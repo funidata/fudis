@@ -6,7 +6,7 @@ import {
   Optional,
   Host,
   ChangeDetectorRef,
-  effect, OnChanges,
+  OnChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -41,27 +41,23 @@ export class TextInputComponent
     _idService: FudisIdService,
   ) {
     super(_idService, _changeDetectorRef);
-    effect(() => {
-      this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
-        if(this.control){
-           this._required = hasRequiredValidator(this.control);
-        
-        if(this.type === 'number'){
-              this._minNumber = getMinFromValidator(this.control);
-              this._maxNumber = getMaxFromValidator(this.control);
-              this._maxLength = null;
-              this._minLength = null;
-        
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+
+        if (this.type === 'number') {
+          this._minNumber = getMinFromValidator(this.control);
+          this._maxNumber = getMaxFromValidator(this.control);
+          this._maxLength = null;
+          this._minLength = null;
         } else {
-              this._maxLength = getMaxLengthFromValidator(this.control);
-              this._minLength = getMinLengthFromValidator(this.control);
-              this._minNumber = null;
-              this._maxNumber = null;
+          this._maxLength = getMaxLengthFromValidator(this.control);
+          this._minLength = getMinLengthFromValidator(this.control);
+          this._minNumber = null;
+          this._maxNumber = null;
         }
-              
       }
-      })
-    })
+    });
   }
 
   /**
@@ -92,12 +88,14 @@ export class TextInputComponent
   /**
    * Max number for number input HTML attribute
    */
-  protected _maxNumber: number | null = null;  /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
+  protected _maxNumber: number | null =
+    null; /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
 
   /**
    * Min number for number input HTML attribute
    */
-  protected _minNumber: number | null = null;  /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
+  protected _minNumber: number | null =
+    null; /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
 
   ngOnInit(): void {
     this._setInputId('text-input');
@@ -114,14 +112,14 @@ export class TextInputComponent
 
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
-/* TODO: move these checks under _applyControlUpdateCheck in InputBase directive */
+  /* TODO: move these checks under _applyControlUpdateCheck in InputBase directive */
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
-    if (changes.control?.currentValue !== changes.control?.previousValue) {   
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
     }
 
     if (changes.type?.currentValue !== changes.type?.previousValue) {
-      this._updateValueAndValidityTrigger.next()
+      this._updateValueAndValidityTrigger.next();
     }
   }
 

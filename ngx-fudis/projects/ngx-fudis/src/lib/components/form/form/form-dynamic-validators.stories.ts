@@ -1,12 +1,10 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { Component, Input, OnInit, importProvidersFrom } from '@angular/core';
+import { Component, Input, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FudisValidatorFn, FudisValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import {
@@ -34,43 +32,75 @@ import { fudisSpacingArray } from '../../../types/spacing';
         <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
-        <fudis-fieldset
-          [label]="'Add and remove validators dynamically'"
-        >
+        <fudis-fieldset [label]="'Add and remove validators dynamically'">
           <ng-template fudisContent [type]="'fieldset'">
-            <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+            <fudis-grid [rowGap]="'xs'" [width]="'md'">
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
-                  [initialFocus]="true"
-                  [control]="formExample.controls['required']"
-                  [label]="'Required text input'"
+                  [control]="formExample.controls['text']"
+                  [label]="'Text input'"
                   [helpText]="'Please add some content.'"
-                >
-                </fudis-text-input>
-                <fudis-grid-item>
-                  <fudis-button [variant]="'secondary'" [label]="'Test update value & validity for required'" (handleClick)="handleUpdateRequiredValidator()"></fudis-button>
-                  <fudis-button [label]="'Remove validator for required'" (handleClick)="handleRemoveRequiredValidator()"></fudis-button>
-                </fudis-grid-item>
+                />
+                <fudis-grid [rowGap]="'md'">
+                  <fudis-button
+                    [label]="_textRequired + ' text required validator'"
+                    (handleClick)="toggleRequired(formExample.controls['text'], 'textRequired')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_textMaxLength + ' text maxLength validator'"
+                    (handleClick)="toggleMaxLength(formExample.controls['text'], 'textMaxLength')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_textMinLength + ' text minLength validator'"
+                    (handleClick)="toggleMinLength(formExample.controls['text'], 'textMinLength')"
+                  ></fudis-button>
+                </fudis-grid>
+              </fudis-grid>
+              <hr class="fudis-hr" />
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
-                  [initialFocus]="true"
                   [control]="formExample.controls['email']"
                   [label]="'Email'"
                   [helpText]="'This is an example email input with multiple validations.'"
-                >
-                </fudis-text-input>
-                <fudis-grid-item>
-                  <fudis-button [variant]="'secondary'" [label]="'Test update value & validity for email,min and max'" (handleClick)="handleUpdateEmailValidator()"></fudis-button>
-                  <fudis-button [label]="'Remove validator for email,min and max'" (handleClick)="handleRemoveEmailValidator()"></fudis-button>
-                </fudis-grid-item>
+                />
+                <fudis-grid [rowGap]="'md'">
+                  <fudis-button
+                    [label]="_emailPattern + ' email pattern validator'"
+                    (handleClick)="toggleEmail(formExample.controls['email'], 'emailPattern')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_emailMaxLength + ' email maxLength validator'"
+                    (handleClick)="toggleMaxLength(formExample.controls['email'], 'emailMaxLength')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_emailMinLength + ' email minLength validator'"
+                    (handleClick)="toggleMinLength(formExample.controls['email'], 'emailMinLength')"
+                  ></fudis-button>
+                </fudis-grid>
+              </fudis-grid>
+              <hr class="fudis-hr" />
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
                   [control]="formExample.controls['number']"
                   [label]="'Number input'"
                   [type]="'number'"
-                  [size]="'sm'">
-                </fudis-text-input>
-                <fudis-grid-item>
-                  <fudis-button [variant]="'secondary'" [label]="'Test update value & validity for number input'" (handleClick)="handleUpdateNumberInput()"></fudis-button>
-                  <fudis-button [label]="'Remove validator  for number input'" (handleClick)="handleRemoveNumberInput()"></fudis-button>
-                </fudis-grid-item>
+                  [size]="'md'"
+                />
+                <fudis-grid [rowGap]="'md'">
+                  <fudis-button
+                    [label]="_numberRequired + ' number required validator'"
+                    (handleClick)="toggleRequired(formExample.controls['number'], 'numberRequired')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_numberMax + ' maxNumber validator'"
+                    (handleClick)="toggleMaxNumber(formExample.controls['number'], 'numberMax')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_numberMin + ' minNumber validator'"
+                    (handleClick)="toggleMinNumber(formExample.controls['number'], 'numberMin')"
+                  ></fudis-button>
+                </fudis-grid>
+              </fudis-grid>
             </fudis-grid>
           </ng-template>
         </fudis-fieldset>
@@ -78,30 +108,24 @@ import { fudisSpacingArray } from '../../../types/spacing';
     </fudis-form>
   `,
 })
-class DynamicValidatorExampleComponent implements OnInit {
-  constructor(
-    private _translationService: FudisTranslationService,
-    private _focusService: FudisFocusService,
-  ) {
-    this._requiredValidatorInstance = FudisValidators.required('Missing required name who is responsible for this course.')
-    this._maxLengthValidatorInstance = FudisValidators.maxLength(this.maxLength, 'Email should not be more than 20 characters.')
-    this._minLengthValidatorInstance = FudisValidators.minLength(this.minLength, `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,)
-    this._emailValidatorInstance = FudisValidators.email('Input must be an email address.')
-    this._minNumberValidatorInstance = FudisValidators.min(this.minNumber, 'Number is too small');
-    this._maxNumberValidatorInstance = FudisValidators.max(this.maxNumber, `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.` )
+class DynamicValidatorExampleComponent {
+  constructor() {
     this.formExample = new FormGroup({
-      required: new FormControl(
-        null,
+      text: new FormControl(null, [
         this._requiredValidatorInstance,
-      ),
-      email: new FormControl(null, [
+        this._minLengthValidatorInstance,
         this._maxLengthValidatorInstance,
+      ]),
+      email: new FormControl(null, [
         this._emailValidatorInstance,
+        this._maxLengthValidatorInstance,
+        this._minLengthValidatorInstance,
       ]),
       number: new FormControl(null, [
-        this._maxNumberValidatorInstance,
+        this._requiredValidatorInstance,
         this._minNumberValidatorInstance,
-      ])
+        this._maxNumberValidatorInstance,
+      ]),
     });
   }
 
@@ -118,94 +142,163 @@ class DynamicValidatorExampleComponent implements OnInit {
   firstLoad: boolean = true;
   fieldsetId = 'first-fieldset-id';
 
-  formExample: FormGroup;
-
   minLength = 5;
   maxLength = 20;
   minNumber = 2;
   maxNumber = 5;
 
-
-  private _closed: boolean = true;
+  _textRequired = 'Remove';
+  _textMaxLength = 'Remove';
+  _textMinLength = 'Remove';
+  _emailPattern = 'Remove';
+  _emailMaxLength = 'Remove';
+  _emailMinLength = 'Remove';
+  _numberMin = 'Remove';
+  _numberMax = 'Remove';
+  _numberRequired = 'Remove';
 
   /**
-   * Instance of required validator
+   * Instance of validators
    */
-    private _requiredValidatorInstance: FudisValidatorFn | null;
-    private _maxLengthValidatorInstance: FudisValidatorFn | null;
-    private _minLengthValidatorInstance: FudisValidatorFn | null;
-    private _emailValidatorInstance: FudisValidatorFn | null;
-    private _minNumberValidatorInstance: FudisValidatorFn | null;
-    private _maxNumberValidatorInstance: FudisValidatorFn | null;
+  protected _requiredValidatorInstance: FudisValidatorFn =
+    FudisValidators.required('This is required input.');
+  private _maxLengthValidatorInstance: FudisValidatorFn = FudisValidators.maxLength(
+    this.maxLength,
+    `Input length should not be more than ${this.maxLength} characters.`,
+  );
+  private _minLengthValidatorInstance: FudisValidatorFn = FudisValidators.minLength(
+    this.minLength,
+    `Too short input. Minimum length is ${this.minLength}.`,
+  );
+  private _emailValidatorInstance: FudisValidatorFn = FudisValidators.email(
+    'Input must be an email address.',
+  );
+  private _minNumberValidatorInstance: FudisValidatorFn = FudisValidators.min(
+    this.minNumber,
+    'Number is too small',
+  );
+  private _maxNumberValidatorInstance: FudisValidatorFn = FudisValidators.max(
+    this.maxNumber,
+    `Given number is higher than allowed ${this.maxNumber}.`,
+  );
 
-  ngOnInit(): void {
-    this._focusService.addToIgnoreList('unique-input-3');
-  }
+  formExample: FormGroup;
 
-  handleClosedOutput(value: boolean): void {
-    this._closed = value;
-  }
-
-  handleUpdateRequiredValidator(): void {
-    if(!this._requiredValidatorInstance) {
-      this._requiredValidatorInstance = FudisValidators.required('Missing required name who is responsible for this course.');
-      this.formExample.controls['required'].addValidators(this._requiredValidatorInstance);
-      this.formExample.controls['required'].updateValueAndValidity();
+  changeText(target: string): void {
+    switch (target) {
+      case 'textRequired':
+        this._textRequired = this._textRequired === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'textMaxLength':
+        this._textMaxLength = this._textMaxLength === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'textMinLength':
+        this._textMinLength = this._textMinLength === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'emailPattern':
+        this._emailPattern = this._emailPattern === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'emailMaxLength':
+        this._emailMaxLength = this._emailMaxLength === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'emailMinLength':
+        this._emailMinLength = this._emailMinLength === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'numberRequired':
+        this._numberRequired = this._numberRequired === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'numberMin':
+        this._numberMin = this._numberMin === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'numberMax':
+        this._numberMax = this._numberMax === 'Add' ? 'Remove' : 'Add';
+        return;
+      default:
+        console.error('Wrong input provided. No case for text: ' + target);
+        return;
     }
   }
 
-  handleUpdateEmailValidator(): void {
-    if(!this._maxLengthValidatorInstance && !this._emailValidatorInstance && !this._minLengthValidatorInstance) {
-      this._maxLengthValidatorInstance = FudisValidators.maxLength(this.maxLength, 'Email should not be more than 20 characters.');
-      this._minLengthValidatorInstance = FudisValidators.minLength(this.minLength, `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,)
-      this._emailValidatorInstance = FudisValidators.email('Input must be an email address.');
+  toggleRequired(control: FormControl, target: string): void {
+    const required = control.hasValidator(this._requiredValidatorInstance);
 
-      this.formExample.controls['email'].addValidators(this._maxLengthValidatorInstance);
-      this.formExample.controls['email'].addValidators(this._minLengthValidatorInstance);
-      this.formExample.controls['email'].addValidators(this._emailValidatorInstance);
-      this.formExample.controls['email'].updateValueAndValidity();
+    if (required) {
+      control.removeValidators(this._requiredValidatorInstance);
+    } else {
+      control.addValidators(this._requiredValidatorInstance);
     }
+
+    this.changeText(target);
+
+    control.updateValueAndValidity();
   }
 
-  handleUpdateNumberValidator(): void {
-    if(!this._maxNumberValidatorInstance && !this._minNumberValidatorInstance) {
-      this._maxNumberValidatorInstance = FudisValidators.max(this.maxNumber, `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.` )
-      this._minNumberValidatorInstance = FudisValidators.min(this.minNumber, 'Number is too small'),
+  toggleMaxLength(control: FormControl, target: string): void {
+    const hasMaxLength = control.hasValidator(this._maxLengthValidatorInstance);
 
-      this.formExample.controls['number'].addValidators(this._maxNumberValidatorInstance);
-      this.formExample.controls['number'].addValidators(this._minNumberValidatorInstance);
-      this.formExample.controls['number'].updateValueAndValidity();
+    if (hasMaxLength) {
+      control.removeValidators(this._maxLengthValidatorInstance);
+    } else {
+      control.addValidators(this._maxLengthValidatorInstance);
     }
+
+    this.changeText(target);
+
+    control.updateValueAndValidity();
   }
 
-  handleRemoveRequiredValidator(): void {
-    if(this._requiredValidatorInstance) {
-      this.formExample.controls['required'].removeValidators(this._requiredValidatorInstance);
-      this.formExample.controls['required'].updateValueAndValidity();
-      this._requiredValidatorInstance = null;
+  toggleMinLength(control: FormControl, target: string): void {
+    const hasMinLength = control.hasValidator(this._minLengthValidatorInstance);
+
+    if (hasMinLength) {
+      control.removeValidators(this._minLengthValidatorInstance);
+    } else {
+      control.addValidators(this._minLengthValidatorInstance);
     }
+
+    this.changeText(target);
+
+    control.updateValueAndValidity();
   }
 
-  handleRemoveEmailValidator(): void {
-    if(this._maxLengthValidatorInstance && this._emailValidatorInstance && this._minLengthValidatorInstance) {
-      this.formExample.controls['email'].removeValidators(this._maxLengthValidatorInstance);
-      this.formExample.controls['email'].removeValidators(this._minLengthValidatorInstance);
-      this.formExample.controls['email'].removeValidators(this._emailValidatorInstance);
-      this.formExample.controls['email'].updateValueAndValidity();
-      this._maxLengthValidatorInstance = null;
-      this._minLengthValidatorInstance = null;
-      this._emailValidatorInstance = null;
+  toggleEmail(control: FormControl, target: string): void {
+    const hasEmail = control.hasValidator(this._emailValidatorInstance);
+
+    if (hasEmail) {
+      control.removeValidators(this._emailValidatorInstance);
+    } else {
+      control.addValidators(this._emailValidatorInstance);
     }
+
+    this.changeText(target);
+
+    this.formExample.controls['email'].updateValueAndValidity();
   }
 
-  handleRemoveNumberValidator(): void {
-    if(this._maxNumberValidatorInstance && this._minNumberValidatorInstance) {
-      this.formExample.controls['number'].removeValidators(this._maxNumberValidatorInstance);
-      this.formExample.controls['number'].removeValidators(this._minNumberValidatorInstance);
-      this.formExample.controls['number'].updateValueAndValidity();
-      this._maxNumberValidatorInstance = null;
-      this._minNumberValidatorInstance = null;
+  toggleMinNumber(control: FormControl, target: string): void {
+    const hasMinNumber = control.hasValidator(this._minNumberValidatorInstance);
+
+    if (hasMinNumber) {
+      control.removeValidators(this._minNumberValidatorInstance);
+    } else {
+      control.addValidators(this._minNumberValidatorInstance);
     }
+
+    this.changeText(target);
+
+    control.updateValueAndValidity();
+  }
+
+  toggleMaxNumber(control: FormControl, target: string): void {
+    const hasMaxNumber = control.hasValidator(this._maxNumberValidatorInstance);
+
+    if (hasMaxNumber) {
+      control.removeValidators(this._maxNumberValidatorInstance);
+    } else {
+      control.addValidators(this._maxNumberValidatorInstance);
+    }
+    this.changeText(target);
+    control.updateValueAndValidity();
   }
 }
 
@@ -214,7 +307,7 @@ export default {
   component: FormComponent,
   decorators: [
     moduleMetadata({
-      declarations: [ DynamicValidatorExampleComponent],
+      declarations: [DynamicValidatorExampleComponent],
       imports: [ReactiveFormsModule, RouterModule],
     }),
     applicationConfig({
