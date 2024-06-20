@@ -1,7 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { LinkDirective } from "./link.directive.ts";
 import * as LinkDirectiveStories from "./link.directive.stories.ts";
-import { linkExclude } from "../../utilities/storybook";
 
 <Meta title="Directives/Link" />
 
@@ -25,4 +24,4 @@ At the moment, Link Directive doesn't support the use of `externalLink` nor `tit
 
 ## Properties
 
-<ArgTypes of={LinkDirective} exclude={linkExclude} />
+<ArgTypes of={LinkDirective} />

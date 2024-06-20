@@ -11,7 +11,7 @@ export default {
   },
   argTypes: {
     size: {
-      control: { type: 'select' },
+      control: { type: 'radio' },
       options: ['inherit', 'md', 'lg'],
     },
   },

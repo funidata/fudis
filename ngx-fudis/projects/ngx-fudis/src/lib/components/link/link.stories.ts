@@ -27,22 +27,27 @@ const Template: StoryFn<LinkComponent> = (args: LinkComponent) => ({
 
 export const Example = Template.bind({});
 Example.args = {
-  href: 'https://www.example.com',
-  initialFocus: false,
   size: 'inherit',
+  title: '',
+  href: 'https://www.example.com',
+  externalLink: '',
+  initialFocus: false,
 };
 
 export const ExampleWithExternalLink = Template.bind({});
 ExampleWithExternalLink.args = {
+  size: 'inherit',
+  title: '',
+  href: '',
   externalLink: 'https://www.example.com',
   initialFocus: false,
-  size: 'inherit',
 };
 
 export const ExampleWithLinkWithTitle = Template.bind({});
 ExampleWithLinkWithTitle.args = {
-  externalLink: 'https://www.example.com',
-  title: 'Visible title for the link',
-  initialFocus: false,
   size: 'inherit',
+  title: 'Visible title for the link',
+  href: '',
+  externalLink: 'https://www.example.com',
+  initialFocus: false,
 };
