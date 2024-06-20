@@ -27,12 +27,12 @@ import { ActionsDirective } from '../../../../directives/content-projection/acti
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'First DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'First DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Second DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'" [subHeading]="'Here is sub heading'">
+        <fudis-dt [contentText]="'Second DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'" [subHeading]="'Here is sub heading'">
           <fudis-button [label]="'Edit'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
         </fudis-dd>
       </fudis-dl-item>
@@ -40,18 +40,18 @@ import { ActionsDirective } from '../../../../directives/content-projection/acti
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
-        <fudis-dd [textContent]="'This is other DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Single DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
+        <fudis-dd [contentText]="'This is other DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'DT With Languages 1'"></fudis-dt>
-        <fudis-dd [textContent]="'This is in English'" [lang]="'en'"></fudis-dd>
-        <fudis-dd [textContent]="'Tämä on suomeksi'" [lang]="'fi'"></fudis-dd>
-        <fudis-dd [textContent]="''" [lang]="'sv'"></fudis-dd>
+        <fudis-dt [contentText]="'DT With Languages 1'"></fudis-dt>
+        <fudis-dd [contentText]="'This is in English'" [lang]="'en'"></fudis-dd>
+        <fudis-dd [contentText]="'Tämä on suomeksi'" [lang]="'fi'"></fudis-dd>
+        <fudis-dd [contentText]="''" [lang]="'sv'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,

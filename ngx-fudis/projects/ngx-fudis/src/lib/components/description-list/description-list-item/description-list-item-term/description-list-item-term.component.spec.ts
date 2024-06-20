@@ -24,29 +24,29 @@ import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directi
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'First DT'" />
-        <fudis-dd [textContent]="'This is my DD'" />
+        <fudis-dt [contentText]="'First DT'" />
+        <fudis-dd [contentText]="'This is my DD'" />
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Second DT'" />
-        <fudis-dd [textContent]="'This is my DD'" />
-        <fudis-dd *ngIf="langVisible" [textContent]="'Language content'" [lang]="'en'" />
+        <fudis-dt [contentText]="'Second DT'" />
+        <fudis-dd [contentText]="'This is my DD'" />
+        <fudis-dd *ngIf="langVisible" [contentText]="'Language content'" [lang]="'en'" />
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Single DT'" />
-        <fudis-dd [textContent]="'This is my DD'" />
+        <fudis-dt [contentText]="'Single DT'" />
+        <fudis-dd [contentText]="'This is my DD'" />
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'DT With Languages 1'" />
-        <fudis-dd [textContent]="'This is in English'" [lang]="'en'" />
-        <fudis-dd [textContent]="'Tämä on suomeksi'" [lang]="'fi'" />
-        <fudis-dd [textContent]="''" [lang]="'sv'" />
+        <fudis-dt [contentText]="'DT With Languages 1'" />
+        <fudis-dd [contentText]="'This is in English'" [lang]="'en'" />
+        <fudis-dd [contentText]="'Tämä on suomeksi'" [lang]="'fi'" />
+        <fudis-dd [contentText]="''" [lang]="'sv'" />
       </fudis-dl-item>
     </fudis-dl>
   `,
