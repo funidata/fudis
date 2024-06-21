@@ -93,8 +93,10 @@ export const AlignSelfX: StoryFn<GridItemComponent> = (args: GridItemComponent) 
       class="storybook__item-highlight"
       [alignSelfX]="{sm: 'start', md: 'end', lg: 'center'}"
     >
-      <fudis-body-text>Responsive alignSelfX =</fudis-body-text>
-      <fudis-body-text>"{{responsiveAlignSelfX}}"</fudis-body-text>
+      <fudis-body-text
+        >Responsive alignSelfX = <br />
+        "{{responsiveAlignSelfX}}"</fudis-body-text
+      >
     </fudis-grid-item>
   </fudis-grid>`,
 });

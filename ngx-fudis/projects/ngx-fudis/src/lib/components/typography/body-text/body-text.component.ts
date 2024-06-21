@@ -2,7 +2,6 @@ import {
   Component,
   Input,
   HostBinding,
-  ViewEncapsulation,
   ChangeDetectionStrategy,
   Optional,
   Host,
@@ -15,7 +14,6 @@ import { FudisIdService } from '../../../services/id/id.service';
   selector: 'fudis-body-text',
   templateUrl: './body-text.component.html',
   styleUrls: ['./body-text.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent {
@@ -26,7 +24,7 @@ export class BodyTextComponent {
     this._id = _idService.getNewId('body-text');
 
     if (_parentDialog) {
-      this.size = 'md-light';
+      this.variant = 'md-light';
     }
   }
 
@@ -36,14 +34,9 @@ export class BodyTextComponent {
   @HostBinding('class') private _classes = 'fudis-body-text-host';
 
   /**
-   * Font size for the paragraph
+   * Variant for the paragraph
    */
-  @Input() size: FudisBodyText = 'md-regular';
-
-  /**
-   * Option to change text color if background is not compatible with default dark text
-   */
-  @Input() color: 'default' | 'white' = 'default';
+  @Input() variant: FudisBodyText = 'md-regular';
 
   /**
    * Text alignment

@@ -1,0 +1,31 @@
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+
+fudis-body-text {
+  /**
+ * Add spacing between multiple following Body Text elements.
+ * Body Text does not have bottom margin if it does not have other Body Text element underneath.
+ */
+  &:has(+ fudis-body-text) {
+    margin-bottom: spacing.$spacing-xs;
+  }
+
+  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
+  & fudis-link {
+    display: inline-block;
+  }
+
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+  &.fudis-body-text-host {
+    display: block;
+  }
+}
+
+/**
+* Remove spacing between multiple following Body Text elements directly under Grid element.
+* Grid already defines a gap between its children elements.
+*/
+.fudis-grid {
+  > fudis-body-text:has(+ fudis-body-text) {
+    margin-bottom: spacing.$spacing-none;
+  }
+}
