@@ -114,7 +114,7 @@ const Template: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) =
   template: html`
     <fudis-body-text
       class="grid-refresh-text"
-      [size]="'sm-regular'"
+      [variant]="'sm-regular'"
       style="width: 12rem;
   margin-bottom: 2rem;"
     >
