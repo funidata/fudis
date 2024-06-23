@@ -1,5 +1,6 @@
 @use "../../foundations/colors/mixins.scss" as colors;
 @use "../../foundations/borders/mixins.scss" as borders;
+@use "../../foundations/grid/tokens.scss" as gridTokens;
 @use "../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-notification {
@@ -9,7 +10,7 @@
   display: flex;
   align-items: flex-start;
   padding: 0 spacing.$spacing-sm 0 spacing.$spacing-xxs;
-  width: 100%;
+  max-width: gridTokens.$grid-width-lg;
   min-height: spacing.$spacing-md;
 
   &__content {
