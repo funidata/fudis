@@ -50,8 +50,6 @@ export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
-export type FudisLinkColor = 'primary-dark' | 'gray-dark' | 'white';
-
 export interface FudisTranslationConfig {
   BREADCRUMBS: {
     // Prefix visible to screen reader
@@ -106,6 +104,8 @@ export interface FudisTranslationConfig {
       // Clear filter button label for screen readers
       CLEAR: string;
       NO_RESULTS: string;
+      SHOWING: string;
+      RESULTS: string;
     };
   };
   IMAGE: {

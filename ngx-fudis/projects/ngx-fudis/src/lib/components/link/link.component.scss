@@ -4,25 +4,13 @@
 @use "../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-link {
+  @include colors.text-color("primary-dark");
+
   display: inline-block;
   text-decoration: underline solid;
 
   &:focus {
     @include focus.focus-generic;
-  }
-
-  &__color {
-    &__primary-dark {
-      @include colors.text-color("primary-dark");
-    }
-
-    &__gray-dark {
-      @include colors.text-color("gray-dark");
-    }
-
-    &__white {
-      @include colors.text-color("white");
-    }
   }
 
   &__size {
