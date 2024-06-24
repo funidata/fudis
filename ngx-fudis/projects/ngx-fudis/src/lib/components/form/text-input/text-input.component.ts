@@ -88,14 +88,12 @@ export class TextInputComponent
   /**
    * Max number for number input HTML attribute
    */
-  protected _maxNumber: number | null =
-    null; /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
+  protected _maxNumber: number | null = null;
 
   /**
    * Min number for number input HTML attribute
    */
-  protected _minNumber: number | null =
-    null; /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
+  protected _minNumber: number | null = null;
 
   ngOnInit(): void {
     this._setInputId('text-input');

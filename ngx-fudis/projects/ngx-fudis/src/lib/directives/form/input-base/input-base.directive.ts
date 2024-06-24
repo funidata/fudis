@@ -103,10 +103,16 @@ export class InputBaseDirective extends TooltipApiDirective {
    */
   protected _required: boolean = false;
 
+  /**
+   * Max length for HTML attribute and for character indicator in guidance
+   */
   protected _maxLength: number | null = null;
 
   protected _destroyRef = inject(DestroyRef);
 
+  /**
+   * Trigger update when control validator is changed
+   */
   protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
@@ -156,6 +162,9 @@ export class InputBaseDirective extends TooltipApiDirective {
     }
   }
 
+  /**
+   * Update value and validity of control
+   */
   protected _applyControlUpdateCheck(): void {
     const original = this.control.updateValueAndValidity;
 
