@@ -135,7 +135,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
     }
   }
 
-  protected _setCharacterLimitIndicatorValues(): void {
+  private _setCharacterLimitIndicatorValues(): void {
     if (this.maxLength) {
       this._maxLengthWidth = this.maxLength > 100 ? 'lg' : this.maxLength > 10 ? 'md' : 'sm';
       this._maxLengthAlertThreshold = this.maxLength - 5;
