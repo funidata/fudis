@@ -17,6 +17,7 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
+import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 
 @Component({
   selector: 'fudis-button',
@@ -191,8 +192,9 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     }
     // Safari issue: button click does not trigger visible focus by default
     // This line is to ensure that Safari users also see visible focus when mouse clicking a button
+    // If button does not have focus it will never trigger blur event
     this.buttonEl.nativeElement.focus();
-    
+
     this.handleClick.emit(event);
   }
 
@@ -201,8 +203,9 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
   public toggleMenu(): void {
     const newState = !this.dropdownOpen.value;
-
     this.dropdownOpen.next(newState);
+
+    DropdownMenuComponent.fireMaxWidthCalcEvent.next(true);
   }
 
   /**
@@ -214,6 +217,8 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     if (!this._focused && focusToButton) {
       this.buttonEl.nativeElement.focus();
     }
+
+    DropdownMenuComponent.fireMaxWidthCalcEvent.next(true);
   }
 
   /**
@@ -233,11 +238,11 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   protected _handleButtonBlur(event: FocusEvent): void {
     this._focused = false;
 
-    const targetIsDropdownMenuButton = (event.relatedTarget as HTMLElement)?.classList?.contains(
+    const targetIsDropdownMenuOption = (event.relatedTarget as HTMLElement)?.classList?.contains(
       'fudis-dropdown-menu-item',
     );
 
-    if (this.asMenuButton && !targetIsDropdownMenuButton) {
+    if (this.asMenuButton && !targetIsDropdownMenuOption) {
       this.dropdownOpen.next(false);
     }
 

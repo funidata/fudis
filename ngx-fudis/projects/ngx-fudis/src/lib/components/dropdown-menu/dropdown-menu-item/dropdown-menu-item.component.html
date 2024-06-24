@@ -8,7 +8,7 @@
   (keydown)="_handleKeyDown($event)"
   (blur)="_handleMenuItemBlur($event)"
   (focus)="_handleMenuItemFocus()"
-  (click)="!disabled && _clickOption($event)"
+  (click)="_clickOption($event)"
 >
   {{ label }}
   <span

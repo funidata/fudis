@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -17,6 +16,7 @@ import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropd
 import { ButtonComponent } from '../button/button.component';
 import { DOCUMENT } from '@angular/common';
 import { FudisInputSize } from '../../types/forms';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -25,17 +25,21 @@ import { FudisInputSize } from '../../types/forms';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownMenuComponent
-  extends DropdownBaseDirective
-  implements OnInit, AfterContentInit
-{
-  private _mouseDownTargetInsideComponent: boolean;
+export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit {
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) private _document: Document,
     @Host() private _parentButton: ButtonComponent,
   ) {
     super();
+
+    /**
+     * Fire maxWidth calculation through Observable call from parent Button
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    DropdownMenuComponent.fireMaxWidthCalcEvent.subscribe((res) => {
+      this._getMaxWidth();
+    });
   }
 
   /**
@@ -46,12 +50,17 @@ export class DropdownMenuComponent
   /**
    * Align Dropdown Menu opening position
    */
-  @Input() align: 'left' | 'right' | 'center' = 'left';
+  @Input() align: 'left' | 'right' | 'center' = 'center';
 
   /**
    * Dropdown Menu size
    */
   @Input() size: FudisInputSize = 'lg';
+
+  /**
+   * Dropdown Menu's max width calculation observable
+   */
+  public static fireMaxWidthCalcEvent: Subject<boolean> = new Subject();
 
   /**
    * Determine dropdown max-width
@@ -121,11 +130,6 @@ export class DropdownMenuComponent
     this._parentButton.closeMenu();
   }
 
-  @HostListener('mousedown', ['$event.target'])
-  private _handleMouseDown() {
-    this._mouseDownTargetInsideComponent = true;
-  }
-
   /**
    * Host Listener for dropdown's width, it needs to be wider than its Button parent
    */
@@ -176,16 +180,5 @@ export class DropdownMenuComponent
 
   ngOnInit(): void {
     this.id = this._idService.getNewGrandParentId('dropdown-menu');
-  }
-
-  ngAfterContentInit(): void {
-    this._getMaxWidth();
-  }
-
-  /**
-   * Get defined dropdown css max-width attribute
-   */
-  get maxWidth(): string {
-    return this._maxWidth;
   }
 }
