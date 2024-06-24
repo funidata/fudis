@@ -112,7 +112,7 @@ export class TextInputComponent
 
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
-  /* TODO: move these checks under _applyControlUpdateCheck in InputBase directive */
+
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();

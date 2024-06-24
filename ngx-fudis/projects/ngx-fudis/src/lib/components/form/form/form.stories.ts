@@ -508,8 +508,6 @@ class FormContentExampleComponent implements OnInit {
   handleClosedOutput(value: boolean): void {
     this._closed = value;
   }
-
-  /* TODO: Lisää tähän funktio validaattorin lisäykseen ja poistoon */
 }
 
 export default {

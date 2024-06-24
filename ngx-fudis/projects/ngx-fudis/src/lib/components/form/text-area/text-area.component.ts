@@ -38,6 +38,13 @@ export class TextAreaComponent
     _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(_idService, _changeDetectorRef);
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if(this.control) {
+        this._required = hasRequiredValidator(this.control);
+        this._maxLength = getMaxLengthFromValidator(this.control);;
+        this._minLength = getMinLengthFromValidator(this.control);
+      }
+    });
   }
 
   /**
@@ -77,9 +84,7 @@ export class TextAreaComponent
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
     if (changes.control) {
-      this._required = hasRequiredValidator(this.control);
-      this._maxLength = getMaxLengthFromValidator(this.control);
-      this._minLength = getMinLengthFromValidator(this.control);
+      this._applyControlUpdateCheck();
     }
   }
 
