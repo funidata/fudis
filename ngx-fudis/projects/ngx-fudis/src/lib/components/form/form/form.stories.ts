@@ -424,12 +424,15 @@ class FormContentExampleComponent implements OnInit {
         },
         [
           FudisGroupValidators.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
-          FudisGroupValidators.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
+          FudisGroupValidators.max({
+            value: 2,
+            message: new BehaviorSubject('Too many selected.'),
+          }),
         ],
       ),
       teacher: new FormControl(
         null,
-        FudisValidators.required("Missing teacher's name who is responsible for this course.")
+        FudisValidators.required("Missing teacher's name who is responsible for this course."),
       ),
       email: new FormControl(null, [
         FudisValidators.required('Missing email contact.'),
@@ -508,7 +511,6 @@ class FormContentExampleComponent implements OnInit {
 
   /* TODO: Lisää tähän funktio validaattorin lisäykseen ja poistoon */
 }
-
 
 export default {
   title: 'Components/Form/Form',

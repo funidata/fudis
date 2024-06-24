@@ -34,7 +34,7 @@ export class InputBaseDirective extends TooltipApiDirective {
   /**
    * FormControl for the input
    */
-    @Input({ required: true }) control: FormControl;
+  @Input({ required: true }) control: FormControl;
 
   /**
    * Label for the input.
@@ -158,10 +158,10 @@ export class InputBaseDirective extends TooltipApiDirective {
 
   protected _applyControlUpdateCheck(): void {
     const original = this.control.updateValueAndValidity;
-      
+
     this.control.updateValueAndValidity = () => {
       original.apply(this.control);
-      this._updateValueAndValidityTrigger.next()
+      this._updateValueAndValidityTrigger.next();
     };
   }
 }
