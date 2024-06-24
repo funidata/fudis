@@ -189,6 +189,10 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     if (this.asMenuButton) {
       this.toggleMenu();
     }
+    // Safari issue: button click does not trigger visible focus by default
+    // This line is to ensure that Safari users also see visible focus when mouse clicking a button
+    this.buttonEl.nativeElement.focus();
+    
     this.handleClick.emit(event);
   }
 
