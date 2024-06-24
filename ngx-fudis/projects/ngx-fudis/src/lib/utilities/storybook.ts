@@ -158,6 +158,7 @@ export const dropdownMenuExclude: RegExp = excludeRegex([
   'dropdownMenuElement',
   'closeDropdownMenu',
   'setFocusedOption',
+  'fireMaxWidthCalcEvent',
 ]);
 
 export const dropdownMenuItemExclude: RegExp = excludeRegex([
@@ -183,6 +184,7 @@ export const dropdownMenuControlsExclude: RegExp = excludeRegex([
   'dropdownMenuElement',
   'closeDropdownMenu',
   'setFocusedOption',
+  'fireMaxWidthCalcEvent',
 ]);
 
 /**

@@ -15,9 +15,9 @@ import { FudisInputSize } from '../../types/forms';
   selector: 'example-dropdown-menu',
   template: `<fudis-grid [columns]="2">
       <fudis-grid-item>
-        <fudis-heading [level]="4">Align to right, size 'md'</fudis-heading>
+        <fudis-heading [level]="4">Random items menu</fudis-heading>
         <fudis-button
-          [label]="'Console.log options menu'"
+          [label]="'Random items menu'"
           [labelHidden]="true"
           [size]="'small'"
           [variant]="'secondary'"
@@ -36,7 +36,7 @@ import { FudisInputSize } from '../../types/forms';
         </fudis-button>
       </fudis-grid-item>
       <fudis-grid-item>
-        <fudis-heading [level]="4">Align to left (default), size 'lg'</fudis-heading>
+        <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
         <fudis-button
           [label]="'Grouped animals menu'"
           [labelHidden]="true"
@@ -104,6 +104,12 @@ export default {
     },
     controls: {
       exclude: dropdownMenuControlsExclude,
+    },
+  },
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
     },
   },
 } as Meta;
