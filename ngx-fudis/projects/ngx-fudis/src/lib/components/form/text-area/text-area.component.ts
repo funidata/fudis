@@ -39,9 +39,9 @@ export class TextAreaComponent
   ) {
     super(_idService, _changeDetectorRef);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
-      if(this.control) {
+      if (this.control) {
         this._required = hasRequiredValidator(this.control);
-        this._maxLength = getMaxLengthFromValidator(this.control);;
+        this._maxLength = getMaxLengthFromValidator(this.control);
         this._minLength = getMinLengthFromValidator(this.control);
       }
     });
