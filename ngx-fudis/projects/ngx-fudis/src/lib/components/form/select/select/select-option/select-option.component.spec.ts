@@ -19,12 +19,14 @@ import { ContentDirective } from '../../../../../directives/content-projection/c
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
+import { getElement } from '../../../../../utilities/tests/utilities';
 
 @Component({
   selector: 'fudis-mock-container',
   template: `<fudis-select
     #testSelect
     [label]="'Test Label'"
+    [variant]="variant"
     [placeholder]="'Test placeholder'"
     [control]="control"
     [size]="'md'"
@@ -42,12 +44,14 @@ class MockContainerComponent {
   testOptions: FudisSelectOption<object>[] = defaultOptions;
   control: FormControl = new FormControl(null);
 
+  variant = 'dropdown';
+
   @ViewChild('testOption') testOption: SelectOptionComponent;
   @ViewChild('testSelect') testSelect: SelectComponent;
 }
 
 describe('SelectOptionComponent', () => {
-  let containerComponent: MockContainerComponent;
+  let component: MockContainerComponent;
   let fixture: ComponentFixture<MockContainerComponent>;
 
   beforeEach(async () => {
@@ -72,23 +76,24 @@ describe('SelectOptionComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockContainerComponent);
-    containerComponent = fixture.componentInstance;
+    component = fixture.componentInstance;
+    component.variant = 'dropdown';
     fixture.detectChanges();
   });
 
   function setSelectDropdownOpen() {
-    containerComponent.testSelect.openDropdown();
+    component.testSelect.openDropdown();
     fixture.detectChanges();
   }
 
   function initializeFormControlWithValue() {
-    containerComponent.control = new FormControl(defaultOptions[4]);
-    containerComponent = fixture.componentInstance;
+    component.control = new FormControl(defaultOptions[4]);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   }
 
   function updateControlValue() {
-    containerComponent.control.patchValue(defaultOptions[1]);
+    component.control.patchValue(defaultOptions[1]);
     fixture.detectChanges();
   }
 
@@ -101,7 +106,7 @@ describe('SelectOptionComponent', () => {
       options[2].nativeElement.click();
       fixture.detectChanges();
 
-      expect(containerComponent.testSelect.control.value?.label).toBe('Platypus');
+      expect(component.testSelect.control.value?.label).toBe('Platypus');
     });
 
     it('should not have selected default value if form control has no value on init', () => {
@@ -175,5 +180,54 @@ describe('SelectOptionComponent', () => {
 
       expect(textContent).toEqual('Really dangerous cat (Disabled)');
     });
+
+    it('should trigger emit when clicking', () => {
+      jest.spyOn(component.testSelect.selectionUpdate, 'emit');
+
+      component.testSelect.openDropdown();
+
+      fixture.detectChanges();
+
+      const disabledOption = getElement(fixture, '#fudis-select-1-option-4');
+      const enabledOption = getElement(fixture, '#fudis-select-1-option-5');
+
+      disabledOption.click();
+
+      expect(component.testSelect.selectionUpdate.emit).not.toHaveBeenCalled();
+
+      enabledOption.click();
+
+      expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
+        fudisGeneratedHtmlId: 'fudis-select-1-option-5',
+        label: 'Screaming hairy armadillo',
+        sound: "Rollin' rollin' rollin'!",
+        value: 'value-5-armadillo',
+      });
+    });
+  });
+
+  it('should trigger emit when option is typed and nulled after non-typed', () => {
+    jest.spyOn(component.testSelect.selectionUpdate, 'emit');
+
+    component.variant = 'autocompleteType';
+
+    component.testSelect.openDropdown();
+
+    fixture.detectChanges();
+
+    component.testSelect.autocompleteRef.updateInputValue('Platypus');
+
+    fixture.detectChanges();
+
+    expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
+      fudisGeneratedHtmlId: 'fudis-select-1-option-3',
+      label: 'Platypus',
+      sound: 'Plat plat!',
+      value: 'value-3-platypys',
+    });
+
+    component.testSelect.autocompleteRef.updateInputValue('Platypu');
+
+    expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith(null);
   });
 });

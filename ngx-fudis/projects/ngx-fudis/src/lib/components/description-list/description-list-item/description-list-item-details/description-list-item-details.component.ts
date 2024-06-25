@@ -60,7 +60,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   /**
    * Visible text content for details
    */
-  @Input() textContent: string;
+  @Input() contentText: string;
 
   /**
    * Sub heading in between Term and Details elements
@@ -90,11 +90,11 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    * Parse Details text content and set parent Description List Item languages
    */
   private _sendDetailsLanguageToParent(): void {
-    const parsedTextContent =
-      this.textContent && this.textContent.replace(/\s/g, '') !== '' ? this.textContent : null;
+    const parsedContentText =
+      this.contentText && this.contentText.replace(/\s/g, '') !== '' ? this.contentText : null;
 
-    if (parsedTextContent && !this._detailsSent) {
-      this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
+    if (parsedContentText && !this._detailsSent) {
+      this._parentDlItem.addDetailsLanguage(this.lang, parsedContentText, this._id);
 
       this._detailsSent = true;
 
@@ -120,7 +120,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     }
 
     // If text content changes, update it to parent
-    if (changes.textContent?.currentValue !== changes.textContent?.previousValue && this.lang) {
+    if (changes.contentText?.currentValue !== changes.contentText?.previousValue && this.lang) {
       this._sendDetailsLanguageToParent();
     }
   }

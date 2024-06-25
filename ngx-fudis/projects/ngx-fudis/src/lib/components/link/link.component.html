@@ -2,7 +2,6 @@
   <a
     fudisLink
     [id]="id"
-    [color]="color"
     [size]="size"
     [classes]="['fudis-link__external']"
     (focus)="_handleFocus($event)"
@@ -18,7 +17,7 @@
       <span class="fudis-link__external__icon-wrapper"
         >{{ externalLink
         }}<span class="fudis-link__external__icon">
-          <fudis-icon [icon]="'new-tab'" [color]="color" />
+          <fudis-icon [icon]="'new-tab'" [color]="'primary-dark'" />
         </span>
       </span>
     </ng-container>
@@ -29,7 +28,7 @@
           <span class="fudis-link__external__icon-wrapper"
             >{{ parsedTitle[1]
             }}<span class="fudis-link__external__icon">
-              <fudis-icon [icon]="'new-tab'" [color]="color" />
+              <fudis-icon [icon]="'new-tab'" [color]="'primary-dark'" />
             </span>
           </span>
         </ng-container>
@@ -37,7 +36,7 @@
           <span class="fudis-link__external__icon-wrapper"
             >{{ parsedTitle[0]
             }}<span class="fudis-link__external__icon">
-              <fudis-icon [icon]="'new-tab'" [color]="color" />
+              <fudis-icon [icon]="'new-tab'" [color]="'primary-dark'" />
             </span>
           </span>
         </ng-container>
@@ -49,7 +48,6 @@
   <a
     fudisLink
     [id]="id"
-    [color]="color"
     [size]="size"
     [classes]="['fudis-link__router']"
     (focus)="_handleFocus($event)"
@@ -65,7 +63,6 @@
   <a
     fudisLink
     [id]="id"
-    [color]="color"
     [size]="size"
     [classes]="['fudis-link__href']"
     (focus)="_handleFocus($event)"

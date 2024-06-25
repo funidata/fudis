@@ -9,8 +9,7 @@
     "
     [classList]="'fudis-alert__text'"
     [align]="'center'"
-    [size]="'lg-regular'"
-    [color]="variant !== 'warning' ? 'white' : 'default'"
+    [variant]="'lg-regular'"
   >
     {{ message }}
     <fudis-link
@@ -19,7 +18,6 @@
       (handleBlur)="_handleBlur($event)"
       [attr.aria-label]="message"
       [initialFocus]="initialFocus"
-      [color]="variant !== 'warning' ? 'white' : 'gray-dark'"
       class="fudis-alert__link"
       [link]="link"
       [title]="linkTitle"

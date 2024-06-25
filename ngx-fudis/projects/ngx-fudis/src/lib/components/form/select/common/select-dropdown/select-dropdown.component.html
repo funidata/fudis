@@ -11,4 +11,38 @@
   role="listbox"
 >
   <ng-content></ng-content>
+  <ng-container *ngIf="selectVariant !== 'dropdown' && open && filterText">
+    <fudis-body-text
+      *ngIf="autocompleteHelpText !== false"
+      [class.fudis-select-dropdown__help-text--hidden]="!results"
+      class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__first"
+      [variant]="'md-light'"
+      ><ng-container *ngIf="autocompleteHelpText">{{ autocompleteHelpText }}</ng-container
+      ><ng-container *ngIf="!autocompleteHelpText"
+        >{{ _translationShowing | async }} {{ results }}
+        {{ _translationResults | async }}</ng-container
+      ></fudis-body-text
+    >
+    <fudis-body-text
+      class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__last"
+      [class.fudis-select-dropdown__help-text--hidden]="results"
+      [variant]="'md-light'"
+      >{{ _translationNoResultsFound | async }}</fudis-body-text
+    >
+    <span
+      *ngIf="autocompleteHelpText !== false && _displayStatus && results && filterText"
+      class="fudis-visually-hidden"
+      role="alert"
+    >
+      <ng-container *ngIf="autocompleteHelpText">
+        {{ autocompleteHelpText }}
+      </ng-container>
+      <ng-container *ngIf="!autocompleteHelpText">
+        {{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}
+      </ng-container>
+    </span>
+    <span *ngIf="!results && _displayStatus" class="fudis-visually-hidden" role="alert">
+      {{ _translationNoResultsFound | async }}
+    </span>
+  </ng-container>
 </div>
