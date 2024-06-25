@@ -41,7 +41,7 @@
     "@angular/cli": "17.3.8",
     "@angular/compiler-cli": "17.3.10",
     "@babel/core": "7.24.6",
-    "@compodoc/compodoc": "1.1.23",
+    "@compodoc/compodoc": "1.1.25",
     "@ngneat/transloco": "6.0.4",
     "@storybook/addon-a11y": "7.6.19",
     "@storybook/addon-actions": "7.6.19",
