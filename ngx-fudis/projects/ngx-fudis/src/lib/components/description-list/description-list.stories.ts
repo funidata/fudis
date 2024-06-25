@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import docs from './description-list-docs.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
-import { descriptionListExclude } from '../../utilities/storybook';
+import { descriptionListExclude, nestedDescriptionListExclude } from '../../utilities/storybook';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
@@ -120,7 +120,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'Raiders of the Lost Ark'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'1981'"></fudis-dd>
@@ -139,7 +139,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Temple of Doom'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'1984'"></fudis-dd>
@@ -158,7 +158,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Last Crusade'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'1989'"></fudis-dd>
@@ -179,7 +179,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Kingdom of Crystal Skull'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'2008'"></fudis-dd>
@@ -198,7 +198,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Dial of Destiny'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'2023'"></fudis-dd>
@@ -220,8 +220,13 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
 
 export const NestedDescriptionLists = NestedDescriptionListsTemplate.bind({});
 NestedDescriptionLists.args = {
-  variant: 'compact',
   disableGrid: false,
+};
+
+NestedDescriptionLists.parameters = {
+  controls: {
+    exclude: nestedDescriptionListExclude,
+  },
 };
 
 const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (

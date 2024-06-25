@@ -1,6 +1,8 @@
 @use "../../foundations/spacing/tokens.scss" as spacing;
 @use "../../foundations/borders/mixins.scss" as borders;
 @use "../../foundations/colors/mixins.scss" as colors;
+@use "../../foundations/typography/mixins.scss" as typography;
+@use "../../foundations/focus/mixins.scss" as focus;
 
 .fudis-dl-item-details {
   &__regular {
@@ -19,5 +21,28 @@
     @include colors.bg-color("transparent");
     @include borders.border-none;
     @include borders.outline-none;
+  }
+}
+
+/** Button elements inside notification are made to look identical with Fudis Link element */
+.fudis-notification {
+  button {
+    @include colors.bg-color("transparent");
+    @include colors.text-color("primary-dark");
+    @include borders.border-none;
+    @include borders.outline-none;
+    @include typography.text-link-m-typography;
+
+    border-radius: spacing.$spacing-none;
+    padding: spacing.$spacing-none;
+    min-height: spacing.$spacing-none;
+    vertical-align: baseline;
+    text-transform: initial;
+    text-decoration: underline solid;
+    letter-spacing: spacing.$spacing-none;
+
+    &:focus {
+      @include focus.focus-generic;
+    }
   }
 }

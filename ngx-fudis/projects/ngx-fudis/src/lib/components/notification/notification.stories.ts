@@ -31,17 +31,22 @@ const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) =
   >`,
 });
 
-const LinkTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+const ButtonAndLinkTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
-  template: html`<fudis-notification [variant]="variant">
-    <fudis-body-text
-      >This is Notification with Link.
-      <fudis-link
-        [externalLink]="'https://www.example.com'"
-        [title]="'This link opens in new tab.'"
-      ></fudis-link
-    ></fudis-body-text>
-  </fudis-notification>`,
+  template: html` <fudis-grid [align]="'start'">
+    <fudis-notification [variant]="variant">
+      <fudis-body-text
+        >This is Notification with Link.
+        <fudis-link [externalLink]="'https://www.example.com'" [title]="'This is example link.'" />
+      </fudis-body-text>
+    </fudis-notification>
+    <fudis-notification [variant]="variant">
+      <fudis-body-text
+        >This is Notification with Button.
+        <fudis-button [label]="'This is example button.'" />
+      </fudis-body-text>
+    </fudis-notification>
+  </fudis-grid>`,
 });
 
 const MultiChildTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
@@ -60,8 +65,8 @@ Example.args = {
   variant: 'warning',
 };
 
-export const ExampleWithExternalLink = LinkTemplate.bind({});
-ExampleWithExternalLink.args = {
+export const ExampleWithExternalLinkAndButton = ButtonAndLinkTemplate.bind({});
+ExampleWithExternalLinkAndButton.args = {
   variant: 'info',
 };
 

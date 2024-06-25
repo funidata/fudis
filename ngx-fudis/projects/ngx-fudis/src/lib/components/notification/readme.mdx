@@ -19,19 +19,17 @@ Notifications are often informative contextual notifications that cannot be clic
 
 ### Content Guidelines
 
-Notification Component doesn't strict what content is contained.
+For basic text content it is recommended to use [Body Text Components](/docs/components-typography-body-text--documentation),
+however Notification Component can contain any kind of Fudis components, text or html content if needed.
 
-It is recommended to use [Body Text Components](/docs/components-typography-body-text--documentation). Inside Notification, Body Text size defaults to `lg-regular` but this can be overriden if needed.
-
-If using [Link Component](/docs/components-link--documentation) or [Link Directive](/docs/directives-link--documentation), for proper color contrast color of the links are set to `gray-dark`.
-
-Otherwise Notification does not interfere with the content styling.
+If using [Button Component](/docs/components-button--documentation) or button element they will be transformed to look like
+[Link Component](/docs/components-link--documentation). Otherwise Notification does not interfere with the content styling.
 
 Please see code examples for recommended usage patterns.
 
 <Canvas of={NotificationStories.ExampleWithMultipleChildComponents}></Canvas>
 
-<Canvas of={NotificationStories.ExampleWithExternalLink}></Canvas>
+<Canvas of={NotificationStories.ExampleWithExternalLinkAndButton}></Canvas>
 
 ### Accessibility
 
@@ -43,6 +41,7 @@ Please see code examples for recommended usage patterns.
 
 - [Icon](/docs/components-icon--documentation)
 - [Link](/docs/components-link--documentation)
+- [Button](/docs/components-button--documentation)
 - [BodyText](/docs/components-typography-body-text--documentation)
 
 ## Properties

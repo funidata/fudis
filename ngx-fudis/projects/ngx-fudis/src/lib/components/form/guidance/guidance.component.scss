@@ -43,7 +43,19 @@
     @include typography.body-text-sm-regular;
 
     margin-top: spacing.$spacing-xs;
-    margin-left: spacing.$spacing-xs;
+    text-align: end;
+
+    &__sm {
+      min-width: spacing.$spacing-md;
+    }
+
+    &__md {
+      min-width: spacing.$spacing-xl;
+    }
+
+    &__lg {
+      min-width: spacing.$spacing-xxl;
+    }
 
     &__float-right {
       margin-left: auto;
