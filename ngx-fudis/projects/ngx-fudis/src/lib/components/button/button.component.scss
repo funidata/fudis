@@ -57,25 +57,25 @@
 
   &__size {
     &-small {
-      height: spacing.$spacing-md;
+      min-height: spacing.$spacing-md;
     }
 
     &-medium {
-      height: spacing.$spacing-lg;
+      min-height: spacing.$spacing-lg;
     }
 
     &-icon-only {
       padding: 0;
       width: spacing.$spacing-lg;
       min-width: initial;
-      height: spacing.$spacing-lg;
+      min-height: spacing.$spacing-lg;
     }
   }
 
   &__icon {
     position: relative;
     width: spacing.$spacing-lg;
-    height: spacing.$spacing-lg;
+    height: spacing.$spacing-sm;
 
     &__component {
       position: absolute;

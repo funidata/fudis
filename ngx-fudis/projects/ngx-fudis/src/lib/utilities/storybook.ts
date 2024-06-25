@@ -140,6 +140,11 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'serviceDefaults',
 ]);
 
+export const nestedDescriptionListExclude: RegExp = excludeRegex([
+  ...descriptionListCommonExclude,
+  'variant',
+]);
+
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
 
 /**
@@ -250,6 +255,7 @@ export const linkExclude: RegExp = excludeRegex([
   'handleBlur',
   'handleFocus',
   'link',
+  'id',
 ]);
 
 /**

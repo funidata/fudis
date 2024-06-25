@@ -16,7 +16,7 @@
       *ngIf="autocompleteHelpText !== false"
       [class.fudis-select-dropdown__help-text--hidden]="!results"
       class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__first"
-      [size]="'md-light'"
+      [variant]="'md-light'"
       ><ng-container *ngIf="autocompleteHelpText">{{ autocompleteHelpText }}</ng-container
       ><ng-container *ngIf="!autocompleteHelpText"
         >{{ _translationShowing | async }} {{ results }}
@@ -26,7 +26,7 @@
     <fudis-body-text
       class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__last"
       [class.fudis-select-dropdown__help-text--hidden]="results"
-      [size]="'md-light'"
+      [variant]="'md-light'"
       >{{ _translationNoResultsFound | async }}</fudis-body-text
     >
     <span

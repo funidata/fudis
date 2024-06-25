@@ -29,7 +29,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
           fudisGridItem
           [columns]="'stretch'"
           [alignSelfX]="'center'"
-          [size]="'lg-regular'"
+          [variant]="'lg-regular'"
           >Current Grid Service values: <code>{{ _currentServiceConfigs }}</code>
         </fudis-body-text>
       </fudis-grid>
@@ -158,7 +158,10 @@ const columnsToString = (columns: string | number | object): string => {
 
 const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: { ...args, transformedColumns: columnsToString(args.columns) },
-  template: html`<fudis-body-text style="margin: 1rem 0;" [size]="'lg-regular'" [align]="'center'"
+  template: html`<fudis-body-text
+      style="margin: 1rem 0;"
+      [variant]="'lg-regular'"
+      [align]="'center'"
       >Current value of <code>columns</code> is:
       <code>{{transformedColumns}}</code></fudis-body-text
     >
@@ -174,9 +177,10 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
       [columnGap]="columnGap"
       [rowGap]="rowGap"
     >
-      <fudis-body-text class="storybook__item"
-        >Grid child element which has more content than most of the child elements</fudis-body-text
-      >
+      <div class="storybook__item">
+        <fudis-body-text>First Grid child's first Body Text inside it</fudis-body-text>
+        <fudis-body-text>First Grid child's second Body Text inside it</fudis-body-text>
+      </div>
       <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
       <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
       <fudis-body-text class="storybook__item"

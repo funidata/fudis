@@ -3,6 +3,8 @@
 .fudis-select-dropdown {
   &__help-text {
     &.fudis-body-text-host {
+      /** No need for margin bottom because both Body Text help text elements are not visible simultaneously **/
+      margin-bottom: spacing.$spacing-none;
       padding: spacing.$spacing-xs;
     }
 

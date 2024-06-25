@@ -18,7 +18,7 @@
   }}</span
   ><span [class]="(_mainCssClass | async) + '__content'">
     <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'"> &#40;</span
-    >{{ textContent
+    >{{ contentText
     }}<span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
     ><ng-content
   /></span>
