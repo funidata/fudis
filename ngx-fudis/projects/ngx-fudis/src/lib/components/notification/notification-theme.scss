@@ -1,0 +1,6 @@
+/** Notifications inside Fudis Grid will always have the maximum width of the Grid element */
+.fudis-grid {
+  fudis-notification .fudis-notification {
+    max-width: 100%;
+  }
+}
