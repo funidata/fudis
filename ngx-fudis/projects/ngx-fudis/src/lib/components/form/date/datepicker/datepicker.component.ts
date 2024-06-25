@@ -80,7 +80,7 @@ export class DatepickerComponent
   /**
    * FormControl for the input
    */
-  @Input({ required: true }) control: FormControl<Date | null>;
+  @Input({ required: true }) override control: FormControl<Date | null>;
 
   /**
    * Available sizes for the datepicker

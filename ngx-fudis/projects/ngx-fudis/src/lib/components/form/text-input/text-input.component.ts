@@ -3,10 +3,10 @@ import {
   Component,
   Input,
   OnInit,
-  OnChanges,
   Optional,
   Host,
   ChangeDetectorRef,
+  OnChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -20,9 +20,10 @@ import {
   getMinLengthFromValidator,
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
+// import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-text-input',
@@ -31,7 +32,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class TextInputComponent
   extends InputBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
+  implements OnInit, AfterViewInit, OnChanges
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
@@ -40,12 +41,29 @@ export class TextInputComponent
     _idService: FudisIdService,
   ) {
     super(_idService, _changeDetectorRef);
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+
+        if (this.type === 'number') {
+          this._minNumber = getMinFromValidator(this.control);
+          this._maxNumber = getMaxFromValidator(this.control);
+          this._maxLength = null;
+          this._minLength = null;
+        } else {
+          this._maxLength = getMaxLengthFromValidator(this.control);
+          this._minLength = getMinLengthFromValidator(this.control);
+          this._minNumber = null;
+          this._maxNumber = null;
+        }
+      }
+    });
   }
 
   /**
    * FormControl for text-input
    */
-  @Input({ required: true }) control: FormControl<string | null | number>;
+  @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
    * Available sizes for the input. Recommended size for number input is 'sm'.
@@ -60,25 +78,26 @@ export class TextInputComponent
   /**
    * Max length for HTML attribute and for character indicator in guidance
    */
-  protected _maxLength: number | undefined = undefined;
+  protected override _maxLength: number | null = null;
 
   /**
    * Min length for HTML attribute
    */
-  protected _minLength: number | undefined = undefined;
+  protected _minLength: number | null = null;
 
   /**
    * Max number for number input HTML attribute
    */
-  protected _maxNumber: number | undefined = undefined;
+  protected _maxNumber: number | null = null;
 
   /**
    * Min number for number input HTML attribute
    */
-  protected _minNumber: number | undefined = undefined;
+  protected _minNumber: number | null = null;
 
   ngOnInit(): void {
     this._setInputId('text-input');
+    this._updateValueAndValidityTrigger.next();
 
     /**
      * TODO: write test
@@ -94,15 +113,11 @@ export class TextInputComponent
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._required = hasRequiredValidator(this.control);
-      this._maxLength = getMaxLengthFromValidator(this.control);
+      this._applyControlUpdateCheck();
     }
 
-    if (changes.type?.currentValue === 'number') {
-      this._minNumber = getMinFromValidator(this.control);
-      this._maxNumber = getMaxFromValidator(this.control);
-    } else if (changes.type?.currentValue !== changes.type?.previousValue) {
-      this._minLength = getMinLengthFromValidator(this.control);
+    if (changes.type?.currentValue !== changes.type?.previousValue) {
+      this._updateValueAndValidityTrigger.next();
     }
   }
 

@@ -78,7 +78,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
   /**
    * When set displays also a character count indicator.
    */
-  @Input() maxLength: number | undefined = undefined;
+  @Input() maxLength: number | null = null;
 
   /**
    * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
