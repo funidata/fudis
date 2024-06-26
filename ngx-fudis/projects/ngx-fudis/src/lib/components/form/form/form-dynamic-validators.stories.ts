@@ -14,6 +14,8 @@ import {
 } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { fudisSpacingArray } from '../../../types/spacing';
+import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 @Component({
   selector: 'example-dynamic-validator',
   template: `
@@ -101,6 +103,55 @@ import { fudisSpacingArray } from '../../../types/spacing';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
+
+              <hr class="fudis-hr" />
+              <fudis-grid [columns]="{ md: 3 }">
+                <fudis-checkbox-group
+                  [label]="'If you like summer'"
+                  [formGroup]="formExample2.controls.summer"
+                >
+                  <fudis-checkbox
+                    [controlName]="'summer1'"
+                    [label]="'Summer holidays'"
+                    (handleChange)="
+                      toggleRequiredFromOthers([
+                        formExample2.controls.winter,
+                        formExample2.controls.working
+                      ])
+                    "
+                  />
+                </fudis-checkbox-group>
+                <fudis-checkbox-group
+                  [label]="'If you like winter'"
+                  [formGroup]="formExample2.controls.winter"
+                >
+                  <fudis-checkbox
+                    [controlName]="'winter1'"
+                    [label]="'Winter holidays'"
+                    (handleChange)="
+                      toggleRequiredFromOthers([
+                        formExample2.controls.summer,
+                        formExample2.controls.working
+                      ])
+                    "
+                  />
+                </fudis-checkbox-group>
+                <fudis-checkbox-group
+                  [label]="'If you like working'"
+                  [formGroup]="formExample2.controls.working"
+                >
+                  <fudis-checkbox
+                    [controlName]="'working1'"
+                    [label]="'Working holidays'"
+                    (handleChange)="
+                      toggleRequiredFromOthers([
+                        formExample2.controls.summer,
+                        formExample2.controls.winter
+                      ])
+                    "
+                  />
+                </fudis-checkbox-group>
+              </fudis-grid>
             </fudis-grid>
           </ng-template>
         </fudis-fieldset>
@@ -126,6 +177,27 @@ class DynamicValidatorExampleComponent {
         this._minNumberValidatorInstance,
         this._maxNumberValidatorInstance,
       ]),
+    });
+
+    this.formExample2 = new FormGroup({
+      summer: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+        {
+          summer1: new FormControl(null),
+        },
+        this._atLeastOneRequiredValidatorInstance,
+      ),
+      winter: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+        {
+          winter1: new FormControl(null),
+        },
+        this._atLeastOneRequiredValidatorInstance,
+      ),
+      working: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+        {
+          working1: new FormControl(null),
+        },
+        this._atLeastOneRequiredValidatorInstance,
+      ),
     });
   }
 
@@ -181,8 +253,11 @@ class DynamicValidatorExampleComponent {
     this.maxNumber,
     `Given number is higher than allowed ${this.maxNumber}.`,
   );
+  private _atLeastOneRequiredValidatorInstance: FudisValidatorFn =
+    FudisGroupValidators.atLeastOneRequired('At least one option must be selected');
 
   formExample: FormGroup;
+  formExample2: FormGroup;
 
   changeText(target: string): void {
     switch (target) {
@@ -217,6 +292,25 @@ class DynamicValidatorExampleComponent {
         console.error('Wrong input provided. No case for text: ' + target);
         return;
     }
+  }
+
+  toggleRequiredFromOthers(
+    removeControls: FormGroup<FudisCheckboxGroupFormGroup<object>>[],
+  ): void {
+
+    removeControls.forEach((control) => {
+      const required = control.hasValidator(this._atLeastOneRequiredValidatorInstance);
+
+      if (required) {
+        control.removeValidators(this._atLeastOneRequiredValidatorInstance);
+        control.disable();
+      } else {
+        control.addValidators(this._atLeastOneRequiredValidatorInstance);
+        control.enable();
+      }
+
+      control.updateValueAndValidity();
+    });
   }
 
   toggleRequired(control: FormControl, target: string): void {
