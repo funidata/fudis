@@ -79,4 +79,4 @@ jobs:
           <meta http-equiv='refresh' content='0; url=https://fudis.funidata.fi/v/$VERSION/index.html' />
           </head>
           </html>" > /tmp/index.html
-          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }} --cache-control max-age=5
