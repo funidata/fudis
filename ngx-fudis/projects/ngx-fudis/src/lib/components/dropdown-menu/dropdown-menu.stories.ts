@@ -130,6 +130,6 @@ const Template: StoryFn = (args) => ({
 
 export const Example = Template.bind({});
 Example.args = {
-  align: 'left',
+  align: 'center',
   size: 'lg',
 };

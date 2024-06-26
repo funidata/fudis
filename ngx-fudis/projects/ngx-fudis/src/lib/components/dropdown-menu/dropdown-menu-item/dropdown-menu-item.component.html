@@ -1,10 +1,12 @@
 <button
   #dropdownItem
-  class="fudis-dropdown-menu-item fudis-dropdown-menu-item__focusable"
+  class="fudis-dropdown-menu-item"
+  [class.fudis-dropdown-menu-item--disabled]="disabled || null"
+  [class.fudis-dropdown-menu-item__focusable]="!disabled"
   [attr.id]="_id"
   [attr.role]="'menuitem'"
   [attr.aria-disabled]="disabled || null"
-  [class.fudis-dropdown-menu-item--disabled]="disabled || null"
+  [attr.disabled]="disabled || null"
   (keydown)="_handleKeyDown($event)"
   (blur)="_handleMenuItemBlur($event)"
   (focus)="_handleMenuItemFocus()"
