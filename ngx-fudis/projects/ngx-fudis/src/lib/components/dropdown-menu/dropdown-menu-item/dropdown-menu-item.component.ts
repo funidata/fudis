@@ -105,8 +105,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
       this.handleClick.emit(event);
 
       this._parentDropdownMenu.closeDropdownMenu();
-    }
-    else {
+    } else {
       event.stopPropagation();
     }
   }
