@@ -65,16 +65,6 @@ jobs:
         run: npm run build -- storybook
       - name: Copy docs to S3 bucket
         run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/v/$VERSION
-      # Saving in a file appears to be the only way to read from env vars when using irongut/editrelease...
-      - name: Generate docs link for release notes
-        run: echo "**Documentation:** [Storybook](https://fudis.funidata.fi/v/${VERSION})" >> release_notes_annex
-      - name: Edit Release
-        uses: irongut/editrelease@v1.2.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          id: ${{ github.event.release.id }}
-          files: release_notes_annex
-          spacing: 2
       - name: Check semver
         id: check-semver
         run: |
