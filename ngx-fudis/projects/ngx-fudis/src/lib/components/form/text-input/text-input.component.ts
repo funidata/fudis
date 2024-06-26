@@ -20,7 +20,6 @@ import {
   getMinLengthFromValidator,
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
-// import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
