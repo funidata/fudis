@@ -46,6 +46,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   ) {
     super(_idService, _changeDetectorRef);
 
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+      }
+    });
+
     effect(() => {
       const translations = _translationService.getTranslations()();
 
@@ -244,11 +250,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      // TODO: refactor this after dynamic validator update ticket is done
-      this._required = hasRequiredValidator(this.control);
+      this._applyControlUpdateCheck();
+      this._updateValueAndValidityTrigger.next();
 
       if (changes.control?.currentValue?.value) {
         this._updateSelectionFromControlValue();
+        this._updateValueAndValidityTrigger.next();
       }
 
       this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
@@ -266,6 +273,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       !changes.variant.firstChange
     ) {
       this._filterTextUpdate('');
+      this._updateValueAndValidityTrigger.next();
     }
   }
 
