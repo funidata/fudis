@@ -306,7 +306,7 @@ class DynamicValidatorExampleComponent {
   });
   private _minDateValidatorInstance: FudisValidatorFn = FudisValidators.datepickerMin({
     value: new Date(new Date().setDate(new Date().getDate() - 1)),
-    message: 'Date cannot be before yeterdays date',
+    message: 'Date cannot be before yesterdays date',
   });
   private _atLeastOneRequiredValidatorInstance: FudisValidatorFn =
     FudisGroupValidators.atLeastOneRequired('At least one option must be selected');
