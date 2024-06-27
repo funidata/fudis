@@ -15,7 +15,6 @@ import {
   effect,
   signal,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
@@ -92,11 +91,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Set dropdown size (should follow the given input element size)
    */
   @Input() size: FudisInputSize | 'xs' = 'lg';
-
-  /**
-   * Formcontrol. For SelectBase set on purpose to type 'any' and spesified in SelectComponent and MultiselectComponent.
-   */
-  @Input() override control: FormControl;
 
   /**
    * Placeholder text for the dropdown input when no selection has been made
@@ -255,7 +249,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
       if (changes.control?.currentValue?.value) {
         this._updateSelectionFromControlValue();
-        this._updateValueAndValidityTrigger.next();
       }
 
       this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
@@ -273,7 +266,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       !changes.variant.firstChange
     ) {
       this._filterTextUpdate('');
-      this._updateValueAndValidityTrigger.next();
     }
   }
 
