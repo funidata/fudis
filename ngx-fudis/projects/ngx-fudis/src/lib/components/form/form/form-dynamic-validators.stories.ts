@@ -108,45 +108,45 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
               <fudis-grid [columns]="{ md: 3 }">
                 <fudis-checkbox-group
                   [label]="'If you like summer'"
-                  [formGroup]="formExample2.controls.summer"
+                  [formGroup]="formExample.controls.summer"
                 >
                   <fudis-checkbox
                     [controlName]="'summer1'"
                     [label]="'Summer holidays'"
                     (handleChange)="
                       toggleRequiredFromOthers([
-                        formExample2.controls.winter,
-                        formExample2.controls.working
+                        formExample.controls.winter,
+                        formExample.controls.working
                       ])
                     "
                   />
                 </fudis-checkbox-group>
                 <fudis-checkbox-group
                   [label]="'If you like winter'"
-                  [formGroup]="formExample2.controls.winter"
+                  [formGroup]="formExample.controls.winter"
                 >
                   <fudis-checkbox
                     [controlName]="'winter1'"
                     [label]="'Winter holidays'"
                     (handleChange)="
                       toggleRequiredFromOthers([
-                        formExample2.controls.summer,
-                        formExample2.controls.working
+                        formExample.controls.summer,
+                        formExample.controls.working
                       ])
                     "
                   />
                 </fudis-checkbox-group>
                 <fudis-checkbox-group
                   [label]="'If you like working'"
-                  [formGroup]="formExample2.controls.working"
+                  [formGroup]="formExample.controls.working"
                 >
                   <fudis-checkbox
                     [controlName]="'working1'"
                     [label]="'Working holidays'"
                     (handleChange)="
                       toggleRequiredFromOthers([
-                        formExample2.controls.summer,
-                        formExample2.controls.winter
+                        formExample.controls.summer,
+                        formExample.controls.winter
                       ])
                     "
                   />
@@ -177,9 +177,6 @@ class DynamicValidatorExampleComponent {
         this._minNumberValidatorInstance,
         this._maxNumberValidatorInstance,
       ]),
-    });
-
-    this.formExample2 = new FormGroup({
       summer: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           summer1: new FormControl(null),
@@ -294,10 +291,7 @@ class DynamicValidatorExampleComponent {
     }
   }
 
-  toggleRequiredFromOthers(
-    removeControls: FormGroup<FudisCheckboxGroupFormGroup<object>>[],
-  ): void {
-
+  toggleRequiredFromOthers(removeControls: FormGroup<FudisCheckboxGroupFormGroup<object>>[]): void {
     removeControls.forEach((control) => {
       const required = control.hasValidator(this._atLeastOneRequiredValidatorInstance);
 

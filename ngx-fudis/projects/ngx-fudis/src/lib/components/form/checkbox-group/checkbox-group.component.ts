@@ -136,7 +136,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       this.formGroup.updateValueAndValidity = () => {
         original.apply(group);
         this._updateValueAndValidityTrigger.next();
-      }
+      };
     }
 
     if (this.errorSummaryReloadOnInit) {
