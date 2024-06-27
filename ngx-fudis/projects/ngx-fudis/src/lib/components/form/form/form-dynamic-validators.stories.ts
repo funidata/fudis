@@ -103,7 +103,47 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-
+              <hr class="fudis-hr" />
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+                <fudis-datepicker
+                  [label]="'Choose your favorite date'"
+                  [control]="formExample.controls.date"
+                ></fudis-datepicker>
+                <fudis-grid [rowGap]="'md'">
+                  <fudis-button
+                    [label]="_dateRequired + ' date required validator'"
+                    (handleClick)="toggleRequired(formExample.controls['date'], 'dateRequired')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_dateMax + ' maxDate validator'"
+                    (handleClick)="toggleMaxDate(formExample.controls['date'], 'dateMax')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_dateMin + ' minDate validator'"
+                    (handleClick)="toggleMinDate(formExample.controls['date'], 'dateMin')"
+                  ></fudis-button>
+                </fudis-grid>
+              </fudis-grid>
+              <hr class="fudis-hr" />
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+                <fudis-select
+                  [label]="'Select your favorite animal'"
+                  [size]="'md'"
+                  [control]="formExample.controls.animal"
+                >
+                  <ng-template fudisContent [type]="'select-options'">
+                    <fudis-select-option [data]="{ value: 'option-1', label: 'Otter' }" />
+                    <fudis-select-option [data]="{ value: 'option-2', label: 'Rattle snake' }" />
+                    <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
+                  </ng-template>
+                </fudis-select>
+                <fudis-grid [rowGap]="'md'">
+                  <fudis-button
+                    [label]="_optionRequired + ' option required validator'"
+                    (handleClick)="toggleRequired(formExample.controls['animal'], 'optionRequired')"
+                  ></fudis-button>
+                </fudis-grid>
+              </fudis-grid>
               <hr class="fudis-hr" />
               <fudis-grid [columns]="{ md: 3 }">
                 <fudis-checkbox-group
@@ -177,6 +217,12 @@ class DynamicValidatorExampleComponent {
         this._minNumberValidatorInstance,
         this._maxNumberValidatorInstance,
       ]),
+      date: new FormControl<Date | null>(null, [
+        this._requiredValidatorInstance,
+        this._maxDateValidatorInstance,
+        this._minDateValidatorInstance,
+      ]),
+      animal: new FormControl(null, this._requiredValidatorInstance),
       summer: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           summer1: new FormControl(null),
@@ -225,6 +271,10 @@ class DynamicValidatorExampleComponent {
   _numberMin = 'Remove';
   _numberMax = 'Remove';
   _numberRequired = 'Remove';
+  _dateRequired = 'Remove';
+  _optionRequired = 'Remove';
+  _dateMax = 'Remove';
+  _dateMin = 'Remove';
 
   /**
    * Instance of validators
@@ -250,11 +300,18 @@ class DynamicValidatorExampleComponent {
     this.maxNumber,
     `Given number is higher than allowed ${this.maxNumber}.`,
   );
+  private _maxDateValidatorInstance: FudisValidatorFn = FudisValidators.datepickerMax({
+    value: new Date(),
+    message: 'Date cannot be after todays date',
+  });
+  private _minDateValidatorInstance: FudisValidatorFn = FudisValidators.datepickerMin({
+    value: new Date(new Date().setDate(new Date().getDate() - 1)),
+    message: 'Date cannot be before yeterdays date',
+  });
   private _atLeastOneRequiredValidatorInstance: FudisValidatorFn =
     FudisGroupValidators.atLeastOneRequired('At least one option must be selected');
 
   formExample: FormGroup;
-  formExample2: FormGroup;
 
   changeText(target: string): void {
     switch (target) {
@@ -278,6 +335,18 @@ class DynamicValidatorExampleComponent {
         return;
       case 'numberRequired':
         this._numberRequired = this._numberRequired === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'dateRequired':
+        this._dateRequired = this._dateRequired === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'optionRequired':
+        this._optionRequired = this._optionRequired === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'dateMin':
+        this._dateMin = this._dateMin === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'dateMax':
+        this._dateMax = this._dateMax === 'Add' ? 'Remove' : 'Add';
         return;
       case 'numberMin':
         this._numberMin = this._numberMin === 'Add' ? 'Remove' : 'Add';
@@ -384,6 +453,30 @@ class DynamicValidatorExampleComponent {
       control.removeValidators(this._maxNumberValidatorInstance);
     } else {
       control.addValidators(this._maxNumberValidatorInstance);
+    }
+    this.changeText(target);
+    control.updateValueAndValidity();
+  }
+
+  toggleMaxDate(control: FormControl, target: string): void {
+    const hasMaxDate = control.hasValidator(this._maxDateValidatorInstance);
+
+    if (hasMaxDate) {
+      control.removeValidators(this._maxDateValidatorInstance);
+    } else {
+      control.addValidators(this._maxDateValidatorInstance);
+    }
+    this.changeText(target);
+    control.updateValueAndValidity();
+  }
+
+  toggleMinDate(control: FormControl, target: string): void {
+    const hasMaxDate = control.hasValidator(this._minDateValidatorInstance);
+
+    if (hasMaxDate) {
+      control.removeValidators(this._minDateValidatorInstance);
+    } else {
+      control.addValidators(this._minDateValidatorInstance);
     }
     this.changeText(target);
     control.updateValueAndValidity();
