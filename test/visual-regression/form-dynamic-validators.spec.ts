@@ -37,7 +37,7 @@ test("form dynamic inputs", async ({ page }) => {
   await page
     .getByTestId("fudis-datepicker-1")
     .fill(
-      new Date(new Date().setDate(new Date().getDate() - 5)).toLocaleDateString("fi-FI"),
+      new Date(2021, 3, 12).toLocaleDateString("fi-FI"),
     ); /** insert invalid mindate to datepicker */
   await page
     .getByTestId("fudis-checkbox-group-1-item-1")

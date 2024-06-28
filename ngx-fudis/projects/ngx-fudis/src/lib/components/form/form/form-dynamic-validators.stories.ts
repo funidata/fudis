@@ -253,10 +253,6 @@ class DynamicValidatorExampleComponent {
   @Input() errorSummaryHelpText: string;
   @Input() errorSummaryVisible: boolean;
 
-  releaseDate: number = new Date(1991, 4, 1).getTime();
-  firstLoad: boolean = true;
-  fieldsetId = 'first-fieldset-id';
-
   minLength = 5;
   maxLength = 20;
   minNumber = 2;
