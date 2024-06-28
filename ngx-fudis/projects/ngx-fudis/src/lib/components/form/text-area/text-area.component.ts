@@ -83,7 +83,7 @@ export class TextAreaComponent
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
-    if (changes.control) {
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
     }
   }
