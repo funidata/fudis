@@ -20,6 +20,8 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -34,6 +36,12 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(_idService, _translationService, _changeDetectorRef);
+
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.formGroup) {
+        this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+      }
+    });
   }
   /**
    * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
@@ -69,6 +77,11 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created FormGroup or one provided from the App.
    */
   protected _internalFormGroup: boolean = false;
+
+  /**
+   * Trigger update when control validator is changed
+   */
+  protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
    * Getter for _groupBlurredOut boolean.
@@ -114,6 +127,15 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       group.markAllAsTouched = () => {
         originalMarkAllAsTouched.apply(group);
         this._groupBlurredOut = true;
+      };
+
+      /**
+       * Extend original updateValueAndValidity function to update possible dynamic validator changes
+       */
+      const original = group.updateValueAndValidity;
+      this.formGroup.updateValueAndValidity = () => {
+        original.apply(group);
+        this._updateValueAndValidityTrigger.next();
       };
     }
 
