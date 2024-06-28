@@ -69,6 +69,7 @@ export class TextAreaComponent
 
   ngOnInit(): void {
     this._setInputId('text-area');
+    this._updateValueAndValidityTrigger.next();
 
     /**
      * TODO: write test
