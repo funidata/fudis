@@ -30,6 +30,7 @@ import { FormComponent } from '../../form/form.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
 import { BehaviorSubject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -60,6 +61,14 @@ export class DatepickerComponent
     _idService: FudisIdService,
   ) {
     super(_idService, _changeDetectorRef);
+
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+        this._minDate = getMinDateFromValidator(this.control);
+        this._maxDate = getMaxDateFromValidator(this.control);
+      }
+    });
 
     effect(() => {
       _adapter.setLocale(updateLocale(_translationService.getLanguageSignal()()));
@@ -190,9 +199,7 @@ export class DatepickerComponent
 
     // Do checks for the control to define attributes used in e.g. HTML
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._required = hasRequiredValidator(this.control);
-      this._minDate = getMinDateFromValidator(this.control);
-      this._maxDate = getMaxDateFromValidator(this.control);
+      this._applyControlUpdateCheck();
 
       // If control changes and these checks are on, add parseValidator
       if (!this._parseValidatorInstance && this.parseDateValidator) {

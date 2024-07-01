@@ -15,7 +15,6 @@ import {
   effect,
   signal,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
@@ -45,6 +44,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(_idService, _changeDetectorRef);
+
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+      }
+    });
 
     effect(() => {
       const translations = _translationService.getTranslations()();
@@ -86,11 +91,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Set dropdown size (should follow the given input element size)
    */
   @Input() size: FudisInputSize | 'xs' = 'lg';
-
-  /**
-   * Formcontrol. For SelectBase set on purpose to type 'any' and spesified in SelectComponent and MultiselectComponent.
-   */
-  @Input() override control: FormControl;
 
   /**
    * Placeholder text for the dropdown input when no selection has been made
@@ -244,8 +244,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      // TODO: refactor this after dynamic validator update ticket is done
-      this._required = hasRequiredValidator(this.control);
+      this._applyControlUpdateCheck();
+      this._updateValueAndValidityTrigger.next();
 
       if (changes.control?.currentValue?.value) {
         this._updateSelectionFromControlValue();

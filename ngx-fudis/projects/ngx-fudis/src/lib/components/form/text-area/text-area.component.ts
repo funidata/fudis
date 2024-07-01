@@ -69,6 +69,7 @@ export class TextAreaComponent
 
   ngOnInit(): void {
     this._setInputId('text-area');
+    this._updateValueAndValidityTrigger.next();
 
     /**
      * TODO: write test
@@ -83,7 +84,7 @@ export class TextAreaComponent
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
-    if (changes.control) {
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
     }
   }
