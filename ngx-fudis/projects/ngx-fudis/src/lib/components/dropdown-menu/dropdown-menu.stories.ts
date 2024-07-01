@@ -7,7 +7,7 @@ import { dropdownMenuControlsExclude } from '../../utilities/storybook';
 import {
   defaultMenuItems,
   smallDropdownMenuGroupedMockData,
-} from '../form/select/common/mock_data';
+} from './mock_data';
 import { action } from '@storybook/addon-actions';
 import { FudisInputSize } from '../../types/forms';
 
