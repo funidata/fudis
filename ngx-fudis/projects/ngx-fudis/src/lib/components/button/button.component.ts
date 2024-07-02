@@ -15,7 +15,7 @@ import {
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisComponentChanges } from '../../types/miscellaneous';
+import { FudisButtonSize, FudisButtonType, FudisButtonVariant, FudisComponentChanges } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 
@@ -51,17 +51,17 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   /**
    * Button variant options
    */
-  @Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() variant: FudisButtonVariant = 'primary';
 
   /**
    * Button size options
    */
-  @Input() size: 'icon-only' | 'small' | 'medium' = 'medium';
+  @Input() size: FudisButtonSize = 'medium';
 
   /**
    * Button type options
    */
-  @Input() type: 'button' | 'submit' = 'button';
+  @Input() type: FudisButtonType = 'button';
 
   /**
    * Hide visible label text for icon-only buttons.
