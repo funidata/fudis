@@ -15,7 +15,12 @@ import {
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisButtonSize, FudisButtonType, FudisButtonVariant, FudisComponentChanges } from '../../types/miscellaneous';
+import {
+  FudisButtonSize,
+  FudisButtonType,
+  FudisButtonVariant,
+  FudisComponentChanges,
+} from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 
@@ -98,19 +103,16 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
   @Output() handleClick = new EventEmitter<Event>();
 
-  // TODO: write test
   /**
    * Focus handler
    */
   @Output() handleFocus = new EventEmitter<FocusEvent>();
 
-  // TODO: write test
   /**
    * Blur handler
    */
   @Output() handleBlur = new EventEmitter<FocusEvent>();
 
-  // TODO: write test
   /**
    * onDestroy handler emit
    */
@@ -159,15 +161,10 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
 
   ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
     const variant = changes.variant?.currentValue !== changes.variant?.previousValue;
-
     const disabled = changes.disabled?.currentValue !== changes.disabled?.previousValue;
-
     const size = changes.size?.currentValue !== changes.size?.previousValue;
-
     const label = changes.label?.currentValue !== changes.label?.previousValue;
-
     const labelHidden = changes.labelHidden?.currentValue !== changes.labelHidden?.previousValue;
-
     const ariaLabel = changes.ariaLabel?.currentValue !== changes.ariaLabel?.previousValue;
 
     if (variant || disabled || size) {

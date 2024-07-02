@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy} from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
 import { DropdownMenuItemComponent } from './dropdown-menu-item/dropdown-menu-item.component';

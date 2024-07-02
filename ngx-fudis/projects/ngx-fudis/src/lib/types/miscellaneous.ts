@@ -35,8 +35,8 @@ export type FudisButtonSize = (typeof fudisButtonSizeArray)[number];
 export const fudisButtonTypeArray = ['submit', 'button'] as const;
 export type FudisButtonType = (typeof fudisButtonTypeArray)[number];
 
-/** 
- * Description List 
+/**
+ * Description List
  */
 export type FudisDescriptionListVariant = 'regular' | 'compact';
 
@@ -91,7 +91,6 @@ export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
  * Tooltip
  */
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
-
 
 /**
  * Translation
