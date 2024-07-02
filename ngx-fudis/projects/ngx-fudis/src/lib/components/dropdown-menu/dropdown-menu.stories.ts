@@ -11,59 +11,59 @@ import { FudisInputSize } from '../../types/forms';
 @Component({
   selector: 'example-dropdown-menu',
   template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
-      <fudis-grid-item>
-        <fudis-heading [level]="4">Random items menu</fudis-heading>
-        <fudis-button
-          [label]="'Random items menu'"
-          [labelHidden]="true"
-          [size]="'small'"
-          [variant]="'secondary'"
-          [icon]="'three-dots'"
-          [asMenuButton]="true"
-        >
-          <fudis-dropdown-menu [align]="align" [size]="size">
+    <fudis-grid-item>
+      <fudis-heading [level]="4">Random items menu</fudis-heading>
+      <fudis-button
+        [label]="'Random items menu'"
+        [labelHidden]="true"
+        [size]="'small'"
+        [variant]="'secondary'"
+        [icon]="'three-dots'"
+        [asMenuButton]="true"
+      >
+        <fudis-dropdown-menu [align]="align" [size]="size">
+          <fudis-dropdown-menu-item
+            *ngFor="let item of defaultMenuItems"
+            [label]="item.label"
+            [disabled]="item.disabled"
+            (handleClick)="_clickOption(item.label, $event)"
+          >
+          </fudis-dropdown-menu-item>
+        </fudis-dropdown-menu>
+      </fudis-button>
+    </fudis-grid-item>
+    <fudis-grid-item>
+      <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
+      <fudis-button
+        [label]="'Grouped animals menu'"
+        [labelHidden]="true"
+        [size]="'small'"
+        [variant]="'secondary'"
+        [icon]="'three-dots'"
+        [asMenuButton]="true"
+      >
+        <fudis-dropdown-menu [align]="align" [size]="size">
+          <fudis-dropdown-menu-group
+            *ngFor="let group of smallDropdownMenuGroupedMockData"
+            [label]="group.country"
+          >
             <fudis-dropdown-menu-item
-              *ngFor="let item of defaultMenuItems"
-              [label]="item.label"
-              [disabled]="item.disabled"
-              (handleClick)="_clickOption(item.label, $event)"
+              *ngFor="let groupedItem of group.items"
+              [label]="groupedItem.label"
+              [disabled]="groupedItem.disabled"
+              (handleClick)="_clickOption(groupedItem.label, $event)"
             >
             </fudis-dropdown-menu-item>
-          </fudis-dropdown-menu>
-        </fudis-button>
-      </fudis-grid-item>
-      <fudis-grid-item>
-        <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
-        <fudis-button
-          [label]="'Grouped animals menu'"
-          [labelHidden]="true"
-          [size]="'small'"
-          [variant]="'secondary'"
-          [icon]="'three-dots'"
-          [asMenuButton]="true"
-        >
-          <fudis-dropdown-menu [align]="align" [size]="size">
-            <fudis-dropdown-menu-group
-              *ngFor="let group of smallDropdownMenuGroupedMockData"
-              [label]="group.country"
-            >
-              <fudis-dropdown-menu-item
-                *ngFor="let groupedItem of group.items"
-                [label]="groupedItem.label"
-                [disabled]="groupedItem.disabled"
-                (handleClick)="_clickOption(groupedItem.label, $event)"
-              >
-              </fudis-dropdown-menu-item>
-            </fudis-dropdown-menu-group>
-          </fudis-dropdown-menu>
-        </fudis-button>
-      </fudis-grid-item>
-      <fudis-grid-item [columns]="'1/-1'">
+          </fudis-dropdown-menu-group>
+        </fudis-dropdown-menu>
+      </fudis-button>
+    </fudis-grid-item>
+    <fudis-grid-item [columns]="'1/-1'">
       <fudis-body-text *ngIf="_latestClickItem"
-      >Latest clicked item was: {{ _latestClickItem }}</fudis-body-text
-    >
-      </fudis-grid-item>
-    </fudis-grid>`,
+        >Latest clicked item was: {{ _latestClickItem }}</fudis-body-text
+      >
+    </fudis-grid-item>
+  </fudis-grid>`,
 })
 class DropdownMenuExampleComponent {
   protected _latestClickItem: string | null = null;
