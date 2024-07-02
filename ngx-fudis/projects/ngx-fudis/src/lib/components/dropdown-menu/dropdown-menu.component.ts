@@ -17,6 +17,7 @@ import { ButtonComponent } from '../button/button.component';
 import { DOCUMENT } from '@angular/common';
 import { FudisInputSize } from '../../types/forms';
 import { Subject } from 'rxjs';
+import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -50,7 +51,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   /**
    * Align Dropdown Menu opening position
    */
-  @Input() align: 'left' | 'right' | 'center' = 'center';
+  @Input() align: FudisDropdownMenuAlign = 'center';
 
   /**
    * Dropdown Menu size

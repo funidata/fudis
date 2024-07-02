@@ -2,6 +2,10 @@ import { SimpleChange } from '@angular/core';
 
 export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
+export const fudisDropdownMenuAlignArray = ['left', 'center', 'right'] as const;
+
+export type FudisDropdownMenuAlign = (typeof fudisDropdownMenuAlignArray)[number];
+
 export type FudisDescriptionListVariant = 'regular' | 'compact';
 
 export type FudisDescriptionListItemDetailInfo = {
