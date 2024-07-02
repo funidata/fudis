@@ -106,4 +106,6 @@ export const fudisIconColorArray = [
 
 export type FudisIconColor = (typeof fudisIconColorArray)[number];
 
-export type FudisIconRotate = 'flip-180' | 'cw-90' | 'ccw-90' | 'none';
+export const fudisIconRotateArray = ['flip-180', 'cw-90', 'ccw-90', 'none'] as const;
+
+export type FudisIconRotate = (typeof fudisIconRotateArray)[number];
