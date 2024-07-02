@@ -10,7 +10,7 @@ import { FudisInputSize } from '../../types/forms';
 
 @Component({
   selector: 'example-dropdown-menu',
-  template: `<fudis-grid [columns]="2">
+  template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
       <fudis-grid-item>
         <fudis-heading [level]="4">Random items menu</fudis-heading>
         <fudis-button
@@ -58,10 +58,12 @@ import { FudisInputSize } from '../../types/forms';
           </fudis-dropdown-menu>
         </fudis-button>
       </fudis-grid-item>
-    </fudis-grid>
-    <fudis-body-text *ngIf="_latestClickItem"
+      <fudis-grid-item [columns]="'1/-1'">
+      <fudis-body-text *ngIf="_latestClickItem"
       >Latest clicked item was: {{ _latestClickItem }}</fudis-body-text
-    >`,
+    >
+      </fudis-grid-item>
+    </fudis-grid>`,
 })
 class DropdownMenuExampleComponent {
   protected _latestClickItem: string | null = null;
