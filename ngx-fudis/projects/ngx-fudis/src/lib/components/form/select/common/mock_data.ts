@@ -5,6 +5,11 @@ interface MockSelectOptionGroupData {
   options: FudisSelectOption<TestAnimalScience>[];
 }
 
+interface MockDropdownMenuGroupData {
+  country: string;
+  items: TestMenuItemActions[];
+}
+
 export type TestAnimalSound = {
   value: string;
   label: string;
@@ -25,6 +30,19 @@ export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
 ];
 
+export const defaultMenuItems: TestMenuItemActions[] = [
+  {
+    label: 'First item',
+    disabled: false,
+  },
+  { label: 'Second item', disabled: true },
+  {
+    label: 'Third item with really long label to push it to the limit!',
+    disabled: false,
+  },
+  { label: 'Fourth item', disabled: false },
+];
+
 export const multiselectChipListMockData: FudisSelectOption<object>[] = [
   { value: 'hereford', label: 'Hereford' },
   { value: 'texas-longhorn', label: 'Texas Longhorn' },
@@ -36,6 +54,11 @@ export type TestAnimalScience = {
   value: string;
   label: string;
   subLabel: string;
+  disabled?: boolean;
+};
+
+export type TestMenuItemActions = {
+  label: string;
   disabled?: boolean;
 };
 
@@ -947,6 +970,46 @@ export const smallGroupedMockData: MockSelectOptionGroupData[] = [
         value: 'e2fa6f0a-632a-485f-8ccf-b984311fe3b4',
         label: 'Mountain lion',
         subLabel: 'Felis concolor',
+      },
+    ],
+  },
+];
+
+export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
+  {
+    country: 'Netherlands',
+    items: [
+      {
+        label: 'Golden jackal',
+        disabled: false,
+      },
+      {
+        label: 'Mountain lion',
+        disabled: false,
+      },
+    ],
+  },
+  {
+    country: 'Brazil',
+    items: [
+      {
+        label: 'Small Indian mongoose',
+        disabled: true,
+      },
+      {
+        label: 'Falcon, prairie',
+        disabled: false,
+      },
+    ],
+  },
+  {
+    country: 'China',
+    items: [
+      {
+        label: 'Salmon pink bird eater tarantula',
+      },
+      {
+        label: 'Crane, sandhill',
       },
     ],
   },

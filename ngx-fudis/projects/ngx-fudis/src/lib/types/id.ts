@@ -29,12 +29,16 @@ export const fudisIdComponents = [
 export const fudisIdParents = [
   'breadcrumbs',
   'checkbox-group',
-  'dropdown-menu',
   'language-badge-group',
   'radio-button-group',
 ] as const;
 
-export const fudisIdGrandParents = ['description-list', 'select', 'multiselect'] as const;
+export const fudisIdGrandParents = [
+  'description-list',
+  'select',
+  'multiselect',
+  'dropdown-menu',
+] as const;
 
 export type FudisIdComponent = (typeof fudisIdComponents)[number];
 
@@ -72,6 +76,17 @@ export type FudisIdDlFamily = {
 };
 
 /**
+ * Dropdown Menu component id and its grouped and non-grouped items
+ */
+export type FudisIdDropdownMenuFamily = {
+  id: string;
+  nonGroupedOptions: string[];
+  groups: {
+    [groupId: string]: string[];
+  };
+};
+
+/**
  * Collection of all ids
  */
 export type FudisIdData = {
@@ -86,6 +101,9 @@ export type FudisIdData = {
   grandParents: {
     'description-list': {
       [parentId: string]: FudisIdDlFamily;
+    };
+    'dropdown-menu': {
+      [parentId: string]: FudisIdDropdownMenuFamily;
     };
     select: {
       [parentId: string]: FudisIdSelectFamily;

@@ -2,7 +2,7 @@ import { Component, Input, effect, OnChanges } from '@angular/core';
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { FudisSelectVariant } from '../../../../../types/forms';
+import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
@@ -41,6 +41,26 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
    * Current filter text from Autocomplete parents
    */
   @Input() filterText: string;
+
+  /**
+   * Assign Select dropdown to contain single-select or multiselect options (with checkboxes)
+   */
+  @Input() multiselect: boolean = false;
+
+  /**
+   * Id of parent component
+   */
+  @Input() parentId: string;
+
+  /**
+   * Set dropdown size
+   */
+  @Input() size: FudisInputSize | 'xs' = 'lg';
+
+  /**
+   * Set dropdown open status
+   */
+  @Input() open: boolean = false;
 
   /**
    * Boolean which toggles status updates for screen readers about changed option results

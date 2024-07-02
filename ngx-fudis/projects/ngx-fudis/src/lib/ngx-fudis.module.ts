@@ -44,7 +44,7 @@ import { FudisDialogService } from './services/dialog/dialog.service';
 
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
-
+import { DropdownMenuGroupComponent } from './components/dropdown-menu/dropdown-menu-group/dropdown-menu-group.component';
 import { FudisFocusService } from './services/focus/focus.service';
 import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
@@ -139,6 +139,7 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     DialogContentDirective,
     DialogCloseDirective,
     DropdownBaseDirective,
+    DropdownMenuGroupComponent,
     DropdownMenuComponent,
     DropdownItemBaseDirective,
     DropdownMenuItemComponent,
@@ -242,8 +243,9 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     DialogContentDirective,
     DialogCloseDirective,
     DialogActionsDirective,
-    // DropdownMenuComponent,
-    // DropdownMenuItemComponent,
+    DropdownMenuGroupComponent,
+    DropdownMenuComponent,
+    DropdownMenuItemComponent,
     EndDateErrorDirective,
     ErrorMessageComponent,
     ExpandableComponent,
