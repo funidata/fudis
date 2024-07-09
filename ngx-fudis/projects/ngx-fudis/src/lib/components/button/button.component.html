@@ -4,15 +4,16 @@
     fudisTooltip
     [class]="_classList | async"
     [type]="type"
+    (click)="!disabled && buttonClick($event)"
     (blur)="_handleButtonBlur($event)"
     (focus)="_handleButtonFocus($event)"
-    (click)="!disabled && buttonClick($event)"
     (keydown)="_handleMenuButtonKeyDown($event)"
     [attr.aria-disabled]="disabled"
     [attr.aria-label]="_ariaLabel | async"
     [attr.id]="_id"
-    [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
+    [attr.aria-expanded]="!asMenuButton ? null : (dropdownOpen | async)"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
+    [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -44,8 +45,9 @@
     [attr.aria-disabled]="disabled"
     [attr.aria-label]="_ariaLabel | async"
     [attr.id]="_id"
-    [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
+    [attr.aria-expanded]="!asMenuButton ? null : (dropdownOpen | async)"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
+    [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
   >
     <ng-container *ngIf="icon">
       <div class="fudis-button__icon">
