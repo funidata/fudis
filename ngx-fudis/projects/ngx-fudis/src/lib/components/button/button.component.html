@@ -13,6 +13,7 @@
     [attr.id]="_id"
     [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen | async"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
+    [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -46,6 +47,7 @@
     [attr.id]="_id"
     [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen | async"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
+    [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
   >
     <ng-container *ngIf="icon">
       <div class="fudis-button__icon">
