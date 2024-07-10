@@ -21,8 +21,8 @@ test("dropdown menu", async ({ page }) => {
 
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Tab");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
   await expect(page).toHaveScreenshot("6-navigate-to-second-menu.png", { fullPage: true });
 
   await page.keyboard.press("Escape");
