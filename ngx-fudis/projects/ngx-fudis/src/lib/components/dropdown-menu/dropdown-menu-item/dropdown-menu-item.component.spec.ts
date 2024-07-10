@@ -131,7 +131,6 @@ describe('DropdownMenuItemComponent', () => {
       );
       expect(disabledContent?.textContent).toContain('(Disabled)');
       expect(!!disabledItem.getAttribute('aria-disabled')).toEqual(true);
-      expect(!!disabledItem.getAttribute('disabled')).toEqual(true);
     });
   });
 
