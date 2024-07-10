@@ -127,11 +127,14 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('asMenuButton', true);
       fixture.detectChanges();
 
+      expect(getButton().getAttribute('aria-expanded')).toEqual('false');
+
       getButton().click();
+      fixture.detectChanges();
 
       expect(component.toggleMenu).toHaveBeenCalled();
 
-      expect(!!getButton().getAttribute('aria-expanded')).toEqual(true);
+      expect(getButton().getAttribute('aria-expanded')).toEqual('true');
 
       expect(getButton().getAttribute('aria-label')).toEqual(
         'Open additional menu It has nice things to click',
