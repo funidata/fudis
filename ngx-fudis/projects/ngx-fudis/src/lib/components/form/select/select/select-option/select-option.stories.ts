@@ -50,5 +50,9 @@ const ExampleTemplate: StoryFn<SelectOptionComponent> = (args: SelectOptionCompo
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  data: { value: 'example-value-id', label: 'Example option label', subLabel: 'Example sub label for this option' },
+  data: {
+    value: 'example-value-id',
+    label: 'Example option label',
+    subLabel: 'Example sub label for this option',
+  },
 };
