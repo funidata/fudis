@@ -89,8 +89,8 @@
       [autocompleteHelpText]="autocompleteHelpText"
       [filterText]="_autocompleteFilterText()"
       [multiselect]="true"
-      [size]="size"
       [parentId]="id"
+      [size]="size"
     >
       <ng-container *ngIf="_content?.type === 'select-options'">
         <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>

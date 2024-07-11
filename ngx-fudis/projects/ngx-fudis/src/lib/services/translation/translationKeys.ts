@@ -30,6 +30,11 @@ export const en: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Close' },
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: 'Disabled',
+    },
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Language',
     MISSING: 'Missing',
@@ -104,6 +109,11 @@ export const fi: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Sulje' },
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: 'Ei valittavissa',
+    },
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Kieli',
     MISSING: 'Puuttuu',
@@ -178,6 +188,11 @@ export const sv: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Stäng' },
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: 'Inaktiverad',
+    },
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Språk',
     MISSING: 'Saknas',

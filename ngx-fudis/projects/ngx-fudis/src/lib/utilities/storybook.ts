@@ -39,7 +39,6 @@ const buttonCommonExclude: string[] = [
   'buttonEl',
   'handleBlur',
   'buttonClick',
-  'openMenu',
   'closeMenu',
   'toggleMenu',
 ];
@@ -152,6 +151,30 @@ export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCo
  * Dialog
  */
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
+
+/**
+ * Dropdown Menu and Dropdown Menu Item
+ */
+export const dropdownMenuExclude: RegExp = excludeRegex([
+  'dropdownElement',
+  'dropdownMenuElement',
+  'closeDropdownMenu',
+  'setFocusedOption',
+  'fireMaxWidthCalcEvent',
+  'id',
+  'hostClass',
+  'handleBlur',
+  'handleFocus',
+]);
+
+export const dropdownMenuItemExclude: RegExp = excludeRegex([
+  'checked',
+  'close',
+  'handleChecked',
+  'handleBlur',
+  'handleClick',
+  'dropdownItem',
+]);
 
 /**
  * Error Message and Error Summary
