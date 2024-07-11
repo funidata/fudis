@@ -30,7 +30,8 @@
     @include focus.focus-dropdown;
   }
 
-  &:active {
+  /* stylelint-disable-next-line selector-class-pattern */
+  &:active:not(.fudis-dropdown-menu-item--disabled) {
     @include colorMixins.bg-color("primary");
     @include colorMixins.text-color("white");
   }

@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, EventEmitter, Input, Output, importProvidersFrom } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import docs from './dropdown-menu-docs.mdx';
-import { dropdownMenuControlsExclude } from '../../utilities/storybook';
+import { dropdownMenuExclude } from '../../utilities/storybook';
 import {
   defaultMenuItems,
   smallDropdownMenuGroupedMockData,
@@ -103,7 +103,7 @@ export default {
       page: docs,
     },
     controls: {
-      exclude: dropdownMenuControlsExclude,
+      exclude: dropdownMenuExclude,
     },
   },
   argTypes: {
