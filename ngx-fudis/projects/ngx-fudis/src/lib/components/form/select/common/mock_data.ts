@@ -1,3 +1,7 @@
+/**
+ * This file contains mock data related to Select and Multiselect Components
+ */
+
 import { FudisSelectOption } from '../../../../types/forms';
 
 interface MockSelectOptionGroupData {

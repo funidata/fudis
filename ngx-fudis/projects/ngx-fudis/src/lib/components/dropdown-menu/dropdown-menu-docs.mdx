@@ -1,0 +1,102 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { linkTo } from "@storybook/addon-links";
+import { Source } from "@storybook/blocks";
+import { DropdownMenuComponent } from "./dropdown-menu.component.ts";
+import { DropdownMenuItemComponent } from "./dropdown-menu-item/dropdown-menu-item.component.ts";
+import * as DropdownMenuStories from "./dropdown-menu.stories.ts";
+import { dropdownMenuExclude, dropdownMenuItemExclude } from "../../utilities/storybook";
+
+<Meta title="Components/Dropdown Menu" />
+
+# Dropdown Menu
+
+Dropdown Menu is used to offer various functions related to the current view.
+
+## Usage Guidelines
+
+Dropdown Menu is assembled with [Button](/docs/components-button--documentation), DropdownMenu and DropdownMenuItem components and it has certain guidelines and pattern to follow in order to work as designed.
+
+Dropdown opening alignment can be altered with `align` property. Default value is `center` where the dropdown tries to find the optimal place for opening.
+Fixed opening positions can be assigned to `left` or `right`.
+
+Size (i.e. width) of the dropdown can be adjusted with `size` property with available options of `sm`, `md`, `lg`.
+
+### Grouped Items
+
+Dropdown Menu Items can be grouped under different sub-categories if needed. The same functionality can be found from [Select Component](/docs/components-form-select-common-features--documentation#grouping-options) family.
+
+To group items, wrap them using `DropdownMenuGroupComponent` with `fudis-dropdown-menu-group` selector, it requires `label` property.
+
+## Examples
+
+<Canvas of={DropdownMenuStories.Example}></Canvas>
+
+### Code Example For Basic Dropdown Menu
+
+**NOTE**: All Button properties are given in this example as needed, just modify `label` according to your needs.
+
+<Source
+  code={`
+<fudis-button
+ [label]="'Basic menu'"
+ [labelHidden]="true"
+ [size]="'small'"
+ [variant]="'secondary'"
+ [icon]="'three-dots'"
+ [asMenuButton]="true">
+ <fudis-dropdown-menu>
+  <fudis-dropdown-menu-item
+   *ngFor="let item of menuItems"
+   [label]="item.label"
+   [disabled]="item.disabled"
+   (handleClick)="clickOption($event)">
+  </fudis-dropdown-menu-item>
+ </fudis-dropdown-menu>
+</fudis-button>`}
+/>
+
+### Code Example For Grouped Items Dropdown Menu
+
+<Source
+  code={`
+<fudis-button
+ [label]="'Grouped items menu'"
+ [labelHidden]="true"
+ [size]="'small'"
+ [variant]="'secondary'"
+ [icon]="'three-dots'"
+ [asMenuButton]="true">
+ <fudis-dropdown-menu [align]="'left'" [size]="'md'">
+  <fudis-dropdown-menu-group
+   *ngFor="let group of groupedMenuItems"
+   [label]="group.label">
+   <fudis-dropdown-menu-item
+    *ngFor="let groupedItem of group.items"
+    [label]="groupedItem.label"
+    [disabled]="groupedItem.disabled"
+    (handleClick)="clickOption($event)">
+   </fudis-dropdown-menu-item>
+  </fudis-dropdown-menu-group>
+ </fudis-dropdown-menu>
+</fudis-button>`}
+/>
+
+### Accessibility
+
+- Button has visible focus state
+- Button click can be triggered with mouse as well as keyboard <code>enter</code> and <code>space</code> keys
+- Dropdown menu items can be toggled with <code>arrow down</code> and <code>arrow up</code> keys
+  - Dropdown menu item click can be triggered with mouse as well as keyboard <code>enter</code> and <code>space</code> key
+
+### Related components
+
+- [Button](/docs/components-button--documentation)
+- [Icon](/docs/components-icon--documentation)
+
+## Dropdown Menu Properties
+
+<ArgTypes of={DropdownMenuComponent} exclude={dropdownMenuExclude} />
+
+## Dropdown Menu Item Properties
+
+<ArgTypes of={DropdownMenuItemComponent} exclude={dropdownMenuItemExclude} />

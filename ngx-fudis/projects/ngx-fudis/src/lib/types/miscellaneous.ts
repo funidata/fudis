@@ -1,13 +1,70 @@
 import { SimpleChange } from '@angular/core';
 
+/**
+ * Alert
+ */
+export interface FudisAlert {
+  message: string;
+  type: FudisNotification;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  routerLinkUrl?: string | any[] | null;
+  linkTitle?: string;
+  id: string;
+}
+
+export interface FudisAlertElement extends FudisAlert {
+  htmlId: string;
+  buttonId: string;
+  initialFocus: boolean;
+}
+
+/**
+ * Badge
+ */
 export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
+/**
+ * Button
+ */
+export const fudisButtonVariantArray = ['primary', 'secondary', 'tertiary'] as const;
+export type FudisButtonVariant = (typeof fudisButtonVariantArray)[number];
+
+export const fudisButtonSizeArray = ['icon-only', 'small', 'medium'] as const;
+export type FudisButtonSize = (typeof fudisButtonSizeArray)[number];
+
+export const fudisButtonTypeArray = ['submit', 'button'] as const;
+export type FudisButtonType = (typeof fudisButtonTypeArray)[number];
+
+/**
+ * Description List
+ */
 export type FudisDescriptionListVariant = 'regular' | 'compact';
 
 export type FudisDescriptionListItemDetailInfo = {
   id: string;
   language: FudisLanguageAbbr;
 };
+
+/**
+ * Dialog
+ */
+export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
+
+/**
+ * Dropdown Menu
+ */
+export const fudisDropdownMenuAlignArray = ['left', 'center', 'right'] as const;
+export type FudisDropdownMenuAlign = (typeof fudisDropdownMenuAlignArray)[number];
+
+/**
+ * Expandable
+ */
+export type FudisExpandableType = 'regular' | 'lite';
+
+/**
+ * Language Badge
+ */
+export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
 export type FudisLanguageBadgeContent = {
   [lang in FudisLanguageAbbr]?: { [id: string]: string | null | undefined };
@@ -25,31 +82,20 @@ export interface FudisLanguageBadgeTranslations {
   fi?: string;
 }
 
-export interface FudisAlert {
-  message: string;
-  type: FudisNotification;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  routerLinkUrl?: string | any[] | null;
-  linkTitle?: string;
-  id: string;
-}
-
-export interface FudisAlertElement extends FudisAlert {
-  htmlId: string;
-  buttonId: string;
-  initialFocus: boolean;
-}
-
-export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
-
-export type FudisExpandableType = 'regular' | 'lite';
-
+/**
+ * Notification
+ */
 export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
 
+/**
+ * Tooltip
+ */
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
-export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
-
+/**
+ * Translation
+ * TODO: Move to separate file
+ */
 export interface FudisTranslationConfig {
   BREADCRUMBS: {
     // Prefix visible to screen reader
@@ -80,6 +126,11 @@ export interface FudisTranslationConfig {
   DIALOG: {
     // Label for close button
     CLOSE: string;
+  };
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: string;
+    };
   };
   INPUT_WITH_LANGUAGE_OPTIONS: {
     // Label for language selection dropdown
