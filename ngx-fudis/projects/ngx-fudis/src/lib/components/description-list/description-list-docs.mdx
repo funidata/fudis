@@ -4,6 +4,8 @@ import { DescriptionListComponent } from "./description-list.component.ts";
 import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/blocks";
 import { descriptionListArgsTypesExclude } from "../../utilities/storybook.ts";
+import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
+import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
 
 <Meta title="Components/Description List" />
 
@@ -21,8 +23,8 @@ Description List is built using child components as follows:
   code={`
 <fudis-dl>
   <fudis-dl-item>
-    <fudis-dt/>
-    <fudis-dd/>
+    <fudis-dt />
+    <fudis-dd />
   </fudis-dl-item>
 </fudis-dl>`}
 />
@@ -50,7 +52,6 @@ Details element has also `subHeading` Input for adding optional sub-heading betw
   <fudis-dt [contentText]="'I am the main Term text content'" />
   <fudis-dd [subHeading]="'I am Details Sub heading'" [contentText]="'I am first Details element'" />
   <fudis-dd [contentText]="'I am second Details element'" />
-  <fudis-dd [contentText]="'I am third Details element'" />
 </fudis-dl-item>
 </fudis-dl>`}
 />
@@ -89,7 +90,8 @@ When nesting Description List as sublist, the nested one should have `variant` s
 
 <Canvas of={DescriptionListStories.NestedDescriptionLists}></Canvas>
 
-It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how Button is used inside the Description List.
+It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how Button is used inside the Description List in various ways.
+Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
 
 <Canvas of={DescriptionListStories.NestedSubComponents}></Canvas>
 
@@ -139,6 +141,14 @@ Description List components communicate with each other and define automatically
 - [Icon](/docs/components-icon--icon)
 - [Button](/docs/components-button--button)
 
-## Properties
+## Description List Properties
 
 <ArgTypes of={DescriptionListComponent} exclude={descriptionListArgsTypesExclude} />
+
+## Description List Item Term Properties
+
+<ArgTypes of={DescriptionListItemTermComponent} />
+
+## Description List Item Details Properties
+
+<ArgTypes of={DescriptionListItemDetailsComponent} />
