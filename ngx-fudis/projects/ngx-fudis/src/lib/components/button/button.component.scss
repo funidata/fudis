@@ -21,7 +21,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 0 spacing.$spacing-xs;
   min-width: spacing.$spacing-xxl;
   vertical-align: middle;
 
@@ -37,6 +36,21 @@
 
     &:focus {
       @include focus.focus-generic;
+    }
+  }
+
+  &__label {
+    &--hidden {
+      padding: 0 spacing.$spacing-xs;
+    }
+
+    &--visible {
+      padding: 0 spacing.$spacing-xs;
+
+      /* stylelint-disable-next-line selector-class-pattern */
+      &:has(.fudis-button__icon) {
+        padding: 0 spacing.$spacing-xs 0 0;
+      }
     }
   }
 
@@ -56,15 +70,15 @@
   }
 
   &__size {
-    &-small {
+    &__small {
       min-height: spacing.$spacing-md;
     }
 
-    &-medium {
+    &__medium {
       min-height: spacing.$spacing-lg;
     }
 
-    &-icon-only {
+    &__icon-only {
       padding: 0;
       width: spacing.$spacing-lg;
       min-width: initial;
