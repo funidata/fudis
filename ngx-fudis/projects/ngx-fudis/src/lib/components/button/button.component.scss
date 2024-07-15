@@ -33,10 +33,6 @@
     @include colors.bg-color("gray-light");
     @include borders.border("2px", "solid", "transparent");
     @include borders.outline("1px", "dashed", "gray-middle");
-
-    &:focus {
-      @include focus.focus-generic;
-    }
   }
 
   &__label {
