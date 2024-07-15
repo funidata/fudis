@@ -1,4 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import docs from './description-list-docs.mdx';
@@ -264,7 +265,7 @@ DescriptionListInsideGrid.args = {
 const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
-  props: args,
+  props: { ...args, classified: action('classified') },
   template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Sub Components</fudis-heading
     >
@@ -280,7 +281,18 @@ const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Last name'"></fudis-dt>
-        <fudis-dd [contentText]="'Dangerwest'"></fudis-dd>
+        <fudis-dd
+          [contentText]="classified ? '&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' : 'Dangerwest'"
+          [ariaLabel]="classified ? 'Hidden classified content' : null"
+        >
+          <fudis-button
+            [variant]="'tertiary'"
+            [size]="'small'"
+            [icon]="classified ? 'eye' : 'eye-blind'"
+            [label]="classified ? 'Show details' : 'Hide details'"
+            (handleClick)="classified = !classified"
+          ></fudis-button>
+        </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Alias'"></fudis-dt>
