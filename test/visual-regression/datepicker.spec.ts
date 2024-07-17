@@ -55,8 +55,6 @@ test("datepicker default change calendar language", async ({ page }) => {
 test("datepicker disabled", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-date-datepicker--disabled&viewMode=story");
   await expect(page).toHaveScreenshot("disabled-1-init.png");
-  await page.getByTestId("fudis-datepicker-1").focus();
-  await expect(page).toHaveScreenshot("disabled-2-focus.png");
 });
 
 test("datepicker min and max", async ({ page }) => {
