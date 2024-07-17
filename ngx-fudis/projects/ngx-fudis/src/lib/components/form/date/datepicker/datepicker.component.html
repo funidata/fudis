@@ -19,7 +19,7 @@
       (keyup)="_handleKeyUp($event)"
       [min]="_minDate"
       [max]="_maxDate"
-      [readonly]="control.disabled || disabled"
+      [attr.disabled]="control.disabled || disabled"
       [attr.aria-disabled]="control.disabled || disabled ? true : null"
       [attr.aria-invalid]="
         (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
