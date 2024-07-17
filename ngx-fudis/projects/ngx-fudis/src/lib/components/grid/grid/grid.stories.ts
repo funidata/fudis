@@ -40,7 +40,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
         [classes]="['storybook__wrapper-border']"
       >
         <fudis-heading [level]="3" [variant]="'md'"
-          >Listen to Service Columns but not AlignItemsX</fudis-heading
+          >Listen to Service's Columns but not AlignItemsX</fudis-heading
         >
         <fudis-body-text class="storybook__item"
           >This Grid has [alignItemsX]="'{{ _gridAlignValue }}'"</fudis-body-text
@@ -64,12 +64,12 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
           >It should listen to Service updates on alignItemsX</fudis-body-text
         >
         <fudis-body-text class="storybook__item"
-          >But it has columns="2" and it should not listen to Service's columns</fudis-body-text
+          >But it has [columns]="2" and it should not listen to Service's columns</fudis-body-text
         >
       </fudis-grid>
 
       <fudis-grid [serviceDefaults]="false" [classes]="['storybook__wrapper-border']">
-        <fudis-heading [level]="3" [variant]="'md'">Service Defaults are turned of</fudis-heading>
+        <fudis-heading [level]="3" [variant]="'md'">Service Defaults are turned off</fudis-heading>
         <fudis-body-text class="storybook__item"
           >This Grid has no set alignItemsX value, and it is ignoring defaults from
           Service!</fudis-body-text
@@ -90,7 +90,9 @@ class GridWithServiceExampleComponent {
 
     _gridService.setDefaultValues(defaultValue);
 
-    this._currentServiceConfigs = JSON.stringify(_gridService.getDefaultValues()());
+    this._currentServiceConfigs = JSON.stringify(_gridService.getDefaultValues()())
+      .split(',"')
+      .join(', "');
   }
 
   protected _gridAlignValue: FudisGridAlign = 'end';
@@ -120,7 +122,9 @@ class GridWithServiceExampleComponent {
       columns: updateColumnsValue,
     });
 
-    this._currentServiceConfigs = JSON.stringify(this._gridService.getDefaultValues()());
+    this._currentServiceConfigs = JSON.stringify(this._gridService.getDefaultValues()())
+      .split(',"')
+      .join(', "');
   }
 }
 
