@@ -9,17 +9,17 @@ Sometimes you need to test your local changes straight away in the application, 
 ## Step-by-step
 
 1. Make desired changes in Fudis
-2. Run build command `npm run build:ngx-fudis` in `fudis/ngx-fudis` folder
-3. Navigate to dist project  `fudis/ngx-fudis/dist/ngx-fudis`
+2. Navigate to `cd ngx-fudis` and run build command `npm run build:watch`
+3. Navigate to dist project `cd dist/ngx-fudis`
 4. Run `yarn link`
 5. Running should result in success message: `success Registered "@funidata/ngx-fudis"`
 6. Switch to application side
-7. Add `"preserveSymlinks": true` to application's `angular.json`
+7. Add `"preserveSymlinks": true` to application's `angular.json` (**Note**: This step is already done in Sisu environment)
 8. Run `yarn link @funidata/ngx-fudis` in the folder where `node_modules` has `@ngx-fudis` already installed
 9. Running should result in success message: `success Using linked package for "@funidata/ngx-fudis"`
 10. Confirm that yarn link is working by running `ls -l node_modules/* | egrep "^l"`
 11. Running should result a list of linked modules and should contain something like this `lrwxr-xr-x@ 1 user  project  52 Jul 16 10:54 ngx-fudis -> ../../../../../.config/yarn/link/@funidata/ngx-fudis`. You should also see a small arrow indicating a symlink in `ngx-fudis` folder inside `node_modules`
-12. Now you are using your local package
+12. Now you are using your local package. Fudis watches file changes and all changes should reflect on the application side
 13. After you have completed your tests unlink the package
 14. Application side run `yarn unlink @funidata/ngx-fudis`
 15. Running should result in success message: `success Removed linked package "@funidata/ngx-fudis"`
