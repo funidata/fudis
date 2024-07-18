@@ -25,6 +25,7 @@ test("checkbox group disabled", async ({ page }) => {
   );
   await expect(page).toHaveScreenshot("disabled-1-init.png");
 
-  await page.getByTestId("fudis-checkbox-group-1-item-1").focus();
+  await page.keyboard.press("Tab"); // Focus on tooltip button
+  await page.keyboard.press("Tab"); // Focus on next focusable (i.e. not disabled) checkbox element
   await expect(page).toHaveScreenshot("disabled-2-focused.png");
 });
