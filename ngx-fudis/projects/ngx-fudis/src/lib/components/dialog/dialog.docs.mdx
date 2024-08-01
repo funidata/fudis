@@ -92,7 +92,7 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ```
 <fudis-dialog>
-  <fudis-heading [level]="2" fudisDialogTitle>
+  <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'">
     Heading for a dialog
   </fudis-heading>
 </fudis-dialog>
@@ -143,7 +143,7 @@ Directives written with `kebab-case` are meant to be used as HTML element.
     <fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open dialog'" />
     <ng-template #dialogFromTemplate>
       <fudis-dialog>
-        <fudis-heading [level]="2" fudisDialogTitle>This is Dialog Heading</fudis-heading>
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'">This is Dialog Heading</fudis-heading>
         <fudis-dialog-content>
           <fudis-body-text>Some content for Dialog</fudis-body-text>
         </fudis-dialog-content>
@@ -165,7 +165,7 @@ class SimpleDialogComponent {
 
 ## Fudis Form inside Dialog
 
-When using Form inside Dialog, wrap the Form inside `fudis-dialog-content` and use it normally. Meaning, add all the necessary Error Summary properties, such as `errorSummaryHelpText`. Also add `title` and `level`, this title will be the title of the dialog and have initial focus when dialog is opened with keyboard.
+When using [Form](/docs/components-form-form--documentation) inside Dialog, wrap the Form inside `fudis-dialog-content` and use it normally. Meaning, add all the necessary Error Summary properties, such as `errorSummaryHelpText`. Also add `title`, `level` and possible `titleVariant`, this title will be the title of the dialog and have initial focus when dialog is opened with keyboard.
 
 In `fudisContent` template add form components and in `fudisActions` template add action button(s). Unlike normal form, where buttons are positioned on top of the form, **these action buttons will be positioned at the bottom** after the form content, in order to follow dialog look and feel.
 
@@ -181,7 +181,8 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 				<fudis-dialog-content>
 					<fudis-form>
 						[title]="'Dialog with fudis-form'"
-						[level]="2"
+						[level]="1"
+            [titleVariant]="'xl'"
 						[errorSummaryHelpText]="'You need to fill up the information.'">
 						<ng-template fudisContent [type]="'form'">
 							<fudis-fieldset [label]="'Question about your power animal'">
