@@ -17,7 +17,7 @@ export default {
 const Template: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
   props: args,
 
-  template: html`<fudis-grid [columns]="4">
+  template: html`<fudis-grid [columns]="{ xs: 2, md: 4 }">
     <fudis-grid-item [columns]="'stretch'">
       <fudis-body-text
         >Too see alignSelfX and alignSelfY clearly, make sure the preview canvas is wide
