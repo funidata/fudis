@@ -121,12 +121,12 @@ describe('DatepickerComponent', () => {
       expect(datepickerIconSvgElement.nativeElement.getAttribute('id')).toEqual('calendar');
     });
 
-    it('should have disabled and readonly attributes if input has been disabled', () => {
+    it('should have disabled attributes if input has been disabled', () => {
       component.disabled = true;
       fixture.detectChanges();
 
       expect(!!datepickerInput.getAttribute('aria-disabled')).toEqual(true);
-      expect(datepickerInput.hasAttribute('readonly')).toBeTruthy();
+      expect(datepickerInput.hasAttribute('disabled')).toBeTruthy();
     });
 
     it('should emit events', () => {
