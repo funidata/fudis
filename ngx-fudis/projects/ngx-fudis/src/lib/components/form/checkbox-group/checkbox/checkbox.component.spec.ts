@@ -176,27 +176,22 @@ describe('CheckboxComponent', () => {
     });
 
     it('should create with disabled status, if control is set as disabled', () => {
-      const checkedCheckbox = fixture.nativeElement.querySelector(
+      const unCheckedCheckbox = fixture.nativeElement.querySelector(
         '#fudis-checkbox-group-1 [ng-reflect-control-name="pineapple"]',
       );
 
-      const checkedIcon = checkedCheckbox.querySelector(
+      const checkedIcon = unCheckedCheckbox.querySelector(
         'fudis-icon[ng-reflect-icon="check-small"]',
       );
 
-      const inputElement = checkedCheckbox.querySelector('input');
+      const inputElement = unCheckedCheckbox.querySelector('input');
 
       const inputValue: string | null | undefined = inputElement.getAttribute('value');
-
-      /**
-       * Check that focus preventing `disabled` property, added by formControl on init, has been removed
-       */
       const inputDisabled = inputElement.getAttribute('disabled');
-
       const inputAriaDisabled = inputElement.getAttribute('aria-disabled');
 
       expect(checkedIcon).toBeNull();
-      expect(inputDisabled).toBeNull();
+      expect(inputDisabled).not.toBeNull();
       expect(inputAriaDisabled).toEqual('true');
       expect(inputValue).toEqual('false');
     });

@@ -67,6 +67,7 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
   'titleVariant',
+  'handleChange',
   'id',
   'formGroup',
   'triggerEmit',

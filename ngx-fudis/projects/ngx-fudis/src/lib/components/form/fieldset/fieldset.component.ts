@@ -122,6 +122,12 @@ export class FieldSetComponent
   @Input() labelSize: 'md' | 'sm' = 'md';
 
   /**
+   * Accessibility attribute for describing the whole Fieldset.
+   * Used internally in CheckboxGroup.
+   */
+  @Input() describedbyId: string;
+
+  /**
    * CSS classes for the native fieldset HTMLelement
    */
   protected _classes: string[];
