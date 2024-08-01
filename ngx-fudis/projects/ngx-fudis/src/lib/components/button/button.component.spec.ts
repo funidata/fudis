@@ -42,7 +42,9 @@ describe('ButtonComponent', () => {
           fixture.detectChanges();
 
           expect(sortClasses(getButton().className)).toEqual(
-            sortClasses(`fudis-button fudis-button__${variant} fudis-button__size-${size}`),
+            sortClasses(
+              `fudis-button fudis-button__label--visible fudis-button__${variant} fudis-button__size__${size}`,
+            ),
           );
         });
       });
@@ -50,7 +52,7 @@ describe('ButtonComponent', () => {
 
     it('should have proper default CSS classes', () => {
       expect(getButton().className).toEqual(
-        'fudis-button fudis-button__primary fudis-button__size-medium',
+        'fudis-button fudis-button__label--visible fudis-button__primary fudis-button__size__medium',
       );
     });
 
