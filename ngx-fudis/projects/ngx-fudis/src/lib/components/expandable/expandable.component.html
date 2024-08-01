@@ -18,6 +18,7 @@
           variant
         }}"
         [attr.aria-expanded]="!_closed"
+        [attr.aria-controls]="!closed ? _id + '__content' : null"
         (click)="_setClosedStatus(!_closed)"
       >
         <fudis-icon
@@ -45,6 +46,7 @@
   <div
     class="fudis-expandable__content fudis-expandable__content__padding-{{ padding }}"
     *ngIf="_openedOnce"
+    [id]="_id + '__content'"
     [attr.aria-hidden]="_closed"
     [hidden]="_closed"
   >

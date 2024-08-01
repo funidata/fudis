@@ -167,7 +167,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     const labelHidden = changes.labelHidden?.currentValue !== changes.labelHidden?.previousValue;
     const ariaLabel = changes.ariaLabel?.currentValue !== changes.ariaLabel?.previousValue;
 
-    if (variant || disabled || size) {
+    if (variant || disabled || size || labelHidden) {
       this._classList.next(this._getClasses());
     }
 
@@ -273,6 +273,20 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
       this._iconColor.next('primary');
     }
 
-    return ['fudis-button', `fudis-button__size-${this.size}`, `fudis-button__${this.variant}`];
+    if (this.labelHidden) {
+      return [
+        'fudis-button',
+        `fudis-button__size__${this.size}`,
+        `fudis-button__${this.variant}`,
+        `fudis-button__label--hidden`,
+      ];
+    } else {
+      return [
+        'fudis-button',
+        `fudis-button__size__${this.size}`,
+        `fudis-button__${this.variant}`,
+        `fudis-button__label--visible`,
+      ];
+    }
   }
 }

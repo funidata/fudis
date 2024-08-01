@@ -1,4 +1,5 @@
 @use "../../../../foundations/typography/mixins.scss" as typography;
+@use "../../../../foundations/typography/tokens.scss" as typographyTokens;
 @use "../../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../../foundations/spacing/tokens.scss" as spacing;
 
@@ -43,6 +44,7 @@
 
     &__colon {
       display: inline-block;
+      font-weight: typographyTokens.$font-weight-light;
     }
   }
 }
