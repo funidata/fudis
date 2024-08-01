@@ -153,9 +153,9 @@ When combined with fr units, the fr columns occupy the rest of the available spa
 
 #### Max Content
 
-Not too surprisingly when compared to previous, `max-content` is **the largest** size a box can take without overflowing its content.
+Not too surprisingly when compared to previous, `max-content` is **the largest** size a box can take.
 
-This might be useful in cases, where we want to enable expansion of the column to be as wide as its content allows.
+But pay attention when using `max-content` because it will not wrap even if it causes overflow.
 
 When combined with fr units, the fr columns occupy the rest of the available space after max-content columns have taken their space.
 
