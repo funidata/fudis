@@ -28,7 +28,10 @@ import { ActionsDirective } from '../../../../directives/content-projection/acti
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
         <fudis-dt [contentText]="'First DT'"></fudis-dt>
-        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
+        <fudis-dd
+          [contentText]="'This is my DD'"
+          [ariaLabel]="'Additional information for screen readers'"
+        ></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Second DT'"></fudis-dt>
@@ -205,6 +208,22 @@ describe('DescriptionListItemDetailsComponent', () => {
 
       expect(subHeadingElement.textContent).toEqual('Here is sub heading');
       expect(parenthesisClass).toBeTruthy();
+    });
+  });
+
+  describe('Aria-label', () => {
+    it('should be visible for screen readers if given', () => {
+      expect(
+        getDlItemDetailsFromArrayIndex(0)
+          .query(By.css('.fudis-dl-item-details__regular__content'))
+          .nativeElement.getAttribute('aria-label'),
+      ).toEqual('Additional information for screen readers');
+
+      expect(
+        getDlItemDetailsFromArrayIndex(1)
+          .query(By.css('.fudis-dl-item-details__regular__content'))
+          .nativeElement.getAttribute('aria-label'),
+      ).toBeNull();
     });
   });
 
