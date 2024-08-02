@@ -16,7 +16,7 @@
   <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__sub-heading'">{{
     subHeading
   }}</span
-  ><span [class]="(_mainCssClass | async) + '__content'">
+  ><span [class]="(_mainCssClass | async) + '__content'" [attr.aria-label]="ariaLabel">
     <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'"> &#40;</span
     >{{ contentText
     }}<span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span

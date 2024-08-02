@@ -361,11 +361,11 @@ class DynamicValidatorExampleComponent {
       const required = control.hasValidator(this._atLeastOneRequiredValidatorInstance);
 
       if (required) {
-        control.removeValidators(this._atLeastOneRequiredValidatorInstance);
         control.disable();
+        control.removeValidators(this._atLeastOneRequiredValidatorInstance);
       } else {
-        control.addValidators(this._atLeastOneRequiredValidatorInstance);
         control.enable();
+        control.addValidators(this._atLeastOneRequiredValidatorInstance);
       }
 
       control.updateValueAndValidity();

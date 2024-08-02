@@ -58,7 +58,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   @Input() lang: FudisLanguageAbbr;
 
   /**
-   * Visible text content for details
+   * Visible text content for Details
    */
   @Input() contentText: string;
 
@@ -68,10 +68,18 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   @Input() subHeading: string | undefined;
 
   /**
+   * Aria-label for classified/hidden Details content
+   */
+  @Input() ariaLabel: string | undefined;
+
+  /**
    * Id generated with Id Service
    */
   protected _id: string;
 
+  /**
+   * Selected language to show respective Details content
+   */
   protected _langSelected = new BehaviorSubject<boolean>(false);
 
   /**

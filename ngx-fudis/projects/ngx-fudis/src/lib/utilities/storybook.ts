@@ -67,6 +67,7 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
   'titleVariant',
+  'handleChange',
   'id',
   'formGroup',
   'triggerEmit',
@@ -110,11 +111,9 @@ export const daterangeExclude: RegExp = excludeRegex([
  * Description List
  */
 const descriptionListCommonExclude: string[] = [
-  'addChildId',
   'align',
   'alignItemsX',
   'alignItemsY',
-  'childDlItems',
   'getDisabledGridStatus',
   'getVariant',
   'classes',
@@ -124,7 +123,6 @@ const descriptionListCommonExclude: string[] = [
   'serviceDefaults',
   'marginBottom',
   'marginTop',
-  'removeChildId',
   'rowGap',
   'tag',
   'width',
@@ -133,10 +131,7 @@ const descriptionListCommonExclude: string[] = [
 export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'id',
   'getVariant',
-  'addChildId',
-  'childDlItems',
   'getDisabledGridStatus',
-  'removeChildId',
   'serviceDefaults',
 ]);
 

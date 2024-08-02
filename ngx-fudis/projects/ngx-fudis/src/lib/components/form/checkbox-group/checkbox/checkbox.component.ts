@@ -7,7 +7,6 @@ import {
   OnInit,
   ViewEncapsulation,
   OnDestroy,
-  AfterViewInit,
   ViewChild,
   ElementRef,
 } from '@angular/core';
@@ -22,7 +21,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./checkbox.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CheckboxComponent implements OnInit, OnDestroy {
   constructor(
     private _idService: FudisIdService,
     @Host() protected _checkboxGroup: CheckboxGroupComponent,
@@ -97,15 +96,6 @@ export class CheckboxComponent implements OnInit, OnDestroy, AfterViewInit {
        */
       this._checkboxGroup.formGroup.addControl(this.controlName, this.control);
       this._controlAddedToParent = true;
-    }
-  }
-
-  ngAfterViewInit(): void {
-    /**
-     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This removes that attribute making checkbox again focusable. The binded click function _checkboxClick will then prevent toggling the checkbox, if control is disabled.
-     */
-    if (this.control.disabled) {
-      this._inputRef.nativeElement.removeAttribute('disabled');
     }
   }
 
