@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:watch": "ng build ngx-fudis --watch",
     "build:ngx-fudis": "ng build ngx-fudis -c production",
     "test": "jest --coverage false",
     "test:watch": "jest --coverage false --watch",
