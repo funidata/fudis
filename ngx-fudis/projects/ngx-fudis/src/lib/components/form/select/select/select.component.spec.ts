@@ -16,7 +16,7 @@ import { SelectAutocompleteComponent } from '../common/autocomplete/autocomplete
 import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
 import { BodyTextComponent } from '../../../typography/body-text/body-text.component';
 import { By } from '@angular/platform-browser';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FudisSelectOption } from '../../../../types/forms';
 import { ButtonComponent } from '../../../button/button.component';
 import { getElement } from '../../../../utilities/tests/utilities';
@@ -25,7 +25,6 @@ import { SelectIconsComponent } from '../common/select-icons/select-icons.compon
 @Component({
   selector: 'fudis-mock-container',
   template: `<fudis-select
-    #testSelect
     [variant]="'autocompleteDropdown'"
     [label]="'Test Label'"
     [placeholder]="'Autocomplete test placeholder'"
@@ -41,8 +40,6 @@ class MockAutocompleteComponent {
   testOptions: TestAnimalSound[] = defaultOptions;
   control: FormControl<FudisSelectOption<TestAnimalSound> | null> =
     new FormControl<TestAnimalSound | null>(null);
-
-  @ViewChild('testSelect') testSelect: SelectComponent;
 }
 
 describe('SelectComponent', () => {
