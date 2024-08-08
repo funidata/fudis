@@ -1,4 +1,4 @@
-import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from '../../components/button/button.component';
 import { fudisSpacingArray } from '../../types/spacing';
 import { SpacingDirective } from './spacing.directive';

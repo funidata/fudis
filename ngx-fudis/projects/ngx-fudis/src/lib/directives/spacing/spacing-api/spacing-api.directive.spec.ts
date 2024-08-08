@@ -12,13 +12,14 @@ import { getElement } from '../../../utilities/tests/utilities';
 @Component({
   selector: 'fudis-mock-component',
   template: `
-    <fudis-button 
-      fudisSpacing 
-      [label]="'Test1'" 
-      [marginTop]="marginTop" 
-      [marginBottom]="marginBottom" 
-      [marginRight]="marginRight" 
-      [marginLeft]="marginLeft"/>
+    <fudis-button
+      fudisSpacing
+      [label]="'Test1'"
+      [marginTop]="marginTop"
+      [marginBottom]="marginBottom"
+      [marginRight]="marginRight"
+      [marginLeft]="marginLeft"
+    />
     <fudis-button [label]="'Test2'"></fudis-button>
   `,
 })
@@ -56,7 +57,6 @@ describe('SpacingApiDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-
   it('should find elements with spacing directive', () => {
     const elems = getSpacingDirective();
 
@@ -76,7 +76,7 @@ describe('SpacingApiDirective', () => {
     component.marginTop = 'lg';
     component.marginBottom = 'sm';
     component.marginRight = 'md';
-    component.marginLeft = 'xxs'
+    component.marginLeft = 'xxs';
 
     fixture.detectChanges();
 
