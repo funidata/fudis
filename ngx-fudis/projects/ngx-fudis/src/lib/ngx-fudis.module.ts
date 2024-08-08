@@ -274,7 +274,7 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     SelectComponent,
     SelectOptionComponent,
     SelectGroupComponent,
-    // SpacingDirective,
+    SpacingDirective,
     StartDateErrorDirective,
     TextAreaComponent,
     TextInputComponent,
