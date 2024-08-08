@@ -8,14 +8,6 @@ import docs from './spacing-directive.docs.mdx';
 export default {
   title: 'Directives/Spacing',
   component: ButtonComponent,
-  decorators: [
-    componentWrapperDecorator(
-      (story) => `
-			<div style="margin: 40px">	
-		${story}
-		</div>`,
-    ),
-  ],
   parameters: {
     docs: {
       page: docs,
@@ -34,7 +26,9 @@ const ExampleTemplate: StoryFn<SpacingDirective> = (args: SpacingDirective) => (
       >This Fudis Button has margins added through <strong>fudisSpacing</strong> directive. Go ahead
       and inspect the button element while resizing the browser.</fudis-body-text
     >
-    <div style="border: 2px solid var(--fudis-color-primary-light); display: inline-block; margin-top: 2rem">
+    <div
+      style="border: 2px solid var(--fudis-color-primary-light); display: inline-block; margin-top: 2rem"
+    >
       <fudis-button
         fudisSpacing
         [marginTop]="marginTop"
@@ -83,22 +77,23 @@ const marginsToString = (margins: string | object): string => {
 };
 
 const Template: StoryFn<SpacingDirective> = (args: SpacingDirective) => ({
-  props: { ...args, 
-    top: marginsToString(args.marginTop), 
+  props: {
+    ...args,
+    top: marginsToString(args.marginTop),
     bottom: marginsToString(args.marginBottom),
     right: marginsToString(args.marginRight),
-    left: marginsToString(args.marginLeft)},
-    template: html`
-    <fudis-grid
-    [marginBottom]="'md'"
-    [columns]="{'sm': 1, 'md': 2}"
-    [align]="'start'"
-    [rowGap]="'sm'"
-    [marginBottom]="'md'"
-  >
-  <fudis-grid-item>
-    <fudis-body-text [variant]="'lg-regular'">These Fudis Button margin values are responsive. Inspect while resizing the browser. </fudis-body-text>
-      <div fudisSpacing [marginBottom]="'xl'" [marginTop]="'xl'" style="border: 2px solid var(--fudis-color-primary-light); display: inline-block;">
+    left: marginsToString(args.marginLeft),
+  },
+  template: html`
+    <fudis-grid [marginBottom]="'md'" [align]="'start'" [rowGap]="'sm'" [marginBottom]="'md'">
+      <fudis-body-text [variant]="'lg-regular'"
+        >These Fudis Button margin values are responsive. Inspect while resizing the browser.
+      </fudis-body-text>
+      <div
+        fudisGridItem
+        [alignSelfX]="'start'"
+        style="border: 2px solid var(--fudis-color-primary-light); display: inline-block; display: inline-block; margin-top: 2rem"
+      >
         <fudis-button
           fudisSpacing
           [marginTop]="marginTop"
@@ -108,14 +103,15 @@ const Template: StoryFn<SpacingDirective> = (args: SpacingDirective) => ({
           [label]="'Test button'"
         ></fudis-button>
       </div>
-      <fudis-heading [level]="4" [variant]="'sm'" [marginTop]="xl">The current margin values are:</fudis-heading>
-        <ul style="list-style: none">
-          <li><code>marginTop: {{top}}</code></li>
-          <li><code>marginBottom: {{bottom}}</code></li>
-          <li><code>marginLeft: {{left}}</code></li>
-          <li><code>marginRight: {{right}}</code></li>
-        </ul>
-    </fudis-grid-item>
+      <fudis-heading [level]="1" [variant]="'sm'">The responsive margin values are</fudis-heading>
+      <div fudisGrid [columns]="{'sm': 2 }" [align]="'stretch'">
+        <div style="background-color: var(--fudis-color-primary-light); padding: 1rem">
+          <fudis-body-text><strong>MarginTop : </strong><code>{{top}}</code></fudis-body-text>
+          <fudis-body-text><strong>MarginBottom : </strong><code>{{bottom}}</code></fudis-body-text>
+          <fudis-body-text><strong>MarginRight : </strong><code>{{right}}</code></fudis-body-text>
+          <fudis-body-text><strong>MarginLeft : </strong><code>{{left}}</code></fudis-body-text>
+        </div>
+      </div>
     </fudis-grid>
   `,
 });
@@ -127,4 +123,3 @@ ResponsiveExample.args = {
   marginRight: { xs: 'xs', sm: 'sm', md: 'md', lg: 'lg' },
   marginLeft: { xs: 'xxl', sm: 'xl', md: 'lg', lg: 'md' },
 };
-
