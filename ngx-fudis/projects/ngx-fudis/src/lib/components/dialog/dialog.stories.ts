@@ -94,8 +94,21 @@ class DialogLaucherComponent {
             <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
           </ng-template>
         </fudis-form>
+        <fudis-button (handleClick)="doubleTrouble(doubleTroubleDialog)" [label]="'Avaa uusi'" />
       </fudis-dialog-content>
     </fudis-dialog>
+
+    <ng-template #doubleTroubleDialog>
+      <fudis-dialog [size]="size">
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'">Deep Dialog</fudis-heading>
+        <fudis-dialog-content>
+          <p>I am nested</p>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
   `,
 })
 class DialogWithFormComponent {
@@ -110,6 +123,16 @@ class DialogWithFormComponent {
   protected _size: FudisDialogSize;
 
   protected _greetingFromOpeningComponent: string;
+
+  doubleTrouble<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
+    console.log('avaus');
+    this._dialogService
+      .open(dialogToOpen)
+      .afterClosed()
+      .subscribe(() => {
+        console.log('sulku');
+      });
+  }
 
   exampleDialogFormGroup = new FormGroup<TestForm>({
     powerAnimal: new FormControl(
