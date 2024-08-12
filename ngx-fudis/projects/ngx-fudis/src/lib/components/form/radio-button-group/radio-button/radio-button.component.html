@@ -1,29 +1,27 @@
-<label [attr.for]="id" class="fudis-radio-button">
-  <input
-    [attr.aria-invalid]="
-      (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
-    "
-    (blur)="handleBlur()"
-    (change)="handleChange()"
-    class="fudis-radio-button__input"
-    type="radio"
-    [id]="id"
-    [attr.name]="name"
-    [name]="name"
-    [formControl]="control"
-    [attr.required]="required ? true : null"
-    [attr.checked]="checked ? true : null"
-    [value]="value"
-  />
-  <div class="fudis-radio-button__content">
-    <div
-      class="fudis-radio-button__content__control"
-      [class.fudis-radio-button__content__control--invalid]="
-        (control.touched && control.invalid) || invalidState
-      "
-    >
-      <span *ngIf="checked" class="fudis-radio-button__content__control__indicator"></span>
+<ng-container *ngIf="_parentGroup?.control">
+  <label class="fudis-radio-button" [attr.for]="id">
+    <input
+      type="radio"
+      class="fudis-radio-button__input"
+      [id]="id"
+      [formControl]="_parentGroup.control"
+      [value]="value"
+      [name]="_parentGroup.id"
+      [attr.required]="_parentGroup.required ? true : null"
+      [attr.aria-invalid]="(_parentGroup.control.touched && _parentGroup.control.invalid) || _parentGroup.control.touched ? true : null"
+      (change)="handleChange()"
+      (blur)="handleBlur()"
+    />
+    <div class="fudis-radio-button__content">
+      <div
+        class="fudis-radio-button__content__control"
+        [class.fudis-radio-button__content__control--invalid]="
+          (_parentGroup.control.touched && _parentGroup.control.invalid)
+        "
+      >
+        <span *ngIf="_parentGroup.control.value === value" class="fudis-radio-button__content__control__indicator"></span>
+      </div>
+      <span class="fudis-radio-button__label">{{ label }}</span>
     </div>
-    <span class="fudis-radio-button__label">{{ label }}</span>
-  </div>
-</label>
+  </label>
+</ng-container>

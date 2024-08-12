@@ -6,10 +6,12 @@ import {
   HostBinding,
   ViewEncapsulation,
   OnInit,
+  Host,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { FudisIdService } from '../../../../services/id/id.service';
+import { RadioButtonGroupComponent } from '../radio-button-group.component';
 
 @Component({
   selector: 'fudis-radio-button',
@@ -18,7 +20,8 @@ import { FudisIdService } from '../../../../services/id/id.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonComponent implements OnInit {
-  constructor(private _idService: FudisIdService) {}
+  constructor(private _idService: FudisIdService,
+    @Host() protected _parentGroup: RadioButtonGroupComponent) {}
 
   /**
    * Binding host CSS class to component wrapper
@@ -26,14 +29,9 @@ export class RadioButtonComponent implements OnInit {
   @HostBinding('class') private _classes = 'fudis-radio-button-host';
 
   /*
-   * FormControl for single Radio Button
-   */
-  @Input({ required: true }) control: FormControl;
-
-  /*
    * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"
    */
-  @Input({ required: true }) value: string | boolean | null;
+  @Input({ required: true }) value: string | boolean | object | null;
 
   /*
    * Visible label for a single Radio Button, e. g. "Fair trade banana"
@@ -41,34 +39,9 @@ export class RadioButtonComponent implements OnInit {
   @Input({ required: true }) label: string;
 
   /*
-   * Name for group of Radio Buttons, e.g. "fruit"
-   */
-  @Input({ required: true }) name: string;
-
-  /**
-   * Parent wrapper's id. TODO: remove when component is refactored to be similar like like Checkbox Group and Checkboxes
-   */
-  @Input({ required: true }) groupId: string;
-
-  /*
    * Id for single Radio Button
    */
   @Input() id: string | undefined;
-
-  /*
-   * If Radio Button group of same name selection is required
-   */
-  @Input() required: boolean;
-
-  /*
-   * If Radio Button is checked
-   */
-  @Input() checked: boolean;
-
-  /**
-   * Set Radio Button's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
-   */
-  @Input() invalidState: boolean = false;
 
   /**
    * Blur event output
@@ -82,9 +55,9 @@ export class RadioButtonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.id) {
-      this._idService.addNewChildId('radio-button-group', this.groupId, this.id);
+      this._idService.addNewChildId('radio-button-group', this._parentGroup.id, this.id);
     } else {
-      this.id = this._idService.getNewChildId('radio-button-group', this.groupId);
+      this.id = this._idService.getNewChildId('radio-button-group', this._parentGroup.id);
     }
   }
 

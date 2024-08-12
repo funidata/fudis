@@ -2,27 +2,22 @@
   [id]="id"
   [labelSize]="'sm'"
   [label]="label"
-  [inputSize]="size"
-  [required]="_required ? _required : undefined"
+  [required]="required"
   [errorSummaryBreadcrumb]="false"
+  [inputSize]="size"
+  [tooltip]="tooltip"
+  [tooltipPosition]="tooltipPosition"
+  [tooltipToggle]="tooltipToggle"
 >
   <ng-template fudisContent type="fieldset">
-    <fudis-radio-button
-      *ngFor="let option of options; let index = index"
-      [id]="option.id ? option.id : undefined"
-      [groupId]="id"
-      [name]="name"
-      [value]="option.value"
-      [label]="option.label"
-      [required]="_required ? true : false"
-      [checked]="control.value === option.value ? true : false"
-      [control]="control"
-    />
+    <ng-content select="fudis-radio-button" />
     <fudis-guidance
+      *ngIf="control"
+      [formId]="_parentForm?.id || null"
+      [reloadErrorSummary]="_reloadErrorSummary"
       [inputLabel]="label"
       [helpText]="helpText"
-      [for]="id + '-legend'"
-      [control]="control"
+      [for]="id"
     >
       <ng-content select="fudis-error-message" />
     </fudis-guidance>

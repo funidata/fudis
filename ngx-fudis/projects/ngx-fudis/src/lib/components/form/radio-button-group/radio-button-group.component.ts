@@ -1,8 +1,12 @@
-import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, Host, HostBinding, Input, OnChanges, OnInit, Optional, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisRadioButtonOption, FudisInputSize } from '../../../types/forms';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { hasRequiredValidator } from '../../../utilities/form/getValidators';
+import { hasAtLeastOneRequiredOrMinValidator, hasRequiredValidator } from '../../../utilities/form/getValidators';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FormComponent } from '../form/form.component';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 // TODO: Refactor component to work in similar fashion as Checkbox Group, update docs and tests
 @Component({
@@ -12,6 +16,15 @@ import { hasRequiredValidator } from '../../../utilities/form/getValidators';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+  constructor(
+    @Host() @Optional() protected _parentForm: FormComponent | null,
+    _idService: FudisIdService,
+    _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
+  ) {
+    super(_idService,  _translationService, _changeDetectorRef);
+  }
+  
   /**
    * Binding host CSS class to component wrapper
    */
@@ -38,11 +51,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   @Input() size: FudisInputSize = 'lg';
 
   /**
-   * Set fieldset as required. By default set to 'undefined'.
-   */
-  @Input() required: boolean | undefined = undefined;
-
-  /**
    * Name of the group. If not provided, use id for the name.
    */
   @Input() name: string;
@@ -50,24 +58,20 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   /**
    * Set requiredText based on this boolean value
    */
-  protected _required: boolean = false;
+  public required: boolean = false;
 
   ngOnInit() {
     this._setParentId('radio-button-group');
-
-    if (this.options.length < 2) {
-      throw new Error(
-        `Fudis-radio-button-group should have minimum of two options for radio buttons, but it only got ${this.options.length} option.`,
-      );
-    }
 
     if (!this.name) {
       this.name = this.id;
     }
   }
 
+  /** Add value and validity check when form control changes */
+
   ngOnChanges(): void {
-    this._required = hasRequiredValidator(this.control);
+    this.required = hasRequiredValidator(this.control);
 
     if (!this.name) {
       this.name = this.id;
