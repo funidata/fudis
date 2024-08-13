@@ -12,36 +12,36 @@
               <ng-template fudisContent [type]="'section'">
               <fudis-dl>
                   <fudis-dl-item>
-                    <fudis-dt [textContent]="'Voimassaoloaika'"></fudis-dt>
-                    <fudis-dd [textContent]="'2.1.2015 alkaen'"></fudis-dd>
+                    <fudis-dt [contentText]="'Voimassaoloaika'"></fudis-dt>
+                    <fudis-dd [contentText]="'2.1.2015 alkaen'"></fudis-dd>
                   </fudis-dl-item>
                   <fudis-dl-item>
-                    <fudis-dt [textContent]="'Organisaatio'"></fudis-dt>
-                    <fudis-dd [textContent]="'Test University'"></fudis-dd>
+                    <fudis-dt [contentText]="'Organisaatio'"></fudis-dt>
+                    <fudis-dd [contentText]="'Test University'"></fudis-dd>
                   </fudis-dl-item>
                   <fudis-dl-item>
-                    <fudis-dt [textContent]="'Koulusivistyskieli'"></fudis-dt>
-                    <fudis-dd [textContent]="''"></fudis-dd>
+                    <fudis-dt [contentText]="'Koulusivistyskieli'"></fudis-dt>
+                    <fudis-dd [contentText]="''"></fudis-dd>
                   </fudis-dl-item>
               </fudis-dl>
               <fudis-expandable [variant]="'lite'" [level]="5" [title]="'Lisätiedot'">
                 <ng-template fudisContent [type]="'expandable'">
                 <fudis-dl>
                   <fudis-dl-item>
-                    <fudis-dt [textContent]="'Rajauslaki'"></fudis-dt>
-                    <fudis-dd [textContent]="'Ikuinen Opiskeluoikeus'"></fudis-dd>
+                    <fudis-dt [contentText]="'Rajauslaki'"></fudis-dt>
+                    <fudis-dd [contentText]="'Ikuinen Opiskeluoikeus'"></fudis-dd>
                   </fudis-dl-item>
                   <fudis-dl-item>
-                    <fudis-dt [textContent]="'Tutkintoasetus'"></fudis-dt>
-                    <fudis-dd [textContent]="'Laki (324/2015) yliopistolain 39 ja 41 §:n muuttamisesta'"></fudis-dd>
+                    <fudis-dt [contentText]="'Tutkintoasetus'"></fudis-dt>
+                    <fudis-dd [contentText]="'Laki (324/2015) yliopistolain 39 ja 41 §:n muuttamisesta'"></fudis-dd>
                   </fudis-dl-item>
                   <fudis-dl-item>
-                    <fudis-dt [textContent]="'Myöntämispäivä'"></fudis-dt>
-                    <fudis-dd [textContent]="'24.12.2014'"></fudis-dd>
+                    <fudis-dt [contentText]="'Myöntämispäivä'"></fudis-dt>
+                    <fudis-dd [contentText]="'24.12.2014'"></fudis-dd>
                   </fudis-dl-item>
                   <fudis-dl-item>
-                    <fudis-dt [textContent]="'Opintojen aloituspäivä'"></fudis-dt>
-                    <fudis-dd [textContent]="'1.1.2015'"></fudis-dd>
+                    <fudis-dt [contentText]="'Opintojen aloituspäivä'"></fudis-dt>
+                    <fudis-dd [contentText]="'1.1.2015'"></fudis-dd>
                   </fudis-dl-item>
                 </fudis-dl>
                 </ng-template>
@@ -63,46 +63,47 @@
                 <ng-template fudisContent [type]="'section'">
                   <fudis-dl>
                     <fudis-dl-item>
-                      <fudis-dt [textContent]="'Valmistuneet tutkinnot'"></fudis-dt>
-                      <fudis-dd [textContent]="'Ei valmistuneita tutkintoja'"></fudis-dd>
+                      <fudis-dt [contentText]="'Valmistuneet tutkinnot'"></fudis-dt>
+                      <fudis-dd [contentText]="'Ei valmistuneita tutkintoja'"></fudis-dd>
                     </fudis-dl-item>
                   </fudis-dl>
                 </ng-template>
               </fudis-section>
               <fudis-section [marginTop]="'lg'" [title]="'Läsnäolo'" [level]="4" [titleVariant]="'md'">
                 <ng-template fudisContent [type]="'section'">
-                  <fudis-section [title]="'2024 - 2025'" [level]="5" [titleVariant]="'sm'">
-                    <ng-template fudisContent [type]="'section'">
-                      <fudis-section [title]="'Syksy'" [level]="6" [titleVariant]="'xs'">
-                        <ng-template fudisContent [type]="'section'">
-                          <fudis-dl [variant]="'compact'">
-                              <fudis-dl-item>
-                                <fudis-dt [textContent]="'Lukuvuosi-ilmoittautuminen'"></fudis-dt>
-                                <fudis-dd [textContent]="'Puuttuu'"></fudis-dd>
-                              </fudis-dl-item>
-                              <fudis-dl-item>
-                                <fudis-dt [textContent]="'Ilmoittautumispäivä'"></fudis-dt>
-                                <fudis-dd [textContent]="''"></fudis-dd>
-                              </fudis-dl-item>
-                          </fudis-dl>
-                        </ng-template>
-                    </fudis-section>
-                    <fudis-section [title]="'Kevät'" [level]="5" [titleVariant]="'xs'">
-                      <ng-template fudisContent [type]="'section'">
+                  <fudis-heading [level]="5" [variant]="'sm'">2024-2025</fudis-heading>
+                  <fudis-dl>
+                    <fudis-dl-item>
+                      <fudis-dt [contentText]="'Syksy'"></fudis-dt>
+                      <fudis-dd>
                         <fudis-dl [variant]="'compact'">
-                            <fudis-dl-item>
-                              <fudis-dt [textContent]="'Lukuvuosi-ilmoittautuminen'"></fudis-dt>
-                              <fudis-dd [textContent]="'Puuttuu'"></fudis-dd>
-                            </fudis-dl-item>
-                            <fudis-dl-item>
-                              <fudis-dt [textContent]="'Ilmoittautumispäivä'"></fudis-dt>
-                              <fudis-dd [textContent]="''"></fudis-dd>
-                            </fudis-dl-item>
-                        </fudis-dl>
-                      </ng-template>
-                  </fudis-section>
-                    </ng-template>
-                  </fudis-section>
+                          <fudis-dl-item>
+                            <fudis-dt [contentText]="'Lukuvuosi-ilmoittautuminen'"></fudis-dt>
+                            <fudis-dd [contentText]="'Puuttuu'"></fudis-dd>
+                          </fudis-dl-item>
+                          <fudis-dl-item>
+                            <fudis-dt [contentText]="'Ilmoittautumispäivä'"></fudis-dt>
+                            <fudis-dd [contentText]="''"></fudis-dd>
+                          </fudis-dl-item>
+                      </fudis-dl>
+                      </fudis-dd>
+                    </fudis-dl-item>
+                    <fudis-dl-item>
+                      <fudis-dt [contentText]="'Kevät'"></fudis-dt>
+                      <fudis-dd>
+                        <fudis-dl [variant]="'compact'">
+                          <fudis-dl-item>
+                            <fudis-dt [contentText]="'Lukuvuosi-ilmoittautuminen'"></fudis-dt>
+                            <fudis-dd [contentText]="'Puuttuu'"></fudis-dd>
+                          </fudis-dl-item>
+                          <fudis-dl-item>
+                            <fudis-dt [contentText]="'Ilmoittautumispäivä'"></fudis-dt>
+                            <fudis-dd [contentText]="''"></fudis-dd>
+                          </fudis-dl-item>
+                      </fudis-dl>
+                      </fudis-dd>
+                    </fudis-dl-item>
+                  </fudis-dl>
                   <fudis-expandable [variant]="'lite'" [level]="5" [title]="'Aiemmat läsnäolot'">
                     <ng-template fudisContent [type]="'expandable'">
                       <fudis-body-text>"Lista aiemmista läsnäoloista"</fudis-body-text>
