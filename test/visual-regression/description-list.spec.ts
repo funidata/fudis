@@ -66,23 +66,9 @@ test("nested description list compact and grid enabled", async ({ page }) => {
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
-test("nested description list regular and grid enabled", async ({ page }) => {
-  await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--nested-description-lists&viewMode=story",
-  );
-  await expect(page).toHaveScreenshot({ fullPage: true });
-});
-
 test("nested description list compact and grid disabled", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=disableGrid:!true&id=components-description-list--nested-description-lists&viewMode=story",
-  );
-  await expect(page).toHaveScreenshot({ fullPage: true });
-});
-
-test("nested description list regular and grid disabled", async ({ page }) => {
-  await page.goto(
-    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--nested-description-lists&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
@@ -172,73 +158,4 @@ test("description list compact with single item and grid disabled", async ({ pag
     "/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--single-list-item&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
-});
-
-// Description List With Languages
-test("description list regular with languages", async ({ page }) => {
-  await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--with-language-badges&viewMode=story",
-  );
-  await expect(page).toHaveScreenshot("languages-regular-1-initial.png");
-  await page.getByTestId("fudis-button-1").click();
-  await expect(page).toHaveScreenshot("languages-regular-2-clicked-fi-sv.png");
-  await page.getByTestId("fudis-button-2").click();
-  await expect(page).toHaveScreenshot("languages-regular-3-clicked-sv-en.png");
-  await page.getByTestId("fudis-button-3").click();
-  await expect(page).toHaveScreenshot("languages-regular-4-clicked-sv-fi-en.png");
-
-  await page.getByTestId("fudis-language-badge-group-2-item-9").click();
-  await page.getByTestId("fudis-language-badge-group-3-item-9").click();
-  await page.getByTestId("fudis-button-1").focus();
-  await expect(page).toHaveScreenshot("languages-regular-5-clicked-fi-badge.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-10").click();
-  await page.getByTestId("fudis-language-badge-group-3-item-10").click();
-  await page.getByTestId("fudis-button-1").focus();
-  await expect(page).toHaveScreenshot("languages-regular-6-clicked-en-badge.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-8").click();
-  await page.getByTestId("fudis-language-badge-group-3-item-8").click();
-  await page.getByTestId("fudis-button-1").focus();
-  await expect(page).toHaveScreenshot("languages-regular-7-clicked-sv-badge.png");
-  await page.getByTestId("fudis-button-5").click();
-  await expect(page).toHaveScreenshot("languages-regular-8-lang-changed-to-fi.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-11").focus();
-  await expect(page).toHaveScreenshot("languages-regular-9-lang-focus-sv.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-12").focus();
-  await expect(page).toHaveScreenshot("languages-regular-10-lang-focus-fi.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-13").focus();
-  await expect(page).toHaveScreenshot("languages-regular-11-lang-focus-en.png");
-});
-
-test("description list compact with languages", async ({ page }) => {
-  await page.goto(
-    "/iframe.html?args=variant:compact&id=components-description-list--with-language-badges&viewMode=story",
-  );
-  await expect(page).toHaveScreenshot("languages-compact-1-initial.png");
-  await page.getByTestId("fudis-button-1").click();
-  await expect(page).toHaveScreenshot("languages-compact-2-clicked-fi-sv.png");
-  await page.getByTestId("fudis-button-2").click();
-  await expect(page).toHaveScreenshot("languages-compact-3-clicked-sv-en.png");
-  await page.getByTestId("fudis-button-3").click();
-  await expect(page).toHaveScreenshot("languages-compact-4-clicked-sv-fi-en.png");
-
-  await page.getByTestId("fudis-language-badge-group-2-item-9").click();
-  await page.getByTestId("fudis-language-badge-group-3-item-9").click();
-  await page.getByTestId("fudis-button-1").focus();
-  await expect(page).toHaveScreenshot("languages-compact-5-clicked-fi-badge.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-10").click();
-  await page.getByTestId("fudis-language-badge-group-3-item-10").click();
-  await page.getByTestId("fudis-button-1").focus();
-  await expect(page).toHaveScreenshot("languages-compact-6-clicked-en-badge.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-8").click();
-  await page.getByTestId("fudis-language-badge-group-3-item-8").click();
-  await page.getByTestId("fudis-button-1").focus();
-  await expect(page).toHaveScreenshot("languages-compact-7-clicked-sv-badge.png");
-  await page.getByTestId("fudis-button-5").click();
-  await expect(page).toHaveScreenshot("languages-compact-8-lang-changed-to-fi.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-11").focus();
-  await expect(page).toHaveScreenshot("languages-compact-9-lang-focus-sv.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-12").focus();
-  await expect(page).toHaveScreenshot("languages-compact-10-lang-focus-fi.png");
-  await page.getByTestId("fudis-language-badge-group-2-item-13").focus();
-  await expect(page).toHaveScreenshot("languages-compact-11-lang-focus-en.png");
 });

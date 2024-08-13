@@ -1,11 +1,11 @@
 <div
-  [attr.id]="id"
+  #dropdownMenuElement
   class="fudis-dropdown-menu fudis-dropdown-menu__{{ align }} fudis-dropdown-menu__{{ size }}"
-  #dropdownElement
-  [class.fudis-dropdown-menu__multiselect]="multiselect"
-  [attr.aria-multiselectable]="multiselect ? true : null"
-  [attr.role]="multiselect ? 'listbox' : 'menu'"
+  [attr.id]="id"
+  [attr.role]="'menu'"
+  [attr.aria-expanded]="true"
   [style.max-width]="_maxWidth"
 >
-  <ng-content></ng-content>
+  <ng-content select="fudis-dropdown-menu-item"></ng-content>
+  <ng-content select="fudis-dropdown-menu-group"></ng-content>
 </div>

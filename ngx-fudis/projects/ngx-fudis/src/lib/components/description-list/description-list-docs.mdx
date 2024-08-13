@@ -4,6 +4,8 @@ import { DescriptionListComponent } from "./description-list.component.ts";
 import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/blocks";
 import { descriptionListArgsTypesExclude } from "../../utilities/storybook.ts";
+import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
+import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
 
 <Meta title="Components/Description List" />
 
@@ -21,20 +23,20 @@ Description List is built using child components as follows:
   code={`
 <fudis-dl>
   <fudis-dl-item>
-    <fudis-dt/>
-    <fudis-dd/>
+    <fudis-dt />
+    <fudis-dd />
   </fudis-dl-item>
 </fudis-dl>`}
 />
 
 ### Text Content
 
-Term and Details content is passed through `textContent` Input property.
+Term and Details content is passed through `contentText` Input property.
 
 <Source
   code={`
-<fudis-dt [textContent]="'This is Term element text'" />
-<fudis-dd [textContent]="'Here is the Details element text'" />`}
+<fudis-dt [contentText]="'This is Term element text'" />
+<fudis-dd [contentText]="'Here is the Details element text'" />`}
 />
 
 **Note!** Although with Details element it also works, that content is just passed between `<fudis-dd>` tags, it is primarily used for nesting additional content e. g. another list or a button.
@@ -47,10 +49,9 @@ Details element has also `subHeading` Input for adding optional sub-heading betw
   code={`
 <fudis-dl>
   <fudis-dl-item>
-  <fudis-dt [textContent]="'I am the main Term text content'" />
-  <fudis-dd [subHeading]="'I am Details Sub heading'" [textContent]="'I am first Details element'" />
-  <fudis-dd [textContent]="'I am second Details element'" />
-  <fudis-dd [textContent]="'I am third Details element'" />
+  <fudis-dt [contentText]="'I am the main Term text content'" />
+  <fudis-dd [subHeading]="'I am Details Sub heading'" [contentText]="'I am first Details element'" />
+  <fudis-dd [contentText]="'I am second Details element'" />
 </fudis-dl-item>
 </fudis-dl>`}
 />
@@ -63,8 +64,8 @@ By default Description List Component, as its name suggests, renders a `<dl>` ta
   code={`
 <fudis-dl [tag]="'p'">
   <fudis-dl-item>
-    <fudis-dt [textContent]="'Single Item Key'"/>
-    <fudis-dd [textContent]="'And value for that'"/>
+    <fudis-dt [contentText]="'Single Item Key'"/>
+    <fudis-dd [contentText]="'And value for that'"/>
   </fudis-dl-item>
 </fudis-dl>`}
 />
@@ -89,7 +90,8 @@ When nesting Description List as sublist, the nested one should have `variant` s
 
 <Canvas of={DescriptionListStories.NestedDescriptionLists}></Canvas>
 
-It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how Button is used inside the Description List.
+It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how Button is used inside the Description List in various ways.
+Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
 
 <Canvas of={DescriptionListStories.NestedSubComponents}></Canvas>
 
@@ -113,10 +115,10 @@ Set in your `fudis-dd` element `lang` attribute to tell which translation it rep
   code={`
 <fudis-dl>
   <fudis-dl-item>
-    <fudis-dt [textContent]="'Example Languages'" />
-    <fudis-dd [lang]="'en'" [textContent]="'This is in English'" />
-    <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'" />
-    <fudis-dd [lang]="'sv'" [textContent]="'Den här är på Svenska'" />
+    <fudis-dt [contentText]="'Example Languages'" />
+    <fudis-dd [lang]="'en'" [contentText]="'This is in English'" />
+    <fudis-dd [lang]="'fi'" [contentText]="'Tämä on suomeksi'" />
+    <fudis-dd [lang]="'sv'" [contentText]="'Den här är på Svenska'" />
   </fudis-dl-item>
 </fudis-dl>`}
 />
@@ -139,6 +141,14 @@ Description List components communicate with each other and define automatically
 - [Icon](/docs/components-icon--icon)
 - [Button](/docs/components-button--button)
 
-## Properties
+## Description List Properties
 
 <ArgTypes of={DescriptionListComponent} exclude={descriptionListArgsTypesExclude} />
+
+## Description List Item Term Properties
+
+<ArgTypes of={DescriptionListItemTermComponent} />
+
+## Description List Item Details Properties
+
+<ArgTypes of={DescriptionListItemDetailsComponent} />

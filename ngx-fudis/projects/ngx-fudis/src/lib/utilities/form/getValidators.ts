@@ -37,11 +37,11 @@ export const hasAtLeastOneRequiredOrMinValidator = (group: FormGroup): boolean =
   return hasProperErrors;
 };
 
-export const getMaxLengthFromValidator = (control: AbstractControl): number | undefined => {
+export const getMaxLengthFromValidator = (control: AbstractControl): number | null => {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
-    return undefined;
+    return null;
   }
 
   const errors = validatorFn(new FormControl({ length: Infinity }));
@@ -49,11 +49,11 @@ export const getMaxLengthFromValidator = (control: AbstractControl): number | un
   return errors?.['maxlength']?.requiredLength;
 };
 
-export const getMinLengthFromValidator = (control: AbstractControl): number | undefined => {
+export const getMinLengthFromValidator = (control: AbstractControl): number | null => {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
-    return undefined;
+    return null;
   }
 
   const errors = validatorFn(new FormControl({ length: -Infinity }));
@@ -61,22 +61,22 @@ export const getMinLengthFromValidator = (control: AbstractControl): number | un
   return errors?.['minlength']?.requiredLength;
 };
 
-export const getMaxFromValidator = (control: AbstractControl): number | undefined => {
+export const getMaxFromValidator = (control: AbstractControl): number | null => {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
-    return undefined;
+    return null;
   }
 
   const errors = validatorFn(new FormControl(Infinity)) ?? {};
   return errors?.['max']?.max;
 };
 
-export const getMinFromValidator = (control: AbstractControl): number | undefined => {
+export const getMinFromValidator = (control: AbstractControl): number | null => {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
-    return undefined;
+    return null;
   }
 
   const errors = validatorFn(new FormControl(-Infinity)) ?? {};

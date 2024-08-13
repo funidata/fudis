@@ -69,6 +69,11 @@
       }
     }
 
+    // Make today's date circle darker
+    & .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+      border-color: colors.$color-gray-dark !important;
+    }
+
     // Target controls on top of the calendar pop-up
     & .mat-calendar-controls {
       // Month and year buttons

@@ -39,7 +39,6 @@ const buttonCommonExclude: string[] = [
   'buttonEl',
   'handleBlur',
   'buttonClick',
-  'openMenu',
   'closeMenu',
   'toggleMenu',
 ];
@@ -68,6 +67,7 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
   'titleVariant',
+  'handleChange',
   'id',
   'formGroup',
   'triggerEmit',
@@ -111,11 +111,9 @@ export const daterangeExclude: RegExp = excludeRegex([
  * Description List
  */
 const descriptionListCommonExclude: string[] = [
-  'addChildId',
   'align',
   'alignItemsX',
   'alignItemsY',
-  'childDlItems',
   'getDisabledGridStatus',
   'getVariant',
   'classes',
@@ -125,7 +123,6 @@ const descriptionListCommonExclude: string[] = [
   'serviceDefaults',
   'marginBottom',
   'marginTop',
-  'removeChildId',
   'rowGap',
   'tag',
   'width',
@@ -134,11 +131,13 @@ const descriptionListCommonExclude: string[] = [
 export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'id',
   'getVariant',
-  'addChildId',
-  'childDlItems',
   'getDisabledGridStatus',
-  'removeChildId',
   'serviceDefaults',
+]);
+
+export const nestedDescriptionListExclude: RegExp = excludeRegex([
+  ...descriptionListCommonExclude,
+  'variant',
 ]);
 
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
@@ -147,6 +146,30 @@ export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCo
  * Dialog
  */
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
+
+/**
+ * Dropdown Menu and Dropdown Menu Item
+ */
+export const dropdownMenuExclude: RegExp = excludeRegex([
+  'dropdownElement',
+  'dropdownMenuElement',
+  'closeDropdownMenu',
+  'setFocusedOption',
+  'fireMaxWidthCalcEvent',
+  'id',
+  'hostClass',
+  'handleBlur',
+  'handleFocus',
+]);
+
+export const dropdownMenuItemExclude: RegExp = excludeRegex([
+  'checked',
+  'close',
+  'handleChecked',
+  'handleBlur',
+  'handleClick',
+  'dropdownItem',
+]);
 
 /**
  * Error Message and Error Summary
@@ -211,6 +234,7 @@ export const linkExclude: RegExp = excludeRegex([
   'handleBlur',
   'handleFocus',
   'link',
+  'id',
 ]);
 
 /**
@@ -240,7 +264,6 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'setOptionVisibility',
   'focusToInput',
   'onBlur',
-  'getSelectedOptions',
   'handleCheckedSort',
   'handleMultiSelectionChange',
 ]);
@@ -260,7 +283,6 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'focusSelector',
   'selectionUpdate',
   'handleBlur',
-  'getSelectedOptions',
   'handleCheckedSort',
   'handleMultiSelectionChange',
   'closeDropdown',
@@ -273,7 +295,6 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'handleSelectionChange',
   'handleChecked',
   'handleClick',
-  'optionInputRef',
   'checked',
   'close',
   'errorSummaryReloadOnInit',
@@ -281,7 +302,8 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'componentFocused',
   'setFocusedOption',
   'autocompleteRef',
-  'variant',
+  'filterTextUpdate',
+  'visibleOptionsUpdate',
 ]);
 
 /**

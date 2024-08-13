@@ -65,7 +65,8 @@ class DialogLaucherComponent {
       <fudis-dialog-content>
         <fudis-form
           [title]="'Dialog with fudis-form'"
-          [level]="2"
+          [level]="1"
+          [titleVariant]="'xl'"
           [errorSummaryHelpText]="'You need to fill up the information.'"
         >
           <ng-template fudisContent [type]="'form'">
@@ -137,7 +138,7 @@ class DialogWithFormComponent {
 
     <ng-template #dialogWithGrid>
       <fudis-dialog [size]="size">
-        <fudis-heading fudisDialogTitle [level]="2"
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
           >Dialog with fudis-grid and scrollable content</fudis-heading
         >
         <fudis-dialog-content>
@@ -166,18 +167,6 @@ class DialogWithFormComponent {
               hendrerit ante nisl sed quam. Vestibulum euismod leo ac magna pretium.
             </fudis-body-text>
           </fudis-grid>
-          <!-- <fudis-description-list
-        [columns]="{ xs: 1, sm: 2, md: 3 }"
-        [data]="[
-          { key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },
-          { key: 'Occupation', value: 'Pie maker' },
-          { key: 'Special skill', value: 'Spicing it up' },
-          {
-            key: 'Awards',
-            value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987'
-          }
-        ]"
-      ></fudis-description-list> -->
           <hr />
           <fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginTop]="'sm'" [marginBottom]="'sm'">
             <div style="border: 2px solid lightblue">

@@ -39,15 +39,16 @@ const preview = {
               [
                 "Setup VS Code",
                 "Command Reference",
+                "Testing Local Changes with Symlink",
                 "Git and GitHub Conventions",
-                "Creating Release",
+                "Creating a Release",
               ],
               "DS Practises",
               [
                 "Ways of Working",
                 "Project Structure",
                 "Naming Conventions",
-                "Creating A Component",
+                "Creating a Component",
                 "Testing Practises",
                 "Component Checklist",
               ],

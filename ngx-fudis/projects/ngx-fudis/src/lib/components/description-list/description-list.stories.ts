@@ -1,9 +1,10 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import docs from './description-list-docs.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
-import { descriptionListExclude } from '../../utilities/storybook';
+import { descriptionListExclude, nestedDescriptionListExclude } from '../../utilities/storybook';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
@@ -70,24 +71,24 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
     >
     <fudis-dl [marginTop]="'sm'" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'First name'"></fudis-dt>
-        <fudis-dd [textContent]="'Rex'"></fudis-dd>
+        <fudis-dt [contentText]="'First name'"></fudis-dt>
+        <fudis-dd [contentText]="'Rex'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Last name'"></fudis-dt>
-        <fudis-dd [textContent]="'Dangerwest'"></fudis-dd>
+        <fudis-dt [contentText]="'Last name'"></fudis-dt>
+        <fudis-dd [contentText]="'Dangerwest'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Alias'"></fudis-dt>
-        <fudis-dd [textContent]="'Radical Emmet Xtreme'"></fudis-dd>
+        <fudis-dt [contentText]="'Alias'"></fudis-dt>
+        <fudis-dd [contentText]="'Radical Emmet Xtreme'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Voice actor'"></fudis-dt>
-        <fudis-dd [textContent]="'Chris Pratt'"></fudis-dd>
+        <fudis-dt [contentText]="'Voice actor'"></fudis-dt>
+        <fudis-dd [contentText]="'Chris Pratt'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Enemy'"></fudis-dt>
-        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'"></fudis-dd>
+        <fudis-dt [contentText]="'Enemy'"></fudis-dt>
+        <fudis-dd [contentText]="'Emmet Brickowski'" [subHeading]="'Archenemy'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>`,
 });
@@ -118,98 +119,98 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
     >
     <fudis-dl [marginTop]="'sm'" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Raiders of the Lost Ark'"></fudis-dt>
+        <fudis-dt [contentText]="'Raiders of the Lost Ark'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
-              <fudis-dd [textContent]="'1981'"></fudis-dd>
+              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
+              <fudis-dd [contentText]="'1981'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [textContent]="'8.4 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [contentText]="'8.4 / 10'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
-              <fudis-dd [textContent]="quoteOne"></fudis-dd>
+              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [contentText]="quoteOne"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'The Temple of Doom'"></fudis-dt>
+        <fudis-dt [contentText]="'The Temple of Doom'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
-              <fudis-dd [textContent]="'1984'"></fudis-dd>
+              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
+              <fudis-dd [contentText]="'1984'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [textContent]="'7.5 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [contentText]="'7.5 / 10'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
-              <fudis-dd [textContent]="'Ah, dessert! Chilled monkey brains.'"></fudis-dd>
+              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [contentText]="'Ah, dessert! Chilled monkey brains.'"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'The Last Crusade'"></fudis-dt>
+        <fudis-dt [contentText]="'The Last Crusade'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
-              <fudis-dd [textContent]="'1989'"></fudis-dd>
+              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
+              <fudis-dd [contentText]="'1989'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [textContent]="'8.2 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [contentText]="'8.2 / 10'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
+              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
               <fudis-dd
-                [textContent]="'I suddenly remembered my Charlemagne. Let my armies be the rocks and the trees and the birds in the sky...'"
+                [contentText]="'I suddenly remembered my Charlemagne. Let my armies be the rocks and the trees and the birds in the sky...'"
               ></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'The Kingdom of Crystal Skull'"></fudis-dt>
+        <fudis-dt [contentText]="'The Kingdom of Crystal Skull'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
-              <fudis-dd [textContent]="'2008'"></fudis-dd>
+              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
+              <fudis-dd [contentText]="'2008'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [textContent]="'6.2 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [contentText]="'6.2 / 10'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
-              <fudis-dd [textContent]="'How much of human life is lost in waiting?'"></fudis-dd>
+              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [contentText]="'How much of human life is lost in waiting?'"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'The Dial of Destiny'"></fudis-dt>
+        <fudis-dt [contentText]="'The Dial of Destiny'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="variant">
+          <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
-              <fudis-dd [textContent]="'2023'"></fudis-dd>
+              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
+              <fudis-dd [contentText]="'2023'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [textContent]="'6.5 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [contentText]="'6.5 / 10'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
-              <fudis-dd [textContent]="quoteTwo"></fudis-dd>
+              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [contentText]="quoteTwo"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
@@ -220,8 +221,13 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
 
 export const NestedDescriptionLists = NestedDescriptionListsTemplate.bind({});
 NestedDescriptionLists.args = {
-  variant: 'compact',
   disableGrid: false,
+};
+
+NestedDescriptionLists.parameters = {
+  controls: {
+    exclude: nestedDescriptionListExclude,
+  },
 };
 
 const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
@@ -234,12 +240,12 @@ const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
     >
     <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Teacher email'"></fudis-dt>
-        <fudis-dd [textContent]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
+        <fudis-dt [contentText]="'Teacher email'"></fudis-dt>
+        <fudis-dd [contentText]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Course name'"></fudis-dt>
-        <fudis-dd [textContent]="'Defense Against the Dark Arts'"></fudis-dd>
+        <fudis-dt [contentText]="'Course name'"></fudis-dt>
+        <fudis-dd [contentText]="'Defense Against the Dark Arts'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
     <fudis-body-text
@@ -259,7 +265,7 @@ DescriptionListInsideGrid.args = {
 const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
-  props: args,
+  props: { ...args, classified: action('classified') },
   template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Sub Components</fudis-heading
     >
@@ -270,22 +276,33 @@ const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
       [columns]="columns"
     >
       <fudis-dl-item>
-        <fudis-dt [textContent]="'First name'"></fudis-dt>
-        <fudis-dd [textContent]="'Rex'"></fudis-dd>
+        <fudis-dt [contentText]="'First name'"></fudis-dt>
+        <fudis-dd [contentText]="'Rex'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Last name'"></fudis-dt>
-        <fudis-dd [textContent]="'Dangerwest'"></fudis-dd>
+        <fudis-dt [contentText]="'Last name'"></fudis-dt>
+        <fudis-dd
+          [contentText]="classified ? '&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' : 'Dangerwest'"
+          [ariaLabel]="classified ? 'Hidden classified content' : null"
+        >
+          <fudis-button
+            [variant]="'tertiary'"
+            [size]="'small'"
+            [icon]="classified ? 'eye' : 'eye-blind'"
+            [label]="classified ? 'Show details' : 'Hide details'"
+            (handleClick)="classified = !classified"
+          ></fudis-button>
+        </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Alias'"></fudis-dt>
-        <fudis-dd [textContent]="'Radical Emmet Xtreme'">
+        <fudis-dt [contentText]="'Alias'"></fudis-dt>
+        <fudis-dd [contentText]="'Radical Emmet Xtreme'">
           <fudis-button [label]="'Edit'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Enemy'">Enemy</fudis-dt>
-        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'">
+        <fudis-dt [contentText]="'Enemy'">Enemy</fudis-dt>
+        <fudis-dd [contentText]="'Emmet Brickowski'" [subHeading]="'Archenemy'">
           <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
         </fudis-dd>
       </fudis-dl-item>
@@ -315,28 +332,28 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
       [marginBottom]="'sm'"
     >
       <fudis-description-list-item>
-        <fudis-dt [textContent]="'Example paragraph'"></fudis-dt>
-        <fudis-dd [lang]="'sv'" [textContent]="'Och den här är på Svenska'"></fudis-dd>
-        <fudis-dd [lang]="'en'" [textContent]="'This is in English'"></fudis-dd>
-        <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'"></fudis-dd>
+        <fudis-dt [contentText]="'Example paragraph'"></fudis-dt>
+        <fudis-dd [lang]="'sv'" [contentText]="'Och den här är på Svenska'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'This is in English'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [contentText]="'Tämä on suomeksi'"></fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
-        <fudis-dt [textContent]="'Example without one language'"></fudis-dt>
-        <fudis-dd [lang]="'fi'" [textContent]="'Tähtien sota'"></fudis-dd>
-        <fudis-dd [lang]="'en'" [textContent]="''"></fudis-dd>
-        <fudis-dd [lang]="'sv'" [textContent]="'Stjärnornas krig'"></fudis-dd>
+        <fudis-dt [contentText]="'Example without one language'"></fudis-dt>
+        <fudis-dd [lang]="'fi'" [contentText]="'Tähtien sota'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="''"></fudis-dd>
+        <fudis-dd [lang]="'sv'" [contentText]="'Stjärnornas krig'"></fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
         <fudis-dt
-          [textContent]="'Example which has multiple Details in different languages'"
+          [contentText]="'Example which has multiple Details in different languages'"
         ></fudis-dt>
-        <fudis-dd [lang]="'fi'" [textContent]="'Uusi toivo'"></fudis-dd>
-        <fudis-dd [lang]="'fi'" [textContent]="'Imperiumin vastaisku'"></fudis-dd>
-        <fudis-dd [lang]="'fi'" [textContent]="'Jedin paluu'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [contentText]="'Uusi toivo'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [contentText]="'Imperiumin vastaisku'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [contentText]="'Jedin paluu'"></fudis-dd>
 
-        <fudis-dd [lang]="'en'" [textContent]="'New Hope'"></fudis-dd>
-        <fudis-dd [lang]="'en'" [textContent]="'Empire Strikes Back'"></fudis-dd>
-        <fudis-dd [lang]="'en'" [textContent]="'Return of the Jedi'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'New Hope'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'Empire Strikes Back'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'Return of the Jedi'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
     <example-language-service-change-component /> `,
@@ -384,16 +401,16 @@ const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
       [variant]="variant"
     >
       <fudis-description-list-item>
-        <fudis-dt [textContent]="'Members of Jedi High Council'"></fudis-dt>
+        <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
         <fudis-dd
-          [textContent]="item.value"
+          [contentText]="item.value"
           [subHeading]="item.subHeading"
           *ngFor="let item of data"
         ></fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
-        <fudis-dt [textContent]="'Non-Jedi Master Members'"></fudis-dt>
-        <fudis-dd [textContent]="'Anakin Skywalker'"></fudis-dd>
+        <fudis-dt [contentText]="'Non-Jedi Master Members'"></fudis-dt>
+        <fudis-dd [contentText]="'Anakin Skywalker'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
   `,
@@ -421,8 +438,8 @@ const SingleListItemTemplate: StoryFn<DescriptionListComponent> = (
       [tag]="'p'"
     >
       <fudis-description-list-item>
-        <fudis-dt [textContent]="'Address'"></fudis-dt>
-        <fudis-dd [textContent]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
+        <fudis-dt [contentText]="'Address'"></fudis-dt>
+        <fudis-dd [contentText]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
   `,

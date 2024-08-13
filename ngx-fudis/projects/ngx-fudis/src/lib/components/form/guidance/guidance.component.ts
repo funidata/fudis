@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, effect } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -6,13 +6,14 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-guidance',
   templateUrl: './guidance.component.html',
   styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent implements OnInit {
+export class GuidanceComponent implements OnChanges, OnInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
@@ -77,7 +78,7 @@ export class GuidanceComponent implements OnInit {
   /**
    * When set displays also a character count indicator.
    */
-  @Input() maxLength: number | undefined = undefined;
+  @Input() maxLength: number | null = null;
 
   /**
    * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
@@ -110,6 +111,11 @@ export class GuidanceComponent implements OnInit {
   protected _maxLengthAlertThreshold: number;
 
   /**
+   * The width of the character-limit-indicator, determined by how many digits are in the maxLength input value
+   */
+  protected _maxLengthWidth: 'sm' | 'md' | 'lg';
+
+  /**
    * Id from IdService
    */
   protected _id: string;
@@ -120,7 +126,18 @@ export class GuidanceComponent implements OnInit {
   protected _lazyLoadedErrors: string[] = [];
 
   ngOnInit(): void {
+    this._setCharacterLimitIndicatorValues();
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<GuidanceComponent>): void {
+    if (changes.maxLength?.currentValue !== changes.maxLength?.previousValue) {
+      this._setCharacterLimitIndicatorValues();
+    }
+  }
+
+  private _setCharacterLimitIndicatorValues(): void {
     if (this.maxLength) {
+      this._maxLengthWidth = this.maxLength > 100 ? 'lg' : this.maxLength > 10 ? 'md' : 'sm';
       this._maxLengthAlertThreshold = this.maxLength - 5;
     }
   }

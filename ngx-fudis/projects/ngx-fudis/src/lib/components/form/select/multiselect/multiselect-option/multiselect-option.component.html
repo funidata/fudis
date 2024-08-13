@@ -36,9 +36,13 @@
         [icon]="'check'"
       />
     </div>
-    <div class="fudis-multiselect-option__label__text"
-      >{{ data.label
-      }}<span *ngIf="data.disabled" class="fudis-multiselect-option__label__text__disabled">
+    <div class="fudis-multiselect-option__label__text">
+      <span class="fudis-multiselect-option__label__text__main">{{ data.label }}</span>
+      <span *ngIf="data.subLabel" class="fudis-multiselect-option__label__text__sub">{{
+        data.subLabel
+      }}</span>
+
+      <span *ngIf="data.disabled" class="fudis-multiselect-option__label__text__disabled">
         ({{ _parentMultiselect.translationOptionDisabledText | async }})</span
       >
     </div>

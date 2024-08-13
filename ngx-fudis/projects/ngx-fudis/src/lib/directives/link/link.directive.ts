@@ -1,34 +1,19 @@
-import {
-  OnInit,
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  OnChanges,
-  Input,
-  Host,
-  Optional,
-} from '@angular/core';
+import { OnInit, AfterViewInit, Directive, ElementRef, OnChanges, Input } from '@angular/core';
 import { LinkApiDirective } from './link-api/link-api.directive';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
 import { FudisIdService } from '../../services/id/id.service';
-import { NotificationComponent } from '../../components/notification/notification.component';
 
 @Directive({
   selector: '[fudisLink]',
 })
 export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges, AfterViewInit {
   constructor(
-    @Host() @Optional() private _parentNotification: NotificationComponent,
     protected _bindedElement: ElementRef<HTMLAnchorElement>,
     private _focusService: FudisFocusService,
     private _idService: FudisIdService,
   ) {
     super();
-
-    if (_parentNotification) {
-      this.color = 'gray-dark';
-    }
   }
 
   /**
@@ -55,7 +40,7 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
   }
 
   ngOnChanges(changes: FudisComponentChanges<LinkDirective>): void {
-    if (changes.color || changes.size || changes.classes) {
+    if (changes.size || changes.classes) {
       this._setCssClasses();
     }
   }
@@ -64,11 +49,7 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
    * Set CSS classes
    */
   private _setCssClasses(): void {
-    const classList = [
-      'fudis-link',
-      `fudis-link__size__${this.size}`,
-      `fudis-link__color__${this.color}`,
-    ];
+    const classList = ['fudis-link', `fudis-link__size__${this.size}`];
 
     const arrayToString = this.classes
       .concat(classList)

@@ -30,6 +30,11 @@ export const en: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Close' },
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: 'Disabled',
+    },
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Language',
     MISSING: 'Missing',
@@ -46,8 +51,10 @@ export const en: FudisTranslationConfig = {
       REMOVE_ITEM: 'Remove search filters',
     },
     AUTOCOMPLETE: {
-      CLEAR: 'Clear filter',
+      CLEAR: 'Clear selection',
       NO_RESULTS: 'No results found',
+      SHOWING: 'Showing',
+      RESULTS: 'results',
     },
   },
   IMAGE: {
@@ -102,6 +109,11 @@ export const fi: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Sulje' },
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: 'Ei valittavissa',
+    },
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Kieli',
     MISSING: 'Puuttuu',
@@ -120,6 +132,8 @@ export const fi: FudisTranslationConfig = {
     AUTOCOMPLETE: {
       CLEAR: 'Tyhjennä valinta',
       NO_RESULTS: 'Haku ei palauttanut yhtään tulosta',
+      SHOWING: 'Näytetään',
+      RESULTS: 'tulosta',
     },
   },
   IMAGE: {
@@ -174,6 +188,11 @@ export const sv: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Stäng' },
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: 'Inaktiverad',
+    },
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Språk',
     MISSING: 'Saknas',
@@ -189,6 +208,8 @@ export const sv: FudisTranslationConfig = {
     AUTOCOMPLETE: {
       CLEAR: 'Radera val',
       NO_RESULTS: 'Inga sökresultat',
+      SHOWING: 'Visas',
+      RESULTS: 'resultat',
     },
   },
   IMAGE: {

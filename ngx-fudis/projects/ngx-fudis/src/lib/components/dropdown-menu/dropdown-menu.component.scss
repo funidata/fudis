@@ -45,14 +45,4 @@
   &__sm {
     width: spacing.$spacing-input-sm;
   }
-
-  &__multiselect {
-    max-width: spacing.$spacing-input-lg;
-    max-height: calc(spacing.$spacing-xxl * 4);
-    overflow: auto;
-
-    fudis-body-text {
-      padding: spacing.$spacing-xs;
-    }
-  }
 }

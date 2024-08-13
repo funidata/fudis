@@ -1,7 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { LinkDirective } from "./link.directive.ts";
 import * as LinkDirectiveStories from "./link.directive.stories.ts";
-import { linkExclude } from "../../utilities/storybook";
 
 <Meta title="Directives/Link" />
 
@@ -12,7 +11,7 @@ Link Directive provides the same look and feel as [Link Component](/docs/compone
 ## Usage Guidelines
 
 When routing method such as [UI-Router](https://ui-router.github.io/ng2/) is required, use `fudisLink` directive with HTML anchor element.
-This will apply Link Component's `color` and `size` properties to the native HTML anchor element.
+This will apply Link Component's `size` property to the native HTML anchor element.
 At the moment, Link Directive doesn't support the use of `externalLink` nor `title` properties.
 
 ## Examples
@@ -20,9 +19,9 @@ At the moment, Link Directive doesn't support the use of `externalLink` nor `tit
 <Canvas of={LinkDirectiveStories.Example}></Canvas>
 
 ```
-    <a fudisLink [uiSref]="route" [color]="color" [size]="size">https://www.example.com</a>
+    <a fudisLink [uiSref]="route" [size]="size">https://www.example.com</a>
 ```
 
 ## Properties
 
-<ArgTypes of={LinkDirective} exclude={linkExclude} />
+<ArgTypes of={LinkDirective} />

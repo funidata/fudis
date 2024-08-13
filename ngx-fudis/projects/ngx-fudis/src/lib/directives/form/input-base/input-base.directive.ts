@@ -13,6 +13,7 @@ import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[fudisInputBase]',
@@ -29,6 +30,11 @@ export class InputBaseDirective extends TooltipApiDirective {
    * Template reference for input. Used in e. g. initialFocus
    */
   @ViewChild('inputRef') protected _inputRef: ElementRef<HTMLInputElement>;
+
+  /**
+   * FormControl for the input
+   */
+  @Input({ required: true }) control: FormControl;
 
   /**
    * Label for the input.
@@ -97,7 +103,17 @@ export class InputBaseDirective extends TooltipApiDirective {
    */
   protected _required: boolean = false;
 
+  /**
+   * Max length for HTML attribute and for character indicator in guidance
+   */
+  protected _maxLength: number | null = null;
+
   protected _destroyRef = inject(DestroyRef);
+
+  /**
+   * Trigger update when control validator is changed
+   */
+  protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
    * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed. E. g. if component is inside lazy loaded expandable.
@@ -144,5 +160,17 @@ export class InputBaseDirective extends TooltipApiDirective {
     } else {
       this.id = this._idService.getNewId(componentType);
     }
+  }
+
+  /**
+   * Update value and validity of control
+   */
+  protected _applyControlUpdateCheck(): void {
+    const original = this.control.updateValueAndValidity;
+
+    this.control.updateValueAndValidity = () => {
+      original.apply(this.control);
+      this._updateValueAndValidityTrigger.next();
+    };
   }
 }

@@ -6,6 +6,7 @@ import {
   FudisIdGrandParent,
   FudisIdParent,
   FudisIdSelectFamily,
+  FudisIdDropdownMenuFamily,
 } from '../../types/id';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class FudisIdService {
     components: {
       alert: [],
       autocomplete: [],
+      'body-text': [],
       button: [],
       'autocomplete-multi-select': [],
       datepicker: [],
@@ -38,12 +40,12 @@ export class FudisIdService {
     parents: {
       breadcrumbs: {},
       'checkbox-group': {},
-      'dropdown-menu': {},
       'language-badge-group': {},
       'radio-button-group': {},
     },
     grandParents: {
       'description-list': {},
+      'dropdown-menu': {},
       select: {},
       multiselect: {},
     },
@@ -155,13 +157,20 @@ export class FudisIdService {
    * Add grand parent id to data collection
    */
   public addNewGrandParentId(
-    componentType: 'select' | 'multiselect' | 'description-list',
+    componentType: 'select' | 'multiselect' | 'description-list' | 'dropdown-menu',
     newId: string,
   ): void {
     if (componentType === 'description-list') {
       const newGrandParent: FudisIdDlFamily = {
         id: newId,
         items: {},
+      };
+      this._idData.grandParents[componentType][newId] = newGrandParent;
+    } else if (componentType === 'dropdown-menu') {
+      const newGrandParent: FudisIdDropdownMenuFamily = {
+        id: newId,
+        groups: {},
+        nonGroupedOptions: [],
       };
       this._idData.grandParents[componentType][newId] = newGrandParent;
     } else {
@@ -178,7 +187,7 @@ export class FudisIdService {
    * Get an id and add it to collection for first child of grandparent. E.g. Select Group or Description List Item
    */
   public getNewGroupId(
-    componentType: 'select' | 'multiselect' | 'description-list',
+    componentType: 'select' | 'multiselect' | 'description-list' | 'dropdown-menu',
     parentId: string,
   ): string {
     let newId = '';
@@ -209,7 +218,7 @@ export class FudisIdService {
    * Add group id of grand parent to data collection
    */
   public addNewGroupId(
-    componentType: 'select' | 'multiselect' | 'description-list',
+    componentType: 'select' | 'multiselect' | 'description-list' | 'dropdown-menu',
     parentId: string,
     newId: string,
   ): void {
@@ -229,7 +238,7 @@ export class FudisIdService {
    * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-1
    */
   public getNewSelectOptionId(
-    selectType: 'select' | 'multiselect',
+    selectType: 'select' | 'multiselect' | 'dropdown-menu',
     selectParentId: string,
     groupParentId?: string,
   ): string {

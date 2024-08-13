@@ -9,10 +9,7 @@ import {
   OnInit,
   Optional,
   Output,
-  Signal,
-  WritableSignal,
   effect,
-  signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -20,7 +17,7 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { joinInputValues, sortValues } from '../common/selectUtilities';
+import { joinInputValues } from '../common/utilities/selectUtilities';
 import { FormComponent } from '../../form/form.component';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -75,15 +72,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   protected _sortedSelectedOptions: FudisSelectOption<object>[] = [];
 
   /**
-   * Signal for dropdown options to listen when either Application updates its control value or user clicks (removes) selection chip
-   */
-  private _selectedOptionsSignal: WritableSignal<FudisSelectOption<object>[]> = signal<
-    FudisSelectOption<object>[]
-  >([]);
-
-  private _registeredOptions: FudisSelectOption<object>[] = [];
-
-  /**
    * Set component's id and subscribe to value changes for form control coming from application
    */
   ngOnInit(): void {
@@ -99,14 +87,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
-  }
-
-  /**
-   * Getter used in multiselect options
-   * @returns Signal array of sorted selected options
-   */
-  public getSelectedOptions(): Signal<FudisSelectOption<object>[]> {
-    return this._selectedOptionsSignal.asReadonly();
   }
 
   /**
@@ -147,29 +127,31 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
    * @param type add or remove option from sorting
    */
   public handleCheckedSort(checkedOption: FudisSelectOption<object>, type: 'add' | 'remove'): void {
+    let currentSelectedOptions = [...this._sortedSelectedOptions];
+
     // Check if checkedOption exists in registeredOptions
-    const foundIndex: number = this._registeredOptions.findIndex((option) => {
+    const foundIndex: number = currentSelectedOptions.findIndex((option) => {
       return option.value === checkedOption.value;
     });
 
     // If found, remove it
     if (foundIndex !== -1 && type === 'remove') {
-      this._registeredOptions = this._registeredOptions.filter((_item, index) => {
+      currentSelectedOptions = currentSelectedOptions.filter((_item, index) => {
         return foundIndex !== index;
       });
       // If not found, add it
     } else if (foundIndex === -1 && type === 'add') {
-      this._registeredOptions.push(checkedOption);
+      currentSelectedOptions.push(checkedOption);
     } else if (foundIndex && type === 'add') {
-      this._registeredOptions[foundIndex] = checkedOption;
+      currentSelectedOptions[foundIndex] = checkedOption;
     }
 
     // Compare control value with registered options, if it matches, then sort options for the visible input field label text and for the chips
 
     let valuesInSync = true;
 
-    if (this.control.value && this._registeredOptions.length === this.control.value.length) {
-      this._registeredOptions.forEach((registeredOption) => {
+    if (this.control.value && currentSelectedOptions.length === this.control.value.length) {
+      currentSelectedOptions.forEach((registeredOption) => {
         const matchFound = this.control.value?.find((controlOption) => {
           return (
             registeredOption.value === controlOption.value &&
@@ -184,8 +166,14 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     }
 
     if (valuesInSync && this.control.value) {
-      this._sortedSelectedOptions = sortValues(this._registeredOptions);
+      const dropdown = this._dropdownRef?.dropdownElement?.nativeElement;
+
+      this._sortedSelectedOptions = currentSelectedOptions.sort(
+        this._sortSelectedOptions(dropdown),
+      );
+
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+
       this._changeDetectorRef.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
@@ -214,5 +202,40 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     if (!this.control.value) {
       this._focusToSelectInput();
     }
+  }
+
+  /**
+   * Sort selected options the same order they appear in the DOM
+   */
+  private _sortSelectedOptions(dropdown: HTMLElement | null) {
+    return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
+      if (a['fudisGeneratedHtmlId'] === b['fudisGeneratedHtmlId']) {
+        return 0;
+      }
+
+      if (a['fudisGeneratedHtmlId'] && b['fudisGeneratedHtmlId'] && dropdown) {
+        const firstEl = dropdown.querySelector(`#${a['fudisGeneratedHtmlId']}`);
+
+        const secondEl = dropdown.querySelector(`#${b['fudisGeneratedHtmlId']}`);
+
+        if (firstEl && secondEl) {
+          const position = firstEl.compareDocumentPosition(secondEl);
+
+          if (
+            position & Node.DOCUMENT_POSITION_FOLLOWING ||
+            position & Node.DOCUMENT_POSITION_CONTAINED_BY
+          ) {
+            return -1;
+          } else if (
+            position & Node.DOCUMENT_POSITION_PRECEDING ||
+            position & Node.DOCUMENT_POSITION_CONTAINS
+          ) {
+            return 1;
+          }
+        }
+      }
+
+      return 0;
+    };
   }
 }

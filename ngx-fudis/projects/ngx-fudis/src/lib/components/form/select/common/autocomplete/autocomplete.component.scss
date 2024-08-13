@@ -6,12 +6,11 @@
 
 .fudis-select-autocomplete {
   @include typography.text-field-input;
-  @include borders.border("1px", "solid", "gray-dark");
   @include borders.border-radius("2px");
 
   box-sizing: border-box;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: flex-start;
   padding: spacing.$spacing-xxs spacing.$spacing-lg spacing.$spacing-xxs spacing.$spacing-sm;
   width: 100%;
@@ -27,5 +26,15 @@
   &:focus,
   &:focus-visible {
     @include focus.focus-form-field;
+  }
+
+  &:not([aria-invalid="true"], [aria-disabled="true"]) {
+    @include borders.border("1px", "solid", "gray-dark");
+  }
+
+  &[aria-disabled="true"] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

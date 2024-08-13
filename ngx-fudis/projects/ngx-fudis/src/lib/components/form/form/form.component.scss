@@ -20,13 +20,11 @@
     }
 
     &__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: spacing.$spacing-xs spacing.$spacing-sm;
       margin-right: spacing.$spacing-xs;
       margin-bottom: spacing.$spacing-sm;
-
-      fudis-button:not(:last-of-type) {
-        margin-right: spacing.$spacing-sm;
-        margin-bottom: spacing.$spacing-xs;
-      }
 
       &__dialog {
         display: flex;
