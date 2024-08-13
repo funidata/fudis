@@ -8,7 +8,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import {
   FudisCheckboxGroupChangeEvent,
   FudisCheckboxGroupFormGroup,
-  FudisInputSize,
+  fudisInputSizeArray,
 } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -115,8 +115,8 @@ class MockContainerComponent {
 
 describe('CheckboxGroupComponent', () => {
   let component: CheckboxGroupComponent;
-
   let fixture: ComponentFixture<CheckboxGroupComponent> | ComponentFixture<MockContainerComponent>;
+  let fieldsetElement: HTMLFieldSetElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -147,6 +147,10 @@ describe('CheckboxGroupComponent', () => {
       component.helpText = 'Some help text';
 
       fixture.autoDetectChanges();
+
+      fieldsetElement = fixture.nativeElement.querySelector(
+        'fudis-fieldset .fudis-fieldset',
+      ) as HTMLFieldSetElement;
     });
 
     it('should have correct label as legend', () => {
@@ -174,15 +178,10 @@ describe('CheckboxGroupComponent', () => {
     });
 
     it('should pass correct size values to the Fieldset', () => {
-      const sizes: FudisInputSize[] = ['sm', 'md', 'lg'];
-
-      sizes.forEach((size) => {
+      fudisInputSizeArray.forEach((size) => {
         component.size = size;
         fixture.detectChanges();
 
-        const fieldsetElement = fixture.nativeElement.querySelector(
-          'fudis-fieldset .fudis-fieldset',
-        ) as HTMLFieldSetElement;
         expect(fieldsetElement.classList).toContain(`fudis-input-size__${size}`);
       });
     });
@@ -191,19 +190,17 @@ describe('CheckboxGroupComponent', () => {
       component.id = 'my-custom-checkbox-group';
       fixture.detectChanges();
 
-      const fieldsetElement = fixture.nativeElement.querySelector(
-        'fudis-fieldset .fudis-fieldset',
-      ) as HTMLFieldSetElement;
-
       expect(fieldsetElement.getAttribute('id')).toEqual('my-custom-checkbox-group');
     });
 
     it('should generate correct id', () => {
-      const fieldsetElement = fixture.nativeElement.querySelector(
-        'fudis-fieldset .fudis-fieldset',
-      ) as HTMLFieldSetElement;
-
       expect(fieldsetElement.getAttribute('id')).toEqual('fudis-checkbox-group-1');
+    });
+
+    it('should have correct aria-describedby value', () => {
+      expect(fieldsetElement.getAttribute('aria-describedby')).toEqual(
+        'fudis-checkbox-group-1_guidance',
+      );
     });
   });
 

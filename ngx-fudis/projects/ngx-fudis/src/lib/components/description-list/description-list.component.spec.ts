@@ -19,30 +19,30 @@ import { FudisIdService } from '../../services/id/id.service';
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'First DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'First DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Second DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Second DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Single DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="true">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Disabled Grid DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Disabled Grid DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Disabled Grid DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Disabled Grid DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,

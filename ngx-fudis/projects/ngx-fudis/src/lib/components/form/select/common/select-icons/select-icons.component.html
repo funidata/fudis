@@ -1,19 +1,24 @@
-<fudis-icon
-  *ngIf="parentVariant !== 'autocompleteType' && (!clearButton || (!_controlValue && !filterText))"
-  class="fudis-select-icons__icon"
-  [class.fudis-select-icons__icon--disabled]="disabled"
-  [icon]="'chevron'"
-  [rotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
-/>
-<fudis-icon
-  *ngIf="
-    (parentVariant === 'autocompleteType' && !filterText && !_controlValue) ||
-    (parentVariant === 'autocompleteType' && !clearButton)
-  "
-  class="fudis-select-icons__icon"
-  [class.fudis-select-icons__icon--disabled]="disabled"
-  [icon]="'search'"
-/>
+<div class="fudis-select-icons__container">
+  <fudis-icon
+    *ngIf="
+      parentVariant !== 'autocompleteType' &&
+      (!clearButton || ((_controlValue | async) === false && !filterText))
+    "
+    class="fudis-select-icons__icon"
+    [class.fudis-select-icons__icon--disabled]="disabled"
+    [icon]="'chevron'"
+    [rotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
+  />
+  <fudis-icon
+    *ngIf="
+      (parentVariant === 'autocompleteType' && !filterText && (_controlValue | async) === false) ||
+      (parentVariant === 'autocompleteType' && !clearButton)
+    "
+    class="fudis-select-icons__icon"
+    [class.fudis-select-icons__icon--disabled]="disabled"
+    [icon]="'search'"
+  />
+</div>
 
 <ng-container *ngIf="clearButton">
   <ng-container *ngIf="_translationClearFilterText | async as clearText">
@@ -21,12 +26,12 @@
       [class.fudis-select-icons__icon--disabled]="disabled"
       [class.fudis-select-icons__icon--hidden]="
         !(
-          (parentVariant === 'dropdown' && _controlValue) ||
-          (parentVariant === 'autocompleteDropdown' && (filterText || _controlValue)) ||
-          (parentVariant === 'autocompleteType' && (filterText || _controlValue))
+          (parentVariant === 'dropdown' && (_controlValue | async)) ||
+          (parentVariant === 'autocompleteDropdown' && (filterText || (_controlValue | async))) ||
+          (parentVariant === 'autocompleteType' && (filterText || (_controlValue | async)))
         )
       "
-      (click)="_clearButtonClick($event)"
+      (handleClick)="_clearButtonClick($event)"
       (handleDestroy)="handleClearButtonDestroy.emit()"
       (handleFocus)="_handleClearButtonFocus($event)"
       (handleBlur)="_handleClearButtonBlur($event)"

@@ -3,6 +3,7 @@
   [labelSize]="'sm'"
   [label]="label"
   [required]="_required"
+  [describedbyId]="id + '_guidance'"
   [errorSummaryBreadcrumb]="false"
   [inputSize]="size"
   [tooltip]="tooltip"
@@ -17,7 +18,7 @@
       [reloadErrorSummary]="_reloadErrorSummary"
       [inputLabel]="label"
       [helpText]="helpText"
-      [for]="id + '-legend'"
+      [for]="id"
       [groupBlurredOut]="groupBlurredOut"
       [formGroup]="formGroup"
     >

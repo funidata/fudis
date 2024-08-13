@@ -7,7 +7,11 @@
   [marginBottom]="marginBottom"
   [marginTop]="marginTop"
 >
-  <fieldset [attr.id]="id" [ngClass]="_classes">
+  <fieldset
+    [attr.id]="id"
+    [ngClass]="_classes"
+    [attr.aria-describedby]="describedbyId ? describedbyId : null"
+  >
     <legend
       #fieldsetLegend
       class="fudis-fieldset__legend"

@@ -21,7 +21,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 0 spacing.$spacing-xs;
   min-width: spacing.$spacing-xxl;
   vertical-align: middle;
 
@@ -34,9 +33,20 @@
     @include colors.bg-color("gray-light");
     @include borders.border("2px", "solid", "transparent");
     @include borders.outline("1px", "dashed", "gray-middle");
+  }
 
-    &:focus {
-      @include focus.focus-generic;
+  &__label {
+    &--hidden {
+      padding: 0 spacing.$spacing-xs;
+    }
+
+    &--visible {
+      padding: 0 spacing.$spacing-xs;
+
+      /* stylelint-disable-next-line selector-class-pattern */
+      &:has(.fudis-button__icon) {
+        padding: 0 spacing.$spacing-xs 0 0;
+      }
     }
   }
 
@@ -56,26 +66,26 @@
   }
 
   &__size {
-    &-small {
-      height: spacing.$spacing-md;
+    &__small {
+      min-height: spacing.$spacing-md;
     }
 
-    &-medium {
-      height: spacing.$spacing-lg;
+    &__medium {
+      min-height: spacing.$spacing-lg;
     }
 
-    &-icon-only {
+    &__icon-only {
       padding: 0;
       width: spacing.$spacing-lg;
       min-width: initial;
-      height: spacing.$spacing-lg;
+      min-height: spacing.$spacing-lg;
     }
   }
 
   &__icon {
     position: relative;
     width: spacing.$spacing-lg;
-    height: spacing.$spacing-lg;
+    height: spacing.$spacing-sm;
 
     &__component {
       position: absolute;

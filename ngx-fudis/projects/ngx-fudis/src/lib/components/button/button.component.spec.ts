@@ -1,8 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
+import {
+  fudisButtonSizeArray,
+  fudisButtonTypeArray,
+  fudisButtonVariantArray,
+} from '../../types/miscellaneous';
+import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { fudisIconRotateArray } from '../../types/icons';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
@@ -10,122 +15,136 @@ describe('ButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ButtonComponent, MockComponent(IconComponent)],
-      providers: [],
-    })
-      .overrideComponent(ButtonComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
-  });
+      declarations: [ButtonComponent, IconComponent],
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
-    component.ngOnInit();
     fixture.detectChanges();
   });
 
   function getButton(): HTMLElement {
-    return fixture.nativeElement.querySelector('button') as HTMLElement;
+    return getElement(fixture, 'button') as HTMLElement;
   }
 
-  function assertButtonHasClasses(classes: string): void {
-    const buttonClasses = getButton().className.split(' ').sort();
-
-    expect(buttonClasses).toEqual(classes.split(' ').sort());
-  }
-
-  describe('CSS classes', () => {
-    it('should contain classes for medium sized primary button by default', () => {
-      assertButtonHasClasses('fudis-button fudis-button__primary fudis-button__size-medium');
+  describe('HTML attributes', () => {
+    it('should have generated id', () => {
+      expect(getButton().getAttribute('id')).toEqual('fudis-button-1');
     });
 
-    it('should map the given inputs to the corresponding CSS classes', () => {
-      component.size = 'small';
-      component.variant = 'secondary';
-      component.label = 'Testing css classes';
-      component.ngOnInit();
-      fixture.detectChanges();
-      assertButtonHasClasses('fudis-button fudis-button__size-small fudis-button__secondary');
+    it('should update CSS classes according to given size and variant Inputs', () => {
+      fudisButtonVariantArray.forEach((variant) => {
+        fixture.componentRef.setInput('variant', `${variant}`);
+        fixture.detectChanges();
 
-      component.size = 'medium';
-      component.variant = 'tertiary';
-      component.label = 'Testing css classes';
-      component.ngOnInit();
-      fixture.detectChanges();
-      assertButtonHasClasses('fudis-button fudis-button__size-medium fudis-button__tertiary');
+        fudisButtonSizeArray.forEach((size) => {
+          fixture.componentRef.setInput('size', `${size}`);
+          fixture.detectChanges();
 
-      component.size = 'icon-only';
-      component.variant = 'secondary';
-      component.label = 'Testing css classes';
-      component.ngOnInit();
-      fixture.detectChanges();
-      assertButtonHasClasses('fudis-button fudis-button__size-icon-only fudis-button__secondary');
+          expect(sortClasses(getButton().className)).toEqual(
+            sortClasses(
+              `fudis-button fudis-button__label--visible fudis-button__${variant} fudis-button__size__${size}`,
+            ),
+          );
+        });
+      });
+    });
+
+    it('should have proper default CSS classes', () => {
+      expect(getButton().className).toEqual(
+        'fudis-button fudis-button__label--visible fudis-button__primary fudis-button__size__medium',
+      );
+    });
+
+    it('should update button type according to given type Input', () => {
+      fudisButtonTypeArray.forEach((type) => {
+        fixture.componentRef.setInput('type', `${type}`);
+        fixture.detectChanges();
+
+        expect(getButton().getAttribute('type')).toEqual(`${type}`);
+      });
+    });
+
+    it('should update icon classes according to given iconRotate Input', () => {
+      fixture.componentRef.setInput('icon', 'search');
+      fixture.componentRef.setInput('label', 'Icon button');
+      fixture.componentRef.setInput('labelHidden', true);
+
+      fudisIconRotateArray.forEach((rotate) => {
+        fixture.componentRef.setInput('iconRotate', `${rotate}`);
+        fixture.detectChanges();
+
+        const iconClasses = getButton().querySelector('svg')?.classList;
+
+        expect(iconClasses).toContain(`fudis-icon__rotate__${rotate}`);
+      });
     });
   });
 
-  describe('button clicked', () => {
-    it('should emit events when the button is enabled', () => {
-      let clicked = false;
-      component.label = 'Testing clicking';
-      component.handleClick.subscribe(() => {
-        clicked = true;
-      });
+  describe('Event emitters', () => {
+    it('should emit when button is clicked', () => {
+      jest.spyOn(component.handleClick, 'emit');
 
-      getButton()?.click();
+      getButton().click();
 
-      expect(clicked).toEqual(true);
+      expect(component.handleClick.emit).toHaveBeenCalled();
     });
 
-    it('should not emit events when the button is disabled', () => {
-      let clicked = false;
-      component.handleClick.subscribe(() => {
-        clicked = true;
-      });
+    it('should emit when button is focused', () => {
+      jest.spyOn(component.handleFocus, 'emit');
 
+      getButton().focus();
+
+      expect(component.handleFocus.emit).toHaveBeenCalled();
+    });
+
+    it('should emit when button is blurred', () => {
+      jest.spyOn(component.handleBlur, 'emit');
+
+      getButton().focus();
+      getButton().blur();
+
+      expect(component.handleBlur.emit).toHaveBeenCalled();
+    });
+
+    it('should not emit when button is disabled', () => {
+      jest.spyOn(component.handleClick, 'emit');
       component.disabled = true;
-      component.label = 'Testing disabled state';
       fixture.detectChanges();
 
-      getButton()?.click();
+      getButton().click();
 
-      expect(clicked).toEqual(false);
+      expect(component.handleClick.emit).not.toHaveBeenCalled();
     });
   });
 
-  describe('button with icon, aria-label and label hidden', () => {
-    it('should have icon component present if icon and label and aria-label has been given as an Input', () => {
-      component.icon = 'three-dots';
-      component.label = 'Open additional menu';
-      component.labelHidden = true;
-      component.ariaLabel = 'It has nice things to click';
-      component.type = 'button';
-      component.ngOnInit();
+  describe('Button as MenuButton', () => {
+    it('should toggle dropdown menu', () => {
+      jest.spyOn(component, 'toggleMenu');
+
+      fixture.componentRef.setInput('icon', 'three-dots');
+      fixture.componentRef.setInput('label', 'Open additional menu');
+      fixture.componentRef.setInput('labelHidden', true);
+      fixture.componentRef.setInput('ariaLabel', 'It has nice things to click');
+      fixture.componentRef.setInput('asMenuButton', true);
       fixture.detectChanges();
 
-      expect(IconComponent).toBeTruthy();
-      expect(getButton().getAttribute('aria-label')).toBeTruthy();
+      expect(getButton().getAttribute('aria-expanded')).toEqual('false');
+
+      getButton().click();
+      fixture.detectChanges();
+
+      expect(component.toggleMenu).toHaveBeenCalled();
+
+      expect(getButton().getAttribute('aria-expanded')).toEqual('true');
+
       expect(getButton().getAttribute('aria-label')).toEqual(
         'Open additional menu It has nice things to click',
       );
+
       expect(getButton().getAttribute('type')).toEqual('button');
+
       expect(getButton().textContent).toEqual('');
     });
   });
-
-  describe('button with label and type submit', () => {
-    it('should show uppercase context', () => {
-      component.label = 'Submit me!';
-      component.type = 'submit';
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      expect(getButton().getAttribute('type')).toEqual('submit');
-      expect(getButton().textContent).toContain('Submit me!');
-    });
-  });
-
-  // TODO: tests for menu button and icon rotate
-  // TODO: test for button host class
 });

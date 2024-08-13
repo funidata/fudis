@@ -18,7 +18,10 @@
   (blur)="_blur($event)"
   (click)="!data.disabled && _clickOption($event)"
 >
-  <span class="fudis-select-option__label">{{ data.label }}</span>
+  <div class="fudis-select-option__label">
+    <span class="fudis-select-option__label__main">{{ data.label }}</span>
+    <span *ngIf="data.subLabel" class="fudis-select-option__label__sub">{{ data.subLabel }}</span>
+  </div>
   <fudis-icon
     *ngIf="!data.disabled && _parentSelect.control.value?.value === data.value"
     [icon]="_parent.size === 'xs' ? 'check-small' : 'check'"

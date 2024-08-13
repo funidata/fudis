@@ -38,12 +38,19 @@ export class TextAreaComponent
     _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(_idService, _changeDetectorRef);
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+        this._maxLength = getMaxLengthFromValidator(this.control);
+        this._minLength = getMinLengthFromValidator(this.control);
+      }
+    });
   }
 
   /**
    * FormControl for text-area
    */
-  @Input({ required: true }) control: FormControl<string | null | number>;
+  @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
    * Text Area size
@@ -53,15 +60,16 @@ export class TextAreaComponent
   /**
    * Min length for HTML attribute
    */
-  protected _minLength: number | undefined = undefined;
+  protected _minLength: number | null = null;
 
   /**
    * Max length for HTML attribute and for character indicator in guidance
    */
-  protected _maxLength: number | undefined = undefined;
+  protected override _maxLength: number | null = null;
 
   ngOnInit(): void {
     this._setInputId('text-area');
+    this._updateValueAndValidityTrigger.next();
 
     /**
      * TODO: write test
@@ -76,10 +84,8 @@ export class TextAreaComponent
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
-    if (changes.control) {
-      this._required = hasRequiredValidator(this.control);
-      this._maxLength = getMaxLengthFromValidator(this.control);
-      this._minLength = getMinLengthFromValidator(this.control);
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._applyControlUpdateCheck();
     }
   }
 

@@ -25,7 +25,11 @@
 }
 
 @mixin horizontal-rule() {
+  @include box-reset;
+
+  display: block;
   border: 0;
   border-top: spacing.$pixel-1 solid colors.$color-gray-middle;
+  width: 100%;
   height: spacing.$pixel-1;
 }

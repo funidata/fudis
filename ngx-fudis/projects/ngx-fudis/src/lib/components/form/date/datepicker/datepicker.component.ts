@@ -30,6 +30,7 @@ import { FormComponent } from '../../form/form.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
 import { BehaviorSubject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -61,6 +62,14 @@ export class DatepickerComponent
   ) {
     super(_idService, _changeDetectorRef);
 
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+        this._minDate = getMinDateFromValidator(this.control);
+        this._maxDate = getMaxDateFromValidator(this.control);
+      }
+    });
+
     effect(() => {
       _adapter.setLocale(updateLocale(_translationService.getLanguageSignal()()));
 
@@ -80,7 +89,7 @@ export class DatepickerComponent
   /**
    * FormControl for the input
    */
-  @Input({ required: true }) control: FormControl<Date | null>;
+  @Input({ required: true }) override control: FormControl<Date | null>;
 
   /**
    * Available sizes for the datepicker
@@ -190,9 +199,7 @@ export class DatepickerComponent
 
     // Do checks for the control to define attributes used in e.g. HTML
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._required = hasRequiredValidator(this.control);
-      this._minDate = getMinDateFromValidator(this.control);
-      this._maxDate = getMaxDateFromValidator(this.control);
+      this._applyControlUpdateCheck();
 
       // If control changes and these checks are on, add parseValidator
       if (!this._parseValidatorInstance && this.parseDateValidator) {
@@ -204,13 +211,6 @@ export class DatepickerComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
-    }
-
-    /**
-     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
-     */
-    if (this.control.disabled) {
-      this._inputRef.nativeElement.removeAttribute('disabled');
     }
   }
 

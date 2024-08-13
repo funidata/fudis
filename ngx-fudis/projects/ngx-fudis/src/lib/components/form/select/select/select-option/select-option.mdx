@@ -1,4 +1,6 @@
-import { Meta } from "@storybook/blocks";
+import { Meta, Canvas } from "@storybook/blocks";
+import { Source } from "@storybook/blocks";
+import * as Stories from "./select-option.stories";
 
 <Meta title="Components/Form/Select/Select and Multiselect Option" />
 
@@ -31,6 +33,8 @@ interface FudisSelectOption {
   value: any;
   /** Value that is shown in the UI */
   label: string;
+  /** Secondary, optional label for the option */
+  subLabel?: string;
   /** Is option disabled in the dropdown */
   disabled?: boolean;
   /** To store additional data */
@@ -41,31 +45,36 @@ interface FudisSelectOption {
 
 ## Example Usage
 
+<Canvas of={Stories.Example} />
+
 ### Select Option
 
-```
+<Source
+  code={`
 <fudis-select>
   <ng-template fudisContent [type]="'select-options'">
     <fudis-select-option
       [data]=
         "{value: 'unique-option-value',
-        label: 'Visible Label For the Option'}"
+        label: 'Visible Label For the Option'
+        subLabel: 'Optional secondary label'}"
     />
   </ng-template>
-</fudis-select>
-
-```
+</fudis-select>`}
+/>
 
 ### Multiselect Option
 
-```
+<Source
+  code={`
 <fudis-multiselect>
   <ng-template fudisContent [type]="'select-options'">
     <fudis-multiselect-option
       [data]=
         "{value: 'unique-option-value',
-        label: 'Visible Label For the Option'}"
+        label: 'Visible Label For the Option',
+        subLabel: 'Optional secondary label'}"
     />
   </ng-template>
-</fudis-multiselect>
-```
+</fudis-multiselect>`}
+/>

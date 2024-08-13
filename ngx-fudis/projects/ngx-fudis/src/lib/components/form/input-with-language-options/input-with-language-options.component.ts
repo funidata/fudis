@@ -71,7 +71,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * Maximum length for text area, unset by default.
    */
-  @Input() maxLength: number | undefined = undefined;
+  @Input() maxLength: number | null = null;
 
   /**
    * Control for language option dropdown

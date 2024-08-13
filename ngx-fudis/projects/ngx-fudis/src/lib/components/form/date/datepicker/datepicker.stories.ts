@@ -169,7 +169,6 @@ const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponen
 export const Disabled = DisabledTemplate.bind({});
 Disabled.args = {
   ...commonArgs,
-  disabled: false,
 };
 
 const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({

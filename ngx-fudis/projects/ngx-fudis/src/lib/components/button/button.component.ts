@@ -15,7 +15,14 @@ import {
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisComponentChanges } from '../../types/miscellaneous';
+import {
+  FudisButtonSize,
+  FudisButtonType,
+  FudisButtonVariant,
+  FudisComponentChanges,
+} from '../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
+import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 
 @Component({
   selector: 'fudis-button',
@@ -49,17 +56,17 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   /**
    * Button variant options
    */
-  @Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() variant: FudisButtonVariant = 'primary';
 
   /**
    * Button size options
    */
-  @Input() size: 'icon-only' | 'small' | 'medium' = 'medium';
+  @Input() size: FudisButtonSize = 'medium';
 
   /**
    * Button type options
    */
-  @Input() type: 'button' | 'submit' = 'button';
+  @Input() type: FudisButtonType = 'button';
 
   /**
    * Hide visible label text for icon-only buttons.
@@ -87,59 +94,54 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   @Input() iconRotate: FudisIconRotate = 'none';
 
   /**
-   * TODO: Enable when Dropdown Menu is re-enabled
    * Assign button as menu button with dropdown
-   * @Input() asMenuButton: boolean = false;
    */
+  @Input() asMenuButton: boolean = false;
 
   /**
    * Click handler
    */
   @Output() handleClick = new EventEmitter<Event>();
 
-  // TODO: write test
   /**
    * Focus handler
    */
   @Output() handleFocus = new EventEmitter<FocusEvent>();
 
-  // TODO: write test
   /**
    * Blur handler
    */
   @Output() handleBlur = new EventEmitter<FocusEvent>();
 
-  // TODO: write test
   /**
    * onDestroy handler emit
    */
   @Output() handleDestroy = new EventEmitter<void>();
 
   /**
-   * Toggle menu button
-   *   public dropdownOpen: boolean = false;
+   * Toggle dropdown menu button
    */
+  public dropdownOpen = new BehaviorSubject<boolean>(false);
 
   /**
    * Id of child Dropdown Menu. Passed from child to parent Button.
-   *
-   *   public dropdownMenuId: string;
    */
+  public dropdownMenuId: string;
 
   /**
    * Automatically sets icon color based on button variant
    */
-  protected _iconColor: FudisIconColor = 'white';
+  protected _iconColor = new BehaviorSubject<FudisIconColor>('white');
 
   /**
    * Button CSS class list
    */
-  protected _classList: string[] = [];
+  protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
    * Aria-label for icon-only buttons
    */
-  protected _ariaLabel: string = '';
+  protected _ariaLabel = new BehaviorSubject<string>('');
 
   /**
    * Id generated with FudisIdService
@@ -147,26 +149,30 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   protected _id: string;
 
   /**
-   * To prevent ngOnChanges running before initial ngOnInit
+   * Is button focused or not
    */
-  private _initFinished: boolean = false;
+  private _focused: boolean = false;
 
   ngOnInit() {
-    this._classList = this._getClasses();
-    this._ariaLabel = this._getAriaLabel();
-
-    this._initFinished = true;
+    if (this._classList.value.length === 0) {
+      this._classList.next(this._getClasses());
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
-    if (this._initFinished) {
-      if (changes.variant || changes.disabled || changes.size || changes.disabled) {
-        this._classList = this._getClasses();
-      }
+    const variant = changes.variant?.currentValue !== changes.variant?.previousValue;
+    const disabled = changes.disabled?.currentValue !== changes.disabled?.previousValue;
+    const size = changes.size?.currentValue !== changes.size?.previousValue;
+    const label = changes.label?.currentValue !== changes.label?.previousValue;
+    const labelHidden = changes.labelHidden?.currentValue !== changes.labelHidden?.previousValue;
+    const ariaLabel = changes.ariaLabel?.currentValue !== changes.ariaLabel?.previousValue;
 
-      if (changes.size || changes.labelHidden || changes.label) {
-        this._ariaLabel = this._getAriaLabel();
-      }
+    if (variant || disabled || size || labelHidden) {
+      this._classList.next(this._getClasses());
+    }
+
+    if (size || labelHidden || label || ariaLabel) {
+      this._ariaLabel.next(this._getAriaLabel());
     }
   }
 
@@ -178,51 +184,70 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    * Button click event
    */
   public buttonClick(event: Event): void {
-    // if (this.asMenuButton) {
-    //   this.toggleMenu();
-    // }
+    if (this.asMenuButton) {
+      this.toggleMenu();
+    }
+
     this.handleClick.emit(event);
   }
 
   /**
    * Toggling when Button is used as Menu Button
-   * public toggleMenu(): void {
-   *  this.dropdownOpen = !this.dropdownOpen;
-   * }
-   *
    */
+  public toggleMenu(): void {
+    const newState = !this.dropdownOpen.value;
+    this.dropdownOpen.next(newState);
+
+    DropdownMenuComponent.fireMaxWidthCalcEvent.next(true);
+  }
 
   /**
-   * Open when Button is used as Menu Button
-   * public openMenu(): void {
-   *  this.dropdownOpen = true;
-   * }
+   * Close dropdown when Button is used as Menu Button
    */
+  public closeMenu(focusToButton: boolean = true): void {
+    this.dropdownOpen.next(false);
+
+    if (!this._focused && focusToButton) {
+      this.buttonEl.nativeElement.focus();
+    }
+
+    DropdownMenuComponent.fireMaxWidthCalcEvent.next(true);
+  }
 
   /**
-   * Close when Button is used as Menu Button
-   * public closeMenu(): void {
-   *  this.dropdownOpen = false;
-   * }
+   * Handle Escape key down for Menu Button
    */
+  protected _handleMenuButtonKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.closeMenu();
+    }
+  }
 
   /**
-   * Handler for blurring out and closing Menu Button dropdown
+   * Handler for blurring out and closing Menu Button's dropdown
    */
   protected _handleButtonBlur(event: FocusEvent): void {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const targetIsDropdownMenuButton = (event.relatedTarget as HTMLElement)?.classList?.contains(
+    this._focused = false;
+
+    const targetIsDropdownMenuOption = (event.relatedTarget as HTMLElement)?.classList?.contains(
       'fudis-dropdown-menu-item',
     );
 
-    // if (this.asMenuButton && !targetIsDropdownMenuButton) {
-    //   this.dropdownOpen = false;
-    // }
+    if (this.asMenuButton && !targetIsDropdownMenuOption) {
+      this.dropdownOpen.next(false);
+    }
 
     this.handleBlur.emit(event);
   }
 
+  /**
+   * Handle button focus
+   */
   protected _handleButtonFocus(event: FocusEvent): void {
+    this._focused = true;
+
     this.handleFocus.emit(event);
   }
 
@@ -241,13 +266,27 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
   private _getClasses(): string[] {
     if (this.disabled) {
-      this._iconColor = 'gray-dark';
+      this._iconColor.next('gray-dark');
     } else if (this.variant === 'primary') {
-      this._iconColor = 'white';
+      this._iconColor.next('white');
     } else if (this.variant === 'secondary' || this.variant === 'tertiary') {
-      this._iconColor = 'primary';
+      this._iconColor.next('primary');
     }
 
-    return ['fudis-button', `fudis-button__size-${this.size}`, `fudis-button__${this.variant}`];
+    if (this.labelHidden) {
+      return [
+        'fudis-button',
+        `fudis-button__size__${this.size}`,
+        `fudis-button__${this.variant}`,
+        `fudis-button__label--hidden`,
+      ];
+    } else {
+      return [
+        'fudis-button',
+        `fudis-button__size__${this.size}`,
+        `fudis-button__${this.variant}`,
+        `fudis-button__label--visible`,
+      ];
+    }
   }
 }

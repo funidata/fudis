@@ -89,7 +89,9 @@
   </div>
   <ng-container *ngIf="maxLength && control">
     <small
-      class="fudis-guidance__character-limit-indicator"
+      class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
+        _maxLengthWidth
+      }}"
       [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
     >
       {{ control.value?.length || 0 }}/{{ maxLength }}
@@ -99,7 +101,9 @@
     <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
       <small
         *ngIf="singleControl.key === selectedOption"
-        class="fudis-guidance__character-limit-indicator"
+        class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
+          _maxLengthWidth
+        }}"
         [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
       >
         {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
