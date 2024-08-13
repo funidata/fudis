@@ -6,7 +6,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { action } from '@storybook/addon-actions';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
@@ -22,13 +21,13 @@ const getDefaultValue = (
 @Component({
   selector: 'example-radio-button-group',
   template: `
-    <!-- <form [formGroup]="mainFormGroup"> -->
+    <form [formGroup]="mainFormGroup">
       <fudis-radio-button-group
         *ngIf="mainFormGroup"
         style="margin-bottom: 1rem;"
         [label]="'Choose your preferred fruit'"
         [helpText]="'Fruits are important for your health.'"
-        [tooltip]="'Choose at least one fruit'"
+        [tooltip]="'Fair Trade Banana is right choise'"
         [tooltipToggle]="false"
         [tooltipPosition]="'right'"
         [control]="mainFormGroup.controls['first']"
@@ -40,25 +39,35 @@ const getDefaultValue = (
       [value]="option.value"
   ></fudis-radio-button>
 </fudis-radio-button-group>
-<p>{{ mainFormGroup.controls['first'].value }}</p>
-<!-- testaile null arvolla mitä printtaa -->
-      <!-- <fudis-radio-button-group
+      <fudis-radio-button-group
         *ngIf="mainFormGroup"
         style="margin-top: 2rem; margin-bottom: 1rem;"
         [label]="'Choose a pet'"
         [helpText]="'We all should have a pet.'"
         [control]="mainFormGroup.controls['second']"
-        [options]="petOptions"
-      />
+      >
+      <fudis-radio-button
+      *ngFor="let option of petOptions"
+      (handleChange)="radioButtonChange($event)"
+      [label]="option.label"
+      [value]="option.value"
+  ></fudis-radio-button>
+    </fudis-radio-button-group>
       <fudis-radio-button-group
         *ngIf="mainFormGroup"
         style="margin-top: 2rem; margin-bottom: 1rem;"
         [label]="'Choose a truth'"
         [helpText]="'We all perceive truth individually.'"
         [control]="mainFormGroup.controls['third']"
-        [options]="booleanOptions"
-      /> -->
-    <!-- </form> -->
+      >
+      <fudis-radio-button
+      *ngFor="let option of booleanOptions"
+      (handleChange)="radioButtonChange($event)"
+      [label]="option.label"
+      [value]="option.value"
+  ></fudis-radio-button>
+    </fudis-radio-button-group> 
+ </form>
   `,
 })
 class RadioButtonGroupExampleComponent {
@@ -76,27 +85,27 @@ class RadioButtonGroupExampleComponent {
     { value: 'cherry', label: 'Cherry', id: 'fruit-3' },
   ];
 
-  // petOptions: FudisRadioButtonOption[] = [
-  //   { value: 'platypus', label: 'Platypus' },
-  //   { value: 'otter', label: 'Otter' },
-  //   { value: 'capybara', label: 'Capybara' },
-  // ];
+  petOptions: FudisRadioButtonOption[] = [
+    { value: 'platypus', label: 'Platypus' },
+    { value: 'otter', label: 'Otter' },
+    { value: 'capybara', label: 'Capybara' },
+  ];
 
-  // booleanOptions: FudisRadioButtonOption[] = [
-  //   { value: false, label: 'False', id: 'boolean-1' },
-  //   { value: true, label: 'True', id: 'boolean-2' },
-  // ];
+  booleanOptions: FudisRadioButtonOption[] = [
+    { value: false, label: 'False', id: 'boolean-1' },
+    { value: true, label: 'True', id: 'boolean-2' },
+  ];
 
   mainFormGroup: FormGroup = this._formBuilder.group({
     first: new FormControl(
-      null,
+      getDefaultValue(this.fruitOptions),
       FudisValidators.required('You must choose a fruit'),
     ),
-    // second: new FormControl(
-    //   getDefaultValue(this.petOptions),
-    //   FudisValidators.required('You must choose a pet.'),
-    // ),
-    // third: new FormControl(null, FudisValidators.required('You must choose a truth')),
+    second: new FormControl(
+      getDefaultValue(this.petOptions),
+      FudisValidators.required('You must choose a pet.'),
+    ),
+    third: new FormControl(null, FudisValidators.required('You must choose a truth')),
   });
 }
 
@@ -126,7 +135,6 @@ const Template: StoryFn<RadioButtonGroupExampleComponent> = (
   args: RadioButtonGroupExampleComponent,
 ) => ({
   props: args,
-  radioButtonChange: action('radioButtonChange'),
   template: html`<example-radio-button-group></example-radio-button-group> `,
 });
 
