@@ -8,7 +8,12 @@
       [value]="value"
       [name]="_parentGroup.id"
       [attr.required]="_parentGroup.required ? true : null"
-      [attr.aria-invalid]="(_parentGroup.control.touched && _parentGroup.control.invalid) || _parentGroup.control.touched ? true : null"
+      [attr.aria-invalid]="
+        (_parentGroup.control.touched && _parentGroup.control.invalid) ||
+        _parentGroup.control.touched
+          ? true
+          : null
+      "
       (change)="handleChange()"
       (blur)="handleBlur()"
     />
@@ -16,10 +21,13 @@
       <div
         class="fudis-radio-button__content__control"
         [class.fudis-radio-button__content__control--invalid]="
-          (_parentGroup.control.touched && _parentGroup.control.invalid)
+          _parentGroup.control.touched && _parentGroup.control.invalid
         "
       >
-        <span *ngIf="_parentGroup.control.value === value" class="fudis-radio-button__content__control__indicator"></span>
+        <span
+          *ngIf="_parentGroup.control.value === value"
+          class="fudis-radio-button__content__control__indicator"
+        ></span>
       </div>
       <span class="fudis-radio-button__label">{{ label }}</span>
     </div>

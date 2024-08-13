@@ -8,7 +8,6 @@ import {
   OnInit,
   Host,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 import { FudisIdService } from '../../../../services/id/id.service';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
@@ -20,8 +19,10 @@ import { RadioButtonGroupComponent } from '../radio-button-group.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonComponent implements OnInit {
-  constructor(private _idService: FudisIdService,
-    @Host() protected _parentGroup: RadioButtonGroupComponent) {}
+  constructor(
+    private _idService: FudisIdService,
+    @Host() protected _parentGroup: RadioButtonGroupComponent,
+  ) {}
 
   /**
    * Binding host CSS class to component wrapper

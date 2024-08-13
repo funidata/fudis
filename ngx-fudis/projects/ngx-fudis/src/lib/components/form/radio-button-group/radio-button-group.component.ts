@@ -1,12 +1,23 @@
-import { ChangeDetectorRef, Component, Host, HostBinding, Input, OnChanges, OnInit, Optional, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Host,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisRadioButtonOption, FudisInputSize } from '../../../types/forms';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { hasAtLeastOneRequiredOrMinValidator, hasRequiredValidator } from '../../../utilities/form/getValidators';
-import { FudisFocusService } from '../../../services/focus/focus.service';
+import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormComponent } from '../form/form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 // TODO: Refactor component to work in similar fashion as Checkbox Group, update docs and tests
 @Component({
@@ -22,9 +33,15 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService,  _translationService, _changeDetectorRef);
+    super(_idService, _translationService, _changeDetectorRef);
+
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this.required = hasRequiredValidator(this.control);
+      }
+    });
   }
-  
+
   /**
    * Binding host CSS class to component wrapper
    */
@@ -39,11 +56,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
    * Array of options for group of radio buttons
    */
   @Input({ required: true }) options: FudisRadioButtonOption[];
-
-  /**
-   * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
-   */
-  @Input() invalidState: boolean = false;
 
   /**
    * Width of Radiobutton Group
@@ -62,19 +74,29 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 
   ngOnInit() {
     this._setParentId('radio-button-group');
+    this._updateValueAndValidityTrigger.next();
 
     if (!this.name) {
       this.name = this.id;
     }
+
+    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
 
   /** Add value and validity check when form control changes */
 
-  ngOnChanges(): void {
-    this.required = hasRequiredValidator(this.control);
-
+  ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
     if (!this.name) {
       this.name = this.id;
+    }
+
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
+      const original = this.control.updateValueAndValidity;
+
+      this.control.updateValueAndValidity = () => {
+        original.apply(this.control);
+        this._updateValueAndValidityTrigger.next();
+      };
     }
   }
 }

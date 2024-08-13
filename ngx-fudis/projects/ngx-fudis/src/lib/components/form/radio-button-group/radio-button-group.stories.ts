@@ -31,14 +31,14 @@ const getDefaultValue = (
         [tooltipToggle]="false"
         [tooltipPosition]="'right'"
         [control]="mainFormGroup.controls['first']"
-    >
-    <fudis-radio-button
-      *ngFor="let option of fruitOptions"
-      (handleChange)="radioButtonChange($event)"
-      [label]="option.label"
-      [value]="option.value"
-  ></fudis-radio-button>
-</fudis-radio-button-group>
+      >
+        <fudis-radio-button
+          *ngFor="let option of fruitOptions"
+          (handleChange)="radioButtonChange($event)"
+          [label]="option.label"
+          [value]="option.value"
+        ></fudis-radio-button>
+      </fudis-radio-button-group>
       <fudis-radio-button-group
         *ngIf="mainFormGroup"
         style="margin-top: 2rem; margin-bottom: 1rem;"
@@ -46,13 +46,13 @@ const getDefaultValue = (
         [helpText]="'We all should have a pet.'"
         [control]="mainFormGroup.controls['second']"
       >
-      <fudis-radio-button
-      *ngFor="let option of petOptions"
-      (handleChange)="radioButtonChange($event)"
-      [label]="option.label"
-      [value]="option.value"
-  ></fudis-radio-button>
-    </fudis-radio-button-group>
+        <fudis-radio-button
+          *ngFor="let option of petOptions"
+          (handleChange)="radioButtonChange($event)"
+          [label]="option.label"
+          [value]="option.value"
+        ></fudis-radio-button>
+      </fudis-radio-button-group>
       <fudis-radio-button-group
         *ngIf="mainFormGroup"
         style="margin-top: 2rem; margin-bottom: 1rem;"
@@ -60,14 +60,14 @@ const getDefaultValue = (
         [helpText]="'We all perceive truth individually.'"
         [control]="mainFormGroup.controls['third']"
       >
-      <fudis-radio-button
-      *ngFor="let option of booleanOptions"
-      (handleChange)="radioButtonChange($event)"
-      [label]="option.label"
-      [value]="option.value"
-  ></fudis-radio-button>
-    </fudis-radio-button-group> 
- </form>
+        <fudis-radio-button
+          *ngFor="let option of booleanOptions"
+          (handleChange)="radioButtonChange($event)"
+          [label]="option.label"
+          [value]="option.value"
+        ></fudis-radio-button>
+      </fudis-radio-button-group>
+    </form>
   `,
 })
 class RadioButtonGroupExampleComponent {

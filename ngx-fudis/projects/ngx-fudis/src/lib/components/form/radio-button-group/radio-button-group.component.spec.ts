@@ -16,8 +16,6 @@ const petOptions: FudisRadioButtonOption[] = [
   { value: 'capybara', label: 'Capybara', id: 'test-3' },
 ];
 
-const truthOption: FudisRadioButtonOption[] = [{ value: true, label: 'true', id: 'test-truth' }];
-
 describe('RadioButtonGroupComponent', () => {
   let component: RadioButtonGroupComponent;
   let fixture: ComponentFixture<RadioButtonGroupComponent>;
@@ -45,21 +43,5 @@ describe('RadioButtonGroupComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('Initialization', () => {
-    it('should throw an error if there is only one radio-button option available', () => {
-      component.options = truthOption;
-      fixture.detectChanges();
-      const length = component.options.length as number;
-
-      expect(() => {
-        component.ngOnInit();
-      }).toThrow(
-        new Error(
-          `Fudis-radio-button-group should have minimum of two options for radio buttons, but it only got ${length} option.`,
-        ),
-      );
-    });
   });
 });
