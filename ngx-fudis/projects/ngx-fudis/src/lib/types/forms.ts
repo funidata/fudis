@@ -30,8 +30,6 @@ export interface FudisRadioButtonOption {
   value: string | boolean | null;
   /** Value that is shown in the UI */
   label: string;
-  /** Is option selected */
-  checked?: boolean;
 }
 
 export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';

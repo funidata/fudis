@@ -56,10 +56,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
    */
   @Input() size: FudisInputSize = 'lg';
 
-  /**
-   * Name of the group. If not provided, use id for the name.
-   */
-  @Input() name: string;
 
   /**
    * Set requiredText based on this boolean value
@@ -70,19 +66,12 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     this._setParentId('radio-button-group');
     this._updateValueAndValidityTrigger.next();
 
-    if (!this.name) {
-      this.name = this.id;
-    }
-
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
 
   /** Add value and validity check when form control changes */
 
   ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
-    if (!this.name) {
-      this.name = this.id;
-    }
 
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       const original = this.control.updateValueAndValidity;

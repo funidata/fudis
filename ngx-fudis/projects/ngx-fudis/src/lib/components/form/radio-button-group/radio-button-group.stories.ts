@@ -18,13 +18,6 @@ type TestForm = {
   first: FormControl<string | null>;
 };
 
-const getDefaultValue = (
-  options: FudisRadioButtonOption[],
-): string | boolean | undefined | null => {
-  const checkedValue = options.find((item) => item.checked);
-  return checkedValue?.value;
-};
-
 const html = String.raw;
 
 const options: FudisRadioButtonOption[] = [
@@ -33,7 +26,6 @@ const options: FudisRadioButtonOption[] = [
     value: 'fair-trade-banana',
     label: 'Fair Trade Banana',
     id: 'fruit-2',
-    checked: true,
   },
   { value: 'cherry', label: 'Cherry', id: 'fruit-3' },
 ];
@@ -104,7 +96,7 @@ class DisabledRadioGroupExampleComponent {
   constructor(private _formBuilder: FormBuilder) {}
 
   petOptions: FudisRadioButtonOption[] = [
-    { value: 'platypus', label: 'Platypus', checked: true },
+    { value: 'platypus', label: 'Platypus' },
     { value: 'otter', label: 'Otter' },
     { value: 'capybara', label: 'Capybara' },
   ];
