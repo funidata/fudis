@@ -2,7 +2,6 @@ import {
   ChangeDetectorRef,
   Component,
   Host,
-  HostBinding,
   Input,
   OnChanges,
   OnInit,
@@ -37,15 +36,10 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this.required = hasRequiredValidator(this.control);
+        this._required = hasRequiredValidator(this.control);
       }
     });
   }
-
-  /**
-   * Binding host CSS class to component wrapper
-   */
-  @HostBinding('class') private _classes = 'fudis-radio-button-group-host';
 
   /*
    * FormControl for Radio Button group
@@ -70,7 +64,7 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   /**
    * Set requiredText based on this boolean value
    */
-  public required: boolean = false;
+  protected _required: boolean = false;
 
   ngOnInit() {
     this._setParentId('radio-button-group');

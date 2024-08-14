@@ -3,14 +3,15 @@
     <input
       type="radio"
       class="fudis-radio-button__input"
+      [class.fudis-radio-button__input--disabled]="_parentGroup.control.disabled || null"
       [id]="id"
       [formControl]="_parentGroup.control"
       [value]="value"
       [name]="_parentGroup.id"
-      [attr.required]="_parentGroup.required ? true : null"
+      [attr.aria-disabled]="_parentGroup.control.disabled ? true : null"
       [attr.aria-invalid]="
         (_parentGroup.control.touched && _parentGroup.control.invalid) ||
-        _parentGroup.control.touched
+        _parentGroup.control.invalid
           ? true
           : null
       "
@@ -18,17 +19,20 @@
       (blur)="handleBlur()"
     />
     <div class="fudis-radio-button__content">
-      <div
-        class="fudis-radio-button__content__control"
-        [class.fudis-radio-button__content__control--invalid]="
-          _parentGroup.control.touched && _parentGroup.control.invalid
-        "
-      >
-        <span
-          *ngIf="_parentGroup.control.value === value"
-          class="fudis-radio-button__content__control__indicator"
-        ></span>
-      </div>
+      <div class="fudis-radio-button__content-wrapper">
+        <div
+          class="fudis-radio-button__content__control"
+          [class.fudis-radio-button__content__control--invalid]="
+            _parentGroup.control.touched && _parentGroup.control.invalid
+          "
+          [class.fudis-radio-button__content__control--disabled]="_parentGroup.control.disabled"
+        >
+          <span
+            *ngIf="_parentGroup.control.value === value"
+            class="fudis-radio-button__content__control__indicator"
+          ></span>
+        </div>
+    </div>
       <span class="fudis-radio-button__label">{{ label }}</span>
     </div>
   </label>

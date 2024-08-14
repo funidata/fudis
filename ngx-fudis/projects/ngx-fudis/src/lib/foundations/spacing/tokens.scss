@@ -27,5 +27,7 @@ $spacing-input-sm: calc(10rem / var(--fudis-rem-multiplier));
 $spacing-input-md: calc(14rem / var(--fudis-rem-multiplier));
 $spacing-input-lg: calc(23rem / var(--fudis-rem-multiplier));
 
-// Fixed size for checkboxes' visual input box. Clickable input area should be 2rem high.
+// Fixed size for checkboxes' & 'radio buttons' visual input box. Clickable input area should be 2rem high.
 $spacing-input-checkbox: calc(1.25rem / var(--fudis-rem-multiplier));
+$spacing-input-radio: calc(1.25rem / var(--fudis-rem-multiplier));
+$spacing-input-radio-indicator: calc(0.75rem / var(--fudis-rem-multiplier));

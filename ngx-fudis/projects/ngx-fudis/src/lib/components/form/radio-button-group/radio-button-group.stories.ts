@@ -11,6 +11,12 @@ import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import readme from './readme.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
+import { action } from '@storybook/addon-actions';
+import { radioButtonGroupControlsExclude } from '../../../utilities/storybook';
+
+type TestForm = {
+  first: FormControl<string | null>;
+};
 
 const getDefaultValue = (
   options: FudisRadioButtonOption[],
@@ -18,30 +24,68 @@ const getDefaultValue = (
   const checkedValue = options.find((item) => item.checked);
   return checkedValue?.value;
 };
+
+const html = String.raw;
+
+const options: FudisRadioButtonOption[] = [
+  { value: 'apple', label: 'Apple', id: 'fruit-1' },
+  {
+    value: 'fair-trade-banana',
+    label: 'Fair Trade Banana',
+    id: 'fruit-2',
+    checked: true,
+  },
+  { value: 'cherry', label: 'Cherry', id: 'fruit-3' },
+];
+
+const testFormGroup = new FormGroup<TestForm>({
+  first: new FormControl(
+    null,
+    FudisValidators.required('You must choose a fruit'),
+  ),
+});
+
+const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (args: RadioButtonGroupComponent) => ({
+  props: {
+    ...args,
+    formGroup: testFormGroup,
+    radioButtonChange: action('radioButtonChange'),
+    options,
+  },
+  template: html`<fudis-radio-button-group
+    [size]="size"
+    [control]="formGroup.controls['first']"
+    [label]="label"
+    [helpText]="helpText"
+    [tooltip]="tooltip"
+    [tooltipToggle]="tooltipToggle"
+    [tooltipPosition]="tooltipPosition"
+  >
+    <fudis-radio-button
+      *ngFor="let option of options"
+      (radioButtonChange)="radioButtonChange($event)"
+      [label]="option.label"
+      [value]="option.value">
+    </fudis-radio-button>
+  </fudis-radio-button-group>`
+});
+
+export const Example = ExampleTestTemplate.bind({});
+Example.args = {
+  label: 'Choose your preferred fruit',
+  helpText: 'Fruits are important for your health.',
+  size: 'lg',
+  tooltip: 'Fair Trade Banana is right choise',
+  tooltipToggle: false,
+  tooltipPosition: 'right',
+};
+
 @Component({
-  selector: 'example-radio-button-group',
+  selector: 'disabled-radio-group-example',
   template: `
     <form [formGroup]="mainFormGroup">
       <fudis-radio-button-group
         *ngIf="mainFormGroup"
-        style="margin-bottom: 1rem;"
-        [label]="'Choose your preferred fruit'"
-        [helpText]="'Fruits are important for your health.'"
-        [tooltip]="'Fair Trade Banana is right choise'"
-        [tooltipToggle]="false"
-        [tooltipPosition]="'right'"
-        [control]="mainFormGroup.controls['first']"
-      >
-        <fudis-radio-button
-          *ngFor="let option of fruitOptions"
-          (handleChange)="radioButtonChange($event)"
-          [label]="option.label"
-          [value]="option.value"
-        ></fudis-radio-button>
-      </fudis-radio-button-group>
-      <fudis-radio-button-group
-        *ngIf="mainFormGroup"
-        style="margin-top: 2rem; margin-bottom: 1rem;"
         [label]="'Choose a pet'"
         [helpText]="'We all should have a pet.'"
         [control]="mainFormGroup.controls['second']"
@@ -53,68 +97,38 @@ const getDefaultValue = (
           [value]="option.value"
         ></fudis-radio-button>
       </fudis-radio-button-group>
-      <fudis-radio-button-group
-        *ngIf="mainFormGroup"
-        style="margin-top: 2rem; margin-bottom: 1rem;"
-        [label]="'Choose a truth'"
-        [helpText]="'We all perceive truth individually.'"
-        [control]="mainFormGroup.controls['third']"
-      >
-        <fudis-radio-button
-          *ngFor="let option of booleanOptions"
-          (handleChange)="radioButtonChange($event)"
-          [label]="option.label"
-          [value]="option.value"
-        ></fudis-radio-button>
-      </fudis-radio-button-group>
     </form>
   `,
 })
-class RadioButtonGroupExampleComponent {
+class DisabledRadioGroupExampleComponent {
   constructor(private _formBuilder: FormBuilder) {}
 
-  fruitOptions: FudisRadioButtonOption[] = [
-    { value: 'apple', label: 'Apple', id: 'fruit-1' },
-    {
-      value: 'fair-trade-banana',
-      label: 'Fair Trade Banana',
-      id: 'fruit-2',
-
-      checked: true,
-    },
-    { value: 'cherry', label: 'Cherry', id: 'fruit-3' },
-  ];
-
   petOptions: FudisRadioButtonOption[] = [
-    { value: 'platypus', label: 'Platypus' },
+    { value: 'platypus', label: 'Platypus', checked: true },
     { value: 'otter', label: 'Otter' },
     { value: 'capybara', label: 'Capybara' },
   ];
 
-  booleanOptions: FudisRadioButtonOption[] = [
-    { value: false, label: 'False', id: 'boolean-1' },
-    { value: true, label: 'True', id: 'boolean-2' },
-  ];
-
   mainFormGroup: FormGroup = this._formBuilder.group({
-    first: new FormControl(
-      getDefaultValue(this.fruitOptions),
-      FudisValidators.required('You must choose a fruit'),
-    ),
-    second: new FormControl(
-      getDefaultValue(this.petOptions),
+    second: new FormControl({ value: null, disabled: true },
       FudisValidators.required('You must choose a pet.'),
     ),
-    third: new FormControl(null, FudisValidators.required('You must choose a truth')),
   });
 }
+
+const Disabled: StoryFn<DisabledRadioGroupExampleComponent> = (
+  args: DisabledRadioGroupExampleComponent,
+) => ({
+  props: args,
+  template: html`<disabled-radio-group-example></disabled-radio-group-example> `,
+});
 
 export default {
   title: 'Components/Form/Radio Button Group',
   component: RadioButtonGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [RadioButtonGroupExampleComponent],
+      declarations: [ DisabledRadioGroupExampleComponent],
       imports: [ReactiveFormsModule, FormsModule],
     }),
   ],
@@ -123,20 +137,27 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: /.*/g,
+      exclude: radioButtonGroupControlsExclude,
     },
   },
-  argTypes: {},
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
+    tooltipPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    tooltip: {
+      control: { type: 'text' },
+    },
+  },
 } as Meta;
 
-const html = String.raw;
-
-const Template: StoryFn<RadioButtonGroupExampleComponent> = (
-  args: RadioButtonGroupExampleComponent,
-) => ({
-  props: args,
-  template: html`<example-radio-button-group></example-radio-button-group> `,
-});
-
-export const Examples = Template.bind({});
-Examples.args = {};
+export const ExampleWithDisabledOptions = Disabled.bind({});
+ExampleWithDisabledOptions.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
