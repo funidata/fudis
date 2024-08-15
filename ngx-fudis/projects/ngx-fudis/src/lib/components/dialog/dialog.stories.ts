@@ -94,21 +94,8 @@ class DialogLaucherComponent {
             <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
           </ng-template>
         </fudis-form>
-        <fudis-button (handleClick)="doubleTrouble(doubleTroubleDialog)" [label]="'Avaa uusi'" />
       </fudis-dialog-content>
     </fudis-dialog>
-
-    <ng-template #doubleTroubleDialog>
-      <fudis-dialog [size]="size">
-        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'">Deep Dialog</fudis-heading>
-        <fudis-dialog-content>
-          <p>I am nested</p>
-        </fudis-dialog-content>
-        <fudis-dialog-actions>
-          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
-        </fudis-dialog-actions>
-      </fudis-dialog>
-    </ng-template>
   `,
 })
 class DialogWithFormComponent {
@@ -123,16 +110,6 @@ class DialogWithFormComponent {
   protected _size: FudisDialogSize;
 
   protected _greetingFromOpeningComponent: string;
-
-  doubleTrouble<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
-    console.log('avaus');
-    this._dialogService
-      .open(dialogToOpen)
-      .afterClosed()
-      .subscribe(() => {
-        console.log('sulku');
-      });
-  }
 
   exampleDialogFormGroup = new FormGroup<TestForm>({
     powerAnimal: new FormControl(
@@ -248,6 +225,81 @@ class DialogWithGridComponent {
   }
 }
 
+@Component({
+  selector: 'fudis-nested-dialogs',
+  template: `
+    <fudis-button
+      (handleClick)="openDialogTemplate(firstDialog)"
+      [label]="'Open dialog with nested dialogs'"
+    ></fudis-button>
+
+    <ng-template #firstDialog>
+      <fudis-dialog [size]="size">
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
+          >First opened Dialog</fudis-heading
+        >
+        <fudis-dialog-content>
+          <fudis-grid [rowGap]="'sm'"
+            ><fudis-body-text
+              >It is not recommended to have multiple dialogs open simultaneously, but sometimes it
+              is the least worse solution.</fudis-body-text
+            >
+            <fudis-button
+              (handleClick)="openDialogTemplate(secondDialog)"
+              [label]="'Open nested Dialog'"
+            ></fudis-button
+          ></fudis-grid>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
+    <ng-template #secondDialog>
+      <fudis-dialog [size]="'md'">
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
+          >Second opened Dialog</fudis-heading
+        >
+        <fudis-dialog-content>
+          <fudis-grid [rowGap]="'sm'"
+            ><fudis-body-text>This is a nested Dialog component.</fudis-body-text>
+            <fudis-button
+              (handleClick)="openDialogTemplate(thirdDialog)"
+              [label]="'Open final third Dialog'"
+            ></fudis-button
+          ></fudis-grid>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
+    <ng-template #thirdDialog>
+      <fudis-dialog [size]="'sm'">
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
+          >Third opened Dialog</fudis-heading
+        >
+        <fudis-dialog-content>
+          <fudis-body-text>This is now third and last dialog opened. </fudis-body-text>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
+  `,
+})
+class NestedDialogsComponent {
+  constructor(private _dialogService: FudisDialogService) {}
+
+  @Input() size: FudisDialogSize = 'md';
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  openDialogTemplate<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
+    this._dialogService.open(dialogToOpen);
+  }
+}
+
 export default {
   title: 'Components/Dialog',
   component: DialogComponent,
@@ -255,7 +307,12 @@ export default {
     moduleMetadata({
       imports: [ReactiveFormsModule, FormsModule],
       providers: [],
-      declarations: [DialogWithGridComponent, DialogWithFormComponent, DialogLaucherComponent],
+      declarations: [
+        DialogWithGridComponent,
+        DialogWithFormComponent,
+        NestedDialogsComponent,
+        DialogLaucherComponent,
+      ],
     }),
   ],
   parameters: {
@@ -286,12 +343,22 @@ const TemplateFrom: StoryFn<DialogComponent> = (args: DialogComponent) => ({
   template: html` <fudis-dialog-laucher [size]="size"></fudis-dialog-laucher> `,
 });
 
+const TemplateNested: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+  props: args,
+  template: html` <fudis-nested-dialogs [size]="size"></fudis-nested-dialogs> `,
+});
+
 export const ExampleWithForm = TemplateFrom.bind({});
 ExampleWithForm.args = {
   size: 'md',
 };
 
 export const ExampleWithGrid = TemplateGrid.bind({});
-ExampleWithForm.args = {
+ExampleWithGrid.args = {
   size: 'md',
+};
+
+export const ExampleWithNestedDialogs = TemplateNested.bind({});
+ExampleWithNestedDialogs.args = {
+  size: 'lg',
 };
