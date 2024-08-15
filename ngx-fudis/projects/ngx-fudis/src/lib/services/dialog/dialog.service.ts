@@ -50,10 +50,6 @@ export class FudisDialogService {
    * Close all instances of Dialogs
    */
   public closeAll(): void {
-    this._dialogRefs.forEach((dialog) => {
-      dialog.close();
-    });
-
     this.ngMaterialDialog.closeAll();
   }
 

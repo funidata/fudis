@@ -280,8 +280,12 @@ class DialogWithGridComponent {
           >Third opened Dialog</fudis-heading
         >
         <fudis-dialog-content>
-          <fudis-body-text>This is now third and last dialog opened. </fudis-body-text>
+          <fudis-grid [rowGap]="'sm'"
+            ><fudis-body-text>This is now third and last dialog opened. </fudis-body-text>
+            <fudis-button (handleClick)="closeAll()" [label]="'Close All Dialogs'"></fudis-button
+          ></fudis-grid>
         </fudis-dialog-content>
+
         <fudis-dialog-actions>
           <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
         </fudis-dialog-actions>
@@ -297,6 +301,10 @@ class NestedDialogsComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   openDialogTemplate<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
     this._dialogService.open(dialogToOpen);
+  }
+
+  closeAll(): void {
+    this._dialogService.closeAll();
   }
 }
 
