@@ -31,10 +31,14 @@ describe('DialogComponent', () => {
 
     dialogService = TestBed.inject(FudisDialogService);
 
+    initDialogComponent();
+  });
+
+  const initDialogComponent = () => {
     fixture = TestBed.createComponent(DialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  };
 
   it('should be created', () => {
     expect(component).toBeTruthy();
@@ -43,32 +47,27 @@ describe('DialogComponent', () => {
   describe('HTML attributes', () => {
     it('should have CSS classes according to given size Input', () => {
       const dialogEl = getElement(fixture, '.fudis-dialog');
-      component.ngOnInit();
 
       expect(component.size).toEqual('md');
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__md');
 
       component.size = 'sm';
       fixture.detectChanges();
-      component.ngOnInit();
 
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__sm');
 
       component.size = 'lg';
       fixture.detectChanges();
-      component.ngOnInit();
 
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__lg');
 
       component.size = 'xl';
       fixture.detectChanges();
-      component.ngOnInit();
 
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__xl');
 
       component.size = 'initial';
       fixture.detectChanges();
-      component.ngOnInit();
 
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__initial');
     });
@@ -85,13 +84,13 @@ describe('DialogComponent', () => {
 
   it('should call open signal on initialisation', () => {
     const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
-    component.ngOnInit();
-
+    initDialogComponent();
     expect(dialogSpy).toHaveBeenCalledWith(true);
   });
 
   it('should call open signal on destroy', () => {
     const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
+    initDialogComponent();
     component.ngOnDestroy();
 
     expect(dialogSpy).toHaveBeenCalledWith(false);

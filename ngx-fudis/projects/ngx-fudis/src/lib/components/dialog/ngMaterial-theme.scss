@@ -58,6 +58,8 @@
       & .mat-mdc-dialog-content {
         @include utilities.box-reset;
 
+        overflow: visible;
+
         &:focus-visible,
         &:focus {
           @include focus.focus-generic;

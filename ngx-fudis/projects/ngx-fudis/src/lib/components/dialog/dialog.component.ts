@@ -54,7 +54,7 @@ export class DialogComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this._orderNumber === 1) {
+    if (this._orderNumber === 1 || this._orderNumber === 0) {
       this._dialogService.setDialogOpenSignal(false);
     }
   }
