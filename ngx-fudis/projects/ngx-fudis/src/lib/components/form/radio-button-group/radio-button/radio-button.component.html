@@ -1,10 +1,10 @@
 <ng-container *ngIf="_parentGroup?.control">
-  <label class="fudis-radio-button" [attr.for]="id">
+  <label class="fudis-radio-button" [attr.for]="_id">
     <input
       type="radio"
       class="fudis-radio-button__input"
       [class.fudis-radio-button__input--disabled]="_parentGroup.control.disabled || null"
-      [id]="id"
+      [id]="_id"
       [formControl]="_parentGroup.control"
       [value]="value"
       [name]="_parentGroup.id"

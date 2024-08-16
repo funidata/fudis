@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MockComponent } from 'ng-mocks';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { FudisRadioButtonGroupChangeEvent, FudisRadioButtonOption, fudisInputSizeArray } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';

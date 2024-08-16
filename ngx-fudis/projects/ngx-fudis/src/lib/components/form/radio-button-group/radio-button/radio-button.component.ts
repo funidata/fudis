@@ -25,11 +25,6 @@ export class RadioButtonComponent implements OnInit {
     @Host() protected _parentGroup: RadioButtonGroupComponent,
   ) {}
 
-  /**
-   * Binding host CSS class to component wrapper
-   */
-  @HostBinding('class') private _classes = 'fudis-radio-button-host';
-
   /*
    * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"
    */
@@ -39,11 +34,6 @@ export class RadioButtonComponent implements OnInit {
    * Visible label for a single Radio Button, e. g. "Fair trade banana"
    */
   @Input({ required: true }) label: string;
-
-  /*
-   * Id for single Radio Button
-   */
-  @Input() id: string;
 
   /**
    * Blur event output
@@ -55,11 +45,16 @@ export class RadioButtonComponent implements OnInit {
    */
   @Output() radioButtonChange = new EventEmitter<FudisRadioButtonChangeEvent>();
 
+  /*
+   * Id for single Radio Button
+   */
+  protected _id: string;
+
   ngOnInit(): void {
-    if (this.id) {
-      this._idService.addNewChildId('radio-button-group', this._parentGroup.id, this.id);
+    if (this._id) {
+      this._idService.addNewChildId('radio-button-group', this._parentGroup.id, this._id);
     } else {
-      this.id = this._idService.getNewChildId('radio-button-group', this._parentGroup.id);
+      this._id = this._idService.getNewChildId('radio-button-group', this._parentGroup.id);
     }
   }
 
@@ -69,13 +64,13 @@ export class RadioButtonComponent implements OnInit {
 
   handleChange(): void {
     const optionToEmit: FudisRadioButtonChangeEvent = {
-      id: this.id,
+      id: this._id,
       value: this._parentGroup.control.value,
       label: this.label,
     };
 
     this.radioButtonChange.emit(optionToEmit);
 
-    this._parentGroup.triggerEmit(this.id, this.label);
+    this._parentGroup.triggerEmit(this._id, this.label);
   }
 }
