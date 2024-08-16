@@ -27,7 +27,7 @@ test("dialog with grid", async ({ page }) => {
   await expect(page).toHaveScreenshot("grid-4-content-closed.png");
 });
 
-test.only("nested dialogs", async ({ page }) => {
+test("nested dialogs", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-dialog--example-with-nested-dialogs&viewMode=story",
   );
