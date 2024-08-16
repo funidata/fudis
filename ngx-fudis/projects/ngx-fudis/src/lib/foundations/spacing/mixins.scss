@@ -24,26 +24,31 @@ $spacing-tokens: (
 @mixin spacing-classes($parent) {
   @each $sKey, $sValue in $spacing-tokens {
     @each $dirKey, $dirValue in $direction-attributes {
+      // Generates for desired screen size margin or padding with desired diredction. E.g. .fudis-lg-ml-sm or .fudis-sm-pt-xl
       .#{$parent}-#{$dirKey}-#{$sKey} {
         #{$dirValue}: #{$sValue};
       }
     }
 
+    // Generates horizontal margins e.g. .fudis-lg-mx-sm
     .#{$parent}-mx-#{$sKey} {
       margin-right: #{$sValue};
       margin-left: #{$sValue};
     }
 
+    // Generates vertical margins e.g. .fudis-lg-my-sm
     .#{$parent}-my-#{$sKey} {
       margin-top: #{$sValue};
       margin-bottom: #{$sValue};
     }
 
+    // Generates horizontal padding e.g. .fudis-lg-px-sm
     .#{$parent}-px-#{$sKey} {
       padding-right: #{$sValue};
       padding-left: #{$sValue};
     }
 
+    // Generates vertical padding e.g. .fudis-lg-py-sm
     .#{$parent}-py-#{$sKey} {
       padding-top: #{$sValue};
       padding-bottom: #{$sValue};
