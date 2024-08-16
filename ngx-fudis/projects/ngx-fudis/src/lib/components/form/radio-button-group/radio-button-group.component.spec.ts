@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
-import { FudisRadioButtonOption, fudisInputSizeArray } from '../../../types/forms';
+import { FudisRadioButtonGroupChangeEvent, FudisRadioButtonOption, fudisInputSizeArray } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -19,43 +19,36 @@ import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { By } from '@angular/platform-browser';
 
-// type TestFormGroup = {
-//   [key: string]: FormControl<boolean | null | undefined>;
-// };
-
-// const testFormGroup = new FormGroup<TestFormGroup>({
-//   first: new FormControl(
-//     null,
-//     FudisValidators.required('You must choose a fruit'),
-//   ),
-// });
-
-const testFormControl: FormControl = new FormControl('capybara');
 @Component({
   selector: 'fudis-mock-component',
   template: `<fudis-radio-button-group
     [id]="'radio-button-test-group'"
     [control]="testFormControl"
     [label]="'Test label'"
-    [helpText]="'Some help text'">
+    [helpText]="'Some help text'"
+    (handleChange)="handleRadioButtonClick($event)">
     <p class="do-not-find-me">This should not be shown</p>
     <fudis-radio-button
       *ngFor="let option of options"
-      (radioButtonChange)="handleRadioButtonClick($event)"
       [label]="option.label"
       [value]="option.value" />
   </fudis-radio-button-group>`
 })
 class MockContainerComponent {
 
-  public testFormControl: FormControl = new FormControl('capybara');
+  public testFormControl: FormControl = new FormControl(null, FudisValidators.required('You must choose an animal'));
 
-
-  public options: FudisRadioButtonOption[] = [
+  public options: FudisRadioButtonOption<object>[] = [
     { value: 'platypus', label: 'Platypus', id: 'test-1' },
     { value: 'otter', label: 'Otter', id: 'test-2' },
     { value: 'capybara', label: 'Capybara', id: 'test-3' },
   ];
+
+  eventReceived: FudisRadioButtonGroupChangeEvent;
+
+  handleRadioButtonClick(event: FudisRadioButtonGroupChangeEvent): void {
+    this.eventReceived = event;
+  }
 }
 
 describe('Basic inputs of Radio Button Group', () => {
@@ -85,7 +78,7 @@ describe('Basic inputs of Radio Button Group', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RadioButtonGroupComponent);
     component = fixture.componentInstance;
-    component.control = new FormControl(null, FudisValidators.required('You must choose a fruit'));
+    component.control = new FormControl(null, FudisValidators.required('This is required field'));
     component.label = 'Radio Button Group test label';
     component.helpText = 'Some help text';
     fixture.autoDetectChanges();
@@ -104,8 +97,6 @@ describe('Basic inputs of Radio Button Group', () => {
       '.fudis-fieldset__legend__title__text',
     ) as HTMLElement;
 
-    console.log(legendLabel);
-
     expect(legendLabel.textContent).toContain('Radio Button Group test label');
   });
 
@@ -113,8 +104,6 @@ describe('Basic inputs of Radio Button Group', () => {
     const helpText = fixture.nativeElement.querySelector(
       '.fudis-guidance__help-text',
     ) as HTMLElement;
-
-    console.log(helpText.outerHTML);
 
     expect(helpText.textContent).toContain('Some help text');
   });
@@ -154,7 +143,7 @@ describe('Basic inputs of Radio Button Group', () => {
     );
   });
 
-  describe('with Child Radio Buttons', () => {
+  describe('Child Radio Buttons', () => {
     let mockComponent: MockContainerComponent;
 
     beforeEach(() => {
@@ -177,7 +166,7 @@ describe('Basic inputs of Radio Button Group', () => {
       expect(element.length).toEqual(3);
     });
 
-    it('all should have matching name attribute with radio button group id', () => {
+    it('should all have matching name attribute with radio button group id', () => {
       const radioGroup = getElement(fixture, 'fieldset') as HTMLElement;
       const radioGroupId = radioGroup.getAttribute('id');
 
@@ -189,5 +178,40 @@ describe('Basic inputs of Radio Button Group', () => {
         expect(radioName).toEqual(radioGroupId);
       });
     });
+
+    it('should have invalid styles and states, when form control is touched and should display errors', () => {
+      const inputElement = getElement(fixture, 'input');
+      inputElement.dispatchEvent(new FocusEvent('blur'));
+
+      fixture.detectChanges();
+
+      const invalidStylesRadioButtons: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-radio-button .fudis-radio-button__content__control--invalid',
+      );
+
+      const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-radio-button input[aria-invalid="true"]',
+      );
+
+      const errorMessage = fixture.nativeElement.querySelector(
+        'fudis-guidance .fudis-error-message',
+      ) as HTMLElement;
+
+      expect(invalidStylesRadioButtons.length).toEqual(3);
+      expect(invalidInputs.length).toEqual(3);
+      expect(errorMessage.textContent).toContain('You must choose an animal');
+    });
+
+    it('should emit correct object', () => {
+      jest.spyOn(mockComponent, 'handleRadioButtonClick');
+      const radio = fixture.nativeElement.querySelector('fudis-radio-button input');
+
+      radio.click();
+      fixture.detectChanges();
+
+      expect(mockComponent.eventReceived.id).toEqual('radio-button-test-group-item-1');
+      expect(mockComponent.eventReceived.value).toEqual('platypus');
+      expect(mockComponent.handleRadioButtonClick).toHaveBeenCalled();
+    })
   })
 });
