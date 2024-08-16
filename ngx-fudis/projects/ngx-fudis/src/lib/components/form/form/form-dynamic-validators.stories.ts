@@ -304,7 +304,7 @@ class DynamicValidatorExampleComponent {
       label: 'Canoeing',
     },
     { value: 'climbing', label: 'Climbing' },
-    { value: 'table-tennis', label: 'Table Tennis'},
+    { value: 'table-tennis', label: 'Table Tennis' },
   ];
 
   /**

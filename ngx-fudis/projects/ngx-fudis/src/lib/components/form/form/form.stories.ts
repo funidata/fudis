@@ -311,12 +311,16 @@ class ExampleWithMultipleFormsComponent {
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
                         /> -->
-                  <!-- <fudis-radio-button-group
-                          [label]="'Course type'"
-                          [id]="'radio-button-group-1'"
-                          [options]="courseTypeOptions"
-                          [control]="formExample.controls['courseType']"
-                        /> -->
+                  <fudis-radio-button-group
+                    [label]="'Course type'"
+                    [control]="formExample.controls['courseType']"
+                  >
+                    <fudis-radio-button
+                      *ngFor="let option of courseTypeOptions"
+                      [label]="option.label"
+                      [value]="option.value"
+                    />
+                  </fudis-radio-button-group>
                   <fudis-checkbox-group
                     [formGroup]="formExample.controls.courseBooks"
                     [label]="'Course books'"
@@ -440,7 +444,7 @@ class FormContentExampleComponent implements OnInit {
         FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
       ]),
       importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-      // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+      courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
       // startDate: new FormControl<Date | null>(
       //   null,
       //   FudisValidators.required('Start date is required.'),
@@ -484,8 +488,8 @@ class FormContentExampleComponent implements OnInit {
   ];
 
   courseTypeOptions: FudisRadioButtonOption<object>[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
+    { value: 'basic', label: 'Basic' },
+    { value: 'advanced', label: 'Advanced' },
   ];
 
   // Expose when DateRange is exposed to public API

@@ -1,8 +1,15 @@
-import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FudisDialogService, FudisGroupValidators, FudisValidators } from 'ngx-fudis';
-// import { FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
+import {
+  FudisDialogService,
+  FudisGroupValidators,
+  FudisTranslationService,
+  FudisValidators,
+} from 'ngx-fudis';
+import { FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 type MyCheckboxType = {
   controlName: string;
@@ -12,7 +19,7 @@ type MyCheckboxType = {
 type MyForm = {
   textInput: FormControl<string | null | number>;
   checkboxFormGroup: FormGroup;
-  // truth: FormControl<boolean | null>;
+  truth: FormControl<boolean | null>;
 };
 
 @Component({
@@ -44,10 +51,16 @@ type MyForm = {
                   [helpText]="'I hope everything is OK'"
                   [control]="testFormGroup.controls['textInput']"
                 />
-                <!-- <fudis-radio-button-group
-                [title]="'Choose the truth'"
-                [control]="testFormGroup.controls['truth']"
-              /> -->
+                <fudis-radio-button-group
+                  [label]="'Choose the truth'"
+                  [control]="testFormGroup.controls['truth']"
+                >
+                  <fudis-radio-button
+                    *ngFor="let option of radioButtonOptions"
+                    [label]="option.label"
+                    [value]="option.value"
+                  />
+                </fudis-radio-button-group>
               </ng-template>
             </fudis-fieldset>
           </ng-template>
@@ -66,10 +79,13 @@ type MyForm = {
   `,
   styles: [],
 })
-export class DialogTestFormComponent {
+export class DialogTestFormComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { greeting: string },
+    @Inject(DOCUMENT) private _document: Document,
     private _dialogService: FudisDialogService,
+    private _translocoService: TranslocoService,
+    private _fudisLanguage: FudisTranslationService,
   ) {
     this._greetingFromOpener = this.data.greeting;
   }
@@ -83,10 +99,10 @@ export class DialogTestFormComponent {
     { controlName: 'strawberry', label: 'strawberry' },
   ];
 
-  // radioButtonOptions: FudisRadioButtonOption<object>[] = [
-  //   { value: true, label: 'True', id: 'boolean-2' },
-  //   { value: false, label: 'False', id: 'boolean-1' },
-  // ];
+  radioButtonOptions: FudisRadioButtonOption<object>[] = [
+    { value: true, label: 'True' },
+    { value: false, label: 'False' },
+  ];
 
   testFormGroup = new FormGroup<MyForm>({
     textInput: new FormControl<string | null | number>(null, [
@@ -110,12 +126,21 @@ export class DialogTestFormComponent {
         }),
       ],
     ),
-    //   truth: new FormControl<boolean | null>(
-    //     null,
-    //     FudisValidators.required(
-    //       this._translocoService.selectTranslateObject('form_errors.required'),
-    //    ),
+    truth: new FormControl<boolean | null>(
+      null,
+      FudisValidators.required(
+        this._translocoService.selectTranslateObject('form_errors.required'),
+      ),
+    ),
   });
+
+  ngOnInit(): void {
+    this._translocoService.setActiveLang('fi');
+    this._translocoService.setActiveLang('en');
+
+    this._document.documentElement.lang = 'en';
+    this._fudisLanguage.setLanguage('en');
+  }
 
   submitDialogForm(): void {
     if (this.testFormGroup.valid) {

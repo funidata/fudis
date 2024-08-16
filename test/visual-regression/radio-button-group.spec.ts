@@ -1,7 +1,9 @@
 import test, { expect } from "@playwright/test";
 
 test("radio button group with required", async ({ page }) => {
-  await page.goto("/iframe.html?args=&id=components-form-radio-button-group--example&viewMode=story");
+  await page.goto(
+    "/iframe.html?args=&id=components-form-radio-button-group--example&viewMode=story",
+  );
   await expect(page).toHaveScreenshot("validation-1-init.png");
 
   await page.getByTestId("fudis-radio-button-group-1-item-1").focus();

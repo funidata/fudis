@@ -18,7 +18,9 @@ test("form dynamic inputs", async ({ page }) => {
   await page
     .getByText("Summer holidays")
     .click(); /** Check the first checkbox to remove error messages */
-  await page.getByTestId("fudis-button-15").click(); /* remove required validator from radio button group */
+  await page
+    .getByTestId("fudis-button-15")
+    .click(); /* remove required validator from radio button group */
 
   await page.getByTestId("fudis-button-1").click(); /* submit form without errors */
   await expect(page).toHaveScreenshot("dynamic-2-submit-without-errors.png", { fullPage: true });
