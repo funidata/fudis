@@ -11,6 +11,7 @@ import {
 
 import { FudisIdService } from '../../../../services/id/id.service';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
+import { FudisRadioButtonChangeEvent } from '../../../../types/forms';
 
 @Component({
   selector: 'fudis-radio-button',
@@ -42,7 +43,7 @@ export class RadioButtonComponent implements OnInit {
   /*
    * Id for single Radio Button
    */
-  @Input() id: string | undefined;
+  @Input() id: string;
 
   /**
    * Blur event output
@@ -52,7 +53,7 @@ export class RadioButtonComponent implements OnInit {
   /**
    * Checked input change output
    */
-  @Output() radioButtonChange = new EventEmitter<string>();
+  @Output() radioButtonChange = new EventEmitter<FudisRadioButtonChangeEvent>();
 
   ngOnInit(): void {
     if (this.id) {
@@ -67,6 +68,14 @@ export class RadioButtonComponent implements OnInit {
   }
 
   handleChange(): void {
-    this.radioButtonChange.emit();
+    const optionToEmit: FudisRadioButtonChangeEvent = {
+      id: this.id,
+      value: this._parentGroup.control.value,
+      label: this.label,
+    };
+
+    this.radioButtonChange.emit(optionToEmit);
+
+    this._parentGroup.triggerEmit(this.id, this.label);
   }
 }

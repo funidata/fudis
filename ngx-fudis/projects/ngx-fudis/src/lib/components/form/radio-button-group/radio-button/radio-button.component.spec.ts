@@ -31,7 +31,7 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 class MockContainerComponent {
   protected _testControl = new FormControl<boolean | null>(null);
 
-  protected _options: FudisRadioButtonOption[] = [
+  protected _options: FudisRadioButtonOption<object>[] = [
     { value: 'platypus', label: 'Platypus' },
     { value: 'otter', label: 'Otter' },
     { value: 'capybara', label: 'Capybara' },

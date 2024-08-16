@@ -20,7 +20,7 @@ type TestForm = {
 
 const html = String.raw;
 
-const options: FudisRadioButtonOption[] = [
+const options: FudisRadioButtonOption<object>[] = [
   { value: 'apple', label: 'Apple', id: 'fruit-1' },
   {
     value: 'fair-trade-banana',
@@ -95,7 +95,7 @@ Example.args = {
 class DisabledRadioGroupExampleComponent {
   constructor(private _formBuilder: FormBuilder) {}
 
-  petOptions: FudisRadioButtonOption[] = [
+  petOptions: FudisRadioButtonOption<object>[] = [
     { value: 'platypus', label: 'Platypus' },
     { value: 'otter', label: 'Otter' },
     { value: 'capybara', label: 'Capybara' },

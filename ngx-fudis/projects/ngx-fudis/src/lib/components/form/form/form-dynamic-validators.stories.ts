@@ -297,7 +297,7 @@ class DynamicValidatorExampleComponent {
   _dateMin = 'Remove';
   _radioOptionRequired = 'Remove';
 
-  sportOptions: FudisRadioButtonOption[] = [
+  sportOptions: FudisRadioButtonOption<object>[] = [
     { value: 'cycling', label: 'Cycling', id: 'sport-1' },
     {
       value: 'canoeing',

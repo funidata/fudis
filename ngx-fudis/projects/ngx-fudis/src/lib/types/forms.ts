@@ -23,13 +23,12 @@ export type FudisCheckboxOption<T extends object> = T & {
   [key: string]: unknown;
 };
 
-export interface FudisRadioButtonOption {
-  /** Unique id for single radio button option */
-  id?: string;
+export type FudisRadioButtonOption<T extends object> = T & {
   /** Underlying value of the option */
   value: string | boolean | null;
   /** Value that is shown in the UI */
   label: string;
+  [key: string]: unknown;
 }
 
 export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';
@@ -130,6 +129,18 @@ export type FudisCheckboxGroupChangeEvent = {
   changedControlName: string;
   formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 };
+
+export type FudisRadioButtonChangeEvent = {
+  id: string;
+  value: unknown;
+  label: string;
+}
+
+export type FudisRadioButtonGroupChangeEvent = {
+  id: string;
+  label: string;
+  value: unknown;
+}
 
 export interface FudisDateRangeItem {
   control: FormControl<Date | null>;

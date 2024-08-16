@@ -1,15 +1,17 @@
 import {
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Host,
   Input,
   OnChanges,
   OnInit,
   Optional,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisRadioButtonOption, FudisInputSize } from '../../../types/forms';
+import { FudisInputSize, FudisRadioButtonGroupChangeEvent } from '../../../types/forms';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -44,18 +46,14 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   /*
    * FormControl for Radio Button group
    */
-  @Input({ required: true }) control: FormControl<boolean | null>;
-
-  /*
-   * Array of options for group of radio buttons
-   */
-  @Input({ required: true }) options: FudisRadioButtonOption[];
+  @Input({ required: true }) control: FormControl<unknown>;
 
   /**
    * Width of Radiobutton Group
    */
   @Input() size: FudisInputSize = 'lg';
 
+  @Output() handleChange = new EventEmitter<FudisRadioButtonGroupChangeEvent>();
 
   /**
    * Set requiredText based on this boolean value
@@ -81,5 +79,14 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
         this._updateValueAndValidityTrigger.next();
       };
     }
+  }
+
+  public triggerEmit(id: string, label: string): void {
+    const data: FudisRadioButtonGroupChangeEvent = {
+      id: id,
+      label: label,
+      value: this.control?.value
+    };
+    this.handleChange.emit(data);
   }
 }

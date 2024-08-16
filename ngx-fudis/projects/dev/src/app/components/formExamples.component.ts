@@ -145,7 +145,7 @@ export class AppFormExampleComponent implements OnInit {
     { value: 'english', label: 'EN' },
   ];
 
-  radioButtonOptions: FudisRadioButtonOption[] = [];
+  radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 
   checkboxOptions: FudisCheckboxOption<object>[] = [];
 

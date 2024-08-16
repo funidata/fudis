@@ -483,7 +483,7 @@ class FormContentExampleComponent implements OnInit {
     { value: 'english', label: 'EN' },
   ];
 
-  courseTypeOptions: FudisRadioButtonOption[] = [
+  courseTypeOptions: FudisRadioButtonOption<object>[] = [
     { value: 'basic', label: 'Basic', id: 'courseType-1' },
     { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];

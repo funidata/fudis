@@ -121,7 +121,7 @@ class ErrorSummaryExampleComponent {
     // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
   });
 
-  courseTypeOptions: FudisRadioButtonOption[] = [
+  courseTypeOptions: FudisRadioButtonOption<object>[] = [
     { value: 'basic', label: 'Basic', id: 'courseType-1' },
     { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];

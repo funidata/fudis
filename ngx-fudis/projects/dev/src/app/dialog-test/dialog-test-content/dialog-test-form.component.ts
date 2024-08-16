@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FudisDialogService, FudisGroupValidators, FudisValidators } from 'ngx-fudis';
+// import { FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 type MyCheckboxType = {
   controlName: string;
@@ -46,7 +47,6 @@ type MyForm = {
                 <!-- <fudis-radio-button-group
                 [title]="'Choose the truth'"
                 [control]="testFormGroup.controls['truth']"
-                [options]="radioButtonOptions"
               /> -->
               </ng-template>
             </fudis-fieldset>
@@ -83,7 +83,7 @@ export class DialogTestFormComponent {
     { controlName: 'strawberry', label: 'strawberry' },
   ];
 
-  // radioButtonOptions: FudisRadioButtonOption[] = [
+  // radioButtonOptions: FudisRadioButtonOption<object>[] = [
   //   { value: true, label: 'True', id: 'boolean-2' },
   //   { value: false, label: 'False', id: 'boolean-1' },
   // ];
