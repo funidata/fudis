@@ -22,11 +22,31 @@ $spacing-tokens: (
 );
 
 @mixin spacing-classes($parent) {
-  @each $dirKey, $dirValue in $direction-attributes {
-    @each $sKey, $sValue in $spacing-tokens {
+  @each $sKey, $sValue in $spacing-tokens {
+    @each $dirKey, $dirValue in $direction-attributes {
       .#{$parent}-#{$dirKey}-#{$sKey} {
         #{$dirValue}: #{$sValue};
       }
+    }
+
+    .#{$parent}-mx-#{$sKey} {
+      margin-right: #{$sValue};
+      margin-left: #{$sValue};
+    }
+
+    .#{$parent}-my-#{$sKey} {
+      margin-top: #{$sValue};
+      margin-bottom: #{$sValue};
+    }
+
+    .#{$parent}-px-#{$sKey} {
+      padding-right: #{$sValue};
+      padding-left: #{$sValue};
+    }
+
+    .#{$parent}-py-#{$sKey} {
+      padding-top: #{$sValue};
+      padding-bottom: #{$sValue};
     }
   }
 }
