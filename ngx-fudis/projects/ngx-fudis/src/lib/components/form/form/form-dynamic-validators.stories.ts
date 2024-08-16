@@ -197,10 +197,10 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                 <fudis-radio-button-group
                   [label]="'Select your favorite sport'"
                   [control]="formExample.controls.sport"
+                  (handleChange)="radioButtonChange($event)"
                 >
                   <fudis-radio-button
                     *ngFor="let sport of sportOptions"
-                    (handleChange)="radioButtonChange($event)"
                     [label]="sport.label"
                     [value]="sport.value"
                   >
@@ -208,7 +208,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                 </fudis-radio-button-group>
                 <fudis-grid [rowGap]="'md'">
                   <fudis-button
-                    [label]="_optionRequired + ' option required validator'"
+                    [label]="_radioOptionRequired + ' option required validator'"
                     (handleClick)="
                       toggleRequired(formExample.controls['sport'], 'radioOptionRequired')
                     "
@@ -298,14 +298,13 @@ class DynamicValidatorExampleComponent {
   _radioOptionRequired = 'Remove';
 
   sportOptions: FudisRadioButtonOption<object>[] = [
-    { value: 'cycling', label: 'Cycling', id: 'sport-1' },
+    { value: 'cycling', label: 'Cycling' },
     {
       value: 'canoeing',
       label: 'Canoeing',
-      id: 'sport-2',
     },
-    { value: 'climbing', label: 'Climbing', id: 'sport-3' },
-    { value: 'table-tennis', label: 'Table Tennis', id: 'sport-4' },
+    { value: 'climbing', label: 'Climbing' },
+    { value: 'table-tennis', label: 'Table Tennis'},
   ];
 
   /**
@@ -373,6 +372,9 @@ class DynamicValidatorExampleComponent {
         return;
       case 'optionRequired':
         this._optionRequired = this._optionRequired === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'radioOptionRequired':
+        this._radioOptionRequired = this._radioOptionRequired === 'Add' ? 'Remove' : 'Add';
         return;
       case 'dateMin':
         this._dateMin = this._dateMin === 'Add' ? 'Remove' : 'Add';
