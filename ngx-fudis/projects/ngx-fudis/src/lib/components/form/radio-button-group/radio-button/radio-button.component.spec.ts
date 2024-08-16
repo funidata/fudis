@@ -26,15 +26,20 @@ import { FudisValidators } from '../../../../utilities/form/validators';
   template: `<fudis-radio-button-group
     [id]="'radio-button-test-group'"
     [label]="'Choose a pet'"
-    [control]="_testControl">
-    <fudis-radio-button 
-    *ngFor="let option of _options"
+    [control]="_testControl"
+  >
+    <fudis-radio-button
+      *ngFor="let option of _options"
       [label]="option.label"
-      [value]="option.value"/>
-    </fudis-radio-button-group>`,
+      [value]="option.value"
+    />
+  </fudis-radio-button-group>`,
 })
 class MockContainerComponent {
-  protected _testControl: FormControl = new FormControl(null, FudisValidators.required('You must choose an animal'));
+  protected _testControl: FormControl = new FormControl(
+    null,
+    FudisValidators.required('You must choose an animal'),
+  );
 
   public _options: FudisRadioButtonOption<object>[] = [
     { value: 'platypus', label: 'Platypus' },
@@ -116,18 +121,21 @@ describe('RadioButtonComponent', () => {
       input.dispatchEvent(new Event('blur'));
       fixture.detectChanges();
 
-      expect(radioCircle.className).toEqual('fudis-radio-button__content__control fudis-radio-button__content__control--invalid');
+      expect(radioCircle.className).toEqual(
+        'fudis-radio-button__content__control fudis-radio-button__content__control--invalid',
+      );
 
       input.click();
       fixture.detectChanges();
 
       expect(radioCircle.className).toEqual('fudis-radio-button__content__control');
-    })
+    });
   });
 
   describe('Interaction and logic when clicking', () => {
     it('should emit radioButtonChnage() when clicking component', waitForAsync(() => {
-      const radioButtonComponentSpy = fixture.debugElement.query(By.directive(RadioButtonComponent),
+      const radioButtonComponentSpy = fixture.debugElement.query(
+        By.directive(RadioButtonComponent),
       ).componentInstance;
 
       const optionToMatch: FudisRadioButtonOption<object> = {
@@ -148,6 +156,6 @@ describe('RadioButtonComponent', () => {
 
       const inputValue = input.getAttribute('ng-reflect-value');
       expect(inputValue).toEqual('platypus');
-    }))
-  })
+    }));
+  });
 });

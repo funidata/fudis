@@ -29,7 +29,7 @@ export type FudisRadioButtonOption<T extends object> = T & {
   /** Value that is shown in the UI */
   label: string;
   [key: string]: unknown;
-}
+};
 
 export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';
 
@@ -134,13 +134,13 @@ export type FudisRadioButtonChangeEvent = {
   id: string;
   value: unknown;
   label: string;
-}
+};
 
 export type FudisRadioButtonGroupChangeEvent = {
   id: string;
   label: string;
   value: unknown;
-}
+};
 
 export interface FudisDateRangeItem {
   control: FormControl<Date | null>;

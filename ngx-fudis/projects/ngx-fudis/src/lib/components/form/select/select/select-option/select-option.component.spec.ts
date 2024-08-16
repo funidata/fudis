@@ -32,10 +32,7 @@ import { getElement } from '../../../../../utilities/tests/utilities';
     [size]="'md'"
   >
     <ng-template fudisContent type="select-options">
-      <fudis-select-option
-        *ngFor="let option of testOptions"
-        [data]="option"
-      ></fudis-select-option>
+      <fudis-select-option *ngFor="let option of testOptions" [data]="option"></fudis-select-option>
     </ng-template>
   </fudis-select>`,
 })

@@ -3,7 +3,6 @@ import {
   Input,
   Output,
   EventEmitter,
-  HostBinding,
   ViewEncapsulation,
   OnInit,
   Host,

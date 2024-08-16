@@ -31,13 +31,12 @@ const options: FudisRadioButtonOption<object>[] = [
 ];
 
 const testFormGroup = new FormGroup<TestForm>({
-  first: new FormControl(
-    null,
-    FudisValidators.required('You must choose a fruit'),
-  ),
+  first: new FormControl(null, FudisValidators.required('You must choose a fruit')),
 });
 
-const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (args: RadioButtonGroupComponent) => ({
+const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
+  args: RadioButtonGroupComponent,
+) => ({
   props: {
     ...args,
     formGroup: testFormGroup,
@@ -57,9 +56,10 @@ const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (args: RadioButt
       *ngFor="let option of options"
       (radioButtonChange)="radioButtonChange($event)"
       [label]="option.label"
-      [value]="option.value">
+      [value]="option.value"
+    >
     </fudis-radio-button>
-  </fudis-radio-button-group>`
+  </fudis-radio-button-group>`,
 });
 
 export const Example = ExampleTestTemplate.bind({});
@@ -102,7 +102,8 @@ class DisabledRadioGroupExampleComponent {
   ];
 
   mainFormGroup: FormGroup = this._formBuilder.group({
-    second: new FormControl({ value: null, disabled: true },
+    second: new FormControl(
+      { value: null, disabled: true },
       FudisValidators.required('You must choose a pet.'),
     ),
   });
@@ -120,7 +121,7 @@ export default {
   component: RadioButtonGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [ DisabledRadioGroupExampleComponent],
+      declarations: [DisabledRadioGroupExampleComponent],
       imports: [ReactiveFormsModule, FormsModule],
     }),
   ],

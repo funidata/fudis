@@ -70,7 +70,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   /** Add value and validity check when form control changes */
 
   ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
-
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       const original = this.control.updateValueAndValidity;
 
@@ -85,7 +84,7 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     const data: FudisRadioButtonGroupChangeEvent = {
       id: id,
       label: label,
-      value: this.control?.value
+      value: this.control?.value,
     };
     this.handleChange.emit(data);
   }

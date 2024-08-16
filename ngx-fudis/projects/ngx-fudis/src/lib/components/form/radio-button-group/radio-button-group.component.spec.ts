@@ -1,7 +1,12 @@
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
-import { FudisRadioButtonGroupChangeEvent, FudisRadioButtonOption, fudisInputSizeArray } from '../../../types/forms';
+import {
+  FudisRadioButtonGroupChangeEvent,
+  FudisRadioButtonOption,
+  fudisInputSizeArray,
+} from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -16,7 +21,6 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { By } from '@angular/platform-browser';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -25,17 +29,21 @@ import { By } from '@angular/platform-browser';
     [control]="testFormControl"
     [label]="'Test label'"
     [helpText]="'Some help text'"
-    (handleChange)="handleRadioButtonClick($event)">
+    (handleChange)="handleRadioButtonClick($event)"
+  >
     <p class="do-not-find-me">This should not be shown</p>
     <fudis-radio-button
       *ngFor="let option of options"
       [label]="option.label"
-      [value]="option.value" />
-  </fudis-radio-button-group>`
+      [value]="option.value"
+    />
+  </fudis-radio-button-group>`,
 })
 class MockContainerComponent {
-
-  public testFormControl: FormControl = new FormControl(null, FudisValidators.required('You must choose an animal'));
+  public testFormControl: FormControl = new FormControl(
+    null,
+    FudisValidators.required('You must choose an animal'),
+  );
 
   public options: FudisRadioButtonOption<object>[] = [
     { value: 'platypus', label: 'Platypus', id: 'test-1' },
@@ -52,7 +60,9 @@ class MockContainerComponent {
 
 describe('Basic inputs of Radio Button Group', () => {
   let component: RadioButtonGroupComponent;
-  let fixture: ComponentFixture<RadioButtonGroupComponent> | ComponentFixture<MockContainerComponent>;
+  let fixture:
+    | ComponentFixture<RadioButtonGroupComponent>
+    | ComponentFixture<MockContainerComponent>;
   let fieldsetElement: HTMLFieldSetElement;
 
   beforeEach(async () => {
@@ -107,7 +117,6 @@ describe('Basic inputs of Radio Button Group', () => {
     expect(helpText.textContent).toContain('Some help text');
   });
 
-
   it('should display required text', () => {
     const requiredText = fixture.nativeElement.querySelector(
       '.fudis-fieldset__legend__title__text__required',
@@ -158,9 +167,7 @@ describe('Basic inputs of Radio Button Group', () => {
     });
 
     it('should have correct amount of child components', () => {
-      const element: NodeList = fixture.nativeElement.querySelectorAll(
-        'fudis-radio-button',
-      );
+      const element: NodeList = fixture.nativeElement.querySelectorAll('fudis-radio-button');
 
       expect(element.length).toEqual(3);
     });
@@ -173,7 +180,9 @@ describe('Basic inputs of Radio Button Group', () => {
       const radioArray = [...radioButtons];
 
       radioArray.forEach((radio) => {
-        const radioName = radio.query(By.css('.fudis-radio-button__input')).nativeElement.getAttribute('ng-reflect-name');
+        const radioName = radio
+          .query(By.css('.fudis-radio-button__input'))
+          .nativeElement.getAttribute('ng-reflect-name');
         expect(radioName).toEqual(radioGroupId);
       });
     });
@@ -211,6 +220,6 @@ describe('Basic inputs of Radio Button Group', () => {
       expect(mockComponent.eventReceived.id).toEqual('radio-button-test-group-item-1');
       expect(mockComponent.eventReceived.value).toEqual('platypus');
       expect(mockComponent.handleRadioButtonClick).toHaveBeenCalled();
-    })
-  })
+    });
+  });
 });
