@@ -18,6 +18,7 @@ test("dialog with grid", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-grid&viewMode=story");
   await page.getByTestId("fudis-button-1").click();
   await expect(page.getByTestId("fudis-button-2")).toBeVisible();
+  await expect(page.getByText("Dialog with fudis-grid and scrollable content")).toBeVisible();
   await expect(page).toHaveScreenshot("grid-1-init.png");
   await page.getByRole("region").focus();
   await expect(page).toHaveScreenshot("grid-2-content-focus.png");
