@@ -34,7 +34,6 @@ import { getElement } from '../../../../../utilities/tests/utilities';
     <ng-template fudisContent type="select-options">
       <fudis-select-option
         *ngFor="let option of testOptions"
-        #testOption
         [data]="option"
       ></fudis-select-option>
     </ng-template>
@@ -46,7 +45,6 @@ class MockContainerComponent {
 
   variant = 'dropdown';
 
-  @ViewChild('testOption') testOption: SelectOptionComponent;
   @ViewChild('testSelect') testSelect: SelectComponent;
 }
 
