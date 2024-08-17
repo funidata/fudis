@@ -254,6 +254,10 @@ export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
   'required',
 ]);
 
+export const radioButtonGroupExclude: RegExp = excludeRegex([
+  'triggerEmit',
+]);
+
 /**
  * Section
  */

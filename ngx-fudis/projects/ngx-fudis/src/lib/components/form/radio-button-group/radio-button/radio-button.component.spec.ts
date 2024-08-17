@@ -143,7 +143,7 @@ describe('RadioButtonComponent', () => {
         value: 'platypus',
       };
 
-      radioButtonComponentSpy.radioButtonChange.subscribe((value: FudisRadioButtonChangeEvent) => {
+      radioButtonComponentSpy.handleChange.subscribe((value: FudisRadioButtonChangeEvent) => {
         if (value) {
           expect(value.label).toEqual(optionToMatch);
           expect(value.value).toEqual(optionToMatch);

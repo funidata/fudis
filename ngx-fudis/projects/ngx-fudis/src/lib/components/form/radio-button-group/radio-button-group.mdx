@@ -1,0 +1,87 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { RadioButtonGroupComponent } from "./radio-button-group.component";
+import * as RadioButtonGroupStories from "./radio-button-group.stories";
+import { RadioButtonComponent } from "./radio-button/radio-button.component";
+import { radioButtonGroupExclude } from "../../../utilities/storybook"
+
+<Meta title="Components/Form/Radio Button Group" />
+
+# Radio Button Group
+
+Radio Button Group is a form fieldset element constructing from `fieldset` `legend` and `<input type="radio">` elements.
+
+It is built using parent wrapper of Radio Button Group Component and adding Radio Button Components as its children.
+
+## Mandatory properties
+
+### Parent Radio Button Group
+
+Mandatory properties for Radio Button Group are `label`, `control`. Radio Button Group has to have **at least** two Radio Buttons and should **not be used** with only one option available.
+
+Radio Button options can be provided as an array of `FudisRadioButtonOption` objects.
+
+### Child Radio Button
+
+For child Radio Button components mandatory properties are `label` and `value`.
+
+### Code Example
+
+```
+// In TypeScript file
+
+const control: FormControl = new FormControl(null, FudisValidators.required('You must choose a fruit'));
+
+const fruitOptions: FudisRadioButtonOption<object>[] = [
+  { value: 'apple', label: 'Apple' },
+  {
+    value: 'fair-trade-banana',
+    label: 'Fair Trade Banana',
+  },
+  { value: 'cherry', label: 'Cherry' },
+];
+
+// HTML template
+
+<fudis-radio-button-group
+    [control]="control"
+    [label]="label"
+  >
+    <fudis-radio-button
+      *ngFor="let option of fruitOptions"
+      [label]="option.label"
+      [value]="option.value"
+    />
+  </fudis-radio-button-group>
+
+```
+## Examples
+
+<Canvas of={RadioButtonGroupStories.Example}></Canvas>
+
+## Handling Changes
+
+Both Radio Button Group and Radio Button have `handleChange` output property.
+
+### Output for Radio Button Group
+
+When clicking any of the child Radio Buttons or the parent Radio Button Group, the property `handleChange` will emit an object with properties:
+
+- id: Current id of the option, which was clicked.
+- label: Label of the currently selected Radio Button option.
+- value: Selected option value.
+
+## Accessibility
+
+- Fieldset has a legend as its first child element
+- When selection is mandatory, it is communicated with 'Required' text using validators
+- Radio Button options are grouped by name attribute
+- Guidance is linked to the Radio Button Group's fieldset element via aria-describedby
+- Possible error messages are displayed after user blurs out from the first Radio Button option
+
+## Properties of Radio Button Group Component
+
+<ArgTypes of={RadioButtonGroupComponent} exclude={radioButtonGroupExclude}/>
+
+## Properties of Radio Button Component
+
+<ArgTypes of={RadioButtonComponent} />

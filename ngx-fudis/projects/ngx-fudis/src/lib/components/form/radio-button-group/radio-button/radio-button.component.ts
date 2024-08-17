@@ -40,14 +40,33 @@ export class RadioButtonComponent implements OnInit {
   @Output() radioButtonBlur = new EventEmitter<string>();
 
   /**
-   * Checked input change output
+   * Emits changed Radio Button.
    */
-  @Output() radioButtonChange = new EventEmitter<FudisRadioButtonChangeEvent>();
+  @Output() handleChange = new EventEmitter<FudisRadioButtonChangeEvent>();
 
   /*
    * Id for single Radio Button
    */
   protected _id: string;
+
+  /**
+   * Blur handler
+   */
+  protected _handleBlur(): void {
+    this.radioButtonBlur.emit();
+  }
+
+  protected _onChange(): void {
+    const optionToEmit: FudisRadioButtonChangeEvent = {
+      id: this._id,
+      value: this._parentGroup.control.value,
+      label: this.label,
+    };
+
+    this.handleChange.emit(optionToEmit);
+
+    this._parentGroup.triggerEmit(this._id, this.label);
+  }
 
   ngOnInit(): void {
     if (this._id) {
@@ -55,21 +74,5 @@ export class RadioButtonComponent implements OnInit {
     } else {
       this._id = this._idService.getNewChildId('radio-button-group', this._parentGroup.id);
     }
-  }
-
-  handleBlur(): void {
-    this.radioButtonBlur.emit();
-  }
-
-  handleChange(): void {
-    const optionToEmit: FudisRadioButtonChangeEvent = {
-      id: this._id,
-      value: this._parentGroup.control.value,
-      label: this.label,
-    };
-
-    this.radioButtonChange.emit(optionToEmit);
-
-    this._parentGroup.triggerEmit(this._id, this.label);
   }
 }

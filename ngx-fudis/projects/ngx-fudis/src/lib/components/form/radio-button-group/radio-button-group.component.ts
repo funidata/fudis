@@ -53,6 +53,9 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
    */
   @Input() size: FudisInputSize = 'lg';
 
+  /**
+   * Emit changed control's id, label and value when one Radio Button is clicked.
+   */
   @Output() handleChange = new EventEmitter<FudisRadioButtonGroupChangeEvent>();
 
   /**
