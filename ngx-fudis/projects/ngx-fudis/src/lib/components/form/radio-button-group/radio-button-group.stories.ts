@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
@@ -25,7 +19,10 @@ const fruitOptions: FudisRadioButtonOption<object>[] = [
   { value: 'cherry', label: 'Cherry' },
 ];
 
-const control: FormControl = new FormControl(null, FudisValidators.required('You must choose a fruit'));
+const control: FormControl = new FormControl(
+  null,
+  FudisValidators.required('You must choose a fruit'),
+);
 
 const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
   args: RadioButtonGroupComponent,
@@ -69,29 +66,31 @@ Example.args = {
 @Component({
   selector: 'disabled-radio-group-example',
   template: `
-      <fudis-radio-button-group
-        [label]="'Choose a pet'"
-        [helpText]="'We all should have a pet.'"
-        [control]="control"
-        (handleChange)="radioButtonChange($event)"
-      >
-        <fudis-radio-button
-          *ngFor="let option of petOptions"
-          [label]="option.label"
-          [value]="option.value"
-        ></fudis-radio-button>
-      </fudis-radio-button-group>
+    <fudis-radio-button-group
+      [label]="'Choose a pet'"
+      [helpText]="'We all should have a pet.'"
+      [control]="control"
+      (handleChange)="radioButtonChange($event)"
+    >
+      <fudis-radio-button
+        *ngFor="let option of petOptions"
+        [label]="option.label"
+        [value]="option.value"
+      ></fudis-radio-button>
+    </fudis-radio-button-group>
   `,
 })
 class DisabledRadioGroupExampleComponent {
-
   petOptions: FudisRadioButtonOption<object>[] = [
     { value: 'platypus', label: 'Platypus' },
     { value: 'otter', label: 'Otter' },
     { value: 'capybara', label: 'Capybara' },
   ];
 
-  control: FormControl = new FormControl( { value: null, disabled: true }, FudisValidators.required('You must choose a pet.'));
+  control: FormControl = new FormControl(
+    { value: null, disabled: true },
+    FudisValidators.required('You must choose a pet.'),
+  );
 }
 
 const Disabled: StoryFn<DisabledRadioGroupExampleComponent> = (

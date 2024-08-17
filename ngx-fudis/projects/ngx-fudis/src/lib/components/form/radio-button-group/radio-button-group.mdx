@@ -2,7 +2,7 @@ import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { RadioButtonGroupComponent } from "./radio-button-group.component";
 import * as RadioButtonGroupStories from "./radio-button-group.stories";
 import { RadioButtonComponent } from "./radio-button/radio-button.component";
-import { radioButtonGroupExclude } from "../../../utilities/storybook"
+import { radioButtonGroupExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Radio Button Group" />
 
@@ -54,6 +54,7 @@ const fruitOptions: FudisRadioButtonOption<object>[] = [
   </fudis-radio-button-group>
 
 ```
+
 ## Examples
 
 <Canvas of={RadioButtonGroupStories.Example}></Canvas>
@@ -80,7 +81,7 @@ When clicking any of the child Radio Buttons or the parent Radio Button Group, t
 
 ## Properties of Radio Button Group Component
 
-<ArgTypes of={RadioButtonGroupComponent} exclude={radioButtonGroupExclude}/>
+<ArgTypes of={RadioButtonGroupComponent} exclude={radioButtonGroupExclude} />
 
 ## Properties of Radio Button Component
 
