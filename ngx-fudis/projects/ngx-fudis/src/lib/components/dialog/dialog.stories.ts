@@ -85,13 +85,13 @@ class DialogLaucherComponent {
             </fudis-fieldset>
           </ng-template>
           <ng-template fudisActions [type]="'form'">
+          <fudis-button fudisDialogClose [label]="'Cancel'" [variant]="'secondary'"></fudis-button>
             <fudis-button
               fudisFormSubmit
               [formValid]="exampleDialogFormGroup.valid"
               (handleClick)="closeDialogWithForm()"
               [label]="'Submit'"
             ></fudis-button>
-            <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
           </ng-template>
         </fudis-form>
       </fudis-dialog-content>
