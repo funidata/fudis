@@ -10,7 +10,6 @@ import {
 
 import { FudisIdService } from '../../../../services/id/id.service';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
-import { FudisRadioButtonChangeEvent } from '../../../../types/forms';
 
 @Component({
   selector: 'fudis-radio-button',
@@ -24,12 +23,12 @@ export class RadioButtonComponent implements OnInit {
     @Host() protected _parentGroup: RadioButtonGroupComponent,
   ) {}
 
-  /*
-   * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"
+  /**
+   * Selectable value of a single Radio Button, e.g. "fair-trade-banana"
    */
-  @Input({ required: true }) value: string | boolean | object | null;
+  @Input({ required: true }) value: string | boolean | object | null | unknown;
 
-  /*
+  /**
    * Visible label for a single Radio Button, e. g. "Fair trade banana"
    */
   @Input({ required: true }) label: string;
@@ -40,11 +39,6 @@ export class RadioButtonComponent implements OnInit {
   @Output() radioButtonBlur = new EventEmitter<string>();
 
   /**
-   * Emits changed Radio Button.
-   */
-  @Output() handleChange = new EventEmitter<FudisRadioButtonChangeEvent>();
-
-  /*
    * Id for single Radio Button
    */
   protected _id: string;
@@ -56,15 +50,13 @@ export class RadioButtonComponent implements OnInit {
     this.radioButtonBlur.emit();
   }
 
+  /**
+   * Selected Radio Button change
+   */
   protected _onChange(): void {
-    const optionToEmit: FudisRadioButtonChangeEvent = {
-      id: this._id,
-      value: this._parentGroup.control.value,
-      label: this.label,
-    };
-
-    this.handleChange.emit(optionToEmit);
-
+    /**
+     * Call parent's function, which triggers Radio Button Group's emit
+     */
     this._parentGroup.triggerEmit(this._id, this.label);
   }
 

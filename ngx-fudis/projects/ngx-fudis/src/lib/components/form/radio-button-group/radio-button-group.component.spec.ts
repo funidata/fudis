@@ -217,8 +217,8 @@ describe('Basic inputs of Radio Button Group', () => {
       radio.click();
       fixture.detectChanges();
 
-      expect(mockComponent.eventReceived.id).toEqual('radio-button-test-group-item-1');
-      expect(mockComponent.eventReceived.value).toEqual('platypus');
+      expect(mockComponent.eventReceived.option.id).toEqual('radio-button-test-group-item-1');
+      expect(mockComponent.eventReceived.option.value).toEqual('platypus');
       expect(mockComponent.handleRadioButtonClick).toHaveBeenCalled();
     });
   });

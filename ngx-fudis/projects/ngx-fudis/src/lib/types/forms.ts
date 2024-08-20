@@ -24,10 +24,13 @@ export type FudisCheckboxOption<T extends object> = T & {
 };
 
 export type FudisRadioButtonOption<T extends object> = T & {
+  /** Generated id for single radio option */
+  id?: string;
   /** Underlying value of the option */
-  value: string | boolean | null;
+  value: string | boolean | null | unknown;
   /** Value that is shown in the UI */
   label: string;
+  /** To store additional data */
   [key: string]: unknown;
 };
 
@@ -130,16 +133,9 @@ export type FudisCheckboxGroupChangeEvent = {
   formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 };
 
-export type FudisRadioButtonChangeEvent = {
-  id: string;
-  value: unknown;
-  label: string;
-};
-
 export type FudisRadioButtonGroupChangeEvent = {
-  id: string;
-  label: string;
-  value: unknown;
+  option: FudisRadioButtonOption<object>;
+  control: FormControl<unknown>;
 };
 
 export interface FudisDateRangeItem {

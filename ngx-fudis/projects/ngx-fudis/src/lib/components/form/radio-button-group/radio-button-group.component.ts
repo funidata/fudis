@@ -8,7 +8,6 @@ import {
   OnInit,
   Optional,
   Output,
-  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisInputSize, FudisRadioButtonGroupChangeEvent } from '../../../types/forms';
@@ -20,12 +19,10 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 
-// TODO: Refactor component to work in similar fashion as Checkbox Group, update docs and tests
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
   styleUrls: ['./radio-button-group.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
   constructor(
@@ -43,18 +40,18 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     });
   }
 
-  /*
-   * FormControl for Radio Button group
+  /**
+   * FormControl for Radio Button Group
    */
   @Input({ required: true }) control: FormControl<unknown>;
 
   /**
-   * Width of Radiobutton Group
+   * Width of Radio Button Group
    */
   @Input() size: FudisInputSize = 'lg';
 
   /**
-   * Emit changed control's id, label and value when one Radio Button is clicked.
+   * Emit form control and changed option when one option is clicked
    */
   @Output() handleChange = new EventEmitter<FudisRadioButtonGroupChangeEvent>();
 
@@ -70,8 +67,7 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
 
-  /** Add value and validity check when form control changes */
-
+  /** Add value and validity check when control value changes */
   ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       const original = this.control.updateValueAndValidity;
@@ -85,9 +81,12 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 
   public triggerEmit(id: string, label: string): void {
     const data: FudisRadioButtonGroupChangeEvent = {
-      id: id,
-      label: label,
-      value: this.control?.value,
+      option: {
+        id: id,
+        label: label,
+        value: this.control?.value,
+      },
+      control: this.control,
     };
     this.handleChange.emit(data);
   }

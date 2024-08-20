@@ -1,15 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
-
 import { Component } from '@angular/core';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { RadioButtonComponent } from './radio-button.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
-import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
+import { FudisRadioButtonOption } from '../../../../types/forms';
 import { FieldSetComponent } from '../../fieldset/fieldset.component';
-
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.directive';
@@ -133,29 +130,13 @@ describe('RadioButtonComponent', () => {
   });
 
   describe('Interaction and logic when clicking', () => {
-    it('should emit radioButtonChnage() when clicking component', waitForAsync(() => {
-      const radioButtonComponentSpy = fixture.debugElement.query(
-        By.directive(RadioButtonComponent),
-      ).componentInstance;
-
-      const optionToMatch: FudisRadioButtonOption<object> = {
-        label: 'Platypus',
-        value: 'platypus',
-      };
-
-      radioButtonComponentSpy.handleChange.subscribe((value: FudisRadioButtonChangeEvent) => {
-        if (value) {
-          expect(value.label).toEqual(optionToMatch);
-          expect(value.value).toEqual(optionToMatch);
-        }
-      });
-
+    it('should have correct value', () => {
       const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
         'input#radio-button-test-group-item-1',
       );
 
       const inputValue = input.getAttribute('ng-reflect-value');
       expect(inputValue).toEqual('platypus');
-    }));
+    });
   });
 });
