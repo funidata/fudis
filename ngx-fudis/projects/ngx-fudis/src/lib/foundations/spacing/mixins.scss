@@ -21,35 +21,36 @@ $spacing-tokens: (
   "xxl": spacing.$spacing-xxl,
 );
 
-@mixin spacing-classes($parent) {
+
+@mixin spacing-classes($prefix) {
   @each $sKey, $sValue in $spacing-tokens {
     @each $dirKey, $dirValue in $direction-attributes {
-      // Generates for desired screen size margin or padding with desired diredction. E.g. .fudis-lg-ml-sm or .fudis-sm-pt-xl
-      .#{$parent}-#{$dirKey}-#{$sKey} {
+      // Generates for desired screen size margin or padding with desired direction. E.g. .fudis-lg-ml-sm or .fudis-sm-pt-xl
+      .#{$prefix}-#{$dirKey}-#{$sKey} {
         #{$dirValue}: #{$sValue};
       }
     }
 
     // Generates horizontal margins e.g. .fudis-lg-mx-sm
-    .#{$parent}-mx-#{$sKey} {
+    .#{$prefix}-mx-#{$sKey} {
       margin-right: #{$sValue};
       margin-left: #{$sValue};
     }
 
     // Generates vertical margins e.g. .fudis-lg-my-sm
-    .#{$parent}-my-#{$sKey} {
+    .#{$prefix}-my-#{$sKey} {
       margin-top: #{$sValue};
       margin-bottom: #{$sValue};
     }
 
     // Generates horizontal padding e.g. .fudis-lg-px-sm
-    .#{$parent}-px-#{$sKey} {
+    .#{$prefix}-px-#{$sKey} {
       padding-right: #{$sValue};
       padding-left: #{$sValue};
     }
 
     // Generates vertical padding e.g. .fudis-lg-py-sm
-    .#{$parent}-py-#{$sKey} {
+    .#{$prefix}-py-#{$sKey} {
       padding-top: #{$sValue};
       padding-bottom: #{$sValue};
     }
