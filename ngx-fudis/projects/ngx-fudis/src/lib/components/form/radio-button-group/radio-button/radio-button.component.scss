@@ -25,6 +25,8 @@
   &__content {
     display: flex;
     align-items: center;
+    /* stylelint-disable-next-line unit-disallowed-list */
+    transform: translateX(-0.25rem);
     padding-left: 0;
 
     &-wrapper {
