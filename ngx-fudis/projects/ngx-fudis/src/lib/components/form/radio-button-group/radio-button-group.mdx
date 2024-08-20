@@ -8,7 +8,7 @@ import { radioButtonGroupExclude } from "../../../utilities/storybook";
 
 # Radio Button Group
 
-Radio Button Group is a form fieldset element constructing from `fieldset` `legend` and `<input type="radio">` elements.
+Radio Button Group is a form fieldset element constructing from `fieldset`, `legend` and `<input type="radio">` elements.
 
 It is built using parent wrapper of Radio Button Group Component and adding Radio Button Components as its children.
 
@@ -16,13 +16,13 @@ It is built using parent wrapper of Radio Button Group Component and adding Radi
 
 ### Parent Radio Button Group
 
-Mandatory properties for Radio Button Group are `label`, `control`. Radio Button Group has to have **at least** two Radio Buttons and should **not be used** with only one option available.
-
-Radio Button options can be provided as an array of `FudisRadioButtonOption` objects.
+Mandatory properties for Radio Button Group are `label` and `control`. Radio Button Group has to have **at least** two Radio Buttons and should **not be used** with only one option available.
 
 ### Child Radio Button
 
-For child Radio Button components mandatory properties are `label` and `value`.
+Radio Buttons can be provided as an array of `FudisRadioButtonOption` objects.
+
+Radio Button component's mandatory properties are `label` and `value`.
 
 ### Code Example
 
@@ -44,7 +44,7 @@ const fruitOptions: FudisRadioButtonOption<object>[] = [
 
 <fudis-radio-button-group
     [control]="control"
-    [label]="label"
+    [label]="'Pick a fruit'"
   >
     <fudis-radio-button
       *ngFor="let option of fruitOptions"
@@ -61,15 +61,14 @@ const fruitOptions: FudisRadioButtonOption<object>[] = [
 
 ## Handling Changes
 
-Both Radio Button Group and Radio Button have `handleChange` output property.
+Radio Button Group has `handleChange` output property.
 
 ### Output for Radio Button Group
 
-When clicking any of the child Radio Buttons or the parent Radio Button Group, the property `handleChange` will emit an object with properties:
+When clicking any of the child Radio Buttons, the parent's property `handleChange` will emit an object with properties:
 
-- id: Current id of the option, which was clicked.
-- label: Label of the currently selected Radio Button option.
-- value: Selected option value.
+- option: `FudisRadioButtonOption` typed object consisting of id, value and label data of the Radio Button
+- control: Current FormControl of the Radio Button Group
 
 ## Accessibility
 

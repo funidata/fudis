@@ -252,6 +252,8 @@ export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
   'errorSummaryReloadOnInit',
   'id',
   'required',
+  'handleChange',
+  'triggerEmit',
 ]);
 
 export const radioButtonGroupExclude: RegExp = excludeRegex(['triggerEmit']);
@@ -264,7 +266,6 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
 /**
  * Select and Multiselect
  */
-
 export const selectArgsTableExclude: RegExp = excludeRegex([
   'componentFocused',
   'translationOptionDisabledText',
