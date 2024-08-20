@@ -165,6 +165,39 @@ import { fudisSpacingArray } from '../../../types/spacing';
           </fudis-expandable>
         </ng-template>
       </fudis-form> -->
+      <fudis-form
+        [level]="2"
+        [title]="'Form with Radio Button Group'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryHelpText]="errorSummaryHelpText"
+      >
+        <ng-template fudisActions [type]="'form'">
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formFive.valid"
+            [label]="'Submit'"
+          />
+        </ng-template>
+        <ng-template fudisContent [type]="'form'">
+          <fudis-expandable
+            [title]="'Expandable with Radio Button Group'"
+            [errorSummaryBreadcrumb]="true"
+          >
+            <ng-template fudisContent [type]="'expandable'">
+              <fudis-radio-button-group
+                [label]="'Pick a fruit'"
+                [control]="allForms.controls.formFive"
+              >
+                <fudis-radio-button
+                  *ngFor="let option of radioOptions"
+                  [label]="option.label"
+                  [value]="option.value"
+                />
+              </fudis-radio-button-group>
+            </ng-template>
+          </fudis-expandable>
+        </ng-template>
+      </fudis-form>
     </fudis-grid>
   `,
 })
@@ -176,6 +209,21 @@ class ExampleWithMultipleFormsComponent {
   errorSummaryHelpText = 'There are incorrect form fields.';
 
   selectOptions = defaultOptions;
+
+  radioOptions: FudisRadioButtonOption<object>[] = [
+    {
+      label: 'Pear',
+      value: 'item-1-pear',
+    },
+    {
+      label: 'Orange',
+      value: 'item-2-orange',
+    },
+    {
+      label: 'Peach',
+      value: 'item-3-peach',
+    },
+  ];
 
   submitAllForms(): void {
     if (this.allForms.invalid) {
@@ -219,6 +267,7 @@ class ExampleWithMultipleFormsComponent {
     //     FudisValidators.minLength(2, 'Choose at least 2'),
     //   ]),
     // }),
+    formFive: new FormControl(null, FudisValidators.required('No fruit picked! :(')),
   });
 }
 
