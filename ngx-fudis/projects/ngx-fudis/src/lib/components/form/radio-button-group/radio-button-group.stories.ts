@@ -33,7 +33,6 @@ const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
     radioButtonChange: action('radioButtonChange'),
     fruitOptions,
   },
-  /* Tsekkaa radioButtonChange */
   template: html`<fudis-radio-button-group
     [size]="size"
     [control]="formControl"

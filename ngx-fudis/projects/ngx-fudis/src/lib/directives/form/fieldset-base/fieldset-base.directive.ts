@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, DestroyRef, Directive, Input, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
@@ -38,7 +38,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   @Input() helpText: string;
 
   /**
-   * If component is a child of Form component, Form's Error Summary is visible,this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
+   * If component is a child of Form component, Form's Error Summary is visible, this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
    */
   @Input() errorSummaryReloadOnInit: boolean = true;
 
@@ -46,8 +46,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    * Trigger update when control validator is changed
    */
   protected _updateValueAndValidityTrigger = new Subject<void>();
-
-  protected _destroyRef = inject(DestroyRef);
 
   /**
    * Fudis translation key for required text

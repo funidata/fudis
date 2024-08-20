@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -79,7 +79,7 @@ type MyForm = {
   `,
   styles: [],
 })
-export class DialogTestFormComponent implements OnInit {
+export class DialogTestFormComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { greeting: string },
     @Inject(DOCUMENT) private _document: Document,
@@ -133,14 +133,6 @@ export class DialogTestFormComponent implements OnInit {
       ),
     ),
   });
-
-  ngOnInit(): void {
-    this._translocoService.setActiveLang('fi');
-    this._translocoService.setActiveLang('en');
-
-    this._document.documentElement.lang = 'en';
-    this._fudisLanguage.setLanguage('en');
-  }
 
   submitDialogForm(): void {
     if (this.testFormGroup.valid) {
