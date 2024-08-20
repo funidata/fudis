@@ -15,6 +15,7 @@
 @use "../components/form/select/common/select-dropdown/select-dropdown-theme.scss" as selectDropdown;
 @use "../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss"
   as dd;
+@use "./display-theme";
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core;
