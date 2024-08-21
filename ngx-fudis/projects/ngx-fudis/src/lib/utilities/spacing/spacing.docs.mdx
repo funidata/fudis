@@ -1,0 +1,96 @@
+import { ArgTypes, Meta, Canvas, Controls } from "@storybook/blocks";
+import * as SpacingStories from "./spacing.stories.ts";
+
+<Meta title="Utilities/Spacing" />
+
+# Spacing
+
+Fudis Spacing classes allows you to add responsive margin and paddings to components and to any other native UI elements. With Fudis Spacing classes you can add more space to the elements right , left, top or bottom. Fudis spacing classes also include class names to include horizontal and vertical space simultaneously.
+When class is used with a varying breakpoint value, note that the chosen breakpoint refers to the smallest screen size when the style has affect.
+
+## Usage
+
+### With Varying Values for Different Breakpoints
+```
+fudis - $breakpoint - $direction-attribute - $spacing-token
+```
+Responsive class name formation start with a prefix 'fudis' and follows a pattern with respective **Fudis Foundation tokens:**<br/>
+
+- [Breakpoint tokens](/docs/foundations-breakpoints--documentation): Screen min widths values from `xs` to `xxl`.
+- **Direction attributes:** Name identifiers for margin and padding directions.
+- [Spacing tokens](/docs/foundations-spacing--documentation): Sizes from `xxs` to `xxl`, including `none`.
+
+
+### With Single Value for All Breakpoints
+```
+fudis - $direction-attribute - $spacing-token
+```
+For spacing values that apply throught out the different screen sizes simply remove the 'breakpoint token'.
+
+## Direction Attributes
+Use the following direction attributes to define where spacing is applied.
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>CSS attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>mt</td>
+      <td>margin-top</td>
+    </tr>
+    <tr>
+      <td>mb</td>
+      <td>margin-bottom</td>
+    </tr>
+    <tr>
+      <td>ml</td>
+      <td>margin-left</td>
+    </tr>
+    <tr>
+      <td>mr</td>
+      <td>margin-right</td>
+    </tr>
+    <tr>
+      <td>mx</td>
+      <td>margin-right, margin-left</td>
+    </tr>
+    <tr>
+      <td>my</td>
+      <td>margin-top, margin-bottom</td>
+    </tr>
+    <tr>
+      <td>pt</td>
+      <td>padding-top</td>
+    </tr>
+    <tr>
+      <td>pb</td>
+      <td>padding-bottom</td>
+    </tr>
+    <tr>
+      <td>pl</td>
+      <td>padding-left</td>
+    </tr>
+    <tr>
+      <td>pr</td>
+      <td>padding-right</td>
+    </tr>
+    <tr>
+      <td>px</td>
+      <td>padding-right, padding-left</td>
+    </tr>
+    <tr>
+      <td>py</td>
+      <td>padding-top, padding-bottom</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+<Canvas of={SpacingStories.Example}></Canvas>
+
+
