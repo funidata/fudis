@@ -1,7 +1,25 @@
-fudis-checkbox-group {
+fudis-breadcrumbs,
+fudis-body-text,
+fudis-checkbox-group,
+fudis-datepicker,
+fudis-dl,
+fudis-dropdown-menu,
+fudis-expandable,
+fudis-fieldset,
+fudis-footer,
+fudis-form,
+fudis-input-with-language-options,
+fudis-notification,
+fudis-radio-button-group,
+fudis-multiselect,
+fudis-section,
+fudis-select,
+fudis-text-area,
+fudis-text-input {
   display: block;
 }
 
-fudis-body-text {
-  display: block;
+fudis-button,
+fudis-link {
+  display: inline-block;
 }

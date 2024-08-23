@@ -21,7 +21,6 @@ $spacing-tokens: (
   "xxl": spacing.$spacing-xxl,
 );
 
-
 @mixin spacing-classes($prefix) {
   @each $sKey, $sValue in $spacing-tokens {
     @each $dirKey, $dirValue in $direction-attributes {
