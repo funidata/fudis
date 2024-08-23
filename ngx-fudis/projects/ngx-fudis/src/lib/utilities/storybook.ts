@@ -87,7 +87,6 @@ const datepickerCommonExcludes: string[] = [
   'errorSummaryReloadOnInit',
   'handleBlur',
   'handleKeyUp',
-  'dateParse',
   'endDateError',
   'startDateError',
 ];
