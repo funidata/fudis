@@ -8,7 +8,6 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxGroupFormGroup,
-  // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -327,7 +326,7 @@ class ExampleWithMultipleFormsComponent {
                     <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
                   </fudis-checkbox-group>
                   <fudis-datepicker
-                    [label]="'Start date'"
+                    [label]="'Important date'"
                     [helpText]="'You have to start from somewhere'"
                     [control]="formExample.controls['importantDate']"
                   >
@@ -365,7 +364,7 @@ class ExampleWithMultipleFormsComponent {
                 </fudis-grid>
               </ng-template>
             </fudis-expandable>
-            <!-- <fudis-expandable
+            <fudis-expandable
               [closed]="_closed"
               [title]="'Expandable section 2'"
               [errorSummaryBreadcrumb]="true"
@@ -373,14 +372,22 @@ class ExampleWithMultipleFormsComponent {
               <ng-template fudisContent [type]="'expandable'">
                 <fudis-fieldset [label]="'More important dates'">
                   <ng-template fudisContent [type]="'fieldset'">
-                    <fudis-date-range
-                      [startDate]="dateRangeStartDate"
-                      [endDate]="dateRangeEndDate"
-                    />
+                    <fudis-date-range>
+                      <fudis-datepicker
+                        fudisDateStart
+                        [label]="'Start date'"
+                        [control]="formExample.controls.startDate"
+                      />
+                      <fudis-datepicker
+                        fudisDateEnd
+                        [label]="'End date'"
+                        [control]="formExample.controls.endDate"
+                      />
+                    </fudis-date-range>
                   </ng-template>
                 </fudis-fieldset>
               </ng-template>
-            </fudis-expandable> -->
+            </fudis-expandable>
           </ng-template>
         </fudis-section>
       </ng-template>
@@ -441,24 +448,20 @@ class FormContentExampleComponent implements OnInit {
       ]),
       importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
       // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
-      // startDate: new FormControl<Date | null>(
-      //   null,
-      //   FudisValidators.required('Start date is required.'),
-      // ),
-      // dateRangeStartDate: new FormControl<Date | null>(null, [
-      //   FudisValidators.required('Choose start date'),
-      //   FudisValidators.datepickerMax({
-      //     value: new Date(2023, 5, 20),
-      //     message: 'Start date cannot be later than 20.6.2023',
-      //   }),
-      // ]),
-      // dateRangeEndDate: new FormControl<Date | null>(null, [
-      //   FudisValidators.required('Choose end date'),
-      //   FudisValidators.datepickerMin({
-      //     value: new Date(2023, 5, 19),
-      //     message: 'Start date cannot be earliner than 19.6.2023',
-      //   }),
-      // ]),
+      startDate: new FormControl<Date | null>(null, [
+        FudisValidators.required('Start date is required.'),
+        FudisValidators.datepickerMin({
+          value: new Date(2024, 8, 19),
+          message: 'Start date cannot be earlier than 19.9.2024',
+        }),
+      ]),
+      endDate: new FormControl<Date | null>(null, [
+        FudisValidators.required('End date is required.'),
+        FudisValidators.datepickerMax({
+          value: new Date(2024, 9, 20),
+          message: 'End date cannot be later than 20.10.2024',
+        }),
+      ]),
     });
   }
 
@@ -487,17 +490,6 @@ class FormContentExampleComponent implements OnInit {
     { value: 'basic', label: 'Basic', id: 'courseType-1' },
     { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];
-
-  // Expose when DateRange is exposed to public API
-  // dateRangeStartDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.dateRangeStartDate,
-  //   label: 'Start date',
-  // };
-
-  // dateRangeEndDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.dateRangeEndDate,
-  //   label: 'End date',
-  // };
 
   private _closed: boolean = true;
 
