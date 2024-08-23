@@ -70,9 +70,9 @@ export class DateRangeComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.id) {
-      this._idService.addNewId('daterange', this.id);
+      this._idService.addNewId('date-range', this.id);
     } else {
-      this.id = this._idService.getNewId('daterange');
+      this.id = this._idService.getNewId('date-range');
     }
   }
 

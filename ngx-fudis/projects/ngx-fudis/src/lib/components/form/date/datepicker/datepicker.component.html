@@ -19,7 +19,7 @@
       (keyup)="_handleKeyUp($event)"
       [min]="_minDate"
       [max]="_maxDate"
-      [placeholder]="_placeholderString"
+      [placeholder]="_placeholderString | async"
       [attr.disabled]="control.disabled || disabled"
       [attr.aria-disabled]="control.disabled || disabled ? true : null"
       [attr.aria-invalid]="

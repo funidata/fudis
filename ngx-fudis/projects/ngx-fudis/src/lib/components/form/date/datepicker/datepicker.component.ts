@@ -117,7 +117,7 @@ export class DatepickerComponent
       this._endDateInvalidTranslation =
         this._translationService.getTranslations()().DATEPICKER.VALIDATION.END_DATE_INVALID;
 
-      this._placeholderString = this._translationService.getTranslations()().DATEPICKER.PLACEHOLDER;
+      this._placeholderString.next(translations.DATEPICKER.PLACEHOLDER);
     });
   }
 
@@ -169,7 +169,7 @@ export class DatepickerComponent
   /**
    * Fudis translation for Datepicker placeholder text
    */
-  protected _placeholderString: string;
+  protected _placeholderString = new BehaviorSubject<string>('');
 
   /**
    * Instance of Datepicker Parse validator

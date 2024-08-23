@@ -1,4 +1,9 @@
-<div #dateRangeRef class="fudis-date-range" [class.fudis-date-range--visible]="_heightSet">
+<div
+  #dateRangeRef
+  class="fudis-date-range"
+  [id]="id"
+  [class.fudis-date-range--visible]="_heightSet"
+>
   <ng-content select="[fudisDateStart]"></ng-content>
   <span class="fudis-date-range__gutter"></span>
   <ng-content select="[fudisDateEnd]"></ng-content>
