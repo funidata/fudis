@@ -44,22 +44,6 @@ The following example demostrates how custom error message can be used along wit
 
 <Canvas of={ErrorMessageStories.Example}></Canvas>
 
-{/* prettier-ignore */}
-{/* ### Error Message with Date Range Component
-
-When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisStartDateError`and `fudisEndDateError` directives for selecting between start and end time inputs.
-
-````
-<fudis-date-range [startDate]="startDate" [endDate]="endDate">
-	<ng-template fudisStartDateError>
-		<fudis-error-message [message]="'Error on the start date'" *ngIf="startDateErrorCondition" />
-	</ng-template>
-	<ng-template fudisEndDateError>
-		<fudis-error-message [message]="'Error on the end date'" *ngIf="endDateErrorCondition" />
-	</ng-template>
-</fudis-date-range>
-``` */}
-
 ## Accessibility
 
 - Related form field label and id are linked to error message
