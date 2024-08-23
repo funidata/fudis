@@ -133,13 +133,6 @@ export type FudisCheckboxGroupChangeEvent = {
   formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 };
 
-export interface FudisDateRangeItem {
-  control: FormControl<Date | null>;
-  label: string;
-  helpText?: string;
-  tooltip?: string;
-}
-
 export const FudisDateInputFormat = {
   dateInput: 'DD.MM.YYYY',
   monthYearLabel: 'MMM YYYY',

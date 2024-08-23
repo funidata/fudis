@@ -27,8 +27,6 @@ import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.comp
 import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button-group.component';
 import { SelectComponent } from '../../select/select/select.component';
 import { MultiselectComponent } from '../../select/multiselect/multiselect.component';
-import { DateRangeComponent } from '../../date/date-range/date-range.component';
-import { FudisDateRangeItem } from '../../../../types/forms';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
@@ -43,7 +41,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     @Host() @Optional() private _textInput: TextInputComponent,
     @Host() @Optional() private _textArea: TextAreaComponent,
     @Host() @Optional() private _datePicker: DatepickerComponent,
-    @Host() @Optional() private _dateRange: DateRangeComponent,
     @Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
     @Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
     @Host() @Optional() private _select: SelectComponent,
@@ -108,7 +105,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     | TextInputComponent
     | TextAreaComponent
     | DatepickerComponent
-    | FudisDateRangeItem
     | RadioButtonGroupComponent
     | SelectComponent
     | MultiselectComponent;
