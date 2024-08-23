@@ -342,3 +342,32 @@ export const tooltipExclude: RegExp = excludeRegex([
   'variant',
   'buttonClick',
 ]);
+
+/**
+ * Spacing
+ */
+export const spacingExclude: RegExp = excludeRegex([
+  'ariaLabel',
+  'asMenuButton',
+  'buttonClick',
+  'buttonEl',
+  'closeMenu',
+  'disabled',
+  'dropdownMenuId',
+  'dropdownOpen',
+  'handleClick',
+  'handleBlur',
+  'handleDestroy',
+  'handleFocus',
+  'icon',
+  'iconRotate',
+  'label',
+  'labelHidden',
+  'size',
+  'type',
+  'variant',
+  'toggleMenu',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+]);
