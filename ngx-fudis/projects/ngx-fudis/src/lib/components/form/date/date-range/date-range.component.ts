@@ -56,7 +56,7 @@ export class DateRangeComponent implements OnInit, OnChanges {
   /**
    * Is setting Datepicker label heights to equal completed
    */
-  protected _heightSet: boolean = false;
+  protected _heightSet: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Date value for start date
@@ -109,7 +109,7 @@ export class DateRangeComponent implements OnInit, OnChanges {
         (labels[0] as HTMLLabelElement).style.height = `${labelTwoHeigth / fontSize}rem`;
       }
 
-      this._heightSet = true;
+      this._heightSet.next(true);
     }
   }
 

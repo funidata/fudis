@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MockComponent } from 'ng-mocks';
-import { By } from '@angular/platform-browser';
 import { DateRangeComponent } from './date-range.component';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { LabelComponent } from '../../label/label.component';
@@ -12,11 +11,42 @@ import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
+import { FudisValidators } from '../../../../utilities/form/validators';
+
+@Component({
+  selector: 'fudis-mock-date-range',
+  template: `<fudis-date-range [dateComparisonParse]="comparisonParse">
+    <p class="do-not-find-me">This should not be shown</p>
+    <fudis-datepicker fudisDateStart [label]="'start date'" [control]="startDateControl" />
+    <fudis-datepicker fudisDateEnd [label]="'End date'" [control]="endDateControl" />
+  </fudis-date-range>`,
+})
+class MockDateRangeComponent {
+  public comparisonParse: boolean = true;
+  public startDateControl = new FormControl<Date | null>(null, [
+    FudisValidators.required('Start date is required'),
+    FudisValidators.datepickerMin({
+      value: new Date(2024, 6, 10),
+      message: 'Selected date is not valid',
+    }),
+  ]);
+  public endDateControl = new FormControl<Date | null>(null, [
+    FudisValidators.required('End date is required'),
+    FudisValidators.datepickerMax({
+      value: new Date(2024, 7, 21),
+      message: 'Selected date is not valid',
+    }),
+  ]);
+}
 
 describe('DateRangeComponent', () => {
   let component: DateRangeComponent;
   let fixture: ComponentFixture<DateRangeComponent>;
+
+  let mockComponent: MockDateRangeComponent;
+  let mockFixture: ComponentFixture<MockDateRangeComponent>;
   let wrapperElement: HTMLDivElement;
 
   beforeEach(() => {
@@ -27,9 +57,10 @@ describe('DateRangeComponent', () => {
         LabelComponent,
         GuidanceComponent,
         ValidatorErrorMessageComponent,
-        MockComponent(IconComponent),
+        MockDateRangeComponent,
+        IconComponent,
       ],
-      providers: [FudisIdService],
+      providers: [FudisIdService, FudisTranslationService],
       imports: [
         ReactiveFormsModule,
         MatDatepickerModule,
@@ -39,67 +70,51 @@ describe('DateRangeComponent', () => {
     }).compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DateRangeComponent);
-    component = fixture.componentInstance;
-    component.startDate = {
-      label: 'Start date',
-      control: new FormControl<Date | null>(null, []),
-    };
-    component.endDate = {
-      label: 'End date',
-      control: new FormControl<Date | null>(null, []),
-    };
-    fixture.detectChanges();
-  });
-
   describe('Wrapper element', () => {
     beforeEach(() => {
-      wrapperElement = getElement(fixture, '.fudis-daterange') as HTMLDivElement;
+      fixture = TestBed.createComponent(DateRangeComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+
+      wrapperElement = getElement(fixture, '.fudis-date-range') as HTMLDivElement;
     });
 
     it('should create', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should always have default CSS class and generated id', () => {
-      expect(sortClasses(wrapperElement.className)).toEqual(sortClasses('fudis-daterange'));
+    it('should have default CSS class and generated id', () => {
+      expect(sortClasses(wrapperElement.className)).toEqual(
+        sortClasses('fudis-date-range fudis-date-range--visible'),
+      );
 
-      expect(wrapperElement.getAttribute('id')).toEqual('fudis-daterange-1');
-    });
-
-    it('should have two child datepicker components present', () => {
-      const datepickerELement = fixture.debugElement.queryAll(By.css('fudis-datepicker'));
-
-      expect(datepickerELement.length).toEqual(2);
+      expect(wrapperElement.getAttribute('id')).toEqual('fudis-date-range-1');
     });
   });
 
-  describe('Control', () => {
-    it('should update validity according to given dates when compared to each other', () => {
-      component.startDate.control.patchValue(new Date('01-10-2024'));
-      component.endDate.control.patchValue(new Date('01-05-2024'));
-      fixture.detectChanges();
+  describe('Mock component', () => {
+    beforeEach(() => {
+      mockFixture = TestBed.createComponent(MockDateRangeComponent);
+      mockComponent = mockFixture.componentInstance;
+      mockFixture.detectChanges();
 
-      expect(component.startDate.control.valid).toEqual(false);
-      expect(component.endDate.control.valid).toEqual(false);
+      wrapperElement = getElement(mockFixture, '.fudis-date-range') as HTMLDivElement;
+    });
 
-      expect(component.startDate.control.errors?.['datepickerStartDateInvalid']).toEqual({
-        message: 'Start date cannot be after end date',
-      });
-      expect(component.endDate.control.errors?.['datepickerEndDateInvalid']).toEqual({
-        message: 'End date cannot be before start date',
-      });
+    it('should create', () => {
+      expect(mockComponent).toBeTruthy();
+    });
 
-      component.startDate.control.patchValue(new Date('01-10-2024'));
-      component.endDate.control.patchValue(new Date('01-15-2024'));
-      fixture.detectChanges();
+    it('should have two child Datepickers', () => {
+      const datepickerElements = wrapperElement.querySelectorAll('fudis-datepicker');
 
-      expect(component.startDate.control.valid).toEqual(true);
-      expect(component.endDate.control.valid).toEqual(true);
+      expect(datepickerElements.length).toEqual(2);
+    });
 
-      expect(component.startDate.control.errors?.['datepickerStartDateInvalid']).toBe(undefined);
-      expect(component.endDate.control.errors?.['datepickerEndDateInvalid']).toBe(undefined);
+    it('should not render other than Datepicker elements', () => {
+      const extraTag = wrapperElement.querySelector('.do-not-find-me');
+
+      expect(extraTag).toBeNull();
     });
   });
 });
