@@ -8,16 +8,6 @@ fudis-body-text {
   &:has(+ fudis-body-text) {
     margin-bottom: spacing.$spacing-xs;
   }
-
-  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
-  & fudis-link {
-    display: inline-block;
-  }
-
-  /* stylelint-disable-next-line selector-no-qualifying-type */
-  &.fudis-body-text-host {
-    display: block;
-  }
 }
 
 /**
