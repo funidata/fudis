@@ -75,7 +75,7 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
 ]);
 
 /**
- * Datepicker and Date-range
+ * Datepicker and Date Range
  */
 const datepickerCommonExcludes: string[] = [
   'control',
@@ -87,7 +87,7 @@ const datepickerCommonExcludes: string[] = [
   'errorSummaryReloadOnInit',
   'handleBlur',
   'handleKeyUp',
-  'parseDateValidator',
+  'dateParse',
   'endDateError',
   'startDateError',
 ];
@@ -96,15 +96,16 @@ export const datepickerControlsExclude: RegExp = excludeRegex([
   ...datepickerCommonExcludes,
   'focusToInput',
   'onBlur',
+  'dateRangeType',
 ]);
 
 export const datepickerExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
-export const daterangeExclude: RegExp = excludeRegex([
-  'endDate',
-  'startDate',
+export const dateRangeExclude: RegExp = excludeRegex([
+  'checkDateCrossings',
   'id',
-  'initialFocus',
+  'showDateComparisonErrors',
+  'setLabelHeight',
 ]);
 
 /**

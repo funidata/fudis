@@ -67,10 +67,10 @@ export const testComponentDataAfter: FudisIdData = {
       'fudis-datepicker-4',
     ],
     daterange: [
-      'fudis-daterange-1',
-      'fudis-daterange-2',
+      'fudis-date-range-1',
+      'fudis-date-range-2',
       'custom-id-for-daterange',
-      'fudis-daterange-4',
+      'fudis-date-range-4',
     ],
     dialog: ['fudis-dialog-1', 'fudis-dialog-2', 'custom-id-for-dialog', 'fudis-dialog-4'],
     dropdown: [
