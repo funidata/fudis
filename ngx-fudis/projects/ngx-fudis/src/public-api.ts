@@ -16,13 +16,15 @@ export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox-group/checkbox/checkbox.component';
 export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/checkbox-group.component';
 export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
-// export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
+export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
+export {
+  DateStartDirective,
+  DateEndDirective,
+} from './lib/directives/form/datepicker/datepicker.directive';
 export {
   ContentDirective,
-  EndDateErrorDirective,
   FooterContentLeftDirective,
   FooterContentRightDirective,
-  StartDateErrorDirective,
 } from './lib/directives/content-projection/content/content.directive';
 export {
   DialogActionsDirective,

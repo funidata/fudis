@@ -1,35 +1,5 @@
-<ng-container *ngIf="startDate && endDate">
-  <div
-    #dateRangeRef
-    class="fudis-daterange"
-    [id]="id"
-    [class.fudis-daterange--visible]="_heightSet"
-  >
-    <fudis-datepicker
-      class="fudis-daterange__start-date"
-      [size]="'sm'"
-      [id]="id + '-start-date'"
-      [initialFocus]="initialFocus"
-      [tooltip]="startDate.tooltip"
-      [label]="startDate.label"
-      [control]="startDate.control"
-      [helpText]="startDate.helpText"
-    >
-      <ng-container *ngIf="_startDateError">
-        <ng-container *ngTemplateOutlet="_startDateError!.templateRef" />
-      </ng-container>
-    </fudis-datepicker>
-    <span class="fudis-daterange__gutter"></span>
-    <fudis-datepicker
-      [id]="id + '-end-date'"
-      [size]="'sm'"
-      [label]="endDate.label"
-      [control]="endDate.control"
-      [helpText]="endDate.helpText"
-    >
-      <ng-container *ngIf="_endDateError">
-        <ng-container *ngTemplateOutlet="_endDateError!.templateRef" />
-      </ng-container>
-    </fudis-datepicker>
-  </div>
-</ng-container>
+<div #dateRangeRef class="fudis-date-range" [class.fudis-date-range--visible]="_heightSet">
+  <ng-content select="[fudisDateStart]"></ng-content>
+  <span class="fudis-date-range__gutter"></span>
+  <ng-content select="[fudisDateEnd]"></ng-content>
+</div>
