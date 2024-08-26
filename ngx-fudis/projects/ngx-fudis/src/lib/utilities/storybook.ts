@@ -243,6 +243,22 @@ export const linkExclude: RegExp = excludeRegex([
 export const notificationExclude: RegExp = excludeRegex(['link', 'linkTitle', 'externalLink']);
 
 /**
+ * Radio Button Group
+ */
+export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
+  'control',
+  'name',
+  'options',
+  'errorSummaryReloadOnInit',
+  'id',
+  'required',
+  'handleChange',
+  'triggerEmit',
+]);
+
+export const radioButtonGroupExclude: RegExp = excludeRegex(['triggerEmit']);
+
+/**
  * Section
  */
 export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBreadcrumb', 'id']);
@@ -250,7 +266,6 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
 /**
  * Select and Multiselect
  */
-
 export const selectArgsTableExclude: RegExp = excludeRegex([
   'componentFocused',
   'translationOptionDisabledText',

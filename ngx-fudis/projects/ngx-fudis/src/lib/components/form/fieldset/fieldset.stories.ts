@@ -54,11 +54,16 @@ import readme from './readme.mdx';
             [label]="'Contact email'"
             [helpText]="'So that students can ask for more time on their homework.'"
           />
-          <!-- <fudis-radio-button-group
+          <fudis-radio-button-group
             [label]="'Course type'"
-            [options]="courseTypeOptions"
             [control]="fieldsetExample.controls['courseType']"
-          /> -->
+          >
+            <fudis-radio-button
+              *ngFor="let option of courseTypeOptions"
+              [label]="option.label"
+              [value]="option.value"
+            />
+          </fudis-radio-button-group>
           <fudis-date-range>
             <fudis-datepicker
               fudisDateStart
@@ -124,9 +129,9 @@ class FieldsetExampleComponent {
     { value: 'english', label: 'EN' },
   ];
 
-  courseTypeOptions: FudisRadioButtonOption[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
+  courseTypeOptions: FudisRadioButtonOption<object>[] = [
+    { value: 'basic', label: 'Basic' },
+    { value: 'advanced', label: 'Advanced' },
   ];
 }
 

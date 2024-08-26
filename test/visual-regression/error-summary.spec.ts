@@ -5,6 +5,8 @@ test("error summary", async ({ page }) => {
 
   await page.getByTestId("fudis-button-2").click();
   await expect(page).toHaveScreenshot("1-init.png", { fullPage: true });
+  await page.getByTestId("fudis-link-4").click();
+  await expect(page.getByTestId("fudis-checkbox-group-1-legend")).toBeFocused(true);
 
   await page.getByTestId("unique-input-4").fill("hello");
   await expect(page).toHaveScreenshot("2-before-reload-only.png", { fullPage: true });

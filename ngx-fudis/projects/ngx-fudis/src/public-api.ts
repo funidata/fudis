@@ -68,6 +68,8 @@ export { MultiselectComponent } from './lib/components/form/select/multiselect/m
 export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
 export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
+export { RadioButtonComponent } from './lib/components/form/radio-button-group/radio-button/radio-button.component';
+export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SectionComponent } from './lib/components/section/section.component';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';

@@ -1,51 +1,59 @@
-import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Host,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+  Output,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisRadioButtonOption, FudisInputSize } from '../../../types/forms';
+import { FudisInputSize, FudisRadioButtonGroupChangeEvent } from '../../../types/forms';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FormComponent } from '../form/form.component';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
-// TODO: Refactor component to work in similar fashion as Checkbox Group, update docs and tests
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
   styleUrls: ['./radio-button-group.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
-  /**
-   * Binding host CSS class to component wrapper
-   */
-  @HostBinding('class') private _classes = 'fudis-radio-button-group-host';
+  constructor(
+    @Host() @Optional() protected _parentForm: FormComponent | null,
+    _idService: FudisIdService,
+    _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
+  ) {
+    super(_idService, _translationService, _changeDetectorRef);
 
-  /*
-   * FormControl for Radio Button group
-   */
-  @Input({ required: true }) control: FormControl<boolean | null>;
-
-  /*
-   * Array of options for group of radio buttons
-   */
-  @Input({ required: true }) options: FudisRadioButtonOption[];
-
-  /**
-   * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
-   */
-  @Input() invalidState: boolean = false;
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+      }
+    });
+  }
 
   /**
-   * Width of Radiobutton Group
+   * FormControl for Radio Button Group
+   */
+  @Input({ required: true }) control: FormControl<unknown>;
+
+  /**
+   * Width of Radio Button Group
    */
   @Input() size: FudisInputSize = 'lg';
 
   /**
-   * Set fieldset as required. By default set to 'undefined'.
+   * Emit form control and changed option when one option is clicked
    */
-  @Input() required: boolean | undefined = undefined;
-
-  /**
-   * Name of the group. If not provided, use id for the name.
-   */
-  @Input() name: string;
+  @Output() handleChange = new EventEmitter<FudisRadioButtonGroupChangeEvent>();
 
   /**
    * Set requiredText based on this boolean value
@@ -54,23 +62,32 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 
   ngOnInit() {
     this._setParentId('radio-button-group');
+    this._updateValueAndValidityTrigger.next();
 
-    if (this.options.length < 2) {
-      throw new Error(
-        `Fudis-radio-button-group should have minimum of two options for radio buttons, but it only got ${this.options.length} option.`,
-      );
-    }
+    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+  }
 
-    if (!this.name) {
-      this.name = this.id;
+  /** Add value and validity check when control value changes */
+  ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
+      const original = this.control.updateValueAndValidity;
+
+      this.control.updateValueAndValidity = () => {
+        original.apply(this.control);
+        this._updateValueAndValidityTrigger.next();
+      };
     }
   }
 
-  ngOnChanges(): void {
-    this._required = hasRequiredValidator(this.control);
-
-    if (!this.name) {
-      this.name = this.id;
-    }
+  public triggerEmit(id: string, label: string): void {
+    const data: FudisRadioButtonGroupChangeEvent = {
+      option: {
+        id: id,
+        label: label,
+        value: this.control?.value,
+      },
+      control: this.control,
+    };
+    this.handleChange.emit(data);
   }
 }
