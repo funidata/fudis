@@ -18,6 +18,9 @@ test("form dynamic inputs", async ({ page }) => {
   await page
     .getByText("Summer holidays")
     .click(); /** Check the first checkbox to remove error messages */
+  await page
+    .getByTestId("fudis-button-15")
+    .click(); /* remove required validator from radio button group */
 
   await page.getByTestId("fudis-button-1").click(); /* submit form without errors */
   await expect(page).toHaveScreenshot("dynamic-2-submit-without-errors.png", { fullPage: true });
@@ -60,7 +63,7 @@ test("form dynamic inputs", async ({ page }) => {
   await page
     .getByTestId("fudis-checkbox-group-2-item-1")
     .focus(); /** Focus on the second checkbox */
-  await page.getByText("Winter holidays").click(); /** Check the second checkbox*/
+  await page.getByText("Winter holidays").click(); /** Check the second checkbox */
 
   await page.getByTestId("fudis-button-1").click(); /* submit form without errors */
   await expect(page).toHaveScreenshot("dynamic-4-submit-after-removed-validators.png", {

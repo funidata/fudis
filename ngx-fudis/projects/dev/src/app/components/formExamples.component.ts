@@ -145,7 +145,7 @@ export class AppFormExampleComponent implements OnInit {
     { value: 'english', label: 'EN' },
   ];
 
-  radioButtonOptions: FudisRadioButtonOption[] = [];
+  radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 
   checkboxOptions: FudisCheckboxOption<object>[] = [];
 
@@ -157,8 +157,8 @@ export class AppFormExampleComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((value) => {
         this.radioButtonOptions = [
-          { value: true, label: value.chooseTruthTrue, id: 'boolean-2' },
-          { value: false, label: value.chooseTruthFalse, id: 'boolean-1' },
+          { value: true, label: value.chooseTruthTrue },
+          { value: false, label: value.chooseTruthFalse },
         ];
         this.checkboxOptions = [
           { controlName: 'blueberry', label: value.blueberry },
