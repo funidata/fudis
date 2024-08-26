@@ -165,6 +165,39 @@ import { fudisSpacingArray } from '../../../types/spacing';
           </fudis-expandable>
         </ng-template>
       </fudis-form> -->
+      <fudis-form
+        [level]="2"
+        [title]="'Form with Radio Button Group'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryHelpText]="errorSummaryHelpText"
+      >
+        <ng-template fudisActions [type]="'form'">
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formFive.valid"
+            [label]="'Submit'"
+          />
+        </ng-template>
+        <ng-template fudisContent [type]="'form'">
+          <fudis-expandable
+            [title]="'Expandable with Radio Button Group'"
+            [errorSummaryBreadcrumb]="true"
+          >
+            <ng-template fudisContent [type]="'expandable'">
+              <fudis-radio-button-group
+                [label]="'Pick a fruit'"
+                [control]="allForms.controls.formFive"
+              >
+                <fudis-radio-button
+                  *ngFor="let option of radioOptions"
+                  [label]="option.label"
+                  [value]="option.value"
+                />
+              </fudis-radio-button-group>
+            </ng-template>
+          </fudis-expandable>
+        </ng-template>
+      </fudis-form>
     </fudis-grid>
   `,
 })
@@ -176,6 +209,21 @@ class ExampleWithMultipleFormsComponent {
   errorSummaryHelpText = 'There are incorrect form fields.';
 
   selectOptions = defaultOptions;
+
+  radioOptions: FudisRadioButtonOption<object>[] = [
+    {
+      label: 'Pear',
+      value: 'item-1-pear',
+    },
+    {
+      label: 'Orange',
+      value: 'item-2-orange',
+    },
+    {
+      label: 'Peach',
+      value: 'item-3-peach',
+    },
+  ];
 
   submitAllForms(): void {
     if (this.allForms.invalid) {
@@ -219,6 +267,7 @@ class ExampleWithMultipleFormsComponent {
     //     FudisValidators.minLength(2, 'Choose at least 2'),
     //   ]),
     // }),
+    formFive: new FormControl(null, FudisValidators.required('No fruit picked! :(')),
   });
 }
 
@@ -311,12 +360,16 @@ class ExampleWithMultipleFormsComponent {
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
                         /> -->
-                  <!-- <fudis-radio-button-group
-                          [label]="'Course type'"
-                          [id]="'radio-button-group-1'"
-                          [options]="courseTypeOptions"
-                          [control]="formExample.controls['courseType']"
-                        /> -->
+                  <fudis-radio-button-group
+                    [label]="'Course type'"
+                    [control]="formExample.controls['courseType']"
+                  >
+                    <fudis-radio-button
+                      *ngFor="let option of courseTypeOptions"
+                      [label]="option.label"
+                      [value]="option.value"
+                    />
+                  </fudis-radio-button-group>
                   <fudis-checkbox-group
                     [formGroup]="formExample.controls.courseBooks"
                     [label]="'Course books'"
@@ -440,7 +493,7 @@ class FormContentExampleComponent implements OnInit {
         FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
       ]),
       importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-      // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+      courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
       // startDate: new FormControl<Date | null>(
       //   null,
       //   FudisValidators.required('Start date is required.'),
@@ -483,9 +536,9 @@ class FormContentExampleComponent implements OnInit {
     { value: 'english', label: 'EN' },
   ];
 
-  courseTypeOptions: FudisRadioButtonOption[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
+  courseTypeOptions: FudisRadioButtonOption<object>[] = [
+    { value: 'basic', label: 'Basic' },
+    { value: 'advanced', label: 'Advanced' },
   ];
 
   // Expose when DateRange is exposed to public API

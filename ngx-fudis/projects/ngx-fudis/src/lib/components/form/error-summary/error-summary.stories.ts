@@ -59,12 +59,16 @@ import { excludeAllRegex } from '../../../utilities/storybook';
                 />
               </fudis-grid>
               <fudis-grid [columns]="{ xs: 1, sm: 2 }">
-                <!-- <fudis-radio-button-group
-              [label]="'Course type'"
-              [id]="'radio-button-group-1'"
-              [options]="courseTypeOptions"
-              [control]="formExample.controls['courseType']"
-            /> -->
+                <fudis-radio-button-group
+                  [label]="'Course type'"
+                  [control]="formExample.controls['courseType']"
+                >
+                  <fudis-radio-button
+                    *ngFor="let option of courseTypeOptions"
+                    [label]="option.label"
+                    [value]="option.value"
+                  />
+                </fudis-radio-button-group>
                 <fudis-checkbox-group
                   [formGroup]="formExample.controls.courseBooks"
                   [label]="'Course books'"
@@ -118,12 +122,12 @@ class ErrorSummaryExampleComponent {
       FudisValidators.email('Input must be an email address.'),
     ]),
     importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-    // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+    courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
   });
 
-  courseTypeOptions: FudisRadioButtonOption[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
+  courseTypeOptions: FudisRadioButtonOption<object>[] = [
+    { value: 'basic', label: 'Basic' },
+    { value: 'advanced', label: 'Advanced' },
   ];
 
   toggleLiveRemove(): void {

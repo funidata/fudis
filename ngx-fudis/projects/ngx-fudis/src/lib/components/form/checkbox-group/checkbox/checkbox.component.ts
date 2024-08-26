@@ -125,7 +125,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     this.handleChange.emit({ checkbox: optionToEmit, control: this.control });
 
     /**
-     * Call parent's function, which trigger's Checkbox Group's emit
+     * Call parent's function, which triggers Checkbox Group's emit
      */
     this._checkboxGroup.triggerEmit(this.controlName);
   }

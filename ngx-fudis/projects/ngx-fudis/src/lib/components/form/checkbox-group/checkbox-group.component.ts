@@ -21,7 +21,6 @@ import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -54,11 +53,6 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   @Input() size: FudisInputSize = 'lg';
 
   /**
-   * If component is a child of Form component, Form's Error Summary is visible,this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
-   */
-  @Input() errorSummaryReloadOnInit: boolean = true;
-
-  /**
    * Emit changed control's name and whole FormGroup when one Checkbox is clicked.
    */
   @Output() handleChange = new EventEmitter<FudisCheckboxGroupChangeEvent>();
@@ -77,11 +71,6 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created FormGroup or one provided from the App.
    */
   protected _internalFormGroup: boolean = false;
-
-  /**
-   * Trigger update when control validator is changed
-   */
-  protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
    * Getter for _groupBlurredOut boolean.

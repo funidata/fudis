@@ -2,9 +2,9 @@ import { ChangeDetectorRef, Directive, Input, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -36,6 +36,16 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    * Additional guidance text, aligned underneath the main label legend text
    */
   @Input() helpText: string;
+
+  /**
+   * If component is a child of Form component, Form's Error Summary is visible, this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
+   */
+  @Input() errorSummaryReloadOnInit: boolean = true;
+
+  /**
+   * Trigger update when control validator is changed
+   */
+  protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
    * Fudis translation key for required text
@@ -70,6 +80,21 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    */
   protected _reloadErrorSummaryOnLazyLoad(parentForm: boolean | undefined, group: FormGroup): void {
     if (parentForm && group.errors) {
+      this._reloadErrorSummary = true;
+      this._changeDetectorRef.detectChanges();
+    }
+  }
+
+  /**
+   * TODO: write test check cdr logic
+   *
+   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
+   */
+  protected _reloadErrorSummaryOnInit(
+    parentFormErrorSummaryVisible: boolean | undefined,
+    control: FormControl,
+  ): void {
+    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && control.errors) {
       this._reloadErrorSummary = true;
       this._changeDetectorRef.detectChanges();
     }

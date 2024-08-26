@@ -14,7 +14,7 @@ import {
 } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { fudisSpacingArray } from '../../../types/spacing';
-import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisRadioButtonOption } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 @Component({
   selector: 'example-dynamic-validator',
@@ -58,7 +58,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" />
+              <hr class="fudis-hr" aria-hidden="true" />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
                   [control]="formExample.controls['email']"
@@ -80,7 +80,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" />
+              <hr class="fudis-hr" aria-hidden="true" />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
                   [control]="formExample.controls['number']"
@@ -103,7 +103,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" />
+              <hr class="fudis-hr" aria-hidden="true" />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-datepicker
                   [label]="'Choose your favorite date'"
@@ -124,7 +124,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" />
+              <hr class="fudis-hr" aria-hidden="true" />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-select
                   [label]="'Select your favorite animal'"
@@ -144,7 +144,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" />
+              <hr class="fudis-hr" aria-hidden="true" />
               <fudis-grid [columns]="{ md: 3 }">
                 <fudis-checkbox-group
                   [label]="'If you like summer'"
@@ -191,6 +191,29 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     "
                   />
                 </fudis-checkbox-group>
+              </fudis-grid>
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+                <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
+                <fudis-radio-button-group
+                  [label]="'Select your favorite sport'"
+                  [control]="formExample.controls.sport"
+                  (handleChange)="radioButtonChange($event)"
+                >
+                  <fudis-radio-button
+                    *ngFor="let sport of sportOptions"
+                    [label]="sport.label"
+                    [value]="sport.value"
+                  >
+                  </fudis-radio-button>
+                </fudis-radio-button-group>
+                <fudis-grid [rowGap]="'md'">
+                  <fudis-button
+                    [label]="_radioOptionRequired + ' option required validator'"
+                    (handleClick)="
+                      toggleRequired(formExample.controls['sport'], 'radioOptionRequired')
+                    "
+                  ></fudis-button>
+                </fudis-grid>
               </fudis-grid>
             </fudis-grid>
           </ng-template>
@@ -241,6 +264,7 @@ class DynamicValidatorExampleComponent {
         },
         this._atLeastOneRequiredValidatorInstance,
       ),
+      sport: new FormControl(null, [this._requiredValidatorInstance]),
     });
   }
 
@@ -271,6 +295,17 @@ class DynamicValidatorExampleComponent {
   _optionRequired = 'Remove';
   _dateMax = 'Remove';
   _dateMin = 'Remove';
+  _radioOptionRequired = 'Remove';
+
+  sportOptions: FudisRadioButtonOption<object>[] = [
+    { value: 'cycling', label: 'Cycling' },
+    {
+      value: 'canoeing',
+      label: 'Canoeing',
+    },
+    { value: 'climbing', label: 'Climbing' },
+    { value: 'table-tennis', label: 'Table Tennis' },
+  ];
 
   /**
    * Instance of validators
@@ -337,6 +372,9 @@ class DynamicValidatorExampleComponent {
         return;
       case 'optionRequired':
         this._optionRequired = this._optionRequired === 'Add' ? 'Remove' : 'Add';
+        return;
+      case 'radioOptionRequired':
+        this._radioOptionRequired = this._radioOptionRequired === 'Add' ? 'Remove' : 'Add';
         return;
       case 'dateMin':
         this._dateMin = this._dateMin === 'Add' ? 'Remove' : 'Add';

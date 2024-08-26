@@ -177,7 +177,11 @@ export class FieldSetComponent
     this._removeFromErrorSummary();
   }
 
-  protected _handleLegendFocus(event: FocusEvent): void {
+  protected _handleLegendBlur(): void {
+    this._legendFocusVisible = false;
+  }
+
+  protected _handleFocus(event: FocusEvent): void {
     if (event.relatedTarget) {
       const elementHasLinkClass = (event.relatedTarget as HTMLElement).classList.contains(
         'fudis-link',
@@ -185,12 +189,9 @@ export class FieldSetComponent
 
       if (elementHasLinkClass) {
         this._legendFocusVisible = true;
+        this._fieldsetLegend.nativeElement.focus();
       }
     }
-  }
-
-  protected _handleLegendBlur(): void {
-    this._legendFocusVisible = false;
   }
 
   /**
