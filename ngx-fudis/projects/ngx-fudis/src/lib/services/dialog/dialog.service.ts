@@ -9,8 +9,6 @@ export class FudisDialogService {
 
   private _dialogOpen = signal<boolean>(false);
 
-  //private _dialogRef: MatDialogRef<any, any>;
-
   private _dialogRefs: MatDialogRef<any, any>[] = [];
 
   /**
