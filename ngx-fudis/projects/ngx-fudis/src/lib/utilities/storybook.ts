@@ -322,6 +322,35 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
 ]);
 
 /**
+ * Spacing
+ */
+export const spacingExclude: RegExp = excludeRegex([
+  'ariaLabel',
+  'asMenuButton',
+  'buttonClick',
+  'buttonEl',
+  'closeMenu',
+  'disabled',
+  'dropdownMenuId',
+  'dropdownOpen',
+  'handleClick',
+  'handleBlur',
+  'handleDestroy',
+  'handleFocus',
+  'icon',
+  'iconRotate',
+  'label',
+  'labelHidden',
+  'size',
+  'type',
+  'variant',
+  'toggleMenu',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+]);
+
+/**
  * Text Input
  */
 export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
@@ -356,33 +385,4 @@ export const tooltipExclude: RegExp = excludeRegex([
   'type',
   'variant',
   'buttonClick',
-]);
-
-/**
- * Spacing
- */
-export const spacingExclude: RegExp = excludeRegex([
-  'ariaLabel',
-  'asMenuButton',
-  'buttonClick',
-  'buttonEl',
-  'closeMenu',
-  'disabled',
-  'dropdownMenuId',
-  'dropdownOpen',
-  'handleClick',
-  'handleBlur',
-  'handleDestroy',
-  'handleFocus',
-  'icon',
-  'iconRotate',
-  'label',
-  'labelHidden',
-  'size',
-  'type',
-  'variant',
-  'toggleMenu',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
 ]);
