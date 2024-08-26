@@ -5,45 +5,51 @@
 @use "../../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../../foundations/focus/mixins.scss" as focus;
 
-.fudis-radio-button-host {
-  &:not(:last-of-type) {
-    margin-bottom: spacing.$spacing-sm;
-  }
-}
-
 .fudis-radio-button {
   @include typography.body-text-md-regular;
   @include colorMixins.text-color("gray-dark");
 
-  display: block;
+  display: inline-flex;
   position: relative;
+  align-items: center;
   margin-bottom: 0;
-  cursor: pointer;
   width: auto;
+  height: spacing.$spacing-lg;
 
   &__label {
     margin-bottom: 0;
-    padding-left: spacing.$spacing-sm;
+    padding-right: spacing.$spacing-xs;
+    padding-left: spacing.$spacing-xs;
   }
 
   /* Radio button circle */
   &__content {
     display: flex;
     align-items: center;
+    /* stylelint-disable-next-line unit-disallowed-list */
+    transform: translateX(-0.1rem);
     padding-left: 0;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: spacing.$spacing-lg;
+      height: spacing.$spacing-lg;
+    }
 
     &__control {
       @include borders.border("1px", "solid", "gray-middle");
 
-      display: flex;
+      display: inline-flex;
       top: 0;
       left: 0;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      width: spacing.$spacing-md;
-      min-width: spacing.$spacing-md;
-      height: spacing.$spacing-md;
+      width: spacing.$spacing-input-radio;
+      min-width: spacing.$spacing-input-radio;
+      height: spacing.$spacing-input-radio;
 
       &--invalid {
         @include borders.border("1px", "solid", "red");
@@ -51,12 +57,17 @@
         box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
       }
 
+      &--disabled {
+        @include borders.border("1px", "dashed", "gray-middle");
+        @include colorMixins.bg-color("gray-extra-light");
+      }
+
       &__indicator {
         @include colorMixins.bg-color("gray-dark");
 
         border-radius: 50%;
-        width: spacing.$spacing-sm;
-        height: spacing.$spacing-sm;
+        width: spacing.$spacing-input-radio-indicator;
+        height: spacing.$spacing-input-radio-indicator;
       }
     }
   }
@@ -70,7 +81,11 @@
     width: 100%;
     height: 100%;
 
-    /* stylelint-disable-next-line selector-class-pattern, selector-max-class */
+    &--disabled {
+      cursor: default;
+    }
+
+    /* stylelint-disable-next-line */
     &:focus + .fudis-radio-button__content .fudis-radio-button__content__control {
       @include focus.focus-form-field;
     }

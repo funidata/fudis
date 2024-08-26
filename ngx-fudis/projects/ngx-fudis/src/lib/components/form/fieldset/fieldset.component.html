@@ -9,8 +9,10 @@
 >
   <fieldset
     [attr.id]="id"
+    [tabIndex]="-1"
     [ngClass]="_classes"
     [attr.aria-describedby]="describedbyId ? describedbyId : null"
+    (focus)="_handleFocus($event)"
   >
     <legend
       #fieldsetLegend
@@ -18,7 +20,6 @@
       [class.fudis-fieldset__legend--focused]="_legendFocusVisible"
       [attr.id]="id + '-legend'"
       [tabIndex]="-1"
-      (focus)="_handleLegendFocus($event)"
       (blur)="_handleLegendBlur()"
     >
       <div

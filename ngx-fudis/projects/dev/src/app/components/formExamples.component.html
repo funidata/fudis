@@ -47,12 +47,17 @@
                   [message]="'Backend threw an error, it is not totally fault of this component'"
                 />
               </fudis-text-input>
-              <!-- <fudis-radio-button-group
+              <fudis-radio-button-group
                 [label]="t('chooseTruth')"
                 [helpText]="t('chooseTruthHelp')"
                 [control]="testFormGroup.controls['truth']"
-                [options]="radioButtonOptions"
-              /> -->
+              >
+                <fudis-radio-button
+                  *ngFor="let option of radioButtonOptions"
+                  [label]="option.label"
+                  [value]="option.value"
+                />
+              </fudis-radio-button-group>
               <!-- <fudis-dropdown
                 [id]="'dropdown-id-123'"
                 [label]="'Some dropdown'"
