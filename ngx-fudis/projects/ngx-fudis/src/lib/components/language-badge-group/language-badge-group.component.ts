@@ -114,10 +114,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
     this._selectableAppLanguages.forEach((language) => {
       const variant = availableContent[language] ? 'standard' : 'missing';
 
-      const newItem: LanguageLabel = {
-        key: language,
-        variant: variant,
-      };
+      const newItem: LanguageLabel = { key: language, variant };
       tempLangLabels.push(newItem);
     });
 
@@ -129,23 +126,19 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
    */
   private _determineSelectedBadge(options: FudisLanguageBadgeContent): void {
     let determinedLanguage: FudisLanguageAbbr | null;
+    const keys = Object.keys(options);
 
     if (
-      options[this._currentAppLang] &&
-      Object.keys(options[this._currentAppLang]!).length !== 0 &&
+      keys?.includes(this._currentAppLang) &&
       this._selectableAppLanguages.includes(this._currentAppLang)
     ) {
       determinedLanguage = this._currentAppLang;
     } else {
       const firstAvailable = this._selectableAppLanguages.find((lang) => {
-        const possibleOption = options[lang];
-
         let idWithContent;
 
-        if (possibleOption) {
-          idWithContent = Object.keys(possibleOption).some((itemId) => {
-            return possibleOption[itemId] !== null;
-          });
+        if (keys.includes(lang)) {
+          idWithContent = Object.entries(options).some((key, value) => !!value);
         }
 
         return idWithContent;
@@ -157,7 +150,6 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
         determinedLanguage = null;
       }
     }
-
     this._updateLanguage(determinedLanguage);
   }
 }

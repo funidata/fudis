@@ -263,6 +263,7 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     HeadingComponent,
     IconComponent,
     // InputWithLanguageOptionsComponent,
+    LanguageBadgeGroupComponent,
     LinkComponent,
     LinkDirective,
     MultiselectComponent,

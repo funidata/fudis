@@ -40,9 +40,8 @@ export type FudisButtonType = (typeof fudisButtonTypeArray)[number];
  */
 export type FudisDescriptionListVariant = 'regular' | 'compact';
 
-export type FudisDescriptionListItemDetailInfo = {
-  id: string;
-  language: FudisLanguageAbbr;
+export type FudisDescriptionListItemDetailLanguageContent = {
+  [lang in FudisLanguageAbbr]?: { [id: string]: string | null | undefined };
 };
 
 /**
@@ -67,7 +66,7 @@ export type FudisExpandableType = 'regular' | 'lite';
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
 export type FudisLanguageBadgeContent = {
-  [lang in FudisLanguageAbbr]?: { [id: string]: string | null | undefined };
+  [lang in FudisLanguageAbbr]?: boolean | null | undefined;
 };
 
 export type FudisLanguageOption =

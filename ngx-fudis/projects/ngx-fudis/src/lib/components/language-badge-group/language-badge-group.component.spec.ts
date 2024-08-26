@@ -8,10 +8,7 @@ import { getAllElements, getElement } from '../../utilities/tests/utilities';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 
-const providedLanguages: FudisLanguageBadgeContent = {
-  en: { 'test-en-id': 'English' },
-  fi: { 'test-fi-id': 'Finnish' },
-};
+const providedLanguages: FudisLanguageBadgeContent = { en: true, fi: true, sv: false };
 
 describe('LanguageBadgeGroupComponent', () => {
   let component: LanguageBadgeGroupComponent;

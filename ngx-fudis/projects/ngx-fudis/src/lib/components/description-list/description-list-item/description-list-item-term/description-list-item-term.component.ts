@@ -34,7 +34,18 @@ export class DescriptionListItemTermComponent {
     });
 
     effect(() => {
-      this._parentLanguageOptions = _parentDlItem.getDetailsLanguageOptions()();
+      const parentLanguageOptions = _parentDlItem.getDetailsLanguageOptions()();
+
+      if (parentLanguageOptions) {
+        const options = {};
+
+        for (const [key, value] of Object.entries(parentLanguageOptions)) {
+          const itemValue = Object.keys(value).some((itemId) => value[itemId] !== null);
+
+          Object.assign(options, { [key]: itemValue });
+        }
+        this._parentLanguageOptions = options;
+      }
     });
   }
 
