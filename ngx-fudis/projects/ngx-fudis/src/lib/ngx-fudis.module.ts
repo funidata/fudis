@@ -77,8 +77,6 @@ import { NotificationComponent } from './components/notification/notification.co
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SectionComponent } from './components/section/section.component';
-import { SpacingApiDirective } from './directives/spacing/spacing-api/spacing-api.directive';
-import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
@@ -189,8 +187,6 @@ import {
     SelectGroupComponent,
     SelectOptionBaseDirective,
     SelectOptionComponent,
-    SpacingApiDirective,
-    SpacingDirective,
     TextInputComponent,
     TextAreaComponent,
     TooltipDirective,
@@ -278,7 +274,6 @@ import {
     SelectComponent,
     SelectOptionComponent,
     SelectGroupComponent,
-    // SpacingDirective,
     TextAreaComponent,
     TextInputComponent,
     TooltipDirective,
