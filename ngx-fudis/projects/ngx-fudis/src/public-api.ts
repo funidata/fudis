@@ -72,7 +72,6 @@ export { SectionComponent } from './lib/components/section/section.component';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
-// export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';

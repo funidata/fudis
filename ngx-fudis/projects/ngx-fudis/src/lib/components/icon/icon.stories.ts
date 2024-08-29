@@ -55,8 +55,8 @@ export const AllIcons: StoryFn<IconComponent> = (args: IconComponent) => ({
   template: html`
     <fudis-grid [columns]="{xs:2, md: 3, lg: 4}" [width]="'sm'">
       <div
-        class="storybook-flex"
-        style="margin: 0.25rem; justify-content: space-between;"
+        class="storybook-flex fudis-my-xxs fudis-mx-xxs"
+        style="justify-content: space-between;"
         *ngFor="let icon of fudisIconArray;"
       >
         <fudis-body-text>{{icon}}</fudis-body-text>
