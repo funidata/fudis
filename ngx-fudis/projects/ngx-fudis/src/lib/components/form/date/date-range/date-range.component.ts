@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FudisIdService } from '../../../../services/id/id.service';
-import { BehaviorSubject, fromEvent } from 'rxjs';
+import { BehaviorSubject, debounceTime, fromEvent } from 'rxjs';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -27,9 +27,11 @@ export class DateRangeComponent implements OnInit, OnChanges {
   ) {
     // Check Datepicker label heights also when screen in resized
     fromEvent(window, 'resize')
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(), debounceTime(10))
       .subscribe(() => {
-        this.setLabelHeight();
+        if (this._heightSet.value) {
+          this.setLabelHeight();
+        }
       });
   }
 
@@ -88,10 +90,11 @@ export class DateRangeComponent implements OnInit, OnChanges {
   /**
    * Height of Datepickers might vary if other one has tooltip and other one not, or if other one has longer label. This function sets their label height equal, so they should remain aligned.
    */
-  public setLabelHeight(): void {
+  public setLabelHeight(recheck?: boolean): void {
     const labels = (this._dateRangeRef?.nativeElement as HTMLDivElement)?.querySelectorAll(
       '.fudis-label',
     );
+
     if (labels?.length === 2) {
       const labelOneHeigth = labels[0].clientHeight;
       const labelTwoHeigth = labels[1].clientHeight;
@@ -109,7 +112,14 @@ export class DateRangeComponent implements OnInit, OnChanges {
         (labels[0] as HTMLLabelElement).style.height = `${labelTwoHeigth / fontSize}rem`;
       }
 
-      this._heightSet.next(true);
+      // Recheck is run only when Datepickers are initialized
+      if (recheck) {
+        setTimeout(() => {
+          this.setLabelHeight();
+        }, 100);
+      } else {
+        this._heightSet.next(true);
+      }
     }
   }
 

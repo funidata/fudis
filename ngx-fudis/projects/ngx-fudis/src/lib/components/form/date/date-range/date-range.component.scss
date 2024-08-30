@@ -3,12 +3,12 @@
 .fudis-date-range {
   display: grid;
   grid-template-columns: 1fr spacing.$spacing-md 1fr;
-  opacity: 0;
+  opacity: 1;
   max-width: spacing.$spacing-input-lg;
 
   /* Show Date Range only after it has calculated the label height for each Datepicker */
-  &--visible {
-    opacity: 1;
+  &--hidden {
+    opacity: 0;
   }
 
   /* Add hyphen only after the first Datepicker */

@@ -2,7 +2,7 @@
   #dateRangeRef
   class="fudis-date-range"
   [id]="id"
-  [class.fudis-date-range--visible]="_heightSet"
+  [class.fudis-date-range--hidden]="(_heightSet | async) === false"
 >
   <ng-content select="[fudisDateStart]"></ng-content>
   <span class="fudis-date-range__gutter"></span>

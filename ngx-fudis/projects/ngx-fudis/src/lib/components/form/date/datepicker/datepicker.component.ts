@@ -275,7 +275,7 @@ export class DatepickerComponent
       this.focusToInput();
     }
 
-    this._parentDateRange?.setLabelHeight();
+    this._parentDateRange?.setLabelHeight(true);
   }
 
   ngOnDestroy(): void {
