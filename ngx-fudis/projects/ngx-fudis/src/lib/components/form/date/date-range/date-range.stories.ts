@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
+import { DatepickerComponent } from '../datepicker/datepicker.component';
 import docs from './date-range-docs.mdx';
 import { dateRangeExclude } from '../../../../utilities/storybook';
 
@@ -52,7 +53,9 @@ export default {
 
 const html = String.raw;
 
-const TemplateDateRange: StoryFn<DateRangeComponent> = (args: DateRangeComponent) => ({
+const TemplateDateRange: StoryFn<DateRangeComponent | DatepickerComponent> = (
+  args: DateRangeComponent | DatepickerComponent,
+) => ({
   props: {
     ...args,
     controlStart: new FormControl<Date | null>(null, FudisValidators.required('Date is required.')),
@@ -64,12 +67,14 @@ const TemplateDateRange: StoryFn<DateRangeComponent> = (args: DateRangeComponent
       [label]="'Start date'"
       [helpText]="'Choose start date'"
       [control]="controlStart"
+      [dateParse]="dateParse"
     />
     <fudis-datepicker
       fudisDateEnd
       [label]="'End date'"
       [helpText]="'Choose end date'"
       [control]="controlEnd"
+      [dateParse]="dateParse"
     />
   </fudis-date-range> `,
 });
@@ -77,9 +82,12 @@ const TemplateDateRange: StoryFn<DateRangeComponent> = (args: DateRangeComponent
 export const DateRange = TemplateDateRange.bind({});
 DateRange.args = {
   dateComparisonParse: true,
+  dateParse: true,
 };
 
-const TemplateDateRangeMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponent) => ({
+const TemplateDateRangeMinMax: StoryFn<DateRangeComponent | DatepickerComponent> = (
+  args: DateRangeComponent | DatepickerComponent,
+) => ({
   props: {
     ...args,
     controlStart: new FormControl<Date | null>(null, [
@@ -103,12 +111,14 @@ const TemplateDateRangeMinMax: StoryFn<DateRangeComponent> = (args: DateRangeCom
       [label]="'Start date'"
       [helpText]="'Choose start date'"
       [control]="controlStart"
+      [dateParse]="dateParse"
     />
     <fudis-datepicker
       fudisDateEnd
       [label]="'End date'"
       [helpText]="'Choose end date'"
       [control]="controlEnd"
+      [dateParse]="dateParse"
     />
   </fudis-date-range> `,
 });
@@ -116,4 +126,5 @@ const TemplateDateRangeMinMax: StoryFn<DateRangeComponent> = (args: DateRangeCom
 export const WithMinMaxValidators = TemplateDateRangeMinMax.bind({});
 WithMinMaxValidators.args = {
   dateComparisonParse: true,
+  dateParse: true,
 };
