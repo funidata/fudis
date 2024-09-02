@@ -2,6 +2,7 @@ import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { linkTo } from "@storybook/addon-links";
 import { DateRangeComponent } from "./date-range.component.ts";
 import * as DateRangeStories from "./date-range.stories.ts";
+import { dateRangeExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Date/Date Range" />
 
@@ -34,4 +35,4 @@ Set `dateComparisonParse` to `false` for parent Date Range Component to disable 
 
 ## Properties
 
-<ArgTypes of={DateRangeComponent} />
+<ArgTypes of={DateRangeComponent} exclude={dateRangeExclude} />

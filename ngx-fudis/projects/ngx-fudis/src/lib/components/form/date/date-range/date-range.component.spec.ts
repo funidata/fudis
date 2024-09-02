@@ -83,12 +83,10 @@ describe('DateRangeComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should have default CSS class and generated id', () => {
+    it('should have default CSS class before datepickers are mounted', () => {
       expect(sortClasses(wrapperElement.className)).toEqual(
-        sortClasses('fudis-date-range fudis-date-range--visible'),
+        sortClasses('fudis-date-range fudis-date-range--hidden'),
       );
-
-      expect(wrapperElement.getAttribute('id')).toEqual('fudis-date-range-1');
     });
   });
 
@@ -103,6 +101,16 @@ describe('DateRangeComponent', () => {
 
     it('should create', () => {
       expect(mockComponent).toBeTruthy();
+    });
+
+    it('should not have hidden CSS class after rendering done', () => {
+      expect(sortClasses(wrapperElement.className)).toEqual(
+        sortClasses('fudis-date-range fudis-date-range--hidden'),
+      );
+
+      mockFixture.whenRenderingDone().finally(() => {
+        expect(wrapperElement.className).toEqual('fudis-date-range');
+      });
     });
 
     it('should have two child Datepickers', () => {

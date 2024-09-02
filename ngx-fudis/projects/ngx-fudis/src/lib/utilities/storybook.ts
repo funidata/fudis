@@ -102,7 +102,6 @@ export const datepickerExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']
 
 export const dateRangeExclude: RegExp = excludeRegex([
   'checkDateCrossings',
-  'id',
   'showDateComparisonErrors',
   'setLabelHeight',
 ]);
