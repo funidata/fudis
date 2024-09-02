@@ -120,7 +120,7 @@ const TemplateDateRangeMinMax: StoryFn<DateRangeComponent | DatepickerComponent>
       [control]="controlEnd"
       [dateParse]="dateParse"
     />
-  </fudis-date-range> `,
+  </fudis-date-range>`,
 });
 
 export const WithMinMaxValidators = TemplateDateRangeMinMax.bind({});

@@ -66,10 +66,15 @@ export class DateRangeComponent implements OnChanges {
 
   ngOnChanges(changes: FudisComponentChanges<DateRangeComponent>): void {
     const dateComparisonParse = changes.dateComparisonParse?.currentValue;
-    if (dateComparisonParse) {
-      this.checkDateCrossings();
-    } else if (dateComparisonParse === false) {
-      this.showDateComparisonErrors.next(false);
+    const dateComparisonParseChanged =
+      changes.dateComparisonParse?.currentValue !== changes.dateComparisonParse?.previousValue;
+
+    if (dateComparisonParseChanged) {
+      if (dateComparisonParse) {
+        this.checkDateCrossings();
+      } else if (dateComparisonParse === false) {
+        this.showDateComparisonErrors.next(false);
+      }
     }
   }
 
@@ -82,6 +87,9 @@ export class DateRangeComponent implements OnChanges {
     );
 
     if (labels?.length === 2) {
+      (labels[0] as HTMLLabelElement).style.height = 'initial';
+      (labels[1] as HTMLLabelElement).style.height = 'initial';
+
       const labelOneHeigth = labels[0].clientHeight;
       const labelTwoHeigth = labels[1].clientHeight;
 
@@ -98,7 +106,7 @@ export class DateRangeComponent implements OnChanges {
         (labels[0] as HTMLLabelElement).style.height = `${labelTwoHeigth / fontSize}rem`;
       }
 
-      // Recheck is run only when Datepickers are initialized
+      // Recheck when Datepickers are initialized
       if (recheck) {
         setTimeout(() => {
           this.setLabelHeight();
