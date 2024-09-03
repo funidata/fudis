@@ -113,10 +113,9 @@ const Template: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) =
   },
   template: html`
     <fudis-body-text
-      class="grid-refresh-text"
+      class="grid-refresh-text fudis-mb-lg"
       [variant]="'sm-regular'"
-      style="width: 12rem;
-  margin-bottom: 2rem;"
+      style="width: 12rem;"
     >
       &uarr; Click 'Remount' refresh button from the toolbar to refresh canvas error
       message.</fudis-body-text

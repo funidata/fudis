@@ -27,7 +27,6 @@ import { ValidatorErrorMessageComponent } from '../error-message/validator-error
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { SpacingDirective } from '../../../directives/spacing/spacing.directive';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
@@ -136,7 +135,6 @@ describe('ErrorSummaryComponent', () => {
         MockFormComponent,
         NotificationComponent,
         SectionComponent,
-        SpacingDirective,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],

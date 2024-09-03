@@ -13,7 +13,6 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
-import { SpacingDirective } from '../../../directives/spacing/spacing.directive';
 import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
@@ -100,7 +99,6 @@ describe('FormComponent', () => {
         LinkDirective,
         MockFormComponent,
         NotificationComponent,
-        SpacingDirective,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],

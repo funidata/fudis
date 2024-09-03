@@ -27,12 +27,6 @@ import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.comp
 import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button-group.component';
 import { SelectComponent } from '../../select/select/select.component';
 import { MultiselectComponent } from '../../select/multiselect/multiselect.component';
-import { DateRangeComponent } from '../../date/date-range/date-range.component';
-import {
-  EndDateErrorDirective,
-  StartDateErrorDirective,
-} from '../../../../directives/content-projection/content/content.directive';
-import { FudisDateRangeItem } from '../../../../types/forms';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
@@ -47,9 +41,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     @Host() @Optional() private _textInput: TextInputComponent,
     @Host() @Optional() private _textArea: TextAreaComponent,
     @Host() @Optional() private _datePicker: DatepickerComponent,
-    @Host() @Optional() private _dateRange: DateRangeComponent,
-    @Host() @Optional() private _dateStart: StartDateErrorDirective,
-    @Host() @Optional() private _dateEnd: EndDateErrorDirective,
     @Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
     @Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
     @Host() @Optional() private _select: SelectComponent,
@@ -62,10 +53,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
       this._parent = _textArea;
     } else if (_datePicker) {
       this._parent = _datePicker;
-    } else if (_dateRange && _dateStart) {
-      this._parent = _dateRange.startDate;
-    } else if (_dateRange && _dateEnd) {
-      this._parent = _dateRange.endDate;
     } else if (_radioButtonGroup) {
       this._parent = _radioButtonGroup;
     } else if (_inputWithLanguageOptions) {
@@ -118,7 +105,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     | TextInputComponent
     | TextAreaComponent
     | DatepickerComponent
-    | FudisDateRangeItem
     | RadioButtonGroupComponent
     | SelectComponent
     | MultiselectComponent;

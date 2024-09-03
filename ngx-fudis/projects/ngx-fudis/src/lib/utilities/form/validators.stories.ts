@@ -85,27 +85,24 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         FudisValidators.pattern(/[\d]/, 'Text should include at least one digit'),
       ),
     },
-    // Expose after DateRange is exposed to public API
-    // Deleted from the template:
-    // <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
-    // startDate: {
-    //   label: 'DatepickerMin Validator',
-    //   control: new FormControl<Date | null>(null, [
-    //     FudisValidators.datepickerMin({
-    //       value: new Date(2024, 0, 10),
-    //       message: 'Start date cannot be earlier than 10.1.2024',
-    //     }),
-    //   ]),
-    // },
-    // endDate: {
-    //   label: 'DatepickerMax Validator',
-    //   control: new FormControl<Date | null>(null, [
-    //     FudisValidators.datepickerMax({
-    //       value: new Date(2024, 2, 25),
-    //       message: 'End date cannot be later than 25.3.2024',
-    //     }),
-    //   ]),
-    // },
+    startDate: {
+      control: new FormControl<Date | null>(
+        null,
+        FudisValidators.datepickerMin({
+          value: new Date(2024, 7, 16),
+          message: 'Start date cannot be earlier than 16.8.2024',
+        }),
+      ),
+    },
+    endDate: {
+      control: new FormControl<Date | null>(
+        null,
+        FudisValidators.datepickerMax({
+          value: new Date(2024, 7, 27),
+          message: 'End date cannot be later than 27.8.2024',
+        }),
+      ),
+    },
     checkboxGroupAtLeastOneRequired: {
       formGroup: berryFormGroup,
       options: [
@@ -138,6 +135,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
   template: html`
     <fudis-grid [columns]="2" [marginBottom]="'xl'">
       <fudis-heading [level]="3">Fudis Validators</fudis-heading>
+      <fudis-heading [level]="4">Text Validators</fudis-heading>
       <fudis-text-input [label]="'Required validator'" [control]="basicTextInput.control" />
       <fudis-text-input
         [label]="'Email validator'"
@@ -146,19 +144,31 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       />
       <fudis-text-input [label]="'MinLength validator'" [control]="minLengthTextInput.control" />
       <fudis-text-input [label]="'MaxLength validator'" [control]="maxLengthTextInput.control" />
+      <fudis-heading [level]="4">Number Validators</fudis-heading>
       <fudis-text-input
         [label]="'Min number validator'"
         [control]="minNumberInput.control"
         [type]="'number'"
-        [size]="'md'"
       />
       <fudis-text-input
         [label]="'Max number validator'"
         [control]="maxNumberInput.control"
         [type]="'number'"
-        [size]="'md'"
       />
+      <fudis-heading [level]="4">Other Validators</fudis-heading>
       <fudis-text-input [label]="'Pattern validator'" [control]="patternTextInput.control" />
+      <fudis-date-range fudisGridItem [columns]="'stretch'">
+        <fudis-datepicker
+          fudisDateStart
+          [label]="'Datepicker min validator'"
+          [control]="startDate.control"
+        />
+        <fudis-datepicker
+          fudisDateEnd
+          [label]="'Datepicker max validator'"
+          [control]="endDate.control"
+        />
+      </fudis-date-range>
     </fudis-grid>
     <hr class="fudis-hr" />
     <fudis-grid [columns]="2" [marginTop]="'xl'">

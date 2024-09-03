@@ -21,7 +21,6 @@ export class FudisIdService {
       button: [],
       'autocomplete-multi-select': [],
       datepicker: [],
-      daterange: [],
       dialog: [],
       dropdown: [],
       'error-message': [],
