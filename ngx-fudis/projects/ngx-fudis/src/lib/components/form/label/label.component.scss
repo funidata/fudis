@@ -22,6 +22,7 @@
     min-height: spacing.$spacing-md;
 
     &__text {
+      overflow-wrap: anywhere;
       margin-right: spacing.$spacing-xs;
     }
 

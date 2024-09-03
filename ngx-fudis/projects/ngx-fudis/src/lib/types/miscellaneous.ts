@@ -108,6 +108,7 @@ export interface FudisTranslationConfig {
     CALENDAR: string;
     CLOSE: string;
     OPEN: string;
+    PLACEHOLDER: string;
     PREV_MONTH: string;
     NEXT_MONTH: string;
     PREV_YEAR: string;

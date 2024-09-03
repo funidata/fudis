@@ -1,19 +1,18 @@
 @use "../../../../foundations/spacing/tokens.scss" as spacing;
 
-.fudis-daterange {
-  display: flex;
-  align-items: flex-start;
-  opacity: 0;
+.fudis-date-range {
+  display: grid;
+  grid-template-columns: 1fr spacing.$spacing-md 1fr;
+  opacity: 1;
   max-width: spacing.$spacing-input-lg;
 
-  &--visible {
-    opacity: 1;
+  /* Show Date Range only after it has calculated the label height for each Datepicker */
+  &--hidden {
+    opacity: 0;
   }
 
-  &__start-date {
-    display: flex;
-    position: relative;
-
+  /* Add hyphen only after the first Datepicker */
+  fudis-datepicker:nth-of-type(1) {
     /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-class-pattern */
     & .fudis-datepicker__input-wrapper {
       &::after {
