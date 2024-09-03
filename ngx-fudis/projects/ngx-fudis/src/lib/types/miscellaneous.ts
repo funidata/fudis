@@ -65,22 +65,6 @@ export type FudisExpandableType = 'regular' | 'lite';
  */
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
-export type FudisLanguageBadgeContent = {
-  [lang in FudisLanguageAbbr]?: boolean | null | undefined;
-};
-
-export type FudisLanguageOption =
-  | { value: 'finnish'; label: 'FI' }
-  | { value: 'swedish'; label: 'SV' }
-  | { value: 'english'; label: 'EN' }
-  | { value: string | FudisLanguageAbbr; label: string };
-
-export interface FudisLanguageBadgeTranslations {
-  en?: string;
-  sv?: string;
-  fi?: string;
-}
-
 /**
  * Notification
  */

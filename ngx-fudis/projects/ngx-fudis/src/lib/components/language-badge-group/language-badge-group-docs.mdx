@@ -1,0 +1,56 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+import { Source } from "@storybook/blocks";
+import { LanguageBadgeGroupComponent } from "./language-badge-group.component";
+import { languageBadgeGroupExclude } from "../../utilities/storybook";
+import * as LanguageBadgeGroupStories from "./language-badge-group.stories.ts";
+
+<Meta title="Components/Language Badge Group" />
+
+# Language Badge Group Component
+
+Language Badge Group is a language selector component designed to use with specific translatable text and string input elements.
+The component helps to change the selected translation and notes if the content has missing translation in any selectable language.
+
+## Usage Guidelines
+
+By default Language Badge Group always display Badges for Finnish, Swedish and English in this order.
+To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()` to define a new config.
+Check documentation at [FudisTranslationService](/docs/services-translation--documentation#translation-service).
+
+### Properties
+
+Language badge group has one mandatory input property `translatedLanguages` with `FudisLanguageAbbr[]` type.
+The property is a list that tells for which of the selectable languages translations are provided for.
+
+### Handling changes
+
+Language badge group has `handleBadgeClick` output property. When clicking the language badge, the property handleBadgeClick will emit a selected language string.
+
+## Examples
+
+### Basic example
+
+<Canvas of={LanguageBadgeGroupStories.LanguageBadges}></Canvas>
+
+### Interactive example along with app language and badge language options change
+
+If the current app language is among the selectable and provided languages, it will be selected as a default.
+Otherwise the first selectable language with provided translation will be the default selected.
+
+<Canvas of={LanguageBadgeGroupStories.LanguageBadgesInteractive}></Canvas>
+
+### Accessibility
+
+- Language badge has visible focus state
+- Badge group can be navigated with keyboard tab key
+- Badge click can be triggered with keyboard enter and space key
+- Each badge has an aria-label informing the full language name and possible missing and selected states
+
+### Related directives / services
+
+- [Tooltip](/docs/directives-tooltip--documentation)
+- [FudisTranslationService](/docs/services-translation--documentation#translation-service)
+
+## Properties
+
+<ArgTypes of={LanguageBadgeGroupComponent} exclude={languageBadgeGroupExclude} />

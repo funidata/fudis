@@ -79,7 +79,7 @@ const preview = {
             "Dialog",
             "Dropdown Menu",
             "Expandable",
-
+            "Language Badge Group",
             "Form",
             [
               "Checkbox Group",

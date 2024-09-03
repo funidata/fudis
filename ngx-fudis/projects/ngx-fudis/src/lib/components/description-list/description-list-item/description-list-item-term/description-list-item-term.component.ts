@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Host, Input, effect } from '@angular/core';
-import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
+import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
@@ -37,14 +37,14 @@ export class DescriptionListItemTermComponent {
       const parentLanguageOptions = _parentDlItem.getDetailsLanguageOptions()();
 
       if (parentLanguageOptions) {
-        const options = {};
+        const translated: FudisLanguageAbbr[] = [];
 
         for (const [key, value] of Object.entries(parentLanguageOptions)) {
-          const itemValue = Object.keys(value).some((itemId) => value[itemId] !== null);
-
-          Object.assign(options, { [key]: itemValue });
+          if (Object.keys(value).some((itemId) => value[itemId] !== null)) {
+            translated.push(<FudisLanguageAbbr>key);
+          }
         }
-        this._parentLanguageOptions = options;
+        this._parentLanguageTranslations = translated;
       }
     });
   }
@@ -60,9 +60,9 @@ export class DescriptionListItemTermComponent {
   @Input() contentText: string;
 
   /**
-   * Available languages of sibling dt elements fetched from the parent dl-item element
+   * Available translated languages of sibling dt elements fetched from the parent dl-item element
    */
-  protected _parentLanguageOptions: FudisLanguageBadgeContent | null;
+  protected _parentLanguageTranslations: FudisLanguageAbbr[];
 
   /**
    * Main CSS class
