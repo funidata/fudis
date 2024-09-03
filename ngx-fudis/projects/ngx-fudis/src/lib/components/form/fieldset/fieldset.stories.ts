@@ -3,11 +3,7 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angul
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { BehaviorSubject } from 'rxjs';
-import {
-  FudisSelectOption,
-  FudisRadioButtonOption,
-  // FudisDateRangeItem,
-} from '../../../types/forms';
+import { FudisSelectOption, FudisRadioButtonOption } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 // import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -68,7 +64,18 @@ import readme from './readme.mdx';
               [value]="option.value"
             />
           </fudis-radio-button-group>
-          <!-- <fudis-date-range [startDate]="startDate" [endDate]="endDate" /> -->
+          <fudis-date-range>
+            <fudis-datepicker
+              fudisDateStart
+              [label]="'Start date'"
+              [control]="fieldsetExample.controls.startDate"
+            />
+            <fudis-datepicker
+              fudisDateEnd
+              [label]="'End date'"
+              [control]="fieldsetExample.controls.endDate"
+            />
+          </fudis-date-range>
         </fudis-grid>
       </ng-template>
     </fudis-fieldset>
@@ -108,24 +115,13 @@ class FieldsetExampleComponent {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    // startDate: new FormControl<Date | null>(
-    //   null,
-    //   FudisValidators.required('Start date is missing.'),
-    // ),
-    // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is missing.')),
+    startDate: new FormControl<Date | null>(
+      null,
+      FudisValidators.required('Start date is missing.'),
+    ),
+    endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is missing.')),
     courseType: new FormControl('', FudisValidators.required('Course type must be selected.')),
   });
-
-  // Expose when DateRange is exposed to public API
-  // startDate: FudisDateRangeItem = {
-  //   control: this.fieldsetExample.controls.startDate,
-  //   label: 'Start date',
-  // };
-
-  // endDate: FudisDateRangeItem = {
-  //   control: this.fieldsetExample.controls.endDate,
-  //   label: 'End date',
-  // };
 
   languageOptions: FudisSelectOption<object>[] = [
     { value: 'finnish', label: 'FI' },

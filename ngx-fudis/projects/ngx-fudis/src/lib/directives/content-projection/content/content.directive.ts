@@ -32,16 +32,3 @@ export class FooterContentLeftDirective {
 export class FooterContentRightDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
-
-/**
- * Error Message directives for Date Range Component
- */
-@Directive({ selector: '[fudisStartDateError]' })
-export class StartDateErrorDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
-
-@Directive({ selector: '[fudisEndDateError]' })
-export class EndDateErrorDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}

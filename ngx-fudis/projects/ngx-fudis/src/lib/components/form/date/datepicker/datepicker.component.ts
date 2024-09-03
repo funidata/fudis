@@ -31,6 +31,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DateRangeComponent } from '../date-range/date-range.component';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -52,6 +53,7 @@ export class DatepickerComponent
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
+    @Host() @Optional() protected _parentDateRange: DateRangeComponent | null,
     private _adapter: DateAdapter<Date>,
     private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
@@ -61,6 +63,37 @@ export class DatepickerComponent
     _idService: FudisIdService,
   ) {
     super(_idService, _changeDetectorRef);
+
+    /**
+     * Set and delete errors from Date Range start and end date inputs
+     */
+    if (_parentDateRange) {
+      _parentDateRange?.showDateComparisonErrors.pipe(takeUntilDestroyed()).subscribe((value) => {
+        const currentErrors = this.control?.errors;
+
+        if (value) {
+          if (this.dateRangeType === 'start') {
+            this.control?.setErrors({
+              ...currentErrors,
+              datepickerStartDateInvalid: { message: this._startDateInvalidTranslation },
+            });
+          } else if (this.dateRangeType === 'end') {
+            this.control?.setErrors({
+              ...currentErrors,
+              datepickerEndDateInvalid: { message: this._endDateInvalidTranslation },
+            });
+          }
+        } else {
+          if (currentErrors) {
+            delete currentErrors['datepickerStartDateInvalid'];
+            delete currentErrors['datepickerEndDateInvalid'];
+
+            this.control?.setErrors({ ...currentErrors });
+            this.control?.updateValueAndValidity();
+          }
+        }
+      });
+    }
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
@@ -78,13 +111,15 @@ export class DatepickerComponent
       this._dateParseError.next(translations.DATEPICKER.VALIDATION.DATE_PARSE);
 
       _datepickerIntl = updateMatDatePickerTranslations(translations, _datepickerIntl);
+
+      this._startDateInvalidTranslation =
+        this._translationService.getTranslations()().DATEPICKER.VALIDATION.START_DATE_INVALID;
+      this._endDateInvalidTranslation =
+        this._translationService.getTranslations()().DATEPICKER.VALIDATION.END_DATE_INVALID;
+
+      this._placeholderString.next(translations.DATEPICKER.PLACEHOLDER);
     });
   }
-
-  // TODO: Check these when enabling Date Range
-  // @ContentChild(StartDateErrorDirective) startDateError: StartDateErrorDirective;
-
-  // @ContentChild(EndDateErrorDirective) endDateError: EndDateErrorDirective;
 
   /**
    * FormControl for the input
@@ -92,14 +127,19 @@ export class DatepickerComponent
   @Input({ required: true }) override control: FormControl<Date | null>;
 
   /**
-   * Available sizes for the datepicker
+   * Available sizes for the Datepicker
    */
   @Input() size: FudisInputSize = 'md';
 
   /**
    * Show internal date parsing validator message. By setting to false date parsing is not executed.
    */
-  @Input() parseDateValidator: boolean = true;
+  @Input() dateParse: boolean = true;
+
+  /**
+   * Type of the Datepicker in Date Range
+   */
+  public dateRangeType: 'start' | 'end' | null = null;
 
   /**
    * Allowed range for minimun date
@@ -112,9 +152,24 @@ export class DatepickerComponent
   protected _maxDate: Date | null | undefined;
 
   /**
+   * Fudis translation for invalid start date in Date Range
+   */
+  protected _startDateInvalidTranslation: string;
+
+  /**
+   * Fudis translation for invalid end date in Date Range
+   */
+  protected _endDateInvalidTranslation: string;
+
+  /**
    * Fudis translation for date parse error message
    */
   protected _dateParseError = new BehaviorSubject<string>('');
+
+  /**
+   * Fudis translation for Datepicker placeholder text
+   */
+  protected _placeholderString = new BehaviorSubject<string>('');
 
   /**
    * Instance of Datepicker Parse validator
@@ -122,7 +177,7 @@ export class DatepickerComponent
   private _parseValidatorInstance: FudisValidatorFn | null;
 
   /**
-   * Validator reads html input field and checks if it can be converted to valid Date object
+   * Validator reads HTML input field and checks if it can be converted to valid Date object
    */
   private _datepickerParseValidatorFn(): FudisValidatorFn {
     return (control: AbstractControl) => {
@@ -131,13 +186,11 @@ export class DatepickerComponent
       }
 
       const inputElValue = this._inputRef?.nativeElement?.value;
-
       const isValidDate = inputElValue ? parseDate(inputElValue) : false;
 
       if (!!inputElValue && !isValidDate) {
         return { datepickerDateParse: { message: this._dateParseError } };
       }
-
       return null;
     };
   }
@@ -180,7 +233,7 @@ export class DatepickerComponent
   ngOnInit(): void {
     this._setInputId('datepicker');
 
-    if (!this._parseValidatorInstance && this.parseDateValidator) {
+    if (!this._parseValidatorInstance && this.dateParse) {
       this._addParseValidator();
     }
 
@@ -188,11 +241,11 @@ export class DatepickerComponent
   }
 
   ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {
-    // If prop parseDateValidator value changes, add or remove validator accordingly
-    if (changes.parseDateValidator?.currentValue !== changes.parseDateValidator?.previousValue) {
-      if (changes.parseDateValidator?.currentValue && !this._parseValidatorInstance) {
+    // If prop dateParse value changes, add or remove validator accordingly
+    if (changes.dateParse?.currentValue !== changes.dateParse?.previousValue) {
+      if (changes.dateParse?.currentValue && !this._parseValidatorInstance) {
         this._addParseValidator();
-      } else if (!changes.parseDateValidator?.currentValue && this._parseValidatorInstance) {
+      } else if (!changes.dateParse?.currentValue && this._parseValidatorInstance) {
         this._removeParseValidator();
       }
     }
@@ -201,8 +254,17 @@ export class DatepickerComponent
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
 
+      // Subscribe to control value changes and call parent's date crossing check with current value and Date Range input type
+      if (this._parentDateRange && this.dateRangeType) {
+        this.control.valueChanges
+          .pipe(takeUntilDestroyed(this._destroyRef))
+          .subscribe((value) =>
+            this._parentDateRange?.checkDateCrossings(value, this.dateRangeType!),
+          );
+      }
+
       // If control changes and these checks are on, add parseValidator
-      if (!this._parseValidatorInstance && this.parseDateValidator) {
+      if (!this._parseValidatorInstance && this.dateParse) {
         this._addParseValidator();
       }
     }
@@ -212,6 +274,8 @@ export class DatepickerComponent
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+
+    this._parentDateRange?.setLabelHeight(true);
   }
 
   ngOnDestroy(): void {
