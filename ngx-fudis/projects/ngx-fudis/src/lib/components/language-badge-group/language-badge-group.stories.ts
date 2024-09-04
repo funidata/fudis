@@ -56,7 +56,7 @@ class LanguageChangeComponent {
     this.selected = this._languageService.getLanguage();
   }
 
-  @Input() translatedLanguages: FudisLanguageAbbr[] = [];
+  translatedLanguages: FudisLanguageAbbr[] = ['fi', 'en'];
 
   changeBadgeLanguages(languages: FudisLanguageAbbr[]): void {
     this._languageService.setSelectableLanguages(languages);
@@ -116,9 +116,7 @@ const WithInteractiveContentTemplate: StoryFn<LanguageBadgeGroupComponent> = (
   props: {
     ...args,
   },
-  template: html`<interactive-example-with-language-service-change-component
-    [translatedLanguages]="translatedLanguages"
-  />`,
+  template: html`<interactive-example-with-language-service-change-component />`,
 });
 
 export const WithInteractiveContent = WithInteractiveContentTemplate.bind({});

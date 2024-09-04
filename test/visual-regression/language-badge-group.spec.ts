@@ -24,9 +24,7 @@ async function shouldSelectEnglishTranslation(page: Page) {
   await expect(page.getByText(translations.fi)).toBeHidden();
 }
 test("language badge group default", async ({ page }) => {
-  await page.goto(
-    "/iframe.html?id=components-language-badge-group--language-badges&viewMode=story",
-  );
+  await page.goto("/iframe.html?args=&id=components-language-badge-group--example&viewMode=story");
   await expect(page).toHaveScreenshot("language-badge-group.png");
 
   // Hover fi
@@ -44,7 +42,7 @@ test("language badge group default", async ({ page }) => {
 
 test("language badge group interactive", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=&id=components-language-badge-group--language-badges-interactive&viewMode=story",
+    "/iframe.html?args=&id=components-language-badge-group--with-interactive-content&viewMode=story",
   );
 
   // Set app language to Finnish
