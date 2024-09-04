@@ -261,7 +261,7 @@ import {
     HeaderDirective,
     HeadingComponent,
     IconComponent,
-    // InputWithLanguageOptionsComponent,
+    InputWithLanguageOptionsComponent,
     LinkComponent,
     LinkDirective,
     MultiselectComponent,

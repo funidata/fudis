@@ -51,7 +51,7 @@ export class InputWithLanguageOptionsComponent
    * FormGroup including controls.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup | any>;
+  @Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>;
 
   /**
    * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', label: 'EN'}" pairs with "english: New FormControl('')"

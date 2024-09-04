@@ -115,9 +115,9 @@ export type FudisDropdownLanguageOption =
   | { value: 'english'; label: 'EN' }
   | { value: FudisLanguageAbbr; label: string };
 
-export interface FudisInputWithLanguageOptionsFormGroup {
+export type FudisInputWithLanguageOptionsFormGroup<T extends object> = T & {
   [language: string]: FormControl<string | null>;
-}
+};
 
 export type FudisCheckboxGroupFormGroup<T extends object> = T & {
   [key: string]: FormControl<boolean | null | undefined>;
