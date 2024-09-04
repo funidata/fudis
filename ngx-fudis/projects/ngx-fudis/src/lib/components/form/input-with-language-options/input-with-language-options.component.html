@@ -48,7 +48,7 @@
       [initialFocus]="initialFocus && _firstLoad"
       [invalidState]="formGroup.invalid && formGroup.touched"
       [disableGuidance]="true"
-      [control]="$any(formGroup).controls[control.key]"
+      [control]="formGroup.controls[control.key]"
     ></fudis-text-input>
   </ng-container>
 </ng-template>
@@ -67,7 +67,7 @@
       [initialFocus]="initialFocus && _firstLoad"
       [invalidState]="formGroup.invalid && formGroup.touched"
       [disableGuidance]="true"
-      [control]="$any(formGroup).controls[control.key]"
+      [control]="formGroup.controls[control.key]"
     ></fudis-text-area>
   </ng-container>
 </ng-template>
