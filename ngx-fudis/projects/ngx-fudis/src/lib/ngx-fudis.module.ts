@@ -262,6 +262,7 @@ import {
     HeadingComponent,
     IconComponent,
     // InputWithLanguageOptionsComponent,
+    LanguageBadgeGroupComponent,
     LinkComponent,
     LinkDirective,
     MultiselectComponent,
