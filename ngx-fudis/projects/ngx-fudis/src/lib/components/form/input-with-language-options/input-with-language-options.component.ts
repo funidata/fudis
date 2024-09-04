@@ -18,6 +18,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -256,17 +257,17 @@ export class InputWithLanguageOptionsComponent
 
   ngOnInit(): void {
     this._setInputId('input-with-language-options');
-
-    this._updatedOptions = this.updateDropdownList();
-
-    this._dropdownControl = new FormControl(this._updatedOptions[0]);
-    this._for = `${this.id}_${this.options[0].value}`;
-
-    this.initialRequiredCheck();
   }
 
-  ngOnChanges(): void {
-    this._updatedOptions = this.updateDropdownList();
+  ngOnChanges(changes: FudisComponentChanges<InputWithLanguageOptionsComponent>): void {
+    if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
+      this._updatedOptions = this.updateDropdownList();
+
+      this._dropdownControl = new FormControl(this._updatedOptions[0]);
+      this._for = `${this.id}_${this.options[0].value}`;
+
+      this.initialRequiredCheck();
+    }
   }
 
   ngAfterViewInit(): void {
