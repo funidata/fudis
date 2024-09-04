@@ -127,6 +127,6 @@ LanguageBadgesInteractive.args = {
 };
 LanguageBadgesInteractive.parameters = {
   controls: {
-    exclude: languageBadgeGroupControlsExclude,
+    exclude: /.*/g,
   },
 };
