@@ -87,7 +87,7 @@ export default {
   },
 } as Meta;
 
-const LanguageBadgesTemplate: StoryFn<LanguageBadgeGroupComponent> = (
+const ExampleTemplate: StoryFn<LanguageBadgeGroupComponent> = (
   args: LanguageBadgeGroupComponent,
 ) => ({
   props: {
@@ -100,17 +100,17 @@ const LanguageBadgesTemplate: StoryFn<LanguageBadgeGroupComponent> = (
   />`,
 });
 
-export const LanguageBadges = LanguageBadgesTemplate.bind({});
-LanguageBadges.args = {
+export const Example = ExampleTemplate.bind({});
+Example.args = {
   translatedLanguages: ['fi', 'sv'],
 };
-LanguageBadges.parameters = {
+Example.parameters = {
   controls: {
     exclude: languageBadgeGroupControlsExclude,
   },
 };
 
-const LanguageBadgesInteractiveTemplate: StoryFn<LanguageBadgeGroupComponent> = (
+const WithInteractiveContentTemplate: StoryFn<LanguageBadgeGroupComponent> = (
   args: LanguageBadgeGroupComponent,
 ) => ({
   props: {
@@ -121,11 +121,11 @@ const LanguageBadgesInteractiveTemplate: StoryFn<LanguageBadgeGroupComponent> = 
   />`,
 });
 
-export const LanguageBadgesInteractive = LanguageBadgesInteractiveTemplate.bind({});
-LanguageBadgesInteractive.args = {
+export const WithInteractiveContent = WithInteractiveContentTemplate.bind({});
+WithInteractiveContent.args = {
   translatedLanguages: ['fi', 'en'],
 };
-LanguageBadgesInteractive.parameters = {
+WithInteractiveContent.parameters = {
   controls: {
     exclude: /.*/g,
   },
