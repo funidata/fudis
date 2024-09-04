@@ -16,7 +16,7 @@ import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';
 
     <fudis-language-badge-group
       [translatedLanguages]="translatedLanguages"
-      (handleBadgeClick)="languageChange($event)"
+      (handleClick)="languageChange($event)"
     />
 
     <fudis-body-text style="margin-top: 1rem;margin-bottom: 3rem;">{{
@@ -96,7 +96,7 @@ const LanguageBadgesTemplate: StoryFn<LanguageBadgeGroupComponent> = (
   },
   template: html`<fudis-language-badge-group
     [translatedLanguages]="translatedLanguages"
-    (handleBadgeClick)="languageChange($event)"
+    (handleClick)="languageChange($event)"
   />`,
 });
 

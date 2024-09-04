@@ -235,7 +235,7 @@ export const languageBadgeGroupExclude: RegExp = excludeRegex([...languageBadgeG
 
 export const languageBadgeGroupControlsExclude: RegExp = excludeRegex([
   ...languageBadgeGroupCommonExclude,
-  'handleBadgeClick',
+  'handleClick',
 ]);
 
 /**

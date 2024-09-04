@@ -82,13 +82,13 @@ describe('LanguageBadgeGroupComponent', () => {
 
   describe('Interaction', () => {
     it('should update language and emit output when clicked', () => {
-      jest.spyOn(component.handleBadgeClick, 'emit');
+      jest.spyOn(component.handleClick, 'emit');
 
       const fiButton = getElement(fixture, '.fudis-language-badge') as HTMLButtonElement;
 
       fiButton.click();
 
-      expect(component.handleBadgeClick.emit).toHaveBeenCalledWith('fi');
+      expect(component.handleClick.emit).toHaveBeenCalledWith('fi');
     });
   });
 });
