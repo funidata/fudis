@@ -24,10 +24,8 @@ import { DateRangeComponent } from './components/form/date/date-range/date-range
 
 import {
   ContentDirective,
-  EndDateErrorDirective,
   FooterContentLeftDirective,
   FooterContentRightDirective,
-  StartDateErrorDirective,
 } from './directives/content-projection/content/content.directive';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
@@ -79,8 +77,6 @@ import { NotificationComponent } from './components/notification/notification.co
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SectionComponent } from './components/section/section.component';
-import { SpacingApiDirective } from './directives/spacing/spacing-api/spacing-api.directive';
-import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
@@ -108,6 +104,10 @@ import { MultiselectOptionComponent } from './components/form/select/multiselect
 import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { SelectIconsComponent } from './components/form/select/common/select-icons/select-icons.component';
+import {
+  DateEndDirective,
+  DateStartDirective,
+} from './directives/form/datepicker/datepicker.directive';
 
 // TODO: sort things better
 
@@ -129,6 +129,8 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     ContentDirective,
     DatepickerComponent,
     DateRangeComponent,
+    DateStartDirective,
+    DateEndDirective,
     DescriptionListComponent,
     DescriptionListItemComponent,
     DescriptionListItemTermComponent,
@@ -143,7 +145,6 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     DropdownMenuComponent,
     DropdownItemBaseDirective,
     DropdownMenuItemComponent,
-    EndDateErrorDirective,
     ErrorMessageComponent,
     ErrorSummaryComponent,
     ExpandableComponent,
@@ -186,9 +187,6 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     SelectGroupComponent,
     SelectOptionBaseDirective,
     SelectOptionComponent,
-    SpacingApiDirective,
-    SpacingDirective,
-    StartDateErrorDirective,
     TextInputComponent,
     TextAreaComponent,
     TooltipDirective,
@@ -233,7 +231,9 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     CheckboxGroupComponent,
     ContentDirective,
     DatepickerComponent,
-    // DateRangeComponent,
+    DateRangeComponent,
+    DateStartDirective,
+    DateEndDirective,
     DescriptionListComponent,
     DescriptionListItemComponent,
     DescriptionListItemTermComponent,
@@ -246,7 +246,6 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     DropdownMenuGroupComponent,
     DropdownMenuComponent,
     DropdownMenuItemComponent,
-    EndDateErrorDirective,
     ErrorMessageComponent,
     ExpandableComponent,
     FooterComponent,
@@ -263,6 +262,7 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     HeadingComponent,
     IconComponent,
     // InputWithLanguageOptionsComponent,
+    LanguageBadgeGroupComponent,
     LinkComponent,
     LinkDirective,
     MultiselectComponent,
@@ -275,8 +275,6 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     SelectComponent,
     SelectOptionComponent,
     SelectGroupComponent,
-    // SpacingDirective,
-    StartDateErrorDirective,
     TextAreaComponent,
     TextInputComponent,
     TooltipDirective,

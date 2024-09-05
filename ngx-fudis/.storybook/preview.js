@@ -79,7 +79,6 @@ const preview = {
             "Dialog",
             "Dropdown Menu",
             "Expandable",
-
             "Form",
             [
               "Checkbox Group",
@@ -89,6 +88,7 @@ const preview = {
               "Field Set",
               "Form",
               "Input With Language Options",
+              "Radio Button Group",
               "Select",
               ["Common Features", "Select", "Multiselect"],
               "Text Area",
@@ -98,6 +98,7 @@ const preview = {
             "Grid",
             ["Grid", "Grid Item"],
             "Icon",
+            "Language Badge Group",
             "Link",
             "Notification",
             "Section",

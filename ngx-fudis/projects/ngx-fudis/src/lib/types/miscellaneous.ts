@@ -40,9 +40,8 @@ export type FudisButtonType = (typeof fudisButtonTypeArray)[number];
  */
 export type FudisDescriptionListVariant = 'regular' | 'compact';
 
-export type FudisDescriptionListItemDetailInfo = {
-  id: string;
-  language: FudisLanguageAbbr;
+export type FudisDescriptionListItemDetailLanguageContent = {
+  [lang in FudisLanguageAbbr]?: { [id: string]: string | null | undefined };
 };
 
 /**
@@ -65,22 +64,6 @@ export type FudisExpandableType = 'regular' | 'lite';
  * Language Badge
  */
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
-
-export type FudisLanguageBadgeContent = {
-  [lang in FudisLanguageAbbr]?: { [id: string]: string | null | undefined };
-};
-
-export type FudisLanguageOption =
-  | { value: 'finnish'; label: 'FI' }
-  | { value: 'swedish'; label: 'SV' }
-  | { value: 'english'; label: 'EN' }
-  | { value: string | FudisLanguageAbbr; label: string };
-
-export interface FudisLanguageBadgeTranslations {
-  en?: string;
-  sv?: string;
-  fi?: string;
-}
 
 /**
  * Notification
@@ -108,6 +91,7 @@ export interface FudisTranslationConfig {
     CALENDAR: string;
     CLOSE: string;
     OPEN: string;
+    PLACEHOLDER: string;
     PREV_MONTH: string;
     NEXT_MONTH: string;
     PREV_YEAR: string;

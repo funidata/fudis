@@ -9,7 +9,6 @@ export const fudisIdComponents = [
   'button',
   'autocomplete-multi-select',
   'datepicker',
-  'daterange',
   'dialog',
   'dropdown',
   'error-message',

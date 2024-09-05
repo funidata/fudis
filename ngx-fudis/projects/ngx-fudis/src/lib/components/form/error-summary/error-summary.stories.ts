@@ -12,9 +12,6 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { excludeAllRegex } from '../../../utilities/storybook';
 
-// TODO: Refactor fudis-body-text inline style to Spacing Directive after the directive is exposed again
-// (fudisSpacing [marginRight]="'sm'" [marginTop]="'xs'")
-
 @Component({
   selector: 'example-error-summary',
   template: ` <fudis-form
@@ -29,7 +26,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisActions type="form">
-      <fudis-body-text style="margin: 0.5rem 1rem 0 0;">
+      <fudis-body-text class="fudis-mt-xs fudis-mr-sm">
         Live remove is "{{ toggleLive }}"
       </fudis-body-text>
       <fudis-button
