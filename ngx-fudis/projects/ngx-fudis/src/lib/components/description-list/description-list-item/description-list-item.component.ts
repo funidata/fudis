@@ -10,7 +10,7 @@ import {
 import {
   FudisDescriptionListVariant,
   FudisLanguageAbbr,
-  FudisLanguageBadgeContent,
+  FudisDescriptionListItemDetailLanguageContent,
 } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
@@ -45,7 +45,9 @@ export class DescriptionListItemComponent {
   /**
    * Storing list of available languages in Details elements
    */
-  private _detailsLanguageOptions = signal<FudisLanguageBadgeContent | null>(null);
+  private _detailsLanguageOptions = signal<FudisDescriptionListItemDetailLanguageContent | null>(
+    null,
+  );
 
   /**
    * Selected language to pass to child components
@@ -77,7 +79,8 @@ export class DescriptionListItemComponent {
    * Called from child Details, if it has a language property
    */
   public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions() || {};
+    const currentContent: FudisDescriptionListItemDetailLanguageContent =
+      this._detailsLanguageOptions() || {};
 
     if (!currentContent[lang]) {
       currentContent[lang] = {};
@@ -92,7 +95,8 @@ export class DescriptionListItemComponent {
    * Called from child Details, if its language property is removed (or updated)
    */
   public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions() || {};
+    const currentContent: FudisDescriptionListItemDetailLanguageContent =
+      this._detailsLanguageOptions() || {};
 
     if (currentContent[lang as FudisLanguageAbbr]?.[id]) {
       delete currentContent[lang]![id];
@@ -109,7 +113,7 @@ export class DescriptionListItemComponent {
     }
   }
 
-  public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent | null> {
+  public getDetailsLanguageOptions(): Signal<FudisDescriptionListItemDetailLanguageContent | null> {
     return this._detailsLanguageOptions.asReadonly();
   }
 

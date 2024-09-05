@@ -63,6 +63,7 @@ export { HeaderDirective } from './lib/directives/content-projection/header/head
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
+export { LanguageBadgeGroupComponent } from './lib/components/language-badge-group/language-badge-group.component';
 export { LinkDirective } from './lib/directives/link/link.directive';
 export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
 export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
