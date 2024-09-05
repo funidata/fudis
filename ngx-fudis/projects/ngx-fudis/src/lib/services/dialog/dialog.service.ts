@@ -9,7 +9,7 @@ export class FudisDialogService {
 
   private _dialogOpen = signal<boolean>(false);
 
-  private _dialogRef: MatDialogRef<any, any>;
+  private _dialogRefs: MatDialogRef<any, any>[] = [];
 
   /**
    * Open new dialog.
@@ -22,18 +22,18 @@ export class FudisDialogService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config?: MatDialogConfig<any>,
   ): MatDialogRef<T, R> {
-    this._dialogRef = this.ngMaterialDialog.open(
+    const newDialog = this.ngMaterialDialog.open(
       component,
       FudisDialogService._createConfig(config),
     );
 
-    this._dialogRef.keydownEvents().subscribe((event) => {
-      if (event.key === 'Escape') {
-        this.close();
-      }
+    this._dialogRefs.push(newDialog);
+
+    newDialog.afterClosed().subscribe(() => {
+      this._dialogRefs.pop();
     });
 
-    return this._dialogRef;
+    return newDialog;
   }
 
   /**
@@ -41,14 +41,13 @@ export class FudisDialogService {
    * @param dialogResult Data sent to Component which opened this dialog.
    */
   public close(dialogResult?: any): void {
-    this._dialogRef.close(dialogResult);
+    this._dialogRefs[this._dialogRefs.length - 1].close(dialogResult);
   }
 
   /**
    * Close all instances of Dialogs
    */
   public closeAll(): void {
-    this._dialogRef.close();
     this.ngMaterialDialog.closeAll();
   }
 
@@ -64,6 +63,14 @@ export class FudisDialogService {
    */
   public setDialogOpenSignal(value: boolean): void {
     this._dialogOpen.set(value);
+  }
+
+  /**
+   *
+   * @returns Amount of dialogs opened
+   */
+  public dialogsOpen(): number {
+    return this._dialogRefs.length;
   }
 
   /**
