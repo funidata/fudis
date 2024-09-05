@@ -218,8 +218,8 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
    */
   exports: [
     ActionsDirective,
-    // AlertComponent,
-    // AlertGroupComponent,
+    AlertComponent,
+    AlertGroupComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
