@@ -15,6 +15,16 @@
 @use "../../foundations/breakpoints/mixins.scss" as breakpoints;
 @use "../../foundations/utilities/mixins.scss" as utilities;
 @use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/typography/mixins.scss" as typography;
+
+.fudis-dialog {
+  /* Body Text inside Dialog should be md-light by default but can be altered by the App */
+  & fudis-body-text {
+    & .fudis-body-text__default {
+      @include typography.body-text-md-light;
+    }
+  }
+}
 
 .cdk-overlay-container {
   & .cdk-global-overlay-wrapper {
