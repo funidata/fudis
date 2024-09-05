@@ -1,4 +1,9 @@
-<div class="fudis-input-with-language-options fudis-input-size__{{ size }}">
+<div
+  class="fudis-input-with-language-options fudis-input-size__{{ size }}"
+  [class.fudis-input-with-language-options--hidden]="
+    (_DOMUtilitiesService.labelHeightMatched | async) === false
+  "
+>
   <div class="fudis-input-with-language-options__inputs">
     <ng-container *ngIf="formGroup.controls">
       <ng-container
@@ -7,24 +12,23 @@
       <fudis-guidance
         [inputLabel]="label"
         [reloadErrorSummary]="_reloadErrorSummary"
-        [maxLength]="maxLength"
+        [maxLength]="_maxLength"
         [helpText]="helpText"
         [formGroup]="formGroup"
         [for]="id"
         [selectedOption]="_dropdownControl.value.value"
       >
-        <ng-content select="fudis-error-message" />
       </fudis-guidance>
     </ng-container>
   </div>
   <fudis-select
     [label]="_languageLabel"
-    class="fudis-input-with-language-options__dropdown"
+    class="fudis-input-with-language-options__select"
     (selectionUpdate)="handleLanguageSelect($event)"
     [control]="_dropdownControl"
     [label]="_languageLabel"
-    [size]="_missingLanguage ? 'xs' : 'lg'"
-    [id]="id + '_language-dropdown'"
+    [size]="'xs'"
+    [id]="id + '_language-select'"
   >
     <ng-template fudisContent type="select-options">
       <fudis-select-option
@@ -49,7 +53,9 @@
       [invalidState]="formGroup.invalid && formGroup.touched"
       [disableGuidance]="true"
       [control]="formGroup.controls[control.key]"
-    ></fudis-text-input>
+    >
+      <ng-content select="fudis-error-message"
+    /></fudis-text-input>
   </ng-container>
 </ng-template>
 
@@ -68,6 +74,7 @@
       [invalidState]="formGroup.invalid && formGroup.touched"
       [disableGuidance]="true"
       [control]="formGroup.controls[control.key]"
-    ></fudis-text-area>
+      ><ng-content select="fudis-error-message"
+    /></fudis-text-area>
   </ng-container>
 </ng-template>

@@ -12,7 +12,8 @@
     max-width: calc(100% - spacing.$spacing-xxl - spacing.$spacing-xxs);
   }
 
-  &__dropdown {
+  &__select {
+    flex-grow: 1;
     max-width: spacing.$spacing-xxl;
   }
 }
