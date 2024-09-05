@@ -34,11 +34,10 @@ const TemplateAllRequired: StoryFn = () => ({
     id: 'unique-input-id-superhero-name',
     label: 'Your superhero name',
     helpText: 'Please provide superhero name in all languages.',
-    maxLength: 22,
     languageOptions: [
-      { value: 'finnish', label: 'FI' },
-      { value: 'swedish', label: 'SV' },
-      { value: 'english', label: 'EN' },
+      { controlName: 'finnish', label: 'FI' },
+      { controlName: 'swedish', label: 'SV' },
+      { controlName: 'english', label: 'EN' },
     ],
     formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
       finnish: new FormControl<string | null>(null, [
@@ -62,7 +61,6 @@ const TemplateAllRequired: StoryFn = () => ({
       [formGroup]="formGroup"
       [label]="label"
       [helpText]="helpText"
-      [maxLength]="maxLength"
     ></fudis-input-with-language-options>
   `,
 });
@@ -72,22 +70,21 @@ const TemplateOneRequired: StoryFn = () => ({
     id: 'unique-input-id-superhero-name',
     label: 'Your superhero name',
     helpText: 'Please provide superhero name in atleast one language.',
-    maxLength: 30,
     languageOptions: [
-      { value: 'finnish', label: 'FI' },
-      { value: 'swedish', label: 'SV' },
-      { value: 'english', label: 'EN' },
+      { controlName: 'finnish', label: 'FI' },
+      { controlName: 'swedish', label: 'SV' },
+      { controlName: 'english', label: 'EN' },
     ],
     formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
       {
         finnish: new FormControl<string | null>(null, [
-          FudisValidators.maxLength(30, 'Too long name'),
+          FudisValidators.maxLength(15, 'Too long name'),
         ]),
         swedish: new FormControl<string | null>(null, [
-          FudisValidators.maxLength(30, 'Too long name'),
+          FudisValidators.maxLength(20, 'Too long name'),
         ]),
         english: new FormControl<string | null>(null, [
-          FudisValidators.maxLength(30, 'Too long name'),
+          FudisValidators.maxLength(25, 'Too long name'),
         ]),
       },
       [
@@ -104,7 +101,6 @@ const TemplateOneRequired: StoryFn = () => ({
       [formGroup]="formGroup"
       [label]="label"
       [helpText]="helpText"
-      [maxLength]="maxLength"
     ></fudis-input-with-language-options>
   `,
 });

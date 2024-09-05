@@ -110,10 +110,10 @@ export type FudisFormErrorSummaryObjectItemErrors = {
 };
 
 export type FudisDropdownLanguageOption =
-  | { value: 'finnish'; label: 'FI' }
-  | { value: 'swedish'; label: 'SV' }
-  | { value: 'english'; label: 'EN' }
-  | { value: FudisLanguageAbbr; label: string };
+  | { controlName: 'finnish'; label: 'FI' }
+  | { controlName: 'swedish'; label: 'SV' }
+  | { controlName: 'english'; label: 'EN' }
+  | { controlName: string; label: string };
 
 export type FudisInputWithLanguageOptionsFormGroup<T extends object> = T & {
   [language: string]: FormControl<string | null>;
