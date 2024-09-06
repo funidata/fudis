@@ -11,7 +11,7 @@
     />
     <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
       <input
-        *ngIf="control.key === _dropdownControl.value.value"
+        *ngIf="control.key === _selectControl.value.value"
         #inputRef
         class="fudis-form-input"
         [class.fudis-input-with-language-options__inputs__text]="variant === 'text-input'"
@@ -22,7 +22,7 @@
             ? true
             : null
         "
-        [attr.aria-label]="label + ', ' + _dropdownControl.value.label"
+        [attr.aria-label]="label + ', ' + _selectControl.value.label"
         [attr.minlength]="_minLength"
         [attr.maxlength]="_maxLength"
         (blur)="handleInputBlur($event, control.key)"
@@ -41,14 +41,14 @@
       [helpText]="helpText"
       [formGroup]="formGroup"
       [for]="id"
-      [selectedOption]="_dropdownControl.value.value"
+      [selectedOption]="_selectControl.value.value"
     />
   </div>
   <fudis-select
     [label]="_languageLabel"
     class="fudis-input-with-language-options__select"
     (selectionUpdate)="handleLanguageSelect($event)"
-    [control]="_dropdownControl"
+    [control]="_selectControl"
     [label]="_languageLabel"
     [size]="'xs'"
     [id]="id + '_language-select'"
