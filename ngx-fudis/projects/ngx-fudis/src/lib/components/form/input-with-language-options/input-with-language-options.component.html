@@ -71,6 +71,7 @@
     *ngIf="_languageLabel | async as label"
     class="fudis-input-with-language-options__select"
     [label]="label"
+    (handleViewInit)="_DOMUtilitiesService.setLabelHeight(true)"
     (selectionUpdate)="_checkHtmlAttributes($event?.value)"
     [control]="_selectControl"
     [size]="'xs'"

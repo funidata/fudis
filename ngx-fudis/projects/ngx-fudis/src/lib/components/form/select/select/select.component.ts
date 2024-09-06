@@ -60,6 +60,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+    this.handleViewInit.emit();
   }
 
   /**

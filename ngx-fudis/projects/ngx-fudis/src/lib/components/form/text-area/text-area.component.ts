@@ -93,6 +93,7 @@ export class TextAreaComponent
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+    this.handleViewInit.emit();
     /**
      * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
      */

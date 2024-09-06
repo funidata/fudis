@@ -268,12 +268,18 @@ export class DatepickerComponent
         this._addParseValidator();
       }
     }
+
+    if (changes.size?.currentValue !== changes.size?.previousValue && this._parentDateRange) {
+      this._parentDateRange?.setLabelHeight();
+    }
   }
 
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+
+    this.handleViewInit.emit();
 
     this._parentDateRange?.setLabelHeight(true);
   }

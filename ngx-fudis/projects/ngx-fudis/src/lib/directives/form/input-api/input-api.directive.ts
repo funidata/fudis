@@ -78,6 +78,11 @@ export class InputApiDirective extends TooltipApiDirective {
   @Output() handleKeyUp: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
   /**
+   * Output emitted when component has finished AfterViewInit lifecycle hook
+   */
+  @Output() handleViewInit: EventEmitter<void> = new EventEmitter<void>();
+
+  /**
    * Fudis translation key for required text
    */
   protected _requiredText: string;

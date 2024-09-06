@@ -87,6 +87,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+    this.handleViewInit.emit();
   }
 
   /**

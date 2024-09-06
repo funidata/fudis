@@ -213,13 +213,19 @@ export class InputWithLanguageOptionsComponent
       this._selectControl = new FormControl(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
     }
+
+    if (
+      changes.size?.currentValue !== changes.size?.previousValue &&
+      this._DOMUtilitiesService.labelHeightMatched.value
+    ) {
+      this._DOMUtilitiesService.setLabelHeight(true);
+    }
   }
 
   ngAfterViewInit(): void {
     if (this.initialFocus) {
       this._inputRef.nativeElement.focus();
     }
-
-    this._DOMUtilitiesService.setLabelHeight(true);
+    this.handleViewInit.emit();
   }
 }
