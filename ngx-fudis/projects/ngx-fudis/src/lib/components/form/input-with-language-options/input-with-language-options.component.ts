@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  effect,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
   FudisInputWithLanguageOptionsFormGroup,
@@ -26,6 +34,7 @@ import { InputApiDirective } from '../../../directives/form/input-api/input-api.
   templateUrl: './input-with-language-options.component.html',
   styleUrls: ['./input-with-language-options.component.scss'],
   providers: [FudisDOMUtilitiesService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputWithLanguageOptionsComponent
   extends InputApiDirective
@@ -43,7 +52,7 @@ export class InputWithLanguageOptionsComponent
       this._languageLabel = translations.INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
       this._missingLanguage = translations.INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
       if (this.options) {
-        this._updatedOptions = this.updateDropdownList();
+        this._updateSelectOptions();
       }
     });
 
@@ -129,162 +138,56 @@ export class InputWithLanguageOptionsComponent
    */
   protected _languageLabel: string;
 
-  /**
-   * If component is loaded for the first time
-   */
-  protected _firstLoad: boolean = true;
-
-  /**
-   * Language option dropdown value
-   */
-  private _dropdownValue: FudisSelectOption<object>;
-
-  /**
-   * For attribute for dropdown value
-   */
-  private _for: string = '';
-
-  /**
-   * At least one language input is required
-   */
-  private _atLeastOneRequired: boolean = false;
-
-  /**
-   * Property to check that control is not empty
-   */
-  private _nonEmptyControls: string[] = [];
-
-  handleLanguageSelect(value: FudisSelectOption<object> | null): void {
-    if (value) {
-      this._dropdownValue = value;
-      this._for = `${this.id}_${value.value}`;
-    }
-  }
-
-  handleInputBlur(event: Event, controlKey: string): void {
-    this._updatedOptions = this.updateDropdownList();
-    this.formGroup.markAllAsTouched();
-
-    this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
-  }
-
-  updateDropdownList(): FudisSelectOption<object>[] {
+  protected _updateSelectOptions(): void {
     const newOptions: FudisSelectOption<object>[] = [];
 
     this.options.forEach((option) => {
+      let newOption: FudisSelectOption<object> | null = null;
+
       if (
         this.formGroup.controls[option.controlName].invalid ||
         !this.formGroup.controls[option.controlName].value
       ) {
-        const updatedOption = {
+        newOption = {
           value: option.controlName,
           label: `${option.label} (${this._missingLanguage})`,
         };
-
-        newOptions.push(updatedOption);
-
-        if (option.controlName === this._selectControl?.value.value) {
-          this._selectControl.patchValue(updatedOption);
-        }
       } else {
-        const patchOption = { value: option.controlName, label: option.label };
-
-        if (option.controlName === this._selectControl?.value.value) {
-          this._selectControl.patchValue(patchOption);
-        }
-        newOptions.push(patchOption);
+        newOption = { value: option.controlName, label: option.label };
+      }
+      newOptions.push(newOption);
+      if (option.controlName === this._selectControl?.value.value) {
+        this._selectControl.patchValue(newOption);
       }
     });
 
-    return newOptions;
+    this._updatedOptions = newOptions;
   }
 
   /**
-   * OnInit check to forward necessary "required" attributes to all generated inputs.
+   * On init and when Select option changes, check if now visible input should be marked as required.
    */
-  initialRequiredCheck(): void {
-    this._requiredControls = {};
+  isInputRequired(controlKey: string): void {
+    const groupRequiredError = this.formGroup?.errors?.['atLeastOneRequired'];
 
-    // TODO: change this._atLeastOneRequired to be fetched with getValidators
+    const controlRequiredValidator = hasRequiredValidator(this.formGroup.controls[controlKey]);
 
-    if (this.formGroup.errors?.['atLeastOneRequired']) {
-      this._atLeastOneRequired = true;
+    const groupRequiredValidator = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
 
-      Object.keys(this.formGroup.controls).forEach((control) => {
-        this._requiredControls = {
-          ...this._requiredControls,
-          [control]: {
-            value: this.formGroup.controls[control].value,
-            required: this._atLeastOneRequired,
-          },
-        };
-      });
+    const controlValue = this.formGroup.controls[controlKey].value;
+
+    const nonEmptyControls = Object.keys(this.formGroup.controls).filter((control) => {
+      return this.formGroup.controls[control].value;
+    });
+
+    if (
+      controlRequiredValidator ||
+      groupRequiredError ||
+      (nonEmptyControls.length === 1 && controlValue && groupRequiredValidator)
+    ) {
+      this._required = true;
     } else {
-      Object.keys(this.formGroup.controls).forEach((control) => {
-        const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
-
-        this._requiredControls = {
-          ...this._requiredControls,
-          [control]: {
-            value: this.formGroup.controls[control].value,
-            required: isRequired ? true : undefined,
-          },
-        };
-      });
-    }
-  }
-
-  // TODO: as Required input property has been removed, an alternative logic needs to be implemented
-
-  /**
-   * Check onBlur if required is needed to be shown
-   */
-  isControlRequired(value: string, controlKey: string): void {
-    // If all controls are invalid run initialRequiredCheck()
-    if (this.formGroup.errors?.['atLeastOneRequired']) {
-      this.initialRequiredCheck();
-    } else if (this._atLeastOneRequired && controlKey) {
-      // Check how many controls are empty
-      this._requiredControls[controlKey].value = value;
-
-      this._nonEmptyControls = Object.keys(this._requiredControls).filter((control) => {
-        return (
-          this._requiredControls[control].value !== '' &&
-          this._requiredControls[control].value !== null
-        );
-      });
-
-      // If only one control is not empty, include required with that
-      if (this._nonEmptyControls.length === 1) {
-        this._requiredControls = {};
-        Object.keys(this.formGroup.controls).forEach((control) => {
-          const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
-
-          this._requiredControls = {
-            ...this._requiredControls,
-            [control]: {
-              value: this.formGroup.controls[control].value,
-              required: this._nonEmptyControls.includes(control) || isRequired ? true : undefined,
-            },
-          };
-        });
-      }
-
-      // If two or more controls have a value, remove visible required text unless control has FudisValidators.required() or Validators.required
-      if (this._atLeastOneRequired && this._nonEmptyControls.length > 1) {
-        this._requiredControls = {};
-        Object.keys(this.formGroup.controls).forEach((control) => {
-          const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
-
-          this._requiredControls = {
-            ...this._requiredControls,
-            [control]: {
-              value: this.formGroup.controls[control].value,
-              required: isRequired,
-            },
-          };
-        });
-      }
+      this._required = false;
     }
   }
 
@@ -301,19 +204,17 @@ export class InputWithLanguageOptionsComponent
 
   ngOnChanges(changes: FudisComponentChanges<InputWithLanguageOptionsComponent>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
-      this._updatedOptions = this.updateDropdownList();
-
+      this._updateSelectOptions();
       this._selectControl = new FormControl(this._updatedOptions[0]);
-      this._for = `${this.id}_${this.options[0].controlName}`;
-
-      this.initialRequiredCheck();
+      this.isInputRequired(this._selectControl.value.value);
     }
   }
 
   ngAfterViewInit(): void {
-    if (this._firstLoad) {
-      this._firstLoad = false;
+    if (this.initialFocus) {
+      this._inputRef.nativeElement.focus();
     }
+
     this._DOMUtilitiesService.setLabelHeight(true);
   }
 }
