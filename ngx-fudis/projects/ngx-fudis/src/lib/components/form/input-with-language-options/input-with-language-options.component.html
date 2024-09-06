@@ -1,25 +1,48 @@
-<div
-  class="fudis-input-with-language-options fudis-input-size__{{ size }}"
-  [class.fudis-input-with-language-options--hidden]="
-    (_DOMUtilitiesService.labelHeightMatched | async) === false
-  "
->
+<div class="fudis-input-with-language-options fudis-input-size__{{ size }}">
   <div class="fudis-input-with-language-options__inputs">
-    <ng-container *ngIf="formGroup.controls">
-      <ng-container
-        *ngTemplateOutlet="variant === 'text-area' ? textArea : textInput"
-      ></ng-container>
-      <fudis-guidance
-        [inputLabel]="label"
-        [reloadErrorSummary]="_reloadErrorSummary"
-        [maxLength]="_maxLength"
-        [helpText]="helpText"
-        [formGroup]="formGroup"
-        [for]="id"
-        [selectedOption]="_dropdownControl.value.value"
-      >
-      </fudis-guidance>
+    <fudis-label
+      [for]="id"
+      [text]="label"
+      [id]="id + '-label'"
+      [required]="_required"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    />
+    <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
+      <input
+        *ngIf="control.key === _dropdownControl.value.value"
+        #inputRef
+        class="fudis-form-input"
+        [class.fudis-input-with-language-options__inputs__text]="variant === 'text-input'"
+        [class.fudis-input-with-language-options__inputs__area]="variant === 'text-area'"
+        [attr.aria-invalid]="
+          (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
+          (formGroup.controls[control.key].touched && invalidState)
+            ? true
+            : null
+        "
+        [attr.aria-label]="label + ', ' + _dropdownControl.value.label"
+        [attr.minlength]="_minLength"
+        [attr.maxlength]="_maxLength"
+        (blur)="handleInputBlur($event, control.key)"
+        [id]="id"
+        [attr.type]="variant === 'text-input' ? 'text' : 'area'"
+        [attr.aria-describedby]="id + '_guidance'"
+        [attr.required]="_required ? true : null"
+        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled"
+        [readonly]="formGroup.controls[control.key].disabled || disabled"
+      />
     </ng-container>
+    <fudis-guidance
+      [inputLabel]="label"
+      [reloadErrorSummary]="_reloadErrorSummary"
+      [maxLength]="_maxLength"
+      [helpText]="helpText"
+      [formGroup]="formGroup"
+      [for]="id"
+      [selectedOption]="_dropdownControl.value.value"
+    />
   </div>
   <fudis-select
     [label]="_languageLabel"
@@ -38,43 +61,3 @@
     </ng-template>
   </fudis-select>
 </div>
-
-<ng-template #textInput>
-  <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
-    <fudis-text-input
-      *ngIf="control.key === _dropdownControl.value.value"
-      class="fudis-input-with-language-options__inputs__item"
-      (handleBlur)="handleInputBlur($event, control.key)"
-      [ariaLabel]="label + ', ' + _dropdownControl.value.label"
-      [size]="'lg'"
-      [label]="label"
-      [id]="id"
-      [initialFocus]="initialFocus && _firstLoad"
-      [invalidState]="formGroup.invalid && formGroup.touched"
-      [disableGuidance]="true"
-      [control]="formGroup.controls[control.key]"
-    >
-      <ng-content select="fudis-error-message"
-    /></fudis-text-input>
-  </ng-container>
-</ng-template>
-
-<ng-template #textArea>
-  <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
-    <fudis-text-area
-      *ngIf="control.key === _dropdownControl.value.value"
-      (handleBlur)="handleInputBlur($event, control.key)"
-      class="fudis-input-with-language-options__inputs__item"
-      [ariaLabel]="label + ', ' + _dropdownControl.value.label"
-      [size]="'lg'"
-      [label]="label"
-      [id]="id"
-      [invalidState]="formGroup.invalid && formGroup.touched"
-      [initialFocus]="initialFocus && _firstLoad"
-      [invalidState]="formGroup.invalid && formGroup.touched"
-      [disableGuidance]="true"
-      [control]="formGroup.controls[control.key]"
-      ><ng-content select="fudis-error-message"
-    /></fudis-text-area>
-  </ng-container>
-</ng-template>

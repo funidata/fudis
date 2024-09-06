@@ -27,6 +27,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.service';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -35,12 +36,16 @@ import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.se
   styleUrls: ['./input-with-language-options.component.scss'],
   providers: [FudisDOMUtilitiesService],
 })
-export class InputWithLanguageOptionsComponent implements OnInit, OnChanges, AfterViewInit {
+export class InputWithLanguageOptionsComponent
+  extends TooltipApiDirective
+  implements OnInit, OnChanges, AfterViewInit
+{
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     protected _DOMUtilitiesService: FudisDOMUtilitiesService,
   ) {
+    super();
     effect(() => {
       const translations = _translationService.getTranslations()();
 
@@ -150,6 +155,11 @@ export class InputWithLanguageOptionsComponent implements OnInit, OnChanges, Aft
    * Max length for HTML attribute and for character indicator in guidance
    */
   protected _maxLength: number | null = null;
+
+  /**
+   * Min length for HTML attribute and for character indicator in guidance
+   */
+  protected _minLength: number | null = null;
 
   protected _destroyRef = inject(DestroyRef);
 
