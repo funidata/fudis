@@ -1,6 +1,17 @@
-import { Component, EventEmitter, Inject, Input, Output, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  effect,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { FudisNotification } from '../../../types/miscellaneous';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { FudisComponentChanges, FudisNotification } from '../../../types/miscellaneous';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
@@ -11,7 +22,7 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
-export class AlertComponent {
+export class AlertComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private _alertService: FudisAlertService,
@@ -20,16 +31,14 @@ export class AlertComponent {
     private _dialogService: FudisDialogService,
   ) {
     effect(() => {
-      // TODO: To Observable
-      this._closeLabel = this._translateService.getTranslations()().DIALOG.CLOSE;
+      this._closeLabel.next(this._translateService.getTranslations()().DIALOG.CLOSE);
     });
   }
 
   /**
-   * Visible message
+   * Visible alert message
    */
-  // TODO: add observable message
-  @Input({ required: true }) message: string;
+  @Input({ required: true }) message: Observable<string> | string;
 
   /**
    * Id to be set on the whole alert element
@@ -37,42 +46,55 @@ export class AlertComponent {
   @Input({ required: true }) htmlId: string;
 
   /**
-   * Id to be set on the close alert button
+   * Id to be set on the close button
    */
   @Input({ required: true }) buttonId: string;
 
   /**
-   * Variant of alert. Same names and colors as in Notification component.
+   * Variant of Alert. Same names and colors as in Notification Component.
    */
   @Input() variant: FudisNotification = 'info';
 
   /**
-   * Conditional routerLink for Alert. If used, provide also linkTitle.
+   * RouterLink applied to link inside Alert. If used, provide also linkTitle.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() link: string | any[] | null | undefined;
 
   /**
-   * Title of url used with routerLinkUrl
+   * Title of URL, used with routerLinkUrl
    */
   @Input() linkTitle: string | undefined;
 
   /**
-   * Used with links in alert, to force focus to the link on the first load.
+   * Force focus to the link on first load
    */
   @Input() initialFocus: boolean = false;
 
   /**
-   * Output for when Close button is clicked
+   * Output for close button click
    */
   @Output() handleClose = new EventEmitter<Event>();
 
-  // TODO: add output for possible callback event when clicking link in alert
+  /**
+   * Output for link element click
+   */
+  @Output() handleClick = new EventEmitter<Event>();
 
   /**
-   * Label for close button, fetched from FudisTranslationService
+   * Alert message to include in the Alert object
    */
-  protected _closeLabel: string;
+  protected _currentMessage: string;
+
+  /**
+   * Internal translated aria-label for close button
+   */
+  protected _closeLabel = new BehaviorSubject<string>('');
+
+  /**
+   * Disposable object for preserving message as Observable string
+   */
+  private _subscription: Subscription;
 
   /**
    * Handler for close button. Dismisses alert from service and sets focus to last alert in the list or to previously focused element stored with _handleFocus().
@@ -80,7 +102,7 @@ export class AlertComponent {
   protected _handleCloseClick(event: Event): void {
     this._alertService.dismissAlertFromButton(this.buttonId);
 
-    const alerts = this._alertService.getAlertsSignal()();
+    const alerts = this._alertService.allAlertsObservable.getValue();
 
     if (alerts.length !== 0) {
       const targetId = alerts[alerts.length - 1].buttonId;
@@ -135,6 +157,28 @@ export class AlertComponent {
     ) {
       this._alertService.updateAlertLinkFocusState(this.htmlId);
       this._focusService.focusToElementById(nextElement.id);
+    }
+  }
+
+  ngOnInit(): void {
+    if (this.message && typeof this.message !== 'string') {
+      this._subscription = this.message.subscribe((value: string) => {
+        this._currentMessage = value;
+      });
+    }
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<AlertComponent>): void {
+    if (changes.message) {
+      if (typeof this.message === 'string') {
+        this._currentMessage = this.message;
+      }
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
     }
   }
 }

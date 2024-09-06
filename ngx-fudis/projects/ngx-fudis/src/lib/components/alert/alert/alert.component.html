@@ -11,12 +11,13 @@
     [align]="'center'"
     [variant]="'lg-regular'"
   >
-    {{ message }}
+    {{ _currentMessage }}
     <fudis-link
       *ngIf="link && linkTitle"
       (handleFocus)="_handleFocus($event)"
       (handleBlur)="_handleBlur($event)"
-      [attr.aria-label]="message"
+      (handleClick)="handleClick.emit($event)"
+      [attr.aria-label]="_currentMessage"
       [initialFocus]="initialFocus"
       class="fudis-alert__link"
       [link]="link"
@@ -25,7 +26,7 @@
   </fudis-body-text>
 
   <button
-    [attr.aria-label]="message + ', ' + _closeLabel"
+    [attr.aria-label]="_currentMessage + ', ' + (_closeLabel | async)"
     [id]="buttonId"
     (click)="_handleCloseClick($event)"
     (focus)="_handleFocus($event)"
