@@ -1,9 +1,9 @@
 <section
-  *ngIf="_visible"
+  *ngIf="_visible && (_alertList | async) as alerts"
   class="fudis-alert-group fudis-alert-group__{{ position }}"
-  [attr.aria-label]="_alertList().length > 0 ? _alertGroupLabel + ': ' + _alertList().length : null"
+  [attr.aria-label]="alerts.length > 0 ? (_alertGroupLabel | async) + ': ' + alerts.length : null"
 >
-  <ng-container *ngFor="let alert of _alertList()">
+  <ng-container *ngFor="let alert of alerts">
     <fudis-alert
       [initialFocus]="alert.initialFocus"
       [variant]="alert.type"

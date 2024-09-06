@@ -1,10 +1,11 @@
 import { SimpleChange } from '@angular/core';
+import { Observable } from 'rxjs';
 
 /**
  * Alert
  */
 export interface FudisAlert {
-  message: string;
+  message: Observable<string> | string;
   type: FudisNotification;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   routerLinkUrl?: string | any[] | null;
