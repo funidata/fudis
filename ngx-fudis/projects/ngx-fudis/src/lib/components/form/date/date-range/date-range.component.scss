@@ -11,21 +11,7 @@
     opacity: 0;
   }
 
-  /* Add hyphen only after the first Datepicker */
-  fudis-datepicker:nth-of-type(1) {
-    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-class-pattern */
-    & .fudis-datepicker__input-wrapper {
-      &::after {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translate(spacing.$spacing-sm, -50%);
-        width: spacing.$spacing-xs;
-        height: spacing.$spacing-md;
-        content: "\2013";
-      }
-    }
-  }
+  
 
   &__gutter {
     display: block;
