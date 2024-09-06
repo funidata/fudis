@@ -227,7 +227,8 @@ export const headingControlsExclude: RegExp = excludeRegex(['id']);
 /**
  * InputWithLanguageOptions
  */
-export const inputWithLanguageOptionsExclude: RegExp = excludeRegex([
+
+export const inputWithLanguageOptionsStoryExclude: RegExp = excludeRegex([
   'formGroup',
   'options',
   'disableGuidance',
@@ -238,6 +239,8 @@ export const inputWithLanguageOptionsExclude: RegExp = excludeRegex([
   'handleBlur',
   'handleKeyUp',
   'ariaLabel',
+  'id',
+  'handleViewInit',
 ]);
 
 /**

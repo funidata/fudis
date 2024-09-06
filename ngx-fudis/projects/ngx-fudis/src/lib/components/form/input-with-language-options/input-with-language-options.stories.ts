@@ -7,7 +7,7 @@ import { InputWithLanguageOptionsComponent } from './input-with-language-options
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
-import { inputWithLanguageOptionsExclude } from '../../../utilities/storybook';
+import { inputWithLanguageOptionsStoryExclude } from '../../../utilities/storybook';
 import docs from './input-with-language-options.mdx';
 
 export default {
@@ -23,7 +23,7 @@ export default {
   ],
   parameters: {
     controls: {
-      exclude: inputWithLanguageOptionsExclude,
+      exclude: inputWithLanguageOptionsStoryExclude,
     },
     docs: {
       page: docs,
@@ -82,6 +82,7 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
     <fudis-input-with-language-options
       [id]="'unique-input-1'"
       [size]="size"
+      [disabled]="disabled"
       [variant]="variant"
       [formGroup]="formGroup"
       [label]="label"
@@ -123,6 +124,7 @@ const ExampleTemplate: StoryFn = (args) => ({
   template: html`
     <fudis-input-with-language-options
       [formGroup]="formGroup"
+      [disabled]="disabled"
       [size]="size"
       [variant]="variant"
       [label]="label"
