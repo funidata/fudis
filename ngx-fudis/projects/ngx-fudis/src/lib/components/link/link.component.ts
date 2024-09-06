@@ -128,7 +128,7 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   }
 
   /**
-   * Handle Link Component blur event
+   * Handle Link Component click event
    */
   protected _handleClick(event: Event): void {
     this.handleClick.emit(event);

@@ -10,6 +10,7 @@
 @use "../components/grid/grid/grid.component.scss" as grid;
 @use "../foundations/spacing/classes.scss" as spacingClasses;
 @use "../components/link/link.component.scss" as link;
+@use "../components/link/link-theme.scss" as linkTheme;
 @use "../components/button/button-theme.scss" as button;
 @use "../components/typography/heading/heading-theme.scss" as heading;
 @use "../components/typography/body-text/body-text-theme.scss" as bodyText;
