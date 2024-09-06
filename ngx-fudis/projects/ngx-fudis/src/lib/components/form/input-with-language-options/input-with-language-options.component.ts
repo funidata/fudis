@@ -17,8 +17,9 @@ import {
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import {
+  getMinLengthFromValidator,
   hasAtLeastOneRequiredOrMinValidator,
-  // getMaxLengthFromValidator,
+  getMaxLengthFromValidator,
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
 
@@ -27,6 +28,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.service';
 
 import { InputApiDirective } from '../../../directives/form/input-api/input-api.directive';
+import { Subject } from 'rxjs';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -49,7 +51,7 @@ export class InputWithLanguageOptionsComponent
     effect(() => {
       const translations = _translationService.getTranslations()();
 
-      this._languageLabel = translations.INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
+      this._languageLabel.next(translations.INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE);
       this._missingLanguage = translations.INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
       if (this.options) {
         this._updateSelectOptions();
@@ -57,8 +59,9 @@ export class InputWithLanguageOptionsComponent
     });
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
-      if (this.formGroup) {
-        this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+      if (this.formGroup && this._selectControl.value) {
+        this._checkHtmlAttributes(this._selectControl.value.value);
+        this._updateSelectOptions();
       }
     });
   }
@@ -93,16 +96,9 @@ export class InputWithLanguageOptionsComponent
   protected _minLength: number | null = null;
 
   /**
-   * Handle blur event
-   */
-  public onBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-  }
-
-  /**
    * Update value and validity for FormGroup
    */
-  protected _applyControlUpdateCheck(): void {
+  protected _applyFormGroupUpdateCheck(): void {
     const original = this.formGroup.updateValueAndValidity;
 
     this.formGroup.updateValueAndValidity = () => {
@@ -126,7 +122,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * Updated options list after changes
    */
-  protected _updatedOptions: FudisSelectOption<object>[] = [];
+  protected _selectOptions: FudisSelectOption<object>[] = [];
 
   /**
    * Fudis translation
@@ -136,8 +132,11 @@ export class InputWithLanguageOptionsComponent
   /**
    * Fudis translation
    */
-  protected _languageLabel: string;
+  protected _languageLabel = new Subject<string>();
 
+  /**
+   * When Form Control value changes, update Select Options accordingly with or without Missing text
+   */
   protected _updateSelectOptions(): void {
     const newOptions: FudisSelectOption<object>[] = [];
 
@@ -161,20 +160,18 @@ export class InputWithLanguageOptionsComponent
       }
     });
 
-    this._updatedOptions = newOptions;
+    this._selectOptions = newOptions;
   }
 
   /**
    * On init and when Select option changes, check if now visible input should be marked as required.
    */
-  isInputRequired(controlKey: string): void {
+  private _isInputRequired(control: FormControl<string | null>): boolean {
     const groupRequiredError = this.formGroup?.errors?.['atLeastOneRequired'];
 
-    const controlRequiredValidator = hasRequiredValidator(this.formGroup.controls[controlKey]);
+    const controlRequiredValidator = hasRequiredValidator(control);
 
     const groupRequiredValidator = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
-
-    const controlValue = this.formGroup.controls[controlKey].value;
 
     const nonEmptyControls = Object.keys(this.formGroup.controls).filter((control) => {
       return this.formGroup.controls[control].value;
@@ -183,12 +180,19 @@ export class InputWithLanguageOptionsComponent
     if (
       controlRequiredValidator ||
       groupRequiredError ||
-      (nonEmptyControls.length === 1 && controlValue && groupRequiredValidator)
+      (nonEmptyControls.length === 1 && control.value && groupRequiredValidator)
     ) {
-      this._required = true;
-    } else {
-      this._required = false;
+      return true;
     }
+    return false;
+  }
+
+  protected _checkHtmlAttributes(controlName: string): void {
+    const control = this.formGroup.controls[controlName];
+
+    this._minLength = getMinLengthFromValidator(control);
+    this._maxLength = getMaxLengthFromValidator(control);
+    this._required = this._isInputRequired(control);
   }
 
   ngOnInit(): void {
@@ -204,9 +208,10 @@ export class InputWithLanguageOptionsComponent
 
   ngOnChanges(changes: FudisComponentChanges<InputWithLanguageOptionsComponent>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
+      this._applyFormGroupUpdateCheck();
       this._updateSelectOptions();
-      this._selectControl = new FormControl(this._updatedOptions[0]);
-      this.isInputRequired(this._selectControl.value.value);
+      this._selectControl = new FormControl(this._selectOptions[0]);
+      this._checkHtmlAttributes(this._selectOptions[0].value);
     }
   }
 

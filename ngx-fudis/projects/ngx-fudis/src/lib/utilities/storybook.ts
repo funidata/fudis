@@ -224,6 +224,25 @@ export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefau
  */
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
 
+/**
+ * InputWithLanguageOptions
+ */
+export const inputWithLanguageOptionsExclude: RegExp = excludeRegex([
+  'formGroup',
+  'options',
+  'disableGuidance',
+  'errorSummaryReloadOnInit',
+  'id',
+  'initialFocus',
+  'invalidState',
+  'handleBlur',
+  'handleKeyUp',
+  'ariaLabel',
+]);
+
+/**
+ * Language Badge Group
+ */
 const languageBadgeGroupCommonExclude: string[] = [
   'tooltip',
   'tooltipPosition',

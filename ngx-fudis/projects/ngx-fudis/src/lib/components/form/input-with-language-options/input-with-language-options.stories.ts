@@ -7,11 +7,12 @@ import { InputWithLanguageOptionsComponent } from './input-with-language-options
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
+import { inputWithLanguageOptionsExclude } from '../../../utilities/storybook';
+import docs from './input-with-language-options.mdx';
 
 export default {
   title: 'Components/Form/Input With Language Options',
   component: InputWithLanguageOptionsComponent,
-  argTypes: {},
   decorators: [
     moduleMetadata({
       imports: [ReactiveFormsModule, FormsModule],
@@ -22,54 +23,79 @@ export default {
   ],
   parameters: {
     controls: {
-      exclude: ['control'],
+      exclude: inputWithLanguageOptionsExclude,
+    },
+    docs: {
+      page: docs,
+    },
+  },
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
+    helpText: {
+      control: { type: 'text' },
+    },
+    tooltipPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    tooltip: {
+      control: { type: 'text' },
     },
   },
 } as Meta;
 
 const html = String.raw;
 
-const TemplateAllRequired: StoryFn = () => ({
+const commonArgs: Partial<InputWithLanguageOptionsComponent> = {
+  label: 'Your superhero name',
+  size: 'lg',
+  disabled: false,
+  variant: 'text-input',
+  tooltip: 'Your city needs you!',
+  tooltipToggle: false,
+  tooltipPosition: 'right',
+};
+
+const ExampleAllRequiredTemplate: StoryFn = (args) => ({
   props: {
+    ...args,
     id: 'unique-input-id-superhero-name',
-    label: 'Your superhero name',
-    helpText: 'Please provide superhero name in all languages.',
-    languageOptions: [
-      { controlName: 'finnish', label: 'FI' },
-      { controlName: 'swedish', label: 'SV' },
-      { controlName: 'english', label: 'EN' },
-    ],
     formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
       finnish: new FormControl<string | null>(null, [
         FudisValidators.required('Missing superhero name on Finnish.'),
-        FudisValidators.maxLength(22, 'Too long name'),
+        FudisValidators.maxLength(10, 'Too long name'),
       ]),
       swedish: new FormControl<string | null>(null, [
         FudisValidators.required('Missing superhero name on Swedish.'),
-        FudisValidators.maxLength(22, 'Too long name'),
+        FudisValidators.maxLength(15, 'Too long name'),
       ]),
       english: new FormControl<string | null>(null, [
         FudisValidators.required('Missing superhero name on English.'),
-        FudisValidators.maxLength(22, 'Too long name'),
+        FudisValidators.maxLength(20, 'Too long name'),
       ]),
     }),
   },
   template: html`
     <fudis-input-with-language-options
       [id]="'unique-input-1'"
-      [options]="languageOptions"
+      [size]="size"
+      [variant]="variant"
       [formGroup]="formGroup"
       [label]="label"
       [helpText]="helpText"
+      [tooltip]="tooltip"
+      [tooltipToggle]="tooltipToggle"
+      [tooltipPosition]="tooltipPosition"
     ></fudis-input-with-language-options>
   `,
 });
 
-const TemplateOneRequired: StoryFn = () => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
-    id: 'unique-input-id-superhero-name',
-    label: 'Your superhero name',
-    helpText: 'Please provide superhero name in atleast one language.',
+    ...args,
     languageOptions: [
       { controlName: 'finnish', label: 'FI' },
       { controlName: 'swedish', label: 'SV' },
@@ -96,15 +122,28 @@ const TemplateOneRequired: StoryFn = () => ({
   },
   template: html`
     <fudis-input-with-language-options
-      [id]="'unique-input-1'"
-      [options]="languageOptions"
       [formGroup]="formGroup"
+      [size]="size"
+      [variant]="variant"
       [label]="label"
       [helpText]="helpText"
+      [tooltip]="tooltip"
+      [tooltipToggle]="tooltipToggle"
+      [tooltipPosition]="tooltipPosition"
     ></fudis-input-with-language-options>
   `,
 });
 
-export const ExampleWithAllRequired = TemplateAllRequired.bind({});
+export const Example = ExampleTemplate.bind({});
 
-export const ExampleWithAtleastOneRequired = TemplateOneRequired.bind({});
+Example.args = {
+  ...commonArgs,
+  helpText: 'Please provide superhero name in atleast one language.',
+};
+
+export const ExampleWithAllRequired = ExampleAllRequiredTemplate.bind({});
+
+ExampleWithAllRequired.args = {
+  ...commonArgs,
+  helpText: 'Please provide superhero name in all languages.',
+};
