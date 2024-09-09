@@ -8,9 +8,6 @@ class MockElementRef implements ElementRef {
 }
 
 describe('InputApiDirective', () => {
-  let domService: FudisDOMUtilitiesService;
-  let destroyRef: DestroyRef;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [],
@@ -21,8 +18,8 @@ describe('InputApiDirective', () => {
       ],
     });
 
-    destroyRef = TestBed.inject(DestroyRef);
-    domService = TestBed.inject(FudisDOMUtilitiesService);
+    TestBed.inject(DestroyRef);
+    TestBed.inject(FudisDOMUtilitiesService);
   });
 
   it('should create an instance', () => {
