@@ -1,31 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MockComponent } from 'ng-mocks';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { FudisAlertService } from '../../../services/alert/alert.service';
-import { FudisAlert } from '../../../types/miscellaneous';
+import { FudisAlert, fudisAlertPositionArray } from '../../../types/miscellaneous';
 import { AlertComponent } from '../alert/alert.component';
 import { IconComponent } from '../../icon/icon.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
+import { BehaviorSubject } from 'rxjs';
 
-// TODO: fix & refactor when these are again published
-
-describe.skip('AlertGroupComponent', () => {
+describe('AlertGroupComponent', () => {
   let component: AlertGroupComponent;
   let fixture: ComponentFixture<AlertGroupComponent>;
   let alertService: FudisAlertService;
   let dialogService: FudisDialogService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [MatDialogModule],
       declarations: [
         AlertGroupComponent,
-        BodyTextComponent,
         AlertComponent,
+        BodyTextComponent,
         MockComponent(IconComponent),
       ],
       providers: [
@@ -39,7 +37,10 @@ describe.skip('AlertGroupComponent', () => {
           useValue: [],
         },
       ],
-    });
+    }).compileComponents();
+
+    alertService = TestBed.inject(FudisAlertService);
+    dialogService = TestBed.inject(FudisDialogService);
     fixture = TestBed.createComponent(AlertGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -50,55 +51,33 @@ describe.skip('AlertGroupComponent', () => {
   });
 
   describe('Basic inputs', () => {
-    it('should have default CSS classes', () => {
-      const element = getElement(fixture, 'section');
+    it('should update CSS class according to position input', () => {
+      fudisAlertPositionArray.forEach((position) => {
+        const element = getElement(fixture, '.fudis-alert-group');
+        fixture.componentRef.setInput('position', `${position}`);
+        fixture.detectChanges();
 
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses('fudis-alert-group fudis-alert-group__fixed'),
-      );
-    });
-
-    it('should have absolute position', () => {
-      component.position = 'absolute';
-      fixture.detectChanges();
-
-      const element = getElement(fixture, 'section');
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses('fudis-alert-group fudis-alert-group__absolute'),
-      );
-    });
-
-    it('should have static position', () => {
-      component.position = 'static';
-      fixture.detectChanges();
-
-      const element = getElement(fixture, 'section');
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses('fudis-alert-group fudis-alert-group__static'),
-      );
+        expect(sortClasses(element.className)).toEqual(
+          sortClasses(`fudis-alert-group fudis-alert-group__${position}`),
+        );
+      });
     });
   });
 
   describe('Functionality with services', () => {
     beforeEach(() => {
-      alertService = TestBed.inject(FudisAlertService);
-      dialogService = TestBed.inject(FudisDialogService);
-
-      jest.spyOn(alertService, 'getAlertsSignal').mockImplementation();
-
       const firstAlert: FudisAlert = {
-        message: 'Test message',
+        message: new BehaviorSubject<string>('Test message'),
         id: 'my-test-id-1',
         type: 'info',
       };
 
       const secondAlert: FudisAlert = {
-        message: 'Second test message',
+        message: new BehaviorSubject<string>('Second test message'),
         id: 'my-test-id-2',
         type: 'warning',
       };
+
       alertService.addAlert(firstAlert);
       alertService.addAlert(secondAlert);
     });
@@ -111,7 +90,7 @@ describe.skip('AlertGroupComponent', () => {
       expect(childAlerts.length).toEqual(2);
     });
 
-    it('should have one alert as children after one is dismissed', () => {
+    it('should have one alert as child after one is dismissed', () => {
       alertService.dismissAlert('my-test-id-1');
       fixture.detectChanges();
 
@@ -142,7 +121,6 @@ describe.skip('AlertGroupComponent', () => {
 
     it('should not be visible, if Dialog is not open and Alert Group is inside dialog', () => {
       component.insideDialog = true;
-
       component.ngAfterViewInit();
 
       fixture.detectChanges();

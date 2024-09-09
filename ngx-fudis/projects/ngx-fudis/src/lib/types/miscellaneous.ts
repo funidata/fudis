@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 /**
  * Alert
  */
+export const fudisAlertPositionArray = ['static', 'absolute', 'fixed'] as const;
+export type FudisAlertPosition = (typeof fudisAlertPositionArray)[number];
+
 export interface FudisAlert {
   message: Observable<string> | string;
   type: FudisNotification;
@@ -86,7 +89,8 @@ export interface FudisLanguageBadgeTranslations {
 /**
  * Notification
  */
-export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
+export const fudisNotificationVariantArray = ['warning', 'danger', 'success', 'info'] as const;
+export type FudisNotification = (typeof fudisNotificationVariantArray)[number];
 
 /**
  * Tooltip

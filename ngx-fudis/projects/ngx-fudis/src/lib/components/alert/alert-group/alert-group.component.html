@@ -1,5 +1,5 @@
 <section
-  *ngIf="_visible && (_alertList | async) as alerts"
+  *ngIf="(_visible | async) && (_alertList | async) as alerts"
   class="fudis-alert-group fudis-alert-group__{{ position }}"
   [attr.aria-label]="alerts.length > 0 ? (_alertGroupLabel | async) + ': ' + alerts.length : null"
 >

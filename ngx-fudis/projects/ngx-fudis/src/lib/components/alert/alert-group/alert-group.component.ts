@@ -1,7 +1,7 @@
-import { Component, Input, AfterViewInit, effect } from '@angular/core';
+import { Component, Input, AfterViewInit, effect, ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FudisAlertElement } from '../../../types/miscellaneous';
+import { FudisAlertElement, FudisAlertPosition } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
@@ -16,6 +16,7 @@ export class AlertGroupComponent implements AfterViewInit {
     private _alertService: FudisAlertService,
     private _translationService: FudisTranslationService,
     private _dialogService: FudisDialogService,
+    private _cdRef: ChangeDetectorRef,
   ) {
     /**
      * Subscribe to current visible alerts
@@ -36,7 +37,7 @@ export class AlertGroupComponent implements AfterViewInit {
   /**
    * CSS position of alerts
    */
-  @Input() position: 'fixed' | 'absolute' | 'static' = 'fixed';
+  @Input() position: FudisAlertPosition = 'fixed';
 
   /**
    * Boolean to determine if Alert Group is used inside Fudis Dialog Component
@@ -56,7 +57,7 @@ export class AlertGroupComponent implements AfterViewInit {
   /**
    * Boolean to determine if Alert group is visible. Used with _dialogStatus boolean
    */
-  protected _visible: boolean = false;
+  protected _visible = new BehaviorSubject<boolean>(false);
 
   /**
    * Boolean from Dialog Service to determine if Fudis Dialog is open
@@ -65,13 +66,14 @@ export class AlertGroupComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this._setVisibility();
+    this._cdRef.detectChanges();
   }
 
   /**
    * Getter for visible status
    */
   public getVisibleStatus(): boolean {
-    return this._visible;
+    return this._visible.value;
   }
 
   /**
@@ -79,9 +81,9 @@ export class AlertGroupComponent implements AfterViewInit {
    */
   private _setVisibility(): void {
     if ((this._dialogStatus && this.insideDialog) || (!this._dialogStatus && !this.insideDialog)) {
-      this._visible = true;
+      this._visible.next(true);
     } else {
-      this._visible = false;
+      this._visible.next(false);
     }
   }
 }
