@@ -217,10 +217,10 @@ import { fudisSpacingArray } from '../../../types/spacing';
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
-              <!-- <fudis-input-with-language-options
+              <fudis-input-with-language-options
                 [label]="'At least one required'"
                 [formGroup]="allForms.controls.formSix.controls.oneRequired"
-              /> -->
+              />
               <fudis-input-with-language-options
                 [label]="'All required'"
                 [variant]="'text-area'"

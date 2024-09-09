@@ -6,6 +6,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
   selector: 'fudis-guidance',
@@ -30,10 +31,19 @@ export class GuidanceComponent implements OnChanges, OnInit {
      */
 
     _errorSummaryService.allFormErrorsObservable.pipe(takeUntilDestroyed()).subscribe((errors) => {
-      console.log(errors[this.formId!]);
+      let errorsFound = this.formId && !!errors[this.formId]?.[this.for];
+
+      // With FormGroups errors are defined differently, so this checks if FormGroups control has errors
+      if (this.formGroup && !errorsFound) {
+        errorsFound = Object.keys(this.formGroup.controls).some((controlName) => {
+          const errorId = _errorSummaryService.defineErrorId(this.for, controlName);
+
+          return !!(this.formId && errors[this.formId]?.[errorId]);
+        });
+      }
+
       if (
-        this.formId &&
-        errors[this.formId]?.[this.for] &&
+        errorsFound &&
         (_errorSummaryService.formIdToUpdate === this.formId ||
           _errorSummaryService.formIdToUpdate === 'all')
       ) {
@@ -148,9 +158,11 @@ export class GuidanceComponent implements OnChanges, OnInit {
   /**
    * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made.
    */
-  protected _reloadErrorSummaryOnLazyLoad(errorId: string): void {
-    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(errorId)) {
-      this._lazyLoadedErrors.push(errorId);
+  protected _reloadErrorSummaryOnLazyLoad(error: FudisFormErrorSummaryItem): void {
+    const errorLog = error.controlName ? `${error.controlName}_${error.type}` : error.type;
+
+    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(errorLog)) {
+      this._lazyLoadedErrors.push(errorLog);
       this._errorSummaryService.focusToFormOnReload = null;
       this._errorSummaryService.reloadErrorsByFormId(this.formId, false);
     }

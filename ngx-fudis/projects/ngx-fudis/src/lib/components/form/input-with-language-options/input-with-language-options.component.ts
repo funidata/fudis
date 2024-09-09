@@ -140,6 +140,10 @@ export class InputWithLanguageOptionsComponent
    */
   protected _languageLabel = new Subject<string>();
 
+  protected _onFocus(): void {
+    this._reloadErrorSummary = false;
+  }
+
   /**
    * When Form Control value changes, update Select Options accordingly with or without Missing text
    */

@@ -30,6 +30,7 @@
         [formControl]="formGroup.controls[control.key]"
         (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
         (blur)="handleBlur.emit($event)"
+        (focus)="_onFocus()"
         [id]="id"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="_required ? true : null"
@@ -56,6 +57,7 @@
         [formControl]="formGroup.controls[control.key]"
         (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
         (blur)="handleBlur.emit($event)"
+        (focus)="_onFocus()"
         [id]="id"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="_required ? true : null"
@@ -76,7 +78,7 @@
       [selectedOption]="_selectControl.value.value"
     />
   </div>
-  <!-- <fudis-select
+  <fudis-select
     *ngIf="_languageLabel | async as label"
     class="fudis-input-with-language-options__select"
     [label]="label"
@@ -92,5 +94,5 @@
         [data]="{ value: option.value, label: option.label, disabled: option.disabled }"
       />
     </ng-template>
-  </fudis-select> -->
+  </fudis-select>
 </div>
