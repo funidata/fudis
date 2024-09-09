@@ -1,4 +1,7 @@
-<div class="fudis-input-with-language-options fudis-input-size__{{ size }}">
+<div
+  *ngIf="_selectControl.value"
+  class="fudis-input-with-language-options fudis-input-size__{{ size }}"
+>
   <div class="fudis-input-with-language-options__inputs">
     <fudis-label
       [for]="id"

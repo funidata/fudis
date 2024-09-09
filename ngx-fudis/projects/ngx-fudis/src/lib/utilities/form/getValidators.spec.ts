@@ -51,7 +51,7 @@ describe('getValidators utility function', () => {
     });
 
     it('should return true with atLeastOneRequired validator group with InputWithLanguageOptionsFormGroup', () => {
-      const testFormGroup = new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
+      const testFormGroup = new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
         {
           finnish: new FormControl<string | null>(null),
           swedish: new FormControl<string | null>(''),

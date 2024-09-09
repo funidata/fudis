@@ -116,7 +116,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * Control for language option Select
    */
-  protected _selectControl: FormControl<FudisSelectOption<object>>;
+  protected _selectControl: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
 
   /**
    * Property to check control values for required language options
@@ -165,7 +165,7 @@ export class InputWithLanguageOptionsComponent
         newOption = { value: option.controlName, label: option.label };
       }
       newOptions.push(newOption);
-      if (option.controlName === this._selectControl?.value.value) {
+      if (option.controlName === this._selectControl?.value?.value) {
         this._selectControl.patchValue(newOption);
       }
     });
@@ -239,7 +239,7 @@ export class InputWithLanguageOptionsComponent
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
       this._applyFormGroupUpdateCheck();
       this._updateSelectOptions();
-      this._selectControl = new FormControl(this._selectOptions[0]);
+      this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
     }
 
