@@ -18,6 +18,7 @@ test("dialog with grid", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-grid&viewMode=story");
   await page.getByTestId("fudis-button-1").click();
   await expect(page.getByTestId("fudis-button-2")).toBeVisible();
+  await expect(page.getByText("Dialog with fudis-grid and scrollable content")).toBeVisible();
   await expect(page).toHaveScreenshot("grid-1-init.png");
   await page.getByRole("region").focus();
   await expect(page).toHaveScreenshot("grid-2-content-focus.png");
@@ -25,4 +26,35 @@ test("dialog with grid", async ({ page }) => {
   await expect(page).toHaveScreenshot("grid-3-content-scrolled.png");
   await page.getByLabel("Close").click();
   await expect(page).toHaveScreenshot("grid-4-content-closed.png");
+});
+
+test("nested dialogs", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=&id=components-dialog--example-with-nested-dialogs&viewMode=story",
+  );
+  await page.getByTestId("fudis-button-1").click();
+  await expect(page.getByText("First opened dialog")).toBeVisible();
+  await expect(page.getByText("Open nested dialog")).toBeVisible();
+  await page.getByTestId("fudis-button-2").click();
+  await expect(page.getByText("Second opened dialog")).toBeVisible();
+  await expect(page.getByText("Open final third dialog")).toBeVisible();
+  await page.getByTestId("fudis-button-5").click();
+  await expect(page.getByText("This is now third and last dialog opened.")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByText("This is now third and last dialog opened.")).not.toBeVisible();
+  await expect(page.getByText("Second opened dialog")).toBeVisible();
+  await page.getByTestId("fudis-button-7").click();
+  await expect(page.getByText("First opened dialog")).toBeVisible();
+  await page.getByTestId("fudis-button-2").click();
+  await expect(page.getByText("Second opened dialog")).toBeVisible();
+  await page.getByTestId("fudis-button-11").click();
+  await expect(page.getByText("This is now third and last dialog opened.")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByText("Second opened dialog")).toBeVisible();
+  await expect(page.getByText("This is now third and last dialog opened.")).not.toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByText("Second opened dialog")).not.toBeVisible();
+  await expect(page.getByText("First opened dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByText("First opened dialog")).not.toBeVisible();
 });
