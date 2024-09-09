@@ -74,27 +74,20 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   }
 
   /**
-   * TODO: write test and check cdr logic
-   *
-   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
-   */
-  protected _reloadErrorSummaryOnLazyLoad(parentForm: boolean | undefined, group: FormGroup): void {
-    if (parentForm && group.errors) {
-      this._reloadErrorSummary = true;
-      this._changeDetectorRef.detectChanges();
-    }
-  }
-
-  /**
    * TODO: write test check cdr logic
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */
   protected _reloadErrorSummaryOnInit(
     parentFormErrorSummaryVisible: boolean | undefined,
-    control: FormControl,
+    control?: FormControl,
+    group?: FormGroup,
   ): void {
-    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && control.errors) {
+    if (
+      this.errorSummaryReloadOnInit &&
+      parentFormErrorSummaryVisible &&
+      (control?.invalid || group?.invalid)
+    ) {
       this._reloadErrorSummary = true;
       this._changeDetectorRef.detectChanges();
     }

@@ -64,7 +64,9 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     this._setParentId('radio-button-group');
     this._updateValueAndValidityTrigger.next();
 
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    if (this.errorSummaryReloadOnInit) {
+      this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    }
   }
 
   /** Add value and validity check when control value changes */
