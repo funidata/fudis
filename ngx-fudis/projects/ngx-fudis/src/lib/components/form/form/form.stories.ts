@@ -8,6 +8,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxGroupFormGroup,
+  FudisInputWithLanguageOptionsFormGroup,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -118,7 +119,40 @@ import { fudisSpacingArray } from '../../../types/spacing';
           </fudis-expandable>
         </ng-template>
       </fudis-form>
-      <!-- <fudis-form
+      <fudis-form
+        [level]="2"
+        [title]="'Form with Radio Button Group'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryHelpText]="errorSummaryHelpText"
+      >
+        <ng-template fudisActions [type]="'form'">
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formFive.valid"
+            [label]="'Submit'"
+          />
+        </ng-template>
+        <ng-template fudisContent [type]="'form'">
+          <fudis-expandable
+            [title]="'Expandable with Radio Button Group'"
+            [errorSummaryBreadcrumb]="true"
+          >
+            <ng-template fudisContent [type]="'expandable'">
+              <fudis-radio-button-group
+                [label]="'Pick a fruit'"
+                [control]="allForms.controls.formFive"
+              >
+                <fudis-radio-button
+                  *ngFor="let option of radioOptions"
+                  [label]="option.label"
+                  [value]="option.value"
+                />
+              </fudis-radio-button-group>
+            </ng-template>
+          </fudis-expandable>
+        </ng-template>
+      </fudis-form>
+      <fudis-form
         [level]="2"
         [title]="'Form with Select and Multiselect'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -163,36 +197,35 @@ import { fudisSpacingArray } from '../../../types/spacing';
             </ng-template>
           </fudis-expandable>
         </ng-template>
-      </fudis-form> -->
+      </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Radio Button Group'"
+        [title]="'Form with Input With Language Options'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
         <ng-template fudisActions [type]="'form'">
           <fudis-button
             fudisFormSubmit
-            [formValid]="allForms.controls.formFive.valid"
+            [formValid]="allForms.controls.formSix.valid"
             [label]="'Submit'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
           <fudis-expandable
-            [title]="'Expandable with Radio Button Group'"
+            [title]="'Expandable with Input With Language Options'"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
-              <fudis-radio-button-group
-                [label]="'Pick a fruit'"
-                [control]="allForms.controls.formFive"
-              >
-                <fudis-radio-button
-                  *ngFor="let option of radioOptions"
-                  [label]="option.label"
-                  [value]="option.value"
-                />
-              </fudis-radio-button-group>
+              <fudis-input-with-language-options
+                [label]="'At least one required'"
+                [formGroup]="allForms.controls.formSix.controls.oneRequired"
+              />
+              <fudis-input-with-language-options
+                [label]="'All required'"
+                [variant]="'text-area'"
+                [formGroup]="allForms.controls.formSix.controls.allRequired"
+              />
             </ng-template>
           </fudis-expandable>
         </ng-template>
@@ -256,17 +289,39 @@ class ExampleWithMultipleFormsComponent {
       },
       [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
     ),
-    // formFour: new FormGroup({
-    //   select: new FormControl<FudisSelectOption<object> | null>(
-    //     null,
-    //     FudisValidators.required('You must pick one'),
-    //   ),
-    //   multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
-    //     FudisValidators.required('Selection is missing'),
-    //     FudisValidators.minLength(2, 'Choose at least 2'),
-    //   ]),
-    // }),
+    formFour: new FormGroup({
+      select: new FormControl<FudisSelectOption<object> | null>(
+        null,
+        FudisValidators.required('You must pick one'),
+      ),
+      multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
+        FudisValidators.required('Selection is missing'),
+        FudisValidators.minLength(2, 'Choose at least 2'),
+      ]),
+    }),
     formFive: new FormControl(null, FudisValidators.required('No fruit picked! :(')),
+    formSix: new FormGroup({
+      oneRequired: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
+        {
+          finnish: new FormControl<string | null>(null),
+          swedish: new FormControl<string | null>(null),
+          english: new FormControl<string | null>(null),
+        },
+        [FudisGroupValidators.atLeastOneRequired('Provide name in atleast one language')],
+      ),
+      allRequired: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
+        finnish: new FormControl<string | null>('Lorem ipsum', [
+          FudisValidators.required('Missing Finnish description'),
+          FudisValidators.maxLength(10, 'Too long Finnish description'),
+        ]),
+        swedish: new FormControl<string | null>(null, [
+          FudisValidators.required('Missing Swedish description'),
+        ]),
+        english: new FormControl<string | null>(null, [
+          FudisValidators.required('Missing English description'),
+        ]),
+      }),
+    }),
   });
 }
 
