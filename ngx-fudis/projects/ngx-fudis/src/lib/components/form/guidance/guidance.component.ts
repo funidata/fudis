@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummaryItem } from '../../../types/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
@@ -18,6 +17,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
+    private _cdr: ChangeDetectorRef,
   ) {
     this._id = _idService.getNewId('guidance');
 
@@ -30,16 +30,19 @@ export class GuidanceComponent implements OnChanges, OnInit {
      */
 
     _errorSummaryService.allFormErrorsObservable.pipe(takeUntilDestroyed()).subscribe((errors) => {
+      console.log(errors[this.formId!]);
       if (
         this.formId &&
         errors[this.formId]?.[this.for] &&
         (_errorSummaryService.formIdToUpdate === this.formId ||
           _errorSummaryService.formIdToUpdate === 'all')
       ) {
-        if (this.control?.errors) {
+        if (this.control?.invalid) {
           this.control.markAsTouched();
-        } else if (this.formGroup?.errors) {
+          this._cdr.markForCheck();
+        } else if (this.formGroup?.invalid) {
           this.formGroup.markAllAsTouched();
+          this._cdr.markForCheck();
         }
       }
     });
@@ -98,7 +101,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
   /**
    * To trigger Error Summary reload when this Guidance's Validator Error Messages are initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before these Validator Error Messages existed.
    */
-  @Input() reloadErrorSummary: boolean = false;
+  @Input() reloadErrorSummary: boolean | null = false;
 
   /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
@@ -145,9 +148,9 @@ export class GuidanceComponent implements OnChanges, OnInit {
   /**
    * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made.
    */
-  protected _reloadErrorSummaryOnLazyLoad(error: FudisFormErrorSummaryItem): void {
-    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(error.type)) {
-      this._lazyLoadedErrors.push(error.type);
+  protected _reloadErrorSummaryOnLazyLoad(errorId: string): void {
+    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(errorId)) {
+      this._lazyLoadedErrors.push(errorId);
       this._errorSummaryService.focusToFormOnReload = null;
       this._errorSummaryService.reloadErrorsByFormId(this.formId, false);
     }

@@ -75,7 +75,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   /**
    * Output for handling a state when error is sent to Error Summary
    */
-  @Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
+  @Output() handleCreateError = new EventEmitter<string>();
 
   /**
    * Output for handling a state when error is removed from Error Summary
@@ -194,7 +194,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 
       this._errorSummaryService.addNewError(newError);
       this._errorSent = true;
-      this.handleCreateError.emit(newError);
+      this.handleCreateError.emit(this._id);
     }
   }
 

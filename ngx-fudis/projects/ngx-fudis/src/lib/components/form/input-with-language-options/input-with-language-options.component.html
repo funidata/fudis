@@ -20,7 +20,11 @@
             ? true
             : null
         "
-        [attr.aria-label]="label + ', ' + _selectControl.value.label"
+        [attr.aria-label]="
+          ariaLabel
+            ? label + ', ' + _selectControl.value.label + ariaLabel
+            : label + ', ' + _selectControl.value.label
+        "
         [attr.minlength]="_minLength"
         [attr.maxlength]="_maxLength"
         [formControl]="formGroup.controls[control.key]"
@@ -42,7 +46,11 @@
             ? true
             : null
         "
-        [attr.aria-label]="label + ', ' + _selectControl.value.label"
+        [attr.aria-label]="
+          ariaLabel
+            ? label + ', ' + _selectControl.value.label + ariaLabel
+            : label + ', ' + _selectControl.value.label
+        "
         [attr.minlength]="_minLength"
         [attr.maxlength]="_maxLength"
         [formControl]="formGroup.controls[control.key]"
@@ -63,11 +71,12 @@
       [maxLength]="_maxLength"
       [helpText]="helpText"
       [formGroup]="formGroup"
+      [formId]="_parentForm?.id || null"
       [for]="id"
       [selectedOption]="_selectControl.value.value"
     />
   </div>
-  <fudis-select
+  <!-- <fudis-select
     *ngIf="_languageLabel | async as label"
     class="fudis-input-with-language-options__select"
     [label]="label"
@@ -83,5 +92,5 @@
         [data]="{ value: option.value, label: option.label, disabled: option.disabled }"
       />
     </ng-template>
-  </fudis-select>
+  </fudis-select> -->
 </div>

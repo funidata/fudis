@@ -1,17 +1,20 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  Host,
   Input,
   OnChanges,
   OnInit,
+  Optional,
   effect,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
   FudisInputWithLanguageOptionsFormGroup,
   FudisSelectOption,
-  FudisDropdownLanguageOption,
+  FudisLangSelectOptions,
   FudisInputSize,
 } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -29,6 +32,7 @@ import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.se
 
 import { InputApiDirective } from '../../../directives/form/input-api/input-api.directive';
 import { Subject } from 'rxjs';
+import { FormComponent } from '../form/form.component';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -43,9 +47,11 @@ export class InputWithLanguageOptionsComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     protected _DOMUtilitiesService: FudisDOMUtilitiesService,
+    private _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
     effect(() => {
@@ -72,9 +78,9 @@ export class InputWithLanguageOptionsComponent
   @Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>;
 
   /**
-   * Option list for language Select Dropdown. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. "{controlName: 'english', label: 'EN'}" pairs with Form Group's "english: new FormControl('')"
+   * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'english', label: 'EN'}" pairs with Form Group's "english: new FormControl('')"
    */
-  @Input() options: FudisDropdownLanguageOption[] = [
+  @Input() options: FudisLangSelectOptions[] = [
     { controlName: 'finnish', label: 'FI' },
     { controlName: 'swedish', label: 'SV' },
     { controlName: 'english', label: 'EN' },
@@ -195,6 +201,21 @@ export class InputWithLanguageOptionsComponent
     this._required = this._isInputRequired(control);
   }
 
+  /**
+   * TODO: write test check cdr logic
+   *
+   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
+   */
+  protected _reloadErrorSummaryOnInit(
+    parentFormErrorSummaryVisible: boolean | undefined,
+    group: FormGroup,
+  ): void {
+    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && group.invalid) {
+      this._reloadErrorSummary = true;
+      this._changeDetectorRef.detectChanges();
+    }
+  }
+
   ngOnInit(): void {
     /**
      * Add given id to Id Service or generate unique id
@@ -203,6 +224,10 @@ export class InputWithLanguageOptionsComponent
       this._idService.addNewId('input-with-language-options', this.id);
     } else {
       this.id = this._idService.getNewId('input-with-language-options');
+    }
+
+    if (this.errorSummaryReloadOnInit) {
+      this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.formGroup);
     }
   }
 
