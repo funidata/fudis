@@ -27,7 +27,7 @@ test("alert group default", async ({ page }) => {
   // Open dialog
   await page.getByTestId("fudis-button-9").click();
   await expect(page).toHaveScreenshot("4-open-dialog.png");
-  await page.getByTestId("fudis-button-11").click(); // Close dialog
+  await page.keyboard.press("Escape"); // Close dialog
 
   // Dismiss all alerts
   await page.getByTestId("fudis-button-8").click();
