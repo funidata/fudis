@@ -11,10 +11,7 @@ import {
 import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FudisGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/groupValidators';
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
-import {
-  FudisDropdownLanguageOption,
-  FudisInputWithLanguageOptionsFormGroup,
-} from 'dist/ngx-fudis/lib/types/forms';
+import { FudisInputWithLanguageOptionsFormGroup } from 'dist/ngx-fudis/lib/types/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type MyForm = {
@@ -27,7 +24,7 @@ type MyForm = {
   date: FormControl<Date | null>;
   autocompleteDropdown: FormControl<FudisSelectOption<object> | null>;
   autocompleteSearch: FormControl<FudisSelectOption<object> | null>;
-  withLanguages: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
+  withLanguages: FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>;
 };
 
 @Component({
@@ -125,7 +122,7 @@ export class AppFormExampleComponent implements OnInit {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    withLanguages: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
+    withLanguages: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
       {
         finnish: new FormControl<string | null>(null),
         swedish: new FormControl<string | null>(null),
@@ -138,12 +135,6 @@ export class AppFormExampleComponent implements OnInit {
       ],
     ),
   });
-
-  _languageOptions: FudisDropdownLanguageOption[] = [
-    { value: 'finnish', label: 'FI' },
-    { value: 'swedish', label: 'SV' },
-    { value: 'english', label: 'EN' },
-  ];
 
   radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 
