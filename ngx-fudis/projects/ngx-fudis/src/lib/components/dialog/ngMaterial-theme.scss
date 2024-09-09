@@ -2,6 +2,7 @@
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable max-nesting-depth */
+/* stylelint-disable no-descending-specificity */
 /* stylelint-disable unit-disallowed-list */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
@@ -78,6 +79,17 @@
         & fudis-checkbox,
         & fudis-radio-button {
           padding-left: spacing.$spacing-xxs;
+        }
+
+        // Additional padding for dialog content buttons so that focus style is not cropped in any case
+        fudis-button {
+          padding: spacing.$spacing-xxs;
+        }
+
+        & .fudis-form__header__actions__dialog {
+          & fudis-button {
+            padding: spacing.$spacing-none;
+          }
         }
       }
 

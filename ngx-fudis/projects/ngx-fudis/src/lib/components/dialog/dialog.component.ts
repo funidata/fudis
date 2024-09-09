@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, effect } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, effect, OnInit } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
 })
-export class DialogComponent implements OnInit, OnDestroy {
+export class DialogComponent implements OnDestroy, OnInit {
   constructor(
     private _dialogService: FudisDialogService,
     private _idService: FudisIdService,
@@ -20,6 +20,8 @@ export class DialogComponent implements OnInit, OnDestroy {
       this._closeLabel.next(this._translateService.getTranslations()().DIALOG.CLOSE);
     });
     this._id = _idService.getNewId('dialog');
+
+    _dialogService.setDialogOpenSignal(true);
   }
 
   /**
@@ -42,11 +44,25 @@ export class DialogComponent implements OnInit, OnDestroy {
    */
   protected _closeLabel = new BehaviorSubject<string>('');
 
+  /**
+   * To track "order number" of this dialog, if multiple dialogs are open
+   */
+  private _orderNumber: number;
+
   ngOnInit(): void {
-    this._dialogService.setDialogOpenSignal(true);
+    this._orderNumber = this._dialogService.dialogsOpen();
   }
 
   ngOnDestroy(): void {
-    this._dialogService.setDialogOpenSignal(false);
+    if (this._orderNumber === 1 || this._orderNumber === 0) {
+      this._dialogService.setDialogOpenSignal(false);
+    }
+  }
+
+  @HostListener('window:keyup.escape', ['$event'])
+  private _handleEscapePress() {
+    if (this._dialogService.dialogsOpen() === this._orderNumber) {
+      this._dialogService.close();
+    }
   }
 }

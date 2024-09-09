@@ -80,7 +80,7 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
 ]);
 
 /**
- * Datepicker and Date-range
+ * Datepicker and Date Range
  */
 const datepickerCommonExcludes: string[] = [
   'control',
@@ -92,7 +92,6 @@ const datepickerCommonExcludes: string[] = [
   'errorSummaryReloadOnInit',
   'handleBlur',
   'handleKeyUp',
-  'parseDateValidator',
   'endDateError',
   'startDateError',
 ];
@@ -101,15 +100,15 @@ export const datepickerControlsExclude: RegExp = excludeRegex([
   ...datepickerCommonExcludes,
   'focusToInput',
   'onBlur',
+  'dateRangeType',
 ]);
 
 export const datepickerExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
-export const daterangeExclude: RegExp = excludeRegex([
-  'endDate',
-  'startDate',
-  'id',
-  'initialFocus',
+export const dateRangeExclude: RegExp = excludeRegex([
+  'checkDateCrossings',
+  'showDateComparisonErrors',
+  'setLabelHeight',
 ]);
 
 /**
@@ -229,6 +228,20 @@ export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefau
  * Heading
  */
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
+
+const languageBadgeGroupCommonExclude: string[] = [
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+  'invalidOptions',
+];
+
+export const languageBadgeGroupExclude: RegExp = excludeRegex([...languageBadgeGroupCommonExclude]);
+
+export const languageBadgeGroupControlsExclude: RegExp = excludeRegex([
+  ...languageBadgeGroupCommonExclude,
+  'handleClick',
+]);
 
 /**
  * Link

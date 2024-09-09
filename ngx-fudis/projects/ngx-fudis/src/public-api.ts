@@ -16,13 +16,15 @@ export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox-group/checkbox/checkbox.component';
 export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/checkbox-group.component';
 export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
-// export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
+export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
+export {
+  DateStartDirective,
+  DateEndDirective,
+} from './lib/directives/form/datepicker/datepicker.directive';
 export {
   ContentDirective,
-  EndDateErrorDirective,
   FooterContentLeftDirective,
   FooterContentRightDirective,
-  StartDateErrorDirective,
 } from './lib/directives/content-projection/content/content.directive';
 export {
   DialogActionsDirective,
@@ -61,6 +63,7 @@ export { HeaderDirective } from './lib/directives/content-projection/header/head
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
+export { LanguageBadgeGroupComponent } from './lib/components/language-badge-group/language-badge-group.component';
 export { LinkDirective } from './lib/directives/link/link.directive';
 export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
 export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';

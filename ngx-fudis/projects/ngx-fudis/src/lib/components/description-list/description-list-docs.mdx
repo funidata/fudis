@@ -99,15 +99,8 @@ Description List Item Details has `ariaLabel` input which is recommended to appl
 
 Description List with Language Badge Group displays Term element with clickable Language Badges. Clicking a Badge sets those Details visible, which have corresponding language set. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
 
-By default Language Badge Group always display Badges for Finnish, English, Swedish in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()` to define a new config.
-
-<Source
-  code={`
-  constructor(translationService: FudisTranslationService) {
-    // Set only English and Swedish badges visible, in that order
-    languageService.setSelectableLanguages(['en', 'sv']);
-}`}
-/>
+By default Language Badge Group always display Badges for Finnish, Swedish and English in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()` to define a new config.
+Check documentation at [FudisTranslationService](/docs/services-translation--documentation#translation-service).
 
 Set in your `fudis-dd` element `lang` attribute to tell which translation it represents.
 
@@ -135,11 +128,13 @@ Description List components communicate with each other and define automatically
 - `dd` elements are placed directly after `dt` element
 - If only one description list item is present, it is converted to paragraph element
 
-### Related components / directives
+### Related components / directives / services
 
 - [Grid](/docs/components-grid-grid--example)
 - [Icon](/docs/components-icon--icon)
 - [Button](/docs/components-button--button)
+- [Language Badge Group](/docs/components-language-badge-group--documentation)
+- [FudisTranslationService](/docs/services-translation--documentation#translation-service)
 
 ## Description List Properties
 
