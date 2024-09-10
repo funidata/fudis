@@ -159,6 +159,12 @@ export default {
       exclude: alertGroupExclude,
     },
   },
+  argTypes: {
+    position: {
+      options: ['fixed', 'static', 'absolute'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
 const html = String.raw;
