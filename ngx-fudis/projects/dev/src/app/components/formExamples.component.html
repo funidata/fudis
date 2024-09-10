@@ -21,7 +21,7 @@
                 [label]="t('chooseBerry')"
                 [helpText]="t('chooseBerryHelp')"
                 [tooltip]="t('chooseBerryTooltip')"
-                [formGroup]="testFormGroup.controls['checkboxFormGroup']"
+                [formGroup]="testFormGroup.controls.checkboxFormGroup"
               >
                 <fudis-checkbox
                   *ngFor="let option of checkboxOptions"
@@ -33,7 +33,7 @@
               <fudis-text-input
                 [label]="t('label')"
                 [helpText]="t('helpText')"
-                [control]="testFormGroup.controls['textInput']"
+                [control]="testFormGroup.controls.textInput"
                 [tooltip]="
                   'This text-input has multiple validators: required, minlength and maxlength'
                 "
@@ -50,7 +50,7 @@
               <fudis-radio-button-group
                 [label]="t('chooseTruth')"
                 [helpText]="t('chooseTruthHelp')"
-                [control]="testFormGroup.controls['truth']"
+                [control]="testFormGroup.controls.truth"
               >
                 <fudis-radio-button
                   *ngFor="let option of radioButtonOptions"
@@ -73,15 +73,15 @@
               /> -->
               <fudis-datepicker
                 [label]="'Select some date'"
-                [control]="testFormGroup.controls['date']"
+                [control]="testFormGroup.controls.date"
               />
               <fudis-text-area
                 [label]="'Basic required text-area'"
-                [control]="testFormGroup.controls['textArea']"
+                [control]="testFormGroup.controls.textArea"
               />
               <fudis-input-with-language-options
                 [label]="'At least one required'"
-                [formGroup]="testFormGroup.controls['withLanguages']"
+                [formGroup]="testFormGroup.controls.withLanguages"
               />
             </ng-template>
           </fudis-fieldset>
