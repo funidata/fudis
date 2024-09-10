@@ -62,9 +62,8 @@ describe('InputBaseDirective', () => {
     changeDetectorRef = TestBed.inject(ChangeDetectorRef);
   });
 
-  // TODO: fix this
   describe('Directive', () => {
-    it.skip('should create an instance', () => {
+    it('should create an instance', () => {
       TestBed.runInInjectionContext(() => {
         const directive: InputBaseDirective = new InputBaseDirective(idService, changeDetectorRef);
 
@@ -72,8 +71,7 @@ describe('InputBaseDirective', () => {
       });
     });
 
-    // TODO: fix this
-    it.skip('should emit blur event', () => {
+    it('should emit blur event', () => {
       TestBed.runInInjectionContext(() => {
         const directive: InputBaseDirective = new InputBaseDirective(idService, changeDetectorRef);
         const event = new FocusEvent('blur');
@@ -85,8 +83,7 @@ describe('InputBaseDirective', () => {
       });
     });
 
-    // TODO: fix this
-    it.skip('should call focusToInput', () => {
+    it('should call focusToInput', () => {
       TestBed.runInInjectionContext(() => {
         const directive: InputBaseDirective = new InputBaseDirective(idService, changeDetectorRef);
 

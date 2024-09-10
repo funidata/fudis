@@ -22,4 +22,6 @@ describe('FudisDOMUtilitiesService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  // Testing setLabelHeight() functionality in unit test is not the most meaningful. This is tested with Playwright visual regression tests in each component using this method.
 });
