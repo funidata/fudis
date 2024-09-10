@@ -23,6 +23,7 @@ import { IconComponent } from '../../../components/icon/icon.component';
     [disableGuidance]="disableGuidance"
     [initialFocus]="initialFocus"
     [ariaLabel]="ariaLabel"
+    (handleViewInit)="handleViewInit()"
   />`,
 })
 class MockTextInputComponent {
@@ -34,10 +35,16 @@ class MockTextInputComponent {
   disableGuidance = false;
   initialFocus = false;
 
+  viewInitDone = false;
+
   textInputControl = new FormControl<string | null | number>(
     null,
     FudisValidators.required('This is required field'),
   );
+
+  handleViewInit(): void {
+    this.viewInitDone = true;
+  }
 }
 
 describe('InputBaseDirective', () => {
@@ -103,6 +110,10 @@ describe('InputBaseDirective', () => {
       fixtureMock = TestBed.createComponent(MockTextInputComponent);
       componentMock = fixtureMock.componentInstance;
       fixtureMock.autoDetectChanges();
+    });
+
+    it('should call afterViewInit output', () => {
+      expect(componentMock.viewInitDone).toEqual(true);
     });
 
     it('should have label with required indicator', () => {
