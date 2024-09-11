@@ -15,21 +15,16 @@ test("alert group default", async ({ page }) => {
   await page.getByTestId("fudis-alert-2-button").click();
   await expect(page).toHaveScreenshot("2-add-and-remove.png");
 
-  // Add alert with link
-  await page.getByTestId("fudis-button-5").click();
-  await page.keyboard.press("Tab"); // Navigate from focused link to close button
-  await page.keyboard.press("Enter"); // Dismiss alert, focus should move to the next alert
-  await page.keyboard.press("Enter"); // Dismiss focused alert
-  await page.getByTestId("fudis-button-5").click();
-  await page.getByTestId("fudis-button-6").click();
-  await expect(page).toHaveScreenshot("3-add-alerts-with-link.png");
-
   // Open dialog
-  await page.getByTestId("fudis-button-9").click();
-  await expect(page).toHaveScreenshot("4-open-dialog.png");
+  await page.getByTestId("fudis-button-7").click();
+  await page.getByTestId("fudis-alert-3-button").click(); // Dismiss one Alert
+  await page.keyboard.press("Tab"); // Tab away from the last Alert
+  await page.keyboard.press("Tab"); // Tab to Dialog OK button
+  await page.keyboard.press("Tab"); // Tab to the first Alert since we are inside focus trap
+  await expect(page).toHaveScreenshot("3-open-dialog-and-dismiss-alert.png");
   await page.keyboard.press("Escape"); // Close dialog
 
   // Dismiss all alerts
-  await page.getByTestId("fudis-button-8").click();
-  await expect(page).toHaveScreenshot("5-dismiss-all.png");
+  await page.getByTestId("fudis-button-6").click();
+  await expect(page).toHaveScreenshot("4-dismiss-all.png");
 });
