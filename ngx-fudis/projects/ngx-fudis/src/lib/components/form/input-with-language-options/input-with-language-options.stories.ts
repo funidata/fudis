@@ -66,15 +66,18 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
     formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
       finnish: new FormControl<string | null>(null, [
         FudisValidators.required('Missing superhero name on Finnish.'),
-        FudisValidators.maxLength(10, 'Too long name'),
+        FudisValidators.minLength(5, 'Too short Finnish name'),
+        FudisValidators.maxLength(10, 'Too long Finnish name'),
       ]),
       swedish: new FormControl<string | null>(null, [
         FudisValidators.required('Missing superhero name on Swedish.'),
-        FudisValidators.maxLength(15, 'Too long name'),
+        FudisValidators.minLength(5, 'Too short Swedish name'),
+        FudisValidators.maxLength(15, 'Too long Swedish name'),
       ]),
       english: new FormControl<string | null>(null, [
         FudisValidators.required('Missing superhero name on English.'),
-        FudisValidators.maxLength(20, 'Too long name'),
+        FudisValidators.minLength(5, 'Too short English name'),
+        FudisValidators.maxLength(20, 'Too long English name'),
       ]),
     }),
   },
@@ -105,13 +108,13 @@ const ExampleTemplate: StoryFn = (args) => ({
     formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
       {
         finnish: new FormControl<string | null>(null, [
-          FudisValidators.maxLength(15, 'Too long name'),
+          FudisValidators.maxLength(15, 'Too long Finnish name'),
         ]),
         swedish: new FormControl<string | null>(null, [
-          FudisValidators.maxLength(20, 'Too long name'),
+          FudisValidators.maxLength(20, 'Too long Swedish name'),
         ]),
         english: new FormControl<string | null>(null, [
-          FudisValidators.maxLength(25, 'Too long name'),
+          FudisValidators.maxLength(25, 'Too long English name'),
         ]),
       },
       [
