@@ -8,11 +8,8 @@ export const fudisAlertPositionArray = ['static', 'absolute', 'fixed'] as const;
 export type FudisAlertPosition = (typeof fudisAlertPositionArray)[number];
 
 export interface FudisAlert {
-  message: Observable<string> | string;
+  message: Observable<string>;
   type: FudisNotification;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  routerLinkUrl?: string | any[] | null;
-  linkTitle?: string;
   id: string;
 }
 

@@ -35,23 +35,6 @@ constructor(
 
 `} />
 
-### Add New Alert with RouterLink
-
-If a link is needed insinde an alert, both `routerLinkUrl` and `linkTitle` must be provided.
-
-<Source code={`
-const alertWithLink: FudisAlert = {
-			message: 'You need to adjust your settings.',
-			type: 'warning',
-			routerLinkUrl: '/your-routerlink-url/to/destination'
-			linkTitle: 'Move to your settings.'
-			id: 'move-to-settings-warning-identifier',
-		};
-
-    	_alertService.addAlert(alertWithLink);
-
-`}/>
-
 ### Dismiss Alert
 
 #### Dismiss By Id
@@ -88,13 +71,9 @@ Fudis automatically embeddes Alert Group inside [Dialog Component](/docs/compone
 
 ## Accessibility and Keyboard Behavior
 
-### Alerts Without Link
+### Alert Variants
 
-Alerts without links and with variant `danger` or `warning` are communicated to screen readers, as they have html attribute of `role='alert'`. Other variants have `role='status'`. Focus does not change even if new alert appears.
-
-### With Links
-
-Focus will move to the newly added alert's link, so that keyboard users can easily react to it if needed.
+`danger` and `warning` variants are communicated to screen readers, as they have html attribute of `role='alert'`. Other variants have `role='status'`. Focus does not change even if new alert appears.
 
 ### Closing Alert
 
@@ -107,7 +86,7 @@ When user closes an alert, focus will move automatically to the last alert in th
 ### Other Mentionable Accessibility Details
 
 - Focusable elements inside alert have visible focus state
-- Danger and warning alerts without links are communicated to user using `role='alert'` attribute
+- Danger and warning alerts are communicated to user using `role='alert'` attribute
 - Alert Group is wrapped inside a `section` element which has an automatic `aria-label` describing its content. E.g. _'Notifications - Number of notifications: 5'_
 
 ## Alert Group Properties

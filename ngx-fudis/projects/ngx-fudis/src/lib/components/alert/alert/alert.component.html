@@ -1,32 +1,15 @@
 <div class="fudis-alert fudis-alert__{{ variant }}" [id]="htmlId">
   <fudis-body-text
-    [attr.role]="
-      !link && !linkTitle && (variant === 'danger' || variant === 'warning')
-        ? 'alert'
-        : !link && !linkTitle
-          ? 'status'
-          : null
-    "
+    [attr.role]="variant === 'danger' || variant === 'warning' ? 'alert' : 'status'"
     [classList]="'fudis-alert__text'"
     [align]="'center'"
     [variant]="'lg-regular'"
   >
-    {{ _currentMessage }}
-    <fudis-link
-      *ngIf="link && linkTitle"
-      (handleFocus)="_handleFocus($event)"
-      (handleBlur)="_handleBlur($event)"
-      (handleClick)="handleClick.emit($event)"
-      [attr.aria-label]="_currentMessage"
-      [initialFocus]="initialFocus"
-      class="fudis-alert__link"
-      [link]="link"
-      [title]="linkTitle"
-    />
+    {{ message | async }}
   </fudis-body-text>
 
   <button
-    [attr.aria-label]="_currentMessage + ', ' + (_closeLabel | async)"
+    [attr.aria-label]="(message | async) + ', ' + (_closeLabel | async)"
     [id]="buttonId"
     (click)="_handleCloseClick($event)"
     (focus)="_handleFocus($event)"

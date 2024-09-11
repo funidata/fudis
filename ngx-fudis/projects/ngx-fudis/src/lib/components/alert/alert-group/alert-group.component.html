@@ -1,18 +1,15 @@
 <section
-  *ngIf="(_visible | async) && (_alertList | async) as alerts"
+  *ngIf="(_visible | async) && (_alertService.alerts | async) as alerts"
   class="fudis-alert-group fudis-alert-group__{{ position }}"
   [attr.aria-label]="alerts.length > 0 ? (_alertGroupLabel | async) + ': ' + alerts.length : null"
 >
   <ng-container *ngFor="let alert of alerts">
     <fudis-alert
-      [initialFocus]="alert.initialFocus"
       [variant]="alert.type"
       [message]="alert.message"
       [id]="alert.id"
       [htmlId]="alert.htmlId"
       [buttonId]="alert.buttonId"
-      [linkTitle]="alert.linkTitle"
-      [link]="alert.routerLinkUrl"
     />
   </ng-container>
 </section>

@@ -20,8 +20,6 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 const testMessage = new BehaviorSubject<string>('Test message for alert');
 const testHtmlId = 'test-html-id';
 const testButtonId = 'test-button-id';
-const testLinkTitle = 'Test link title';
-const testRouterLinkUrl = '/test/alert/url';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -47,8 +45,6 @@ class MockAlertComponent implements OnInit {
       message: new BehaviorSubject('Second test message'),
       id: 'my-test-id-2',
       type: 'warning',
-      linkTitle: 'Test link',
-      routerLinkUrl: '/test/url',
     };
     this._alertService.addAlert(secondAlert);
   }
@@ -109,52 +105,26 @@ describe('AlertComponent', () => {
 
   describe('Inputs', () => {
     it('should create alert with basic inputs', () => {
-      fixture.detectChanges();
+      fixture.whenStable().finally(() => {
+        const element = getElement(fixture, '.fudis-alert');
 
-      const element = getElement(fixture, '.fudis-alert');
+        // Test @Input() message
+        expect(element.querySelector('button')?.getAttribute('aria-label')).toEqual(
+          String(testMessage.value) + ', Close',
+        );
 
-      // Test @Input() htmlId
-      expect(element.getAttribute('id')).toEqual(testHtmlId);
+        // Test @Input() htmlId
+        expect(element.getAttribute('id')).toEqual(testHtmlId);
 
-      // Test @Input() buttonId
-      expect(element.querySelector('button')?.getAttribute('id')).toEqual(testButtonId);
+        // Test @Input() buttonId
+        expect(element.querySelector('button')?.getAttribute('id')).toEqual(testButtonId);
 
-      // Test @Input() message
-      expect(element.querySelector('button')?.getAttribute('aria-label')).toEqual(
-        String(testMessage.value) + ', Close',
-      );
+        // Test @Input() message
+        expect(element.querySelector('p')?.textContent).toContain(String(testMessage.value));
 
-      // Test @Input() message
-      expect(element.querySelector('p')?.textContent).toContain(String(testMessage.value));
-
-      // Test that link does not exist by default
-      expect(element.querySelector('fudis-link')).toBeFalsy();
-    });
-
-    it('should create alert with a link', () => {
-      component.linkTitle = testLinkTitle;
-      component.link = testRouterLinkUrl;
-      component.initialFocus = true;
-
-      fixture.detectChanges();
-
-      const linkElement = getElement(fixture, '.fudis-alert p fudis-link');
-      const anchorElement = linkElement.querySelector('a');
-
-      // Test that inputs forwarded to Fudis Link are correct
-      expect(linkElement).toBeTruthy();
-
-      expect(sortClasses(linkElement.className)).toEqual(['fudis-alert__link']);
-
-      expect(linkElement?.getAttribute('aria-label')).toEqual(String(testMessage.value));
-
-      expect(linkElement?.getAttribute('ng-reflect-initial-focus')).toEqual('true');
-
-      expect(anchorElement?.getAttribute('ng-reflect-router-link')).toEqual(testRouterLinkUrl);
-
-      expect(anchorElement?.getAttribute('href')).toEqual(testRouterLinkUrl);
-
-      expect(linkElement?.getAttribute('ng-reflect-title')).toEqual(testLinkTitle);
+        // Test that link does not exist by default
+        expect(element.querySelector('fudis-link')).toBeFalsy();
+      });
     });
   });
 
@@ -240,29 +210,6 @@ describe('AlertComponent', () => {
       expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
     });
 
-    it('should emit info to focusService when focusing on link in alert', () => {
-      const button = getElement(mockFixture, '.fudis-button');
-      button.focus();
-
-      const linkInAlert = getElement(mockFixture, '.fudis-link');
-      linkInAlert.focus();
-
-      expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
-    });
-
-    it('should not emit info to focusService when focusing from link to alert close and vice versa', () => {
-      const linkInAlert = getElement(mockFixture, '.fudis-link');
-      linkInAlert.focus();
-
-      const closeButton = getElement(mockFixture, '.fudis-alert__close');
-      closeButton.focus();
-      linkInAlert.focus();
-
-      expect(focusService.setFocusTarget).not.toHaveBeenCalledWith(closeButton);
-
-      expect(focusService.setFocusTarget).not.toHaveBeenCalledWith(linkInAlert);
-    });
-
     it('should set focus to close button, if another close is clicked', () => {
       const firstClose = getElement(mockFixture, '#fudis-alert-1 .fudis-alert__close');
       const secondClose = getElement(mockFixture, '#fudis-alert-2 .fudis-alert__close');
@@ -296,16 +243,6 @@ describe('AlertComponent', () => {
       firstClose.click();
 
       expect(focusService.getFocusTarget).not.toHaveBeenCalledWith();
-    });
-
-    it('should update initialFocus, when blurring from link', () => {
-      const alertLink = getElement(mockFixture, '#fudis-alert-2 .fudis-link');
-      const secondClose = getElement(mockFixture, '#fudis-alert-2 .fudis-alert__close');
-
-      alertLink.focus();
-      secondClose.focus();
-
-      expect(alertService.updateAlertLinkFocusState).toHaveBeenCalledWith('fudis-alert-2');
     });
   });
 });
