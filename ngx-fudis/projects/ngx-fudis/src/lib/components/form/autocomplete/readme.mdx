@@ -1,0 +1,77 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { linkTo } from "@storybook/addon-links";
+import { AutocompleteComponent } from "./autocomplete.component";
+import * as AutocompleteStories from "./autocomplete.stories.ts";
+
+<Meta title="Components/Form/Autocomplete (single-select)" />
+
+# Autocomplete (single-select)
+
+Fudis-autocomplete (single-select) is based on Angular Material Autocomplete.
+
+Autocomplete is a search input providing user with a list of suggestions. There are two variants for single-select autocomplete: `search` and `dropdown`.
+
+**Search** variant is expecting user input and the option filtering is triggered after three characters. **Dropdown** variant will display options in a dropdown when input is focused, options can be filtered by typing. Filtering is triggered from the first character.
+
+Autocomplete (single-select) can only have one option selected at a time.
+
+## Examples
+
+<Canvas of={AutocompleteStories.AutocompleteSearch}></Canvas>
+<Canvas of={AutocompleteStories.AutocompleteDropdown}></Canvas>
+
+## Usage Guidelines
+
+Autocomplete is designed to use when basic [dropdown](/story/components-form-dropdown--single-select) is not enough - that is, cases where option list has too many objects to scroll through and user has an idea what they are searching for.
+
+**NOTE:** Autocomplete does not have any lazy loading at this time, all the data is loaded in the DOM when component is initialized. This can cause performance issues with `dropdown` variant if option list data is massive. Lazy loading will be implemented later on.
+
+### Mandatory Properties
+
+Autocomplete requires at least `label` and `options` object array with possible option values.
+
+Options array takes in objects with the following signature:
+
+```
+{
+	/** Underlying value of the option */
+	value: any;
+	/** Value that is shown in the UI */
+	label: string;
+	/** Is option disabled in the options list dropdown */
+	disabled?: boolean;
+	/** To store additional data */
+	[key: string]: any;
+}
+```
+
+### Validators and Error Handling
+
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation).
+
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
+
+**Autocomplete validators**
+
+- required
+
+## Accessibility
+
+- Label and guidance are linked to the input via id
+- Input can be disabled
+  - Input remains focusable with keyboard and screen reader
+  - Disabled state is communicated for screen reader
+- Options can be disabled
+  - Disabled option is focusable with screen reader
+  - Disabled state is communicated for screen reader
+- **NOTE:** Option list selection can only be made with `enter` and not with `space` since it is considered as a search character
+
+## Related components
+
+[Icon](/docs/components-icon--icon)
+
+[Angular Material Autocomplete](https://material.angular.io/components/autocomplete/overview)
+
+## Properties
+
+<ArgTypes of={AutocompleteComponent} />

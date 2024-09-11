@@ -1,0 +1,76 @@
+<div
+  #autocompleteMultiSelectWrapper
+  class="fudis-autocomplete-multi-select fudis-input-size__{{ size }}"
+>
+  <fudis-label
+    [text]="label"
+    [id]="id + '__label'"
+    [for]="id"
+    [tooltip]="tooltip"
+    [tooltipPosition]="tooltipPosition"
+    [tooltipToggle]="tooltipToggle"
+  >
+  </fudis-label>
+  <div class="fudis-autocomplete-multi-select__input-wrapper">
+    <input
+      #autocompleteInput
+      role="combobox"
+      [attr.aria-controls]="id + '-dropdown'"
+      class="fudis-autocomplete-multi-select__input-wrapper__input"
+      (focus)="_openDropdown()"
+      (keyup)="_doSearch($event)"
+      (keydown)="_closeOnShiftTab($event)"
+      [id]="id"
+      [value]="_filterText"
+      [attr.placeholder]="placeholder ? placeholder : null"
+      [attr.aria-expanded]="_toggleOn"
+      [attr.aria-labelledby]="id + '-selected-items'"
+      [attr.aria-describedby]="id + '_guidance'"
+    />
+    <fudis-button
+      class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
+      (handleClick)="_toggleDropdown()"
+      [size]="'icon-only'"
+      [variant]="'tertiary'"
+      [icon]="'chevron'"
+      [iconRotate]="_toggleOn ? 'ccw-90' : 'cw-90'"
+      [label]="!_toggleOn ? _openAriaLabel : _closeAriaLabel"
+      [labelHidden]="true"
+    >
+    </fudis-button>
+  </div>
+  <fudis-dropdown-menu
+    *ngIf="_toggleOn"
+    [align]="'center'"
+    [size]="size"
+    [multiselect]="true"
+    [parentId]="id"
+  >
+    <ng-container *ngFor="let item of _results">
+      <fudis-dropdown-menu-item
+        [label]="item.label"
+        [close]="false"
+        (handleChecked)="setItemSelection(item)"
+        (handleBlur)="_closeMenuOnListExit($event)"
+        [checked]="_isChecked(item)"
+      >
+      </fudis-dropdown-menu-item>
+    </ng-container>
+    <ng-container *ngIf="_results.length === 0">
+      <fudis-body-text [size]="'md-light'">{{ _noResultsFound }}</fudis-body-text>
+    </ng-container>
+  </fudis-dropdown-menu>
+  <ng-container *ngIf="selectedOptions.length > 0">
+    <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
+      _removeItemText
+    }}</span>
+    <fudis-autocomplete-multi-select-selected-item-chip
+      [parentId]="id"
+      (removedChipIndex)="_handleRemoveChip($event)"
+      [selectedItems]="selectedOptions"
+    />
+  </ng-container>
+  <ng-container *ngIf="helpText">
+    <fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" />
+  </ng-container>
+</div>
