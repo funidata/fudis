@@ -30,7 +30,16 @@ import { fudisSpacingArray } from '../../../types/spacing';
 @Component({
   selector: 'example-with-multiple-forms',
   template: `
-    <fudis-grid [align]="'center'" [columns]="{ xs: 1, sm: 2 }" [width]="'lg'">
+    <fudis-grid [align]="'center'" [columns]="{ xs: 1, sm: 2 }" [width]="'lg'" [marginTop]="'xl'">
+      <div fudisGridItem [columns]="'stretch'">
+        <fudis-heading [level]="1">Multiple Form Components</fudis-heading>
+        <fudis-body-text
+          >This page is for testing purposes to demo and test, that form components, their
+          validation errors and forms' Error Summaries load correctly whether the Expandable was
+          opened or not before clicking Submit.</fudis-body-text
+        >
+      </div>
+
       <fudis-button
         fudisGridItem
         [columns]="'stretch'"
@@ -40,7 +49,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
 
       <fudis-form
         [level]="2"
-        [title]="'Form with Text Input'"
+        [title]="'Form 1 with Text Input'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -48,7 +57,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formOne.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 1'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -64,7 +73,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Text Area'"
+        [title]="'Form 2 with Text Area'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -72,7 +81,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formTwo.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 2'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -88,7 +97,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Checkbox Group'"
+        [title]="'Form 3 with Checkbox Group'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -96,7 +105,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formThree.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 3'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -121,7 +130,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Radio Button Group'"
+        [title]="'Form 4 with Radio Button Group'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -129,7 +138,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formFive.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 4'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -154,7 +163,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Select and Multiselect'"
+        [title]="'Form 5 with Select and Multiselect'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -162,7 +171,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formFour.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 5'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -200,7 +209,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Input With Language Options'"
+        [title]="'Form 6 with Input With Language Options'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -208,7 +217,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formSix.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 6'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -226,6 +235,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
                 [variant]="'text-area'"
                 [formGroup]="allForms.controls.formSix.controls.allRequired"
               />
+              <fudis-button [label]="'Patch value'" (handleClick)="patchValue()"></fudis-button>
             </ng-template>
           </fudis-expandable>
         </ng-template>
@@ -256,6 +266,12 @@ class ExampleWithMultipleFormsComponent {
       value: 'item-3-peach',
     },
   ];
+
+  patchValue(): void {
+    this.allForms.controls.formSix.controls.oneRequired.controls['finnish'].patchValue(
+      'Surprise value from outside',
+    );
+  }
 
   submitAllForms(): void {
     if (this.allForms.invalid) {
