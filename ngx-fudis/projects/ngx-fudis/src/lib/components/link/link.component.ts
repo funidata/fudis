@@ -15,7 +15,6 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'fudis-link',
   templateUrl: './link.component.html',
-  styleUrls: ['./link.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent extends LinkApiDirective implements OnChanges {
