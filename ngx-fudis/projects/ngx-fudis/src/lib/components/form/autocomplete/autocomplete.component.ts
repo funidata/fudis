@@ -1,10 +1,13 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
+  Host,
   Input,
   OnChanges,
   OnInit,
+  Optional,
   effect,
 } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -16,6 +19,9 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'fudis-autocomplete',
@@ -27,26 +33,34 @@ export class AutocompleteComponent
   implements OnInit, AfterContentInit, OnChanges, AfterViewInit
 {
   constructor(
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
+    private _translationService: FudisTranslationService,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService);
+    super(_idService, _changeDetectorRef);
+
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required = hasRequiredValidator(this.control);
+      }
+    });
 
     effect(() => {
-      this._clearFilterText = this._translations().SELECT.AUTOCOMPLETE.CLEAR;
+      this._clearFilterText = this._translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
     });
   }
 
   /**
    * FormControl for the input.
    */
-  @Input({ required: true }) control: FormControl<FudisSelectOption | null>;
+  @Input({ required: true }) override control: FormControl<FudisSelectOption<object> | null>;
 
   /**
    * Option list
    */
-  @Input({ required: true }) options: FudisSelectOption[];
+  @Input({ required: true }) options: FudisSelectOption<object>[];
 
   /**
    * Available sizes for the autocomplete - defaults to large.
@@ -58,7 +72,7 @@ export class AutocompleteComponent
    * If string, it fills the input with given string. NOTE: This sets formControl's value to 'null' if string does not match of any labels from 'options'.
    * If given FudisSelectOption, it searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with item from 'options' input.
    */
-  @Input() selectedOption: string | FudisSelectOption;
+  @Input() selectedOption: string | FudisSelectOption<object>[];
 
   /**
    * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
@@ -78,7 +92,7 @@ export class AutocompleteComponent
   /**
    * Internal filtered options derived from options Input
    */
-  protected _filteredOptions: Observable<FudisSelectOption[]>;
+  protected _filteredOptions: Observable<FudisSelectOption<object>[] | null>;
 
   /**
    * Translated aria-label for close icon which clears the input
@@ -87,6 +101,7 @@ export class AutocompleteComponent
 
   ngOnInit(): void {
     this._setInputId('autocomplete');
+    this._updateValueAndValidityTrigger.next();
   }
 
   ngAfterContentInit() {
@@ -100,8 +115,11 @@ export class AutocompleteComponent
     }
   }
 
-  ngOnChanges(): void {
-    this._required = this.required ?? hasRequiredValidator(this.control);
+    // KATSO MALLIA SELECT BASE CONSTRUCTORISTA
+  ngOnChanges(changes: FudisComponentChanges<AutocompleteComponent>): void {
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._applyControlUpdateCheck();
+    }
   }
 
   /**
@@ -115,7 +133,7 @@ export class AutocompleteComponent
     this._checkFilteredOptions();
 
     // After clearing set focus back to input field
-    this.inputRef.nativeElement.focus();
+    this._inputRef.nativeElement.focus();
   }
 
   /**
@@ -136,8 +154,8 @@ export class AutocompleteComponent
       const findMe = this.selectedOption;
 
       const foundIndex = this.options.findIndex(
-        (option: FudisSelectOption) =>
-          option.value === findMe.value && option.label === findMe.label,
+        (option: FudisSelectOption<object>) =>
+          option.value === findMe[foundIndex].value && option.label === findMe[foundIndex].label,
       );
       if (foundIndex !== -1) {
         this._autocompleteFormControl.patchValue(this.options[foundIndex].label);
@@ -202,7 +220,7 @@ export class AutocompleteComponent
   /**
    * Filter options when user inputs text or opens dropdown
    */
-  private _filter(value: string): FudisSelectOption[] {
+  private _filter(value: string): FudisSelectOption<object>[] {
     if (value || value === '') {
       const filterValue = value.toLowerCase();
       const filteredOptions = this.options.filter((option) =>

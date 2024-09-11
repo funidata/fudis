@@ -14,8 +14,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { AutocompleteMultiSelectComponent } from './components/autocomplete-multi-select/autocomplete-multi-select.component';
-import { AutocompleteMultiSelectSelectedItemChipComponent } from './components/autocomplete-multi-select/autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
+// import { AutocompleteMultiSelectComponent } from './components/autocomplete-multi-select/autocomplete-multi-select.component';
+// import { AutocompleteMultiSelectSelectedItemChipComponent } from './components/autocomplete-multi-select/autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
 import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
@@ -123,8 +123,8 @@ import {
   declarations: [
     ActionsDirective,
     AutocompleteComponent,
-    AutocompleteMultiSelectComponent,
-    AutocompleteMultiSelectSelectedItemChipComponent,
+    // AutocompleteMultiSelectComponent,
+    // AutocompleteMultiSelectSelectedItemChipComponent,
     AlertComponent,
     AlertGroupComponent,
     BadgeComponent,
@@ -231,8 +231,8 @@ import {
   exports: [
     ActionsDirective,
     AutocompleteComponent,
-    AutocompleteMultiSelectComponent,
-    AutocompleteMultiSelectSelectedItemChipComponent,
+    // AutocompleteMultiSelectComponent,
+    // AutocompleteMultiSelectSelectedItemChipComponent,
     // AlertComponent,
     // AlertGroupComponent,
     BadgeComponent,

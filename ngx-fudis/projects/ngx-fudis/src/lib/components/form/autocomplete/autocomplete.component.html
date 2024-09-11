@@ -3,7 +3,6 @@
     [text]="label"
     [id]="id + '__label'"
     [for]="id"
-    [requiredText]="_required ? _requiredText : undefined"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -55,10 +54,11 @@
   </div>
   <fudis-guidance
     *ngIf="!disableGuidance"
+    [formId]="_parentForm?.id || null"
+    [reloadErrorSummary]="_reloadErrorSummary"
     [inputLabel]="label"
     [helpText]="helpText"
     [for]="id"
-    [errorMsg]="errorMsg"
     [control]="control"
   >
     <ng-content select="fudis-error-message" />
