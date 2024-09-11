@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FudisIdService } from '../id/id.service';
 import { FudisAlert, FudisAlertElement } from '../../types/miscellaneous';
-import { BehaviorSubject, map, take } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +20,10 @@ export class FudisAlertService {
    */
   public addAlert(newAlert: FudisAlert): void {
     const htmlId = this._idService.getNewId('alert');
+    const currentAlerts = this._alerts.getValue();
 
     this._alerts.next([
-      ...this._alerts.getValue(),
+      ...currentAlerts,
       { ...newAlert, htmlId, buttonId: `${htmlId}-button`, initialFocus: true },
     ]);
   }
@@ -31,24 +32,16 @@ export class FudisAlertService {
    * To dismiss alert by 'id' provided in 'addAlert()'. It will dismiss all alerts matching the 'id'.
    */
   public dismissAlert(id: string): void {
-    this._alerts
-      .pipe(
-        take(1),
-        map((alerts) => alerts.filter((alert) => alert.id !== id)),
-      )
-      .subscribe((result) => this._alerts.next(result));
+    const filteredAlerts = this._alerts.getValue().filter((alert) => alert.id !== id);
+    this._alerts.next(filteredAlerts);
   }
 
   /**
    * Dismisses only one alert from alert's close button click in the UI
    */
   public dismissAlertFromButton(id: string): void {
-    this._alerts
-      .pipe(
-        take(1),
-        map((alerts) => alerts.filter((alert) => alert.buttonId !== id)),
-      )
-      .subscribe((result) => this._alerts.next(result));
+    const filteredAlerts = this._alerts.getValue().filter((alert) => alert.buttonId !== id);
+    this._alerts.next(filteredAlerts);
   }
 
   /**
@@ -61,7 +54,7 @@ export class FudisAlertService {
   /**
    * Get alerts as an Observable
    */
-  get allAlertsObservable(): BehaviorSubject<FudisAlertElement[]> {
+  get alerts(): BehaviorSubject<FudisAlertElement[]> {
     return this._alerts;
   }
 
@@ -70,14 +63,17 @@ export class FudisAlertService {
    */
   public updateAlertLinkFocusState(htmlId: string): void {
     let alertIndex: number;
+    const tempAlerts = this._alerts.getValue();
 
-    this._alerts.value.forEach((value, index) => {
+    tempAlerts.forEach((value, index) => {
       if (value.htmlId === htmlId) {
         alertIndex = index;
       }
 
       if (alertIndex !== -1) {
-        this._alerts.value[index].initialFocus = false;
+        tempAlerts[index].initialFocus = false;
+
+        this._alerts.next(tempAlerts);
       }
     });
   }

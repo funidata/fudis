@@ -1,36 +1,36 @@
-import { Component, Input, AfterViewInit, effect, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, effect, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FudisAlertElement, FudisAlertPosition } from '../../../types/miscellaneous';
+import {
+  FudisAlertElement,
+  FudisAlertPosition,
+  FudisComponentChanges,
+} from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-alert-group',
   templateUrl: './alert-group.component.html',
   styleUrls: ['./alert-group.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertGroupComponent implements AfterViewInit {
+export class AlertGroupComponent implements OnChanges {
   constructor(
-    private _alertService: FudisAlertService,
+    protected _alertService: FudisAlertService,
     private _translationService: FudisTranslationService,
     private _dialogService: FudisDialogService,
-    private _cdRef: ChangeDetectorRef,
   ) {
-    /**
-     * Subscribe to current visible alerts
-     */
-    _alertService.allAlertsObservable.pipe(takeUntilDestroyed()).subscribe((value) => {
-      this._alertList.next(value);
-    });
+    this._dialogService
+      .getDialogOpenStatus()
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        this._setVisibility(value);
+      });
 
     effect(() => {
       this._alertGroupLabel.next(this._translationService.getTranslations()().ALERT.HEADING_LABEL);
-
-      this._dialogStatus = this._dialogService.getDialogOpenSignal()();
-
-      this._setVisibility();
     });
   }
 
@@ -42,7 +42,7 @@ export class AlertGroupComponent implements AfterViewInit {
   /**
    * Boolean to determine if Alert Group is used inside Fudis Dialog Component
    */
-  @Input() insideDialog: boolean = false;
+  @Input() insideDialog: boolean;
 
   /**
    * List of Alerts fetched from Alert Service
@@ -64,9 +64,10 @@ export class AlertGroupComponent implements AfterViewInit {
    */
   private _dialogStatus: boolean;
 
-  ngAfterViewInit(): void {
-    this._setVisibility();
-    this._cdRef.detectChanges();
+  ngOnChanges(changes: FudisComponentChanges<AlertGroupComponent>): void {
+    if (changes.insideDialog?.currentValue !== changes.insideDialog?.previousValue) {
+      this._setVisibility(this._dialogService.getDialogOpenStatus().value);
+    }
   }
 
   /**
@@ -79,8 +80,8 @@ export class AlertGroupComponent implements AfterViewInit {
   /**
    * Set visibility when Fudis Dialog is opened and closed
    */
-  private _setVisibility(): void {
-    if ((this._dialogStatus && this.insideDialog) || (!this._dialogStatus && !this.insideDialog)) {
+  private _setVisibility(dialogStatus: boolean): void {
+    if ((dialogStatus && this.insideDialog) || (!dialogStatus && !this.insideDialog)) {
       this._visible.next(true);
     } else {
       this._visible.next(false);

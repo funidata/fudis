@@ -17,8 +17,6 @@ import docs from '../alert.docs.mdx';
         <fudis-button [label]="'Add warning'" (handleClick)="addWarning()" />
         <fudis-button [label]="'Add success'" (handleClick)="addSuccess()" />
         <fudis-button [label]="'Add info'" (handleClick)="addInfo()" />
-        <fudis-button [label]="'Add info with link'" (handleClick)="addInfoWithLink()" />
-        <fudis-button [label]="'Add warning with link'" (handleClick)="addWarningWithLink()" />
         <fudis-button [label]="'Dismiss random id'" (handleClick)="dismissRandom()" />
         <fudis-button [label]="'Dismiss all'" (handleClick)="dismissAll()" />
         <fudis-button [label]="'Open dialog'" (handleClick)="openDialog()" />
@@ -42,7 +40,7 @@ class AddAlertsComponent implements AfterViewInit {
     private _alertService: FudisAlertService,
   ) {
     effect(() => {
-      this._alerts = this._alertService.allAlertsObservable;
+      this._alerts = this._alertService.alerts;
       this._marginCounter = 2 + this._alerts.getValue().length * 2;
     });
   }
@@ -69,7 +67,7 @@ class AddAlertsComponent implements AfterViewInit {
 
   addWarning(): void {
     const newAlert: FudisAlert = {
-      message: 'Something dangerous MIGHT happen',
+      message: new BehaviorSubject('Something dangerous MIGHT happen'),
       type: 'warning',
       id: 'my-own-id-2',
     };
@@ -77,21 +75,17 @@ class AddAlertsComponent implements AfterViewInit {
     this._alertService.addAlert(newAlert);
   }
 
-  addWarningWithLink(): void {
-    const newAlert: FudisAlert = {
-      message: new BehaviorSubject('Something dangerous MIGHT happen.'),
-      type: 'warning',
-      id: 'my-own-id-3',
-      routerLinkUrl: '/',
-      linkTitle: 'More info about this warning.',
-    };
+  alertWarningDemoLinkClick(): void {
+    alert('yikes!');
+  }
 
-    this._alertService.addAlert(newAlert);
+  alertInfoDemoLinkClick(): void {
+    alert('Nothing really interesting here.');
   }
 
   addSuccess(): void {
     const newAlert: FudisAlert = {
-      message: 'Yippee Ki-Yay! You were successful!',
+      message: new BehaviorSubject('Yippee Ki-Yay! You were successful!'),
       type: 'success',
       id: 'my-own-id-4',
     };
@@ -101,7 +95,7 @@ class AddAlertsComponent implements AfterViewInit {
 
   addInfo(): void {
     const newAlert: FudisAlert = {
-      message: 'Nothing special here.',
+      message: new BehaviorSubject('Nothing special here.'),
       type: 'info',
       id: 'my-own-id-5',
     };
@@ -109,20 +103,8 @@ class AddAlertsComponent implements AfterViewInit {
     this._alertService.addAlert(newAlert);
   }
 
-  addInfoWithLink(): void {
-    const newAlert: FudisAlert = {
-      message: 'Mostly neutral information here.',
-      type: 'info',
-      id: 'my-own-id-6',
-      routerLinkUrl: '/',
-      linkTitle: 'Additional information about this situation.',
-    };
-
-    this._alertService.addAlert(newAlert);
-  }
-
   dismissRandom(): void {
-    const alerts = this._alertService.allAlertsObservable.getValue();
+    const alerts = this._alertService.alerts.getValue();
 
     if (alerts.length > 0) {
       const random = Math.floor(Math.random() * alerts.length);

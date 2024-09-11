@@ -16,8 +16,6 @@ describe('FudisAlertService', () => {
     message: new BehaviorSubject<string>('Second message'),
     type: 'warning',
     id: 'test-id-2',
-    linkTitle: 'Test link title',
-    routerLinkUrl: 'test/url/here',
   };
 
   const firstAlertFromService: FudisAlertElement = {
@@ -44,7 +42,7 @@ describe('FudisAlertService', () => {
   });
 
   it('should return an empty array initially', () => {
-    const alerts = service.allAlertsObservable.getValue();
+    const alerts = service.alerts.getValue();
 
     expect(alerts).toEqual([]);
   });
@@ -53,7 +51,7 @@ describe('FudisAlertService', () => {
     service.addAlert(firstAlert);
     service.addAlert(secondAlert);
 
-    const alerts = service.allAlertsObservable.getValue();
+    const alerts = service.alerts.getValue();
 
     expect(alerts).toEqual([firstAlertFromService, secondAlertFromService]);
   });
@@ -64,7 +62,7 @@ describe('FudisAlertService', () => {
 
     service.dismissAlert('test-id-1');
 
-    const alerts = service.allAlertsObservable.getValue();
+    const alerts = service.alerts.getValue();
 
     expect(alerts).toEqual([secondAlertFromService]);
   });
@@ -75,7 +73,7 @@ describe('FudisAlertService', () => {
 
     service.dismissAll();
 
-    const alerts = service.allAlertsObservable.getValue();
+    const alerts = service.alerts.getValue();
 
     expect(alerts).toEqual([]);
   });
@@ -86,7 +84,7 @@ describe('FudisAlertService', () => {
 
     service.dismissAlertFromButton('fudis-alert-1-button');
 
-    const alerts = service.allAlertsObservable.getValue();
+    const alerts = service.alerts.getValue();
 
     expect(alerts).toEqual([secondAlertFromService]);
   });
@@ -97,7 +95,7 @@ describe('FudisAlertService', () => {
 
     service.updateAlertLinkFocusState('fudis-alert-2');
 
-    const alerts = service.allAlertsObservable.getValue();
+    const alerts = service.alerts.getValue();
 
     expect(alerts[1].initialFocus).toEqual(false);
   });
