@@ -137,12 +137,11 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
                   </ng-template>
                 </fudis-select>
-                <fudis-grid [rowGap]="'md'">
-                  <fudis-button
-                    [label]="_optionRequired + ' option required validator'"
-                    (handleClick)="toggleRequired(formExample.controls['animal'], 'optionRequired')"
-                  ></fudis-button>
-                </fudis-grid>
+
+                <fudis-button
+                  [label]="_optionRequired + ' option required validator'"
+                  (handleClick)="toggleRequired(formExample.controls['animal'], 'optionRequired')"
+                ></fudis-button>
               </fudis-grid>
               <hr class="fudis-hr" aria-hidden="true" />
               <fudis-grid [columns]="{ md: 3 }">
@@ -156,7 +155,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -171,7 +170,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -186,7 +185,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
@@ -206,15 +205,90 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   >
                   </fudis-radio-button>
                 </fudis-radio-button-group>
-                <fudis-grid [rowGap]="'md'">
-                  <fudis-button
-                    [label]="_radioOptionRequired + ' option required validator'"
-                    (handleClick)="
-                      toggleRequired(formExample.controls['sport'], 'radioOptionRequired')
-                    "
-                  ></fudis-button>
-                </fudis-grid>
+                <fudis-button
+                  [label]="_radioOptionRequired + ' option required validator'"
+                  (handleClick)="
+                    toggleRequired(formExample.controls['sport'], 'radioOptionRequired')
+                  "
+                ></fudis-button>
               </fudis-grid>
+            </fudis-grid>
+            <fudis-grid [columns]="{ md: 'inputLg auto' }">
+              <fudis-select
+                [label]="'Select your favorite animal'"
+                [size]="'md'"
+                [control]="formExample.controls.animal"
+              >
+                <ng-template fudisContent [type]="'select-options'">
+                  <fudis-select-option [data]="{ value: 'option-1', label: 'Otter' }" />
+                  <fudis-select-option [data]="{ value: 'option-2', label: 'Rattle snake' }" />
+                  <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
+                </ng-template>
+              </fudis-select>
+
+              <fudis-button
+                [label]="_optionRequired + ' option required validator'"
+                (handleClick)="toggleRequired(formExample.controls['animal'], 'optionRequired')"
+              ></fudis-button>
+            </fudis-grid>
+            <hr class="fudis-hr" aria-hidden="true" />
+            <fudis-grid [columns]="{ md: 3 }">
+              <fudis-checkbox-group
+                [label]="'If you like summer'"
+                [formGroup]="formExample.controls.summer"
+              >
+                <fudis-checkbox
+                  [controlName]="'summer1'"
+                  [label]="'Summer holidays'"
+                  (handleChange)="
+                    toggleRequiredFromOthers([
+                      formExample.controls.winter,
+                      formExample.controls.working,
+                    ])
+                  "
+                />
+              </fudis-checkbox-group>
+              <fudis-checkbox-group
+                [label]="'If you like winter'"
+                [formGroup]="formExample.controls.winter"
+              >
+                <fudis-checkbox
+                  [controlName]="'winter1'"
+                  [label]="'Winter holidays'"
+                  (handleChange)="
+                    toggleRequiredFromOthers([
+                      formExample.controls.summer,
+                      formExample.controls.working,
+                    ])
+                  "
+                />
+              </fudis-checkbox-group>
+              <fudis-checkbox-group
+                [label]="'If you like working'"
+                [formGroup]="formExample.controls.working"
+              >
+                <fudis-checkbox
+                  [controlName]="'working1'"
+                  [label]="'Working holidays'"
+                  (handleChange)="
+                    toggleRequiredFromOthers([
+                      formExample.controls.summer,
+                      formExample.controls.winter,
+                    ])
+                  "
+                />
+              </fudis-checkbox-group>
+            </fudis-grid>
+            <fudis-grid [columns]="{ md: 'inputLg auto' }">
+              <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
+              <fudis-input-with-language-options
+                [label]="'At least one required'"
+                [formGroup]="formExample.controls.dj"
+              ></fudis-input-with-language-options>
+              <fudis-button
+                [label]="_oneRequired + ' option required validator'"
+                (handleClick)="toggleOneRequired(formExample.controls['dj'], 'oneRequired')"
+              ></fudis-button>
             </fudis-grid>
           </ng-template>
         </fudis-fieldset>
@@ -265,6 +339,20 @@ class DynamicValidatorExampleComponent {
         this._atLeastOneRequiredValidatorInstance,
       ),
       sport: new FormControl(null, [this._requiredValidatorInstance]),
+      dj: new FormGroup(
+        {
+          finnish: new FormControl<string | null>(null, [
+            FudisValidators.maxLength(15, 'Too long Finnish name'),
+          ]),
+          swedish: new FormControl<string | null>(null, [
+            FudisValidators.maxLength(20, 'Too long Swedish name'),
+          ]),
+          english: new FormControl<string | null>(null, [
+            FudisValidators.maxLength(25, 'Too long English name'),
+          ]),
+        },
+        this._atLeastOneRequiredValidatorInstance,
+      ),
     });
   }
 
@@ -293,6 +381,7 @@ class DynamicValidatorExampleComponent {
   _numberRequired = 'Remove';
   _dateRequired = 'Remove';
   _optionRequired = 'Remove';
+  _oneRequired = 'Remove';
   _dateMax = 'Remove';
   _dateMin = 'Remove';
   _radioOptionRequired = 'Remove';
@@ -388,6 +477,9 @@ class DynamicValidatorExampleComponent {
       case 'numberMax':
         this._numberMax = this._numberMax === 'Add' ? 'Remove' : 'Add';
         return;
+      case 'oneRequired':
+        this._oneRequired = this._oneRequired === 'Add' ? 'Remove' : 'Add';
+        return;
       default:
         console.error('Wrong input provided. No case for text: ' + target);
         return;
@@ -408,6 +500,19 @@ class DynamicValidatorExampleComponent {
 
       control.updateValueAndValidity();
     });
+  }
+
+  toggleOneRequired(group: FormGroup, target: string): void {
+    const required = group.hasValidator(this._atLeastOneRequiredValidatorInstance);
+
+    if (required) {
+      group.removeValidators(this._atLeastOneRequiredValidatorInstance);
+    } else {
+      group.addValidators(this._atLeastOneRequiredValidatorInstance);
+    }
+    this.changeText(target);
+
+    group.updateValueAndValidity();
   }
 
   toggleRequired(control: FormControl, target: string): void {
@@ -567,6 +672,7 @@ export const DynamicExample: StoryFn<FormComponent> = (args: FormComponent) => (
   props: args,
   template: html` <example-dynamic-validator
     [title]="title"
+    [helpText]="helpText"
     [titleVariant]="titleVariant"
     [level]="level"
     [errorSummaryHelpText]="errorSummaryHelpText"
@@ -576,6 +682,8 @@ export const DynamicExample: StoryFn<FormComponent> = (args: FormComponent) => (
 
 DynamicExample.args = {
   title: 'Example with Dynamic Form Validators',
+  helpText:
+    "This example page is used to test, that when validators are added or removed from the FormControls, components' HTML attributes such as 'required' and max/min length are updated correctly.",
   titleVariant: 'xl',
   level: 1,
   errorSummaryHelpText:

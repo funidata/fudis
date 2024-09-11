@@ -2,7 +2,6 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BehaviorSubject } from 'rxjs';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -117,11 +116,7 @@ const ExampleTemplate: StoryFn = (args) => ({
           FudisValidators.maxLength(25, 'Too long English name'),
         ]),
       },
-      [
-        FudisGroupValidators.atLeastOneRequired(
-          new BehaviorSubject('Give name in at least in one language'),
-        ),
-      ],
+      [FudisGroupValidators.atLeastOneRequired('Give name in at least in one language')],
     ),
   },
   template: html`
