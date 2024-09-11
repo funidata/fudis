@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable, Signal, TemplateRef, signal } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class FudisDialogService {
   constructor(public ngMaterialDialog: MatDialog) {}
 
-  private _dialogOpen = signal<boolean>(false);
+  private _dialogOpen = new BehaviorSubject<boolean>(false);
 
   private _dialogRefs: MatDialogRef<any, any>[] = [];
 
@@ -19,7 +20,6 @@ export class FudisDialogService {
    */
   public open<T, R = any>(
     component: ComponentType<T> | TemplateRef<T>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config?: MatDialogConfig<any>,
   ): MatDialogRef<T, R> {
     const newDialog = this.ngMaterialDialog.open(
@@ -54,15 +54,15 @@ export class FudisDialogService {
   /**
    * Get dialog open status
    */
-  public getDialogOpenSignal(): Signal<boolean> {
-    return this._dialogOpen.asReadonly();
+  public getDialogOpenStatus(): BehaviorSubject<boolean> {
+    return this._dialogOpen;
   }
 
   /**
    * Set dialog open
    */
-  public setDialogOpenSignal(value: boolean): void {
-    this._dialogOpen.set(value);
+  public setDialogOpenStatus(value: boolean): void {
+    this._dialogOpen.next(value);
   }
 
   /**
