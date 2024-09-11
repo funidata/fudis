@@ -36,7 +36,7 @@ export class LabelComponent extends TooltipApiDirective {
   /**
    * Show text indicating if form element associated with the label is required or not
    */
-  @Input() required: boolean;
+  @Input() required: boolean | null;
 
   /**
    * Fudis translation key for required text

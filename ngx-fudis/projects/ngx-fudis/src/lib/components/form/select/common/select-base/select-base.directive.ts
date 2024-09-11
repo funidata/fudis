@@ -47,7 +47,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(hasRequiredValidator(this.control));
       }
     });
 

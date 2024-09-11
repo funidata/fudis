@@ -202,7 +202,7 @@ export class InputWithLanguageOptionsComponent
 
     this._minLength = getMinLengthFromValidator(control);
     this._maxLength = getMaxLengthFromValidator(control);
-    this._required = this._isInputRequired(control);
+    this._required.next(this._isInputRequired(control));
   }
 
   /**

@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Directive({
   selector: '[fudisInputApi]',
@@ -90,7 +90,7 @@ export class InputApiDirective extends TooltipApiDirective {
   /**
    * Set requiredText based on this boolean value
    */
-  protected _required: boolean = false;
+  protected _required = new BehaviorSubject<boolean>(false);
 
   /**
    * Max length for HTML attribute and for character indicator in guidance

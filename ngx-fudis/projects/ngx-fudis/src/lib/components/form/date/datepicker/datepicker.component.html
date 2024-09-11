@@ -3,7 +3,7 @@
     [id]="id + '-label'"
     [for]="id"
     [text]="label"
-    [required]="_required"
+    [required]="_required | async"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"

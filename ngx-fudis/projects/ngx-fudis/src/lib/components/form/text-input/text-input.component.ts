@@ -42,7 +42,7 @@ export class TextInputComponent
     super(_idService, _changeDetectorRef);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(hasRequiredValidator(this.control));
 
         if (this.type === 'number') {
           this._minNumber = getMinFromValidator(this.control);

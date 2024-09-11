@@ -2,7 +2,7 @@
   <fudis-label
     [text]="label"
     [id]="id + '-label'"
-    [required]="_required"
+    [required]="_required | async"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -48,7 +48,7 @@
         [placeholder]="placeholder"
         [disabled]="control.disabled || disabled"
         [dropdownOpen]="_dropdownOpen"
-        [required]="_required"
+        [required]="_required | async"
         [invalidState]="(control.touched && control.invalid) || (control.touched && invalidState)"
         [multiselect]="true"
         [selectedLabel]="_dropdownSelectionLabelText"
