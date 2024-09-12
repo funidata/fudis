@@ -43,7 +43,8 @@ const commonProps: Partial<MultiselectComponent> = {
   size: 'lg',
   disabled: false,
   placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this Dropdown please pick at least two',
+  helpText:
+    'All pets are equally important, but for sake of this Dropdown please pick at least two',
   showSelectionChips: true,
   selectionClearButton: true,
   autocompleteHelpText: 'Hello from Dropdown Help Text!',
