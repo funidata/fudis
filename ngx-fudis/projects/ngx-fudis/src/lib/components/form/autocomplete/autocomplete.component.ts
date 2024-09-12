@@ -48,7 +48,8 @@ export class AutocompleteComponent
     });
 
     effect(() => {
-      this._clearFilterText = this._translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
+      this._clearFilterText =
+        this._translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
     });
   }
 
@@ -115,7 +116,7 @@ export class AutocompleteComponent
     }
   }
 
-    // KATSO MALLIA SELECT BASE CONSTRUCTORISTA
+  // KATSO MALLIA SELECT BASE CONSTRUCTORISTA
   ngOnChanges(changes: FudisComponentChanges<AutocompleteComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
