@@ -18,7 +18,7 @@ const defaultValues: Partial<InputApiDirective> = {
   tooltipToggle: false,
 };
 
-const nonTestedValues = ['handleBlur', 'handleKeyUp', 'handleViewInit'];
+const nonTestedValues = ['handleBlur', 'handleKeyUp', 'handleViewInit', 'handleFocus'];
 
 class MockElementRef implements ElementRef {
   nativeElement = {};
@@ -53,6 +53,7 @@ describe('InputApiDirective', () => {
         const typedKey = inputKey as keyof InputApiDirective;
 
         if (Array.from(typedKey)[0] !== '_' && !nonTestedValues.includes(inputKey)) {
+          console.log(typedKey);
           expect(directive[typedKey]).toEqual(defaultValues[typedKey]);
         }
       });
