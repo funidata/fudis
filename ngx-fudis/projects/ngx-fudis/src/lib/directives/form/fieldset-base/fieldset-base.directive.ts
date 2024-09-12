@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Directive, Input, effect } from '@angular/core';
+import { Directive, Input, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -13,7 +13,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
-    protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
 
@@ -50,7 +49,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   /**
    * Fudis translation key for required text
    */
-  protected _requiredText = new BehaviorSubject<string>('');
+  protected _requiredText = new Subject<string>();
 
   /**
    * To prevent ngOnChanges running before initial ngOnInit
@@ -82,14 +81,14 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
     parentFormErrorSummaryVisible: boolean | undefined,
     control?: FormControl,
     group?: FormGroup,
-  ): void {
+  ): boolean {
     if (
       this.errorSummaryReloadOnInit &&
       parentFormErrorSummaryVisible &&
       (control?.invalid || group?.invalid)
     ) {
-      this._reloadErrorSummary = true;
-      this._changeDetectorRef.detectChanges();
+      return true;
     }
+    return false;
   }
 }

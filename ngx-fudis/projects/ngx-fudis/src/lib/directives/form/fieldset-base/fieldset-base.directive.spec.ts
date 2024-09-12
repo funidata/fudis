@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FieldSetBaseDirective } from './fieldset-base.directive';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FudisCheckboxOption } from '../../../types/forms';
 import { CheckboxComponent } from '../../../components/form/checkbox-group/checkbox/checkbox.component';
@@ -16,6 +16,7 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
 @Component({
   selector: 'fudis-mock-checkbox-group-component',
@@ -52,7 +53,6 @@ class MockCheckboxGroupComponent {
 describe('FieldSetBaseDirective', () => {
   let idService: FudisIdService;
   let translationService: FudisTranslationService;
-  let changeDetectorRef: ChangeDetectorRef;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -66,30 +66,26 @@ describe('FieldSetBaseDirective', () => {
         ValidatorErrorMessageComponent,
         GridDirective,
         MockCheckboxGroupComponent,
+        TooltipApiDirective,
       ],
       providers: [
         FudisIdService,
         FudisTranslationService,
         FudisBreakpointService,
         FudisGridService,
-        ChangeDetectorRef,
       ],
       imports: [ReactiveFormsModule],
     });
 
     idService = TestBed.inject(FudisIdService);
     translationService = TestBed.inject(FudisTranslationService);
-    changeDetectorRef = TestBed.inject(ChangeDetectorRef);
   });
 
-  // TODO: fix this
-
-  it.skip('should create an instance', () => {
+  it('should create an instance', () => {
     TestBed.runInInjectionContext(() => {
       const directive: FieldSetBaseDirective = new FieldSetBaseDirective(
         idService,
         translationService,
-        changeDetectorRef,
       );
 
       expect(directive).toBeTruthy();

@@ -30,11 +30,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
+    private _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _translationService, _changeDetectorRef);
+    super(_idService, _translationService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.formGroup) {
@@ -129,11 +129,14 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     }
 
     if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummaryOnInit(
+      this._reloadErrorSummary = this._reloadErrorSummaryOnInit(
         this._parentForm?.errorSummaryVisible,
         undefined,
         this.formGroup,
       );
+      if (this._reloadErrorSummary) {
+        this._changeDetectorRef.detectChanges();
+      }
     }
   }
 

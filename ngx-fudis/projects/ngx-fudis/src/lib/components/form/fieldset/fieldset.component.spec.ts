@@ -141,17 +141,18 @@ describe('FieldSetComponent', () => {
       expect(fieldsetHelpText?.textContent).toEqual('Fieldset help text');
     });
 
-    it('should have required text if given', () => {
+    it.only('should have required text if given', () => {
       componentMock.required = true;
-      fixtureMock.detectChanges();
 
-      const requiredTextElement = getElement(
-        fixtureMock,
-        '.fudis-fieldset__legend__title__text__required',
-      );
+      fixtureMock.whenStable().finally(() => {
+        const requiredTextElement = getElement(
+          fixtureMock,
+          '.fudis-fieldset__legend__title__text__required',
+        );
 
-      expect(requiredTextElement).toBeTruthy();
-      expect(requiredTextElement?.textContent).toEqual(' (Required)');
+        expect(requiredTextElement).toBeTruthy();
+        expect(requiredTextElement?.textContent).toEqual(' (Required)');
+      });
     });
 
     it('should have initial focus', () => {

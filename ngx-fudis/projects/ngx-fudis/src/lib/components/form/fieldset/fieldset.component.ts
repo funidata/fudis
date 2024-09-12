@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -44,9 +43,8 @@ export class FieldSetComponent
     private _focusService: FudisFocusService,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _translationService, _changeDetectorRef);
+    super(_idService, _translationService);
   }
 
   /**
