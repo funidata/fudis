@@ -138,7 +138,7 @@ export const Example = ExampleTemplate.bind({});
 
 Example.args = {
   ...commonArgs,
-  helpText: 'Please provide superhero name in atleast one language.',
+  helpText: 'Please provide superhero name in at least one language.',
 };
 
 export const ExampleWithAllRequired = ExampleAllRequiredTemplate.bind({});
