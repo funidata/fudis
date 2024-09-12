@@ -55,14 +55,9 @@ export class AlertGroupComponent implements OnChanges {
   protected _alertGroupLabel = new BehaviorSubject<string>('');
 
   /**
-   * Boolean to determine if Alert group is visible. Used with _dialogStatus boolean
+   * Boolean to determine if Alert group is visible
    */
   protected _visible = new BehaviorSubject<boolean>(false);
-
-  /**
-   * Boolean from Dialog Service to determine if Fudis Dialog is open
-   */
-  private _dialogStatus: boolean;
 
   ngOnChanges(changes: FudisComponentChanges<AlertGroupComponent>): void {
     if (changes.insideDialog?.currentValue !== changes.insideDialog?.previousValue) {
@@ -71,7 +66,7 @@ export class AlertGroupComponent implements OnChanges {
   }
 
   /**
-   * Getter for visible status
+   * Get Alert Group's visible status
    */
   public getVisibleStatus(): boolean {
     return this._visible.value;

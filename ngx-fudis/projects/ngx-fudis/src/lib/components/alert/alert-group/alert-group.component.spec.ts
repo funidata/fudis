@@ -10,6 +10,7 @@ import { AlertComponent } from '../alert/alert.component';
 import { IconComponent } from '../../icon/icon.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { BehaviorSubject } from 'rxjs';
+import { SimpleChange } from '@angular/core';
 
 describe('AlertGroupComponent', () => {
   let component: AlertGroupComponent;
@@ -119,16 +120,18 @@ describe('AlertGroupComponent', () => {
       expect(component.getVisibleStatus()).toEqual(true);
     });
 
-    // TODO: Fix this
-    // it('should not be visible, if Dialog is not open and Alert Group is inside dialog', () => {
-    //   dialogService.setDialogOpenStatus(false);
+    it('should not be visible, if Dialog is not open and Alert Group is inside dialog', () => {
+      dialogService.setDialogOpenStatus(false);
 
-    //   component.insideDialog = true;
+      component.insideDialog = true;
+      component.ngOnChanges({
+        insideDialog: new SimpleChange('false', component.insideDialog, true),
+      });
 
-    //   fixture.autoDetectChanges();
+      fixture.autoDetectChanges();
 
-    //   expect(fixture.nativeElement.querySelector('section')).toBeNull();
-    //   expect(component.getVisibleStatus()).toEqual(false);
-    // });
+      expect(fixture.nativeElement.querySelector('section')).toBeNull();
+      expect(component.getVisibleStatus()).toEqual(false);
+    });
   });
 });
