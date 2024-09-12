@@ -247,7 +247,7 @@ class DialogWithGridComponent {
             <ng-container *ngTemplateOutlet="favoriteVeggies" />
             <fudis-text-input
               class="fudis-mb-md"
-              [id]="'example-input-dialog'"
+              [id]="'example-input-' + id"
               [label]="'What is your favorite ' + id"
               [control]="exampleDialogFormGroup.controls['favoriteVeggie']"
             />
@@ -380,7 +380,7 @@ class NestedDialogComponent {
     </ng-template>
 
     <ng-template #fourthDialog>
-      <fudis-nested-dialog [title]="'Fourth opened Dialog'" [size]="size" />
+      <fudis-nested-dialog [title]="'Fourth and last opened Dialog'" [size]="size" />
     </ng-template>
   `,
 })
