@@ -141,7 +141,7 @@ describe('FieldSetComponent', () => {
       expect(fieldsetHelpText?.textContent).toEqual('Fieldset help text');
     });
 
-    it.only('should have required text if given', () => {
+    it('should have required text if given', () => {
       componentMock.required = true;
 
       fixtureMock.whenStable().finally(() => {

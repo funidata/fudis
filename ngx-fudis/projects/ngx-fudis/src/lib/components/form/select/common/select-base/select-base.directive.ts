@@ -351,8 +351,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
         if (focused || this._mouseDownInsideComponent) {
           clearInterval(focusCheckInterval);
           this._mouseDownInsideComponent = false;
-
           resolve(true);
+
           // If focus target is null
         } else if (!nextTarget) {
           clearInterval(focusCheckInterval);
@@ -363,7 +363,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           counter = counter + 50;
         } else {
           // Else resolve boolean check after two tries, if any relevant element is focused
-
           clearInterval(focusCheckInterval);
           resolve(!!this._focusedOption || this._inputFocused || this._clearButtonFocused);
         }
@@ -411,9 +410,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       !this._dropdownOpen.value
     ) {
       this.openDropdown();
-      console.log('auki');
     } else if (this._clickFromIcon) {
-      console.log('kiinni');
       this.closeDropdown();
     }
     this._preventDropdownReopen = false;

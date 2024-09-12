@@ -53,7 +53,6 @@ describe('InputApiDirective', () => {
         const typedKey = inputKey as keyof InputApiDirective;
 
         if (Array.from(typedKey)[0] !== '_' && !nonTestedValues.includes(inputKey)) {
-          console.log(typedKey);
           expect(directive[typedKey]).toEqual(defaultValues[typedKey]);
         }
       });
