@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -18,7 +18,6 @@ export class GuidanceComponent implements OnChanges, OnInit {
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
-    private _cdr: ChangeDetectorRef,
   ) {
     this._id = _idService.getNewId('guidance');
 
@@ -49,10 +48,8 @@ export class GuidanceComponent implements OnChanges, OnInit {
       ) {
         if (this.control?.invalid) {
           this.control.markAsTouched();
-          this._cdr.markForCheck();
         } else if (this.formGroup?.invalid) {
           this.formGroup.markAllAsTouched();
-          this._cdr.markForCheck();
         }
       }
     });
