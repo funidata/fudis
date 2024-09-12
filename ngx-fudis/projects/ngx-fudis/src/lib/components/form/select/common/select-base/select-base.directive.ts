@@ -155,7 +155,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * For setting dropdown open / closed
    */
-  protected _dropdownOpen: boolean = false;
+  protected _dropdownOpen = new BehaviorSubject<boolean>(false);
 
   /**
    * Internal translated text for icon-only button aria-label when opening dropdown
@@ -282,7 +282,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   public openDropdown(): void {
     if (!this.disabled && !this.control.disabled) {
       this._optionsLoadedOnce = true;
-      this._dropdownOpen = true;
+      this._dropdownOpen.next(true);
     }
   }
 
@@ -292,7 +292,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
-    this._dropdownOpen = false;
+    this._dropdownOpen.next(false);
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
@@ -351,6 +351,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
         if (focused || this._mouseDownInsideComponent) {
           clearInterval(focusCheckInterval);
           this._mouseDownInsideComponent = false;
+
           resolve(true);
           // If focus target is null
         } else if (!nextTarget) {
@@ -362,6 +363,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           counter = counter + 50;
         } else {
           // Else resolve boolean check after two tries, if any relevant element is focused
+
           clearInterval(focusCheckInterval);
           resolve(!!this._focusedOption || this._inputFocused || this._clearButtonFocused);
         }
@@ -406,10 +408,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       !this._preventDropdownReopen &&
       openDropdown &&
       !this._mouseDownInsideComponent &&
-      !this._dropdownOpen
+      !this._dropdownOpen.value
     ) {
       this.openDropdown();
+      console.log('auki');
     } else if (this._clickFromIcon) {
+      console.log('kiinni');
       this.closeDropdown();
     }
     this._preventDropdownReopen = false;
@@ -473,7 +477,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           break;
         case 'ArrowDown':
           event.preventDefault();
-          if (!this._dropdownOpen) {
+          if (!this._dropdownOpen.value) {
             this._toggleDropdown();
           }
           if (this._inputFocused) {
@@ -509,7 +513,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Toggle dropdown
    */
   protected _toggleDropdown(): void {
-    if (this._dropdownOpen) {
+    if (this._dropdownOpen.value) {
       this.closeDropdown();
     } else {
       this.openDropdown();
@@ -665,7 +669,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   @HostListener('window:keydown.escape', ['$event'])
   private _handleEscapePress(event: KeyboardEvent) {
-    if (this._dropdownOpen) {
+    if (this._dropdownOpen.value) {
       event.preventDefault();
 
       this.closeDropdown(true, true);
@@ -679,7 +683,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @HostListener('document:mouseup', ['$event.target'])
   private _handleWindowClick(targetElement: HTMLElement) {
     this._mouseDownInsideComponent = false;
-    if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
+    if (this._dropdownOpen.value && !this._selectRef.nativeElement.contains(targetElement)) {
       this.closeDropdown(false);
     }
   }

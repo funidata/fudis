@@ -60,7 +60,7 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   /**
    * Set dropdown open status
    */
-  @Input() open: boolean = false;
+  @Input() open: boolean | null = false;
 
   /**
    * Boolean which toggles status updates for screen readers about changed option results

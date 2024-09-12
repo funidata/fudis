@@ -46,7 +46,7 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
   /**
    * If parent's dropdown is open or not
    */
-  @Input() dropdownOpen: boolean = false;
+  @Input() dropdownOpen: boolean | null = false;
 
   /**
    * For single select label when control has value on init
