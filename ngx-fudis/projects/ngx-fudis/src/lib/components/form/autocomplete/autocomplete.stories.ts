@@ -7,7 +7,7 @@ import readme from './readme.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
 
 export default {
-  title: 'Components/Form/Autocomplete (single-select)',
+  title: 'Components/Form/Deprecated Autocomplete (single-select)',
   component: AutocompleteComponent,
   parameters: {
     docs: {

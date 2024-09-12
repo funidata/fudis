@@ -24,7 +24,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
 
 @Component({
-  selector: 'fudis-autocomplete',
+  selector: 'into-depr-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
 })
