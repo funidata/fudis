@@ -59,7 +59,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   /**
    * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this parent component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed.
    */
-  protected _reloadErrorSummary = false;
+  protected _reloadErrorSummaryTrigger = false;
 
   /**
    * Generate id for parent component
@@ -77,7 +77,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */
-  protected _reloadErrorSummaryOnInit(
+  protected _triggerErrorSummaryOnInitReload(
     parentFormErrorSummaryVisible: boolean | undefined,
     control?: FormControl,
     group?: FormGroup,

@@ -14,6 +14,7 @@
     class="fudis-form-input fudis-text-area__input"
     [formControl]="control"
     (blur)="onBlur($event)"
+    (focus)="_onFocus($event)"
     [id]="id"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.aria-invalid]="
@@ -29,7 +30,7 @@
   <fudis-guidance
     *ngIf="!disableGuidance"
     [formId]="_parentForm?.id || null"
-    [reloadErrorSummary]="_reloadErrorSummary"
+    [reloadErrorSummary]="_reloadErrorSummaryTrigger"
     [inputLabel]="label"
     [maxLength]="_maxLength | async"
     [helpText]="helpText"

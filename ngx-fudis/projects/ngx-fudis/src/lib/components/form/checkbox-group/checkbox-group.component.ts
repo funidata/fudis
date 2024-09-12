@@ -58,6 +58,11 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   @Output() handleChange = new EventEmitter<FudisCheckboxGroupChangeEvent>();
 
   /**
+   * Emit when Checkbox option is focused
+   */
+  @Output() handleFocus = new EventEmitter<FocusEvent>();
+
+  /**
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
    */
   private _groupBlurredOut = false;
@@ -71,6 +76,41 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created FormGroup or one provided from the App.
    */
   protected _internalFormGroup: boolean = false;
+
+  private _initialCheck(group: FormGroup): void {
+    if (group.touched) {
+      this._groupBlurredOut = true;
+    } else {
+      /**
+       * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
+       */
+      const originalMarkAllAsTouched = group.markAllAsTouched;
+      group.markAllAsTouched = () => {
+        originalMarkAllAsTouched.apply(group);
+        this._groupBlurredOut = true;
+      };
+
+      /**
+       * Extend original updateValueAndValidity function to update possible dynamic validator changes
+       */
+      const original = group.updateValueAndValidity;
+      this.formGroup.updateValueAndValidity = () => {
+        original.apply(group);
+        this._updateValueAndValidityTrigger.next();
+      };
+    }
+
+    if (this.errorSummaryReloadOnInit) {
+      this._reloadErrorSummaryTrigger = this._triggerErrorSummaryOnInitReload(
+        this._parentForm?.errorSummaryVisible,
+        undefined,
+        this.formGroup,
+      );
+      if (this._reloadErrorSummaryTrigger) {
+        this._changeDetectorRef.detectChanges();
+      }
+    }
+  }
 
   /**
    * Getter for _groupBlurredOut boolean.
@@ -105,38 +145,14 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     this._initialCheck(this.formGroup);
   }
 
-  private _initialCheck(group: FormGroup): void {
-    if (group.touched) {
-      this._groupBlurredOut = true;
-    } else {
-      /**
-       * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
-       */
-      const originalMarkAllAsTouched = group.markAllAsTouched;
-      group.markAllAsTouched = () => {
-        originalMarkAllAsTouched.apply(group);
-        this._groupBlurredOut = true;
-      };
+  /**
+   * Triggered from child options when they are fosed
+   */
+  public optionFocused(event: FocusEvent): void {
+    this.handleFocus.emit(event);
 
-      /**
-       * Extend original updateValueAndValidity function to update possible dynamic validator changes
-       */
-      const original = group.updateValueAndValidity;
-      this.formGroup.updateValueAndValidity = () => {
-        original.apply(group);
-        this._updateValueAndValidityTrigger.next();
-      };
-    }
-
-    if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummary = this._reloadErrorSummaryOnInit(
-        this._parentForm?.errorSummaryVisible,
-        undefined,
-        this.formGroup,
-      );
-      if (this._reloadErrorSummary) {
-        this._changeDetectorRef.detectChanges();
-      }
+    if (this._reloadErrorSummaryTrigger) {
+      this._reloadErrorSummaryTrigger = false;
     }
   }
 

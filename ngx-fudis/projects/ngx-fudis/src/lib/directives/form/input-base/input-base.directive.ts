@@ -25,12 +25,12 @@ export class InputBaseDirective extends InputApiDirective {
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */
-  protected _reloadErrorSummaryOnInit(
+  protected _triggerErrorSummaryOnInitReload(
     parentFormErrorSummaryVisible: boolean | undefined,
     control: FormControl,
   ): void {
     if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && control.errors) {
-      this._reloadErrorSummary = true;
+      this._reloadErrorSummaryTrigger = true;
       this._changeDetectorRef.detectChanges();
     }
   }

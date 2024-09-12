@@ -21,6 +21,7 @@
     [attr.min]="_minNumber | async"
     [attr.max]="_maxNumber | async"
     (blur)="onBlur($event)"
+    (focus)="_onFocus($event)"
     [id]="id"
     [attr.type]="type"
     [attr.aria-describedby]="id + '_guidance'"
@@ -31,7 +32,7 @@
   <fudis-guidance
     *ngIf="!disableGuidance"
     [formId]="_parentForm?.id || null"
-    [reloadErrorSummary]="_reloadErrorSummary"
+    [reloadErrorSummary]="_reloadErrorSummaryTrigger"
     [inputLabel]="label"
     [maxLength]="_maxLength | async"
     [helpText]="helpText"

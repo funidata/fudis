@@ -145,10 +145,6 @@ export class InputWithLanguageOptionsComponent
    */
   protected _maxLength = new BehaviorSubject<number | null>(null);
 
-  protected _onFocus(): void {
-    this._reloadErrorSummary = false;
-  }
-
   /**
    * When Form Control value changes, update Select Options accordingly with or without Missing text
    */
@@ -215,12 +211,12 @@ export class InputWithLanguageOptionsComponent
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */
-  protected _reloadErrorSummaryOnInit(
+  protected _triggerErrorSummaryOnInitReload(
     parentFormErrorSummaryVisible: boolean | undefined,
     group: FormGroup,
   ): void {
     if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && group.invalid) {
-      this._reloadErrorSummary = true;
+      this._reloadErrorSummaryTrigger = true;
       this._changeDetectorRef.detectChanges();
     }
   }
@@ -236,7 +232,7 @@ export class InputWithLanguageOptionsComponent
     }
 
     if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.formGroup);
+      this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.formGroup);
     }
   }
 

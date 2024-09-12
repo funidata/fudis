@@ -214,71 +214,12 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
               </fudis-grid>
             </fudis-grid>
             <fudis-grid [columns]="{ md: 'inputLg auto' }">
-              <fudis-select
-                [label]="'Select your favorite animal'"
-                [size]="'md'"
-                [control]="formExample.controls.animal"
-              >
-                <ng-template fudisContent [type]="'select-options'">
-                  <fudis-select-option [data]="{ value: 'option-1', label: 'Otter' }" />
-                  <fudis-select-option [data]="{ value: 'option-2', label: 'Rattle snake' }" />
-                  <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
-                </ng-template>
-              </fudis-select>
-
               <fudis-button
                 [label]="_optionRequired + ' option required validator'"
                 (handleClick)="toggleRequired(formExample.controls['animal'], 'optionRequired')"
               ></fudis-button>
             </fudis-grid>
-            <hr class="fudis-hr" aria-hidden="true" />
-            <fudis-grid [columns]="{ md: 3 }">
-              <fudis-checkbox-group
-                [label]="'If you like summer'"
-                [formGroup]="formExample.controls.summer"
-              >
-                <fudis-checkbox
-                  [controlName]="'summer1'"
-                  [label]="'Summer holidays'"
-                  (handleChange)="
-                    toggleRequiredFromOthers([
-                      formExample.controls.winter,
-                      formExample.controls.working,
-                    ])
-                  "
-                />
-              </fudis-checkbox-group>
-              <fudis-checkbox-group
-                [label]="'If you like winter'"
-                [formGroup]="formExample.controls.winter"
-              >
-                <fudis-checkbox
-                  [controlName]="'winter1'"
-                  [label]="'Winter holidays'"
-                  (handleChange)="
-                    toggleRequiredFromOthers([
-                      formExample.controls.summer,
-                      formExample.controls.working,
-                    ])
-                  "
-                />
-              </fudis-checkbox-group>
-              <fudis-checkbox-group
-                [label]="'If you like working'"
-                [formGroup]="formExample.controls.working"
-              >
-                <fudis-checkbox
-                  [controlName]="'working1'"
-                  [label]="'Working holidays'"
-                  (handleChange)="
-                    toggleRequiredFromOthers([
-                      formExample.controls.summer,
-                      formExample.controls.winter,
-                    ])
-                  "
-                />
-              </fudis-checkbox-group>
-            </fudis-grid>
+
             <fudis-grid [columns]="{ md: 'inputLg auto' }">
               <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
               <fudis-input-with-language-options

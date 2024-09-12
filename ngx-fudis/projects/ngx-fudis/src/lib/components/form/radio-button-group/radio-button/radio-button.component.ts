@@ -50,6 +50,10 @@ export class RadioButtonComponent implements OnInit {
     this.radioButtonBlur.emit();
   }
 
+  protected _handleFocus(event: FocusEvent): void {
+    this._parentGroup.optionFocused(event);
+  }
+
   /**
    * Selected Radio Button change
    */

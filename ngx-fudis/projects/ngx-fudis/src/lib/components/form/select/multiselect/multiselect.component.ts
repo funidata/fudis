@@ -77,7 +77,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   ngOnInit(): void {
     this._setParentId('multiselect');
 
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.control);
   }
 
   /**

@@ -108,7 +108,7 @@ export class TextInputComponent
       }
     });
 
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.control);
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {

@@ -15,7 +15,7 @@
     <fudis-guidance
       *ngIf="control"
       [formId]="_parentForm?.id || null"
-      [reloadErrorSummary]="_reloadErrorSummary"
+      [reloadErrorSummary]="_reloadErrorSummaryTrigger"
       [inputLabel]="label"
       [helpText]="helpText"
       [for]="id"

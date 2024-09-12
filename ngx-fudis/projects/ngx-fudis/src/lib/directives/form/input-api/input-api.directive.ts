@@ -73,6 +73,11 @@ export class InputApiDirective extends TooltipApiDirective {
   @Output() handleBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   /**
+   * To listen for input's blur event.
+   */
+  @Output() handleFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
+  /**
    * To listen for input's key up event.
    */
   @Output() handleKeyUp: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -97,5 +102,13 @@ export class InputApiDirective extends TooltipApiDirective {
   /**
    * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed. E. g. if component is inside lazy loaded expandable.
    */
-  protected _reloadErrorSummary = false;
+  protected _reloadErrorSummaryTrigger = false;
+
+  protected _onFocus(event: FocusEvent): void {
+    if (this._reloadErrorSummaryTrigger) {
+      this._reloadErrorSummaryTrigger = false;
+    }
+
+    this.handleFocus.emit(event);
+  }
 }

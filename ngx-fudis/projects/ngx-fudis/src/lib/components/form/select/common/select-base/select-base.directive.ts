@@ -394,7 +394,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * To handle input focus
    */
-  protected _inputFocus(): void {
+  protected _selectInputFocus(event: FocusEvent): void {
     this._inputFocused = true;
 
     const openDropdown =
@@ -413,6 +413,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this.closeDropdown();
     }
     this._preventDropdownReopen = false;
+
+    this._onFocus(event);
   }
 
   /**

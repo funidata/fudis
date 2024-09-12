@@ -20,7 +20,7 @@
         [attr.aria-controls]="id + '-dropdown'"
         aria-haspopup="listbox"
         (click)="_clickInput()"
-        (focus)="_inputFocus()"
+        (focus)="_selectInputFocus($event)"
         (blur)="_inputBlur($event)"
         (keydown)="_inputKeyDown($event)"
         (keyup)="_inputKeyUp($event)"
@@ -62,7 +62,7 @@
         (triggerDropdownOpen)="openDropdown()"
         (triggerDropdownClose)="closeDropdown()"
         (triggerDropdownToggle)="_toggleDropdown()"
-        (triggerFocus)="_inputFocus()"
+        (triggerFocus)="_selectInputFocus($event)"
         (triggerBlur)="_inputBlur($event)"
       />
       <div class="fudis-select__input-wrapper__icons">
@@ -100,7 +100,7 @@
   <fudis-guidance
     *ngIf="!disableGuidance"
     [formId]="_parentForm?.id || null"
-    [reloadErrorSummary]="_reloadErrorSummary"
+    [reloadErrorSummary]="_reloadErrorSummaryTrigger"
     [inputLabel]="label"
     [helpText]="helpText"
     [for]="id"

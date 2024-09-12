@@ -49,6 +49,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
 
       <fudis-form
         [level]="2"
+        [titleVariant]="'lg'"
         [title]="'Form 1 with Text Input'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
@@ -73,6 +74,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
+        [titleVariant]="'lg'"
         [title]="'Form 2 with Text Area'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
@@ -97,6 +99,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
+        [titleVariant]="'lg'"
         [title]="'Form 3 with Checkbox Group'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
@@ -130,6 +133,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
+        [titleVariant]="'lg'"
         [title]="'Form 4 with Radio Button Group'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
@@ -163,6 +167,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
+        [titleVariant]="'lg'"
         [title]="'Form 5 with Select and Multiselect'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
@@ -209,6 +214,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
+        [titleVariant]="'lg'"
         [title]="'Form 6 with Input With Language Options'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"

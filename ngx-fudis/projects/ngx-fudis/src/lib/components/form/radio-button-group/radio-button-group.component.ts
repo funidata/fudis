@@ -56,6 +56,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   @Output() handleChange = new EventEmitter<FudisRadioButtonGroupChangeEvent>();
 
   /**
+   * Emit on option focus
+   */
+  @Output() handleFocus = new EventEmitter<FocusEvent>();
+
+  /**
    * Set requiredText based on this boolean value
    */
   protected _required: boolean = false;
@@ -65,12 +70,12 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     this._updateValueAndValidityTrigger.next();
 
     if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummary = this._reloadErrorSummaryOnInit(
+      this._reloadErrorSummaryTrigger = this._triggerErrorSummaryOnInitReload(
         this._parentForm?.errorSummaryVisible,
         this.control,
       );
 
-      if (this._reloadErrorSummary) {
+      if (this._reloadErrorSummaryTrigger) {
         this._changeDetectorRef.detectChanges();
       }
     }
@@ -85,6 +90,17 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
         original.apply(this.control);
         this._updateValueAndValidityTrigger.next();
       };
+    }
+  }
+
+  /**
+   * Triggered from child options when they are fosed
+   */
+  public optionFocused(event: FocusEvent): void {
+    this.handleFocus.emit(event);
+
+    if (this._reloadErrorSummaryTrigger) {
+      this._reloadErrorSummaryTrigger = false;
     }
   }
 
