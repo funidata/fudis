@@ -27,11 +27,11 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
+    private _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _translationService, _changeDetectorRef);
+    super(_idService, _translationService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
@@ -65,7 +65,14 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
     this._updateValueAndValidityTrigger.next();
 
     if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+      this._reloadErrorSummary = this._reloadErrorSummaryOnInit(
+        this._parentForm?.errorSummaryVisible,
+        this.control,
+      );
+
+      if (this._reloadErrorSummary) {
+        this._changeDetectorRef.detectChanges();
+      }
     }
   }
 

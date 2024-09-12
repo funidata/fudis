@@ -23,6 +23,7 @@ import {
 import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-text-input',
@@ -45,15 +46,15 @@ export class TextInputComponent
         this._required.next(hasRequiredValidator(this.control));
 
         if (this.type === 'number') {
-          this._minNumber = getMinFromValidator(this.control);
-          this._maxNumber = getMaxFromValidator(this.control);
-          this._maxLength = null;
-          this._minLength = null;
+          this._maxLength.next(null);
+          this._minLength.next(null);
+          this._minNumber.next(getMinFromValidator(this.control));
+          this._maxNumber.next(getMaxFromValidator(this.control));
         } else {
-          this._maxLength = getMaxLengthFromValidator(this.control);
-          this._minLength = getMinLengthFromValidator(this.control);
-          this._minNumber = null;
-          this._maxNumber = null;
+          this._maxLength.next(getMaxLengthFromValidator(this.control));
+          this._minLength.next(getMinLengthFromValidator(this.control));
+          this._minNumber.next(null);
+          this._maxNumber.next(null);
         }
       }
     });
@@ -77,22 +78,22 @@ export class TextInputComponent
   /**
    * Max length for HTML attribute and for character indicator in guidance
    */
-  protected override _maxLength: number | null = null;
+  protected _maxLength = new BehaviorSubject<number | null>(null);
 
   /**
    * Min length for HTML attribute
    */
-  protected _minLength: number | null = null;
+  protected _minLength = new BehaviorSubject<number | null>(null);
 
   /**
    * Max number for number input HTML attribute
    */
-  protected _maxNumber: number | null = null;
+  protected _maxNumber = new BehaviorSubject<number | null>(null);
 
   /**
    * Min number for number input HTML attribute
    */
-  protected _minNumber: number | null = null;
+  protected _minNumber = new BehaviorSubject<number | null>(null);
 
   ngOnInit(): void {
     this._setInputId('text-input');

@@ -28,8 +28,8 @@
             ? label + ', ' + _selectControl.value.label + ariaLabel
             : label + ', ' + _selectControl.value.label
         "
-        [attr.minlength]="_minLength"
-        [attr.maxlength]="_maxLength"
+        [attr.minlength]="_minLength | async"
+        [attr.maxlength]="_maxLength | async"
         [formControl]="formGroup.controls[control.key]"
         (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
         (blur)="handleBlur.emit($event)"
@@ -55,8 +55,8 @@
             ? label + ', ' + _selectControl.value.label + ariaLabel
             : label + ', ' + _selectControl.value.label
         "
-        [attr.minlength]="_minLength"
-        [attr.maxlength]="_maxLength"
+        [attr.minlength]="_minLength | async"
+        [attr.maxlength]="_maxLength | async"
         [formControl]="formGroup.controls[control.key]"
         (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
         (blur)="handleBlur.emit($event)"
@@ -73,7 +73,7 @@
       *ngIf="!disableGuidance"
       [inputLabel]="label"
       [reloadErrorSummary]="_reloadErrorSummary"
-      [maxLength]="_maxLength"
+      [maxLength]="_maxLength | async"
       [helpText]="helpText"
       [formGroup]="formGroup"
       [formId]="_parentForm?.id || null"

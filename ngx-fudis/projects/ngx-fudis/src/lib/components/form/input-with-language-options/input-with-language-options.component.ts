@@ -31,7 +31,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.service';
 
 import { InputApiDirective } from '../../../directives/form/input-api/input-api.directive';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { FormComponent } from '../form/form.component';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
@@ -99,7 +99,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * Min length for HTML attribute and for character indicator in guidance
    */
-  protected _minLength: number | null = null;
+  protected _minLength = new BehaviorSubject<number | null>(null);
 
   /**
    * Update value and validity for FormGroup
@@ -139,6 +139,11 @@ export class InputWithLanguageOptionsComponent
    * Fudis translation
    */
   protected _languageLabel = new Subject<string>();
+
+  /**
+   * Max length for HTML attribute and for character indicator in guidance
+   */
+  protected _maxLength = new BehaviorSubject<number | null>(null);
 
   protected _onFocus(): void {
     this._reloadErrorSummary = false;
@@ -200,8 +205,8 @@ export class InputWithLanguageOptionsComponent
   protected _checkHtmlAttributes(controlName: string): void {
     const control = this.formGroup.controls[controlName];
 
-    this._minLength = getMinLengthFromValidator(control);
-    this._maxLength = getMaxLengthFromValidator(control);
+    this._minLength.next(getMinLengthFromValidator(control));
+    this._maxLength.next(getMaxLengthFromValidator(control));
     this._required.next(this._isInputRequired(control));
   }
 

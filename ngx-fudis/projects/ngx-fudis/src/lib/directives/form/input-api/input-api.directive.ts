@@ -83,19 +83,9 @@ export class InputApiDirective extends TooltipApiDirective {
   @Output() handleViewInit: EventEmitter<void> = new EventEmitter<void>();
 
   /**
-   * Fudis translation key for required text
-   */
-  protected _requiredText: string;
-
-  /**
    * Set requiredText based on this boolean value
    */
   protected _required = new BehaviorSubject<boolean>(false);
-
-  /**
-   * Max length for HTML attribute and for character indicator in guidance
-   */
-  protected _maxLength: number | null = null;
 
   protected _destroyRef = inject(DestroyRef);
 
