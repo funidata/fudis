@@ -22,7 +22,12 @@ test("form dynamic inputs", async ({ page }) => {
     .getByTestId("fudis-button-15")
     .click(); /* remove required validator from radio button group */
 
+  await page
+    .getByTestId("fudis-button-17")
+    .click(); /* remove at least one required validator from input with language options */
+
   await page.getByTestId("fudis-button-1").click(); /* submit form without errors */
+
   await expect(page).toHaveScreenshot("dynamic-2-submit-without-errors.png", { fullPage: true });
 
   /**
