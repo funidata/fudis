@@ -116,7 +116,6 @@ export class AutocompleteComponent
     }
   }
 
-  // KATSO MALLIA SELECT BASE CONSTRUCTORISTA
   ngOnChanges(changes: FudisComponentChanges<AutocompleteComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
