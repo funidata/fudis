@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -44,7 +43,7 @@ import { GroupComponentBaseDirective } from '../../../directives/form/group-comp
 })
 export class InputWithLanguageOptionsComponent
   extends GroupComponentBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
+  implements OnInit, OnChanges
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
@@ -102,18 +101,6 @@ export class InputWithLanguageOptionsComponent
    * Min length for HTML attribute and for character indicator in guidance
    */
   protected _minLength = new BehaviorSubject<number | null>(null);
-
-  /**
-   * Update value and validity for FormGroup
-   */
-  protected _applyFormGroupUpdateCheck(): void {
-    const original = this.formGroup.updateValueAndValidity;
-
-    this.formGroup.updateValueAndValidity = () => {
-      original.apply(this.formGroup);
-      this._updateValueAndValidityTrigger.next();
-    };
-  }
 
   /**
    * Control for language option Select
@@ -225,7 +212,7 @@ export class InputWithLanguageOptionsComponent
 
   ngOnChanges(changes: FudisComponentChanges<InputWithLanguageOptionsComponent>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
-      this._applyFormGroupUpdateCheck();
+      this._applyGroupUpdateCheck();
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
@@ -237,12 +224,5 @@ export class InputWithLanguageOptionsComponent
     ) {
       this._DOMUtilitiesService.setLabelHeight(true);
     }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.initialFocus) {
-      this._inputRef.nativeElement.focus();
-    }
-    this.handleViewInit.emit();
   }
 }

@@ -277,12 +277,8 @@ export class DatepickerComponent
     }
   }
 
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
-
-    this.handleViewInit.emit();
+  override ngAfterViewInit(): void {
+    this._afterViewInitCommon();
 
     this._parentDateRange?.setLabelHeight(true);
   }

@@ -122,17 +122,6 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
   }
 
   /**
-   * Triggered from child options when they are fosed
-   */
-  public optionFocused(event: FocusEvent): void {
-    this.handleFocus.emit(event);
-
-    if (this._reloadErrorSummaryTrigger) {
-      this._reloadErrorSummaryTrigger = false;
-    }
-  }
-
-  /**
    * Used to display possible error messages only when focus has moved out from all the group's checkboxes.
    */
   public setGroupBlurredOut(value: boolean): void {

@@ -15,9 +15,9 @@
           ? true
           : null
       "
-      (focus)="_handleFocus($event)"
+      (focus)="_parentGroup.onFocus($event)"
       (change)="_onChange()"
-      (blur)="_handleBlur()"
+      (blur)="_onBlur()"
     />
     <div class="fudis-radio-button__content">
       <div class="fudis-radio-button__content-wrapper">

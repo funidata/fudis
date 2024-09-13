@@ -72,17 +72,6 @@ export class RadioButtonGroupComponent
     }
   }
 
-  /**
-   * Triggered from child options when they are fosed
-   */
-  public optionFocused(event: FocusEvent): void {
-    this.handleFocus.emit(event);
-
-    if (this._reloadErrorSummaryTrigger) {
-      this._reloadErrorSummaryTrigger = false;
-    }
-  }
-
   public triggerEmit(id: string, label: string): void {
     const data: FudisRadioButtonGroupChangeEvent = {
       option: {

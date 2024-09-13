@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -27,7 +26,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class SelectComponent extends SelectBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
@@ -57,13 +56,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this._parentForm?.errorSummaryVisible,
       this.control.invalid,
     );
-  }
-
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
-    this.handleViewInit.emit();
   }
 
   /**

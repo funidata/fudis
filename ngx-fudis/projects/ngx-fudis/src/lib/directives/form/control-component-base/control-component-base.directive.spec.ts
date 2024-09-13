@@ -118,17 +118,7 @@ describe('ControlComponentBaseDirective', () => {
 //       });
 //     });
 
-//     it('should call focusToInput', () => {
-//       TestBed.runInInjectionContext(() => {
-//         const directive: InputBaseDirective = new InputBaseDirective(idService, changeDetectorRef);
 
-//         jest.spyOn(directive, 'focusToInput').mockImplementation(() => {});
-//         directive.focusToInput();
-
-//         expect(directive.focusToInput).toHaveBeenCalled();
-//       });
-//     });
-//   });
 
 //   describe('Input values', () => {
 //     let componentMock: MockTextInputComponent;

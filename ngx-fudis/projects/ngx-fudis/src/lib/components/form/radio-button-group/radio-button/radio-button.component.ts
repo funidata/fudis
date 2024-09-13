@@ -46,12 +46,8 @@ export class RadioButtonComponent implements OnInit {
   /**
    * Blur handler
    */
-  protected _handleBlur(): void {
+  protected _onBlur(): void {
     this.radioButtonBlur.emit();
-  }
-
-  protected _handleFocus(event: FocusEvent): void {
-    this._parentGroup.optionFocused(event);
   }
 
   /**

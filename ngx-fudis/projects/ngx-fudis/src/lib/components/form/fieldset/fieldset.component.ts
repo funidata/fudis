@@ -185,7 +185,7 @@ export class FieldSetComponent
 
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this._fieldsetLegend.nativeElement.focus();
+      this._fieldsetLegend?.nativeElement?.focus();
     }
   }
 

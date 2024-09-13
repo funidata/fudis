@@ -15,7 +15,7 @@
       [id]="id"
       [matDatepicker]="picker"
       [formControl]="control"
-      (focus)="_onFocus($event)"
+      (focus)="onFocus($event)"
       (blur)="_handleInputBlur($event)"
       (keyup)="_handleKeyUp($event)"
       [min]="_minDate"

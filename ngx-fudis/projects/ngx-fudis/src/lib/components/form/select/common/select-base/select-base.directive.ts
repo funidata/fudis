@@ -415,7 +415,7 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
     }
     this._preventDropdownReopen = false;
 
-    this._onFocus(event);
+    this.onFocus(event);
   }
 
   /**

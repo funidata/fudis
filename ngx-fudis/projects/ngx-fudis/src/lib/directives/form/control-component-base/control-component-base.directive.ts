@@ -24,15 +24,6 @@ export class ControlComponentBaseDirective extends FormCommonApiDirective {
   }
 
   /**
-   * Set focust to the input element
-   */
-  public focusToInput(): void {
-    if (this._inputRef?.nativeElement) {
-      this._inputRef.nativeElement.focus();
-    }
-  }
-
-  /**
    * Update value and validity of control
    */
   protected _applyControlUpdateCheck(): void {

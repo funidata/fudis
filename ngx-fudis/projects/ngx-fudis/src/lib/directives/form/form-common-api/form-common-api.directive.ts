@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   DestroyRef,
   Directive,
@@ -17,7 +18,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 @Directive({
   selector: '[fudisFormCommonApi]',
 })
-export class FormCommonApiDirective extends TooltipApiDirective {
+export class FormCommonApiDirective extends TooltipApiDirective implements AfterViewInit {
   constructor(
     protected _idService: FudisIdService,
     protected _cdr: ChangeDetectorRef,
@@ -114,14 +115,6 @@ export class FormCommonApiDirective extends TooltipApiDirective {
    */
   protected _reloadErrorSummaryTrigger = false;
 
-  protected _onFocus(event: FocusEvent): void {
-    if (this._reloadErrorSummaryTrigger) {
-      this._reloadErrorSummaryTrigger = false;
-    }
-
-    this.handleFocus.emit(event);
-  }
-
   /**
    * Generate id for parent component
    */
@@ -157,5 +150,34 @@ export class FormCommonApiDirective extends TooltipApiDirective {
       this._reloadErrorSummaryTrigger = true;
       this._cdr.detectChanges();
     }
+  }
+
+  protected _afterViewInitCommon(): void {
+    if (this.initialFocus) {
+      this._inputRef?.nativeElement?.focus();
+    }
+    this.handleViewInit.emit();
+  }
+
+  ngAfterViewInit(): void {
+    this._afterViewInitCommon();
+  }
+
+  /**
+   * Set focus to the input element
+   */
+  public focusToInput(): void {
+    this._inputRef?.nativeElement?.focus();
+  }
+
+  /**
+   * Executed when component's input is focused or when child input, e.g. Checkbox is focused
+   */
+  public onFocus(event: FocusEvent): void {
+    if (this._reloadErrorSummaryTrigger) {
+      this._reloadErrorSummaryTrigger = false;
+    }
+
+    this.handleFocus.emit(event);
   }
 }

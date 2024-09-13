@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -27,7 +26,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
 })
-export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
@@ -81,16 +80,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
       this._parentForm?.errorSummaryVisible,
       this.control.invalid,
     );
-  }
-
-  /**
-   * Set initial focus and update component's state if control has value on initialisation
-   */
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
-    this.handleViewInit.emit();
   }
 
   /**

@@ -14,7 +14,7 @@
     class="fudis-form-input fudis-text-area__input"
     [formControl]="control"
     (blur)="onBlur($event)"
-    (focus)="_onFocus($event)"
+    (focus)="onFocus($event)"
     [id]="id"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.aria-invalid]="

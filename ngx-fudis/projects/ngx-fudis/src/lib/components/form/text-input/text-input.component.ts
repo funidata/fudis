@@ -124,11 +124,8 @@ export class TextInputComponent
     }
   }
 
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
-    this.handleViewInit.emit();
+  override ngAfterViewInit(): void {
+    this._afterViewInitCommon();
     /**
      * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
      */
