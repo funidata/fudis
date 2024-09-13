@@ -49,6 +49,7 @@ const commonProps: Partial<MultiselectComponent> = {
   selectionClearButton: true,
   autocompleteHelpText: 'Hello from Dropdown Help Text!',
   variant: 'dropdown',
+  initialFocus: false,
 };
 
 const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
@@ -76,6 +77,7 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
       [showSelectionChips]="showSelectionChips"
       [selectionClearButton]="selectionClearButton"
       [autocompleteHelpText]="autocompleteHelpText"
+      [initialFocus]="initialFocus"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option

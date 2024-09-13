@@ -53,6 +53,7 @@ const commonArgs: Partial<InputWithLanguageOptionsComponent> = {
   size: 'lg',
   disabled: false,
   variant: 'text-input',
+  initialFocus: false,
   tooltip: 'Your city needs you!',
   tooltipToggle: false,
   tooltipPosition: 'right',
@@ -89,6 +90,7 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
       [formGroup]="formGroup"
       [label]="label"
       [helpText]="helpText"
+      [initialFocus]="initialFocus"
       [tooltip]="tooltip"
       [tooltipToggle]="tooltipToggle"
       [tooltipPosition]="tooltipPosition"
@@ -127,6 +129,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [variant]="variant"
       [label]="label"
       [helpText]="helpText"
+      [initialFocus]="initialFocus"
       [tooltip]="tooltip"
       [tooltipToggle]="tooltipToggle"
       [tooltipPosition]="tooltipPosition"

@@ -38,6 +38,7 @@ const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
     [control]="formControl"
     [label]="label"
     [helpText]="helpText"
+    [initialFocus]="initialFocus"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
@@ -57,6 +58,7 @@ Example.args = {
   label: 'Choose your preferred fruit',
   helpText: 'Fruits are important for your health.',
   size: 'lg',
+  initialFocus: false,
   tooltip: 'Fair Trade Banana is right choise',
   tooltipToggle: false,
   tooltipPosition: 'right',

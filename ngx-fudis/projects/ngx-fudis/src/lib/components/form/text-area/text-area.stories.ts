@@ -81,6 +81,7 @@ Example.args = {
   disabled: false,
   label: 'Text Area label example',
   helpText: 'Example help text',
+  initialFocus: false,
 };
 
 export const Disabled = Template.bind({});
@@ -91,6 +92,7 @@ Disabled.args = {
   disabled: true,
   label: 'Text Area label example',
   helpText: 'Example help text',
+  initialFocus: false,
 };
 
 export const WithValidators: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({

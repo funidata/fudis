@@ -95,6 +95,7 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
@@ -112,6 +113,7 @@ Example.args = {
   helpText: 'Pick at least one fruit.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',
+  initialFocus: false,
   tooltipToggle: false,
   tooltipPosition: 'right',
 };
@@ -145,6 +147,7 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
@@ -161,6 +164,7 @@ ExampleWithDisabledOption.args = {
   label: 'Choose your preferred fruits',
   helpText: 'Some options are disabled and cannot be toggled.',
   size: 'lg',
+  initialFocus: false,
   tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,
   tooltipPosition: 'right',
@@ -204,6 +208,7 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
@@ -221,6 +226,7 @@ ExampleWithMinMax.args = {
   helpText: 'Pick two to three fruits.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',
+  initialFocus: false,
   tooltipToggle: false,
   tooltipPosition: 'right',
 };
@@ -241,6 +247,7 @@ const ExampleWithoutFormGroupTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
@@ -257,6 +264,7 @@ ExampleWithoutFormGroup.args = {
   label: 'Choose your preferred fruits',
   helpText: 'This Checkbox Group has no App provided FormGroup.',
   size: 'lg',
+  initialFocus: false,
   tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,
   tooltipPosition: 'right',
