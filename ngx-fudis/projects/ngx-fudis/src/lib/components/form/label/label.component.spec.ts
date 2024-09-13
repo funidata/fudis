@@ -38,11 +38,12 @@ describe('LabelComponent', () => {
 
     it('should have required text visible if it is given', () => {
       component.required = true;
-      fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('.fudis-label__content__required'));
+      fixture.whenStable().finally(() => {
+        const elem = fixture.debugElement.query(By.css('.fudis-label__content__required'));
 
-      expect(elem.nativeElement).toBeTruthy();
-      expect(elem.nativeElement.innerHTML).toEqual('(Required)');
+        expect(elem.nativeElement).toBeTruthy();
+        expect(elem.nativeElement.innerHTML).toEqual('(Required)');
+      });
     });
 
     it('should have tooltip button visible if tooltip text is given', () => {

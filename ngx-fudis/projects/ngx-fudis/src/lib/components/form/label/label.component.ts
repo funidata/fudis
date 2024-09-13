@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-label',
@@ -41,5 +41,5 @@ export class LabelComponent extends TooltipApiDirective {
   /**
    * Fudis translation key for required text
    */
-  protected _requiredText = new BehaviorSubject<string>('');
+  protected _requiredText = new Subject<string>();
 }
