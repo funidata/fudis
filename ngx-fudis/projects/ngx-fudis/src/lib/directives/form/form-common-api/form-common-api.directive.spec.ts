@@ -1,9 +1,12 @@
+import { TestBed } from '@angular/core/testing';
 import { FormCommonApiDirective } from './form-common-api.directive';
 
 describe('FormCommonApiDirective', () => {
   it('should create an instance', () => {
-    const directive = new FormCommonApiDirective();
-    expect(directive).toBeTruthy();
+    TestBed.runInInjectionContext(() => {
+      const directive = new FormCommonApiDirective();
+      expect(directive).toBeTruthy();
+    });
   });
 });
 
