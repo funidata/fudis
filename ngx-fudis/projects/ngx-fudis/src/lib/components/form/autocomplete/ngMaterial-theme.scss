@@ -1,0 +1,104 @@
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable max-nesting-depth */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable selector-max-class */
+/* stylelint-disable selector-class-pattern */
+@use "../../../foundations/typography/mixins.scss" as typography;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/borders/mixins.scss" as borders;
+@use "../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../foundations/colors/tokens.scss" as colorTokens;
+
+/** 
+* Styles which affects to fudis-autocomplete (search and dropdown variants) and fudis-dropdown (single and multiselect variants) components. 
+* If you make changes, check that all of the above componenta and variants still work as wanted
+*/
+
+.fudis-autocomplete,
+.fudis-dropdown {
+  &__option-list {
+    @include borders.border("1px", "solid", "gray-middle");
+
+    background-color: colorTokens.$color-white !important;
+  }
+
+  &__option {
+    // Reduce dropdown option list height
+    &.mat-mdc-option {
+      min-height: spacing.$spacing-lg;
+
+      // Change option hover color
+      &:hover:not(.mdc-list-item--disabled) {
+        @include colorMixins.bg-color("primary-light");
+      }
+
+      // Change option focus color
+      &:focus:not(.mdc-list-item--disabled) {
+        @include colorMixins.bg-color("primary-light");
+      }
+
+      // Change option color when navigating with keyboard arrows
+      &.mat-mdc-option-active {
+        // Background-color mixin does not work in this particular case
+        background-color: colorTokens.$color-primary-light !important;
+      }
+
+      &.mdc-list-item--selected {
+        // Background-color mixin does not work in this particular case
+        background-color: colorTokens.$color-primary !important;
+        color: colorTokens.$color-white;
+
+        & mat-pseudo-checkbox {
+          // Styles for dropdown single-select checkmark
+          &.mat-pseudo-checkbox-minimal {
+            &::after {
+              color: colorTokens.$color-white;
+            }
+          }
+
+          // Styles for dropdown multi-select checkmark and checkbox
+          &.mat-pseudo-checkbox-full {
+            background-color: colorTokens.$color-white;
+
+            &::after {
+              color: colorTokens.$color-gray-dark;
+            }
+          }
+        }
+
+        // Selected item text color
+        & .mdc-list-item__primary-text {
+          color: colorTokens.$color-white !important;
+        }
+      }
+
+      // Change dropdown option list typography
+      & .mdc-list-item__primary-text {
+        @include typography.body-text-md-regular;
+      }
+    }
+  }
+}
+
+.fudis-dropdown {
+  &__select {
+    & .mat-mdc-select-value {
+      @include typography.text-field-input;
+    }
+
+    & .mat-mdc-select-placeholder {
+      @include colorMixins.text-color("gray-middle");
+    }
+
+    & .mat-mdc-select-arrow-wrapper {
+      display: none;
+    }
+
+    &.mat-mdc-select-disabled {
+      @include colorMixins.bg-color("gray-extra-light");
+    }
+  }
+}
