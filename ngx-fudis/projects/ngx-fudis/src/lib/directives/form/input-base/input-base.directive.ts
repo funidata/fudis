@@ -2,12 +2,12 @@ import { Directive, Input, ChangeDetectorRef } from '@angular/core';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
-import { InputApiDirective } from '../input-api/input-api.directive';
+import { FormCommonApiDirective } from '../form-common-api/form-common-api.directive';
 
 @Directive({
   selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends InputApiDirective {
+export class InputBaseDirective extends FormCommonApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _changeDetectorRef: ChangeDetectorRef,

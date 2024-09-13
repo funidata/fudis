@@ -96,7 +96,7 @@ import { FormSubmitDirective } from './directives/form/form-actions/form-actions
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
-import { InputApiDirective } from './directives/form/input-api/input-api.directive';
+
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { LinkApiDirective } from './directives/link/link-api/link-api.directive';
@@ -173,7 +173,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     HeaderDirective,
     HeadingComponent,
     IconComponent,
-    InputApiDirective,
     InputBaseDirective,
     InputWithLanguageOptionsComponent,
     LabelComponent,

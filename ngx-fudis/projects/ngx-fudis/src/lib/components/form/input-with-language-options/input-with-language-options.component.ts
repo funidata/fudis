@@ -30,9 +30,9 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.service';
 
-import { InputApiDirective } from '../../../directives/form/input-api/input-api.directive';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FormComponent } from '../form/form.component';
+import { FormCommonApiDirective } from '../../../directives/form/form-common-api/form-common-api.directive';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -43,7 +43,7 @@ import { FormComponent } from '../form/form.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputWithLanguageOptionsComponent
-  extends InputApiDirective
+  extends FormCommonApiDirective
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
