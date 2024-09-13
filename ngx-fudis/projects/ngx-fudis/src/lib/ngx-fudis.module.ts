@@ -79,6 +79,7 @@ import {
   FooterContentLeftDirective,
   FooterContentRightDirective,
 } from './directives/content-projection/content/content.directive';
+import { ControlComponentBaseDirective } from './directives/form/control-component-base/control-component-base.directive';
 import {
   DateEndDirective,
   DateStartDirective,
@@ -91,13 +92,12 @@ import {
 } from './directives/dialog/dialog-directives';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
-import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
+import { FormCommonApiDirective } from './directives/form/form-common-api/form-common-api.directive';
 import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
-
-import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
+import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { LinkApiDirective } from './directives/link/link-api/link-api.directive';
 import { LinkDirective } from './directives/link/link.directive';
@@ -135,6 +135,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ButtonComponent,
     CheckboxComponent,
     CheckboxGroupComponent,
+    ControlComponentBaseDirective,
     ContentDirective,
     DatepickerComponent,
     DateRangeComponent,
@@ -157,11 +158,11 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ErrorMessageComponent,
     ErrorSummaryComponent,
     ExpandableComponent,
-    FieldSetBaseDirective,
     FieldSetComponent,
     FooterComponent,
     FooterContentLeftDirective,
     FooterContentRightDirective,
+    FormCommonApiDirective,
     FormComponent,
     FormSubmitDirective,
     GridComponent,
@@ -169,11 +170,11 @@ import { FudisTranslationService } from './services/translation/translation.serv
     GridDirective,
     GridItemComponent,
     GridItemDirective,
+    GroupComponentBaseDirective,
     GuidanceComponent,
     HeaderDirective,
     HeadingComponent,
     IconComponent,
-    InputBaseDirective,
     InputWithLanguageOptionsComponent,
     LabelComponent,
     LanguageBadgeComponent,
