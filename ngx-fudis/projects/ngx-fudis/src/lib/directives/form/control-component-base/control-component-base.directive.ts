@@ -17,13 +17,6 @@ export class ControlComponentBaseDirective extends FormCommonApiDirective {
   @Input({ required: true }) control: FormControl;
 
   /**
-   * Handle blur event
-   */
-  public onBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-  }
-
-  /**
    * Update value and validity of control
    */
   protected _applyControlUpdateCheck(): void {

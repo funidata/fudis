@@ -118,8 +118,6 @@ describe('ControlComponentBaseDirective', () => {
 //       });
 //     });
 
-
-
 //   describe('Input values', () => {
 //     let componentMock: MockTextInputComponent;
 //     let fixtureMock: ComponentFixture<MockTextInputComponent>;

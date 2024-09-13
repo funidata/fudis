@@ -13,7 +13,8 @@
     #inputRef
     class="fudis-form-input fudis-text-area__input"
     [formControl]="control"
-    (blur)="onBlur($event)"
+    (blur)="handleBlur.emit($event)"
+    (keyup)="handleKeyUp.emit($event)"
     (focus)="onFocus($event)"
     [id]="id"
     [attr.aria-describedby]="id + '_guidance'"

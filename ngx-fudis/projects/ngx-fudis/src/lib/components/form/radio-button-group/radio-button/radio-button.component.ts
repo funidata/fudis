@@ -44,13 +44,6 @@ export class RadioButtonComponent implements OnInit {
   protected _id: string;
 
   /**
-   * Blur handler
-   */
-  protected _onBlur(): void {
-    this.radioButtonBlur.emit();
-  }
-
-  /**
    * Selected Radio Button change
    */
   protected _onChange(): void {

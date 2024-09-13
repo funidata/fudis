@@ -33,8 +33,7 @@ export const excludeAllRegex: RegExp = /.*/;
 /**
  * Common Form Component excludes
  */
-
-const formCommonExclude: string[] = [
+const formCommonControlsExclude: string[] = [
   'control',
   'group',
   'handleFocus',
@@ -44,7 +43,6 @@ const formCommonExclude: string[] = [
   'handleBlur',
   'focusToInput',
   'onFocus',
-  'onBlur',
   'id',
   'formGroup',
   'ariaLabel',
@@ -52,6 +50,11 @@ const formCommonExclude: string[] = [
   'invalidState',
   'errorSummaryReloadOnInit',
 ];
+
+/**
+ * Common Form Component excludes
+ */
+const formCommonDocsExclude: string[] = ['onFocus', 'focusToInput'];
 
 /**
  * Button
@@ -79,10 +82,15 @@ export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclud
 /**
  * CheckboxGroup and Checkbox
  */
-export const checkboxGroupExclude: RegExp = excludeRegex(['groupBlurredOut', 'setGroupBlurredOut']);
+export const checkboxGroupExclude: RegExp = excludeRegex([
+  ...formCommonDocsExclude,
+  'groupBlurredOut',
+  'setGroupBlurredOut',
+  'triggerEmit',
+]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
-  ...formCommonExclude,
+  ...formCommonControlsExclude,
   'setGroupBlurredOut',
   'triggerEmit',
 ]);
@@ -90,14 +98,18 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
 /**
  * Datepicker and Date Range
  */
-const datepickerCommonExcludes: string[] = [...formCommonExclude, 'endDateError', 'startDateError'];
+const datepickerCommonExcludes: string[] = [
+  ...formCommonControlsExclude,
+  'endDateError',
+  'startDateError',
+];
 
 export const datepickerControlsExclude: RegExp = excludeRegex([
   ...datepickerCommonExcludes,
   'dateRangeType',
 ]);
 
-export const datepickerExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
+export const datepickerExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
 export const dateRangeExclude: RegExp = excludeRegex([
   'checkDateCrossings',
@@ -227,9 +239,11 @@ export const headingControlsExclude: RegExp = excludeRegex(['id']);
  * InputWithLanguageOptions
  */
 export const inputWithLanguageOptionsStoryExclude: RegExp = excludeRegex([
-  ...formCommonExclude,
+  ...formCommonControlsExclude,
   'options',
 ]);
+
+export const inputWithLanguageOptionsDocsExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
 /**
  * Language Badge Group
@@ -269,11 +283,11 @@ export const notificationExclude: RegExp = excludeRegex(['link', 'linkTitle', 'e
  * Radio Button Group
  */
 export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
-  ...formCommonExclude,
+  ...formCommonControlsExclude,
   'triggerEmit',
 ]);
 
-export const radioButtonGroupExclude: RegExp = excludeRegex(['triggerEmit']);
+export const radioButtonGroupExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
 /**
  * Section
@@ -295,13 +309,12 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'openDropdown',
   'setOptionVisibility',
   'focusToInput',
-  'onBlur',
   'handleCheckedSort',
   'handleMultiSelectionChange',
 ]);
 
 export const selectStoryControlExclude: RegExp = excludeRegex([
-  ...formCommonExclude,
+  ...formCommonControlsExclude,
   'selectionUpdate',
   'filterTextUpdate',
   'focusSelector',
@@ -351,9 +364,9 @@ export const spacingExclude: RegExp = excludeRegex([
 /**
  * Text Input
  */
-export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
+export const textInputExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
-export const textInputControlsExclude: RegExp = excludeRegex([...formCommonExclude]);
+export const textInputControlsExclude: RegExp = excludeRegex([...formCommonControlsExclude]);
 
 /**
  * Tooltip

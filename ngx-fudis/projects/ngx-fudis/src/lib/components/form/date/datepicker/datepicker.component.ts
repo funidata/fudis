@@ -216,20 +216,6 @@ export class DatepickerComponent
     this.control.updateValueAndValidity();
   }
 
-  /**
-   * Handle input blur
-   */
-  protected _handleInputBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-  }
-
-  /**
-   * Handle input key up
-   */
-  protected _handleKeyUp(event: KeyboardEvent): void {
-    this.handleKeyUp.emit(event);
-  }
-
   ngOnInit(): void {
     this._setComponentId('datepicker');
 
