@@ -53,7 +53,10 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   ngOnInit(): void {
     this._setParentId('select');
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   ngAfterViewInit(): void {
@@ -109,6 +112,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
-    this._changeDetectorRef.detectChanges();
+    this._cdr.detectChanges();
   }
 }

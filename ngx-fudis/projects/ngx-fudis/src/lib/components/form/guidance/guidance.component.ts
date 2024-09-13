@@ -18,7 +18,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
-    private _changeDetectionRef: ChangeDetectorRef,
+    private _cdr: ChangeDetectorRef,
   ) {
     this._id = _idService.getNewId('guidance');
 
@@ -49,10 +49,10 @@ export class GuidanceComponent implements OnChanges, OnInit {
       ) {
         if (this.control?.invalid) {
           this.control.markAsTouched();
-          this._changeDetectionRef.markForCheck();
+          this._cdr.markForCheck();
         } else if (this.formGroup?.invalid) {
           this.formGroup.markAllAsTouched();
-          this._changeDetectionRef.markForCheck();
+          this._cdr.markForCheck();
         }
       }
     });

@@ -54,7 +54,10 @@ export class RadioButtonGroupComponent
     this._setParentComponentId('radio-button-group');
     this._updateValueAndValidityTrigger.next();
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   /** Add value and validity check when control value changes */

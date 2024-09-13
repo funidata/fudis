@@ -81,7 +81,10 @@ export class TextAreaComponent
       }
     });
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {

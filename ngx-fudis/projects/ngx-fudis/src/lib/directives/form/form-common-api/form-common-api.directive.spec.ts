@@ -1,23 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { FormCommonApiDirective } from './form-common-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 describe('FormCommonApiDirective', () => {
   let idService: FudisIdService;
+  let cdr: ChangeDetectorRef;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      providers: [FudisIdService],
+      providers: [FudisIdService, ChangeDetectorRef],
       imports: [],
     });
 
     idService = TestBed.inject(FudisIdService);
+    cdr = TestBed.inject(ChangeDetectorRef);
   });
 
   it('should create an instance', () => {
     TestBed.runInInjectionContext(() => {
-      const directive = new FormCommonApiDirective(idService);
+      const directive = new FormCommonApiDirective(idService, cdr);
       expect(directive).toBeTruthy();
     });
   });

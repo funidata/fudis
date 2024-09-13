@@ -7,31 +7,14 @@ import { FormControl } from '@angular/forms';
   selector: '[fudisControlComponentBase]',
 })
 export class ControlComponentBaseDirective extends FormCommonApiDirective {
-  constructor(
-    _idService: FudisIdService,
-    protected _changeDetectorRef: ChangeDetectorRef,
-  ) {
-    super(_idService);
+  constructor(_idService: FudisIdService, _cdr: ChangeDetectorRef) {
+    super(_idService, _cdr);
   }
 
   /**
    * FormControl for the input
    */
   @Input({ required: true }) control: FormControl;
-
-  /**
-   * TODO: write test check cdr logic
-   *
-   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
-   */
-  protected _triggerErrorSummaryOnInitReload(
-    parentFormErrorSummaryVisible: boolean | undefined,
-  ): void {
-    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && this.control.invalid) {
-      this._reloadErrorSummaryTrigger = true;
-      this._changeDetectorRef.detectChanges();
-    }
-  }
 
   /**
    * Handle blur event

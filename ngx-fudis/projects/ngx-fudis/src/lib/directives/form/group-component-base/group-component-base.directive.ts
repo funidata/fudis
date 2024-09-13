@@ -7,11 +7,8 @@ import { FormGroup } from '@angular/forms';
   selector: '[fudisGroupComponentBase]',
 })
 export class GroupComponentBaseDirective extends FormCommonApiDirective {
-  constructor(
-    _idService: FudisIdService,
-    private _cdr: ChangeDetectorRef,
-  ) {
-    super(_idService);
+  constructor(_idService: FudisIdService, _cdr: ChangeDetectorRef) {
+    super(_idService, _cdr);
   }
 
   /**
@@ -20,17 +17,14 @@ export class GroupComponentBaseDirective extends FormCommonApiDirective {
   @Input() formGroup: FormGroup;
 
   /**
-   * TODO: write test check cdr logic
-   *
-   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
+   * Update value and validity of FormGroup
    */
+  protected _applyGroupUpdateCheck(): void {
+    const original = this.formGroup.updateValueAndValidity;
 
-  protected _triggerErrorSummaryOnInitReload(
-    parentFormErrorSummaryVisible: boolean | undefined,
-  ): void {
-    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && this.formGroup.invalid) {
-      this._reloadErrorSummaryTrigger = true;
-      this._cdr.detectChanges();
-    }
+    this.formGroup.updateValueAndValidity = () => {
+      original.apply(this.formGroup);
+      this._updateValueAndValidityTrigger.next();
+    };
   }
 }

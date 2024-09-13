@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   DestroyRef,
   Directive,
   ElementRef,
@@ -17,7 +18,10 @@ import { FudisIdService } from '../../../services/id/id.service';
   selector: '[fudisFormCommonApi]',
 })
 export class FormCommonApiDirective extends TooltipApiDirective {
-  constructor(protected _idService: FudisIdService) {
+  constructor(
+    protected _idService: FudisIdService,
+    protected _cdr: ChangeDetectorRef,
+  ) {
     super();
   }
 
@@ -137,6 +141,21 @@ export class FormCommonApiDirective extends TooltipApiDirective {
       this._idService.addNewId(componentType, this.id);
     } else {
       this.id = this._idService.getNewId(componentType);
+    }
+  }
+
+  /**
+   * TODO: write test check cdr logic
+   *
+   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
+   */
+  protected _triggerErrorSummaryOnInitReload(
+    parentFormErrorSummaryVisible: boolean | undefined,
+    controlOrGroupInvalid: boolean,
+  ): void {
+    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && controlOrGroupInvalid) {
+      this._reloadErrorSummaryTrigger = true;
+      this._cdr.detectChanges();
     }
   }
 }

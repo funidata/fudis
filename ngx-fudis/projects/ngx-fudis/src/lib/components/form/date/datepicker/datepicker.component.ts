@@ -237,7 +237,10 @@ export class DatepickerComponent
       this._addParseValidator();
     }
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {

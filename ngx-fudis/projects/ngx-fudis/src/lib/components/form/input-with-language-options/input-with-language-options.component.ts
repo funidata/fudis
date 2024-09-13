@@ -217,7 +217,10 @@ export class InputWithLanguageOptionsComponent
   ngOnInit(): void {
     this._setComponentId('input-with-language-options');
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.formGroup.invalid,
+    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<InputWithLanguageOptionsComponent>): void {

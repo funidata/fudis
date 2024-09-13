@@ -89,7 +89,10 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
       };
     }
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.formGroup.invalid,
+    );
   }
 
   /**

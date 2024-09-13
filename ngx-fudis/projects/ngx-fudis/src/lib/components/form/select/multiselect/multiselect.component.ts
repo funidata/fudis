@@ -77,7 +77,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   ngOnInit(): void {
     this._setParentId('multiselect');
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   /**
@@ -175,7 +178,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
 
-      this._changeDetectorRef.detectChanges();
+      this._cdr.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText = null;
