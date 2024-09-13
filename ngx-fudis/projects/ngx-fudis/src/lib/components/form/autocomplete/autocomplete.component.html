@@ -3,7 +3,7 @@
     [text]="label"
     [id]="id + '__label'"
     [for]="id"
-    [required]="_required"
+    [required]="_required | async"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -56,7 +56,7 @@
   <fudis-guidance
     *ngIf="!disableGuidance"
     [formId]="_parentForm?.id || null"
-    [reloadErrorSummary]="_reloadErrorSummary"
+    [reloadErrorSummary]="_reloadErrorSummaryTrigger"
     [inputLabel]="label"
     [helpText]="helpText"
     [for]="id"

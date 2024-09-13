@@ -8,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -20,6 +19,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 /**
  * Fudis Components
  */
+import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { BadgeComponent } from './components/badge/badge.component';
