@@ -10,13 +10,14 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
+import { FudisIdComponent, FudisIdParent } from '../../../types/id';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Directive({
   selector: '[fudisFormCommonApi]',
-  standalone: true,
 })
 export class FormCommonApiDirective extends TooltipApiDirective {
-  constructor() {
+  constructor(protected _idService: FudisIdService) {
     super();
   }
 
@@ -73,12 +74,12 @@ export class FormCommonApiDirective extends TooltipApiDirective {
   @Input() disableGuidance: boolean;
 
   /**
-   * To listen for input's blur event.
+   * To listen for component's blur event.
    */
   @Output() handleBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   /**
-   * To listen for input's blur event.
+   * To listen for component's focus event.
    */
   @Output() handleFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
@@ -115,5 +116,27 @@ export class FormCommonApiDirective extends TooltipApiDirective {
     }
 
     this.handleFocus.emit(event);
+  }
+
+  /**
+   * Generate id for parent component
+   */
+  protected _setParentComponentId(parentType: FudisIdParent): void {
+    if (this.id) {
+      this._idService.addNewParentId(parentType, this.id);
+    } else {
+      this.id = this._idService.getNewParentId(parentType);
+    }
+  }
+
+  /**
+   * Add given id to Id Service or generate unique id
+   */
+  protected _setComponentId(componentType: FudisIdComponent): void {
+    if (this.id) {
+      this._idService.addNewId(componentType, this.id);
+    } else {
+      this.id = this._idService.getNewId(componentType);
+    }
   }
 }

@@ -15,37 +15,36 @@ import {
   FudisInputSize,
 } from '../../../types/forms';
 
-import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 
 @Component({
   selector: 'fudis-checkbox-group',
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
+export class CheckboxGroupComponent extends GroupComponentBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
+    _cdr: ChangeDetectorRef,
   ) {
-    super(_idService, _translationService);
+    super(_idService, _cdr);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.formGroup) {
-        this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+        this._required.next(hasAtLeastOneRequiredOrMinValidator(this.formGroup));
       }
     });
   }
   /**
    * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
    */
-  @Input() formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  @Input() override formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 
   /**
    * Width size of the group.
@@ -58,19 +57,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   @Output() handleChange = new EventEmitter<FudisCheckboxGroupChangeEvent>();
 
   /**
-   * Emit when Checkbox option is focused
-   */
-  @Output() handleFocus = new EventEmitter<FocusEvent>();
-
-  /**
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
    */
   private _groupBlurredOut = false;
-
-  /**
-   * Set requiredText based on this boolean value.
-   */
-  protected _required: boolean = false;
 
   /**
    * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created FormGroup or one provided from the App.
@@ -100,16 +89,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       };
     }
 
-    if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummaryTrigger = this._triggerErrorSummaryOnInitReload(
-        this._parentForm?.errorSummaryVisible,
-        undefined,
-        this.formGroup,
-      );
-      if (this._reloadErrorSummaryTrigger) {
-        this._changeDetectorRef.detectChanges();
-      }
-    }
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
   }
 
   /**
@@ -127,7 +107,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   }
 
   public ngOnInit() {
-    this._setParentId('checkbox-group');
+    this._setParentComponentId('checkbox-group');
 
     /**
      * If there's no formGroup provided when component is initialised, create one internally.
@@ -139,7 +119,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       /**
        * Validation check can be currently be done only for App provided formGroup
        */
-      this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+      this._required.next(hasAtLeastOneRequiredOrMinValidator(this.formGroup));
     }
 
     this._initialCheck(this.formGroup);
