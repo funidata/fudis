@@ -32,7 +32,7 @@ import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.se
 
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FormComponent } from '../form/form.component';
-import { FormCommonApiDirective } from '../../../directives/form/form-common-api/form-common-api.directive';
+import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -43,17 +43,17 @@ import { FormCommonApiDirective } from '../../../directives/form/form-common-api
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputWithLanguageOptionsComponent
-  extends FormCommonApiDirective
+  extends GroupComponentBaseDirective
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _translationService: FudisTranslationService,
-    private _idService: FudisIdService,
     protected _DOMUtilitiesService: FudisDOMUtilitiesService,
-    private _changeDetectorRef: ChangeDetectorRef,
+    _changeDetectorRef: ChangeDetectorRef,
+    _idService: FudisIdService,
   ) {
-    super();
+    super(_idService, _changeDetectorRef);
     effect(() => {
       const translations = _translationService.getTranslations()();
 
@@ -75,7 +75,9 @@ export class InputWithLanguageOptionsComponent
   /**
    * FormGroup including controls.
    */
-  @Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>;
+  @Input({ required: true }) override formGroup: FormGroup<
+    FudisInputWithLanguageOptionsFormGroup<object>
+  >;
 
   /**
    * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'english', label: 'EN'}" pairs with Form Group's "english: new FormControl('')"
@@ -211,15 +213,6 @@ export class InputWithLanguageOptionsComponent
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */
-  protected _triggerErrorSummaryOnInitReload(
-    parentFormErrorSummaryVisible: boolean | undefined,
-    group: FormGroup,
-  ): void {
-    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && group.invalid) {
-      this._reloadErrorSummaryTrigger = true;
-      this._changeDetectorRef.detectChanges();
-    }
-  }
 
   ngOnInit(): void {
     /**
