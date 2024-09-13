@@ -66,33 +66,19 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
    */
   protected _internalFormGroup: boolean = false;
 
-  private _initialCheck(group: FormGroup): void {
-    if (group.touched) {
+  private _applyGroupMarkAsTouched(): void {
+    if (this.formGroup.touched) {
       this._groupBlurredOut = true;
     } else {
       /**
        * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
        */
-      const originalMarkAllAsTouched = group.markAllAsTouched;
-      group.markAllAsTouched = () => {
-        originalMarkAllAsTouched.apply(group);
+      const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
+      this.formGroup.markAllAsTouched = () => {
+        originalMarkAllAsTouched.apply(this.formGroup);
         this._groupBlurredOut = true;
       };
-
-      /**
-       * Extend original updateValueAndValidity function to update possible dynamic validator changes
-       */
-      const original = group.updateValueAndValidity;
-      this.formGroup.updateValueAndValidity = () => {
-        original.apply(group);
-        this._updateValueAndValidityTrigger.next();
-      };
     }
-
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.formGroup.invalid,
-    );
   }
 
   /**
@@ -125,7 +111,14 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
       this._required.next(hasAtLeastOneRequiredOrMinValidator(this.formGroup));
     }
 
-    this._initialCheck(this.formGroup);
+    this._applyGroupMarkAsTouched();
+
+    this._applyGroupUpdateCheck();
+
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.formGroup.invalid,
+    );
   }
 
   /**
