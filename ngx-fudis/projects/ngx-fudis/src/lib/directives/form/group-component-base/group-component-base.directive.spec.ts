@@ -26,26 +26,6 @@ describe('GroupComponentBaseDirective', () => {
   });
 });
 
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { FudisIdService } from '../../../services/id/id.service';
-// import { FieldSetBaseDirective } from './fieldset-base.directive';
-// import { Component } from '@angular/core';
-// import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-// import { FudisCheckboxOption } from '../../../types/forms';
-// import { CheckboxComponent } from '../../../components/form/checkbox-group/checkbox/checkbox.component';
-// import { CheckboxGroupComponent } from '../../../components/form/checkbox-group/checkbox-group.component';
-// import { FieldSetComponent } from '../../../components/form/fieldset/fieldset.component';
-// import { GridDirective } from '../../grid/grid/grid.directive';
-// import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-// import { FudisGridService } from '../../../services/grid/grid.service';
-// import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
-// import { ContentDirective } from '../../content-projection/content/content.directive';
-// import { getElement } from '../../../utilities/tests/utilities';
-// import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
-// import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
-// import { FudisTranslationService } from '../../../services/translation/translation.service';
-// import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-
 // @Component({
 //   selector: 'fudis-mock-checkbox-group-component',
 //   template: ` <fudis-checkbox-group

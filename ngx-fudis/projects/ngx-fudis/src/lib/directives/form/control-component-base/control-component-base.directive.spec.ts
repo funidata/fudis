@@ -26,20 +26,6 @@ describe('ControlComponentBaseDirective', () => {
   });
 });
 
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { FudisIdService } from '../../../services/id/id.service';
-// import { FudisTranslationService } from '../../../services/translation/translation.service';
-// import { InputBaseDirective } from './input-base.directive';
-// import { ChangeDetectorRef, Component } from '@angular/core';
-// import { FormControl, ReactiveFormsModule } from '@angular/forms';
-// import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
-// import { getElement } from '../../../utilities/tests/utilities';
-// import { TextInputComponent } from '../../../components/form/text-input/text-input.component';
-// import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
-// import { LabelComponent } from '../../../components/form/label/label.component';
-// import { FudisValidators } from '../../../utilities/form/validators';
-// import { IconComponent } from '../../../components/icon/icon.component';
-
 // @Component({
 //   selector: 'fudis-mock-text-input-component',
 //   template: ` <fudis-text-input
