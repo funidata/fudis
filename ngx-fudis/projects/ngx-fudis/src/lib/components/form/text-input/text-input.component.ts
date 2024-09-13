@@ -9,7 +9,6 @@ import {
   OnChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -24,6 +23,7 @@ import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
+import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'fudis-text-input',
@@ -31,7 +31,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./text-input.component.scss'],
 })
 export class TextInputComponent
-  extends InputBaseDirective
+  extends ControlComponentBaseDirective
   implements OnInit, AfterViewInit, OnChanges
 {
   constructor(
@@ -96,7 +96,7 @@ export class TextInputComponent
   protected _minNumber = new BehaviorSubject<number | null>(null);
 
   ngOnInit(): void {
-    this._setInputId('text-input');
+    this._setComponentId('text-input');
     this._updateValueAndValidityTrigger.next();
 
     /**
@@ -108,7 +108,7 @@ export class TextInputComponent
       }
     });
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {

@@ -19,7 +19,6 @@ import { ContentDirective } from '../../../../../directives/content-projection/c
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import { InputBaseDirective } from '../../../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
@@ -31,11 +30,12 @@ import { hasRequiredValidator } from '../../../../../utilities/form/getValidator
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
+import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 
 @Directive({
   selector: '[fudisSelectBase]',
 })
-export class SelectBaseDirective extends InputBaseDirective implements OnChanges {
+export class SelectBaseDirective extends ControlComponentBaseDirective implements OnChanges {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
     protected _focusService: FudisFocusService,

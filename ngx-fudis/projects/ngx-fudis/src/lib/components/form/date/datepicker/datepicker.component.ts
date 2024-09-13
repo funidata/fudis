@@ -14,7 +14,6 @@ import {
 import { FormControl, AbstractControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -32,6 +31,7 @@ import { FudisDateAdapter } from '../date-common/date-adapter';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateRangeComponent } from '../date-range/date-range.component';
+import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -48,7 +48,7 @@ import { DateRangeComponent } from '../date-range/date-range.component';
   ],
 })
 export class DatepickerComponent
-  extends InputBaseDirective
+  extends ControlComponentBaseDirective
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
@@ -231,13 +231,13 @@ export class DatepickerComponent
   }
 
   ngOnInit(): void {
-    this._setInputId('datepicker');
+    this._setComponentId('datepicker');
 
     if (!this._parseValidatorInstance && this.dateParse) {
       this._addParseValidator();
     }
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
   }
 
   ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {

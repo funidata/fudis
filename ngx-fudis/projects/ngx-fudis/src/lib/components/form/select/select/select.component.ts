@@ -53,7 +53,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   ngOnInit(): void {
     this._setParentId('select');
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
   }
 
   ngAfterViewInit(): void {

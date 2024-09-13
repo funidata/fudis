@@ -120,9 +120,9 @@ export class FieldSetComponent
   @Input() errorSummaryBreadcrumb: boolean = true;
 
   /**
-   * Display "Required" text next to Field Set main label. By default set to 'undefined'.
+   * Display "Required" text next to Field Set main label.
    */
-  @Input() required: boolean | undefined = undefined;
+  @Input() required: boolean | null;
 
   /**
    * Visual size of label legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.

@@ -9,41 +9,36 @@ import {
   Optional,
   Output,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { FudisInputSize, FudisRadioButtonGroupChangeEvent } from '../../../types/forms';
-import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormComponent } from '../form/form.component';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
   styleUrls: ['./radio-button-group.component.scss'],
 })
-export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+export class RadioButtonGroupComponent
+  extends ControlComponentBaseDirective
+  implements OnInit, OnChanges
+{
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _changeDetectorRef: ChangeDetectorRef,
+    _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
   ) {
-    super(_idService, _translationService);
+    super(_idService, _changeDetectorRef);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(hasRequiredValidator(this.control));
       }
     });
   }
-
-  /**
-   * FormControl for Radio Button Group
-   */
-  @Input({ required: true }) control: FormControl<unknown>;
 
   /**
    * Width of Radio Button Group
@@ -55,30 +50,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
    */
   @Output() handleChange = new EventEmitter<FudisRadioButtonGroupChangeEvent>();
 
-  /**
-   * Emit on option focus
-   */
-  @Output() handleFocus = new EventEmitter<FocusEvent>();
-
-  /**
-   * Set requiredText based on this boolean value
-   */
-  protected _required: boolean = false;
-
   ngOnInit() {
-    this._setParentId('radio-button-group');
+    this._setParentComponentId('radio-button-group');
     this._updateValueAndValidityTrigger.next();
 
-    if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummaryTrigger = this._triggerErrorSummaryOnInitReload(
-        this._parentForm?.errorSummaryVisible,
-        this.control,
-      );
-
-      if (this._reloadErrorSummaryTrigger) {
-        this._changeDetectorRef.detectChanges();
-      }
-    }
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
   }
 
   /** Add value and validity check when control value changes */

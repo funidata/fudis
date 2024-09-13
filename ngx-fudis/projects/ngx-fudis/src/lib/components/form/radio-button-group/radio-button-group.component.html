@@ -2,7 +2,7 @@
   [id]="id"
   [labelSize]="'sm'"
   [label]="label"
-  [required]="_required"
+  [required]="_required | async"
   [describedbyId]="id + '_guidance'"
   [errorSummaryBreadcrumb]="false"
   [inputSize]="size"

@@ -2,18 +2,16 @@ import { ChangeDetectorRef, Directive, Input } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormCommonApiDirective } from '../form-common-api/form-common-api.directive';
 import { FormControl } from '@angular/forms';
-import { FudisIdComponent } from '../../../types/id';
 
 @Directive({
   selector: '[fudisControlComponentBase]',
-  standalone: true,
 })
 export class ControlComponentBaseDirective extends FormCommonApiDirective {
   constructor(
-    protected _idService: FudisIdService,
+    _idService: FudisIdService,
     protected _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super();
+    super(_idService);
   }
 
   /**
@@ -28,9 +26,8 @@ export class ControlComponentBaseDirective extends FormCommonApiDirective {
    */
   protected _triggerErrorSummaryOnInitReload(
     parentFormErrorSummaryVisible: boolean | undefined,
-    control: FormControl,
   ): void {
-    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && control.errors) {
+    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && this.control.invalid) {
       this._reloadErrorSummaryTrigger = true;
       this._changeDetectorRef.detectChanges();
     }
@@ -49,17 +46,6 @@ export class ControlComponentBaseDirective extends FormCommonApiDirective {
   public focusToInput(): void {
     if (this._inputRef?.nativeElement) {
       this._inputRef.nativeElement.focus();
-    }
-  }
-
-  /**
-   * Add given id to Id Service or generate unique id
-   */
-  protected _setInputId(componentType: FudisIdComponent): void {
-    if (this.id) {
-      this._idService.addNewId(componentType, this.id);
-    } else {
-      this.id = this._idService.getNewId(componentType);
     }
   }
 

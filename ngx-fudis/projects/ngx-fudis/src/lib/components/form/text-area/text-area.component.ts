@@ -9,7 +9,6 @@ import {
   Optional,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -22,6 +21,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
+import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'fudis-text-area',
@@ -29,7 +29,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./text-area.component.scss'],
 })
 export class TextAreaComponent
-  extends InputBaseDirective
+  extends ControlComponentBaseDirective
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
@@ -69,7 +69,7 @@ export class TextAreaComponent
   protected _maxLength = new BehaviorSubject<number | null>(null);
 
   ngOnInit(): void {
-    this._setInputId('text-area');
+    this._setComponentId('text-area');
     this._updateValueAndValidityTrigger.next();
 
     /**
@@ -81,7 +81,7 @@ export class TextAreaComponent
       }
     });
 
-    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {

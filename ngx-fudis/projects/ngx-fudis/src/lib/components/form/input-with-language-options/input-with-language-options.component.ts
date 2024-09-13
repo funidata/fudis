@@ -215,18 +215,9 @@ export class InputWithLanguageOptionsComponent
    */
 
   ngOnInit(): void {
-    /**
-     * Add given id to Id Service or generate unique id
-     */
-    if (this.id) {
-      this._idService.addNewId('input-with-language-options', this.id);
-    } else {
-      this.id = this._idService.getNewId('input-with-language-options');
-    }
+    this._setComponentId('input-with-language-options');
 
-    if (this.errorSummaryReloadOnInit) {
-      this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible, this.formGroup);
-    }
+    this._triggerErrorSummaryOnInitReload(this._parentForm?.errorSummaryVisible);
   }
 
   ngOnChanges(changes: FudisComponentChanges<InputWithLanguageOptionsComponent>): void {
