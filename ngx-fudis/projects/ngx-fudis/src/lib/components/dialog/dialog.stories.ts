@@ -352,6 +352,13 @@ class NestedDialogComponent {
       [label]="'Open dialog with nested dialogs'"
     />
 
+    <ng-container *ngIf="_favourites">
+      <fudis-body-text class="fudis-mt-sm" *ngFor="let veggie of _favourites | keyvalue">
+        Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
+        >.
+      </fudis-body-text>
+    </ng-container>
+
     <ng-template #firstDialog>
       <fudis-nested-dialog
         [id]="'fruit'"
@@ -389,10 +396,19 @@ class NestedDialogsComponent {
 
   @Input() size: FudisDialogSize = 'md';
 
+  protected _favourites: Veggies | null;
+
   openDialogTemplate(
     dialogToOpen: ComponentType<NestedDialogComponent> | TemplateRef<NestedDialogComponent>,
   ) {
-    this._dialogService.open(dialogToOpen);
+    this._dialogService
+      .open(dialogToOpen)
+      .afterClosed()
+      .subscribe((result: Veggies) => {
+        if (result) {
+          this._favourites = result;
+        }
+      });
   }
 }
 

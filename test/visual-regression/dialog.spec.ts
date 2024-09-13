@@ -33,7 +33,7 @@ test("nested dialogs", async ({ page }) => {
     "/iframe.html?args=&id=components-dialog--example-with-nested-dialogs&viewMode=story",
   );
   await page.getByText("Open dialog with nested dialogs").click();
-  await expect(page).toHaveScreenshot("nested-dialog-fruit-1.png");
+  await expect(page).toHaveScreenshot("nested-dialog-1-fruit.png");
 
   let currentDialog = page.getByTestId("fudis-dialog-1");
   await expect(currentDialog.getByText("First opened dialog")).toBeVisible();
@@ -41,7 +41,7 @@ test("nested dialogs", async ({ page }) => {
   await currentDialog.getByTestId("example-input-fruit").fill("Orange");
   await currentDialog.getByText("Save and open next dialog").click();
 
-  await expect(page).toHaveScreenshot("nested-dialog-berry-1.png");
+  await expect(page).toHaveScreenshot("nested-dialog-2-berry.png");
 
   currentDialog = page.getByTestId("fudis-dialog-2");
   await expect(currentDialog.getByText("Second opened dialog")).toBeVisible();
@@ -50,15 +50,16 @@ test("nested dialogs", async ({ page }) => {
   await currentDialog.getByTestId("example-input-berry").fill("Strawberry");
   await currentDialog.getByText("Save and open next dialog").click();
 
-  await expect(page).toHaveScreenshot("nested-dialog-vegetable-1.png");
+  await expect(page).toHaveScreenshot("nested-dialog-3-vegetable.png");
 
   currentDialog = page.getByTestId("fudis-dialog-3");
   await expect(currentDialog.getByText("Third opened dialog")).toBeVisible();
   await expect(currentDialog.getByText("Your favorite fruit is Orange.")).toBeVisible();
   await expect(currentDialog.getByText("Your favorite berry is Strawberry.")).toBeVisible();
   await currentDialog.getByText("Save and close dialog").click();
+  await page.keyboard.press("PageDown");
 
-  await expect(page).toHaveScreenshot("nested-dialog-berry-2.png");
+  await expect(page).toHaveScreenshot("nested-dialog-4-open-previous-dialog.png");
 
   currentDialog = page.getByTestId("fudis-dialog-2");
   await expect(currentDialog.getByText("Second opened dialog")).toBeVisible();
@@ -66,8 +67,9 @@ test("nested dialogs", async ({ page }) => {
   await expect(currentDialog.getByText("Your favorite berry is Strawberry.")).toBeVisible();
   await currentDialog.getByTestId("example-input-berry").fill("Blueberry");
   await currentDialog.getByText("Save and close dialog").click();
+  await page.keyboard.press("PageDown");
 
-  await expect(page).toHaveScreenshot("nested-dialog-fruit-2.png");
+  await expect(page).toHaveScreenshot("nested-dialog-5-update-berry.png");
 
   currentDialog = page.getByTestId("fudis-dialog-1");
   await expect(currentDialog.getByText("First opened dialog")).toBeVisible();
@@ -81,7 +83,7 @@ test("nested dialogs", async ({ page }) => {
   currentDialog = page.getByTestId("fudis-dialog-5");
   await currentDialog.getByText("Save and open next dialog").click();
 
-  await expect(page).toHaveScreenshot("nested-dialog-favorite-veggies-1.png");
+  await expect(page).toHaveScreenshot("nested-dialog-6-last-dialog.png");
 
   currentDialog = page.getByTestId("fudis-dialog-6");
   await expect(currentDialog.getByText("Fourth and last opened dialog")).toBeVisible();
@@ -89,8 +91,9 @@ test("nested dialogs", async ({ page }) => {
   await expect(currentDialog.getByText("Your favorite fruit is Banana.")).toBeVisible();
   await expect(currentDialog.getByText("Your favorite berry is Blueberry.")).toBeVisible();
   await currentDialog.getByText("Close this dialog").click();
+  await page.keyboard.press("PageDown");
 
-  await expect(page).toHaveScreenshot("nested-dialog-vegetable-2.png");
+  await expect(page).toHaveScreenshot("nested-dialog-7-vegetable.png");
 
   currentDialog = page.getByTestId("fudis-dialog-5");
   await expect(currentDialog.getByText("Third opened dialog")).toBeVisible();
@@ -99,7 +102,7 @@ test("nested dialogs", async ({ page }) => {
   await currentDialog.getByTestId("example-input-vegetable").fill("Tomato");
   await currentDialog.getByText("Save and open next dialog").click();
 
-  await expect(page).toHaveScreenshot("nested-dialog-favorite-veggies-2.png");
+  await expect(page).toHaveScreenshot("nested-dialog-8-vegetable-update.png");
 
   currentDialog = page.getByTestId("fudis-dialog-7");
   await expect(currentDialog.getByText("Fourth and last opened dialog")).toBeVisible();
@@ -121,8 +124,10 @@ test("nested dialogs", async ({ page }) => {
   currentDialog = page.getByTestId("fudis-dialog-1");
   await expect(currentDialog.getByText("Second opened dialog")).not.toBeVisible();
   await expect(currentDialog.getByText("First opened dialog")).toBeVisible();
-  await page.keyboard.press("Escape");
+  await currentDialog.getByText("Save and close dialog").click(); // If the last closing is done by ESC, the data won't pass to the Story template
 
   await expect(page.getByText("First opened dialog")).not.toBeVisible();
   await expect(page.getByText("Open dialog with nested dialogs")).toBeVisible();
+
+  await expect(page).toHaveScreenshot("nested-dialog-9-final-result.png");
 });
