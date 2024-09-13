@@ -7,6 +7,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -126,6 +128,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
    */
   declarations: [
     ActionsDirective,
+    AutocompleteComponent,
     AlertComponent,
     AlertGroupComponent,
     BadgeComponent,
@@ -211,6 +214,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     CommonModule,
     FormsModule,
     LayoutModule,
+    MatAutocompleteModule,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -230,6 +234,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
    */
   exports: [
     ActionsDirective,
+    AutocompleteComponent,
     // AlertComponent,
     // AlertGroupComponent,
     BadgeComponent,
