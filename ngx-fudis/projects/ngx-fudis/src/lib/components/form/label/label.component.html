@@ -1,8 +1,10 @@
 <label class="fudis-label" [attr.for]="for" [id]="id">
   <span class="fudis-label__content">
     <span class="fudis-label__content__text">{{ text }}</span>
-    <span class="fudis-label__content__required" *ngIf="required && _requiredText"
-      >({{ _requiredText | async }})</span
+    <span
+      class="fudis-label__content__required"
+      *ngIf="required && (_requiredText | async) as requiredText"
+      >({{ requiredText }})</span
     >
   </span>
   <ng-container *ngIf="tooltip">

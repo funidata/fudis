@@ -33,7 +33,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { FormComponent } from '../form/form.component';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 
-// TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
   selector: 'fudis-input-with-language-options',
   templateUrl: './input-with-language-options.component.html',
