@@ -20,10 +20,6 @@ const defaultValues: Partial<FormCommonApiDirective> = {
 
 const nonTestedValues = ['handleBlur', 'handleKeyUp', 'handleViewInit', 'handleFocus'];
 
-// class MockElementRef implements ElementRef {
-//   nativeElement = {};
-// }
-
 describe('FormCommonApiDirective', () => {
   let idService: FudisIdService;
   let cdr: ChangeDetectorRef;

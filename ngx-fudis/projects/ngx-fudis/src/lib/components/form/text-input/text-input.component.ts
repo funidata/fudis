@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   Input,
   OnInit,
@@ -30,10 +29,7 @@ import { ControlComponentBaseDirective } from '../../../directives/form/control-
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent
-  extends ControlComponentBaseDirective
-  implements OnInit, AfterViewInit, OnChanges
-{
+export class TextInputComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
@@ -121,16 +117,6 @@ export class TextInputComponent
 
     if (changes.type?.currentValue !== changes.type?.previousValue) {
       this._updateValueAndValidityTrigger.next();
-    }
-  }
-
-  override ngAfterViewInit(): void {
-    this._afterViewInitCommon();
-    /**
-     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
-     */
-    if (this.control.disabled) {
-      this._inputRef.nativeElement.removeAttribute('disabled');
     }
   }
 }

@@ -51,7 +51,7 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
    */
   @Input() errorSummaryReloadOnInit: boolean = true;
 
-  // TODO: Disabling should be done straight from the form control. But because form control sets HTML disabled="true" and not only aria-disabled="true", this will be prevent user to focus on input even if it 'disabled'. As long this Angular 'feature' exists, we should 'manually' provide disabling through input as well.
+  // TODO: Remove so that disabling is done straight from control/group
 
   /**
    * Option for disabling the input.

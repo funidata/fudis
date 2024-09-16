@@ -28,7 +28,9 @@ Most important input properties are:
 
 Component requires an Angular FormGroup as `formGroup` property. Each control in this `formGroup` represents one selectable option from the Select dropdown.
 
-Selectable options is defined by an array property `options`, which has a default value of:
+#### Default Options
+
+Selectable options is defined by an array property `options`, which has a **default value** of:
 
 ```
 options = [
@@ -50,7 +52,9 @@ formGroup = new FormGroup({
 
 This way the `options` property `controlName: 'finnish'` is paired with the FormGroup's control with key `finnish`.
 
-In similar fashion, if default `options` array is defined like this:
+#### Customised Options
+
+In similar fashion, if `options` array is defined like this:
 
 ```
 options = [

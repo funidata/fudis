@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Host,
@@ -28,10 +27,7 @@ import { ControlComponentBaseDirective } from '../../../directives/form/control-
   templateUrl: './text-area.component.html',
   styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent
-  extends ControlComponentBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
-{
+export class TextAreaComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
@@ -90,16 +86,6 @@ export class TextAreaComponent
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
-    }
-  }
-
-  override ngAfterViewInit(): void {
-    this._afterViewInitCommon();
-    /**
-     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
-     */
-    if (this.control.disabled) {
-      this._inputRef.nativeElement.removeAttribute('disabled');
     }
   }
 }
