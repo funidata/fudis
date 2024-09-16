@@ -1,7 +1,9 @@
 import test, { expect } from "@playwright/test";
 
 test("form dynamic inputs", async ({ page }) => {
-  await page.goto("/iframe.html?args=&id=components-form-form--dynamic-example&viewMode=story");
+  await page.goto(
+    "/iframe.html?args=&id=components-form-form--example-with-dynamic-validators&viewMode=story",
+  );
   await page.getByTestId("fudis-button-1").click(); /* submit form with errors */
   await expect(page).toHaveScreenshot("dynamic-1-submit-with-errors.png", { fullPage: true });
 
