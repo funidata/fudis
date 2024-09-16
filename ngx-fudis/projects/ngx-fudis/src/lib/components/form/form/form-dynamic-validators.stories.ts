@@ -155,7 +155,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -170,7 +170,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -185,7 +185,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
@@ -213,13 +213,6 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                 ></fudis-button>
               </fudis-grid>
             </fudis-grid>
-            <fudis-grid [columns]="{ md: 'inputLg auto' }">
-              <fudis-button
-                [label]="_optionRequired + ' option required validator'"
-                (handleClick)="toggleRequired(formExample.controls['animal'], 'optionRequired')"
-              ></fudis-button>
-            </fudis-grid>
-
             <fudis-grid [columns]="{ md: 'inputLg auto' }">
               <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
               <fudis-input-with-language-options

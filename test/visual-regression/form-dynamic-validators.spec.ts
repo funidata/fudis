@@ -23,7 +23,7 @@ test("form dynamic inputs", async ({ page }) => {
     .click(); /* remove required validator from radio button group */
 
   await page
-    .getByTestId("fudis-button-17")
+    .getByTestId("fudis-button-16")
     .click(); /* remove at least one required validator from input with language options */
 
   await page.getByTestId("fudis-button-1").click(); /* submit form without errors */
