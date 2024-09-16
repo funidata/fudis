@@ -25,7 +25,7 @@ export class FudisDOMUtilitiesService {
   public labelHeightMatched: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
-   * Utility function to match two Fudis Labels height, if components are designed to be always side by side. E. g. InputWithLanguageOptions and DateRange
+   * Utility function to match two Fudis Labels height, if components are designed to be always side by side. E. g. LocalizedTextGroup and DateRange
    *
    * Height of components might vary if other one has tooltip and other one not, or if other one has longer label.
    */

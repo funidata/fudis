@@ -1,8 +1,5 @@
-<div
-  *ngIf="_selectControl.value"
-  class="fudis-input-with-language-options fudis-input-size__{{ size }}"
->
-  <div class="fudis-input-with-language-options__inputs">
+<div *ngIf="_selectControl.value" class="fudis-localized-text-group fudis-input-size__{{ size }}">
+  <div class="fudis-localized-text-group__inputs">
     <fudis-label
       [for]="id"
       [text]="label"
@@ -16,7 +13,7 @@
       <input
         *ngIf="variant === 'text-input' && control.key === _selectControl.value.value"
         #inputRef
-        class="fudis-form-input fudis-input-with-language-options__inputs__text"
+        class="fudis-form-input fudis-localized-text-group__inputs__text"
         [attr.aria-invalid]="
           (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
           (formGroup.controls[control.key].touched && invalidState)
@@ -43,7 +40,7 @@
       <textarea
         #inputRef
         *ngIf="variant === 'text-area' && control.key === _selectControl.value.value"
-        class="fudis-form-input fudis-input-with-language-options__inputs__area"
+        class="fudis-form-input fudis-localized-text-group__inputs__area"
         [attr.aria-invalid]="
           (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
           (formGroup.controls[control.key].touched && invalidState)
@@ -83,7 +80,7 @@
   </div>
   <fudis-select
     *ngIf="_languageLabel | async as label"
-    class="fudis-input-with-language-options__select"
+    class="fudis-localized-text-group__select"
     [label]="label"
     [selectionClearButton]="false"
     (handleViewInit)="_DOMUtilitiesService.setLabelHeight(true)"

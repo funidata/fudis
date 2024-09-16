@@ -29,13 +29,13 @@ import readme from './readme.mdx';
       </ng-template>
       <ng-template fudisContent [type]="'fieldset'">
         <fudis-grid [columns]="{ md: 2 }">
-          <!-- <fudis-input-with-language-options
+          <!-- <fudis-localized-text-group
             [options]="languageOptions"
             [formGroup]="fieldsetExample.controls['name']"
             [label]="'Course name'"
             [helpText]="'Some name would be nice. Provide course name in at least one language.'"
           />
-          <fudis-input-with-language-options
+          <fudis-localized-text-group
             [variant]="'text-area'"
             [options]="languageOptions"
             [formGroup]="fieldsetExample.controls['description']"
@@ -83,7 +83,7 @@ import readme from './readme.mdx';
 })
 class FieldsetExampleComponent {
   fieldsetExample = new FormGroup({
-    // Expose when InputWithLanguageOptions is exposed to public API
+    // Expose when LocalizedTextGroup is exposed to public API
     // name: new FormGroup(
     //   {
     //     finnish: new FormControl(''),

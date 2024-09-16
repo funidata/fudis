@@ -2,16 +2,16 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
+import { LocalizedTextGroupComponent } from './localized-text-group.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
-import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
-import { inputWithLanguageOptionsStoryExclude } from '../../../utilities/storybook';
-import docs from './input-with-language-options.mdx';
+import { FudisLocalizedTextGroup } from '../../../types/forms';
+import { LocalizedTextGroupStoryExclude } from '../../../utilities/storybook';
+import docs from './localized-text-group.mdx';
 
 export default {
-  title: 'Components/Form/Input With Language Options',
-  component: InputWithLanguageOptionsComponent,
+  title: 'Components/Form/Localized Text Group',
+  component: LocalizedTextGroupComponent,
   decorators: [
     moduleMetadata({
       imports: [ReactiveFormsModule, FormsModule],
@@ -22,7 +22,7 @@ export default {
   ],
   parameters: {
     controls: {
-      exclude: inputWithLanguageOptionsStoryExclude,
+      exclude: LocalizedTextGroupStoryExclude,
     },
     docs: {
       page: docs,
@@ -48,7 +48,7 @@ export default {
 
 const html = String.raw;
 
-const commonArgs: Partial<InputWithLanguageOptionsComponent> = {
+const commonArgs: Partial<LocalizedTextGroupComponent> = {
   label: 'Your superhero name',
   size: 'lg',
   disabled: false,
@@ -63,7 +63,7 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     id: 'unique-input-id-superhero-name',
-    formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
+    formGroup: new FormGroup<FudisLocalizedTextGroup<object>>({
       finnish: new FormControl<string | null>(null, [
         FudisValidators.required('Missing superhero name on Finnish.'),
         FudisValidators.minLength(5, 'Too short Finnish name'),
@@ -82,7 +82,7 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
     }),
   },
   template: html`
-    <fudis-input-with-language-options
+    <fudis-localized-text-group
       [id]="'unique-input-1'"
       [size]="size"
       [disabled]="disabled"
@@ -94,7 +94,7 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
       [tooltip]="tooltip"
       [tooltipToggle]="tooltipToggle"
       [tooltipPosition]="tooltipPosition"
-    ></fudis-input-with-language-options>
+    ></fudis-localized-text-group>
   `,
 });
 
@@ -106,7 +106,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       { controlName: 'swedish', label: 'SV' },
       { controlName: 'english', label: 'EN' },
     ],
-    formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
+    formGroup: new FormGroup<FudisLocalizedTextGroup<object>>(
       {
         finnish: new FormControl<string | null>(null, [
           FudisValidators.maxLength(15, 'Too long Finnish name'),
@@ -122,7 +122,7 @@ const ExampleTemplate: StoryFn = (args) => ({
     ),
   },
   template: html`
-    <fudis-input-with-language-options
+    <fudis-localized-text-group
       [formGroup]="formGroup"
       [disabled]="disabled"
       [size]="size"
@@ -133,7 +133,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [tooltip]="tooltip"
       [tooltipToggle]="tooltipToggle"
       [tooltipPosition]="tooltipPosition"
-    ></fudis-input-with-language-options>
+    ></fudis-localized-text-group>
   `,
 });
 

@@ -24,7 +24,7 @@ test("form dynamic inputs", async ({ page }) => {
 
   await page
     .getByTestId("fudis-button-16")
-    .click(); /* remove at least one required validator from input with language options */
+    .click(); /* remove at least one required validator from Localized Text Group */
 
   await page.getByTestId("fudis-button-1").click(); /* submit form without errors */
 

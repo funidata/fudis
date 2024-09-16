@@ -8,7 +8,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxGroupFormGroup,
-  FudisInputWithLanguageOptionsFormGroup,
+  FudisLocalizedTextGroup,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -215,7 +215,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       <fudis-form
         [level]="2"
         [titleVariant]="'lg'"
-        [title]="'Form 6 with Input With Language Options'"
+        [title]="'Form 6 with Localized Text Group'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -228,15 +228,15 @@ import { fudisSpacingArray } from '../../../types/spacing';
         </ng-template>
         <ng-template fudisContent [type]="'form'">
           <fudis-expandable
-            [title]="'Expandable with Input With Language Options'"
+            [title]="'Expandable with Localized Text Group'"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
-              <fudis-input-with-language-options
+              <fudis-localized-text-group
                 [label]="'At least one required'"
                 [formGroup]="allForms.controls.formSix.controls.oneRequired"
               />
-              <fudis-input-with-language-options
+              <fudis-localized-text-group
                 [label]="'All required'"
                 [variant]="'text-area'"
                 [formGroup]="allForms.controls.formSix.controls.allRequired"
@@ -323,7 +323,7 @@ class ExampleWithMultipleFormsComponent {
     }),
     formFive: new FormControl(null, FudisValidators.required('No fruit picked! :(')),
     formSix: new FormGroup({
-      oneRequired: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
+      oneRequired: new FormGroup<FudisLocalizedTextGroup<object>>(
         {
           finnish: new FormControl<string | null>(null),
           swedish: new FormControl<string | null>(null),
@@ -331,7 +331,7 @@ class ExampleWithMultipleFormsComponent {
         },
         [FudisGroupValidators.atLeastOneRequired('Provide name in atleast one language')],
       ),
-      allRequired: new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
+      allRequired: new FormGroup<FudisLocalizedTextGroup<object>>({
         finnish: new FormControl<string | null>('Lorem ipsum', [
           FudisValidators.required('Missing Finnish description'),
           FudisValidators.maxLength(10, 'Too long Finnish description'),
@@ -408,7 +408,7 @@ class ExampleWithMultipleFormsComponent {
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">
                   <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
-                  <!-- <fudis-input-with-language-options
+                  <!-- <fudis-localized-text-group
                           [id]="'unique-input-1'"
                           [options]="languageOptions"
                           [formGroup]="formExample.controls['name']"
@@ -425,8 +425,8 @@ class ExampleWithMultipleFormsComponent {
                               'Reminder here as well, that you have not set a good start date'
                             "
                           />
-                        </fudis-input-with-language-options> -->
-                  <!-- <fudis-input-with-language-options
+                        </fudis-localized-text-group> -->
+                  <!-- <fudis-localized-text-group
                           [variant]="'text-area'"
                           [id]="'unique-input-2'"
                           [options]="languageOptions"
@@ -530,7 +530,7 @@ class FormContentExampleComponent implements OnInit {
     private _focusService: FudisFocusService,
   ) {
     this.formExample = new FormGroup({
-      // Expose when InputWithLanguageOptions is exposed to public API
+      // Expose when LocalizedTextGroup is exposed to public API
       // name: new FormGroup(
       //   {
       //     finnish: new FormControl(null),

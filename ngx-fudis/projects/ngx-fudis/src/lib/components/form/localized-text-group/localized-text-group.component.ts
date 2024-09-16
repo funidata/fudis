@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
-  FudisInputWithLanguageOptionsFormGroup,
+  FudisLocalizedTextGroup,
   FudisSelectOption,
   FudisLangSelectOptions,
   FudisInputSize,
@@ -34,13 +34,13 @@ import { FormComponent } from '../form/form.component';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 
 @Component({
-  selector: 'fudis-input-with-language-options',
-  templateUrl: './input-with-language-options.component.html',
-  styleUrls: ['./input-with-language-options.component.scss'],
+  selector: 'fudis-localized-text-group',
+  templateUrl: './localized-text-group.component.html',
+  styleUrls: ['./localized-text-group.component.scss'],
   providers: [FudisDOMUtilitiesService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputWithLanguageOptionsComponent
+export class LocalizedTextGroupComponent
   extends GroupComponentBaseDirective
   implements OnInit, OnChanges
 {
@@ -73,9 +73,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * FormGroup including controls.
    */
-  @Input({ required: true }) override formGroup: FormGroup<
-    FudisInputWithLanguageOptionsFormGroup<object>
-  >;
+  @Input({ required: true }) override formGroup: FormGroup<FudisLocalizedTextGroup<object>>;
 
   /**
    * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'english', label: 'EN'}" pairs with Form Group's "english: new FormControl('')"
@@ -201,7 +199,7 @@ export class InputWithLanguageOptionsComponent
    */
 
   ngOnInit(): void {
-    this._setComponentId('input-with-language-options');
+    this._setComponentId('localized-text-group');
 
     this._triggerErrorSummaryOnInitReload(
       this._parentForm?.errorSummaryVisible,
@@ -209,7 +207,7 @@ export class InputWithLanguageOptionsComponent
     );
   }
 
-  ngOnChanges(changes: FudisComponentChanges<InputWithLanguageOptionsComponent>): void {
+  ngOnChanges(changes: FudisComponentChanges<LocalizedTextGroupComponent>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
       this._applyGroupUpdateCheck();
       this._updateSelectOptions();

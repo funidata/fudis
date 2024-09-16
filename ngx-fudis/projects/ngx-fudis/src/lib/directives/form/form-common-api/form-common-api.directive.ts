@@ -37,7 +37,7 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   @Input({ required: true }) label: string;
 
   /**
-   * Provide additional information for screen reader users by extending text content of the label. Used in e. g. input with language options for providing info about currently selected language.
+   * Provide additional information for screen reader users by extending text content of the label. Used in e. g. Localized Text Group for providing info about currently selected language.
    */
   @Input() ariaLabel: string;
 

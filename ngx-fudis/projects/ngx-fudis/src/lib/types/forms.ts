@@ -115,8 +115,8 @@ export type FudisLangSelectOptions =
   | { controlName: 'english'; label: 'EN' }
   | { controlName: string; label: string };
 
-export type FudisInputWithLanguageOptionsFormGroup<T extends object> = T & {
-  [language: string]: FormControl<string | null>;
+export type FudisLocalizedTextGroup<T extends object> = T & {
+  [key: string]: FormControl<string | null>;
 };
 
 export type FudisCheckboxGroupFormGroup<T extends object> = T & {

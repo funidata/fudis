@@ -155,7 +155,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working,
+                        formExample.controls.working
                       ])
                     "
                   />
@@ -170,7 +170,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working,
+                        formExample.controls.working
                       ])
                     "
                   />
@@ -185,7 +185,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter,
+                        formExample.controls.winter
                       ])
                     "
                   />
@@ -215,10 +215,10 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
             </fudis-grid>
             <fudis-grid [columns]="{ md: 'inputLg auto' }">
               <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
-              <fudis-input-with-language-options
+              <fudis-localized-text-group
                 [label]="'At least one required'"
                 [formGroup]="formExample.controls.dj"
-              ></fudis-input-with-language-options>
+              ></fudis-localized-text-group>
               <fudis-button
                 [label]="_oneRequired + ' option required validator'"
                 (handleClick)="toggleOneRequired(formExample.controls['dj'], 'oneRequired')"
@@ -602,7 +602,7 @@ export default {
 
 const html = String.raw;
 
-export const DynamicExample: StoryFn<FormComponent> = (args: FormComponent) => ({
+export const ExampleWithDynamicValidators: StoryFn<FormComponent> = (args: FormComponent) => ({
   props: args,
   template: html` <example-dynamic-validator
     [title]="title"
@@ -614,8 +614,8 @@ export const DynamicExample: StoryFn<FormComponent> = (args: FormComponent) => (
   />`,
 });
 
-DynamicExample.args = {
-  title: 'Example with Dynamic Form Validators',
+ExampleWithDynamicValidators.args = {
+  title: 'Example with Dynamic Validators',
   helpText:
     "This example page is used to test, that when validators are added or removed from the FormControls, components' HTML attributes such as 'required' and max/min length are updated correctly.",
   titleVariant: 'xl',
@@ -625,7 +625,7 @@ DynamicExample.args = {
   errorSummaryVisible: false,
 };
 
-DynamicExample.parameters = {
+ExampleWithDynamicValidators.parameters = {
   controls: {
     exclude: formExclude,
   },

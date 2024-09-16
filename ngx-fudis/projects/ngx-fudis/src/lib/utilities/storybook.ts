@@ -236,14 +236,14 @@ export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefau
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
 
 /**
- * InputWithLanguageOptions
+ * LocalizedTextGroup
  */
-export const inputWithLanguageOptionsStoryExclude: RegExp = excludeRegex([
+export const LocalizedTextGroupStoryExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
   'options',
 ]);
 
-export const inputWithLanguageOptionsDocsExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
+export const LocalizedTextGroupDocsExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
 /**
  * Language Badge Group

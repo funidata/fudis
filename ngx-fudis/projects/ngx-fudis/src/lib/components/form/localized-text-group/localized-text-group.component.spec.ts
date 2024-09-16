@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MockComponent } from 'ng-mocks';
 import { FormGroup, FormControl } from '@angular/forms';
-import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
+import { LocalizedTextGroupComponent } from './localized-text-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { FudisLangSelectOptions } from '../../../types/forms';
 import { TextInputComponent } from '../text-input/text-input.component';
@@ -23,14 +23,14 @@ const languageOptions: FudisLangSelectOptions[] = [
 ];
 
 // TODO: Write tests
-describe('InputWithLanguageOptionsComponent', () => {
-  let component: InputWithLanguageOptionsComponent;
-  let fixture: ComponentFixture<InputWithLanguageOptionsComponent>;
+describe('LocalizedTextGroupComponent', () => {
+  let component: LocalizedTextGroupComponent;
+  let fixture: ComponentFixture<LocalizedTextGroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        InputWithLanguageOptionsComponent,
+        LocalizedTextGroupComponent,
         MockComponent(FieldSetComponent),
         MockComponent(TextInputComponent),
         MockComponent(SelectComponent),
@@ -38,7 +38,7 @@ describe('InputWithLanguageOptionsComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InputWithLanguageOptionsComponent);
+    fixture = TestBed.createComponent(LocalizedTextGroupComponent);
     component = fixture.componentInstance;
     component.label = 'Label for testing purposes';
     component.formGroup = testFormGroup;

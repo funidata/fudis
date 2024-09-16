@@ -1,7 +1,7 @@
 @use "../../../foundations/spacing/tokens.scss" as spacing;
 @use "../../../foundations/utilities/mixins.scss" as utilities;
 
-.fudis-input-with-language-options {
+.fudis-localized-text-group {
   @include utilities.box-reset;
 
   display: flex;

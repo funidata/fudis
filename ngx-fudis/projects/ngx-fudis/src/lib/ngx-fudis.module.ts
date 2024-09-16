@@ -50,7 +50,7 @@ import { GridItemComponent } from './components/grid/grid-item/grid-item.compone
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
-import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
+import { LocalizedTextGroupComponent } from './components/form/localized-text-group/localized-text-group.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
@@ -178,7 +178,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     HeaderDirective,
     HeadingComponent,
     IconComponent,
-    InputWithLanguageOptionsComponent,
+    LocalizedTextGroupComponent,
     LabelComponent,
     LanguageBadgeComponent,
     LanguageBadgeGroupComponent,
@@ -276,7 +276,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     HeaderDirective,
     HeadingComponent,
     IconComponent,
-    InputWithLanguageOptionsComponent,
+    LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,
     LinkComponent,
     LinkDirective,

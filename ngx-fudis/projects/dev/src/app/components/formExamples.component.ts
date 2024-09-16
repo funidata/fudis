@@ -14,12 +14,6 @@ import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/valid
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-type myLangGroup = {
-  finnish: FormControl<string | null>;
-  english: FormControl<string | null>;
-  swedish: FormControl<string | null>;
-};
-
 type MyForm = {
   dropdown: FormControl<FudisSelectOption<object> | null>;
   dropdownMulti: FormControl<FudisSelectOption<object>[] | null>;
@@ -30,7 +24,7 @@ type MyForm = {
   date: FormControl<Date | null>;
   autocompleteDropdown: FormControl<FudisSelectOption<object> | null>;
   autocompleteSearch: FormControl<FudisSelectOption<object> | null>;
-  withLanguages: FormGroup<myLangGroup>;
+  withLanguages: FormGroup;
 };
 
 @Component({

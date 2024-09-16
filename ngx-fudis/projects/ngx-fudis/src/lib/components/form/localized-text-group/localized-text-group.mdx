@@ -1,13 +1,13 @@
 import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
-import * as Stories from "./input-with-language-options.stories";
-import { InputWithLanguageOptionsComponent } from "./input-with-language-options.component";
-import { inputWithLanguageOptionsDocsExclude } from "../../../utilities/storybook";
+import * as Stories from "./localized-text-group.stories";
+import { LocalizedTextGroupComponent } from "./localized-text-group.component";
+import { LocalizedTextGroupDocsExclude } from "../../../utilities/storybook";
 
-<Meta title="Components/Form/Input With Language Options" />
+<Meta title="Components/Form/Localized Text Group" />
 
-# Input With Language Options
+# Localized Text Group
 
-Input With Language Options is a form component, where a text form field (left side) is paired with selected dropdown option (right side).
+Localized Text Group is a form component, where a text form field (left side) is paired with selected dropdown option (right side).
 
 Its primary use is to provide an editor tool, where user can type same content in different languages. E.g. some description text or content title needs to be in all application languages.
 
@@ -88,7 +88,7 @@ The `formGroup` property of this example is defined like this:
 
 <Source
   code={`
-formGroup = new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
+formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
   finnish: new FormControl<string | null>(null, [
     FudisValidators.maxLength(15, 'Too long Finnish name'),
   ]),
@@ -111,7 +111,7 @@ The `formGroup` property of this example is defined like this:
 
 <Source
   code={`
-formGroup = new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
+formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
   finnish: new FormControl<string | null>(null, [
     FudisValidators.required('Missing superhero name on Finnish.'),
     FudisValidators.minLength(5, 'Too short Finnish name'),
@@ -148,6 +148,6 @@ formGroup = new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>({
 - [Tooltip Directive](/docs/directives-tooltip--documentation)
 - [Validators](/docs/utilities-validators--documentation)
 
-## Properties of Input With Language Options
+## Properties of Localized Text Group
 
-<ArgTypes of={InputWithLanguageOptionsComponent} exclude={inputWithLanguageOptionsDocsExclude} />
+<ArgTypes of={LocalizedTextGroupComponent} exclude={LocalizedTextGroupDocsExclude} />

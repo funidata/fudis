@@ -11,10 +11,7 @@ import {
   hasRequiredValidator,
   hasAtLeastOneRequiredOrMinValidator,
 } from './getValidators';
-import {
-  FudisCheckboxGroupFormGroup,
-  FudisInputWithLanguageOptionsFormGroup,
-} from '../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisLocalizedTextGroup } from '../../types/forms';
 import { FudisGroupValidators } from './groupValidators';
 
 describe('getValidators utility function', () => {
@@ -50,8 +47,8 @@ describe('getValidators utility function', () => {
       expect(isRequired).toEqual(true);
     });
 
-    it('should return true with atLeastOneRequired validator group with InputWithLanguageOptionsFormGroup', () => {
-      const testFormGroup = new FormGroup<FudisInputWithLanguageOptionsFormGroup<object>>(
+    it('should return true with atLeastOneRequired validator group with LocalizedTextGroupFormGroup', () => {
+      const testFormGroup = new FormGroup<FudisLocalizedTextGroup<object>>(
         {
           finnish: new FormControl<string | null>(null),
           swedish: new FormControl<string | null>(''),

@@ -74,7 +74,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
   @Input() control: FormControl;
 
   /**
-   * FormGroup of related FormGroup. E.g. InputWithLanguageOptions with FormGroup
+   * FormGroup of related FormGroup. E.g. LocalizedTextGroup with FormGroup
    */
   @Input() formGroup: FormGroup;
 
