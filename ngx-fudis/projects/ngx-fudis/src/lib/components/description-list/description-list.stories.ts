@@ -269,7 +269,7 @@ const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
   template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Sub Components</fudis-heading
     >
-    <fudis-description-list
+    <fudis-dl
       [marginTop]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
@@ -306,7 +306,7 @@ const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
           <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
         </fudis-dd>
       </fudis-dl-item>
-    </fudis-description-list> `,
+    </fudis-dl> `,
 });
 
 export const NestedSubComponents = NestedSubComponentsTemplate.bind({});
@@ -323,7 +323,7 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
   template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Language Badges</fudis-heading
     >
-    <fudis-description-list
+    <fudis-dl
       [marginTop]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
@@ -331,19 +331,19 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
       [columns]="columns"
       [marginBottom]="'sm'"
     >
-      <fudis-description-list-item>
+      <fudis-dl-item>
         <fudis-dt [contentText]="'Example paragraph'"></fudis-dt>
         <fudis-dd [lang]="'sv'" [contentText]="'Och den här är på Svenska'"></fudis-dd>
         <fudis-dd [lang]="'en'" [contentText]="'This is in English'"></fudis-dd>
         <fudis-dd [lang]="'fi'" [contentText]="'Tämä on suomeksi'"></fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt [contentText]="'Example without one language'"></fudis-dt>
         <fudis-dd [lang]="'fi'" [contentText]="'Tähtien sota'"></fudis-dd>
         <fudis-dd [lang]="'en'" [contentText]="''"></fudis-dd>
         <fudis-dd [lang]="'sv'" [contentText]="'Stjärnornas krig'"></fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt
           [contentText]="'Example which has multiple Details in different languages'"
         ></fudis-dt>
@@ -354,8 +354,8 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
         <fudis-dd [lang]="'en'" [contentText]="'New Hope'"></fudis-dd>
         <fudis-dd [lang]="'en'" [contentText]="'Empire Strikes Back'"></fudis-dd>
         <fudis-dd [lang]="'en'" [contentText]="'Return of the Jedi'"></fudis-dd>
-      </fudis-description-list-item>
-    </fudis-description-list>
+      </fudis-dl-item>
+    </fudis-dl>
     <example-language-service-change-component /> `,
 });
 
@@ -393,26 +393,26 @@ const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
     <fudis-heading [level]="2" [variant]="'md'"
       >Description List Item With Multiple Details</fudis-heading
     >
-    <fudis-description-list
+    <fudis-dl
       [marginTop]="'sm'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
       [variant]="variant"
     >
-      <fudis-description-list-item>
+      <fudis-dl-item>
         <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
         <fudis-dd
           [contentText]="item.value"
           [subHeading]="item.subHeading"
           *ngFor="let item of data"
         ></fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt [contentText]="'Non-Jedi Master Members'"></fudis-dt>
         <fudis-dd [contentText]="'Anakin Skywalker'"></fudis-dd>
-      </fudis-description-list-item>
-    </fudis-description-list>
+      </fudis-dl-item>
+    </fudis-dl>
   `,
 });
 
@@ -429,7 +429,7 @@ const SingleListItemTemplate: StoryFn<DescriptionListComponent> = (
   props: args,
   template: html`
     <fudis-heading [level]="2" [variant]="'md'">Description List with Single Item</fudis-heading>
-    <fudis-description-list
+    <fudis-dl
       [marginTop]="'sm'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
@@ -437,11 +437,11 @@ const SingleListItemTemplate: StoryFn<DescriptionListComponent> = (
       [variant]="variant"
       [tag]="'p'"
     >
-      <fudis-description-list-item>
+      <fudis-dl-item>
         <fudis-dt [contentText]="'Address'"></fudis-dt>
         <fudis-dd [contentText]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
-      </fudis-description-list-item>
-    </fudis-description-list>
+      </fudis-dl-item>
+    </fudis-dl>
   `,
 });
 
