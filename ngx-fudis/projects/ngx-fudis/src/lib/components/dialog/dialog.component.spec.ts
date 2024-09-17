@@ -95,6 +95,4 @@ describe('DialogComponent', () => {
 
     expect(dialogSpy).toHaveBeenCalledWith(false);
   });
-
-  // TODO: add tests for Alert Group inside Dialog
 });
