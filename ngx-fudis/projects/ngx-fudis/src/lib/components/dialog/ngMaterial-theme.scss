@@ -56,6 +56,13 @@
         }
       }
 
+      // Removing heading default margin bottom
+      & .mat-mdc-dialog-title.mdc-dialog__title {
+        .fudis-heading {
+          margin-bottom: 0;
+        }
+      }
+
       & .mat-mdc-dialog-content {
         @include utilities.box-reset;
 
