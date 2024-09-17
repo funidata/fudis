@@ -109,7 +109,7 @@ export type FudisFormErrorSummaryObjectItemErrors = {
   [errorType: string]: string;
 };
 
-export type FudisLangSelectOptions =
+export type FudisLocalizedTextGroupOptions =
   | { controlName: 'finnish'; label: 'FI' }
   | { controlName: 'swedish'; label: 'SV' }
   | { controlName: 'english'; label: 'EN' }
