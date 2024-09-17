@@ -69,7 +69,7 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
   template: html` <fudis-heading [level]="2" [variant]="'md'"
       >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
     >
-    <fudis-dl [marginTop]="'sm'" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
+    <fudis-dl class="fudis-mt-sm" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
       <fudis-dl-item>
         <fudis-dt [contentText]="'First name'"></fudis-dt>
         <fudis-dd [contentText]="'Rex'"></fudis-dd>
@@ -117,7 +117,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
     <fudis-heading [level]="2" [variant]="'md'"
       >Nested Description Lists with Indiana Jones Movies</fudis-heading
     >
-    <fudis-dl [marginTop]="'sm'" [disableGrid]="disableGrid">
+    <fudis-dl class="fudis-mt-sm" [disableGrid]="disableGrid">
       <fudis-dl-item>
         <fudis-dt [contentText]="'Raiders of the Lost Ark'"></fudis-dt>
         <fudis-dd>
@@ -270,7 +270,7 @@ const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
       >Description List With Sub Components</fudis-heading
     >
     <fudis-dl
-      [marginTop]="'sm'"
+      class="fudis-mt-sm"
       [disableGrid]="disableGrid"
       [variant]="variant"
       [columns]="columns"
@@ -324,12 +324,11 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
       >Description List With Language Badges</fudis-heading
     >
     <fudis-dl
-      [marginTop]="'sm'"
+      class="fudis-mt-sm fudis-mb-sm"
       [disableGrid]="disableGrid"
       [variant]="variant"
       [serviceDefaults]="serviceDefaults"
       [columns]="columns"
-      [marginBottom]="'sm'"
     >
       <fudis-dl-item>
         <fudis-dt [contentText]="'Example paragraph'"></fudis-dt>
@@ -394,7 +393,7 @@ const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
       >Description List Item With Multiple Details</fudis-heading
     >
     <fudis-dl
-      [marginTop]="'sm'"
+      class="fudis-mt-sm"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
@@ -430,7 +429,7 @@ const SingleListItemTemplate: StoryFn<DescriptionListComponent> = (
   template: html`
     <fudis-heading [level]="2" [variant]="'md'">Description List with Single Item</fudis-heading>
     <fudis-dl
-      [marginTop]="'sm'"
+      class="fudis-mt-sm"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
