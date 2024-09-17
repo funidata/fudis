@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { FudisValidators } from '../../../utilities/form/validators';
 import { FieldSetComponent } from './fieldset.component';
 import { NotificationComponent } from '../../notification/notification.component';
 import { TextInputComponent } from '../text-input/text-input.component';
@@ -50,10 +49,6 @@ class MockFieldSetComponent {
   initialFocus = false;
   labelSize = 'md';
   inputSize: FudisInputSize;
-
-  fieldsetExample = new FormGroup({
-    exampleTextInput: new FormControl(null, FudisValidators.required('This field is required')),
-  });
 }
 
 describe('FieldSetComponent', () => {
@@ -100,7 +95,7 @@ describe('FieldSetComponent', () => {
   }
 
   describe('Wrapper fieldset element HTML attributes', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       fieldsetElement = getElement(fixtureMock, 'fieldset') as HTMLFieldSetElement;
     });
 
@@ -143,16 +138,15 @@ describe('FieldSetComponent', () => {
 
     it('should have required text if given', () => {
       componentMock.required = true;
+      fixtureMock.detectChanges();
 
-      fixtureMock.whenStable().finally(() => {
-        const requiredTextElement = getElement(
-          fixtureMock,
-          '.fudis-fieldset__legend__title__text__required',
-        );
+      const requiredTextElement = getElement(
+        fixtureMock,
+        '.fudis-fieldset__legend__title__text__required',
+      );
 
-        expect(requiredTextElement).toBeTruthy();
-        expect(requiredTextElement?.textContent).toEqual(' (Required)');
-      });
+      expect(requiredTextElement).toBeTruthy();
+      expect(requiredTextElement?.textContent).toEqual(' (Required)');
     });
 
     it('should have initial focus', () => {

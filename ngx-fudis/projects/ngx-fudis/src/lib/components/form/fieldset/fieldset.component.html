@@ -40,11 +40,8 @@
           >
             <span class="fudis-fieldset__legend__title__text"
               >{{ label
-              }}<span
-                *ngIf="required && (_requiredText | async) as requiredText"
-                class="fudis-fieldset__legend__title__text__required"
-              >
-                ({{ requiredText }})</span
+              }}<span *ngIf="required" class="fudis-fieldset__legend__title__text__required">
+                ({{ _requiredText | async }})</span
               ></span
             >
             <ng-container *ngIf="tooltip">
