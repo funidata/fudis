@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxFudisModule } from 'ngx-fudis';
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -16,35 +16,29 @@ import { AppDropdownExamplesComponent } from './components/dropdownExamples.comp
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    DialogTestComponent,
-    DialogTestContentComponent,
-    DialogTestFormComponent,
-    AppFormExampleComponent,
-    AppDropdownExamplesComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    NgxFudisModule,
-    ScrollingModule,
-    HttpClientModule,
-    TranslocoRootModule,
-    RouterModule.forRoot([]),
-  ],
-  providers: [
-    {
-      provide: MatDialogRef,
-      useValue: {},
-    },
-    {
-      provide: MAT_DIALOG_DATA,
-      useValue: [],
-    },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        DialogTestComponent,
+        DialogTestContentComponent,
+        DialogTestFormComponent,
+        AppFormExampleComponent,
+        AppDropdownExamplesComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        NgxFudisModule,
+        ScrollingModule,
+        TranslocoRootModule,
+        RouterModule.forRoot([])], providers: [
+        {
+            provide: MatDialogRef,
+            useValue: {},
+        },
+        {
+            provide: MAT_DIALOG_DATA,
+            useValue: [],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
