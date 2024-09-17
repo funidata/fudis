@@ -19,6 +19,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { BreadcrumbsItemComponent } from './components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
+import { DividerComponent } from './components/divider/divider.component';
 import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
 import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
@@ -143,6 +144,7 @@ import {
     DialogActionsDirective,
     DialogContentDirective,
     DialogCloseDirective,
+    DividerComponent,
     DropdownBaseDirective,
     DropdownMenuGroupComponent,
     DropdownMenuComponent,
@@ -248,6 +250,7 @@ import {
     DialogContentDirective,
     DialogCloseDirective,
     DialogActionsDirective,
+    DividerComponent,
     DropdownMenuGroupComponent,
     DropdownMenuComponent,
     DropdownMenuItemComponent,

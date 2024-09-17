@@ -170,7 +170,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         />
       </fudis-date-range>
     </fudis-grid>
-    <hr class="fudis-hr" />
+    <fudis-divider />
     <fudis-grid [columns]="2" [marginTop]="'xl'">
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">

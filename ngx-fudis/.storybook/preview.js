@@ -77,6 +77,7 @@ const preview = {
             "Button",
             "Description List",
             "Dialog",
+            "Divider",
             "Dropdown Menu",
             "Expandable",
             "Form",
