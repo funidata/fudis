@@ -16,7 +16,7 @@ import {
 } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
+import { hasOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -38,7 +38,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.formGroup) {
-        this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+        this._required = hasOneRequiredOrMinValidator(this.formGroup);
       }
     });
   }
@@ -99,7 +99,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       /**
        * Validation check can be currently be done only for App provided formGroup
        */
-      this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+      this._required = hasOneRequiredOrMinValidator(this.formGroup);
     }
 
     this._initialCheck(this.formGroup);

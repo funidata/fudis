@@ -45,7 +45,7 @@ class MockCheckboxGroupComponent {
       blueberry: new FormControl<FudisCheckboxOption<object> | null>(null),
       cloudberry: new FormControl<FudisCheckboxOption<object> | null>(null),
     },
-    FudisGroupValidators.atLeastOneRequired('Choose at least one berry'),
+    FudisGroupValidators.oneRequired('Choose at least one berry'),
   );
 }
 
