@@ -3,95 +3,95 @@
 @use "./palette" as palette;
 
 // Angular Material default typography styling
-$typography: mat.define-typography-config(
+$typography: mat.m2-define-typography-config(
   $font-family: "Fira Sans",
   // fudis-heading-xxl
   $headline-4:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(2.25rem / var(--fudis-rem-multiplier)),
       calc(2.5rem / var(--fudis-rem-multiplier)),
       500
     ),
   // fudis-heading-xl
   $headline-5:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(1.75rem / var(--fudis-rem-multiplier)),
       calc(2rem / var(--fudis-rem-multiplier)),
       500
     ),
   // fudis-heading-l
   $headline-6:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(1.5rem / var(--fudis-rem-multiplier)),
       calc(1.75rem / var(--fudis-rem-multiplier)),
       500
     ),
   // fudis-heading-m
   $subtitle-1:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(1.25rem / var(--fudis-rem-multiplier)),
       calc(1.75rem / var(--fudis-rem-multiplier)),
       500
     ),
   // fudis-heading-s
   $body-1:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(1.125rem / var(--fudis-rem-multiplier)),
       calc(1.125rem / var(--fudis-rem-multiplier)),
       500
     ),
   // fudis-body-lg-regular
   $body-2:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(1rem / var(--fudis-rem-multiplier)),
       calc(1.25rem / var(--fudis-rem-multiplier)),
       400
     ),
   // fudis-body-md-regular
   $subtitle-2:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(0.875rem / var(--fudis-rem-multiplier)),
       calc(1.125rem / var(--fudis-rem-multiplier)),
       400
     ),
   // fudis-body-sm-regular & tooltip
   $caption:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(0.75rem / var(--fudis-rem-multiplier)),
       calc(1rem / var(--fudis-rem-multiplier)),
       400
     ),
   // fudis-text-button
   $button:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       calc(0.875rem / var(--fudis-rem-multiplier)),
       calc(1rem / var(--fudis-rem-multiplier)),
       500
     ),
 );
-$primary-theme: mat.define-light-theme(
+$primary-theme: mat.m2-define-light-theme(
   (
     color: (
-      primary: mat.define-palette(palette.$palette-map-primary, 500),
-      accent: mat.define-palette(palette.$palette-map-accent, 500),
+      primary: mat.m2-define-palette(palette.$palette-map-primary, 500),
+      accent: mat.m2-define-palette(palette.$palette-map-accent, 500),
     ),
     typography: $typography,
   )
 );
-$button-theme: mat.define-light-theme(
+$button-theme: mat.m2-define-light-theme(
   (
     color: (
-      primary: mat.define-palette(palette.$palette-map-primary, 500),
-      accent: mat.define-palette(palette.$palette-map-accent, 500),
+      primary: mat.m2-define-palette(palette.$palette-map-primary, 500),
+      accent: mat.m2-define-palette(palette.$palette-map-accent, 500),
     ),
     typography: $typography,
   )
 );
-$datepicker-theme: mat.define-light-theme(
+$datepicker-theme: mat.m2-define-light-theme(
   (
     color: (
-      primary: mat.define-palette(palette.$palette-map-primary, 100),
-      accent: mat.define-palette(palette.$palette-map-accent, 500),
+      primary: mat.m2-define-palette(palette.$palette-map-primary, 100),
+      accent: mat.m2-define-palette(palette.$palette-map-accent, 500),
     ),
     typography: $typography,
   )
