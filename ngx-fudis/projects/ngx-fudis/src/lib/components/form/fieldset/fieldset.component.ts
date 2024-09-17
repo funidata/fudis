@@ -26,7 +26,7 @@ import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/for
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FormComponent } from '../form/form.component';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
@@ -173,7 +173,9 @@ export class FieldSetComponent
   /**
    * Fudis translation key for required text
    */
-  protected _requiredText = new Subject<string>();
+  protected _requiredText = new BehaviorSubject<string>(
+    this._translationService.getTranslations()().REQUIRED,
+  );
 
   ngOnInit(): void {
     this._setFieldsetId();
