@@ -7,6 +7,7 @@ import { dropdownMenuExclude } from '../../utilities/storybook';
 import { defaultMenuItems, smallDropdownMenuGroupedMockData } from './mock_data';
 import { action } from '@storybook/addon-actions';
 import { FudisInputSize } from '../../types/forms';
+import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
 
 @Component({
   selector: 'example-dropdown-menu',
@@ -108,6 +109,10 @@ export default {
   argTypes: {
     size: {
       options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
+    align: {
+      options: fudisDropdownMenuAlignArray,
       control: { type: 'radio' },
     },
   },

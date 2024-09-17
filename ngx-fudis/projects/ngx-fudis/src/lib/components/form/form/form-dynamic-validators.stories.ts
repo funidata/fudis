@@ -571,6 +571,8 @@ export const DynamicExample: StoryFn<FormComponent> = (args: FormComponent) => (
     [level]="level"
     [errorSummaryHelpText]="errorSummaryHelpText"
     [errorSummaryVisible]="errorSummaryVisible"
+    [badge]="badge"
+    [badgeText]="badgeText"
   />`,
 });
 
@@ -581,6 +583,8 @@ DynamicExample.args = {
   errorSummaryHelpText:
     'There are errors in this form. Please address these before trying to submit again.',
   errorSummaryVisible: false,
+  badge: null,
+  badgeText: '',
 };
 
 DynamicExample.parameters = {

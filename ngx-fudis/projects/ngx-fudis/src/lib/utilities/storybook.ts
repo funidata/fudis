@@ -193,6 +193,7 @@ export const expandableControlExclude: RegExp = excludeRegex([
   ...expandableCommonExclude,
   'closedChange',
   'errorSummaryBreadcrumb',
+  'openOnErrorSummaryReload',
 ]);
 
 /**
@@ -369,14 +370,17 @@ export const spacingExclude: RegExp = excludeRegex([
 export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
 export const textInputControlsExclude: RegExp = excludeRegex([
+  'ariaLabel',
   'control',
+  'disableGuidance',
+  'errorSummaryReloadOnInit',
   'focusToInput',
   'handleBlur',
-  'onBlur',
-  'ariaLabel',
-  'disableGuidance',
+  'handleKeyUp',
   'id',
   'initialFocus',
+  'invalidState',
+  'onBlur',
 ]);
 
 /**
@@ -398,4 +402,9 @@ export const tooltipExclude: RegExp = excludeRegex([
   'type',
   'variant',
   'buttonClick',
+  'toggleMenu',
+  'closeMenu',
+  'dropdownOpen',
+  'dropdownMenuId',
+  'asMenuButton',
 ]);
