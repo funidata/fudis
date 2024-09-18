@@ -58,6 +58,7 @@
   display: block;
   padding: spacing.$spacing-xxs;
   width: 100%;
+  height: calc(5rem / var(--fudis-rem-multiplier));
   resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
 
   &:focus {
