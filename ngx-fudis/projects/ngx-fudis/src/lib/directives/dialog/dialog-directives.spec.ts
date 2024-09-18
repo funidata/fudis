@@ -34,6 +34,21 @@ class HostComponent {}
 describe('DialogDirectives', () => {
   let fixture: ComponentFixture<HostComponent>;
 
+  // Let's mock the scrollHeight to be bigger than client height, so we can mock that the dialog is scrollable
+  const originalScrollHeight =
+    Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollHeight') || {};
+
+  beforeAll(() => {
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
+      configurable: true,
+      value: 10,
+    });
+  });
+
+  afterAll(() => {
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', originalScrollHeight);
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
@@ -74,9 +89,9 @@ describe('DialogDirectives', () => {
       expect(content.getAttribute('class')).toContain('mat-mdc-dialog-content');
       expect(content.textContent).toEqual('Dialog Content');
 
-      // TODO: How to mock ngAfterViewInit & scrollable dialog in the Content Directive Component to get set attributes tested?
-      // expect(content.getAttribute('tabIndex')).toEqual('0');
-      // expect(content.getAttribute('role')).toEqual('region');
+      // The dialog is mocked to be scrollable, so the following values should be set
+      expect(content.getAttribute('tabIndex')).toEqual('0');
+      expect(content.getAttribute('role')).toEqual('region');
     });
   });
 
