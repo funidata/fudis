@@ -175,7 +175,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">
         <fudis-checkbox-group
-          [label]="'At Least One Required Group Validator'"
+          [label]="'One Required Group Validator'"
           [formGroup]="checkboxGroupOneRequired.formGroup"
         >
           <fudis-checkbox
