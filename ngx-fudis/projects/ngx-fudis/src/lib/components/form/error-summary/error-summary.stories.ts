@@ -15,8 +15,8 @@ import { excludeAllRegex } from '../../../utilities/storybook';
 @Component({
   selector: 'example-error-summary',
   template: ` <fudis-form
+    class="fudis-mt-xl"
     [align]="'center'"
-    [marginTop]="'xl'"
     [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="id"
