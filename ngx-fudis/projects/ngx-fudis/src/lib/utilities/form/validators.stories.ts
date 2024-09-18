@@ -27,7 +27,7 @@ const berryFormGroup = new FormGroup(
     cloudberry: new FormControl<boolean | null | undefined>(null),
     raspberry: new FormControl<boolean | null | undefined>(null),
   },
-  [FudisGroupValidators.atLeastOneRequired('Pick at least one berry')],
+  [FudisGroupValidators.oneRequired('Pick at least one berry')],
 );
 
 const fruitMinFormGroup = new FormGroup(
@@ -103,7 +103,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         }),
       ),
     },
-    checkboxGroupAtLeastOneRequired: {
+    checkboxGroupOneRequired: {
       formGroup: berryFormGroup,
       options: [
         { controlName: 'strawberry', label: 'Strawberry' },
@@ -175,11 +175,11 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">
         <fudis-checkbox-group
-          [label]="'At Least One Required Group Validator'"
-          [formGroup]="checkboxGroupAtLeastOneRequired.formGroup"
+          [label]="'One Required Group Validator'"
+          [formGroup]="checkboxGroupOneRequired.formGroup"
         >
           <fudis-checkbox
-            *ngFor="let option of checkboxGroupAtLeastOneRequired.options"
+            *ngFor="let option of checkboxGroupOneRequired.options"
             [controlName]="option.controlName"
             [label]="option.label"
           />

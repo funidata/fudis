@@ -17,7 +17,7 @@ export const hasRequiredValidator = (control: AbstractControl): boolean => {
   return false;
 };
 
-export const hasAtLeastOneRequiredOrMinValidator = (group: FormGroup): boolean => {
+export const hasOneRequiredOrMinValidator = (group: FormGroup): boolean => {
   const validatorFn = group.validator;
 
   if (validatorFn === null) {
@@ -32,7 +32,7 @@ export const hasAtLeastOneRequiredOrMinValidator = (group: FormGroup): boolean =
     }),
   );
 
-  const hasProperErrors: boolean = !!(errors?.['atLeastOneRequired'] || errors?.['min'].value > 0);
+  const hasProperErrors: boolean = !!(errors?.['oneRequired'] || errors?.['min'].value > 0);
 
   return hasProperErrors;
 };

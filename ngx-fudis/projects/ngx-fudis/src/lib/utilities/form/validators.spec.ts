@@ -298,7 +298,7 @@ describe('Fudis Validators', () => {
   });
 
   describe('Fudis Group Validators', () => {
-    describe('AtLeastOneRequired Validator', () => {
+    describe('OneRequired Validator', () => {
       let formGroup: FormGroup;
       const translation = 'Choose at least one option';
 
@@ -309,16 +309,16 @@ describe('Fudis Validators', () => {
             cloudberry: new FormControl<boolean | null | undefined>(null),
             raspberry: new FormControl<boolean | null | undefined>(null),
           },
-          FudisGroupValidators.atLeastOneRequired('Choose at least one option'),
+          FudisGroupValidators.oneRequired('Choose at least one option'),
         );
       });
 
-      it('should return atLeastOneRequired error if FormGroup has atLeastOneRequired validator', () => {
-        expect(formGroup.errors?.['atLeastOneRequired']).toEqual({ message: translation });
+      it('should return oneRequired error if FormGroup has oneRequired validator', () => {
+        expect(formGroup.errors?.['oneRequired']).toEqual({ message: translation });
         expect(formGroup.valid).toEqual(false);
       });
 
-      it('should not return atLeastOneRequired error if at least one option is selected', () => {
+      it('should not return oneRequired error if at least one option is selected', () => {
         formGroup.controls['strawberry'].setValue(true);
 
         expect(formGroup.errors).toEqual(null);
