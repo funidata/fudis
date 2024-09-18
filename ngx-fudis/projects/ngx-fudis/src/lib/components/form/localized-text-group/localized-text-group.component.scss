@@ -7,9 +7,9 @@
   display: flex;
 
   &__inputs {
-    flex: 1;
+    flex-grow: 1;
     margin-right: spacing.$spacing-xxs;
-    max-width: calc(100% - spacing.$spacing-xxl - spacing.$spacing-xxs);
+    max-width: calc(100% - spacing.$spacing-input-xs - spacing.$spacing-xxs);
 
     &__text {
       @include utilities.text-input;
@@ -22,6 +22,5 @@
 
   &__select {
     flex-grow: 1;
-    max-width: spacing.$spacing-xxl;
   }
 }

@@ -37,7 +37,7 @@ export const en: FudisTranslationConfig = {
     },
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
-    LANGUAGE: 'Lang',
+    LANGUAGE: 'Language',
     MISSING: 'Missing',
     MAX_LENGTH: 'characters used',
   },

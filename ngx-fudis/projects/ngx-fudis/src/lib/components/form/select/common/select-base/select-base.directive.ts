@@ -411,7 +411,11 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
     ) {
       this.openDropdown();
     } else if (this._clickFromIcon) {
-      this.closeDropdown();
+      if (this._dropdownOpen.value) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
     }
     this._preventDropdownReopen = false;
 
