@@ -3,7 +3,6 @@ import { HeadingComponent } from './heading.component';
 import readme from './readme.mdx';
 import { headingControlsExclude } from '../../../utilities/storybook';
 import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../../types/typography';
-import { fudisSpacingArray } from '../../../types/spacing';
 
 const html = String.raw;
 
@@ -22,14 +21,13 @@ export default {
     },
     variant: { options: fudisHeadingVariantArray, control: { type: 'select' } },
     align: { options: ['left', 'right', 'center'] },
-    marginBottom: { options: fudisSpacingArray },
   },
 } as Meta;
 
 const Template: StoryFn = (args) => ({
   props: args,
   template: html`
-    <fudis-heading [level]="level" [variant]="variant" [marginBottom]="marginBottom" [align]="align"
+    <fudis-heading [level]="level" [variant]="variant" [align]="align"
       >This is Fudis heading. Variant is: '{{variant}}' and rendered element is:
       'h{{level}}'</fudis-heading
     >
@@ -41,7 +39,6 @@ Example.args = {
   level: 1,
   variant: 'lg',
   align: 'left',
-  marginBottom: 'xs',
 };
 
 Example.parameters = {
