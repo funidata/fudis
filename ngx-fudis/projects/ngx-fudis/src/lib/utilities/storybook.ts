@@ -120,8 +120,6 @@ const descriptionListCommonExclude: string[] = [
   'columns',
   'id',
   'serviceDefaults',
-  'marginBottom',
-  'marginTop',
   'rowGap',
   'tag',
   'width',
