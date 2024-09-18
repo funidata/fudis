@@ -8,7 +8,7 @@
       [formControl]="_parentGroup.control"
       [value]="value"
       [name]="_parentGroup.id"
-      [attr.aria-disabled]="_parentGroup.control.disabled ? true : null"
+      [attr.aria-disabled]="_parentGroup.control.disabled || null"
       [attr.aria-invalid]="
         (_parentGroup.control.touched && _parentGroup.control.invalid) ||
         _parentGroup.control.invalid

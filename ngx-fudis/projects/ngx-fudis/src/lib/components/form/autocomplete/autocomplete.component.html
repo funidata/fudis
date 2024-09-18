@@ -27,7 +27,7 @@
       "
       [attr.aria-disabled]="disabled"
       [attr.placeholder]="placeholder ? placeholder : null"
-      [attr.required]="_required ? true : null"
+      [attr.required]="(_required | async) || null"
     />
     <ng-container *ngIf="_autocompleteFormControl.value">
       <fudis-button

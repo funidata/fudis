@@ -21,12 +21,12 @@
       [min]="_minDate"
       [max]="_maxDate"
       [placeholder]="_placeholderString | async"
-      [attr.disabled]="control.disabled || disabled"
-      [attr.aria-disabled]="control.disabled || disabled ? true : null"
+      [attr.disabled]="control.disabled || disabled || null"
+      [attr.aria-disabled]="control.disabled || disabled || null"
       [attr.aria-invalid]="
-        (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
+        (control.touched && control.invalid) || (control.touched && invalidState) || null
       "
-      [attr.required]="_required ? true : null"
+      [attr.required]="(_required | async) || null"
       [attr.aria-describedby]="id + '_guidance'"
     />
     <mat-datepicker-toggle

@@ -23,9 +23,9 @@
     "
     [attr.minLength]="_minLength | async"
     [attr.maxLength]="_maxLength | async"
-    [attr.required]="_required ? true : null"
-    [attr.aria-disabled]="control.disabled || disabled"
-    [readonly]="control.disabled || disabled"
+    [attr.required]="(_required | async) || null"
+    [attr.aria-disabled]="control.disabled || disabled || null"
+    [readonly]="control.disabled || disabled || null"
   >
   </textarea>
   <fudis-guidance
