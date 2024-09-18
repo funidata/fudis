@@ -70,6 +70,8 @@ describe('LocalizedTextGroupComponent', () => {
       formGroup: new SimpleChange(undefined, formGroup, true),
     });
 
+    jest.spyOn(component.handleViewInit, 'emit');
+
     fixture.detectChanges();
   });
 
@@ -312,6 +314,42 @@ describe('LocalizedTextGroupComponent', () => {
         const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
 
         expect(selectElement).toEqual('FI');
+      });
+    });
+
+    describe(`output emits with ${variant}`, () => {
+      it('should emit handleFocus', () => {
+        jest.spyOn(component.handleFocus, 'emit');
+
+        const focusEvent = new FocusEvent('focus');
+
+        getElement(fixture, '.fudis-form-input').dispatchEvent(focusEvent);
+
+        expect(component.handleFocus.emit).toHaveBeenCalledWith(focusEvent);
+      });
+      it('should emit handleBlur', () => {
+        jest.spyOn(component.handleBlur, 'emit');
+
+        const focusEvent = new FocusEvent('blur');
+
+        getElement(fixture, '.fudis-form-input').dispatchEvent(focusEvent);
+
+        expect(component.handleBlur.emit).toHaveBeenCalledWith(focusEvent);
+      });
+      it('should emit handleKeyUp', () => {
+        jest.spyOn(component.handleKeyUp, 'emit');
+
+        const keyEvent = new KeyboardEvent('keyup', { key: 'q' });
+
+        getElement(fixture, '.fudis-form-input').dispatchEvent(keyEvent);
+
+        fixture.detectChanges();
+
+        expect(component.handleKeyUp.emit).toHaveBeenCalledWith(keyEvent);
+      });
+
+      it('should emit handleViewInit', () => {
+        expect(component.handleViewInit.emit).toHaveBeenCalled();
       });
     });
   };

@@ -8,6 +8,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisLocalizedTextGroup } from '../../../types/forms';
 import { LocalizedTextGroupStoryExclude } from '../../../utilities/storybook';
 import docs from './localized-text-group.mdx';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/Form/Localized Text Group',
@@ -61,6 +62,10 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     id: 'unique-input-id-superhero-name',
+    handleFocus: action('handleFocus'),
+    handleBlur: action('handleBlur'),
+    handleViewInit: action('handleViewInit'),
+    handleKeyUp: action('handleKeyUp'),
     formGroup: new FormGroup<FudisLocalizedTextGroup<object>>({
       finnish: new FormControl<string | null>(null, [
         FudisValidators.required('Missing backstory in Finnish.'),
@@ -92,6 +97,10 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
       [tooltip]="tooltip"
       [tooltipToggle]="tooltipToggle"
       [tooltipPosition]="tooltipPosition"
+      (handleBlur)="handleBlur($event)"
+      (handleFocus)="handleFocus($event)"
+      (handleKeyUp)="handleKeyUp($event)"
+      (handleViewInit)="handleViewInit($event)"
     ></fudis-localized-text-group>
   `,
 });
@@ -99,6 +108,10 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
 const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
+    handleFocus: action('handleFocus'),
+    handleBlur: action('handleBlur'),
+    handleViewInit: action('handleViewInit'),
+    handleKeyUp: action('handleKeyUp'),
     languageOptions: [
       { controlName: 'finnish', label: 'FI' },
       { controlName: 'swedish', label: 'SV' },
@@ -131,6 +144,10 @@ const ExampleTemplate: StoryFn = (args) => ({
       [tooltip]="tooltip"
       [tooltipToggle]="tooltipToggle"
       [tooltipPosition]="tooltipPosition"
+      (handleBlur)="handleBlur($event)"
+      (handleFocus)="handleFocus($event)"
+      (handleKeyUp)="handleKeyUp($event)"
+      (handleViewInit)="handleViewInit($event)"
     ></fudis-localized-text-group>
   `,
 });
