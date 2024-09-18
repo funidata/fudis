@@ -10,7 +10,7 @@ For custom application spesific validator, please check 'Custom Validators' sect
 
 Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`.
 
-Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
+Group validators (FudisGroupValidators) have the following types: `oneRequired`, `min` and `max`.
 
 # Usage Guidelines
 
@@ -92,12 +92,12 @@ FudisValidators.datepickerMax({ value: new Date(2024,9,1), message: 'End date ca
 
 These validators are used with Form Group.
 
-### AtLeastOneRequired Validator
+### OneRequired Validator
 
-AtLeastOneRequired validator can be used with Checkbox Group and Localized Text Group, cases where at least one option needs to be selected. When using this validator, the input has to be set as required. Error message parameter is given as a string or as an observable string
+OneRequired validator can be used with Checkbox Group and Localized Text Group, cases where at least one option needs to be selected. When using this validator, the input has to be set as required. Error message parameter is given as a string or as an observable string
 
 ```
-FudisGroupValidators.atLeastOneRequired('At least one selection has to be made')
+FudisGroupValidators.oneRequired('At least one selection has to be made')
 
 ```
 

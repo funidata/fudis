@@ -14,7 +14,7 @@ import { FudisGridGap } from '../../types/grid';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'fudis-dl, fudis-description-list',
+  selector: 'fudis-dl',
   templateUrl: './description-list.component.html',
   styleUrls: ['./description-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

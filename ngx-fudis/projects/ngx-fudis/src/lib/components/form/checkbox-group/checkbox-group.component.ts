@@ -15,7 +15,7 @@ import {
   FudisInputSize,
 } from '../../../types/forms';
 
-import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
+import { hasOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -37,7 +37,7 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.formGroup) {
-        this._required.next(hasAtLeastOneRequiredOrMinValidator(this.formGroup));
+        this._required.next(hasOneRequiredOrMinValidator(this.formGroup));
       }
     });
   }
@@ -108,7 +108,7 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
       /**
        * Validation check can be currently be done only for App provided formGroup
        */
-      this._required.next(hasAtLeastOneRequiredOrMinValidator(this.formGroup));
+      this._required.next(hasOneRequiredOrMinValidator(this.formGroup));
     }
 
     this._applyGroupMarkAsTouched();

@@ -122,7 +122,7 @@ formExample = new FormGroup({
       first: new FormControl(null),
       second: new FormControl(null),
     },
-    [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Select at least one checkbox!'))],
+    [FudisGroupValidators.oneRequired(new BehaviorSubject('Select at least one checkbox!'))],
   ),
 });
 

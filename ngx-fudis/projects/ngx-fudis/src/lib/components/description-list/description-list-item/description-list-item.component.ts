@@ -17,7 +17,7 @@ import { DescriptionListComponent } from '../description-list.component';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'fudis-dl-item, fudis-description-list-item',
+  selector: 'fudis-dl-item',
   styleUrls: ['./description-list-item.component.scss'],
   templateUrl: './description-list-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

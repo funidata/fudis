@@ -9,13 +9,11 @@
   [classes]="classes"
   [rowGap]="'none'"
   [serviceDefaults]="false"
-  [marginBottom]="marginBottom"
-  [marginTop]="marginTop"
 >
   <div class="fudis-section__header" [id]="_headingId">
     <div class="fudis-section__header__container">
       <div class="fudis-section__header__heading">
-        <fudis-heading [marginBottom]="'none'" [level]="level" [variant]="titleVariant"
+        <fudis-heading class="fudis-mb-none" [level]="level" [variant]="titleVariant"
           >{{ title
           }}<ng-container *ngIf="badge && badgeText">
             <fudis-badge

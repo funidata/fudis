@@ -309,7 +309,7 @@ class ExampleWithMultipleFormsComponent {
         pineapple: new FormControl<boolean | null>(null),
         orange: new FormControl<boolean | null | undefined>(null),
       },
-      [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+      [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
     ),
     formFour: new FormGroup({
       select: new FormControl<FudisSelectOption<object> | null>(
@@ -351,7 +351,7 @@ class ExampleWithMultipleFormsComponent {
   selector: 'example-form-content',
   template: `
     <fudis-form
-      [marginTop]="'xl'"
+      class="fudis-mt-xl"
       [badge]="badge"
       [badgeText]="badgeText"
       [level]="level"
@@ -537,7 +537,7 @@ class FormContentExampleComponent implements OnInit {
       //     swedish: new FormControl(null),
       //     english: new FormControl(null),
       //   },
-      //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))],
+      //   [FudisGroupValidators.oneRequired(new BehaviorSubject('Course name is missing.'))],
       // ),
       // description: new FormGroup({
       //   finnish: new FormControl(null, [

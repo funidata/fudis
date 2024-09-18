@@ -90,7 +90,7 @@ class FieldsetExampleComponent {
     //     swedish: new FormControl(''),
     //     english: new FormControl(''),
     //   },
-    //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing'))],
+    //   [FudisGroupValidators.oneRequired(new BehaviorSubject('Course name is missing'))],
     // ),
     // description: new FormGroup({
     //   finnish: new FormControl('', [

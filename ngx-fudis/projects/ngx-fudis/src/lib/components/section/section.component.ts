@@ -17,7 +17,6 @@ import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
-import { FudisSpacing } from '../../types/spacing';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
@@ -99,16 +98,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
    * Alignment of Grid component inside its parent
    */
   @Input() align: FudisGridAlign = 'start';
-
-  /**
-   * Margin top for the Grid
-   */
-  @Input() marginTop: FudisSpacing = 'none';
-
-  /**
-   * Margin bottom for the Grid
-   */
-  @Input() marginBottom: FudisSpacing = 'none';
 
   /**
    * Custom CSS classes

@@ -18,7 +18,6 @@ import { ActionsDirective } from '../../../directives/content-projection/actions
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { FudisSpacing } from '../../../types/spacing';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -97,16 +96,6 @@ export class FieldSetComponent
    * Alignment of Grid component inside its parent
    */
   @Input() align: FudisGridAlign = 'start';
-
-  /**
-   * Margin top for the Grid
-   */
-  @Input() marginTop: FudisSpacing = 'none';
-
-  /**
-   * Margin bottom for the Grid
-   */
-  @Input() marginBottom: FudisSpacing = 'none';
 
   /**
    * Set focus to Field Set when it appears first time
