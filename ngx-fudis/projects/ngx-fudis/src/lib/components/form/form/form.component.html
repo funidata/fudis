@@ -17,9 +17,8 @@
         <div class="fudis-form__header__title">
           <ng-container *ngIf="_dialogParent">
             <fudis-heading
-              class="fudis-form__header__title__dialog"
+              class="fudis-form__header__title__dialog fudis-mb-xs"
               fudisDialogTitle
-              [marginBottom]="'xs'"
               [variant]="titleVariant"
               [level]="level"
               >{{ title
@@ -33,7 +32,7 @@
             </fudis-heading>
           </ng-container>
           <ng-container *ngIf="!_dialogParent">
-            <fudis-heading [marginBottom]="'xs'" [variant]="titleVariant" [level]="level"
+            <fudis-heading class="fudis-mb-xs" [variant]="titleVariant" [level]="level"
               >{{ title
               }}<ng-container *ngIf="badge && badgeText">
                 <fudis-badge
