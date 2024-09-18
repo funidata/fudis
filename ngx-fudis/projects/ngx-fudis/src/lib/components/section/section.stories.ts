@@ -59,8 +59,6 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
     [align]="align"
-    [marginTop]="marginTop"
-    [marginBottom]="marginBottom"
     [width]="width"
   >
     <ng-template fudisActions [type]="'section'">
@@ -94,8 +92,6 @@ Example.args = {
   badge: 'primary',
   badgeText: 'Example',
   align: 'start',
-  marginTop: 'none',
-  marginBottom: 'none',
   width: 'xl',
 };
 
@@ -123,8 +119,8 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
       >
 
       <fudis-section
+        class="fudis-mt-sm"
         [title]="'Nested Section'"
-        [marginTop]="'sm'"
         [titleVariant]="'sm'"
         [level]="3"
       >
