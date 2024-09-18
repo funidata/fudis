@@ -49,10 +49,8 @@ export default {
 const html = String.raw;
 
 const commonArgs: Partial<LocalizedTextGroupComponent> = {
-  label: 'Your superhero name',
   size: 'lg',
   disabled: false,
-  variant: 'text-input',
   initialFocus: false,
   tooltip: 'Your city needs you!',
   tooltipToggle: false,
@@ -65,25 +63,25 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
     id: 'unique-input-id-superhero-name',
     formGroup: new FormGroup<FudisLocalizedTextGroup<object>>({
       finnish: new FormControl<string | null>(null, [
-        FudisValidators.required('Missing superhero name on Finnish.'),
-        FudisValidators.minLength(5, 'Too short Finnish name'),
-        FudisValidators.maxLength(10, 'Too long Finnish name'),
+        FudisValidators.required('Missing backstory in Finnish.'),
+        FudisValidators.minLength(10, 'Too short backstory in Finnish'),
+        FudisValidators.maxLength(50, 'Too long backstory in Finnish'),
       ]),
       swedish: new FormControl<string | null>(null, [
-        FudisValidators.required('Missing superhero name on Swedish.'),
-        FudisValidators.minLength(5, 'Too short Swedish name'),
-        FudisValidators.maxLength(15, 'Too long Swedish name'),
+        FudisValidators.required('Missing backstory in Swedish.'),
+        FudisValidators.minLength(10, 'Too short backstory in Swedish'),
+        FudisValidators.maxLength(100, 'Too long backstory in Swedish'),
       ]),
       english: new FormControl<string | null>(null, [
-        FudisValidators.required('Missing superhero name on English.'),
-        FudisValidators.minLength(5, 'Too short English name'),
-        FudisValidators.maxLength(20, 'Too long English name'),
+        FudisValidators.required('Missing backstory in English.'),
+        FudisValidators.minLength(10, 'Too short backstory in English'),
+        FudisValidators.maxLength(1000, 'Too long backstory in English'),
       ]),
     }),
   },
   template: html`
     <fudis-localized-text-group
-      [id]="'unique-input-1'"
+      [id]="'unique-custom-text-group-1'"
       [size]="size"
       [disabled]="disabled"
       [variant]="variant"
@@ -141,6 +139,8 @@ export const Example = ExampleTemplate.bind({});
 
 Example.args = {
   ...commonArgs,
+  label: 'Your superhero name',
+  variant: 'text-input',
   helpText: 'Please provide superhero name in at least one language.',
 };
 
@@ -148,5 +148,7 @@ export const ExampleWithAllRequired = ExampleAllRequiredTemplate.bind({});
 
 ExampleWithAllRequired.args = {
   ...commonArgs,
-  helpText: 'Please provide superhero name in all languages.',
+  label: 'Your superhero origin story',
+  variant: 'text-area',
+  helpText: 'Please provide an interesting superhero backstory in all languages.',
 };
