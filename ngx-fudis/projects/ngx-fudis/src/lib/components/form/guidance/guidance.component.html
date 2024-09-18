@@ -40,7 +40,7 @@
         </ng-container>
 
         <!--
-          Check parent level errors of FormGroup e. g. atLeastOneIsRequired
+          Check parent level errors of FormGroup e. g. oneRequired
         -->
         <ng-container *ngIf="formGroup?.errors && formGroup?.invalid">
           <ng-container *ngFor="let error of formGroup?.errors | keyvalue">

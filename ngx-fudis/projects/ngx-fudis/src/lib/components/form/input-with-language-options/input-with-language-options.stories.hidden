@@ -91,7 +91,7 @@
 //         ]),
 //       },
 //       [
-//         FudisGroupValidators.atLeastOneRequired(
+//         FudisGroupValidators.oneRequired(
 //           new BehaviorSubject('Give name in at least in one language'),
 //         ),
 //       ],
@@ -111,4 +111,4 @@
 
 // export const ExampleWithAllRequired = TemplateAllRequired.bind({});
 
-// export const ExampleWithAtleastOneRequired = TemplateOneRequired.bind({});
+// export const ExampleWithOneRequired = TemplateOneRequired.bind({});

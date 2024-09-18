@@ -110,7 +110,7 @@ When Form Group has validation errors, the visual and screen reader attributes a
 
 ### As a Required Fieldset
 
-To mark Checkbox Group as Required field, include validator `FudisGroupValidators.atLeastOneRequired()` or `FudisGroupValidators.min()` in the validators array of `formGroup`.
+To mark Checkbox Group as Required field, include validator `FudisGroupValidators.oneRequired()` or `FudisGroupValidators.min()` in the validators array of `formGroup`.
 
 ```
 // In TypeScript file
@@ -119,7 +119,7 @@ myFormGroup = new FormGroup(
   {
   // controls
   },
-  [FudisGroupValidators.atLeastOneRequired('At least one option must be selected!')]
+  [FudisGroupValidators.oneRequired('At least one option must be selected!')]
 );
 
 

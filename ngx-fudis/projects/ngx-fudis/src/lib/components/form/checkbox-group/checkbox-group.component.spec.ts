@@ -29,7 +29,7 @@ const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
     pineapple: new FormControl<boolean | null | undefined>(null),
     orange: new FormControl<boolean | null | undefined>(null),
   },
-  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+  [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
 
 type TestOption = {
