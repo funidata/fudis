@@ -156,7 +156,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -171,7 +171,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -186,14 +186,14 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
                 </fudis-checkbox-group>
               </fudis-grid>
+              <fudis-divider />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
-                <fudis-divider fudisGridItem [columns]="'stretch'" />
                 <fudis-radio-button-group
                   [label]="'Select your favorite sport'"
                   [control]="formExample.controls.sport"

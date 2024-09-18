@@ -6,7 +6,6 @@
 .fudis-divider {
   @include utilities.box-reset;
 
-  display: block;
   border: 0;
   border-top: spacing.$pixel-1 solid colors.$color-gray-middle;
   width: 100%;

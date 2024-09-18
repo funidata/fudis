@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DividerComponent } from './divider.component';
 import { getElement } from '../../utilities/tests/utilities';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('DividerComponent', () => {
   let fixture: ComponentFixture<DividerComponent>;
@@ -8,7 +9,11 @@ describe('DividerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DividerComponent],
-    }).compileComponents();
+    })
+      .overrideComponent(DividerComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {
