@@ -1,35 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LocalizedTextGroupComponent } from './localized-text-group.component';
-import { FudisLocalizedTextGroupOptions } from '../../../types/forms';
+
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { SelectComponent } from '../select/select/select.component';
-import { getElement } from '../../../utilities/tests/utilities';
+import { getAllElements, getElement } from '../../../utilities/tests/utilities';
 import { LabelComponent } from '../label/label.component';
 import { ChangeDetectionStrategy, SimpleChange } from '@angular/core';
+import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
-const formGroupFirst: FormGroup = new FormGroup({
-  finnish: new FormControl('', FudisValidators.required('Required in Finnish')),
-  swedish: new FormControl(''),
-  english: new FormControl('', FudisValidators.required('Required in English')),
-});
+import { SelectIconsComponent } from '../select/common/select-icons/select-icons.component';
+import { IconComponent } from '../../icon/icon.component';
+import { FudisLocalizedTextGroup, FudisLocalizedTextGroupOptions } from '../../../types/forms';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
-const formGroupSecond = new FormGroup({
-  klingon: new FormControl<string | null>(null),
-  elvish: new FormControl<string | null>(null),
-  dothraki: new FormControl<string | null>(null),
-});
+const values = {
+  label: 'Label for testing purposes',
+  helpText: 'Help text for testing purposes',
+};
 
-const optionsSecond: FudisLocalizedTextGroupOptions[] = [
-  { controlName: 'klingon', label: 'KLI' },
-  { controlName: 'elvish', label: 'ELV' },
-  { controlName: 'dothraki', label: 'DOT' },
-];
+const controlRequired = FudisValidators.required('Required in Finnish');
+
+const groupRequired = FudisGroupValidators.atLeastOneRequired('One required!');
+
+const minLength = FudisValidators.minLength(5, 'Min length is 5');
+
+const maxlength = FudisValidators.maxLength(25, 'Max length is 25');
 
 describe('LocalizedTextGroupComponent', () => {
   let component: LocalizedTextGroupComponent;
   let fixture: ComponentFixture<LocalizedTextGroupComponent>;
+  let translationService: FudisTranslationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,32 +41,286 @@ describe('LocalizedTextGroupComponent', () => {
         LabelComponent,
         SelectComponent,
         GuidanceComponent,
+        ValidatorErrorMessageComponent,
+        SelectIconsComponent,
+        IconComponent,
       ],
+      providers: [FudisTranslationService],
+      imports: [ReactiveFormsModule],
     })
       .overrideComponent(LocalizedTextGroupComponent, {
         set: { changeDetection: ChangeDetectionStrategy.Default },
       })
       .compileComponents();
-    fixture = TestBed.createComponent(LocalizedTextGroupComponent);
-    component = fixture.componentInstance;
-    component.formGroup = formGroupFirst;
 
-    component.label = 'Label for testing purposes';
+    fixture = TestBed.createComponent(LocalizedTextGroupComponent);
+    translationService = TestBed.inject(FudisTranslationService);
+    component = fixture.componentInstance;
+
+    const formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
+      finnish: new FormControl('', controlRequired),
+      swedish: new FormControl(''),
+      english: new FormControl('', FudisValidators.required('Required in English')),
+    });
+
+    component.formGroup = formGroup;
+    component.label = values.label;
+    component.helpText = values.helpText;
     component.ngOnChanges({
-      label: new SimpleChange(undefined, 'Label for testing purposes', true),
-      formGroup: new SimpleChange(undefined, formGroupFirst, true),
+      formGroup: new SimpleChange(undefined, formGroup, true),
     });
 
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  const testWithVariant = (variant: 'text-input' | 'text-area') => {
+    beforeEach(() => {
+      const previous = component.variant;
+
+      component.variant = variant;
+      component.ngOnChanges({
+        variant: new SimpleChange(previous, variant, false),
+      });
+
+      fixture.autoDetectChanges();
+    });
+
+    describe(`basic inputs with ${variant}`, () => {
+      it(`should create`, () => {
+        expect(component).toBeTruthy();
+      });
+
+      it(`should have correct variant`, () => {
+        const textInput = getElement(fixture, '.fudis-localized-text-group__inputs__text');
+
+        const textArea = getElement(fixture, '.fudis-localized-text-group__inputs__area');
+
+        expect(component.variant).toEqual(variant);
+
+        if (variant === 'text-input') {
+          expect(textInput).toBeTruthy();
+          expect(textArea).toBeNull();
+        } else {
+          expect(textInput).toBeNull();
+          expect(textArea).toBeTruthy();
+        }
+      });
+
+      it(`should have correct label`, () => {
+        const labelText = getElement(fixture, '.fudis-label__content__text').textContent;
+
+        expect(labelText).toEqual(values.label);
+      });
+
+      it(`should have correct help text`, () => {
+        const helpText = getElement(fixture, '.fudis-guidance__help-text').textContent;
+
+        expect(helpText).toEqual(values.helpText);
+      });
+
+      it(`should have correct id`, () => {
+        const id = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        ).getAttribute('id');
+
+        expect(id).toEqual(`fudis-localized-text-group-1`);
+      });
+
+      it(`should have correct aria-label`, () => {
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('aria-label')).toEqual(values.label + ', FI (Missing)');
+      });
+
+      it(`should have default option in Select`, () => {
+        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
+
+        expect(selectElement).toEqual('FI (Missing)');
+      });
+
+      it(`should have custom default option in Select`, () => {
+        const formGroupSecond = new FormGroup<FudisLocalizedTextGroup<object>>({
+          klingon: new FormControl<string | null>(null),
+          elvish: new FormControl<string | null>(null),
+          dothraki: new FormControl<string | null>(null),
+        });
+
+        const optionsSecond: FudisLocalizedTextGroupOptions[] = [
+          { controlName: 'klingon', label: 'KLI' },
+          { controlName: 'elvish', label: 'ELV' },
+          { controlName: 'dothraki', label: 'DOT' },
+        ];
+
+        const previous = component.formGroup;
+        component.formGroup = formGroupSecond;
+        component.options = optionsSecond;
+
+        component.ngOnChanges({
+          formGroup: new SimpleChange(previous, formGroupSecond, false),
+        });
+
+        fixture.detectChanges();
+
+        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
+
+        expect(selectElement).toEqual('KLI (Missing)');
+      });
+
+      it('should have correct translations', () => {
+        translationService.setLanguage('fi');
+        fixture.detectChanges();
+
+        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
+
+        const requiredText = getElement(fixture, '.fudis-label__content__required').textContent;
+
+        expect(selectElement).toEqual('FI (Puuttuu)');
+        expect(requiredText).toEqual('(Pakollinen)');
+      });
+    });
+
+    describe(`FormControl and Group updates with ${variant}`, () => {
+      it(`should have errors visible, when touched`, () => {
+        component.formGroup.markAllAsTouched();
+        fixture.detectChanges();
+
+        const errors = getAllElements(fixture, '.fudis-error-message');
+
+        expect(errors.length).toEqual(2);
+
+        const expectedErrors = ['Required in English', 'Required in Finnish'];
+
+        errors.forEach((error, index) => {
+          expect(error.textContent).toEqual(expectedErrors[index]);
+        });
+      });
+
+      it(`should not have min or max length`, () => {
+        component.formGroup.controls['finnish'].removeValidators(minLength);
+        component.formGroup.controls['finnish'].removeValidators(maxlength);
+        component.formGroup.updateValueAndValidity();
+        fixture.detectChanges();
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('minlength')).toBeNull();
+        expect(element.getAttribute('maxlength')).toBeNull();
+      });
+
+      it(`should have min or max length`, () => {
+        component.formGroup.controls['finnish'].addValidators(minLength);
+        component.formGroup.controls['finnish'].addValidators(maxlength);
+        component.formGroup.updateValueAndValidity();
+        fixture.detectChanges();
+
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('minlength')).toEqual('5');
+        expect(element.getAttribute('maxlength')).toEqual('25');
+      });
+
+      it(`should have required attribute, when control is required`, () => {
+        component.formGroup.controls['finnish'].addValidators(controlRequired);
+        component.formGroup.updateValueAndValidity();
+        fixture.detectChanges();
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('required')).toBeTruthy();
+      });
+
+      it(`should not have required attribute, when control is required`, () => {
+        component.formGroup.controls['finnish'].removeValidators(controlRequired);
+        component.formGroup.updateValueAndValidity();
+        fixture.detectChanges();
+
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('required')).toBeNull();
+      });
+
+      it(`should have required attribute, when group is required`, () => {
+        component.formGroup.addValidators(groupRequired);
+        component.formGroup.controls['finnish'].removeValidators(controlRequired);
+        component.formGroup.updateValueAndValidity();
+        fixture.detectChanges();
+
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('required')).toBeTruthy();
+      });
+
+      it(`should not have required attribute, when group is required`, () => {
+        component.formGroup.removeValidators(groupRequired);
+        component.formGroup.controls['finnish'].removeValidators(controlRequired);
+        component.formGroup.updateValueAndValidity();
+        fixture.detectChanges();
+
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('required')).toBeNull();
+      });
+
+      it(`should be disabled`, () => {
+        component.formGroup.disable();
+        fixture.detectChanges();
+
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('disabled')).toEqual('');
+        expect(element.getAttribute('aria-disabled')).toBeTruthy();
+        expect(element.getAttribute('readonly')).toEqual('');
+      });
+
+      it(`should not be disabled`, () => {
+        const element = getElement(
+          fixture,
+          `${variant === 'text-input' ? 'input' : 'textarea'}.fudis-form-input`,
+        );
+
+        expect(element.getAttribute('disabled')).toBeNull();
+        expect(element.getAttribute('aria-disabled')).toBeNull();
+        expect(element.getAttribute('readonly')).toBeNull();
+      });
+
+      it(`should update Select menu option, when control is updated`, () => {
+        component.formGroup.controls['finnish'].patchValue('Hello');
+
+        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
+
+        expect(selectElement).toEqual('FI');
+      });
+    });
+  };
+
+  describe('with text-input', () => {
+    testWithVariant('text-input');
   });
 
-  it.only('should have correct label', () => {
-    const labelText = getElement(fixture, '.fudis-label__content__text').textContent;
-
-    expect(labelText).toEqual('Label for testing purposes');
+  describe('with text-area', () => {
+    testWithVariant('text-area');
   });
 });

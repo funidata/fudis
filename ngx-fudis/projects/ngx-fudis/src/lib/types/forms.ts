@@ -116,7 +116,7 @@ export type FudisLocalizedTextGroupOptions =
   | { controlName: string; label: string };
 
 export type FudisLocalizedTextGroup<T extends object> = T & {
-  [key: string]: FormControl<string | null>;
+  [lang: string | 'finnish' | 'swedish' | 'english']: FormControl<string | null>;
 };
 
 export type FudisCheckboxGroupFormGroup<T extends object> = T & {

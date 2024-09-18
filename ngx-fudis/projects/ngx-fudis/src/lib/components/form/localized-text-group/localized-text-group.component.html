@@ -33,9 +33,13 @@
         (focus)="onFocus($event)"
         [id]="id"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.required]="_required ? true : null"
-        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled"
-        [readonly]="formGroup.controls[control.key].disabled || disabled"
+        [attr.required]="(_required | async) || null"
+        [attr.aria-disabled]="
+          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+        "
+        [readonly]="
+          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+        "
       />
       <textarea
         #inputRef
@@ -60,9 +64,9 @@
         (focus)="onFocus($event)"
         [id]="id"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.required]="_required ? true : null"
-        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled"
-        [readonly]="formGroup.controls[control.key].disabled || disabled"
+        [attr.required]="(_required | async) || null"
+        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled || null"
+        [readonly]="formGroup.controls[control.key].disabled || disabled || null"
       >
       </textarea>
     </ng-container>

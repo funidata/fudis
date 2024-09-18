@@ -213,7 +213,6 @@ export class LocalizedTextGroupComponent
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
-      console.log('wrum!');
     }
 
     if (
