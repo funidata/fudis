@@ -5,7 +5,7 @@ import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
-import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { getElement } from '../../utilities/tests/utilities';
 import { fudisDialogSizeArray } from '../../types/miscellaneous';
 
 describe('DialogComponent', () => {
