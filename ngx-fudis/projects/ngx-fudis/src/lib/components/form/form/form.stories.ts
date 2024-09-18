@@ -274,7 +274,7 @@ class ExampleWithMultipleFormsComponent {
   selector: 'example-form-content',
   template: `
     <fudis-form
-      [marginTop]="'xl'"
+      class="fudis-mt-xl"
       [badge]="badge"
       [badgeText]="badgeText"
       [level]="level"
