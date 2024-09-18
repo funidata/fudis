@@ -20,7 +20,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import {
   getMinLengthFromValidator,
-  hasAtLeastOneRequiredOrMinValidator,
+  hasOneRequiredOrMinValidator,
   getMaxLengthFromValidator,
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
@@ -164,11 +164,11 @@ export class LocalizedTextGroupComponent
    * On init and when Select option changes, check if now visible input should be marked as required.
    */
   private _isInputRequired(control: FormControl<string | null>): boolean {
-    const groupRequiredError = this.formGroup?.errors?.['atLeastOneRequired'];
+    const groupRequiredError = this.formGroup?.errors?.['oneRequired'];
 
     const controlRequiredValidator = hasRequiredValidator(control);
 
-    const groupRequiredValidator = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+    const groupRequiredValidator = hasOneRequiredOrMinValidator(this.formGroup);
 
     const nonEmptyControls = Object.keys(this.formGroup.controls).filter((control) => {
       return this.formGroup.controls[control].value;

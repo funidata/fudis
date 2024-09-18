@@ -129,7 +129,7 @@ const ExampleTemplate: StoryFn = (args) => ({
           FudisValidators.maxLength(25, 'Too long English name'),
         ]),
       },
-      [FudisGroupValidators.atLeastOneRequired('Give name in at least in one language')],
+      [FudisGroupValidators.oneRequired('Give name in at least in one language')],
     ),
   },
   template: html`

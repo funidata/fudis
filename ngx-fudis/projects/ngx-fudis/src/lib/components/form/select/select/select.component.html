@@ -47,7 +47,7 @@
         #autocompleteRef
         [id]="id"
         [placeholder]="placeholder"
-        [disabled]="control.disabled || disabled || null"
+        [disabled]="control.disabled || disabled"
         [dropdownOpen]="_dropdownOpen | async"
         [required]="_required | async"
         [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
@@ -76,7 +76,7 @@
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
           (handleClearButtonDestroy)="_setClearButtonFocusFalse()"
           [clearButton]="selectionClearButton"
-          [disabled]="control.disabled || disabled || null"
+          [disabled]="control.disabled || disabled"
         />
       </div>
     </div>

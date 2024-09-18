@@ -329,7 +329,7 @@ class ExampleWithMultipleFormsComponent {
           swedish: new FormControl<string | null>(null),
           english: new FormControl<string | null>(null),
         },
-        [FudisGroupValidators.atLeastOneRequired('Provide name in atleast one language')],
+        [FudisGroupValidators.oneRequired('Provide name in atleast one language')],
       ),
       allRequired: new FormGroup<FudisLocalizedTextGroup<object>>({
         finnish: new FormControl<string | null>('Lorem ipsum', [

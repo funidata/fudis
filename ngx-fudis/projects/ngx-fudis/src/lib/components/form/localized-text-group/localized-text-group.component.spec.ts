@@ -23,7 +23,7 @@ const values = {
 
 const controlRequired = FudisValidators.required('Required in Finnish');
 
-const groupRequired = FudisGroupValidators.atLeastOneRequired('One required!');
+const groupRequired = FudisGroupValidators.oneRequired('One required!');
 
 const minLength = FudisValidators.minLength(5, 'Min length is 5');
 

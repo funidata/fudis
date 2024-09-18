@@ -155,7 +155,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -170,7 +170,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -185,7 +185,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
@@ -285,7 +285,7 @@ class DynamicValidatorExampleComponent {
             FudisValidators.maxLength(25, 'Too long English name'),
           ]),
         },
-        this._atLeastOneRequiredValidatorInstance,
+        this._oneRequiredValidatorInstance,
       ),
     });
   }
@@ -438,12 +438,12 @@ class DynamicValidatorExampleComponent {
   }
 
   toggleOneRequired(group: FormGroup, target: string): void {
-    const required = group.hasValidator(this._atLeastOneRequiredValidatorInstance);
+    const required = group.hasValidator(this._oneRequiredValidatorInstance);
 
     if (required) {
-      group.removeValidators(this._atLeastOneRequiredValidatorInstance);
+      group.removeValidators(this._oneRequiredValidatorInstance);
     } else {
-      group.addValidators(this._atLeastOneRequiredValidatorInstance);
+      group.addValidators(this._oneRequiredValidatorInstance);
     }
     this.changeText(target);
 
