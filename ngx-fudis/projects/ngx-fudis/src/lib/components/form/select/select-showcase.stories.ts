@@ -50,7 +50,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
     groupedMockData,
   },
   template: html`
-    <fudis-form [title]="'Select showcase'" [level]="1" [width]="'md'" [marginBottom]="'xxl'">
+    <fudis-form class="fudis-mb-xxl" [title]="'Select showcase'" [level]="1" [width]="'md'">
       <ng-template fudisHeader type="form">
         <fudis-body-text
           >Following Select components share all same Form Control. When you change value in one,

@@ -20,7 +20,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
   selector: 'example-dynamic-validator',
   template: `
     <fudis-form
-      [marginTop]="'xl'"
+      class="fudis-mt-xl"
       [badge]="badge"
       [badgeText]="badgeText"
       [level]="level"
