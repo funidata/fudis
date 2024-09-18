@@ -13,7 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import {
   FudisLocalizedTextGroup,
   FudisSelectOption,
-  FudisLangSelectOptions,
+  FudisLocalizedTextGroupOptions,
   FudisInputSize,
 } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -78,7 +78,7 @@ export class LocalizedTextGroupComponent
   /**
    * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'english', label: 'EN'}" pairs with Form Group's "english: new FormControl('')"
    */
-  @Input() options: FudisLangSelectOptions[] = [
+  @Input() options: FudisLocalizedTextGroupOptions[] = [
     { controlName: 'finnish', label: 'FI' },
     { controlName: 'swedish', label: 'SV' },
     { controlName: 'english', label: 'EN' },
@@ -213,6 +213,7 @@ export class LocalizedTextGroupComponent
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
+      console.log('wrum!');
     }
 
     if (
