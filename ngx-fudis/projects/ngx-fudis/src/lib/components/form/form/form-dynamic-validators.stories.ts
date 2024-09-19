@@ -155,7 +155,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -170,7 +170,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -185,7 +185,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
@@ -212,17 +212,17 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   "
                 ></fudis-button>
               </fudis-grid>
-            </fudis-grid>
-            <fudis-grid [columns]="{ md: 'inputLg auto' }">
-              <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
-              <fudis-localized-text-group
-                [label]="'At least one required'"
-                [formGroup]="formExample.controls.dj"
-              ></fudis-localized-text-group>
-              <fudis-button
-                [label]="_oneRequired + ' option required validator'"
-                (handleClick)="toggleOneRequired(formExample.controls['dj'], 'oneRequired')"
-              ></fudis-button>
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+                <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
+                <fudis-localized-text-group
+                  [label]="'At least one required'"
+                  [formGroup]="formExample.controls.dj"
+                ></fudis-localized-text-group>
+                <fudis-button
+                  [label]="_oneRequired + ' option required validator'"
+                  (handleClick)="toggleOneRequired(formExample.controls['dj'], 'oneRequired')"
+                ></fudis-button>
+              </fudis-grid>
             </fudis-grid>
           </ng-template>
         </fudis-fieldset>
