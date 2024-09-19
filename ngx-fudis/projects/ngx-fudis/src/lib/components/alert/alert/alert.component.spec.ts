@@ -104,8 +104,9 @@ describe('AlertComponent', () => {
   });
 
   describe('Inputs', () => {
-    it('should create alert with basic inputs', () => {
-      fixture.whenStable().finally(() => {
+    it('should create alert with basic inputs', async () => {
+      await fixture.whenStable().finally(() => {
+        fixture.detectChanges();
         const element = getElement(fixture, '.fudis-alert');
 
         // Test @Input() message
