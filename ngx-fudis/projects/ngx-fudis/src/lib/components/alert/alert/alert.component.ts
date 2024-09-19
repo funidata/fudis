@@ -84,7 +84,7 @@ export class AlertComponent {
   }
 
   /**
-   * Focus handler for both link and close button inside alert. Saves the element focus originated from to restore focus there when there are no alerts left.
+   * Focus handler for close Button inside alert. Saves the element focus originated from, to restore focus there when there are no alerts left.
    */
   protected _handleFocus(focusEvent: FocusEvent): void {
     const relatedTarget = focusEvent?.relatedTarget as HTMLElement;
