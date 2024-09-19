@@ -106,8 +106,6 @@ describe('DialogDirectives', () => {
     it('should contain text', () => {
       const button = getElement(fixture, '[fudisDialogClose]');
       expect(button.textContent).toEqual('Close this dialog');
-
-      // TODO: How to test this actually extends MatDialogCLose?
     });
   });
 });

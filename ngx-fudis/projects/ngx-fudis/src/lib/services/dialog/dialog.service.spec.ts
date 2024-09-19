@@ -127,7 +127,6 @@ describe('DialogService', () => {
     expect(service.dialogsOpen()).toEqual(1);
   });
 
-  // TODO: how to test matdialogRef close?
   it('close should close dialog and pass data from dialog to component', () => {
     const closeDialogSpy = jest.spyOn(service, 'close');
     component.openTestDialog();
