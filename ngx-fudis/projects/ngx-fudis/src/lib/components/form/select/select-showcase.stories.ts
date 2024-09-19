@@ -229,7 +229,11 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
                 >Control value: null.</fudis-body-text
               ></ng-container
             >
-            <fudis-dl *ngIf="control.value" [variant]="'compact'">
+            <fudis-dl
+              *ngIf="control.value"
+              [variant]="'compact'"
+              [classes]="['fudis-mt-none fudis-mb-none']"
+            >
               <fudis-dl-item>
                 <fudis-dt [contentText]="'Value'"></fudis-dt>
                 <fudis-dd [contentText]="control.value.value"></fudis-dd>
@@ -469,11 +473,11 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
                 >Control value: null.</fudis-body-text
               ></ng-container
             >
-            <fudis-dl *ngIf="control.value">
+            <fudis-dl *ngIf="control.value" [classes]="['fudis-mt-none fudis-mb-none']">
               <fudis-dl-item *ngFor="let option of control.value; let index = index">
                 <fudis-dt [contentText]="'Selected option ' + index"></fudis-dt>
                 <fudis-dd>
-                  <fudis-dl [variant]="'compact'">
+                  <fudis-dl [variant]="'compact'" [classes]="['fudis-mt-none fudis-mb-none']">
                     <fudis-dl-item>
                       <fudis-dt [contentText]="'Value'"></fudis-dt>
                       <fudis-dd [contentText]="option.value"></fudis-dd>
