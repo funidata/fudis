@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LocalizedTextGroupComponent } from './localized-text-group.component';
-
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { SelectComponent } from '../select/select/select.component';
@@ -9,10 +8,13 @@ import { getAllElements, getElement } from '../../../utilities/tests/utilities';
 import { LabelComponent } from '../label/label.component';
 import { ChangeDetectionStrategy, SimpleChange } from '@angular/core';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-
 import { SelectIconsComponent } from '../select/common/select-icons/select-icons.component';
 import { IconComponent } from '../../icon/icon.component';
-import { FudisLocalizedTextGroup, FudisLocalizedTextGroupOptions } from '../../../types/forms';
+import {
+  fudisInputSizeArray,
+  FudisLocalizedTextGroup,
+  FudisLocalizedTextGroupOptions,
+} from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 
@@ -106,6 +108,17 @@ describe('LocalizedTextGroupComponent', () => {
           expect(textInput).toBeNull();
           expect(textArea).toBeTruthy();
         }
+      });
+
+      it(`should have correct size`, () => {
+        fudisInputSizeArray.forEach((size) => {
+          const wrapperElement = getElement(fixture, '.fudis-localized-text-group');
+
+          component.size = size;
+          fixture.detectChanges();
+
+          expect(wrapperElement.className).toContain(`fudis-input-size__${size}`);
+        });
       });
 
       it(`should have correct label`, () => {
@@ -327,6 +340,7 @@ describe('LocalizedTextGroupComponent', () => {
 
         expect(component.handleFocus.emit).toHaveBeenCalledWith(focusEvent);
       });
+
       it('should emit handleBlur', () => {
         jest.spyOn(component.handleBlur, 'emit');
 
@@ -336,6 +350,7 @@ describe('LocalizedTextGroupComponent', () => {
 
         expect(component.handleBlur.emit).toHaveBeenCalledWith(focusEvent);
       });
+
       it('should emit handleKeyUp', () => {
         jest.spyOn(component.handleKeyUp, 'emit');
 
