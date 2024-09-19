@@ -2,11 +2,9 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { BehaviorSubject } from 'rxjs';
 import { FudisSelectOption, FudisRadioButtonOption } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-// import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import readme from './readme.mdx';
 
 @Component({

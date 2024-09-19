@@ -47,7 +47,7 @@ describe('getValidators utility function', () => {
       expect(isRequired).toEqual(true);
     });
 
-    it('should return true with oneRequired validator group with InputWithLanguageOptionsFormGroup', () => {
+    it('should return true with oneRequired validator group with LocalizedTextGroup', () => {
       const testFormGroup = new FormGroup<FudisLocalizedTextGroup<object>>(
         {
           finnish: new FormControl<string | null>(null),

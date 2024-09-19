@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalizedTextGroupComponent } from './localized-text-group.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
-import { FudisLocalizedTextGroup } from '../../../types/forms';
+import { fudisInputSizeArray, FudisLocalizedTextGroup } from '../../../types/forms';
 import { LocalizedTextGroupStoryExclude } from '../../../utilities/storybook';
 import docs from './localized-text-group.mdx';
 import { action } from '@storybook/addon-actions';
@@ -31,7 +31,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: fudisInputSizeArray,
       control: { type: 'radio' },
     },
     helpText: {

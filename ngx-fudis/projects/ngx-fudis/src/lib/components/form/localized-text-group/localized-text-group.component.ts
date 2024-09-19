@@ -100,6 +100,11 @@ export class LocalizedTextGroupComponent
   protected _minLength = new BehaviorSubject<number | null>(null);
 
   /**
+   * Max length for HTML attribute and for character indicator in guidance
+   */
+  protected _maxLength = new BehaviorSubject<number | null>(null);
+
+  /**
    * Control for language option Select
    */
   protected _selectControl: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
@@ -125,11 +130,6 @@ export class LocalizedTextGroupComponent
    * Fudis translation
    */
   protected _languageLabel = new Subject<string>();
-
-  /**
-   * Max length for HTML attribute and for character indicator in guidance
-   */
-  protected _maxLength = new BehaviorSubject<number | null>(null);
 
   /**
    * When Form Control value changes, update Select Options accordingly with or without Missing text
@@ -192,15 +192,10 @@ export class LocalizedTextGroupComponent
     this._required.next(this._isInputRequired(control));
   }
 
-  /**
-   * TODO: write test check cdr logic
-   *
-   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
-   */
-
   ngOnInit(): void {
     this._setComponentId('localized-text-group');
 
+    // Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
     this._triggerErrorSummaryOnInitReload(
       this._parentForm?.errorSummaryVisible,
       this.formGroup.invalid,

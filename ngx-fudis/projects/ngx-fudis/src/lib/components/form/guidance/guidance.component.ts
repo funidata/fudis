@@ -94,7 +94,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
   @Input() maxLength: number | null = null;
 
   /**
-   * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
+   * Used to match FormControl value for the Localized Text Group component so that the component can display the length of the entered input for the connected language option.
    */
   @Input() selectedOption: string;
 

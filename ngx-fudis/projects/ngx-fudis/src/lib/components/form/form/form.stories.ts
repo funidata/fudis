@@ -30,7 +30,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
 @Component({
   selector: 'example-with-multiple-forms',
   template: `
-    <fudis-grid [align]="'center'" [columns]="{ xs: 1, sm: 2 }" [width]="'lg'" [marginTop]="'xl'">
+    <fudis-grid [align]="'center'" [columns]="{ sm: 2 }" [width]="'lg'" [marginTop]="'xl'">
       <div fudisGridItem [columns]="'stretch'">
         <fudis-heading [level]="1">Multiple Form Components</fudis-heading>
         <fudis-body-text

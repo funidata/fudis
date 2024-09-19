@@ -122,11 +122,16 @@ export class AppFormExampleComponent implements OnInit {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    withLanguages: new FormGroup({
-      finnish: new FormControl<string | null>(null),
-      swedish: new FormControl<string | null>(null),
-      english: new FormControl<string | null>(null),
-    }),
+    withLanguages: new FormGroup(
+      {
+        finnish: new FormControl<string | null>(null),
+        swedish: new FormControl<string | null>(null),
+        english: new FormControl<string | null>(null),
+      },
+      FudisGroupValidators.oneRequired(
+        this._translocoService.selectTranslateObject('form_errors.one_required'),
+      ),
+    ),
   });
 
   radioButtonOptions: FudisRadioButtonOption<object>[] = [];
