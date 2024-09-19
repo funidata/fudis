@@ -117,11 +117,11 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
     <fudis-heading [level]="2" [variant]="'md'"
       >Nested Description Lists with Indiana Jones Movies</fudis-heading
     >
-    <fudis-dl class="fudis-mt-sm" [disableGrid]="disableGrid">
+    <fudis-dl class="fudis-mt-sm" [disableGrid]="disableGrid" [classes]="['fudis-mb-none']">
       <fudis-dl-item>
         <fudis-dt [contentText]="'Raiders of the Lost Ark'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="'compact'">
+          <fudis-dl [variant]="'compact'" [classes]="['fudis-mt-none fudis-mb-none']">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'1981'"></fudis-dd>
@@ -140,7 +140,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Temple of Doom'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="'compact'">
+          <fudis-dl [variant]="'compact'" [classes]="['fudis-mt-none fudis-mb-none']">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'1984'"></fudis-dd>
@@ -159,7 +159,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Last Crusade'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="'compact'">
+          <fudis-dl [variant]="'compact'" [classes]="['fudis-mt-none fudis-mb-none']">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'1989'"></fudis-dd>
@@ -180,7 +180,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Kingdom of Crystal Skull'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="'compact'">
+          <fudis-dl [variant]="'compact'" [classes]="['fudis-mt-none fudis-mb-none']">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'2008'"></fudis-dd>
@@ -199,7 +199,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
       <fudis-dl-item>
         <fudis-dt [contentText]="'The Dial of Destiny'"></fudis-dt>
         <fudis-dd>
-          <fudis-dl [variant]="'compact'">
+          <fudis-dl [variant]="'compact'" [classes]="['fudis-mt-none fudis-mb-none']">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Release Year'"></fudis-dt>
               <fudis-dd [contentText]="'2023'"></fudis-dd>
@@ -238,7 +238,11 @@ const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
     <fudis-heading [level]="2" [variant]="'md'"
       >Description List as Grid's Child Component</fudis-heading
     >
-    <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
+    <fudis-dl
+      [disableGrid]="disableGrid"
+      [variant]="variant"
+      [classes]="['fudis-mb-none fudis-mt-none']"
+    >
       <fudis-dl-item>
         <fudis-dt [contentText]="'Teacher email'"></fudis-dt>
         <fudis-dd [contentText]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
@@ -394,7 +398,7 @@ const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
     >
     <fudis-dl
       class="fudis-mt-sm"
-      [variant]="'regular'"
+      [classes]="['fudis-mb-none']"
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
       [variant]="variant"

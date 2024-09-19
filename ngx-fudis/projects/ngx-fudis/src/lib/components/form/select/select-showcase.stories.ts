@@ -61,7 +61,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
         <fudis-button (handleClick)="onClick()" [label]="'Toggle Disabled State'"></fudis-button>
       </ng-template>
       <ng-template fudisContent type="form">
-        <fudis-grid [columns]="{lg: 2}" [marginTop]="'sm'">
+        <fudis-grid [columns]="{lg: 2}" [classes]="['fudis-mt-sm']">
           <fudis-grid-item>
             <fudis-heading [level]="2" [variant]="'md'"
               >Single-select Dropdown with Clear Button</fudis-heading
@@ -284,7 +284,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
         <fudis-button (handleClick)="onClick()" [label]="'Toggle Disabled State'"></fudis-button>
       </ng-template>
       <ng-template fudisContent type="form">
-        <fudis-grid [columns]="{lg: 2}" [marginTop]="'sm'">
+        <fudis-grid [columns]="{lg: 2}" [classes]="['fudis-mt-sm']">
           <fudis-grid-item>
             <fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Dropdown with Clear Button</fudis-heading

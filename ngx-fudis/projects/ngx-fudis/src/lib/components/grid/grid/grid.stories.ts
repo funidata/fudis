@@ -13,8 +13,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
       [columns]="1"
       [rowGap]="'sm'"
       [align]="'center'"
-      [marginTop]="'md'"
-      [marginBottom]="'md'"
+      [classes]="['fudis-mt-md fudis-mb-md']"
     >
       <fudis-grid [columns]="2" [alignItemsX]="'center'" [rowGap]="'sm'" [alignItemsY]="'center'">
         <fudis-button
@@ -172,8 +171,6 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
       [align]="align"
       [alignItemsX]="alignItemsX"
       [alignItemsY]="alignItemsY"
-      [marginTop]="marginTop"
-      [marginBottom]="marginBottom"
       [width]="width"
       [columnGap]="columnGap"
       [rowGap]="rowGap"
@@ -198,8 +195,6 @@ Example.args = {
   align: 'center',
   alignItemsX: 'stretch',
   alignItemsY: 'stretch',
-  marginTop: 'none',
-  marginBottom: 'none',
   width: 'xxl',
   rowGap: 'responsive',
   columnGap: 'responsive',
@@ -233,14 +228,6 @@ Example.argTypes = {
   },
   width: {
     options: ['xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'initial'],
-    control: { type: 'select' },
-  },
-  marginTop: {
-    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
-    control: { type: 'select' },
-  },
-  marginBottom: {
-    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
     control: { type: 'select' },
   },
   rowGap: {

@@ -10,8 +10,6 @@ export const getGridClasses = (values: FudisGridProperties): string => {
     'fudis-grid',
     `fudis-grid__${values.width}`,
     `fudis-grid__align__${values.align}`,
-    `fudis-grid__margin__top__${values.marginTop}`,
-    `fudis-grid__margin__bottom__${values.marginBottom}`,
     values.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${values.rowGap}`,
     values.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${values.columnGap}`,
   ];
@@ -91,8 +89,6 @@ export const getValuesForCSSClasses = (
       align: appValues.align ?? defaultValues.align,
       alignItemsX: appValues.alignItemsX ?? defaultValues.alignItemsX,
       alignItemsY: appValues.alignItemsY ?? defaultValues.alignItemsY,
-      marginTop: appValues.marginTop ?? defaultValues.marginTop,
-      marginBottom: appValues.marginBottom ?? defaultValues.marginBottom,
       rowGap: appValues.rowGap ?? defaultValues.rowGap,
       columnGap: appValues.columnGap ?? defaultValues.columnGap,
       classes: appValues.classes ?? defaultValues.classes,
@@ -106,9 +102,6 @@ export const getValuesForCSSClasses = (
       align: appValues.align ?? serviceValues.align ?? defaultValues.align,
       alignItemsX: appValues.alignItemsX ?? serviceValues.alignItemsX ?? defaultValues.alignItemsX,
       alignItemsY: appValues.alignItemsY ?? serviceValues.alignItemsY ?? defaultValues.alignItemsY,
-      marginTop: appValues.marginTop ?? serviceValues.marginTop ?? defaultValues.marginTop,
-      marginBottom:
-        appValues.marginBottom ?? serviceValues.marginBottom ?? defaultValues.marginBottom,
       rowGap: appValues.rowGap ?? serviceValues.rowGap ?? defaultValues.rowGap,
       columnGap: appValues.columnGap ?? serviceValues.columnGap ?? defaultValues.columnGap,
       classes: appValues.classes ?? serviceValues.classes ?? defaultValues.classes,

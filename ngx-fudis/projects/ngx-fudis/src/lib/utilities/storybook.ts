@@ -16,7 +16,7 @@ export const excludeRegex = (array?: string[]): RegExp => {
 };
 
 /**
- * Regex for excluding everything except given strings. E. g. to exclude everything but marginTop and variant properties: excludeEverythingExceptRegex(['marginTop', 'variant'])
+ * Regex for excluding everything except given strings. E. g. to exclude everything but variant property: excludeEverythingExceptRegex(['variant'])
  */
 export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
   const joined: string | null = array ? array.join('|') : null;

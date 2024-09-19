@@ -6,7 +6,6 @@ import {
   FudisGridAlignItems,
   FudisGridColumns,
 } from '../../../types/grid';
-import { FudisSpacing } from '../../../types/spacing';
 
 @Directive({
   selector: '[fudisGridApi]',
@@ -46,16 +45,6 @@ export class GridApiDirective {
    * To make Grid ignore default values defined by application and FudisGridService
    */
   @Input() serviceDefaults: boolean = true;
-
-  /**
-   * Margin bottom for the Grid.
-   */
-  @Input() marginBottom: FudisSpacing = 'none';
-
-  /**
-   * Margin top for the Grid.
-   */
-  @Input() marginTop: FudisSpacing = 'none';
 
   /**
    * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
