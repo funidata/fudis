@@ -1,0 +1,96 @@
+import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
+import { AlertGroupComponent } from "./alert-group/alert-group.component.ts";
+
+<Meta title="Components/Alert Group" />
+
+# Alert Group
+
+**Please note, that Alert Group is not compatible with Sisu alert logic.**
+
+Alert Group Component displays list of toaster-like Alert Components with four variants: `success`, `info`, `warning` and `danger.` These variants are the same ones as with [Notification Component](/docs/components-notification--documentation).
+
+## Adding and Dismissing Alerts
+
+Alert Group listens to `FudisAlertService` where application or UI sends information about adding or dismissing alerts.
+
+### Add New Alert
+
+To add new alert, send an object of type `FudisAlert` to `FudisAlertService` using `addAlert()`.
+
+Note that `id` doesn't need to be unique for AlertService.
+
+<Source code={`
+constructor(
+	private _alertService: FudisAlertService
+	) {
+		const newAlert: FudisAlert = {
+			message: 'Well done, a new alert is displayed!',
+			type: 'success',
+			id: 'well-done-identifier',
+		};
+
+    	_alertService.addAlert(newAlert);
+    }
+
+`} />
+
+### Dismiss Alert
+
+#### Dismiss By Id
+
+Previously sent alert can be dismissed with `dismissAlert()`. If multiple alerts with the same `id` is sent, all of them will be dismissed.
+
+<Source
+  code={`
+_alertService.dismissAlert('well-done-identifier');
+`}
+/>
+
+#### Dismiss All
+
+All alerts can be dismissed by calling `dismissAll()`.
+
+<Source
+  code={`
+_alertService.dismissAll();
+`}
+/>
+
+#### Dismiss From UI
+
+When user clicks alert's close button, it will dismiss that single alert from the service. But it will not affect the other alerts with the same `id`.
+
+## Positioning
+
+Usually Alert Group is positioned to the top of the screen, right after navigation.
+
+CSS position of Alert Group can be set using `position` attribute with three currently provided options. By default it is `fixed` but can be set to `static` or `absolute` as well.
+
+## With Fudis Dialog
+
+Fudis automatically embeddes Alert Group inside [Dialog Component](/docs/components-dialog--documentation), so that new and existing alerts are visible and available for keyboard users when dialog is open.
+Alerts are reloaded to the DOM each time dialog is opened and closed.
+
+## Accessibility and Keyboard Behavior
+
+### Alert Variants
+
+`danger` and `warning` variants are communicated to screen readers, as they have html attribute of `role='alert'`. Other variants have `role='status'`. Focus does not change even if new alert appears.
+
+### Closing Alert
+
+When user closes an alert, focus will move automatically to the last alert in the list. If there are no alerts left, Alert Group tries to return focus to that UI element where focus was before focusing on the alert.
+
+### With Fudis Dialog Open
+
+[Dialog Component](/docs/components-dialog--documentation) has a focus trap, and navigating outside of the dialog is not possible until the dialog is closed. If there are visible alerts, those are included as focusable elements inside the dialog's focus trap. If user closes all the alerts when dialog is open, focus returns to dialog's close button.
+
+### Other Mentionable Accessibility Details
+
+- Focusable elements inside alert have visible focus state
+- Danger and warning alerts are communicated to user using `role='alert'` attribute
+- Alert Group is wrapped inside a `section` element which has an automatic `aria-label` describing its content. E.g. _'Notifications - Number of notifications: 5'_
+
+## Properties
+
+<ArgTypes of={AlertGroupComponent} />

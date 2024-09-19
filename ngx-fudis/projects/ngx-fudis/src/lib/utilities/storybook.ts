@@ -31,6 +31,11 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 export const excludeAllRegex: RegExp = /.*/;
 
 /**
+ * Alert
+ */
+export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisibleStatus']);
+
+/**
  * Common Form Component excludes
  */
 const formCommonControlsExclude: string[] = [

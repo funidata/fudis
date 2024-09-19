@@ -1,79 +1,80 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FudisIdService } from '../id/id.service';
 import { FudisAlert, FudisAlertElement } from '../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
-// TODO: discuss how much this needs to be improved to be usable for client application
 @Injectable({
   providedIn: 'root',
 })
 export class FudisAlertService {
   constructor(private _idService: FudisIdService) {}
 
-  private _alerts = signal<FudisAlertElement[]>([]);
+  /**
+   * Current alerts
+   */
+  private _alerts = new BehaviorSubject<FudisAlertElement[]>([]);
 
   /**
-   * To add new alert, which will be rendered then by Alert Group component. Note 'id' doesn't necessarily need to be unique. It could also e. g. 'error-in-form-add-new-user', so all these error could be dismissed with dismissAlert() using this 'id'.
+   * To add new alert, which will be rendered by Alert Group component.
+   * Note that 'id' doesn't necessarily need to be unique. All errors with the same 'id' can be dismissed with dismissAlert() using that particular 'id'.
    */
   public addAlert(newAlert: FudisAlert): void {
-    const alertToAdd = newAlert;
-
     const htmlId = this._idService.getNewId('alert');
+    const currentAlerts = this._alerts.getValue();
 
-    const currentAlerts: FudisAlertElement[] = this._alerts();
-
-    currentAlerts.push({ ...alertToAdd, htmlId, buttonId: `${htmlId}-button`, initialFocus: true });
-
-    this._alerts.set(currentAlerts);
+    this._alerts.next([
+      ...currentAlerts,
+      { ...newAlert, htmlId, buttonId: `${htmlId}-button`, initialFocus: true },
+    ]);
   }
 
   /**
    * To dismiss alert by 'id' provided in 'addAlert()'. It will dismiss all alerts matching the 'id'.
    */
   public dismissAlert(id: string): void {
-    const currentAlerts: FudisAlertElement[] = this._alerts();
-
-    const filteredAlerts = currentAlerts.filter((alert) => alert.id !== id);
-
-    this._alerts.set(filteredAlerts);
+    const filteredAlerts = this._alerts.getValue().filter((alert) => alert.id !== id);
+    this._alerts.next(filteredAlerts);
   }
 
   /**
    * Dismisses only one alert from alert's close button click in the UI
    */
   public dismissAlertFromButton(id: string): void {
-    const currentAlerts: FudisAlertElement[] = this._alerts();
-
-    const filteredAlerts = currentAlerts.filter((alert) => alert.buttonId !== id);
-
-    this._alerts.set(filteredAlerts);
+    const filteredAlerts = this._alerts.getValue().filter((alert) => alert.buttonId !== id);
+    this._alerts.next(filteredAlerts);
   }
 
   /**
    * Dismiss all alerts
    */
   public dismissAll(): void {
-    this._alerts.set([]);
+    this._alerts.next([]);
   }
 
   /**
-   * Get Signal containing alerts array
+   * Get alerts as an Observable
    */
-  public getAlertsSignal(): Signal<FudisAlertElement[]> {
-    return this._alerts.asReadonly();
+  get alerts(): BehaviorSubject<FudisAlertElement[]> {
+    return this._alerts;
   }
 
   /**
    * Set 'initialFocus' attribute of alert to false, so that if same alert with link is rendered again, the initial focus will not jump there anymore.
    */
   public updateAlertLinkFocusState(htmlId: string): void {
-    const currentAlerts: FudisAlertElement[] = this._alerts();
+    let alertIndex: number;
+    const tempAlerts = this._alerts.getValue();
 
-    const index = currentAlerts.findIndex((alert) => alert.htmlId === htmlId);
+    tempAlerts.forEach((value, index) => {
+      if (value.htmlId === htmlId) {
+        alertIndex = index;
+      }
 
-    if (index !== -1) {
-      currentAlerts[index] = { ...currentAlerts[index], initialFocus: false };
+      if (alertIndex !== -1) {
+        tempAlerts[index].initialFocus = false;
 
-      this._alerts.set(currentAlerts);
-    }
+        this._alerts.next(tempAlerts);
+      }
+    });
   }
 }

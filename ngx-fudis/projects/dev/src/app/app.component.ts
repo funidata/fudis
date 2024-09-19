@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import {
-  // FudisAlertService,
+  FudisAlertService,
   FudisDialogService,
   FudisGridService,
   FudisTranslationService,
@@ -10,7 +10,7 @@ import {
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption, FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
-// import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
+import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     private _translocoService: TranslocoService,
     private _gridService: FudisGridService,
     private _fudisLanguage: FudisTranslationService,
-    // private _alertService: FudisAlertService,
+    private _alertService: FudisAlertService,
     private _errorSummaryService: FudisErrorSummaryService,
     private _breakpointService: FudisBreakpointService,
   ) {
@@ -93,16 +93,14 @@ export class AppComponent implements OnInit {
     this.getApplicationFontSize();
   }
 
-  // triggerAlert(): void {
-  //   const newAlert: FudisAlert = {
-  //     message: 'Something dangerous MIGHT happen.',
-  //     type: 'warning',
-  //     id: 'my-own-id-3',
-  //     routerLinkUrl: '/',
-  //     linkTitle: 'More info about this warning.',
-  //   };
-  //   this._alertService.addAlert(newAlert);
-  // }
+  triggerAlert(): void {
+    const newAlert: FudisAlert = {
+      message: this._translocoService.selectTranslate('alertText'),
+      type: 'warning',
+      id: 'my-own-id-3',
+    };
+    this._alertService.addAlert(newAlert);
+  }
 
   getApplicationFontSize(): void {
     this.fontSize = getComputedStyle(

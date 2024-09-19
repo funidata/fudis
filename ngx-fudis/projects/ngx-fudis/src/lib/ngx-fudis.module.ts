@@ -234,9 +234,9 @@ import { FudisTranslationService } from './services/translation/translation.serv
    */
   exports: [
     ActionsDirective,
+    AlertComponent,
+    AlertGroupComponent,
     AutocompleteComponent,
-    // AlertComponent,
-    // AlertGroupComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
