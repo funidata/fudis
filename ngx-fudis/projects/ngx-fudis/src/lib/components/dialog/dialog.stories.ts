@@ -72,7 +72,7 @@ class DialogLaucherComponent {
     <fudis-dialog [size]="_size">
       <fudis-dialog-content>
         <fudis-form
-          [title]="'Dialog with fudis-form'"
+          [title]="'Dialog with Form'"
           [level]="1"
           [titleVariant]="'xl'"
           [errorSummaryHelpText]="'You need to fill up the information.'"
