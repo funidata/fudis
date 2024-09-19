@@ -337,7 +337,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg', 'xl', 'initial'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
       control: { type: 'select' },
     },
   },

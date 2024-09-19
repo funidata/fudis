@@ -17,6 +17,10 @@
 @use "../../foundations/utilities/mixins.scss" as utilities;
 @use "../../foundations/spacing/tokens.scss" as spacing;
 
+.cdk-overlay-pane.fudis-dialog-panel.mat-mdc-dialog-panel {
+  max-width: 100vw;
+}
+
 .cdk-overlay-container {
   & .cdk-global-overlay-wrapper {
     overflow: auto;
@@ -24,11 +28,13 @@
 }
 
 .fudis-dialog-panel {
-  border-top: 1px solid colors.$color-gray-dark;
-  border-right: none;
-  border-bottom: 1px solid colors.$color-gray-dark;
-  border-left: none;
-  max-width: 100vw !important;
+  display: block;
+  border: 1px solid colors.$color-gray-dark;
+  margin: 0 spacing.$spacing-sm;
+
+  @include breakpoints.breakpoint("lg") {
+    margin: 0 spacing.$spacing-lg;
+  }
 
   & mat-dialog-container.mat-mdc-dialog-container {
     padding: 0;
@@ -97,31 +103,6 @@
           }
         }
       }
-    }
-  }
-
-  /* Keep dialog borders visible and as wide as possible until sm breakpoint */
-  @include breakpoints.breakpoint-max("sm") {
-    @include borders.border("1px", "solid", "gray-dark");
-
-    max-width: 98vw !important;
-  }
-
-  @include breakpoints.breakpoint("sm") {
-    @include borders.border("1px", "solid", "gray-dark");
-
-    max-width: 90vw !important;
-
-    &:has(.fudis-dialog__size__xl) {
-      max-width: 98vw !important;
-    }
-  }
-
-  @include breakpoints.breakpoint("md") {
-    max-width: 80vw !important;
-
-    &:has(.fudis-dialog__size__xl) {
-      max-width: 98vw !important;
     }
   }
 }

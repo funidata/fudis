@@ -47,7 +47,7 @@ export type FudisDescriptionListItemDetailLanguageContent = {
 /**
  * Dialog
  */
-export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
+export type FudisDialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Dropdown Menu
