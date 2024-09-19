@@ -125,8 +125,6 @@ const descriptionListCommonExclude: string[] = [
   'columns',
   'id',
   'serviceDefaults',
-  'marginBottom',
-  'marginTop',
   'rowGap',
   'tag',
   'width',
@@ -211,8 +209,6 @@ export const formExclude: RegExp = excludeRegex([
   'classes',
   'columnGap',
   'columns',
-  'marginBottom',
-  'marginTop',
   'rowGap',
   'width',
 ]);

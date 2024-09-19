@@ -118,7 +118,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * At least one language input is required
    */
-  private _atLeastOneRequired: boolean = false;
+  private _oneRequired: boolean = false;
 
   /**
    * Property to check that control is not empty
@@ -171,17 +171,17 @@ export class InputWithLanguageOptionsComponent
   initialRequiredCheck(): void {
     this._requiredControls = {};
 
-    // TODO: change this._atLeastOneRequired to be fetched with getValidators
+    // TODO: change this._oneRequired to be fetched with getValidators
 
-    if (this.formGroup.errors?.['atLeastOneRequired']) {
-      this._atLeastOneRequired = true;
+    if (this.formGroup.errors?.['oneRequired']) {
+      this._oneRequired = true;
 
       Object.keys(this.formGroup.controls).forEach((control) => {
         this._requiredControls = {
           ...this._requiredControls,
           [control]: {
             value: this.formGroup.controls[control].value,
-            required: this._atLeastOneRequired,
+            required: this._oneRequired,
           },
         };
       });
@@ -207,9 +207,9 @@ export class InputWithLanguageOptionsComponent
    */
   isControlRequired(value: string, controlKey: string): void {
     // If all controls are invalid run initialRequiredCheck()
-    if (this.formGroup.errors?.['atLeastOneRequired']) {
+    if (this.formGroup.errors?.['oneRequired']) {
       this.initialRequiredCheck();
-    } else if (this._atLeastOneRequired && controlKey) {
+    } else if (this._oneRequired && controlKey) {
       // Check how many controls are empty
       this._requiredControls[controlKey].value = value;
 
@@ -237,7 +237,7 @@ export class InputWithLanguageOptionsComponent
       }
 
       // If two or more controls have a value, remove visible required text unless control has FudisValidators.required() or Validators.required
-      if (this._atLeastOneRequired && this._nonEmptyControls.length > 1) {
+      if (this._oneRequired && this._nonEmptyControls.length > 1) {
         this._requiredControls = {};
         Object.keys(this.formGroup.controls).forEach((control) => {
           const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
