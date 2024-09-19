@@ -226,9 +226,9 @@ import {
    */
   exports: [
     ActionsDirective,
+    AlertComponent,
+    AlertGroupComponent,
     AutocompleteComponent,
-    // AlertComponent,
-    // AlertGroupComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
