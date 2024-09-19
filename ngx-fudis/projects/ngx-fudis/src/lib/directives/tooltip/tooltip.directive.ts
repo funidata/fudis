@@ -44,7 +44,7 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
   /**
    * When tooltip HTMLElement receives focus
    */
-  @HostListener('focus') private onFocus() {
+  @HostListener('focus') private _onFocus() {
     if (!this.tooltipToggle) {
       this._ngMaterialTooltip.show();
     }

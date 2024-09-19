@@ -14,7 +14,6 @@ import {
   FudisCheckboxGroupFormGroup,
   FudisInputSize,
 } from '../../../types/forms';
-
 import { hasOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -29,7 +28,6 @@ import { GroupComponentBaseDirective } from '../../../directives/form/group-comp
 export class CheckboxGroupComponent extends GroupComponentBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
     _cdr: ChangeDetectorRef,
   ) {

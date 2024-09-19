@@ -398,44 +398,6 @@ class ExampleWithMultipleFormsComponent {
             >
               <ng-template fudisContent [type]="'expandable'">
                 <fudis-grid>
-                  <!-- <fudis-fieldset
-                [label]="'Basic info'"
-                [helpText]="'Some generic info about this course'"
-                [id]="fieldsetId"
-              >
-                <ng-template fudisNotifications [type]="'fieldset'">
-                  <fudis-notification> This is notification for a fieldset. </fudis-notification>
-                </ng-template>
-                <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
-                  <!-- <fudis-localized-text-group
-                          [id]="'unique-input-1'"
-                          [options]="languageOptions"
-                          [formGroup]="formExample.controls['name']"
-                          [label]="'Course name'"
-                          [helpText]="
-                            'Some name would be nice. Provide course name in at least one language.'
-                          "
-                        >
-                          <fudis-error-message
-                            *ngIf="
-                              formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                            "
-                            [message]="
-                              'Reminder here as well, that you have not set a good start date'
-                            "
-                          />
-                        </fudis-localized-text-group> -->
-                  <!-- <fudis-localized-text-group
-                          [variant]="'text-area'"
-                          [id]="'unique-input-2'"
-                          [options]="languageOptions"
-                          [formGroup]="formExample.controls['description']"
-                          [label]="'Course description'"
-                          [helpText]="
-                            'So that students know what they are getting into. Provide description in all languages.'
-                          "
-                        /> -->
                   <fudis-radio-button-group
                     [label]="'Course type'"
                     [control]="formExample.controls['courseType']"
@@ -465,9 +427,6 @@ class ExampleWithMultipleFormsComponent {
                       [message]="'Wrong date chosen. 1.5.1991 would be great!'"
                     />
                   </fudis-datepicker>
-                  <!-- </fudis-grid>
-                </ng-template>
-              </fudis-fieldset> -->
                   <fudis-fieldset
                     [label]="'Tearcher info'"
                     [tooltip]="'Quite many fields are required.'"
@@ -530,29 +489,6 @@ class FormContentExampleComponent implements OnInit {
     private _focusService: FudisFocusService,
   ) {
     this.formExample = new FormGroup({
-      // Expose when LocalizedTextGroup is exposed to public API
-      // name: new FormGroup(
-      //   {
-      //     finnish: new FormControl(null),
-      //     swedish: new FormControl(null),
-      //     english: new FormControl(null),
-      //   },
-      //   [FudisGroupValidators.oneRequired(new BehaviorSubject('Course name is missing.'))],
-      // ),
-      // description: new FormGroup({
-      //   finnish: new FormControl(null, [
-      //     FudisValidators.required('Missing description in Finnish.'),
-      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      //   ]),
-      //   swedish: new FormControl(null, [
-      //     FudisValidators.required('Missing description in Swedish.'),
-      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      //   ]),
-      //   english: new FormControl(null, [
-      //     FudisValidators.required('Missing description in English.'),
-      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      //   ]),
-      // }),
       courseBooks: new FormGroup(
         {
           first: new FormControl(null),

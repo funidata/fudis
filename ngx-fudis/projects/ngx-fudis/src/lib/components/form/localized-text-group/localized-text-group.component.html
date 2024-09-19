@@ -80,7 +80,9 @@
       [formId]="_parentForm?.id || null"
       [for]="id"
       [selectedOption]="_selectControl.value.value"
-    />
+    >
+      <ng-content select="fudis-error-message"
+    /></fudis-guidance>
   </div>
   <fudis-select
     *ngIf="_languageLabel | async as label"

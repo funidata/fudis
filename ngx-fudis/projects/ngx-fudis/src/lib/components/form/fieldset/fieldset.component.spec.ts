@@ -56,8 +56,8 @@ describe('FieldSetComponent', () => {
   let fixtureMock: ComponentFixture<MockFieldSetComponent>;
   let fieldsetElement: HTMLFieldSetElement;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [
         ActionsDirective,
         BodyTextComponent,
@@ -95,7 +95,7 @@ describe('FieldSetComponent', () => {
   }
 
   describe('Wrapper fieldset element HTML attributes', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       fieldsetElement = getElement(fixtureMock, 'fieldset') as HTMLFieldSetElement;
     });
 

@@ -3,6 +3,8 @@ import { FormCommonApiDirective } from './form-common-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { ChangeDetectorRef } from '@angular/core';
 
+// TODO: check tests so all components inheriting this directive are getting and applying these properties correctly, emit correctly and other common logic works consistently
+
 const defaultValues: Partial<FormCommonApiDirective> = {
   ariaLabel: undefined,
   disabled: false,

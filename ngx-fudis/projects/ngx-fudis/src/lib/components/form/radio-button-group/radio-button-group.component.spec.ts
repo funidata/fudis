@@ -17,7 +17,6 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
