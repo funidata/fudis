@@ -3,7 +3,7 @@
 @use "../../foundations/spacing/tokens.scss" as spacing;
 @use "../../foundations/utilities/mixins.scss" as utilities;
 
-.fudis-divider {
+.fudis-hr {
   @include utilities.box-reset;
 
   border: 0;

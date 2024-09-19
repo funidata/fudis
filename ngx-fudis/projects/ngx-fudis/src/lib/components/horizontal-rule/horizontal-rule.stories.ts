@@ -1,10 +1,10 @@
 import { StoryFn, Meta } from '@storybook/angular';
-import { DividerComponent } from './divider.component';
-import docs from './divider.docs.mdx';
+import { HorizontalRuleComponent } from './horizontal-rule.component';
+import docs from './horizontal-rule.docs.mdx';
 
 export default {
-  title: 'Components/Divider',
-  component: DividerComponent,
+  title: 'Components/Horizontal Rule',
+  component: HorizontalRuleComponent,
   parameters: {
     docs: {
       page: docs,
@@ -14,13 +14,13 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn<DividerComponent> = (args: DividerComponent) => ({
+export const Example: StoryFn<HorizontalRuleComponent> = (args: HorizontalRuleComponent) => ({
   ...args,
   template: html` <fudis-body-text class="fudis-mb-md">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
       vehicula ut massa non facilisis.
     </fudis-body-text>
-    <fudis-divider />
+    <fudis-hr />
     <fudis-body-text class="fudis-mt-md">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
       vehicula ut massa non facilisis.
