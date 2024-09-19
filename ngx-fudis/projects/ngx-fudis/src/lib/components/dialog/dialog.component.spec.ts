@@ -83,13 +83,13 @@ describe('DialogComponent', () => {
   });
 
   it('should call open signal on initialisation', () => {
-    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
+    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenStatus');
     initDialogComponent();
     expect(dialogSpy).toHaveBeenCalledWith(true);
   });
 
   it('should call open signal on destroy', () => {
-    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
+    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenStatus');
     initDialogComponent();
     component.ngOnDestroy();
 

@@ -1,4 +1,5 @@
 {
+  "alertText": "Something dangerous MIGHT happen",
   "label": "This is text input",
   "change_language": "Change language",
   "helpText": "This is English.",
