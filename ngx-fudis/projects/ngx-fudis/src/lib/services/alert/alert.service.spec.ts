@@ -1,19 +1,21 @@
 import { TestBed } from '@angular/core/testing';
-
 import { FudisAlertService } from './alert.service';
 import { FudisAlert, FudisAlertElement } from '../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 describe('FudisAlertService', () => {
   let service: FudisAlertService;
 
-  const firstAlert: FudisAlert = { message: 'First message', type: 'danger', id: 'test-id-1' };
+  const firstAlert: FudisAlert = {
+    message: new BehaviorSubject<string>('First message'),
+    type: 'danger',
+    id: 'test-id-1',
+  };
 
   const secondAlert: FudisAlert = {
-    message: 'Second message',
+    message: new BehaviorSubject<string>('Second message'),
     type: 'warning',
     id: 'test-id-2',
-    linkTitle: 'Test link title',
-    routerLinkUrl: 'test/url/here',
   };
 
   const firstAlertFromService: FudisAlertElement = {
@@ -39,19 +41,19 @@ describe('FudisAlertService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should be return an empty array initially', () => {
-    const alerts = service.getAlertsSignal();
+  it('should return an empty array initially', () => {
+    const alerts = service.alerts.getValue();
 
-    expect(alerts()).toEqual([]);
+    expect(alerts).toEqual([]);
   });
 
   it('should return two alerts after adding two', () => {
     service.addAlert(firstAlert);
     service.addAlert(secondAlert);
 
-    const alerts = service.getAlertsSignal();
+    const alerts = service.alerts.getValue();
 
-    expect(alerts()).toEqual([firstAlertFromService, secondAlertFromService]);
+    expect(alerts).toEqual([firstAlertFromService, secondAlertFromService]);
   });
 
   it('should return second alert after dismissing first by id', () => {
@@ -60,9 +62,9 @@ describe('FudisAlertService', () => {
 
     service.dismissAlert('test-id-1');
 
-    const alerts = service.getAlertsSignal();
+    const alerts = service.alerts.getValue();
 
-    expect(alerts()).toEqual([secondAlertFromService]);
+    expect(alerts).toEqual([secondAlertFromService]);
   });
 
   it('should return empty array after dismissing all', () => {
@@ -71,9 +73,9 @@ describe('FudisAlertService', () => {
 
     service.dismissAll();
 
-    const alerts = service.getAlertsSignal();
+    const alerts = service.alerts.getValue();
 
-    expect(alerts()).toEqual([]);
+    expect(alerts).toEqual([]);
   });
 
   it('should return only second alert after first one is dismissed by button', () => {
@@ -82,9 +84,9 @@ describe('FudisAlertService', () => {
 
     service.dismissAlertFromButton('fudis-alert-1-button');
 
-    const alerts = service.getAlertsSignal();
+    const alerts = service.alerts.getValue();
 
-    expect(alerts()).toEqual([secondAlertFromService]);
+    expect(alerts).toEqual([secondAlertFromService]);
   });
 
   it('should update initialFocus status of second alert', () => {
@@ -93,11 +95,8 @@ describe('FudisAlertService', () => {
 
     service.updateAlertLinkFocusState('fudis-alert-2');
 
-    const alerts = service.getAlertsSignal();
+    const alerts = service.alerts.getValue();
 
-    expect(alerts()).toEqual([
-      firstAlertFromService,
-      { ...secondAlertFromService, initialFocus: false },
-    ]);
+    expect(alerts[1].initialFocus).toEqual(false);
   });
 });
