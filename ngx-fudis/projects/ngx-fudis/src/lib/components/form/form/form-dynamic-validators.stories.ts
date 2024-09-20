@@ -212,8 +212,8 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   "
                 ></fudis-button>
               </fudis-grid>
+              <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
-                <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
                 <fudis-localized-text-group
                   [label]="'At least one required'"
                   [formGroup]="formExample.controls.dj"
