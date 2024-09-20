@@ -19,6 +19,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { BreadcrumbsItemComponent } from './components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
+import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
 import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
@@ -166,6 +167,7 @@ import {
     GuidanceComponent,
     HeaderDirective,
     HeadingComponent,
+    HorizontalRuleComponent,
     IconComponent,
     InputBaseDirective,
     InputWithLanguageOptionsComponent,
@@ -224,9 +226,9 @@ import {
    */
   exports: [
     ActionsDirective,
+    AlertComponent,
+    AlertGroupComponent,
     AutocompleteComponent,
-    // AlertComponent,
-    // AlertGroupComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
@@ -265,6 +267,7 @@ import {
     GridItemDirective,
     HeaderDirective,
     HeadingComponent,
+    HorizontalRuleComponent,
     IconComponent,
     // InputWithLanguageOptionsComponent,
     LanguageBadgeGroupComponent,

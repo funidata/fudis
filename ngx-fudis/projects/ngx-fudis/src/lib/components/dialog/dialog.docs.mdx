@@ -22,6 +22,10 @@ As a feature, dialog has close icon button on the right corner of the dialog whi
 
 Sending and receiving data between opened Dialog and Component which opened it, is achieved using Dialog Service.
 
+It is not recommended to have multiple dialogs open simultaneously, but sometimes it is the least worse solution.
+Dialog can transfer data between nested dialogs. With multiple open dialogs, `dialogService.close()` closes the top dialog.
+`dialogService.closeAll()` closes all the open dialogs, but won't pass any data from any dialog to the launcher component.
+
 ### Passing Data Between Components
 
 #### From Component to Dialog
@@ -135,6 +139,7 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 <Canvas of={DialogStories.ExampleWithForm}></Canvas>
 <Canvas of={DialogStories.ExampleWithGrid}></Canvas>
+<Canvas of={DialogStories.ExampleWithNestedDialogs}></Canvas>
 
 ### Full code example
 
@@ -182,7 +187,7 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 			<fudis-dialog>
 				<fudis-dialog-content>
 					<fudis-form>
-						[title]="'Dialog with fudis-form'"
+						[title]="'Dialog with Form'"
 						[level]="1"
             [titleVariant]="'xl'"
 						[errorSummaryHelpText]="'You need to fill up the information.'">
@@ -226,6 +231,7 @@ class FormDialogComponent {
 
 - Focus is trapped inside the dialog
 - Initial focus is set to heading defined with `fudisDialogTitle` directive, when using keyboard
+- Focus returns to Dialog launcher when it is closed
 - Dialog can't be closed with outside click
 - Dialog can be closed with keyboard Escape
 - Dialog content is scrollable with keyboard and mouse

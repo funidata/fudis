@@ -1,6 +1,6 @@
 <ng-container *transloco="let t">
   <div class="root-style">
-    <!-- <fudis-alert-group /> -->
+    <fudis-alert-group />
 
     <fudis-grid [columns]="4" [marginTop]="'lg'">
       <fudis-grid-item [columns]="'3 / 4'" [alignSelfX]="'end'" [alignSelfY]="'end'">
@@ -24,7 +24,7 @@
             <fudis-heading [level]="3" fudisGridItem [columns]="'auto'">
               <fudis-link [href]="'#'" [title]="'Link inside a heading'"></fudis-link>
             </fudis-heading>
-            <!-- <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" /> -->
+            <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" />
             <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
             <fudis-body-text *ngIf="_message"
               >This value comes from the closed dialog input:
@@ -70,7 +70,7 @@
 
       <fudis-expandable [title]="'Description list'">
         <ng-template fudisContent type="expandable">
-          <!-- <fudis-description-list [data]="testData"></fudis-description-list> -->
+          <!-- <fudis-dl [data]="testData"></fudis-dl> -->
         </ng-template>
       </fudis-expandable>
 

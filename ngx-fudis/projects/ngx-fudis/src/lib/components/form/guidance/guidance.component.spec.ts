@@ -34,7 +34,7 @@ const testFormGroupWithGroupValidator: FormGroup = new FormGroup(
     swedish: new FormControl<string | null>(null),
     english: new FormControl<string | null>(null),
   },
-  FudisGroupValidators.atLeastOneRequired('There must be one value!'),
+  FudisGroupValidators.oneRequired('There must be one value!'),
 );
 
 const testControl = new FormControl(null, [

@@ -1,14 +1,15 @@
 import { SimpleChange } from '@angular/core';
+import { Observable } from 'rxjs';
 
 /**
  * Alert
  */
+export const fudisAlertPositionArray = ['static', 'absolute', 'fixed'] as const;
+export type FudisAlertPosition = (typeof fudisAlertPositionArray)[number];
+
 export interface FudisAlert {
-  message: string;
+  message: Observable<string>;
   type: FudisNotification;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  routerLinkUrl?: string | any[] | null;
-  linkTitle?: string;
   id: string;
 }
 
@@ -47,7 +48,8 @@ export type FudisDescriptionListItemDetailLanguageContent = {
 /**
  * Dialog
  */
-export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
+export const fudisDialogSizeArray = ['sm', 'md', 'lg', 'xl', 'initial'] as const;
+export type FudisDialogSize = (typeof fudisDialogSizeArray)[number];
 
 /**
  * Dropdown Menu
@@ -68,7 +70,8 @@ export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 /**
  * Notification
  */
-export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
+export const fudisNotificationVariantArray = ['warning', 'danger', 'success', 'info'] as const;
+export type FudisNotification = (typeof fudisNotificationVariantArray)[number];
 
 /**
  * Tooltip

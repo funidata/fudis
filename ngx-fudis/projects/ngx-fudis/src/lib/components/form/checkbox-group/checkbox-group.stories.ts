@@ -76,7 +76,7 @@ const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
     pineapple: new FormControl<boolean | null | undefined>(null),
     orange: new FormControl<boolean | null | undefined>(null),
   },
-  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+  [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
 
 const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
@@ -124,7 +124,7 @@ const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<o
     pineapple: new FormControl<boolean | null | undefined | null>(null),
     orange: new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
   },
-  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Please pick one! :('))],
+  [FudisGroupValidators.oneRequired(new BehaviorSubject('Please pick one! :('))],
 );
 
 const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (

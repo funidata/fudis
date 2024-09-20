@@ -31,6 +31,11 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 export const excludeAllRegex: RegExp = /.*/;
 
 /**
+ * Alert
+ */
+export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisibleStatus']);
+
+/**
  * Button
  */
 const buttonCommonExclude: string[] = [
@@ -120,8 +125,6 @@ const descriptionListCommonExclude: string[] = [
   'columns',
   'id',
   'serviceDefaults',
-  'marginBottom',
-  'marginTop',
   'rowGap',
   'tag',
   'width',
@@ -207,8 +210,6 @@ export const formExclude: RegExp = excludeRegex([
   'classes',
   'columnGap',
   'columns',
-  'marginBottom',
-  'marginTop',
   'rowGap',
   'width',
 ]);

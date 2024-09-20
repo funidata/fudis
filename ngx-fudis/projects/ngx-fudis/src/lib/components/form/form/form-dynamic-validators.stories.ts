@@ -20,7 +20,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
   selector: 'example-dynamic-validator',
   template: `
     <fudis-form
-      [marginTop]="'xl'"
+      class="fudis-mt-xl"
       [badge]="badge"
       [badgeText]="badgeText"
       [level]="level"
@@ -58,7 +58,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" aria-hidden="true" />
+              <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
                   [control]="formExample.controls['email']"
@@ -80,7 +80,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" aria-hidden="true" />
+              <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
                   [control]="formExample.controls['number']"
@@ -103,7 +103,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" aria-hidden="true" />
+              <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-datepicker
                   [label]="'Choose your favorite date'"
@@ -124,7 +124,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" aria-hidden="true" />
+              <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-select
                   [label]="'Select your favorite animal'"
@@ -144,7 +144,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   ></fudis-button>
                 </fudis-grid>
               </fudis-grid>
-              <hr class="fudis-hr" aria-hidden="true" />
+              <fudis-hr />
               <fudis-grid [columns]="{ md: 3 }">
                 <fudis-checkbox-group
                   [label]="'If you like summer'"
@@ -192,8 +192,8 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   />
                 </fudis-checkbox-group>
               </fudis-grid>
+              <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
-                <hr fudisGridItem [columns]="'stretch'" class="fudis-hr" aria-hidden="true" />
                 <fudis-radio-button-group
                   [label]="'Select your favorite sport'"
                   [control]="formExample.controls.sport"
@@ -250,19 +250,19 @@ class DynamicValidatorExampleComponent {
         {
           summer1: new FormControl(null),
         },
-        this._atLeastOneRequiredValidatorInstance,
+        this._oneRequiredValidatorInstance,
       ),
       winter: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           winter1: new FormControl(null),
         },
-        this._atLeastOneRequiredValidatorInstance,
+        this._oneRequiredValidatorInstance,
       ),
       working: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           working1: new FormControl(null),
         },
-        this._atLeastOneRequiredValidatorInstance,
+        this._oneRequiredValidatorInstance,
       ),
       sport: new FormControl(null, [this._requiredValidatorInstance]),
     });
@@ -339,8 +339,9 @@ class DynamicValidatorExampleComponent {
     value: new Date(new Date().setDate(new Date().getDate() - 1)),
     message: 'Date cannot be before yesterdays date',
   });
-  private _atLeastOneRequiredValidatorInstance: FudisValidatorFn =
-    FudisGroupValidators.atLeastOneRequired('At least one option must be selected');
+  private _oneRequiredValidatorInstance: FudisValidatorFn = FudisGroupValidators.oneRequired(
+    'At least one option must be selected',
+  );
 
   formExample: FormGroup;
 
@@ -396,14 +397,14 @@ class DynamicValidatorExampleComponent {
 
   toggleRequiredFromOthers(removeControls: FormGroup<FudisCheckboxGroupFormGroup<object>>[]): void {
     removeControls.forEach((control) => {
-      const required = control.hasValidator(this._atLeastOneRequiredValidatorInstance);
+      const required = control.hasValidator(this._oneRequiredValidatorInstance);
 
       if (required) {
         control.disable();
-        control.removeValidators(this._atLeastOneRequiredValidatorInstance);
+        control.removeValidators(this._oneRequiredValidatorInstance);
       } else {
         control.enable();
-        control.addValidators(this._atLeastOneRequiredValidatorInstance);
+        control.addValidators(this._oneRequiredValidatorInstance);
       }
 
       control.updateValueAndValidity();
