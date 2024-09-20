@@ -11,10 +11,6 @@
   @include mixins.box-reset;
 }
 
-.fudis-hr {
-  @include mixins.horizontal-rule;
-}
-
 // Invalid and disabled state styles for input elemenets
 
 .fudis-form-input {

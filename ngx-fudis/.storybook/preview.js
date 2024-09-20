@@ -97,6 +97,7 @@ const preview = {
             "Footer",
             "Grid",
             ["Grid", "Grid Item"],
+            "Horizontal Rule",
             "Icon",
             "Language Badge Group",
             "Link",
