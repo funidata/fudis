@@ -612,6 +612,8 @@ export const ExampleWithDynamicValidators: StoryFn<FormComponent> = (args: FormC
     [level]="level"
     [errorSummaryHelpText]="errorSummaryHelpText"
     [errorSummaryVisible]="errorSummaryVisible"
+    [badge]="badge"
+    [badgeText]="badgeText"
   />`,
 });
 
@@ -624,6 +626,8 @@ ExampleWithDynamicValidators.args = {
   errorSummaryHelpText:
     'There are errors in this form. Please address these before trying to submit again.',
   errorSummaryVisible: false,
+  badge: null,
+  badgeText: '',
 };
 
 ExampleWithDynamicValidators.parameters = {

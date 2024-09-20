@@ -207,6 +207,7 @@ export const expandableControlExclude: RegExp = excludeRegex([
   ...expandableCommonExclude,
   'closedChange',
   'errorSummaryBreadcrumb',
+  'openOnErrorSummaryReload',
 ]);
 
 /**
@@ -388,4 +389,9 @@ export const tooltipExclude: RegExp = excludeRegex([
   'type',
   'variant',
   'buttonClick',
+  'toggleMenu',
+  'closeMenu',
+  'dropdownOpen',
+  'dropdownMenuId',
+  'asMenuButton',
 ]);
