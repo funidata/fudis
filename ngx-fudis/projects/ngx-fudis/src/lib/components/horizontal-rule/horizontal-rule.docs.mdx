@@ -1,0 +1,25 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import * as HorizontalRuleStories from "./horizontal-rule.stories.ts";
+
+<Meta title="Components/Horizontal Rule" />
+
+# Horizontal Rule
+
+Horizontal Rule implies a thematic break between HTML paragraph-level elements.
+
+## Usage Guidelines
+
+Use `<fudis-hr />` on your template when you need to visually separate page content. Note that the Horizontal Rule is
+hidden from screen readers, so for semantic division accessible to screen readers you need to use a semantic wrapper
+like [Section](/docs/components-section--documentation).
+
+## Examples
+
+<Canvas of={HorizontalRuleStories.Example}></Canvas>
+
+## Accessibility
+
+- Color contrast meets WCAG AA minimum contrast ratio against white `#FFFFFF` background
+  - Contrast ratio 4.81:1
+  - **NOTE**: When using Horizontal Rule on backgrounds other than white, make sure the color contrast is adequate
+- As a purely visual element, Horizontal Rule is hidden from screen readers

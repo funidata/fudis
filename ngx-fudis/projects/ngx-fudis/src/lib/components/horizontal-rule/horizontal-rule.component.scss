@@ -1,0 +1,13 @@
+/* stylelint-disable property-disallowed-list */
+@use "../../foundations/colors/tokens.scss" as colors;
+@use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/utilities/mixins.scss" as utilities;
+
+.fudis-hr {
+  @include utilities.box-reset;
+
+  border: 0;
+  border-top: spacing.$pixel-1 solid colors.$color-gray-middle;
+  width: 100%;
+  height: spacing.$pixel-1;
+}
