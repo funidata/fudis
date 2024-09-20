@@ -6,6 +6,7 @@ import { DialogComponent } from './dialog.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { getElement } from '../../utilities/tests/utilities';
+import { fudisDialogSizeArray } from '../../types/miscellaneous';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -51,25 +52,12 @@ describe('DialogComponent', () => {
       expect(component.size).toEqual('md');
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__md');
 
-      component.size = 'sm';
-      fixture.detectChanges();
+      fudisDialogSizeArray.forEach((size) => {
+        component.size = size;
+        fixture.detectChanges();
 
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__sm');
-
-      component.size = 'lg';
-      fixture.detectChanges();
-
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__lg');
-
-      component.size = 'xl';
-      fixture.detectChanges();
-
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__xl');
-
-      component.size = 'initial';
-      fixture.detectChanges();
-
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__initial');
+        expect(dialogEl.className).toEqual(`fudis-dialog fudis-dialog__size__${size}`);
+      });
     });
 
     it('should have CSS class for close button', () => {
@@ -95,6 +83,4 @@ describe('DialogComponent', () => {
 
     expect(dialogSpy).toHaveBeenCalledWith(false);
   });
-
-  // TODO: add tests for Alert Group inside Dialog
 });
