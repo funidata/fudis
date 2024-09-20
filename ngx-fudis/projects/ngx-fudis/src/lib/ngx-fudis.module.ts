@@ -27,6 +27,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { BreadcrumbsItemComponent } from './components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
+import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
 import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
@@ -177,6 +178,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     GuidanceComponent,
     HeaderDirective,
     HeadingComponent,
+    HorizontalRuleComponent,
     IconComponent,
     LocalizedTextGroupComponent,
     LabelComponent,
@@ -275,6 +277,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     GridItemDirective,
     HeaderDirective,
     HeadingComponent,
+    HorizontalRuleComponent,
     IconComponent,
     LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,

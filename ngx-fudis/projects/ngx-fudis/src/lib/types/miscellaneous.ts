@@ -48,7 +48,8 @@ export type FudisDescriptionListItemDetailLanguageContent = {
 /**
  * Dialog
  */
-export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
+export const fudisDialogSizeArray = ['sm', 'md', 'lg', 'xl', 'initial'] as const;
+export type FudisDialogSize = (typeof fudisDialogSizeArray)[number];
 
 /**
  * Dropdown Menu

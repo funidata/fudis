@@ -27,16 +27,6 @@
   padding: 0;
 }
 
-@mixin horizontal-rule() {
-  @include box-reset;
-
-  display: block;
-  border: 0;
-  border-top: spacing.$pixel-1 solid colors.$color-gray-middle;
-  width: 100%;
-  height: spacing.$pixel-1;
-}
-
 @mixin text-input() {
   @include typography.text-field-input;
   @include borders.border-radius("2px");

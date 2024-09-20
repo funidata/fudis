@@ -1,11 +1,6 @@
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MockComponents } from 'ng-mocks';
 import { FudisDialogService } from './dialog.service';
 import { BodyTextComponent } from '../../components/typography/body-text/body-text.component';
@@ -26,22 +21,37 @@ import { AlertGroupComponent } from '../../components/alert/alert-group/alert-gr
       <fudis-heading fudisDialogTitle [level]="2">Dialog Heading</fudis-heading>
       <fudis-dialog-content>
         <fudis-heading [level]="3" [variant]="'sm'">Content heading</fudis-heading>
-        <fudis-body-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
-          vehicula ut massa non facilisis.
-        </fudis-body-text>
+        <fudis-body-text>{{ greetingFromOpeningComponent }}</fudis-body-text>
       </fudis-dialog-content>
       <fudis-dialog-actions>
-        <fudis-button (handleClick)="closeTestDialog()" [label]="'Ok'"></fudis-button>
+        <fudis-button
+          (handleClick)="closeTestDialog()"
+          [label]="'Close this dialog'"
+        ></fudis-button>
+        <fudis-button
+          (handleClick)="closeAllOpenDialogs()"
+          [label]="'Close all open dialogs'"
+        ></fudis-button>
       </fudis-dialog-actions>
     </fudis-dialog>
   `,
 })
 class DialogTestContentComponent {
-  constructor(public ngMaterialDialog: MatDialog) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: { greeting: string },
+    public dialog: FudisDialogService,
+  ) {
+    this.greetingFromOpeningComponent = this.data.greeting;
+  }
+
+  greetingFromOpeningComponent: string;
 
   closeTestDialog() {
-    this.ngMaterialDialog.closeAll();
+    this.dialog.close('This string is passed when dialog is closed');
+  }
+
+  closeAllOpenDialogs() {
+    this.dialog.closeAll();
   }
 }
 
@@ -56,7 +66,7 @@ class DialogTestButtonComponent {
   constructor(public dialog: FudisDialogService) {}
 
   openTestDialog() {
-    this.dialog.open(DialogTestContentComponent);
+    this.dialog.open(DialogTestContentComponent, { data: { greeting: 'Message to dialog!' } });
   }
 }
 
@@ -94,31 +104,41 @@ describe('DialogService', () => {
       ],
     });
     fixture = TestBed.createComponent(DialogTestButtonComponent);
+    dialogContentFixture = TestBed.createComponent(DialogTestContentComponent);
     component = fixture.componentInstance;
+    dialogContentComponent = dialogContentFixture.componentInstance;
 
     fixture.detectChanges();
+    dialogContentFixture.detectChanges();
   });
 
   beforeEach(() => {
     service = TestBed.inject(FudisDialogService);
   });
 
-  it('should open fudis-dialog', () => {
+  it('should open fudis-dialog with greeting from component to dialog', () => {
     const openDialogSpy = jest.spyOn(service, 'open');
+    expect(service.dialogsOpen()).toEqual(0);
     component.openTestDialog();
 
-    expect(openDialogSpy).toHaveBeenCalledWith(DialogTestContentComponent);
+    expect(openDialogSpy).toHaveBeenCalledWith(DialogTestContentComponent, {
+      data: { greeting: 'Message to dialog!' },
+    });
+    expect(service.dialogsOpen()).toEqual(1);
   });
 
-  // TODO: add tests for closing and passing data between components
-
-  it('should close fudis-dialog', () => {
-    dialogContentFixture = TestBed.createComponent(DialogTestContentComponent);
-    dialogContentComponent = dialogContentFixture.componentInstance;
-
-    const closeDialogSpy = jest.spyOn(service.ngMaterialDialog, 'closeAll');
+  it('close should close dialog and pass data from dialog to component', () => {
+    const closeDialogSpy = jest.spyOn(service, 'close');
+    component.openTestDialog();
     dialogContentComponent.closeTestDialog();
+    expect(closeDialogSpy).toHaveBeenCalled();
+    expect(closeDialogSpy).toHaveBeenCalledWith('This string is passed when dialog is closed');
+  });
 
-    expect(closeDialogSpy).toHaveBeenCalledWith();
+  it('closeAll should close all open fudis-dialogs', () => {
+    const closeDialogSpy = jest.spyOn(service.ngMaterialDialog, 'closeAll');
+
+    dialogContentComponent.closeAllOpenDialogs();
+    expect(closeDialogSpy).toHaveBeenCalled();
   });
 });
