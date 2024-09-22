@@ -285,7 +285,7 @@ class ExampleWithMultipleFormsComponent {
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <ng-template fudisHeader>
-        <fudis-dl [columns]="1" [variant]="'compact'" [classes]="['fudis-mt-none fudis-mb-none']">
+        <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
             <fudis-dt [contentText]="'Important person'" />
             <fudis-dd [contentText]="'Admiral Thrawn'" />

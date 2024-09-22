@@ -105,6 +105,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     const cssClasses = [];
 
     cssClasses.push('fudis-dl');
+    cssClasses.push('fudis-my-none'); // Defining none margins with helper class allows overriding through classes input
 
     if (this.disableGrid) {
       cssClasses.push('fudis-dl__disabled-grid');
