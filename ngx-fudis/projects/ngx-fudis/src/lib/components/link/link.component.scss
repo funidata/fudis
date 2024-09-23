@@ -1,35 +1,22 @@
-@use '../../foundations/colors/mixins.scss' as colors;
 @use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/focus/mixins.scss' as focus;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-link {
-  @include colors.text-color('primary-dark');
-
-  display: inline-block;
-  text-decoration: underline solid;
-
-  &:focus {
-    @include focus.focus-generic;
-  }
-
   &__size {
     &__inherit {
-      @include typography.text-link-inherit-typography;
+      @include typography.link-inherit;
     }
 
     &__md {
-      @include typography.text-link-m-typography;
+      @include typography.link-md;
     }
 
     &__lg {
-      @include typography.text-link-l-typography;
+      @include typography.link-lg;
     }
   }
 
   &__external {
-    position: relative;
-
     &__icon-wrapper {
       display: inline-block;
       position: relative;

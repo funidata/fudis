@@ -12,7 +12,7 @@
   text-align: center;
 
   fudis-link {
-    @include typography.text-link-m-typography;
+    @include typography.link-md;
 
     min-height: spacing.$spacing-lg;
 

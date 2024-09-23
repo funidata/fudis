@@ -31,7 +31,7 @@
     @include colors.text-color('primary-dark');
     @include borders.border-none;
     @include borders.outline-none;
-    @include typography.text-link-m-typography;
+    @include typography.link-md;
 
     border-radius: spacing.$spacing-none;
     padding: spacing.$spacing-none;
