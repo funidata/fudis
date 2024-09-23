@@ -51,6 +51,7 @@ const commonArgs: Partial<SelectComponent> = {
   autocompleteHelpText: 'Hello from Dropdown Help Text!',
   selectionClearButton: true,
   variant: 'dropdown',
+  initialFocus: false,
 };
 
 const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
@@ -69,6 +70,7 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
       [label]="label"
       [disabled]="disabled"
       [helpText]="helpText"
+      [initialFocus]="initialFocus"
       [selectionClearButton]="selectionClearButton"
       [variant]="variant"
       (selectionUpdate)="selectionUpdate($event)"

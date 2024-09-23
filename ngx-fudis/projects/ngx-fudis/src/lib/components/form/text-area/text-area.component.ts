@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Host,
@@ -9,7 +8,6 @@ import {
   Optional,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -21,28 +19,27 @@ import {
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
+import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'fudis-text-area',
   templateUrl: './text-area.component.html',
   styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent
-  extends InputBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
-{
+export class TextAreaComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _focusService: FudisFocusService,
+    _focusService: FudisFocusService,
     _idService: FudisIdService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
-        this._maxLength = getMaxLengthFromValidator(this.control);
-        this._minLength = getMinLengthFromValidator(this.control);
+        this._required.next(hasRequiredValidator(this.control));
+        this._maxLength.next(getMaxLengthFromValidator(this.control));
+        this._minLength.next(getMinLengthFromValidator(this.control));
       }
     });
   }
@@ -60,15 +57,15 @@ export class TextAreaComponent
   /**
    * Min length for HTML attribute
    */
-  protected _minLength: number | null = null;
+  protected _minLength = new BehaviorSubject<number | null>(null);
 
   /**
    * Max length for HTML attribute and for character indicator in guidance
    */
-  protected override _maxLength: number | null = null;
+  protected _maxLength = new BehaviorSubject<number | null>(null);
 
   ngOnInit(): void {
-    this._setInputId('text-area');
+    this._setComponentId('text-area');
     this._updateValueAndValidityTrigger.next();
 
     /**
@@ -80,24 +77,15 @@ export class TextAreaComponent
       }
     });
 
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
-    /**
-     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
-     */
-    if (this.control.disabled) {
-      this._inputRef.nativeElement.removeAttribute('disabled');
     }
   }
 }

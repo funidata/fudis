@@ -12,7 +12,7 @@
   role="option"
   tabindex="-1"
   [attr.id]="_id"
-  [attr.aria-disabled]="data.disabled ? true : null"
+  [attr.aria-disabled]="data.disabled || null"
   (focus)="_focus()"
   (keydown)="_keyDown($event)"
   (blur)="_blur($event)"

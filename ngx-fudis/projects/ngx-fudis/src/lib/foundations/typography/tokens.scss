@@ -27,7 +27,8 @@ $heading-m-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
 $heading-s-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
 
 // Other UI line heights
-$text-input-line-height: calc(1.5rem / var(--fudis-rem-multiplier));
+$text-input-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+$form-label-line-height: calc(1.5rem / var(--fudis-rem-multiplier));
 $badge-line-height: calc(0.875rem / var(--fudis-rem-multiplier));
 
 // Font weight

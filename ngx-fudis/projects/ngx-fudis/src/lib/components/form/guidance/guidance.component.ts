@@ -1,12 +1,12 @@
-import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummaryItem } from '../../../types/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
   selector: 'fudis-guidance',
@@ -18,6 +18,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
+    private _cdr: ChangeDetectorRef,
   ) {
     this._id = _idService.getNewId('guidance');
 
@@ -30,16 +31,28 @@ export class GuidanceComponent implements OnChanges, OnInit {
      */
 
     _errorSummaryService.allFormErrorsObservable.pipe(takeUntilDestroyed()).subscribe((errors) => {
+      let errorsFound = this.formId && !!errors[this.formId]?.[this.for];
+
+      // With FormGroups errors are defined differently, so this checks if FormGroups control has errors
+      if (this.formGroup && !errorsFound) {
+        errorsFound = Object.keys(this.formGroup.controls).some((controlName) => {
+          const errorId = _errorSummaryService.defineErrorId(this.for, controlName);
+
+          return !!(this.formId && errors[this.formId]?.[errorId]);
+        });
+      }
+
       if (
-        this.formId &&
-        errors[this.formId]?.[this.for] &&
+        errorsFound &&
         (_errorSummaryService.formIdToUpdate === this.formId ||
           _errorSummaryService.formIdToUpdate === 'all')
       ) {
-        if (this.control?.errors) {
+        if (this.control?.invalid) {
           this.control.markAsTouched();
-        } else if (this.formGroup?.errors) {
+          this._cdr.markForCheck();
+        } else if (this.formGroup?.invalid) {
           this.formGroup.markAllAsTouched();
+          this._cdr.markForCheck();
         }
       }
     });
@@ -61,7 +74,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
   @Input() control: FormControl;
 
   /**
-   * FormGroup of related FormGroup. E.g. InputWithLanguageOptions with FormGroup
+   * FormGroup of related FormGroup. E.g. LocalizedTextGroup with FormGroup
    */
   @Input() formGroup: FormGroup;
 
@@ -81,7 +94,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
   @Input() maxLength: number | null = null;
 
   /**
-   * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
+   * Used to match FormControl value for the Localized Text Group component so that the component can display the length of the entered input for the connected language option.
    */
   @Input() selectedOption: string;
 
@@ -98,7 +111,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
   /**
    * To trigger Error Summary reload when this Guidance's Validator Error Messages are initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before these Validator Error Messages existed.
    */
-  @Input() reloadErrorSummary: boolean = false;
+  @Input() reloadErrorSummary: boolean | null = false;
 
   /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
@@ -137,7 +150,7 @@ export class GuidanceComponent implements OnChanges, OnInit {
 
   private _setCharacterLimitIndicatorValues(): void {
     if (this.maxLength) {
-      this._maxLengthWidth = this.maxLength > 100 ? 'lg' : this.maxLength > 10 ? 'md' : 'sm';
+      this._maxLengthWidth = this.maxLength >= 100 ? 'lg' : this.maxLength >= 10 ? 'md' : 'sm';
       this._maxLengthAlertThreshold = this.maxLength - 5;
     }
   }
@@ -146,8 +159,10 @@ export class GuidanceComponent implements OnChanges, OnInit {
    * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made.
    */
   protected _reloadErrorSummaryOnLazyLoad(error: FudisFormErrorSummaryItem): void {
-    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(error.type)) {
-      this._lazyLoadedErrors.push(error.type);
+    const errorLog = error.controlName ? `${error.controlName}_${error.type}` : error.type;
+
+    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(errorLog)) {
+      this._lazyLoadedErrors.push(errorLog);
       this._errorSummaryService.focusToFormOnReload = null;
       this._errorSummaryService.reloadErrorsByFormId(this.formId, false);
     }

@@ -5,6 +5,7 @@ import { TextAreaComponent } from './text-area.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
 import { textInputControlsExclude } from '../../../utilities/storybook';
+import { fudisInputSizeArray } from '../../../types/forms';
 
 @Component({
   selector: 'example-text-area-with-form-control',
@@ -56,9 +57,8 @@ export default {
     },
   },
   argTypes: {
-    size: { options: ['sm', 'md', 'lg'] },
+    size: { options: fudisInputSizeArray },
     helpText: { control: 'text' },
-
     tooltipPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
@@ -81,6 +81,7 @@ Example.args = {
   disabled: false,
   label: 'Text Area label example',
   helpText: 'Example help text',
+  initialFocus: false,
 };
 
 export const Disabled = Template.bind({});
@@ -91,6 +92,7 @@ Disabled.args = {
   disabled: true,
   label: 'Text Area label example',
   helpText: 'Example help text',
+  initialFocus: false,
 };
 
 export const WithValidators: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({

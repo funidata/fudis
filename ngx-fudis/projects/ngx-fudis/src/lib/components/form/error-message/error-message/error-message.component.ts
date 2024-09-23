@@ -22,7 +22,7 @@ import { FudisInternalErrorSummaryService } from '../../../../services/form/erro
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { TextAreaComponent } from '../../text-area/text-area.component';
 import { DatepickerComponent } from '../../date/datepicker/datepicker.component';
-import { InputWithLanguageOptionsComponent } from '../../input-with-language-options/input-with-language-options.component';
+import { LocalizedTextGroupComponent } from '../../localized-text-group/localized-text-group.component';
 import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.component';
 import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button-group.component';
 import { SelectComponent } from '../../select/select/select.component';
@@ -41,7 +41,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     @Host() @Optional() private _textInput: TextInputComponent,
     @Host() @Optional() private _textArea: TextAreaComponent,
     @Host() @Optional() private _datePicker: DatepickerComponent,
-    @Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
+    @Host() @Optional() private _LocalizedTextGroup: LocalizedTextGroupComponent,
     @Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
     @Host() @Optional() private _select: SelectComponent,
     @Host() @Optional() private _multiSelect: MultiselectComponent,
@@ -55,8 +55,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
       this._parent = _datePicker;
     } else if (_radioButtonGroup) {
       this._parent = _radioButtonGroup;
-    } else if (_inputWithLanguageOptions) {
-      this._parentGroup = _inputWithLanguageOptions;
+    } else if (_LocalizedTextGroup) {
+      this._parentGroup = _LocalizedTextGroup;
     } else if (_checkboxGroup) {
       this._parentGroup = _checkboxGroup;
     } else if (_select) {
@@ -112,7 +112,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Possible parent group components to used with Error Message
    */
-  private _parentGroup: InputWithLanguageOptionsComponent | CheckboxGroupComponent;
+  private _parentGroup: LocalizedTextGroupComponent | CheckboxGroupComponent;
 
   /**
    * Custom instance of FudisValidator

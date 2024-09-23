@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     /* stylelint-disable-next-line unit-disallowed-list */
-    transform: translateX(-0.1rem);
+    transform: translateX(calc(-0.1rem / var(--fudis-rem-multiplier)));
     padding-left: 0;
 
     &-wrapper {

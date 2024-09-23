@@ -2,6 +2,7 @@
 @use "../../../../foundations/borders/mixins.scss" as borders;
 @use "../../../../foundations/typography/mixins.scss" as typography;
 @use "../../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../../foundations/breakpoints/mixins.scss" as breakpoints;
 @use "../../../../foundations/focus/mixins.scss" as focus;
 
 .fudis-select {
@@ -25,12 +26,13 @@
 
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     padding: spacing.$spacing-xxs spacing.$spacing-lg spacing.$spacing-xxs spacing.$spacing-sm;
     width: 100%;
     height: spacing.$spacing-xl;
     max-height: spacing.$spacing-xl;
+    overflow: hidden;
     /* stylelint-disable-next-line property-disallowed-list */
     line-height: spacing.$spacing-lg;
 
@@ -45,12 +47,21 @@
 
     &__label,
     &__placeholder {
+      // Max width to make sure, that if label is super long, it should not expand the width of Select to its maximum of 23rem in mobile viewport.
+      /* stylelint-disable-next-line unit-disallowed-list */
+
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
 
       &--hidden {
         display: none;
+      }
+
+      // Workaround to prevent long labels streching the container caused by "white-space: no-wrap". If that would be removed from the above, the three dots ... overflow would not work.
+      @include breakpoints.breakpoint-max("sm") {
+        /* stylelint-disable-next-line unit-disallowed-list */
+        max-width: calc(100vw - calc(5.5rem / var(--fudis-rem-multiplier)));
       }
     }
 
@@ -66,6 +77,6 @@
 
   /* stylelint-disable-next-line */
   &.fudis-input-size__xs .fudis-select__input {
-    padding: spacing.$spacing-xxs spacing.$spacing-xs;
+    padding-left: spacing.$spacing-xs;
   }
 }

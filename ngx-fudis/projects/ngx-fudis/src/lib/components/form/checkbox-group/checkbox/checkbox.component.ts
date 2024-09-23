@@ -148,8 +148,10 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   /**
    * When Checkbox is focused
    */
-  protected _onFocus(): void {
+  protected _onFocus(event: FocusEvent): void {
     this._focused = true;
+
+    this._checkboxGroup.onFocus(event);
   }
 
   /**

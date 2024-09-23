@@ -82,6 +82,7 @@ const commonArgs: Partial<DatepickerComponent> = {
   size: 'md',
   disabled: false,
   dateParse: true,
+  initialFocus: false,
   tooltip: 'Is it your birthday?',
   tooltipPosition: 'left',
   tooltipToggle: false,
@@ -101,6 +102,7 @@ const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent
       [control]="control"
       [disabled]="disabled"
       [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
@@ -131,6 +133,7 @@ const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerCompo
       [control]="control"
       [disabled]="disabled"
       [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
@@ -160,6 +163,7 @@ const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponen
       [control]="control"
       [disabled]="disabled"
       [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
@@ -198,6 +202,7 @@ const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent)
       [control]="control"
       [disabled]="disabled"
       [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
