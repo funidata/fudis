@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "mdx"],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
@@ -11,6 +11,5 @@
     "../projects/**/*.spec.ts",
     "../projects/dev/**/*"
   ],
-  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"],
-  "files": ["./typings.d.ts"]
+  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"]
 }

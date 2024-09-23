@@ -1,7 +1,10 @@
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-@use "../spacing/tokens.scss" as spacing;
-@use "../colors/tokens.scss" as colors;
+@use '../spacing/tokens.scss' as spacing;
+@use '../colors/tokens.scss' as colors;
+@use '../typography/mixins.scss' as typography;
+@use '../borders/mixins.scss' as borders;
+@use '../focus/mixins.scss' as focus;
 
 @mixin visually-hidden() {
   position: absolute;
@@ -22,4 +25,33 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+@mixin text-input() {
+  @include typography.text-field-input;
+  @include borders.border-radius('2px');
+
+  box-sizing: border-box;
+  padding: spacing.$spacing-xxs spacing.$spacing-sm;
+  width: 100%;
+  height: spacing.$spacing-xl;
+
+  &:focus {
+    @include focus.focus-form-field;
+  }
+}
+
+@mixin text-area() {
+  @include typography.text-field-input;
+
+  box-sizing: border-box;
+  display: block;
+  padding: spacing.$spacing-xxs;
+  width: 100%;
+  height: calc(5rem / var(--fudis-rem-multiplier));
+  resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
+
+  &:focus {
+    @include focus.focus-form-field;
+  }
 }

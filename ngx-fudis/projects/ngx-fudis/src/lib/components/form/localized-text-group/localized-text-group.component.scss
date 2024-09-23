@@ -1,0 +1,25 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
+
+.fudis-localized-text-group {
+  @include utilities.box-reset;
+
+  display: flex;
+
+  &__inputs {
+    margin-right: spacing.$spacing-xxs;
+    width: 100%;
+
+    &__text {
+      @include utilities.text-input;
+    }
+
+    &__area {
+      @include utilities.text-area;
+    }
+  }
+
+  &__select {
+    min-width: spacing.$spacing-input-xs;
+  }
+}

@@ -19,7 +19,6 @@ import { ContentDirective } from '../../../../../directives/content-projection/c
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import { InputBaseDirective } from '../../../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
@@ -31,23 +30,24 @@ import { hasRequiredValidator } from '../../../../../utilities/form/getValidator
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
+import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 
 @Directive({
   selector: '[fudisSelectBase]',
 })
-export class SelectBaseDirective extends InputBaseDirective implements OnChanges {
+export class SelectBaseDirective extends ControlComponentBaseDirective implements OnChanges {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
-    protected _focusService: FudisFocusService,
     private _translationService: FudisTranslationService,
+    _focusService: FudisFocusService,
     _idService: FudisIdService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(hasRequiredValidator(this.control));
       }
     });
 
@@ -155,7 +155,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * For setting dropdown open / closed
    */
-  protected _dropdownOpen: boolean = false;
+  protected _dropdownOpen = new BehaviorSubject<boolean>(false);
 
   /**
    * Internal translated text for icon-only button aria-label when opening dropdown
@@ -282,7 +282,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   public openDropdown(): void {
     if (!this.disabled && !this.control.disabled) {
       this._optionsLoadedOnce = true;
-      this._dropdownOpen = true;
+      this._dropdownOpen.next(true);
     }
   }
 
@@ -292,7 +292,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
-    this._dropdownOpen = false;
+    this._dropdownOpen.next(false);
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
@@ -352,6 +352,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           clearInterval(focusCheckInterval);
           this._mouseDownInsideComponent = false;
           resolve(true);
+
           // If focus target is null
         } else if (!nextTarget) {
           clearInterval(focusCheckInterval);
@@ -394,7 +395,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * To handle input focus
    */
-  protected _inputFocus(): void {
+  protected _selectInputFocus(event: FocusEvent): void {
     this._inputFocused = true;
 
     const openDropdown =
@@ -406,13 +407,19 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       !this._preventDropdownReopen &&
       openDropdown &&
       !this._mouseDownInsideComponent &&
-      !this._dropdownOpen
+      !this._dropdownOpen.value
     ) {
       this.openDropdown();
     } else if (this._clickFromIcon) {
-      this.closeDropdown();
+      if (this._dropdownOpen.value) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
     }
     this._preventDropdownReopen = false;
+
+    this.onFocus(event);
   }
 
   /**
@@ -471,7 +478,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           break;
         case 'ArrowDown':
           event.preventDefault();
-          if (!this._dropdownOpen) {
+          if (!this._dropdownOpen.value) {
             this._toggleDropdown();
           }
           if (this._inputFocused) {
@@ -507,7 +514,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Toggle dropdown
    */
   protected _toggleDropdown(): void {
-    if (this._dropdownOpen) {
+    if (this._dropdownOpen.value) {
       this.closeDropdown();
     } else {
       this.openDropdown();
@@ -663,7 +670,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   @HostListener('window:keydown.escape', ['$event'])
   private _handleEscapePress(event: KeyboardEvent) {
-    if (this._dropdownOpen) {
+    if (this._dropdownOpen.value) {
       event.preventDefault();
 
       this.closeDropdown(true, true);
@@ -677,7 +684,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @HostListener('document:mouseup', ['$event.target'])
   private _handleWindowClick(targetElement: HTMLElement) {
     this._mouseDownInsideComponent = false;
-    if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
+    if (this._dropdownOpen.value && !this._selectRef.nativeElement.contains(targetElement)) {
       this.closeDropdown(false);
     }
   }

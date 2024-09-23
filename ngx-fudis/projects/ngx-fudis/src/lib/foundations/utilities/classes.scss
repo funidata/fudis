@@ -1,7 +1,7 @@
-@use "./mixins.scss" as mixins;
-@use "../spacing/tokens.scss" as spacing;
-@use "../borders/mixins.scss" as border;
-@use "../colors/mixins.scss" as colors;
+@use './mixins.scss' as mixins;
+@use '../spacing/tokens.scss' as spacing;
+@use '../borders/mixins.scss' as border;
+@use '../colors/mixins.scss' as colors;
 
 .fudis-visually-hidden {
   @include mixins.visually-hidden;
@@ -14,17 +14,15 @@
 // Invalid and disabled state styles for input elemenets
 
 .fudis-form-input {
-  &[aria-disabled="false"] {
-    @include border.border("1px", "solid", "gray-middle");
+  @include border.border('1px', 'solid', 'gray-middle');
+
+  &[aria-invalid='true'] {
+    @include border.border('1px', 'solid', 'red');
   }
 
-  &[aria-invalid="true"] {
-    @include border.border("1px", "solid", "red");
-  }
-
-  &[aria-disabled="true"] {
-    @include border.border("1px", "dashed", "gray-middle");
-    @include colors.bg-color("gray-extra-light");
+  &[aria-disabled='true'] {
+    @include border.border('1px', 'dashed', 'gray-middle');
+    @include colors.bg-color('gray-extra-light');
 
     cursor: default;
   }

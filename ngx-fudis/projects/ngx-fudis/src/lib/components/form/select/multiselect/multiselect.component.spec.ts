@@ -12,7 +12,6 @@ import { MultiselectChipListComponent } from './multiselect-chip-list/multiselec
 import { MultiselectOptionComponent } from './multiselect-option/multiselect-option.component';
 import { SelectGroupComponent } from '../common/select-group/select-group.component';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
-import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -79,7 +78,6 @@ describe('MultiselectComponent', () => {
         FudisFocusService,
         TooltipDirective,
         SelectBaseDirective,
-        InputBaseDirective,
       ],
       imports: [ReactiveFormsModule],
     }).compileComponents();

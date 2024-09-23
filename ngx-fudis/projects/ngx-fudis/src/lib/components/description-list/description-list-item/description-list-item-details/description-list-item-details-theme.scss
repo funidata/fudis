@@ -1,8 +1,9 @@
+/* stylelint-disable @stylistic/indentation */
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable selector-class-pattern */
 
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-dl-item-details-host {
   &:not(&--fi, &--sv, &--en) {

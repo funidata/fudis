@@ -1,39 +1,39 @@
-@use "../../foundations/colors/mixins.scss" as colorMixin;
-@use "../../foundations/borders/mixins.scss" as border;
-@use "../../foundations/typography/mixins.scss" as typography;
-@use "../../foundations/spacing/tokens.scss" as spacing;
+@use '../../foundations/colors/mixins.scss' as colorMixin;
+@use '../../foundations/borders/mixins.scss' as border;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-badge {
-  @include border.border-radius("2px");
+  @include border.border-radius('2px');
   @include typography.badge-typography;
-  @include colorMixin.text-color("gray-dark");
+  @include colorMixin.text-color('gray-dark');
 
   display: inline-block;
   padding: spacing.$pixel-1 spacing.$pixel-3;
   vertical-align: middle;
 
   &__accent {
-    @include colorMixin.bg-color("yellow-light");
-    @include border.border("1px", "solid", "yellow");
+    @include colorMixin.bg-color('yellow-light');
+    @include border.border('1px', 'solid', 'yellow');
   }
 
   &__danger {
-    @include colorMixin.bg-color("red-light");
-    @include border.border("1px", "solid", "red");
+    @include colorMixin.bg-color('red-light');
+    @include border.border('1px', 'solid', 'red');
   }
 
   &__primary {
-    @include colorMixin.bg-color("primary-light");
-    @include border.border("1px", "solid", "primary");
+    @include colorMixin.bg-color('primary-light');
+    @include border.border('1px', 'solid', 'primary');
   }
 
   &__secondary {
-    @include colorMixin.bg-color("gray-extra-light");
-    @include border.border("1px", "solid", "gray-middle");
+    @include colorMixin.bg-color('gray-extra-light');
+    @include border.border('1px', 'solid', 'gray-middle');
   }
 
   &__success {
-    @include colorMixin.bg-color("green-light");
-    @include border.border("1px", "solid", "green");
+    @include colorMixin.bg-color('green-light');
+    @include border.border('1px', 'solid', 'green');
   }
 }

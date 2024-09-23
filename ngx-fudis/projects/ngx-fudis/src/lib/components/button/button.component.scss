@@ -1,9 +1,9 @@
-@use "../../foundations/colors/mixins.scss" as colors;
-@use "../../foundations/focus/mixins.scss" as focus;
-@use "../../foundations/borders/mixins.scss" as borders;
-@use "../../foundations/typography/mixins.scss" as typography;
-@use "../../foundations/spacing/tokens.scss" as spacing;
-@use "../../foundations/utilities/mixins.scss" as utilities;
+@use '../../foundations/colors/mixins.scss' as colors;
+@use '../../foundations/focus/mixins.scss' as focus;
+@use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-button-host {
   display: inline-block;
@@ -12,10 +12,10 @@
 
 .fudis-button {
   @include utilities.box-reset;
-  @include borders.border-radius("2px");
-  @include colors.bg-color("transparent");
+  @include borders.border-radius('2px');
+  @include colors.bg-color('transparent');
   @include typography.button-typography;
-  @include borders.border("2px", "solid", "primary");
+  @include borders.border('2px', 'solid', 'primary');
 
   display: inline-flex;
   align-items: center;
@@ -28,11 +28,11 @@
     @include focus.focus-generic;
   }
 
-  &[aria-disabled="true"] {
-    @include colors.text-color("gray-dark");
-    @include colors.bg-color("gray-light");
-    @include borders.border("2px", "solid", "transparent");
-    @include borders.outline("1px", "dashed", "gray-middle");
+  &[aria-disabled='true'] {
+    @include colors.text-color('gray-dark');
+    @include colors.bg-color('gray-light');
+    @include borders.border('2px', 'solid', 'transparent');
+    @include borders.outline('1px', 'dashed', 'gray-middle');
   }
 
   &__label {
@@ -51,18 +51,18 @@
   }
 
   &__primary {
-    @include colors.text-color("white");
-    @include colors.bg-color("primary");
+    @include colors.text-color('white');
+    @include colors.bg-color('primary');
   }
 
   &__secondary {
-    @include colors.text-color("primary");
-    @include colors.bg-color("white");
+    @include colors.text-color('primary');
+    @include colors.bg-color('white');
   }
 
   &__tertiary {
-    @include colors.text-color("primary");
-    @include borders.border("2px", "solid", "transparent");
+    @include colors.text-color('primary');
+    @include borders.border('2px', 'solid', 'transparent');
   }
 
   &__size {

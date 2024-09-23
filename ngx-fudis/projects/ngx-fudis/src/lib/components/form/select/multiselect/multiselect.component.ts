@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -27,7 +26,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
 })
-export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
@@ -36,7 +35,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
+    super(_document, _translationService, _focusService, _idService, _changeDetectorRef);
 
     effect(() => {
       this._translationRemoveItem.next(
@@ -77,16 +76,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   ngOnInit(): void {
     this._setParentId('multiselect');
 
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
-  }
-
-  /**
-   * Set initial focus and update component's state if control has value on initialisation
-   */
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   /**
@@ -174,7 +167,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
 
-      this._changeDetectorRef.detectChanges();
+      this._cdr.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText = null;

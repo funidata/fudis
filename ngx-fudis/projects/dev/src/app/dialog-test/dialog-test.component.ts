@@ -14,7 +14,6 @@ export class DialogTestComponent {
     const ref = this.dialog.open(DialogTestContentComponent);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ref.afterClosed().subscribe((res: any) => {
-      // eslint-disable-next-line no-console
       console.log(res);
     });
   }

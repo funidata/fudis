@@ -1,6 +1,5 @@
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Host,
@@ -14,7 +13,6 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { FudisSelectOption, FudisInputSize } from '../../../types/forms';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -22,6 +20,7 @@ import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
+import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'into-depr-autocomplete',
@@ -29,21 +28,21 @@ import { FormComponent } from '../form/form.component';
   styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent
-  extends InputBaseDirective
-  implements OnInit, AfterContentInit, OnChanges, AfterViewInit
+  extends ControlComponentBaseDirective
+  implements OnInit, AfterContentInit, OnChanges
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _focusService: FudisFocusService,
     private _translationService: FudisTranslationService,
     _idService: FudisIdService,
+    _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(hasRequiredValidator(this.control));
       }
     });
 
@@ -101,19 +100,13 @@ export class AutocompleteComponent
   protected _clearFilterText: string;
 
   ngOnInit(): void {
-    this._setInputId('autocomplete');
+    this._setComponentId('autocomplete');
     this._updateValueAndValidityTrigger.next();
   }
 
   ngAfterContentInit() {
     this._setInitialValues();
     this._checkFilteredOptions();
-  }
-
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<AutocompleteComponent>): void {

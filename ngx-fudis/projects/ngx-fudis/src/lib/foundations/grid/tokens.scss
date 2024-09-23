@@ -9,10 +9,10 @@ $grid-width-xl: calc(65rem / var(--fudis-rem-multiplier)); // 1040px
 $grid-width-xxl: calc(96.25rem / var(--fudis-rem-multiplier)); // 1540px
 
 $grid-widths: (
-  "xxl": $grid-width-xxl,
-  "xl": $grid-width-xl,
-  "lg": $grid-width-lg,
-  "md": $grid-width-md,
-  "sm": $grid-width-sm,
-  "xs": $grid-width-xs,
+  'xxl': $grid-width-xxl,
+  'xl': $grid-width-xl,
+  'lg': $grid-width-lg,
+  'md': $grid-width-md,
+  'sm': $grid-width-sm,
+  'xs': $grid-width-xs,
 );

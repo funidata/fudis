@@ -31,7 +31,7 @@ export class SelectIconsComponent implements OnChanges {
   /**
    * If Select's dropdown is open
    */
-  @Input() dropdownOpen: boolean;
+  @Input() dropdownOpen: boolean | null;
 
   /**
    * Parent Select's variant

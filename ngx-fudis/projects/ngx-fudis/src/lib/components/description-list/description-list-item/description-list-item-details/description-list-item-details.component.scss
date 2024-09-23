@@ -1,13 +1,13 @@
-@use "../../../../foundations/typography/mixins.scss" as typography;
-@use "../../../../foundations/typography/tokens.scss" as typographyTokens;
-@use "../../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../../foundations/utilities/mixins.scss" as utilities;
+@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/typography/tokens.scss' as typographyTokens;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dl-item-details {
   &__regular {
     @include typography.description-list-value-typography;
-    @include colorMixins.text-color("gray-dark");
+    @include colorMixins.text-color('gray-dark');
 
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@
     }
 
     &__sub-heading {
-      @include colorMixins.text-color("gray-dark");
+      @include colorMixins.text-color('gray-dark');
       @include typography.description-list-value-typography;
 
       margin-top: 0;
@@ -40,7 +40,7 @@
 
   &__compact {
     @include typography.description-list-compact-value-typography;
-    @include colorMixins.text-color("gray-dark");
+    @include colorMixins.text-color('gray-dark');
 
     display: inline-block;
     margin-left: 0;

@@ -134,6 +134,7 @@ Example.args = {
   disabled: false,
   label: 'Text-input label example',
   helpText: 'Example help text',
+  initialFocus: false,
 };
 
 export const Disabled = Template.bind({});
@@ -144,6 +145,7 @@ Disabled.args = {
   tooltipToggle: false,
   label: 'Disabled Text Input',
   helpText: 'You should be able to focus on this input but not insert any values',
+  initialFocus: false,
 };
 
 export const WithValidators: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
