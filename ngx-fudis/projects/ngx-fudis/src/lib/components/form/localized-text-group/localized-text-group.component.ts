@@ -112,13 +112,6 @@ export class LocalizedTextGroupComponent
   protected _selectControl: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
 
   /**
-   * Property to check control values for required language options
-   */
-  protected _requiredControls: {
-    [key: string]: { value?: string | null; required: boolean | undefined };
-  } = {};
-
-  /**
    * Updated options list after changes
    */
   protected _selectOptions: FudisSelectOption<object>[] = [];
