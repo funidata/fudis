@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisIdService } from '../../services/id/id.service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-breadcrumbs',
@@ -36,8 +36,13 @@ export class BreadcrumbsComponent {
   /**
    * Prefix for aria-label from Fudis translation keys
    */
-  protected _breadcrumbsPrefix = new Subject<string>();
+  protected _breadcrumbsPrefix = new BehaviorSubject<string>(
+    this._translationService.getTranslations()().BREADCRUMBS.PREFIX,
+  );
 
+  /**
+   * HTML id
+   */
   protected _id: string;
 
   /**
