@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
@@ -27,7 +28,11 @@ describe('DialogComponent', () => {
           useValue: [],
         },
       ],
-    }).compileComponents();
+    })
+      .overrideComponent(DialogComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
 
     dialogService = TestBed.inject(FudisDialogService);
 
@@ -51,6 +56,11 @@ describe('DialogComponent', () => {
       expect(component.size).toEqual('md');
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__md');
 
+      component.size = 'xs';
+      fixture.detectChanges();
+
+      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__xs');
+
       component.size = 'sm';
       fixture.detectChanges();
 
@@ -65,11 +75,6 @@ describe('DialogComponent', () => {
       fixture.detectChanges();
 
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__xl');
-
-      component.size = 'initial';
-      fixture.detectChanges();
-
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__initial');
     });
 
     it('should have CSS class for close button', () => {

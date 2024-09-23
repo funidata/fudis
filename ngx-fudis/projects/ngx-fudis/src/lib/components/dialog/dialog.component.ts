@@ -1,4 +1,12 @@
-import { Component, HostListener, Input, OnDestroy, effect, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  OnDestroy,
+  effect,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
@@ -9,6 +17,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'fudis-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogComponent implements OnDestroy, OnInit {
   constructor(

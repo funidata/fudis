@@ -4,14 +4,14 @@
 @use "../../foundations/borders/mixins.scss" as borders;
 
 @mixin mobile-dialog-width {
-  width: calc(478px - ( 2 * spacing.$spacing-sm ) );
+  width: calc(spacing.$spacing-dialog-xs - (2 * spacing.$spacing-sm));
 }
 
 .fudis-dialog {
   box-sizing: border-box;
   position: relative;
   margin: spacing.$spacing-md spacing.$spacing-sm;
-  max-width: calc(100vw - 4rem);
+  max-width: calc(100vw - spacing.$spacing-xxl);
 
   &__close {
     float: right;
@@ -26,38 +26,48 @@
 
   &__size {
     &__xs {
-      @include mobile-dialog-width();
+      @include mobile-dialog-width;
     }
 
     &__sm {
-      @include mobile-dialog-width();
+      @include mobile-dialog-width;
 
       @include breakpoints.breakpoint("sm") {
-        width: calc(702px - ( 2 * spacing.$spacing-sm ) );
+        width: calc(spacing.$spacing-dialog-sm - (2 * spacing.$spacing-sm));
       }
     }
 
     &__md {
-      @include mobile-dialog-width();
+      @include mobile-dialog-width;
 
       @include breakpoints.breakpoint("sm") {
-        width: calc(878px - ( 2 * spacing.$spacing-sm ) );
+        width: calc(spacing.$spacing-dialog-md - (2 * spacing.$spacing-sm));
       }
     }
 
     &__lg {
-      @include mobile-dialog-width();
+      @include mobile-dialog-width;
 
       @include breakpoints.breakpoint("sm") {
-        width: calc(1118px - ( 2 * spacing.$spacing-lg ) );
+        width: calc(spacing.$spacing-dialog-lg - (2 * spacing.$spacing-sm));
+      }
+
+      @include breakpoints.breakpoint("lg") {
+        /* stylelint-disable-next-line unit-disallowed-list */
+        max-width: calc(100vw - 6rem);
       }
     }
 
     &__xl {
-      @include mobile-dialog-width();
-      
+      @include mobile-dialog-width;
+
       @include breakpoints.breakpoint("sm") {
-        width: calc(1438px - ( 2 * spacing.$spacing-lg ) );
+        width: calc(spacing.$spacing-dialog-xl - (2 * spacing.$spacing-sm));
+      }
+
+      @include breakpoints.breakpoint("lg") {
+        /* stylelint-disable-next-line unit-disallowed-list */
+        max-width: calc(100vw - 6rem);
       }
     }
   }
