@@ -155,7 +155,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -170,7 +170,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -185,7 +185,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
@@ -618,7 +618,7 @@ export const ExampleWithDynamicValidators: StoryFn<FormComponent> = (args: FormC
 });
 
 ExampleWithDynamicValidators.args = {
-  title: 'Example with Dynamic Validators',
+  title: 'Example With Dynamic Validators',
   helpText:
     "This example page is used to test, that when validators are added or removed from the FormControls, components' HTML attributes such as 'required' and max/min length are updated correctly.",
   titleVariant: 'xl',
