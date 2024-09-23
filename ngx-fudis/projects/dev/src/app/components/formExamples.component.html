@@ -58,19 +58,7 @@
                   [value]="option.value"
                 />
               </fudis-radio-button-group>
-              <!-- <fudis-dropdown
-                [id]="'dropdown-id-123'"
-                [label]="'Some dropdown'"
-                [options]="dropdownOptions"
-                [control]="testFormGroup.controls['dropdown']"
-              />
-              <fudis-dropdown
-                [id]="'dropdown-id-multi'"
-                [label]="'Some multiselect dropdown'"
-                [options]="dropdownOptions"
-                [multipleOption]="true"
-                [control]="testFormGroup.controls['dropdownMulti']"
-              /> -->
+
               <fudis-datepicker
                 [label]="'Select some date'"
                 [control]="testFormGroup.controls.date"
@@ -111,10 +99,17 @@
         <fudis-heading [level]="3" [variant]="'md'"
           >Autocomplete multi-select dropdown</fudis-heading
         >
-        <!-- <fudis-autocomplete-multi-select
-          [label]="'Search and choose items'"
-          [options]="multipleOptions"
-        /> -->
+        <fudis-multiselect
+          [size]="selectSize"
+          [variant]="'autocompleteDropdown'"
+          [label]="'Pick a pet'"
+          [control]="testFormGroup.controls.autocompleteSearch"
+        >
+          <ng-template fudisContent type="select-options">
+            <fudis-multiselect-option *ngFor="let option of selectOptions" [data]="option" />
+          </ng-template>
+        </fudis-multiselect>
+        <fudis-button [label]="'Change Select size'" (handleClick)="changeSelectSize()" />
       </fudis-grid>
     </ng-template>
   </fudis-expandable>

@@ -6,6 +6,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxChangeEvent,
+  FudisInputSize,
 } from 'projects/ngx-fudis/src/lib/types/forms';
 
 import { FudisErrorSummaryService } from 'ngx-fudis';
@@ -13,6 +14,7 @@ import { FudisGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { defaultOptions } from 'projects/ngx-fudis/src/lib/components/form/select/common/mock_data';
 
 type MyForm = {
   dropdown: FormControl<FudisSelectOption<object> | null>;
@@ -23,7 +25,7 @@ type MyForm = {
   checkboxFormGroup: FormGroup;
   date: FormControl<Date | null>;
   autocompleteDropdown: FormControl<FudisSelectOption<object> | null>;
-  autocompleteSearch: FormControl<FudisSelectOption<object> | null>;
+  autocompleteSearch: FormControl<FudisSelectOption<object>[] | null>;
   withLanguages: FormGroup;
 };
 
@@ -116,7 +118,7 @@ export class AppFormExampleComponent implements OnInit {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    autocompleteSearch: new FormControl<FudisSelectOption<object> | null>(
+    autocompleteSearch: new FormControl<FudisSelectOption<object>[] | null>(
       null,
       FudisValidators.required(
         this._translocoService.selectTranslateObject('form_errors.required'),
@@ -133,6 +135,8 @@ export class AppFormExampleComponent implements OnInit {
       ),
     ),
   });
+
+  selectOptions = defaultOptions;
 
   radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 
@@ -156,6 +160,18 @@ export class AppFormExampleComponent implements OnInit {
           { controlName: 'strawberry', label: value.strawberry },
         ];
       });
+  }
+
+  selectSize: FudisInputSize = 'sm';
+
+  changeSelectSize(): void {
+    if (this.selectSize === 'sm') {
+      this.selectSize = 'md';
+    } else if (this.selectSize === 'md') {
+      this.selectSize = 'lg';
+    } else {
+      this.selectSize = 'sm';
+    }
   }
 
   clickSubmit(): void {
