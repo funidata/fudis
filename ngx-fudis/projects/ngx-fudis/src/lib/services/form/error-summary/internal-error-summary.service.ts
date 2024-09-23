@@ -321,7 +321,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param id Id of the form error summary item
    * @param controlName Control name of the form error summary item
    */
-  // eslint-disable-next-line class-methods-use-this
+
   public defineErrorId(id: string, controlName: string | undefined): string {
     return controlName ? `${id}_${controlName}` : id;
   }

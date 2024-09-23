@@ -1,23 +1,23 @@
 /*
 * Global style files
 */
-@use "@angular/material" as mat;
-@use "./fudis-theme.scss" as theme;
-@use "../components/form/autocomplete/ngMaterial-theme.scss" as autoComplete;
-@use "../components/form/date/datepicker/ngMaterial-theme.scss" as datePicker;
-@use "../components/dialog/ngMaterial-theme.scss" as dialog;
-@use "../directives/tooltip/ngMaterial-theme.scss" as tooltip;
-@use "../components/grid/grid-item/grid-item.component.scss" as gridItem;
-@use "../components/grid/grid/grid.component.scss" as grid;
-@use "../foundations/spacing/classes.scss" as spacingClasses;
-@use "../components/link/link.component.scss" as link;
-@use "../components/button/button-theme.scss" as button;
-@use "../components/typography/heading/heading-theme.scss" as heading;
-@use "../components/typography/body-text/body-text-theme.scss" as bodyText;
-@use "../components/form/select/common/select-dropdown/select-dropdown-theme.scss" as selectDropdown;
-@use "../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss"
+@use '@angular/material' as mat;
+@use './fudis-theme.scss' as theme;
+@use '../components/form/autocomplete/ngMaterial-theme.scss' as autoComplete;
+@use '../components/form/date/datepicker/ngMaterial-theme.scss' as datePicker;
+@use '../components/dialog/ngMaterial-theme.scss' as dialog;
+@use '../directives/tooltip/ngMaterial-theme.scss' as tooltip;
+@use '../components/grid/grid-item/grid-item.component.scss' as gridItem;
+@use '../components/grid/grid/grid.component.scss' as grid;
+@use '../foundations/spacing/classes.scss' as spacingClasses;
+@use '../components/link/link.component.scss' as link;
+@use '../components/button/button-theme.scss' as button;
+@use '../components/typography/heading/heading-theme.scss' as heading;
+@use '../components/typography/body-text/body-text-theme.scss' as bodyText;
+@use '../components/form/select/common/select-dropdown/select-dropdown-theme.scss' as selectDropdown;
+@use '../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss'
   as dd;
-@use "./display-theme";
+@use './display-theme';
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core;

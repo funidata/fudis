@@ -191,9 +191,7 @@ export class AppFormExampleComponent implements OnInit {
     this.customError = !this.customError;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   handleChange(updatedOptions: FudisCheckboxChangeEvent): void {
-    // eslint-disable-next-line no-console
     console.log(updatedOptions);
   }
 }

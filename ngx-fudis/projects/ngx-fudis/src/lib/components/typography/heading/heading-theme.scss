@@ -1,6 +1,6 @@
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable no-descending-specificity */
-@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
 
 fudis-heading {
   .fudis-heading {
@@ -14,13 +14,13 @@ fudis-heading {
     }
   }
 
-  &[class*="fudis-mb"],
-  &[class*="fudis-xxs-mb"],
-  &[class*="fudis-xs-mb"],
-  &[class*="fudis-md-mb"],
-  &[class*="fudis-lg-mb"],
-  &[class*="fudis-xl-mb"],
-  &[class*="fudis-xxl-mb"] {
+  &[class*='fudis-mb'],
+  &[class*='fudis-xxs-mb'],
+  &[class*='fudis-xs-mb'],
+  &[class*='fudis-md-mb'],
+  &[class*='fudis-lg-mb'],
+  &[class*='fudis-xl-mb'],
+  &[class*='fudis-xxl-mb'] {
     .fudis-heading {
       margin-bottom: 0;
     }

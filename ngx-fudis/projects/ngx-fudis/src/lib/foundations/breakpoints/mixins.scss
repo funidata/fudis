@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "./tokens";
+@use 'sass:map';
+@use './tokens';
 
 @mixin breakpoint($breakpoint) {
   @if map_has_key(tokens.$breakpoints, $breakpoint) {
@@ -14,7 +14,7 @@
 }
 
 @mixin breakpoint-max($breakpoint) {
-  @if map_has_key(tokens.$max-breakpoints, $breakpoint) and $breakpoint != "xs" {
+  @if map_has_key(tokens.$max-breakpoints, $breakpoint) and $breakpoint != 'xs' {
     $breakpoint-value: map.get(tokens.$max-breakpoints, $breakpoint);
     $calc-max-width: calc($breakpoint-value - 0.01em);
 

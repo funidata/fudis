@@ -1,4 +1,4 @@
-@use "../../../foundations/utilities/mixins.scss" as utilities;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-text-input {
   box-sizing: border-box;
@@ -11,7 +11,7 @@
 
   // Keep number input arrows visible all the time
   /* stylelint-disable-next-line selector-no-qualifying-type */
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-inner-spin-button {
     opacity: 1;
   }
 }

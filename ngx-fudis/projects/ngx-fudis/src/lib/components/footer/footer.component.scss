@@ -1,12 +1,12 @@
-@use "../../foundations/typography/mixins.scss" as typography;
-@use "../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../foundations/spacing/tokens.scss" as spacing;
-@use "../../foundations/breakpoints/mixins.scss" as breakpoints;
-@use "../../foundations/utilities/mixins.scss" as utilities;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-footer {
   @include utilities.box-reset;
-  @include colorMixins.bg-color("gray-extra-light");
+  @include colorMixins.bg-color('gray-extra-light');
 
   position: relative;
   text-align: center;
@@ -16,7 +16,7 @@
 
     min-height: spacing.$spacing-lg;
 
-    @include breakpoints.breakpoint-max("lg") {
+    @include breakpoints.breakpoint-max('lg') {
       &:not(:first-of-type) {
         margin-top: spacing.$spacing-sm;
       }
@@ -39,7 +39,7 @@
       color: #000000;
     }
 
-    @include breakpoints.breakpoint("lg") {
+    @include breakpoints.breakpoint('lg') {
       flex-direction: row;
       align-items: center;
 
@@ -55,7 +55,7 @@
     }
   }
 
-  @include breakpoints.breakpoint("sm") {
+  @include breakpoints.breakpoint('sm') {
     text-align: initial;
   }
 }

@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "./tokens" as colors;
+@use 'sass:map';
+@use './tokens' as colors;
 
 @mixin text-color($color) {
   @if map_has_key(colors.$colors, $color) {

@@ -1,9 +1,9 @@
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../../foundations/borders/mixins.scss" as borders;
-@use "../../../../foundations/typography/mixins.scss" as typography;
-@use "../../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../../foundations/breakpoints/mixins.scss" as breakpoints;
-@use "../../../../foundations/focus/mixins.scss" as focus;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-select {
   position: relative;
@@ -22,7 +22,7 @@
 
   &__input {
     @include typography.text-field-input;
-    @include borders.border-radius("2px");
+    @include borders.border-radius('2px');
 
     box-sizing: border-box;
     display: flex;
@@ -37,7 +37,7 @@
     line-height: spacing.$spacing-lg;
 
     &::placeholder {
-      @include colorMixins.text-color("gray-middle");
+      @include colorMixins.text-color('gray-middle');
     }
 
     &:focus,
@@ -59,14 +59,14 @@
       }
 
       // Workaround to prevent long labels streching the container caused by "white-space: no-wrap". If that would be removed from the above, the three dots ... overflow would not work.
-      @include breakpoints.breakpoint-max("sm") {
+      @include breakpoints.breakpoint-max('sm') {
         /* stylelint-disable-next-line unit-disallowed-list */
         max-width: calc(100vw - calc(5.5rem / var(--fudis-rem-multiplier)));
       }
     }
 
     &__placeholder {
-      @include colorMixins.text-color("gray-middle");
+      @include colorMixins.text-color('gray-middle');
     }
 
     &__dropdown {

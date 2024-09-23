@@ -1,10 +1,10 @@
-@use "../../../foundations/typography/mixins.scss" as typography;
-@use "../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../foundations/utilities/mixins.scss" as utilities;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-body-text {
   @include utilities.box-reset;
-  @include colorMixins.text-color("gray-dark");
+  @include colorMixins.text-color('gray-dark');
 
   &__sm-regular {
     @include typography.body-text-sm-regular;

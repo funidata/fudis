@@ -1,9 +1,9 @@
-@use "../../foundations/colors/mixins.scss" as colors;
-@use "../../foundations/borders/mixins.scss" as borders;
-@use "../../foundations/spacing/tokens.scss" as spacing;
+@use '../../foundations/colors/mixins.scss' as colors;
+@use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-notification {
-  @include borders.border-radius("2px");
+  @include borders.border-radius('2px');
 
   box-sizing: border-box;
   display: flex;
@@ -19,29 +19,29 @@
   }
 
   &__warning {
-    @include colors.bg-color("yellow-light");
-    @include borders.border("1px", "solid", "yellow");
+    @include colors.bg-color('yellow-light');
+    @include borders.border('1px', 'solid', 'yellow');
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__danger {
-    @include colors.bg-color("red-light");
-    @include borders.border("1px", "solid", "red");
+    @include colors.bg-color('red-light');
+    @include borders.border('1px', 'solid', 'red');
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__success {
-    @include colors.bg-color("green-light");
-    @include borders.border("1px", "solid", "green");
+    @include colors.bg-color('green-light');
+    @include borders.border('1px', 'solid', 'green');
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__info {
-    @include colors.bg-color("primary-light");
-    @include borders.border("1px", "solid", "primary-dark");
+    @include colors.bg-color('primary-light');
+    @include borders.border('1px', 'solid', 'primary-dark');
 
     border-left-width: spacing.$spacing-xs;
   }
