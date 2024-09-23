@@ -72,7 +72,16 @@ By default Description List Component, as its name suggests, renders a `<dl>` ta
 
 ## Managing Layout
 
-By default Description List uses Grid Directive under the hood and the component accepts multiple inputs from Grid API. For full list see [Properties](#properties) table. Grid can be disabled in Description List by setting `disableGrid` as true.
+By default Description List uses Grid Directive under the hood and the component accepts multiple inputs from Grid API. For full list see [Properties](#description-list-properties) table. Grid can be disabled in Description List by setting `disableGrid` as true.
+
+Add margins and paddings to the dl element by adding `classes` with desired [Spacing Helper Classes](/docs/foundations-spacing-css-helper-classes--documentation), e.g.
+
+<Source
+  code={`
+  <fudis-dl
+[classes]="'fudis-mt-xl fudis-pl-md'">
+</fudis-dl>`}
+/>
 
 ## Examples
 

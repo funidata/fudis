@@ -121,7 +121,7 @@ describe('DescriptionListComponent', () => {
     it('should have grid classes if grid is enabled', () => {
       expect(sortClasses(getDlElement('dl').className)).toEqual(
         sortClasses(
-          'fudis-dl fudis-my-none fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__row-gap__sm',
+          'fudis-dl fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__row-gap__sm',
         ),
       );
     });
@@ -131,7 +131,7 @@ describe('DescriptionListComponent', () => {
       mockFixture.detectChanges();
 
       expect(sortClasses(getDlElement('dl').className)).toEqual(
-        sortClasses('fudis-dl fudis-my-none fudis-dl__disabled-grid'),
+        sortClasses('fudis-dl fudis-dl__disabled-grid'),
       );
     });
   });

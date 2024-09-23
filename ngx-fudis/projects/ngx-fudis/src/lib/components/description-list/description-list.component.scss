@@ -2,6 +2,10 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dl {
+  box-sizing: border-box;
+  margin-block: 0; // Override browser's default margins for dl element
+  padding-block: 0; // Override browser's default paddings
+
   &__disabled-grid {
     @include utilities.box-reset;
 
