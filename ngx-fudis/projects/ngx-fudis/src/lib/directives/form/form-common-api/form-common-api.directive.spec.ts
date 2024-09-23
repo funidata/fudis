@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { FormCommonApiDirective } from './form-common-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 // TODO: check tests so all components inheriting this directive are getting and applying these properties correctly, emit correctly and other common logic works consistently
 
@@ -24,29 +25,31 @@ const nonTestedValues = ['handleBlur', 'handleKeyUp', 'handleViewInit', 'handleF
 
 describe('FormCommonApiDirective', () => {
   let idService: FudisIdService;
+  let focusService: FudisFocusService;
   let cdr: ChangeDetectorRef;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      providers: [FudisIdService, ChangeDetectorRef],
+      providers: [FudisIdService, FudisFocusService, ChangeDetectorRef],
       imports: [],
     });
 
     idService = TestBed.inject(FudisIdService);
+    focusService = TestBed.inject(FudisFocusService);
     cdr = TestBed.inject(ChangeDetectorRef);
   });
 
   it('should create an instance', () => {
     TestBed.runInInjectionContext(() => {
-      const directive = new FormCommonApiDirective(idService, cdr);
+      const directive = new FormCommonApiDirective(idService, focusService, cdr);
       expect(directive).toBeTruthy();
     });
   });
 
   it('should have default input values', () => {
     TestBed.runInInjectionContext(() => {
-      const directive = new FormCommonApiDirective(idService, cdr);
+      const directive = new FormCommonApiDirective(idService, focusService, cdr);
       Object.keys(directive).forEach((inputKey) => {
         const typedKey = inputKey as keyof FormCommonApiDirective;
 
@@ -59,7 +62,7 @@ describe('FormCommonApiDirective', () => {
 
   it('should emit handleFocus when onFocus is called', () => {
     TestBed.runInInjectionContext(() => {
-      const directive = new FormCommonApiDirective(idService, cdr);
+      const directive = new FormCommonApiDirective(idService, focusService, cdr);
       jest.spyOn(directive.handleFocus, 'emit');
 
       const focusEvent = new FocusEvent('focus');

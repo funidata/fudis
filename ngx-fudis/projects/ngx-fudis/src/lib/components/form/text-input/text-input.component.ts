@@ -32,11 +32,11 @@ import { ControlComponentBaseDirective } from '../../../directives/form/control-
 export class TextInputComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _focusService: FudisFocusService,
+    _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
         this._required.next(hasRequiredValidator(this.control));

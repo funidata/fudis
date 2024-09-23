@@ -16,6 +16,7 @@ import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-radio-button-group',
@@ -29,9 +30,10 @@ export class RadioButtonGroupComponent
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     _changeDetectorRef: ChangeDetectorRef,
+    _focusService: FudisFocusService,
     _idService: FudisIdService,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {

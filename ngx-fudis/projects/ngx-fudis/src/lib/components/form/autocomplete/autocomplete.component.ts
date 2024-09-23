@@ -33,12 +33,12 @@ export class AutocompleteComponent
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _focusService: FudisFocusService,
     private _translationService: FudisTranslationService,
     _idService: FudisIdService,
+    _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {

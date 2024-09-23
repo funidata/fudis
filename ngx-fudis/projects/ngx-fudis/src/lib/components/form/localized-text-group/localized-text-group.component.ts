@@ -32,6 +32,7 @@ import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.se
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FormComponent } from '../form/form.component';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-localized-text-group',
@@ -48,10 +49,11 @@ export class LocalizedTextGroupComponent
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _translationService: FudisTranslationService,
     protected _DOMUtilitiesService: FudisDOMUtilitiesService,
-    _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
+    _focusService: FudisFocusService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
     effect(() => {
       const translations = _translationService.getTranslations()();
 

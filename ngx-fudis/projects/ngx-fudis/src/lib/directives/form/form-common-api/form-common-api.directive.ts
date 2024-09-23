@@ -14,6 +14,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdComponent, FudisIdParent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Directive({
   selector: '[fudisFormCommonApi]',
@@ -21,6 +22,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 export class FormCommonApiDirective extends TooltipApiDirective implements AfterViewInit {
   constructor(
     protected _idService: FudisIdService,
+    protected _focusService: FudisFocusService,
     protected _cdr: ChangeDetectorRef,
   ) {
     super();
@@ -153,8 +155,8 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   }
 
   protected _afterViewInitCommon(): void {
-    if (this.initialFocus) {
-      this._inputRef?.nativeElement?.focus();
+    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
+      this.focusToInput();
     }
     this.handleViewInit.emit();
   }

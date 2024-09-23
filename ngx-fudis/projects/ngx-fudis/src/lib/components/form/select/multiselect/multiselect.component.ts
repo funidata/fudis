@@ -35,7 +35,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
+    super(_document, _translationService, _focusService, _idService, _changeDetectorRef);
 
     effect(() => {
       this._translationRemoveItem.next(

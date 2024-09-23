@@ -57,12 +57,12 @@ export class DatepickerComponent
     private _adapter: DateAdapter<Date>,
     private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
-    private _focusService: FudisFocusService,
     private _translationService: FudisTranslationService,
-    _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
+    _focusService: FudisFocusService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
 
     /**
      * Set and delete errors from Date Range start and end date inputs

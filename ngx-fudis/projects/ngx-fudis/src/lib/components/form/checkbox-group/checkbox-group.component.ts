@@ -19,6 +19,7 @@ import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -29,9 +30,10 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
+    _focusService: FudisFocusService,
     _cdr: ChangeDetectorRef,
   ) {
-    super(_idService, _cdr);
+    super(_idService, _focusService, _cdr);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.formGroup) {

@@ -38,12 +38,12 @@ import { ControlComponentBaseDirective } from '../../../../../directives/form/co
 export class SelectBaseDirective extends ControlComponentBaseDirective implements OnChanges {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
-    protected _focusService: FudisFocusService,
     private _translationService: FudisTranslationService,
+    _focusService: FudisFocusService,
     _idService: FudisIdService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
