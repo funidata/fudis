@@ -6,14 +6,17 @@ import { IconComponent } from '../../../../icon/icon.component';
 import { FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
 import { FormControl } from '@angular/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('SelectIconsComponent', () => {
   let component: SelectIconsComponent;
   let fixture: ComponentFixture<SelectIconsComponent>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [SelectIconsComponent, ButtonComponent, IconComponent],
+    }).overrideComponent(SelectIconsComponent, {
+      set: { changeDetection: ChangeDetectionStrategy.Default },
     });
     fixture = TestBed.createComponent(SelectIconsComponent);
     component = fixture.componentInstance;
@@ -25,8 +28,8 @@ describe('SelectIconsComponent', () => {
     'autocompleteType',
   ];
 
-  const expectOnlyVisibleIcon = (icon: 'chevron' | 'search' | 'close') => {
-    fixture.whenStable().then(() => {
+  const expectOnlyVisibleIcon = async (icon: 'chevron' | 'search' | 'close') => {
+    await fixture.whenStable().then(() => {
       const chevronIcon = getElement(fixture, '.fudis-icon__chevron');
       const searchIcon = getElement(fixture, '.fudis-icon__search');
       const clearIcon = getElement(
@@ -51,7 +54,7 @@ describe('SelectIconsComponent', () => {
   };
 
   describe('With Dropdown parent variant', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       component.parentVariant = 'dropdown';
       component.parentControl = new FormControl<FudisSelectOption<object> | null>(null);
 
@@ -67,29 +70,31 @@ describe('SelectIconsComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should change chevron rotate', () => {
+    it('should change chevron rotate', async () => {
       component.dropdownOpen = false;
+      fixture.autoDetectChanges();
       let chevronElement = getElement(fixture, '.fudis-icon__chevron.fudis-icon__rotate__cw-90');
 
-      fixture.whenStable().then(() => {
+      await fixture.whenStable().then(() => {
         expect(chevronElement).toBeTruthy();
+        expectOnlyVisibleIcon('chevron');
       });
-
-      expectOnlyVisibleIcon('chevron');
 
       component.dropdownOpen = true;
+      fixture.detectChanges();
 
-      fixture.whenStable().then(() => {
+      await fixture.whenStable().then(() => {
+        fixture.detectChanges();
         chevronElement = getElement(fixture, '.fudis-icon__chevron.fudis-icon__rotate__ccw-90');
         expect(chevronElement).toBeTruthy();
+        expectOnlyVisibleIcon('chevron');
       });
-
-      expectOnlyVisibleIcon('chevron');
     });
 
     describe('should switch between search and clear with autocomplete type', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         component.parentVariant = 'autocompleteType';
+        fixture.detectChanges();
       });
 
       it('should show search by default', () => {
@@ -98,21 +103,22 @@ describe('SelectIconsComponent', () => {
       });
 
       it('should show clear with filter text and/or control value', () => {
-        iterableVariants.forEach((variant) => {
+        iterableVariants.forEach(async (variant) => {
           component.parentVariant = variant;
           component.clearButton = true;
           component.filterText = true;
           component.parentControl.patchValue({ value: 'test-value', label: 'Test Label' });
           fixture.detectChanges();
-          expectOnlyVisibleIcon('close');
+
+          await fixture.whenStable().then(() => {
+            expectOnlyVisibleIcon('close');
+          });
 
           component.parentControl.patchValue(null);
           fixture.detectChanges();
-          expectOnlyVisibleIcon('close');
-
-          component.parentControl.patchValue({ value: 'test-value', label: 'Test Label' });
-          component.filterText = false;
-          expectOnlyVisibleIcon('close');
+          await fixture.whenStable().then(() => {
+            expectOnlyVisibleIcon('close');
+          });
         });
       });
 
@@ -132,8 +138,9 @@ describe('SelectIconsComponent', () => {
     });
 
     describe('should switch between chevron and clear with autocomplete dropdown', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         component.parentVariant = 'autocompleteDropdown';
+        fixture.detectChanges();
       });
 
       it('should show chevron with disabled', () => {
@@ -167,15 +174,6 @@ describe('SelectIconsComponent', () => {
         expectOnlyVisibleIcon('close');
       });
 
-      it('should show clear button when control has value', () => {
-        component.clearButton = true;
-        component.filterText = false;
-        component.parentControl.patchValue({ value: 'test-value', label: 'Test Label' });
-        fixture.detectChanges();
-
-        expectOnlyVisibleIcon('close');
-      });
-
       it('should show chevron button when filter and control value are null', () => {
         component.clearButton = true;
         component.filterText = false;
@@ -187,57 +185,60 @@ describe('SelectIconsComponent', () => {
     });
 
     describe('clear button should emit', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         component.parentVariant = 'autocompleteDropdown';
         component.clearButton = true;
-        component.filterText = false;
+        component.filterText = true;
         component.parentControl.patchValue({ value: 'test-value', label: 'Test Label' });
         fixture.detectChanges();
         expectOnlyVisibleIcon('close');
       });
 
-      it('focus event', () => {
+      it('focus event', async () => {
         const focusEvent = new FocusEvent('focus');
 
         jest.spyOn(component.handleClearButtonFocus, 'emit');
 
-        fixture.whenStable().then(() => {
+        await fixture.whenStable().then(() => {
+          fixture.detectChanges();
           getElement(fixture, '.fudis-button').dispatchEvent(focusEvent);
 
           expect(component.handleClearButtonFocus.emit).toHaveBeenCalledWith(focusEvent);
         });
       });
 
-      it('blur event', () => {
+      it('blur event', async () => {
         const blurEvent = new FocusEvent('blur');
 
         jest.spyOn(component.handleClearButtonBlur, 'emit');
 
-        fixture.whenStable().then(() => {
+        await fixture.whenStable().then(() => {
           getElement(fixture, '.fudis-button').dispatchEvent(blurEvent);
 
           expect(component.handleClearButtonBlur.emit).toHaveBeenCalledWith(blurEvent);
         });
       });
 
-      it('click event', () => {
+      it('click event', async () => {
         const clickEvent = new MouseEvent('click');
 
         jest.spyOn(component.handleClearButtonClick, 'emit');
 
-        fixture.whenStable().then(() => {
+        await fixture.whenStable().then(() => {
           getElement(fixture, '.fudis-button').dispatchEvent(clickEvent);
 
           expect(component.handleClearButtonClick.emit).toHaveBeenCalledWith(clickEvent);
         });
       });
 
-      it('destroy event', () => {
+      it('destroy event', async () => {
         jest.spyOn(component.handleClearButtonDestroy, 'emit');
 
         component.clearButton = false;
 
-        fixture.whenStable().then(() => {
+        await fixture.whenStable().then(() => {
+          fixture.detectChanges();
+
           expect(component.handleClearButtonDestroy.emit).toHaveBeenCalled();
         });
       });

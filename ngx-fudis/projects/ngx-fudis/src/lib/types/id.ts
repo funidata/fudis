@@ -17,7 +17,7 @@ export const fudisIdComponents = [
   'form',
   'guidance',
   'heading',
-  'input-with-language-options',
+  'localized-text-group',
   'link',
   'section',
   'text-area',

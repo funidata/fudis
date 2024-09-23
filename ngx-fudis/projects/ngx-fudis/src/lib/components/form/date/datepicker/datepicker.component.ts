@@ -14,7 +14,6 @@ import {
 import { FormControl, AbstractControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -32,6 +31,7 @@ import { FudisDateAdapter } from '../date-common/date-adapter';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateRangeComponent } from '../date-range/date-range.component';
+import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -48,7 +48,7 @@ import { DateRangeComponent } from '../date-range/date-range.component';
   ],
 })
 export class DatepickerComponent
-  extends InputBaseDirective
+  extends ControlComponentBaseDirective
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
@@ -57,12 +57,12 @@ export class DatepickerComponent
     private _adapter: DateAdapter<Date>,
     private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
-    private _focusService: FudisFocusService,
     private _translationService: FudisTranslationService,
-    _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
+    _focusService: FudisFocusService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService, _changeDetectorRef);
 
     /**
      * Set and delete errors from Date Range start and end date inputs
@@ -97,7 +97,7 @@ export class DatepickerComponent
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(hasRequiredValidator(this.control));
         this._minDate = getMinDateFromValidator(this.control);
         this._maxDate = getMaxDateFromValidator(this.control);
       }
@@ -216,28 +216,17 @@ export class DatepickerComponent
     this.control.updateValueAndValidity();
   }
 
-  /**
-   * Handle input blur
-   */
-  protected _handleInputBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-  }
-
-  /**
-   * Handle input key up
-   */
-  protected _handleKeyUp(event: KeyboardEvent): void {
-    this.handleKeyUp.emit(event);
-  }
-
   ngOnInit(): void {
-    this._setInputId('datepicker');
+    this._setComponentId('datepicker');
 
     if (!this._parseValidatorInstance && this.dateParse) {
       this._addParseValidator();
     }
 
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {
@@ -268,12 +257,14 @@ export class DatepickerComponent
         this._addParseValidator();
       }
     }
+
+    if (changes.size?.currentValue !== changes.size?.previousValue && this._parentDateRange) {
+      this._parentDateRange?.setLabelHeight();
+    }
   }
 
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
+  override ngAfterViewInit(): void {
+    this._afterViewInitCommon();
 
     this._parentDateRange?.setLabelHeight(true);
   }

@@ -8,6 +8,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxGroupFormGroup,
+  FudisLocalizedTextGroup,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -29,7 +30,16 @@ import { fudisSpacingArray } from '../../../types/spacing';
 @Component({
   selector: 'example-with-multiple-forms',
   template: `
-    <fudis-grid [align]="'center'" [columns]="{ xs: 1, sm: 2 }" [width]="'lg'">
+    <fudis-grid [align]="'center'" [columns]="{ sm: 2 }" [width]="'lg'" [marginTop]="'xl'">
+      <div fudisGridItem [columns]="'stretch'">
+        <fudis-heading [level]="1">Multiple Form Components</fudis-heading>
+        <fudis-body-text
+          >This page is for testing purposes to demo and test, that form components, their
+          validation errors and forms' Error Summaries load correctly whether the Expandable was
+          opened or not before clicking Submit.</fudis-body-text
+        >
+      </div>
+
       <fudis-button
         fudisGridItem
         [columns]="'stretch'"
@@ -39,7 +49,8 @@ import { fudisSpacingArray } from '../../../types/spacing';
 
       <fudis-form
         [level]="2"
-        [title]="'Form with Text Input'"
+        [titleVariant]="'lg'"
+        [title]="'Form 1 with Text Input'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -47,7 +58,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formOne.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 1'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -63,7 +74,8 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Text Area'"
+        [titleVariant]="'lg'"
+        [title]="'Form 2 with Text Area'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -71,7 +83,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formTwo.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 2'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -87,7 +99,8 @@ import { fudisSpacingArray } from '../../../types/spacing';
       </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Checkbox Group'"
+        [titleVariant]="'lg'"
+        [title]="'Form 3 with Checkbox Group'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -95,7 +108,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formThree.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 3'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -118,9 +131,44 @@ import { fudisSpacingArray } from '../../../types/spacing';
           </fudis-expandable>
         </ng-template>
       </fudis-form>
-      <!-- <fudis-form
+      <fudis-form
         [level]="2"
-        [title]="'Form with Select and Multiselect'"
+        [titleVariant]="'lg'"
+        [title]="'Form 4 with Radio Button Group'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryHelpText]="errorSummaryHelpText"
+      >
+        <ng-template fudisActions [type]="'form'">
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formFive.valid"
+            [label]="'Submit Form 4'"
+          />
+        </ng-template>
+        <ng-template fudisContent [type]="'form'">
+          <fudis-expandable
+            [title]="'Expandable with Radio Button Group'"
+            [errorSummaryBreadcrumb]="true"
+          >
+            <ng-template fudisContent [type]="'expandable'">
+              <fudis-radio-button-group
+                [label]="'Pick a fruit'"
+                [control]="allForms.controls.formFive"
+              >
+                <fudis-radio-button
+                  *ngFor="let option of radioOptions"
+                  [label]="option.label"
+                  [value]="option.value"
+                />
+              </fudis-radio-button-group>
+            </ng-template>
+          </fudis-expandable>
+        </ng-template>
+      </fudis-form>
+      <fudis-form
+        [level]="2"
+        [titleVariant]="'lg'"
+        [title]="'Form 5 with Select and Multiselect'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -128,7 +176,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formFour.valid"
-            [label]="'Submit'"
+            [label]="'Submit Form 5'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
@@ -163,36 +211,37 @@ import { fudisSpacingArray } from '../../../types/spacing';
             </ng-template>
           </fudis-expandable>
         </ng-template>
-      </fudis-form> -->
+      </fudis-form>
       <fudis-form
         [level]="2"
-        [title]="'Form with Radio Button Group'"
+        [titleVariant]="'lg'"
+        [title]="'Form 6 with Localized Text Group'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
         <ng-template fudisActions [type]="'form'">
           <fudis-button
             fudisFormSubmit
-            [formValid]="allForms.controls.formFive.valid"
-            [label]="'Submit'"
+            [formValid]="allForms.controls.formSix.valid"
+            [label]="'Submit Form 6'"
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
           <fudis-expandable
-            [title]="'Expandable with Radio Button Group'"
+            [title]="'Expandable with Localized Text Group'"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
-              <fudis-radio-button-group
-                [label]="'Pick a fruit'"
-                [control]="allForms.controls.formFive"
-              >
-                <fudis-radio-button
-                  *ngFor="let option of radioOptions"
-                  [label]="option.label"
-                  [value]="option.value"
-                />
-              </fudis-radio-button-group>
+              <fudis-localized-text-group
+                [label]="'At least one required'"
+                [formGroup]="allForms.controls.formSix.controls.oneRequired"
+              />
+              <fudis-localized-text-group
+                [label]="'All required'"
+                [variant]="'text-area'"
+                [formGroup]="allForms.controls.formSix.controls.allRequired"
+              />
+              <fudis-button [label]="'Patch value'" (handleClick)="patchValue()"></fudis-button>
             </ng-template>
           </fudis-expandable>
         </ng-template>
@@ -223,6 +272,12 @@ class ExampleWithMultipleFormsComponent {
       value: 'item-3-peach',
     },
   ];
+
+  patchValue(): void {
+    this.allForms.controls.formSix.controls.oneRequired.controls['finnish'].patchValue(
+      'Surprise value from outside',
+    );
+  }
 
   submitAllForms(): void {
     if (this.allForms.invalid) {
@@ -256,17 +311,39 @@ class ExampleWithMultipleFormsComponent {
       },
       [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
     ),
-    // formFour: new FormGroup({
-    //   select: new FormControl<FudisSelectOption<object> | null>(
-    //     null,
-    //     FudisValidators.required('You must pick one'),
-    //   ),
-    //   multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
-    //     FudisValidators.required('Selection is missing'),
-    //     FudisValidators.minLength(2, 'Choose at least 2'),
-    //   ]),
-    // }),
+    formFour: new FormGroup({
+      select: new FormControl<FudisSelectOption<object> | null>(
+        null,
+        FudisValidators.required('You must pick one'),
+      ),
+      multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
+        FudisValidators.required('Selection is missing'),
+        FudisValidators.minLength(2, 'Choose at least 2'),
+      ]),
+    }),
     formFive: new FormControl(null, FudisValidators.required('No fruit picked! :(')),
+    formSix: new FormGroup({
+      oneRequired: new FormGroup<FudisLocalizedTextGroup<object>>(
+        {
+          finnish: new FormControl<string | null>(null),
+          swedish: new FormControl<string | null>(null),
+          english: new FormControl<string | null>(null),
+        },
+        [FudisGroupValidators.oneRequired('Provide name in atleast one language')],
+      ),
+      allRequired: new FormGroup<FudisLocalizedTextGroup<object>>({
+        finnish: new FormControl<string | null>('Lorem ipsum', [
+          FudisValidators.required('Missing Finnish description'),
+          FudisValidators.maxLength(10, 'Too long Finnish description'),
+        ]),
+        swedish: new FormControl<string | null>(null, [
+          FudisValidators.required('Missing Swedish description'),
+        ]),
+        english: new FormControl<string | null>(null, [
+          FudisValidators.required('Missing English description'),
+        ]),
+      }),
+    }),
   });
 }
 
@@ -321,44 +398,6 @@ class ExampleWithMultipleFormsComponent {
             >
               <ng-template fudisContent [type]="'expandable'">
                 <fudis-grid>
-                  <!-- <fudis-fieldset
-                [label]="'Basic info'"
-                [helpText]="'Some generic info about this course'"
-                [id]="fieldsetId"
-              >
-                <ng-template fudisNotifications [type]="'fieldset'">
-                  <fudis-notification> This is notification for a fieldset. </fudis-notification>
-                </ng-template>
-                <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
-                  <!-- <fudis-input-with-language-options
-                          [id]="'unique-input-1'"
-                          [options]="languageOptions"
-                          [formGroup]="formExample.controls['name']"
-                          [label]="'Course name'"
-                          [helpText]="
-                            'Some name would be nice. Provide course name in at least one language.'
-                          "
-                        >
-                          <fudis-error-message
-                            *ngIf="
-                              formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                            "
-                            [message]="
-                              'Reminder here as well, that you have not set a good start date'
-                            "
-                          />
-                        </fudis-input-with-language-options> -->
-                  <!-- <fudis-input-with-language-options
-                          [variant]="'text-area'"
-                          [id]="'unique-input-2'"
-                          [options]="languageOptions"
-                          [formGroup]="formExample.controls['description']"
-                          [label]="'Course description'"
-                          [helpText]="
-                            'So that students know what they are getting into. Provide description in all languages.'
-                          "
-                        /> -->
                   <fudis-radio-button-group
                     [label]="'Course type'"
                     [control]="formExample.controls['courseType']"
@@ -388,9 +427,6 @@ class ExampleWithMultipleFormsComponent {
                       [message]="'Wrong date chosen. 1.5.1991 would be great!'"
                     />
                   </fudis-datepicker>
-                  <!-- </fudis-grid>
-                </ng-template>
-              </fudis-fieldset> -->
                   <fudis-fieldset
                     [label]="'Tearcher info'"
                     [tooltip]="'Quite many fields are required.'"
@@ -453,29 +489,6 @@ class FormContentExampleComponent implements OnInit {
     private _focusService: FudisFocusService,
   ) {
     this.formExample = new FormGroup({
-      // Expose when InputWithLanguageOptions is exposed to public API
-      // name: new FormGroup(
-      //   {
-      //     finnish: new FormControl(null),
-      //     swedish: new FormControl(null),
-      //     english: new FormControl(null),
-      //   },
-      //   [FudisGroupValidators.oneRequired(new BehaviorSubject('Course name is missing.'))],
-      // ),
-      // description: new FormGroup({
-      //   finnish: new FormControl(null, [
-      //     FudisValidators.required('Missing description in Finnish.'),
-      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      //   ]),
-      //   swedish: new FormControl(null, [
-      //     FudisValidators.required('Missing description in Swedish.'),
-      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      //   ]),
-      //   english: new FormControl(null, [
-      //     FudisValidators.required('Missing description in English.'),
-      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      //   ]),
-      // }),
       courseBooks: new FormGroup(
         {
           first: new FormControl(null),

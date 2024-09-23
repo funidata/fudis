@@ -141,7 +141,7 @@
 
 @mixin text-field-label {
   text-transform: uppercase;
-  line-height: tokens.$text-input-line-height;
+  line-height: tokens.$form-label-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-m-font-size;
   font-weight: tokens.$font-weight-regular;

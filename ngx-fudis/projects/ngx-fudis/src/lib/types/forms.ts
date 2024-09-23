@@ -109,15 +109,15 @@ export type FudisFormErrorSummaryObjectItemErrors = {
   [errorType: string]: string;
 };
 
-export type FudisDropdownLanguageOption =
-  | { value: 'finnish'; label: 'FI' }
-  | { value: 'swedish'; label: 'SV' }
-  | { value: 'english'; label: 'EN' }
-  | { value: FudisLanguageAbbr; label: string };
+export type FudisLocalizedTextGroupOptions =
+  | { controlName: 'finnish'; label: 'FI' }
+  | { controlName: 'swedish'; label: 'SV' }
+  | { controlName: 'english'; label: 'EN' }
+  | { controlName: string; label: string };
 
-export interface FudisInputWithLanguageOptionsFormGroup {
-  [language: string]: FormControl<string | null>;
-}
+export type FudisLocalizedTextGroup<T extends object> = T & {
+  [lang: string | 'finnish' | 'swedish' | 'english']: FormControl<string | null>;
+};
 
 export type FudisCheckboxGroupFormGroup<T extends object> = T & {
   [key: string]: FormControl<boolean | null | undefined>;

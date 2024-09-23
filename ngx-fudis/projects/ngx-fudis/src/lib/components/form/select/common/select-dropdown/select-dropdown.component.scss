@@ -35,14 +35,6 @@
     left: initial;
   }
 
-  /* stylelint-disable-next-line */
-  &.fudis-input-size__xs {
-    width: initial;
-    /* stylelint-disable-next-line unit-disallowed-list */
-    min-width: calc(7rem / var(--fudis-rem-multiplier));
-    max-width: initial;
-  }
-
   &--open {
     display: flex;
   }

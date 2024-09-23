@@ -1,0 +1,153 @@
+import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
+import * as Stories from "./localized-text-group.stories";
+import { LocalizedTextGroupComponent } from "./localized-text-group.component";
+import { LocalizedTextGroupDocsExclude } from "../../../utilities/storybook";
+
+<Meta title="Components/Form/Localized Text Group" />
+
+# Localized Text Group
+
+Localized Text Group is a form component, where a text form field (left side) is paired with selected dropdown option (right side).
+
+Its primary use is to provide an editor tool, where user can type same content in different languages. E.g. some description text or content title needs to be in all application languages.
+
+## Key Properties
+
+Its API and functionality is very similar to other basic form components, e. g. [Text Input Component](/docs/components-form-text-input--documentation) and [Text Area Component](/docs/components-form-text-area--documentation).
+
+Most important input properties are:
+
+- `label`: Mandatory visible label text
+- `variant`: By default `text-input` which renders an input HTML element. For longer texts variant `text-area` can be used to render a `textarea` element.
+- `formGroup`: Mandatory Angular Form Control, described in the next section
+- `options`: Option list paired with Form Controls, described in the next section
+
+## Usage Guidelines
+
+### Pairing Form Group with Selectable Dropdown Options
+
+Component requires an Angular FormGroup as `formGroup` property. Each control in this `formGroup` represents one selectable option from the Select dropdown.
+
+#### Default Options
+
+Selectable options is defined by an array property `options`, which has a **default value** of:
+
+```
+options = [
+  { controlName: 'finnish', label: 'FI' },
+  { controlName: 'swedish', label: 'SV' },
+  { controlName: 'english', label: 'EN' },
+]
+```
+
+With this default value, the FormGroup should have a following structure:
+
+```
+formGroup = new FormGroup({
+  finnish: new FormControl<string | null>(null),
+  swedish: new FormControl<string | null>(null),
+  english: new FormControl<string | null>(null),
+}),
+```
+
+This way the `options` property `controlName: 'finnish'` is paired with the FormGroup's control with key `finnish`.
+
+#### Customised Options
+
+In similar fashion, if `options` array is defined like this:
+
+```
+options = [
+  { controlName: 'klingon', label: 'KLI' },
+  { controlName: 'elvish', label: 'ELV' },
+  { controlName: 'dothraki', label: 'DOT' },
+]
+```
+
+Then the FormGroup should look like this to match with each selectable option:
+
+```
+formGroup = new FormGroup({
+  klingon: new FormControl<string | null>(null),
+  elvish: new FormControl<string | null>(null),
+  dothraki: new FormControl<string | null>(null),
+}),
+```
+
+## Error Validation
+
+As expected, the component's `formGroup` and / or its child controls can have validators. The component will show and list all the validation errors it recognizes even if the invalid option is not currently selected.
+
+To make sure component displays validation error messages correctly, check [Fudis Validator](/docs/utilities-validators--documentation) guidelines for instructions.
+
+## Examples
+
+### With at least One Required
+
+The `formGroup` property of this example is defined like this:
+
+<Source
+  code={`
+formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
+  finnish: new FormControl<string | null>(null, [
+    FudisValidators.maxLength(15, 'Too long Finnish name'),
+  ]),
+  swedish: new FormControl<string | null>(null, [
+    FudisValidators.maxLength(20, 'Too long Swedish name'),
+  ]),
+  english: new FormControl<string | null>(null, [
+    FudisValidators.maxLength(25, 'Too long English name'),
+  ]),
+},
+  [FudisGroupValidators.oneRequired('Give name in at least in one language')],
+)`}
+/>
+
+<Canvas of={Stories.Example}></Canvas>
+
+### With All Required
+
+The `formGroup` property of this example is defined like this:
+
+<Source
+  code={`
+formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
+  finnish: new FormControl<string | null>(null, [
+    FudisValidators.required('Missing superhero name on Finnish.'),
+    FudisValidators.minLength(5, 'Too short Finnish name'),
+    FudisValidators.maxLength(10, 'Too long Finnish name'),
+  ]),
+  swedish: new FormControl<string | null>(null, [
+    FudisValidators.required('Missing superhero name on Swedish.'),
+    FudisValidators.minLength(5, 'Too short Swedish name'),
+    FudisValidators.maxLength(15, 'Too long Swedish name'),
+  ]),
+  english: new FormControl<string | null>(null, [
+    FudisValidators.required('Missing superhero name on English.'),
+    FudisValidators.minLength(5, 'Too short English name'),
+    FudisValidators.maxLength(20, 'Too long English name'),
+  ])
+})`}
+/>
+
+<Canvas of={Stories.ExampleWithAllRequired}></Canvas>
+
+## Accessibility
+
+- Label text above and Guidance texts below the input field are connected to the form field.
+- Currently selected option is communicated with aria-label of the text input field
+- Component and Select dropdown can be navigated and interacted with keyboard
+- All validation errors are listed below the input field, even if invalid option is not currently selected from the dropdown
+- The Select dropdown labels have an additional 'Missing' text, if that option is required or it has invalid value
+
+## Related Components, Directives and Utilities
+
+- [Text Input Component](/docs/components-form-text-input--documentation)
+- [Text Area Component](/docs/components-form-text-area--documentation)
+- [Select Component](/docs/components-form-select-select--documentation)
+- [Tooltip Directive](/docs/directives-tooltip--documentation)
+- [Validators](/docs/utilities-validators--documentation)
+
+## Properties of Localized Text Group
+
+<ArgTypes of={LocalizedTextGroupComponent} exclude={LocalizedTextGroupDocsExclude} />

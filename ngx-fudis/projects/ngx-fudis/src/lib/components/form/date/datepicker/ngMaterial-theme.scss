@@ -117,3 +117,18 @@
     }
   }
 }
+
+/* In Date Range, add hyphen only after the first Datepicker */
+.fudis-date-range fudis-datepicker:nth-of-type(1) {
+  & .fudis-datepicker__input-wrapper {
+    &::after {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translate(spacing.$spacing-sm, -50%);
+      width: spacing.$spacing-xs;
+      height: spacing.$spacing-md;
+      content: '\2013';
+    }
+  }
+}

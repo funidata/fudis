@@ -87,7 +87,7 @@ const preview = {
               "Error Summary",
               "Field Set",
               "Form",
-              "Input With Language Options",
+              "Localized Text Group",
               "Radio Button Group",
               "Select",
               ["Common Features", "Select", "Multiselect"],
