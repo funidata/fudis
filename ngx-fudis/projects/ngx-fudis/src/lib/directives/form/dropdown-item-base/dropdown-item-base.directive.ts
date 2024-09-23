@@ -40,7 +40,7 @@ export class DropdownItemBaseDirective {
   /**
    * Trigger focus based on keyboard interaction. Used to focus on next / previous dropdown item element
    */
-  // eslint-disable-next-line class-methods-use-this
+
   protected _baseHandleKeyDown(
     event: KeyboardEvent,
     element: ElementRef,

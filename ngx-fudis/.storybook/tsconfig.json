@@ -11,6 +11,5 @@
     "../projects/**/*.spec.ts",
     "../projects/dev/**/*"
   ],
-  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"],
-  "files": ["./typings.d.ts"]
+  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"]
 }
