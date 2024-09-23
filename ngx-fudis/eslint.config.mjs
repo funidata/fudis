@@ -4,8 +4,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
-import { rules } from "@angular-eslint/eslint-plugin-template";
-import { IndentStyle } from "typescript";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,10 +40,6 @@ export default [
         project: "tsconfig.json",
       },
     },
-  },
-  {
-    files: ["**/*.scss"],
-    rules: {},
   },
   ...compat.extends("prettier").map((config) => ({
     ...config,
