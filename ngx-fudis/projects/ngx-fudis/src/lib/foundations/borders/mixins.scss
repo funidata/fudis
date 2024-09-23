@@ -1,3 +1,4 @@
+/* stylelint-disable @stylistic/block-opening-brace-space-before */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
 @use 'sass:map';
@@ -5,8 +6,10 @@
 @use '../spacing/tokens.scss' as spacing;
 @use './tokens.scss' as borderTokens;
 
-// Generates border, i. e.:
-// border: 2px solid $primary-dark;
+/**
+  Generates border, i. e.:
+  border: 2px solid $primary-dark;
+*/
 @mixin border($width, $style, $color) {
   @if map_has_key(spacing.$pixel-tokens, $width) and
     map_has_key(borderTokens.$border-styles, $style) and
@@ -20,8 +23,9 @@
   }
 }
 
-// Generates outline, i. e.:
-// outline: 2px solid $primary-dark;
+/**
+ Generates outline i.e. outline: 2px solid $primary-dark;
+*/
 @mixin outline($width, $style, $color) {
   @if map_has_key(spacing.$pixel-tokens, $width) and
     map_has_key(borderTokens.$border-styles, $style) and
