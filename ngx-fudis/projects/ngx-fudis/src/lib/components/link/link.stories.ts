@@ -21,33 +21,31 @@ export default {
   },
 } as Meta;
 
+const html = String.raw;
+
 const Template: StoryFn<LinkComponent> = (args: LinkComponent) => ({
   props: args,
+  template: html` <a
+    fudisLink
+    [title]="title"
+    [size]="size"
+    [external]="external"
+    [initialFocus]="initialFocus"
+  ></a>`,
 });
 
 export const Example = Template.bind({});
 Example.args = {
   size: 'inherit',
-  title: '',
-  href: 'https://www.example.com',
-  externalLink: '',
+  title: 'Visible title for the link',
+  external: false,
   initialFocus: false,
 };
 
 export const ExampleWithExternalLink = Template.bind({});
 ExampleWithExternalLink.args = {
   size: 'inherit',
-  title: '',
-  href: '',
-  externalLink: 'https://www.example.com',
-  initialFocus: false,
-};
-
-export const ExampleWithLinkWithTitle = Template.bind({});
-ExampleWithLinkWithTitle.args = {
-  size: 'inherit',
   title: 'Visible title for the link',
-  href: '',
-  externalLink: 'https://www.example.com',
+  external: true,
   initialFocus: false,
 };

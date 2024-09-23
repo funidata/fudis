@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive({
   selector: '[fudisLinkApi]',
@@ -18,4 +18,30 @@ export class LinkApiDirective {
    * Id for the anchor element. By default generated with FudisIdService
    */
   @Input() id: string;
+
+  /**
+   * External link URL
+   */
+  @Input() external: boolean = false;
+
+  /**
+   * Title for the link, if not defined title will be the same as link URL
+   */
+  @Input({ required: true }) title: string;
+
+  /**
+   * Focus event output
+   */
+  @Output() handleFocus = new EventEmitter<FocusEvent>();
+
+  /**
+   * Blur event output
+   */
+  @Output() handleBlur = new EventEmitter<FocusEvent>();
+
+  // TODO: write test
+  /**
+   * Click event output
+   */
+  @Output() handleClick = new EventEmitter<Event>();
 }

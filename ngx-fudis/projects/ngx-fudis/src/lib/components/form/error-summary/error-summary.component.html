@@ -13,12 +13,11 @@
             </ng-container>
             <ul class="fudis-error-summary__error-list">
               <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
-                <fudis-link
+                <a
+                  fudisLink
                   (handleClick)="handleErrorClick($event, error.id)"
-                  [size]="'md'"
-                  [href]="'#'"
                   [title]="error.message"
-                />
+                ></a>
               </li>
             </ul>
           </div>

@@ -25,8 +25,6 @@ export class BodyTextComponent implements OnChanges {
     private _idService: FudisIdService,
   ) {
     this._id = _idService.getNewId('body-text');
-
-    console.log(_breadcrumbsItem);
   }
 
   /**
