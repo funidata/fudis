@@ -10,7 +10,8 @@
 @mixin border($width, $style, $color) {
   @if map_has_key(spacing.$pixel-tokens, $width) and
     map_has_key(borderTokens.$border-styles, $style) and
-    map_has_key(colors.$colors, $color) {
+    map_has_key(colors.$colors, $color)
+  {
     border: map.get(spacing.$pixel-tokens, $width)
       map.get(borderTokens.$border-styles, $style)
       map.get(colors.$colors, $color);
@@ -24,7 +25,8 @@
 @mixin outline($width, $style, $color) {
   @if map_has_key(spacing.$pixel-tokens, $width) and
     map_has_key(borderTokens.$border-styles, $style) and
-    map_has_key(colors.$colors, $color) {
+    map_has_key(colors.$colors, $color)
+  {
     outline: map.get(spacing.$pixel-tokens, $width)
       map.get(borderTokens.$border-styles, $style)
       map.get(colors.$colors, $color);
