@@ -2,7 +2,7 @@
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable selector-class-pattern */
 
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-dl-item-details-host {
   &:not(&--fi, &--sv, &--en) {
@@ -16,7 +16,7 @@
 
   // Add small margin before details with sub heading when there are multiple details
   &:has(+ .fudis-dl-item-details-host .fudis-dl-item-details__regular__sub-heading)
-    .fudis-dl-item-details__regular {
+  .fudis-dl-item-details__regular {
     margin-bottom: spacing.$spacing-xs;
   }
 

@@ -1,4 +1,4 @@
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-date-range {
   display: grid;
@@ -22,7 +22,7 @@
         transform: translate(spacing.$spacing-sm, -50%);
         width: spacing.$spacing-xs;
         height: spacing.$spacing-md;
-        content: "\2013";
+        content: '\2013';
       }
     }
   }

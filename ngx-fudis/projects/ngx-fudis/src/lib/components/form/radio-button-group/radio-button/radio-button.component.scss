@@ -1,13 +1,13 @@
-@use "../../../../foundations/borders/mixins.scss" as borders;
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../../foundations/typography/mixins.scss" as typography;
-@use "../../../../foundations/colors/tokens.scss" as colors;
-@use "../../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../../foundations/focus/mixins.scss" as focus;
+@use '../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/colors/tokens.scss' as colors;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-radio-button {
   @include typography.body-text-md-regular;
-  @include colorMixins.text-color("gray-dark");
+  @include colorMixins.text-color('gray-dark');
 
   display: inline-flex;
   position: relative;
@@ -39,7 +39,7 @@
     }
 
     &__control {
-      @include borders.border("1px", "solid", "gray-middle");
+      @include borders.border('1px', 'solid', 'gray-middle');
 
       display: inline-flex;
       top: 0;
@@ -52,18 +52,18 @@
       height: spacing.$spacing-input-radio;
 
       &--invalid {
-        @include borders.border("1px", "solid", "red");
+        @include borders.border('1px', 'solid', 'red');
 
         box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
       }
 
       &--disabled {
-        @include borders.border("1px", "dashed", "gray-middle");
-        @include colorMixins.bg-color("gray-extra-light");
+        @include borders.border('1px', 'dashed', 'gray-middle');
+        @include colorMixins.bg-color('gray-extra-light');
       }
 
       &__indicator {
-        @include colorMixins.bg-color("gray-dark");
+        @include colorMixins.bg-color('gray-dark');
 
         border-radius: 50%;
         width: spacing.$spacing-input-radio-indicator;

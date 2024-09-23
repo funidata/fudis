@@ -1,8 +1,8 @@
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../../foundations/borders/mixins.scss" as borders;
-@use "../../../../foundations/typography/mixins.scss" as typography;
-@use "../../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../../foundations/focus/mixins.scss" as focus;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-select {
   position: relative;
@@ -21,7 +21,7 @@
 
   &__input {
     @include typography.text-field-input;
-    @include borders.border-radius("2px");
+    @include borders.border-radius('2px');
 
     box-sizing: border-box;
     display: flex;
@@ -35,7 +35,7 @@
     line-height: spacing.$spacing-lg;
 
     &::placeholder {
-      @include colorMixins.text-color("gray-middle");
+      @include colorMixins.text-color('gray-middle');
     }
 
     &:focus,
@@ -55,7 +55,7 @@
     }
 
     &__placeholder {
-      @include colorMixins.text-color("gray-middle");
+      @include colorMixins.text-color('gray-middle');
     }
 
     &__dropdown {

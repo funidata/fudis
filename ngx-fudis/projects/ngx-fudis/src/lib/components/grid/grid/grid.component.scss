@@ -1,8 +1,8 @@
 /* stylelint-disable order/order */
 
-@use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
-@use "../../../foundations/grid/mixins.scss" as grid;
-@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../../foundations/grid/mixins.scss' as grid;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-grid {
   box-sizing: border-box;
@@ -10,7 +10,7 @@
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
 
-  @include breakpoints.breakpoint("sm") {
+  @include breakpoints.breakpoint('sm') {
     width: 100%;
   }
 
@@ -94,7 +94,7 @@
       margin-right: auto;
       margin-left: auto;
 
-      @include breakpoints.breakpoint-max("sm") {
+      @include breakpoints.breakpoint-max('sm') {
         @include grid.grid-xs-margins;
       }
     }
@@ -112,92 +112,92 @@
 	*/
 
   &__xxl {
-    @include breakpoints.breakpoint("xs") {
-      @include grid.grid-max-width("xs");
+    @include breakpoints.breakpoint('xs') {
+      @include grid.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint("sm") {
-      @include grid.grid-max-width("sm");
+    @include breakpoints.breakpoint('sm') {
+      @include grid.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint("md") {
-      @include grid.grid-max-width("md");
+    @include breakpoints.breakpoint('md') {
+      @include grid.grid-max-width('md');
     }
 
-    @include breakpoints.breakpoint("lg") {
-      @include grid.grid-max-width("lg");
+    @include breakpoints.breakpoint('lg') {
+      @include grid.grid-max-width('lg');
     }
 
-    @include breakpoints.breakpoint("xl") {
-      @include grid.grid-max-width("xl");
+    @include breakpoints.breakpoint('xl') {
+      @include grid.grid-max-width('xl');
     }
 
-    @include breakpoints.breakpoint("xxl") {
-      @include grid.grid-max-width("xxl");
+    @include breakpoints.breakpoint('xxl') {
+      @include grid.grid-max-width('xxl');
     }
   }
 
   &__xl {
-    @include breakpoints.breakpoint("xs") {
-      @include grid.grid-max-width("xs");
+    @include breakpoints.breakpoint('xs') {
+      @include grid.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint("sm") {
-      @include grid.grid-max-width("sm");
+    @include breakpoints.breakpoint('sm') {
+      @include grid.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint("md") {
-      @include grid.grid-max-width("md");
+    @include breakpoints.breakpoint('md') {
+      @include grid.grid-max-width('md');
     }
 
-    @include breakpoints.breakpoint("lg") {
-      @include grid.grid-max-width("lg");
+    @include breakpoints.breakpoint('lg') {
+      @include grid.grid-max-width('lg');
     }
 
-    @include breakpoints.breakpoint("xl") {
-      @include grid.grid-max-width("xl");
+    @include breakpoints.breakpoint('xl') {
+      @include grid.grid-max-width('xl');
     }
   }
 
   &__lg {
-    @include breakpoints.breakpoint("xs") {
-      @include grid.grid-max-width("xs");
+    @include breakpoints.breakpoint('xs') {
+      @include grid.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint("sm") {
-      @include grid.grid-max-width("sm");
+    @include breakpoints.breakpoint('sm') {
+      @include grid.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint("md") {
-      @include grid.grid-max-width("md");
+    @include breakpoints.breakpoint('md') {
+      @include grid.grid-max-width('md');
     }
 
-    @include breakpoints.breakpoint("lg") {
-      @include grid.grid-max-width("lg");
+    @include breakpoints.breakpoint('lg') {
+      @include grid.grid-max-width('lg');
     }
   }
 
   &__md {
-    @include breakpoints.breakpoint("xs") {
-      @include grid.grid-max-width("xs");
+    @include breakpoints.breakpoint('xs') {
+      @include grid.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint("sm") {
-      @include grid.grid-max-width("sm");
+    @include breakpoints.breakpoint('sm') {
+      @include grid.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint("md") {
-      @include grid.grid-max-width("md");
+    @include breakpoints.breakpoint('md') {
+      @include grid.grid-max-width('md');
     }
   }
 
   &__sm {
-    @include breakpoints.breakpoint("xs") {
-      @include grid.grid-max-width("xs");
+    @include breakpoints.breakpoint('xs') {
+      @include grid.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint("sm") {
-      @include grid.grid-max-width("sm");
+    @include breakpoints.breakpoint('sm') {
+      @include grid.grid-max-width('sm');
     }
   }
 
@@ -206,7 +206,7 @@
   }
 
   &__xs {
-    @include grid.grid-max-width("xs");
+    @include grid.grid-max-width('xs');
   }
 
   &__row-gap {

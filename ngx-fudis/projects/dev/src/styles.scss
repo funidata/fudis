@@ -1,8 +1,8 @@
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable color-no-hex */
 /* stylelint-disable property-disallowed-list */
-@use "@angular/material" as mat;
-@use "../../../dist/ngx-fudis/index" as fudis;
+@use '@angular/material' as mat;
+@use '../../../dist/ngx-fudis/index' as fudis;
 @include mat.core;
 
 * {

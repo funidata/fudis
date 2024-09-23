@@ -1,5 +1,5 @@
-@use "../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
 
 .fudis-form {
   &__header {
@@ -42,7 +42,7 @@
         }
       }
 
-      @include breakpoints.breakpoint("sm") {
+      @include breakpoints.breakpoint('sm') {
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;

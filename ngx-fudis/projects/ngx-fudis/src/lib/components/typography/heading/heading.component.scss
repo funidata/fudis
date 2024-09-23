@@ -1,8 +1,8 @@
-@use "../../../foundations/typography/mixins.scss" as typography;
-@use "../../../foundations/colors/mixins.scss" as colorMixins;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-heading {
-  @include colorMixins.text-color("gray-dark");
+  @include colorMixins.text-color('gray-dark');
 
   box-sizing: border-box;
   margin-top: 0;

@@ -1,17 +1,16 @@
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
-@use "sass:map";
-@use "../colors/tokens.scss" as colors;
-@use "../spacing/tokens.scss" as spacing;
-@use "./tokens.scss" as borderTokens;
+@use 'sass:map';
+@use '../colors/tokens.scss' as colors;
+@use '../spacing/tokens.scss' as spacing;
+@use './tokens.scss' as borderTokens;
 
 // Generates border, i. e.:
 // border: 2px solid $primary-dark;
 @mixin border($width, $style, $color) {
   @if map_has_key(spacing.$pixel-tokens, $width) and
     map_has_key(borderTokens.$border-styles, $style) and
-    map_has_key(colors.$colors, $color)
-  {
+    map_has_key(colors.$colors, $color) {
     border: map.get(spacing.$pixel-tokens, $width)
       map.get(borderTokens.$border-styles, $style)
       map.get(colors.$colors, $color);
@@ -25,8 +24,7 @@
 @mixin outline($width, $style, $color) {
   @if map_has_key(spacing.$pixel-tokens, $width) and
     map_has_key(borderTokens.$border-styles, $style) and
-    map_has_key(colors.$colors, $color)
-  {
+    map_has_key(colors.$colors, $color) {
     outline: map.get(spacing.$pixel-tokens, $width)
       map.get(borderTokens.$border-styles, $style)
       map.get(colors.$colors, $color);

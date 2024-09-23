@@ -1,9 +1,9 @@
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-@use "sass:map";
-@use "../breakpoints/mixins.scss" as breakpoints;
-@use "../spacing/tokens.scss" as spacing;
-@use "./tokens.scss" as tokens;
+@use 'sass:map';
+@use '../breakpoints/mixins.scss' as breakpoints;
+@use '../spacing/tokens.scss' as spacing;
+@use './tokens.scss' as tokens;
 
 // Body Text
 
@@ -55,7 +55,7 @@
   font-size: tokens.$heading-xxl-font-size;
   font-weight: tokens.$font-weight-medium;
 
-  @include breakpoints.breakpoint-max("sm") {
+  @include breakpoints.breakpoint-max('sm') {
     font-size: tokens.$heading-xl-font-size;
   }
 }
@@ -66,7 +66,7 @@
   font-size: tokens.$heading-xl-font-size;
   font-weight: tokens.$font-weight-medium;
 
-  @include breakpoints.breakpoint-max("sm") {
+  @include breakpoints.breakpoint-max('sm') {
     line-height: tokens.$heading-m-line-height;
     font-size: tokens.$heading-l-font-size;
   }
@@ -78,7 +78,7 @@
   font-size: tokens.$heading-l-font-size;
   font-weight: tokens.$font-weight-medium;
 
-  @include breakpoints.breakpoint-max("sm") {
+  @include breakpoints.breakpoint-max('sm') {
     font-size: tokens.$heading-m-font-size;
   }
 }
@@ -89,7 +89,7 @@
   font-size: tokens.$heading-m-font-size;
   font-weight: tokens.$font-weight-medium;
 
-  @include breakpoints.breakpoint-max("sm") {
+  @include breakpoints.breakpoint-max('sm') {
     line-height: tokens.$heading-s-line-height;
     font-size: tokens.$heading-s-font-size;
   }
@@ -101,7 +101,7 @@
   font-size: tokens.$heading-s-font-size;
   font-weight: tokens.$font-weight-medium;
 
-  @include breakpoints.breakpoint-max("sm") {
+  @include breakpoints.breakpoint-max('sm') {
     font-size: tokens.$heading-xs-font-size;
     font-weight: tokens.$font-weight-bold;
   }
@@ -113,7 +113,7 @@
   font-size: tokens.$heading-xs-font-size;
   font-weight: tokens.$font-weight-bold;
 
-  @include breakpoints.breakpoint-max("sm") {
+  @include breakpoints.breakpoint-max('sm') {
     font-size: tokens.$heading-xxs-font-size;
   }
 }
@@ -202,11 +202,11 @@
 // Button component
 
 @mixin button-typography {
-  @include letter-spacing("1px");
+  @include letter-spacing('1px');
 
   text-transform: uppercase;
   line-height: tokens.$body-text-s-line-height;
-  font-family: tokens.$font-family, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: tokens.$font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: tokens.$body-text-m-font-size;
   font-weight: tokens.$font-weight-bold;
 }

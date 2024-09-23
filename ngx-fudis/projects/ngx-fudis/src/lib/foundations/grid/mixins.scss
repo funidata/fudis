@@ -1,6 +1,6 @@
-@use "sass:map";
-@use "./tokens" as tokens;
-@use "../spacing/tokens.scss" as spacing;
+@use 'sass:map';
+@use './tokens' as tokens;
+@use '../spacing/tokens.scss' as spacing;
 
 @mixin grid-max-width($width) {
   @if map_has_key(tokens.$grid-widths, $width) {

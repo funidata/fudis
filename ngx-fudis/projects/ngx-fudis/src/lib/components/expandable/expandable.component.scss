@@ -1,9 +1,9 @@
-@use "../../foundations/colors/mixins.scss" as color;
-@use "../../foundations/borders/mixins.scss" as border;
-@use "../../foundations/spacing/tokens.scss" as spacing;
-@use "../../foundations/typography/mixins.scss" as typography;
-@use "../../foundations/focus/mixins.scss" as focus;
-@use "../../foundations/breakpoints/mixins.scss" as breakpoint;
+@use '../../foundations/colors/mixins.scss' as color;
+@use '../../foundations/borders/mixins.scss' as border;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/focus/mixins.scss' as focus;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoint;
 
 .fudis-expandable {
   margin-bottom: spacing.$spacing-sm;
@@ -14,7 +14,7 @@
   }
 
   &__regular {
-    @include border.border("2px", "solid", "gray-extra-light");
+    @include border.border('2px', 'solid', 'gray-extra-light');
   }
 
   &__header {
@@ -22,7 +22,7 @@
     padding: spacing.$spacing-xs;
 
     &__regular {
-      @include color.bg-color("gray-extra-light");
+      @include color.bg-color('gray-extra-light');
     }
 
     &__heading {
@@ -31,7 +31,7 @@
 
       &__button {
         @include border.border-none;
-        @include color.bg-color("transparent");
+        @include color.bg-color('transparent');
         @include typography.expandable-regular-typography;
 
         cursor: pointer;
@@ -54,7 +54,7 @@
         }
 
         &__lite {
-          @include color.text-color("primary");
+          @include color.text-color('primary');
           @include typography.text-link-m-typography;
         }
       }
@@ -68,25 +68,25 @@
         margin-left: spacing.$spacing-xs;
       }
 
-      @include breakpoint.breakpoint("sm") {
+      @include breakpoint.breakpoint('sm') {
         margin-top: 0;
         margin-left: 0;
       }
     }
 
-    @include breakpoint.breakpoint("sm") {
+    @include breakpoint.breakpoint('sm') {
       display: flex;
     }
   }
 
   &__content {
     &__padding-default {
-      @include breakpoint.breakpoint("md") {
+      @include breakpoint.breakpoint('md') {
         padding: spacing.$spacing-md;
         padding-left: spacing.$spacing-xl;
       }
 
-      @include breakpoint.breakpoint-max("md") {
+      @include breakpoint.breakpoint-max('md') {
         padding: spacing.$spacing-sm;
         padding-left: spacing.$spacing-md;
       }

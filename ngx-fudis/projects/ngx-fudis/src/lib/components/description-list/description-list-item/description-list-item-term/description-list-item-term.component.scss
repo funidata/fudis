@@ -1,7 +1,7 @@
-@use "../../../../foundations/typography/mixins.scss" as typography;
-@use "../../../../foundations/typography/tokens.scss" as typographyTokens;
-@use "../../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/typography/tokens.scss' as typographyTokens;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-dl-item-term {
   &__regular {
@@ -12,7 +12,7 @@
 
     &__text-content {
       @include typography.description-list-key-typography;
-      @include colorMixins.text-color("gray-dark");
+      @include colorMixins.text-color('gray-dark');
     }
 
     &__colon {
@@ -26,7 +26,7 @@
     padding-left: spacing.$spacing-xs;
 
     &::before {
-      @include colorMixins.bg-color("gray-middle");
+      @include colorMixins.bg-color('gray-middle');
 
       display: inline-block;
       position: absolute;
@@ -34,12 +34,12 @@
       left: 0;
       width: spacing.$pixel-1;
       height: 80%;
-      content: "";
+      content: '';
     }
 
     &__text-content {
       @include typography.description-list-compact-key-typography;
-      @include colorMixins.text-color("gray-dark");
+      @include colorMixins.text-color('gray-dark');
     }
 
     &__colon {

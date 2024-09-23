@@ -1,7 +1,7 @@
-@use "../../../foundations/borders/mixins.scss" as borders;
-@use "../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../foundations/typography/mixins.scss" as typography;
-@use "../../../foundations/focus/mixins.scss" as focus;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-text-input {
   box-sizing: border-box;
@@ -10,7 +10,7 @@
 
   &__input {
     @include typography.text-field-input;
-    @include borders.border-radius("2px");
+    @include borders.border-radius('2px');
 
     box-sizing: border-box;
     padding: spacing.$spacing-xxs spacing.$spacing-sm;
@@ -24,7 +24,7 @@
 
   // Keep number input arrows visible all the time
   /* stylelint-disable-next-line selector-no-qualifying-type */
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-inner-spin-button {
     opacity: 1;
   }
 }
