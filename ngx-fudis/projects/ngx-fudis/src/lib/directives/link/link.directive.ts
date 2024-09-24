@@ -5,8 +5,6 @@ import {
   ElementRef,
   OnChanges,
   effect,
-  EventEmitter,
-  Output,
   Input,
 } from '@angular/core';
 import { FudisComponentChanges } from '../../types/miscellaneous';
@@ -56,22 +54,6 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
    * Title for the link, if not defined title will be the same as link URL
    */
   @Input({ required: true }) title: string;
-
-  /**
-   * Focus event output
-   */
-  @Output() handleFocus = new EventEmitter<FocusEvent>();
-
-  /**
-   * Blur event output
-   */
-  @Output() handleBlur = new EventEmitter<FocusEvent>();
-
-  // TODO: write test
-  /**
-   * Click event output
-   */
-  @Output() handleClick = new EventEmitter<Event>();
 
   private _sizeCssClass: string = `fudis-link__size__inherit`;
 
@@ -150,27 +132,6 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
 
   private _setTitle(): void {
     this._bindedElement.nativeElement.innerText = this.title;
-  }
-
-  /**
-   * Handle Link Component focus event
-   */
-  protected _handleFocus(event: FocusEvent): void {
-    this.handleFocus.emit(event);
-  }
-
-  /**
-   * Handle Link Component blur event
-   */
-  protected _handleBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-  }
-
-  /**
-   * Handle Link Component click event
-   */
-  protected _handleClick(event: Event): void {
-    this.handleClick.emit(event);
   }
 
   //   /**

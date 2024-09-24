@@ -6,43 +6,28 @@ import * as LinkDirectiveStories from "./link.directive.stories.ts";
 
 # Link Directive
 
-Link Directive provides the same look and feel as [Link Component](/docs/components-link--documentation).
+Link Directive adjusts styles and HTML attributes of any native anchor element with tag `<a>`. The directive allows application to use its own routing solutions, as Link Directive does not take any opinion in this. It only tweaks styling of selected anchor element.
 
 ## Usage Guidelines
 
-When routing method such as [UI-Router](https://ui-router.github.io/ng2/) is required, use `fudisLink` directive with HTML anchor element.
-This will apply Link Component's `size` property to the native HTML anchor element.
-At the moment, Link Directive doesn't support the use of `externalLink` nor `title` properties.
+To bind anchor element with Link Directive, add `fudisLink` selector to it. Directive also requires `title` string property. If your anchor element directs to an external site, add `external` property to it. This will adjust HTML attributes and render an icon indicating, that this link will open a new tab.
+
+**Note!**
+
+Although inserting text content between `<a></a>` tags is allowed, it is recommended only to use `title` property for the text content of the link. This is because Angular change detection can be triggered more reliably with the `title` property.
+
+`<a fudisLink href="https://www.example.com" [title]="'This is external link'" [external]="true"></a>`
 
 ## Examples
 
 <Canvas of={LinkDirectiveStories.Example}></Canvas>
 
-```
-    <a fudisLink [uiSref]="route" [size]="size">https://www.example.com</a>
-```
-
 ## Properties
 
 <ArgTypes of={LinkDirective} />
 
-# Link
-
-Link Component is an HTML anchor element which uses [Link Directive](/docs/directives-link--documentation).
-Link Directive can also be used as is and is recommended when using e.g. [UI-Router](https://ui-router.github.io/ng2/).
-
-## Usage Guidelines
-
-Link Component **requires** its link reference.
-Possible values are `href` for regular HTML href or `externalLink` which targets to another domain, this will also add new-tab icon and assistive aria-label for screen readers.
-Or if using [Angular Router](https://angular.io/api/router) the required properties are `link` and `fragmentId`.
-
-Link URL is set as the link title by default. By adding `title` property the visible title can be modified.
-
-## Example
-
-### Accessibility
+## Accessibility
 
 - Link has visible focus
-- Icon indicates new tab for visible users but is hidden from screen readers
-- Screenreader is informed if link will open in a new tab
+- When Link Directive is set external, an Icon indicates new tab for visible users but is hidden from screen readers
+- When Link Directive is set external, screenreader is informed that link will open in a new tab

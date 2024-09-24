@@ -13,9 +13,10 @@
             </ng-container>
             <ul class="fudis-error-summary__error-list">
               <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
+                <!-- eslint-disable-next-line -->
                 <a
                   fudisLink
-                  (handleClick)="handleErrorClick($event, error.id)"
+                  (click)="handleErrorClick($event, error.id)"
                   [title]="error.message"
                 ></a>
               </li>
