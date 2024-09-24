@@ -1,5 +1,14 @@
-import { OnInit, AfterViewInit, Directive, ElementRef, OnChanges, effect } from '@angular/core';
-import { LinkApiDirective } from './link-api/link-api.directive';
+import {
+  OnInit,
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  OnChanges,
+  effect,
+  EventEmitter,
+  Output,
+  Input,
+} from '@angular/core';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
 import { FudisIdService } from '../../services/id/id.service';
@@ -9,21 +18,60 @@ import { FudisTranslationService } from '../../services/translation/translation.
 @Directive({
   selector: '[fudisLink]',
 })
-export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges, AfterViewInit {
+export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   constructor(
     private _bindedElement: ElementRef<HTMLAnchorElement>,
     private _focusService: FudisFocusService,
     private _idService: FudisIdService,
     private _translationService: FudisTranslationService,
   ) {
-    super();
-
     effect(() => {
       this._externalLinkAriaLabel.next(
         this._translationService.getTranslations()().LINK.EXTERNAL_LINK,
       );
     });
   }
+
+  /**
+   * Link size. By default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'md' (14px) or 'lg' (16px).
+   */
+  @Input() size: 'inherit' | 'md' | 'lg' = 'inherit';
+
+  /**
+   * Set browser focus to link on the first load.
+   */
+  @Input() initialFocus: boolean = false;
+
+  /**
+   * Id for the anchor element. By default generated with FudisIdService
+   */
+  @Input() id: string;
+
+  /**
+   * External link URL
+   */
+  @Input() external: boolean = false;
+
+  /**
+   * Title for the link, if not defined title will be the same as link URL
+   */
+  @Input({ required: true }) title: string;
+
+  /**
+   * Focus event output
+   */
+  @Output() handleFocus = new EventEmitter<FocusEvent>();
+
+  /**
+   * Blur event output
+   */
+  @Output() handleBlur = new EventEmitter<FocusEvent>();
+
+  // TODO: write test
+  /**
+   * Click event output
+   */
+  @Output() handleClick = new EventEmitter<Event>();
 
   private _sizeCssClass: string = `fudis-link__size__inherit`;
 

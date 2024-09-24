@@ -101,7 +101,7 @@ import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
-import { LinkApiDirective } from './directives/link/link-api/link-api.directive';
+
 import { LinkDirective } from './directives/link/link.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
@@ -183,7 +183,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     LabelComponent,
     LanguageBadgeComponent,
     LanguageBadgeGroupComponent,
-    LinkApiDirective,
     LinkDirective,
     MultiselectComponent,
     MultiselectChipListComponent,

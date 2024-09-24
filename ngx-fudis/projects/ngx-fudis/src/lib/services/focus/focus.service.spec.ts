@@ -3,7 +3,6 @@ import { FudisFocusService } from './focus.service';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '../../components/button/button.component';
 import { IconComponent } from '../../components/icon/icon.component';
-import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
 import { LinkDirective } from '../../directives/link/link.directive';
 
 @Component({
@@ -43,13 +42,7 @@ describe('FudisFocusService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        MockFocusComponent,
-        ButtonComponent,
-        IconComponent,
-        LinkDirective,
-        LinkApiDirective,
-      ],
+      declarations: [MockFocusComponent, ButtonComponent, IconComponent, LinkDirective],
     });
 
     fixture = TestBed.createComponent(MockFocusComponent);
