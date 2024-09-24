@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import {
-  FudisRadioButtonGroupChangeEvent,
+  FudisRadioButtonChangeEvent,
   FudisRadioButtonOption,
   fudisInputSizeArray,
 } from '../../../types/forms';
@@ -50,9 +50,9 @@ class MockContainerComponent {
     { value: 'capybara', label: 'Capybara', id: 'test-3' },
   ];
 
-  eventReceived: FudisRadioButtonGroupChangeEvent;
+  eventReceived: FudisRadioButtonChangeEvent;
 
-  handleRadioButtonClick(event: FudisRadioButtonGroupChangeEvent): void {
+  handleRadioButtonClick(event: FudisRadioButtonChangeEvent): void {
     this.eventReceived = event;
   }
 }

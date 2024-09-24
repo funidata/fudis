@@ -133,7 +133,7 @@ export type FudisCheckboxGroupChangeEvent = {
   formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 };
 
-export type FudisRadioButtonGroupChangeEvent = {
+export type FudisRadioButtonChangeEvent = {
   option: FudisRadioButtonOption<object>;
   control: FormControl<unknown>;
 };
