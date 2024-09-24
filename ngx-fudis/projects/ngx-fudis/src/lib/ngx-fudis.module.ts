@@ -55,7 +55,6 @@ import { LocalizedTextGroupComponent } from './components/form/localized-text-gr
 import { LabelComponent } from './components/form/label/label.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
-import { LinkComponent } from './components/link/link.component';
 import { MultiselectChipListComponent } from './components/form/select/multiselect/multiselect-chip-list/multiselect-chip-list.component';
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
@@ -185,7 +184,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     LanguageBadgeComponent,
     LanguageBadgeGroupComponent,
     LinkApiDirective,
-    LinkComponent,
     LinkDirective,
     MultiselectComponent,
     MultiselectChipListComponent,
@@ -281,7 +279,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     IconComponent,
     LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,
-    LinkComponent,
     LinkDirective,
     MultiselectComponent,
     MultiselectOptionComponent,

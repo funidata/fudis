@@ -61,6 +61,10 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
     if (changes.external?.currentValue !== changes.external?.previousValue) {
       this._setExternalAttributes();
     }
+
+    if (changes.title?.currentValue !== changes.title?.previousValue) {
+      this._setTitle();
+    }
   }
 
   /**
@@ -95,4 +99,83 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
       (this._bindedElement.nativeElement as HTMLAnchorElement).focus();
     }
   }
+
+  private _setTitle(): void {
+    this._bindedElement.nativeElement.innerText = this.title;
+  }
+
+  /**
+   * Handle Link Component focus event
+   */
+  protected _handleFocus(event: FocusEvent): void {
+    this.handleFocus.emit(event);
+  }
+
+  /**
+   * Handle Link Component blur event
+   */
+  protected _handleBlur(event: FocusEvent): void {
+    this.handleBlur.emit(event);
+  }
+
+  /**
+   * Handle Link Component click event
+   */
+  protected _handleClick(event: Event): void {
+    this.handleClick.emit(event);
+  }
+
+  //   /**
+  //  * For external links with a title. Used to split the last word of the title to be paired with the Icon, so that on line break, the icon sticks with the last word of the title.
+  //  */
+  //   private _parseExternalLinkTitle(): void {
+  //     if (this.external) {
+  //       if (this.title) {
+  //         const toArray = this.title.split(' ');
+
+  //         if (toArray.length > 1) {
+  //           const lastWord: string = toArray[toArray.length - 1];
+
+  //           const titleStart: string = toArray.slice(0, -1).join(' ');
+
+  //           this._externalLinkTitleParsed.next([titleStart, lastWord]);
+  //         } else {
+  //           this._externalLinkTitleParsed.next(toArray);
+  //         }
+  //       } else {
+  //         this._externalLinkTitleParsed.next([this.title]);
+  //       }
+  //     }
+  //   }
 }
+
+// <!--
+// <ng-container *ngIf="!title">
+//   <span class="fudis-link__external__icon-wrapper"
+//     >{{ external
+//     }}<span class="fudis-link__external__icon">
+//       <fudis-icon [icon]="'new-tab'" [color]="'primary-dark'" />
+//     </span>
+//   </span>
+// </ng-container>
+// <ng-container *ngIf="_externalLinkTitleParsed | async as parsedTitle">
+//   <ng-container *ngIf="title">
+//     <ng-container *ngIf="parsedTitle.length > 1"
+//       >{{ parsedTitle[0] }}
+//       <span class="fudis-link__external__icon-wrapper"
+//         >{{ parsedTitle[1]
+//         }}<span class="fudis-link__external__icon">
+//           <fudis-icon [icon]="'new-tab'" [color]="'primary-dark'" />
+//         </span>
+//       </span>
+//     </ng-container>
+//     <ng-container *ngIf="parsedTitle.length === 1">
+//       <span class="fudis-link__external__icon-wrapper"
+//         >{{ parsedTitle[0]
+//         }}<span class="fudis-link__external__icon">
+//           <fudis-icon [icon]="'new-tab'" [color]="'primary-dark'" />
+//         </span>
+//       </span>
+//     </ng-container>
+//   </ng-container>
+// </ng-container> -->

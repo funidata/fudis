@@ -10,7 +10,6 @@ import {
   FooterContentRightDirective,
 } from '../../directives/content-projection/content/content.directive';
 import { GridItemComponent } from '../grid/grid-item/grid-item.component';
-import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
@@ -20,12 +19,12 @@ import { FudisTranslationService } from '../../services/translation/translation.
   selector: 'fudis-mock-footer',
   template: `<fudis-footer>
     <ng-template fudisFooterContentRight>
-      <fudis-link [externalLink]="'example.com'" [title]="'Privacy notice'" />
-      <fudis-link [externalLink]="'example.com'" [title]="'Accessibility statement'" />
-      <fudis-link [externalLink]="'example.com'" [title]="'System information'" />
+      <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'System information'"></a>
     </ng-template>
     <ng-template fudisFooterContentLeft>
-      <fudis-link [externalLink]="'example.com'" [title]="'Promo link'" />
+      <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
     </ng-template>
   </fudis-footer>`,
 })
@@ -43,7 +42,6 @@ describe('FooterComponent', () => {
         FooterComponent,
         GridComponent,
         GridItemComponent,
-        LinkComponent,
         LinkDirective,
         FooterContentLeftDirective,
         FooterContentRightDirective,

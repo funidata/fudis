@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisFocusService } from './focus.service';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '../../components/button/button.component';
-import { LinkComponent } from '../../components/link/link.component';
 import { IconComponent } from '../../components/icon/icon.component';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
 import { LinkDirective } from '../../directives/link/link.directive';
@@ -10,16 +9,21 @@ import { LinkDirective } from '../../directives/link/link.directive';
 @Component({
   selector: 'fudis-mock-component',
   template: `<div class="mock-container">
-    <fudis-link (handleFocus)="handleFocus('fudis-link-1')" [initialFocus]="true" [href]="'/'"
-      >First link</fudis-link
-    >
-    <fudis-link
-      (handleFocus)="handleFocus('fudis-link-2')"
-      *ngIf="secondLinkVisible"
+    <a
+      fudisLink
+      (handleFocus)="handleFocus('fudis-link-1')"
+      [title]="'First link'"
       [initialFocus]="true"
       [href]="'/'"
-      >Second link</fudis-link
-    >
+    ></a>
+    <a
+      fudisLink
+      *ngIf="secondLinkVisible"
+      (handleFocus)="handleFocus('fudis-link-2')"
+      [initialFocus]="true"
+      [title]="'Second link'"
+      [href]="'/'"
+    ></a>
   </div>`,
 })
 class MockFocusComponent {
@@ -43,7 +47,6 @@ describe('FudisFocusService', () => {
         MockFocusComponent,
         ButtonComponent,
         IconComponent,
-        LinkComponent,
         LinkDirective,
         LinkApiDirective,
       ],

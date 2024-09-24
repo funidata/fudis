@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
-import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { FudisIdService } from '../../services/id/id.service';
@@ -34,7 +33,6 @@ describe('BreadcrumbsComponent', () => {
       declarations: [
         BreadcrumbsComponent,
         BreadcrumbsItemComponent,
-        LinkComponent,
         LinkDirective,
         IconComponent,
         BodyTextComponent,

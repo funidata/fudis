@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconComponent } from '../icon/icon.component';
-import { LinkComponent } from '../link/link.component';
 import { NotificationComponent } from './notification.component';
 import { FudisNotification } from '../../types/miscellaneous';
 import { getElement } from '../../utilities/tests/utilities';
@@ -14,7 +13,7 @@ describe('NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotificationComponent, IconComponent, LinkComponent, LinkDirective],
+      declarations: [NotificationComponent, IconComponent, LinkDirective],
       imports: [RouterModule.forRoot([])],
     })
       .overrideComponent(NotificationComponent, {
