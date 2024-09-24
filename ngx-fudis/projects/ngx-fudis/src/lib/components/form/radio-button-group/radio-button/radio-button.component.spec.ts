@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { RadioButtonComponent } from './radio-button.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
-import { FudisRadioButtonOption } from '../../../../types/forms';
+import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { FieldSetComponent } from '../../fieldset/fieldset.component';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
@@ -17,6 +17,7 @@ import { IconComponent } from '../../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
+import { By } from '@angular/platform-browser';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -130,13 +131,30 @@ describe('RadioButtonComponent', () => {
   });
 
   describe('Interaction and logic when clicking', () => {
-    it('should have correct value', () => {
+    it('should have correct value and emit handleChange() when clicking component', waitForAsync(() => {
+      const radioButtonComponentToSpy = fixture.debugElement.query(
+        By.directive(RadioButtonComponent),
+      ).componentInstance;
+
+      const optionToMatch: FudisRadioButtonOption<object> = {
+        id: 'radio-button-test-group-item-1',
+        value: 'platypus',
+        label: 'Platypus',
+      };
+
+      radioButtonComponentToSpy.handleChange.subscribe((value: FudisRadioButtonChangeEvent) => {
+        if (value) {
+          expect(value.option).toEqual(optionToMatch);
+          expect(value.control.value).toEqual(true);
+        }
+      });
+
       const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
         'input#radio-button-test-group-item-1',
       );
 
       const inputValue = input.getAttribute('ng-reflect-value');
       expect(inputValue).toEqual('platypus');
-    });
+    }));
   });
 });
