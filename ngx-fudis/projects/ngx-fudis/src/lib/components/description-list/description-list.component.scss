@@ -1,5 +1,5 @@
-@use "../../foundations/breakpoints/mixins.scss" as breakpoint;
-@use "../../foundations/utilities/mixins.scss" as utilities;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoint;
+@use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dl {
   &__disabled-grid {
@@ -7,7 +7,7 @@
 
     columns: 1;
 
-    @include breakpoint.breakpoint("md") {
+    @include breakpoint.breakpoint('md') {
       columns: 2;
     }
   }

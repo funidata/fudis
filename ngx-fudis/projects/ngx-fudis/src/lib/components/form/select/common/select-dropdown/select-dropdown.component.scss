@@ -1,15 +1,15 @@
-@use "../../../../../foundations/borders/mixins.scss" as borders;
-@use "../../../../../foundations/focus/mixins.scss" as focus;
-@use "../../../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../../../foundations/utilities/mixins.scss" as utilities;
-@use "../../../../../foundations/z-index/mixins.scss" as zIndex;
+@use '../../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../../foundations/focus/mixins.scss' as focus;
+@use '../../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../../../foundations/z-index/mixins.scss' as zIndex;
 
 .fudis-select-dropdown {
   @include utilities.box-reset;
-  @include colorMixins.bg-color("white");
-  @include zIndex.z-index("dropdown-menu");
-  @include borders.border("1px", "solid", "gray-dark");
+  @include colorMixins.bg-color('white');
+  @include zIndex.z-index('dropdown-menu');
+  @include borders.border('1px', 'solid', 'gray-dark');
 
   display: none;
   position: absolute;
@@ -33,14 +33,6 @@
   &__center {
     right: initial;
     left: initial;
-  }
-
-  /* stylelint-disable-next-line */
-  &.fudis-input-size__xs {
-    width: initial;
-    /* stylelint-disable-next-line unit-disallowed-list */
-    min-width: calc(7rem / var(--fudis-rem-multiplier));
-    max-width: initial;
   }
 
   &--open {

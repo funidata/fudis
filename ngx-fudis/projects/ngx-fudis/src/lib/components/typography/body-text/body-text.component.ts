@@ -1,14 +1,8 @@
-import {
-  Component,
-  Input,
-  HostBinding,
-  ChangeDetectionStrategy,
-  Optional,
-  Host,
-} from '@angular/core';
+import { Component, Input, HostBinding, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FudisBodyText, FudisTextAlign } from '../../../types/typography';
-import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisIdService } from '../../../services/id/id.service';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-body-text',
@@ -16,16 +10,9 @@ import { FudisIdService } from '../../../services/id/id.service';
   styleUrls: ['./body-text.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BodyTextComponent {
-  constructor(
-    @Host() @Optional() private _parentDialog: DialogComponent,
-    private _idService: FudisIdService,
-  ) {
+export class BodyTextComponent implements OnChanges {
+  constructor(private _idService: FudisIdService) {
     this._id = _idService.getNewId('body-text');
-
-    if (_parentDialog) {
-      this.variant = 'md-light';
-    }
   }
 
   /**
@@ -48,5 +35,18 @@ export class BodyTextComponent {
    */
   protected _id: string;
 
-  // TODO: Enable Input spacing for marginBottom
+  /**
+   * To add default CSS class if app hasn't provided any variant
+   */
+  protected _defaultClass = new BehaviorSubject<boolean>(true);
+
+  ngOnChanges(changes: FudisComponentChanges<BodyTextComponent>): void {
+    if (changes.variant?.currentValue !== changes.variant?.previousValue) {
+      if (!changes.variant?.currentValue) {
+        this._defaultClass.next(true);
+      } else {
+        this._defaultClass.next(false);
+      }
+    }
+  }
 }

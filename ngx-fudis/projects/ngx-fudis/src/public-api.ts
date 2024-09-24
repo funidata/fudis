@@ -6,14 +6,15 @@
 export * from './lib/ngx-fudis.module';
 
 export { ActionsDirective } from './lib/directives/content-projection/actions/actions.directive';
-// export { AlertComponent } from './lib/components/alert/alert/alert.component';
-// export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
+export { AlertComponent } from './lib/components/alert/alert/alert.component';
+export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
 export { AutocompleteComponent } from './lib/components/form/autocomplete/autocomplete.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { BreadcrumbsComponent } from './lib/components/breadcrumbs/breadcrumbs.component';
 export { BreadcrumbsItemComponent } from './lib/components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 export { ButtonComponent } from './lib/components/button/button.component';
+export { HorizontalRuleComponent } from './lib/components/horizontal-rule/horizontal-rule.component';
 export { CheckboxComponent } from './lib/components/form/checkbox-group/checkbox/checkbox.component';
 export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/checkbox-group.component';
 export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
@@ -38,7 +39,7 @@ export { DescriptionListComponent } from './lib/components/description-list/desc
 export { DescriptionListItemComponent } from './lib/components/description-list/description-list-item/description-list-item.component';
 export { DescriptionListItemDetailsComponent } from './lib/components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 export { DescriptionListItemTermComponent } from './lib/components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
-// export { FudisAlertService } from './lib/services/alert/alert.service';
+export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
 export { FudisDialogService } from './lib/services/dialog/dialog.service';
 export { FudisGridService } from './lib/services/grid/grid.service';
@@ -55,7 +56,7 @@ export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.compo
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
 export { FormSubmitDirective } from './lib/directives/form/form-actions/form-actions.directive';
-// export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
+export { LocalizedTextGroupComponent } from './lib/components/form/localized-text-group/localized-text-group.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';

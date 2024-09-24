@@ -11,7 +11,7 @@ export interface FudisGroupValidatorsMinMaxSettings {
  * Form Group Validators
  */
 export const FudisGroupValidators = {
-  atLeastOneRequired,
+  oneRequired,
   min,
   max,
 };
@@ -19,7 +19,7 @@ export const FudisGroupValidators = {
 /**
  * At least one option must be selected from a group
  */
-function atLeastOneRequired(message: FudisValidatorMessage): FudisValidatorFn {
+function oneRequired(message: FudisValidatorMessage): FudisValidatorFn {
   return (controlGroup: AbstractControl): FudisValidationErrors | null => {
     const { controls } = controlGroup as FormGroup;
 
@@ -34,7 +34,7 @@ function atLeastOneRequired(message: FudisValidatorMessage): FudisValidatorFn {
 
       if (!theOne) {
         return {
-          atLeastOneRequired: { message },
+          oneRequired: { message },
         };
       }
     }

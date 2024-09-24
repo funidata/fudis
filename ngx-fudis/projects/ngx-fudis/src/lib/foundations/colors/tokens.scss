@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 /* stylelint-disable color-no-hex */
 
@@ -32,21 +32,21 @@ $color-green-light: #c6ecd6;
 $color-green: #1e874b;
 $color-focus-primary: #1076db;
 $colors: (
-  "primary-light": $color-primary-light,
-  "primary": $color-primary,
-  "primary-dark": $color-primary-dark,
-  "primary-extra-dark": $color-primary-extra-dark,
-  "white": $color-white,
-  "gray-extra-light": $color-gray-extra-light,
-  "gray-light": $color-gray-light,
-  "gray-middle": $color-gray-middle,
-  "gray-dark": $color-gray-dark,
-  "red-light": $color-red-light,
-  "red": $color-red,
-  "yellow-light": $color-yellow-light,
-  "yellow": $color-yellow,
-  "green-light": $color-green-light,
-  "green": $color-green,
-  "focus-primary": $color-focus-primary,
-  "transparent": transparent,
+  'primary-light': $color-primary-light,
+  'primary': $color-primary,
+  'primary-dark': $color-primary-dark,
+  'primary-extra-dark': $color-primary-extra-dark,
+  'white': $color-white,
+  'gray-extra-light': $color-gray-extra-light,
+  'gray-light': $color-gray-light,
+  'gray-middle': $color-gray-middle,
+  'gray-dark': $color-gray-dark,
+  'red-light': $color-red-light,
+  'red': $color-red,
+  'yellow-light': $color-yellow-light,
+  'yellow': $color-yellow,
+  'green-light': $color-green-light,
+  'green': $color-green,
+  'focus-primary': $color-focus-primary,
+  'transparent': transparent,
 );

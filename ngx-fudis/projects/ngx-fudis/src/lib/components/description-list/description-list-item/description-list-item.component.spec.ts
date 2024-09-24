@@ -203,7 +203,7 @@ describe('DescriptionListItemComponent', () => {
 
       mockFixture.detectChanges();
 
-      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toBeNull;
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toBeNull();
     });
   });
 });

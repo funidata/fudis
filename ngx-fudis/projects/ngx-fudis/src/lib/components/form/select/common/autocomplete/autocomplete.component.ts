@@ -41,12 +41,12 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
   /**
    * Set input fields required attribute
    */
-  @Input() required: boolean;
+  @Input() required: boolean | null;
 
   /**
    * If parent's dropdown is open or not
    */
-  @Input() dropdownOpen: boolean = false;
+  @Input() dropdownOpen: boolean | null = false;
 
   /**
    * For single select label when control has value on init

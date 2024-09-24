@@ -174,7 +174,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     newError: FudisFormErrorSummaryItem,
     currentErrors: FudisFormErrorSummaryObject,
   ): FudisFormErrorSummaryObject {
-    const errorId = this._defineErrorId(newError.id, newError.controlName);
+    const errorId = this.defineErrorId(newError.id, newError.controlName);
 
     if (!currentErrors[errorId]) {
       currentErrors = {
@@ -321,8 +321,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param id Id of the form error summary item
    * @param controlName Control name of the form error summary item
    */
-  // eslint-disable-next-line class-methods-use-this
-  private _defineErrorId(id: string, controlName: string | undefined): string {
+
+  public defineErrorId(id: string, controlName: string | undefined): string {
     return controlName ? `${id}_${controlName}` : id;
   }
 }

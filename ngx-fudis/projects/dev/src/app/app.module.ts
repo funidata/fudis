@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxFudisModule } from 'ngx-fudis';
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -25,13 +25,13 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
     AppFormExampleComponent,
     AppDropdownExamplesComponent,
   ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     NgxFudisModule,
     ScrollingModule,
-    HttpClientModule,
     TranslocoRootModule,
     RouterModule.forRoot([]),
   ],
@@ -44,7 +44,7 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
       provide: MAT_DIALOG_DATA,
       useValue: [],
     },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

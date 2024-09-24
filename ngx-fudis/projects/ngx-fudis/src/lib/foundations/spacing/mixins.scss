@@ -1,26 +1,26 @@
-@use "./tokens.scss" as spacing;
+@use './tokens.scss' as spacing;
 
 $direction-attributes: (
-  "m": "margin",
-  "mt": "margin-top",
-  "mb": "margin-bottom",
-  "ml": "margin-left",
-  "mr": "margin-right",
-  "p": "padding",
-  "pt": "padding-top",
-  "pb": "padding-bottom",
-  "pl": "padding-left",
-  "pr": "padding-right",
+  'm': 'margin',
+  'mt': 'margin-top',
+  'mb': 'margin-bottom',
+  'ml': 'margin-left',
+  'mr': 'margin-right',
+  'p': 'padding',
+  'pt': 'padding-top',
+  'pb': 'padding-bottom',
+  'pl': 'padding-left',
+  'pr': 'padding-right',
 );
 $spacing-tokens: (
-  "none": spacing.$spacing-none,
-  "xxs": spacing.$spacing-xxs,
-  "xs": spacing.$spacing-xs,
-  "sm": spacing.$spacing-sm,
-  "md": spacing.$spacing-md,
-  "lg": spacing.$spacing-lg,
-  "xl": spacing.$spacing-xl,
-  "xxl": spacing.$spacing-xxl,
+  'none': spacing.$spacing-none,
+  'xxs': spacing.$spacing-xxs,
+  'xs': spacing.$spacing-xs,
+  'sm': spacing.$spacing-sm,
+  'md': spacing.$spacing-md,
+  'lg': spacing.$spacing-lg,
+  'xl': spacing.$spacing-xl,
+  'xxl': spacing.$spacing-xxl,
 );
 
 @mixin spacing-classes($prefix) {

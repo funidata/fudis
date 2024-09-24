@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -27,7 +26,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class SelectComponent extends SelectBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
@@ -36,7 +35,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
+    super(_document, _translationService, _focusService, _idService, _changeDetectorRef);
   }
 
   /*
@@ -53,13 +52,10 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   ngOnInit(): void {
     this._setParentId('select');
 
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
-  }
-
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
+    this._triggerErrorSummaryOnInitReload(
+      this._parentForm?.errorSummaryVisible,
+      this.control.invalid,
+    );
   }
 
   /**
@@ -108,6 +104,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
-    this._changeDetectorRef.detectChanges();
+    this._cdr.detectChanges();
   }
 }

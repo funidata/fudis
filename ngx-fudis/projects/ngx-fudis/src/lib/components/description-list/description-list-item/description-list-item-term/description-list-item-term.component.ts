@@ -7,7 +7,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'fudis-dt, fudis-description-list-term',
+  selector: 'fudis-dt',
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

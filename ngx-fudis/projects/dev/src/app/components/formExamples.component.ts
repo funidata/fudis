@@ -6,16 +6,15 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxChangeEvent,
+  FudisInputSize,
 } from 'projects/ngx-fudis/src/lib/types/forms';
 
 import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FudisGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/groupValidators';
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
-import {
-  FudisDropdownLanguageOption,
-  FudisInputWithLanguageOptionsFormGroup,
-} from 'dist/ngx-fudis/lib/types/forms';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { defaultOptions } from 'projects/ngx-fudis/src/lib/components/form/select/common/mock_data';
 
 type MyForm = {
   dropdown: FormControl<FudisSelectOption<object> | null>;
@@ -26,8 +25,8 @@ type MyForm = {
   checkboxFormGroup: FormGroup;
   date: FormControl<Date | null>;
   autocompleteDropdown: FormControl<FudisSelectOption<object> | null>;
-  autocompleteSearch: FormControl<FudisSelectOption<object> | null>;
-  withLanguages: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
+  autocompleteSearch: FormControl<FudisSelectOption<object>[] | null>;
+  withLanguages: FormGroup;
 };
 
 @Component({
@@ -119,31 +118,25 @@ export class AppFormExampleComponent implements OnInit {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    autocompleteSearch: new FormControl<FudisSelectOption<object> | null>(
+    autocompleteSearch: new FormControl<FudisSelectOption<object>[] | null>(
       null,
       FudisValidators.required(
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    withLanguages: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
+    withLanguages: new FormGroup(
       {
         finnish: new FormControl<string | null>(null),
         swedish: new FormControl<string | null>(null),
         english: new FormControl<string | null>(null),
       },
-      [
-        FudisGroupValidators.atLeastOneRequired(
-          this._translocoService.selectTranslate('error_one_required'),
-        ),
-      ],
+      FudisGroupValidators.oneRequired(
+        this._translocoService.selectTranslateObject('form_errors.one_required'),
+      ),
     ),
   });
 
-  _languageOptions: FudisDropdownLanguageOption[] = [
-    { value: 'finnish', label: 'FI' },
-    { value: 'swedish', label: 'SV' },
-    { value: 'english', label: 'EN' },
-  ];
+  selectOptions = defaultOptions;
 
   radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 
@@ -169,6 +162,18 @@ export class AppFormExampleComponent implements OnInit {
       });
   }
 
+  selectSize: FudisInputSize = 'sm';
+
+  changeSelectSize(): void {
+    if (this.selectSize === 'sm') {
+      this.selectSize = 'md';
+    } else if (this.selectSize === 'md') {
+      this.selectSize = 'lg';
+    } else {
+      this.selectSize = 'sm';
+    }
+  }
+
   clickSubmit(): void {
     this.testFormGroup.markAllAsTouched();
 
@@ -186,9 +191,7 @@ export class AppFormExampleComponent implements OnInit {
     this.customError = !this.customError;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   handleChange(updatedOptions: FudisCheckboxChangeEvent): void {
-    // eslint-disable-next-line no-console
     console.log(updatedOptions);
   }
 }

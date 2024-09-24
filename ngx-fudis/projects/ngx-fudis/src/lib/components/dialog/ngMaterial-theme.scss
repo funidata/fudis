@@ -19,6 +19,15 @@
 @use "../../foundations/utilities/mixins.scss" as utilities;
 @use "../../foundations/spacing/tokens.scss" as spacing;
 
+.fudis-dialog {
+  /* Body Text inside Dialog should be md-light by default but can be altered by the App */
+  & fudis-body-text {
+    & .fudis-body-text__default {
+      @include typography.body-text-md-light;
+    }
+  }
+}
+
 .cdk-overlay-pane.fudis-dialog-panel.mat-mdc-dialog-panel {
   max-width: 100vw;
 }
@@ -120,7 +129,7 @@
 }
 
 .fudis-dialog-backdrop {
-  @include colorMixins.bg-color("white");
+  @include colorMixins.bg-color('white');
 
   &.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
     opacity: 0.95 !important;

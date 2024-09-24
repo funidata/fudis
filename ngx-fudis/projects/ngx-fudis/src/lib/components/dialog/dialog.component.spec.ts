@@ -7,6 +7,7 @@ import { DialogComponent } from './dialog.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { getElement } from '../../utilities/tests/utilities';
+import { fudisDialogSizeArray } from '../../types/miscellaneous';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -56,25 +57,12 @@ describe('DialogComponent', () => {
       expect(component.size).toEqual('md');
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__md');
 
-      component.size = 'xs';
-      fixture.detectChanges();
+      fudisDialogSizeArray.forEach((size) => {
+        component.size = size;
+        fixture.detectChanges();
 
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__xs');
-
-      component.size = 'sm';
-      fixture.detectChanges();
-
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__sm');
-
-      component.size = 'lg';
-      fixture.detectChanges();
-
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__lg');
-
-      component.size = 'xl';
-      fixture.detectChanges();
-
-      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__xl');
+        expect(dialogEl.className).toEqual(`fudis-dialog fudis-dialog__size__${size}`);
+      });
     });
 
     it('should have CSS class for close button', () => {
@@ -88,18 +76,16 @@ describe('DialogComponent', () => {
   });
 
   it('should call open signal on initialisation', () => {
-    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
+    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenStatus');
     initDialogComponent();
     expect(dialogSpy).toHaveBeenCalledWith(true);
   });
 
   it('should call open signal on destroy', () => {
-    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
+    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenStatus');
     initDialogComponent();
     component.ngOnDestroy();
 
     expect(dialogSpy).toHaveBeenCalledWith(false);
   });
-
-  // TODO: add tests for Alert Group inside Dialog
 });

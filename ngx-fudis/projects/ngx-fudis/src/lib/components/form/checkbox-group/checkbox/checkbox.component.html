@@ -9,18 +9,18 @@
       [formControl]="control"
       [value]="control.value"
       [name]="_checkboxGroup.id"
-      [attr.aria-disabled]="control.disabled ? true : null"
-      [attr.checked]="control.value ? true : null"
+      [attr.aria-disabled]="control.disabled || null"
+      [attr.checked]="control.value || null"
       [attr.aria-invalid]="
-        _checkboxGroup.formGroup &&
-        _checkboxGroup.formGroup.touched &&
-        _checkboxGroup.formGroup.invalid
-          ? true
-          : null
+        (_checkboxGroup.formGroup &&
+          _checkboxGroup.formGroup.touched &&
+          _checkboxGroup.formGroup.invalid) ||
+        null
       "
       (change)="_onChange()"
       (blur)="_onBlur($event)"
-      (focus)="_onFocus()"
+      (focus)="_onFocus($event)"
+      (keyup)="_checkboxGroup.handleKeyUp.emit($event)"
     />
     <div class="fudis-checkbox__content">
       <div class="fudis-checkbox__content-wrapper">

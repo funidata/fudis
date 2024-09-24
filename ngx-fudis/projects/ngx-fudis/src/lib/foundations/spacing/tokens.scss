@@ -1,5 +1,5 @@
 /* stylelint-disable unit-disallowed-list */
-@use "sass:map";
+@use 'sass:map';
 
 // Based on default 16px base value
 
@@ -18,11 +18,11 @@ $pixel-3: 3px;
 
 // Used with borders, border-radius and letter-spacing mixins. Any value >=4px should be used from spacing values above.
 $pixel-tokens: (
-  "1px": $pixel-1,
-  "2px": $pixel-2,
-  "3px": $pixel-3,
+  '1px': $pixel-1,
+  '2px': $pixel-2,
+  '3px': $pixel-3,
 );
-$spacing-input-xs: calc(4rem / var(--fudis-rem-multiplier));
+$spacing-input-xs: calc(5.75rem / var(--fudis-rem-multiplier));
 $spacing-input-sm: calc(10rem / var(--fudis-rem-multiplier));
 $spacing-input-md: calc(14rem / var(--fudis-rem-multiplier));
 $spacing-input-lg: calc(23rem / var(--fudis-rem-multiplier));

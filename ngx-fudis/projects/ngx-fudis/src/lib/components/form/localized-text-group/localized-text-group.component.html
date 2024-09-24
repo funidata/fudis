@@ -1,0 +1,105 @@
+<div *ngIf="_selectControl.value" class="fudis-localized-text-group fudis-input-size__{{ size }}">
+  <div class="fudis-localized-text-group__inputs">
+    <fudis-label
+      [for]="id"
+      [text]="label"
+      [id]="id + '-label'"
+      [required]="_required | async"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    />
+    <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
+      <input
+        *ngIf="variant === 'text-input' && control.key === _selectControl.value.value"
+        #inputRef
+        class="fudis-form-input fudis-localized-text-group__inputs__text"
+        [attr.aria-invalid]="
+          (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
+          (formGroup.controls[control.key].touched && invalidState)
+            ? true
+            : null
+        "
+        [attr.aria-label]="
+          ariaLabel
+            ? label + ', ' + _selectControl.value.label + ariaLabel
+            : label + ', ' + _selectControl.value.label
+        "
+        [attr.minlength]="_minLength | async"
+        [attr.maxlength]="_maxLength | async"
+        [formControl]="formGroup.controls[control.key]"
+        (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
+        (blur)="handleBlur.emit($event)"
+        (focus)="onFocus($event)"
+        [id]="id"
+        [attr.aria-describedby]="id + '_guidance'"
+        [attr.required]="(_required | async) || null"
+        [attr.aria-disabled]="
+          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+        "
+        [readonly]="
+          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+        "
+      />
+      <textarea
+        #inputRef
+        *ngIf="variant === 'text-area' && control.key === _selectControl.value.value"
+        class="fudis-form-input fudis-localized-text-group__inputs__area"
+        [attr.aria-invalid]="
+          (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
+          (formGroup.controls[control.key].touched && invalidState)
+            ? true
+            : null
+        "
+        [attr.aria-label]="
+          ariaLabel
+            ? label + ', ' + _selectControl.value.label + ariaLabel
+            : label + ', ' + _selectControl.value.label
+        "
+        [attr.minlength]="_minLength | async"
+        [attr.maxlength]="_maxLength | async"
+        [formControl]="formGroup.controls[control.key]"
+        (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
+        (blur)="handleBlur.emit($event)"
+        (focus)="onFocus($event)"
+        [id]="id"
+        [attr.aria-describedby]="id + '_guidance'"
+        [attr.required]="(_required | async) || null"
+        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled || null"
+        [readonly]="formGroup.controls[control.key].disabled || disabled || null"
+      >
+      </textarea>
+    </ng-container>
+    <fudis-guidance
+      *ngIf="!disableGuidance"
+      [inputLabel]="label"
+      [reloadErrorSummary]="_reloadErrorSummaryTrigger"
+      [maxLength]="_maxLength | async"
+      [helpText]="helpText"
+      [formGroup]="formGroup"
+      [formId]="_parentForm?.id || null"
+      [for]="id"
+      [selectedOption]="_selectControl.value.value"
+    >
+      <ng-content select="fudis-error-message"
+    /></fudis-guidance>
+  </div>
+  <fudis-select
+    *ngIf="_languageLabel | async as label"
+    class="fudis-localized-text-group__select"
+    [label]="label"
+    [selectionClearButton]="false"
+    (handleViewInit)="_DOMUtilitiesService.setLabelHeight(true)"
+    (selectionUpdate)="_checkHtmlAttributes($event?.value)"
+    [control]="_selectControl"
+    [size]="'xs'"
+    [id]="id + '_language-select'"
+  >
+    <ng-template fudisContent type="select-options">
+      <fudis-select-option
+        *ngFor="let option of _selectOptions"
+        [data]="{ value: option.value, label: option.label, disabled: option.disabled }"
+      />
+    </ng-template>
+  </fudis-select>
+</div>

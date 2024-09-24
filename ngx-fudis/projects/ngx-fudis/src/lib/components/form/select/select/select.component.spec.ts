@@ -9,7 +9,6 @@ import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directi
 import { LabelComponent } from '../../label/label.component';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
-import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { SelectAutocompleteComponent } from '../common/autocomplete/autocomplete.component';
@@ -71,7 +70,6 @@ describe('SelectComponent', () => {
         FudisFocusService,
         TooltipDirective,
         SelectBaseDirective,
-        InputBaseDirective,
       ],
       imports: [ReactiveFormsModule],
     }).compileComponents();

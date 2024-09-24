@@ -30,7 +30,7 @@ export class DialogComponent implements OnDestroy, OnInit {
     });
     this._id = _idService.getNewId('dialog');
 
-    _dialogService.setDialogOpenSignal(true);
+    _dialogService.setDialogOpenStatus(true);
   }
 
   /**
@@ -64,7 +64,7 @@ export class DialogComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     if (this._orderNumber === 1 || this._orderNumber === 0) {
-      this._dialogService.setDialogOpenSignal(false);
+      this._dialogService.setDialogOpenStatus(false);
     }
   }
 

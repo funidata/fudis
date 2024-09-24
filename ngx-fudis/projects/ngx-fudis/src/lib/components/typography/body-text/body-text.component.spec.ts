@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
-import { fudisBodyTextArray } from '../../../types/typography';
+import { fudisBodyTextArray, fudisTextAlignArray } from '../../../types/typography';
 
 describe('BodyTextComponent', () => {
   let component: BodyTextComponent;
@@ -26,7 +26,7 @@ describe('BodyTextComponent', () => {
 
   //TODO: Write test for host class
   describe('CSS classes', () => {
-    it('should change CSS classes according to the given body-text variant', () => {
+    it('should change CSS classes according to the given body-text variant input', () => {
       fudisBodyTextArray.forEach((variant) => {
         component.variant = variant;
         fixture.detectChanges();
@@ -34,32 +34,26 @@ describe('BodyTextComponent', () => {
         const element = getElement(fixture, '.fudis-body-text');
 
         expect(sortClasses(element.className)).toEqual(
-          sortClasses(`fudis-body-text fudis-body-text__left fudis-body-text__${variant}`),
+          sortClasses(
+            `fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__${variant}`,
+          ),
         );
       });
     });
 
-    // TODO: Refactor to use helper function to test align input
-    it('should change CSS classes according to given body-text align', () => {
-      const element = getElement(fixture, '.fudis-body-text');
+    it('should change CSS classes according to the given body-text align input', () => {
+      fudisTextAlignArray.forEach((align) => {
+        component.align = align;
+        fixture.detectChanges();
 
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses('fudis-body-text fudis-body-text__left fudis-body-text__md-regular'),
-      );
+        const element = getElement(fixture, '.fudis-body-text');
 
-      component.align = 'center';
-      fixture.detectChanges();
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses('fudis-body-text fudis-body-text__center fudis-body-text__md-regular'),
-      );
-
-      component.align = 'right';
-      fixture.detectChanges();
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses('fudis-body-text fudis-body-text__right fudis-body-text__md-regular'),
-      );
+        expect(sortClasses(element.className)).toEqual(
+          sortClasses(
+            `fudis-body-text fudis-body-text__default fudis-body-text__${align} fudis-body-text__md-regular`,
+          ),
+        );
+      });
     });
   });
 });

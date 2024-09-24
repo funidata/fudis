@@ -1,4 +1,5 @@
-@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/colors/tokens.scss' as colors;
 
 fudis-body-text {
   /**
@@ -11,11 +12,26 @@ fudis-body-text {
 }
 
 /**
-* Remove spacing between multiple following Body Text elements directly under Grid element.
-* Grid already defines a gap between its children elements.
-*/
+ * Remove spacing between multiple following Body Text elements directly under Grid element.
+ * Grid already defines a gap between its children elements.
+ */
 .fudis-grid {
   > fudis-body-text:has(+ fudis-body-text) {
     margin-bottom: spacing.$spacing-none;
+  }
+}
+
+/**
+ * Body Texts inside three Alert variants should be white instead of default dark-gray.
+ * Body Text Component does not support other than dark-gray color, we need to use important! here
+ */
+.fudis-alert {
+  &__info,
+  &__success,
+  &__danger {
+    fudis-body-text p {
+      /* stylelint-disable-next-line property-disallowed-list, declaration-no-important */
+      color: colors.$color-white !important;
+    }
   }
 }

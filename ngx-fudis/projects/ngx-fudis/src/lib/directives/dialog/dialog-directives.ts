@@ -8,8 +8,6 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 
-// TODO: Write tests for all Dialog Directives in this file
-
 @Directive({
   selector: '[fudisDialogTitle]',
   providers: [
@@ -41,7 +39,6 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 }
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'fudis-dialog-content',
 })
 export class DialogContentDirective extends MatDialogContent implements AfterViewInit {
@@ -85,7 +82,6 @@ export class DialogContentDirective extends MatDialogContent implements AfterVie
 }
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'fudis-dialog-actions',
 })
 export class DialogActionsDirective extends MatDialogActions {

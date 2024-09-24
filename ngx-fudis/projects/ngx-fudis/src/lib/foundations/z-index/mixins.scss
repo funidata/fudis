@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "./tokens" as tokens;
+@use 'sass:map';
+@use './tokens' as tokens;
 
 @mixin z-index($layer-name) {
   @if map_has_key(tokens.$layer-names, $layer-name) {

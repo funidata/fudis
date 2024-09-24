@@ -1,32 +1,28 @@
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable no-descending-specificity */
-@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
 
 fudis-heading {
-  display: block;
+  .fudis-heading {
+    margin-bottom: spacing.$spacing-xs;
 
-  // Expose this default styling when marginBottom property is removed
+    &__variant {
+      &__xl,
+      &__xxl {
+        margin-bottom: spacing.$spacing-sm;
+      }
+    }
+  }
 
-  // .fudis-heading {
-  //   margin-bottom: spacing.$spacing-xs;
-  // }
-
-  // &[class^="fudis-mb"],
-  // &[class^="fudis-xxs-mb"],
-  // &[class^="fudis-xs-mb"],
-  // &[class^="fudis-md-mb"],
-  // &[class^="fudis-lg-mb"],
-  // &[class^="fudis-xl-mb"],
-  // &[class^="fudis-xxl-mb"] {
-  //   .fudis-heading {
-  //     margin-bottom: 0;
-  //   }
-  // }
-
-  // &[class^="fudis-heading-variant__xxl"],
-  // &[class^="fudis-heading-variant__xl"] {
-  //   .fudis-heading {
-  //     margin-bottom: spacing.$spacing-sm;
-  //   }
-  // }
+  &[class*='fudis-mb'],
+  &[class*='fudis-xxs-mb'],
+  &[class*='fudis-xs-mb'],
+  &[class*='fudis-md-mb'],
+  &[class*='fudis-lg-mb'],
+  &[class*='fudis-xl-mb'],
+  &[class*='fudis-xxl-mb'] {
+    .fudis-heading {
+      margin-bottom: 0;
+    }
+  }
 }
