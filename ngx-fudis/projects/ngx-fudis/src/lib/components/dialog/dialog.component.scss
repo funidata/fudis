@@ -1,7 +1,7 @@
-@use "../../foundations/spacing/tokens.scss" as spacing;
-@use "../../foundations/breakpoints/mixins.scss" as breakpoints;
-@use "../../foundations/grid/tokens.scss" as gridTokens;
-@use "../../foundations/borders/mixins.scss" as borders;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../foundations/grid/tokens.scss' as gridTokens;
+@use '../../foundations/borders/mixins.scss' as borders;
 
 @mixin mobile-dialog-width {
   width: calc(spacing.$spacing-dialog-xs - (2 * spacing.$spacing-sm));
@@ -32,7 +32,7 @@
     &__sm {
       @include mobile-dialog-width;
 
-      @include breakpoints.breakpoint("sm") {
+      @include breakpoints.breakpoint('sm') {
         width: calc(spacing.$spacing-dialog-sm - (2 * spacing.$spacing-sm));
       }
     }
@@ -40,7 +40,7 @@
     &__md {
       @include mobile-dialog-width;
 
-      @include breakpoints.breakpoint("sm") {
+      @include breakpoints.breakpoint('sm') {
         width: calc(spacing.$spacing-dialog-md - (2 * spacing.$spacing-sm));
       }
     }
@@ -48,11 +48,11 @@
     &__lg {
       @include mobile-dialog-width;
 
-      @include breakpoints.breakpoint("sm") {
+      @include breakpoints.breakpoint('sm') {
         width: calc(spacing.$spacing-dialog-lg - (2 * spacing.$spacing-sm));
       }
 
-      @include breakpoints.breakpoint("lg") {
+      @include breakpoints.breakpoint('lg') {
         /* stylelint-disable-next-line unit-disallowed-list */
         max-width: calc(100vw - 6rem);
       }
@@ -61,11 +61,11 @@
     &__xl {
       @include mobile-dialog-width;
 
-      @include breakpoints.breakpoint("sm") {
+      @include breakpoints.breakpoint('sm') {
         width: calc(spacing.$spacing-dialog-xl - (2 * spacing.$spacing-sm));
       }
 
-      @include breakpoints.breakpoint("lg") {
+      @include breakpoints.breakpoint('lg') {
         /* stylelint-disable-next-line unit-disallowed-list */
         max-width: calc(100vw - 6rem);
       }
