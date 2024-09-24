@@ -18,6 +18,7 @@
 @use "../../foundations/grid/mixins.scss" as grid;
 @use "../../foundations/utilities/mixins.scss" as utilities;
 @use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/typography/mixins.scss" as typography;
 
 .fudis-dialog {
   /* Body Text inside Dialog should be md-light by default but can be altered by the App */
