@@ -10,7 +10,7 @@ import { LinkDirective } from '../../directives/link/link.directive';
   template: `<div class="mock-container">
     <a
       fudisLink
-      (handleFocus)="handleFocus('fudis-link-1')"
+      (focus)="handleFocus('fudis-link-1')"
       [title]="'First link'"
       [initialFocus]="true"
       [href]="'/'"
@@ -18,7 +18,7 @@ import { LinkDirective } from '../../directives/link/link.directive';
     <a
       fudisLink
       *ngIf="secondLinkVisible"
-      (handleFocus)="handleFocus('fudis-link-2')"
+      (focus)="handleFocus('fudis-link-2')"
       [initialFocus]="true"
       [title]="'Second link'"
       [href]="'/'"
