@@ -179,7 +179,7 @@ class DialogWithFormComponent {
               hendrerit ante nisl sed quam. Vestibulum euismod leo ac magna pretium.
             </fudis-body-text>
           </fudis-grid>
-          <hr aria-hidden="true" />
+          <fudis-hr />
           <fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginTop]="'sm'" [marginBottom]="'sm'">
             <div style="border: 2px solid lightblue">
               <fudis-body-text>Showcase of grid items</fudis-body-text>
