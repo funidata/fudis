@@ -6,13 +6,38 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
 @Component({
   selector: 'fudis-mock-link-directive',
-  template: `<a class="test-link-element" #linkRefOne href="" fudisLink [title]="title"></a>`,
+  template: `<a
+      *ngIf="!linkWithInitialFocus"
+      fudisLink
+      #linkRefOne
+      href=""
+      class="test-link-element"
+      (focus)="handleFocus()"
+      [title]="title"
+    ></a>
+    <a
+      *ngIf="linkWithInitialFocus"
+      fudisLink
+      class="test-link-element"
+      href=""
+      (focus)="handleFocus()"
+      [initialFocus]="true"
+      [title]="title"
+    ></a>`,
 })
 class MockComponent {
   @ViewChild('linkRefOne') public linkRefOne: ElementRef<HTMLAnchorElement>;
   @ViewChild(LinkDirective) public dirRef: LinkDirective;
 
   title = 'Test title for the link';
+
+  linkWithInitialFocus = false;
+
+  focused = false;
+
+  handleFocus(): void {
+    this.focused = true;
+  }
 }
 
 describe('LinkDirective', () => {
@@ -95,6 +120,22 @@ describe('LinkDirective', () => {
     expect(innerContainer.textContent?.trim()).toEqual(secondMatch);
     expect(linkElement.getAttribute('aria-label')).toEqual(`${title}, (opens in a new tab)`);
   };
+
+  describe('Initial focus', () => {
+    it('should not be triggered by default', () => {
+      expect(component.dirRef.initialFocus).toBeFalsy();
+      expect(component.focused).toBeFalsy();
+    });
+    it('should be trigggered on init', () => {
+      // Reset the component
+      fixture = TestBed.createComponent(MockComponent);
+      component = fixture.componentInstance;
+      component.linkWithInitialFocus = true;
+      fixture.detectChanges();
+      expect(component.dirRef.initialFocus).toBeTruthy();
+      expect(component.focused).toBeTruthy();
+    });
+  });
 
   describe('CSS classes', () => {
     it('should create', () => {
