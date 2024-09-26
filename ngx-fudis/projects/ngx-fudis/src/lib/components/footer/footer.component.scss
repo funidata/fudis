@@ -17,8 +17,8 @@
     min-height: spacing.$spacing-lg;
 
     @include breakpoints.breakpoint-max('lg') {
-      &:not(:first-of-type) {
-        margin-top: spacing.$spacing-sm;
+      &:not(:last-of-type) {
+        margin-bottom: spacing.$spacing-sm;
       }
     }
   }
@@ -47,7 +47,7 @@
         margin-right: spacing.$spacing-md;
       }
 
-      fudis-link {
+      .fudis-link {
         &:not(:last-of-type) {
           margin-right: spacing.$spacing-md;
         }

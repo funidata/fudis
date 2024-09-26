@@ -21,7 +21,7 @@ const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
       <ng-template fudisFooterContentRight>
         <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
         <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
-        <a fudisLink href="example.com" [title]="'System information'" [external]="true"></a>
+        <a fudisLink href="example.com" [title]="'System information'"></a>
       </ng-template>
       <ng-template fudisFooterContentLeft>
         <a fudisLink href="example.com" [title]="'Promo link'" [external]="true"></a>

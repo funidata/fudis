@@ -122,7 +122,7 @@ describe('AlertComponent', () => {
         expect(element.querySelector('p')?.textContent).toContain(String(testMessage.value));
 
         // Test that link does not exist by default
-        expect(element.querySelector('fudis-link')).toBeFalsy();
+        expect(element.querySelector('.fudis-link')).toBeFalsy();
       });
     });
   });
