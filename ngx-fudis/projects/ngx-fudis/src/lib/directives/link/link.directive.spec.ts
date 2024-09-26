@@ -44,8 +44,8 @@ describe('LinkDirective', () => {
   let component: MockComponent;
   let fixture: ComponentFixture<MockComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [MockComponent, LinkDirective, IconComponent],
     }).compileComponents();
 

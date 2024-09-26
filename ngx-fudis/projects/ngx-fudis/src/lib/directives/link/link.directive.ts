@@ -10,7 +10,6 @@ import {
   ViewContainerRef,
   Inject,
   ComponentRef,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
@@ -30,7 +29,6 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
     private _focusService: FudisFocusService,
     private _idService: FudisIdService,
     private _translationService: FudisTranslationService,
-    private _cdr: ChangeDetectorRef,
   ) {
     effect(() => {
       this._externalLinkAriaLabel.next(
@@ -120,8 +118,6 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
       if (externalChanged) {
         this._setExternalHtml();
       }
-
-      this._cdr.detectChanges();
     }
   }
 
@@ -212,7 +208,6 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
         ?.append(this._iconComponentRef.instance.elementRef.nativeElement);
     } else {
       // If not External, detach Icon Component instance
-
       this._viewContainerRef.detach();
     }
   }
