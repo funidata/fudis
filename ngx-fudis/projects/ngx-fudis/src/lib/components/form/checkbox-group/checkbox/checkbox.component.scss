@@ -15,7 +15,7 @@
   align-items: center;
   cursor: pointer;
   width: auto;
-  height: spacing.$spacing-lg;
+  min-height: spacing.$spacing-lg;
 
   &__content {
     display: inline-flex;
