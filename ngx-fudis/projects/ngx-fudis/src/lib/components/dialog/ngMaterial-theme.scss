@@ -49,7 +49,7 @@
       overflow-y: visible; /** This was set to auto by ngMaterial, it caused double scrollbar in Sisu environment. This is a try-out fix */
 
       & .mat-mdc-dialog-title {
-        margin: spacing.$spacing-xxs 0 spacing.$spacing-sm 0;
+        margin: spacing.$spacing-xxs 0 spacing.$spacing-xs 0;
         padding: 0;
         pointer-events: none;
 
