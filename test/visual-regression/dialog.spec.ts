@@ -131,3 +131,19 @@ test("nested dialogs", async ({ page }) => {
 
   await expect(page).toHaveScreenshot("nested-dialog-9-final-result.png");
 });
+
+test("Dialog sizes", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=&id=components-dialog--example-with-dialog-sizes&viewMode=story",
+  );
+
+  let x = 1;
+  while( x <= 10) {
+    await page.getByTestId(`fudis-button-${x}`).click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await expect(page).toHaveScreenshot(`dialog-sizes-${x}.png`, {fullPage: true});
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).not.toBeVisible();
+    x++;
+  }
+});

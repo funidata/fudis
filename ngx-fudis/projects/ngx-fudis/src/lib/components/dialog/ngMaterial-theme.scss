@@ -115,5 +115,7 @@
   &.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
     /* stylelint-disable-next-line declaration-no-important */
     opacity: 0.95 !important;
+    height: 300vh;
+    width: 300vw;
   }
 }
