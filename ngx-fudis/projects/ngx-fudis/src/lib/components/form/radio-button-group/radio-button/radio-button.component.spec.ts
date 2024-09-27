@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -135,7 +135,7 @@ describe('RadioButtonComponent', () => {
   });
 
   describe('Interaction and logic when clicking', () => {
-    it('should have correct value and emit handleChange() when clicking component', waitForAsync(() => {
+    it('should have correct value and emit handleChange() when clicking component', () => {
       const radioButtonComponentToSpy = fixture.debugElement.query(
         By.directive(RadioButtonComponent),
       ).componentInstance;
@@ -163,6 +163,6 @@ describe('RadioButtonComponent', () => {
       expect(component.testControl.value).toEqual('platypus');
 
       expect(handleChangeTriggered).toBeTruthy();
-    }));
+    });
   });
 });
