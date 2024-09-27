@@ -91,47 +91,47 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
   /**
    * Output event for input field blur
    */
-  @Output() handleBlur = new EventEmitter<FocusEvent>();
+  @Output() triggerBlur = new EventEmitter<FocusEvent>();
 
   /**
    * Output event for input field focus
    */
-  @Output() handleFocus = new EventEmitter<FocusEvent>();
+  @Output() triggerFocus = new EventEmitter<FocusEvent>();
 
   /**
    * Output event for enter press on autocomplete, when there is only one option visible
    */
-  @Output() handleInputClick = new EventEmitter<Event>();
+  @Output() triggerInputClick = new EventEmitter<Event>();
 
   /**
    * Output event for toggling parent dropdown
    */
-  @Output() handleDropdownToggle = new EventEmitter<void>();
+  @Output() triggerDropdownToggle = new EventEmitter<void>();
 
   /**
    * Output event for closing parent dropdown
    */
-  @Output() handleDropdownClose = new EventEmitter<void>();
+  @Output() triggerDropdownClose = new EventEmitter<void>();
 
   /**
    * Output event for opening parent dropdown
    */
-  @Output() handleDropdownOpen = new EventEmitter<void>();
+  @Output() triggerDropdownOpen = new EventEmitter<void>();
 
   /**
    * Output event for updating parent's filter text signal
    */
-  @Output() handleFilterTextUpdate = new EventEmitter<string>();
+  @Output() triggerFilterTextUpdate = new EventEmitter<string>();
 
   /**
    * Output event for updating parent's focus to first option signal
    */
-  @Output() handleFocusToFirstOption = new EventEmitter<void>();
+  @Output() triggerFocusToFirstOption = new EventEmitter<void>();
 
   /**
    * Output event for enter press on autocomplete, when there is only one option visible
    */
-  @Output() handleSelectOnlyVisibleOption = new EventEmitter<void>();
+  @Output() triggerSelectOnlyVisibleOption = new EventEmitter<void>();
 
   /**
    * Used to prevent case when user selects an option from dropdown with Space key, which would add an extra space to filter text and "breaking" the selection.
@@ -193,9 +193,9 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
    */
   private _checkValueAndEmit(newValue: string | null): void {
     if (newValue && newValue.length >= this.typeThreshold) {
-      this.handleFilterTextUpdate.emit(newValue);
+      this.triggerFilterTextUpdate.emit(newValue);
     } else {
-      this.handleFilterTextUpdate.emit('');
+      this.triggerFilterTextUpdate.emit('');
     }
 
     if (
@@ -203,7 +203,7 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
       ((!newValue && this.typeThreshold !== 0) ||
         (newValue && newValue?.length < this.typeThreshold))
     ) {
-      this.handleDropdownClose.emit();
+      this.triggerDropdownClose.emit();
     }
   }
 
@@ -213,7 +213,7 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
    */
   protected _inputBlur(event: FocusEvent): void {
     this._focused = false;
-    this.handleBlur.emit(event);
+    this.triggerBlur.emit(event);
   }
 
   /**
@@ -222,7 +222,7 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
    */
   protected _inputFocus(event: FocusEvent): void {
     this._focused = true;
-    this.handleFocus.emit(event);
+    this.triggerFocus.emit(event);
     const inputValue = (event.target as HTMLInputElement).value;
 
     this._checkValueAndEmit(inputValue);
@@ -236,7 +236,7 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
     const inputValue = (event.target as HTMLInputElement).value;
 
     if (inputValue.length >= this.typeThreshold) {
-      this.handleInputClick.emit(event);
+      this.triggerInputClick.emit(event);
     }
   }
 
@@ -276,16 +276,16 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
        */
       if (key === 'Enter') {
         if (this.dropdownOpen && this.visibleOptions?.length === 1 && !!inputValue) {
-          this.handleSelectOnlyVisibleOption.emit();
+          this.triggerSelectOnlyVisibleOption.emit();
         } else if (!this._preventDropdownReOpen && inputValue.length >= this.typeThreshold) {
-          this.handleDropdownToggle.emit();
+          this.triggerDropdownToggle.emit();
         }
         /**
          * Escape key
          */
       } else if (key === 'Escape') {
         if (this.dropdownOpen) {
-          this.handleDropdownClose.emit();
+          this.triggerDropdownClose.emit();
         }
         /**
          * ArrowDown key
@@ -293,15 +293,15 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
       } else if (key === 'ArrowDown') {
         event.preventDefault();
         if (inputValue.length >= this.typeThreshold) {
-          this.handleDropdownOpen.emit();
-          this.handleFocusToFirstOption.emit();
+          this.triggerDropdownOpen.emit();
+          this.triggerFocusToFirstOption.emit();
         }
 
         /**
          * Close
          */
       } else if (this.dropdownOpen && inputValue.length < this.typeThreshold) {
-        this.handleDropdownClose.emit();
+        this.triggerDropdownClose.emit();
 
         /**
          * Open
@@ -311,7 +311,7 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
         !this._preventDropdownReOpen &&
         inputValue.length >= this.typeThreshold
       ) {
-        this.handleDropdownOpen.emit();
+        this.triggerDropdownOpen.emit();
       }
     }
 

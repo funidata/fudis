@@ -127,22 +127,22 @@ describe('AutocompleteComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should handle blur event', () => {
-      jest.spyOn(component.handleBlur, 'emit');
+    it('should trigger blur event', () => {
+      jest.spyOn(component.triggerBlur, 'emit');
       getInputElement().dispatchEvent(new FocusEvent('blur'));
 
-      expect(component.handleBlur.emit).toHaveBeenCalled();
+      expect(component.triggerBlur.emit).toHaveBeenCalled();
     });
 
-    it('should handle input click event', () => {
-      jest.spyOn(component.handleInputClick, 'emit');
+    it('should trigger input click event', () => {
+      jest.spyOn(component.triggerInputClick, 'emit');
       getInputElement().dispatchEvent(new FocusEvent('click'));
 
-      expect(component.handleInputClick.emit).toHaveBeenCalled();
+      expect(component.triggerInputClick.emit).toHaveBeenCalled();
     });
 
-    it('should not handle input click event when value is lower than threshold', () => {
-      jest.spyOn(component.handleInputClick, 'emit');
+    it('should not trigger input click event when value is lower than threshold', () => {
+      jest.spyOn(component.triggerInputClick, 'emit');
 
       component.updateInputValue('no');
 
@@ -153,11 +153,11 @@ describe('AutocompleteComponent', () => {
 
       getInputElement().dispatchEvent(new FocusEvent('click'));
 
-      expect(component.handleInputClick.emit).not.toHaveBeenCalled();
+      expect(component.triggerInputClick.emit).not.toHaveBeenCalled();
     });
 
-    it('should handle input click event when threshold', () => {
-      jest.spyOn(component.handleInputClick, 'emit');
+    it('should trigger input click event when threshold', () => {
+      jest.spyOn(component.triggerInputClick, 'emit');
 
       component.updateInputValue('yes');
 
@@ -168,19 +168,19 @@ describe('AutocompleteComponent', () => {
 
       getInputElement().dispatchEvent(new FocusEvent('click'));
 
-      expect(component.handleInputClick.emit).toHaveBeenCalled();
+      expect(component.triggerInputClick.emit).toHaveBeenCalled();
     });
 
-    it('should handle filter text update event', () => {
-      jest.spyOn(component.handleFilterTextUpdate, 'emit');
+    it('should trigger filter text update event', () => {
+      jest.spyOn(component.triggerFilterTextUpdate, 'emit');
 
       component.updateInputValue('');
 
-      expect(component.handleFilterTextUpdate.emit).toHaveBeenCalledWith('');
+      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('');
 
       component.updateInputValue('hey');
 
-      expect(component.handleFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
+      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
     });
 
     describe('focus events', () => {
@@ -188,22 +188,22 @@ describe('AutocompleteComponent', () => {
         fixture.componentRef.setInput('dropdownOpen', true);
       });
 
-      it('should handle focus event', () => {
-        jest.spyOn(component.handleFocus, 'emit');
+      it('should trigger focus event', () => {
+        jest.spyOn(component.triggerFocus, 'emit');
         getInputElement().dispatchEvent(new FocusEvent('focus'));
 
-        expect(component.handleFocus.emit).toHaveBeenCalled();
+        expect(component.triggerFocus.emit).toHaveBeenCalled();
       });
 
-      it('should emit handle text updates and dropdown close emit correctly', () => {
+      it('should emit trigger text updates and dropdown close emit correctly', () => {
         component.inputRef.nativeElement.value = 'hey';
         fixture.detectChanges();
-        jest.spyOn(component.handleFilterTextUpdate, 'emit');
-        jest.spyOn(component.handleDropdownClose, 'emit');
+        jest.spyOn(component.triggerFilterTextUpdate, 'emit');
+        jest.spyOn(component.triggerDropdownClose, 'emit');
         getInputElement().dispatchEvent(new FocusEvent('focus'));
 
-        expect(component.handleFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
-        expect(component.handleDropdownClose.emit).not.toHaveBeenCalledWith();
+        expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
+        expect(component.triggerDropdownClose.emit).not.toHaveBeenCalledWith();
 
         fixture.componentRef.setInput('typeThreshold', 3);
         component.inputRef.nativeElement.value = 'no';
@@ -211,8 +211,8 @@ describe('AutocompleteComponent', () => {
 
         getInputElement().dispatchEvent(new FocusEvent('focus'));
 
-        expect(component.handleFilterTextUpdate.emit).toHaveBeenCalledWith('');
-        expect(component.handleDropdownClose.emit).toHaveBeenCalledWith();
+        expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('');
+        expect(component.triggerDropdownClose.emit).toHaveBeenCalledWith();
       });
     });
 
@@ -223,47 +223,47 @@ describe('AutocompleteComponent', () => {
         component.inputRef.nativeElement.value = 'no';
         getInputElement().dispatchEvent(new FocusEvent('focus'));
 
-        jest.spyOn(component.handleDropdownToggle, 'emit');
-        jest.spyOn(component.handleDropdownOpen, 'emit');
-        jest.spyOn(component.handleDropdownClose, 'emit');
-        jest.spyOn(component.handleSelectOnlyVisibleOption, 'emit');
-        jest.spyOn(component.handleFocusToFirstOption, 'emit');
+        jest.spyOn(component.triggerDropdownToggle, 'emit');
+        jest.spyOn(component.triggerDropdownOpen, 'emit');
+        jest.spyOn(component.triggerDropdownClose, 'emit');
+        jest.spyOn(component.triggerSelectOnlyVisibleOption, 'emit');
+        jest.spyOn(component.triggerFocusToFirstOption, 'emit');
       });
 
-      it('should not handle dropdown toggle event with Enter', () => {
+      it('should not trigger dropdown toggle event with Enter', () => {
         getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
         getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
-        expect(component.handleDropdownToggle.emit).not.toHaveBeenCalled();
+        expect(component.triggerDropdownToggle.emit).not.toHaveBeenCalled();
       });
 
-      it('should handle dropdown toggle event with Enter', () => {
+      it('should trigger dropdown toggle event with Enter', () => {
         component.inputRef.nativeElement.value = 'yes';
         getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
         getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
 
-        expect(component.handleDropdownToggle.emit).toHaveBeenCalled();
-        expect(component.handleFocusToFirstOption.emit).not.toHaveBeenCalled();
+        expect(component.triggerDropdownToggle.emit).toHaveBeenCalled();
+        expect(component.triggerFocusToFirstOption.emit).not.toHaveBeenCalled();
       });
 
-      it('should not handle dropdown open event with ArrowDown', () => {
+      it('should not trigger dropdown open event with ArrowDown', () => {
         getInputElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
         getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
 
-        expect(component.handleDropdownOpen.emit).not.toHaveBeenCalled();
-        expect(component.handleFocusToFirstOption.emit).not.toHaveBeenCalled();
+        expect(component.triggerDropdownOpen.emit).not.toHaveBeenCalled();
+        expect(component.triggerFocusToFirstOption.emit).not.toHaveBeenCalled();
       });
 
-      it('should handle dropdown open event with ArrowDown', () => {
+      it('should trigger dropdown open event with ArrowDown', () => {
         component.inputRef.nativeElement.value = 'yes';
 
         getInputElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
         getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
 
-        expect(component.handleDropdownOpen.emit).toHaveBeenCalled();
-        expect(component.handleFocusToFirstOption.emit).toHaveBeenCalled();
+        expect(component.triggerDropdownOpen.emit).toHaveBeenCalled();
+        expect(component.triggerFocusToFirstOption.emit).toHaveBeenCalled();
       });
 
-      it('should emit handleSelectOnlyVisibleOption', () => {
+      it('should emit triggerSelectOnlyVisibleOption', () => {
         component.visibleOptions = ['too', 'many'];
         component.dropdownOpen = true;
         component.inputRef.nativeElement.value = 'yes';
@@ -272,22 +272,22 @@ describe('AutocompleteComponent', () => {
         getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
         getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
 
-        expect(component.handleSelectOnlyVisibleOption.emit).not.toHaveBeenCalled();
+        expect(component.triggerSelectOnlyVisibleOption.emit).not.toHaveBeenCalled();
 
         component.visibleOptions = ['only'];
 
         getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
         getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
-        expect(component.handleSelectOnlyVisibleOption.emit).toHaveBeenCalled();
+        expect(component.triggerSelectOnlyVisibleOption.emit).toHaveBeenCalled();
       });
 
-      it('should emit handleClose on Escape', () => {
+      it('should emit triggerClose on Escape', () => {
         component.dropdownOpen = true;
 
         getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Escape' }));
         getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
 
-        expect(component.handleDropdownClose.emit).toHaveBeenCalled();
+        expect(component.triggerDropdownClose.emit).toHaveBeenCalled();
       });
     });
   });
