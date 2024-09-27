@@ -25,8 +25,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: spacing.$spacing-lg;
-      height: spacing.$spacing-lg;
+      min-width: spacing.$spacing-lg;
+      min-height: spacing.$spacing-lg;
     }
 
     &__box {
