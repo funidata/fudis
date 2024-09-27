@@ -53,7 +53,7 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   @Input() id: string;
 
   /**
-   * External link URL
+   * If link opens in a new tab
    */
   @Input() external: boolean = false;
 
@@ -62,12 +62,24 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
    */
   @Input({ required: true }) title: string;
 
+  /**
+   * Helper class for link size
+   */
   private _sizeCssClass: string = `fudis-link__size__inherit`;
 
+  /**
+   * Container ref to attach Icon Component
+   */
   private _viewContainerRef = inject(ViewContainerRef);
 
+  /**
+   * Icon Component reference which will be attached to the View Container
+   */
   private _iconComponentRef: ComponentRef<IconComponent>;
 
+  /**
+   * Helper array for parsing long link texts with new-tab icon
+   */
   private _parsedTitle: string[] = [];
 
   /**
