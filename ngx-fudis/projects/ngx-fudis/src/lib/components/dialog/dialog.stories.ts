@@ -154,7 +154,7 @@ class DialogWithFormComponent {
           >Dialog with fudis-grid and scrollable content</fudis-heading
         >
         <fudis-dialog-content>
-          <fudis-grid [classes]="['fudis-mb-md']">
+          <fudis-grid [classes]="'fudis-mb-md'">
             <fudis-heading [level]="3" [variant]="'sm'">
               I am fudis-heading inside the grid taking the whole width
             </fudis-heading>
@@ -180,7 +180,7 @@ class DialogWithFormComponent {
             </fudis-body-text>
           </fudis-grid>
           <fudis-hr />
-          <fudis-grid [columns]="{ sm: 2, md: 3 }" [classes]="['fudis-mt-sm fudis-mb-sm']">
+          <fudis-grid [columns]="{ sm: 2, md: 3 }" [classes]="'fudis-mt-sm fudis-mb-sm'">
             <div style="border: 2px solid lightblue">
               <fudis-body-text>Showcase of grid items</fudis-body-text>
             </div>

@@ -6,7 +6,7 @@ import { convertToRemValue } from '../../utilities/rem-converter';
  * Takes in object of Input() attributes and creates CSS classlist out of those to be passed to Grid element.
  */
 export const getGridClasses = (values: FudisGridProperties): string => {
-  let classList = [
+  const classList = [
     'fudis-grid',
     `fudis-grid__${values.width}`,
     `fudis-grid__align__${values.align}`,
@@ -15,7 +15,7 @@ export const getGridClasses = (values: FudisGridProperties): string => {
   ];
 
   if (values.classes) {
-    classList = classList.concat(values.classes);
+    classList.push(values.classes);
   }
 
   const arrayToString = classList

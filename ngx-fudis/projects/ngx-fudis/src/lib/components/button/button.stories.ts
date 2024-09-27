@@ -95,7 +95,7 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
   props: args,
   template: html`
     <fudis-grid
-      [classes]="['fudis-mb-md']"
+      [classes]="'fudis-mb-md'"
       [columns]="{xs:2, md: 4}"
       [align]="'start'"
       [rowGap]="'xs'"

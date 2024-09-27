@@ -53,7 +53,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   /**
    * CSS class list
    */
-  protected _classList = new BehaviorSubject<string[]>([]);
+  protected _classList = new BehaviorSubject<string>('');
 
   /**
    * Signal for variant
@@ -112,6 +112,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
     const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
 
-    this._classList.next(combined);
+    this._classList.next(combined.join(' '));
   }
 }

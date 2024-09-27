@@ -29,7 +29,7 @@ export class GridApiDirective {
   /**
    * Custom CSS classes for Grid element.
    */
-  @Input() classes: string[] = [];
+  @Input() classes: string;
 
   /**
    * Gutter gap between columns. Using Fudis spacing token values of xxs to xxl, none and responsive.

@@ -102,7 +102,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Custom CSS classes
    */
-  @Input() classes: string[];
+  @Input() classes: string;
 
   /**
    * Is section title shown in error summary breadcrumb
@@ -117,7 +117,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Section CSS class list
    */
-  protected _classList = new BehaviorSubject<string[]>([]);
+  protected _classList = new BehaviorSubject<string>('');
 
   /**
    * Object to send to error summary service
@@ -178,12 +178,12 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Set main CSS class with possible custom classes
    */
-  private _getClasses(): string[] {
-    const cssClasses = this.classes ?? [];
-
-    cssClasses.push('fudis-section');
-
-    return cssClasses;
+  private _getClasses(): string {
+    if (this.classes) {
+      return `fudis-section ${this.classes}`;
+    } else {
+      return 'fudis-section';
+    }
   }
 
   /**

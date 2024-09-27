@@ -133,7 +133,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
     },
   },
   template: html`
-    <fudis-grid [columns]="2" [classes]="['fudis-mb-xl']">
+    <fudis-grid [columns]="2" [classes]="'fudis-mb-xl'">
       <fudis-heading [level]="3">Fudis Validators</fudis-heading>
       <fudis-heading [level]="4">Text Validators</fudis-heading>
       <fudis-text-input [label]="'Required validator'" [control]="basicTextInput.control" />
@@ -171,7 +171,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       </fudis-date-range>
     </fudis-grid>
     <fudis-hr />
-    <fudis-grid [columns]="2" [classes]="['fudis-mt-xl']">
+    <fudis-grid [columns]="2" [classes]="'fudis-mt-xl'">
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">
         <fudis-checkbox-group

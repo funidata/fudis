@@ -71,7 +71,7 @@ describe('GridUtils', () => {
         align: 'end',
         rowGap: 'responsive',
         columnGap: 'responsive',
-        classes: ['my-custom-class', 'my-other-custom-class'],
+        classes: 'my-custom-class my-other-custom-class',
       };
 
       expect(utils.getGridClasses(values)).toBe(

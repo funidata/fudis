@@ -13,7 +13,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
       [columns]="1"
       [rowGap]="'sm'"
       [align]="'center'"
-      [classes]="['fudis-mt-md fudis-mb-md']"
+      [classes]="'fudis-mt-md fudis-mb-md'"
     >
       <fudis-grid [columns]="2" [alignItemsX]="'center'" [rowGap]="'sm'" [alignItemsY]="'center'">
         <fudis-button
@@ -36,7 +36,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
       <fudis-grid
         [alignItemsX]="_gridAlignValue"
         [rowGap]="'sm'"
-        [classes]="['storybook__wrapper-border']"
+        [classes]="'storybook__wrapper-border'"
       >
         <fudis-heading [level]="3" [variant]="'md'"
           >Listen to Service's Columns but not AlignItemsX</fudis-heading
@@ -52,7 +52,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
           screen!</fudis-body-text
         >
       </fudis-grid>
-      <fudis-grid [columns]="2" [classes]="['storybook__wrapper-border']">
+      <fudis-grid [columns]="2" [classes]="'storybook__wrapper-border'">
         <fudis-heading [level]="3" [variant]="'md'"
           >Listen to Service's AlignItemsX but not Columns</fudis-heading
         >
@@ -67,7 +67,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
         >
       </fudis-grid>
 
-      <fudis-grid [serviceDefaults]="false" [classes]="['storybook__wrapper-border']">
+      <fudis-grid [serviceDefaults]="false" [classes]="'storybook__wrapper-border'">
         <fudis-heading [level]="3" [variant]="'md'">Service Defaults are turned off</fudis-heading>
         <fudis-body-text class="storybook__item"
           >This Grid has no set alignItemsX value, and it is ignoring defaults from
@@ -166,7 +166,7 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
       <code>{{transformedColumns}}</code></fudis-body-text
     >
     <fudis-grid
-      [classes]="['storybook__wrapper-border']"
+      [classes]="'storybook__wrapper-border'"
       [columns]="columns"
       [align]="align"
       [alignItemsX]="alignItemsX"

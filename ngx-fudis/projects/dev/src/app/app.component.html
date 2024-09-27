@@ -2,7 +2,7 @@
   <div class="root-style">
     <fudis-alert-group />
 
-    <fudis-grid [columns]="4" [classes]="['fudis-mt-lg']">
+    <fudis-grid [columns]="4" [classes]="'fudis-mt-lg'">
       <fudis-grid-item [columns]="'3 / 4'" [alignSelfX]="'end'" [alignSelfY]="'end'">
         <fudis-body-text>1 rem = {{ visibleRemValue }}px</fudis-body-text>
         <fudis-body-text>Font size is {{ fontSize }}</fudis-body-text>
@@ -11,12 +11,12 @@
         <fudis-button [label]="'Change rem base'" (handleClick)="changeRemBase()"></fudis-button>
       </fudis-grid-item>
     </fudis-grid>
-    <fudis-grid [columns]="1" [classes]="['fudis-mt-xl']">
+    <fudis-grid [columns]="1" [classes]="'fudis-mt-xl'">
       <fudis-heading [level]="1">Welcome to Fudis sandbox </fudis-heading>
 
       <fudis-expandable [title]="'Random stuff'">
         <ng-template fudisContent type="expandable">
-          <fudis-grid [classes]="['fudis-mt-md']">
+          <fudis-grid [classes]="'fudis-mt-md'">
             <fudis-notification variant="danger" ariaVariantText="Varoitus!"
               >Whoops! Here is danger notification.</fudis-notification
             >
