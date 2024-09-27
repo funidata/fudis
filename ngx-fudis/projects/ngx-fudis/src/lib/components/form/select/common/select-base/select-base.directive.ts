@@ -280,7 +280,7 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
    * Open dropdown
    */
   public openDropdown(): void {
-    if (!this.disabled && !this.control.disabled) {
+    if (!this.control.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.next(true);
     }
@@ -374,7 +374,7 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
    * When Clear button is clicked
    */
   protected _clearButtonClick(): void {
-    if (!this.disabled && !this.control.disabled) {
+    if (!this.control.disabled) {
       this._setControlNull();
 
       this._focusToSelectInput();

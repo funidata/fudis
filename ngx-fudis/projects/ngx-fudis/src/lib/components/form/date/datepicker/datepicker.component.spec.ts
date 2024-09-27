@@ -122,7 +122,7 @@ describe('DatepickerComponent', () => {
     });
 
     it('should have disabled attributes if input has been disabled', () => {
-      component.disabled = true;
+      component.control.disable();
       fixture.detectChanges();
 
       expect(!!datepickerInput.getAttribute('aria-disabled')).toEqual(true);

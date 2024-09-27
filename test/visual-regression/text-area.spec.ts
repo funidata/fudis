@@ -2,9 +2,8 @@ import test, { expect } from "@playwright/test";
 
 test("text-area disabled", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-text-area--disabled&viewMode=story");
-  await expect(page).toHaveScreenshot("disabled-1-init.png");
   await page.getByTestId("fudis-text-area-1").focus();
-  await expect(page).toHaveScreenshot("disabled-2-focus.png");
+  await expect(page).toHaveScreenshot("disabled.png");
 });
 
 test("text-area with validators", async ({ page }) => {

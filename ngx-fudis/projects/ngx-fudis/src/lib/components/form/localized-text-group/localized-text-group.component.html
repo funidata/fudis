@@ -16,9 +16,7 @@
         class="fudis-form-input fudis-localized-text-group__inputs__text"
         [attr.aria-invalid]="
           (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
-          (formGroup.controls[control.key].touched && invalidState)
-            ? true
-            : null
+          null
         "
         [attr.aria-label]="
           ariaLabel
@@ -35,11 +33,9 @@
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="(_required | async) || null"
         [attr.aria-disabled]="
-          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+          formGroup.disabled || formGroup.controls[control.key].disabled || null
         "
-        [readonly]="
-          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
-        "
+        [readonly]="formGroup.disabled || formGroup.controls[control.key].disabled || null"
       />
       <textarea
         #inputRef
@@ -47,9 +43,7 @@
         class="fudis-form-input fudis-localized-text-group__inputs__area"
         [attr.aria-invalid]="
           (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
-          (formGroup.controls[control.key].touched && invalidState)
-            ? true
-            : null
+          null
         "
         [attr.aria-label]="
           ariaLabel
@@ -65,8 +59,8 @@
         [id]="id"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="(_required | async) || null"
-        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled || null"
-        [readonly]="formGroup.controls[control.key].disabled || disabled || null"
+        [attr.aria-disabled]="formGroup.controls[control.key].disabled || null"
+        [readonly]="formGroup.controls[control.key].disabled || null"
       >
       </textarea>
     </ng-container>

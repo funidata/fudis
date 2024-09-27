@@ -51,7 +51,6 @@ const html = String.raw;
 
 const commonArgs: Partial<LocalizedTextGroupComponent> = {
   size: 'lg',
-  disabled: false,
   initialFocus: false,
   tooltip: 'Your city needs you!',
   tooltipToggle: false,
@@ -88,7 +87,6 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
     <fudis-localized-text-group
       [id]="'unique-custom-text-group-1'"
       [size]="size"
-      [disabled]="disabled"
       [variant]="variant"
       [formGroup]="formGroup"
       [label]="label"
@@ -135,7 +133,6 @@ const ExampleTemplate: StoryFn = (args) => ({
   template: html`
     <fudis-localized-text-group
       [formGroup]="formGroup"
-      [disabled]="disabled"
       [size]="size"
       [variant]="variant"
       [label]="label"

@@ -42,7 +42,6 @@ const html = String.raw;
 const commonArgs: Partial<SelectComponent> = {
   label: 'Select a pet',
   size: 'lg',
-  disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
   selectionClearButton: true,
@@ -66,7 +65,6 @@ const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectCompon
       [control]="control"
       [label]="label"
       [helpText]="helpText"
-      [disabled]="disabled"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
@@ -104,7 +102,6 @@ const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
       [control]="control"
       [label]="label"
       [helpText]="helpText"
-      [disabled]="disabled"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
@@ -141,7 +138,6 @@ const SelectDropdownWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (
       [control]="control"
       [label]="label"
       [helpText]="helpText"
-      [disabled]="disabled"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
@@ -180,7 +176,6 @@ const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn<MultiselectComponen
       [control]="control"
       [label]="label"
       [helpText]="helpText"
-      [disabled]="disabled"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >

@@ -73,23 +73,26 @@ const Template: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
   props: { ...args, control: new FormControl(null) },
 });
 
+const TemplateDisabled: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
+  props: { ...args, control: new FormControl({ value: null, disabled: true }) },
+});
+
 export const Example = Template.bind({});
 Example.args = {
   tooltip: '',
   tooltipToggle: false,
   size: 'lg',
-  disabled: false,
   label: 'Text Area label example',
   helpText: 'Example help text',
   initialFocus: false,
 };
 
-export const Disabled = Template.bind({});
+export const Disabled = TemplateDisabled.bind({});
 Disabled.args = {
   tooltip: '',
   tooltipToggle: false,
   size: 'lg',
-  disabled: true,
+  control: new FormControl({ value: null, disabled: true }),
   label: 'Text Area label example',
   helpText: 'Example help text',
   initialFocus: false,

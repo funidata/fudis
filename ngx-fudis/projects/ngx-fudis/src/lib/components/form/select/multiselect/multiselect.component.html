@@ -26,13 +26,11 @@
         (keyup)="_inputKeyUp($event)"
         [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="_dropdownOpen"
-        [attr.aria-disabled]="disabled || control.disabled"
+        [attr.aria-disabled]="control.disabled"
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.aria-invalid]="
-          (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
-        "
+        [attr.aria-invalid]="(control.touched && control.invalid) || null"
       >
         <span *ngIf="!_dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
           placeholder
@@ -46,10 +44,10 @@
         #autocompleteRef
         [id]="id"
         [placeholder]="placeholder"
-        [disabled]="control.disabled || disabled"
+        [disabled]="control.disabled"
         [dropdownOpen]="_dropdownOpen | async"
         [required]="_required | async"
-        [invalidState]="(control.touched && control.invalid) || (control.touched && invalidState)"
+        [invalidState]="control.touched && control.invalid"
         [multiselect]="true"
         [selectedLabel]="_dropdownSelectionLabelText"
         [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
@@ -76,7 +74,7 @@
           (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
           [clearButton]="selectionClearButton"
-          [disabled]="control.disabled || disabled"
+          [disabled]="control.disabled"
         />
       </div>
     </div>

@@ -41,7 +41,6 @@ const html = String.raw;
 const commonProps: Partial<MultiselectComponent> = {
   label: 'Select a pet',
   size: 'lg',
-  disabled: false,
   placeholder: 'Choose a pet',
   helpText:
     'All pets are equally important, but for sake of this Dropdown please pick at least two',
@@ -71,7 +70,6 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
       [variant]="'dropdown'"
       [label]="label"
       [helpText]="helpText"
-      [disabled]="disabled"
       [variant]="variant"
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"

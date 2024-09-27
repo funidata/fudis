@@ -89,14 +89,6 @@ describe('AutocompleteComponent', () => {
       autocompleteSize('lg');
     });
 
-    it('should have disabled CSS styling if input is disabled', () => {
-      const autocompleteInput = fixture.nativeElement.querySelector('input');
-      component.disabled = true;
-      fixture.detectChanges();
-
-      expect(autocompleteInput.className).toContain('fudis-form-input--disabled');
-    });
-
     it('should have invalid CSS styling if control is invalid', () => {
       const autocompleteInput = fixture.nativeElement.querySelector('input');
       component.control = autocompleteRequiredControl;
