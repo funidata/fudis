@@ -1,5 +1,4 @@
 /* stylelint-disable unit-disallowed-list */
-@use 'sass:map';
 
 // Spacing values, based on default 16px base value
 $spacing-none: 0; // 0px
@@ -21,19 +20,12 @@ $pixel-tokens: (
   '2px': $pixel-2,
   '3px': $pixel-3,
 );
-$spacing-input-xs: calc(5.75rem / var(--fudis-rem-multiplier));
-$spacing-input-sm: calc(10rem / var(--fudis-rem-multiplier));
-$spacing-input-md: calc(14rem / var(--fudis-rem-multiplier));
-$spacing-input-lg: calc(23rem / var(--fudis-rem-multiplier));
 
-// Fixed size for checkboxes' & radio buttons' visual input box. Clickable input area should be 2rem high.
-$spacing-input-checkbox: calc(1.25rem / var(--fudis-rem-multiplier));
-$spacing-input-radio: calc(1.25rem / var(--fudis-rem-multiplier));
-$spacing-input-radio-indicator: calc(0.75rem / var(--fudis-rem-multiplier));
+// Form input width tokens
+$input-width-xs: calc(5.75rem / var(--fudis-rem-multiplier));
+$input-width-sm: calc(10rem / var(--fudis-rem-multiplier));
+$input-width-md: calc(14rem / var(--fudis-rem-multiplier));
+$input-width-lg: calc(23rem / var(--fudis-rem-multiplier));
 
-// Dialog size widths
-$spacing-dialog-xs: calc(30rem / var(--fudis-rem-multiplier));
-$spacing-dialog-sm: calc(44rem / var(--fudis-rem-multiplier));
-$spacing-dialog-md: calc(55rem / var(--fudis-rem-multiplier));
-$spacing-dialog-lg: calc(70rem / var(--fudis-rem-multiplier));
-$spacing-dialog-xl: calc(90rem / var(--fudis-rem-multiplier));
+// Fixed size for checkboxes' visual input box. Clickable input area should be 2rem high.
+$checkbox-size: calc(1.25rem / var(--fudis-rem-multiplier));

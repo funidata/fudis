@@ -1,8 +1,15 @@
+/* stylelint-disable unit-disallowed-list */
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 
+$dialog-width-xs: calc(30rem / var(--fudis-rem-multiplier));
+$dialog-width-sm: calc(44rem / var(--fudis-rem-multiplier));
+$dialog-width-md: calc(55rem / var(--fudis-rem-multiplier));
+$dialog-width-lg: calc(70rem / var(--fudis-rem-multiplier));
+$dialog-width-xl: calc(90rem / var(--fudis-rem-multiplier));
+
 @mixin mobile-dialog-width {
-  width: calc(spacing.$spacing-dialog-xs - (2 * spacing.$spacing-sm));
+  width: calc($dialog-width-xs - spacing.$spacing-lg);
 
   @include breakpoints.breakpoint-max('sm') {
     padding: spacing.$spacing-md spacing.$spacing-sm;
@@ -13,8 +20,7 @@
   box-sizing: content-box;
   position: relative;
   padding: spacing.$spacing-md spacing.$spacing-xl;
-  /* stylelint-disable-next-line unit-disallowed-list */
-  max-width: calc(100vw - 10rem);
+  max-width: calc(100vw - 10rem / var(--fudis-rem-multiplier));
 
   &__close {
     float: right;
@@ -38,7 +44,7 @@
       @include mobile-dialog-width;
 
       @include breakpoints.breakpoint('sm') {
-        width: calc(spacing.$spacing-dialog-sm - (2 * spacing.$spacing-xl));
+        width: calc($dialog-width-sm - (2 * spacing.$spacing-xl));
       }
     }
 
@@ -46,7 +52,7 @@
       @include mobile-dialog-width;
 
       @include breakpoints.breakpoint('sm') {
-        width: calc(spacing.$spacing-dialog-md - (2 * spacing.$spacing-xl));
+        width: calc($dialog-width-md - (2 * spacing.$spacing-xl));
       }
     }
 
@@ -54,12 +60,11 @@
       @include mobile-dialog-width;
 
       @include breakpoints.breakpoint('sm') {
-        width: calc(spacing.$spacing-dialog-lg - (2 * spacing.$spacing-xl));
+        width: calc($dialog-width-lg - (2 * spacing.$spacing-xl));
       }
 
       @include breakpoints.breakpoint('lg') {
-        /* stylelint-disable-next-line unit-disallowed-list */
-        max-width: calc(100vw - 15rem);
+        max-width: calc(100vw - 15rem / var(--fudis-rem-multiplier));
       }
     }
 
@@ -67,12 +72,11 @@
       @include mobile-dialog-width;
 
       @include breakpoints.breakpoint('sm') {
-        width: calc(spacing.$spacing-dialog-xl - (2 * spacing.$spacing-xl));
+        width: calc($dialog-width-xl - (2 * spacing.$spacing-xl));
       }
 
       @include breakpoints.breakpoint('lg') {
-        /* stylelint-disable-next-line unit-disallowed-list */
-        max-width: calc(100vw - 15rem);
+        max-width: calc(100vw - 15rem / var(--fudis-rem-multiplier));
       }
     }
   }
