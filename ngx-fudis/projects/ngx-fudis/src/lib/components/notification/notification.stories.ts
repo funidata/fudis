@@ -37,7 +37,12 @@ const ButtonAndLinkTemplate: StoryFn<NotificationComponent> = (args: Notificatio
     <fudis-notification [variant]="variant">
       <fudis-body-text
         >This is Notification with Link.
-        <fudis-link [externalLink]="'https://www.example.com'" [title]="'This is example link.'" />
+        <a
+          fudisLink
+          href="https://www.example.com"
+          [external]="true"
+          [title]="'This is example link.'"
+        ></a>
       </fudis-body-text>
     </fudis-notification>
     <fudis-notification [variant]="variant">

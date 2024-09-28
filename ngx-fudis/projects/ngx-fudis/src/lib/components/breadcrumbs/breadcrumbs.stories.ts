@@ -1,16 +1,10 @@
-import { RouterTestingModule } from '@angular/router/testing';
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import readme from './readme.mdx';
 
 export default {
   title: 'Components/Breadcrumbs',
   component: BreadcrumbsComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [RouterTestingModule],
-    }),
-  ],
   parameters: {
     docs: {
       page: readme,
@@ -34,11 +28,10 @@ const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => 
   },
   template: html`
     <fudis-breadcrumbs [label]="label">
-      <fudis-breadcrumbs-item
-        *ngFor="let link of links"
-        [label]="link.label"
-        [url]="link.url"
-      ></fudis-breadcrumbs-item>
+      <fudis-breadcrumbs-item *ngFor="let link of links; let index = index">
+        <a *ngIf="index + 1 !== links.length" [href]="link.url">{{link.label}}</a>
+        <fudis-body-text *ngIf="index + 1 === links.length">{{link.label}}</fudis-body-text>
+      </fudis-breadcrumbs-item>
     </fudis-breadcrumbs>
   `,
 });

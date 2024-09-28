@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
 import { LinkDirective } from "./link.directive.ts";
 import * as LinkDirectiveStories from "./link.directive.stories.ts";
 
@@ -6,21 +6,32 @@ import * as LinkDirectiveStories from "./link.directive.stories.ts";
 
 # Link Directive
 
-Link Directive provides the same look and feel as [Link Component](/docs/components-link--documentation).
+Link Directive adjusts styles and HTML attributes of any native anchor element with tag `<a>`. The directive allows application to use its own routing solutions, as Link Directive does not take any opinion in this. It only tweaks styling of binded anchor element.
 
 ## Usage Guidelines
 
-When routing method such as [UI-Router](https://ui-router.github.io/ng2/) is required, use `fudisLink` directive with HTML anchor element.
-This will apply Link Component's `size` property to the native HTML anchor element.
-At the moment, Link Directive doesn't support the use of `externalLink` nor `title` properties.
+To bind anchor element with Link Directive, include `fudisLink` directive selector to it. Directive also requires `title` string property. If your anchor element directs to an external site, add `external` boolean property to it. This will adjust HTML attributes and semantics including a 'new-tab' [Icon Component](/docs/components-icon--documentation).
 
-## Examples
+<Source
+  code={`
+<a fudisLink href="https://www.example.com" [title]="'This is external link'" [external]="true"></a>
+`}
+/>
+
+**Note!**
+
+Although inserting text content between `<a></a>` tags can be done, it is highly recommended only to use `title` property for the text content of the link. With `title` property we can be sure, that only `string` type text is used and Angular change detection can be triggered more reliably with the `title` property.
+
+## Example
 
 <Canvas of={LinkDirectiveStories.Example}></Canvas>
 
-```
-    <a fudisLink [uiSref]="route" [size]="size">https://www.example.com</a>
-```
+## Accessibility
+
+- Link has visible focus
+- When Link Directive is set external, an icon indicates new tab for visible users but is hidden from screen readers
+- When Link Directive is set external, aria-label has an additional info text about this
+- When Link Directive is set external, HTML attributes `rel` and `target` are set properly
 
 ## Properties
 

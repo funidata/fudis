@@ -4,6 +4,8 @@
 @use '../breakpoints/mixins.scss' as breakpoints;
 @use '../spacing/tokens.scss' as spacing;
 @use './tokens.scss' as tokens;
+@use '../colors/mixins.scss' as colors;
+@use '../focus/mixins.scss' as focus;
 
 // Body Text
 
@@ -236,19 +238,36 @@
 
 // Link component
 
-@mixin text-link-m-typography {
+@mixin text-link {
+  @include colors.text-color('primary-dark');
+
+  display: inline-block;
+  position: relative;
+  text-decoration: underline solid;
   font-family: tokens.$font-family;
+  overflow-wrap: anywhere;
+
+  &:focus {
+    @include focus.focus-generic;
+  }
+}
+
+@mixin link-md {
+  @include text-link;
+
   font-size: tokens.$body-text-m-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
-@mixin text-link-l-typography {
-  font-family: tokens.$font-family;
+@mixin link-lg {
+  @include text-link;
+
   font-size: tokens.$body-text-l-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
-@mixin text-link-inherit-typography {
-  font-family: tokens.$font-family;
+@mixin link-inherit {
+  @include text-link;
+
   font-size: inherit;
 }
