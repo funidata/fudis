@@ -25,7 +25,6 @@ import { BadgeComponent } from '../../badge/badge.component';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { NotificationComponent } from '../../notification/notification.component';
-import { LinkComponent } from '../../link/link.component';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -95,7 +94,6 @@ describe('FormComponent', () => {
         HeadingComponent,
         IconComponent,
         LabelComponent,
-        LinkComponent,
         LinkDirective,
         MockFormComponent,
         NotificationComponent,

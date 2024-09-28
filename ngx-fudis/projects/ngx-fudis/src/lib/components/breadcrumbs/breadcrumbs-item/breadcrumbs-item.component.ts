@@ -3,7 +3,6 @@ import {
   Component,
   Host,
   HostBinding,
-  Input,
   ViewEncapsulation,
 } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -28,16 +27,6 @@ export class BreadcrumbsItemComponent {
    * Binding host CSS class to component wrapper
    */
   @HostBinding('class') private _classes = 'fudis-breadcrumbs-item-host';
-
-  /**
-   * Visible label text
-   */
-  @Input({ required: true }) label: string;
-
-  /**
-   * Angular Router url
-   */
-  @Input({ required: true }) url: string;
 
   /**
    * Id from Id Service

@@ -55,7 +55,6 @@ import { LocalizedTextGroupComponent } from './components/form/localized-text-gr
 import { LabelComponent } from './components/form/label/label.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
-import { LinkComponent } from './components/link/link.component';
 import { MultiselectChipListComponent } from './components/form/select/multiselect/multiselect-chip-list/multiselect-chip-list.component';
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
@@ -102,7 +101,7 @@ import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
-import { LinkApiDirective } from './directives/link/link-api/link-api.directive';
+
 import { LinkDirective } from './directives/link/link.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
@@ -184,8 +183,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     LabelComponent,
     LanguageBadgeComponent,
     LanguageBadgeGroupComponent,
-    LinkApiDirective,
-    LinkComponent,
     LinkDirective,
     MultiselectComponent,
     MultiselectChipListComponent,
@@ -281,7 +278,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     IconComponent,
     LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,
-    LinkComponent,
     LinkDirective,
     MultiselectComponent,
     MultiselectOptionComponent,

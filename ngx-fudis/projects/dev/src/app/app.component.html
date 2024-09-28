@@ -22,7 +22,7 @@
             >
 
             <fudis-heading [level]="3" fudisGridItem [columns]="'auto'">
-              <fudis-link [href]="'#'" [title]="'Link inside a heading'"></fudis-link>
+              <a fudisLink [href]="'#'" [title]="'Link inside a heading'"></a>
             </fudis-heading>
             <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" />
             <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
@@ -134,12 +134,12 @@
 
     <fudis-footer>
       <ng-template fudisFooterContentRight>
-        <fudis-link [href]="'example.com'" [title]="'Tietosuojaseloste'" />
-        <fudis-link [href]="'example.com'" [title]="'Saavutettavuusseloste'" />
-        <fudis-link [href]="'example.com'" [title]="'Järjestelmätiedot'" />
+        <a fudisLink href="example.com" [external]="true" [title]="'Tietosuojaseloste'"></a>
+        <a fudisLink href="example.com" [external]="true" [title]="'Saavutettavuusseloste'"></a>
+        <a fudisLink href="example.com" [external]="true" [title]="'Järjestelmätiedot'"></a>
       </ng-template>
       <ng-template fudisFooterContentLeft>
-        <fudis-link [href]="'example.com'" [title]="'Promo link'" />
+        <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
       </ng-template>
     </fudis-footer>
   </div>

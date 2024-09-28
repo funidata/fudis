@@ -18,8 +18,8 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
-  constructor(private _elementRef: ElementRef) {
-    (_elementRef.nativeElement as SVGElement).style.cssText = `
+  constructor(public elementRef: ElementRef) {
+    (elementRef.nativeElement as SVGElement).style.cssText = `
       display: inline-flex;
       vertical-align: middle;
     `;

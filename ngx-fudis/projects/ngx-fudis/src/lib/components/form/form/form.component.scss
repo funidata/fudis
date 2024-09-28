@@ -30,15 +30,13 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
-        margin-right: spacing.$spacing-xs;
-        margin-bottom: spacing.$spacing-sm;
 
         fudis-button:not(:first-of-type) {
-          margin-left: spacing.$spacing-sm;
+          margin-left: spacing.$spacing-xs;
         }
 
         fudis-button:not(:last-of-type) {
-          margin-bottom: spacing.$spacing-xs;
+          margin-bottom: spacing.$spacing-xxs;
         }
       }
 

@@ -1,0 +1,34 @@
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-link {
+  &__size {
+    &__inherit {
+      @include typography.link-inherit;
+    }
+
+    &__md {
+      @include typography.link-md;
+    }
+
+    &__lg {
+      @include typography.link-lg;
+    }
+  }
+
+  &__external {
+    &__icon-wrapper {
+      display: inline-block;
+      position: relative;
+      padding-right: spacing.$spacing-lg;
+      text-decoration: underline solid;
+    }
+
+    &__icon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+}

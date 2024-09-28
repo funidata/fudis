@@ -6,7 +6,6 @@ import { AlertComponent } from './alert.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { IconComponent } from '../../icon/icon.component';
-import { LinkComponent } from '../../link/link.component';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisAlert, fudisNotificationVariantArray } from '../../../types/miscellaneous';
 import { AlertGroupComponent } from '../alert-group/alert-group.component';
@@ -69,7 +68,6 @@ describe('AlertComponent', () => {
         AlertGroupComponent,
         BodyTextComponent,
         ButtonComponent,
-        LinkComponent,
         LinkDirective,
         MockAlertComponent,
         MockComponent(IconComponent),
@@ -124,7 +122,7 @@ describe('AlertComponent', () => {
         expect(element.querySelector('p')?.textContent).toContain(String(testMessage.value));
 
         // Test that link does not exist by default
-        expect(element.querySelector('fudis-link')).toBeFalsy();
+        expect(element.querySelector('.fudis-link')).toBeFalsy();
       });
     });
   });
