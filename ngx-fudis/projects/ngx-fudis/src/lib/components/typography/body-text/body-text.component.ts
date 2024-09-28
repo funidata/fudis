@@ -1,8 +1,17 @@
-import { Component, Input, HostBinding, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostBinding,
+  ChangeDetectionStrategy,
+  OnChanges,
+  Optional,
+  Host,
+} from '@angular/core';
 import { FudisBodyText, FudisTextAlign } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
+import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 
 @Component({
   selector: 'fudis-body-text',
@@ -11,7 +20,10 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent implements OnChanges {
-  constructor(private _idService: FudisIdService) {
+  constructor(
+    @Host() @Optional() protected _breadcrumbsItem: BreadcrumbsItemComponent,
+    private _idService: FudisIdService,
+  ) {
     this._id = _idService.getNewId('body-text');
   }
 
