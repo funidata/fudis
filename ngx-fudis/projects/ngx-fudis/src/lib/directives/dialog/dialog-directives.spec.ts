@@ -14,6 +14,7 @@ import {
   DialogCloseDirective,
 } from './dialog-directives';
 import { getElement } from '../../utilities/tests/utilities';
+import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
 
 @Component({
   selector: 'fudis-mock-dialog',
@@ -52,6 +53,7 @@ describe('DialogDirectives', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
+        AlertGroupComponent,
         BodyTextComponent,
         ButtonComponent,
         HeadingComponent,

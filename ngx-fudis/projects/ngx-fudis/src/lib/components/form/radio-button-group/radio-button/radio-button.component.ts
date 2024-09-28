@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
 
 @Component({
@@ -34,9 +35,9 @@ export class RadioButtonComponent implements OnInit {
   @Input({ required: true }) label: string;
 
   /**
-   * Blur event output
+   * Emits changed Radio button option and form control.
    */
-  @Output() radioButtonBlur = new EventEmitter<string>();
+  @Output() handleChange = new EventEmitter<FudisRadioButtonChangeEvent>();
 
   /**
    * Id for single Radio Button
@@ -47,6 +48,17 @@ export class RadioButtonComponent implements OnInit {
    * Selected Radio Button change
    */
   protected _onChange(): void {
+    const optionToEmit: FudisRadioButtonOption<object> = {
+      id: this._id,
+      label: this.label,
+      value: this._parentGroup?.control.value,
+    };
+
+    /**
+     * This Radio button's emit
+     */
+    this.handleChange.emit({ option: optionToEmit, control: this._parentGroup.control });
+
     /**
      * Call parent's function, which triggers Radio Button Group's emit
      */

@@ -139,6 +139,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     if ((event.relatedTarget as HTMLElement)?.getAttribute('name') !== this._checkboxGroup.id) {
       setTimeout(() => {
         if (document.activeElement?.getAttribute('name') !== this._checkboxGroup.id) {
+          this._checkboxGroup.handleBlur.emit(event);
           this._checkboxGroup.setGroupBlurredOut(true);
         }
       }, 150);

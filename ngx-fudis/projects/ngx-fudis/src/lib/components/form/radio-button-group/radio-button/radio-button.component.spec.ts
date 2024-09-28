@@ -5,7 +5,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { RadioButtonComponent } from './radio-button.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
-import { FudisRadioButtonOption } from '../../../../types/forms';
+import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { FieldSetComponent } from '../../fieldset/fieldset.component';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
@@ -17,13 +17,15 @@ import { IconComponent } from '../../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
+import { By } from '@angular/platform-browser';
+import { getElement } from '../../../../utilities/tests/utilities';
 
 @Component({
   selector: 'fudis-mock-component',
   template: `<fudis-radio-button-group
     [id]="'radio-button-test-group'"
     [label]="'Choose a pet'"
-    [control]="_testControl"
+    [control]="testControl"
   >
     <fudis-radio-button
       *ngFor="let option of _options"
@@ -32,8 +34,8 @@ import { FudisValidators } from '../../../../utilities/form/validators';
     />
   </fudis-radio-button-group>`,
 })
-class MockContainerComponent {
-  protected _testControl: FormControl = new FormControl(
+class MockComponent {
+  public testControl: FormControl = new FormControl(
     null,
     FudisValidators.required('You must choose an animal'),
   );
@@ -46,12 +48,13 @@ class MockContainerComponent {
 }
 
 describe('RadioButtonComponent', () => {
-  let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<RadioButtonComponent>;
+  let fixture: ComponentFixture<MockComponent> | ComponentFixture<RadioButtonComponent>;
+  let component: MockComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        MockContainerComponent,
+        MockComponent,
         RadioButtonComponent,
         RadioButtonGroupComponent,
         FieldSetComponent,
@@ -74,7 +77,9 @@ describe('RadioButtonComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MockContainerComponent);
+    fixture = TestBed.createComponent(MockComponent);
+
+    component = fixture.componentInstance;
 
     fixture.detectChanges();
   });
@@ -130,13 +135,34 @@ describe('RadioButtonComponent', () => {
   });
 
   describe('Interaction and logic when clicking', () => {
-    it('should have correct value', () => {
-      const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
-        'input#radio-button-test-group-item-1',
-      );
+    it('should have correct value and emit handleChange() when clicking component', () => {
+      const radioButtonComponentToSpy = fixture.debugElement.query(
+        By.directive(RadioButtonComponent),
+      ).componentInstance;
 
-      const inputValue = input.getAttribute('ng-reflect-value');
-      expect(inputValue).toEqual('platypus');
+      const optionToMatch: FudisRadioButtonOption<object> = {
+        id: 'radio-button-test-group-item-1',
+        value: 'platypus',
+        label: 'Platypus',
+      };
+
+      let handleChangeTriggered = false;
+
+      radioButtonComponentToSpy.handleChange.subscribe((value: FudisRadioButtonChangeEvent) => {
+        if (value) {
+          handleChangeTriggered = true;
+          expect(value.option).toEqual(optionToMatch);
+          expect(value.control.value).toEqual('platypus');
+        }
+      });
+
+      const input = getElement(fixture, 'input#radio-button-test-group-item-1') as HTMLInputElement;
+
+      input.dispatchEvent(new MouseEvent('click'));
+
+      expect(component.testControl.value).toEqual('platypus');
+
+      expect(handleChangeTriggered).toBeTruthy();
     });
   });
 });
