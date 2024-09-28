@@ -1,9 +1,13 @@
+/* stylelint-disable unit-disallowed-list */
 @use '../../../../foundations/borders/mixins.scss' as borders;
 @use '../../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../../foundations/typography/mixins.scss' as typography;
 @use '../../../../foundations/colors/tokens.scss' as colors;
 @use '../../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../../foundations/focus/mixins.scss' as focus;
+
+$radio-input-size: calc(1.25rem / var(--fudis-rem-multiplier));
+$radio-indicator-size: calc(0.75rem / var(--fudis-rem-multiplier));
 
 .fudis-radio-button {
   @include typography.body-text-md-regular;
@@ -26,7 +30,6 @@
   &__content {
     display: flex;
     align-items: center;
-    /* stylelint-disable-next-line unit-disallowed-list */
     transform: translateX(calc(-0.1rem / var(--fudis-rem-multiplier)));
     padding-left: 0;
 
@@ -47,9 +50,9 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      width: spacing.$spacing-input-radio;
-      min-width: spacing.$spacing-input-radio;
-      height: spacing.$spacing-input-radio;
+      width: $radio-input-size;
+      min-width: $radio-input-size;
+      height: $radio-input-size;
 
       &--invalid {
         @include borders.border('1px', 'solid', 'red');
@@ -66,8 +69,8 @@
         @include colorMixins.bg-color('gray-dark');
 
         border-radius: 50%;
-        width: spacing.$spacing-input-radio-indicator;
-        height: spacing.$spacing-input-radio-indicator;
+        width: $radio-indicator-size;
+        height: $radio-indicator-size;
       }
     }
   }

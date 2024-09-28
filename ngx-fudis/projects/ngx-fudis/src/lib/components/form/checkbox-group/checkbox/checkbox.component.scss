@@ -37,8 +37,8 @@
       align-items: center;
       justify-content: center;
       border-radius: 0;
-      width: spacing.$spacing-input-checkbox;
-      height: spacing.$spacing-input-checkbox;
+      width: spacing.$checkbox-size;
+      height: spacing.$checkbox-size;
 
       &__icon .fudis-icon {
         fill: colors.$color-gray-middle;
