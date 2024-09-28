@@ -1,9 +1,7 @@
 <li class="fudis-breadcrumbs-item" [attr.id]="_id">
-  <fudis-link class="fudis-breadcrumbs-item__link" [link]="url" [title]="label" />
+  <ng-content select="a" />
   <span class="fudis-breadcrumbs-item__icon">
     <fudis-icon [icon]="'chevron'" />
   </span>
-  <fudis-body-text class="fudis-breadcrumbs-item__current" [attr.aria-current]="'page'">{{
-    label
-  }}</fudis-body-text>
+  <ng-content select="fudis-body-text" />
 </li>

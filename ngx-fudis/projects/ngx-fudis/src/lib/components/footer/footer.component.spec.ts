@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { FooterComponent } from './footer.component';
 import { GridComponent } from '../grid/grid/grid.component';
@@ -10,7 +9,6 @@ import {
   FooterContentRightDirective,
 } from '../../directives/content-projection/content/content.directive';
 import { GridItemComponent } from '../grid/grid-item/grid-item.component';
-import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
@@ -20,12 +18,12 @@ import { FudisTranslationService } from '../../services/translation/translation.
   selector: 'fudis-mock-footer',
   template: `<fudis-footer>
     <ng-template fudisFooterContentRight>
-      <fudis-link [externalLink]="'example.com'" [title]="'Privacy notice'" />
-      <fudis-link [externalLink]="'example.com'" [title]="'Accessibility statement'" />
-      <fudis-link [externalLink]="'example.com'" [title]="'System information'" />
+      <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'System information'"></a>
     </ng-template>
     <ng-template fudisFooterContentLeft>
-      <fudis-link [externalLink]="'example.com'" [title]="'Promo link'" />
+      <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
     </ng-template>
   </fudis-footer>`,
 })
@@ -43,12 +41,11 @@ describe('FooterComponent', () => {
         FooterComponent,
         GridComponent,
         GridItemComponent,
-        LinkComponent,
         LinkDirective,
+        IconComponent,
         FooterContentLeftDirective,
         FooterContentRightDirective,
         MockFooterComponent,
-        MockComponent(IconComponent),
       ],
       providers: [FudisGridService, FudisBreakpointService, FudisTranslationService],
     }).compileComponents();
@@ -57,14 +54,14 @@ describe('FooterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MockFooterComponent);
     component = fixture.componentInstance;
-    fixture.autoDetectChanges();
+    fixture.detectChanges();
   });
 
   function getFooterGridElem() {
     return fixture.debugElement.query(By.directive(GridComponent));
   }
 
-  it('should create', () => {
+  it('should create', async () => {
     expect(component).toBeTruthy();
   });
 
@@ -96,19 +93,21 @@ describe('FooterComponent', () => {
         expect(getFooterGridElem().nativeElement.children[0].children.length).toEqual(2);
       });
 
-      it('should have Funidata logo visible with an alt text for screen readers', () => {
-        const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
-        const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
+      it('should have Funidata logo visible with an alt text for screen readers', async () => {
+        await fixture.whenStable().then(() => {
+          const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
+          const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
 
-        const svgElementTitle = firstGridItemElem.querySelector(
-          '.fudis-footer__item__logo svg title',
-        ) as HTMLTitleElement;
+          const svgElementTitle = firstGridItemElem.querySelector(
+            '.fudis-footer__item__logo svg title',
+          ) as HTMLTitleElement;
 
-        expect(svgElementTitle.innerHTML).toEqual('Funidata logo');
-        expect(anchorElem.children.length).toEqual(1);
-        expect(anchorElem.getAttribute('aria-label')).toEqual(
-          'Funidata homepage (opens in a new tab)',
-        );
+          expect(svgElementTitle.innerHTML).toEqual('Funidata logo');
+          expect(anchorElem.children.length).toEqual(1);
+          expect(anchorElem.getAttribute('aria-label')).toEqual(
+            'Funidata homepage (opens in a new tab)',
+          );
+        });
       });
     });
     describe('Footer after lang update', () => {

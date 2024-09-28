@@ -1,8 +1,4 @@
-<nav
-  *ngIf="_breadcrumbsPrefix"
-  [attr.aria-label]="(_breadcrumbsPrefix | async) + ': ' + label"
-  [attr.id]="_id"
->
+<nav [attr.aria-label]="(_breadcrumbsPrefix | async) + ': ' + label" [attr.id]="_id">
   <ul class="fudis-breadcrumbs">
     <ng-content select="fudis-breadcrumbs-item" />
   </ul>
