@@ -9,7 +9,7 @@ import {
   Optional,
   Output,
 } from '@angular/core';
-import { FudisInputSize, FudisRadioButtonGroupChangeEvent } from '../../../types/forms';
+import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormComponent } from '../form/form.component';
@@ -50,7 +50,7 @@ export class RadioButtonGroupComponent
   /**
    * Emit form control and changed option when one option is clicked
    */
-  @Output() handleChange = new EventEmitter<FudisRadioButtonGroupChangeEvent>();
+  @Output() handleChange = new EventEmitter<FudisRadioButtonChangeEvent>();
 
   ngOnInit() {
     this._setParentComponentId('radio-button-group');
@@ -75,7 +75,7 @@ export class RadioButtonGroupComponent
   }
 
   public triggerEmit(id: string, label: string): void {
-    const data: FudisRadioButtonGroupChangeEvent = {
+    const data: FudisRadioButtonChangeEvent = {
       option: {
         id: id,
         label: label,
