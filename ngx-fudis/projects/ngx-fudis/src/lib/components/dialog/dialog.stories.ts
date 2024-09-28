@@ -416,7 +416,7 @@ class NestedDialogsComponent {
   selector: 'fudis-dialog-size-example',
   template: `
     <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">
-    <fudis-heading>Regular Dialogs</fudis-heading>
+      <fudis-heading>Regular Dialogs</fudis-heading>
       <fudis-button
         *ngFor="let size of sizes"
         [label]="'Open regular ' + size + ' dialog'"
@@ -424,39 +424,36 @@ class NestedDialogsComponent {
       />
     </fudis-grid>
     <fudis-hr class="fudis-my-xl" />
-    <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'" >
-    <fudis-heading>Form Dialogs</fudis-heading>
+    <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">
+      <fudis-heading>Form Dialogs</fudis-heading>
       <fudis-button
         *ngFor="let size of sizes"
         [label]="'Open form ' + size + ' dialog'"
         (handleClick)="openDialogWithForm(size)"
       />
     </fudis-grid>
-    
 
     <ng-template #exampleDialogTemplate>
       <fudis-dialog [size]="_size">
-          <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'">This dialog size is {{_size}}</fudis-heading>
-          <fudis-dialog-content>
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
+          >This dialog size is {{ _size }}</fudis-heading
+        >
+        <fudis-dialog-content>
           <fudis-body-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
-                vehicula ut massa non facilisis. Aliquam vehicula risus vitae ex condimentum, sed
-                efficitur neque scelerisque.
-              </fudis-body-text>
-          </fudis-dialog-content>
-          <fudis-dialog-actions>
-            <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
-          </fudis-dialog-actions>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
+            vehicula ut massa non facilisis. Aliquam vehicula risus vitae ex condimentum, sed
+            efficitur neque scelerisque.
+          </fudis-body-text>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+        </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>
-  `
+  `,
 })
-
-
 class DialogSizeExampleComponent {
-  constructor(
-    private _dialogService: FudisDialogService
-  ) {}
+  constructor(private _dialogService: FudisDialogService) {}
 
   protected _size: FudisDialogSize;
 
