@@ -1,6 +1,7 @@
 <p
   [id]="_id"
   [class.fudis-body-text__default]="_defaultClass | async"
+  [attr.aria-current]="_breadcrumbsItem ? 'page' : null"
   class="fudis-body-text fudis-body-text__{{ variant }} fudis-body-text__{{ align }}"
   ><ng-content
 /></p>

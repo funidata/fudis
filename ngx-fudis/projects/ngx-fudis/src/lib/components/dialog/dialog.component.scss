@@ -1,65 +1,62 @@
+/* stylelint-disable unit-disallowed-list */
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../foundations/grid/tokens.scss' as gridTokens;
+@use '../../foundations/borders/mixins.scss' as borders;
+
+$dialog-width-xs: calc(30rem / var(--fudis-rem-multiplier));
+$dialog-width-sm: calc(44rem / var(--fudis-rem-multiplier));
+$dialog-width-md: calc(55rem / var(--fudis-rem-multiplier));
+$dialog-width-lg: calc(70rem / var(--fudis-rem-multiplier));
+$dialog-width-xl: calc(90rem / var(--fudis-rem-multiplier));
 
 .fudis-dialog {
-  box-sizing: content-box;
+  @include borders.border('1px', 'solid', 'gray-dark');
+
+  box-sizing: border-box;
   position: relative;
-  margin: spacing.$spacing-md spacing.$spacing-sm;
-  max-width: calc(100vw - (2 * spacing.$spacing-sm));
+  padding: spacing.$spacing-md spacing.$spacing-sm;
+  max-width: calc(100vw - spacing.$spacing-lg);
 
   &__close {
     float: right;
 
     &__absolute {
       position: absolute;
-      top: 0;
-      right: 0;
-      float: initial;
+      right: spacing.$spacing-sm;
+
+      @include breakpoints.breakpoint('sm') {
+        right: spacing.$spacing-xl;
+      }
     }
   }
 
   &__size {
-    &__initial {
-      width: initial;
+    &__xs {
+      width: $dialog-width-xs;
     }
 
     &__sm {
-      width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-md);
-
-      @include breakpoints.breakpoint('md') {
-        width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-xl);
-      }
+      width: $dialog-width-sm;
     }
 
     &__md {
-      width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-md);
-
-      @include breakpoints.breakpoint('md') {
-        width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-xl);
-      }
+      width: $dialog-width-md;
     }
 
     &__lg {
-      width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-md);
-
-      @include breakpoints.breakpoint('md') {
-        width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-xl);
-      }
+      width: $dialog-width-lg;
     }
 
     &__xl {
-      width: gridTokens.$grid-width-xl;
+      width: $dialog-width-xl;
     }
   }
 
   @include breakpoints.breakpoint('sm') {
-    margin: spacing.$spacing-md;
-    max-width: calc(100% - (2 * spacing.$spacing-md));
+    padding: spacing.$spacing-md spacing.$spacing-xl;
   }
 
   @include breakpoints.breakpoint('md') {
-    margin: spacing.$spacing-md spacing.$spacing-xl;
-    max-width: calc(100% - (2 * spacing.$spacing-xl));
+    max-width: calc(100vw - spacing.$spacing-xxl);
   }
 }

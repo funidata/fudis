@@ -20,7 +20,6 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { IconComponent } from '../../icon/icon.component';
-import { LinkComponent } from '../../link/link.component';
 import { NotificationComponent } from '../../notification/notification.component';
 import { HeadingComponent } from '../../typography/heading/heading.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
@@ -130,7 +129,6 @@ describe('ErrorSummaryComponent', () => {
         HeadingComponent,
         IconComponent,
         LabelComponent,
-        LinkComponent,
         LinkDirective,
         MockFormComponent,
         NotificationComponent,

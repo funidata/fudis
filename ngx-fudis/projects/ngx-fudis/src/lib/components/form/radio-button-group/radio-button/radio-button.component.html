@@ -17,7 +17,7 @@
       "
       (focus)="_parentGroup.onFocus($event)"
       (keyup)="_parentGroup.handleKeyUp.emit($event)"
-      (blur)="radioButtonBlur.emit(label); _parentGroup.handleBlur.emit($event)"
+      (blur)="_parentGroup.handleBlur.emit($event)"
       (change)="_onChange()"
     />
     <div class="fudis-radio-button__content">

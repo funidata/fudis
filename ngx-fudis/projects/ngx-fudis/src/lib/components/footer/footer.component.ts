@@ -14,7 +14,7 @@ import {
   FooterContentRightDirective,
 } from '../../directives/content-projection/content/content.directive';
 import { FudisTranslationConfig } from '../../types/miscellaneous';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-footer',
@@ -58,10 +58,14 @@ export class FooterComponent {
   /**
    * Alternative text for the Funidata logo
    */
-  protected _funidataLogoAltText = new Subject<string>();
+  protected _funidataLogoAltText = new BehaviorSubject<string>(
+    this._translationService.getTranslations()().IMAGE.FUNIDATA_LOGO,
+  );
 
   /**
    * External link text for Funidata logo
    */
-  protected _externalLinkHelpText = new Subject<string>();
+  protected _externalLinkHelpText = new BehaviorSubject<string>(
+    this._translationService.getTranslations()().LINK.EXTERNAL_LINK,
+  );
 }
