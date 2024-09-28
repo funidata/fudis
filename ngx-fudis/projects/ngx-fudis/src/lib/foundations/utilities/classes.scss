@@ -30,18 +30,18 @@
 
 .fudis-input-size {
   &__xs {
-    max-width: spacing.$spacing-input-xs;
+    max-width: spacing.$input-width-xs;
   }
 
   &__sm {
-    max-width: spacing.$spacing-input-sm;
+    max-width: spacing.$input-width-sm;
   }
 
   &__md {
-    max-width: spacing.$spacing-input-md;
+    max-width: spacing.$input-width-md;
   }
 
   &__lg {
-    max-width: spacing.$spacing-input-lg;
+    max-width: spacing.$input-width-lg;
   }
 }

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
@@ -28,7 +29,11 @@ describe('DialogComponent', () => {
           useValue: [],
         },
       ],
-    }).compileComponents();
+    })
+      .overrideComponent(DialogComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
 
     dialogService = TestBed.inject(FudisDialogService);
 

@@ -48,7 +48,7 @@ export type FudisDescriptionListItemDetailLanguageContent = {
 /**
  * Dialog
  */
-export const fudisDialogSizeArray = ['sm', 'md', 'lg', 'xl', 'initial'] as const;
+export const fudisDialogSizeArray = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 export type FudisDialogSize = (typeof fudisDialogSizeArray)[number];
 
 /**

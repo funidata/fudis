@@ -22,8 +22,8 @@
   @include borders.outline('2px', 'solid', 'primary');
 
   outline-offset: -(spacing.$pixel-1);
-  width: spacing.$spacing-input-checkbox;
-  height: spacing.$spacing-input-checkbox;
+  width: spacing.$checkbox-size;
+  height: spacing.$checkbox-size;
 }
 
 @mixin focus-dropdown {
