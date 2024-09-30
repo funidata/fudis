@@ -80,6 +80,7 @@
   </div>
   <fudis-select
     *ngIf="_languageLabel | async as label"
+    #selectRef
     class="fudis-localized-text-group__select"
     [label]="label"
     [selectionClearButton]="false"

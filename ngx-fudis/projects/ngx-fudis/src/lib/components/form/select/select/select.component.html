@@ -13,7 +13,9 @@
       <div
         *ngIf="variant === 'dropdown' || control.disabled"
         #inputRef
-        tabindex="0"
+        [attr.tabindex]="
+          !control.disabled && !parentLocalizedTextGroupFormGroup?.disabled ? 0 : null
+        "
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
         [id]="id"
         role="combobox"
@@ -27,7 +29,9 @@
         (keyup)="_inputKeyUp($event)"
         [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="_dropdownOpen"
-        [attr.aria-disabled]="control.disabled"
+        [attr.aria-disabled]="
+          control.disabled || parentLocalizedTextGroupFormGroup?.disabled || null
+        "
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
@@ -74,12 +78,14 @@
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
           (handleClearButtonDestroy)="_setClearButtonFocusFalse()"
           [clearButton]="selectionClearButton"
-          [disabled]="control.disabled"
+          [disabled]="control.disabled || !!parentLocalizedTextGroupFormGroup?.disabled"
         />
       </div>
     </div>
     <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce && !control.disabled"
+      *ngIf="
+        _optionsLoadedOnce && !control.disabled && !parentLocalizedTextGroupFormGroup?.disabled
+      "
       #dropdownRef
       [open]="_dropdownOpen | async"
       [selectVariant]="variant"
