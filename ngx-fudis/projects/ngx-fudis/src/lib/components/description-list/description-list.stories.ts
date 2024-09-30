@@ -69,7 +69,12 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
   template: html` <fudis-heading [level]="2" [variant]="'md'"
       >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
     >
-    <fudis-dl class="fudis-mt-sm" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
+    <fudis-dl
+      [classes]="'fudis-mt-sm'"
+      [variant]="variant"
+      [columns]="2"
+      [disableGrid]="disableGrid"
+    >
       <fudis-dl-item>
         <fudis-dt [contentText]="'First name'"></fudis-dt>
         <fudis-dd [contentText]="'Rex'"></fudis-dd>
@@ -117,7 +122,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
     <fudis-heading [level]="2" [variant]="'md'"
       >Nested Description Lists with Indiana Jones Movies</fudis-heading
     >
-    <fudis-dl class="fudis-mt-sm" [disableGrid]="disableGrid">
+    <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="disableGrid">
       <fudis-dl-item>
         <fudis-dt [contentText]="'Raiders of the Lost Ark'"></fudis-dt>
         <fudis-dd>
@@ -394,7 +399,6 @@ const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
     >
     <fudis-dl
       class="fudis-mt-sm"
-      [variant]="'regular'"
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
       [variant]="variant"

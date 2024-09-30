@@ -1,4 +1,4 @@
-import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
+import { FudisBreakpointKey } from './breakpoints';
 import { convertToRemValue } from '../utilities/rem-converter';
 
 export const fudisSpacingArray = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
@@ -40,13 +40,3 @@ export const fudisSpacingValues: FudisSpacingValues = {
   none: '0',
   default: defaultSpacingValue,
 };
-
-/**
- * Attributes for managing spacings
- */
-export interface FudisSpacingAttributes {
-  marginTop?: FudisSpacing | FudisBreakpointValueResponsive;
-  marginBottom?: FudisSpacing | FudisBreakpointValueResponsive;
-  marginRight?: FudisSpacing | FudisBreakpointValueResponsive;
-  marginLeft?: FudisSpacing | FudisBreakpointValueResponsive;
-}

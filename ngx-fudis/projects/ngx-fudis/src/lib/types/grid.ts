@@ -16,10 +16,8 @@ export const gridInputPropertyDefaults: FudisGridProperties = {
   align: 'start',
   alignItemsX: 'stretch',
   alignItemsY: 'stretch',
-  classes: [],
+  classes: undefined,
   columnGap: 'responsive',
-  marginTop: 'none',
-  marginBottom: 'none',
   rowGap: 'responsive',
   width: 'xxl',
 };
@@ -63,11 +61,9 @@ export interface FudisGridProperties {
   align?: FudisGridAlign;
   alignItemsY?: FudisGridAlignItems;
   alignItemsX?: FudisGridAlignItems;
-  classes?: string[];
+  classes?: string;
   columns?: FudisBreakpointValueResponsive;
   columnGap?: FudisGridGap;
-  marginBottom?: FudisSpacing;
-  marginTop?: FudisSpacing;
   rowGap?: FudisGridGap;
   width?: FudisGridWidth;
 }

@@ -2,6 +2,8 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dl {
+  @include utilities.box-reset;
+
   &__disabled-grid {
     @include utilities.box-reset;
 

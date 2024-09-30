@@ -16,7 +16,6 @@ import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { GridDirective } from './grid.directive';
-import { FudisSpacing } from '../../../types/spacing';
 
 @Component({
   selector: 'fudis-mock-grid-directive',
@@ -31,7 +30,7 @@ import { FudisSpacing } from '../../../types/spacing';
       <fudis-body-text>Paragraph text for testing grid directive.</fudis-body-text>
       <fudis-button [label]="'Test button'" />
     </div>
-    <div fudisGrid [columns]="2" [marginBottom]="marginBottom" [marginTop]="marginTop">
+    <div fudisGrid [columns]="2">
       <fudis-heading [level]="4">I am test heading number two</fudis-heading>
       <fudis-body-text>Paragraph text for testing grid directive.</fudis-body-text>
       <fudis-button [label]="'Test button number two'" />
@@ -51,10 +50,6 @@ class HostComponent {
   classes: string[] = [];
 
   serviceDefaults: boolean = true;
-
-  marginBottom: FudisSpacing = 'none';
-
-  marginTop: FudisSpacing = 'none';
 
   rowGap: FudisGridGap = 'responsive';
 
@@ -101,17 +96,6 @@ describe('GridDirective', () => {
     }
   }
 
-  function getClasses(index: number, marginTop: FudisSpacing, marginBottom: FudisSpacing) {
-    const attr = 'classList';
-    component.marginTop = marginTop;
-    component.marginBottom = marginBottom;
-    fixture.detectChanges();
-
-    const classes = getAttribute(index, attr);
-
-    return classes;
-  }
-
   describe('Component creation', () => {
     it('should create mock component', () => {
       expect(component).toBeTruthy();
@@ -150,37 +134,6 @@ describe('GridDirective', () => {
 
       expect(getAttribute(0, 'align-items')).toBe('end');
       expect(getAttribute(0, 'justify-items')).toBe('end');
-    });
-
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it('should convert marginTop and marginBottom attributes to respective CSS classes', () => {
-      expect(getClasses(1, 'xxs', 'xxs').value).toContain(
-        'fudis-grid__margin__top__xxs fudis-grid__margin__bottom__xxs',
-      );
-
-      expect(getClasses(1, 'xs', 'xs').value).toContain(
-        'fudis-grid__margin__top__xs fudis-grid__margin__bottom__xs',
-      );
-
-      expect(getClasses(1, 'sm', 'sm').value).toContain(
-        'fudis-grid__margin__top__sm fudis-grid__margin__bottom__sm',
-      );
-
-      expect(getClasses(1, 'md', 'md').value).toContain(
-        'fudis-grid__margin__top__md fudis-grid__margin__bottom__md',
-      );
-
-      expect(getClasses(1, 'lg', 'lg').value).toContain(
-        'fudis-grid__margin__top__lg fudis-grid__margin__bottom__lg',
-      );
-
-      expect(getClasses(1, 'xl', 'xl').value).toContain(
-        'fudis-grid__margin__top__xl fudis-grid__margin__bottom__xl',
-      );
-
-      expect(getClasses(1, 'xxl', 'xxl').value).toContain(
-        'fudis-grid__margin__top__xxl fudis-grid__margin__bottom__xxl',
-      );
     });
   });
 
