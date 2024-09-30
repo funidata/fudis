@@ -87,22 +87,22 @@ Add margins and paddings to the dl element by adding `classes` with desired [Spa
 
 ### Regular Variant
 
-<Canvas of={DescriptionListStories.DescriptionList}></Canvas>
+<Canvas of={DescriptionListStories.DescriptionList} />
 
 ### Compact Variant
 
-<Canvas of={DescriptionListStories.DescriptionListCompact}></Canvas>
+<Canvas of={DescriptionListStories.DescriptionListCompact} />
 
 ### Nesting Lists and Sub-Components
 
 When nesting Description List as sublist, the nested one should have `variant` set to `compact`.
 
-<Canvas of={DescriptionListStories.NestedDescriptionLists}></Canvas>
+<Canvas of={DescriptionListStories.NestedDescriptionLists} />
 
 It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how Button is used inside the Description List in various ways.
 Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
 
-<Canvas of={DescriptionListStories.NestedSubComponents}></Canvas>
+<Canvas of={DescriptionListStories.NestedSubComponents} />
 
 ### With Language Badge Group
 
@@ -127,23 +127,23 @@ Set in your `fudis-dd` element `lang` attribute to tell which translation it rep
 
 Description List components communicate with each other and define automatically to set Language Badges visible and theme it properly if you have provided or not a Details component for each of languages set with `setSelectableLanguages()`.
 
-<Canvas of={DescriptionListStories.WithLanguageBadges}></Canvas>
+<Canvas of={DescriptionListStories.WithLanguageBadges} />
 
 ### Accessibility
 
-- Description List component wraps list content into `dl` element
-- Each description term is contained within a `dt` element
-- Each description details is contained in one or more `dd` element
-- `dd` elements are placed directly after `dt` element
-- If only one description list item is present, it is converted to paragraph element
+* Description List component wraps list content into `dl` element
+* Each description term is contained within a `dt` element
+* Each description details is contained in one or more `dd` element
+* `dd` elements are placed directly after `dt` element
+* If only one description list item is present, it is converted to paragraph element
 
 ### Related components / directives / services
 
-- [Grid](/docs/components-grid-grid--example)
-- [Icon](/docs/components-icon--icon)
-- [Button](/docs/components-button--button)
-- [Language Badge Group](/docs/components-language-badge-group--documentation)
-- [FudisTranslationService](/docs/services-translation--documentation#translation-service)
+* [Grid](/docs/components-grid-grid--example)
+* [Icon](/docs/components-icon--icon)
+* [Button](/docs/components-button--button)
+* [Language Badge Group](/docs/components-language-badge-group--documentation)
+* [FudisTranslationService](/docs/services-translation--documentation#translation-service)
 
 ## Description List Properties
 

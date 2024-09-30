@@ -1,0 +1,66 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Services/Translation" />
+
+# Translation Service
+
+Translation Service consists of two parts:
+
+* Functions for selecting translated language in several repeated texts in various Fudis components
+* Functions for setting selectable languages in components, which manage multiple languages either for display or user input. Currently this is available in Description List component using Language Badges.
+
+## Including Service
+
+Use Translation Service by importing and adding it to constructor.
+
+```
+import { FudisTranslationService } from 'ngx-fudis';
+
+  constructor(
+    fudisTranslationService: FudisTranslationService,
+  ) {}
+```
+
+## Component Translation Related Features
+
+Several Fudis component has static text associated with the component logic. Most common example is form components' required indicator which is visible text next to the form field label.
+Also, some of the helper texts for screen readers are set automatically.
+All the translation keys for static texts come from Fudis translations and it is not possible to modify them from the application side.
+
+Currently supported languages in Fudis components are English, Finnish and Swedish. Default language of Fudis components is English.
+
+### Set Language
+
+`setLanguage` sets the language of above-mentioned repeated texts of Fudis components. Function takes language abbreviation argument of either `en`, `fi` or `sv`.
+
+```
+fudisTranslationService.setLanguage('fi');
+```
+
+### Get Language
+
+Get current language of Fudis configuration with `getLanguage`.
+
+```
+this.currentLanguage = fudisTranslationService.getLanguage();
+```
+
+## Selectable Languages in Components
+
+Currently only Language Badge Group has this feature enabled, but with Translation Service it is possible to determine which languages are displayed as selectable badges.
+
+By default set languages is an array of `['fi', 'sv', 'en']`.
+
+Check an [example under Language Badge Group](/story/components-language-badge-group--documentation#interactive-example-along-with-app-language-and-badge-language-options-change) how badges behave when different language settings is set.
+
+### Set Selectable Translations
+
+`setSelectableLanguages()` sets the settings for which languages / translations are selectable in components used to display multiple languages. It takes an array of language abbreviation as its argument. The order of abbreviation also determines the order of display in the components.
+
+```
+fudisTranslationService.setSelectableLanguages(['en','sv']);
+```
+
+### Get Selectable Translations
+
+`getSelectableLanguages()` returns a signal which is invoked each time selectable languages is updated.

@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { GridItemComponent } from './grid-item.component';
-import docs from './grid-item.docs.mdx';
+import docs from './grid-item.mdx';
 
 const html = String.raw;
 

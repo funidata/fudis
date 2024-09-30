@@ -17,10 +17,10 @@ Its API and functionality is very similar to other basic form components, e. g. 
 
 Most important input properties are:
 
-- `label`: Mandatory visible label text
-- `variant`: By default `text-input` which renders an input HTML element. For longer texts variant `text-area` can be used to render a `textarea` element.
-- `formGroup`: Mandatory Angular Form Control, described in the next section
-- `options`: Option list paired with Form Controls, described in the next section
+* `label`: Mandatory visible label text
+* `variant`: By default `text-input` which renders an input HTML element. For longer texts variant `text-area` can be used to render a `textarea` element.
+* `formGroup`: Mandatory Angular Form Control, described in the next section
+* `options`: Option list paired with Form Controls, described in the next section
 
 ## Usage Guidelines
 
@@ -103,7 +103,7 @@ formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
 )`}
 />
 
-<Canvas of={Stories.Example}></Canvas>
+<Canvas of={Stories.Example} />
 
 ### With All Required
 
@@ -130,23 +130,23 @@ formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
 })`}
 />
 
-<Canvas of={Stories.ExampleWithAllRequired}></Canvas>
+<Canvas of={Stories.ExampleWithAllRequired} />
 
 ## Accessibility
 
-- Label text above and Guidance texts below the input field are connected to the form field.
-- Currently selected option is communicated with aria-label of the text input field
-- Component and Select dropdown can be navigated and interacted with keyboard
-- All validation errors are listed below the input field, even if invalid option is not currently selected from the dropdown
-- The Select dropdown labels have an additional 'Missing' text, if that option is required or it has invalid value
+* Label text above and Guidance texts below the input field are connected to the form field.
+* Currently selected option is communicated with aria-label of the text input field
+* Component and Select dropdown can be navigated and interacted with keyboard
+* All validation errors are listed below the input field, even if invalid option is not currently selected from the dropdown
+* The Select dropdown labels have an additional 'Missing' text, if that option is required or it has invalid value
 
 ## Related Components, Directives and Utilities
 
-- [Text Input Component](/docs/components-form-text-input--documentation)
-- [Text Area Component](/docs/components-form-text-area--documentation)
-- [Select Component](/docs/components-form-select-select--documentation)
-- [Tooltip Directive](/docs/directives-tooltip--documentation)
-- [Validators](/docs/utilities-validators--documentation)
+* [Text Input Component](/docs/components-form-text-input--documentation)
+* [Text Area Component](/docs/components-form-text-area--documentation)
+* [Select Component](/docs/components-form-select-select--documentation)
+* [Tooltip Directive](/docs/directives-tooltip--documentation)
+* [Validators](/docs/utilities-validators--documentation)
 
 ## Properties of Localized Text Group
 

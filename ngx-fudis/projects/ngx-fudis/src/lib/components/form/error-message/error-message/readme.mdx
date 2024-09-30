@@ -8,8 +8,8 @@ import { ErrorMessageComponent } from "./error-message.component";
 
 Form component's errors can be achieved in two ways:
 
-- Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
-- As an Error Message child component, for cases when using a validator or creating a custom one can be tricky.
+* Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
+* As an Error Message child component, for cases when using a validator or creating a custom one can be tricky.
 
 If your error message repeats multiple times across your form or application, it is recommended to create your own [Fudis Validator](/docs/utilities-validators--documentation).
 
@@ -42,26 +42,28 @@ Message parameter can be passed either as a string or as an observable string.
 
 The following example demostrates how custom error message can be used along with Fudis Validator error messages. By toggling 'Switch Message Content' button will dynamically update error message content.
 
-<Canvas of={ErrorMessageStories.Example}></Canvas>
+<Canvas of={ErrorMessageStories.Example} />
 
 ## Accessibility
 
-- Related form field label and id are linked to error message
-- Error Message is correctly passed to [Error Summary](/docs/components-form-error-summary--documentation)
+* Related form field label and id are linked to error message
+* Error Message is correctly passed to [Error Summary](/docs/components-form-error-summary--documentation)
 
 ## Currently Supported Form Components
 
-- [Text Input](/docs/components-form-text-input--documentation)
-- [Text Area](/docs/components-form-text-area--documentation)
-- [Select](/docs/components-form-select--documentation)
-- [Checkbox Group](/docs/components-form-checkbox-group--documentation)
-- [Date Picker](/docs/components-form-date-datepicker--documentation)
-- [Radio Button Group](/docs/components-form-radio-button-group--documentation)
-- [Localized Text Group](/docs/components-form-localized-text-group--documentation)
+* [Text Input](/docs/components-form-text-input--documentation)
+* [Text Area](/docs/components-form-text-area--documentation)
+* [Select](/docs/components-form-select--documentation)
+* [Checkbox Group](/docs/components-form-checkbox-group--documentation)
+* [Date Picker](/docs/components-form-date-datepicker--documentation)
+* [Radio Button Group](/docs/components-form-radio-button-group--documentation)
+* [Localized Text Group](/docs/components-form-localized-text-group--documentation)
 
 ## Related Components
 
-- [Error Summary](/docs/components-form-error-summary--documentation)
+* [Error Summary](/docs/components-form-error-summary--documentation)
 
 <ArgTypes of={ErrorMessageComponent} />
-````
+
+```
+```

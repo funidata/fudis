@@ -1,0 +1,49 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Foundations/Layers" />
+
+# Z-index
+
+Fudis offers few component layer based z-indexes.
+
+Load z-index mixins and tokens to your SCSS file with:
+
+```
+@use "@funidata/ngx-fudis" as fudis;
+```
+
+## Tokens
+
+<table>
+  <thead>
+    <tr>
+      <th>Layer name</th>
+      <th>Z-index value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>dropdown-menu</td>
+      <td>100</td>
+    </tr>
+
+    <tr>
+      <td>dialog</td>
+      <td>200</td>
+    </tr>
+
+    <tr>
+      <td>alert</td>
+      <td>300</td>
+    </tr>
+  </tbody>
+</table>
+
+## Mixins
+
+Use z-index through mixin as follows
+
+```
+@include fudis.z-index('dialog');
+```

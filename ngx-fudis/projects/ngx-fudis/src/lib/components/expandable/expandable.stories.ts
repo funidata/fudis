@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
-import docs from './expandable.docs.mdx';
+import docs from './expandable.mdx';
 import { expandableExclude, expandableControlExclude } from '../../utilities/storybook';
 
 export default {

@@ -18,7 +18,7 @@ Breadcrumbs organism is built using parent wrapper of Breadcrumbs Component and 
 
 Necessary properties for Breadcrumbs Component is `label`.
 
-`label` is used as aria-label and it should describe the name of the section breadcrumbs consists from, e.g. _"My profile"_. Aria-label will automatically have a prefix _"Breadcrumbs: "_ which will be followed by the given label.
+`label` is used as aria-label and it should describe the name of the section breadcrumbs consists from, e.g. *"My profile"*. Aria-label will automatically have a prefix *"Breadcrumbs: "* which will be followed by the given label.
 
 ### Breadcrumbs Item - Child Component
 
@@ -27,14 +27,14 @@ Breadcrumbs Item has content slots for `<a>` and `<fudis-body-text>` elements. E
 
 ## Example
 
-<Canvas of={BreadcrumbsStories.Example}></Canvas>
+<Canvas of={BreadcrumbsStories.Example} />
 
 ## Accessibility
 
-- Breadcrumbs is a `nav` element containing `ul` list of Breadcrumbs Items
-- Fudis automatically adds an aria-label to parent to provide additional information about the breadcrumbs
-- Each visible Breadcrumbs Item, except the last one, is a link
-- The last visible list item has `aria-current="page"` attribute
+* Breadcrumbs is a `nav` element containing `ul` list of Breadcrumbs Items
+* Fudis automatically adds an aria-label to parent to provide additional information about the breadcrumbs
+* Each visible Breadcrumbs Item, except the last one, is a link
+* The last visible list item has `aria-current="page"` attribute
 
 ## Properties
 

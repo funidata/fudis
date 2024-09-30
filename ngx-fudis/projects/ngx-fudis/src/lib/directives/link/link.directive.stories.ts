@@ -1,5 +1,5 @@
 import { StoryFn, Meta } from '@storybook/angular';
-import readme from './link-directive.docs.mdx';
+import readme from './link-directive.mdx';
 import { LinkDirective } from './link.directive';
 
 export default {

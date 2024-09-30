@@ -17,8 +17,9 @@ Autocomplete (single-select) can only have one option selected at a time.
 
 ## Examples
 
-<Canvas of={AutocompleteStories.AutocompleteSearch}></Canvas>
-<Canvas of={AutocompleteStories.AutocompleteDropdown}></Canvas>
+<Canvas of={AutocompleteStories.AutocompleteSearch} />
+
+<Canvas of={AutocompleteStories.AutocompleteDropdown} />
 
 ## Usage Guidelines
 
@@ -53,18 +54,18 @@ If a custom validation is used, read [how to add Error message](/docs/components
 
 **Autocomplete validators**
 
-- required
+* required
 
 ## Accessibility
 
-- Label and guidance are linked to the input via id
-- Input can be disabled
-  - Input remains focusable with keyboard and screen reader
-  - Disabled state is communicated for screen reader
-- Options can be disabled
-  - Disabled option is focusable with screen reader
-  - Disabled state is communicated for screen reader
-- **NOTE:** Option list selection can only be made with `enter` and not with `space` since it is considered as a search character
+* Label and guidance are linked to the input via id
+* Input can be disabled
+  * Input remains focusable with keyboard and screen reader
+  * Disabled state is communicated for screen reader
+* Options can be disabled
+  * Disabled option is focusable with screen reader
+  * Disabled state is communicated for screen reader
+* **NOTE:** Option list selection can only be made with `enter` and not with `space` since it is considered as a search character
 
 ## Related components
 

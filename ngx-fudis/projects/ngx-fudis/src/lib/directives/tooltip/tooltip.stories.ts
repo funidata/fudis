@@ -3,7 +3,7 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from '../../components/button/button.component';
 import { TooltipDirective } from './tooltip.directive';
 import { tooltipExclude } from '../../utilities/storybook';
-import readme from './readme.mdx';
+import readme from './tooltip.mdx';
 
 export default {
   title: 'Directives/Tooltip',

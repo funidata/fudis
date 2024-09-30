@@ -13,7 +13,7 @@ Field Set is a grouping tool for Fudis Form Components. There are three directiv
 
 Header actions are buttons positioned next to the Field Set label.
 Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
-Fudis Actions Directive also needs `type` input which has to be set as '_fieldset_'.
+Fudis Actions Directive also needs `type` input which has to be set as '*fieldset*'.
 There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
 
 ```
@@ -26,7 +26,7 @@ There are no restrictions on header actions content but it is advised to use Fud
 
 Notifications are Fudis Notifications positioned under the Field Set label.
 Notifications are assigned through Fudis Notifications Directive content projection with **fudisNotifications** selector.
-Fudis Notifications Directive also needs a `type` input which has to be set as '_fieldset_'.
+Fudis Notifications Directive also needs a `type` input which has to be set as '*fieldset*'.
 There are no restrictions on header actions content but it is advised to use Fudis Notifications only.
 
 ```
@@ -38,7 +38,7 @@ There are no restrictions on header actions content but it is advised to use Fud
 ### Main Content
 
 Main content is where the form components live. Main content is assigned through Fudis Content Directive content projection with **fudisContent** selector.
-Fudis Content Directive also needs `type` input which has to be set as '_fieldset_'.
+Fudis Content Directive also needs `type` input which has to be set as '*fieldset*'.
 There are no restrictions on main content but it is advised to use Fudis Form Components only.
 
 ```
@@ -57,7 +57,7 @@ Field Set is not valid without a **mandatory** `label` property which is semanti
 
 ### Required
 
-If the whole Field Set is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
+If the whole Field Set is required, it can be set through `required` boolean property which will add '*(Required)*' text after the legend.
 Note that this has no other logic and is not concerned about validation of the components used inside the Field Set.
 
 ### Help Text
@@ -77,6 +77,7 @@ Boolean property `errorSummaryBreadcrumb` adds Field Set label to the clickable 
 Field Set can use some of the Fudis [Grid properties](/docs/foundations-grid--documentation), including `width` and `align`.
 
 {/* prettier-ignore */}
+
 {/* TODO: Expose this when Radio Button Group and Checkbox Group components are exposed
 
 ### Input Size

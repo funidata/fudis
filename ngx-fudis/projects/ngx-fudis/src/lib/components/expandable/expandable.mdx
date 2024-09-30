@@ -1,0 +1,87 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ExpandableComponent } from "./expandable.component";
+import * as ExpandableStories from "./expandable.stories.ts";
+import { expandableExclude } from "../../utilities/storybook";
+
+<Meta title="Components/Expandable" />
+
+# Expandable
+
+Fudis Expandable is an accordion component where its content can be expanded or collapsed to create more compact pages.
+
+## Commonly Used Properties
+
+### Variant
+
+Fudis Expandable has two variant types: `regular` and `lite`.
+
+### Opening and Closing Programatically
+
+Expandable is by default closed; this can be programatically controlled with the `closed` input property.
+
+### Heading Level
+
+To define which h-level element the heading of the Expandable is, provide suitable `level` attribute. By default this is number `2` and renders a `h2` tag.
+
+## Content Projection
+
+Expandable's content and additional header buttons are provided via content projection by using `fudisContent` and `fudisAction` directives:
+
+```
+<fudis-expandable [title]="'Some title'">
+  <ng-template fudisActions [type]="'expandable'">
+    <fudis-button />
+  </ng-template>
+
+  <ng-template fudisContent [type]="'expandable'">
+    <your-body-template />
+  </ng-template>
+</fudis-expandable>
+```
+
+All buttons wrapped in the fudisActions ng-template will appear to the right side of the header bar and on sm-sized screen they move to their own level.
+
+The content of the Expandable is not initially rendered to the DOM. Content will be initialized when the Expandable is expanded for the first time. This helps to avoid unnecessary requests to the backend (among other expensive operations). Subsequent closing/expanding only hides the content instead of removing it from the DOM, for the same reason.
+
+About using lazy initalisation with content projection, see [Angular example of conditional content projection](https://angular.io/guide/content-projection#conditional-content-projection) for more background.
+
+## Examples
+
+<Canvas of={ExpandableStories.AllVariants} />
+
+## Expandable as Form's Child Component
+
+### Property `openOnErrorSummaryReload`
+
+If Expandable has any form field components, e. g. Text Input as its child content, they are not loaded to HTML DOM until Expandable is opened for the first time.
+
+This can cause syncing issues with Form and Error Summary, because Text Input and other form field components send data to Error Summary only after they are loaded to the DOM.
+
+To ease this issue, property `openOnErrorSummaryReload` is by default `true`: If Expandable is a child component of [Form Component](/docs/components-form-form--documentation), the Expandable will open itself whenever [Error Summary Service's reloadErrors()](/docs/services-error-summary--documentation#reload-errors) is called.
+
+### Property `errorSummaryBreadcrumb`
+
+Input `errorSummaryBreadcrumb` is a boolean that determines whether the Expandable title is shown in the breadcrumb of Error Summary. This can be useful if Form structure is nested where there is a validatable forms in the contents of the Expandable.
+
+Note: If there is Fudis Form components, such as Fudis Text Input, as Expandable's content, the Expandable must be first opened (and loaded to the DOM) before Error Summary gets information about invalid Form components.
+
+## Accessibility
+
+* Variant regular's heading background and text color contrast ratio meets AA and AAA levels.
+* Variant lite's heading uses primary-color variable (`--fudis-color-primary`) which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.
+* Expandable title is a required property.
+* Header buttons and the Expandable content are semantically correct and accessible by screen readers.
+* Information about the Expandable's closed state is conveyed to screen readers.
+* Expandable is a section HTML element and its title is paired with the wrapping element.
+* Header expanding block and the additional buttons have a visible focus state
+* Header expanding block and the additional buttons' click can be triggered with keyboard <code>enter</code> and <code>space</code> key
+* Support for semantic header aria-level for screen reader users. The Expandable semantic level is set to equal `h2` as a default and can be changed via the level input: `level: 2` equals to `h2`, `level: 3` equals to `h3` etc. Changing the level does not affect to the appearance of the component.
+
+### Related components
+
+* [Button](/docs/components-icon--documentation)
+* [Icon](/docs/components-icon--documentation)
+
+## Properties
+
+<ArgTypes of={ExpandableComponent} exclude={expandableExclude} />

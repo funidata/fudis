@@ -7,7 +7,7 @@ import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { alertGroupExclude } from '../../../utilities/storybook';
-import docs from '../alert.docs.mdx';
+import docs from '../alert.mdx';
 
 @Component({
   selector: 'example-add-alerts',

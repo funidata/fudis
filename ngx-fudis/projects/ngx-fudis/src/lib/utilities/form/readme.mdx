@@ -26,7 +26,7 @@ For required form field, include `FudisValidators.required()` in the form contro
 FudisValidators.required('This is required field')
 ```
 
----
+***
 
 ### Email Validator
 
@@ -36,7 +36,7 @@ Email validator expects that the related form field type is set to `[type]="'ema
 FudisValidators.email('Input must be an email address.')
 ```
 
----
+***
 
 ### MinLength and MaxLength Validators
 
@@ -50,7 +50,7 @@ FudisValidators.minLength(10, 'You should write a little bit more.', true)
 
 ```
 
----
+***
 
 ### Min and Max Validators
 
@@ -63,7 +63,7 @@ FudisValidators.min(3, 'Choose at least 3 options.')
 
 ```
 
----
+***
 
 ### Pattern Validator
 
@@ -74,7 +74,7 @@ FudisValidators.pattern(/^[A-Z \d\W]+$/, 'PLEASE USE ONLY LOW CAPS!')
 
 ```
 
----
+***
 
 ### DatepickerMin and DatepickerMax Validators
 
@@ -115,8 +115,8 @@ FudisGroupValidators.max({ value: 4, message: 'Four is the maximun amount of all
 
 If your form component and form control need some other validation, which is not provided by Fudis. You can either:
 
-- Repeating cases: Create a custom validator function
-- Single uses: [Error Message Component](/docs/components-form-error-message--documentation)
+* Repeating cases: Create a custom validator function
+* Single uses: [Error Message Component](/docs/components-form-error-message--documentation)
 
 If your custom validator logic repeats multiple times, it is recommended to create your own custom validator. If your need is more like an exception of exception, you can just use [Error Message Component](/docs/components-form-error-message--documentation).
 

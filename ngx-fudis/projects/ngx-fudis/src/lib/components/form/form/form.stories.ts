@@ -15,7 +15,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import docs from './form.docs.mdx';
+import docs from './form.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import {
   FudisHeadingLevel,

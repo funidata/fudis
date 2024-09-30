@@ -1,0 +1,87 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Documentation/Development/DS Practises/Naming Conventions" />
+
+# Naming Conventions
+
+Fudis Design System uses the following naming conventions described in this document. Goals and principles of these conventions are:
+
+* Names are consistent and self-explaining between developers, designers and product teams using Fudis
+* To reduce load of creating and inventing new names for components, styles etc.
+* Maintain consistent project, file and folder structure
+* Exceptions can happen, if over-engineering naming causes more confusion than intuitive development experience
+
+## Prefix
+
+Fudis often uses selector prefix **fudis** and **Fudis**. Prefix prevents collision with consumers existing design tokens. Prefix is used in e.g. component's HTML selector, CSS/SCSS class names and utility functions.
+
+## Components
+
+Fudis core team has decided that component name's should be intuitive, easy to understand and not over-engineered. To keep things in order, component's are categorised in folders. So that the components from same family can be found together. E. g. form related components live under `components/form` folder and typography components live in `components/typography` folder.
+
+### Angular Component
+
+* **Component** suffix.
+* Camel case: First letter of each segment in uppercase
+* E. g. `RadioButtonComponent` and `DescriptionListComponent`
+
+### HTML Selector
+
+* **fudis** -prefix
+* All lower case
+* Kebab case: segments are joined with <code>-</code>.
+* E. g. `fudis-radio-button` and `fudis-description-list`
+
+### Component's Input / Output attributes
+
+When defining e.g. component's @Input directives, try to name these consistently between components. E. g. many components have `variant`, `size` and `control` Input, so if you need similar feature to your component, **avoid** naming these differently to something as `variation`, `magnitude` and `controlToFormElement`.
+
+It helps Fudis developers and product developers using Fudis if naming of similar features are consistent, simple and intuitive between components.
+
+<br />
+
+## CSS/SCSS Class Names
+
+Fudis aims to follow BEM methodology of block, element and modifier when defining CSS/SCSS class names.
+
+**Block:**
+
+The main star of CSS class name, usually the component itself. Syntax is similar to Angular HTML selector.
+
+E. g. `.fudis-radio-button`, `.fudis-text-input` and `.fudis-grid`
+
+**Element:**
+
+A sub element of the main block segmented with two underscores `__`. It is good practise to aim that component's HTML and CSS doesn't require too deep nesting.
+
+E. g. `.fudis-radio-button__indicator` and `.fudis-radio-button__indicator__icon`
+
+**Modifier:**
+
+Modifier is most often used the state of component changes. Segmented with two `--` dashes. Often these are related to user actions or similar state of an HTML element. Following example events and states could be considered as BEM modifier when defining CSS class names: `hover`, `active`, `invalid`, `disabled`, `hidden`.
+
+E. g. `.fudis-radio-button__indicator--invalid` and `.fudis-button--active`
+
+<br />
+
+## Foundations and Design Tokens
+
+In project's `foundations` folder live the atoms of Fudis DS. These include tokens and variables for e. g. colors, spacing, font-sizes and focus styles and also SCSS mixins to use them consistently.
+
+Naming of these follow the **kebab-case** pattern from least spesific to most spesific part of the foundation element.
+
+### Example SCSS variable token `$spacing-xs`
+
+* `spacing` the main category of the token
+* `xs` spesifying the variant / value of the category token
+
+### Example SCSS mixins `focus-generic` and `focus-form-field`
+
+* `focus` as the main category
+* `generic` and `form-field` spesifying the variant / value of the category mixin
+
+## TypeScript Interfaces and Types
+
+Currently types and interfaces live in `types` folder. Interfaces and types follow **CamelCase**.
+
+E. g. `DescriptionListItem` and `RadioButtonOption`

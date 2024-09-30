@@ -1,0 +1,136 @@
+import { Meta, ArgTypes } from "@storybook/blocks";
+import { FormComponent } from "./form.component";
+import { formArgTypesExclude } from "../../../utilities/storybook";
+
+<Meta title="Components/Form/Form" />
+
+# Form
+
+Fudis Form is a layout component which enables semantically coherent and easy flow for building forms. It constructs from three main sections: header content, header actions and main content.
+
+## Directives
+
+### Header Content
+
+Header content is additional information displayed under the actual form heading.
+Header content is assigned through Fudis Header Directive content projection with **fudisHeader** selector.
+There are no restrictions on header content but it is advised to use Fudis Components only.
+
+```
+<ng-template fudisHeader>
+  <your-content-here />
+</ng-template>
+```
+
+### Header Actions
+
+Header actions are buttons positioned on top of the form.
+Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
+Fudis Actions Directive also needs `type` input which has to be set as '*form*'.
+
+There are no restrictions on Header Actions content but it is advised to use Fudis Buttons only. Pairing Button with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
+
+```
+<ng-template fudisActions [type]="'form'">
+  <fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit form'" (handleClick)="myFormSubmit()" />
+  ...other content
+</ng-template>
+```
+
+### Main Content
+
+Main content is where the form components live.
+Main content is assigned through Fudis Content Directive content projection with **fudisContent** selector.
+Fudis Content Directive also needs `type` input which has to be set as '*form*'.
+There are no restrictions on main content but it is advised to use Fudis Form Components only.
+
+```
+<ng-template fudisContent [type]="'form'">
+  <your-content-here />
+</ng-template>
+```
+
+## Form Inputs
+
+Aside from content projection Fudis Form will create heading, badge and error-summary based on given properties.
+
+Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation).
+The complete list of allowed properties can be found from Properties table at the bottom of this page.
+
+### Heading
+
+Fudis Form is not valid without a heading.
+
+**Mandatory properties** are `title` (title text content) and `level` (the semantic heading level), additionally it is possible to change the visual size of the heading with `titleVariant`, which otherwise defaults to `xl`.
+
+See possible heading levels and sizes from [Heading Documentation](/docs/components-typography-heading--documentation).
+
+### Badge
+
+Fudis Badge can be attached to form heading by adding `badge` (badge variant) and `badgeText` (badge text content) properties.
+See badge variants from [Badge Documentation](/docs/components-badge--documentation).
+
+### Error Summary
+
+`errorSummaryVisible`: Boolean property controlling the visibility of the Error Summary. This is automatically managed if your Form has Button with `fudisFormSubmit` directive with boolean property `formValid`. Further documentation of [Form Submit Directive](/docs/directives-form-actions--documentation).
+
+`errorSummaryHelpText`: Mandatory helper text displayed as describing guidance text for the Error Summary.
+
+More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](/docs/services-error-summary--documentation).
+
+## Code Example
+
+This is a simple example on how to use Form Component.
+
+```
+
+// HTML Template
+
+<fudis-form
+  [title]="'Example form heading'"
+  [level]="2"
+  [helpText]="'Here is some more information about this form'"
+  [errorSummaryHelpText]="'There are errors in this form.'"
+>
+  <ng-template fudisHeader>
+    <fudis-body-text>Additional form information</fudis-body-text>
+  </ng-template>
+  <ng-template fudisActions [type]="'form'">
+    <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" (handleClick)="submitForm()" />
+  </ng-template>
+  <ng-template fudisContent [type]="'form'">
+    <fudis-text-input
+      [label]="'Example text-input'"
+      [control]="formExample.controls.exampleTextInput"
+    />
+    <fudis-checkbox-group
+      [formGroup]="formExample.controls.exampleCheckboxGroup"
+      [label]="'Example CheckboxGroup'"
+    >
+      <fudis-checkbox [controlName]="'first'" [label]="'Choose option 1'" />
+      <fudis-checkbox [controlName]="'second'" [label]="'Choose option 2'" />
+    </fudis-checkbox-group>
+  </ng-template>
+</fudis-form>
+
+// TypeScript
+
+formExample = new FormGroup({
+  exampleTextInput: new FormControl(null, FudisValidators.minLength(5, 'Input requires at least 5 characters.')),
+  exampleCheckboxGroup: new FormGroup(
+    {
+      first: new FormControl(null),
+      second: new FormControl(null),
+    },
+    [FudisGroupValidators.oneRequired(new BehaviorSubject('Select at least one checkbox!'))],
+  ),
+});
+
+submitForm(): void {
+ // Other logic you need to do on submit
+}
+```
+
+## Properties
+
+<ArgTypes of={FormComponent} exclude={formArgTypesExclude} />

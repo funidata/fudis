@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { HorizontalRuleComponent } from './horizontal-rule.component';
-import docs from './horizontal-rule.docs.mdx';
+import docs from './horizontal-rule.mdx';
 
 export default {
   title: 'Components/Horizontal Rule',

@@ -1,0 +1,187 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { CheckboxGroupComponent } from "./checkbox-group.component";
+import { CheckboxComponent } from "./checkbox/checkbox.component";
+import * as CheckboxGroupStories from "./checkbox-group.stories";
+import { checkboxGroupExclude } from "../../../utilities/storybook";
+
+<Meta title="Components/Form/Checkbox Group" />
+
+# Checkbox Group
+
+Checkbox Group is a form fieldset element constructing from `fieldset` `legend` and `<input type="checkbox">` elements.
+
+It is built using parent wrapper of Checkbox Group Component and adding Checkbox Components as its children.
+
+Checkbox Group can be built in two ways:
+
+* [With `formGroup` property in the parent Checkbox Group](#with-formgroup-property-in-the-parent-checkbox-group)
+* [With `control` properties in the child Checkboxes](#with-control-properties-in-the-child-checkboxes)
+
+**Note!** If you want to [include validators](#validators-with-form-group) for the whole Checkbox Group, use the first one!
+
+## With `formGroup` property in the parent Checkbox Group
+
+### Parent Checkbox Group
+
+Checkbox Group can be provided with `formGroup` property, which is an Angular FormGroup typed object. Mandatory `label` property must also be provided.
+
+Form Group must be built with Angular Form Controls, which can have a type of `FormControl<boolean | null | undefined>`.
+
+Providing `formGroup` for the parent allows including [Validators for the Checkbox Group](#validators-with-form-group) as well.
+
+### Child Checkboxes
+
+For child Checkbox components mandatory properties are `controlName` and `label`. Checkbox's `controlName` must match with the corresponding control in the main `formGroup`.
+
+### Code Example
+
+```
+// In TypeScript file
+
+myFormGroup = new FormGroup(
+  {
+    apple: new FormControl<boolean | null | undefined>(null),
+    fairTradeBanana: new FormControl<boolean | null | undefined>(null),
+    pear: new FormControl<boolean | null | undefined>(null),
+  }
+);
+
+myOptions = [
+  {label: 'Apple', controlName: 'apple'},
+  {label: 'Fair Trade Banana', controlName: 'fairTradeBanana'},
+  {label: 'Pear', controlName: 'pear'},
+]
+
+// HTML template
+
+<fudis-checkbox-group
+  [formGroup]="myFormGroup"
+  [label]="'Select Fruits'">
+  <fudis-checkbox *ngFor="let option of myOptions"
+    [controlName]="option.controlName
+    [label]="option.label" />
+</fudis-checkbox-group>
+```
+
+### Example
+
+<Canvas of={CheckboxGroupStories.Example} />
+
+## With `control` properties in the child Checkboxes
+
+### Parent Checkbox Group
+
+When parent isn't provided with `formGroup` property, it will create one internally. Mandatory `label` must be provided. Adding validators is not currently available when creating Checkbox Group without provided `formGroup`.
+
+### Child Checkboxes
+
+Property `control` is Angular `FormControl<boolean | null | undefined>` typed object. When it is provided, it will be added to the internally created Form Group of the Checkbox Group. If `controlName` property is provided, it will be used as this control's key in the Form Group. Otherwise internally generated id will be used.
+
+### Code Example
+
+```
+// In TypeScript file
+
+myOptionsWithControls = [
+
+  // Note! Provided controlName property is optional this way. If it is not given, Fudis will use the id of the checkbox as controlName.
+
+  {label: 'Apple', controlName: 'apple', control: new FormControl<boolean | null | undefined>(null)},
+  {label: 'Fair Trade Banana', controlName: 'fairTradeBanana', new FormControl<boolean | null | undefined>(true)},
+  {label: 'Pear', controlName: 'pear', new FormControl<boolean | null | undefined>(null)},
+]
+
+// HTML template
+
+<fudis-checkbox-group
+  [label]="'Select Fruits'">
+  <fudis-checkbox *ngFor="let option of myOptionsWithControls"
+    [control]="option.control"
+    [controlName]="option.controlName
+    [label]="option.label" />
+</fudis-checkbox-group>
+```
+
+## Validators with Form Group
+
+To use validators with the whole Checkbox Group, please provide [`formGroup` property](#with-formgroup-property-in-the-parent-checkbox-group) to it.
+
+When Form Group has validation errors, the visual and screen reader attributes about invalid state is triggered when user blurs out first time outside of focusable options.
+
+### As a Required Fieldset
+
+To mark Checkbox Group as Required field, include validator `FudisGroupValidators.oneRequired()` or `FudisGroupValidators.min()` in the validators array of `formGroup`.
+
+```
+// In TypeScript file
+
+myFormGroup = new FormGroup(
+  {
+  // controls
+  },
+  [FudisGroupValidators.oneRequired('At least one option must be selected!')]
+);
+
+
+// In HTML template
+
+<fudis-checkbox-group
+  [formGroup]="myFormGroup"
+  [label]="'Choose at least one'"
+  >
+  // Checkboxes
+</fudis-checkbox-group>
+
+```
+
+### Minimum and Maximum Selection Validation
+
+If Checkbox Group has minimum and/or maximum options to be selected, form field include `FudisGroupValidators.min` and/or `FudisGroupValidators.max` in the group validators.
+
+```
+// In TypeScript file
+
+myFormGroup = new FormGroup(
+  {
+    // controls
+  },
+  [
+    FudisGroupValidators.min({value: 2, message: 'Select at least two!'}),
+    FudisGroupValidators.max({value: 3, message: 'Too many selected! Three is maximum.'})
+  ]
+);
+```
+
+## Handling Changes
+
+Both Checkbox Group and Checkbox have `handleChange` output property.
+
+### Output for Checkbox Group
+
+When clicking any of the child Checkboxes, the parent's property `handleChange` will emit an object with properties:
+
+* changedControlName: Name of the checkbox's control, which was clicked
+* formGroup: Current state of App provided or internally created Form Group
+
+### Output for Checkbox
+
+When clicking Checkbox, property `handleChange` will emit an object with properties:
+
+* checkbox: `FudisCheckboxOption` typed object consisting of various data
+* control: Current Form Control of the Checkbox
+
+## Accessibility
+
+* Fieldset has a legend as its first child element
+* When selection is mandatory, it is communicated with 'Required' text using validators
+* Checkbox options are grouped by name attribute
+* Guidance is linked to the Checkbox Group's fieldset element via aria-describedby
+* Possible error messages are displayed after user blurs out from the whole checkbox group
+
+## Properties of Checkbox Group Component
+
+<ArgTypes of={CheckboxGroupComponent} exclude={checkboxGroupExclude} />
+
+## Properties of Checkbox Component
+
+<ArgTypes of={CheckboxComponent} />

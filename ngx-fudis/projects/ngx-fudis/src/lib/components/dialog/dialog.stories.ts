@@ -3,7 +3,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
-import docs from './dialog.docs.mdx';
+import docs from './dialog.mdx';
 import { FudisValidators } from '../../utilities/form/validators';
 import { dialogExclude } from '../../utilities/storybook';
 import { DialogComponent } from './dialog.component';

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FudisValidatorFn, FudisValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
-import docs from './form.docs.mdx';
+import docs from './form.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import {
   FudisHeadingLevel,

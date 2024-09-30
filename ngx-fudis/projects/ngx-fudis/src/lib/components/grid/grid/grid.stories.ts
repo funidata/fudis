@@ -1,7 +1,7 @@
 import { StoryFn, Meta, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 import { GridComponent } from './grid.component';
 import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utilities/storybook';
-import docs from './grid.docs.mdx';
+import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
 import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';

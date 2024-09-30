@@ -1,15 +1,14 @@
 export const stories = [
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
-  "../projects/ngx-fudis/src/lib/**/*.stories.mdx",
-  "../projects/ngx-fudis/src/lib/**/*.docs.mdx",
-  "../projects/documentation/**/*.stories.mdx",
-  "../projects/documentation/**/*.docs.mdx",
+  "../projects/ngx-fudis/src/lib/**/*.mdx",
+  "../projects/documentation/**/*.mdx",
 ];
 export const addons = [
   "@storybook/addon-links",
   "@storybook/addon-essentials",
   "@storybook/addon-interactions",
   "@storybook/addon-a11y",
+  "@chromatic-com/storybook",
 ];
 export const framework = {
   name: "@storybook/angular",
@@ -26,7 +25,6 @@ export const staticDirs = [
   "./../projects/ngx-fudis/src/lib/assets/images",
 ];
 export const docs = {
-  autodocs: true,
   defaultName: "Documentation",
 };
 export function managerHead(head) {

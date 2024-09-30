@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
-import docs from './checkbox-group.docs.mdx';
+import docs from './checkbox-group.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 

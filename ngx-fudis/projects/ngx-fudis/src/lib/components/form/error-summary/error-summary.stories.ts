@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
 import { ErrorSummaryComponent } from './error-summary.component';
-import docs from './error-summary-component.docs.mdx';
+import docs from './error-summary-component.mdx';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummaryUpdateStrategy, FudisRadioButtonOption } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';

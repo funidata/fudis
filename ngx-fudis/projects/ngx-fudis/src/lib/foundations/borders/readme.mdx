@@ -1,0 +1,146 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Foundations/Borders" />
+
+# Border Mixins
+
+Load Fudis mixins and tokens to your SCSS file with:
+
+```
+@use "@funidata/ngx-fudis" as fudis;
+```
+
+## Border
+
+Set border of an element.
+
+```
+@include fudis.border($width, $style, $color)
+
+```
+
+<table>
+  <thead>
+    <tr>
+      <th>$width</th>
+      <th>$style</th>
+      <th>$color</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>string value from spacing tokens map (*$pixel-tokens*)</td>
+      <td>string value from border tokens map (*$border-styles*)</td>
+      <td>string value from colors tokens map (*$colors*)</td>
+    </tr>
+  </tbody>
+</table>
+
+```
+.my-element {
+  @include fudis.border('2px', 'solid', 'primary');
+}
+```
+
+### Border None
+
+Border none doesn't need any parameters.
+
+```
+@include fudis.border-none;
+
+```
+
+### Border Radius
+
+Set border radius of an element.
+
+```
+@include fudis.border-radius($width)
+```
+
+<table>
+  <thead>
+    <tr>
+      <th>$width</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>string value from spacing tokens map (*$pixel-tokens*)</td>
+    </tr>
+  </tbody>
+</table>
+
+```
+.my-element {
+  @include fudis.border-radius('2px');
+}
+```
+
+## Outline
+
+Set outline of an element.
+
+```
+@include fudis.outline($width, $style, $color)
+```
+
+<table>
+  <thead>
+    <tr>
+      <th>$width</th>
+      <th>$style</th>
+      <th>$color</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>string value from spacing tokens map (*$pixel-tokens*)</td>
+      <td>string value from border tokens map (*$border-styles*)</td>
+      <td>string value from colors tokens map (*$colors*)</td>
+    </tr>
+  </tbody>
+</table>
+
+```
+.my-element {
+  @include fudis.outline('1px', 'dashed', 'gray-middle');
+}
+```
+
+### Outline None
+
+Outline none doesn't need any parameters.
+
+```
+@include fudis.outline-none;
+
+```
+
+# Border Tokens
+
+<table>
+  <thead>
+    <tr>
+      <th>$border-styles</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>solid</td>
+    </tr>
+
+    <tr>
+      <td>dashed</td>
+    </tr>
+
+    <tr>
+      <td>none</td>
+    </tr>
+  </tbody>
+</table>
