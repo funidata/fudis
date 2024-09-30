@@ -3,7 +3,6 @@ import { moduleMetadata } from "@storybook/angular";
 import docJson from "../documentation.json";
 import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
-import { useTheme } from "./useTheme";
 
 setCompodocJson(docJson);
 
@@ -136,7 +135,6 @@ export const globalTypes = {
 };
 
 export const decorators = [
-  useTheme,
   moduleMetadata({
     imports: [NgxFudisModule],
   }),
