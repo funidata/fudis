@@ -3,7 +3,6 @@
 */
 @use '@angular/material' as mat;
 @use './fudis-theme.scss' as theme;
-@use '../components/form/autocomplete/ngMaterial-theme.scss' as autoComplete;
 @use '../components/form/date/datepicker/ngMaterial-theme.scss' as datePicker;
 @use '../components/dialog/ngMaterial-theme.scss' as dialog;
 @use '../directives/tooltip/ngMaterial-theme.scss' as tooltip;

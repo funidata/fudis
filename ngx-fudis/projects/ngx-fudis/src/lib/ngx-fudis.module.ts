@@ -19,7 +19,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 /**
  * Fudis Components
  */
-import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -128,7 +127,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
    */
   declarations: [
     ActionsDirective,
-    AutocompleteComponent,
     AlertComponent,
     AlertGroupComponent,
     BadgeComponent,
@@ -235,7 +233,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ActionsDirective,
     AlertComponent,
     AlertGroupComponent,
-    AutocompleteComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
