@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important */
 @use './tokens.scss' as spacing;
 
 $direction-attributes: (
@@ -28,32 +29,32 @@ $spacing-tokens: (
     @each $dirKey, $dirValue in $direction-attributes {
       // Generates for desired screen size margin or padding with desired direction. E.g. .fudis-lg-ml-sm or .fudis-sm-pt-xl
       .#{$prefix}-#{$dirKey}-#{$sKey} {
-        #{$dirValue}: #{$sValue};
+        #{$dirValue}: #{$sValue} !important;
       }
     }
 
     // Generates horizontal margins e.g. .fudis-lg-mx-sm
     .#{$prefix}-mx-#{$sKey} {
-      margin-right: #{$sValue};
-      margin-left: #{$sValue};
+      margin-right: #{$sValue} !important;
+      margin-left: #{$sValue} !important;
     }
 
     // Generates vertical margins e.g. .fudis-lg-my-sm
     .#{$prefix}-my-#{$sKey} {
-      margin-top: #{$sValue};
-      margin-bottom: #{$sValue};
+      margin-top: #{$sValue} !important;
+      margin-bottom: #{$sValue} !important;
     }
 
     // Generates horizontal padding e.g. .fudis-lg-px-sm
     .#{$prefix}-px-#{$sKey} {
-      padding-right: #{$sValue};
-      padding-left: #{$sValue};
+      padding-right: #{$sValue} !important;
+      padding-left: #{$sValue} !important;
     }
 
     // Generates vertical padding e.g. .fudis-lg-py-sm
     .#{$prefix}-py-#{$sKey} {
-      padding-top: #{$sValue};
-      padding-bottom: #{$sValue};
+      padding-top: #{$sValue} !important;
+      padding-bottom: #{$sValue} !important;
     }
   }
 }

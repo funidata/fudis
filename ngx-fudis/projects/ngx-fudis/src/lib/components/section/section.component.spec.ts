@@ -125,7 +125,7 @@ describe('SectionComponent', () => {
     it('should have Grid related classes', () => {
       expect(sortClasses(getSectionElement().className)).toEqual(
         sortClasses(
-          'fudis-section fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none',
+          'fudis-section fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__row-gap__none',
         ),
       );
     });
@@ -136,7 +136,7 @@ describe('SectionComponent', () => {
 
       expect(sortClasses(getSectionElement().className)).toEqual(
         sortClasses(
-          'fudis-section my-custom-class other-custom-class fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none',
+          'fudis-section my-custom-class other-custom-class fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__row-gap__none',
         ),
       );
     });

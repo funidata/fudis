@@ -95,11 +95,10 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
   props: args,
   template: html`
     <fudis-grid
-      [marginBottom]="'md'"
+      [classes]="'fudis-mb-md'"
       [columns]="{xs:2, md: 4}"
       [align]="'start'"
       [rowGap]="'xs'"
-      [marginBottom]="'md'"
     >
       <fudis-heading [level]="4" [variant]="'sm'">Medium size buttons</fudis-heading>
       <fudis-button variant="primary" label="Primary"></fudis-button>

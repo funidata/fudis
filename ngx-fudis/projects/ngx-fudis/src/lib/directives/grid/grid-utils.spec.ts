@@ -56,14 +56,12 @@ describe('GridUtils', () => {
       const values: FudisGridProperties = {
         width: 'xxl',
         align: 'end',
-        marginTop: 'md',
-        marginBottom: 'xl',
         rowGap: 'sm',
         columnGap: 'lg',
       };
 
       expect(utils.getGridClasses(values)).toBe(
-        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__margin__top__md fudis-grid__margin__bottom__xl fudis-grid__row-gap__sm fudis-grid__column-gap__lg',
+        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__row-gap__sm fudis-grid__column-gap__lg',
       );
     });
 
@@ -71,15 +69,13 @@ describe('GridUtils', () => {
       const values: FudisGridProperties = {
         width: 'xxl',
         align: 'end',
-        marginTop: 'md',
-        marginBottom: 'xl',
         rowGap: 'responsive',
         columnGap: 'responsive',
-        classes: ['my-custom-class', 'my-other-custom-class'],
+        classes: 'my-custom-class my-other-custom-class',
       };
 
       expect(utils.getGridClasses(values)).toBe(
-        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__margin__top__md fudis-grid__margin__bottom__xl my-custom-class my-other-custom-class',
+        'fudis-grid fudis-grid__xxl fudis-grid__align__end my-custom-class my-other-custom-class',
       );
     });
   });

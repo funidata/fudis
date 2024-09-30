@@ -117,7 +117,7 @@ describe('FieldSetComponent', () => {
 
     it('should have default CSS classes coming from fudisGrid directive', () => {
       const classesFromGrid =
-        'fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none';
+        'fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__row-gap__none';
 
       expect(fieldsetElement.parentElement?.className).toContain(classesFromGrid);
     });
