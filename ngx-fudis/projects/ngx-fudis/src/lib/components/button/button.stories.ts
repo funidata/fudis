@@ -91,7 +91,7 @@ IconOnly.parameters = {
   },
 };
 
-export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-grid

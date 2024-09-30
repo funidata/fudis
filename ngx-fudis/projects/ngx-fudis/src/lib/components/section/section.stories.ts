@@ -47,7 +47,7 @@ export default {
 
 const html = String.raw;
 
-const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-section
     [title]="title"
@@ -101,7 +101,7 @@ Example.parameters = {
   },
 };
 
-const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => ({
+const NestedExampleTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-section
     [title]="'Parent Section'"

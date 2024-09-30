@@ -36,7 +36,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<IconComponent> = (args: IconComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
 });
 
@@ -47,7 +47,7 @@ Example.args = {
   rotate: 'none',
 };
 
-export const AllIcons: StoryFn<IconComponent> = (args: IconComponent) => ({
+export const AllIcons: StoryFn = (args) => ({
   props: {
     fudisIconArray,
     ...args,

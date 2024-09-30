@@ -14,7 +14,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
 
   template: html`<fudis-grid [columns]="{ xs: 2, md: 4 }">
@@ -67,7 +67,7 @@ Example.argTypes = {
   },
 };
 
-export const AlignSelfX: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfX: StoryFn = (args) => ({
   props: { ...args, responsiveAlignSelfX: "{ sm: 'start', md: 'end', lg: 'center' }" },
   template: html`<fudis-grid [columns]="2">
     <fudis-grid-item class="storybook__item-highlight">
@@ -101,7 +101,7 @@ export const AlignSelfX: StoryFn<GridItemComponent> = (args: GridItemComponent) 
   </fudis-grid>`,
 });
 
-export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfY: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-grid-item class="storybook__item-highlight">
@@ -182,7 +182,7 @@ export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
   </fudis-grid>`,
 });
 
-export const AlignSelfXAndY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfXAndY: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-grid-item class="storybook__item-highlight">
@@ -220,7 +220,7 @@ export const AlignSelfXAndY: StoryFn<GridItemComponent> = (args: GridItemCompone
   </fudis-grid>`,
 });
 
-export const Columns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const Columns: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-grid [columns]="6">
     <fudis-grid-item class="storybook__item-highlight" [columns]="'stretch'">
@@ -258,7 +258,7 @@ export const Columns: StoryFn<GridItemComponent> = (args: GridItemComponent) => 
   </fudis-grid>`,
 });
 
-export const ResponsiveColumns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const ResponsiveColumns: StoryFn = (args) => ({
   props: {
     ...args,
     exampleOne: { xs: 'stretch', md: 3, lg: 1 },

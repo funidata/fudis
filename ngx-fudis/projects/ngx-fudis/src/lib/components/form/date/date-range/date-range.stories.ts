@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import { DatepickerComponent } from '../datepicker/datepicker.component';
 import docs from './date-range-docs.mdx';
 import { dateRangeExclude } from '../../../../utilities/storybook';
 
@@ -53,9 +52,7 @@ export default {
 
 const html = String.raw;
 
-const TemplateDateRange: StoryFn<DateRangeComponent | DatepickerComponent> = (
-  args: DateRangeComponent | DatepickerComponent,
-) => ({
+const TemplateDateRange: StoryFn = (args) => ({
   props: {
     ...args,
     controlStart: new FormControl<Date | null>(null, FudisValidators.required('Date is required.')),
@@ -85,9 +82,7 @@ DateRange.args = {
   dateParse: true,
 };
 
-const TemplateDateRangeMinMax: StoryFn<DateRangeComponent | DatepickerComponent> = (
-  args: DateRangeComponent | DatepickerComponent,
-) => ({
+const TemplateDateRangeMinMax: StoryFn = (args) => ({
   props: {
     ...args,
     controlStart: new FormControl<Date | null>(null, [

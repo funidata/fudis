@@ -161,7 +161,7 @@ export default {
 } as Meta;
 const html = String.raw;
 
-export const Example: StoryFn<ErrorSummaryComponent> = (args: ErrorSummaryComponent) => ({
+export const Example: StoryFn = (args) => ({
   props: args,
   template: html` <example-error-summary />`,
 });

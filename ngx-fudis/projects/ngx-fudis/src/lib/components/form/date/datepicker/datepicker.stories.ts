@@ -87,7 +87,7 @@ const commonArgs: Partial<DatepickerComponent> = {
   tooltipToggle: false,
 };
 
-const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl(null, FudisValidators.required('Date is required.')),
@@ -117,7 +117,7 @@ Datepicker.args = {
   ...commonArgs,
 };
 
-const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const PreselectedTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl(new Date(1977, 11, 16)),
@@ -146,7 +146,7 @@ PreselectedDate.args = {
   ...commonArgs,
 };
 
-const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const DisabledTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl({ value: null, disabled: true }),
@@ -175,7 +175,7 @@ Disabled.args = {
   ...commonArgs,
 };
 
-const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const MinMaxTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl<Date | null>(null, [

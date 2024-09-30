@@ -62,9 +62,7 @@ export default {
   },
 } as Meta;
 
-const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
-  args: DescriptionListComponent,
-) => ({
+const DescriptionListTemplate: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-heading [level]="2" [variant]="'md'"
       >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
@@ -110,9 +108,7 @@ DescriptionListCompact.args = {
   disableGrid: false,
 };
 
-const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
-  args: DescriptionListComponent,
-) => ({
+const NestedDescriptionListsTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     quoteOne: "It's not the years, honey, it's the mileage.",
@@ -235,9 +231,7 @@ NestedDescriptionLists.parameters = {
   },
 };
 
-const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
-  args: DescriptionListComponent,
-) => ({
+const DescriptionListInsideGridTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-grid [columns]="{sm: 1, md: 2}" [rowGap]="'xs'">
     <fudis-heading [level]="2" [variant]="'md'"
@@ -267,9 +261,7 @@ DescriptionListInsideGrid.args = {
   disableGrid: true,
 };
 
-const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
-  args: DescriptionListComponent,
-) => ({
+const NestedSubComponentsTemplate: StoryFn = (args) => ({
   props: { ...args, classified: action('classified') },
   template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Sub Components</fudis-heading
@@ -321,9 +313,7 @@ NestedSubComponents.args = {
   disableGrid: false,
 };
 
-const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
-  args: DescriptionListComponent,
-) => ({
+const WithLanguageBadgesTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Language Badges</fudis-heading
@@ -389,9 +379,7 @@ const multipleDDData = [
   { subHeading: 'Grand Master', value: 'Yoda' },
 ];
 
-const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
-  args: DescriptionListComponent,
-) => ({
+const ItemWithMultipleDdElementsTemplate: StoryFn = (args) => ({
   props: { ...args, data: multipleDDData },
   template: html`
     <fudis-heading [level]="2" [variant]="'md'"
@@ -426,9 +414,7 @@ ItemWithMultipleDdElements.args = {
   serviceDefaults: false,
 };
 
-const SingleListItemTemplate: StoryFn<DescriptionListComponent> = (
-  args: DescriptionListComponent,
-) => ({
+const SingleListItemTemplate: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-heading [level]="2" [variant]="'md'">Description List with Single Item</fudis-heading>

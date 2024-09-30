@@ -53,7 +53,7 @@ const commonArgs: Partial<SelectComponent> = {
   initialFocus: false,
 };
 
-const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     defaultOptions,

@@ -159,8 +159,8 @@ const columnsToString = (columns: string | number | object): string => {
   return JSON.stringify(columns);
 };
 
-const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
-  props: { ...args, transformedColumns: columnsToString(args.columns) },
+const ExampleTemplate: StoryFn = (args) => ({
+  props: { ...args, transformedColumns: columnsToString(args['columns']) },
   template: html`<fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
       >Current value of <code>columns</code> is:
       <code>{{transformedColumns}}</code></fudis-body-text
@@ -350,7 +350,7 @@ ResponsiveColumns.parameters = {
   },
 };
 
-const ExampleWithServiceTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
+const ExampleWithServiceTemplate: StoryFn = (args) => ({
   props: { ...args },
   template: html` <example-grid-with-service></example-grid-with-service>`,
 });

@@ -151,7 +151,7 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<AlertGroupComponent> = (args: AlertGroupComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-alert-group [position]="position" /><example-add-alerts /> `,
 });

@@ -614,7 +614,7 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
+export const Example: StoryFn = (args) => ({
   props: args,
   template: html` <example-form-content
     [title]="title"
@@ -646,7 +646,7 @@ Example.parameters = {
   },
 };
 
-export const ExampleWithMultipleForms: StoryFn<FormComponent> = (args: FormComponent) => ({
+export const ExampleWithMultipleForms: StoryFn = (args) => ({
   props: args,
   template: html` <example-with-multiple-forms />`,
 });

@@ -24,9 +24,7 @@ const control: FormControl = new FormControl(
   FudisValidators.required('You must choose a fruit'),
 );
 
-const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
-  args: RadioButtonGroupComponent,
-) => ({
+const ExampleTestTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formControl: control,
@@ -94,9 +92,7 @@ class DisabledRadioGroupExampleComponent {
   );
 }
 
-const Disabled: StoryFn<DisabledRadioGroupExampleComponent> = (
-  args: DisabledRadioGroupExampleComponent,
-) => ({
+const Disabled: StoryFn = (args) => ({
   props: args,
   template: html`<disabled-radio-group-example></disabled-radio-group-example> `,
 });

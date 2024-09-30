@@ -27,7 +27,7 @@ export default {
 
 const html = String.raw;
 
-const ExampleTemplate: StoryFn<SelectOptionComponent> = (args: SelectOptionComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),

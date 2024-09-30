@@ -22,7 +22,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: StoryFn<AutocompleteComponent> = (args: AutocompleteComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
 });
 

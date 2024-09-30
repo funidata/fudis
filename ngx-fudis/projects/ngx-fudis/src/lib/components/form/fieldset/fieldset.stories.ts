@@ -116,7 +116,7 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn<FieldSetComponent> = (args: FieldSetComponent) => ({
+export const Example: StoryFn = (args) => ({
   props: args,
   template: html` <example-fieldset /> `,
 });

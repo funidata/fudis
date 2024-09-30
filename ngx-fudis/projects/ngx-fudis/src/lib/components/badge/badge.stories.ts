@@ -18,7 +18,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
 });
 
@@ -30,7 +30,7 @@ Example.args = {
   content: 'Badge text',
 };
 
-export const AllVariants: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   ...args,
   template: html`
     <fudis-grid [rowGap]="'sm'">

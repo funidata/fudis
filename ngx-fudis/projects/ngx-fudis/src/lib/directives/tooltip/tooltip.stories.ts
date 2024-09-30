@@ -1,7 +1,5 @@
 import { StoryFn, Meta } from '@storybook/angular';
-
 import { ButtonComponent } from '../../components/button/button.component';
-import { TooltipDirective } from './tooltip.directive';
 import { tooltipExclude } from '../../utilities/storybook';
 import readme from './tooltip.mdx';
 
@@ -29,7 +27,7 @@ export default {
 
 const html = String.raw;
 
-export const ExampleWithNativeButton: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+export const ExampleWithNativeButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <button
@@ -49,7 +47,7 @@ ExampleWithNativeButton.args = {
   tooltipToggle: false,
 };
 
-export const ExampleWithFudisButton: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+export const ExampleWithFudisButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-button

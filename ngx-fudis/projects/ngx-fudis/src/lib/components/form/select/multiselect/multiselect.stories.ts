@@ -51,7 +51,7 @@ const commonProps: Partial<MultiselectComponent> = {
   initialFocus: false,
 };
 
-const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     defaultOptions,

@@ -31,7 +31,7 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-expandable
@@ -49,7 +49,7 @@ const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
   `,
 });
 
-const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
+const ActionTemplate: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-expandable
@@ -110,7 +110,7 @@ ExampleLite.args = {
   padding: 'default',
 };
 
-export const AllVariants: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-grid [align]="'start'" [width]="'xl'">
