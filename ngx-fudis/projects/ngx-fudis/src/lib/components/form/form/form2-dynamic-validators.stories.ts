@@ -155,7 +155,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -170,7 +170,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -185,7 +185,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
@@ -430,11 +430,9 @@ class DynamicValidatorExampleComponent {
 
   toggleLocalizedTextGroupDisable(): void {
     if (this.formExample.controls['dj'].disabled) {
-      console.log('Enabling!');
       this.formExample.controls['dj'].enable();
       this._localizedDisabled = 'Disable';
     } else {
-      console.log('Disabling');
       this.formExample.controls['dj'].disable();
       this._localizedDisabled = 'Enable';
     }

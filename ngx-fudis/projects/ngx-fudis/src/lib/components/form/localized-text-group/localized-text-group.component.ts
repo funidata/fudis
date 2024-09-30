@@ -207,25 +207,9 @@ export class LocalizedTextGroupComponent
     );
   }
 
-  private _applyDisabledCheck(): void {
-    // const originalDisable = this.formGroup.disable;
-    // const originalEnable = this.formGroup.enable;
-    // this.formGroup.enable = () => {
-    //   console.log('enable control!');
-    //   originalEnable.apply(originalEnable);
-    //   this._selectControl.enable();
-    // };
-    // this.formGroup.disable = () => {
-    //   console.log('disable control!');
-    //   originalDisable.apply(this.formGroup);
-    //   this._selectControl.disable();
-    // };
-  }
-
   ngOnChanges(changes: FudisComponentChanges<LocalizedTextGroupComponent>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
       this._applyGroupUpdateCheck();
-      this._applyDisabledCheck();
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);

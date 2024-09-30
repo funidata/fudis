@@ -387,8 +387,6 @@ describe('LocalizedTextGroupComponent', () => {
           fixture.detectChanges();
           const selectInput = getElement(fixture, '#fudis-localized-text-group-1_language-select');
 
-          console.log(selectInput.outerHTML);
-
           expect(selectInput.getAttribute('tabindex')).toBeNull();
           expect(selectInput.getAttribute('aria-disabled')).toBeTruthy();
 
@@ -398,8 +396,6 @@ describe('LocalizedTextGroupComponent', () => {
           fixture.detectChanges();
 
           const selectInput = getElement(fixture, '#fudis-localized-text-group-1_language-select');
-
-          console.log(selectInput.outerHTML);
 
           expect(selectInput.getAttribute('tabindex')).toEqual('0');
           expect(selectInput.getAttribute('aria-disabled')).toBeNull();
