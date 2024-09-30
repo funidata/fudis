@@ -52,7 +52,6 @@ const formCommonControlsExclude: string[] = [
   'formGroup',
   'ariaLabel',
   'disableGuidance',
-  'invalidState',
   'errorSummaryReloadOnInit',
 ];
 

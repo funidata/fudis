@@ -13,19 +13,15 @@
     <input
       #inputRef
       class="fudis-autocomplete__input"
-      [class.fudis-form-input--invalid]="(control.invalid && control.touched) || invalidState"
-      [class.fudis-form-input--disabled]="disabled"
+      [class.fudis-form-input--invalid]="control.invalid && control.touched"
       type="text"
       [id]="id"
       [matAutocomplete]="autocomplete"
       (blur)="_autocompleteBlur($event)"
       [formControl]="_autocompleteFormControl"
-      [readonly]="disabled"
       [attr.aria-describedby]="id + '_guidance'"
-      [attr.aria-invalid]="
-        (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
-      "
-      [attr.aria-disabled]="disabled"
+      [attr.aria-invalid]="(control.touched && control.invalid) || null"
+      [attr.aria-disabled]="control.disabled"
       [attr.placeholder]="placeholder ? placeholder : null"
       [attr.required]="(_required | async) || null"
     />
@@ -48,7 +44,6 @@
         [class.fudis-autocomplete__input__icon__chevron]="variant !== 'search'"
         [icon]="variant === 'search' ? 'search' : 'chevron'"
         [rotate]="variant === 'dropdown' ? 'cw-90' : 'none'"
-        [class.fudis-autocomplete__input__icon--disabled]="disabled"
       >
       </fudis-icon>
     </ng-container>

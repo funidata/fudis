@@ -13,27 +13,29 @@
       <div
         *ngIf="variant === 'dropdown' || control.disabled"
         #inputRef
-        tabindex="0"
+        [attr.tabindex]="
+          !control.disabled && !parentLocalizedTextGroupFormGroup?.disabled ? 0 : null
+        "
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
         [id]="id"
         role="combobox"
         [attr.aria-controls]="id + '-dropdown'"
         aria-haspopup="listbox"
         [attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
-        (click)="_clickInput()"
+        (click)="!control.disabled && !parentLocalizedTextGroupFormGroup?.disabled && _clickInput()"
         (focus)="_selectInputFocus($event)"
         (blur)="_inputBlur($event)"
         (keydown)="_inputKeyDown($event)"
         (keyup)="_inputKeyUp($event)"
         [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="_dropdownOpen"
-        [attr.aria-disabled]="disabled || control.disabled"
+        [attr.aria-disabled]="
+          control.disabled || parentLocalizedTextGroupFormGroup?.disabled || null
+        "
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.aria-invalid]="
-          (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
-        "
+        [attr.aria-invalid]="(control.touched && control.invalid) || null"
       >
         <span *ngIf="!_dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
           placeholder
@@ -47,15 +49,17 @@
         #autocompleteRef
         [id]="id"
         [placeholder]="placeholder"
-        [disabled]="control.disabled || disabled"
+        [disabled]="control.disabled"
         [dropdownOpen]="_dropdownOpen | async"
         [required]="_required | async"
         [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
         [selectedLabel]="_dropdownSelectionLabelText"
         [visibleOptions]="_visibleOptions"
-        [invalidState]="(control.touched && control.invalid) || (control.touched && invalidState)"
+        [invalidState]="control.touched && control.invalid"
         [selectionClearButton]="selectionClearButton"
-        (triggerInputClick)="_clickInput()"
+        (triggerInputClick)="
+          !control.disabled && !parentLocalizedTextGroupFormGroup?.disabled && _clickInput()
+        "
         (triggerFocusToFirstOption)="_focusToFirstOption()"
         (triggerFilterTextUpdate)="_filterTextUpdate($event); _checkIfAutocompleteValueNull($event)"
         (triggerSelectOnlyVisibleOption)="_focusToFirstOption(true)"
@@ -76,12 +80,14 @@
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
           (handleClearButtonDestroy)="_setClearButtonFocusFalse()"
           [clearButton]="selectionClearButton"
-          [disabled]="control.disabled || disabled"
+          [disabled]="control.disabled || !!parentLocalizedTextGroupFormGroup?.disabled"
         />
       </div>
     </div>
     <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce && !disabled && !control.disabled"
+      *ngIf="
+        _optionsLoadedOnce && !control.disabled && !parentLocalizedTextGroupFormGroup?.disabled
+      "
       #dropdownRef
       [open]="_dropdownOpen | async"
       [selectVariant]="variant"

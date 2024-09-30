@@ -53,22 +53,10 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
    */
   @Input() errorSummaryReloadOnInit: boolean = true;
 
-  // TODO: Remove so that disabling is done straight from control/group
-
-  /**
-   * Option for disabling the input.
-   */
-  @Input() disabled: boolean = false;
-
   /**
    * Help text, aligned underneath the input.
    */
   @Input() helpText: string | undefined;
-
-  /**
-   * Set input's visual style and attributes as invalid. Does not override if control.invalid is true.
-   */
-  @Input() invalidState: boolean = false;
 
   /**
    * Set browser focus to the input on the first load.

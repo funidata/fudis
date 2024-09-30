@@ -125,22 +125,24 @@ const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
   props: { ...args, control: new FormControl(null) },
 });
 
+const TemplateDisabled: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
+  props: { ...args, control: new FormControl({ value: null, disabled: true }) },
+});
+
 export const Example = Template.bind({});
 Example.args = {
   tooltip: '',
   tooltipToggle: false,
   size: 'lg',
   type: 'text',
-  disabled: false,
   label: 'Text-input label example',
   helpText: 'Example help text',
   initialFocus: false,
 };
 
-export const Disabled = Template.bind({});
+export const Disabled = TemplateDisabled.bind({});
 Disabled.args = {
   size: 'lg',
-  disabled: true,
   tooltip: '',
   tooltipToggle: false,
   label: 'Disabled Text Input',

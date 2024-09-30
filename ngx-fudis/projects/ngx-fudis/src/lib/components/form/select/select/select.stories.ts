@@ -45,7 +45,6 @@ const html = String.raw;
 const commonArgs: Partial<SelectComponent> = {
   label: 'Select a pet',
   size: 'lg',
-  disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
   autocompleteHelpText: 'Hello from Dropdown Help Text!',
@@ -68,7 +67,6 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
-      [disabled]="disabled"
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [selectionClearButton]="selectionClearButton"

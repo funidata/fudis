@@ -80,7 +80,6 @@ const commonArgs: Partial<DatepickerComponent> = {
   label: 'Select a date',
   helpText: 'Choose your favourite date.',
   size: 'md',
-  disabled: false,
   dateParse: true,
   initialFocus: false,
   tooltip: 'Is it your birthday?',
@@ -100,7 +99,6 @@ const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
       [tooltip]="tooltip"
@@ -131,7 +129,6 @@ const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerCompo
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
       [tooltip]="tooltip"
@@ -161,7 +158,6 @@ const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponen
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
       [tooltip]="tooltip"
@@ -200,7 +196,6 @@ const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent)
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
       [tooltip]="tooltip"

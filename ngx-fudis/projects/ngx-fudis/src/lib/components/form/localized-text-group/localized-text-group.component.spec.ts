@@ -376,4 +376,30 @@ describe('LocalizedTextGroupComponent', () => {
   describe('with text-area', () => {
     testWithVariant('text-area');
   });
+
+  describe('select disabling', () => {
+    it('should disable and enable Select input', async () => {
+      component.formGroup.disable();
+
+      await fixture
+        .whenStable()
+        .then(() => {
+          fixture.detectChanges();
+          const selectInput = getElement(fixture, '#fudis-localized-text-group-1_language-select');
+
+          expect(selectInput.getAttribute('tabindex')).toBeNull();
+          expect(selectInput.getAttribute('aria-disabled')).toBeTruthy();
+
+          component.formGroup.enable();
+        })
+        .finally(() => {
+          fixture.detectChanges();
+
+          const selectInput = getElement(fixture, '#fudis-localized-text-group-1_language-select');
+
+          expect(selectInput.getAttribute('tabindex')).toEqual('0');
+          expect(selectInput.getAttribute('aria-disabled')).toBeNull();
+        });
+    });
+  });
 });
