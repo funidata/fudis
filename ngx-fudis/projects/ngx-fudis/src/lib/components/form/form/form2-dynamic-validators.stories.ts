@@ -218,10 +218,16 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
                   [label]="'At least one required'"
                   [formGroup]="formExample.controls.dj"
                 ></fudis-localized-text-group>
-                <fudis-button
-                  [label]="_oneRequired + ' option required validator'"
-                  (handleClick)="toggleOneRequired(formExample.controls['dj'], 'oneRequired')"
-                ></fudis-button>
+                <fudis-grid [rowGap]="'md'">
+                  <fudis-button
+                    [label]="_oneRequired + ' option required validator'"
+                    (handleClick)="toggleOneRequired(formExample.controls['dj'], 'oneRequired')"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_localizedDisabled + ' Localized Text Group'"
+                    (handleClick)="toggleLocalizedTextGroupDisable()"
+                  ></fudis-button>
+                </fudis-grid>
               </fudis-grid>
             </fudis-grid>
           </ng-template>
@@ -319,6 +325,7 @@ class DynamicValidatorExampleComponent {
   _dateMax = 'Remove';
   _dateMin = 'Remove';
   _radioOptionRequired = 'Remove';
+  _localizedDisabled = 'Disable';
 
   sportOptions: FudisRadioButtonOption<object>[] = [
     { value: 'cycling', label: 'Cycling' },
@@ -418,6 +425,18 @@ class DynamicValidatorExampleComponent {
       default:
         console.error('Wrong input provided. No case for text: ' + target);
         return;
+    }
+  }
+
+  toggleLocalizedTextGroupDisable(): void {
+    if (this.formExample.controls['dj'].disabled) {
+      console.log('Enabling!');
+      this.formExample.controls['dj'].enable();
+      this._localizedDisabled = 'Disable';
+    } else {
+      console.log('Disabling');
+      this.formExample.controls['dj'].disable();
+      this._localizedDisabled = 'Enable';
     }
   }
 
