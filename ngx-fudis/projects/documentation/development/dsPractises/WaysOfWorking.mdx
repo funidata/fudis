@@ -22,21 +22,21 @@ Quite many of the formatting errors can be automatically fixed on save if you ha
 
 ### Some Principles for Writing Styles
 
-* Reuse components, while preventing rewriting their existing .scss styles
+- Reuse components, while preventing rewriting their existing .scss styles
 
-* Component inline styles should be avoided. This allows full control over component styles through variables.
+- Component inline styles should be avoided. This allows full control over component styles through variables.
 
   > Exceptions exist, e. g. [GridComponent](/docs/components-grid-grid--documentation) which dynamically applies @Input of `[columns]` values as native CSS grid values without need to write tens of helper CSS classes.
 
-* Components styles should be recorded in their own .scss file directly in their own folder.
+- Components styles should be recorded in their own .scss file directly in their own folder.
 
-* Use globally defined tokens and mixins to enable colors, spacing, etc. rather than introducing hard-to-maintain local values.
+- Use globally defined tokens and mixins to enable colors, spacing, etc. rather than introducing hard-to-maintain local values.
 
   > If Stylelint throws an error, that you are using an unallowed attribute or value in your scss-file, there is always a mixin for that. For example `color`, `background-color` and `font-size` are not allowed. When using mixins for these we minimise the risk that workarounds and exceptions start to appear to our code base.
 
-* Avoid using style override with `!important`
+- Avoid using style override with `!important`
 
-* Occasionally it is unconvenient to follow the rules of Stylelint. E. g. if you need to do CSS sibling selection, but SCSS syntax with Stylelint thinks you are not following the good practises. In these occasions it is acceptable to add an ignore rule for that line of styling.
+- Occasionally it is unconvenient to follow the rules of Stylelint. E. g. if you need to do CSS sibling selection, but SCSS syntax with Stylelint thinks you are not following the good practises. In these occasions it is acceptable to add an ignore rule for that line of styling.
 
 ### Using Foundation Tokens and Mixins in Component's SCSS-file
 

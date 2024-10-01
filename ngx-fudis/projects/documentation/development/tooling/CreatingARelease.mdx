@@ -33,21 +33,21 @@ Find release notes for the latest [Fudis Version](https://github.com/funidata/fu
 
 **Steps for creating a new release:**
 
-* Depending on the changes included in the release, run the following command with the correct argument `npm run fudis-release -- <major|minor|patch>`. **Example:** `npm run fudis-release -- patch`
+- Depending on the changes included in the release, run the following command with the correct argument `npm run fudis-release -- <major|minor|patch>`. **Example:** `npm run fudis-release -- patch`
   > This will run a release shell script which creates a new branch named `release` and automatically runs `npm version` command with given argument.\
   > `npm version` will increment version number in `package.json` files, commits the changes, tags that commit as the new version, and pushes commits and tags to GitHub.
-* Create Pull Request
-* Merge created Pull Request
-* Go to project's GitHub main page **Releases**
-* Select **Draft a new release**
-* Select **Choose a tag**. Choose the newest generated version tag from a list
-* If necessary choose from **Previous tag** dropdown, the version you want to compare to. Otherwise use default 'Previous tag: auto'
-* Select **Generate release notes**
-* Replace **What's Changed** heading with a current date
-* Check from **Preview** that everything looks correct
-* Check that **Set as the latest release** checkbox is selected
-* Publish release
-* Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
+- Create Pull Request
+- Merge created Pull Request
+- Go to project's GitHub main page **Releases**
+- Select **Draft a new release**
+- Select **Choose a tag**. Choose the newest generated version tag from a list
+- If necessary choose from **Previous tag** dropdown, the version you want to compare to. Otherwise use default 'Previous tag: auto'
+- Select **Generate release notes**
+- Replace **What's Changed** heading with a current date
+- Check from **Preview** that everything looks correct
+- Check that **Set as the latest release** checkbox is selected
+- Publish release
+- Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
 
 ### Note!
 

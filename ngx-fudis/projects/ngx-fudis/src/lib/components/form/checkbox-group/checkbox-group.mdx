@@ -14,8 +14,8 @@ It is built using parent wrapper of Checkbox Group Component and adding Checkbox
 
 Checkbox Group can be built in two ways:
 
-* [With `formGroup` property in the parent Checkbox Group](#with-formgroup-property-in-the-parent-checkbox-group)
-* [With `control` properties in the child Checkboxes](#with-control-properties-in-the-child-checkboxes)
+- [With `formGroup` property in the parent Checkbox Group](#with-formgroup-property-in-the-parent-checkbox-group)
+- [With `control` properties in the child Checkboxes](#with-control-properties-in-the-child-checkboxes)
 
 **Note!** If you want to [include validators](#validators-with-form-group) for the whole Checkbox Group, use the first one!
 
@@ -160,23 +160,23 @@ Both Checkbox Group and Checkbox have `handleChange` output property.
 
 When clicking any of the child Checkboxes, the parent's property `handleChange` will emit an object with properties:
 
-* changedControlName: Name of the checkbox's control, which was clicked
-* formGroup: Current state of App provided or internally created Form Group
+- changedControlName: Name of the checkbox's control, which was clicked
+- formGroup: Current state of App provided or internally created Form Group
 
 ### Output for Checkbox
 
 When clicking Checkbox, property `handleChange` will emit an object with properties:
 
-* checkbox: `FudisCheckboxOption` typed object consisting of various data
-* control: Current Form Control of the Checkbox
+- checkbox: `FudisCheckboxOption` typed object consisting of various data
+- control: Current Form Control of the Checkbox
 
 ## Accessibility
 
-* Fieldset has a legend as its first child element
-* When selection is mandatory, it is communicated with 'Required' text using validators
-* Checkbox options are grouped by name attribute
-* Guidance is linked to the Checkbox Group's fieldset element via aria-describedby
-* Possible error messages are displayed after user blurs out from the whole checkbox group
+- Fieldset has a legend as its first child element
+- When selection is mandatory, it is communicated with 'Required' text using validators
+- Checkbox options are grouped by name attribute
+- Guidance is linked to the Checkbox Group's fieldset element via aria-describedby
+- Possible error messages are displayed after user blurs out from the whole checkbox group
 
 ## Properties of Checkbox Group Component
 

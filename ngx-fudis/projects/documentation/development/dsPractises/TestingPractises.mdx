@@ -21,7 +21,7 @@ See [Command Reference](/docs/documentation-development-tooling-command-referenc
 
 Firstly, it should be noted that generating the screenshots that are committed into version control MUST BE generated with the Docker image provided in `test/Dockerfile`. Failing to do so will result in machine-specific differences in the screenshots when the tests are run in CI/CD and in consequent false positive test failures.
 
-However, the Playwright UI (run directly on host machine) should be leveraged when writing VR tests. It offers better error messages, stack traces, and overall UX. You can launch the UI with `npm run test:ui`. As our team generally uses Apple hardware, PNG files ending in *"-darwin"* have been ignored in Git as to not be accidentally committed. When using the UI on macOS, such screenshots will be generated but they are safe to ignore. The screenshots that are generated inside the container end with *"-ubuntu"*.
+However, the Playwright UI (run directly on host machine) should be leveraged when writing VR tests. It offers better error messages, stack traces, and overall UX. You can launch the UI with `npm run test:ui`. As our team generally uses Apple hardware, PNG files ending in _"-darwin"_ have been ignored in Git as to not be accidentally committed. When using the UI on macOS, such screenshots will be generated but they are safe to ignore. The screenshots that are generated inside the container end with _"-ubuntu"_.
 
 The actual test code looks something like this:
 
@@ -34,17 +34,17 @@ test("badge default", async ({ page }) => {
 });
 ```
 
-It is possible to call `PageAssertions.toHaveScreenshot` multiple times in a single test. Without arguments, this will result in sequentially numbered screenshot filenames. You can also give this method a string ending in *".png"* as an argument if you wish to name the generated files explicitly.
+It is possible to call `PageAssertions.toHaveScreenshot` multiple times in a single test. Without arguments, this will result in sequentially numbered screenshot filenames. You can also give this method a string ending in _".png"_ as an argument if you wish to name the generated files explicitly.
 
 #### Resources
 
-* [Playwright documentation](https://playwright.dev/docs/writing-tests)
+- [Playwright documentation](https://playwright.dev/docs/writing-tests)
 
-* [Playwright plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
+- [Playwright plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
 
 ### Generating Commitable Screenshots
 
-Generating commitable screenshots should be done by running `npm run test:vr` which will spin up a Docker container and run all Playwright tests. You can use NPM's argument syntax to append filenames (full or partial) to this command to run only matching test files, e.g. `npm run test:vr -- badge` would only run tests with *"badge"* in the filename.
+Generating commitable screenshots should be done by running `npm run test:vr` which will spin up a Docker container and run all Playwright tests. You can use NPM's argument syntax to append filenames (full or partial) to this command to run only matching test files, e.g. `npm run test:vr -- badge` would only run tests with _"badge"_ in the filename.
 
 Playwright will fail any test that does not have a matching screenshot and generate a baseline screenshot for that test at the same time. After this expected failure, you can run the test again to verify that everything works. It is probably a good idea to take a quick look at the generated images, too. When all looks good, the images should be committed into version control along with the test file itself.
 

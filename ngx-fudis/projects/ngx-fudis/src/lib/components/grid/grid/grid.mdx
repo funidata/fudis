@@ -14,10 +14,10 @@ This page contains documentation on how to align and set **all** first level chi
 
 **Table of Contents:**
 
-* [Basic Usage](#basic-usage)
-* [Defining Columns](#defining-columns)
-* [Universal Configuration of All Grid Components](#universal-configuration-of-all-grid-components)
-* [Properties Table](#properties)
+- [Basic Usage](#basic-usage)
+- [Defining Columns](#defining-columns)
+- [Universal Configuration of All Grid Components](#universal-configuration-of-all-grid-components)
+- [Properties Table](#properties)
 
 ## Basic Usage
 
@@ -52,10 +52,10 @@ The property `columns` accept three different types of values: number, strings a
 
 **Examples of different ways how to use `columns`:**
 
-* [Equally Wide Columns with Numbers](#equally-wide-columns-with-numbers)
-* [Form Input Widths](#form-input-widths)
-* [Native CSS Grid Units](#native-css-grid-units)
-* [Responsive Colums For Different Breakpoints](#responsive-columns-for-different-breakpoints)
+- [Equally Wide Columns with Numbers](#equally-wide-columns-with-numbers)
+- [Form Input Widths](#form-input-widths)
+- [Native CSS Grid Units](#native-css-grid-units)
+- [Responsive Colums For Different Breakpoints](#responsive-columns-for-different-breakpoints)
 
 ### Equally Wide Columns with Numbers
 
@@ -80,16 +80,16 @@ As Grid's `columns` property is eventually added to Grid HTML element as CSS pro
 
 Common grid-template-columns keyword values we introduce here are:
 
-* [FR Fraction Units](#fr-fraction-units)
-* [Auto, Auto-Fill and Auto-Fit](#auto-auto-fill-and-auto-fit)
-* [Min-Content](#min-content)
-* [Max-Content](#max-content)
+- [FR Fraction Units](#fr-fraction-units)
+- [Auto, Auto-Fill and Auto-Fit](#auto-auto-fill-and-auto-fit)
+- [Min-Content](#min-content)
+- [Max-Content](#max-content)
 
 For more examples and documentation on how to apply other combinations or values to be transformed native CSS `grid-template-columns` property, look at these articles:
 
-* [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
-* [Understanding min-content, max-content, and fit-content in CSS](https://blog.logrocket.com/understanding-min-content-max-content-fit-content-css/)
-* [grid-template-columns in MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+- [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
+- [Understanding min-content, max-content, and fit-content in CSS](https://blog.logrocket.com/understanding-min-content-max-content-fit-content-css/)
+- [grid-template-columns in MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
 
 #### FR Fraction Units
 
@@ -171,10 +171,10 @@ Previously introduced `columns` values stay static and unchanged in all browser 
 
 With `[columns]="{sm: 2, lg: 3, xl: 4}"` In following example:
 
-* Before `sm`: Before screen size of `sm` (there is `xs` before `sm`), Grid will have the default of 1 column.
-* `sm` to `lg`: Through `sm`, `md` and before hitting `lg` breakpoint, Grid will be in 2 equally wide columns
-* `lg` to `xl`: From `lg` and before hitting `xl`, Grid has 3 equal columns
-* `xl` and up: Grid has 4 columns
+- Before `sm`: Before screen size of `sm` (there is `xs` before `sm`), Grid will have the default of 1 column.
+- `sm` to `lg`: Through `sm`, `md` and before hitting `lg` breakpoint, Grid will be in 2 equally wide columns
+- `lg` to `xl`: From `lg` and before hitting `xl`, Grid has 3 equal columns
+- `xl` and up: Grid has 4 columns
 
 ```
 <fudis-grid [columns]="{sm: 2, lg: 3, xl: 4}">
@@ -190,10 +190,10 @@ With `[columns]="{sm: 2, lg: 3, xl: 4}"` In following example:
 
 With `[columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}"` In following example:
 
-* From `xs` to `sm`: Before hitting `sm`, Grid has 2 equally wide columns.
-* From `sm` to `md`: From `sm` before hitting `md`, Grid has 2 columns, where 1st takes 1/3 of width and 2nd 2/3 of whole width.
-* From `md` to `lg`: From `md` before hitting `lg`, Grid has 3 columns, where 1st column takes 1/4, 2nd 2/4 and 3rd column again 1/4 of whole width.
-* From `lg` and up: When hitting breakpoint `lg`, Grid will have 4 equally wide columns.
+- From `xs` to `sm`: Before hitting `sm`, Grid has 2 equally wide columns.
+- From `sm` to `md`: From `sm` before hitting `md`, Grid has 2 columns, where 1st takes 1/3 of width and 2nd 2/3 of whole width.
+- From `md` to `lg`: From `md` before hitting `lg`, Grid has 3 columns, where 1st column takes 1/4, 2nd 2/4 and 3rd column again 1/4 of whole width.
+- From `lg` and up: When hitting breakpoint `lg`, Grid will have 4 equally wide columns.
 
 ```
 <fudis-grid [columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}">
