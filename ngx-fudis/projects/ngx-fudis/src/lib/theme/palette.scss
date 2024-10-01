@@ -1,29 +1,29 @@
 @use '@angular/material' as mat;
-@import '../foundations/colors/tokens';
+@use '../foundations/colors/tokens' as colors;
 
 $palette-map-primary: (
-  100: $color-primary-light,
-  500: $color-primary,
-  700: $color-primary-dark,
-  900: $color-primary-extra-dark,
+  100: colors.$color-primary-light,
+  500: colors.$color-primary,
+  700: colors.$color-primary-dark,
+  900: colors.$color-primary-extra-dark,
   contrast: (
-    100: $color-gray-dark,
-    500: $color-white,
-    700: $color-white,
-    900: $color-white,
+    100: colors.$color-gray-dark,
+    500: colors.$color-white,
+    700: colors.$color-white,
+    900: colors.$color-white,
   ),
 );
 $palette-map-accent: (
-  100: $color-red,
-  200: $color-yellow,
-  500: $color-primary,
-  700: $color-green,
+  100: colors.$color-red,
+  200: colors.$color-yellow,
+  500: colors.$color-primary,
+  700: colors.$color-green,
   900: transparent,
   contrast: (
-    100: $color-red-light,
-    200: $color-yellow-light,
-    500: $color-white,
-    700: $color-green-light,
-    900: $color-gray-dark,
+    100: colors.$color-red-light,
+    200: colors.$color-yellow-light,
+    500: colors.$color-white,
+    700: colors.$color-green-light,
+    900: colors.$color-gray-dark,
   ),
 );
