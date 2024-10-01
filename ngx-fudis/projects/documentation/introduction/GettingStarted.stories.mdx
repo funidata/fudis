@@ -49,15 +49,12 @@ import { NgxFudisModule } from '@funidata/ngx-fudis';
 
 ## 4. Import Core Styles
 
-The core styles from Angular Material and Fudis must be imported to your application's styles for components to work properly.
+The core styles of Fudis must be imported to your application's styles for components to work properly. As Fudis uses Angular Material as its dependency, it is already imported as part of Fudis' main CSS file.
 
 The recommended way is to add following lines your project's root SCSS style file, which is often named `styles.scss` or `index.scss` or similar:
 
 ```
 @use '@funidata/ngx-fudis' as fudis;
-@use '@angular/material' as mat;
-@include mat.core();
-
 ```
 
 ## 5. Define Application's Root Styles

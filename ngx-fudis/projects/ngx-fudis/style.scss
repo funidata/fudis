@@ -2,15 +2,7 @@
 * This file is for Storybook
 */
 
-@use '@angular/material' as mat;
-@use './src/lib/foundations/typography/mixins.scss' as typography;
-
-// Fudis theme import
-@import './src/lib/theme/component-themes-to-apply';
-
-// Import font files globally
-@import './src/lib/assets/fonts/fonts';
-@import './src/lib/foundations/utilities/classes';
+@use './index' as fudis;
 
 :root {
   --fudis-rem-multiplier: 1;
@@ -43,7 +35,7 @@ a.sbdocs {
 }
 
 tr td p.fudis-table-caption {
-  @include typography.table-caption();
+  @include fudis.table-caption();
 }
 
 .storybook {
