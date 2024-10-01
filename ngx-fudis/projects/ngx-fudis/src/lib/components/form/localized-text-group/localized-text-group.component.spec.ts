@@ -60,9 +60,9 @@ describe('LocalizedTextGroupComponent', () => {
     component = fixture.componentInstance;
 
     const formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
-      finnish: new FormControl('', controlRequired),
-      swedish: new FormControl(''),
-      english: new FormControl('', FudisValidators.required('Required in English')),
+      fi: new FormControl('', controlRequired),
+      sv: new FormControl(''),
+      en: new FormControl('', FudisValidators.required('Required in English')),
     });
 
     component.formGroup = formGroup;
@@ -215,8 +215,8 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should not have min or max length`, () => {
-        component.formGroup.controls['finnish'].removeValidators(minLength);
-        component.formGroup.controls['finnish'].removeValidators(maxlength);
+        component.formGroup.controls['fi'].removeValidators(minLength);
+        component.formGroup.controls['fi'].removeValidators(maxlength);
         component.formGroup.updateValueAndValidity();
         fixture.detectChanges();
         const element = getElement(
@@ -229,8 +229,8 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should have min or max length`, () => {
-        component.formGroup.controls['finnish'].addValidators(minLength);
-        component.formGroup.controls['finnish'].addValidators(maxlength);
+        component.formGroup.controls['fi'].addValidators(minLength);
+        component.formGroup.controls['fi'].addValidators(maxlength);
         component.formGroup.updateValueAndValidity();
         fixture.detectChanges();
 
@@ -244,7 +244,7 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should have required attribute, when control is required`, () => {
-        component.formGroup.controls['finnish'].addValidators(controlRequired);
+        component.formGroup.controls['fi'].addValidators(controlRequired);
         component.formGroup.updateValueAndValidity();
         fixture.detectChanges();
         const element = getElement(
@@ -256,7 +256,7 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should not have required attribute, when control is required`, () => {
-        component.formGroup.controls['finnish'].removeValidators(controlRequired);
+        component.formGroup.controls['fi'].removeValidators(controlRequired);
         component.formGroup.updateValueAndValidity();
         fixture.detectChanges();
 
@@ -270,7 +270,7 @@ describe('LocalizedTextGroupComponent', () => {
 
       it(`should have required attribute, when group is required`, () => {
         component.formGroup.addValidators(groupRequired);
-        component.formGroup.controls['finnish'].removeValidators(controlRequired);
+        component.formGroup.controls['fi'].removeValidators(controlRequired);
         component.formGroup.updateValueAndValidity();
         fixture.detectChanges();
 
@@ -284,7 +284,7 @@ describe('LocalizedTextGroupComponent', () => {
 
       it(`should not have required attribute, when group is required`, () => {
         component.formGroup.removeValidators(groupRequired);
-        component.formGroup.controls['finnish'].removeValidators(controlRequired);
+        component.formGroup.controls['fi'].removeValidators(controlRequired);
         component.formGroup.updateValueAndValidity();
         fixture.detectChanges();
 
@@ -322,7 +322,7 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should update Select menu option, when control is updated`, () => {
-        component.formGroup.controls['finnish'].patchValue('Hello');
+        component.formGroup.controls['fi'].patchValue('Hello');
 
         const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
 
