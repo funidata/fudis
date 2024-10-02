@@ -546,12 +546,6 @@ class FormContentExampleComponent implements OnInit {
 
   formExample: FormGroup;
 
-  languageOptions: FudisSelectOption<object>[] = [
-    { value: 'finnish', label: 'FI' },
-    { value: 'swedish', label: 'SV' },
-    { value: 'english', label: 'EN' },
-  ];
-
   courseTypeOptions: FudisRadioButtonOption<object>[] = [
     { value: 'basic', label: 'Basic' },
     { value: 'advanced', label: 'Advanced' },

@@ -15,7 +15,7 @@
         #inputRef
         class="fudis-form-input fudis-localized-text-group__inputs__text"
         [attr.aria-invalid]="
-          (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
+          ((formGroup.controls[control.key].touched || formGroup.touched) && formGroup.invalid) ||
           null
         "
         [attr.aria-label]="
@@ -42,7 +42,7 @@
         *ngIf="variant === 'text-area' && control.key === _selectControl.value.value"
         class="fudis-form-input fudis-localized-text-group__inputs__area"
         [attr.aria-invalid]="
-          (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
+          ((formGroup.controls[control.key].touched || formGroup.touched) && formGroup.invalid) ||
           null
         "
         [attr.aria-label]="
