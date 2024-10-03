@@ -43,6 +43,9 @@ export function previewHead(head) {
           display: flex;
           align-items: center;
       }
+      .sb-show-main.sb-main-padded:has(.fudis-footer){
+          padding: 0;
+      }
     </style>
   `;
 }

@@ -117,23 +117,6 @@ const preview = {
   tags: ["autodocs"],
 };
 
-export const globalTypes = {
-  theme: {
-    name: "Theme",
-    description: "Project theme for components",
-    defaultValue: "sisu",
-    toolbar: {
-      icon: "mirror",
-      items: [
-        { value: "sisu", title: "Sisu" },
-        { value: "into", title: "Into" },
-      ],
-      title: true,
-      dynamicTitle: true,
-    },
-  },
-};
-
 export const decorators = [
   moduleMetadata({
     imports: [NgxFudisModule],
