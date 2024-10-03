@@ -274,7 +274,7 @@ class ExampleWithMultipleFormsComponent {
   ];
 
   patchValue(): void {
-    this.allForms.controls.formSix.controls.oneRequired.controls['finnish'].patchValue(
+    this.allForms.controls.formSix.controls.oneRequired.controls['fi'].patchValue(
       'Surprise value from outside',
     );
   }
@@ -325,21 +325,21 @@ class ExampleWithMultipleFormsComponent {
     formSix: new FormGroup({
       oneRequired: new FormGroup<FudisLocalizedTextGroup<object>>(
         {
-          finnish: new FormControl<string | null>(null),
-          swedish: new FormControl<string | null>(null),
-          english: new FormControl<string | null>(null),
+          fi: new FormControl<string | null>(null),
+          sv: new FormControl<string | null>(null),
+          en: new FormControl<string | null>(null),
         },
         [FudisGroupValidators.oneRequired('Provide name in atleast one language')],
       ),
       allRequired: new FormGroup<FudisLocalizedTextGroup<object>>({
-        finnish: new FormControl<string | null>('Lorem ipsum', [
+        fi: new FormControl<string | null>('Lorem ipsum', [
           FudisValidators.required('Missing Finnish description'),
           FudisValidators.maxLength(10, 'Too long Finnish description'),
         ]),
-        swedish: new FormControl<string | null>(null, [
+        sv: new FormControl<string | null>(null, [
           FudisValidators.required('Missing Swedish description'),
         ]),
-        english: new FormControl<string | null>(null, [
+        en: new FormControl<string | null>(null, [
           FudisValidators.required('Missing English description'),
         ]),
       }),
@@ -545,12 +545,6 @@ class FormContentExampleComponent implements OnInit {
   fieldsetId = 'first-fieldset-id';
 
   formExample: FormGroup;
-
-  languageOptions: FudisSelectOption<object>[] = [
-    { value: 'finnish', label: 'FI' },
-    { value: 'swedish', label: 'SV' },
-    { value: 'english', label: 'EN' },
-  ];
 
   courseTypeOptions: FudisRadioButtonOption<object>[] = [
     { value: 'basic', label: 'Basic' },

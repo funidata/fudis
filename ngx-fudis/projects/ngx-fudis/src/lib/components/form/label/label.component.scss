@@ -17,12 +17,12 @@
   }
 
   &__content {
-    display: inline-block;
+    display: inline-flex;
+    flex-wrap: wrap;
     margin: spacing.$spacing-xxs 0;
     min-height: spacing.$spacing-md;
 
     &__text {
-      overflow-wrap: anywhere;
       margin-right: spacing.$spacing-xs;
     }
 
