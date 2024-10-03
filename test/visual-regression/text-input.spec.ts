@@ -10,15 +10,15 @@ test("text-input with validators", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-text-input--with-validators&viewMode=story",
   );
-  await expect(page).toHaveScreenshot("validators-1-init.png");
+  await expect(page).toHaveScreenshot("validators-1-init.png", { fullPage: true });
   await page.getByTestId("fudis-text-input-1").focus();
   await page.getByTestId("fudis-text-input-2").focus();
   await page.getByTestId("fudis-text-input-2").fill("hey");
   await page.getByTestId("fudis-text-input-1").focus();
-  await expect(page).toHaveScreenshot("validators-2-blur.png");
+  await expect(page).toHaveScreenshot("validators-2-blur.png", { fullPage: true });
   await page.getByTestId("fudis-text-input-1").fill("Hello there!");
   await page.getByTestId("fudis-text-input-2").focus();
   await page.getByTestId("fudis-text-input-2").fill("grievous@malevolence.com");
 
-  await expect(page).toHaveScreenshot("validators-3-filled.png");
+  await expect(page).toHaveScreenshot("validators-3-filled.png", { fullPage: true });
 });

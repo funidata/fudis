@@ -281,13 +281,13 @@ class DynamicValidatorExampleComponent {
       sport: new FormControl(null, [this._requiredValidatorInstance]),
       dj: new FormGroup(
         {
-          finnish: new FormControl<string | null>(null, [
+          fi: new FormControl<string | null>(null, [
             FudisValidators.maxLength(15, 'Too long Finnish name'),
           ]),
-          swedish: new FormControl<string | null>(null, [
+          sv: new FormControl<string | null>(null, [
             FudisValidators.maxLength(20, 'Too long Swedish name'),
           ]),
-          english: new FormControl<string | null>(null, [
+          en: new FormControl<string | null>(null, [
             FudisValidators.maxLength(25, 'Too long English name'),
           ]),
         },
