@@ -42,7 +42,7 @@ export const ExampleWithNativeButton: StoryFn = (args) => ({
 });
 
 ExampleWithNativeButton.args = {
-  tooltip: 'Greetings from toggle tooltip, I hope you can see me!',
+  tooltip: 'Greetings from tooltip, I hope you can see me!',
   tooltipPosition: 'right',
   tooltipToggle: false,
 };
@@ -61,7 +61,7 @@ export const ExampleWithFudisButton: StoryFn = (args) => ({
 });
 
 ExampleWithFudisButton.args = {
-  tooltip: 'Greetings from toggle tooltip, I hope you can see me!',
+  tooltip: 'Greetings from tooltip, I hope you can see me!',
   tooltipPosition: 'right',
   tooltipToggle: false,
 };
