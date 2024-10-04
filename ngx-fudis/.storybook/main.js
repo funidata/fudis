@@ -26,12 +26,15 @@ export const staticDirs = [
 export const docs = {
   defaultName: "Documentation",
 };
+
+// TODO: remove autocomplete hide trick, when deprecated component is removed
 export function managerHead(head) {
   return `
     ${head}
     <link rel="shortcut icon" href="favicon.ico">
     <style>
       #components-description-list--description-list-compact { display: none;}
+      #components-form-deprecated-autocomplete-single-select { display: none;}
     </style>
   `;
 }
