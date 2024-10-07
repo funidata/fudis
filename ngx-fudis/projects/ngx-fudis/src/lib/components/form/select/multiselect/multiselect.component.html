@@ -15,6 +15,7 @@
         #inputRef
         tabindex="0"
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
+        [class.fudis-form-input--touched]="control.touched"
         [id]="id"
         role="combobox"
         [attr.aria-controls]="id + '-dropdown'"

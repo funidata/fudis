@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -23,15 +24,15 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectComponent extends SelectBaseDirective implements OnInit {
+export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
     @Inject(DOCUMENT) _document: Document,
-    private _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
+    _cdr: ChangeDetectorRef,
   ) {
-    super(_document, _translationService, _focusService, _idService);
+    super(_document, _cdr, _translationService, _focusService, _idService);
   }
 
   /*
@@ -100,6 +101,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit {
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
-    this._changeDetectorRef.detectChanges();
+    this._cdr.detectChanges();
   }
 }

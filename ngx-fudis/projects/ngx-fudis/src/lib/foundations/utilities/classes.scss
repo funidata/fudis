@@ -17,8 +17,11 @@
   @include border.border('1px', 'solid', 'gray-middle');
 
   /* stylelint-disable-next-line selector-class-pattern */
-  &.ng-touched[aria-invalid='true'] {
-    @include border.border('1px', 'solid', 'red');
+  &.ng-touched,
+  &--touched {
+    &[aria-invalid='true'] {
+      @include border.border('1px', 'solid', 'red');
+    }
   }
 
   &[aria-disabled='true'] {

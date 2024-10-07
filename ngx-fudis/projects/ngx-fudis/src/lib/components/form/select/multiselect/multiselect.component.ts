@@ -26,12 +26,12 @@ import { BehaviorSubject } from 'rxjs';
 export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(
     @Inject(DOCUMENT) _document: Document,
-    private _changeDetectorRef: ChangeDetectorRef,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
+    _cdr: ChangeDetectorRef,
   ) {
-    super(_document, _translationService, _focusService, _idService);
+    super(_document, _cdr, _translationService, _focusService, _idService);
 
     effect(() => {
       this._translationRemoveItem.next(
@@ -158,7 +158,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
 
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
 
-      this._changeDetectorRef.detectChanges();
+      this._cdr.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText = null;
