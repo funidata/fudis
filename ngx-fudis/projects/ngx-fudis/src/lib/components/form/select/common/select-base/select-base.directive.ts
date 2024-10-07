@@ -718,7 +718,9 @@ export class SelectBaseDirective
         this._clickFromIcon);
 
     if (this._clickFromIcon) {
-      this._focusToSelectInput();
+      if (!this.control.disabled) {
+        this._focusToSelectInput();
+      }
     }
   }
 }
