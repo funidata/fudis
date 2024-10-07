@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   ContentChild,
   Directive,
   ElementRef,
@@ -41,9 +40,8 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
     private _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _focusService, _changeDetectorRef);
+    super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {

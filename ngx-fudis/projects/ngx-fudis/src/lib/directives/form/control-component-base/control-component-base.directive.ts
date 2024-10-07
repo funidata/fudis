@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormCommonApiDirective } from '../form-common-api/form-common-api.directive';
 import { FormControl } from '@angular/forms';
@@ -8,12 +8,8 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   selector: '[fudisControlComponentBase]',
 })
 export class ControlComponentBaseDirective extends FormCommonApiDirective {
-  constructor(
-    _idService: FudisIdService,
-    _focusService: FudisFocusService,
-    _cdr: ChangeDetectorRef,
-  ) {
-    super(_idService, _focusService, _cdr);
+  constructor(_idService: FudisIdService, _focusService: FudisFocusService) {
+    super(_idService, _focusService);
   }
 
   /**

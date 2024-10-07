@@ -2,11 +2,9 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  Host,
   Inject,
   Input,
   OnInit,
-  Optional,
   Output,
   effect,
 } from '@angular/core';
@@ -17,7 +15,6 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues } from '../common/utilities/selectUtilities';
-import { FormComponent } from '../../form/form.component';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
@@ -28,14 +25,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
+    private _changeDetectorRef: ChangeDetectorRef,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_document, _translationService, _focusService, _idService, _changeDetectorRef);
+    super(_document, _translationService, _focusService, _idService);
 
     effect(() => {
       this._translationRemoveItem.next(
@@ -75,11 +71,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
    */
   ngOnInit(): void {
     this._setParentId('multiselect');
-
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.control.invalid,
-    );
   }
 
   /**
@@ -167,7 +158,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
 
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
 
-      this._cdr.detectChanges();
+      this._changeDetectorRef.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText = null;

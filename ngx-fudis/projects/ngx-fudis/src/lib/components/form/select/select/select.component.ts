@@ -2,11 +2,9 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  Host,
   Inject,
   Input,
   OnInit,
-  Optional,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -17,7 +15,6 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { FormComponent } from '../../form/form.component';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -28,14 +25,13 @@ import { DOCUMENT } from '@angular/common';
 })
 export class SelectComponent extends SelectBaseDirective implements OnInit {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
+    private _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_document, _translationService, _focusService, _idService, _changeDetectorRef);
+    super(_document, _translationService, _focusService, _idService);
   }
 
   /*
@@ -56,11 +52,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit {
 
   ngOnInit(): void {
     this._setParentId('select');
-
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.control.invalid,
-    );
   }
 
   /**
@@ -109,6 +100,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit {
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
-    this._cdr.detectChanges();
+    this._changeDetectorRef.detectChanges();
   }
 }
