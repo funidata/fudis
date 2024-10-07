@@ -35,7 +35,7 @@
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.aria-invalid]="(control.touched && control.invalid) || null"
+        [attr.aria-invalid]="control.invalid || null"
       >
         <span *ngIf="!_dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
           placeholder

@@ -20,7 +20,7 @@
       (blur)="_autocompleteBlur($event)"
       [formControl]="_autocompleteFormControl"
       [attr.aria-describedby]="id + '_guidance'"
-      [attr.aria-invalid]="(control.touched && control.invalid) || null"
+      [attr.aria-invalid]="control.invalid || null"
       [attr.aria-disabled]="control.disabled"
       [attr.placeholder]="placeholder ? placeholder : null"
       [attr.required]="(_required | async) || null"

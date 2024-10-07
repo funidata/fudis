@@ -11,7 +11,7 @@
   <input
     #inputRef
     class="fudis-form-input fudis-text-input__input"
-    [attr.aria-invalid]="(control.touched && control.invalid) || null"
+    [attr.aria-invalid]="control.invalid || null"
     [attr.aria-label]="ariaLabel"
     [formControl]="control"
     [attr.minlength]="_minLength | async"

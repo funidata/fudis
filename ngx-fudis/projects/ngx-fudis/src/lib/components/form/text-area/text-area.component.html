@@ -18,7 +18,7 @@
     (focus)="onFocus($event)"
     [id]="id"
     [attr.aria-describedby]="id + '_guidance'"
-    [attr.aria-invalid]="(control.touched && control.invalid) || null"
+    [attr.aria-invalid]="control.invalid || null"
     [attr.minLength]="_minLength | async"
     [attr.maxLength]="_maxLength | async"
     [attr.required]="(_required | async) || null"

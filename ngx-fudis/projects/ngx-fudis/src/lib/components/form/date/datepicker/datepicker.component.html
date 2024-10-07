@@ -23,7 +23,7 @@
       [placeholder]="_placeholderString | async"
       [attr.disabled]="control.disabled || null"
       [attr.aria-disabled]="control.disabled || null"
-      [attr.aria-invalid]="(control.touched && control.invalid) || null"
+      [attr.aria-invalid]="control.invalid || null"
       [attr.required]="(_required | async) || null"
       [attr.aria-describedby]="id + '_guidance'"
     />
