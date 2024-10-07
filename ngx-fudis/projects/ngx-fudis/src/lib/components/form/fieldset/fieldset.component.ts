@@ -4,14 +4,13 @@ import {
   ContentChild,
   effect,
   ElementRef,
-  Host,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Optional,
   ViewChild,
   ViewEncapsulation,
+  AfterContentInit,
 } from '@angular/core';
 
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
@@ -23,7 +22,6 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FormComponent } from '../form/form.component';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { BehaviorSubject } from 'rxjs';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
@@ -36,10 +34,10 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
 })
 export class FieldSetComponent
   extends TooltipApiDirective
-  implements AfterViewInit, OnInit, OnDestroy, OnChanges
+  implements AfterViewInit, OnInit, OnDestroy, OnChanges, AfterContentInit
 {
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent | null,
+    private _element: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
     private _translationService: FudisTranslationService,
@@ -154,10 +152,7 @@ export class FieldSetComponent
    */
   private _fieldsetInfo: FudisFormErrorSummarySection;
 
-  /**
-   * To prevent ngOnChanges running before initial ngOnInit
-   */
-  protected _initFinished: boolean = false;
+  private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
 
   /**
    * Fudis translation key for required text
@@ -170,8 +165,14 @@ export class FieldSetComponent
     this._setFieldsetId();
     this._addToErrorSummary(this.label);
     this._setClasses();
+  }
 
-    this._initFinished = true;
+  ngAfterContentInit(): void {
+    this._parentForm = this._errorSummaryService.getElementsFormParentAndErrorSummaryStatus(
+      this._element.nativeElement,
+    );
+
+    this._addToErrorSummary(this.label);
   }
 
   ngAfterViewInit(): void {
@@ -181,14 +182,15 @@ export class FieldSetComponent
   }
 
   ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
-    if (this._initFinished) {
-      if (changes.label?.currentValue) {
-        this._addToErrorSummary(changes.label?.currentValue);
-      }
+    if (
+      changes.label?.currentValue &&
+      changes.label?.currentValue !== changes.label?.previousValue
+    ) {
+      this._addToErrorSummary(changes.label?.currentValue);
+    }
 
-      if (changes.inputSize) {
-        this._setClasses();
-      }
+    if (changes.inputSize?.currentValue !== changes.inputSize?.previousValue) {
+      this._setClasses();
     }
   }
 
