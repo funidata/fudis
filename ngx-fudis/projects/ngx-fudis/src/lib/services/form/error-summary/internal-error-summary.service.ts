@@ -23,6 +23,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = {};
 
   /**
+   * Current Form ids with Error Summary Visibility status
+   */
+  private _formErrorSummaryStatus = new BehaviorSubject<{ [formId: string]: boolean }>({});
+
+  /**
    * Collection of errors categorised by parent Form id.
    */
 
@@ -110,11 +115,57 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     return this._allFormErrors;
   }
 
+  get formErrorSummaryStatus(): BehaviorSubject<{ [formId: string]: boolean }> {
+    return this._formErrorSummaryStatus;
+  }
+
   /**
    * Returns a readonly list of visible errors
    */
   public getFormErrorsById(formId: string): FudisFormErrorSummaryObject {
     return this._allFormErrors[formId];
+  }
+
+  public setFormErrorSummaryVisiblity(formId: string, status: boolean) {
+    const currentValues = { ...this._formErrorSummaryStatus.value };
+
+    Object.keys(currentValues).forEach((id) => {
+      if (id === formId) {
+        currentValues[id] = status;
+      }
+    });
+
+    this._formErrorSummaryStatus.next(currentValues);
+  }
+
+  public getElementsFormParentAndErrorSummaryStatus(
+    element: HTMLElement,
+  ): null | { id: string; errorSummaryVisible: boolean } {
+    let foundId: string | null = null;
+
+    Object.keys(this._formErrorSummaryStatus.value).find((id) => {
+      if (element.closest(`#${id}`)) {
+        foundId = id;
+      }
+    });
+
+    if (foundId) {
+      return { id: foundId, errorSummaryVisible: this._formErrorSummaryStatus.value[foundId] };
+    }
+
+    return null;
+  }
+
+  public addFormErrorSummaryStatus(formId: string, status: boolean) {
+    let currentValue = this._formErrorSummaryStatus.value;
+
+    if (!currentValue[formId]) {
+      currentValue = { ...currentValue, [formId]: status };
+    } else {
+      currentValue[formId] = status;
+    }
+
+    this._formErrorSummaryStatus.next(currentValue);
   }
 
   public addNewFormId(formId: string): void {
@@ -128,6 +179,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   public removeFormId(formId: string): void {
     if (this._allFormErrors[formId]) {
       delete this._allFormErrors[formId];
+    }
+
+    if (
+      this._formErrorSummaryStatus.value[formId] !== null ||
+      this._formErrorSummaryStatus.value[formId] !== undefined
+    ) {
+      const currentValue = { ...this._formErrorSummaryStatus.value };
+      delete currentValue[formId];
+
+      this._formErrorSummaryStatus.next(currentValue);
     }
 
     if (this._sections[formId]) {
@@ -206,7 +267,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param error Error object
    */
   public removeError(error: FudisFormErrorSummaryRemoveItem, formId: string): void {
-    const currentErrorsOfForm = this._allFormErrors[formId];
+    const currentErrorsOfForm = { ...this._allFormErrors[formId] };
 
     const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
 

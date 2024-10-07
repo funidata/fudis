@@ -19,6 +19,7 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-form',
@@ -34,6 +35,14 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
     super();
+
+    this._errorSummaryService.formErrorSummaryStatus
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        if (value[this.id] !== this.errorSummaryVisible) {
+          this.errorSummaryVisible = !this.errorSummaryVisible;
+        }
+      });
   }
 
   /**
@@ -105,6 +114,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     this._setFormId();
 
     this._errorSummaryService.addNewFormId(this.id);
+    this._errorSummaryService.addFormErrorSummaryStatus(this.id, this.errorSummaryVisible);
 
     if (this._dialogParent) {
       this._dialogParent.closeButtonPositionAbsolute = true;
