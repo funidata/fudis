@@ -39,7 +39,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     this._errorSummaryService.formErrorSummaryStatus
       .pipe(takeUntilDestroyed())
       .subscribe((value) => {
-        if (value[this.id] !== this.errorSummaryVisible) {
+        if (value[this.id] !== this.errorSummaryVisible && this._initFinished) {
           this.errorSummaryVisible = !this.errorSummaryVisible;
         }
       });
@@ -110,11 +110,15 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
    */
   protected _formElement: HTMLFormElement | undefined;
 
+  private _initFinished: boolean = false;
+
   ngOnInit(): void {
     this._setFormId();
 
     this._errorSummaryService.addNewFormId(this.id);
     this._errorSummaryService.addFormErrorSummaryStatus(this.id, this.errorSummaryVisible);
+
+    this._initFinished = true;
 
     if (this._dialogParent) {
       this._dialogParent.closeButtonPositionAbsolute = true;

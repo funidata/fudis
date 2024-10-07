@@ -366,9 +366,18 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this._focusToFormOnReload = null;
     }
 
+    const currentFormsErrorSummaryStatus = { ...this._formErrorSummaryStatus.value };
+
     if (!allErrorsReloaded) {
       this._formIdToUpdate = formId;
+      currentFormsErrorSummaryStatus[formId] = true;
+    } else {
+      Object.keys(currentFormsErrorSummaryStatus).forEach((id) => {
+        currentFormsErrorSummaryStatus[id] = true;
+      });
     }
+
+    this._formErrorSummaryStatus.next(currentFormsErrorSummaryStatus);
 
     this._allFormErrorsObservable.next({ ...this._allFormErrors });
   }

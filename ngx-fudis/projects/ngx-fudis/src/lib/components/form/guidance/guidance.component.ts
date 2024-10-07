@@ -1,4 +1,15 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  effect,
+  DestroyRef,
+  inject,
+  AfterContentInit,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -13,48 +24,18 @@ import { FudisFormErrorSummaryItem } from '../../../types/forms';
   templateUrl: './guidance.component.html',
   styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent implements OnChanges, OnInit {
+export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _cdr: ChangeDetectorRef,
+    private _elementRef: ElementRef,
   ) {
     this._id = _idService.getNewId('guidance');
 
     effect(() => {
       this._maxLengthText.next(_translationService.getTranslations()().TEXTINPUT.MAX_LENGTH);
-    });
-
-    /**
-     * If there's a function call of errorSummaryService.reloadFormErrors('id-of-this-form'), and this Guidance's parent Form id is that 'id-for-this-form', this effect() check will trigger and set this Guidance's control / group as touched, so possible errors are set as visible.
-     */
-
-    _errorSummaryService.allFormErrorsObservable.pipe(takeUntilDestroyed()).subscribe((errors) => {
-      let errorsFound = this.formId && !!errors[this.formId]?.[this.for];
-
-      // With FormGroups errors are defined differently, so this checks if FormGroups control has errors
-      if (this.formGroup && !errorsFound) {
-        errorsFound = Object.keys(this.formGroup.controls).some((controlName) => {
-          const errorId = _errorSummaryService.defineErrorId(this.for, controlName);
-
-          return !!(this.formId && errors[this.formId]?.[errorId]);
-        });
-      }
-
-      if (
-        errorsFound &&
-        (_errorSummaryService.formIdToUpdate === this.formId ||
-          _errorSummaryService.formIdToUpdate === 'all')
-      ) {
-        if (this.control?.invalid) {
-          this.control.markAsTouched();
-          this._cdr.markForCheck();
-        } else if (this.formGroup?.invalid) {
-          this.formGroup.markAllAsTouched();
-          this._cdr.markForCheck();
-        }
-      }
     });
   }
 
@@ -104,14 +85,11 @@ export class GuidanceComponent implements OnChanges, OnInit {
   @Input() groupBlurredOut: boolean = true;
 
   /**
-   * Id of parent Form component
-   */
-  @Input() formId: string | null;
-
-  /**
    * To trigger Error Summary reload when this Guidance's Validator Error Messages are initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before these Validator Error Messages existed.
    */
-  @Input() reloadErrorSummary: boolean | null = false;
+  protected _reloadErrorSummary: boolean | null = false;
+
+  private _destroyRef = inject(DestroyRef);
 
   /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
@@ -138,6 +116,8 @@ export class GuidanceComponent implements OnChanges, OnInit {
    */
   protected _lazyLoadedErrors: string[] = [];
 
+  protected _parentFormId = new BehaviorSubject<string | null>(null);
+
   ngOnInit(): void {
     this._setCharacterLimitIndicatorValues();
   }
@@ -148,6 +128,54 @@ export class GuidanceComponent implements OnChanges, OnInit {
     }
   }
 
+  ngAfterContentInit(): void {
+    const formParent = this._errorSummaryService.getElementsFormParentAndErrorSummaryStatus(
+      this._elementRef.nativeElement as HTMLElement,
+    );
+
+    if (formParent) {
+      this._reloadErrorSummary = formParent.errorSummaryVisible;
+      this._parentFormId.next(formParent.id);
+      this._subscribeToErrors(formParent.id);
+    } else {
+      this._parentFormId.next(null);
+    }
+  }
+
+  private _subscribeToErrors(formId: string): void {
+    /**
+     * If there's a function call of errorSummaryService.reloadFormErrors('id-of-this-form'), and this Guidance's parent Form id is that 'id-for-this-form', this effect() check will trigger and set this Guidance's control / group as touched, so possible errors are set as visible.
+     */
+    this._errorSummaryService.allFormErrorsObservable
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((errors) => {
+        let errorsFound = !!errors[formId]?.[this.for];
+
+        // With FormGroups errors are defined differently, so this checks if FormGroups control has errors
+        if (this.formGroup && !errorsFound) {
+          errorsFound = Object.keys(this.formGroup.controls).some((controlName) => {
+            const errorId = this._errorSummaryService.defineErrorId(this.for, controlName);
+
+            return !!errors[formId]?.[errorId];
+          });
+        }
+
+        if (
+          errorsFound &&
+          (this._errorSummaryService.formIdToUpdate === formId ||
+            this._errorSummaryService.formIdToUpdate === 'all')
+        ) {
+          if (this.control?.invalid) {
+            this.control.markAsTouched();
+            this._cdr.detectChanges();
+          } else if (this.formGroup?.invalid) {
+            this.formGroup.markAllAsTouched();
+            this._cdr.detectChanges();
+          }
+        }
+      });
+  }
+
   private _setCharacterLimitIndicatorValues(): void {
     if (this.maxLength) {
       this._maxLengthWidth = this.maxLength >= 100 ? 'lg' : this.maxLength >= 10 ? 'md' : 'sm';
@@ -156,15 +184,42 @@ export class GuidanceComponent implements OnChanges, OnInit {
   }
 
   /**
-   * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made.
+   * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made. It will only trigger reload once all errors of this Guidance are registered.
    */
   protected _reloadErrorSummaryOnLazyLoad(error: FudisFormErrorSummaryItem): void {
     const errorLog = error.controlName ? `${error.controlName}_${error.type}` : error.type;
 
-    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(errorLog)) {
+    if (
+      this._parentFormId.value &&
+      this._reloadErrorSummary &&
+      !this._lazyLoadedErrors.includes(errorLog)
+    ) {
       this._lazyLoadedErrors.push(errorLog);
       this._errorSummaryService.focusToFormOnReload = null;
-      this._errorSummaryService.reloadErrorsByFormId(this.formId, false);
+
+      let numberOfErrors = 0;
+
+      if (this.control?.errors) {
+        numberOfErrors = numberOfErrors + Object.keys(this.control.errors).length;
+      }
+
+      if (this.formGroup) {
+        if (this.formGroup.errors) {
+          numberOfErrors = numberOfErrors + Object.keys(this.formGroup.errors).length;
+        }
+
+        Object.keys(this.formGroup.controls).forEach((control) => {
+          const controlErrors = this.formGroup.controls[control]?.errors;
+
+          if (controlErrors) {
+            numberOfErrors = numberOfErrors + Object.keys(controlErrors).length;
+          }
+        });
+      }
+
+      if (numberOfErrors === this._lazyLoadedErrors.length) {
+        this._errorSummaryService.reloadErrorsByFormId(this._parentFormId.value, false);
+      }
     }
   }
 }
