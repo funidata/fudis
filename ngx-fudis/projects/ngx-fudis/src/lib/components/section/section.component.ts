@@ -142,9 +142,7 @@ export class SectionComponent
   }
 
   ngAfterContentInit(): void {
-    this._parentForm = this._errorSummaryService.getElementsFormParentAndErrorSummaryStatus(
-      this._element.nativeElement,
-    );
+    this._parentForm = this._errorSummaryService.getFormAncestor(this._element.nativeElement);
 
     this._addToErrorSummary();
   }

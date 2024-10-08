@@ -40,7 +40,7 @@ export class FormComponent
   ) {
     super();
 
-    this._errorSummaryService.formErrorSummaryStatus
+    this._errorSummaryService.formErrorSummaryVisibilityStatus
       .pipe(takeUntilDestroyed())
       .subscribe((value) => {
         if (value[this.id] !== this.errorSummaryVisible && this._initFinished) {
@@ -120,7 +120,10 @@ export class FormComponent
     this._setFormId();
 
     this._errorSummaryService.addNewFormId(this.id);
-    this._errorSummaryService.addFormErrorSummaryStatus(this.id, this.errorSummaryVisible);
+    this._errorSummaryService.addformErrorSummaryVisibilityStatus(
+      this.id,
+      this.errorSummaryVisible,
+    );
 
     this._initFinished = true;
 
@@ -139,7 +142,10 @@ export class FormComponent
 
   ngOnChanges(changes: FudisComponentChanges<FormComponent>): void {
     if (changes.errorSummaryVisible?.currentValue !== changes.errorSummaryVisible?.previousValue) {
-      this._errorSummaryService.addFormErrorSummaryStatus(this.id, this.errorSummaryVisible);
+      this._errorSummaryService.addformErrorSummaryVisibilityStatus(
+        this.id,
+        this.errorSummaryVisible,
+      );
     }
   }
 

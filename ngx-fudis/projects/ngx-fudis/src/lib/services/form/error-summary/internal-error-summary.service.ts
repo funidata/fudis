@@ -23,14 +23,15 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = {};
 
   /**
-   * Current Form ids with Error Summary Visibility status
+   * Current Form ids with their Error Summary Visibility status
    */
-  private _formErrorSummaryStatus = new BehaviorSubject<{ [formId: string]: boolean }>({});
+  private _formErrorSummaryVisibilityStatus = new BehaviorSubject<{ [formId: string]: boolean }>(
+    {},
+  );
 
   /**
    * Collection of errors categorised by parent Form id.
    */
-
   private _allFormErrorsObservable = new BehaviorSubject<FudisFormErrorSummaryFormsAndErrors>({});
 
   /**
@@ -115,8 +116,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     return this._allFormErrors;
   }
 
-  get formErrorSummaryStatus(): BehaviorSubject<{ [formId: string]: boolean }> {
-    return this._formErrorSummaryStatus;
+  get formErrorSummaryVisibilityStatus(): BehaviorSubject<{ [formId: string]: boolean }> {
+    return this._formErrorSummaryVisibilityStatus;
   }
 
   /**
@@ -126,38 +127,54 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     return this._allFormErrors[formId];
   }
 
-  public setFormErrorSummaryVisiblity(formId: string, status: boolean) {
-    const currentValues = { ...this._formErrorSummaryStatus.value };
+  /**
+   *
+   * @param formId Form to update
+   * @param visibility Set Error Summary visilibity to true or false
+   */
+  public setFormErrorSummaryVisiblity(formId: string, visibility: boolean) {
+    const currentValues = { ...this._formErrorSummaryVisibilityStatus.value };
+    let valueUpdated = false;
 
     Object.keys(currentValues).forEach((id) => {
-      if (id === formId) {
-        currentValues[id] = status;
+      if (id === formId && currentValues[id] !== visibility) {
+        currentValues[id] = visibility;
+        valueUpdated = true;
       }
     });
-
-    this._formErrorSummaryStatus.next(currentValues);
+    if (valueUpdated) {
+      this._formErrorSummaryVisibilityStatus.next(currentValues);
+    }
   }
 
-  public getElementsFormParentAndErrorSummaryStatus(
+  /**
+   *
+   * @param element HTMLElement to check, if it has Form Component as ancestor
+   * @returns if ancestor found, returns id of that Form and visibility status of Form's Error Summary
+   */
+  public getFormAncestor(
     element: HTMLElement,
   ): null | { id: string; errorSummaryVisible: boolean } {
     let foundId: string | null = null;
 
-    Object.keys(this._formErrorSummaryStatus.value).find((id) => {
+    Object.keys(this._formErrorSummaryVisibilityStatus.value).find((id) => {
       if (element.closest(`#${id}`)) {
         foundId = id;
       }
     });
 
     if (foundId) {
-      return { id: foundId, errorSummaryVisible: this._formErrorSummaryStatus.value[foundId] };
+      return {
+        id: foundId,
+        errorSummaryVisible: this._formErrorSummaryVisibilityStatus.value[foundId],
+      };
     }
 
     return null;
   }
 
-  public addFormErrorSummaryStatus(formId: string, status: boolean) {
-    let currentValue = this._formErrorSummaryStatus.value;
+  public addformErrorSummaryVisibilityStatus(formId: string, status: boolean) {
+    let currentValue = this._formErrorSummaryVisibilityStatus.value;
 
     if (!currentValue[formId]) {
       currentValue = { ...currentValue, [formId]: status };
@@ -165,7 +182,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       currentValue[formId] = status;
     }
 
-    this._formErrorSummaryStatus.next(currentValue);
+    this._formErrorSummaryVisibilityStatus.next(currentValue);
   }
 
   public addNewFormId(formId: string): void {
@@ -182,13 +199,13 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
 
     if (
-      this._formErrorSummaryStatus.value[formId] !== null ||
-      this._formErrorSummaryStatus.value[formId] !== undefined
+      this._formErrorSummaryVisibilityStatus.value[formId] !== null ||
+      this._formErrorSummaryVisibilityStatus.value[formId] !== undefined
     ) {
-      const currentValue = { ...this._formErrorSummaryStatus.value };
+      const currentValue = { ...this._formErrorSummaryVisibilityStatus.value };
       delete currentValue[formId];
 
-      this._formErrorSummaryStatus.next(currentValue);
+      this._formErrorSummaryVisibilityStatus.next(currentValue);
     }
 
     if (this._sections[formId]) {
@@ -366,7 +383,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this._focusToFormOnReload = null;
     }
 
-    const currentFormsErrorSummaryStatus = { ...this._formErrorSummaryStatus.value };
+    const currentFormsErrorSummaryStatus = { ...this._formErrorSummaryVisibilityStatus.value };
 
     if (!allErrorsReloaded) {
       this._formIdToUpdate = formId;
@@ -377,7 +394,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       });
     }
 
-    this._formErrorSummaryStatus.next(currentFormsErrorSummaryStatus);
+    this._formErrorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
 
     this._allFormErrorsObservable.next({ ...this._allFormErrors });
   }

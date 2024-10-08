@@ -131,9 +131,7 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
 
   private _getParentForm(): void {
-    this._parentForm = this._errorSummaryService.getElementsFormParentAndErrorSummaryStatus(
-      this._element.nativeElement,
-    );
+    this._parentForm = this._errorSummaryService.getFormAncestor(this._element.nativeElement);
   }
 
   /**

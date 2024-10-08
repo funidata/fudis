@@ -37,7 +37,7 @@ export class FormSubmitDirective implements OnInit {
       targetElement === this._button.buttonEl.nativeElement;
 
     if (submitButton) {
-      const parentForm = this._errorSummaryService.getElementsFormParentAndErrorSummaryStatus(
+      const parentForm = this._errorSummaryService.getFormAncestor(
         this._button.buttonEl.nativeElement,
       );
 

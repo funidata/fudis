@@ -129,7 +129,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    const formParent = this._errorSummaryService.getElementsFormParentAndErrorSummaryStatus(
+    const formParent = this._errorSummaryService.getFormAncestor(
       this._elementRef.nativeElement as HTMLElement,
     );
 
