@@ -141,7 +141,10 @@ export class FormComponent
   }
 
   ngOnChanges(changes: FudisComponentChanges<FormComponent>): void {
-    if (changes.errorSummaryVisible?.currentValue !== changes.errorSummaryVisible?.previousValue) {
+    if (
+      changes.errorSummaryVisible?.currentValue !== changes.errorSummaryVisible?.previousValue &&
+      this.id
+    ) {
       this._errorSummaryService.addformErrorSummaryVisibilityStatus(
         this.id,
         this.errorSummaryVisible,
