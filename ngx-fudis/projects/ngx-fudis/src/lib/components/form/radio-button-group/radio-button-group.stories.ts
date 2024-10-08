@@ -30,7 +30,7 @@ const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
   props: {
     ...args,
     formControl: control,
-    radioButtonChange: action('radioButtonChange'),
+    handleChange: action('handleChange'),
     fruitOptions,
   },
   template: html`<fudis-radio-button-group
@@ -42,7 +42,7 @@ const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
-    (handleChange)="radioButtonChange($event)"
+    (handleChange)="handleChange($event)"
   >
     <fudis-radio-button
       *ngFor="let option of fruitOptions"
@@ -71,7 +71,7 @@ Example.args = {
       [label]="'Choose a pet'"
       [helpText]="'We all should have a pet.'"
       [control]="control"
-      (handleChange)="radioButtonChange($event)"
+      (handleChange)="handleChange($event)"
     >
       <fudis-radio-button
         *ngFor="let option of petOptions"

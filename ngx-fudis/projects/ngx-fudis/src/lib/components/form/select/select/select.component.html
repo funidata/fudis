@@ -17,6 +17,7 @@
           !control.disabled && !parentLocalizedTextGroupFormGroup?.disabled ? 0 : null
         "
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
+        [class.fudis-form-input--touched]="control.touched"
         [id]="id"
         role="combobox"
         [attr.aria-controls]="id + '-dropdown'"
@@ -35,7 +36,7 @@
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.aria-invalid]="(control.touched && control.invalid) || null"
+        [attr.aria-invalid]="control.invalid || null"
       >
         <span *ngIf="!_dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
           placeholder
@@ -107,8 +108,6 @@
   </div>
   <fudis-guidance
     *ngIf="!disableGuidance"
-    [formId]="_parentForm?.id || null"
-    [reloadErrorSummary]="_reloadErrorSummaryTrigger"
     [inputLabel]="label"
     [helpText]="helpText"
     [for]="id"

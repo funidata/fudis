@@ -7,8 +7,10 @@ import {
   ViewEncapsulation,
   OnDestroy,
   OnChanges,
-  Optional,
-  Host,
+  ElementRef,
+  AfterContentInit,
+  inject,
+  DestroyRef,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
@@ -16,7 +18,6 @@ import { ActionsDirective } from '../../directives/content-projection/actions/ac
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
-import { FormComponent } from '../form/form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -25,9 +26,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ExpandableComponent implements OnDestroy, OnChanges {
+export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChanges {
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent | null,
+    private _element: ElementRef,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
@@ -35,24 +36,6 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
     this._headingId = `${this._id}-heading`;
 
     // TODO: write test
-
-    if (_parentForm) {
-      _errorSummaryService.allFormErrorsObservable
-        .pipe(takeUntilDestroyed())
-        .subscribe((errors) => {
-          const expandableErrors = errors?.[_parentForm.id];
-
-          if (
-            this.closed &&
-            this.openOnErrorSummaryReload &&
-            _parentForm &&
-            expandableErrors &&
-            _parentForm.errorSummaryVisible
-          ) {
-            this._setClosedStatus(false);
-          }
-        });
-    }
   }
 
   /**
@@ -143,11 +126,47 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
    */
   private _errorSummaryInfoSent: boolean = false;
 
+  private _destroyRef = inject(DestroyRef);
+
+  private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
+
+  private _getParentForm(): void {
+    this._parentForm = this._errorSummaryService.getFormAncestor(this._element.nativeElement);
+  }
+
   /**
    * Getter for closed boolean
    */
   get closed(): boolean {
     return this._closed;
+  }
+
+  ngAfterContentInit(): void {
+    this._getParentForm();
+
+    if (this._parentForm) {
+      if (this.errorSummaryBreadcrumb) {
+        this._addToErrorSummary(this.title);
+      }
+
+      this._errorSummaryService.allFormErrorsObservable
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((errors) => {
+          this._getParentForm();
+          if (this._parentForm) {
+            const expandableErrors = errors?.[this._parentForm.id];
+
+            if (
+              this.closed &&
+              this.openOnErrorSummaryReload &&
+              expandableErrors &&
+              this._parentForm.errorSummaryVisible
+            ) {
+              this._setClosedStatus(false);
+            }
+          }
+        });
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<ExpandableComponent>): void {

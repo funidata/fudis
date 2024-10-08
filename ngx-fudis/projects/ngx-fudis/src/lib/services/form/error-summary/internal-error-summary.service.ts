@@ -23,9 +23,15 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = {};
 
   /**
+   * Current Form ids with their Error Summary Visibility status
+   */
+  private _formErrorSummaryVisibilityStatus = new BehaviorSubject<{ [formId: string]: boolean }>(
+    {},
+  );
+
+  /**
    * Collection of errors categorised by parent Form id.
    */
-
   private _allFormErrorsObservable = new BehaviorSubject<FudisFormErrorSummaryFormsAndErrors>({});
 
   /**
@@ -110,11 +116,73 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     return this._allFormErrors;
   }
 
+  get formErrorSummaryVisibilityStatus(): BehaviorSubject<{ [formId: string]: boolean }> {
+    return this._formErrorSummaryVisibilityStatus;
+  }
+
   /**
    * Returns a readonly list of visible errors
    */
   public getFormErrorsById(formId: string): FudisFormErrorSummaryObject {
     return this._allFormErrors[formId];
+  }
+
+  /**
+   *
+   * @param formId Form to update
+   * @param visibility Set Error Summary visilibity to true or false
+   */
+  public setFormErrorSummaryVisiblity(formId: string, visibility: boolean) {
+    const currentValues = { ...this._formErrorSummaryVisibilityStatus.value };
+    let valueUpdated = false;
+
+    Object.keys(currentValues).forEach((id) => {
+      if (id === formId && currentValues[id] !== visibility) {
+        currentValues[id] = visibility;
+        valueUpdated = true;
+      }
+    });
+    if (valueUpdated) {
+      this._formErrorSummaryVisibilityStatus.next(currentValues);
+    }
+  }
+
+  /**
+   *
+   * @param element HTMLElement to check, if it has Form Component as ancestor
+   * @returns if ancestor found, returns id of that Form and visibility status of Form's Error Summary
+   */
+  public getFormAncestor(
+    element: HTMLElement,
+  ): null | { id: string; errorSummaryVisible: boolean } {
+    let foundId: string | null = null;
+
+    Object.keys(this._formErrorSummaryVisibilityStatus.value).find((id) => {
+      if (element.closest(`#${id}`)) {
+        foundId = id;
+      }
+    });
+
+    if (foundId) {
+      return {
+        id: foundId,
+        errorSummaryVisible: this._formErrorSummaryVisibilityStatus.value[foundId],
+      };
+    }
+
+    return null;
+  }
+
+  public addformErrorSummaryVisibilityStatus(formId: string, status: boolean) {
+    let currentValue = this._formErrorSummaryVisibilityStatus.value;
+
+    if (!currentValue[formId]) {
+      currentValue = { ...currentValue, [formId]: status };
+    } else {
+      currentValue[formId] = status;
+    }
+
+    this._formErrorSummaryVisibilityStatus.next(currentValue);
   }
 
   public addNewFormId(formId: string): void {
@@ -128,6 +196,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   public removeFormId(formId: string): void {
     if (this._allFormErrors[formId]) {
       delete this._allFormErrors[formId];
+    }
+
+    if (
+      this._formErrorSummaryVisibilityStatus.value[formId] !== null ||
+      this._formErrorSummaryVisibilityStatus.value[formId] !== undefined
+    ) {
+      const currentValue = { ...this._formErrorSummaryVisibilityStatus.value };
+      delete currentValue[formId];
+
+      this._formErrorSummaryVisibilityStatus.next(currentValue);
     }
 
     if (this._sections[formId]) {
@@ -206,7 +284,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param error Error object
    */
   public removeError(error: FudisFormErrorSummaryRemoveItem, formId: string): void {
-    const currentErrorsOfForm = this._allFormErrors[formId];
+    const currentErrorsOfForm = { ...this._allFormErrors[formId] };
 
     const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
 
@@ -305,9 +383,18 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this._focusToFormOnReload = null;
     }
 
+    const currentFormsErrorSummaryStatus = { ...this._formErrorSummaryVisibilityStatus.value };
+
     if (!allErrorsReloaded) {
       this._formIdToUpdate = formId;
+      currentFormsErrorSummaryStatus[formId] = true;
+    } else {
+      Object.keys(currentFormsErrorSummaryStatus).forEach((id) => {
+        currentFormsErrorSummaryStatus[id] = true;
+      });
     }
+
+    this._formErrorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
 
     this._allFormErrorsObservable.next({ ...this._allFormErrors });
   }
