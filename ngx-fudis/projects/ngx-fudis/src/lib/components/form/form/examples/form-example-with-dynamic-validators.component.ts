@@ -12,6 +12,8 @@ import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typogr
 import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+
 type MyForm = {
   text: FormControl<string | null>;
   email: FormControl<string | null>;
@@ -42,6 +44,11 @@ type MyForm = {
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <ng-template fudisActions [type]="'form'">
+        <fudis-button
+          (handleClick)="toggleErrorSummary()"
+          [variant]="'secondary'"
+          [label]="'Toggle Error Summary'"
+        />
         <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
@@ -166,7 +173,7 @@ type MyForm = {
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.winter,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -181,7 +188,7 @@ type MyForm = {
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.working
+                        formExample.controls.working,
                       ])
                     "
                   />
@@ -196,7 +203,7 @@ type MyForm = {
                     (handleChange)="
                       toggleRequiredFromOthers([
                         formExample.controls.summer,
-                        formExample.controls.winter
+                        formExample.controls.winter,
                       ])
                     "
                   />
@@ -247,7 +254,7 @@ type MyForm = {
   `,
 })
 export class StorybookExampleDynamicValidatorsComponent {
-  constructor() {
+  constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {
     this.formExample = new FormGroup({
       text: new FormControl<string | null>(null, [
         this._requiredValidatorInstance,
@@ -387,6 +394,18 @@ export class StorybookExampleDynamicValidatorsComponent {
   );
 
   formExample: FormGroup<MyForm>;
+
+  _errorSummaryVisible = false;
+
+  toggleErrorSummary() {
+    this._errorSummaryVisible =
+      this._errorSummaryService.formErrorSummaryVisibilityStatus.value['fudis-form-1'];
+
+    this._errorSummaryService.setFormErrorSummaryVisiblity(
+      'fudis-form-1',
+      !this._errorSummaryVisible,
+    );
+  }
 
   changeText(target: string): void {
     switch (target) {
