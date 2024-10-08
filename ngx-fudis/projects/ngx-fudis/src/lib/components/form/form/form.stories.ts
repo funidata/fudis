@@ -8,9 +8,9 @@ import docs from './form.docs.mdx';
 import { fudisHeadingLevelArray } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { fudisSpacingArray } from '../../../types/spacing';
-import { FormContentExampleComponent } from './examples/form-example.component';
-import { ExampleWithMultipleFormsComponent } from './examples/form-example-with-multiple-forms.component';
-import { DynamicValidatorExampleComponent } from './examples/form-example-with-dynamic-validators.component';
+import { StorybookExampleFormComponent } from './examples/form-example.component';
+import { StorybookExampleWithMultipleFormsComponent } from './examples/form-example-with-multiple-forms.component';
+import { StorybookExampleDynamicValidatorsComponent } from './examples/form-example-with-dynamic-validators.component';
 
 export default {
   title: 'Components/Form/Form',
@@ -19,9 +19,9 @@ export default {
     moduleMetadata({
       declarations: [],
       imports: [
-        DynamicValidatorExampleComponent,
-        FormContentExampleComponent,
-        ExampleWithMultipleFormsComponent,
+        StorybookExampleDynamicValidatorsComponent,
+        StorybookExampleFormComponent,
+        StorybookExampleWithMultipleFormsComponent,
         ReactiveFormsModule,
         RouterModule,
       ],

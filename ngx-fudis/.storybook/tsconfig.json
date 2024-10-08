@@ -9,7 +9,8 @@
     "../src/test.ts",
     "../src/**/*.spec.ts",
     "../projects/**/*.spec.ts",
-    "../projects/dev/**/*"
+    "../projects/dev/**/*",
+    "../projects/ngx-fudis/src/lib/components/form/form/examples/*.ts"
   ],
   "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"]
 }

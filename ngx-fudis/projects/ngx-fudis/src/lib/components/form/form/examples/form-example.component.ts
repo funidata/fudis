@@ -157,7 +157,7 @@ type MyForm = {
     </fudis-form>
   `,
 })
-export class FormContentExampleComponent implements OnInit {
+export class StorybookExampleFormComponent implements OnInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _focusService: FudisFocusService,

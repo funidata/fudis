@@ -236,7 +236,7 @@ import { CommonModule } from '@angular/common';
     </fudis-grid>
   `,
 })
-export class ExampleWithMultipleFormsComponent {
+export class StorybookExampleWithMultipleFormsComponent {
   constructor(private _errorSummaryService: FudisErrorSummaryService) {}
 
   errorSummaryVisible = false;

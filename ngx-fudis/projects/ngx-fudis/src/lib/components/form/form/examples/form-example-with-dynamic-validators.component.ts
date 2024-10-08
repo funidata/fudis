@@ -246,7 +246,7 @@ type MyForm = {
     </fudis-form>
   `,
 })
-export class DynamicValidatorExampleComponent {
+export class StorybookExampleDynamicValidatorsComponent {
   constructor() {
     this.formExample = new FormGroup({
       text: new FormControl<string | null>(null, [
