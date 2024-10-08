@@ -1,22 +1,33 @@
-import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { Component, Input, importProvidersFrom } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
-import { FudisValidatorFn, FudisValidators } from '../../../utilities/form/validators';
-import { FormComponent } from './form.component';
-import docs from './form.docs.mdx';
-import { FudisBadgeVariant } from '../../../types/miscellaneous';
+import { Component, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import {
-  FudisHeadingLevel,
-  FudisHeadingVariant,
-  fudisHeadingLevelArray,
-} from '../../../types/typography';
-import { formExclude } from '../../../utilities/storybook';
-import { fudisSpacingArray } from '../../../types/spacing';
-import { FudisCheckboxGroupFormGroup, FudisRadioButtonOption } from '../../../types/forms';
-import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+  FudisCheckboxGroupFormGroup,
+  FudisRadioButtonOption,
+  FudisSelectOption,
+} from '../../../../types/forms';
+import { FudisBadgeVariant } from '../../../../types/miscellaneous';
+import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
+import { FudisValidatorFn } from '../../../../utilities/form/validators';
+import { FudisValidators, FudisGroupValidators } from 'ngx-fudis';
+import { NgxFudisModule } from '../../../../../public-api';
+import { CommonModule } from '@angular/common';
+
+type MyForm = {
+  text: FormControl<string | null>;
+  email: FormControl<string | null>;
+  number: FormControl<number | null>;
+  date: FormControl<Date | null>;
+  animal: FormControl<FudisSelectOption<object> | null>;
+  summer: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  winter: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  working: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  sport: FormControl;
+  dj: FormGroup;
+};
+
 @Component({
+  standalone: true,
+  imports: [NgxFudisModule, CommonModule],
   selector: 'example-dynamic-validator',
   template: `
     <fudis-form
@@ -235,20 +246,20 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
     </fudis-form>
   `,
 })
-class DynamicValidatorExampleComponent {
+export class DynamicValidatorExampleComponent {
   constructor() {
     this.formExample = new FormGroup({
-      text: new FormControl(null, [
+      text: new FormControl<string | null>(null, [
         this._requiredValidatorInstance,
         this._minLengthValidatorInstance,
         this._maxLengthValidatorInstance,
       ]),
-      email: new FormControl(null, [
+      email: new FormControl<string | null>(null, [
         this._emailValidatorInstance,
         this._maxLengthValidatorInstance,
         this._minLengthValidatorInstance,
       ]),
-      number: new FormControl(null, [
+      number: new FormControl<number | null>(null, [
         this._requiredValidatorInstance,
         this._minNumberValidatorInstance,
         this._maxNumberValidatorInstance,
@@ -258,7 +269,10 @@ class DynamicValidatorExampleComponent {
         this._maxDateValidatorInstance,
         this._minDateValidatorInstance,
       ]),
-      animal: new FormControl(null, this._requiredValidatorInstance),
+      animal: new FormControl<FudisSelectOption<object> | null>(
+        null,
+        this._requiredValidatorInstance,
+      ),
       summer: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           summer1: new FormControl(null),
@@ -372,7 +386,7 @@ class DynamicValidatorExampleComponent {
     'At least one option must be selected',
   );
 
-  formExample: FormGroup;
+  formExample: FormGroup<MyForm>;
 
   changeText(target: string): void {
     switch (target) {
@@ -572,82 +586,3 @@ class DynamicValidatorExampleComponent {
     control.updateValueAndValidity();
   }
 }
-
-export default {
-  title: 'Components/Form/Form',
-  component: FormComponent,
-  decorators: [
-    moduleMetadata({
-      declarations: [DynamicValidatorExampleComponent],
-      imports: [ReactiveFormsModule, RouterModule],
-    }),
-    applicationConfig({
-      providers: [importProvidersFrom(BrowserAnimationsModule)],
-    }),
-  ],
-  parameters: {
-    docs: {
-      page: docs,
-    },
-  },
-  argTypes: {
-    badge: {
-      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
-      control: {
-        type: 'select',
-      },
-    },
-    badgeText: {
-      control: {
-        type: 'text',
-      },
-    },
-    titleVariant: {
-      options: fudisSpacingArray,
-      control: {
-        type: 'select',
-      },
-    },
-    level: {
-      options: fudisHeadingLevelArray,
-      control: {
-        type: 'select',
-      },
-    },
-  },
-} as Meta;
-
-const html = String.raw;
-
-export const ExampleWithDynamicValidators: StoryFn<FormComponent> = (args: FormComponent) => ({
-  props: args,
-  template: html` <example-dynamic-validator
-    [title]="title"
-    [helpText]="helpText"
-    [titleVariant]="titleVariant"
-    [level]="level"
-    [errorSummaryHelpText]="errorSummaryHelpText"
-    [errorSummaryVisible]="errorSummaryVisible"
-    [badge]="badge"
-    [badgeText]="badgeText"
-  />`,
-});
-
-ExampleWithDynamicValidators.args = {
-  title: 'Example With Dynamic Validators',
-  helpText:
-    "This example page is used to test, that when validators are added or removed from the FormControls, components' HTML attributes such as 'required' and max/min length are updated correctly.",
-  titleVariant: 'xl',
-  level: 1,
-  errorSummaryHelpText:
-    'There are errors in this form. Please address these before trying to submit again.',
-  errorSummaryVisible: false,
-  badge: null,
-  badgeText: '',
-};
-
-ExampleWithDynamicValidators.parameters = {
-  controls: {
-    exclude: formExclude,
-  },
-};
