@@ -7,14 +7,14 @@ import { Meta, Markdown } from "@storybook/blocks";
 ## General
 
 <Markdown>
-{`
+  {`
 | GitHub Source code | Owner | Description |
 | :--- | :---- | :---- |
 | [Fudis (Funidata Design System)](https://github.com/funidata/fudis)| [Funidata Oy](https://www.funidata.fi/en) | [Design System library](https://fudis.funidata.fi) |
 `}
 </Markdown>
 
-Fudis is an open-source project for maintaining and developing a design system for Funidata's web applications. 
+Fudis is an open-source project for maintaining and developing a design system for Funidata's web applications.
 Fudis Design System component library is deployed to public Storybook. More in depth designs guidelines are maintained in Funidata's private Figma account for the use of Funidata's other products.
 
 ## Developing process
@@ -23,8 +23,8 @@ Fudis Design System maintenance responsibility belongs to one development team a
 A third party contributions are governed by a public [Contributor License Agreement](https://github.com/funidata/fudis/blob/main/CLA).
 
 Code review is an important step in Fudis developmet process to get a second opinion on the solution and implementation before it is merged.
-Fudis coding standards ensure uniformity across codebase, making it easier for developers to read, understand, and maintain code. 
-For example, Typescript's strong typing reduces security risks as with unwanted typed values the build will fail. 
+Fudis coding standards ensure uniformity across codebase, making it easier for developers to read, understand, and maintain code.
+For example, Typescript's strong typing reduces security risks as with unwanted typed values the build will fail.
 
 Fudis uses CI/CD pipeline process though GitHub Actions in delivering newer version of the library.
 
@@ -38,17 +38,16 @@ Setting up the development environment instructions in [here.](/docs/documentati
 
 ## Data handling
 
- Fudis does not have any backend services. Sensitive data is not used in developing and testing.
+Fudis does not have any backend services. Sensitive data is not used in developing and testing.
 
 ## Dependencies
 
 Fudis Design System is developed with Typescript and uses [Angular](https://angular.dev/) framework. Component library extends [Angular Material component library](https://material.angular.io/). Angular Material is also dependency for the published [NPM package](https://www.npmjs.com/package/@funidata/ngx-fudis). Further dependencies can be seen from package.json files. Practices Fudis development team does for better security:
+
 - Chosen third party libraries are widely supported and well maintained.
-- Depedencies are updated frequently, roughly once a month. 
+- Depedencies are updated frequently, roughly once a month.
 - GitHub's Dependabot alerts library vulnerabilities and automatically creates pull request to fix those.
- 
+
 ## Service Requirements
 
 Fudis Design System is developed according to the latest [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/standards-guidelines/)
-
-
