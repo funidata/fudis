@@ -16,6 +16,7 @@ $color-primary-extra-dark: var(--fudis-color-primary-extra-dark);
 
 // Grays
 
+$color-black: #000000;
 $color-white: #ffffff;
 $color-gray-extra-light: #f1f1f1;
 $color-gray-light: #d4d4d4;
@@ -36,6 +37,7 @@ $colors: (
   'primary': $color-primary,
   'primary-dark': $color-primary-dark,
   'primary-extra-dark': $color-primary-extra-dark,
+  'black': $color-black,
   'white': $color-white,
   'gray-extra-light': $color-gray-extra-light,
   'gray-light': $color-gray-light,
