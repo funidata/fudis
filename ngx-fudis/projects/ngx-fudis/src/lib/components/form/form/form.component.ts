@@ -9,6 +9,7 @@ import {
   OnInit,
   Optional,
   ViewEncapsulation,
+  OnChanges,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -16,7 +17,7 @@ import { HeaderDirective } from '../../../directives/content-projection/header/h
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
-import { FudisBadgeVariant } from '../../../types/miscellaneous';
+import { FudisBadgeVariant, FudisComponentChanges } from '../../../types/miscellaneous';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -27,7 +28,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit, OnDestroy {
+export class FormComponent
+  extends GridApiDirective
+  implements OnInit, AfterContentInit, OnDestroy, OnChanges
+{
   constructor(
     private _idService: FudisIdService,
     private _elementRef: ElementRef,
@@ -131,6 +135,12 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
   ngOnDestroy(): void {
     this._errorSummaryService.removeFormId(this.id);
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<FormComponent>): void {
+    if (changes.errorSummaryVisible?.currentValue !== changes.errorSummaryVisible?.previousValue) {
+      this._errorSummaryService.addFormErrorSummaryStatus(this.id, this.errorSummaryVisible);
+    }
   }
 
   /**
