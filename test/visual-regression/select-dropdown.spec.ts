@@ -77,7 +77,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.waitForTimeout(100);
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await expect(
-    page.getByTestId("fudis-select-1").getByRole("combobox").getByText("Dolphin, common"),
+    page.getByTestId("fudis-select-1-input-label").getByText("Dolphin, common"),
   ).toBeVisible();
   await expect(page).toHaveScreenshot("A-12-enter-select-dolphin.png", {
     fullPage: true,

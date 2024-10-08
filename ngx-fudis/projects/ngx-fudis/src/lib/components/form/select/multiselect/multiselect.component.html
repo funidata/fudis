@@ -35,9 +35,12 @@
         <span *ngIf="!_dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
           placeholder
         }}</span>
-        <span *ngIf="_dropdownSelectionLabelText" class="fudis-select__input__label">{{
-          _dropdownSelectionLabelText
-        }}</span>
+        <span
+          *ngIf="_dropdownSelectionLabelText"
+          [id]="id + '-input-label'"
+          class="fudis-select__input__label"
+          >{{ _dropdownSelectionLabelText }}</span
+        >
       </div>
       <fudis-select-autocomplete
         *ngIf="variant !== 'dropdown'"
