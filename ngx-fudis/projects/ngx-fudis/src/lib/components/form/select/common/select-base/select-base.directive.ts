@@ -707,7 +707,9 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
         this._clickFromIcon);
 
     if (this._clickFromIcon) {
-      this._focusToSelectInput();
+      if (!this.control.disabled) {
+        this._focusToSelectInput();
+      }
     }
   }
 }
