@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -11,6 +11,9 @@ import { fudisSpacingArray } from '../../../types/spacing';
 import { StorybookExampleFormComponent } from './examples/form-example.component';
 import { StorybookExampleWithMultipleFormsComponent } from './examples/form-example-with-multiple-forms.component';
 import { StorybookExampleDynamicValidatorsComponent } from './examples/form-example-with-dynamic-validators.component';
+import { BehaviorSubject } from 'rxjs';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 export default {
   title: 'Components/Form/Form',
@@ -65,17 +68,93 @@ export default {
 const html = String.raw;
 
 export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
-  props: args,
-  template: html` <example-form-content
-    [title]="title"
-    [titleVariant]="titleVariant"
-    [level]="level"
-    [helpText]="helpText"
-    [badge]="badge"
-    [badgeText]="badgeText"
-    [errorSummaryHelpText]="errorSummaryHelpText"
-    [errorSummaryVisible]="errorSummaryVisible"
-  />`,
+  props: {
+    ...args,
+    formGroup: new FormGroup({
+      courseBooks: new FormGroup(
+        {
+          first: new FormControl(null),
+          second: new FormControl(null),
+          third: new FormControl(null),
+        },
+        [
+          FudisGroupValidators.min({ value: 1, message: 'No book selected.' }),
+          FudisGroupValidators.max({
+            value: 2,
+            message: new BehaviorSubject('Too many selected.'),
+          }),
+        ],
+      ),
+      teacher: new FormControl<string | null>(
+        null,
+        FudisValidators.required("Missing teacher's name who is responsible for this course."),
+      ),
+      email: new FormControl<string | null>(null, [
+        FudisValidators.required('Missing email contact.'),
+        FudisValidators.email('Input must be an email address.'),
+        FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
+      ]),
+      importantDate: new FormControl<Date | null>(
+        null,
+        FudisValidators.required('Start date is missing.'),
+      ),
+      courseType: new FormControl<string | null>(
+        null,
+        FudisValidators.required('Course type must be selected.'),
+      ),
+      startDate: new FormControl<Date | null>(null, [
+        FudisValidators.required('Start date is required.'),
+        FudisValidators.datepickerMin({
+          value: new Date(2024, 8, 19),
+          message: 'Start date cannot be earlier than 19.9.2024',
+        }),
+      ]),
+      endDate: new FormControl<Date | null>(null, [
+        FudisValidators.required('End date is required.'),
+        FudisValidators.datepickerMax({
+          value: new Date(2024, 9, 20),
+          message: 'End date cannot be later than 20.10.2024',
+        }),
+      ]),
+    }),
+  },
+  template: html`
+    <fudis-form
+      class="fudis-mt-xl"
+      [badge]="badge"
+      [badgeText]="badgeText"
+      [level]="level"
+      [title]="title"
+      [titleVariant]="titleVariant"
+      [helpText]="helpText"
+      [errorSummaryHelpText]="errorSummaryHelpText"
+      [errorSummaryVisible]="errorSummaryVisible"
+    >
+      <ng-template fudisHeader>
+        <fudis-dl [columns]="1" [variant]="'compact'">
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Important person'" />
+            <fudis-dd [contentText]="'Admiral Thrawn'" />
+          </fudis-dl-item>
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Key'" />
+            <fudis-dd [contentText]="'THX-1138'" />
+          </fudis-dl-item>
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Another important person'" />
+            <fudis-dd [contentText]="'Mara Jase'" />
+          </fudis-dl-item>
+        </fudis-dl>
+      </ng-template>
+      <ng-template fudisActions [type]="'form'">
+        <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
+        <fudis-button fudisFormSubmit [formValid]="formGroup.valid" [label]="'Submit'" />
+      </ng-template>
+      <ng-template fudisContent [type]="'form'">
+        <example-form-content [formGroup]="formGroup" />
+      </ng-template>
+    </fudis-form>
+  `,
 });
 
 Example.args = {
