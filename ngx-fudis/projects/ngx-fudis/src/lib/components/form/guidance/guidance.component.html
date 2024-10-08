@@ -1,139 +1,137 @@
-<ng-container>
-  <div class="fudis-guidance" [id]="_id">
-    <div [id]="for + '_guidance'">
-      <div
-        [id]="_id + '-errors'"
-        [class.fudis-guidance__errors]="
-          (control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut)
+<div class="fudis-guidance" [id]="_id">
+  <div [id]="for + '_guidance'">
+    <div
+      [id]="_id + '-errors'"
+      [class.fudis-guidance__errors]="
+        (control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut)
+      "
+    >
+      <fudis-icon
+        [icon]="'alert-fill'"
+        *ngIf="
+          (control?.invalid && control?.touched) ||
+          (formGroup?.invalid && formGroup?.touched && groupBlurredOut)
         "
-      >
-        <fudis-icon
-          [icon]="'alert-fill'"
-          *ngIf="
-            (control?.invalid && control?.touched) ||
-            (formGroup?.invalid && formGroup?.touched && groupBlurredOut)
-          "
-        />
-        <div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
-          <!--
+      />
+      <div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
+        <!--
             Check errors for each control FormGroup e. g. english, finnish, swedish
           -->
-          <ng-container *ngIf="formGroup?.controls && !control && !formGroup?.errors">
-            <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
-              <ng-container *ngIf="singleControl.value.errors">
-                <ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
-                  <fudis-validator-error-message
-                    *ngIf="error.value.message"
-                    (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
-                    [formId]="_parentFormId | async"
-                    [focusId]="for"
-                    [visible]="
-                      !!((singleControl.value.touched || formGroup.touched) && groupBlurredOut)
-                    "
-                    [type]="error.key"
-                    [controlName]="singleControl.key"
-                    [label]="inputLabel"
-                    [message]="error.value.message"
-                  />
-                </ng-container>
+        <ng-container *ngIf="formGroup?.controls && !control && !formGroup?.errors">
+          <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
+            <ng-container *ngIf="singleControl.value.errors">
+              <ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
+                <fudis-validator-error-message
+                  *ngIf="error.value.message"
+                  (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
+                  [formId]="_parentFormId | async"
+                  [focusId]="for"
+                  [visible]="
+                    !!((singleControl.value.touched || formGroup.touched) && groupBlurredOut)
+                  "
+                  [type]="error.key"
+                  [controlName]="singleControl.key"
+                  [label]="inputLabel"
+                  [message]="error.value.message"
+                />
               </ng-container>
             </ng-container>
           </ng-container>
+        </ng-container>
 
-          <!--
+        <!--
             Check parent level errors of FormGroup e. g. oneRequired
           -->
-          <ng-container *ngIf="formGroup?.errors && formGroup?.invalid">
-            <ng-container *ngFor="let error of formGroup?.errors | keyvalue">
-              <fudis-validator-error-message
-                *ngIf="error.value?.message"
-                (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
-                [formId]="_parentFormId | async"
-                [visible]="!!(formGroup.touched && groupBlurredOut)"
-                [focusId]="for"
-                [type]="error.key"
-                [label]="inputLabel"
-                [message]="error.value?.message"
-              />
-            </ng-container>
+        <ng-container *ngIf="formGroup?.errors && formGroup?.invalid">
+          <ng-container *ngFor="let error of formGroup?.errors | keyvalue">
+            <fudis-validator-error-message
+              *ngIf="error.value?.message"
+              (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
+              [formId]="_parentFormId | async"
+              [visible]="!!(formGroup.touched && groupBlurredOut)"
+              [focusId]="for"
+              [type]="error.key"
+              [label]="inputLabel"
+              [message]="error.value?.message"
+            />
           </ng-container>
+        </ng-container>
 
-          <!--
+        <!--
             Check errors for single FormControl e. g. single text-input with maxlength error
           -->
-          <ng-container *ngIf="control?.errors && !formGroup">
-            <ng-container *ngFor="let error of control.errors | keyvalue">
-              <fudis-validator-error-message
-                *ngIf="error.value?.message"
-                (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
-                [formId]="_parentFormId | async"
-                [visible]="control.touched"
-                [focusId]="for"
-                [type]="error.key"
-                [label]="inputLabel"
-                [message]="error.value?.message"
-              />
-            </ng-container>
+        <ng-container *ngIf="control?.errors && !formGroup">
+          <ng-container *ngFor="let error of control.errors | keyvalue">
+            <fudis-validator-error-message
+              *ngIf="error.value?.message"
+              (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
+              [formId]="_parentFormId | async"
+              [visible]="control.touched"
+              [focusId]="for"
+              [type]="error.key"
+              [label]="inputLabel"
+              [message]="error.value?.message"
+            />
           </ng-container>
-          <ng-content />
-        </div>
-      </div>
-
-      <p *ngIf="helpText || (control && maxLength)" class="fudis-guidance__help-text">
-        <ng-container *ngIf="helpText">{{ helpText }}</ng-container>
-        <ng-container *ngIf="control && maxLength">
-          <span class="fudis-visually-hidden"
-            >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText | async }}</span
-          >
         </ng-container>
-      </p>
+        <ng-content />
+      </div>
     </div>
-    <ng-container *ngIf="maxLength && control">
+
+    <p *ngIf="helpText || (control && maxLength)" class="fudis-guidance__help-text">
+      <ng-container *ngIf="helpText">{{ helpText }}</ng-container>
+      <ng-container *ngIf="control && maxLength">
+        <span class="fudis-visually-hidden"
+          >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText | async }}</span
+        >
+      </ng-container>
+    </p>
+  </div>
+  <ng-container *ngIf="maxLength && control">
+    <small
+      class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
+        _maxLengthWidth
+      }}"
+      [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
+    >
+      {{ control.value?.length || 0 }}/{{ maxLength }}
+    </small>
+  </ng-container>
+  <ng-container *ngIf="formGroup?.controls && !control && maxLength">
+    <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
       <small
+        *ngIf="singleControl.key === selectedOption"
         class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
           _maxLengthWidth
         }}"
         [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
       >
-        {{ control.value?.length || 0 }}/{{ maxLength }}
+        {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
       </small>
-    </ng-container>
-    <ng-container *ngIf="formGroup?.controls && !control && maxLength">
-      <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
-        <small
-          *ngIf="singleControl.key === selectedOption"
-          class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
-            _maxLengthWidth
-          }}"
-          [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
+      <ng-container
+        *ngIf="
+          singleControl.value.value?.length === _maxLengthAlertThreshold ||
+          singleControl.value.value?.length === maxLength
+        "
+      >
+        <p
+          class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden"
+          role="alert"
+          >{{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
+          {{ _maxLengthText | async }}</p
         >
-          {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
-        </small>
-        <ng-container
-          *ngIf="
-            singleControl.value.value?.length === _maxLengthAlertThreshold ||
-            singleControl.value.value?.length === maxLength
-          "
-        >
-          <p
-            class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden"
-            role="alert"
-            >{{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
-            {{ _maxLengthText | async }}</p
-          >
-        </ng-container>
       </ng-container>
     </ng-container>
-  </div>
-  <ng-container
-    *ngIf="
-      control &&
-      maxLength &&
-      (control.value?.length === _maxLengthAlertThreshold || control.value?.length === maxLength)
-    "
-  >
-    <p class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden" role="alert"
-      >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText | async }}</p
-    >
   </ng-container>
+</div>
+<ng-container
+  *ngIf="
+    control &&
+    maxLength &&
+    (control.value?.length === _maxLengthAlertThreshold || control.value?.length === maxLength)
+  "
+>
+  <p class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden" role="alert"
+    >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText | async }}</p
+  >
 </ng-container>
