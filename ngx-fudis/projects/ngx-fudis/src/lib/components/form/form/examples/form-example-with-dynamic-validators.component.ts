@@ -9,7 +9,7 @@ import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
 import { FudisValidators, FudisGroupValidators } from 'ngx-fudis';
-import { NgxFudisModule } from '../../../../../public-api';
+import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 
 type MyForm = {

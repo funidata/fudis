@@ -6,7 +6,7 @@ import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
 import { FudisTranslationService, FudisGroupValidators, FudisValidators } from 'ngx-fudis';
 import { BehaviorSubject } from 'rxjs';
-import { NgxFudisModule } from '../../../../../public-api';
+import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 
 type MyForm = {

@@ -9,7 +9,7 @@ import { FudisErrorSummaryService, FudisValidators, FudisGroupValidators } from 
 import { BehaviorSubject } from 'rxjs';
 import { defaultOptions } from '../../select/common/mock_data';
 import { Component } from '@angular/core';
-import { NgxFudisModule } from '../../../../../public-api';
+import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 
 @Component({
