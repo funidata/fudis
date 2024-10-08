@@ -1,16 +1,18 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import {
   FudisRadioButtonOption,
   FudisCheckboxGroupFormGroup,
   FudisSelectOption,
   FudisLocalizedTextGroup,
 } from '../../../../types/forms';
-import { FudisErrorSummaryService, FudisValidators, FudisGroupValidators } from 'ngx-fudis';
-import { BehaviorSubject } from 'rxjs';
+import { FudisValidators } from '../../../../utilities/form/validators';
+import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { defaultOptions } from '../../select/common/mock_data';
-import { Component } from '@angular/core';
-import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
 
 @Component({
   standalone: true,

@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { FormGroup, FormControl } from '@angular/forms';
 import {
   FudisCheckboxGroupFormGroup,
@@ -7,10 +9,8 @@ import {
 } from '../../../../types/forms';
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
-import { FudisValidatorFn } from '../../../../utilities/form/validators';
-import { FudisValidators, FudisGroupValidators } from 'ngx-fudis';
-import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
+import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 
 type MyForm = {
   text: FormControl<string | null>;
