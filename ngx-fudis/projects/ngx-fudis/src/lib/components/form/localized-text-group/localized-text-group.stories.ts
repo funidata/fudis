@@ -66,17 +66,17 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
     handleViewInit: action('handleViewInit'),
     handleKeyUp: action('handleKeyUp'),
     formGroup: new FormGroup<FudisLocalizedTextGroup<object>>({
-      finnish: new FormControl<string | null>(null, [
+      fi: new FormControl<string | null>(null, [
         FudisValidators.required('Missing backstory in Finnish.'),
         FudisValidators.minLength(10, 'Too short backstory in Finnish'),
         FudisValidators.maxLength(50, 'Too long backstory in Finnish'),
       ]),
-      swedish: new FormControl<string | null>(null, [
+      sv: new FormControl<string | null>(null, [
         FudisValidators.required('Missing backstory in Swedish.'),
         FudisValidators.minLength(10, 'Too short backstory in Swedish'),
         FudisValidators.maxLength(100, 'Too long backstory in Swedish'),
       ]),
-      english: new FormControl<string | null>(null, [
+      en: new FormControl<string | null>(null, [
         FudisValidators.required('Missing backstory in English.'),
         FudisValidators.minLength(10, 'Too short backstory in English'),
         FudisValidators.maxLength(1000, 'Too long backstory in English'),
@@ -111,19 +111,19 @@ const ExampleTemplate: StoryFn = (args) => ({
     handleViewInit: action('handleViewInit'),
     handleKeyUp: action('handleKeyUp'),
     languageOptions: [
-      { controlName: 'finnish', label: 'FI' },
-      { controlName: 'swedish', label: 'SV' },
-      { controlName: 'english', label: 'EN' },
+      { controlName: 'fi', label: 'FI' },
+      { controlName: 'sv', label: 'SV' },
+      { controlName: 'en', label: 'EN' },
     ],
     formGroup: new FormGroup<FudisLocalizedTextGroup<object>>(
       {
-        finnish: new FormControl<string | null>(null, [
+        fi: new FormControl<string | null>(null, [
           FudisValidators.maxLength(15, 'Too long Finnish name'),
         ]),
-        swedish: new FormControl<string | null>(null, [
+        sv: new FormControl<string | null>(null, [
           FudisValidators.maxLength(20, 'Too long Swedish name'),
         ]),
-        english: new FormControl<string | null>(null, [
+        en: new FormControl<string | null>(null, [
           FudisValidators.maxLength(25, 'Too long English name'),
         ]),
       },

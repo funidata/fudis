@@ -110,13 +110,13 @@ export type FudisFormErrorSummaryObjectItemErrors = {
 };
 
 export type FudisLocalizedTextGroupOptions =
-  | { controlName: 'finnish'; label: 'FI' }
-  | { controlName: 'swedish'; label: 'SV' }
-  | { controlName: 'english'; label: 'EN' }
+  | { controlName: 'fi'; label: 'FI' }
+  | { controlName: 'sv'; label: 'SV' }
+  | { controlName: 'en'; label: 'EN' }
   | { controlName: string; label: string };
 
 export type FudisLocalizedTextGroup<T extends object> = T & {
-  [lang: string | 'finnish' | 'swedish' | 'english']: FormControl<string | null>;
+  [lang: string | 'fi' | 'sv' | 'en']: FormControl<string | null>;
 };
 
 export type FudisCheckboxGroupFormGroup<T extends object> = T & {

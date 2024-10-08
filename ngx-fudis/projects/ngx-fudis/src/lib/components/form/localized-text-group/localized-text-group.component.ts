@@ -86,12 +86,12 @@ export class LocalizedTextGroupComponent
   @Input({ required: true }) override formGroup: FormGroup<FudisLocalizedTextGroup<object>>;
 
   /**
-   * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'english', label: 'EN'}" pairs with Form Group's "english: new FormControl('')"
+   * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'en', label: 'EN'}" pairs with Form Group's "en: new FormControl('')"
    */
   @Input() options: FudisLocalizedTextGroupOptions[] = [
-    { controlName: 'finnish', label: 'FI' },
-    { controlName: 'swedish', label: 'SV' },
-    { controlName: 'english', label: 'EN' },
+    { controlName: 'fi', label: 'FI' },
+    { controlName: 'sv', label: 'SV' },
+    { controlName: 'en', label: 'EN' },
   ];
 
   /**
