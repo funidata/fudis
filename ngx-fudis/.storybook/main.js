@@ -33,8 +33,8 @@ export function managerHead(head) {
     ${head}
     <link rel="shortcut icon" href="favicon.ico">
     <style>
-      #components-description-list--description-list-compact { display: none;}
-      #components-form-deprecated-autocomplete-single-select { display: none;}
+      .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
+      .sidebar-item:has(#components-form-deprecated-autocomplete-single-select) { display: none;}
     </style>
   `;
 }
