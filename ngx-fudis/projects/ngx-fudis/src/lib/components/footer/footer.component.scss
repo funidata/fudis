@@ -14,8 +14,6 @@
   .fudis-link {
     @include typography.link-md;
 
-    min-height: spacing.$spacing-lg;
-
     @include breakpoints.breakpoint-max('lg') {
       &:not(:last-of-type) {
         margin-bottom: spacing.$spacing-sm;
@@ -34,7 +32,6 @@
     flex-direction: column;
 
     &__logo {
-      margin-bottom: spacing.$spacing-sm;
       /* stylelint-disable-next-line property-disallowed-list, color-no-hex */
       color: #000000;
     }
