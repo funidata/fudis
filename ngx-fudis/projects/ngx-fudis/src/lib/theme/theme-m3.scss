@@ -10,27 +10,10 @@ $fudis-theme: mat.define-theme((
     brand-family: 'Fira Sans',
     plain-family: 'Fira Sans',
     bold-weight: 500,
-    medium-weight: 400,
+    medium-weight: 500,
     regular-weight: 400
   ),
   density: (
     scale: 0
   )
 ));
-
-// $datepicker-theme: mat.define-theme((
-//   color: (
-//     theme-type: light,
-//     primary: $_tertiary;
-//   ),
-//   typography: (
-//     brand-family: 'Fira Sand',
-//     plain-family: 'Fira Sans',
-//     bold-weight: 500,
-//     medium-weight: 400,
-//     regular-weight: 400
-//   ),
-//   density: (
-//     scale: 0
-//   )
-// ));

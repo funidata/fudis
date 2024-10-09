@@ -82,6 +82,12 @@
       & .mat-mdc-button,
       & .mat-mdc-icon-button {
         @include colorMixins.bg-color('transparent');
+
+        &.mat-calendar-next-button,
+        &.mat-calendar-previous-button {
+          width: spacing.$spacing-xl;
+          height: spacing.$spacing-xl;
+        }
       }
 
       // Make sure month/year button has 0 opacity and not have borders like button

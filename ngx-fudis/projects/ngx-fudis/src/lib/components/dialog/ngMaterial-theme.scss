@@ -47,6 +47,7 @@
         margin: spacing.$spacing-xxs 0 spacing.$spacing-sm 0;
         padding: 0;
         pointer-events: none;
+        letter-spacing: normal;
 
         &::before {
           display: none;
@@ -64,6 +65,10 @@
 
       .mat-mdc-dialog-content {
         @include utilities.box-reset;
+
+        letter-spacing: normal;
+        line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+        font-size: calc(1.125rem / var(--fudis-rem-multiplier));
 
         &:focus-visible,
         &:focus {

@@ -11,5 +11,6 @@ mat-tooltip-component .mat-tooltip-handset {
 mat-tooltip-component {
   .mat-mdc-tooltip .mdc-tooltip__surface {
     background-color: colors.$color-gray-dark;
+    letter-spacing: normal;
   }
 }
