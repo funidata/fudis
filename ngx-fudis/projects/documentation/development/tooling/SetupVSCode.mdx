@@ -1,0 +1,86 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Documentation/Development/Tooling/Setup VS Code" />
+
+# Visual Studio Code Setup
+
+As per the title, these instructions are written for Microsoft Visual Studio Code. The setup described here ensures a smooth and uniform developer experience along with consistent code. If you deviate from this setup, please make sure you understand the goals of our common workflow and how your setup achieves them. Using this setup as a basis of your own is highly recommended.
+
+## Using Recommended Setup
+
+Copy VS Code configuration files (run in repository root):
+
+```bash
+cp -R settings/.vscode .
+```
+
+VS Code will use this configuration only when you open it under Fudis repository, leaving your global configuration unaffected.
+
+After copying the files, reload VS Code (on Mac: CMD+Shift+P > "Developer: Reload Window").
+
+## Extensions
+
+Recommended extensions are listed in `settings/.vscode/extensions.json`. If you copied over that file as recommended and reloaded VS Code, you should see the recommended listed in the Extensions tab and can easily inspect and install them (note that VS Code lists only the extensions that you do not have).
+
+### Required Extensions
+
+These linting and formatting extensions are necessary to interactively see linting errors and auto-format files:
+
+- [ESLint (`dbaeumer.vscode-eslint`)](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier - Code formatter (`esbenp.prettier-vscode`)](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Stylelint (`stylelint.vscode-stylelint`)](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+
+### Recommended Extensions
+
+The rest of the extensions in `extensions.json` are recommended for a better developer experience. Use them according to taste.
+
+We also recommend that you remove the common `rvest.vs-code-prettier-eslint` extension as it has been deprecated by `dbaeumer.vscode-eslint` listed above and can cause confusion.
+
+## Settings
+
+Recommended settings are specified in `settings/.vscode/settings.json`. They assume that at least the [required extensions](#required-extensions) are installed.
+
+Take a look at the file to see all recommendations and commentary about them. You should really use all of them, but here are some of the most important ones:
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Recommended Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <code>eslint.workingDirectories</code>
+      </td>
+
+      <td>`["ngx-fudis"]`</td>
+
+      <td>
+        Enables the ESLint extension to work when VS Code is opened in repository root. Without this
+        setting, interactive linting is available only when VS Code is opened in{" "}
+        <code>ngx-fudis/</code> directory.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>editor.formatOnSave</code>
+      </td>
+
+      <td>
+        <code>true</code>
+      </td>
+
+      <td>
+        Makes formatting painless as it happens automatically and you never have to think about it.
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+Remember that VS Code applies `.vscode/settings.json` contents only to that folder and its subfolders, so your global configuration will not be affected by using these recommendations.

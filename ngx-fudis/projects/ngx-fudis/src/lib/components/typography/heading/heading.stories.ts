@@ -47,7 +47,7 @@ Example.parameters = {
   },
 };
 
-export const AllVariants: StoryFn<HeadingComponent> = (args: HeadingComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-grid [rowGap]="'sm'">

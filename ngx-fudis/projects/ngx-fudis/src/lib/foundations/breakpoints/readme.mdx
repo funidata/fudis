@@ -1,0 +1,121 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Foundations/Breakpoints" />
+
+# Breakpoint Mixins
+
+[Figma for Breakpoints](https://www.figma.com/file/a6G6ZD6W3tlq0qmUkdvdp1/Fudis-DS-Foundations?type=design&node-id=822-394&mode=design&t=Z3hBCijTMHJNlDzQ-0)
+
+Load Fudis mixins and tokens to your SCSS file with:
+
+```
+@use "@funidata/ngx-fudis" as fudis;
+```
+
+## Min-width
+
+When you are using `breakpoint('md')`, your styles will be applied from `$breakpoint-md` and up.
+
+```
+@include fudis.breakpoint($breakpoint){}
+```
+
+<table>
+  <thead>
+    <tr>
+      <th>$breakpoint</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>string value from breakpoint tokens map (**$breakpoints**)</td>
+    </tr>
+  </tbody>
+</table>
+
+```
+.my-element {
+  @include fudis.breakpoint('md') {
+    // Rules defined here apply from breakpoint 'md' and up
+  };
+}
+
+```
+
+## Max-width
+
+When you are using `breakpoint-max('md')`, your styles will be applied when viewport is smaller than `$breakpoint-md`.
+
+```
+@include fudis.breakpoint-max($breakpoint){}
+```
+
+<hr />
+
+# Breakpoint Tokens and Values They Apply
+
+Breakpoints are based on Bootstrap's breakpoint system.
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>String value</th>
+      <th>Value</th>
+      <th>Default px value</th>
+      <th>Range it affects</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>$breakpoint-xxl</td>
+      <td>xxl</td>
+      <td>100em</td>
+      <td>1600px</td>
+      <td>+1600px</td>
+    </tr>
+
+    <tr>
+      <td>$breakpoint-xl</td>
+      <td>xl</td>
+      <td>75em</td>
+      <td>1200px</td>
+      <td>1200px-1599px</td>
+    </tr>
+
+    <tr>
+      <td>$breakpoint-lg</td>
+      <td>lg</td>
+      <td>62em</td>
+      <td>992px</td>
+      <td>992px-1199px</td>
+    </tr>
+
+    <tr>
+      <td>$breakpoint-md</td>
+      <td>md</td>
+      <td>48em</td>
+      <td>768px</td>
+      <td>768px-991px</td>
+    </tr>
+
+    <tr>
+      <td>$breakpoint-sm</td>
+      <td>sm</td>
+      <td>36em</td>
+      <td>576px</td>
+      <td>576px-767px</td>
+    </tr>
+
+    <tr>
+      <td>$breakpoint-xs</td>
+      <td>xs</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0-575px</td>
+    </tr>
+
+  </tbody>
+</table>

@@ -9,7 +9,12 @@
     "../src/test.ts",
     "../src/**/*.spec.ts",
     "../projects/**/*.spec.ts",
-    "../projects/dev/**/*"
+    "../projects/dev/**/*",
+    "../projects/ngx-fudis/schematics/ng-add/index.ts",
+    "../projects/ngx-fudis/setup-jest.ts",
+    "../projects/ngx-fudis/src/lib/services/id/testData.ts",
+    "../projects/ngx-fudis/src/lib/utilities/tests/utilities.ts",
+    "../projects/ngx-fudis/src/public-api.ts"
   ],
   "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"]
 }

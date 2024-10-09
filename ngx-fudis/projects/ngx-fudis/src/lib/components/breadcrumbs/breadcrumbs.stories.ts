@@ -21,7 +21,7 @@ const links = [
   { label: 'UCS Imperial Star Destroyer\u{2122}', url: '/my-legos/genre/star-wars/set-75252' },
 ];
 
-const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => ({
+const Template: StoryFn = (args) => ({
   props: {
     ...args,
     links,

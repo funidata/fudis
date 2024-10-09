@@ -24,14 +24,14 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant"
     ><fudis-body-text>This is notification.</fudis-body-text></fudis-notification
   >`,
 });
 
-const ButtonAndLinkTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+const ButtonAndLinkTemplate: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-grid [align]="'start'">
     <fudis-notification [variant]="variant">
@@ -54,7 +54,7 @@ const ButtonAndLinkTemplate: StoryFn<NotificationComponent> = (args: Notificatio
   </fudis-grid>`,
 });
 
-const MultiChildTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+const MultiChildTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant">
     <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
@@ -80,7 +80,7 @@ ExampleWithMultipleChildComponents.args = {
   variant: 'warning',
 };
 
-export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   props: {
     ...args,
   },

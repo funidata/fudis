@@ -1,6 +1,5 @@
 import { StoryFn, Meta } from '@storybook/angular';
-import readme from './link-directive.docs.mdx';
-import { LinkDirective } from './link.directive';
+import readme from './link-directive.mdx';
 
 export default {
   title: 'Directives/Link',
@@ -19,7 +18,7 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn<LinkDirective> = (args: LinkDirective) => ({
+export const Example: StoryFn = (args) => ({
   props: args,
   template: html`
     <a
@@ -32,7 +31,7 @@ export const Example: StoryFn<LinkDirective> = (args: LinkDirective) => ({
   `,
 });
 
-export const AllCombinations: StoryFn<LinkDirective> = (args) => ({
+export const AllCombinations: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-grid [width]="'sm'" [rowGap]="'md'">

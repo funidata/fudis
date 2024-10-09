@@ -26,6 +26,7 @@
             "styles": ["projects/ngx-fudis/style.scss"],
             "port": 6006,
             "host": "0.0.0.0",
+            "open": false,
             "compodoc": true,
             "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
           }

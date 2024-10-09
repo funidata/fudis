@@ -103,7 +103,7 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) => ({
+const Template: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl(
@@ -131,9 +131,7 @@ Example.args = {
   message: 'This is custom string error message that is placed with content projection',
 };
 
-export const ExampleWithObservableError: StoryFn<ErrorMessageComponent> = (
-  args: ErrorMessageComponent,
-) => ({
+export const ExampleWithObservableError: StoryFn = (args) => ({
   ...args,
   template: `
 <example-text-input-with-error-message></example-text-input-with-error-message>

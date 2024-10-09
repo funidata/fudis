@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
-import docs from './button.docs.mdx';
+import docs from './button.mdx';
 import { buttonControlsExclude, buttonIconOnlyExclude } from '../../utilities/storybook';
 import { fudisIconArray } from '../../types/icons';
 
@@ -91,7 +91,7 @@ IconOnly.parameters = {
   },
 };
 
-export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-grid

@@ -121,11 +121,11 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
+const Template: StoryFn = (args) => ({
   props: { ...args, control: new FormControl(null) },
 });
 
-const TemplateDisabled: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
+const TemplateDisabled: StoryFn = (args) => ({
   props: { ...args, control: new FormControl({ value: null, disabled: true }) },
 });
 
@@ -150,7 +150,7 @@ Disabled.args = {
   initialFocus: false,
 };
 
-export const WithValidators: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
+export const WithValidators: StoryFn = (args) => ({
   props: args,
   template: `
 		<example-text-input-with-form-control></example-text-input-with-form-control>
