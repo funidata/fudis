@@ -12,6 +12,7 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/typography/tokens.scss' as tokens;
 
 .fudis-dialog {
   /* Body Text inside Dialog should be md-light by default but can be altered by the App */
@@ -67,8 +68,8 @@
         @include utilities.box-reset;
 
         letter-spacing: normal;
-        line-height: calc(1.125rem / var(--fudis-rem-multiplier));
-        font-size: calc(1.125rem / var(--fudis-rem-multiplier));
+        line-height: tokens.$body-text-m-line-height;
+        font-size: tokens.$body-text-m-line-height;
 
         &:focus-visible,
         &:focus {
@@ -121,6 +122,7 @@
     /* stylelint-disable-next-line declaration-no-important */
     opacity: 0.95 !important;
     width: 300vw;
-    height: 300vh;
+    height: 350vh;
+    top: -50vh;
   }
 }
