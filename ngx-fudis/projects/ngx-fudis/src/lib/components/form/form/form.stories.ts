@@ -4,7 +4,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FormComponent } from './form.component';
-import docs from './form.docs.mdx';
+import docs from './form.mdx';
 import { fudisHeadingLevelArray } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { fudisSpacingArray } from '../../../types/spacing';
