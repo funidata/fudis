@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   DestroyRef,
   Directive,
   ElementRef,
@@ -23,7 +22,6 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   constructor(
     protected _idService: FudisIdService,
     protected _focusService: FudisFocusService,
-    protected _cdr: ChangeDetectorRef,
   ) {
     super();
   }
@@ -101,11 +99,6 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
-   * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed. E. g. if component is inside lazy loaded expandable.
-   */
-  protected _reloadErrorSummaryTrigger = false;
-
-  /**
    * Generate id for parent component
    */
   protected _setParentComponentId(parentType: FudisIdParent): void {
@@ -124,21 +117,6 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
       this._idService.addNewId(componentType, this.id);
     } else {
       this.id = this._idService.getNewId(componentType);
-    }
-  }
-
-  /**
-   * TODO: write test check cdr logic
-   *
-   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
-   */
-  protected _triggerErrorSummaryOnInitReload(
-    parentFormErrorSummaryVisible: boolean | undefined,
-    controlOrGroupInvalid: boolean,
-  ): void {
-    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && controlOrGroupInvalid) {
-      this._reloadErrorSummaryTrigger = true;
-      this._cdr.detectChanges();
     }
   }
 
@@ -164,10 +142,6 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
    * Executed when component's input is focused or when child input, e.g. Checkbox is focused
    */
   public onFocus(event: FocusEvent): void {
-    if (this._reloadErrorSummaryTrigger) {
-      this._reloadErrorSummaryTrigger = false;
-    }
-
     this.handleFocus.emit(event);
   }
 }

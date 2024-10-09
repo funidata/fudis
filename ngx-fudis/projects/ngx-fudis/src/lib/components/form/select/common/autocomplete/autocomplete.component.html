@@ -3,6 +3,7 @@
   type="text"
   class="fudis-select-autocomplete fudis-form-input"
   role="combobox"
+  [class.fudis-form-input--touched]="invalidState"
   [attr.value]="selectedLabel || null"
   [attr.aria-controls]="id + '-dropdown'"
   aria-haspopup="listbox"

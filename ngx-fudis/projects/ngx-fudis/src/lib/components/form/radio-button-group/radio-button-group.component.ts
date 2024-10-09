@@ -2,17 +2,14 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  Host,
   Input,
   OnChanges,
   OnInit,
-  Optional,
   Output,
 } from '@angular/core';
 import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
@@ -28,12 +25,11 @@ export class RadioButtonGroupComponent
   implements OnInit, OnChanges
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
     _changeDetectorRef: ChangeDetectorRef,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
   ) {
-    super(_idService, _focusService, _changeDetectorRef);
+    super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
@@ -55,11 +51,6 @@ export class RadioButtonGroupComponent
   ngOnInit() {
     this._setParentComponentId('radio-button-group');
     this._updateValueAndValidityTrigger.next();
-
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.control.invalid,
-    );
   }
 
   /** Add value and validity check when control value changes */
