@@ -15,8 +15,6 @@
     <ng-content select="fudis-checkbox" />
     <fudis-guidance
       *ngIf="formGroup"
-      [formId]="_parentForm?.id || null"
-      [reloadErrorSummary]="_reloadErrorSummaryTrigger"
       [inputLabel]="label"
       [helpText]="helpText"
       [for]="id"

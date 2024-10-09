@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { FormCommonApiDirective } from '../form-common-api/form-common-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormGroup } from '@angular/forms';
@@ -8,12 +8,8 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   selector: '[fudisGroupComponentBase]',
 })
 export class GroupComponentBaseDirective extends FormCommonApiDirective {
-  constructor(
-    _idService: FudisIdService,
-    _focusService: FudisFocusService,
-    _cdr: ChangeDetectorRef,
-  ) {
-    super(_idService, _focusService, _cdr);
+  constructor(_idService: FudisIdService, _focusService: FudisFocusService) {
+    super(_idService, _focusService);
   }
 
   /**

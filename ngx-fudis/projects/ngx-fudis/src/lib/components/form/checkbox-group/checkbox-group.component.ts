@@ -1,13 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Host,
-  Input,
-  OnInit,
-  Optional,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FudisCheckboxGroupChangeEvent,
@@ -15,7 +6,6 @@ import {
   FudisInputSize,
 } from '../../../types/forms';
 import { hasOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
-import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
@@ -27,13 +17,8 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   styleUrls: ['./checkbox-group.component.scss'],
 })
 export class CheckboxGroupComponent extends GroupComponentBaseDirective implements OnInit {
-  constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
-    _idService: FudisIdService,
-    _focusService: FudisFocusService,
-    _cdr: ChangeDetectorRef,
-  ) {
-    super(_idService, _focusService, _cdr);
+  constructor(_idService: FudisIdService, _focusService: FudisFocusService) {
+    super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.formGroup) {
@@ -114,11 +99,6 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
     this._applyGroupMarkAsTouched();
 
     this._applyGroupUpdateCheck();
-
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.formGroup.invalid,
-    );
   }
 
   /**

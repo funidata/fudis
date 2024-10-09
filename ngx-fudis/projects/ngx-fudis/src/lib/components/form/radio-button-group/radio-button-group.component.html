@@ -15,8 +15,6 @@
     <ng-content select="fudis-radio-button" />
     <fudis-guidance
       *ngIf="control"
-      [formId]="_parentForm?.id || null"
-      [reloadErrorSummary]="_reloadErrorSummaryTrigger"
       [inputLabel]="label"
       [helpText]="helpText"
       [for]="id"

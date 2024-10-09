@@ -1,12 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Host,
-  Input,
-  OnChanges,
-  OnInit,
-  Optional,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -17,7 +9,6 @@ import {
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
@@ -28,13 +19,8 @@ import { ControlComponentBaseDirective } from '../../../directives/form/control-
   styleUrls: ['./text-area.component.scss'],
 })
 export class TextAreaComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
-  constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
-    _focusService: FudisFocusService,
-    _idService: FudisIdService,
-    _changeDetectorRef: ChangeDetectorRef,
-  ) {
-    super(_idService, _focusService, _changeDetectorRef);
+  constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
+    super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
         this._required.next(hasRequiredValidator(this.control));
@@ -76,11 +62,6 @@ export class TextAreaComponent extends ControlComponentBaseDirective implements 
         this.control.setValue(null);
       }
     });
-
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.control.invalid,
-    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {

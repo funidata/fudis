@@ -1,14 +1,4 @@
-import {
-  AfterContentInit,
-  ChangeDetectorRef,
-  Component,
-  Host,
-  Input,
-  OnChanges,
-  OnInit,
-  Optional,
-  effect,
-} from '@angular/core';
+import { AfterContentInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -19,7 +9,6 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { FormComponent } from '../form/form.component';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
@@ -32,13 +21,11 @@ export class AutocompleteComponent
   implements OnInit, AfterContentInit, OnChanges
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _focusService, _changeDetectorRef);
+    super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
