@@ -107,6 +107,10 @@
       @include colorMixins.bg-color('primary-light');
     }
 
+    & .mat-calendar-body-cell.mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+      @include colorMixins.bg-color('primary-light');
+    }
+
     // If selected day is not inside allowed date range and is disabled in the calendar pop-up (user is able to insert invalid date through input)
     & .mat-calendar-body-cell.mat-calendar-body-disabled .mat-calendar-body-selected {
       @include colorMixins.text-color('gray-dark');
