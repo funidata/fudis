@@ -9,6 +9,7 @@ setCompodocJson(docJson);
 const preview = {
   parameters: {
     controls: {
+      disableSaveFromUI: true,
       exclude: excludeRegex(),
       matchers: {
         color: /(background|color)$/i,
