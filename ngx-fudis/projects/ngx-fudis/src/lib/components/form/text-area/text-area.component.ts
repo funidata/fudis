@@ -32,7 +32,7 @@ export class TextAreaComponent
   }
 
   /**
-   * FormControl for text-area
+   * FormControl binded to the HTML textarea element
    */
   @Input({ required: true }) override control: FormControl<string | null | number>;
 

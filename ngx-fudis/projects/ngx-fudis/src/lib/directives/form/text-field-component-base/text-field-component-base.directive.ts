@@ -15,27 +15,33 @@ export class TextFieldComponentBaseDirective extends ControlComponentBaseDirecti
   }
 
   /**
-   * Available sizes for the input. Recommended size for number input is 'sm'.
+   * Width of the input field.
    */
   @Input() size: FudisInputSize = 'lg';
 
   /**
-   * If user clears the input field, set FormControl value to null instead of empty string
+   * If user clears the input field, set FormControl value to null instead of empty string.
    */
   @Input() nullControlOnEmptyString: boolean = true;
 
   /**
-   * Max length for HTML attribute and for character indicator in guidance
+   * Max length for HTML attribute and for character indicator in guidance.
    */
   protected _maxLength = new BehaviorSubject<number | null>(null);
 
   /**
-   * Min length for HTML attribute
+   * Min length for HTML attribute.
    */
   protected _minLength = new BehaviorSubject<number | null>(null);
 
+  /**
+   * Subscription to listen to control's value changes
+   */
   protected _subscription: Subscription;
 
+  /**
+   * Depending on input prop 'nullControlOnEmptyString' either subscribe or unsubscribe to control's value changes
+   */
   protected _setControlValueSubscription(): void {
     if (this.nullControlOnEmptyString) {
       if (!this._subscription) {

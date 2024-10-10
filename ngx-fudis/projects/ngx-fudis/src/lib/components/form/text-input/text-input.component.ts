@@ -46,7 +46,7 @@ export class TextInputComponent
   }
 
   /**
-   * FormControl for text-input
+   * FormControl binded to the HTML input element
    */
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
