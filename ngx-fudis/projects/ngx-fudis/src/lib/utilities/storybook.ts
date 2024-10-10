@@ -79,9 +79,20 @@ export const buttonControlsExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
   'handleClick',
   'labelHidden',
+  'asMenuButton',
+  'type',
+  'handleFocus',
+  'handleDestroy',
 ]);
 
-export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclude, 'handleClick']);
+export const buttonIconOnlyExclude: RegExp = excludeRegex([
+  ...buttonCommonExclude,
+  'handleClick',
+  'asMenuButton',
+  'type',
+  'handleFocus',
+  'handleDestroy',
+]);
 
 /**
  * CheckboxGroup and Checkbox
@@ -331,6 +342,11 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'autocompleteRef',
   'handleCheckedSort',
   'handleMultiSelectionChange',
+  'parentLocalizedTextGroupFormGroup',
+  'handleChecked',
+  'handleClick',
+  'checked',
+  'close',
 ]);
 
 /**

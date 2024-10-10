@@ -2,7 +2,6 @@
 * Global style files
 */
 @use '@angular/material' as mat;
-@use './fudis-theme.scss' as theme;
 @use '../components/form/autocomplete/ngMaterial-theme.scss' as autoComplete;
 @use '../components/form/date/datepicker/ngMaterial-theme.scss' as datePicker;
 @use '../components/dialog/ngMaterial-theme.scss' as dialog;
@@ -18,13 +17,14 @@
 @use '../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss'
   as dd;
 @use './display-theme';
+@use './theme-m3.scss' as m3;
 
 // Emit theme-dependent styles for common features used across multiple Material components.
-@include mat.core;
-@include mat.core-theme(theme.$primary-theme);
-@include mat.all-component-typographies(theme.$typography);
-@include mat.autocomplete-theme(theme.$primary-theme);
-@include mat.button-theme(theme.$button-theme);
-@include mat.datepicker-theme(theme.$datepicker-theme);
-@include mat.dialog-theme(theme.$primary-theme);
-@include mat.tooltip-theme(theme.$primary-theme);
+
+html {
+  @include mat.core;
+  @include mat.core-theme(m3.$fudis-theme);
+  @include mat.button-theme(m3.$fudis-theme);
+  @include mat.tooltip-theme(m3.$fudis-theme);
+  @include mat.datepicker-theme(m3.$fudis-theme);
+}

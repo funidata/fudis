@@ -1,5 +1,6 @@
 /* stylelint-disable @stylistic/indentation */
 /* stylelint-disable declaration-no-important */
+/* stylelint-disable selector-not-notation */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
@@ -18,6 +19,10 @@
 
   &:focus {
     @include focus.focus-generic;
+  }
+
+  &.mat-mdc-raised-button:not(:disabled) {
+    background-color: colors.$color-primary;
   }
 }
 
@@ -82,6 +87,12 @@
       & .mat-mdc-button,
       & .mat-mdc-icon-button {
         @include colorMixins.bg-color('transparent');
+
+        &.mat-calendar-next-button,
+        &.mat-calendar-previous-button {
+          width: spacing.$spacing-xl;
+          height: spacing.$spacing-xl;
+        }
       }
 
       // Make sure month/year button has 0 opacity and not have borders like button
@@ -96,8 +107,18 @@
     & .mat-calendar-body-cell.mat-calendar-body-active .mat-calendar-body-selected,
     &
       .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
-      > .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
       @include colorMixins.text-color('gray-dark');
+      @include colorMixins.bg-color('primary-light');
+    }
+
+    &
+      .mat-calendar-body-cell.mat-calendar-body-active
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
       @include colorMixins.bg-color('primary-light');
     }
 

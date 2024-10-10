@@ -47,6 +47,12 @@ Example.args = {
   rotate: 'none',
 };
 
+Example.parameters = {
+  controls: {
+    exclude: excludeEverythingExceptRegex(['icon', 'color', 'rotate']),
+  },
+};
+
 export const AllIcons: StoryFn = (args) => ({
   props: {
     fudisIconArray,
