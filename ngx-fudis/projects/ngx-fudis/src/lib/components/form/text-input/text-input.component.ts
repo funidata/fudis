@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisInputSize, FudisInputType } from '../../../types/forms';
+import { FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
@@ -12,20 +12,19 @@ import {
 } from '../../../utilities/form/getValidators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
 import { BehaviorSubject } from 'rxjs';
-import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
   selector: 'fudis-text-input',
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
-  constructor(
-    _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
-    _idService: FudisIdService,
-  ) {
+export class TextInputComponent
+  extends TextFieldComponentBaseDirective
+  implements OnInit, OnChanges
+{
+  constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
     super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
@@ -52,24 +51,9 @@ export class TextInputComponent extends ControlComponentBaseDirective implements
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
-   * Available sizes for the input. Recommended size for number input is 'sm'.
-   */
-  @Input() size: FudisInputSize = 'lg';
-
-  /**
    * Type of the input - defaults to 'text'
    */
   @Input() type: FudisInputType = 'text';
-
-  /**
-   * Max length for HTML attribute and for character indicator in guidance
-   */
-  protected _maxLength = new BehaviorSubject<number | null>(null);
-
-  /**
-   * Min length for HTML attribute
-   */
-  protected _minLength = new BehaviorSubject<number | null>(null);
 
   /**
    * Max number for number input HTML attribute
@@ -84,15 +68,7 @@ export class TextInputComponent extends ControlComponentBaseDirective implements
   ngOnInit(): void {
     this._setComponentId('text-input');
     this._updateValueAndValidityTrigger.next();
-
-    /**
-     * TODO: write test
-     */
-    this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-      if (typeof value === 'string' && value.trim() === '') {
-        this.control.setValue(null);
-      }
-    });
+    this._setControlValueSubscription();
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
@@ -102,6 +78,10 @@ export class TextInputComponent extends ControlComponentBaseDirective implements
 
     if (changes.type?.currentValue !== changes.type?.previousValue) {
       this._updateValueAndValidityTrigger.next();
+    }
+
+    if (changes.nullControlOnEmptyString?.currentValue !== changes.control?.previousValue) {
+      this._setControlValueSubscription();
     }
   }
 }
