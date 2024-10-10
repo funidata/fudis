@@ -1,3 +1,4 @@
+/* stylelint-disable  @stylistic/no-missing-end-of-source-newline */
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../foundations/colors/tokens' as colors;
@@ -11,11 +12,11 @@ $_palettes: (
     10: colors.$color-primary-extra-dark,
     20: colors.$color-primary-extra-dark,
     25: colors.$color-primary-dark,
-    30: colors.$color-primary-dark, 
+    30: colors.$color-primary-dark,
     35: colors.$color-primary-dark,
-    40: colors.$color-primary-light, 
-    50: colors.$color-primary, 
-    60: colors.$color-primary, 
+    40: colors.$color-primary-light,
+    50: colors.$color-primary,
+    60: colors.$color-primary,
     70: colors.$color-primary-light,
     80: colors.$color-primary-light,
     90: colors.$color-primary-light,
@@ -107,12 +108,10 @@ $_palettes: (
     100: colors.$color-white,
   ),
 );
-
 $_rest: (
   secondary: map.get($_palettes, secondary),
   neutral: map.get($_palettes, neutral),
-  neutral-variant: map.get($_palettes,  neutral-variant),
+  neutral-variant: map.get($_palettes, neutral-variant),
   error: map.get($_palettes, error),
 );
-
 $primary: map.merge(map.get($_palettes, primary), $_rest);

@@ -47,8 +47,8 @@
       .mat-mdc-dialog-title {
         margin: spacing.$spacing-xxs 0 spacing.$spacing-sm 0;
         padding: 0;
-        pointer-events: none;
         letter-spacing: normal;
+        pointer-events: none;
 
         &::before {
           display: none;
@@ -67,8 +67,10 @@
       .mat-mdc-dialog-content {
         @include utilities.box-reset;
 
-        letter-spacing: normal;
+        /* stylelint-disable-next-line property-disallowed-list */
         line-height: tokens.$body-text-m-line-height;
+        letter-spacing: normal;
+        /* stylelint-disable-next-line property-disallowed-list */
         font-size: tokens.$body-text-m-line-height;
 
         &:focus-visible,
@@ -119,10 +121,10 @@
   @include colorMixins.bg-color('white');
 
   &.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    top: -50vh;
     /* stylelint-disable-next-line declaration-no-important */
     opacity: 0.95 !important;
     width: 300vw;
     height: 350vh;
-    top: -50vh;
   }
 }

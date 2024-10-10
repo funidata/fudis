@@ -1,19 +1,22 @@
+/* stylelint-disable  @stylistic/no-missing-end-of-source-newline */
 @use '@angular/material' as mat;
 @use './palette.scss' as palette;
 
-$fudis-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: palette.$primary,
-  ),
-  typography: (
-    brand-family: 'Fira Sans',
-    plain-family: 'Fira Sans',
-    bold-weight: 600,
-    medium-weight: 500,
-    regular-weight: 400
-  ),
-  density: (
-    scale: 0
+$fudis-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: palette.$primary,
+    ),
+    typography: (
+      brand-family: 'Fira Sans',
+      plain-family: 'Fira Sans',
+      bold-weight: 600,
+      medium-weight: 500,
+      regular-weight: 400,
+    ),
+    density: (
+      scale: 0,
+    ),
   )
-));
+);

@@ -14,7 +14,8 @@
 @use '../components/typography/heading/heading-theme.scss' as heading;
 @use '../components/typography/body-text/body-text-theme.scss' as bodyText;
 @use '../components/form/select/common/select-dropdown/select-dropdown-theme.scss' as selectDropdown;
-@use '../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss' as dd;
+@use '../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss'
+  as dd;
 @use './display-theme';
 @use './theme-m3.scss' as m3;
 
@@ -27,4 +28,3 @@ html {
   @include mat.tooltip-theme(m3.$fudis-theme);
   @include mat.datepicker-theme(m3.$fudis-theme);
 }
-

@@ -1,5 +1,6 @@
 /* stylelint-disable @stylistic/indentation */
 /* stylelint-disable declaration-no-important */
+/* stylelint-disable selector-not-notation */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
@@ -102,12 +103,18 @@
     & .mat-calendar-body-cell.mat-calendar-body-active .mat-calendar-body-selected,
     &
       .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
-      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
       @include colorMixins.text-color('gray-dark');
       @include colorMixins.bg-color('primary-light');
     }
 
-    & .mat-calendar-body-cell.mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    &
+      .mat-calendar-body-cell.mat-calendar-body-active
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
       @include colorMixins.bg-color('primary-light');
     }
 
