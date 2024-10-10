@@ -1,9 +1,7 @@
 export const stories = [
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
-  "../projects/ngx-fudis/src/lib/**/*.stories.mdx",
-  "../projects/ngx-fudis/src/lib/**/*.docs.mdx",
-  "../projects/documentation/**/*.stories.mdx",
-  "../projects/documentation/**/*.docs.mdx",
+  "../projects/ngx-fudis/src/lib/**/*.mdx",
+  "../projects/documentation/**/*.mdx",
 ];
 export const addons = [
   "@storybook/addon-links",
@@ -26,15 +24,17 @@ export const staticDirs = [
   "./../projects/ngx-fudis/src/lib/assets/images",
 ];
 export const docs = {
-  autodocs: true,
   defaultName: "Documentation",
 };
+
+// TODO: remove autocomplete hide trick, when deprecated component is removed
 export function managerHead(head) {
   return `
     ${head}
     <link rel="shortcut icon" href="favicon.ico">
     <style>
-      #components-description-list--description-list-compact { display: none;}
+      .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
+      .sidebar-item:has(#components-form-deprecated-autocomplete-single-select) { display: none;}
     </style>
   `;
 }
@@ -45,6 +45,9 @@ export function previewHead(head) {
       .storybook-flex {
           display: flex;
           align-items: center;
+      }
+      .sb-show-main.sb-main-padded:has(.fudis-footer){
+          padding: 0;
       }
     </style>
   `;

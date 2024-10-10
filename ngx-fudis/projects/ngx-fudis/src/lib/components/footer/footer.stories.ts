@@ -14,7 +14,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-footer>

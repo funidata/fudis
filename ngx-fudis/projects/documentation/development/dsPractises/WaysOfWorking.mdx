@@ -1,0 +1,74 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Documentation/Development/DS Practises/Ways of Working" />
+
+# Ways of Working
+
+<br />
+
+## Modularity
+
+Reusing components, styles and other bits and pieces of code is encouraged. If it starts to look like that part are repeated multiple times, it might be a good idea to separate that part to its own e. g. sub-component or utility function.
+
+## Naming Conventions
+
+Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions Documentation](/docs/documentation-development-ds-practises-naming-conventions--documentation).
+
+## Styles
+
+Fudis uses SCSS as its tool for defining styles. In addition various linting rules are forced through Stylelint. Stylelint quite aggressively will throw errors if there are unallowed values or attributes such as `px` values or if there are unnecessary white space or similar syntax inconsistecy.
+
+Quite many of the formatting errors can be automatically fixed on save if you have setupped your VSCode or other IDE correctly, see [VSCode Setup Documentation](/docs/documentation-development-tooling-setup-vs-code--documentation).
+
+### Some Principles for Writing Styles
+
+- Reuse components, while preventing rewriting their existing .scss styles
+
+- Component inline styles should be avoided. This allows full control over component styles through variables.
+
+  > Exceptions exist, e. g. [GridComponent](/docs/components-grid-grid--documentation) which dynamically applies @Input of `[columns]` values as native CSS grid values without need to write tens of helper CSS classes.
+
+- Components styles should be recorded in their own .scss file directly in their own folder.
+
+- Use globally defined tokens and mixins to enable colors, spacing, etc. rather than introducing hard-to-maintain local values.
+
+  > If Stylelint throws an error, that you are using an unallowed attribute or value in your scss-file, there is always a mixin for that. For example `color`, `background-color` and `font-size` are not allowed. When using mixins for these we minimise the risk that workarounds and exceptions start to appear to our code base.
+
+- Avoid using style override with `!important`
+
+- Occasionally it is unconvenient to follow the rules of Stylelint. E. g. if you need to do CSS sibling selection, but SCSS syntax with Stylelint thinks you are not following the good practises. In these occasions it is acceptable to add an ignore rule for that line of styling.
+
+### Using Foundation Tokens and Mixins in Component's SCSS-file
+
+To use foundations in component's scss file, import it with SCSS's `@use` feature and use it in similar fashion like in example below.
+
+```
+@use '../path/to/foundations/colors/tokens.scss' as colorTokens;
+@use '../path/to/foundations/colors/mixins.scss' as colorMixins;
+
+.fudis-my-new-component{
+	@include colorMixins.color('white')
+	@include colorMixins.bg-color('primary')
+
+	&__inner-svg-icon{
+		fill: colorTokens.$fudis-color-primary-light;
+	}
+}
+
+```
+
+### Angular Material Styles
+
+Under `theme` folder resides `fudis-theme.scss` and `palette.scss` files which include main style configurations for Fudis components using Angular Material as their base.
+
+If needed, you can create additional themes for the component and include that theme for a spesific component. E. g. `@include mat.datepicker-theme($fudis-datepicker-theme);` adds a spesific Datepicker theme just for the spesific datepicker component.
+
+#### Custom styling outside ngMaterial theming API
+
+**It's recommended not to override or modify Angular Material's CSS or DOM.** This will make upstream minor and patch changes potentially breaking changes for Fudis.
+
+But if ngMaterial based Fudis component requires additional tweaking in styles, create a file with rest of the component files. E. g. to `components/form/datepicker` a file `ngMaterial-theme.scss`. Also import this file with `@use` to root `style.scss` file to make it available to application and ngMaterial.
+
+```
+@use "./src/lib/components/form/date/datepicker/ngMaterial-theme.scss" as datepicker;
+```

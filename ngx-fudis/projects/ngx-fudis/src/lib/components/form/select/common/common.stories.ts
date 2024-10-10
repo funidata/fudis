@@ -49,7 +49,7 @@ const commonArgs: Partial<SelectComponent> = {
   autocompleteHelpText: 'Hello from autocompleteHelpText!',
 };
 
-const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const SelectAutocompleteTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     defaultOptions,
@@ -83,9 +83,7 @@ SelectAutocomplete.args = {
   ...commonArgs,
 };
 
-const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
-  args: MultiselectComponent,
-) => ({
+const MultiselectAutocompleteTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     defaultOptions,
@@ -120,9 +118,7 @@ MultiselectAutocomplete.args = {
   ...(commonArgs as Partial<MultiselectComponent>),
 };
 
-const SelectDropdownWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (
-  args: SelectComponent,
-) => ({
+const SelectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),
@@ -158,9 +154,7 @@ SelectDropdownWithGroupedOptions.args = {
   ...(commonArgs as Partial<SelectComponent>),
 };
 
-const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn<MultiselectComponent> = (
-  args: MultiselectComponent,
-) => ({
+const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),

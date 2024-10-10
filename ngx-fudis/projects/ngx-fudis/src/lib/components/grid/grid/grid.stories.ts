@@ -1,7 +1,7 @@
 import { StoryFn, Meta, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 import { GridComponent } from './grid.component';
 import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utilities/storybook';
-import docs from './grid.docs.mdx';
+import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
 import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
@@ -159,8 +159,8 @@ const columnsToString = (columns: string | number | object): string => {
   return JSON.stringify(columns);
 };
 
-const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
-  props: { ...args, transformedColumns: columnsToString(args.columns) },
+const ExampleTemplate: StoryFn = (args) => ({
+  props: { ...args, transformedColumns: columnsToString(args['columns']) },
   template: html`<fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
       >Current value of <code>columns</code> is:
       <code>{{transformedColumns}}</code></fudis-body-text
@@ -350,7 +350,7 @@ ResponsiveColumns.parameters = {
   },
 };
 
-const ExampleWithServiceTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
+const ExampleWithServiceTemplate: StoryFn = (args) => ({
   props: { ...args },
   template: html` <example-grid-with-service></example-grid-with-service>`,
 });

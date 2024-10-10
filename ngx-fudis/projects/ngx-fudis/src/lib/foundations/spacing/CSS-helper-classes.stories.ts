@@ -1,7 +1,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from '../../components/button/button.component';
 import { spacingExclude } from '../../utilities/storybook';
-import docs from './CSS-helper-classes.docs.mdx';
+import docs from './CSS-helper-classes.mdx';
 
 export default {
   title: 'Foundations/Spacing/CSS Helper Classes',

@@ -1,0 +1,192 @@
+import { Meta, Typeset } from "@storybook/blocks";
+
+<Meta title="Foundations/Typography" />
+
+export const heading = {
+  type: {
+    primary: "Fira Sans",
+  },
+  weight: {
+    medium: "500",
+    bold: "600",
+  },
+  size: {
+    xxs: 14,
+    xs: 16,
+    sm: 18,
+    md: 20,
+    lg: 24,
+    xl: 28,
+    xxl: 36,
+  },
+};
+
+export const body = {
+  type: {
+    primary: "Fira Sans",
+  },
+  weight: {
+    light: "300",
+    regular: "400",
+  },
+  size: {
+    lg: 16,
+    md: 14,
+    sm: 12,
+  },
+};
+
+export const table_caption_text = "Fudis table caption text";
+
+export const text_xxl = "Fudis heading XXL (2.25rem) 500";
+export const text_xl = "Fudis heading XL (1.75rem) 500";
+export const text_lg = "Fudis heading LG (1.5rem) 500";
+export const text_md = "Fudis heading MD (1.25rem) 500";
+export const text_sm = "Fudis heading SM (1.125rem) 500";
+export const text_xs = "Fudis heading XS (1rem) 600";
+export const text_xxs = "Fudis heading XXS (0.857rem) 600";
+
+export const body_sm =
+  'Fudis body-text sm-regular (0.75rem) 400: "The quick brown fox jumps over the lazy dog."';
+export const body_sm_light =
+  'Fudis body-text sm-light (0.75rem) 300: "The quick brown fox jumps over the lazy dog."';
+export const body_md =
+  'Fudis body-text md-regular (0.875rem) 400: "The quick brown fox jumps over the lazy dog."';
+export const body_md_light =
+  'Fudis body-text md-light (0.875rem) 300: "The quick brown fox jumps over the lazy dog."';
+export const body_lg =
+  'Fudis body-text lg-regular (1rem) 400: "The quick brown fox jumps over the lazy dog."';
+export const body_lg_light =
+  'Fudis body-text lg-light (1rem) 300: "The quick brown fox jumps over the lazy dog."';
+
+# Typography
+
+[Figma for Typography](https://www.figma.com/file/a6G6ZD6W3tlq0qmUkdvdp1/Fudis-DS-Foundations?type=design&node-id=26-193&mode=design&t=WlBPoaV8ItZbOjWm-0)
+
+**Font:** Fira Sans
+
+## Headings
+
+**Weights:** 500(medium), 600(bold)
+
+<Typeset
+  fontSizes={[Number(heading.size.xxl)]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_xxl}
+  fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(heading.size.xl)]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_xl}
+  fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(heading.size.lg)]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_lg}
+  fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(heading.size.md)]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_md}
+  fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(heading.size.sm)]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_sm}
+  fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(heading.size.xs)]}
+  fontWeight={heading.weight.bold}
+  sampleText={text_xs}
+  fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(heading.size.xxs)]}
+  fontWeight={heading.weight.bold}
+  sampleText={text_xxs}
+  fontFamily={heading.type.primary}
+/>
+
+## Body Text
+
+**Weights:** 300(light) 400(regular)
+
+<Typeset
+  fontSizes={[Number(body.size.lg)]}
+  fontWeight={body.weight.regular}
+  sampleText={body_lg}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(body.size.lg)]}
+  fontWeight={body.weight.light}
+  sampleText={body_lg_light}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(body.size.md)]}
+  fontWeight={body.weight.regular}
+  sampleText={body_md}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(body.size.md)]}
+  fontWeight={body.weight.light}
+  sampleText={body_md_light}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(body.size.sm)]}
+  fontWeight={body.weight.regular}
+  sampleText={body_sm}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[Number(body.size.sm)]}
+  fontWeight={body.weight.light}
+  sampleText={body_sm_light}
+  fontFamily={body.type.primary}
+/>
+
+## Table Caption
+
+<table>
+  <th>Mixin</th>
+  <th>Styles</th>
+  <th>Example</th>
+
+  <tbody>
+    <tr>
+      <td>table-caption</td>
+
+      <td>
+        <p>Size: 14px / 0.875rem</p>
+        <p>Weight: 400 / Regular</p>
+        <p>Transform: Uppercase</p>
+      </td>
+
+      <td>
+        <p class="fudis-table-caption">
+          {table_caption_text}
+        </p>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

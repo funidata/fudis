@@ -34,7 +34,7 @@ const commonControl = new FormControl<FudisSelectOption<object> | null>(defaultO
   FudisValidators.required('You must choose a pet!'),
 ]);
 
-const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const SelectShowcaseTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     defaultOptions,
@@ -257,7 +257,7 @@ const commonMultiselectControl = new FormControl<FudisSelectOption<object>[] | n
   [FudisValidators.minLength(2, 'Pick at least two pets', true)],
 );
 
-const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const MultiselectShowcaseTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     defaultOptions,

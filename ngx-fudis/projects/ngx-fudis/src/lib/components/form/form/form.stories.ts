@@ -4,7 +4,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FormComponent } from './form.component';
-import docs from './form.docs.mdx';
+import docs from './form.mdx';
 import { fudisHeadingLevelArray } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { fudisSpacingArray } from '../../../types/spacing';
@@ -67,7 +67,7 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
+export const Example: StoryFn = (args) => ({
   props: {
     ...args,
     formGroup: new FormGroup({
@@ -175,7 +175,7 @@ Example.parameters = {
   },
 };
 
-export const ExampleWithMultipleForms: StoryFn<FormComponent> = (args: FormComponent) => ({
+export const ExampleWithMultipleForms: StoryFn = (args) => ({
   props: args,
   template: html` <example-with-multiple-forms />`,
 });
@@ -186,7 +186,7 @@ ExampleWithMultipleForms.parameters = {
   },
 };
 
-export const ExampleWithDynamicValidators: StoryFn<FormComponent> = (args: FormComponent) => ({
+export const ExampleWithDynamicValidators: StoryFn = (args) => ({
   props: args,
   template: html` <example-dynamic-validator
     [title]="title"

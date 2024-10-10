@@ -1,0 +1,69 @@
+import { Meta, ArgTypes, Source } from "@storybook/blocks";
+import { FudisGridService } from "./grid.service.ts";
+
+<Meta title="Services/Grid" />
+
+# Grid Service
+
+Grid Service provides tools to apply default property values to all Grid Components and Grid Directive elements application has. These default values can be overwritten or totally ignored for each grid if needed.
+
+## How To Use
+
+Grid Service has getter and setter functions for default Grid properties.
+
+### getDefaultValues()
+
+`FudisGridService.getDefaultValues()` returns a signal function. So when these default values change, there is an option to trigger Angular's `effect()` hook.
+
+### setDefaultValues()
+
+#### Function and its Typing
+
+`FudisGridService.setDefaultValues()` requires an object paremeter of type `FudisGridProperties`.
+
+<Source
+  code={`
+  interface FudisGridProperties {
+  align?: FudisGridAlign;
+  alignItemsY?: FudisGridAlignItems;
+  alignItemsX?: FudisGridAlignItems;
+  classes?: string[];
+  columns?: FudisBreakpointValueResponsive;
+  columnGap?: FudisGridGap;
+  rowGap?: FudisGridGap;
+  width?: FudisGridWidth;
+}
+`}
+/>
+
+#### Combining Values from Grid Service and Individual Properties of Single Grid Component
+
+If Grid Component has an individually specified properties, these Grid Service's defaults **will not** be applied.
+
+Only exceptions is `columns` property. Just like the Grid Component, Grid Service's column attribute accepts an object where `grid-template-columns` rule can be defined per each breakpoint.
+
+Actually applied `columns` is a combination from both Grid Service and Grid Component.
+
+<Source
+  code={`
+
+// HTML Template
+
+<fudis-grid [columns]={xs: 2, md: 3, xl: 6} />
+
+// Configuration set in Fudis Grid Service
+
+defaultGridValues = {xs: 1, sm: 2};
+
+// Actually applied values to Grid Component would be then
+
+<fudis-grid [columns]={xs: 2, sm: 2, md: 3, xl: 6} />
+
+`}
+/>
+
+So individually set breakpoint column values override those set in configuration.
+
+## Properties
+
+<ArgTypes of={FudisGridService} />

@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { HorizontalRuleComponent } from './horizontal-rule.component';
-import docs from './horizontal-rule.docs.mdx';
+import docs from './horizontal-rule.mdx';
 
 export default {
   title: 'Components/Horizontal Rule',
@@ -14,7 +14,7 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn<HorizontalRuleComponent> = (args: HorizontalRuleComponent) => ({
+export const Example: StoryFn = (args) => ({
   ...args,
   template: html` <fudis-body-text class="fudis-mb-md">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
