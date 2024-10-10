@@ -31,9 +31,3 @@ const Template: StoryFn = (args) => ({
 });
 
 export const Example = Template.bind({});
-
-Example.parameters = {
-  controls: {
-    exclude: /.*/g,
-  },
-};

@@ -14,11 +14,23 @@
   .fudis-link {
     @include typography.link-md;
 
-    min-height: spacing.$spacing-lg;
+    &:first-of-type {
+      margin-top: spacing.$spacing-sm;
+    }
 
-    @include breakpoints.breakpoint-max('lg') {
+    &:not(:last-of-type) {
+      margin-bottom: spacing.$spacing-lg;
+    }
+
+    @include breakpoints.breakpoint('lg') {
       &:not(:last-of-type) {
-        margin-bottom: spacing.$spacing-sm;
+        margin-bottom: spacing.$spacing-none;
+      }
+    }
+
+    @include breakpoints.breakpoint('sm') {
+      &:first-of-type {
+        margin-top: spacing.$spacing-none;
       }
     }
   }
@@ -45,6 +57,7 @@
 
       &__logo {
         margin-right: spacing.$spacing-md;
+        margin-bottom: spacing.$spacing-none;
       }
 
       .fudis-link {
