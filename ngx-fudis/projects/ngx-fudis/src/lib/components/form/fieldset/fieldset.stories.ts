@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FudisSelectOption, FudisRadioButtonOption } from '../../../types/forms';
+import { FudisRadioButtonOption } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
@@ -83,12 +83,6 @@ class FieldsetExampleComponent {
     courseType: new FormControl('', FudisValidators.required('Course type must be selected.')),
   });
 
-  languageOptions: FudisSelectOption<object>[] = [
-    { value: 'finnish', label: 'FI' },
-    { value: 'swedish', label: 'SV' },
-    { value: 'english', label: 'EN' },
-  ];
-
   courseTypeOptions: FudisRadioButtonOption<object>[] = [
     { value: 'basic', label: 'Basic' },
     { value: 'advanced', label: 'Advanced' },
@@ -116,7 +110,7 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn<FieldSetComponent> = (args: FieldSetComponent) => ({
+export const Example: StoryFn = (args) => ({
   props: args,
   template: html` <example-fieldset /> `,
 });

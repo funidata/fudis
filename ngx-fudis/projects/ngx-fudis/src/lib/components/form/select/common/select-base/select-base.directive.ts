@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   ContentChild,
   Directive,
   ElementRef,
@@ -14,6 +13,8 @@ import {
   WritableSignal,
   effect,
   signal,
+  AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
@@ -35,15 +36,18 @@ import { ControlComponentBaseDirective } from '../../../../../directives/form/co
 @Directive({
   selector: '[fudisSelectBase]',
 })
-export class SelectBaseDirective extends ControlComponentBaseDirective implements OnChanges {
+export class SelectBaseDirective
+  extends ControlComponentBaseDirective
+  implements OnChanges, AfterViewInit
+{
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
+    protected _cdr: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _focusService, _changeDetectorRef);
+    super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
@@ -241,6 +245,13 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
    * Keyboard button pressed down
    */
   private _keyDown: string | null = null;
+
+  override ngAfterViewInit(): void {
+    this._afterViewInitCommon();
+
+    // Needed when Select is inside closed Expandable, and Form Submit is triggered before component is loaded
+    this._cdr.detectChanges();
+  }
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
@@ -707,7 +718,9 @@ export class SelectBaseDirective extends ControlComponentBaseDirective implement
         this._clickFromIcon);
 
     if (this._clickFromIcon) {
-      this._focusToSelectInput();
+      if (!this.control.disabled) {
+        this._focusToSelectInput();
+      }
     }
   }
 }

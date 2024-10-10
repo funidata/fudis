@@ -1,9 +1,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
-
 import { ButtonComponent } from '../../components/button/button.component';
-import { TooltipDirective } from './tooltip.directive';
 import { tooltipExclude } from '../../utilities/storybook';
-import readme from './readme.mdx';
+import readme from './tooltip.mdx';
 
 export default {
   title: 'Directives/Tooltip',
@@ -29,7 +27,7 @@ export default {
 
 const html = String.raw;
 
-export const ExampleWithNativeButton: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+export const ExampleWithNativeButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <button
@@ -44,12 +42,12 @@ export const ExampleWithNativeButton: StoryFn<TooltipDirective> = (args: Tooltip
 });
 
 ExampleWithNativeButton.args = {
-  tooltip: 'Greetings from toggle tooltip, I hope you can see me!',
+  tooltip: 'Greetings from tooltip, I hope you can see me!',
   tooltipPosition: 'right',
   tooltipToggle: false,
 };
 
-export const ExampleWithFudisButton: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+export const ExampleWithFudisButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-button
@@ -63,7 +61,7 @@ export const ExampleWithFudisButton: StoryFn<TooltipDirective> = (args: TooltipD
 });
 
 ExampleWithFudisButton.args = {
-  tooltip: 'Greetings from toggle tooltip, I hope you can see me!',
+  tooltip: 'Greetings from tooltip, I hope you can see me!',
   tooltipPosition: 'right',
   tooltipToggle: false,
 };

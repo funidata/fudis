@@ -3,7 +3,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
-import docs from './dialog.docs.mdx';
+import docs from './dialog.mdx';
 import { FudisValidators } from '../../utilities/form/validators';
 import { dialogExclude } from '../../utilities/storybook';
 import { DialogComponent } from './dialog.component';
@@ -506,22 +506,22 @@ export default {
 
 const html = String.raw;
 
-const TemplateGrid: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+const TemplateGrid: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-dialog-with-grid [size]="size"></fudis-dialog-with-grid> `,
 });
 
-const TemplateFrom: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+const TemplateFrom: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-dialog-laucher [size]="size"></fudis-dialog-laucher> `,
 });
 
-const TemplateNested: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+const TemplateNested: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-nested-dialogs [size]="size"></fudis-nested-dialogs> `,
 });
 
-const TemplateSize: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+const TemplateSize: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-dialog-size-example></fudis-dialog-size-example> `,
 });

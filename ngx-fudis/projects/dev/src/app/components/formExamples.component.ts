@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import {
   FudisCheckboxOption,
   FudisSelectOption,
@@ -126,9 +126,9 @@ export class AppFormExampleComponent implements OnInit {
     ),
     withLanguages: new FormGroup(
       {
-        finnish: new FormControl<string | null>(null),
-        swedish: new FormControl<string | null>(null),
-        english: new FormControl<string | null>(null),
+        fi: new FormControl<string | null>(null),
+        sv: new FormControl<string | null>(null),
+        en: new FormControl<string | null>(null),
       },
       FudisGroupValidators.oneRequired(
         this._translocoService.selectTranslateObject('form_errors.one_required'),

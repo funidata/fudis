@@ -87,9 +87,7 @@ export default {
   },
 } as Meta;
 
-const ExampleTemplate: StoryFn<LanguageBadgeGroupComponent> = (
-  args: LanguageBadgeGroupComponent,
-) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     languageChange: action('languageChange'),
@@ -110,9 +108,7 @@ Example.parameters = {
   },
 };
 
-const WithInteractiveContentTemplate: StoryFn<LanguageBadgeGroupComponent> = (
-  args: LanguageBadgeGroupComponent,
-) => ({
+const WithInteractiveContentTemplate: StoryFn = (args) => ({
   props: {
     ...args,
   },

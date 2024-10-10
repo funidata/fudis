@@ -24,13 +24,11 @@ const control: FormControl = new FormControl(
   FudisValidators.required('You must choose a fruit'),
 );
 
-const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
-  args: RadioButtonGroupComponent,
-) => ({
+const ExampleTestTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formControl: control,
-    radioButtonChange: action('radioButtonChange'),
+    handleChange: action('handleChange'),
     fruitOptions,
   },
   template: html`<fudis-radio-button-group
@@ -42,7 +40,7 @@ const ExampleTestTemplate: StoryFn<RadioButtonGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
-    (handleChange)="radioButtonChange($event)"
+    (handleChange)="handleChange($event)"
   >
     <fudis-radio-button
       *ngFor="let option of fruitOptions"
@@ -71,7 +69,7 @@ Example.args = {
       [label]="'Choose a pet'"
       [helpText]="'We all should have a pet.'"
       [control]="control"
-      (handleChange)="radioButtonChange($event)"
+      (handleChange)="handleChange($event)"
     >
       <fudis-radio-button
         *ngFor="let option of petOptions"
@@ -94,9 +92,7 @@ class DisabledRadioGroupExampleComponent {
   );
 }
 
-const Disabled: StoryFn<DisabledRadioGroupExampleComponent> = (
-  args: DisabledRadioGroupExampleComponent,
-) => ({
+const Disabled: StoryFn = (args) => ({
   props: args,
   template: html`<disabled-radio-group-example></disabled-radio-group-example> `,
 });

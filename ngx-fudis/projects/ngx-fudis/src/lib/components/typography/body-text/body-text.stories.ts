@@ -42,7 +42,7 @@ Example.args = {
     'Mutiny Pirate Round execution dock spanker broadside schooner aye reef sails quarter yo-ho-ho.',
 };
 
-export const AllVariants: StoryFn<BodyTextComponent> = (args: BodyTextComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-body-text [variant]="'lg-regular'"

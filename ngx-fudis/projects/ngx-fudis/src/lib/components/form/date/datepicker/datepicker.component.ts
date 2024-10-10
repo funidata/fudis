@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   Host,
   Input,
@@ -25,7 +24,6 @@ import {
   hasRequiredValidator,
 } from '../../../../utilities/form/getValidators';
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
-import { FormComponent } from '../../form/form.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
 import { BehaviorSubject } from 'rxjs';
@@ -52,7 +50,6 @@ export class DatepickerComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
     @Host() @Optional() protected _parentDateRange: DateRangeComponent | null,
     private _adapter: DateAdapter<Date>,
     private _datePickerConfigService: FudisTranslationService,
@@ -60,9 +57,8 @@ export class DatepickerComponent
     private _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _focusService, _changeDetectorRef);
+    super(_idService, _focusService);
 
     /**
      * Set and delete errors from Date Range start and end date inputs
@@ -222,11 +218,6 @@ export class DatepickerComponent
     if (!this._parseValidatorInstance && this.dateParse) {
       this._addParseValidator();
     }
-
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.control.invalid,
-    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {

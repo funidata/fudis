@@ -1,12 +1,12 @@
 import {
+  AfterContentInit,
   Component,
   ContentChild,
-  Host,
+  ElementRef,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Optional,
   ViewEncapsulation,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
@@ -20,7 +20,6 @@ import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellane
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { FormComponent } from '../form/form/form.component';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -29,9 +28,12 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./section.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
+export class SectionComponent
+  extends TooltipApiDirective
+  implements OnInit, AfterContentInit, OnChanges, OnDestroy
+{
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent | null,
+    private _element: ElementRef,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
@@ -129,11 +131,19 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
    */
   private _errorSummaryInfoSent: boolean = false;
 
+  private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
+
   ngOnInit(): void {
     this._setSectionId();
 
     this._headingId = `${this.id}-heading`;
     this._classList.next(this._getClasses());
+    this._addToErrorSummary();
+  }
+
+  ngAfterContentInit(): void {
+    this._parentForm = this._errorSummaryService.getFormAncestor(this._element.nativeElement);
+
     this._addToErrorSummary();
   }
 

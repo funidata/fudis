@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
-import docs from './checkbox-group.docs.mdx';
+import docs from './checkbox-group.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
@@ -79,7 +79,7 @@ const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
 
-const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formGroup: basicFormGroup,
@@ -129,9 +129,7 @@ const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<o
   [FudisGroupValidators.oneRequired(new BehaviorSubject('Please pick one! :('))],
 );
 
-const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
-  args: CheckboxGroupComponent,
-) => ({
+const ExampleWithDisabledTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formGroup: withDisabledFormGroupOptions,
@@ -190,9 +188,7 @@ const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<obj
   ],
 );
 
-const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
-  args: CheckboxGroupComponent,
-) => ({
+const ExampleWithMinMaxTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formGroup: withMinMaxFormGroupOptions,
@@ -231,9 +227,7 @@ ExampleWithMinMax.args = {
   tooltipPosition: 'right',
 };
 
-const ExampleWithoutFormGroupTemplate: StoryFn<CheckboxGroupComponent> = (
-  args: CheckboxGroupComponent,
-) => ({
+const ExampleWithoutFormGroupTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     checkboxChange: action('checkboxChange'),

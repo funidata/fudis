@@ -3,14 +3,13 @@ import { moduleMetadata } from "@storybook/angular";
 import docJson from "../documentation.json";
 import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
-import { useTheme } from "./useTheme";
 
 setCompodocJson(docJson);
 
 const preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
+      disableSaveFromUI: true,
       exclude: excludeRegex(),
       matchers: {
         color: /(background|color)$/i,
@@ -115,27 +114,11 @@ const preview = {
       },
     },
   },
-};
 
-export const globalTypes = {
-  theme: {
-    name: "Theme",
-    description: "Project theme for components",
-    defaultValue: "sisu",
-    toolbar: {
-      icon: "mirror",
-      items: [
-        { value: "sisu", title: "Sisu" },
-        { value: "into", title: "Into" },
-      ],
-      title: true,
-      dynamicTitle: true,
-    },
-  },
+  tags: ["autodocs"],
 };
 
 export const decorators = [
-  useTheme,
   moduleMetadata({
     imports: [NgxFudisModule],
   }),

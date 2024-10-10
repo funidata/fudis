@@ -50,9 +50,9 @@ describe('getValidators utility function', () => {
     it('should return true with oneRequired validator group with LocalizedTextGroup', () => {
       const testFormGroup = new FormGroup<FudisLocalizedTextGroup<object>>(
         {
-          finnish: new FormControl<string | null>(null),
-          swedish: new FormControl<string | null>(''),
-          english: new FormControl<string | null>('Hello there!'),
+          fi: new FormControl<string | null>(null),
+          sv: new FormControl<string | null>(''),
+          en: new FormControl<string | null>('Hello there!'),
         },
         [FudisGroupValidators.oneRequired('One must have some value!')],
       );

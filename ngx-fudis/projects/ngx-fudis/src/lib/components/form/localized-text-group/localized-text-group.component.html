@@ -14,10 +14,10 @@
         *ngIf="variant === 'text-input' && control.key === _selectControl.value.value"
         #inputRef
         class="fudis-form-input fudis-localized-text-group__inputs__text"
-        [attr.aria-invalid]="
-          (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
-          null
+        [class.fudis-form-input--touched]="
+          formGroup.controls[control.key].touched || formGroup.touched
         "
+        [attr.aria-invalid]="formGroup.invalid || null"
         [attr.aria-label]="
           ariaLabel
             ? label + ', ' + _selectControl.value.label + ariaLabel
@@ -41,10 +41,10 @@
         #inputRef
         *ngIf="variant === 'text-area' && control.key === _selectControl.value.value"
         class="fudis-form-input fudis-localized-text-group__inputs__area"
-        [attr.aria-invalid]="
-          (formGroup.controls[control.key].touched && formGroup.controls[control.key].invalid) ||
-          null
+        [class.fudis-form-input--touched]="
+          formGroup.controls[control.key].touched || formGroup.touched
         "
+        [attr.aria-invalid]="formGroup.invalid || null"
         [attr.aria-label]="
           ariaLabel
             ? label + ', ' + _selectControl.value.label + ariaLabel
@@ -67,11 +67,9 @@
     <fudis-guidance
       *ngIf="!disableGuidance"
       [inputLabel]="label"
-      [reloadErrorSummary]="_reloadErrorSummaryTrigger"
       [maxLength]="_maxLength | async"
       [helpText]="helpText"
       [formGroup]="formGroup"
-      [formId]="_parentForm?.id || null"
       [for]="id"
       [selectedOption]="_selectControl.value.value"
     >

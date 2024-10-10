@@ -1,12 +1,9 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  Host,
   Input,
   OnChanges,
   OnInit,
-  Optional,
   ViewChild,
   effect,
   AfterViewInit,
@@ -32,7 +29,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.service';
 
 import { BehaviorSubject } from 'rxjs';
-import { FormComponent } from '../form/form.component';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { SelectComponent } from '../select/select/select.component';
@@ -49,14 +45,12 @@ export class LocalizedTextGroupComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _translationService: FudisTranslationService,
     protected _DOMUtilitiesService: FudisDOMUtilitiesService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _focusService, _changeDetectorRef);
+    super(_idService, _focusService);
     effect(() => {
       const translations = _translationService.getTranslations()();
 
@@ -86,12 +80,12 @@ export class LocalizedTextGroupComponent
   @Input({ required: true }) override formGroup: FormGroup<FudisLocalizedTextGroup<object>>;
 
   /**
-   * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'english', label: 'EN'}" pairs with Form Group's "english: new FormControl('')"
+   * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'en', label: 'EN'}" pairs with Form Group's "en: new FormControl('')"
    */
   @Input() options: FudisLocalizedTextGroupOptions[] = [
-    { controlName: 'finnish', label: 'FI' },
-    { controlName: 'swedish', label: 'SV' },
-    { controlName: 'english', label: 'EN' },
+    { controlName: 'fi', label: 'FI' },
+    { controlName: 'sv', label: 'SV' },
+    { controlName: 'en', label: 'EN' },
   ];
 
   /**
@@ -199,12 +193,6 @@ export class LocalizedTextGroupComponent
 
   ngOnInit(): void {
     this._setComponentId('localized-text-group');
-
-    // Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
-    this._triggerErrorSummaryOnInitReload(
-      this._parentForm?.errorSummaryVisible,
-      this.formGroup.invalid,
-    );
   }
 
   ngOnChanges(changes: FudisComponentChanges<LocalizedTextGroupComponent>): void {
