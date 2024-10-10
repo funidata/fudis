@@ -7,6 +7,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement } from '../../../utilities/tests/utilities';
+import { SimpleChange } from '@angular/core';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -110,6 +111,40 @@ describe('TextInputComponent', () => {
 
       expect(component.control.value).toEqual('210');
       expect(component.control.invalid).toBeTruthy();
+    });
+
+    it('should set value as null, if empty string is passed as value', () => {
+      component.control.patchValue('');
+
+      expect(component.control.value).toEqual(null);
+
+      component.control.patchValue('  ');
+
+      expect(component.control.value).toEqual(null);
+    });
+
+    it('should not set value as null, if empty string is passed as value', () => {
+      const previousValue = component.nullControlOnEmptyString;
+
+      component.nullControlOnEmptyString = false;
+
+      component.ngOnChanges({
+        nullControlOnEmptyString: new SimpleChange(
+          previousValue,
+          component.nullControlOnEmptyString,
+          true,
+        ),
+      });
+
+      expect(component.control.value).toEqual(null);
+
+      component.control.patchValue('');
+
+      expect(component.control.value).toEqual('');
+
+      component.control.patchValue('  ');
+
+      expect(component.control.value).toEqual('  ');
     });
   });
 

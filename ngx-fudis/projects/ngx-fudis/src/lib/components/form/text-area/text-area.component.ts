@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
@@ -10,15 +9,17 @@ import {
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
-import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
+import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
 
 @Component({
   selector: 'fudis-text-area',
   templateUrl: './text-area.component.html',
   styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
+export class TextAreaComponent
+  extends TextFieldComponentBaseDirective
+  implements OnInit, OnChanges
+{
   constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
     super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -31,42 +32,23 @@ export class TextAreaComponent extends ControlComponentBaseDirective implements 
   }
 
   /**
-   * FormControl for text-area
+   * FormControl binded to the HTML textarea element
    */
   @Input({ required: true }) override control: FormControl<string | null | number>;
-
-  /**
-   * Text Area size
-   */
-  @Input() size: FudisInputSize = 'lg';
-
-  /**
-   * Min length for HTML attribute
-   */
-  protected _minLength = new BehaviorSubject<number | null>(null);
-
-  /**
-   * Max length for HTML attribute and for character indicator in guidance
-   */
-  protected _maxLength = new BehaviorSubject<number | null>(null);
 
   ngOnInit(): void {
     this._setComponentId('text-area');
     this._updateValueAndValidityTrigger.next();
-
-    /**
-     * TODO: write test
-     */
-    this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-      if (typeof value === 'string' && value.trim() === '') {
-        this.control.setValue(null);
-      }
-    });
+    this._setControlValueSubscription();
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
+    }
+
+    if (changes.nullControlOnEmptyString?.currentValue !== changes.control?.previousValue) {
+      this._setControlValueSubscription();
     }
   }
 }
