@@ -17,12 +17,12 @@
   text-transform: uppercase !important;
   color: colors.$color-white !important;
 
-  &.mat-mdc-raised-button:not(:disabled) {
-    background-color: colors.$color-primary;
-  }
-
   &:focus {
     @include focus.focus-generic;
+  }
+
+  &.mat-mdc-raised-button:not(:disabled) {
+    background-color: colors.$color-primary;
   }
 }
 
