@@ -106,6 +106,7 @@ import { LinkDirective } from './directives/link/link.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
+import { TextFieldComponentBaseDirective } from './directives/form/text-field-component-base/text-field-component-base.directive';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 
 /**
@@ -199,8 +200,9 @@ import { FudisTranslationService } from './services/translation/translation.serv
     SelectGroupComponent,
     SelectOptionBaseDirective,
     SelectOptionComponent,
-    TextInputComponent,
     TextAreaComponent,
+    TextFieldComponentBaseDirective,
+    TextInputComponent,
     TooltipDirective,
     ValidatorErrorMessageComponent,
     SelectIconsComponent,
