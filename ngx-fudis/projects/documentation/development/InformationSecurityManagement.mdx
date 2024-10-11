@@ -15,30 +15,32 @@ import { Meta, Markdown } from "@storybook/blocks";
 </Markdown>
 
 Fudis is an open-source project for maintaining and developing a design system for Funidata's web applications.
-Fudis Design System component library is deployed to public Storybook. More in depth designs guidelines are maintained in Funidata's private Figma account for the use of Funidata's other products.
+With each new version release, Fudis Design System developer documentation is deployed to public Storybook and component library as public [package to NPM](https://www.npmjs.com/package/@funidata/ngx-fudis). More in depth designs guidelines are maintained in Funidata's private Figma account for the use of Funidata's other products.
 
-## Developing process
+## Developing Process and Version Controls Practises
 
 Fudis Design System maintenance responsibility belongs to one development team at Funidata, which administers all project's code contributions.
 A third party contributions are governed by a public [Contributor License Agreement](https://github.com/funidata/fudis/blob/main/CLA).
 
-Code review is an important step in Fudis developmet process to get a second opinion on the solution and implementation before it is merged.
-Fudis coding standards ensure uniformity across codebase, making it easier for developers to read, understand, and maintain code.
-For example, Typescript's strong typing reduces security risks as with unwanted typed values the build will fail.
+As a general widely supported Design System development guideline, Fudis components and utilities are dumb user interface building blocks, and and it is client application's responsibility to choose what data is passed to the components.
 
-Fudis uses CI/CD pipeline process though GitHub Actions in delivering newer version of the library.
+Code review is an important step in Fudis developmet process to get a second opinion on the solution and implementation. Pull requests cannot be merged before other core developer has approved it.
 
-## Testing practices
+Fudis coding standards ensure uniformity across codebase, making it easier for developers to read, understand, and maintain code. For example, Typescript's strong typing reduces security risks as with unwanted typed values the build will fail. Various widely supported linters are used to avoid e.g. deprecated functions and other antipatterns.
 
-All Design System library components are expected to have unit tests and visual regression tests, which are run within each pull request.
+Fudis uses GitHub Actions CI/CD pipelines in delivering newer version of the library. The secret keys required to run various CI/CD actions can only be managed by repository's administrators. GitHub's provided tools e.g. CodeQL analysis and Secret scanning is enabled to automatically catch and prevent possible vulnerabilities.
 
-## Service deployment
+## Testing Practices
+
+All repositorys components and functionality are expected to have unit tests and visual regression E2E tests. Tests are always run with each pull request, after merging PR to main branch and when running NPM package release script. If tests fail merging and deployment is halted until failed checks are resolved.
+
+## Service Deployment
 
 Setting up the development environment instructions in [here.](/docs/documentation-development-getting-started--documentation)
 
-## Data handling
+## Data Handling
 
-Fudis does not have any backend services. Sensitive data is not used in developing and testing.
+Fudis does not have any backend services. Sensitive data is not used in developing and testing, only fake mock data.
 
 ## Dependencies
 
