@@ -12,6 +12,7 @@ test("datepicker default init, focus, fill, open, select", async ({ page }) => {
   await page.getByTestId("fudis-datepicker-1").fill(date);
   await expect(page).toHaveScreenshot("default-3-fill.png");
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
+  await expect(page.getByTestId("cdk-overlay-0")).toBeVisible();
   await expect(page).toHaveScreenshot("default-4-open-calendar.png", { fullPage: true });
   await page.keyboard.press("ArrowLeft");
   await page.keyboard.press("ArrowLeft");
@@ -21,6 +22,7 @@ test("datepicker default init, focus, fill, open, select", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await expect(page).toHaveScreenshot("default-5-before-selection.png", { fullPage: true });
   await page.keyboard.press("Enter");
+  await expect(page.getByTestId("cdk-overlay-0")).not.toBeVisible();
   await expect(page.getByText("Choose your favourite date.")).toBeVisible();
   await expect(page).toHaveScreenshot("default-6-selected.png", { fullPage: true });
 });
