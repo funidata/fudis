@@ -1,12 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -24,11 +16,7 @@ export class RadioButtonGroupComponent
   extends ControlComponentBaseDirective
   implements OnInit, OnChanges
 {
-  constructor(
-    _changeDetectorRef: ChangeDetectorRef,
-    _focusService: FudisFocusService,
-    _idService: FudisIdService,
-  ) {
+  constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
     super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
