@@ -15,20 +15,6 @@ Description List displays a list of key value pairs and has two different list v
 
 ## Usage Guidelines
 
-### Basic Structure
-
-Description List is built using child components as follows:
-
-<Source
-  code={`
-<fudis-dl>
-  <fudis-dl-item>
-    <fudis-dt />
-    <fudis-dd />
-  </fudis-dl-item>
-</fudis-dl>`}
-/>
-
 ### Text Content
 
 Term and Details content is passed through `contentText` Input property.
@@ -58,7 +44,7 @@ Details element has also `subHeading` Input for adding optional sub-heading betw
 
 ### Tag Selection
 
-By default Description List Component, as its name suggests, renders a `<dl>` tag with child `<dt>` and `<dd>` tags. If you have only one item in your list, it is adviced to change `tag` property to `p`. When set, the component will instead of list element render a paragraph element.
+By default Description List Component, as its name suggests, renders a `<dl>` tag with child `<dt>` and `<dd>` tags. If you have only one item in your list, it is adviced to change `tag` property to `p`. When set, the component will render a paragraph element instead of a list.
 
 <Source
   code={`
@@ -78,9 +64,7 @@ Add margins and paddings to the dl element by adding `classes` with desired [Spa
 
 <Source
   code={`
-  <fudis-dl
-[classes]="'fudis-mt-xl fudis-pl-md'">
-</fudis-dl>`}
+  <fudis-dl [classes]="'fudis-mt-xl fudis-pl-md'">...</fudis-dl>`}
 />
 
 ## Examples
@@ -99,19 +83,19 @@ When nesting Description List as sublist, the nested one should have `variant` s
 
 <Canvas of={DescriptionListStories.NestedDescriptionLists} />
 
-It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how Button is used inside the Description List in various ways.
+It is possible to incluce e.g. [Button Component](/docs/components-button--documentation) or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how button is used inside the Description List in various ways.
 Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
 
 <Canvas of={DescriptionListStories.NestedSubComponents} />
 
 ### With Language Badge Group
 
-Description List with Language Badge Group displays Term element with clickable Language Badges. Clicking a Badge sets those Details visible, which have corresponding language set. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
+Description List with [Language Badge Group](/docs/components-language-badge-group--documentation) displays Term element with clickable language badges. Clicking a badge sets Details content visible, which have corresponding language set. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
 
-By default Language Badge Group always display Badges for Finnish, Swedish and English in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()` to define a new config.
+By default Language Badge Group always displays badges for Finnish, Swedish and English, in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()`.
 Check documentation at [FudisTranslationService](/docs/services-translation--documentation#translation-service).
 
-Set in your `fudis-dd` element `lang` attribute to tell which translation it represents.
+Set `fudis-dd` element's `lang` attribute to tell which translation it represents.
 
 <Source
   code={`
@@ -125,7 +109,7 @@ Set in your `fudis-dd` element `lang` attribute to tell which translation it rep
 </fudis-dl>`}
 />
 
-Description List components communicate with each other and define automatically to set Language Badges visible and theme it properly if you have provided or not a Details component for each of languages set with `setSelectableLanguages()`.
+Description List components communicate with each other and automatically define Language Badge Group visibility. Each button, for each of the languages set in `setSelectableLanguages()`, is themed properly according to provided languages in Details components.
 
 <Canvas of={DescriptionListStories.WithLanguageBadges} />
 
@@ -135,7 +119,6 @@ Description List components communicate with each other and define automatically
 - Each description term is contained within a `dt` element
 - Each description details is contained in one or more `dd` element
 - `dd` elements are placed directly after `dt` element
-- If only one description list item is present, it is converted to paragraph element
 
 ### Related components / directives / services
 
