@@ -82,7 +82,10 @@ Example.args = {
 class DisabledRadioGroupExampleComponent {
   petOptions: FudisRadioButtonOption<object>[] = [
     { value: 'platypus', label: 'Platypus' },
-    { value: 'otter', label: 'Otter' },
+    {
+      value: 'otter',
+      label: 'Otter with powerful webbed feet and seal-like ability for holding breath underwater',
+    },
     { value: 'capybara', label: 'Capybara' },
   ];
 
