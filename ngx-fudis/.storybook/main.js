@@ -27,14 +27,12 @@ export const docs = {
   defaultName: "Documentation",
 };
 
-// TODO: remove autocomplete hide trick, when deprecated component is removed
 export function managerHead(head) {
   return `
     ${head}
     <link rel="shortcut icon" href="favicon.ico">
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
-      .sidebar-item:has(#components-form-deprecated-autocomplete-single-select) { display: none;}
     </style>
   `;
 }
