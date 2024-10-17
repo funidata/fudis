@@ -9,6 +9,12 @@ import { AlertGroupComponent } from "./alert-group/alert-group.component.ts";
 
 Alert Group Component displays list of toaster-like Alert Components with four variants: `success`, `info`, `warning` and `danger.` These variants are the same ones as with [Notification Component](/docs/components-notification--documentation).
 
+## Usage Guidelines
+
+First, add `<fudis-alert-group />` HTML tag in the application template, preferably somewhere up in the application's DOM, e.g. `app.component.html`. 
+Note that Alerts will position themselves at the very top of their container, meaning they might overlap the application navigation element, which should be fixed manually by setting the CSS `top` value as needed in the application side.
+
+
 ## Adding and Dismissing Alerts
 
 Alert Group listens to `FudisAlertService` where application or UI sends information about adding or dismissing alerts.
