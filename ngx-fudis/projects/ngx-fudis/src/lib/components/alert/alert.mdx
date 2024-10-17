@@ -12,7 +12,8 @@ Alert Group Component displays list of toaster-like Alert Components with four v
 ## Usage Guidelines
 
 First, add `<fudis-alert-group />` HTML tag in the application template, preferably somewhere up in the application's DOM, e.g. `app.component.html`.
-Note that Alerts will position themselves at the very top of their container, meaning they might overlap the application navigation element, which should be fixed manually by setting the CSS `top` value as needed in the application side.
+Note that Alerts will position themselves at the very top of their container, meaning they might overlap the application navigation element, which should be fixed manually by setting custom CSS `top` value as needed in the application side.
+Also, make sure that the custom CSS does not affect Alerts in Dialogs, where they should always be on top because Dialogs have backdrop.
 
 ## Adding and Dismissing Alerts
 
