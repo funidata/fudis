@@ -28,7 +28,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     effect(() => {
       const filterText = this._parent.getAutocompleteFilterText()();
 
-      if (this._parent.variant !== 'dropdown') {
+      if (this._parent.variant !== 'dropdown' && this._parent.autocompleteFiltering) {
         this._isOptionVisible(filterText);
       } else {
         this._isOptionVisible('');
