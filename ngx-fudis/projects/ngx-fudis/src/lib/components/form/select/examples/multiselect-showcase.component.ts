@@ -243,8 +243,6 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
   `,
 })
 export class StorybookExampleMultiselectShowcaseComponent {
-  constructor() {}
-
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object>[] | null>();
 
   defaultOptions = defaultOptions;
