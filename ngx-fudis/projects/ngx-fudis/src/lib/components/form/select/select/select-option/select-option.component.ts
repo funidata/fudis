@@ -1,4 +1,4 @@
-import { Component, Host, Inject, OnInit, Optional, effect } from '@angular/core';
+import { Component, Host, Inject, OnDestroy, OnInit, Optional, effect } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../../types/forms';
@@ -12,7 +12,7 @@ import { SelectOptionBaseDirective } from '../../common/select-option-base/selec
   templateUrl: './select-option.component.html',
   styleUrls: ['./select-option.component.scss'],
 })
-export class SelectOptionComponent extends SelectOptionBaseDirective implements OnInit {
+export class SelectOptionComponent extends SelectOptionBaseDirective implements OnInit, OnDestroy {
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
@@ -43,6 +43,11 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
     } else {
       this._updateVisibilityToParents(true);
     }
+  }
+
+  ngOnDestroy(): void {
+    this._parentSelect.setOptionVisibility(this._id, false);
+    this._parentGroup?.setOptionVisibility(this._id, false);
   }
 
   /**
