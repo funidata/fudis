@@ -22,7 +22,7 @@
     (keyup)="handleKeyUp.emit($event)"
     (focus)="onFocus($event)"
     [id]="id"
-    [attr.tabindex]="disabled ? -1 : 0"
+    [attr.tabindex]="disabled ? -1 : null"
     [attr.type]="type"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.required]="(_required | async) || null"

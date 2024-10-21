@@ -21,7 +21,7 @@
       [min]="_minDate"
       [max]="_maxDate"
       [placeholder]="_placeholderString | async"
-      [attr.tabindex]="disabled ? -1 : 0"
+      [attr.tabindex]="disabled ? -1 : null"
       [attr.aria-disabled]="control.disabled || disabled || null"
       [attr.aria-invalid]="control.invalid || null"
       [attr.required]="(_required | async) || null"

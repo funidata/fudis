@@ -17,7 +17,7 @@
     (keyup)="handleKeyUp.emit($event)"
     (focus)="onFocus($event)"
     [id]="id"
-    [attr.tabindex]="disabled ? -1 : 0"
+    [attr.tabindex]="disabled ? -1 : null"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.aria-invalid]="control.invalid || null"
     [attr.minLength]="_minLength | async"
