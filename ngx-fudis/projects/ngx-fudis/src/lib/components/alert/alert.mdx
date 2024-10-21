@@ -11,7 +11,7 @@ Alert Group Component displays list of toaster-like Alert Components with four v
 
 ## Usage Guidelines
 
-First, add `<fudis-alert-group />` HTML tag in the application template, preferably somewhere up in the application's DOM, e.g. `app.component.html`.
+First, add `<fudis-alert-group />` HTML tag in the application template, preferably as the bottom element in `app.component.html`.
 Note that Alerts will position themselves at the very top of their container, meaning they might overlap the application navigation element, which should be fixed manually by setting custom CSS `top` value as needed in the application side.
 Also, make sure that the custom CSS does not affect Alerts in Dialogs, where they should always be on top because Dialogs have backdrop.
 
@@ -83,7 +83,7 @@ Alerts are reloaded to the DOM each time dialog is opened and closed.
 
 ### Alert Variants
 
-`danger` and `warning` variants are communicated to screen readers, as they have html attribute of `role='alert'`. Other variants have `role='status'`. Focus does not change even if new alert appears.
+All Alerts are communicated to screen readers when appearing for the first time, but with different roles. `danger` and `warning` variants have html attribute of `role='alert'`, other variants have `role='status'`. Focus does not change even if new alert appears.
 
 ### Closing Alert
 
@@ -95,9 +95,8 @@ When user closes an alert, focus will move automatically to the last alert in th
 
 ### Other Mentionable Accessibility Details
 
-- Focusable elements inside alert have visible focus state
-- Danger and warning alerts are communicated to user using `role='alert'` attribute
-- Alert Group is wrapped inside a `section` element which has an automatic `aria-label` describing its content. E.g. _'Notifications - Number of notifications: 5'_
+- Danger and warning alerts will interrupt the user's current activity
+- Alert Group is wrapped inside a `section` element which has an automatic `aria-label` describing its content, e.g. _'Notifications - Number of notifications: 5'_
 
 ## Properties
 
