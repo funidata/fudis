@@ -62,6 +62,11 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   @Input() initialFocus: boolean = false;
 
   /**
+   * Preferred way to disable input is to set formControl as disabled. This Input property should be used in edge cases only.
+   */
+  @Input() disabled: boolean = false;
+
+  /**
    * Disable guidance for this component instance. No help text or errors will be visible.
    */
   @Input() disableGuidance: boolean;

@@ -29,6 +29,7 @@
     @include colors.bg-color('gray-extra-light');
 
     cursor: default;
+    pointer-events: none;
   }
 }
 
