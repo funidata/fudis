@@ -4,7 +4,6 @@ import {
   Input,
   OnChanges,
   OnInit,
-  ViewChild,
   effect,
   AfterViewInit,
 } from '@angular/core';
@@ -31,7 +30,6 @@ import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.se
 import { BehaviorSubject } from 'rxjs';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { SelectComponent } from '../select/select/select.component';
 
 @Component({
   selector: 'fudis-localized-text-group',
@@ -68,11 +66,6 @@ export class LocalizedTextGroupComponent
       }
     });
   }
-
-  /**
-   * Template reference for Select
-   */
-  @ViewChild('selectRef') private _selectRef: SelectComponent;
 
   /**
    * FormGroup including controls.
@@ -201,7 +194,6 @@ export class LocalizedTextGroupComponent
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
-      this._setParentFormGroup();
     }
 
     if (
@@ -209,17 +201,6 @@ export class LocalizedTextGroupComponent
       this._DOMUtilitiesService.labelHeightMatched.value
     ) {
       this._DOMUtilitiesService.setLabelHeight(true);
-    }
-  }
-
-  protected _setParentFormGroup(): void {
-    if (this._selectRef) {
-      this._selectRef.parentLocalizedTextGroupFormGroup = this.formGroup;
-    } else {
-      // With ngOnChanges DOM and Select might not yet have been loaded, so try again if needed
-      setTimeout(() => {
-        this._setParentFormGroup();
-      }, 100);
     }
   }
 }

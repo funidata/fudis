@@ -9,7 +9,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -45,11 +45,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
     new EventEmitter<FudisSelectOption<object> | null>();
-
-  /**
-   * Used with Localized Text Group to disable Select component, if LocalizedTextGroup's FormGroup is disabled
-   */
-  public parentLocalizedTextGroupFormGroup: undefined | FormGroup;
 
   ngOnInit(): void {
     this._setParentId('select');
