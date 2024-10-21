@@ -31,6 +31,7 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
       [control]="control"
       [label]="label"
       [helpText]="helpText"
+      [autocompleteNoResultsText]="autocompleteNoResultsText"
       [autocompleteFilter]="false"
       [selectionClearButton]="true"
       (selectionUpdate)="selectionUpdate.emit($event)"

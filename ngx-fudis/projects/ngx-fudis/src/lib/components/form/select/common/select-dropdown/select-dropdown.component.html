@@ -27,8 +27,13 @@
       class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__last"
       [class.fudis-select-dropdown__help-text--hidden]="results"
       [variant]="'md-light'"
-      >{{ _translationNoResultsFound | async }}</fudis-body-text
     >
+      @if (autocompleteNoResultsText) {
+        {{ autocompleteNoResultsText }}
+      } @else {
+        {{ _translationNoResultsFound | async }}
+      }
+    </fudis-body-text>
     <span
       *ngIf="autocompleteHelpText !== false && _displayStatus && results && filterText"
       class="fudis-visually-hidden"

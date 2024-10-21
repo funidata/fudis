@@ -14,6 +14,7 @@ export class StorybookExampleBackendSimulationBaseDirective {
       this.databaseCounter = 0;
       if (value?.trim()) {
         this.filterStatus = 'In progress...';
+        this.autocompleteNoResultsText = 'Fetching results...';
       }
       this.searchResults?.next([]);
     });
@@ -48,7 +49,7 @@ export class StorybookExampleBackendSimulationBaseDirective {
             }
 
             results.sort((a, b) => a.label.localeCompare(b.label));
-
+            this.autocompleteNoResultsText = null;
             this.searchResults?.next(results);
             this.filterStatus = 'Finished';
           }, 500);
@@ -65,6 +66,8 @@ export class StorybookExampleBackendSimulationBaseDirective {
   protected databaseCounter = 0;
 
   protected searchResults = new BehaviorSubject<FudisSelectOption<object>[]>([]);
+
+  protected autocompleteNoResultsText: null | string = null;
 
   protected label = 'Select a movie';
 

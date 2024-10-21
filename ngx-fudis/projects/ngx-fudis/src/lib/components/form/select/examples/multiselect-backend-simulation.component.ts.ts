@@ -34,6 +34,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
       [label]="label"
       [helpText]="helpText"
       [autocompleteFilter]="false"
+      [autocompleteNoResultsText]="autocompleteNoResultsText"
       [selectionClearButton]="true"
       (selectionUpdate)="selectionUpdate.emit($event)"
       (filterTextUpdate)="searchTextUpdateSubject.next($event)"
