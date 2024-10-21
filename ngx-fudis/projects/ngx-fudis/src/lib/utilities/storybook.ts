@@ -53,6 +53,9 @@ const formCommonControlsExclude: string[] = [
   'ariaLabel',
   'disableGuidance',
   'errorSummaryReloadOnInit',
+  'disabled',
+  'nullControlOnEmptyString',
+  'initialFocus',
 ];
 
 /**
@@ -342,7 +345,6 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'autocompleteRef',
   'handleCheckedSort',
   'handleMultiSelectionChange',
-  'parentLocalizedTextGroupFormGroup',
   'handleChecked',
   'handleClick',
   'checked',
