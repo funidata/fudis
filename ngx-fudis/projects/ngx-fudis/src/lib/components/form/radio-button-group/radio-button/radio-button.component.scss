@@ -93,4 +93,12 @@ $radio-indicator-size: calc(0.75rem / var(--fudis-rem-multiplier));
       @include focus.focus-form-field;
     }
   }
+
+  /* 
+  * If RadioButtonGroup is disabled through "disabled" Input, we need to set pointer-event to none for each radio-button. 
+  * This is not necessary when disabling comes through formControl.
+  */
+  &--disabled {
+    pointer-events: none;
+  }
 }

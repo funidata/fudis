@@ -1,14 +1,21 @@
 <ng-container *ngIf="_parentGroup?.control">
-  <label class="fudis-radio-button" [attr.for]="_id">
+  <label
+    class="fudis-radio-button"
+    [attr.for]="_id"
+    [class.fudis-radio-button--disabled]="_parentGroup.disabled"
+  >
     <input
       type="radio"
       class="fudis-radio-button__input"
-      [class.fudis-radio-button__input--disabled]="_parentGroup.control.disabled || null"
+      [class.fudis-radio-button__input--disabled]="
+        _parentGroup.control.disabled || _parentGroup.disabled || null
+      "
       [id]="_id"
       [formControl]="_parentGroup.control"
       [value]="value"
       [name]="_parentGroup.id"
-      [attr.aria-disabled]="_parentGroup.control.disabled || null"
+      [attr.tabindex]="_parentGroup.control.disabled || _parentGroup.disabled ? -1 : null"
+      [attr.aria-disabled]="_parentGroup.control.disabled || _parentGroup.disabled || null"
       [attr.aria-invalid]="
         (_parentGroup.control.touched && _parentGroup.control.invalid) ||
         _parentGroup.control.invalid
@@ -27,7 +34,9 @@
           [class.fudis-radio-button__content__control--invalid]="
             _parentGroup.control.touched && _parentGroup.control.invalid
           "
-          [class.fudis-radio-button__content__control--disabled]="_parentGroup.control.disabled"
+          [class.fudis-radio-button__content__control--disabled]="
+            _parentGroup.control.disabled || _parentGroup.disabled
+          "
         >
           <span
             *ngIf="_parentGroup.control.value === value"
