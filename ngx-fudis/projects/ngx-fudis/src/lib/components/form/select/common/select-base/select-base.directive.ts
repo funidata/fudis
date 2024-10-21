@@ -118,7 +118,7 @@ export class SelectBaseDirective
   /**
    * By default Autocomplete filters options loaded to the DOM based on user input. When this is set to 'false', filtering is disabled and all options available in DOM are displayed regardless of user's input. Disabling can be useful, if application wants to implement their own filtering logic. E. g. get user's input, run a backend search and create list of options for the Select.
    */
-  @Input() autocompleteFiltering: boolean = true;
+  @Input() autocompleteFilter: boolean = true;
 
   /**
    * For Autocomplete variants optional helper text displayed as first item in opened dropdown list. By default uses internal Fudis translation, which can be disabled by setting this property to boolean 'false'
