@@ -30,12 +30,15 @@
         (blur)="handleBlur.emit($event)"
         (focus)="onFocus($event)"
         [id]="id"
+        [attr.tabindex]="disabled ? -1 : 0"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="(_required | async) || null"
         [attr.aria-disabled]="
-          formGroup.disabled || formGroup.controls[control.key].disabled || null
+          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
         "
-        [readonly]="formGroup.disabled || formGroup.controls[control.key].disabled || null"
+        [readonly]="
+          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+        "
       />
       <textarea
         #inputRef
@@ -57,10 +60,11 @@
         (blur)="handleBlur.emit($event)"
         (focus)="onFocus($event)"
         [id]="id"
+        [attr.tabindex]="disabled ? -1 : 0"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="(_required | async) || null"
-        [attr.aria-disabled]="formGroup.controls[control.key].disabled || null"
-        [readonly]="formGroup.controls[control.key].disabled || null"
+        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled || null"
+        [readonly]="formGroup.controls[control.key].disabled || disabled || null"
       >
       </textarea>
     </ng-container>
@@ -78,8 +82,8 @@
   </div>
   <fudis-select
     *ngIf="_languageLabel | async as label"
-    #selectRef
     class="fudis-localized-text-group__select"
+    [disabled]="this.formGroup.disabled || disabled"
     [label]="label"
     [selectionClearButton]="false"
     (handleViewInit)="_DOMUtilitiesService.setLabelHeight(true)"

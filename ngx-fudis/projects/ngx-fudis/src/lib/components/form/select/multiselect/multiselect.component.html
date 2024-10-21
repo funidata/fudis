@@ -13,7 +13,6 @@
       <div
         *ngIf="variant === 'dropdown'"
         #inputRef
-        tabindex="0"
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
         [class.fudis-form-input--touched]="control.touched"
         [id]="id"
@@ -25,9 +24,10 @@
         (blur)="_inputBlur($event)"
         (keydown)="_inputKeyDown($event)"
         (keyup)="_inputKeyUp($event)"
+        [attr.tabindex]="!control.disabled && !disabled ? 0 : null"
         [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="_dropdownOpen"
-        [attr.aria-disabled]="control.disabled"
+        [attr.aria-disabled]="control.disabled || disabled"
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
@@ -48,7 +48,7 @@
         #autocompleteRef
         [id]="id"
         [placeholder]="placeholder"
-        [disabled]="control.disabled"
+        [disabled]="control.disabled || disabled"
         [dropdownOpen]="_dropdownOpen | async"
         [required]="_required | async"
         [invalidState]="control.touched && control.invalid"
@@ -78,7 +78,7 @@
           (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
           [clearButton]="selectionClearButton"
-          [disabled]="control.disabled"
+          [disabled]="control.disabled || disabled"
         />
       </div>
     </div>
@@ -106,7 +106,9 @@
     [for]="id"
     [control]="control"
   />
-  <ng-container *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0 && control.enabled">
+  <ng-container
+    *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0 && control.enabled && !disabled"
+  >
     <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
       _translationRemoveItem | async
     }}</span>
