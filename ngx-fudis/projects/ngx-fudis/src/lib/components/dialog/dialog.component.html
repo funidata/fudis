@@ -1,4 +1,3 @@
-<fudis-alert-group [insideDialog]="true" />
 <div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
   <fudis-button
     *ngIf="_closeLabel | async as closeLabel"
@@ -15,3 +14,4 @@
   </fudis-button>
   <ng-content></ng-content>
 </div>
+<fudis-alert-group [insideDialog]="true" />
