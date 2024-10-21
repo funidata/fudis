@@ -14,7 +14,7 @@
   <ng-template fudisContent type="fieldset">
     <ng-content select="fudis-radio-button" />
     <fudis-guidance
-      *ngIf="control"
+      *ngIf="control && !disableGuidance"
       [inputLabel]="label"
       [helpText]="helpText"
       [for]="id"

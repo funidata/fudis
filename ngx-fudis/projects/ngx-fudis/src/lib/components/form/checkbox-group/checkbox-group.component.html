@@ -14,7 +14,7 @@
   <ng-template fudisContent type="fieldset">
     <ng-content select="fudis-checkbox" />
     <fudis-guidance
-      *ngIf="formGroup"
+      *ngIf="formGroup && !disableGuidance"
       [inputLabel]="label"
       [helpText]="helpText"
       [for]="id"
