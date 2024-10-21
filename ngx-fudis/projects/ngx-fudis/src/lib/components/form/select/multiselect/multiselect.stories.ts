@@ -1,4 +1,4 @@
-import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
+import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,11 +8,15 @@ import { MultiselectComponent } from './multiselect.component';
 import readme from './multiselect.mdx';
 import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
+import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component.ts';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
   component: MultiselectComponent,
   decorators: [
+    moduleMetadata({
+      imports: [StorybookExampleMultiselectBackendSimulationComponent],
+    }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
@@ -96,4 +100,20 @@ const ExampleTemplate: StoryFn = (args) => ({
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   ...commonProps,
+};
+
+const ExampleBackendTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    selectionUpdate: action('selectionUpdate'),
+  },
+  template: html`<example-multiselect-backend-simulation></example-multiselect-backend-simulation>`,
+});
+
+export const BackendSimulation = ExampleBackendTemplate.bind({});
+
+BackendSimulation.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
 };
