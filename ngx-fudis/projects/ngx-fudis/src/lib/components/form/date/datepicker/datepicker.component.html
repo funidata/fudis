@@ -21,8 +21,8 @@
       [min]="_minDate"
       [max]="_maxDate"
       [placeholder]="_placeholderString | async"
-      [attr.disabled]="control.disabled || null"
-      [attr.aria-disabled]="control.disabled || null"
+      [attr.tabindex]="disabled ? -1 : 0"
+      [attr.aria-disabled]="control.disabled || disabled || null"
       [attr.aria-invalid]="control.invalid || null"
       [attr.required]="(_required | async) || null"
       [attr.aria-describedby]="id + '_guidance'"
@@ -32,13 +32,13 @@
       class="fudis-datepicker__toggle"
       [id]="id + '-calendar-icon-toggle'"
       [for]="picker"
-      [disabled]="control.disabled"
+      [disabled]="control.disabled || disabled"
       [disableRipple]="true"
     >
       <mat-icon matDatepickerToggleIcon>
         <fudis-icon
           [icon]="'calendar'"
-          [color]="control.disabled ? 'gray-dark' : 'primary'"
+          [color]="control.disabled || disabled ? 'gray-dark' : 'primary'"
         ></fudis-icon>
       </mat-icon>
     </mat-datepicker-toggle>
