@@ -3,6 +3,7 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { selectMovieMockData } from '../common/mock_data';
 import { BehaviorSubject, debounceTime, Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl } from '@angular/forms';
 
 @Directive({
   standalone: true,
@@ -35,7 +36,10 @@ export class StorybookExampleBackendSimulationBaseDirective {
                 break;
               }
 
-              if (
+              if (this.control.value && value === this.control.value?.label) {
+                results.push(option);
+                counter = counterLimit;
+              } else if (
                 (option.label.toLowerCase().includes(value.toLowerCase()) ||
                   option.subLabel?.toLowerCase().includes(value.toLowerCase()) ||
                   value === '&&&') &&
@@ -72,4 +76,6 @@ export class StorybookExampleBackendSimulationBaseDirective {
     'There are 1000 options to choose from. You can also search by genre, e. g. action.';
 
   protected placeholder = 'Select a movie';
+
+  protected control: FormControl;
 }

@@ -48,7 +48,7 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
 export class StorybookExampleSelectBackendSimulationComponent extends StorybookExampleBackendSimulationBaseDirective {
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object> | null>();
 
-  control: FormControl = new FormControl<FudisSelectOption<object> | null>(null, [
+  override control: FormControl = new FormControl<FudisSelectOption<object> | null>(null, [
     FudisValidators.required('You must choose a pet!'),
   ]);
 }
