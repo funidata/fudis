@@ -1,3 +1,4 @@
+/* stylelint-disable selector-max-compound-selectors */
 /* stylelint-disable @stylistic/indentation */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable selector-not-notation */
@@ -11,11 +12,13 @@
 @use '../../../../foundations/borders/mixins.scss' as borders;
 @use '../../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../../foundations/focus/mixins.scss' as focus;
+@use '../../../../foundations/typography/tokens.scss' as typography;
 
 // When navigating calendar pop-up with Tab key, close button appears at the very end. Button does not appear when using mouse.
 .mat-datepicker-close-button {
   text-transform: uppercase !important;
   color: colors.$color-white !important;
+  font-size: typography.$body-text-m-font-size; // Necessary for overwriting font-size in customer app side
 
   &:focus {
     @include focus.focus-generic;
@@ -88,6 +91,8 @@
       & .mat-mdc-icon-button {
         @include colorMixins.bg-color('transparent');
 
+        font-size: typography.$body-text-m-font-size; // Necessary for overwriting font-size in customer app side
+
         &.mat-calendar-next-button,
         &.mat-calendar-previous-button {
           width: spacing.$spacing-xl;
@@ -99,6 +104,26 @@
       & .mat-mdc-button-persistent-ripple.mdc-button__ripple {
         &::before {
           opacity: 0 !important;
+        }
+      }
+    }
+
+    // After M3 update Datepicker calendar's table font-size does not work in customer app side unless we override them
+    & .mat-calendar-table {
+      // Weekday headers
+      .mat-calendar-table-header th {
+        font-size: typography.$body-text-m-font-size;
+      }
+
+      & .mat-calendar-body {
+        // Month abbreviation
+        & .mat-calendar-body-label {
+          font-size: typography.$body-text-m-font-size;
+        }
+
+        // Calendar days
+        & .mat-calendar-body-cell {
+          font-size: typography.$body-text-m-font-size;
         }
       }
     }

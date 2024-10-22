@@ -3,6 +3,7 @@
 
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/typography/mixins.scss' as typography;
 
 mat-tooltip-component .mat-tooltip-handset {
   margin: spacing.$spacing-xs;
@@ -10,6 +11,8 @@ mat-tooltip-component .mat-tooltip-handset {
 
 mat-tooltip-component {
   .mat-mdc-tooltip .mdc-tooltip__surface {
+    @include typography.body-text-md-regular; // Necessary for overwriting typography in customer app side
+
     background-color: colors.$color-gray-dark;
     letter-spacing: normal;
   }
