@@ -48,7 +48,6 @@ export class StorybookExampleBackendSimulationBaseDirective {
               this.databaseCounter = this.databaseCounter + 1;
             }
 
-            results.sort((a, b) => a.label.localeCompare(b.label));
             this.autocompleteNoResultsText = null;
             this.searchResults?.next(results);
             this.filterStatus = 'Finished';
@@ -61,8 +60,6 @@ export class StorybookExampleBackendSimulationBaseDirective {
 
   protected searchTextUpdateSubject = new Subject<string | null>();
 
-  protected mockData = selectMovieMockData;
-
   protected databaseCounter = 0;
 
   protected searchResults = new BehaviorSubject<FudisSelectOption<object>[]>([]);
@@ -71,7 +68,8 @@ export class StorybookExampleBackendSimulationBaseDirective {
 
   protected label = 'Select a movie';
 
-  protected helpText = 'There are 1000 options to choose from';
+  protected helpText =
+    'There are 1000 options to choose from. You can also search by genre, e. g. action.';
 
   protected placeholder = 'Select a movie';
 }
