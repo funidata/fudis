@@ -16,6 +16,7 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
       filtering is done outside of Select with a delay to simulate fetching options from the
       backend.</fudis-body-text
     >
+    <fudis-body-text>It will limit its search for only 10 results. </fudis-body-text>
     <fudis-body-text
       >Number of options from 'database' checked: {{ databaseCounter }}</fudis-body-text
     >
