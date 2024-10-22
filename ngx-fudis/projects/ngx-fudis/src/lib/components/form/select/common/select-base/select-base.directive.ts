@@ -301,7 +301,7 @@ export class SelectBaseDirective
    * Open dropdown
    */
   public openDropdown(): void {
-    if (!this.control.disabled) {
+    if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.next(true);
     }
@@ -395,7 +395,7 @@ export class SelectBaseDirective
    * When Clear button is clicked
    */
   protected _clearButtonClick(): void {
-    if (!this.control.disabled) {
+    if (!this.control.disabled && !this.disabled) {
       this._setControlNull();
 
       this._focusToSelectInput();
@@ -602,7 +602,7 @@ export class SelectBaseDirective
    * Manually set typed text in input fields
    */
   protected _updateInputValueTexts(value: string): void {
-    if (this.variant !== 'dropdown') {
+    if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.preventSpaceKeypress = true;
 
       this.autocompleteRef.updateInputValue(value);

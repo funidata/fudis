@@ -146,7 +146,7 @@ Disabled.args = {
   tooltip: '',
   tooltipToggle: false,
   label: 'Disabled Text Input',
-  helpText: 'You should be able to focus on this input but not insert any values',
+  helpText: 'You should not be able to focus on this input unless you use screen reader',
   initialFocus: false,
 };
 

@@ -7,6 +7,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 
 const defaultValues: Partial<FormCommonApiDirective> = {
   ariaLabel: undefined,
+  disabled: false,
   disableGuidance: false,
   errorSummaryReloadOnInit: true,
   helpText: undefined,

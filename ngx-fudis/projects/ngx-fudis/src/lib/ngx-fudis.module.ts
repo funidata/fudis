@@ -7,7 +7,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -19,7 +18,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 /**
  * Fudis Components
  */
-import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -129,7 +127,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
    */
   declarations: [
     ActionsDirective,
-    AutocompleteComponent,
     AlertComponent,
     AlertGroupComponent,
     BadgeComponent,
@@ -215,7 +212,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     CommonModule,
     FormsModule,
     LayoutModule,
-    MatAutocompleteModule,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -237,7 +233,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ActionsDirective,
     AlertComponent,
     AlertGroupComponent,
-    AutocompleteComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,

@@ -1,5 +1,10 @@
 <ng-container *ngIf="control">
-  <label class="fudis-checkbox" [attr.for]="id" [id]="id + '-label'">
+  <label
+    class="fudis-checkbox"
+    [attr.for]="id"
+    [id]="id + '-label'"
+    [class.fudis-checkbox--disabled]="_checkboxGroup.disabled"
+  >
     <input
       #inputRef
       (click)="_checkboxClick($event)"
@@ -9,7 +14,8 @@
       [formControl]="control"
       [value]="control.value"
       [name]="_checkboxGroup.id"
-      [attr.aria-disabled]="control.disabled || null"
+      [attr.tabindex]="control.disabled || _checkboxGroup.disabled ? -1 : null"
+      [attr.aria-disabled]="control.disabled || _checkboxGroup.disabled || null"
       [attr.checked]="control.value || null"
       [attr.aria-invalid]="
         (_checkboxGroup.formGroup &&
@@ -33,7 +39,9 @@
             _checkboxGroup.formGroup.invalid &&
             _checkboxGroup.groupBlurredOut
           "
-          [class.fudis-checkbox__content__box--disabled]="control.disabled"
+          [class.fudis-checkbox__content__box--disabled]="
+            control.disabled || _checkboxGroup.disabled
+          "
         >
           <fudis-icon
             *ngIf="control.value"

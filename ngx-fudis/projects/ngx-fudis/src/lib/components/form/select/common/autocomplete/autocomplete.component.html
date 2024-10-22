@@ -16,6 +16,7 @@
   (keydown)="!disabled && _keyDown($event)"
   [attr.id]="id"
   autocomplete="off"
+  [attr.tabindex]="disabled ? -1 : null"
   [attr.aria-autocomplete]="'list'"
   [attr.aria-expanded]="dropdownOpen"
   [attr.aria-disabled]="disabled || null"
