@@ -11,7 +11,7 @@ mat-tooltip-component .mat-tooltip-handset {
 
 mat-tooltip-component {
   .mat-mdc-tooltip .mdc-tooltip__surface {
-    @include typography.body-text-md-regular; // Necessary for overwriting typography in customer app side
+    @include typography.body-text-sm-regular; // Necessary for overwriting typography in customer app side
 
     background-color: colors.$color-gray-dark;
     letter-spacing: normal;
