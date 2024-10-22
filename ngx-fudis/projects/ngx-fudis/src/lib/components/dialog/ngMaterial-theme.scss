@@ -68,10 +68,10 @@
         @include utilities.box-reset;
 
         /* stylelint-disable-next-line property-disallowed-list */
-        line-height: tokens.$body-text-m-line-height;
+        line-height: tokens.$body-text-md-line-height;
         letter-spacing: normal;
         /* stylelint-disable-next-line property-disallowed-list */
-        font-size: tokens.$body-text-m-line-height;
+        font-size: tokens.$body-text-md-line-height;
 
         &:focus-visible,
         &:focus {
