@@ -1,6 +1,6 @@
 {
   "name": "ngx-fudis",
-  "version": "3.0.0-rc.4",
+  "version": "3.0.0-rc.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
