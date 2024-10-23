@@ -70,9 +70,13 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   });
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowUp");
+  await expect(page.getByTestId("fudis-select-1-group-10-option-5")).toBeFocused();
   await page.keyboard.press("ArrowUp");
+  await expect(page.getByTestId("fudis-select-1-group-10-option-4")).toBeFocused();
   await page.keyboard.press("ArrowUp");
+  await expect(page.getByTestId("fudis-select-1-group-10-option-3")).toBeFocused();
   await page.keyboard.press("ArrowUp");
+  await expect(page.getByTestId("fudis-select-1-group-10-option-2")).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await expect(page.getByTestId("fudis-select-1-input-label")).toHaveText("Dolphin, common");
