@@ -11,48 +11,48 @@
 
 @mixin body-text-lg-light {
   text-transform: initial;
-  line-height: tokens.$body-text-l-line-height;
+  line-height: tokens.$body-text-lg-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
+  font-size: tokens.$body-text-lg-font-size;
   font-weight: tokens.$font-weight-light;
 }
 
 @mixin body-text-lg-regular {
   text-transform: initial;
-  line-height: tokens.$body-text-l-line-height;
+  line-height: tokens.$body-text-lg-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
+  font-size: tokens.$body-text-lg-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
 @mixin body-text-md-light {
   text-transform: initial;
-  line-height: tokens.$body-text-m-line-height;
+  line-height: tokens.$body-text-md-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-light;
 }
 
 @mixin body-text-md-regular {
   text-transform: initial;
-  line-height: tokens.$body-text-m-line-height;
+  line-height: tokens.$body-text-md-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
 @mixin body-text-sm-regular {
   text-transform: initial;
-  line-height: tokens.$body-text-s-line-height;
+  line-height: tokens.$body-text-sm-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-s-font-size;
+  font-size: tokens.$body-text-sm-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
 // Headings
 
 @mixin heading-xxl {
-  line-height: tokens.$heading-l-line-height;
+  line-height: tokens.$heading-lg-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$heading-xxl-font-size;
   font-weight: tokens.$font-weight-medium;
@@ -63,44 +63,44 @@
 }
 
 @mixin heading-xl {
-  line-height: tokens.$heading-l-line-height;
+  line-height: tokens.$heading-lg-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$heading-xl-font-size;
   font-weight: tokens.$font-weight-medium;
 
   @include breakpoints.breakpoint-max('sm') {
-    line-height: tokens.$heading-m-line-height;
-    font-size: tokens.$heading-l-font-size;
+    line-height: tokens.$heading-md-line-height;
+    font-size: tokens.$heading-lg-font-size;
   }
 }
 
 @mixin heading-lg {
-  line-height: tokens.$heading-m-line-height;
+  line-height: tokens.$heading-md-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$heading-l-font-size;
+  font-size: tokens.$heading-lg-font-size;
   font-weight: tokens.$font-weight-medium;
 
   @include breakpoints.breakpoint-max('sm') {
-    font-size: tokens.$heading-m-font-size;
+    font-size: tokens.$heading-md-font-size;
   }
 }
 
 @mixin heading-md {
-  line-height: tokens.$heading-m-line-height;
+  line-height: tokens.$heading-md-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$heading-m-font-size;
+  font-size: tokens.$heading-md-font-size;
   font-weight: tokens.$font-weight-medium;
 
   @include breakpoints.breakpoint-max('sm') {
-    line-height: tokens.$heading-s-line-height;
-    font-size: tokens.$heading-s-font-size;
+    line-height: tokens.$heading-sm-line-height;
+    font-size: tokens.$heading-sm-font-size;
   }
 }
 
 @mixin heading-sm {
-  line-height: tokens.$heading-s-line-height;
+  line-height: tokens.$heading-sm-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$heading-s-font-size;
+  font-size: tokens.$heading-sm-font-size;
   font-weight: tokens.$font-weight-medium;
 
   @include breakpoints.breakpoint-max('sm') {
@@ -110,7 +110,7 @@
 }
 
 @mixin heading-xs {
-  line-height: tokens.$heading-s-line-height;
+  line-height: tokens.$heading-sm-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$heading-xs-font-size;
   font-weight: tokens.$font-weight-bold;
@@ -121,7 +121,7 @@
 }
 
 @mixin heading-xxs {
-  line-height: tokens.$heading-s-line-height;
+  line-height: tokens.$heading-sm-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$heading-xxs-font-size;
   font-weight: tokens.$font-weight-bold;
@@ -133,7 +133,7 @@
   text-transform: uppercase;
   line-height: tokens.$text-input-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
@@ -145,21 +145,21 @@
   text-transform: uppercase;
   line-height: tokens.$form-label-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
 @mixin text-field-input {
   line-height: tokens.$text-input-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
+  font-size: tokens.$body-text-lg-font-size;
   font-weight: tokens.$font-weight-light;
 }
 
 @mixin select-group-label {
   line-height: tokens.$text-input-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-s-font-size;
+  font-size: tokens.$body-text-sm-font-size;
   font-weight: tokens.$font-weight-light;
 }
 
@@ -169,7 +169,7 @@
   text-transform: uppercase;
   line-height: tokens.$badge-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-s-font-size;
+  font-size: tokens.$body-text-sm-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
@@ -180,24 +180,24 @@
 }
 
 @mixin description-list-value-typography {
-  line-height: tokens.$body-text-l-line-height;
+  line-height: tokens.$body-text-lg-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
+  font-size: tokens.$body-text-lg-font-size;
   font-weight: tokens.$font-weight-light;
 }
 
 @mixin description-list-compact-key-typography {
   text-transform: none;
-  line-height: tokens.$body-text-l-line-height;
+  line-height: tokens.$body-text-lg-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-light;
 }
 
 @mixin description-list-compact-value-typography {
-  line-height: tokens.$body-text-l-line-height;
+  line-height: tokens.$body-text-lg-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
@@ -207,9 +207,9 @@
   @include letter-spacing('1px');
 
   text-transform: uppercase;
-  line-height: tokens.$body-text-s-line-height;
+  line-height: tokens.$body-text-sm-line-height;
   font-family: tokens.$font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-bold;
 }
 
@@ -224,15 +224,15 @@
 // Expandable component
 
 @mixin expandable-regular-typography {
-  line-height: tokens.$body-text-l-line-height;
+  line-height: tokens.$body-text-lg-line-height;
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
+  font-size: tokens.$body-text-lg-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
 @mixin expandable-sub-title-typography {
   font-family: tokens.$font-family;
-  font-size: tokens.$body-text-s-font-size;
+  font-size: tokens.$body-text-sm-font-size;
   font-weight: tokens.$font-weight-light;
 }
 
@@ -255,14 +255,14 @@
 @mixin link-md {
   @include text-link;
 
-  font-size: tokens.$body-text-m-font-size;
+  font-size: tokens.$body-text-md-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
 @mixin link-lg {
   @include text-link;
 
-  font-size: tokens.$body-text-l-font-size;
+  font-size: tokens.$body-text-lg-font-size;
   font-weight: tokens.$font-weight-regular;
 }
 
