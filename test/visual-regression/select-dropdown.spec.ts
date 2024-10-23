@@ -69,10 +69,16 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
     fullPage: true,
   });
   await page.keyboard.press("ArrowDown", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+  await expect(page.getByTestId("fudis-select-1-option-1")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-5")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-4")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-3")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-2")).toBeFocused();
   await page.keyboard.press("Enter", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("A-12-enter-select-dolphin.png", {
