@@ -89,17 +89,8 @@ test("Select autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-5-dropdown")).toBeVisible();
   await page.keyboard.press("Backspace");
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
-  await page.keyboard.press("KeyU");
-  await page.keyboard.press("KeyN");
-  await page.keyboard.press("KeyT");
-  await page.keyboard.press("KeyA");
-  await page.keyboard.press("KeyI");
-  await page.keyboard.press("KeyN");
-  await page.keyboard.press("Space");
-  await page.keyboard.press("KeyL");
-  await page.keyboard.press("KeyI");
-  await page.keyboard.press("KeyO");
-  await page.keyboard.press("KeyN");
+
+  await page.keyboard.type("untain lion", { delay: 50 });
   await expect(page.getByTestId("fudis-select-5-dropdown")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(0);
   await expect(page).toHaveScreenshot("C-4-autocomplete-type-mountain-lion-typed.png", {

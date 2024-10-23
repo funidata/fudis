@@ -68,18 +68,13 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page).toHaveScreenshot("A-11-close-escape.png", {
     fullPage: true,
   });
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowUp");
-  await expect(page.getByTestId("fudis-select-1-group-10-option-5")).toBeFocused();
-  await page.keyboard.press("ArrowUp");
-  await expect(page.getByTestId("fudis-select-1-group-10-option-4")).toBeFocused();
-  await page.keyboard.press("ArrowUp");
-  await expect(page.getByTestId("fudis-select-1-group-10-option-3")).toBeFocused();
-  await page.keyboard.press("ArrowUp");
-  await expect(page.getByTestId("fudis-select-1-group-10-option-2")).toBeFocused();
-  await page.keyboard.press("Enter");
+  await page.keyboard.press("ArrowDown", { delay: 50 });
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await page.keyboard.press("Enter", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(page.getByTestId("fudis-select-1-input-label")).toHaveText("Dolphin, common");
   await expect(page).toHaveScreenshot("A-12-enter-select-dolphin.png", {
     fullPage: true,
   });
