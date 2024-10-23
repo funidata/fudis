@@ -3,28 +3,28 @@
 $font-family: 'Fira Sans', sans-serif;
 
 // Body text font size
-$body-text-l-font-size: calc(1rem / var(--fudis-rem-multiplier));
-$body-text-m-font-size: calc(0.875rem / var(--fudis-rem-multiplier));
-$body-text-s-font-size: calc(0.75rem / var(--fudis-rem-multiplier));
+$body-text-lg-font-size: calc(1rem / var(--fudis-rem-multiplier));
+$body-text-md-font-size: calc(0.875rem / var(--fudis-rem-multiplier));
+$body-text-sm-font-size: calc(0.75rem / var(--fudis-rem-multiplier));
 
 // Heading font size
 $heading-xxl-font-size: calc(2.25rem / var(--fudis-rem-multiplier));
 $heading-xl-font-size: calc(1.75rem / var(--fudis-rem-multiplier));
-$heading-l-font-size: calc(1.5rem / var(--fudis-rem-multiplier));
-$heading-m-font-size: calc(1.25rem / var(--fudis-rem-multiplier));
-$heading-s-font-size: calc(1.125rem / var(--fudis-rem-multiplier));
+$heading-lg-font-size: calc(1.5rem / var(--fudis-rem-multiplier));
+$heading-md-font-size: calc(1.25rem / var(--fudis-rem-multiplier));
+$heading-sm-font-size: calc(1.125rem / var(--fudis-rem-multiplier));
 $heading-xs-font-size: calc(1rem / var(--fudis-rem-multiplier));
 $heading-xxs-font-size: calc(0.875rem / var(--fudis-rem-multiplier));
 
 // Body text line height
-$body-text-l-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
-$body-text-m-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
-$body-text-s-line-height: calc(1rem / var(--fudis-rem-multiplier));
+$body-text-lg-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+$body-text-md-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+$body-text-sm-line-height: calc(1rem / var(--fudis-rem-multiplier));
 
 // Heading line heights
-$heading-l-line-height: calc(2.5rem / var(--fudis-rem-multiplier));
-$heading-m-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
-$heading-s-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+$heading-lg-line-height: calc(2.5rem / var(--fudis-rem-multiplier));
+$heading-md-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
+$heading-sm-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
 
 // Other UI line heights
 $text-input-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
