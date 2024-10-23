@@ -23,16 +23,8 @@
     "fudis-release": "scripts/release.sh",
     "format:check": "prettier --check ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/funidata/fudis.git"
-  },
   "author": "Funidata Ltd",
   "license": "CC-BY-NC-SA-4.0",
-  "bugs": {
-    "url": "https://github.com/funidata/fudis/issues"
-  },
-  "homepage": "https://funidata.github.io/fudis/main/",
   "devDependencies": {
     "prettier": "^3.2.5"
   }

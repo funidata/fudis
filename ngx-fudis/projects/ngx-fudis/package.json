@@ -10,6 +10,15 @@
       "sass": "./src/lib/theme/fudis-theme.scss"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/funidata/fudis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/funidata/fudis/issues"
+  },
+  "author": "Funidata Ltd",
+  "homepage": "https://funidata.github.io/fudis/main/",
   "peerDependencies": {
     "@angular/cdk": "^18.2.8",
     "@angular/common": "^18.2.7",
