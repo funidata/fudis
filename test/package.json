@@ -1,6 +1,6 @@
 {
   "name": "fudis-vr",
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0",
   "description": "Visual regression tests for Fudis",
   "scripts": {
     "start": "npx playwright test --ui",
