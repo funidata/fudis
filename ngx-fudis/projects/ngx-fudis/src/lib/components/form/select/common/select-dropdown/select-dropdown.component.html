@@ -10,7 +10,6 @@
   (blur)="_dropdownBlur($event)"
   role="listbox"
 >
-  <ng-content></ng-content>
   <ng-container *ngIf="selectVariant !== 'dropdown' && open && filterText">
     <fudis-body-text
       *ngIf="autocompleteHelpText !== false"
@@ -35,6 +34,7 @@
       ><ng-container *ngTemplateOutlet="noResults"
     /></span>
   </ng-container>
+  <ng-content></ng-content>
 </div>
 
 <ng-template #helpText>

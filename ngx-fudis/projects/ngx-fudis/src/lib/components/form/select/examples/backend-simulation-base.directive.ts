@@ -52,9 +52,11 @@ export class StorybookExampleBackendSimulationBaseDirective {
               this.databaseCounter = this.databaseCounter + 1;
             }
 
-            this.autocompleteNoResultsText = null;
             this.searchResults?.next(results);
             this.filterStatus = 'Finished';
+            setTimeout(() => {
+              this.autocompleteNoResultsText = null;
+            }, 100);
           }, 500);
         }
       });
