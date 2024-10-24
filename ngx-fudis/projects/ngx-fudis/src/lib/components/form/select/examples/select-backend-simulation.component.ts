@@ -24,6 +24,10 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
     <fudis-body-text
       >Number of options loaded to DOM: {{ (searchResults | async)?.length }}</fudis-body-text
     >
+    <fudis-body-text
+      >Currently selected movie:
+      {{ control.value ? control.value.label : 'No movie selected' }}</fudis-body-text
+    >
     <fudis-select
       class="fudis-mt-md"
       [size]="'lg'"
