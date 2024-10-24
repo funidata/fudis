@@ -24,14 +24,15 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page).toHaveScreenshot("A-4-focus-disabled.png", {
     fullPage: true,
   });
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowUp");
-  await page.keyboard.press("ArrowUp");
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowUp", { delay: 20 });
+  await page.keyboard.press("ArrowUp", { delay: 20 });
+  await expect(page.getByTestId("fudis-select-1-group-1-option-2")).toBeVisible();
   await expect(page).toHaveScreenshot("A-5-focus-mountain-lion.png", {
     fullPage: true,
   });
