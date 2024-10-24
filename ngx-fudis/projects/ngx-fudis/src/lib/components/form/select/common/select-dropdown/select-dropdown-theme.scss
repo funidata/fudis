@@ -8,10 +8,6 @@
       padding: spacing.$spacing-xs;
     }
 
-    &__first {
-      order: -1;
-    }
-
     &--hidden.fudis-body-text-host {
       display: none;
       visibility: hidden;

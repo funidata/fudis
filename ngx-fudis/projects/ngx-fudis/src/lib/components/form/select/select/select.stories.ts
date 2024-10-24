@@ -1,4 +1,4 @@
-import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
+import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,11 +12,15 @@ import {
   TestAnimalScience,
 } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
+import { StorybookExampleSelectBackendSimulationComponent } from '../examples/select-backend-simulation.component';
 
 export default {
   title: 'Components/Form/Select/Select',
   component: SelectComponent,
   decorators: [
+    moduleMetadata({
+      imports: [StorybookExampleSelectBackendSimulationComponent],
+    }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
@@ -92,4 +96,20 @@ const ExampleTemplate: StoryFn = (args) => ({
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   ...commonArgs,
+};
+
+const ExampleBackendTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    selectionUpdate: action('selectionUpdate'),
+  },
+  template: html`<example-select-backend-simulation></example-select-backend-simulation>`,
+});
+
+export const BackendSimulation = ExampleBackendTemplate.bind({});
+
+BackendSimulation.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
 };

@@ -224,16 +224,8 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
   await page.keyboard.press("KeyU");
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
-  await page.keyboard.press("KeyN");
-  await page.keyboard.press("KeyT");
-  await page.keyboard.press("KeyA");
-  await page.keyboard.press("KeyI");
-  await page.keyboard.press("KeyN");
-  await page.keyboard.press("Space");
-  await page.keyboard.press("KeyL");
-  await page.keyboard.press("KeyI");
-  await page.keyboard.press("KeyO");
-  await page.keyboard.press("KeyN");
+
+  await page.keyboard.type("ntain lion", { delay: 50 });
   await expect(page.getByText("Showing 1 results")).toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
   await page.keyboard.press("Enter");
@@ -279,9 +271,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.getByTestId("fudis-multiselect-6").focus();
   await expect(page.getByTestId("fudis-multiselect-6-dropdown")).not.toBeVisible();
 
-  await page.keyboard.press("E");
-  await page.keyboard.press("N");
-  await page.keyboard.press("D");
+  await page.keyboard.type("END", { delay: 50 });
 
   await expect(
     page.getByTestId("fudis-multiselect-6-dropdown").getByText("No results found"),

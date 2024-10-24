@@ -1,4 +1,4 @@
-import { Component, Host, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Host, Inject, OnInit, Optional, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
@@ -12,7 +12,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './multiselect-option.component.html',
   styleUrls: ['./multiselect-option.component.scss'],
 })
-export class MultiselectOptionComponent extends SelectOptionBaseDirective implements OnInit {
+export class MultiselectOptionComponent
+  extends SelectOptionBaseDirective
+  implements OnInit, OnDestroy
+{
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
@@ -51,6 +54,11 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
     } else {
       this.checked = false;
     }
+  }
+
+  ngOnDestroy(): void {
+    this._parentMultiselect.setOptionVisibility(this._id, false);
+    this._parentGroup?.setOptionVisibility(this._id, false);
   }
 
   /**

@@ -24,14 +24,15 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page).toHaveScreenshot("A-4-focus-disabled.png", {
     fullPage: true,
   });
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowUp");
-  await page.keyboard.press("ArrowUp");
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowDown", { delay: 20 });
+  await page.keyboard.press("ArrowUp", { delay: 20 });
+  await page.keyboard.press("ArrowUp", { delay: 20 });
+  await expect(page.getByTestId("fudis-select-1-group-1-option-2")).toBeVisible();
   await expect(page).toHaveScreenshot("A-5-focus-mountain-lion.png", {
     fullPage: true,
   });
@@ -68,17 +69,19 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page).toHaveScreenshot("A-11-close-escape.png", {
     fullPage: true,
   });
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowUp");
-  await page.keyboard.press("ArrowUp");
-  await page.keyboard.press("ArrowUp");
-  await page.keyboard.press("ArrowUp");
-  await page.keyboard.press("Enter");
-  await page.waitForTimeout(100);
+  await page.keyboard.press("ArrowDown", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+  await expect(page.getByTestId("fudis-select-1-option-1")).toBeFocused();
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-5")).toBeFocused();
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-4")).toBeFocused();
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-3")).toBeFocused();
+  await page.keyboard.press("ArrowUp", { delay: 50 });
+  await expect(page.getByTestId("fudis-select-1-group-10-option-2")).toBeFocused();
+  await page.keyboard.press("Enter", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(
-    page.getByTestId("fudis-select-1-input-label").getByText("Dolphin, common"),
-  ).toBeVisible();
   await expect(page).toHaveScreenshot("A-12-enter-select-dolphin.png", {
     fullPage: true,
   });
