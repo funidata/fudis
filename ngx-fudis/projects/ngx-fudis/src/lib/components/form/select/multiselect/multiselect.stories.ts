@@ -8,7 +8,7 @@ import { MultiselectComponent } from './multiselect.component';
 import readme from './multiselect.mdx';
 import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
-import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component.ts';
+import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component';
 
 export default {
   title: 'Components/Form/Select/Multiselect',

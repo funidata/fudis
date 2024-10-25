@@ -53,6 +53,6 @@ export class StorybookExampleSelectBackendSimulationComponent extends StorybookE
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object> | null>();
 
   override control: FormControl = new FormControl<FudisSelectOption<object> | null>(null, [
-    FudisValidators.required('You must choose a pet!'),
+    FudisValidators.required('You must choose a movie!'),
   ]);
 }

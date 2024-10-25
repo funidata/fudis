@@ -2,10 +2,9 @@ import test, { expect } from "@playwright/test";
 
 test("Multiselect Autocomplete with filtering false", async ({ page }) => {
   /**
-   *
    * @param database How many options from 'database' was checked to match results
    * @param domLoaded Number of results sent to DOM
-   * * @param input string to be used for searching
+   * @param input string to be used for searching
    */
   const expectSearchResults = async (database: number, domLoaded: number, input: string) => {
     await page.getByTestId("fudis-multiselect-1").clear();
