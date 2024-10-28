@@ -14,6 +14,12 @@
     "type": "git",
     "url": "git+https://github.com/funidata/fudis.git"
   },
+  "keywords": [
+    "funidata",
+    "design-system",
+    "component-library",
+    "angular-components"
+  ],
   "bugs": {
     "url": "https://github.com/funidata/fudis/issues"
   },
