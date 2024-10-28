@@ -91,6 +91,19 @@ Both Select and Multiselect have three variants:
   - User must type 3 letters before any selectable results are shown
   - Initially a search icon is visible and after typing 3 letters, it changes to a button which can be used to clear the typed text
 
+### Default Filtering Logic and Manually Filtering Options e.g. from Backend
+
+By default, Select with Autocomplete assumes, that all available options are always loaded to the DOM and from user input it will hide or show matching options.
+
+In real world applications there are cases, that for performance, it is unfeasible to always load all options to the DOM. Select and Multiselect has a property `autocompleteFilter`, when set to `false`, it disables default filtering logic.
+
+This combined with Output property `filterTextUpdate` application can listen to user's input, do their own filtering logic and then load options to the DOM.
+
+Example Stories for manual autocomplete filtering:
+
+- [Select](/story/components-form-select-select--backend-simulation)
+- [Multiselect](/story/components-form-select-multiselect--backend-simulation)
+
 ### Selection Clear Button Boolean
 
 By default `selectionClearButton` is set to boolean `true`. Whenever user has made a valid selection from the options, the Clear button can be clicked to clear the selection. This will set the component's `FormControl` to `null`.
