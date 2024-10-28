@@ -36,7 +36,7 @@ export class StorybookExampleBackendSimulationBaseDirective {
                 break;
               }
 
-              if (this.control.value && value === this.control.value?.label) {
+              if (this.control.value && option === this.control.value?.label) {
                 results.push(option);
                 counter = counterLimit;
               } else if (
