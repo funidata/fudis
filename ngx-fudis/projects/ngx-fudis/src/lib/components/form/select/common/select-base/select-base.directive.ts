@@ -116,9 +116,19 @@ export class SelectBaseDirective
   @Input() selectionClearButton: boolean = true;
 
   /**
+   * By default Autocomplete filters options loaded to the DOM based on user input. When this is set to 'false', filtering is disabled and all options available in DOM are displayed regardless of user's input. Disabling can be useful, if application wants to implement their own filtering logic. E. g. get user's input, run a backend search and create list of options for the Select.
+   */
+  @Input() autocompleteFilter: boolean = true;
+
+  /**
    * For Autocomplete variants optional helper text displayed as first item in opened dropdown list. By default uses internal Fudis translation, which can be disabled by setting this property to boolean 'false'
    */
   @Input() autocompleteHelpText: string | false;
+
+  /**
+   * By default, Autocomplete variant will display "No results found" text when there are 0 options matching. When combined with 'autocompleteFilter' false, application can set their own 'Fetching options...' etc. text while their own filtering is in progress.
+   */
+  @Input() autocompleteNoResultsText: string | null = null;
 
   /**
    * Value output event on selection change

@@ -47,6 +47,7 @@ import { SelectIconsComponent } from '../select-icons/select-icons.component';
     </fudis-multiselect>
     <fudis-multiselect
       #multiSelectAuto
+      [autocompleteFilter]="autocompleteFilter"
       [variant]="'autocompleteDropdown'"
       [label]="'MultiAutoSelect Label'"
       [autocompleteHelpText]="'This is autocomplete help text'"
@@ -71,6 +72,7 @@ class MockSelectComponent {
   clearButton: boolean = true;
   size = 'md';
   variant: FudisSelectVariant = 'dropdown';
+  autocompleteFilter = true;
 
   @ViewChild('multiSelect') multiSelect: MultiselectComponent;
   @ViewChild('multiSelectAuto') multiSelectAuto: MultiselectComponent;
@@ -192,6 +194,59 @@ describe('SelectBaseDirective', () => {
 
         expect(element).toBeTruthy();
       });
+    });
+
+    it('should set autocompleteNoResultsText', () => {
+      const customText = 'This is custom no results text';
+
+      component.multiSelectAuto.autocompleteNoResultsText = customText;
+
+      fixture.detectChanges();
+
+      const autocompleteInput = getElement(fixture, '#fudis-multiselect-2') as HTMLInputElement;
+      autocompleteInput.focus();
+
+      fixture.detectChanges();
+
+      component.multiSelectAuto.autocompleteRef.updateInputValue('hello');
+
+      fixture.detectChanges();
+
+      const noResultsElement = getElement(fixture, '.fudis-select-dropdown__help-text__last');
+
+      expect(noResultsElement.textContent).toEqual(customText);
+    });
+
+    it('autocompleteFilter false should not filter results', () => {
+      const autocompleteInput = getElement(fixture, '#fudis-multiselect-2') as HTMLInputElement;
+      autocompleteInput.focus();
+      fixture.detectChanges();
+
+      component.multiSelectAuto.autocompleteRef.updateInputValue('salmon');
+
+      fixture.detectChanges();
+
+      const allOptionsBefore = getAllElements(
+        fixture,
+        '#fudis-multiselect-2-main-wrapper .fudis-multiselect-option--visible',
+      );
+
+      expect(allOptionsBefore.length).toEqual(1);
+
+      component.autocompleteFilter = false;
+
+      fixture.detectChanges();
+
+      component.multiSelectAuto.autocompleteRef.updateInputValue('salmo');
+
+      fixture.detectChanges();
+
+      const allOptionsAfter = getAllElements(
+        fixture,
+        '#fudis-multiselect-2-main-wrapper .fudis-multiselect-option--visible',
+      );
+
+      expect(allOptionsAfter.length).toEqual(9);
     });
 
     it('selectionClearButton', () => {

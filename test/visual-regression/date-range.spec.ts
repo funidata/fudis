@@ -8,6 +8,8 @@ test("date range default init, focus, fill", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-date-date-range--date-range&viewMode=story",
   );
+  await expect(page.getByTestId("fudis-datepicker-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-datepicker-2")).toBeVisible();
   await expect(page).toHaveScreenshot("default-1-init.png");
 
   await page.getByTestId("fudis-datepicker-1").focus();

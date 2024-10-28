@@ -58,7 +58,7 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   @Input() external: boolean = false;
 
   /**
-   * Title for the link, if not defined title will be the same as link URL
+   * Title for the link
    */
   @Input({ required: true }) title: string;
 
