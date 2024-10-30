@@ -52,7 +52,7 @@ export class AppFormExampleComponent implements OnInit {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-  })
+  });
 
   testFormGroup = new FormGroup<MyForm>({
     textArea: new FormControl<string | null>(

@@ -15,7 +15,11 @@
       <fudis-expandable [title]="'Random stuff'">
         <ng-template fudisContent type="expandable">
           <fudis-grid [classes]="'fudis-mt-md'">
-            <fudis-notification [variant]="'danger'"><fudis-body-text>Whoops! Here is danger notification</fudis-body-text></fudis-notification>
+            <fudis-notification [variant]="'danger'"
+              ><fudis-body-text
+                >Whoops! Here is danger notification</fudis-body-text
+              ></fudis-notification
+            >
             <fudis-heading [level]="3" fudisGridItem [columns]="'auto'">
               <a fudisLink [href]="'#'" [title]="'Link inside a heading'"></a>
             </fudis-heading>
