@@ -9,14 +9,13 @@ import {
   FudisFormErrorSummarySectionObject,
 } from '../../../types/forms';
 import { BehaviorSubject } from 'rxjs';
+import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 
 /**
  * Internal Error Summary tools not exposed to public
  */
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService implements OnDestroy {
-  constructor() {}
-
   /**
    * Current errors
    */
@@ -58,6 +57,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * To control that only form with spesific ID is reloaded in corresponding ErrorSummaryComponent effect() when signal is updated.
    */
   private _formIdToUpdate: string;
+
+  private _latestMessageLanguage: FudisLanguageAbbr;
 
   get allFormErrorsObservable(): BehaviorSubject<FudisFormErrorSummaryFormsAndErrors> {
     return this._allFormErrorsObservable;
@@ -231,9 +232,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     let currentErrors = this._allFormErrors;
 
-    const langUpdated =
-      currentErrors?.[newError.formId]?.[newError.id] &&
-      currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
+    const langUpdated = this._latestMessageLanguage !== newError.language;
 
     currentErrors = {
       ...currentErrors,
@@ -244,7 +243,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     if (langUpdated || this._updateStrategy === 'all') {
       this._focusToFormOnReload = null;
-      this.reloadErrorsByFormId(newError.formId);
+      this._latestMessageLanguage = newError.language;
+      this.reloadErrorsByFormId(newError.formId, false, false, true);
     }
   }
 
@@ -376,7 +376,12 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     });
   }
 
-  public reloadErrorsByFormId(formId: string, focus?: boolean, allErrorsReloaded?: boolean): void {
+  public reloadErrorsByFormId(
+    formId: string,
+    focus?: boolean,
+    allErrorsReloaded?: boolean,
+    langChanged?: boolean,
+  ): void {
     if (focus) {
       this._focusToFormOnReload = formId;
     } else {
@@ -384,6 +389,10 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
 
     const currentFormsErrorSummaryStatus = { ...this._formErrorSummaryVisibilityStatus.value };
+
+    // If lang has changed AND this ErrorSummary is already visible, or lang hasn't changed, but requires updating
+    const reloadErrorsOnLangChange =
+      (langChanged && currentFormsErrorSummaryStatus[formId]) || !langChanged;
 
     if (!allErrorsReloaded) {
       this._formIdToUpdate = formId;
@@ -394,9 +403,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       });
     }
 
-    this._formErrorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
+    if (reloadErrorsOnLangChange) {
+      this._formErrorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
 
-    this._allFormErrorsObservable.next({ ...this._allFormErrors });
+      this._allFormErrorsObservable.next({ ...this._allFormErrors });
+    }
   }
 
   ngOnDestroy(): void {

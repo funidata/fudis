@@ -5,7 +5,6 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   Output,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
@@ -23,7 +22,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
   templateUrl: './validator-error-message.component.html',
   styleUrls: ['./validator-error-message.component.scss'],
 })
-export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _idService: FudisIdService,
@@ -97,35 +96,20 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
    */
   private _errorSent: boolean = false;
 
+  private _newError: FudisFormErrorSummaryItem;
+
   /**
    * Disposable object for preserving message as Observable string
    */
-  private _subscribtion: Subscription;
+  private _messageSubscribtion: Subscription;
 
-  /**
-   * To prevent ngOnChanges running before initial ngOnInit
-   */
-  private _initFinished: boolean = false;
-
-  ngOnInit(): void {
-    /**
-     * Create validator error message if a message is a observable string
-     */
-    if (this.message && typeof this.message !== 'string') {
-      this._subscribtion = this.message.subscribe((value: string) => {
+  private _subscribeToMessage(message: Observable<string>): void {
+    this._messageSubscribtion = message.subscribe((value: string) => {
+      if (this._currentMessage !== value) {
         this._currentMessage = value;
         this._createError();
-      });
-    }
-    /**
-     * Create validator error message if a message is a string
-     */
-    if (typeof this.message === 'string') {
-      this._currentMessage = this.message;
-      this._createError();
-    }
-
-    this._initFinished = true;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -137,22 +121,30 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   }
 
   ngOnChanges(changes: FudisComponentChanges<ValidatorErrorMessageComponent>): void {
-    if (this._initFinished) {
-      if (
-        changes.focusId ||
-        changes.message ||
-        changes.label ||
-        changes.type ||
-        changes.controlName ||
-        changes.formId
-      ) {
-        /**
-         * Update string message and try to create a new error when changes happen
-         */
-        if (typeof this.message === 'string') {
-          this._currentMessage = this.message;
-        }
+    if (
+      changes.focusId?.currentValue !== changes.focusId?.previousValue ||
+      changes.message?.currentValue !== changes.message?.previousValue ||
+      changes.label?.currentValue !== changes.label?.previousValue ||
+      changes.type?.currentValue !== changes.type?.previousValue ||
+      changes.controlName?.currentValue !== changes.controlName?.previousValue ||
+      changes.formId?.currentValue !== changes.formId?.previousValue
+    ) {
+      /**
+       * Update string message and try to create a new error when changes happen
+       */
 
+      const newMessage = changes.message?.currentValue;
+      const newLabel = changes.label?.currentValue;
+
+      if (newMessage) {
+        if (typeof newMessage === 'string') {
+          this._currentMessage = newMessage;
+        } else {
+          this._subscribeToMessage(newMessage);
+        }
+      }
+
+      if (newLabel) {
         this._createError();
       }
     }
@@ -161,8 +153,8 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   ngOnDestroy(): void {
     this._removeError();
 
-    if (this._subscribtion) {
-      this._subscribtion.unsubscribe();
+    if (this._messageSubscribtion) {
+      this._messageSubscribtion.unsubscribe();
     }
   }
 
@@ -180,7 +172,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 
   private _createError(): void {
     if (this.formId && this.focusId && this._currentMessage && this.label) {
-      const newError: FudisFormErrorSummaryItem = {
+      this._newError = {
         id: this.focusId,
         error: this._currentMessage,
         formId: this.formId,
@@ -190,9 +182,13 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
         language: this._translationService.getLanguage(),
       };
 
-      this._errorSummaryService.addNewError(newError);
-      this._errorSent = true;
-      this.handleCreateError.emit(newError);
+      this._addNewErrorDelay().then((resolve) => {
+        if (resolve) {
+          this._errorSummaryService.addNewError(this._newError);
+          this._errorSent = true;
+          this.handleCreateError.emit(this._newError);
+        }
+      });
     }
   }
 
@@ -208,5 +204,32 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
       this._errorSummaryService.removeError(errorToRemove, this.formId);
       this.handleRemoveError.emit(errorToRemove);
     }
+  }
+
+  /**
+   * TODO: document
+   */
+  private _addErrorInterval: null | NodeJS.Timeout = null;
+
+  /**
+   * Resolve a promise after delay if there hasn't been new updates to error
+   * @returns boolean
+   */
+  private _addNewErrorDelay(): Promise<boolean> {
+    let tempNewError: FudisFormErrorSummaryItem;
+
+    return new Promise((resolve) => {
+      this._addErrorInterval = setInterval(() => {
+        if (tempNewError === this._newError) {
+          if (this._addErrorInterval) {
+            clearInterval(this._addErrorInterval);
+            this._addErrorInterval = null;
+          }
+          resolve(true);
+        } else {
+          tempNewError = this._newError;
+        }
+      }, 100);
+    });
   }
 }
