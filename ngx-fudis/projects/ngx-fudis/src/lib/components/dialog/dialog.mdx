@@ -1,6 +1,8 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { DialogComponent } from "./dialog.component.ts";
-import * as DialogStories from "./dialog.stories.ts";
+import * as DialogFormStory from "./dialog-with-form.stories.ts";
+import * as DialogGridStory from "./dialog-with-grid.stories.ts";
+import * as DialogNestedStory from "./dialog-nested-example.stories.ts";
 import { dialogExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Dialog" />
@@ -136,11 +138,11 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ## Examples
 
-<Canvas of={DialogStories.ExampleWithForm} />
+<Canvas of={DialogFormStory.ExampleWithForm} />
 
-<Canvas of={DialogStories.ExampleWithGrid} />
+<Canvas of={DialogGridStory.ExampleWithGrid} />
 
-<Canvas of={DialogStories.ExampleWithNestedDialogs} />
+<Canvas of={DialogNestedStory.ExampleWithNestedDialogs} />
 
 ### Full code example
 
