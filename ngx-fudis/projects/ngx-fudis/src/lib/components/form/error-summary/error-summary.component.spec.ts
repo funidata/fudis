@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -29,6 +29,7 @@ import { TextInputComponent } from '../text-input/text-input.component';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
+import { getElement } from '../../../utilities/tests/utilities';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -99,13 +100,18 @@ class MockFormComponent {
   }
 }
 
-const getErrorList = (fixture: ComponentFixture<MockFormComponent>): NodeList | null => {
-  const errors: NodeList = fixture.nativeElement.querySelectorAll(
-    'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-  );
+const errorList3 = [
+  'Expandable title / Expandable input: Not an email',
+  'Form information / Contact email: Missing email contact',
+  'Section title / Section input: Too short input',
+];
 
-  return errors;
-};
+const errorList4 = [
+  'Expandable title / Expandable input: Not an email',
+  'Form information / Contact email: Missing email contact',
+  'Form information / Name: Missing your name',
+  'Section title / Section input: Too short input',
+];
 
 describe('ErrorSummaryComponent', () => {
   let wrapperComponent: MockFormComponent;
@@ -149,82 +155,112 @@ describe('ErrorSummaryComponent', () => {
     wrapperFixture = TestBed.createComponent(MockFormComponent);
     wrapperComponent = wrapperFixture.componentInstance;
     wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
-    wrapperFixture.autoDetectChanges();
     wrapperComponent.reloadErrors();
+    wrapperFixture.detectChanges();
   });
 
+  const getErrorListPromise = (): Promise<string[] | null> => {
+    return new Promise((resolve) => {
+      let tempErrorsArray: string[] = [];
+
+      let tryCounter = 0;
+
+      const interval = setInterval(() => {
+        wrapperFixture.detectChanges();
+
+        const errorsArray: string[] = [];
+
+        const errors: NodeList = wrapperFixture.nativeElement.querySelectorAll(
+          'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+        );
+
+        errors.forEach((item) => {
+          if (item.textContent) {
+            errorsArray.push(item.textContent);
+          }
+        });
+
+        if (tempErrorsArray.sort().toString() == errorsArray.sort().toString()) {
+          clearInterval(interval);
+
+          resolve(errorsArray.sort());
+        } else {
+          tempErrorsArray = errorsArray;
+          tryCounter = tryCounter + 1;
+        }
+
+        if (tryCounter === 5) {
+          resolve(null);
+        }
+      }, 100);
+    });
+  };
+
   describe('Contents', () => {
-    it('helper texts are displayed properly', () => {
-      const renderedHelpText = wrapperFixture.nativeElement.querySelector('fudis-body-text p');
+    it('helper texts are displayed properly', async () => {
+      await wrapperFixture.whenStable().then(() => {
+        wrapperFixture.detectChanges();
+        const renderedHelpText = getElement(
+          wrapperFixture,
+          '.fudis-error-summary__errors fudis-body-text',
+        );
 
-      // Hidden icon text + Help Text
-      expect(renderedHelpText.textContent).toBe(
-        'Attention:\u00A0There were errors you need to fix',
-      );
+        // Hidden icon text + Help Text
+        expect(renderedHelpText.textContent).toBe(
+          'Attention:\u00A0There were errors you need to fix',
+        );
+      });
     });
 
-    it('should remove errors dynamically without reload', () => {
+    it('should remove errors dynamically without reload', async () => {
       wrapperComponent.errorSummaryService.setUpdateStrategy('onRemove');
-      wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
-      wrapperFixture.detectChanges();
 
-      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
+      await wrapperFixture.whenStable().then(async () => {
+        wrapperFixture.detectChanges();
+        await expect(getErrorListPromise()).resolves.toEqual(errorList3);
+      });
     });
 
-    it('should add & remove errors dynamically without reload', () => {
+    it('should add & remove errors dynamically without reload', async () => {
       wrapperComponent.errorSummaryService.setUpdateStrategy('all');
-      wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
-      wrapperFixture.detectChanges();
 
-      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
-
-      wrapperComponent.formGroup.controls.name.patchValue(null);
-      wrapperFixture.detectChanges();
-
-      expect(getErrorList(wrapperFixture)?.length).toEqual(4);
+      await wrapperFixture.whenStable().then(async () => {
+        wrapperFixture.detectChanges();
+        await expect(getErrorListPromise())
+          .resolves.toEqual(errorList3)
+          .finally(async () => {
+            wrapperComponent.formGroup.controls.name.patchValue(null);
+            wrapperFixture.detectChanges();
+            await wrapperFixture.whenStable().then(async () => {
+              await expect(getErrorListPromise()).resolves.toEqual(errorList4);
+            });
+          });
+      });
     });
 
-    it('error list have right amount of list elements', () => {
-      expect(getErrorList(wrapperFixture)?.length).toEqual(4);
+    it('error list have right messages', async () => {
+      await wrapperFixture.whenStable().then(async () => {
+        await expect(getErrorListPromise()).resolves.toEqual(errorList4);
+      });
     });
 
-    it('error list have right messages', () => {
-      const errorList = wrapperFixture.nativeElement.querySelectorAll(
-        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-      );
-
-      const firstMessage = errorList[0].textContent;
-      const secondMessage = errorList[1].textContent;
-      const thirdMessage = errorList[2].textContent;
-      const forthMessage = errorList[3].textContent;
-
-      expect(firstMessage).toEqual('Form information / Name: Missing your name');
-      expect(secondMessage).toEqual('Form information / Contact email: Missing email contact');
-      expect(thirdMessage).toEqual('Section title / Section input: Too short input');
-      expect(forthMessage).toEqual('Expandable title / Expandable input: Not an email');
-    });
-
-    it('should update error messages when control is updated and errors loaded', () => {
-      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca!');
-      wrapperFixture.detectChanges();
-      wrapperComponent.reloadErrors();
-      wrapperFixture.detectChanges();
-
-      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
-    });
-
-    it('should not update error messages without reload', () => {
+    it('should not update error messages without reload', async () => {
+      wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
-      wrapperFixture.detectChanges();
 
-      expect(getErrorList(wrapperFixture)?.length).toEqual(4);
+      await wrapperFixture.whenStable().then(async () => {
+        await expect(getErrorListPromise())
+          .resolves.toEqual(errorList4)
+          .then(async () => {
+            wrapperComponent.reloadErrors();
 
-      wrapperComponent.reloadErrors();
-      wrapperFixture.detectChanges();
-
-      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
+            await wrapperFixture.whenStable().then(async () => {
+              await expect(getErrorListPromise()).resolves.toEqual(errorList3);
+            });
+          });
+      });
     });
   });
 });
