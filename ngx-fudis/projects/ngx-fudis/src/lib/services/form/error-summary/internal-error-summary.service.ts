@@ -9,7 +9,6 @@ import {
   FudisFormErrorSummarySectionObject,
 } from '../../../types/forms';
 import { BehaviorSubject } from 'rxjs';
-import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 
 /**
  * Internal Error Summary tools not exposed to public
@@ -57,8 +56,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * To control that only form with spesific ID is reloaded in corresponding ErrorSummaryComponent effect() when signal is updated.
    */
   private _formIdToUpdate: string;
-
-  private _latestMessageLanguage: FudisLanguageAbbr;
 
   get allFormErrorsObservable(): BehaviorSubject<FudisFormErrorSummaryFormsAndErrors> {
     return this._allFormErrorsObservable;
@@ -232,7 +229,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     let currentErrors = this._allFormErrors;
 
-    const langUpdated = this._latestMessageLanguage !== newError.language;
+    const currentMessage = currentErrors?.[newError.formId]?.[newError.id]?.errors[newError.type];
+
+    const currentLabel = currentErrors?.[newError.formId]?.[newError.id]?.label;
+
+    const messageChanged = currentMessage && currentMessage !== newError.error;
+
+    const labelChanged = currentLabel && currentLabel !== newError.label;
+
+    const contentChanged =
+      currentErrors?.[newError.formId]?.[newError.id] && (messageChanged || labelChanged);
 
     currentErrors = {
       ...currentErrors,
@@ -241,9 +247,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     this._allFormErrors = currentErrors;
 
-    if (langUpdated || this._updateStrategy === 'all') {
+    if (contentChanged || this._updateStrategy === 'all') {
       this._focusToFormOnReload = null;
-      this._latestMessageLanguage = newError.language;
+
       this.reloadErrorsByFormId(newError.formId, false, false, true);
     }
   }
@@ -261,7 +267,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
           id: newError.id,
           errors: { [newError.type]: newError.error },
           label: newError.label,
-          language: newError.language,
         },
       };
     } else {
@@ -270,8 +275,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
         [errorId]: {
           id: newError.id,
           errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
+
           label: newError.label,
-          language: newError.language,
         },
       };
     }
@@ -301,7 +306,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
       if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
         this._focusToFormOnReload = null;
-
         this.reloadErrorsByFormId(formId);
       }
     }
@@ -380,7 +384,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     formId: string,
     focus?: boolean,
     allErrorsReloaded?: boolean,
-    langChanged?: boolean,
+    contentChanged?: boolean,
   ): void {
     if (focus) {
       this._focusToFormOnReload = formId;
@@ -390,9 +394,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     const currentFormsErrorSummaryStatus = { ...this._formErrorSummaryVisibilityStatus.value };
 
-    // If lang has changed AND this ErrorSummary is already visible, or lang hasn't changed, but requires updating
-    const reloadErrorsOnLangChange =
-      (langChanged && currentFormsErrorSummaryStatus[formId]) || !langChanged;
+    // If content has changed (usually because lang has changed) AND this ErrorSummary is already visible, or content hasn't changed but this ErrorSummary is hidden --> Update and set visible
+    const reloadOnContentChange =
+      (contentChanged && currentFormsErrorSummaryStatus[formId]) || !contentChanged;
 
     if (!allErrorsReloaded) {
       this._formIdToUpdate = formId;
@@ -403,7 +407,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       });
     }
 
-    if (reloadErrorsOnLangChange) {
+    if (reloadOnContentChange) {
       this._formErrorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
 
       this._allFormErrorsObservable.next({ ...this._allFormErrors });

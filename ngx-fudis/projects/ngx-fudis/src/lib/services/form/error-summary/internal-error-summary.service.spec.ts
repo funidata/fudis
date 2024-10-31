@@ -19,7 +19,6 @@ describe('InternalErrorSummaryService', () => {
     error: 'There is something wrong',
     type: 'required',
     controlName: undefined,
-    language: 'en',
   };
 
   const firstErrorAnotherErrorType: FudisFormErrorSummaryItem = {
@@ -35,7 +34,6 @@ describe('InternalErrorSummaryService', () => {
     error: 'You need to fix also this',
     type: 'required',
     controlName: undefined,
-    language: 'en',
   };
 
   const firstErrorFromService: FudisFormErrorSummaryObject = {
@@ -43,7 +41,6 @@ describe('InternalErrorSummaryService', () => {
       id: 'first-error',
       errors: { required: 'There is something wrong', email: 'Email is not valid' },
       label: 'Test label',
-      language: 'en',
     },
   };
 
@@ -52,7 +49,6 @@ describe('InternalErrorSummaryService', () => {
       id: 'second-error',
       errors: { required: 'You need to fix also this' },
       label: 'Test label',
-      language: 'en',
     },
   };
 
@@ -130,19 +126,23 @@ describe('InternalErrorSummaryService', () => {
     });
   });
 
-  it('should reload errors when Error Summary Item language is changed', () => {
+  it('should reload errors when Error Summary Item content is changed', () => {
     const firstErrorWithLangUpdate: FudisFormErrorSummaryItem = {
       ...firstError,
-      language: 'sv',
+      error: 'Something new',
     };
 
     service.addNewError(firstError);
 
-    expect(service.getErrors()['test-form-id-1']['first-error'].language).toEqual('en');
+    expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
+      'There is something wrong',
+    );
     service.addNewError(firstErrorWithLangUpdate);
-    expect(service.getErrors()['test-form-id-1']['first-error'].language).toEqual('sv');
+    expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
+      'Something new',
+    );
 
-    expect(service.reloadErrorsByFormId).toHaveBeenCalledWith('test-form-id-1');
+    expect(service.reloadErrorsByFormId).toHaveBeenCalledWith('test-form-id-1', false, false, true);
   });
 
   it('should add fieldset information to currentFieldsets array', () => {
