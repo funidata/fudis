@@ -7,10 +7,20 @@ test("form dynamic inputs", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-form--example-with-dynamic-validators&viewMode=story",
   );
+
+  await expect(page.getByTestId("fudis-text-input-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-text-input-2")).toBeVisible();
+  await expect(page.getByTestId("fudis-text-input-3")).toBeVisible();
+  await expect(page.getByTestId("fudis-datepicker-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-select-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-checkbox-group-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-checkbox-group-2")).toBeVisible();
+  await expect(page.getByTestId("fudis-checkbox-group-3")).toBeVisible();
+  await expect(page.getByTestId("fudis-radio-button-group-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-localized-text-group-1")).toBeVisible();
+
   await page.getByTestId("fudis-button-2").click(); /* submit form with errors */
-
   await expect(page.getByText(errorSummaryText)).toBeVisible();
-
   await expect(page).toHaveScreenshot("dynamic-1-submit-with-errors.png", { fullPage: true });
 
   await page.getByTestId("fudis-button-1").click(); // Click toggle to hide
@@ -76,8 +86,14 @@ test("form dynamic inputs", async ({ page }) => {
     .focus(); /** Focus on the first checkbox */
   await page.getByText("Summer holidays").click(); /** Uncheck the first checkbox */
 
-  await page.getByTestId("fudis-button-2").click(); /* submit form with errors */
-  await expect(page).toHaveScreenshot("dynamic-3-submit-with-invalid-data.png", { fullPage: true });
+  await expect(page.getByText("At least one option must be selected")).toHaveCount(3);
+
+  await page.waitForTimeout(100).then(async () => {
+    await page.getByTestId("fudis-button-2").click(); /* submit form with errors */
+    await expect(page).toHaveScreenshot("dynamic-3-submit-with-invalid-data.png", {
+      fullPage: true,
+    });
+  });
 
   /**
    * Remove validators which are visible at the moment
