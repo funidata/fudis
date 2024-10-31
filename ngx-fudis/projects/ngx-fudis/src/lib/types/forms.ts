@@ -59,7 +59,6 @@ export type FudisFormErrorSummaryItem = {
   error: string;
   type: string;
   controlName: string | undefined;
-  language: FudisLanguageAbbr;
 };
 
 export type FudisFormErrorSummaryRemoveItem = {
@@ -85,7 +84,6 @@ export type FudisFormErrorSummaryObject = {
     id: string;
     errors: FudisFormErrorSummaryObjectItemErrors;
     label: string;
-    language: FudisLanguageAbbr;
   };
 };
 

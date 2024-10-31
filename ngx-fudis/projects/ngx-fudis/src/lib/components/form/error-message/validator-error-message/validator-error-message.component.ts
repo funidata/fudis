@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import {
   FudisFormErrorSummaryItem,
@@ -26,7 +25,6 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _idService: FudisIdService,
-    private _translationService: FudisTranslationService,
   ) {
     this._id = _idService.getNewId('validator-error-message');
   }
@@ -179,16 +177,17 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
         label: this.label,
         type: this.type,
         controlName: this.controlName,
-        language: this._translationService.getLanguage(),
       };
 
-      this._addNewErrorDelay().then((resolve) => {
-        if (resolve) {
-          this._errorSummaryService.addNewError(this._newError);
-          this._errorSent = true;
-          this.handleCreateError.emit(this._newError);
-        }
-      });
+      if (!this._addErrorInterval) {
+        this._addNewErrorDelay().then((resolve) => {
+          if (resolve) {
+            this._errorSummaryService.addNewError(this._newError);
+            this._errorSent = true;
+            this.handleCreateError.emit(this._newError);
+          }
+        });
+      }
     }
   }
 
@@ -209,7 +208,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   /**
    * TODO: document
    */
-  private _addErrorInterval: null | NodeJS.Timeout = null;
+  private _addErrorInterval: boolean = false;
 
   /**
    * Resolve a promise after delay if there hasn't been new updates to error
@@ -219,17 +218,18 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
     let tempNewError: FudisFormErrorSummaryItem;
 
     return new Promise((resolve) => {
-      this._addErrorInterval = setInterval(() => {
+      this._addErrorInterval = true;
+      const interval = setInterval(() => {
         if (tempNewError === this._newError) {
           if (this._addErrorInterval) {
-            clearInterval(this._addErrorInterval);
-            this._addErrorInterval = null;
+            clearInterval(interval);
+            this._addErrorInterval = false;
           }
           resolve(true);
         } else {
           tempNewError = this._newError;
         }
-      }, 100);
+      }, 50);
     });
   }
 }
