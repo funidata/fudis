@@ -137,6 +137,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
       if (newMessage) {
         if (typeof newMessage === 'string') {
           this._currentMessage = newMessage;
+          this._createError();
         } else {
           this._subscribeToMessage(newMessage);
         }
@@ -179,15 +180,9 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
         controlName: this.controlName,
       };
 
-      if (!this._addErrorInterval) {
-        this._addNewErrorDelay().then((resolve) => {
-          if (resolve) {
-            this._errorSummaryService.addNewError(this._newError);
-            this._errorSent = true;
-            this.handleCreateError.emit(this._newError);
-          }
-        });
-      }
+      this._errorSummaryService.addNewError(this._newError);
+      this._errorSent = true;
+      this.handleCreateError.emit(this._newError);
     }
   }
 
@@ -203,33 +198,5 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
       this._errorSummaryService.removeError(errorToRemove, this.formId);
       this.handleRemoveError.emit(errorToRemove);
     }
-  }
-
-  /**
-   * TODO: document
-   */
-  private _addErrorInterval: boolean = false;
-
-  /**
-   * Resolve a promise after delay if there hasn't been new updates to error
-   * @returns boolean
-   */
-  private _addNewErrorDelay(): Promise<boolean> {
-    let tempNewError: FudisFormErrorSummaryItem;
-
-    return new Promise((resolve) => {
-      this._addErrorInterval = true;
-      const interval = setInterval(() => {
-        if (tempNewError === this._newError) {
-          if (this._addErrorInterval) {
-            clearInterval(interval);
-            this._addErrorInterval = false;
-          }
-          resolve(true);
-        } else {
-          tempNewError = this._newError;
-        }
-      }, 50);
-    });
   }
 }
