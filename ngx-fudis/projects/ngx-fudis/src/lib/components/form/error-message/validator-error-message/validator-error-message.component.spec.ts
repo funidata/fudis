@@ -104,10 +104,11 @@ describe('ValidatorErrorMessageComponent', () => {
     });
 
     it('should create error with string message when component is initialized', () => {
-      component.message = 'Message for testing';
-
-      fixture.detectChanges();
       jest.spyOn(component.handleCreateError, 'emit');
+      component.message = 'Message for testing';
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
@@ -116,11 +117,7 @@ describe('ValidatorErrorMessageComponent', () => {
         label: 'Test label',
         type: 'required',
         controlName: undefined,
-        language: 'en',
       };
-
-      component.ngOnInit();
-      fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
     });
@@ -129,8 +126,9 @@ describe('ValidatorErrorMessageComponent', () => {
       jest.spyOn(component.handleRemoveError, 'emit');
       component.message = 'Error to be removed';
 
-      component.ngOnInit();
-      fixture.detectChanges();
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
 
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: 'test-id',
@@ -138,22 +136,22 @@ describe('ValidatorErrorMessageComponent', () => {
         type: 'required',
         controlName: undefined,
       };
-
       component.ngOnDestroy();
-      fixture.detectChanges();
-
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
 
-    it('should create error message with observable message when component is initialized and update it when observable updates', () => {
+    it('should create error message with observable message when component is initialized and update it when observable updates', async () => {
       const messageAsObservable: Subject<string> = new BehaviorSubject<string>(
         'First message from observable',
       );
 
+      jest.spyOn(component.handleCreateError, 'emit');
+
       component.message = messageAsObservable;
 
-      fixture.detectChanges();
-      jest.spyOn(component.handleCreateError, 'emit');
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
@@ -162,11 +160,7 @@ describe('ValidatorErrorMessageComponent', () => {
         label: 'Test label',
         type: 'required',
         controlName: undefined,
-        language: 'en',
       };
-
-      component.ngOnInit();
-      fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
 
@@ -186,13 +180,18 @@ describe('ValidatorErrorMessageComponent', () => {
       const removedMessageAsObservable: Subject<string> = new BehaviorSubject<string>(
         'Message to be removed',
       );
+
       component.message = removedMessageAsObservable;
       component.focusId = 'test-observable-message-id';
       component.type = 'required';
       component.controlName = undefined;
 
-      component.ngOnInit();
-      fixture.detectChanges();
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+        focusId: new SimpleChange(null, component.focusId, true),
+        type: new SimpleChange(null, component.type, true),
+        controlName: new SimpleChange(null, component.controlName, true),
+      });
 
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: 'test-observable-message-id',
@@ -202,7 +201,6 @@ describe('ValidatorErrorMessageComponent', () => {
       };
 
       component.ngOnDestroy();
-      fixture.detectChanges();
 
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
@@ -212,10 +210,13 @@ describe('ValidatorErrorMessageComponent', () => {
         'First message from observable',
       );
 
+      jest.spyOn(component.handleCreateError, 'emit');
+
       component.message = messageAsObservable;
 
-      fixture.detectChanges();
-      jest.spyOn(component.handleCreateError, 'emit');
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
@@ -224,24 +225,20 @@ describe('ValidatorErrorMessageComponent', () => {
         label: 'Test label',
         type: 'required',
         controlName: undefined,
-        language: 'en',
       };
-
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
-
-      component.label = 'New better label';
 
       const updatedError: FudisFormErrorSummaryItem = {
         ...testError,
         label: 'New better label',
       };
+
+      expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
+
+      component.label = updatedError.label;
+
       component.ngOnChanges({
-        message: new SimpleChange(null, updatedError.label, false),
+        label: new SimpleChange('Test label', component.label, false),
       });
-      fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
     });

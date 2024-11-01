@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -16,12 +17,13 @@ import {
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-error-summary',
   templateUrl: './error-summary.component.html',
   styleUrls: ['./error-summary.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
@@ -73,7 +75,9 @@ export class ErrorSummaryComponent implements AfterViewInit {
   /**
    * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
    */
-  protected _attentionText = new Subject<string>();
+  protected _attentionText = new BehaviorSubject<string>(
+    this._translationService.getTranslations()().ICON.ATTENTION,
+  );
 
   /**
    * Visible errors
