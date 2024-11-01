@@ -94,8 +94,6 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
    */
   private _errorSent: boolean = false;
 
-  private _newError: FudisFormErrorSummaryItem;
-
   /**
    * Disposable object for preserving message as Observable string
    */
@@ -171,7 +169,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   private _createError(): void {
     if (this.formId && this.focusId && this._currentMessage && this.label) {
-      this._newError = {
+      const newError = {
         id: this.focusId,
         error: this._currentMessage,
         formId: this.formId,
@@ -180,9 +178,9 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
         controlName: this.controlName,
       };
 
-      this._errorSummaryService.addNewError(this._newError);
+      this._errorSummaryService.addNewError(newError);
       this._errorSent = true;
-      this.handleCreateError.emit(this._newError);
+      this.handleCreateError.emit(newError);
     }
   }
 
