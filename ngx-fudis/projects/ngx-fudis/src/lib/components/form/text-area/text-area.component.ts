@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -15,6 +15,7 @@ import { TextFieldComponentBaseDirective } from '../../../directives/form/text-f
   selector: 'fudis-text-area',
   templateUrl: './text-area.component.html',
   styleUrls: ['./text-area.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextAreaComponent
   extends TextFieldComponentBaseDirective
