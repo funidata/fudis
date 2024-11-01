@@ -169,7 +169,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   private _createError(): void {
     if (this.formId && this.focusId && this._currentMessage && this.label) {
-      const newError = {
+      const newError: FudisFormErrorSummaryItem = {
         id: this.focusId,
         error: this._currentMessage,
         formId: this.formId,

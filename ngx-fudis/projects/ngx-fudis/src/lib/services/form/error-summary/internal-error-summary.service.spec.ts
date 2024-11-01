@@ -127,7 +127,7 @@ describe('InternalErrorSummaryService', () => {
   });
 
   it('should reload errors when Error Summary Item content is changed', () => {
-    const firstErrorWithLangUpdate: FudisFormErrorSummaryItem = {
+    const firstErrorWithContentUpdate: FudisFormErrorSummaryItem = {
       ...firstError,
       error: 'Something new',
     };
@@ -137,7 +137,7 @@ describe('InternalErrorSummaryService', () => {
     expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
       'There is something wrong',
     );
-    service.addNewError(firstErrorWithLangUpdate);
+    service.addNewError(firstErrorWithContentUpdate);
     expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
       'Something new',
     );
