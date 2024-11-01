@@ -15,6 +15,8 @@ Fudis Dialog consists of three parts: Service, Component and Directives.
 
 It is recommended to have only one Dialog open at a time.
 
+Pay attention to accessibility when designing dialog with read-only content.
+
 ## Service
 
 Dialog Service provides tools for opening and closing a dialog. Service accepts both Angular components and templates to be passed as an argument.
@@ -107,9 +109,10 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 **fudis-dialog-content**: Container for your scrollable dialog content. This directive extends _MatDialogContent_.
 
+>**If dialog consists ONLY text**: Set `focusToContent` input value as true. This will ensure that scrollable content is accessible to keyboard and screenreader users.
 ```
 <fudis-dialog>
-  <fudis-dialog-content>
+  <fudis-dialog-content [focusToContent]="true">
     ...
   </fudis-dialog-content>
 </fudis-dialog>
@@ -138,11 +141,11 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ## Examples
 
-<Canvas of={DialogFormStory.ExampleWithForm} />
+<Canvas of={ DialogFormStory.ExampleWithForm } />
 
-<Canvas of={DialogGridStory.ExampleWithGrid} />
+<Canvas of={ DialogGridStory.ExampleWithGrid } />
 
-<Canvas of={DialogNestedStory.ExampleWithNestedDialogs} />
+<Canvas of={ DialogNestedStory.ExampleWithNestedDialogs } />
 
 ### Full code example
 

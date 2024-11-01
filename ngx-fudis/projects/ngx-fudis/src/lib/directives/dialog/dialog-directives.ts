@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import {
   MatDialog,
   MatDialogActions,
@@ -7,6 +7,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { FudisComponentChanges } from '../../types/miscellaneous';
 
 @Directive({
   selector: '[fudisDialogTitle]',
@@ -49,6 +50,11 @@ export class DialogContentDirective extends MatDialogContent implements AfterVie
     super();
   }
 
+  /**
+   * Dialog focusToContent sets a visual focus to dialog content. Preferred to be used with read-only content.
+   */
+  @Input() focusToContent: boolean = false;
+
   ngAfterViewInit() {
     /*
      * Workaround to enable keyboard browsing on scrollable dialog content
@@ -56,9 +62,20 @@ export class DialogContentDirective extends MatDialogContent implements AfterVie
      * These can be removed, when browser support gets better.
      */
 
-    if (this.isDialogScrollable()) {
+    if (this.isDialogScrollable() && this.focusToContent) {
       this._renderer.setAttribute(this._elRef.nativeElement, 'tabindex', '0');
-      this._renderer.setAttribute(this._elRef.nativeElement, 'role', 'region');
+      this._renderer.setAttribute(this._elRef.nativeElement, 'role', 'document');
+    }
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<DialogContentDirective>): void {
+
+    if ((changes.focusToContent?.currentValue !== changes.focusToContent?.previousValue) && this.focusToContent) {
+      this._renderer.setAttribute(this._elRef.nativeElement, 'tabindex', '0');
+      this._renderer.setAttribute(this._elRef.nativeElement, 'role', 'document');
+    } else {
+      this._renderer.removeAttribute(this._elRef.nativeElement, 'tabindex');
+      this._renderer.removeAttribute(this._elRef.nativeElement, 'role');
     }
   }
 

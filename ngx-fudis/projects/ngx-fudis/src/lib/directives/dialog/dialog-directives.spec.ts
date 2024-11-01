@@ -21,7 +21,7 @@ import { AlertGroupComponent } from '../../components/alert/alert-group/alert-gr
   template: `
     <fudis-dialog [size]="'lg'">
       <fudis-heading fudisDialogTitle [level]="2">Dialog Heading</fudis-heading>
-      <fudis-dialog-content>
+      <fudis-dialog-content [focusToContent]="true">
         <fudis-body-text>Dialog Content</fudis-body-text>
       </fudis-dialog-content>
       <fudis-dialog-actions [align]="'start'">
@@ -93,7 +93,7 @@ describe('DialogDirectives', () => {
 
       // The dialog is mocked to be scrollable, so the following values should be set
       expect(content.getAttribute('tabIndex')).toEqual('0');
-      expect(content.getAttribute('role')).toEqual('region');
+      expect(content.getAttribute('role')).toEqual('document');
     });
   });
 

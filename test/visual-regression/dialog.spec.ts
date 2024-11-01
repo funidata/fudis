@@ -20,7 +20,7 @@ test("dialog with grid", async ({ page }) => {
   await expect(page.getByTestId("fudis-button-2")).toBeVisible();
   await expect(page.getByText("Dialog with fudis-grid and scrollable content")).toBeVisible();
   await expect(page).toHaveScreenshot("grid-1-init.png");
-  await page.getByRole("region").focus();
+  await page.keyboard.press("Tab");
   await expect(page).toHaveScreenshot("grid-2-content-focus.png");
   await page.getByText(" I am last item of the grid ").scrollIntoViewIfNeeded();
   await expect(page).toHaveScreenshot("grid-3-content-scrolled.png");
