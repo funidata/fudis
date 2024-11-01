@@ -1,13 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MockComponent } from 'ng-mocks';
 import { TextInputComponent } from './text-input.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { ButtonComponent } from '../../button/button.component';
+import { IconComponent } from '../../icon/icon.component';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement } from '../../../utilities/tests/utilities';
 import { SimpleChange } from '@angular/core';
+import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -18,9 +21,13 @@ describe('TextInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
+        ButtonComponent,
+        GuidanceComponent,
+        IconComponent,
+        LabelComponent,
         TextInputComponent,
-        MockComponent(LabelComponent),
-        MockComponent(GuidanceComponent),
+        TooltipDirective,
+        TooltipApiDirective,
       ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
@@ -41,13 +48,13 @@ describe('TextInputComponent', () => {
   }
 
   function textInputSizeCheck(size: FudisInputSize): void {
-    component.size = size;
+    fixture.componentRef.setInput('size', size);
     fixture.detectChanges();
     assertTextInputHasClasses(`fudis-text-input fudis-input-size__${size}`);
   }
 
   function textInputTypeCheck(type: FudisInputType): void {
-    component.type = type;
+    fixture.componentRef.setInput('type', type);
     fixture.detectChanges();
 
     const inputElement = getElement(fixture, 'input');
@@ -68,6 +75,20 @@ describe('TextInputComponent', () => {
       textInputTypeCheck('password');
       textInputTypeCheck('url');
       textInputTypeCheck('tel');
+    });
+
+    it('should have generated id', () => {
+      const inputElement = getElement(fixture, 'input');
+
+      expect(inputElement.getAttribute('id')).toEqual('fudis-text-input-1');
+    });
+
+    it('should have custom id', () => {
+      const inputElement = getElement(fixture, 'input');
+      fixture.componentRef.setInput('id', 'my-custom-id');
+      fixture.detectChanges();
+
+      expect(inputElement.getAttribute('id')).toEqual('my-custom-id');
     });
   });
 
@@ -146,6 +167,32 @@ describe('TextInputComponent', () => {
 
       expect(component.control.value).toEqual('  ');
     });
+
+    it('should be disbaled', () => {
+      const inputElement = getElement(fixture, 'input');
+
+      component.control.disable(); // Disabled through control
+      fixture.detectChanges();
+
+      expect(component.control.disabled).toBeTruthy();
+      expect(inputElement.getAttribute('disabled')).toEqual('');
+      expect(inputElement.getAttribute('readonly')).toEqual('');
+      expect(inputElement.getAttribute('aria-disabled')).toEqual('true');
+
+      component.control.enable();
+      fixture.detectChanges();
+
+      expect(inputElement.getAttribute('disabled')).toBeNull();
+      expect(inputElement.getAttribute('readonly')).toBeNull();
+      expect(inputElement.getAttribute('aria-disabled')).toBeNull();
+
+      fixture.componentRef.setInput('disabled', true); // Disable through Input property
+      fixture.detectChanges();
+
+      expect(inputElement.getAttribute('disabled')).toBeNull();
+      expect(inputElement.getAttribute('readonly')).toEqual('');
+      expect(inputElement.getAttribute('aria-disabled')).toEqual('true');
+    });
   });
 
   describe('CSS classes', () => {
@@ -156,5 +203,15 @@ describe('TextInputComponent', () => {
     });
   });
 
-  // TODO: Write tests for id constuction, tooltip, disabled state and other props coming from ControlComponentBaseDirective
+  describe('Tooltip', () => {
+    it('should be visible', () => {
+      fixture.componentRef.setInput('tooltip', 'This is tooltip text');
+      fixture.detectChanges();
+
+      const tooltipTriggerElem = getElement(fixture, 'fudis-button');
+
+      expect(tooltipTriggerElem).toBeTruthy();
+      expect(tooltipTriggerElem.getAttribute('ng-reflect-tooltip')).toEqual('This is tooltip text');
+    });
+  });
 });

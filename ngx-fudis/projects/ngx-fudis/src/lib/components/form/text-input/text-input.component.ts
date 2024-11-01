@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -19,6 +19,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'fudis-text-input',
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextInputComponent
   extends TextFieldComponentBaseDirective
