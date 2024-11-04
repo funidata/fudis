@@ -5,6 +5,10 @@ import { dialogExclude } from '../../utilities/storybook';
 import { DialogComponent } from './dialog.component';
 import { ExampleDialogLaucherComponent } from './examples/example-dialog-launcher.component';
 import { ExampleDialogFormComponent } from './examples/example-dialog-form.component';
+import { ExampleDialogWithGridComponent } from './examples/example-dialog-grid.component';
+import { ExampleNestedDialogsComponent } from './examples/example-nested-dialogs';
+import { ExampleSingleNestedDialogComponent } from './examples/example-single-nested-dialog.component';
+import { ExampleDialogSizeComponent } from './examples/example-dialog-size.component';
 
 export default {
   title: 'Components/Dialog',
@@ -16,6 +20,10 @@ export default {
         FormsModule,
         ExampleDialogLaucherComponent,
         ExampleDialogFormComponent,
+        ExampleDialogWithGridComponent,
+        ExampleNestedDialogsComponent,
+        ExampleSingleNestedDialogComponent,
+        ExampleDialogSizeComponent,
       ],
       providers: [],
       declarations: [],
@@ -44,7 +52,34 @@ const TemplateFrom: StoryFn = (args) => ({
   template: html` <example-dialog-laucher [size]="size"></example-dialog-laucher> `,
 });
 
+const TemplateGrid: StoryFn = (args) => ({
+  props: args,
+  template: html` <fudis-dialog-with-grid [size]="size"></fudis-dialog-with-grid> `,
+});
+
+export const ExampleWithGrid = TemplateGrid.bind({});
+ExampleWithGrid.args = {
+  size: 'md',
+};
+
 export const ExampleWithForm = TemplateFrom.bind({});
 ExampleWithForm.args = {
   size: 'md',
 };
+
+const TemplateNested: StoryFn = (args) => ({
+  props: args,
+  template: html` <fudis-nested-dialogs [size]="size"></fudis-nested-dialogs> `,
+});
+
+export const ExampleWithNestedDialogs = TemplateNested.bind({});
+ExampleWithNestedDialogs.args = {
+  size: 'sm',
+};
+
+const TemplateSize: StoryFn = (args) => ({
+  props: args,
+  template: html` <fudis-dialog-size></fudis-dialog-size> `,
+});
+
+export const ExampleWithDialogSizes = TemplateSize.bind({});

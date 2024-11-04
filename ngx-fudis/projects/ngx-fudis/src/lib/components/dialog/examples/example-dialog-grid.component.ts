@@ -1,13 +1,13 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { ComponentType } from '@angular/cdk/portal';
-import { FudisDialogService } from '../../services/dialog/dialog.service';
-import docs from './dialog.mdx';
-import { dialogExclude } from '../../utilities/storybook';
-import { DialogComponent } from './dialog.component';
-import { FudisDialogSize } from '../../types/miscellaneous';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
+import { FudisDialogSize } from '../../../types/miscellaneous';
+import { NgxFudisModule } from '../../../ngx-fudis.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [NgxFudisModule, CommonModule],
   selector: 'fudis-dialog-with-grid',
   template: `
     <fudis-button
@@ -93,7 +93,7 @@ import { FudisDialogSize } from '../../types/miscellaneous';
     </ng-template>
   `,
 })
-class DialogWithGridComponent {
+export class ExampleDialogWithGridComponent {
   constructor(private _dialogService: FudisDialogService) {}
 
   @Input() size: FudisDialogSize = 'md';
@@ -103,40 +103,3 @@ class DialogWithGridComponent {
     this._dialogService.open(dialogToOpen);
   }
 }
-
-export default {
-  title: 'Components/Dialog',
-  component: DialogComponent,
-  decorators: [
-    moduleMetadata({
-      providers: [],
-      declarations: [DialogWithGridComponent],
-    }),
-  ],
-  parameters: {
-    docs: {
-      page: docs,
-    },
-    controls: {
-      exclude: dialogExclude,
-    },
-  },
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'select' },
-    },
-  },
-} as Meta;
-
-const html = String.raw;
-
-const TemplateGrid: StoryFn = (args) => ({
-  props: args,
-  template: html` <fudis-dialog-with-grid [size]="size"></fudis-dialog-with-grid> `,
-});
-
-export const ExampleWithGrid = TemplateGrid.bind({});
-ExampleWithGrid.args = {
-  size: 'md',
-};

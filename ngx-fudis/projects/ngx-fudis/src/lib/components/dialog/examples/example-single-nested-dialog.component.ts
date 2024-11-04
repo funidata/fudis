@@ -1,13 +1,11 @@
 import { Component, Inject, Input, Optional, TemplateRef } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
-import { FudisDialogService } from '../../services/dialog/dialog.service';
-import docs from './dialog.mdx';
-import { dialogExclude } from '../../utilities/storybook';
-import { DialogComponent } from './dialog.component';
-import { FudisDialogSize } from '../../types/miscellaneous';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
+import { FudisDialogSize } from '../../../types/miscellaneous';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxFudisModule } from 'ngx-fudis';
+import { CommonModule } from '@angular/common';
 
 type TestNestedDialogForm = {
   favoriteVeggie: FormControl<string | null>;
@@ -18,11 +16,18 @@ type Veggie = 'fruit' | 'berry' | 'vegetable';
 type Veggies = { [veg in Veggie]?: string | null | undefined };
 
 @Component({
+  standalone: true,
+  imports: [NgxFudisModule, CommonModule],
   selector: 'fudis-nested-dialog',
   template: `
     <fudis-dialog [size]="size">
       <fudis-dialog-content *ngIf="id">
-        <fudis-form [title]="title" [level]="2" [titleVariant]="'xl'">
+        <fudis-form
+          [title]="title"
+          [level]="2"
+          [titleVariant]="'xl'"
+          [errorSummaryHelpText]="'You need to fill up the information.'"
+        >
           <ng-template fudisContent [type]="'form'">
             <ng-container *ngTemplateOutlet="favoriteVeggies" />
             <fudis-text-input
@@ -71,7 +76,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
     </ng-template>
   `,
 })
-class NestedDialogComponent {
+export class ExampleSingleNestedDialogComponent {
   constructor(
     private _dialogService: FudisDialogService,
     @Optional()
@@ -85,8 +90,8 @@ class NestedDialogComponent {
   @Input() id: Veggie;
   @Input() title: string;
   @Input() nextDialogToOpen:
-    | ComponentType<NestedDialogComponent>
-    | TemplateRef<NestedDialogComponent>;
+    | ComponentType<ExampleSingleNestedDialogComponent>
+    | TemplateRef<ExampleSingleNestedDialogComponent>;
 
   protected _favoriteVeggies: Veggies = {};
   exampleDialogFormGroup = new FormGroup<TestNestedDialogForm>({
@@ -104,7 +109,9 @@ class NestedDialogComponent {
   }
 
   openDialogTemplate(
-    dialogToOpen: ComponentType<NestedDialogComponent> | TemplateRef<NestedDialogComponent>,
+    dialogToOpen:
+      | ComponentType<ExampleSingleNestedDialogComponent>
+      | TemplateRef<ExampleSingleNestedDialogComponent>,
   ) {
     this._dialogService.open(dialogToOpen, {
       data: {
@@ -121,111 +128,3 @@ class NestedDialogComponent {
     this._dialogService.closeAll();
   }
 }
-@Component({
-  selector: 'fudis-nested-dialogs',
-  template: `
-    <fudis-body-text class="fudis-mb-md">
-      NOTE: It is recommended to have only one Dialog open at a time.
-    </fudis-body-text>
-    <fudis-button
-      (handleClick)="openDialogTemplate(firstDialog)"
-      [label]="'Open dialog with nested dialogs'"
-    />
-
-    <ng-container *ngIf="_favourites">
-      <fudis-body-text class="fudis-mt-sm" *ngFor="let veggie of _favourites | keyvalue">
-        Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
-        >.
-      </fudis-body-text>
-    </ng-container>
-
-    <ng-template #firstDialog>
-      <fudis-nested-dialog
-        [id]="'fruit'"
-        [title]="'First opened Dialog'"
-        [size]="size"
-        [nextDialogToOpen]="secondDialog"
-      />
-    </ng-template>
-
-    <ng-template #secondDialog>
-      <fudis-nested-dialog
-        [id]="'berry'"
-        [title]="'Second opened Dialog'"
-        [size]="size"
-        [nextDialogToOpen]="thirdDialog"
-      />
-    </ng-template>
-
-    <ng-template #thirdDialog>
-      <fudis-nested-dialog
-        [id]="'vegetable'"
-        [title]="'Third opened Dialog'"
-        [size]="size"
-        [nextDialogToOpen]="fourthDialog"
-      />
-    </ng-template>
-
-    <ng-template #fourthDialog>
-      <fudis-nested-dialog [title]="'Fourth and last opened Dialog'" [size]="size" />
-    </ng-template>
-  `,
-})
-class NestedDialogsComponent {
-  constructor(private _dialogService: FudisDialogService) {}
-
-  @Input() size: FudisDialogSize = 'md';
-
-  protected _favourites: Veggies | null;
-
-  openDialogTemplate(
-    dialogToOpen: ComponentType<NestedDialogComponent> | TemplateRef<NestedDialogComponent>,
-  ) {
-    this._dialogService
-      .open(dialogToOpen)
-      .afterClosed()
-      .subscribe((result: Veggies) => {
-        if (result) {
-          this._favourites = result;
-        }
-      });
-  }
-}
-
-export default {
-  title: 'Components/Dialog',
-  component: DialogComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [ReactiveFormsModule, FormsModule],
-      providers: [],
-      declarations: [NestedDialogsComponent, NestedDialogComponent],
-    }),
-  ],
-  parameters: {
-    docs: {
-      page: docs,
-    },
-    controls: {
-      exclude: dialogExclude,
-    },
-  },
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'select' },
-    },
-  },
-} as Meta;
-
-const html = String.raw;
-
-const TemplateNested: StoryFn = (args) => ({
-  props: args,
-  template: html` <fudis-nested-dialogs [size]="size"></fudis-nested-dialogs> `,
-});
-
-export const ExampleWithNestedDialogs = TemplateNested.bind({});
-ExampleWithNestedDialogs.args = {
-  size: 'sm',
-};

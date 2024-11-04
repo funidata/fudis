@@ -1,8 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { DialogComponent } from "./dialog.component.ts";
-import * as DialogFormStory from "./dialog-with-form.stories.ts";
-import * as DialogGridStory from "./dialog-with-grid.stories.ts";
-import * as DialogNestedStory from "./dialog-nested-example.stories.ts";
+import * as DialogStory from "./dialog.stories.ts";
 import { dialogExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Dialog" />
@@ -109,7 +107,8 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 **fudis-dialog-content**: Container for your scrollable dialog content. This directive extends _MatDialogContent_.
 
->**If dialog consists ONLY text**: Set `focusToContent` input value as true. This will ensure that scrollable content is accessible to keyboard and screenreader users.
+> **If dialog consists ONLY text**: Set `focusToContent` input value as true. This will ensure that scrollable content is accessible to keyboard and screen reader users.
+
 ```
 <fudis-dialog>
   <fudis-dialog-content [focusToContent]="true">
@@ -141,11 +140,11 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ## Examples
 
-<Canvas of={ DialogFormStory.ExampleWithForm } />
+<Canvas of={DialogStory.ExampleWithForm} />
 
-<Canvas of={ DialogGridStory.ExampleWithGrid } />
+<Canvas of={DialogStory.ExampleWithGrid} />
 
-<Canvas of={ DialogNestedStory.ExampleWithNestedDialogs } />
+<Canvas of={DialogStory.ExampleWithNestedDialogs} />
 
 ### Full code example
 

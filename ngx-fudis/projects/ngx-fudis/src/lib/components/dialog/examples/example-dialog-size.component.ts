@@ -1,19 +1,18 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FudisDialogService } from '../../services/dialog/dialog.service';
-import docs from './dialog.mdx';
-import { dialogExclude } from '../../utilities/storybook';
-import { DialogComponent } from './dialog.component';
-import { FudisDialogSize } from '../../types/miscellaneous';
-import { ExampleDialogFormComponent } from './examples/example-dialog-form.component';
-import { ExampleDialogLaucherComponent } from './examples/example-dialog-launcher.component';
+import { NgxFudisModule } from '../../../ngx-fudis.module';
+import { CommonModule } from '@angular/common';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
+import { FudisDialogSize } from '../../../types/miscellaneous';
+import { ExampleDialogFormComponent } from './example-dialog-form.component';
 
 @Component({
+  standalone: true,
+  imports: [NgxFudisModule, CommonModule],
   selector: 'fudis-dialog-size',
   template: `
+    <fudis-heading [level]="1">Dialog size examples</fudis-heading>
     <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">
-      <fudis-heading>Regular Dialogs</fudis-heading>
+      <fudis-heading [level]="2" [variant]="'lg'">Regular Dialogs</fudis-heading>
       <fudis-button
         *ngFor="let size of sizes"
         [label]="'Open regular ' + size + ' dialog'"
@@ -22,7 +21,7 @@ import { ExampleDialogLaucherComponent } from './examples/example-dialog-launche
     </fudis-grid>
     <fudis-hr class="fudis-my-xl" />
     <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">
-      <fudis-heading>Form Dialogs</fudis-heading>
+      <fudis-heading [level]="2" [variant]="'lg'">Form Dialogs</fudis-heading>
       <fudis-button
         *ngFor="let size of sizes"
         [label]="'Open form ' + size + ' dialog'"
@@ -49,7 +48,7 @@ import { ExampleDialogLaucherComponent } from './examples/example-dialog-launche
     </ng-template>
   `,
 })
-class DialogSizeExampleComponent {
+export class ExampleDialogSizeComponent {
   constructor(private _dialogService: FudisDialogService) {}
 
   protected _size: FudisDialogSize;
@@ -67,43 +66,3 @@ class DialogSizeExampleComponent {
     this._dialogService.open(ExampleDialogFormComponent, { data: { size: size } });
   }
 }
-
-export default {
-  title: 'Components/Dialog',
-  component: DialogComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [
-        ReactiveFormsModule,
-        FormsModule,
-        ExampleDialogFormComponent,
-        ExampleDialogLaucherComponent,
-      ],
-      providers: [],
-      declarations: [DialogSizeExampleComponent],
-    }),
-  ],
-  parameters: {
-    docs: {
-      page: docs,
-    },
-    controls: {
-      exclude: dialogExclude,
-    },
-  },
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'select' },
-    },
-  },
-} as Meta;
-
-const html = String.raw;
-
-const TemplateSize: StoryFn = (args) => ({
-  props: args,
-  template: html` <fudis-dialog-size></fudis-dialog-size> `,
-});
-
-export const ExampleWithDialogSizes = TemplateSize.bind({});

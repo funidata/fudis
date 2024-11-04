@@ -1,4 +1,12 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import {
   MatDialog,
   MatDialogActions,
@@ -42,7 +50,7 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 @Directive({
   selector: 'fudis-dialog-content',
 })
-export class DialogContentDirective extends MatDialogContent implements AfterViewInit {
+export class DialogContentDirective extends MatDialogContent implements OnChanges, AfterViewInit {
   constructor(
     private _elRef: ElementRef,
     private _renderer: Renderer2,
@@ -69,8 +77,10 @@ export class DialogContentDirective extends MatDialogContent implements AfterVie
   }
 
   ngOnChanges(changes: FudisComponentChanges<DialogContentDirective>): void {
-
-    if ((changes.focusToContent?.currentValue !== changes.focusToContent?.previousValue) && this.focusToContent) {
+    if (
+      changes.focusToContent?.currentValue !== changes.focusToContent?.previousValue &&
+      this.focusToContent
+    ) {
       this._renderer.setAttribute(this._elRef.nativeElement, 'tabindex', '0');
       this._renderer.setAttribute(this._elRef.nativeElement, 'role', 'document');
     } else {
