@@ -127,6 +127,7 @@ const commonArgs: Partial<TextInputComponent> = {
   helpText: 'Example help text',
   size: 'lg',
   initialFocus: false,
+  type: 'text',
   tooltip: '',
   tooltipPosition: 'left',
   tooltipToggle: false,
@@ -144,6 +145,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [control]="control"
       [helpText]="helpText"
       [initialFocus]="initialFocus"
+      [type]="type"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
@@ -169,6 +171,7 @@ const DisabledTemplate: StoryFn = (args) => ({
       [control]="control"
       [helpText]="helpText"
       [initialFocus]="initialFocus"
+      [type]="type"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
