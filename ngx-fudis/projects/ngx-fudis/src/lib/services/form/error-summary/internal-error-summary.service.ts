@@ -15,8 +15,6 @@ import { BehaviorSubject } from 'rxjs';
  */
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService implements OnDestroy {
-  constructor() {}
-
   /**
    * Current errors
    */
@@ -231,9 +229,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     let currentErrors = this._allFormErrors;
 
-    const langUpdated =
-      currentErrors?.[newError.formId]?.[newError.id] &&
-      currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
+    const currentMessage = currentErrors?.[newError.formId]?.[newError.id]?.errors[newError.type];
+
+    const currentLabel = currentErrors?.[newError.formId]?.[newError.id]?.label;
+
+    const messageChanged = currentMessage && currentMessage !== newError.error;
+
+    const labelChanged = currentLabel && currentLabel !== newError.label;
+
+    const contentChanged =
+      currentErrors?.[newError.formId]?.[newError.id] && (messageChanged || labelChanged);
 
     currentErrors = {
       ...currentErrors,
@@ -242,9 +247,10 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     this._allFormErrors = currentErrors;
 
-    if (langUpdated || this._updateStrategy === 'all') {
+    if (contentChanged || this._updateStrategy === 'all') {
       this._focusToFormOnReload = null;
-      this.reloadErrorsByFormId(newError.formId);
+
+      this.reloadErrorsByFormId(newError.formId, false, false, true);
     }
   }
 
@@ -261,7 +267,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
           id: newError.id,
           errors: { [newError.type]: newError.error },
           label: newError.label,
-          language: newError.language,
         },
       };
     } else {
@@ -270,8 +275,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
         [errorId]: {
           id: newError.id,
           errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
+
           label: newError.label,
-          language: newError.language,
         },
       };
     }
@@ -301,7 +306,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
       if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
         this._focusToFormOnReload = null;
-
         this.reloadErrorsByFormId(formId);
       }
     }
@@ -376,7 +380,12 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     });
   }
 
-  public reloadErrorsByFormId(formId: string, focus?: boolean, allErrorsReloaded?: boolean): void {
+  public reloadErrorsByFormId(
+    formId: string,
+    focus?: boolean,
+    allErrorsReloaded?: boolean,
+    contentChanged?: boolean,
+  ): void {
     if (focus) {
       this._focusToFormOnReload = formId;
     } else {
@@ -384,6 +393,10 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
 
     const currentFormsErrorSummaryStatus = { ...this._formErrorSummaryVisibilityStatus.value };
+
+    // If content has changed (usually because lang has changed) AND this ErrorSummary is already visible, or content hasn't changed but this ErrorSummary is hidden --> Update and set visible
+    const reloadOnContentChange =
+      (contentChanged && currentFormsErrorSummaryStatus[formId]) || !contentChanged;
 
     if (!allErrorsReloaded) {
       this._formIdToUpdate = formId;
@@ -394,9 +407,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       });
     }
 
-    this._formErrorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
+    if (reloadOnContentChange) {
+      this._formErrorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
 
-    this._allFormErrorsObservable.next({ ...this._allFormErrors });
+      this._allFormErrorsObservable.next({ ...this._allFormErrors });
+    }
   }
 
   ngOnDestroy(): void {

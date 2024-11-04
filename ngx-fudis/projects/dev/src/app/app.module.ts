@@ -12,7 +12,6 @@ import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppFormExampleComponent } from './components/formExamples.component';
-import { AppDropdownExamplesComponent } from './components/dropdownExamples.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 
@@ -23,7 +22,6 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
     DialogTestContentComponent,
     DialogTestFormComponent,
     AppFormExampleComponent,
-    AppDropdownExamplesComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
