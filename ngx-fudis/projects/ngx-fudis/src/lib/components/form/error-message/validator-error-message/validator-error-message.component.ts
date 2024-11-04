@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -20,6 +21,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
   selector: 'fudis-validator-error-message',
   templateUrl: './validator-error-message.component.html',
   styleUrls: ['./validator-error-message.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(
