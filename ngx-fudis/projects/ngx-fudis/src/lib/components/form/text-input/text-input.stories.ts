@@ -75,7 +75,6 @@ class TextInputWithFormControlExampleComponent {
       this.maxNumber,
       `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
     ),
-    FudisValidators.required('This is required field.'),
   ];
 
   mainFormGroup: FormGroup = this._formBuilder.group({
@@ -183,6 +182,8 @@ const DisabledTemplate: StoryFn = (args) => ({
 export const Disabled = DisabledTemplate.bind({});
 Disabled.args = {
   ...commonArgs,
+  label: 'Disabled text input',
+  helpText: 'You should not be able to focus on this input unless you use screen reader',
 };
 
 export const WithValidators: StoryFn = (args) => ({
