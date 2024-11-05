@@ -109,7 +109,9 @@ export class ExampleNestedDialogComponent {
   }
 
   openDialogTemplate(
-    dialogToOpen: ComponentType<ExampleNestedDialogComponent> | TemplateRef<ExampleNestedDialogComponent>,
+    dialogToOpen:
+      | ComponentType<ExampleNestedDialogComponent>
+      | TemplateRef<ExampleNestedDialogComponent>,
   ) {
     this._dialogService.open(dialogToOpen, {
       data: {
@@ -187,7 +189,9 @@ export class ExampleNestedDialogsComponent {
   protected _favourites: Veggies | null;
 
   openDialogTemplate(
-    dialogToOpen: ComponentType<ExampleNestedDialogComponent> | TemplateRef<ExampleNestedDialogComponent>,
+    dialogToOpen:
+      | ComponentType<ExampleNestedDialogComponent>
+      | TemplateRef<ExampleNestedDialogComponent>,
   ) {
     this._dialogService
       .open(dialogToOpen)
