@@ -95,6 +95,8 @@ const DisabledTemplate: StoryFn = (args) => ({
 export const Disabled = DisabledTemplate.bind({});
 Disabled.args = {
   ...commonArgs,
+  label: 'Disabled text area',
+  helpText: 'You should not be able to focus on this input unless you use screen reader',
 };
 
 const WithValidatorsTemplate: StoryFn = (args) => ({
