@@ -8,7 +8,7 @@ import { ExampleDialogFormComponent } from './example-dialog-form.component';
 @Component({
   standalone: true,
   imports: [NgxFudisModule, CommonModule],
-  selector: 'fudis-dialog-size',
+  selector: 'example-dialog-size',
   template: `
     <fudis-heading [level]="1">Dialog size examples</fudis-heading>
     <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">

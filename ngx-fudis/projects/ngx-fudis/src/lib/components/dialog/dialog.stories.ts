@@ -52,7 +52,7 @@ const TemplateFrom: StoryFn = (args) => ({
 
 const TemplateGrid: StoryFn = (args) => ({
   props: args,
-  template: html` <fudis-dialog-with-grid [size]="size"></fudis-dialog-with-grid> `,
+  template: html` <example-dialog-with-grid [size]="size"></example-dialog-with-grid> `,
 });
 
 export const ExampleWithGrid = TemplateGrid.bind({});
@@ -67,7 +67,7 @@ ExampleWithForm.args = {
 
 const TemplateNested: StoryFn = (args) => ({
   props: args,
-  template: html` <fudis-nested-dialogs [size]="size"></fudis-nested-dialogs> `,
+  template: html` <example-nested-dialogs [size]="size"></example-nested-dialogs> `,
 });
 
 export const ExampleWithNestedDialogs = TemplateNested.bind({});
@@ -77,7 +77,7 @@ ExampleWithNestedDialogs.args = {
 
 const TemplateSize: StoryFn = (args) => ({
   props: args,
-  template: html` <fudis-dialog-size></fudis-dialog-size> `,
+  template: html` <example-dialog-size></example-dialog-size> `,
 });
 
 export const ExampleWithDialogSizes = TemplateSize.bind({});

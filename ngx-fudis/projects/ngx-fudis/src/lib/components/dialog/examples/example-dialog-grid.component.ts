@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   standalone: true,
   imports: [NgxFudisModule, CommonModule],
-  selector: 'fudis-dialog-with-grid',
+  selector: 'example-dialog-with-grid',
   template: `
     <fudis-button
       (handleClick)="openDialogTemplate(dialogWithGrid)"
