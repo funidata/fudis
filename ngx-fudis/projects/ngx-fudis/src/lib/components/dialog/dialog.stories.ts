@@ -7,7 +7,6 @@ import { ExampleDialogLaucherComponent } from './examples/example-dialog-launche
 import { ExampleDialogFormComponent } from './examples/example-dialog-form.component';
 import { ExampleDialogWithGridComponent } from './examples/example-dialog-grid.component';
 import { ExampleNestedDialogsComponent } from './examples/example-nested-dialogs';
-import { ExampleSingleNestedDialogComponent } from './examples/example-single-nested-dialog.component';
 import { ExampleDialogSizeComponent } from './examples/example-dialog-size.component';
 
 export default {
@@ -22,7 +21,6 @@ export default {
         ExampleDialogFormComponent,
         ExampleDialogWithGridComponent,
         ExampleNestedDialogsComponent,
-        ExampleSingleNestedDialogComponent,
         ExampleDialogSizeComponent,
       ],
       providers: [],
