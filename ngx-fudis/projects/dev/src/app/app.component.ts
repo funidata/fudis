@@ -9,7 +9,7 @@ import {
   FudisErrorSummaryService,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
-import { FudisSelectOption, FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
 import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
@@ -45,34 +45,6 @@ export class AppComponent implements OnInit {
   newRemBase: string;
   errorSummaryVisible = false;
   protected _message: string;
-
-  dropdownOptions: FudisSelectOption<object>[] = [
-    { value: 'value-1-dog', label: 'Dog' },
-    { value: 'value-2-capybara', label: 'Capybara' },
-    { value: 'value-3-platypys', label: 'Platypus' },
-    { value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
-    { value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
-    { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
-  ];
-
-  multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
-    return {
-      value: i,
-      label: `Item number ${i}`,
-    };
-  });
-
-  testData = [
-    { key: 'First Name', value: 'Rex' },
-    { key: 'Last Name', value: 'Dangerwest' },
-    { key: 'Alias', value: 'Radical Emmet Xtreme' },
-    { key: 'Voice actor', value: 'Chris Pratt' },
-    { key: 'Favorite animal', value: 'Velociraptor', subHeading: 'Dinosaurus' },
-    { key: 'Real name', value: 'Emmet Joseph Brickowski' },
-    { key: 'Species', value: 'Lego' },
-    { key: 'Enemy', value: 'Emmet Brickowski', subHeading: 'Archenemy' },
-    { key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
-  ];
 
   checkboxOptions: FudisCheckboxOption<object>[] = [
     { controlName: 'blueberry', label: 'blueberry' },
@@ -160,10 +132,6 @@ export class AppComponent implements OnInit {
 
   openDialogFromComponent(): void {
     this._dialogService.open(DialogTestContentComponent);
-  }
-
-  doSomething(event: Event) {
-    console.log('event received!', event);
   }
 
   updateGridAlignValue(): void {

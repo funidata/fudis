@@ -5,9 +5,9 @@
         <div class="fudis-error-summary" #focusTarget tabindex="-1">
           <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
           <div class="fudis-error-summary__errors">
-            <ng-container *ngIf="helpText">
+            <ng-container *ngIf="helpText && (_attentionText | async) as attentionText">
               <fudis-body-text [variant]="'md-regular'" class="fudis-mt-xs">
-                <span class="fudis-visually-hidden">{{ _attentionText | async }}:&nbsp;</span
+                <span class="fudis-visually-hidden">{{ attentionText }}:&nbsp;</span
                 >{{ helpText }}</fudis-body-text
               >
             </ng-container>
