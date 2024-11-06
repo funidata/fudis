@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
         <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
           >Dialog with fudis-grid and scrollable content</fudis-heading
         >
-        <fudis-dialog-content [focusToContent]="true">
+        <fudis-dialog-content [contentFocus]="true">
           <fudis-grid [classes]="'fudis-mb-md'">
             <fudis-heading [level]="3" [variant]="'sm'">
               I am fudis-heading inside the grid taking the whole width

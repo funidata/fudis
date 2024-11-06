@@ -13,7 +13,7 @@ Fudis Dialog consists of three parts: Service, Component and Directives.
 
 It is recommended to have only one Dialog open at a time.
 
-Pay attention to accessibility when designing dialog with read-only content.
+Pay attention to accessibility when using dialog with read-only content.
 
 ## Service
 
@@ -107,11 +107,11 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 **fudis-dialog-content**: Container for your scrollable dialog content. This directive extends _MatDialogContent_.
 
-> **If dialog consists ONLY text**: Set `focusToContent` input value as true. This will ensure that scrollable content is accessible to keyboard and screen reader users.
+> **If dialog consists ONLY text**: Set `contentFocus` input value as true. This will ensure that scrollable content is accessible to keyboard and screen reader users.
 
 ```
 <fudis-dialog>
-  <fudis-dialog-content [focusToContent]="true">
+  <fudis-dialog-content [contentFocus]="true">
     ...
   </fudis-dialog-content>
 </fudis-dialog>
