@@ -96,7 +96,7 @@ describe('TextAreaComponent', () => {
       expect(component.control.invalid).toBeTruthy();
     });
 
-    it('should be disbaled', () => {
+    it('should be disabled', () => {
       const inputElement = getElement(fixture, 'textarea');
 
       component.control.disable(); // Disabled through control

@@ -168,7 +168,7 @@ describe('TextInputComponent', () => {
       expect(component.control.value).toEqual('  ');
     });
 
-    it('should be disbaled', () => {
+    it('should be disabled', () => {
       const inputElement = getElement(fixture, 'input');
 
       component.control.disable(); // Disabled through control
