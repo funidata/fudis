@@ -74,7 +74,6 @@ class TextInputWithErrorMessageComponent {
     }
 
     this.originalMessage = !this.originalMessage;
-    this.control.updateValueAndValidity();
   }
 }
 
