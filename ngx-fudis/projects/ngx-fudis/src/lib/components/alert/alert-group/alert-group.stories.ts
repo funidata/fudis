@@ -25,7 +25,7 @@ import docs from '../alert.mdx';
     <ng-template #exampleDialogTemplate>
       <fudis-dialog [size]="'sm'">
         <fudis-heading fudisDialogTitle [level]="2">Small test dialog</fudis-heading>
-        <fudis-dialog-content>
+        <fudis-dialog-content [contentFocus]="true">
           <fudis-body-text>Some content</fudis-body-text>
         </fudis-dialog-content>
         <fudis-dialog-actions>
