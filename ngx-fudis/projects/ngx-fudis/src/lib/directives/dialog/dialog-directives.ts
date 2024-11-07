@@ -56,15 +56,16 @@ export class DialogContentDirective extends MatDialogContent implements OnChange
   @Input() contentFocus: boolean = false;
 
   ngOnChanges(changes: FudisComponentChanges<DialogContentDirective>): void {
-    if (
-      changes.contentFocus?.currentValue !== changes.contentFocus?.previousValue &&
-      this.contentFocus
-    ) {
-      this._renderer.setAttribute(this._elRef.nativeElement, 'tabindex', '0');
-      this._renderer.setAttribute(this._elRef.nativeElement, 'role', 'document');
-    } else {
-      this._renderer.removeAttribute(this._elRef.nativeElement, 'tabindex');
-      this._renderer.removeAttribute(this._elRef.nativeElement, 'role');
+    const contentFocus = changes.contentFocus?.currentValue;
+
+    if (contentFocus !== changes.contentFocus?.previousValue) {
+      if (contentFocus) {
+        this._renderer.setAttribute(this._elRef.nativeElement, 'tabindex', '0');
+        this._renderer.setAttribute(this._elRef.nativeElement, 'role', 'document');
+      } else {
+        this._renderer.removeAttribute(this._elRef.nativeElement, 'tabindex');
+        this._renderer.removeAttribute(this._elRef.nativeElement, 'role');
+      }
     }
   }
 }
