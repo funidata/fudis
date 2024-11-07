@@ -74,7 +74,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       ),
     },
     minNumberInput: {
-      control: new FormControl('', FudisValidators.min(1, 'Number cannot be under 1')),
+      control: new FormControl('', FudisValidators.min(5, 'Number cannot be under 5')),
     },
     maxNumberInput: {
       control: new FormControl('', FudisValidators.max(99, 'Number cannot be over 99')),
@@ -149,11 +149,13 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         [label]="'Min number validator'"
         [control]="minNumberInput.control"
         [type]="'number'"
+        [helpText]="'Try to type smaller than 5'"
       />
       <fudis-text-input
         [label]="'Max number validator'"
         [control]="maxNumberInput.control"
         [type]="'number'"
+        [helpText]="'Try to type larger than 99'"
       />
       <fudis-heading [level]="4">Other Validators</fudis-heading>
       <fudis-text-input [label]="'Pattern validator'" [control]="patternTextInput.control" />

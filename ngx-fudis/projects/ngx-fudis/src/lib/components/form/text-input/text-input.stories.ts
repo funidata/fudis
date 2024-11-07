@@ -11,9 +11,10 @@ import { TextInputComponent } from './text-input.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
 import { textInputControlsExclude } from '../../../utilities/storybook';
+import { fudisInputSizeArray } from '../../../types/forms';
 
 @Component({
-  selector: 'example-text-input-with-form-control',
+  selector: 'example-text-input-with-validators',
   template: `
     <form [formGroup]="mainFormGroup">
       <fudis-text-input
@@ -24,7 +25,7 @@ import { textInputControlsExclude } from '../../../utilities/storybook';
         [helpText]="'Please add some content.'"
       >
         <fudis-error-message
-          [message]="'This is a custom error, it is not totally fault of this component'"
+          [message]="'This is a custom error and has nothing to do with components FormControl'"
         />
       </fudis-text-input>
       <fudis-text-input
@@ -41,9 +42,7 @@ import { textInputControlsExclude } from '../../../utilities/storybook';
       <fudis-text-input
         [control]="mainFormGroup.controls['number']"
         [label]="'Number input'"
-        [tooltip]="'You can choose any number between 1 and 5'"
-        [tooltipPosition]="'left'"
-        [tooltipToggle]="false"
+        [helpText]="'Be mindful that allowed numbers are between 10 and 99'"
         [type]="'number'"
         [size]="'sm'"
       />
@@ -57,9 +56,9 @@ class TextInputWithFormControlExampleComponent {
 
   maxLength = 20;
 
-  minNumber = 2;
+  minNumber = 10;
 
-  maxNumber = 5;
+  maxNumber = 99;
 
   validatorsForEmail = [
     FudisValidators.minLength(
@@ -76,7 +75,6 @@ class TextInputWithFormControlExampleComponent {
       this.maxNumber,
       `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
     ),
-    FudisValidators.required('This is required field.'),
   ];
 
   mainFormGroup: FormGroup = this._formBuilder.group({
@@ -89,6 +87,8 @@ class TextInputWithFormControlExampleComponent {
     ),
   });
 }
+
+const html = String.raw;
 
 export default {
   title: 'Components/Form/Text Input',
@@ -106,7 +106,7 @@ export default {
     controls: { exclude: textInputControlsExclude },
   },
   argTypes: {
-    size: { options: ['sm', 'md', 'lg'] },
+    size: { options: fudisInputSizeArray },
     helpText: { control: 'text' },
     type: {
       options: ['email', 'number', 'password', 'tel', 'text', 'url'],
@@ -121,39 +121,75 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn = (args) => ({
-  props: { ...args, control: new FormControl(null) },
-});
-
-const TemplateDisabled: StoryFn = (args) => ({
-  props: { ...args, control: new FormControl({ value: null, disabled: true }) },
-});
-
-export const Example = Template.bind({});
-Example.args = {
-  tooltip: '',
-  tooltipToggle: false,
-  size: 'lg',
-  type: 'text',
-  label: 'Text-input label example',
+const commonArgs: Partial<TextInputComponent> = {
+  label: 'Text Input label example',
   helpText: 'Example help text',
+  size: 'lg',
   initialFocus: false,
+  type: 'text',
+  tooltip: '',
+  tooltipPosition: 'left',
+  tooltipToggle: false,
 };
 
-export const Disabled = TemplateDisabled.bind({});
+const ExampleTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    control: new FormControl(null),
+  },
+  template: html`
+    <fudis-text-input
+      [label]="label"
+      [size]="size"
+      [control]="control"
+      [helpText]="helpText"
+      [initialFocus]="initialFocus"
+      [type]="type"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    >
+    </fudis-text-input>
+  `,
+});
+
+export const Example = ExampleTemplate.bind({});
+Example.args = {
+  ...commonArgs,
+};
+
+const DisabledTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    control: new FormControl({ value: null, disabled: true }),
+  },
+  template: html`
+    <fudis-text-input
+      [label]="label"
+      [size]="size"
+      [control]="control"
+      [helpText]="helpText"
+      [initialFocus]="initialFocus"
+      [type]="type"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    >
+    </fudis-text-input>
+  `,
+});
+
+export const Disabled = DisabledTemplate.bind({});
 Disabled.args = {
-  size: 'lg',
-  tooltip: '',
-  tooltipToggle: false,
-  label: 'Disabled Text Input',
+  ...commonArgs,
+  label: 'Disabled text input',
   helpText: 'You should not be able to focus on this input unless you use screen reader',
-  initialFocus: false,
 };
 
 export const WithValidators: StoryFn = (args) => ({
   props: args,
   template: `
-		<example-text-input-with-form-control></example-text-input-with-form-control>
+		<example-text-input-with-validators></example-text-input-with-validators>
 	`,
 });
 

@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   EventEmitter,
   Host,
+  inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -29,6 +31,7 @@ import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button
 import { SelectComponent } from '../../select/select/select.component';
 import { MultiselectComponent } from '../../select/multiselect/multiselect.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-error-message',
@@ -121,35 +124,39 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
    */
   private _customValidatorInstance: FudisValidatorFn;
 
-  /**
-   * To prevent ngOnChanges running before initial ngOnInit
-   */
-  private _initFinished: boolean = false;
+  private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    if (typeof this.message === 'string') {
-      this._messageStringAsObservable = new BehaviorSubject<string>(this.message);
-      this._customValidatorInstance = this._customControlValidatorFn(
-        this._messageStringAsObservable,
-      );
-    } else {
-      this._customValidatorInstance = this._customControlValidatorFn(this.message);
-    }
-
     if ((this._parent || this._parentGroup) && this.message) {
       this._addControlValidator();
     }
-
-    this._initFinished = true;
   }
 
   ngOnChanges(changes: FudisComponentChanges<ErrorMessageComponent>): void {
-    if (this._initFinished && changes.message?.currentValue) {
+    const newMessage = changes.message?.currentValue;
+
+    if (newMessage !== changes.message?.previousValue) {
       /**
        * Update validator message if message is a string and not observable
        */
-      if (this._messageStringAsObservable && typeof this.message === 'string') {
-        this._messageStringAsObservable.next(this.message);
+      if (typeof newMessage === 'string') {
+        if (!this._messageStringAsObservable) {
+          this._messageStringAsObservable = new BehaviorSubject<string>(newMessage);
+          this._customValidatorInstance = this._customControlValidatorFn(
+            this._messageStringAsObservable,
+          );
+        } else {
+          this._messageStringAsObservable.next(newMessage);
+        }
+        this._parent?.control?.updateValueAndValidity();
+        this._parentGroup?.formGroup?.updateValueAndValidity();
+      } else if (newMessage) {
+        this._customValidatorInstance = this._customControlValidatorFn(newMessage);
+
+        newMessage.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+          this._parent?.control?.updateValueAndValidity();
+          this._parentGroup?.formGroup?.updateValueAndValidity();
+        });
       }
     }
   }
