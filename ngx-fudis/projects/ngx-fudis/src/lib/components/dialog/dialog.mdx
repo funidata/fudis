@@ -1,6 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { DialogComponent } from "./dialog.component.ts";
-import * as DialogStories from "./dialog.stories.ts";
+import * as DialogStory from "./dialog.stories.ts";
 import { dialogExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Dialog" />
@@ -12,6 +12,8 @@ Fudis Dialog is based on Angular Material Dialog. Dialog opens on top of any con
 Fudis Dialog consists of three parts: Service, Component and Directives.
 
 It is recommended to have only one Dialog open at a time.
+
+Pay attention to accessibility when using dialog with read-only content.
 
 ## Service
 
@@ -105,9 +107,11 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 **fudis-dialog-content**: Container for your scrollable dialog content. This directive extends _MatDialogContent_.
 
+> **If dialog consists ONLY text**: Set `contentFocus` input value as true. This will ensure that scrollable content is accessible to keyboard and screen reader users.
+
 ```
 <fudis-dialog>
-  <fudis-dialog-content>
+  <fudis-dialog-content [contentFocus]="true">
     ...
   </fudis-dialog-content>
 </fudis-dialog>
@@ -136,11 +140,11 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ## Examples
 
-<Canvas of={DialogStories.ExampleWithForm} />
+<Canvas of={DialogStory.ExampleWithForm} />
 
-<Canvas of={DialogStories.ExampleWithGrid} />
+<Canvas of={DialogStory.ExampleWithGrid} />
 
-<Canvas of={DialogStories.ExampleWithNestedDialogs} />
+<Canvas of={DialogStory.ExampleWithNestedDialogs} />
 
 ### Full code example
 
