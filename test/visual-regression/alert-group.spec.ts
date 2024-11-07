@@ -19,6 +19,7 @@ test("alert group default", async ({ page }) => {
   await page.getByTestId("fudis-button-7").click();
   await page.getByTestId("fudis-alert-3-button").click(); // Dismiss one Alert
   await page.keyboard.press("Tab"); // Tab away from the last Alert
+  await page.keyboard.press("Tab"); // Tab to Dialog text content
   await page.keyboard.press("Tab"); // Tab to Dialog OK button
   await page.keyboard.press("Tab"); // Tab to the first Alert since we are inside focus trap
   await expect(page).toHaveScreenshot("3-open-dialog-and-dismiss-alert.png");

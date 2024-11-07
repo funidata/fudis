@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '../../components/button/button.component';
@@ -21,7 +21,7 @@ import { AlertGroupComponent } from '../../components/alert/alert-group/alert-gr
   template: `
     <fudis-dialog [size]="'lg'">
       <fudis-heading fudisDialogTitle [level]="2">Dialog Heading</fudis-heading>
-      <fudis-dialog-content>
+      <fudis-dialog-content [contentFocus]="contentFocus">
         <fudis-body-text>Dialog Content</fudis-body-text>
       </fudis-dialog-content>
       <fudis-dialog-actions [align]="'start'">
@@ -30,9 +30,12 @@ import { AlertGroupComponent } from '../../components/alert/alert-group/alert-gr
     </fudis-dialog>
   `,
 })
-class HostComponent {}
+class HostComponent {
+  @Input() contentFocus: boolean = false;
+}
 
 describe('DialogDirectives', () => {
+  let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
 
   // Let's mock the scrollHeight to be bigger than client height, so we can mock that the dialog is scrollable
@@ -72,6 +75,7 @@ describe('DialogDirectives', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HostComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -90,10 +94,18 @@ describe('DialogDirectives', () => {
       const content = getElement(fixture, 'fudis-dialog-content');
       expect(content.getAttribute('class')).toContain('mat-mdc-dialog-content');
       expect(content.textContent).toEqual('Dialog Content');
+    });
 
-      // The dialog is mocked to be scrollable, so the following values should be set
+    it('should have proper attributes according to contentFocus value', () => {
+      const content = getElement(fixture, 'fudis-dialog-content');
+      expect(content.getAttribute('tabIndex')).toEqual(null);
+
+      component.contentFocus = true;
+
+      fixture.detectChanges();
+
       expect(content.getAttribute('tabIndex')).toEqual('0');
-      expect(content.getAttribute('role')).toEqual('region');
+      expect(content.getAttribute('role')).toEqual('document');
     });
   });
 

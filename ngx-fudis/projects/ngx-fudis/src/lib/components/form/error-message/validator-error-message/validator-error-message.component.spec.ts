@@ -15,6 +15,7 @@ import { TextInputComponent } from '../../text-input/text-input.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
 import { IconComponent } from '../../../icon/icon.component';
+import { getElement } from '../../../../utilities/tests/utilities';
 
 // TODO: write tests for input visible, controlName and variant
 @Component({
@@ -99,6 +100,7 @@ describe('ValidatorErrorMessageComponent', () => {
       component.focusId = 'test-id';
       component.label = 'Test label';
       component.type = 'required';
+      component.visible = true;
       component.controlName = undefined;
       fixture.detectChanges();
     });
@@ -110,6 +112,8 @@ describe('ValidatorErrorMessageComponent', () => {
         message: new SimpleChange(null, component.message, true),
       });
 
+      fixture.detectChanges();
+
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
         error: 'Message for testing',
@@ -118,6 +122,10 @@ describe('ValidatorErrorMessageComponent', () => {
         type: 'required',
         controlName: undefined,
       };
+
+      const errorElementText = getElement(fixture, '.fudis-error-message');
+
+      expect(errorElementText.innerHTML).toEqual('Message for testing');
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
     });
@@ -153,6 +161,8 @@ describe('ValidatorErrorMessageComponent', () => {
         message: new SimpleChange(null, component.message, true),
       });
 
+      fixture.detectChanges();
+
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
         formId: 'test-form-id',
@@ -162,14 +172,24 @@ describe('ValidatorErrorMessageComponent', () => {
         controlName: undefined,
       };
 
+      const errorElementTextFirst = getElement(fixture, '.fudis-error-message');
+
+      expect(errorElementTextFirst.innerHTML).toEqual('First message from observable');
+
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
 
       messageAsObservable.next('Second message after update');
+
+      fixture.detectChanges();
 
       const updatedError: FudisFormErrorSummaryItem = {
         ...testError,
         error: 'Second message after update',
       };
+
+      const errorElementTextSecond = getElement(fixture, '.fudis-error-message');
+
+      expect(errorElementTextSecond.innerHTML).toEqual('Second message after update');
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
     });
