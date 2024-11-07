@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Host,
@@ -32,6 +33,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
 @Component({
   selector: 'fudis-error-message',
   template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   constructor(

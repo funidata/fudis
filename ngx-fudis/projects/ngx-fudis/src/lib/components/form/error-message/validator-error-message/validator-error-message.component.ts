@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -7,7 +8,7 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import {
@@ -20,6 +21,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
   selector: 'fudis-validator-error-message',
   templateUrl: './validator-error-message.component.html',
   styleUrls: ['./validator-error-message.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(
@@ -82,7 +84,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   /**
    * Error message to include in error summary item
    */
-  protected _currentMessage: string;
+  protected _currentMessage = new BehaviorSubject<string>('');
 
   /**
    * Id generated with FudisIdService
@@ -101,8 +103,8 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   private _subscribeToMessage(message: Observable<string>): void {
     this._messageSubscribtion = message.subscribe((value: string) => {
-      if (this._currentMessage !== value) {
-        this._currentMessage = value;
+      if (this._currentMessage.value !== value) {
+        this._currentMessage.next(value);
         this._createError();
       }
     });
@@ -134,7 +136,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
       if (newMessage) {
         if (typeof newMessage === 'string') {
-          this._currentMessage = newMessage;
+          this._currentMessage.next(newMessage);
           this._createError();
         } else {
           this._subscribeToMessage(newMessage);
@@ -168,10 +170,10 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   }
 
   private _createError(): void {
-    if (this.formId && this.focusId && this._currentMessage && this.label) {
+    if (this.formId && this.focusId && this._currentMessage.value && this.label) {
       const newError: FudisFormErrorSummaryItem = {
         id: this.focusId,
-        error: this._currentMessage,
+        error: this._currentMessage.value,
         formId: this.formId,
         label: this.label,
         type: this.type,
