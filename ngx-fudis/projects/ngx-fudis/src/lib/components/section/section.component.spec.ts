@@ -25,6 +25,7 @@ import {
   fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'mock-fudis-section',
@@ -85,6 +86,7 @@ describe('SectionComponent', () => {
         FudisIdService,
         FudisInternalErrorSummaryService,
         FudisBreakpointService,
+        FudisTranslationService,
       ],
       imports: [MatTooltipModule],
     });

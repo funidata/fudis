@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
 import { DropdownMenuItemComponent } from './dropdown-menu-item/dropdown-menu-item.component';
@@ -29,9 +28,6 @@ describe('DropdownMenuComponent', () => {
         add: {
           providers: [{ provide: ButtonComponent, useValue: { id: 'fudis-button-1' } }],
         },
-      })
-      .overrideComponent(DropdownMenuComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
       .compileComponents();
 
@@ -63,11 +59,10 @@ describe('DropdownMenuComponent', () => {
 
     it('should change CSS classes according to the given size and align Inputs', () => {
       fudisInputSizeArray.forEach((size) => {
-        component.size = size;
-        fixture.detectChanges();
+        fixture.componentRef.setInput('size', size);
 
         fudisDropdownMenuAlignArray.forEach((align) => {
-          component.align = align;
+          fixture.componentRef.setInput('align', align);
           fixture.detectChanges();
 
           expect(sortClasses(menuElement.className)).toEqual(

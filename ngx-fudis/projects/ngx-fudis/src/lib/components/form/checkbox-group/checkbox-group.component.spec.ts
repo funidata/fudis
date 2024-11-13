@@ -20,6 +20,10 @@ import { IconComponent } from '../../icon/icon.component';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
@@ -133,7 +137,14 @@ describe('CheckboxGroupComponent', () => {
         IconComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [FudisBreakpointService, FudisGridService],
+      providers: [
+        FudisBreakpointService,
+        FudisGridService,
+        FudisIdService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+        FudisTranslationService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

@@ -13,6 +13,7 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { Component, DebugElement, SimpleChange } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-dl',
@@ -71,7 +72,12 @@ describe('DescriptionListComponent', () => {
         LanguageBadgeGroupComponent,
         MockDlComponent,
       ],
-      providers: [FudisGridService, FudisIdService, FudisBreakpointService],
+      providers: [
+        FudisGridService,
+        FudisIdService,
+        FudisBreakpointService,
+        FudisTranslationService,
+      ],
     }).compileComponents();
   });
 

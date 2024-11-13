@@ -10,6 +10,10 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 const textAreaControl: FormControl = new FormControl('');
 
@@ -29,6 +33,12 @@ describe('TextAreaComponent', () => {
         TooltipApiDirective,
       ],
       imports: [ReactiveFormsModule],
+      providers: [
+        FudisIdService,
+        FudisFocusService,
+        FudisTranslationService,
+        FudisInternalErrorSummaryService,
+      ],
     }).compileComponents();
   });
 

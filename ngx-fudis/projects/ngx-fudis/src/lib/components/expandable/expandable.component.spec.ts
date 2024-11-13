@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { ExpandableComponent } from './expandable.component';
@@ -10,6 +9,7 @@ import { ContentDirective } from '../../directives/content-projection/content/co
 import { FudisExpandableType } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -69,10 +69,10 @@ describe('ExpandableComponent', () => {
         ExpandableComponent,
         MockContainerComponent,
         MockContentComponent,
-        MockComponent(ButtonComponent),
-        MockComponent(IconComponent),
+        ButtonComponent,
+        IconComponent,
       ],
-      providers: [FudisIdService, FudisInternalErrorSummaryService],
+      providers: [FudisIdService, FudisInternalErrorSummaryService, FudisTranslationService],
     }).compileComponents();
   });
 

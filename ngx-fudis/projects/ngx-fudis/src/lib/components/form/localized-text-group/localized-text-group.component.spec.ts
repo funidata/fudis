@@ -6,7 +6,7 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { SelectComponent } from '../select/select/select.component';
 import { getAllElements, getElement } from '../../../utilities/tests/utilities';
 import { LabelComponent } from '../label/label.component';
-import { ChangeDetectionStrategy, SimpleChange } from '@angular/core';
+import { SimpleChange } from '@angular/core';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { SelectIconsComponent } from '../select/common/select-icons/select-icons.component';
 import { IconComponent } from '../../icon/icon.component';
@@ -17,6 +17,9 @@ import {
 } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 const values = {
   label: 'Label for testing purposes',
@@ -47,13 +50,14 @@ describe('LocalizedTextGroupComponent', () => {
         SelectIconsComponent,
         IconComponent,
       ],
-      providers: [FudisTranslationService],
+      providers: [
+        FudisTranslationService,
+        FudisIdService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+      ],
       imports: [ReactiveFormsModule],
-    })
-      .overrideComponent(LocalizedTextGroupComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LocalizedTextGroupComponent);
     translationService = TestBed.inject(FudisTranslationService);
@@ -114,7 +118,7 @@ describe('LocalizedTextGroupComponent', () => {
         fudisInputSizeArray.forEach((size) => {
           const wrapperElement = getElement(fixture, '.fudis-localized-text-group');
 
-          component.size = size;
+          fixture.componentRef.setInput('size', size);
           fixture.detectChanges();
 
           expect(wrapperElement.className).toContain(`fudis-input-size__${size}`);

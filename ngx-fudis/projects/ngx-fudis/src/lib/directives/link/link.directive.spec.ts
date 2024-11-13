@@ -3,6 +3,9 @@ import { Component, ElementRef, SimpleChange, ViewChild } from '@angular/core';
 import { LinkDirective } from './link.directive';
 import { IconComponent } from '../../components/icon/icon.component';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { FudisFocusService } from '../../services/focus/focus.service';
+import { FudisIdService } from '../../services/id/id.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-link-directive',
@@ -47,6 +50,7 @@ describe('LinkDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MockComponent, LinkDirective, IconComponent],
+      providers: [FudisFocusService, FudisIdService, FudisTranslationService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);
