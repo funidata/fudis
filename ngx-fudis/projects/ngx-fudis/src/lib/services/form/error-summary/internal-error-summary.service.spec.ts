@@ -79,8 +79,8 @@ describe('InternalErrorSummaryService', () => {
 
     service = TestBed.inject(FudisInternalErrorSummaryService);
 
-    service.addNewFormId('test-form-id-1');
-    service.addNewFormId('test-form-id-2');
+    service.registerNewForm('test-form-id-1');
+    service.registerNewForm('test-form-id-2');
 
     jest.spyOn(service, 'reloadErrorsByFormId').mockImplementation(() => {});
   });

@@ -87,16 +87,6 @@ export type FudisFormErrorSummaryObject = {
   };
 };
 
-export type FudisFormErrorSummarySection = {
-  id: string;
-  formId: string;
-  title: string;
-};
-
-export type FudisFormErrorSummarySectionObject = {
-  [formId: string]: FudisFormErrorSummarySection[];
-};
-
 export type FudisFormErrorSummaryList = {
   id: string;
   message: string;

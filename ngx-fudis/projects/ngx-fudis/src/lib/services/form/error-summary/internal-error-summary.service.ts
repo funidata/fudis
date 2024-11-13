@@ -2,16 +2,30 @@ import { Injectable, OnDestroy } from '@angular/core';
 import {
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryItem,
-  FudisFormErrorSummarySection,
   FudisFormErrorSummaryRemoveItem,
   FudisFormErrorSummaryUpdateStrategy,
   FudisFormErrorSummaryFormsAndErrors,
-  FudisFormErrorSummarySectionObject,
 } from '../../../types/forms';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../translation/translation.service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
+type FudisFormErrorSummarySection = {
+  id: string;
+  formId: string;
+  title: string;
+};
+
+type FudisFormErrorSummaryFormChild = {
+  [childId: string]: string;
+};
+
+type FudisFormErrorSummaryStructure = {
+  [formId: string]: {
+    sections: FudisFormErrorSummaryFormChild;
+    fieldsets: FudisFormErrorSummaryFormChild;
+  };
+};
 /**
  * Internal Error Summary tools not exposed to public
  */
@@ -43,14 +57,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   private _allFormErrorsObservable = new BehaviorSubject<FudisFormErrorSummaryFormsAndErrors>({});
 
   /**
-   * Current fieldsets
+   * Collection of child Sections, Expandables and Fieldsets of each Form Component
    */
-  private _fieldsets: FudisFormErrorSummarySectionObject = {};
-
-  /**
-   * Current sections
-   */
-  private _sections: FudisFormErrorSummarySectionObject = {};
+  private _formStructure: FudisFormErrorSummaryStructure = {};
 
   /**
    * Info to Error Summary Component if it should move user focus to updated list or not
@@ -99,25 +108,15 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     return this._focusToFormOnReload;
   }
 
+  get formStructure(): FudisFormErrorSummaryStructure {
+    return this._formStructure;
+  }
+
   /**
    * Setter for _focusToFormOnReload
    */
   set focusToFormOnReload(value: string | null) {
     this._focusToFormOnReload = value;
-  }
-
-  /**
-   * Returns a list of current fieldsets
-   */
-  public get fieldsets(): FudisFormErrorSummarySectionObject {
-    return this._fieldsets;
-  }
-
-  /**
-   * Returns a list of current sections
-   */
-  public get sections(): FudisFormErrorSummarySectionObject {
-    return this._sections;
   }
 
   public getErrors(): FudisFormErrorSummaryFormsAndErrors {
@@ -181,27 +180,36 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     return null;
   }
 
-  public addformErrorSummaryVisibilityStatus(formId: string, status: boolean) {
+  /**
+   *
+   * @param formId Form to target
+   * @param visible hide or show Error Summary
+   */
+  public setErrorSummaryVisibilityStatus(formId: string, visible: boolean) {
     let currentValue = this._formErrorSummaryVisibilityStatus.value;
 
     if (!currentValue[formId]) {
-      currentValue = { ...currentValue, [formId]: status };
+      currentValue = { ...currentValue, [formId]: visible };
     } else {
-      currentValue[formId] = status;
+      currentValue[formId] = visible;
     }
 
     this._formErrorSummaryVisibilityStatus.next(currentValue);
   }
 
-  public addNewFormId(formId: string): void {
+  public registerNewForm(formId: string): void {
+    this._formStructure = {
+      ...this._formStructure,
+      [formId]: {
+        sections: {},
+        fieldsets: {},
+      },
+    };
+
     this._allFormErrors[formId] = {};
-
-    this._sections[formId] = [];
-
-    this._fieldsets[formId] = [];
   }
 
-  public removeFormId(formId: string): void {
+  public removeForm(formId: string): void {
     if (this._allFormErrors[formId]) {
       delete this._allFormErrors[formId];
     }
@@ -216,12 +224,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this._formErrorSummaryVisibilityStatus.next(currentValue);
     }
 
-    if (this._sections[formId]) {
-      delete this._sections[formId];
-    }
-
-    if (this._fieldsets[formId]) {
-      delete this._fieldsets[formId];
+    if (this._formStructure[formId]) {
+      delete this._formStructure[formId];
     }
   }
 
@@ -234,7 +238,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   public addNewError(newError: FudisFormErrorSummaryItem): void {
     if (!this._allFormErrors[newError.formId]) {
-      this.addNewFormId(newError.formId);
+      this.registerNewForm(newError.formId);
     }
 
     let currentErrors = this._allFormErrors;
@@ -327,17 +331,17 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param fieldset Form error summary fieldset
    */
   public addFieldset(fieldset: FudisFormErrorSummarySection): void {
-    this._fieldsets = this.updateSectionsOrFieldsets(this._fieldsets, fieldset);
+    if (this._formStructure?.[fieldset.formId]) {
+      this._formStructure[fieldset.formId].fieldsets[fieldset.id] = fieldset.title;
+    }
   }
 
   /**
    * Removes the fieldset from the current fieldsets
    * @param fieldset Form error summary fieldset
    */
-  public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
-    const indexToRemove = this._fieldsets[fieldset.formId].indexOf(fieldset);
-
-    this._fieldsets[fieldset.formId].splice(indexToRemove, 1);
+  public removeFieldset(formId: string, fieldsetId: string): void {
+    delete this._formStructure?.[formId]?.fieldsets[fieldsetId];
   }
 
   /**
@@ -346,37 +350,17 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param section Form error summary section
    */
   public addSection(section: FudisFormErrorSummarySection): void {
-    this._sections = this.updateSectionsOrFieldsets(this._sections, section);
-  }
-
-  private updateSectionsOrFieldsets(
-    previousValues: FudisFormErrorSummarySectionObject,
-    newValue: FudisFormErrorSummarySection,
-  ): FudisFormErrorSummarySectionObject {
-    const valuesToReturn = previousValues;
-
-    const existingItem = valuesToReturn[newValue.formId]?.find((item) => {
-      return item.id === newValue.id;
-    });
-
-    if (existingItem) {
-      const index = valuesToReturn[newValue.formId].indexOf(existingItem);
-      valuesToReturn[newValue.formId][index] = newValue;
-    } else {
-      valuesToReturn[newValue.formId].push(newValue);
+    if (this._formStructure?.[section.formId]) {
+      this._formStructure[section.formId].sections[section.id] = section.title;
     }
-
-    return valuesToReturn;
   }
 
   /**
    * Removes the section from the current sections
    * @param section Form error summary section
    */
-  public removeSection(section: FudisFormErrorSummarySection): void {
-    const indexToRemove = this._sections[section.formId].indexOf(section);
-
-    this._sections[section.formId].splice(indexToRemove, 1);
+  public removeSection(formId: string, sectionId: string): void {
+    delete this._formStructure?.[formId]?.fieldsets[sectionId];
   }
 
   /**

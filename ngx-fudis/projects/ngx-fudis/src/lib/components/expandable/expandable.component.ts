@@ -17,7 +17,6 @@ import { ContentDirective } from '../../directives/content-projection/content/co
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummarySection } from '../../types/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -117,11 +116,6 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   protected _openedOnce: boolean = false;
 
   /**
-   * Object to send to Error Summary Service
-   */
-  private _errorSummaryInfo: FudisFormErrorSummarySection;
-
-  /**
    * Is info sent to Error Summary Service
    */
   private _errorSummaryInfoSent: boolean = false;
@@ -188,12 +182,12 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
    */
   private _addToErrorSummary(title: string): void {
     if (this.errorSummaryBreadcrumb && this._parentForm) {
-      this._errorSummaryInfo = {
+      const errorSummaryInfo = {
         id: this._id,
         formId: this._parentForm.id,
         title: title,
       };
-      this._errorSummaryService.addSection(this._errorSummaryInfo);
+      this._errorSummaryService.addSection(errorSummaryInfo);
       this._errorSummaryInfoSent = true;
     }
   }
@@ -202,8 +196,8 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
    * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
-    if (this._errorSummaryInfoSent) {
-      this._errorSummaryService.removeSection(this._errorSummaryInfo);
+    if (this._errorSummaryInfoSent && this._parentForm) {
+      this._errorSummaryService.removeSection(this._parentForm.id, this._id);
     }
   }
 

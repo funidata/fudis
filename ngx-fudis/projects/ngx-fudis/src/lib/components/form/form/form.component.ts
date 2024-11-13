@@ -119,11 +119,8 @@ export class FormComponent
   ngOnInit(): void {
     this._setFormId();
 
-    this._errorSummaryService.addNewFormId(this.id);
-    this._errorSummaryService.addformErrorSummaryVisibilityStatus(
-      this.id,
-      this.errorSummaryVisible,
-    );
+    this._errorSummaryService.registerNewForm(this.id);
+    this._errorSummaryService.setErrorSummaryVisibilityStatus(this.id, this.errorSummaryVisible);
 
     this._initFinished = true;
 
@@ -137,7 +134,7 @@ export class FormComponent
   }
 
   ngOnDestroy(): void {
-    this._errorSummaryService.removeFormId(this.id);
+    this._errorSummaryService.removeForm(this.id);
   }
 
   ngOnChanges(changes: FudisComponentChanges<FormComponent>): void {
@@ -145,10 +142,7 @@ export class FormComponent
       changes.errorSummaryVisible?.currentValue !== changes.errorSummaryVisible?.previousValue &&
       this.id
     ) {
-      this._errorSummaryService.addformErrorSummaryVisibilityStatus(
-        this.id,
-        this.errorSummaryVisible,
-      );
+      this._errorSummaryService.setErrorSummaryVisibilityStatus(this.id, this.errorSummaryVisible);
     }
   }
 

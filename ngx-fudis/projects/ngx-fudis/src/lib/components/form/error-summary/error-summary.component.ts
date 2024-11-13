@@ -10,11 +10,7 @@ import {
 } from '@angular/core';
 
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import {
-  FudisFormErrorSummaryObject,
-  FudisFormErrorSummaryList,
-  FudisFormErrorSummarySection,
-} from '../../../types/forms';
+import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
@@ -137,11 +133,11 @@ export class ErrorSummaryComponent implements AfterViewInit {
   private _updateSummaryContent(content: FudisFormErrorSummaryObject): void {
     const newErrorList: FudisFormErrorSummaryList[] = [];
 
-    const fieldsets: FudisFormErrorSummarySection[] =
-      this._errorSummaryService.fieldsets[this.formId];
+    const fieldsets: { [id: string]: string } =
+      this._errorSummaryService.formStructure[this.formId].fieldsets;
 
-    const sections: FudisFormErrorSummarySection[] =
-      this._errorSummaryService.sections[this.formId];
+    const sections: { [id: string]: string } =
+      this._errorSummaryService.formStructure[this.formId].sections;
 
     Object.keys(content).forEach((item) => {
       const errorId = content[item].id;
@@ -149,23 +145,23 @@ export class ErrorSummaryComponent implements AfterViewInit {
       const { label } = content[item];
 
       Object.values(content[item].errors).forEach((error: string) => {
-        const parentFieldset = fieldsets.find((fieldset) => {
-          if (this.parentComponent?.querySelector(`#${fieldset.id} #${errorId}`)) {
+        const parentFieldset = Object.keys(fieldsets).find((fieldset) => {
+          if (this.parentComponent?.querySelector(`#${fieldset} #${errorId}`)) {
             return fieldset;
           }
           return null;
         });
 
-        const parentSection = sections.find((section) => {
-          if (this.parentComponent?.querySelector(`#${section.id} #${errorId}`)) {
+        const parentSection = Object.keys(sections).find((section) => {
+          if (this.parentComponent?.querySelector(`#${section} #${errorId}`)) {
             return section;
           }
           return null;
         });
 
-        const parentSectionString = parentSection ? `${parentSection.title} / ` : '';
+        const parentSectionString = parentSection ? `${sections[parentSection]} / ` : '';
 
-        const parentFieldsetString = parentFieldset ? `${parentFieldset.title} / ` : '';
+        const parentFieldsetString = parentFieldset ? `${fieldsets[parentFieldset]} / ` : '';
 
         const cleanedError = error.replace(/[:!?]$/, '');
 
