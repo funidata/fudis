@@ -24,7 +24,7 @@
     "url": "https://github.com/funidata/fudis/issues"
   },
   "author": "Funidata Ltd",
-  "homepage": "https://funidata.github.io/fudis/main/",
+  "homepage": "https://fudis.funidata.fi/",
   "peerDependencies": {
     "@angular/cdk": "^18.2.8",
     "@angular/common": "^18.2.7",
