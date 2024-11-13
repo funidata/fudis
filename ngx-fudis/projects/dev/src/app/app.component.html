@@ -11,9 +11,7 @@
     </fudis-grid>
     <fudis-grid [columns]="1" [classes]="'fudis-mt-xl'">
       <fudis-heading [level]="1">Welcome to Fudis sandbox </fudis-heading>
-      <fudis-button [label]="'Change language'" (handleClick)="changeLanguage()" />
-
-      <!-- <fudis-expandable [title]="'Random stuff'">
+      <fudis-expandable [title]="'Random stuff'">
         <ng-template fudisContent type="expandable">
           <fudis-grid [classes]="'fudis-mt-md'">
             <fudis-notification [variant]="'danger'"
@@ -37,7 +35,7 @@
             <fudis-button [label]="'Change language'" (handleClick)="changeLanguage()" />
           </fudis-grid>
         </ng-template>
-      </fudis-expandable> -->
+      </fudis-expandable>
 
       <app-form-examples fudisGridItem [columns]="'stretch'" />
 

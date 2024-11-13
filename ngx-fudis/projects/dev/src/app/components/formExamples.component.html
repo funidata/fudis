@@ -93,6 +93,15 @@
             <fudis-select-option *ngFor="let option of translatedSelectOptions" [data]="option" />
           </ng-template>
         </fudis-select>
+        <fudis-select
+          [label]="'Translated Select Autocomplete Dropdown'"
+          [variant]="'autocompleteDropdown'"
+          [control]="selectForm.controls.translatedSelect"
+        >
+          <ng-template fudisContent type="select-options">
+            <fudis-select-option *ngFor="let option of translatedSelectOptions" [data]="option" />
+          </ng-template>
+        </fudis-select>
 
         <fudis-multiselect
           [label]="'Translated Multiselect Dropdown'"
