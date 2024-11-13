@@ -1,19 +1,11 @@
-import {
-  Directive,
-  ElementRef,
-  Host,
-  Inject,
-  Input,
-  Optional,
-  ViewChild,
-  effect,
-} from '@angular/core';
+import { Directive, ElementRef, Host, Inject, Input, Optional, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
 import { SelectGroupComponent } from '../select-group/select-group.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 
 @Directive({
   selector: '[fudisSelectOptionBase]',
@@ -22,18 +14,9 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   constructor(
     @Inject(DOCUMENT) _document: Document,
     @Host() @Optional() protected _parentGroup: SelectGroupComponent,
+    protected _translationService: FudisTranslationService,
   ) {
     super(_document);
-
-    effect(() => {
-      const filterText = this._parent.getAutocompleteFilterText()();
-
-      if (this._parent.variant !== 'dropdown' && this._parent.autocompleteFilter) {
-        this._isOptionVisible(filterText);
-      } else {
-        this._isOptionVisible('');
-      }
-    });
   }
 
   /**
@@ -144,5 +127,16 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own implementations
    */
   // eslint-disable-next-line
+  protected _checkVisibilityFromFilterText(filterText: string): void {}
+
+  /**
+   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own implementations
+   */
+  // eslint-disable-next-line
   protected _clickOption(event: Event): void {}
+
+  /**
+   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own implementations
+   */
+  protected _updateVisibleLabel(): void {}
 }

@@ -1,4 +1,4 @@
-import { Component, Host, Inject, OnDestroy, OnInit, Optional, effect } from '@angular/core';
+import { Component, Host, Inject, OnChanges, OnDestroy, Optional } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../../types/forms';
@@ -6,20 +6,27 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-select-option',
   templateUrl: './select-option.component.html',
   styleUrls: ['./select-option.component.scss'],
 })
-export class SelectOptionComponent extends SelectOptionBaseDirective implements OnInit, OnDestroy {
+export class SelectOptionComponent
+  extends SelectOptionBaseDirective
+  implements OnChanges, OnDestroy
+{
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentSelect: SelectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
+    _translationService: FudisTranslationService,
   ) {
-    super(_document, _parentGroup);
+    super(_document, _parentGroup, _translationService);
 
     this._parent = _parentSelect;
 
@@ -29,19 +36,23 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
       this._parentGroup?.id,
     );
 
-    effect(() => {
-      if (this._parent.variant !== 'dropdown') {
-        this._isOptionTyped(this._parent.getAutocompleteFilterText()());
-      }
-    });
+    toObservable(this._parent.getAutocompleteFilterText())
+      .pipe(takeUntilDestroyed())
+      .subscribe((filterText) => {
+        this._checkVisibilityFromFilterText(filterText);
+      });
   }
 
-  ngOnInit(): void {
-    if (this._parent.variant !== 'dropdown') {
-      this._isOptionVisible(this._parent.getAutocompleteFilterText()());
-      this._isOptionTyped(this._parent.getAutocompleteFilterText()());
-    } else {
-      this._updateVisibilityToParents(true);
+  /**
+   * Common parent and its properties
+   */
+  protected override _parent: SelectComponent;
+
+  ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective>): void {
+    if (changes.data?.currentValue !== changes.data?.previousValue) {
+      this._updateVisibleLabel();
+
+      this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
     }
   }
 
@@ -65,6 +76,21 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
       this.handleClick.emit(event);
     }
     this._parent.closeDropdown(true, true);
+  }
+
+  protected override _updateVisibleLabel(): void {
+    if (this._parent.control.value?.value === this.data.value) {
+      this._parent.updateInputValueTexts(this.data.label);
+    }
+  }
+
+  protected override _checkVisibilityFromFilterText(filterText: string): void {
+    if (this._parent.variant !== 'dropdown' && this._parent.autocompleteFilter) {
+      this._isOptionVisible(filterText);
+      this._isOptionTyped(filterText);
+    } else {
+      this._isOptionVisible('');
+    }
   }
 
   /**

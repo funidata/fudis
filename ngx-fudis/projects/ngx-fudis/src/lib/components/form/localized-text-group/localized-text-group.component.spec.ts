@@ -324,6 +324,8 @@ describe('LocalizedTextGroupComponent', () => {
       it(`should update Select menu option, when control is updated`, () => {
         component.formGroup.controls['fi'].patchValue('Hello');
 
+        fixture.detectChanges();
+
         const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
 
         expect(selectElement).toEqual('FI');

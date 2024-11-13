@@ -155,13 +155,12 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
       this._sortedSelectedOptions = currentSelectedOptions.sort(
         this._sortSelectedOptions(dropdown),
       );
+      this._dropdownSelectionLabelText.set(joinInputValues(this._sortedSelectedOptions));
 
-      this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-
-      this._cdr.detectChanges();
+      //this._cdr.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
-      this._dropdownSelectionLabelText = null;
+      this._dropdownSelectionLabelText.set(null);
     }
   }
 
@@ -172,7 +171,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     this._optionsLoadedOnce = true;
 
     if (!this.control.value || this.control.value.length === 0) {
-      this._dropdownSelectionLabelText = null;
+      this._dropdownSelectionLabelText.set(null);
     }
   }
 

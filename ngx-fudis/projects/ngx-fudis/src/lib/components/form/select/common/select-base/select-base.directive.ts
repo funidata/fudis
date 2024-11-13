@@ -159,7 +159,7 @@ export class SelectBaseDirective
   /**
    * Selected option or options label for non-autocomplete dropdowns
    */
-  protected _dropdownSelectionLabelText: string | null = null;
+  protected _dropdownSelectionLabelText = signal<string | null>(null);
 
   /**
    * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
@@ -288,6 +288,13 @@ export class SelectBaseDirective
     ) {
       this._filterTextUpdate('');
     }
+
+    if (
+      changes.autocompleteFilter?.currentValue !== changes.autocompleteFilter?.previousValue &&
+      !changes.autocompleteFilter?.currentValue
+    ) {
+      this._autocompleteFilterText.set(this._autocompleteFilterText());
+    }
   }
 
   /**
@@ -410,7 +417,7 @@ export class SelectBaseDirective
     this.control.patchValue(null);
     this.selectionUpdate.emit(null);
 
-    this._updateInputValueTexts('');
+    this.updateInputValueTexts('');
   }
 
   /**
@@ -601,13 +608,13 @@ export class SelectBaseDirective
   /**
    * Manually set typed text in input fields
    */
-  protected _updateInputValueTexts(value: string): void {
+  public updateInputValueTexts(value: string): void {
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.preventSpaceKeypress = true;
 
       this.autocompleteRef.updateInputValue(value);
     } else {
-      this._dropdownSelectionLabelText = value;
+      this._dropdownSelectionLabelText.set(value);
     }
   }
 

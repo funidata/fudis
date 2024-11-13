@@ -67,7 +67,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
 
-      this._updateInputValueTexts(value?.label || '');
+      this.updateInputValueTexts(value?.label || '');
 
       if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
         this._filterTextUpdate(value.label);
@@ -92,10 +92,10 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   protected override _updateSelectionFromControlValue(): void {
     const currentLabel = this.control.value?.label;
-    this._dropdownSelectionLabelText = currentLabel || '';
+    this._dropdownSelectionLabelText.set(currentLabel || '');
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
-    this._cdr.detectChanges();
+    //this._cdr.detectChanges();
   }
 }
