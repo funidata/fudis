@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
@@ -30,9 +29,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
-    _cdr: ChangeDetectorRef,
   ) {
-    super(_document, _cdr, _translationService, _focusService, _idService);
+    super(_document, _translationService, _focusService, _idService);
   }
 
   /*
@@ -96,6 +94,5 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
-    //this._cdr.detectChanges();
   }
 }

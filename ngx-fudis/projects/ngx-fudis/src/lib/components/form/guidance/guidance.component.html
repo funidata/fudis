@@ -3,7 +3,8 @@
     <div
       [id]="_id + '-errors'"
       [class.fudis-guidance__errors]="
-        (control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut)
+        _afterViewInitDone() &&
+        ((control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut))
       "
     >
       <fudis-icon

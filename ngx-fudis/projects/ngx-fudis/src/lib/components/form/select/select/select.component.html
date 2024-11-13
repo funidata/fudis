@@ -14,7 +14,7 @@
         *ngIf="variant === 'dropdown' || control.disabled || disabled"
         #inputRef
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
-        [class.fudis-form-input--touched]="control.touched"
+        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
         [id]="id"
         role="combobox"
         [attr.aria-controls]="id + '-dropdown'"

@@ -14,7 +14,6 @@ import {
   effect,
   signal,
   AfterViewInit,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
@@ -42,7 +41,6 @@ export class SelectBaseDirective
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
-    protected _cdr: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
@@ -255,13 +253,6 @@ export class SelectBaseDirective
    * Keyboard button pressed down
    */
   private _keyDown: string | null = null;
-
-  override ngAfterViewInit(): void {
-    this._afterViewInitCommon();
-
-    // Needed when Select is inside closed Expandable, and Form Submit is triggered before component is loaded
-    this._cdr.detectChanges();
-  }
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {

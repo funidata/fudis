@@ -13,7 +13,7 @@ import { ButtonComponent } from '../../button/button.component';
 import { RouterModule } from '@angular/router';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { BehaviorSubject } from 'rxjs';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
 const testMessage = new BehaviorSubject<string>('Test message for alert');
@@ -27,11 +27,8 @@ const testButtonId = 'test-button-id';
     <fudis-button [label]="'Test button'" />
   </div>`,
 })
-class MockAlertComponent implements OnInit {
-  constructor(
-    private _alertService: FudisAlertService,
-    private _cdRef: ChangeDetectorRef,
-  ) {
+class MockAlertComponent {
+  constructor(private _alertService: FudisAlertService) {
     const firstAlert: FudisAlert = {
       message: new BehaviorSubject('Test message'),
       id: 'my-test-id-1',
@@ -46,10 +43,6 @@ class MockAlertComponent implements OnInit {
       type: 'warning',
     };
     this._alertService.addAlert(secondAlert);
-  }
-
-  ngOnInit(): void {
-    this._cdRef.detectChanges();
   }
 }
 

@@ -1,13 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-  effect,
-} from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, effect } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -29,9 +20,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
-    _cdr: ChangeDetectorRef,
   ) {
-    super(_document, _cdr, _translationService, _focusService, _idService);
+    super(_document, _translationService, _focusService, _idService);
 
     effect(() => {
       this._translationRemoveItem.next(
@@ -154,8 +144,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
         this._sortSelectedOptions(dropdown),
       );
       this._dropdownSelectionLabelText.set(joinInputValues(this._sortedSelectedOptions));
-
-      //this._cdr.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText.set(null);
