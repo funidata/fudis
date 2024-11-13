@@ -126,7 +126,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
       // If not found, add it
     } else if (foundIndex === -1 && type === 'add') {
       currentSelectedOptions.push(checkedOption);
-    } else if (foundIndex && type === 'add') {
+      // If found, replace it
+    } else if (foundIndex !== -1 && type === 'add') {
       currentSelectedOptions[foundIndex] = checkedOption;
     }
 
@@ -137,10 +138,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     if (this.control.value && currentSelectedOptions.length === this.control.value.length) {
       currentSelectedOptions.forEach((registeredOption) => {
         const matchFound = this.control.value?.find((controlOption) => {
-          return (
-            registeredOption.value === controlOption.value &&
-            registeredOption.label === controlOption.label
-          );
+          return registeredOption.value === controlOption.value;
         });
 
         if (!matchFound) {
