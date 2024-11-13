@@ -3,9 +3,7 @@ import { FudisIdService } from '../id/id.service';
 import { FudisAlert, FudisAlertElement } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FudisAlertService {
   constructor(private _idService: FudisIdService) {}
 

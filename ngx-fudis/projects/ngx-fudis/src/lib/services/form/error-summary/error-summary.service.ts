@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 /**
  * Error Summary Service public methods and tools
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FudisErrorSummaryService {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
