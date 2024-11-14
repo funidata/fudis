@@ -12,18 +12,6 @@
       &__dialog {
         max-width: calc(100% - spacing.$spacing-lg);
       }
-
-      &__wrapper {
-        @include colors.bg-color('white');
-
-        // TODO: Fix header to push content
-        position: absolute; // Make Form title stick to the top of the Dialog
-        width: calc(100% - spacing.$spacing-sm);
-
-        @include breakpoints.breakpoint('sm') {
-          width: calc(100% - spacing.$spacing-xl);
-        }
-      }
     }
 
     &__main {
@@ -40,21 +28,12 @@
       margin-bottom: spacing.$spacing-sm;
 
       &__dialog {
-        position: absolute; // Make Form Action buttons stick to the bottom of the Dialog
-        bottom: 0;
-        left: 0;
-        width: 100%;
-
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        
         fudis-button:not(:first-of-type) {
           margin-left: spacing.$spacing-xs;
-        }
-
-        /* Dialog Actions Directive inside Form needs background color and to override ngMaterial paddings */
-        fudis-dialog-actions {
-          @include colors.bg-color('white');
-
-          /* stylelint-disable-next-line declaration-no-important */
-          padding: 0 spacing.$spacing-xl spacing.$spacing-md 0 !important;
         }
       }
 

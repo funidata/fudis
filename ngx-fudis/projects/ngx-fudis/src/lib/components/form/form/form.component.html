@@ -16,8 +16,7 @@
       <ng-container *ngIf="title && level">
         <div class="fudis-form__header__title">
           <ng-container *ngIf="_dialogParent">
-            <div class="fudis-form__header__title__wrapper">
-              <fudis-heading
+            <fudis-heading
               class="fudis-form__header__title__dialog fudis-mb-xs"
               fudisDialogTitle
               [variant]="titleVariant"
@@ -31,7 +30,6 @@
                 />
               </ng-container>
             </fudis-heading>
-            </div>
           </ng-container>
           <ng-container *ngIf="!_dialogParent">
             <fudis-heading class="fudis-mb-xs" [variant]="titleVariant" [level]="level"
@@ -76,9 +74,7 @@
   </ng-container>
   <ng-container *ngIf="_headerActions?.type === 'form' && _dialogParent">
     <div class="fudis-form__header__actions__dialog">
-      <fudis-dialog-actions>
-        <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-      </fudis-dialog-actions>
+      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
     </div>
   </ng-container>
 </form>
