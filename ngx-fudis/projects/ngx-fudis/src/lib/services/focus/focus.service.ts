@@ -1,9 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FudisFocusService {
   constructor(@Inject(DOCUMENT) private _document: Document) {}
 

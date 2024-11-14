@@ -13,6 +13,8 @@ import {
   DialogContentDirective,
 } from '../../directives/dialog/dialog-directives';
 import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
+import { FudisIdService } from '../id/id.service';
+import { FudisTranslationService } from '../translation/translation.service';
 
 @Component({
   selector: 'fudis-dialog-test-content',
@@ -93,6 +95,8 @@ describe('DialogService', () => {
       ],
       providers: [
         FudisDialogService,
+        FudisIdService,
+        FudisTranslationService,
         {
           provide: MatDialogRef,
           useValue: {},

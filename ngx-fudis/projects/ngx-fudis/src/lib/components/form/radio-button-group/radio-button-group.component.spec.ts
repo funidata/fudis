@@ -20,6 +20,9 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -77,7 +80,14 @@ describe('Basic inputs of Radio Button Group', () => {
         IconComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [FudisBreakpointService, FudisIdService, FudisGridService],
+      providers: [
+        FudisBreakpointService,
+        FudisIdService,
+        FudisGridService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+        FudisTranslationService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

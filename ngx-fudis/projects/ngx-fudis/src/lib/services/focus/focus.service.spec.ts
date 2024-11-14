@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '../../components/button/button.component';
 import { IconComponent } from '../../components/icon/icon.component';
 import { LinkDirective } from '../../directives/link/link.directive';
+import { FudisIdService } from '../id/id.service';
+import { FudisTranslationService } from '../translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -43,6 +45,7 @@ describe('FudisFocusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MockFocusComponent, ButtonComponent, IconComponent, LinkDirective],
+      providers: [FudisFocusService, FudisIdService, FudisTranslationService],
     });
 
     fixture = TestBed.createComponent(MockFocusComponent);

@@ -11,6 +11,9 @@ import { IconComponent } from '../../icon/icon.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { SimpleChange } from '@angular/core';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 describe('AlertGroupComponent', () => {
   let component: AlertGroupComponent;
@@ -29,6 +32,10 @@ describe('AlertGroupComponent', () => {
       ],
       providers: [
         FudisDialogService,
+        FudisAlertService,
+        FudisIdService,
+        FudisTranslationService,
+        FudisFocusService,
         {
           provide: MatDialogRef,
           useValue: {},

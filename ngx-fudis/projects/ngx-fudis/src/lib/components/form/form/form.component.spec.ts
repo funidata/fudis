@@ -25,6 +25,8 @@ import { BadgeComponent } from '../../badge/badge.component';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { NotificationComponent } from '../../notification/notification.component';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -103,8 +105,11 @@ describe('FormComponent', () => {
       providers: [
         FudisBreakpointService,
         FudisGridService,
+        FudisFocusService,
         FudisIdService,
         FudisInternalErrorSummaryService,
+        FudisErrorSummaryService,
+        FudisTranslationService,
       ],
       imports: [ReactiveFormsModule],
     });

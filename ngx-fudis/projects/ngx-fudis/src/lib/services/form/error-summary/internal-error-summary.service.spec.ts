@@ -7,6 +7,7 @@ import {
   FudisFormErrorSummarySection,
 } from '../../../types/forms';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
+import { FudisTranslationService } from '../../translation/translation.service';
 
 describe('InternalErrorSummaryService', () => {
   let service: FudisInternalErrorSummaryService;
@@ -72,7 +73,9 @@ describe('InternalErrorSummaryService', () => {
   };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [FudisInternalErrorSummaryService, FudisTranslationService],
+    });
 
     service = TestBed.inject(FudisInternalErrorSummaryService);
 

@@ -19,6 +19,8 @@ import { getElement } from '../../../../../utilities/tests/utilities';
 import { defaultOptions } from '../../common/mock_data';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
+import { FudisFocusService } from '../../../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -67,7 +69,12 @@ describe('MultiselectOptionComponent', () => {
         IconComponent,
         LabelComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
+      providers: [
+        FudisIdService,
+        FudisTranslationService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 

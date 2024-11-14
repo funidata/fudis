@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy, SimpleChange } from '@angular/core';
+import { SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { IconComponent } from './icon.component';
 import {
@@ -113,11 +113,7 @@ describe('IconComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [IconComponent],
-    })
-      .overrideComponent(IconComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -207,7 +203,7 @@ describe('IconComponent', () => {
   describe('Icon', () => {
     it('should be displayed according to given icon Input value', () => {
       fudisIconArray.forEach((iconName) => {
-        component.icon = iconName;
+        fixture.componentRef.setInput('icon', iconName);
         fixture.detectChanges();
 
         const svgElement = getElement(fixture, '.fudis-icon');

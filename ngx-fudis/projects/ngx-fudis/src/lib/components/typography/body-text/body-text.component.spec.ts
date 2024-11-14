@@ -1,26 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { fudisBodyTextArray, fudisTextAlignArray } from '../../../types/typography';
+import { FudisIdService } from '../../../services/id/id.service';
 
 describe('BodyTextComponent', () => {
-  let component: BodyTextComponent;
   let fixture: ComponentFixture<BodyTextComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BodyTextComponent],
-    })
-      .overrideComponent(BodyTextComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+      providers: [FudisIdService],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BodyTextComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -28,22 +23,21 @@ describe('BodyTextComponent', () => {
   describe('CSS classes', () => {
     it('should change CSS classes according to the given body-text variant input', () => {
       fudisBodyTextArray.forEach((variant) => {
-        component.variant = variant;
+        fixture.componentRef.setInput('variant', variant);
+
         fixture.detectChanges();
 
         const element = getElement(fixture, '.fudis-body-text');
 
         expect(sortClasses(element.className)).toEqual(
-          sortClasses(
-            `fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__${variant}`,
-          ),
+          sortClasses(`fudis-body-text fudis-body-text__left fudis-body-text__${variant}`),
         );
       });
     });
 
     it('should change CSS classes according to the given body-text align input', () => {
       fudisTextAlignArray.forEach((align) => {
-        component.align = align;
+        fixture.componentRef.setInput('align', align);
         fixture.detectChanges();
 
         const element = getElement(fixture, '.fudis-body-text');
