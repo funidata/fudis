@@ -21,6 +21,8 @@ import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
+import { FudisFocusService } from '../../../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-select-option-base-directive',
@@ -84,7 +86,13 @@ describe('SelectOptionBaseDirective', () => {
         LabelComponent,
         BodyTextComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService, SelectBaseDirective],
+      providers: [
+        FudisIdService,
+        FudisTranslationService,
+        SelectBaseDirective,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 

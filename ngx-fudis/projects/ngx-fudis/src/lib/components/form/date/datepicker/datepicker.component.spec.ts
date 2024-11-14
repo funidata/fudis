@@ -12,6 +12,10 @@ import { DatepickerComponent } from './datepicker.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../../../types/forms';
+import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 describe('DatepickerComponent', () => {
   let component: DatepickerComponent;
@@ -33,6 +37,12 @@ describe('DatepickerComponent', () => {
         MatDatepickerModule,
         MatNativeDateModule,
         BrowserAnimationsModule,
+      ],
+      providers: [
+        FudisIdService,
+        FudisTranslationService,
+        FudisInternalErrorSummaryService,
+        FudisFocusService,
       ],
     }).compileComponents();
   });

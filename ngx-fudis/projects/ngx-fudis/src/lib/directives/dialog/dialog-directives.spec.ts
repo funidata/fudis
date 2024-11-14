@@ -15,6 +15,9 @@ import {
 } from './dialog-directives';
 import { getElement } from '../../utilities/tests/utilities';
 import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
+import { FudisIdService } from '../../services/id/id.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
+import { FudisAlertService } from '../../services/alert/alert.service';
 
 @Component({
   selector: 'fudis-mock-dialog',
@@ -68,7 +71,7 @@ describe('DialogDirectives', () => {
         DialogCloseDirective,
         HostComponent,
       ],
-      providers: [FudisDialogService],
+      providers: [FudisDialogService, FudisIdService, FudisTranslationService, FudisAlertService],
       imports: [MatDialogModule],
     }).compileComponents();
   });

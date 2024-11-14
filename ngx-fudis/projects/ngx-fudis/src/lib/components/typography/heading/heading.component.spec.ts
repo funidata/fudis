@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { HeadingComponent } from './heading.component';
 import {
   FudisHeadingVariant,
@@ -8,6 +7,7 @@ import {
   fudisHeadingVariantArray,
 } from '../../../types/typography';
 import { FudisTextAlign, fudisTextAlignArray } from '../../../types/typography';
+import { FudisIdService } from '../../../services/id/id.service';
 
 describe('HeadingComponent', () => {
   let component: HeadingComponent;
@@ -16,11 +16,8 @@ describe('HeadingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeadingComponent],
-    })
-      .overrideComponent(HeadingComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+      providers: [FudisIdService],
+    }).compileComponents();
   });
 
   beforeEach(() => {

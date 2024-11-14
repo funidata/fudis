@@ -1,26 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BadgeComponent } from './badge.component';
 import { FudisBadgeVariant } from '../../types/miscellaneous';
 
 describe('BadgeComponent', () => {
-  let component: BadgeComponent;
   let fixture: ComponentFixture<BadgeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BadgeComponent],
-    })
-      .overrideComponent(BadgeComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BadgeComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -32,7 +25,7 @@ describe('BadgeComponent', () => {
   }
 
   function badgeVariantCheck(variant: FudisBadgeVariant): void {
-    component.variant = variant;
+    fixture.componentRef.setInput('variant', variant);
     fixture.detectChanges();
     assertBadgeHasClasses(`fudis-badge fudis-badge__${variant}`);
   }
@@ -49,13 +42,13 @@ describe('BadgeComponent', () => {
 
   describe('Content', () => {
     it('should have text content according to the given content Input', () => {
-      component.content = 'Badge text';
+      fixture.componentRef.setInput('content', 'Badge text');
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-badge'));
 
       const badgeContent = elem.nativeElement;
 
-      expect(badgeContent.textContent).toEqual(component.content);
+      expect(badgeContent.textContent).toEqual('Badge text');
     });
   });
 });

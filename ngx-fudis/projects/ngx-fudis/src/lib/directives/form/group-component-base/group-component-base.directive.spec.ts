@@ -10,7 +10,7 @@ describe('GroupComponentBaseDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      providers: [FudisIdService],
+      providers: [FudisIdService, FudisFocusService],
       imports: [],
     });
 

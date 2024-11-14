@@ -13,6 +13,8 @@ import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { FudisFocusService } from '../../services/focus/focus.service';
+import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
   selector: 'fudis-mock-footer',
@@ -47,7 +49,13 @@ describe('FooterComponent', () => {
         FooterContentRightDirective,
         MockFooterComponent,
       ],
-      providers: [FudisGridService, FudisBreakpointService, FudisTranslationService],
+      providers: [
+        FudisGridService,
+        FudisBreakpointService,
+        FudisTranslationService,
+        FudisFocusService,
+        FudisIdService,
+      ],
     }).compileComponents();
   });
 

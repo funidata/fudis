@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HorizontalRuleComponent } from './horizontal-rule.component';
 import { getElement } from '../../utilities/tests/utilities';
-import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('HorizontalRuleComponent', () => {
   let fixture: ComponentFixture<HorizontalRuleComponent>;
@@ -9,11 +8,7 @@ describe('HorizontalRuleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HorizontalRuleComponent],
-    })
-      .overrideComponent(HorizontalRuleComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

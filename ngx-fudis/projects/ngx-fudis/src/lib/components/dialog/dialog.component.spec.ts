@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
@@ -8,6 +7,9 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { getElement } from '../../utilities/tests/utilities';
 import { fudisDialogSizeArray } from '../../types/miscellaneous';
+import { FudisIdService } from '../../services/id/id.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
+import { FudisAlertService } from '../../services/alert/alert.service';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -20,6 +22,9 @@ describe('DialogComponent', () => {
       imports: [MatDialogModule],
       providers: [
         FudisDialogService,
+        FudisIdService,
+        FudisTranslationService,
+        FudisAlertService,
         {
           provide: MatDialogRef,
           useValue: {},
@@ -29,11 +34,7 @@ describe('DialogComponent', () => {
           useValue: [],
         },
       ],
-    })
-      .overrideComponent(DialogComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+    }).compileComponents();
 
     dialogService = TestBed.inject(FudisDialogService);
 
@@ -58,7 +59,7 @@ describe('DialogComponent', () => {
       expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__md');
 
       fudisDialogSizeArray.forEach((size) => {
-        component.size = size;
+        fixture.componentRef.setInput('size', size);
         fixture.detectChanges();
 
         expect(dialogEl.className).toEqual(`fudis-dialog fudis-dialog__size__${size}`);

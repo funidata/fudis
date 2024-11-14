@@ -4,6 +4,8 @@ import { SelectDropdownComponent } from './select-dropdown.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { FudisSelectVariant } from '../../../../../types/forms';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
+import { FudisIdService } from '../../../../../services/id/id.service';
 
 const autocompleteVariants: FudisSelectVariant[] = ['autocompleteDropdown', 'autocompleteType'];
 
@@ -15,6 +17,7 @@ describe('SelectDropdownComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SelectDropdownComponent, BodyTextComponent],
+      providers: [FudisTranslationService, FudisIdService],
     });
     fixture = TestBed.createComponent(SelectDropdownComponent);
     component = fixture.componentInstance;

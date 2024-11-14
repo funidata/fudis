@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { MockComponents } from 'ng-mocks';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import {
@@ -16,6 +15,10 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { getElement } from '../../../../utilities/tests/utilities';
+import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 // TODO: write tests for input visible, controlName and variant
 @Component({
@@ -50,10 +53,16 @@ describe('ValidatorErrorMessageComponent', () => {
         TextInputWithValidatorErrorMessageComponent,
         TextInputComponent,
         GuidanceComponent,
-        MockComponents(IconComponent, LabelComponent),
+        IconComponent,
+        LabelComponent,
       ],
       imports: [ReactiveFormsModule],
-      providers: [],
+      providers: [
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+        FudisIdService,
+        FudisTranslationService,
+      ],
     }).compileComponents();
   });
 

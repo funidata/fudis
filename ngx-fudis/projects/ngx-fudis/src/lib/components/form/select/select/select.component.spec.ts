@@ -20,6 +20,7 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { ButtonComponent } from '../../../button/button.component';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -66,6 +67,7 @@ describe('SelectComponent', () => {
       ],
       providers: [
         FudisIdService,
+        FudisInternalErrorSummaryService,
         FudisTranslationService,
         FudisFocusService,
         TooltipDirective,
