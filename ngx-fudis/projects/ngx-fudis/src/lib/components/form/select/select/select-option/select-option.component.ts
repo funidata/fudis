@@ -78,18 +78,18 @@ export class SelectOptionComponent
     this._parent.closeDropdown(true, true);
   }
 
-  protected override _updateVisibleLabel(): void {
-    if (this._parent.control.value?.value === this.data.value) {
-      this._parent.updateInputValueTexts(this.data.label);
-    }
-  }
-
   protected override _checkVisibilityFromFilterText(filterText: string): void {
     if (this._parent.variant !== 'dropdown' && this._parent.autocompleteFilter) {
       this._isOptionVisible(filterText);
       this._isOptionTyped(filterText);
     } else {
       this._isOptionVisible('');
+    }
+  }
+
+  private _updateVisibleLabel(): void {
+    if (this._parent.control.value?.value === this.data.value) {
+      this._parent.updateInputValueTexts(this.data.label);
     }
   }
 
