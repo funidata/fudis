@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -29,7 +28,6 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
-    private _cdr: ChangeDetectorRef,
   ) {
     super();
 

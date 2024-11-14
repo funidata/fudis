@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -28,7 +27,6 @@ import { BehaviorSubject } from 'rxjs';
 export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
-    private readonly _changeDetectorRef: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
   ) {
     /**
@@ -178,7 +176,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
     });
 
     this._visibleErrorList.next(newErrorList.sort(this._sortErrorOrder));
-    this._changeDetectorRef.detectChanges();
 
     if (this._errorSummaryService.focusToFormOnReload === this.formId) {
       this._focusToErrorSummary();

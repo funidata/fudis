@@ -36,5 +36,12 @@
   },
   "closeCalendar": "Close calendar",
   "fieldsetTitle": "Important fieldset title",
-  "breadcrumbsLabel": "Random stuff expandable"
+  "breadcrumbsLabel": "Random stuff expandable",
+  "selectOptions": {
+    "dog": "Dog",
+    "cat": "Cat",
+    "penguin": "Penguin",
+    "parrot": "Parrot",
+    "sheep": "Sheep"
+  }
 }
