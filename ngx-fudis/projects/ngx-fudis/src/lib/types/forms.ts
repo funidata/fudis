@@ -1,6 +1,5 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
-import { FudisLanguageAbbr } from './miscellaneous';
 
 export const fudisInputSizeArray = ['sm', 'md', 'lg'] as const;
 
@@ -52,51 +51,6 @@ export type FudisSelectOption<T extends object> = T & {
   [key: string]: unknown;
 };
 
-export type FudisFormErrorSummaryItem = {
-  id: string;
-  formId: string;
-  label: string;
-  error: string;
-  type: string;
-  controlName: string | undefined;
-};
-
-export type FudisFormErrorSummaryRemoveItem = {
-  id: string;
-  formId: string | null;
-  controlName: string | undefined;
-  type: string;
-};
-
-export type FudisFormErrorSummaryFormsAndErrors = {
-  [id: string]: FudisFormErrorSummaryObject;
-};
-
-export type FudisFormErrorSummaryError = {
-  id: string;
-  errors: FudisFormErrorSummaryObjectItemErrors;
-  label: string;
-  language: FudisLanguageAbbr;
-};
-
-export type FudisFormErrorSummaryObject = {
-  [id: string]: {
-    id: string;
-    errors: FudisFormErrorSummaryObjectItemErrors;
-    label: string;
-  };
-};
-
-export type FudisFormErrorSummaryList = {
-  id: string;
-  message: string;
-  element: HTMLElement | null;
-};
-
-export type FudisFormErrorSummaryObjectItemErrors = {
-  [errorType: string]: string;
-};
-
 export type FudisLocalizedTextGroupOptions =
   | { controlName: 'fi'; label: 'FI' }
   | { controlName: 'sv'; label: 'SV' }
@@ -141,5 +95,3 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
     dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
   },
 };
-
-export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';

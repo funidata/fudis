@@ -6,9 +6,9 @@ import { By } from '@angular/platform-browser';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import {
-  FudisFormErrorSummaryItem,
-  FudisFormErrorSummaryRemoveItem,
-} from '../../../../types/forms';
+  FudisErrorSummaryAddItem,
+  FudisErrorSummaryRemoveItem,
+} from '../../../../types/errorSummary';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
@@ -123,7 +123,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       fixture.detectChanges();
 
-      const testError: FudisFormErrorSummaryItem = {
+      const testError: FudisErrorSummaryAddItem = {
         id: 'test-id',
         error: 'Message for testing',
         formId: 'test-form-id',
@@ -147,7 +147,7 @@ describe('ValidatorErrorMessageComponent', () => {
         message: new SimpleChange(null, component.message, true),
       });
 
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
+      const errorToRemove: FudisErrorSummaryRemoveItem = {
         id: 'test-id',
         formId: 'test-form-id',
         type: 'required',
@@ -172,7 +172,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       fixture.detectChanges();
 
-      const testError: FudisFormErrorSummaryItem = {
+      const testError: FudisErrorSummaryAddItem = {
         id: 'test-id',
         formId: 'test-form-id',
         error: 'First message from observable',
@@ -191,7 +191,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       fixture.detectChanges();
 
-      const updatedError: FudisFormErrorSummaryItem = {
+      const updatedError: FudisErrorSummaryAddItem = {
         ...testError,
         error: 'Second message after update',
       };
@@ -222,7 +222,7 @@ describe('ValidatorErrorMessageComponent', () => {
         controlName: new SimpleChange(null, component.controlName, true),
       });
 
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
+      const errorToRemove: FudisErrorSummaryRemoveItem = {
         id: 'test-observable-message-id',
         formId: 'test-form-id',
         type: 'required',
@@ -247,7 +247,7 @@ describe('ValidatorErrorMessageComponent', () => {
         message: new SimpleChange(null, component.message, true),
       });
 
-      const testError: FudisFormErrorSummaryItem = {
+      const testError: FudisErrorSummaryAddItem = {
         id: 'test-id',
         formId: 'test-form-id',
         error: 'First message from observable',
@@ -256,7 +256,7 @@ describe('ValidatorErrorMessageComponent', () => {
         controlName: undefined,
       };
 
-      const updatedError: FudisFormErrorSummaryItem = {
+      const updatedError: FudisErrorSummaryAddItem = {
         ...testError,
         label: 'New better label',
       };

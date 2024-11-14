@@ -6,14 +6,19 @@ import {
   ElementRef,
   Input,
   ViewChild,
-  effect,
+  signal,
 } from '@angular/core';
 
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../../types/forms';
+import { FudisFormErrorSummaryObject } from '../../../types/errorSummary';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
+
+type ErrorSummaryDOMListItem = {
+  id: string;
+  message: string;
+  element: HTMLElement | null;
+};
 
 @Component({
   selector: 'fudis-error-summary',
@@ -25,7 +30,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
-    private _translationService: FudisTranslationService,
+    protected _translationService: FudisTranslationService,
   ) {
     /**
      * Fetch and update current visible errors when reloadErrors() is called
@@ -41,13 +46,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
       ) {
         this._updateSummaryContent(errors);
       }
-    });
-
-    /**
-     * Update translations on language change
-     */
-    effect(() => {
-      this._attentionText.next(_translationService.getTranslations()().ICON.ATTENTION);
     });
   }
 
@@ -69,16 +67,9 @@ export class ErrorSummaryComponent implements AfterViewInit {
   @Input({ required: true }) formId: string;
 
   /**
-   * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
-   */
-  protected _attentionText = new BehaviorSubject<string>(
-    this._translationService.getTranslations()().ICON.ATTENTION,
-  );
-
-  /**
    * Visible errors
    */
-  protected _visibleErrorList = new BehaviorSubject<FudisFormErrorSummaryList[]>([]);
+  protected _visibleErrorList = signal<ErrorSummaryDOMListItem[]>([]);
 
   /**
    * Focus counter to hit the correct focus field
@@ -104,7 +95,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
   /**
    * Sort errors the same order they appear in the DOM
    */
-  private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {
+  private _sortErrorOrder(a: ErrorSummaryDOMListItem, b: ErrorSummaryDOMListItem): 0 | -1 | 1 {
     if (a.id === b.id) {
       return 0;
     }
@@ -131,7 +122,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
    * Update Error Summary content with possible parent Fieldsets, Sections and Expandables (Sections)
    */
   private _updateSummaryContent(content: FudisFormErrorSummaryObject): void {
-    const newErrorList: FudisFormErrorSummaryList[] = [];
+    const newErrorList: ErrorSummaryDOMListItem[] = [];
 
     const fieldsets: { [id: string]: string } =
       this._errorSummaryService.formStructure[this.formId].fieldsets;
@@ -173,7 +164,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
       });
     });
 
-    this._visibleErrorList.next(newErrorList.sort(this._sortErrorOrder));
+    this._visibleErrorList.set(newErrorList.sort(this._sortErrorOrder));
     this._changeDetectorRef.detectChanges();
 
     if (this._errorSummaryService.focusToFormOnReload === this.formId) {
@@ -185,7 +176,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
    * Move focus to Error Summary if errors are visible
    */
   private _focusToErrorSummary(): void {
-    if (this._focusTarget && this._visibleErrorList.value.length > 0) {
+    if (this._focusTarget && this._visibleErrorList().length > 0) {
       this._numberOfFocusTries = 0;
       (this._focusTarget.nativeElement as HTMLDivElement).focus();
     } else if (this._numberOfFocusTries < 20) {

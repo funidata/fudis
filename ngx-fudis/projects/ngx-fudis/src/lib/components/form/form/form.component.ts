@@ -125,7 +125,7 @@ export class FormComponent
     this._initFinished = true;
 
     if (this._dialogParent) {
-      this._dialogParent.closeButtonPositionAbsolute = true;
+      this._dialogParent.closeButtonPositionAbsolute.set(true);
     }
   }
 

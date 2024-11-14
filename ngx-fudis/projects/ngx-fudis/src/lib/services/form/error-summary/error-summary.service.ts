@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 
 import {
-  FudisFormErrorSummaryFormsAndErrors,
+  FudisErrorSummaryErrors,
   FudisFormErrorSummaryUpdateStrategy,
-} from '../../../types/forms';
+} from '../../../types/errorSummary';
 import { BehaviorSubject } from 'rxjs';
 
 /**
@@ -46,9 +46,9 @@ export class FudisErrorSummaryService {
   }
 
   /**
-   * Returns an observable of all errors sent to Error Summary
+   * Returns an observable of all errors sent to Error Summary. Note, that Observable is updated only when ReloadErrors is called.
    */
-  public getErrorsObservable(): BehaviorSubject<FudisFormErrorSummaryFormsAndErrors> {
+  public getErrorsObservable(): BehaviorSubject<FudisErrorSummaryErrors> {
     return this._errorSummaryService.allFormErrorsObservable;
   }
 }

@@ -1,19 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  FudisFormErrorSummaryFormsAndErrors,
-  FudisFormErrorSummaryItem,
+  FudisErrorSummaryErrors,
+  FudisErrorSummaryAddItem,
   FudisFormErrorSummaryObject,
-  FudisFormErrorSummaryRemoveItem,
-  FudisFormErrorSummarySection,
-} from '../../../types/forms';
+  FudisErrorSummaryRemoveItem,
+} from '../../../types/errorSummary';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 import { FudisTranslationService } from '../../translation/translation.service';
 
 describe('InternalErrorSummaryService', () => {
   let service: FudisInternalErrorSummaryService;
-  let currentErrors: FudisFormErrorSummaryFormsAndErrors;
+  let currentErrors: FudisErrorSummaryErrors;
 
-  const firstError: FudisFormErrorSummaryItem = {
+  const firstError: FudisErrorSummaryAddItem = {
     id: 'first-error',
     formId: 'test-form-id-1',
     label: 'Test label',
@@ -22,13 +21,13 @@ describe('InternalErrorSummaryService', () => {
     controlName: undefined,
   };
 
-  const firstErrorAnotherErrorType: FudisFormErrorSummaryItem = {
+  const firstErrorAnotherErrorType: FudisErrorSummaryAddItem = {
     ...firstError,
     error: 'Email is not valid',
     type: 'email',
   };
 
-  const secondError: FudisFormErrorSummaryItem = {
+  const secondError: FudisErrorSummaryAddItem = {
     id: 'second-error',
     formId: 'test-form-id-2',
     label: 'Test label',
@@ -53,23 +52,28 @@ describe('InternalErrorSummaryService', () => {
     },
   };
 
-  const firstErrorRemoveItem: FudisFormErrorSummaryRemoveItem = {
+  const firstErrorRemoveItem: FudisErrorSummaryRemoveItem = {
     id: 'first-error',
     formId: 'test-form-id-1',
     controlName: undefined,
     type: 'required',
   };
 
-  const fieldSetForErrorSummary: FudisFormErrorSummarySection = {
+  const fieldSetForErrorSummary = {
     id: 'unique-fieldset-id',
     formId: 'test-form-id-1',
     title: 'Fill all the information',
   };
 
-  const sectionForErrorSummary: FudisFormErrorSummarySection = {
+  const sectionForErrorSummary = {
     id: 'unique-section-id',
     formId: 'test-form-id-1',
     title: 'Main section',
+  };
+
+  const emptyResult = {
+    'test-form-id-1': { sections: {}, fieldsets: {} },
+    'test-form-id-2': { sections: {}, fieldsets: {} },
   };
 
   beforeEach(() => {
@@ -89,105 +93,127 @@ describe('InternalErrorSummaryService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initially return an empty object', () => {
-    const errors = service.allFormErrorsObservable.value;
+  describe('Structure', () => {
+    it('should add fieldset information to currentFieldsets array', () => {
+      service.addFieldset(fieldSetForErrorSummary);
 
-    const initial = {};
+      const withFieldset = {
+        'test-form-id-1': {
+          sections: {},
+          fieldsets: {
+            'unique-fieldset-id': 'Fill all the information',
+          },
+        },
+        'test-form-id-2': { sections: {}, fieldsets: {} },
+      };
 
-    expect(errors).toEqual(initial);
-  });
+      expect(service.formStructure).toEqual(withFieldset);
+    });
 
-  it('should return currentErrorList object containing given errors', () => {
-    service.addNewError(firstError);
-    service.addNewError(secondError);
-    service.addNewError(firstErrorAnotherErrorType);
+    it('should remove fieldset information from currentFieldsets array', () => {
+      service.addFieldset(fieldSetForErrorSummary);
+      service.removeFieldset('test-form-id-1', 'unique-fieldset-id');
 
-    currentErrors = {
-      'test-form-id-1': firstErrorFromService,
-      'test-form-id-2': secondErrorFromService,
-    };
+      expect(service.formStructure).toEqual(emptyResult);
+    });
 
-    service.reloadErrorsByFormId('test-form-id-1');
+    it('should add section information to currentSections array', () => {
+      service.addSection(sectionForErrorSummary);
 
-    const errors = service.getErrors();
+      const result = {
+        'test-form-id-1': {
+          sections: {
+            'unique-section-id': 'Main section',
+          },
+          fieldsets: {},
+        },
+        'test-form-id-2': { sections: {}, fieldsets: {} },
+      };
 
-    expect(errors).toEqual(currentErrors);
-  });
+      expect(service.formStructure).toEqual(result);
+    });
 
-  it('should remove object error for respective type', () => {
-    // Add object with 'required' error message
-    service.addNewError(firstError);
+    it('should remove section information from currentSections array', () => {
+      service.addSection(sectionForErrorSummary);
 
-    // Add 'email' error message to the same object
-    service.addNewError(firstErrorAnotherErrorType);
+      service.removeSection('test-form-id-1', 'unique-section-id');
 
-    // Remove only 'required' error message
-    service.removeError(firstErrorRemoveItem, 'test-form-id-1');
-
-    expect(service.getErrors()['test-form-id-1']['first-error'].errors).toEqual({
-      email: 'Email is not valid',
+      expect(service.formStructure).toEqual(emptyResult);
     });
   });
+  describe('Errors', () => {
+    it('should initially return an empty object', () => {
+      const errors = service.allFormErrorsObservable.value;
 
-  it('should reload errors when Error Summary Item content is changed', () => {
-    const firstErrorWithContentUpdate: FudisFormErrorSummaryItem = {
-      ...firstError,
-      error: 'Something new',
-    };
+      const initial = {};
 
-    service.addNewError(firstError);
+      expect(errors).toEqual(initial);
+    });
 
-    expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
-      'There is something wrong',
-    );
-    service.addNewError(firstErrorWithContentUpdate);
-    expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
-      'Something new',
-    );
+    it('should return currentErrorList object containing given errors', () => {
+      service.addNewError(firstError);
+      service.addNewError(secondError);
+      service.addNewError(firstErrorAnotherErrorType);
 
-    expect(service.reloadErrorsByFormId).toHaveBeenCalledWith('test-form-id-1', false, false, true);
-  });
+      currentErrors = {
+        'test-form-id-1': firstErrorFromService,
+        'test-form-id-2': secondErrorFromService,
+      };
 
-  it('should add fieldset information to currentFieldsets array', () => {
-    service.addFieldset(fieldSetForErrorSummary);
+      service.reloadErrorsByFormId('test-form-id-1');
 
-    const fieldset = { 'test-form-id-1': [fieldSetForErrorSummary], 'test-form-id-2': [] };
+      const errors = service.getErrors();
 
-    expect(service.fieldsets).toEqual(fieldset);
-  });
+      expect(errors).toEqual(currentErrors);
+    });
 
-  it('should remove fieldset information from currentFieldsets array', () => {
-    service.addFieldset(fieldSetForErrorSummary);
-    service.removeFieldset(fieldSetForErrorSummary);
+    it('should remove object error for respective type', () => {
+      // Add object with 'required' error message
+      service.addNewError(firstError);
 
-    expect(service.fieldsets).toEqual({ 'test-form-id-1': [], 'test-form-id-2': [] });
-  });
+      // Add 'email' error message to the same object
+      service.addNewError(firstErrorAnotherErrorType);
 
-  it('should add section information to currentSections array', () => {
-    service.addSection(sectionForErrorSummary);
+      // Remove only 'required' error message
+      service.removeError(firstErrorRemoveItem, 'test-form-id-1');
 
-    const sections = { 'test-form-id-1': [sectionForErrorSummary], 'test-form-id-2': [] };
+      expect(service.getErrors()['test-form-id-1']['first-error'].errors).toEqual({
+        email: 'Email is not valid',
+      });
+    });
 
-    expect(service.sections).toEqual(sections);
-  });
+    it('should reload errors when Error Summary Item content is changed', () => {
+      const firstErrorWithContentUpdate: FudisErrorSummaryAddItem = {
+        ...firstError,
+        error: 'Something new',
+      };
 
-  it('should remove section information from currentSections array', () => {
-    service.addSection(sectionForErrorSummary);
+      service.addNewError(firstError);
 
-    service.removeSection(sectionForErrorSummary);
+      expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
+        'There is something wrong',
+      );
+      service.addNewError(firstErrorWithContentUpdate);
+      expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
+        'Something new',
+      );
 
-    const sections = { 'test-form-id-1': [], 'test-form-id-2': [] };
+      expect(service.reloadErrorsByFormId).toHaveBeenCalledWith(
+        'test-form-id-1',
+        false,
+        false,
+        true,
+      );
+    });
 
-    expect(service.sections).toEqual(sections);
-  });
-
-  it('should set and return update strategy', () => {
-    expect(service.updateStrategy).toEqual('reloadOnly');
-    service.updateStrategy = 'all';
-    expect(service.updateStrategy).toEqual('all');
-    service.updateStrategy = 'onRemove';
-    expect(service.updateStrategy).toEqual('onRemove');
-    service.updateStrategy = 'reloadOnly';
-    expect(service.updateStrategy).toEqual('reloadOnly');
+    it('should set and return update strategy', () => {
+      expect(service.updateStrategy).toEqual('reloadOnly');
+      service.updateStrategy = 'all';
+      expect(service.updateStrategy).toEqual('all');
+      service.updateStrategy = 'onRemove';
+      expect(service.updateStrategy).toEqual('onRemove');
+      service.updateStrategy = 'reloadOnly';
+      expect(service.updateStrategy).toEqual('reloadOnly');
+    });
   });
 });

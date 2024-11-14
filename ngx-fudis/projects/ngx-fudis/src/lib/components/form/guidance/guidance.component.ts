@@ -17,7 +17,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { FudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisErrorSummaryAddItem } from '../../../types/errorSummary';
 
 @Component({
   selector: 'fudis-guidance',
@@ -186,7 +186,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit {
   /**
    * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made. It will only trigger reload once all errors of this Guidance are registered.
    */
-  protected _reloadErrorSummaryOnLazyLoad(error: FudisFormErrorSummaryItem): void {
+  protected _reloadErrorSummaryOnLazyLoad(error: FudisErrorSummaryAddItem): void {
     const errorLog = error.controlName ? `${error.controlName}_${error.type}` : error.type;
 
     if (

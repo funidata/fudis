@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import {
   FudisFormErrorSummaryObject,
-  FudisFormErrorSummaryItem,
-  FudisFormErrorSummaryRemoveItem,
+  FudisErrorSummaryAddItem,
+  FudisErrorSummaryRemoveItem,
   FudisFormErrorSummaryUpdateStrategy,
-  FudisFormErrorSummaryFormsAndErrors,
-} from '../../../types/forms';
+  FudisErrorSummaryErrors,
+} from '../../../types/errorSummary';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../translation/translation.service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
@@ -40,9 +40,15 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
+   ------------------
+   Class variables
+   ------------------
+  */
+
+  /**
    * Current errors
    */
-  private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = {};
+  private _allFormErrors: FudisErrorSummaryErrors = {};
 
   /**
    * Current Form ids with their Error Summary Visibility status
@@ -54,7 +60,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   /**
    * Collection of errors categorised by parent Form id.
    */
-  private _allFormErrorsObservable = new BehaviorSubject<FudisFormErrorSummaryFormsAndErrors>({});
+  private _allFormErrorsObservable = new BehaviorSubject<FudisErrorSummaryErrors>({});
 
   /**
    * Collection of child Sections, Expandables and Fieldsets of each Form Component
@@ -76,12 +82,22 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   private _formIdToUpdate: string;
 
-  get allFormErrorsObservable(): BehaviorSubject<FudisFormErrorSummaryFormsAndErrors> {
+  /**
+   ------------------
+   Getters & Setters for Class variables
+   ------------------
+  */
+
+  get allFormErrorsObservable(): BehaviorSubject<FudisErrorSummaryErrors> {
     return this._allFormErrorsObservable;
   }
 
+  public getErrors(): FudisErrorSummaryErrors {
+    return this._allFormErrors;
+  }
+
   /**
-   * Getter for _formIdToUpdate. Used in ErrorSummaryComponent.
+   * Getter for currently assigned _formIdToUpdate. Used in ErrorSummaryComponent.
    */
   get formIdToUpdate(): string {
     return this._formIdToUpdate;
@@ -112,26 +128,12 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     return this._formStructure;
   }
 
-  /**
-   * Setter for _focusToFormOnReload
-   */
   set focusToFormOnReload(value: string | null) {
     this._focusToFormOnReload = value;
   }
 
-  public getErrors(): FudisFormErrorSummaryFormsAndErrors {
-    return this._allFormErrors;
-  }
-
   get formErrorSummaryVisibilityStatus(): BehaviorSubject<{ [formId: string]: boolean }> {
     return this._formErrorSummaryVisibilityStatus;
-  }
-
-  /**
-   * Returns a readonly list of visible errors
-   */
-  public getFormErrorsById(formId: string): FudisFormErrorSummaryObject {
-    return this._allFormErrors[formId];
   }
 
   /**
@@ -236,7 +238,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * If new error item has a matching id on the list, new error is tied to that error list object
    * @param newError Form error summary item
    */
-  public addNewError(newError: FudisFormErrorSummaryItem): void {
+  public addNewError(newError: FudisErrorSummaryAddItem): void {
     if (!this._allFormErrors[newError.formId]) {
       this.registerNewForm(newError.formId);
     }
@@ -269,7 +271,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   private getUpdatedErrorsByFormId(
-    newError: FudisFormErrorSummaryItem,
+    newError: FudisErrorSummaryAddItem,
     currentErrors: FudisFormErrorSummaryObject,
   ): FudisFormErrorSummaryObject {
     const errorId = this.defineErrorId(newError.id, newError.controlName);
@@ -302,7 +304,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * Removes error object from the current errors list if it contains matching error id
    * @param error Error object
    */
-  public removeError(error: FudisFormErrorSummaryRemoveItem, formId: string): void {
+  public removeError(error: FudisErrorSummaryRemoveItem, formId: string): void {
     const currentErrorsOfForm = { ...this._allFormErrors[formId] };
 
     const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
@@ -360,7 +362,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param section Form error summary section
    */
   public removeSection(formId: string, sectionId: string): void {
-    delete this._formStructure?.[formId]?.fieldsets[sectionId];
+    delete this._formStructure?.[formId]?.sections[sectionId];
   }
 
   /**
