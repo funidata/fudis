@@ -5,26 +5,21 @@ import { FudisNotification } from '../../types/miscellaneous';
 import { getElement } from '../../utilities/tests/utilities';
 import { RouterModule } from '@angular/router';
 import { LinkDirective } from '../../directives/link/link.directive';
-import { ChangeDetectionStrategy } from '@angular/core';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 describe('NotificationComponent', () => {
-  let component: NotificationComponent;
   let fixture: ComponentFixture<NotificationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NotificationComponent, IconComponent, LinkDirective],
+      providers: [FudisTranslationService],
       imports: [RouterModule.forRoot([])],
-    })
-      .overrideComponent(NotificationComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -36,7 +31,7 @@ describe('NotificationComponent', () => {
   }
 
   function notificationIconCheck(variant: FudisNotification): void {
-    component.variant = variant;
+    fixture.componentRef.setInput('variant', variant);
 
     fixture.detectChanges();
 
@@ -64,7 +59,8 @@ describe('NotificationComponent', () => {
   }
 
   function notificationVariants(variant: FudisNotification): void {
-    component.variant = variant;
+    fixture.componentRef.setInput('variant', variant);
+
     fixture.detectChanges();
 
     assertNotificationHasClasses(`fudis-notification fudis-notification__${variant}`);

@@ -21,6 +21,9 @@ import { NotificationsDirective } from '../../../directives/content-projection/n
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-mock-fieldset-component',
@@ -76,7 +79,14 @@ describe('FieldSetComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [FudisGridService, FudisInternalErrorSummaryService, FudisBreakpointService],
+      providers: [
+        FudisGridService,
+        FudisInternalErrorSummaryService,
+        FudisBreakpointService,
+        FudisTranslationService,
+        FudisFocusService,
+        FudisIdService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 

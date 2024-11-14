@@ -11,6 +11,10 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { SimpleChange } from '@angular/core';
 import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -30,6 +34,12 @@ describe('TextInputComponent', () => {
         TooltipApiDirective,
       ],
       imports: [ReactiveFormsModule],
+      providers: [
+        FudisIdService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+        FudisTranslationService,
+      ],
     }).compileComponents();
   });
 

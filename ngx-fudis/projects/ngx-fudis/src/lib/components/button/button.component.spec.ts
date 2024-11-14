@@ -8,6 +8,7 @@ import {
 } from '../../types/miscellaneous';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisIconRotateArray } from '../../types/icons';
+import { FudisIdService } from '../../services/id/id.service';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
@@ -16,6 +17,7 @@ describe('ButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ButtonComponent, IconComponent],
+      providers: [FudisIdService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);

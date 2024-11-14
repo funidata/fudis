@@ -22,6 +22,7 @@ import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../button/button.component';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -75,6 +76,7 @@ describe('MultiselectComponent', () => {
       providers: [
         FudisIdService,
         FudisTranslationService,
+        FudisInternalErrorSummaryService,
         FudisFocusService,
         TooltipDirective,
         SelectBaseDirective,

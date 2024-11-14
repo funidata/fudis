@@ -9,12 +9,22 @@ import {
   FudisFormErrorSummarySectionObject,
 } from '../../../types/forms';
 import { BehaviorSubject } from 'rxjs';
+import { FudisTranslationService } from '../../translation/translation.service';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 /**
  * Internal Error Summary tools not exposed to public
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FudisInternalErrorSummaryService implements OnDestroy {
+  constructor(private _translationService: FudisTranslationService) {
+    toObservable(_translationService.getLanguageSignal())
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        this.focusToFormOnReload = null;
+      });
+  }
+
   /**
    * Current errors
    */

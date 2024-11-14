@@ -21,6 +21,10 @@ import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { IconComponent } from '../../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
+import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -100,7 +104,14 @@ describe('CheckboxComponent', () => {
         GuidanceComponent,
         IconComponent,
       ],
-      providers: [FudisBreakpointService, FudisGridService],
+      providers: [
+        FudisBreakpointService,
+        FudisGridService,
+        FudisIdService,
+        FudisTranslationService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

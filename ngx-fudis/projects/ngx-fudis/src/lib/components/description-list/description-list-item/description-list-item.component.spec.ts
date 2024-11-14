@@ -17,6 +17,7 @@ import { LanguageBadgeComponent } from '../../language-badge-group/language-badg
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-dl',
@@ -80,7 +81,12 @@ describe('DescriptionListItemComponent', () => {
         MockDlComponent,
       ],
       imports: [MatTooltipModule],
-      providers: [FudisGridService, FudisIdService, FudisBreakpointService],
+      providers: [
+        FudisGridService,
+        FudisIdService,
+        FudisBreakpointService,
+        FudisTranslationService,
+      ],
     }).compileComponents();
   });
 

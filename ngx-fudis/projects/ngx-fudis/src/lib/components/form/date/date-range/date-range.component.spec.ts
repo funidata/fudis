@@ -14,6 +14,8 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
 import { FudisValidators } from '../../../../utilities/form/validators';
+import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-date-range',
@@ -60,7 +62,12 @@ describe('DateRangeComponent', () => {
         MockDateRangeComponent,
         IconComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
+      providers: [
+        FudisIdService,
+        FudisTranslationService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+      ],
       imports: [
         ReactiveFormsModule,
         MatDatepickerModule,

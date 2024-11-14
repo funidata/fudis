@@ -24,6 +24,7 @@ import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip
 import { By } from '@angular/platform-browser';
 import { groupedTestData } from '../mock_data';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
+import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-select',
@@ -104,7 +105,12 @@ describe('SelectBaseDirective', () => {
         BodyTextComponent,
         ButtonComponent,
       ],
-      providers: [FudisFocusService, FudisIdService, FudisTranslationService],
+      providers: [
+        FudisFocusService,
+        FudisIdService,
+        FudisTranslationService,
+        FudisInternalErrorSummaryService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

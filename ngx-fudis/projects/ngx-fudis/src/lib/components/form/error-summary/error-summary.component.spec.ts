@@ -30,6 +30,7 @@ import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -148,6 +149,8 @@ describe('ErrorSummaryComponent', () => {
         FudisIdService,
         FudisBreakpointService,
         FudisTranslationService,
+        FudisErrorSummaryService,
+        FudisFocusService,
       ],
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();

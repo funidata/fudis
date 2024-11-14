@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@jsverse/transloco';
 import {
@@ -27,17 +27,48 @@ type MyForm = {
 
 type SelectForm = {
   autocompleteSearch: FormControl<FudisSelectOption<object>[] | null>;
+  translatedMultiselect: FormControl<FudisSelectOption<object>[] | null>;
+  translatedSelect: FormControl<FudisSelectOption<object> | null>;
 };
 
 @Component({
   selector: 'app-form-examples',
   templateUrl: 'formExamples.component.html',
 })
-export class AppFormExampleComponent implements OnInit {
+export class AppFormExampleComponent {
   constructor(
     private _translocoService: TranslocoService,
     private _errorSummaryService: FudisErrorSummaryService,
-  ) {}
+  ) {
+    _translocoService
+      .selectTranslateObject('options')
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        this.radioButtonOptions = [
+          { value: true, label: value.chooseTruthTrue },
+          { value: false, label: value.chooseTruthFalse },
+        ];
+        this.checkboxOptions = [
+          { controlName: 'blueberry', label: value.blueberry },
+          { controlName: 'cloudberry', label: value.cloudberry },
+          { controlName: 'raspberry', label: value.raspberry },
+          { controlName: 'strawberry', label: value.strawberry },
+        ];
+      });
+
+    _translocoService
+      .selectTranslateObject('selectOptions')
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        this.translatedSelectOptions = [
+          { value: 'dog-id', label: value.dog },
+          { value: 'cat-id', label: value.cat },
+          { value: 'penguin-id', label: value.penguin },
+          { value: 'sheep-id', label: value.sheep },
+          { value: 'parrot-id', label: value.parrot },
+        ];
+      });
+  }
 
   errorSummaryVisible: boolean = false;
 
@@ -47,6 +78,18 @@ export class AppFormExampleComponent implements OnInit {
 
   selectForm = new FormGroup<SelectForm>({
     autocompleteSearch: new FormControl<FudisSelectOption<object>[] | null>(
+      null,
+      FudisValidators.required(
+        this._translocoService.selectTranslateObject('form_errors.required'),
+      ),
+    ),
+    translatedMultiselect: new FormControl<FudisSelectOption<object>[] | null>(
+      null,
+      FudisValidators.required(
+        this._translocoService.selectTranslateObject('form_errors.required'),
+      ),
+    ),
+    translatedSelect: new FormControl<FudisSelectOption<object> | null>(
       null,
       FudisValidators.required(
         this._translocoService.selectTranslateObject('form_errors.required'),
@@ -115,29 +158,11 @@ export class AppFormExampleComponent implements OnInit {
 
   selectOptions = defaultOptions;
 
+  translatedSelectOptions: FudisSelectOption<object>[] = [];
+
   radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 
   checkboxOptions: FudisCheckboxOption<object>[] = [];
-
-  private _destroyRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    this._translocoService
-      .selectTranslateObject('options')
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((value) => {
-        this.radioButtonOptions = [
-          { value: true, label: value.chooseTruthTrue },
-          { value: false, label: value.chooseTruthFalse },
-        ];
-        this.checkboxOptions = [
-          { controlName: 'blueberry', label: value.blueberry },
-          { controlName: 'cloudberry', label: value.cloudberry },
-          { controlName: 'raspberry', label: value.raspberry },
-          { controlName: 'strawberry', label: value.strawberry },
-        ];
-      });
-  }
 
   selectSize: FudisInputSize = 'sm';
 

@@ -7,6 +7,7 @@ import {
   inject,
   Input,
   Output,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -104,6 +105,11 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
+   * Used prevent checks in HTML DOM before content has been loaded
+   */
+  protected _afterViewInitDone = signal<boolean>(false);
+
+  /**
    * Generate id for parent component
    */
   protected _setParentComponentId(parentType: FudisIdParent): void {
@@ -129,6 +135,7 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+    this._afterViewInitDone.set(true);
     this.handleViewInit.emit();
   }
 

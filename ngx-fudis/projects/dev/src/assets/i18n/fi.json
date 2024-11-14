@@ -36,5 +36,12 @@
   },
   "closeCalendar": "Sulje kalenteri",
   "fieldsetTitle": "Tärkeän lomakeryhmän otsikko",
-  "breadcrumbsLabel": "Sekalaisen setin haitari"
+  "breadcrumbsLabel": "Sekalaisen setin haitari",
+  "selectOptions": {
+    "dog": "Koira",
+    "cat": "Kissa",
+    "penguin": "Pingviini",
+    "parrot": "Papukaija",
+    "sheep": "Lammas"
+  }
 }

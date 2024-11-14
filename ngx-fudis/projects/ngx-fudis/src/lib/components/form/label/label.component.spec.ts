@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { MockComponent } from 'ng-mocks';
 import { LabelComponent } from './label.component';
 import { ButtonComponent } from '../../button/button.component';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 describe('LabelComponent', () => {
   let component: LabelComponent;
@@ -11,12 +11,9 @@ describe('LabelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LabelComponent, MockComponent(ButtonComponent)],
-    })
-      .overrideComponent(LabelComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+      declarations: [LabelComponent, ButtonComponent],
+      providers: [FudisTranslationService, FudisIdService],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LabelComponent);
     component = fixture.componentInstance;
@@ -29,7 +26,7 @@ describe('LabelComponent', () => {
 
   describe('Contents', () => {
     it('should have text content according to the given text Input', () => {
-      component.text = 'This is test label';
+      fixture.componentRef.setInput('text', 'This is test label');
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-label__content__text'));
 
@@ -37,7 +34,8 @@ describe('LabelComponent', () => {
     });
 
     it('should have required text visible if it is given', () => {
-      component.required = true;
+      fixture.componentRef.setInput('required', true);
+
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-label__content__required'));
 
@@ -45,11 +43,10 @@ describe('LabelComponent', () => {
       expect(elem.nativeElement.innerHTML).toEqual('(Required)');
     });
 
-    it('should have tooltip button visible if tooltip text is given', () => {
-      component.tooltip = 'I give more info';
+    it('should have tooltip button visible if tooltip text is given', async () => {
+      fixture.componentRef.setInput('tooltip', 'I give more info');
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('fudis-button'));
-
       expect(elem.nativeElement).toBeTruthy();
     });
 

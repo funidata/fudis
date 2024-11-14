@@ -19,6 +19,8 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { By } from '@angular/platform-browser';
 import { getElement } from '../../../../utilities/tests/utilities';
+import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -71,6 +73,8 @@ describe('RadioButtonComponent', () => {
         FudisBreakpointService,
         FudisGridService,
         FudisTranslationService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
       ],
       imports: [ReactiveFormsModule],
     }).compileComponents();

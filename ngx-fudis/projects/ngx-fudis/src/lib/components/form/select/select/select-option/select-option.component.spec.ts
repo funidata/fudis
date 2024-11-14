@@ -20,6 +20,8 @@ import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
+import { FudisFocusService } from '../../../../../services/focus/focus.service';
+import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -66,7 +68,12 @@ describe('SelectOptionComponent', () => {
         LabelComponent,
         BodyTextComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
+      providers: [
+        FudisIdService,
+        FudisTranslationService,
+        FudisFocusService,
+        FudisInternalErrorSummaryService,
+      ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 
