@@ -143,7 +143,7 @@ describe('InternalErrorSummaryService', () => {
   });
   describe('Errors', () => {
     it('should initially return an empty object', () => {
-      const errors = service.allFormErrorsObservable.value;
+      const errors = service.errorsObservable.value;
 
       const initial = {};
 
@@ -162,7 +162,7 @@ describe('InternalErrorSummaryService', () => {
 
       service.reloadErrorsByFormId('test-form-id-1');
 
-      const errors = service.getErrors();
+      const errors = service.errors;
 
       expect(errors).toEqual(currentErrors);
     });
@@ -177,7 +177,7 @@ describe('InternalErrorSummaryService', () => {
       // Remove only 'required' error message
       service.removeError(firstErrorRemoveItem, 'test-form-id-1');
 
-      expect(service.getErrors()['test-form-id-1']['first-error'].errors).toEqual({
+      expect(service.errors['test-form-id-1']['first-error'].errors).toEqual({
         email: 'Email is not valid',
       });
     });
@@ -190,11 +190,11 @@ describe('InternalErrorSummaryService', () => {
 
       service.addNewError(firstError);
 
-      expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
+      expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
         'There is something wrong',
       );
       service.addNewError(firstErrorWithContentUpdate);
-      expect(service.getErrors()['test-form-id-1']['first-error'].errors['required']).toEqual(
+      expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
         'Something new',
       );
 

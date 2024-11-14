@@ -40,7 +40,7 @@ export class FormComponent
   ) {
     super();
 
-    this._errorSummaryService.formErrorSummaryVisibilityStatus
+    this._errorSummaryService.errorSummaryVisibilityStatus
       .pipe(takeUntilDestroyed())
       .subscribe((value) => {
         if (value[this.id] !== this.errorSummaryVisible && this._initFinished) {
@@ -120,7 +120,7 @@ export class FormComponent
     this._setFormId();
 
     this._errorSummaryService.registerNewForm(this.id);
-    this._errorSummaryService.setErrorSummaryVisibilityStatus(this.id, this.errorSummaryVisible);
+    this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
 
     this._initFinished = true;
 
@@ -142,7 +142,7 @@ export class FormComponent
       changes.errorSummaryVisible?.currentValue !== changes.errorSummaryVisible?.previousValue &&
       this.id
     ) {
-      this._errorSummaryService.setErrorSummaryVisibilityStatus(this.id, this.errorSummaryVisible);
+      this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
     }
   }
 

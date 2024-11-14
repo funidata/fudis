@@ -42,11 +42,9 @@ export class FormSubmitDirective implements OnInit {
       );
 
       if (parentForm && !this.formValid) {
-        this._errorSummaryService.setFormErrorSummaryVisiblity(parentForm.id, true);
-
         this._errorSummaryService.reloadErrorsByFormId(parentForm.id, true);
       } else if (parentForm) {
-        this._errorSummaryService.setFormErrorSummaryVisiblity(parentForm.id, false);
+        this._errorSummaryService.setErrorSummaryVisibility(parentForm.id, false);
       }
     }
   }

@@ -155,7 +155,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
     /**
      * If there's a function call of errorSummaryService.reloadFormErrors('id-of-this-form'), and this Guidance's parent Form id is that 'id-for-this-form', this effect() check will trigger and set this Guidance's control / group as touched, so possible errors are set as visible.
      */
-    this._errorSummaryService.allFormErrorsObservable
+    this._errorSummaryService.errorsObservable
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((errors) => {
         let errorsFound = !!errors[formId]?.[this.for];

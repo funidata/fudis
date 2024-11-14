@@ -399,12 +399,9 @@ export class StorybookExampleDynamicValidatorsComponent {
 
   toggleErrorSummary() {
     this._errorSummaryVisible =
-      this._errorSummaryService.formErrorSummaryVisibilityStatus.value['fudis-form-1'];
+      this._errorSummaryService.errorSummaryVisibilityStatus.value['fudis-form-1'];
 
-    this._errorSummaryService.setFormErrorSummaryVisiblity(
-      'fudis-form-1',
-      !this._errorSummaryVisible,
-    );
+    this._errorSummaryService.setErrorSummaryVisibility('fudis-form-1', !this._errorSummaryVisible);
   }
 
   changeText(target: string): void {

@@ -49,6 +49,6 @@ export class FudisErrorSummaryService {
    * Returns an observable of all errors sent to Error Summary. Note, that Observable is updated only when ReloadErrors is called.
    */
   public getErrorsObservable(): BehaviorSubject<FudisErrorSummaryErrors> {
-    return this._errorSummaryService.allFormErrorsObservable;
+    return this._errorSummaryService.errorsObservable;
   }
 }

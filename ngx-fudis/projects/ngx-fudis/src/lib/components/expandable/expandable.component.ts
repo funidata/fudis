@@ -143,7 +143,7 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
         this._addToErrorSummary(this.title);
       }
 
-      this._errorSummaryService.allFormErrorsObservable
+      this._errorSummaryService.errorsObservable
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe((errors) => {
           this._getParentForm();

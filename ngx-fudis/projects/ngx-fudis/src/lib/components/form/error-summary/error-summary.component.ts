@@ -33,7 +33,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
     /**
      * Fetch and update current visible errors when reloadErrors() is called
      */
-    _errorSummaryService.allFormErrorsObservable.pipe(takeUntilDestroyed()).subscribe((value) => {
+    _errorSummaryService.errorsObservable.pipe(takeUntilDestroyed()).subscribe((value) => {
       const errors = value?.[this.formId];
 
       if (
