@@ -157,7 +157,7 @@ export class AppFormExampleComponent implements OnInit {
     if (this.testFormGroup.invalid) {
       this.errorSummaryVisible = true;
       this.showSuccessBodyText = false;
-      this._errorSummaryService.reloadAllErrors();
+      this._errorSummaryService.reloadFormErrors('fudis-form-1');
     } else {
       this.errorSummaryVisible = false;
       this.showSuccessBodyText = true;
