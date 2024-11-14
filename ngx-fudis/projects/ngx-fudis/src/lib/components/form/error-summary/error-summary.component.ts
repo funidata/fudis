@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -29,7 +28,6 @@ type ErrorSummaryDOMListItem = {
 export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
-    private readonly _changeDetectorRef: ChangeDetectorRef,
     protected _translationService: FudisTranslationService,
   ) {
     /**
@@ -165,7 +163,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
     });
 
     this._visibleErrorList.set(newErrorList.sort(this._sortErrorOrder));
-    this._changeDetectorRef.detectChanges();
 
     if (this._errorSummaryService.focusToFormOnReload === this.formId) {
       this._focusToErrorSummary();

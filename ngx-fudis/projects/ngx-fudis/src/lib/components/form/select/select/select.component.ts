@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
@@ -30,9 +29,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
-    _cdr: ChangeDetectorRef,
   ) {
-    super(_document, _cdr, _translationService, _focusService, _idService);
+    super(_document, _translationService, _focusService, _idService);
   }
 
   /*
@@ -67,7 +65,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
 
-      this._updateInputValueTexts(value?.label || '');
+      this.updateInputValueTexts(value?.label || '');
 
       if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
         this._filterTextUpdate(value.label);
@@ -92,10 +90,9 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   protected override _updateSelectionFromControlValue(): void {
     const currentLabel = this.control.value?.label;
-    this._dropdownSelectionLabelText = currentLabel || '';
+    this._dropdownSelectionLabelText.set(currentLabel || '');
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
-    this._cdr.detectChanges();
   }
 }

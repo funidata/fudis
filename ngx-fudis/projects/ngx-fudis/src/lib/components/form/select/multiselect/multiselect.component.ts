@@ -1,13 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-  effect,
-} from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, effect } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -29,9 +20,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
-    _cdr: ChangeDetectorRef,
   ) {
-    super(_document, _cdr, _translationService, _focusService, _idService);
+    super(_document, _translationService, _focusService, _idService);
 
     effect(() => {
       this._translationRemoveItem.next(
@@ -126,7 +116,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
       // If not found, add it
     } else if (foundIndex === -1 && type === 'add') {
       currentSelectedOptions.push(checkedOption);
-    } else if (foundIndex && type === 'add') {
+      // If found, replace it
+    } else if (foundIndex !== -1 && type === 'add') {
       currentSelectedOptions[foundIndex] = checkedOption;
     }
 
@@ -137,10 +128,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     if (this.control.value && currentSelectedOptions.length === this.control.value.length) {
       currentSelectedOptions.forEach((registeredOption) => {
         const matchFound = this.control.value?.find((controlOption) => {
-          return (
-            registeredOption.value === controlOption.value &&
-            registeredOption.label === controlOption.label
-          );
+          return registeredOption.value === controlOption.value;
         });
 
         if (!matchFound) {
@@ -155,13 +143,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
       this._sortedSelectedOptions = currentSelectedOptions.sort(
         this._sortSelectedOptions(dropdown),
       );
-
-      this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-
-      this._cdr.detectChanges();
+      this._dropdownSelectionLabelText.set(joinInputValues(this._sortedSelectedOptions));
     } else {
       this._sortedSelectedOptions = [];
-      this._dropdownSelectionLabelText = null;
+      this._dropdownSelectionLabelText.set(null);
     }
   }
 
@@ -172,7 +157,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     this._optionsLoadedOnce = true;
 
     if (!this.control.value || this.control.value.length === 0) {
-      this._dropdownSelectionLabelText = null;
+      this._dropdownSelectionLabelText.set(null);
     }
   }
 

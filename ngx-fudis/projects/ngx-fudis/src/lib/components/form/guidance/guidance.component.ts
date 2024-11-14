@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -9,6 +8,8 @@ import {
   DestroyRef,
   inject,
   AfterContentInit,
+  signal,
+  AfterViewInit,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -24,12 +25,11 @@ import { FudisErrorSummaryAddItem } from '../../../types/errorSummary';
   templateUrl: './guidance.component.html',
   styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit {
+export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
-    private _cdr: ChangeDetectorRef,
     private _elementRef: ElementRef,
   ) {
     this._id = _idService.getNewId('guidance');
@@ -118,6 +118,11 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit {
 
   protected _parentFormId = new BehaviorSubject<string | null>(null);
 
+  /**
+   * Used prevent checks in HTML DOM before content has been loaded
+   */
+  protected _afterViewInitDone = signal<boolean>(false);
+
   ngOnInit(): void {
     this._setCharacterLimitIndicatorValues();
   }
@@ -140,6 +145,10 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit {
     } else {
       this._parentFormId.next(null);
     }
+  }
+
+  ngAfterViewInit(): void {
+    this._afterViewInitDone.set(true);
   }
 
   private _subscribeToErrors(formId: string): void {
@@ -167,10 +176,8 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit {
         ) {
           if (this.control?.invalid) {
             this.control.markAsTouched();
-            this._cdr.detectChanges();
           } else if (this.formGroup?.invalid) {
             this.formGroup.markAllAsTouched();
-            this._cdr.detectChanges();
           }
         }
       });

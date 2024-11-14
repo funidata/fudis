@@ -1,5 +1,4 @@
 import { FudisGridProperties } from '../../types/grid';
-import { convertToRemValue } from '../../utilities/rem-converter';
 import * as utils from './gridUtils';
 
 // TODO: Add tests for replaceFormInputWidthsToRem, getGridInputPropertyObject functions. Check if other tests are missing.
@@ -32,22 +31,22 @@ describe('GridUtils', () => {
       value = 'inputXs';
       correctReturnString = utils.getGridCssValue(value);
 
-      expect(correctReturnString).toBe(convertToRemValue(4));
+      expect(correctReturnString).toBe('calc(4rem / var(--fudis-rem-multiplier))');
 
       value = 'inputSm';
       correctReturnString = utils.getGridCssValue(value);
 
-      expect(correctReturnString).toBe(convertToRemValue(10));
+      expect(correctReturnString).toBe('calc(10rem / var(--fudis-rem-multiplier))');
 
       value = 'inputMd';
       correctReturnString = utils.getGridCssValue(value);
 
-      expect(correctReturnString).toBe(convertToRemValue(14));
+      expect(correctReturnString).toBe('calc(14rem / var(--fudis-rem-multiplier))');
 
       value = 'inputLg';
       correctReturnString = utils.getGridCssValue(value);
 
-      expect(correctReturnString).toBe(convertToRemValue(23));
+      expect(correctReturnString).toBe('calc(23rem / var(--fudis-rem-multiplier))');
     });
   });
 

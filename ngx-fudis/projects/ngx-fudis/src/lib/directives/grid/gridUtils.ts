@@ -1,5 +1,4 @@
 import { FudisGridProperties, FudisGridPropertyCollection } from '../../types/grid';
-import { convertToRemValue } from '../../utilities/rem-converter';
 
 /**
  * Utility function used with GridDirective.
@@ -29,10 +28,10 @@ export const getGridClasses = (values: FudisGridProperties): string => {
 
 export const replaceFormInputWidthsToRem = (value: string): string => {
   const convertMap: { [key: string]: string } = {
-    inputXs: convertToRemValue(4),
-    inputSm: convertToRemValue(10),
-    inputMd: convertToRemValue(14),
-    inputLg: convertToRemValue(23),
+    inputXs: 'calc(4rem / var(--fudis-rem-multiplier))',
+    inputSm: 'calc(10rem / var(--fudis-rem-multiplier))',
+    inputMd: 'calc(14rem / var(--fudis-rem-multiplier))',
+    inputLg: 'calc(23rem / var(--fudis-rem-multiplier))',
   };
 
   const valueArray = value.split(' ');

@@ -14,7 +14,6 @@ import {
   effect,
   signal,
   AfterViewInit,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
@@ -42,7 +41,6 @@ export class SelectBaseDirective
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
-    protected _cdr: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
@@ -159,7 +157,7 @@ export class SelectBaseDirective
   /**
    * Selected option or options label for non-autocomplete dropdowns
    */
-  protected _dropdownSelectionLabelText: string | null = null;
+  protected _dropdownSelectionLabelText = signal<string | null>(null);
 
   /**
    * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
@@ -256,13 +254,6 @@ export class SelectBaseDirective
    */
   private _keyDown: string | null = null;
 
-  override ngAfterViewInit(): void {
-    this._afterViewInitCommon();
-
-    // Needed when Select is inside closed Expandable, and Form Submit is triggered before component is loaded
-    this._cdr.detectChanges();
-  }
-
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
@@ -287,6 +278,13 @@ export class SelectBaseDirective
       !changes.variant.firstChange
     ) {
       this._filterTextUpdate('');
+    }
+
+    if (
+      changes.autocompleteFilter?.currentValue !== changes.autocompleteFilter?.previousValue &&
+      !changes.autocompleteFilter?.currentValue
+    ) {
+      this._autocompleteFilterText.set(this._autocompleteFilterText());
     }
   }
 
@@ -410,7 +408,7 @@ export class SelectBaseDirective
     this.control.patchValue(null);
     this.selectionUpdate.emit(null);
 
-    this._updateInputValueTexts('');
+    this.updateInputValueTexts('');
   }
 
   /**
@@ -601,13 +599,13 @@ export class SelectBaseDirective
   /**
    * Manually set typed text in input fields
    */
-  protected _updateInputValueTexts(value: string): void {
+  public updateInputValueTexts(value: string): void {
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.preventSpaceKeypress = true;
 
       this.autocompleteRef.updateInputValue(value);
     } else {
-      this._dropdownSelectionLabelText = value;
+      this._dropdownSelectionLabelText.set(value);
     }
   }
 

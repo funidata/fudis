@@ -1,11 +1,13 @@
-import { Component, Host, Inject, OnInit, Optional, OnDestroy } from '@angular/core';
+import { Component, Host, Inject, Optional, OnDestroy, OnChanges } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { MultiselectComponent } from '../multiselect.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
+import { FudisComponentChanges } from 'projects/ngx-fudis/src/lib/types/miscellaneous';
 
 @Component({
   selector: 'fudis-multiselect-option',
@@ -14,15 +16,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class MultiselectOptionComponent
   extends SelectOptionBaseDirective
-  implements OnInit, OnDestroy
+  implements OnDestroy, OnChanges
 {
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentMultiselect: MultiselectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
+    _translationService: FudisTranslationService,
   ) {
-    super(_document, _parentGroup);
+    super(_document, _parentGroup, _translationService);
 
     this._parent = this._parentMultiselect;
 
@@ -35,24 +38,30 @@ export class MultiselectOptionComponent
     _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
       this._isOptionChecked(newValue);
     });
+
+    toObservable(this._parent.getAutocompleteFilterText())
+      .pipe(takeUntilDestroyed())
+      .subscribe((filterText) => {
+        this._checkVisibilityFromFilterText(filterText);
+      });
   }
 
   /**
-   * On init check if option is visible or checked
+   * Common parent and its properties
    */
-  ngOnInit(): void {
-    if (this._parent.variant !== 'dropdown') {
-      this._isOptionVisible(this._parent.getAutocompleteFilterText()());
-    } else {
-      this._updateVisibilityToParents(true);
-    }
+  protected override _parent: MultiselectComponent;
 
-    const parentControlValue = this._parentMultiselect.control.value;
+  ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent>) {
+    if (changes.data?.currentValue !== changes.data?.previousValue) {
+      this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
 
-    if (parentControlValue && parentControlValue.length !== 0) {
-      this._isOptionChecked(parentControlValue);
-    } else {
-      this.checked = false;
+      const parentControlValue = this._parentMultiselect.control.value;
+
+      if (parentControlValue && parentControlValue.length !== 0) {
+        this._isOptionChecked(parentControlValue);
+      } else {
+        this.checked = false;
+      }
     }
   }
 
@@ -75,6 +84,14 @@ export class MultiselectOptionComponent
 
       this.handleClick.emit(event);
       this.handleChecked.emit();
+    }
+  }
+
+  protected override _checkVisibilityFromFilterText(filterText: string): void {
+    if (this._parent.variant !== 'dropdown' && this._parent.autocompleteFilter) {
+      this._isOptionVisible(filterText);
+    } else {
+      this._isOptionVisible('');
     }
   }
 
