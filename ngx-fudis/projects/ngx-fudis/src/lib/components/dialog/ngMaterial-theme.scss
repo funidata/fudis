@@ -99,6 +99,11 @@
         }
       }
 
+      /* Necessary bottom padding for dialog content with sticky Form Action buttons */
+      .mat-mdc-dialog-content:has(.fudis-form) {
+        padding-bottom: spacing.$spacing-xxl;
+      }
+
       .mat-mdc-dialog-actions {
         align-items: flex-end;
         margin-top: spacing.$spacing-xs;

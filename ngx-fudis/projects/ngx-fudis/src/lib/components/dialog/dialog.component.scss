@@ -2,6 +2,7 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/z-index/mixins.scss' as zIndex;
 
 $dialog-width-xs: calc(30rem / var(--fudis-rem-multiplier));
 $dialog-width-sm: calc(44rem / var(--fudis-rem-multiplier));
@@ -21,6 +22,10 @@ $dialog-width-xl: calc(90rem / var(--fudis-rem-multiplier));
     float: right;
 
     &__absolute {
+      /* Necessary z-index bump for close button with sticky Form title */
+      // TODO: Check if this can be done other way
+      @include zIndex.z-index('dialog');
+
       position: absolute;
       right: spacing.$spacing-sm;
 
