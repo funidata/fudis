@@ -110,8 +110,12 @@
           max-height: inherit;
         }
 
-        /* Make Form content scrollable when inside Dialog. Same styles can be found in MatDialogContent directive */
+        /* Make Form content scrollable when inside Dialog */
         .fudis-form__content {
+          /* Necessary padding for content if ErrorSummary appears, otherwise its visible focus is cropped from the top */
+          padding-top: spacing.$spacing-xxs;
+
+          /* These styles can be found in MatDialogContent directive which enables scrollable content */
           max-height: 65vh;
           overflow: auto;
         }
