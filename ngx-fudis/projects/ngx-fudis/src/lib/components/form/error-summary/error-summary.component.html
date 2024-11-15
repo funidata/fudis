@@ -5,11 +5,10 @@
         <div class="fudis-error-summary" #focusTarget tabindex="-1">
           <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
           <div class="fudis-error-summary__errors">
-            <ng-container
-              *ngIf="helpText"
-            >
+            <ng-container *ngIf="helpText">
               <fudis-body-text [variant]="'md-regular'" class="fudis-mt-xs">
-                <span class="fudis-visually-hidden">{{ _translationService.getTranslations()().ICON.ATTENTION }}:&nbsp;</span
+                <span class="fudis-visually-hidden"
+                  >{{ _translationService.getTranslations()().ICON.ATTENTION }}:&nbsp;</span
                 >{{ helpText }}</fudis-body-text
               >
             </ng-container>
