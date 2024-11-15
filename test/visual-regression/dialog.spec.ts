@@ -6,8 +6,10 @@ test("dialog with form", async ({ page }) => {
   await expect(page.getByTestId("fudis-button-2")).toBeVisible();
   await expect(page).toHaveScreenshot("form-1-init.png");
   await page.getByText("SUBMIT").click();
+  await expect(page.getByText("You need to fill up the information")).toBeVisible();
   await expect(page).toHaveScreenshot("form-2-errors.png");
-  await page.getByTestId("example-input-power-animal").fill("Holiday Armadillo");
+  await page.getByTestId("example-input-power-animal").focus();
+  await page.keyboard.type("Holiday Armadillo");
   await page.getByText("SUBMIT").focus();
   await expect(page).toHaveScreenshot("form-3-before-submit.png");
   await page.getByText("SUBMIT").click();
