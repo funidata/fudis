@@ -7,7 +7,7 @@ import { MultiselectComponent } from '../multiselect.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { FudisComponentChanges } from 'projects/ngx-fudis/src/lib/types/miscellaneous';
+import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-multiselect-option',
