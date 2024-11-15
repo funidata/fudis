@@ -11,13 +11,14 @@ import {
   AfterContentInit,
   inject,
   DestroyRef,
+  Injector,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-expandable',
@@ -135,6 +136,8 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
     return this._closed;
   }
 
+  private _injector = inject(Injector);
+
   ngAfterContentInit(): void {
     this._getParentForm();
 
@@ -143,23 +146,13 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
         this._addToErrorSummary(this.title);
       }
 
-      this._errorSummaryService.errorSummaryVisibilityStatus
-        .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((summaries) => {
-          this._getParentForm();
-          if (this._parentForm) {
-            const expandableErrors = summaries?.[this._parentForm.id];
-
-            if (
-              this.closed &&
-              this.openOnErrorSummaryReload &&
-              expandableErrors &&
-              this._parentForm.errorSummaryVisible
-            ) {
-              this._setClosedStatus(false);
-            }
-          }
-        });
+      toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentForm.id], {
+        injector: this._injector,
+      }).subscribe((value) => {
+        if (this.closed && this.openOnErrorSummaryReload && value) {
+          this._setClosedStatus(false);
+        }
+      });
     }
   }
 

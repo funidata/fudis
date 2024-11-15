@@ -10,6 +10,8 @@ import {
   Optional,
   ViewEncapsulation,
   OnChanges,
+  inject,
+  Injector,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -20,7 +22,7 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { FudisBadgeVariant, FudisComponentChanges } from '../../../types/miscellaneous';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-form',
@@ -39,14 +41,6 @@ export class FormComponent
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
     super();
-
-    this._errorSummaryService.errorSummaryVisibilityStatus
-      .pipe(takeUntilDestroyed())
-      .subscribe((value) => {
-        if (value[this.id] !== this.errorSummaryVisible && this._initFinished) {
-          this.errorSummaryVisible = !this.errorSummaryVisible;
-        }
-      });
   }
 
   /**
@@ -114,19 +108,24 @@ export class FormComponent
    */
   protected _formElement: HTMLFormElement | undefined;
 
-  private _initFinished: boolean = false;
+  private _injector = inject(Injector);
 
   ngOnInit(): void {
     this._setFormId();
 
-    this._errorSummaryService.registerNewForm(this.id);
-    this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
-
-    this._initFinished = true;
+    this._errorSummaryService.registerNewForm(this.id, this.errorSummaryVisible);
 
     if (this._dialogParent) {
       this._dialogParent.closeButtonPositionAbsolute.set(true);
     }
+
+    toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this.id], {
+      injector: this._injector,
+    }).subscribe((value) => {
+      if (value !== this.errorSummaryVisible) {
+        this.errorSummaryVisible = !this.errorSummaryVisible;
+      }
+    });
   }
 
   ngAfterContentInit(): void {

@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, signal } from '@angular/core';
+import { Injectable, OnDestroy, signal, WritableSignal } from '@angular/core';
 import {
   FudisErrorSummaryObject,
   FudisErrorSummaryNewError,
@@ -63,7 +63,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   /**
    * Current Form ids with their Error Summary Visibility status
    */
-  private _errorSummaryVisibilityStatus = new BehaviorSubject<{ [formId: string]: boolean }>({});
+  private _errorSummaryVisibilityStatus: { [formId: string]: WritableSignal<boolean> } = {};
 
   /**
    * Collection of child Sections, Expandables and Fieldsets of each Form Component
@@ -112,7 +112,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   /**
    * Observable to store each Form's Error Summary's visibility status. Form component will listen to these changes, if visiblity changes elsewhere than the @Input() prop
    */
-  get errorSummaryVisibilityStatus(): BehaviorSubject<{ [formId: string]: boolean }> {
+  get errorSummaryVisibilityStatus(): { [formId: string]: WritableSignal<boolean> } {
     return this._errorSummaryVisibilityStatus;
   }
 
@@ -142,15 +142,15 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param visible hide or show Error Summary
    */
   public setErrorSummaryVisibility(formId: string, visible: boolean) {
-    let currentValue = this._errorSummaryVisibilityStatus.value;
+    const currentValue = { ...this._errorSummaryVisibilityStatus };
 
     if (!currentValue[formId]) {
-      currentValue = { ...currentValue, [formId]: visible };
+      currentValue[formId] = signal(visible);
     } else {
-      currentValue[formId] = visible;
+      currentValue[formId].set(visible);
     }
 
-    this._errorSummaryVisibilityStatus.next(currentValue);
+    this._errorSummaryVisibilityStatus = currentValue;
   }
 
   /**
@@ -291,32 +291,28 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     this.setErrorSummaryVisibility(formId, true);
 
-    const currentFormsErrorSummaryStatus = { ...this._errorSummaryVisibilityStatus.value };
-
     // If content has changed (usually because lang has changed) AND this ErrorSummary is already visible, or content hasn't changed but this ErrorSummary is hidden --> Update and set visible
     const reloadOnContentChange =
-      (contentChanged && currentFormsErrorSummaryStatus[formId]) || !contentChanged;
-
-    if (!allErrorsReloaded) {
-      currentFormsErrorSummaryStatus[formId] = true;
-    } else {
-      Object.keys(currentFormsErrorSummaryStatus).forEach((id) => {
-        currentFormsErrorSummaryStatus[id] = true;
-      });
-    }
+      (contentChanged && this._errorSummaryVisibilityStatus[formId]()) || !contentChanged;
 
     if (
       reloadOnContentChange &&
       this._errorsStore[formId] &&
       Object.keys(this._errorsStore[formId]).length !== 0
     ) {
-      this._errorSummaryVisibilityStatus.next(currentFormsErrorSummaryStatus);
-
       setTimeout(() => {
         this._errorsSignal[formId].set(this._errorsStore[formId]);
       }, 50);
 
       this._errorsObservable.next({ ...this._errorsStore });
+
+      if (allErrorsReloaded) {
+        Object.keys(this.setErrorSummaryVisibility).forEach((id) => {
+          this.setErrorSummaryVisibility(id, true);
+        });
+      } else {
+        this.setErrorSummaryVisibility(formId, true);
+      }
     }
   }
 
@@ -340,7 +336,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   ): null | { id: string; errorSummaryVisible: boolean } {
     let foundId: string | null = null;
 
-    Object.keys(this._errorSummaryVisibilityStatus.value).find((id) => {
+    Object.keys(this._errorSummaryVisibilityStatus).find((id) => {
       if (element.closest(`#${id}`)) {
         foundId = id;
       }
@@ -349,7 +345,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     if (foundId) {
       return {
         id: foundId,
-        errorSummaryVisible: this._errorSummaryVisibilityStatus.value[foundId],
+        errorSummaryVisible: this._errorSummaryVisibilityStatus[foundId](),
       };
     }
 
@@ -360,7 +356,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * When new Form Component is initialized, it will register itself for child components and error messages related to it
    * @param formId
    */
-  public registerNewForm(formId: string): void {
+  public registerNewForm(formId: string, errorSummaryVisible: boolean = false): void {
     this._formStructure = {
       ...this._formStructure,
       [formId]: {
@@ -368,6 +364,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
         fieldsets: {},
       },
     };
+
+    this._errorSummaryVisibilityStatus[formId] = signal(errorSummaryVisible);
 
     this._errorsSignal[formId] = signal({});
 
@@ -383,12 +381,12 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       delete this._formStructure[formId];
     }
 
-    const currentVisibilityStatus = { ...this._errorSummaryVisibilityStatus.value };
+    const currentVisibilityStatus = { ...this._errorSummaryVisibilityStatus };
 
     if (currentVisibilityStatus[formId]) {
       delete currentVisibilityStatus[formId];
 
-      this._errorSummaryVisibilityStatus.next(currentVisibilityStatus);
+      this._errorSummaryVisibilityStatus = currentVisibilityStatus;
     }
   }
 
