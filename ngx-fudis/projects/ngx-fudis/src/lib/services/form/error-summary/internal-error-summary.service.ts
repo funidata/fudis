@@ -171,11 +171,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this.registerNewForm(newError.formId);
     }
 
-    const errorId = this.defineErrorId(newError.focusId, newError.controlName);
-
     const currentErrors = this._errorsStore?.[newError.formId];
 
-    const currentMessage = currentErrors?.[errorId]?.errors[newError.type];
+    const currentMessage = currentErrors?.[newError.focusId]?.errors[newError.type];
 
     const messageChanged = currentMessage && currentMessage !== newError.message;
 
@@ -200,12 +198,10 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     newError: FudisErrorSummaryNewError,
     currentErrors: FudisErrorSummaryObject,
   ): FudisErrorSummaryObject {
-    const errorId = this.defineErrorId(newError.focusId, newError.controlName);
-
-    if (!currentErrors[errorId]) {
+    if (!currentErrors[newError.focusId]) {
       currentErrors = {
         ...currentErrors,
-        [errorId]: {
+        [newError.focusId]: {
           id: newError.focusId,
           errors: { [newError.type]: newError.message },
         },
@@ -213,9 +209,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     } else {
       currentErrors = {
         ...currentErrors,
-        [errorId]: {
+        [newError.focusId]: {
           id: newError.focusId,
-          errors: { ...currentErrors[errorId].errors, [newError.type]: newError.message },
+          errors: { ...currentErrors[newError.focusId].errors, [newError.type]: newError.message },
         },
       };
     }
@@ -230,15 +226,13 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   public removeError(error: FudisErrorSummaryRemoveError, formId: string): void {
     const currentErrorsOfForm = { ...this._errorsStore[formId] };
 
-    const errorId = this.defineErrorId(error.focusId, error.controlName);
+    if (currentErrorsOfForm[error.focusId]?.errors[error.type]) {
+      delete currentErrorsOfForm[error.focusId].errors[error.type];
 
-    if (currentErrorsOfForm[errorId]?.errors[error.type]) {
-      delete currentErrorsOfForm[errorId].errors[error.type];
-
-      const otherErrors = Object.keys(currentErrorsOfForm[errorId].errors).length;
+      const otherErrors = Object.keys(currentErrorsOfForm[error.focusId].errors).length;
 
       if (otherErrors === 0) {
-        delete currentErrorsOfForm[errorId];
+        delete currentErrorsOfForm[error.focusId];
       }
 
       this._errorsStore[formId] = currentErrorsOfForm;

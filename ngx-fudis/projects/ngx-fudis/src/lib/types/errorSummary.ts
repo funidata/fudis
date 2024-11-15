@@ -8,7 +8,6 @@ export type FudisErrorSummaryNewError = {
   formId: string;
   message: string;
   type: string;
-  controlName?: string;
 };
 
 /**
@@ -18,7 +17,6 @@ export type FudisErrorSummaryRemoveError = {
   focusId: string;
   formId: string | null;
   type: string;
-  controlName?: string;
 };
 
 /**

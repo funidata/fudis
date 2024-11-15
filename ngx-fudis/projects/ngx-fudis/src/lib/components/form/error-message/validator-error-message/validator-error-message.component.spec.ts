@@ -128,7 +128,6 @@ describe('ValidatorErrorMessageComponent', () => {
         message: 'Test label: Message for testing',
         formId: 'test-form-id',
         type: 'required',
-        controlName: undefined,
       };
 
       const errorElementText = getElement(fixture, '.fudis-error-message');
@@ -150,7 +149,6 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: 'test-id',
         formId: 'test-form-id',
         type: 'required',
-        controlName: undefined,
       };
       component.ngOnDestroy();
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
@@ -176,7 +174,6 @@ describe('ValidatorErrorMessageComponent', () => {
         formId: 'test-form-id',
         message: 'Test label: First message from observable',
         type: 'required',
-        controlName: undefined,
       };
 
       const errorElementTextFirst = getElement(fixture, '.fudis-error-message');
@@ -224,7 +221,6 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: 'test-observable-message-id',
         formId: 'test-form-id',
         type: 'required',
-        controlName: undefined,
       };
 
       component.ngOnDestroy();
@@ -248,7 +244,6 @@ describe('ValidatorErrorMessageComponent', () => {
         formId: 'test-form-id',
         message: 'Test label: First message from observable',
         type: 'required',
-        controlName: undefined,
       };
 
       const updatedError: FudisErrorSummaryNewError = {

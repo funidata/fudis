@@ -191,14 +191,12 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
    * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made. It will only trigger reload once all errors of this Guidance are registered.
    */
   protected _reloadErrorSummaryOnLazyLoad(error: FudisErrorSummaryNewError): void {
-    const errorLog = error.controlName ? `${error.controlName}_${error.type}` : error.type;
-
     if (
       this._parentFormId.value &&
       this._reloadErrorSummary &&
-      !this._lazyLoadedErrors.includes(errorLog)
+      !this._lazyLoadedErrors.includes(error.type)
     ) {
-      this._lazyLoadedErrors.push(errorLog);
+      this._lazyLoadedErrors.push(error.type);
       this._errorSummaryService.focusToFormOnReload = null;
 
       let numberOfErrors = 0;

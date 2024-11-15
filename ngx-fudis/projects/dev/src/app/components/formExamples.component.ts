@@ -76,6 +76,8 @@ export class AppFormExampleComponent {
 
   customError: boolean = true;
 
+  formExpandableClosed = true;
+
   selectForm = new FormGroup<SelectForm>({
     autocompleteSearch: new FormControl<FudisSelectOption<object>[] | null>(
       null,
@@ -180,6 +182,7 @@ export class AppFormExampleComponent {
     this.testFormGroup.markAllAsTouched();
 
     if (this.testFormGroup.invalid) {
+      this.formExpandableClosed = false;
       this.errorSummaryVisible = true;
       this.showSuccessBodyText = false;
       this._errorSummaryService.reloadFormErrors('fudis-form-1');
