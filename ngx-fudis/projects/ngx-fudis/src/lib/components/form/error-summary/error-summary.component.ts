@@ -6,12 +6,15 @@ import {
   Input,
   ViewChild,
   signal,
+  OnInit,
+  inject,
+  Injector,
 } from '@angular/core';
 
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummaryObject } from '../../../types/errorSummary';
+import { FudisErrorSummaryObject } from '../../../types/errorSummary';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 type ErrorSummaryDOMListItem = {
   id: string;
@@ -25,27 +28,11 @@ type ErrorSummaryDOMListItem = {
   styleUrls: ['./error-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorSummaryComponent implements AfterViewInit {
+export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     protected _translationService: FudisTranslationService,
-  ) {
-    /**
-     * Fetch and update current visible errors when reloadErrors() is called
-     */
-    _errorSummaryService.errorsObservable.pipe(takeUntilDestroyed()).subscribe((value) => {
-      const errors = value?.[this.formId];
-
-      if (
-        this.parentComponent &&
-        this.formId &&
-        (_errorSummaryService.formIdToUpdate === this.formId ||
-          _errorSummaryService.formIdToUpdate === 'all')
-      ) {
-        this._updateSummaryContent(errors);
-      }
-    });
-  }
+  ) {}
 
   @ViewChild('focusTarget') private _focusTarget: ElementRef;
 
@@ -119,7 +106,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
   /**
    * Update Error Summary content with possible parent Fieldsets, Sections and Expandables (Sections)
    */
-  private _updateSummaryContent(content: FudisFormErrorSummaryObject): void {
+  private _updateSummaryContent(content: FudisErrorSummaryObject): void {
     const newErrorList: ErrorSummaryDOMListItem[] = [];
 
     const fieldsets: { [id: string]: string } =
@@ -154,11 +141,13 @@ export class ErrorSummaryComponent implements AfterViewInit {
 
         const cleanedError = error.replace(/[:!?]$/, '');
 
-        newErrorList.push({
+        const newItem: ErrorSummaryDOMListItem = {
           id: errorId,
           message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
           element: this.parentComponent.querySelector(`#${errorId}`),
-        });
+        };
+
+        newErrorList.push(newItem);
       });
     });
 
@@ -184,7 +173,20 @@ export class ErrorSummaryComponent implements AfterViewInit {
     }
   }
 
+  private _injector = inject(Injector);
+
+  ngOnInit(): void {
+    /**
+     * Fetch and update current visible errors when reloadErrors() is called
+     */
+    toObservable(this._errorSummaryService.errorsSignal[this.formId], {
+      injector: this._injector,
+    }).subscribe((value) => {
+      this._updateSummaryContent(value);
+    });
+  }
+
   ngAfterViewInit(): void {
-    this._errorSummaryService.reloadErrorsByFormId(this.formId, true);
+    this._focusToErrorSummary();
   }
 }

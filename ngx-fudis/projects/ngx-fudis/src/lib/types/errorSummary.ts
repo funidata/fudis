@@ -1,7 +1,9 @@
+import { WritableSignal } from '@angular/core';
+
 /**
  * To add Error to Error Summary
  */
-export type FudisErrorSummaryAddItem = {
+export type FudisErrorSummaryNewError = {
   id: string;
   formId: string;
   label: string;
@@ -13,7 +15,7 @@ export type FudisErrorSummaryAddItem = {
 /**
  * To remove Error from Error Summary
  */
-export type FudisErrorSummaryRemoveItem = {
+export type FudisErrorSummaryRemoveError = {
   id: string;
   formId: string | null;
   controlName: string | undefined;
@@ -21,21 +23,27 @@ export type FudisErrorSummaryRemoveItem = {
 };
 
 /**
- * Collection of all Errors
+ * Collection of all Errors by th
  */
 export type FudisErrorSummaryErrors = {
-  [id: string]: FudisFormErrorSummaryObject;
+  [id: string]: FudisErrorSummaryObject;
 };
 
-export type FudisFormErrorSummaryObject = {
+export type FudisErrorSummaryErrorsSignal = {
+  [id: string]: FudisErrorSummaryObjectSignal;
+};
+
+export type FudisErrorSummaryObjectSignal = WritableSignal<FudisErrorSummaryObject>;
+
+export type FudisErrorSummaryObject = {
   [id: string]: {
     id: string;
-    errors: FudisFormErrorSummaryObjectItemErrors;
+    errors: FudisErrorSummaryObjectItemErrors;
     label: string;
   };
 };
 
-export type FudisFormErrorSummaryObjectItemErrors = {
+export type FudisErrorSummaryObjectItemErrors = {
   [errorType: string]: string;
 };
 

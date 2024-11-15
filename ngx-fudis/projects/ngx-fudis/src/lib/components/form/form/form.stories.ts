@@ -156,7 +156,7 @@ export const Example: StoryFn = (args) => ({
           </fudis-dl-item>
           <fudis-dl-item>
             <fudis-dt [contentText]="'Another important person'" />
-            <fudis-dd [contentText]="'Mara Jase'" />
+            <fudis-dd [contentText]="'Mara Jade'" />
           </fudis-dl-item>
         </fudis-dl>
       </ng-template>

@@ -12,8 +12,8 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import {
-  FudisErrorSummaryAddItem,
-  FudisErrorSummaryRemoveItem,
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryRemoveError,
 } from '../../../../types/errorSummary';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
@@ -74,12 +74,12 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   /**
    * Output for handling a state when error is sent to Error Summary
    */
-  @Output() handleCreateError = new EventEmitter<FudisErrorSummaryAddItem>();
+  @Output() handleCreateError = new EventEmitter<FudisErrorSummaryNewError>();
 
   /**
    * Output for handling a state when error is removed from Error Summary
    */
-  @Output() handleRemoveError = new EventEmitter<FudisErrorSummaryRemoveItem>();
+  @Output() handleRemoveError = new EventEmitter<FudisErrorSummaryRemoveError>();
 
   /**
    * Error message to include in error summary item
@@ -171,7 +171,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   private _createError(): void {
     if (this.formId && this.focusId && this._currentMessage.value && this.label) {
-      const newError: FudisErrorSummaryAddItem = {
+      const newError: FudisErrorSummaryNewError = {
         id: this.focusId,
         error: this._currentMessage.value,
         formId: this.formId,
@@ -188,7 +188,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   private _removeError(): void {
     if (this._errorSent && this.formId) {
-      const errorToRemove: FudisErrorSummaryRemoveItem = {
+      const errorToRemove: FudisErrorSummaryRemoveError = {
         id: this.focusId,
         formId: this.formId,
         type: this.type,
