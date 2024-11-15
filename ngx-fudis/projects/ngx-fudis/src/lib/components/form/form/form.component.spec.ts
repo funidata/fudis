@@ -113,9 +113,11 @@ describe('FormComponent', () => {
       ],
       imports: [ReactiveFormsModule],
     });
-    fixtureMock = TestBed.createComponent(MockFormComponent);
-    componentMock = fixtureMock.componentInstance;
-    fixtureMock.detectChanges();
+    TestBed.runInInjectionContext(() => {
+      fixtureMock = TestBed.createComponent(MockFormComponent);
+      componentMock = fixtureMock.componentInstance;
+      fixtureMock.detectChanges();
+    });
   });
 
   describe('Wrapper form element HTML attributes', () => {

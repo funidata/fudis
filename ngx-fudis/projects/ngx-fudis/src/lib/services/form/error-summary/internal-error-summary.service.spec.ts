@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import {
   FudisErrorSummaryErrors,
-  FudisErrorSummaryAddItem,
-  FudisFormErrorSummaryObject,
-  FudisErrorSummaryRemoveItem,
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryObject,
+  FudisErrorSummaryRemoveError,
 } from '../../../types/errorSummary';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 import { FudisTranslationService } from '../../translation/translation.service';
@@ -12,7 +12,7 @@ describe('InternalErrorSummaryService', () => {
   let service: FudisInternalErrorSummaryService;
   let currentErrors: FudisErrorSummaryErrors;
 
-  const firstError: FudisErrorSummaryAddItem = {
+  const firstError: FudisErrorSummaryNewError = {
     id: 'first-error',
     formId: 'test-form-id-1',
     label: 'Test label',
@@ -21,13 +21,13 @@ describe('InternalErrorSummaryService', () => {
     controlName: undefined,
   };
 
-  const firstErrorAnotherErrorType: FudisErrorSummaryAddItem = {
+  const firstErrorAnotherErrorType: FudisErrorSummaryNewError = {
     ...firstError,
     error: 'Email is not valid',
     type: 'email',
   };
 
-  const secondError: FudisErrorSummaryAddItem = {
+  const secondError: FudisErrorSummaryNewError = {
     id: 'second-error',
     formId: 'test-form-id-2',
     label: 'Test label',
@@ -36,7 +36,7 @@ describe('InternalErrorSummaryService', () => {
     controlName: undefined,
   };
 
-  const firstErrorFromService: FudisFormErrorSummaryObject = {
+  const firstErrorFromService: FudisErrorSummaryObject = {
     'first-error': {
       id: 'first-error',
       errors: { required: 'There is something wrong', email: 'Email is not valid' },
@@ -44,7 +44,7 @@ describe('InternalErrorSummaryService', () => {
     },
   };
 
-  const secondErrorFromService: FudisFormErrorSummaryObject = {
+  const secondErrorFromService: FudisErrorSummaryObject = {
     'second-error': {
       id: 'second-error',
       errors: { required: 'You need to fix also this' },
@@ -52,7 +52,7 @@ describe('InternalErrorSummaryService', () => {
     },
   };
 
-  const firstErrorRemoveItem: FudisErrorSummaryRemoveItem = {
+  const firstErrorRemoveItem: FudisErrorSummaryRemoveError = {
     id: 'first-error',
     formId: 'test-form-id-1',
     controlName: undefined,
@@ -183,7 +183,7 @@ describe('InternalErrorSummaryService', () => {
     });
 
     it('should reload errors when Error Summary Item content is changed', () => {
-      const firstErrorWithContentUpdate: FudisErrorSummaryAddItem = {
+      const firstErrorWithContentUpdate: FudisErrorSummaryNewError = {
         ...firstError,
         error: 'Something new',
       };
