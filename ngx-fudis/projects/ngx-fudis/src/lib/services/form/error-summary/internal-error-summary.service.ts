@@ -171,9 +171,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this.registerNewForm(newError.formId);
     }
 
+    const errorId = this.defineErrorId(newError.focusId, newError.controlName);
+
     const currentErrors = this._errorsStore?.[newError.formId];
 
-    const currentMessage = currentErrors?.[newError.message]?.errors[newError.type];
+    const currentMessage = currentErrors?.[errorId]?.errors[newError.type];
 
     const messageChanged = currentMessage && currentMessage !== newError.message;
 

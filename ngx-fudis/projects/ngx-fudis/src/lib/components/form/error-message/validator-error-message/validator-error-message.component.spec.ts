@@ -124,10 +124,9 @@ describe('ValidatorErrorMessageComponent', () => {
       fixture.detectChanges();
 
       const testError: FudisErrorSummaryNewError = {
-        id: 'test-id',
-        error: 'Message for testing',
+        focusId: 'test-id',
+        message: 'Test label: Message for testing',
         formId: 'test-form-id',
-        label: 'Test label',
         type: 'required',
         controlName: undefined,
       };
@@ -148,7 +147,7 @@ describe('ValidatorErrorMessageComponent', () => {
       });
 
       const errorToRemove: FudisErrorSummaryRemoveError = {
-        id: 'test-id',
+        focusId: 'test-id',
         formId: 'test-form-id',
         type: 'required',
         controlName: undefined,
@@ -173,10 +172,9 @@ describe('ValidatorErrorMessageComponent', () => {
       fixture.detectChanges();
 
       const testError: FudisErrorSummaryNewError = {
-        id: 'test-id',
+        focusId: 'test-id',
         formId: 'test-form-id',
-        error: 'First message from observable',
-        label: 'Test label',
+        message: 'Test label: First message from observable',
         type: 'required',
         controlName: undefined,
       };
@@ -193,7 +191,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const updatedError: FudisErrorSummaryNewError = {
         ...testError,
-        error: 'Second message after update',
+        message: 'Test label: Second message after update',
       };
 
       const errorElementTextSecond = getElement(fixture, '.fudis-error-message');
@@ -223,7 +221,7 @@ describe('ValidatorErrorMessageComponent', () => {
       });
 
       const errorToRemove: FudisErrorSummaryRemoveError = {
-        id: 'test-observable-message-id',
+        focusId: 'test-observable-message-id',
         formId: 'test-form-id',
         type: 'required',
         controlName: undefined,
@@ -241,33 +239,28 @@ describe('ValidatorErrorMessageComponent', () => {
 
       jest.spyOn(component.handleCreateError, 'emit');
 
-      component.message = messageAsObservable;
+      fixture.componentRef.setInput('message', messageAsObservable);
 
-      component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
-      });
+      fixture.detectChanges();
 
       const testError: FudisErrorSummaryNewError = {
-        id: 'test-id',
+        focusId: 'test-id',
         formId: 'test-form-id',
-        error: 'First message from observable',
-        label: 'Test label',
+        message: 'Test label: First message from observable',
         type: 'required',
         controlName: undefined,
       };
 
       const updatedError: FudisErrorSummaryNewError = {
         ...testError,
-        label: 'New better label',
+        message: 'Better label: First message from observable',
       };
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
 
-      component.label = updatedError.label;
+      fixture.componentRef.setInput('label', 'Better label');
 
-      component.ngOnChanges({
-        label: new SimpleChange('Test label', component.label, false),
-      });
+      fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
     });

@@ -13,49 +13,45 @@ describe('InternalErrorSummaryService', () => {
   let currentErrors: FudisErrorSummaryErrors;
 
   const firstError: FudisErrorSummaryNewError = {
-    id: 'first-error',
+    focusId: 'first-error',
     formId: 'test-form-id-1',
-    label: 'Test label',
-    error: 'There is something wrong',
+    message: 'Test label: There is something wrong',
     type: 'required',
-    controlName: undefined,
   };
 
   const firstErrorAnotherErrorType: FudisErrorSummaryNewError = {
     ...firstError,
-    error: 'Email is not valid',
+    message: 'Test label: Email is not valid',
     type: 'email',
   };
 
   const secondError: FudisErrorSummaryNewError = {
-    id: 'second-error',
+    focusId: 'second-error',
     formId: 'test-form-id-2',
-    label: 'Test label',
-    error: 'You need to fix also this',
+    message: 'Test label: You need to fix also this',
     type: 'required',
-    controlName: undefined,
   };
 
   const firstErrorFromService: FudisErrorSummaryObject = {
     'first-error': {
       id: 'first-error',
-      errors: { required: 'There is something wrong', email: 'Email is not valid' },
-      label: 'Test label',
+      errors: {
+        required: 'Test label: There is something wrong',
+        email: 'Test label: Email is not valid',
+      },
     },
   };
 
   const secondErrorFromService: FudisErrorSummaryObject = {
     'second-error': {
       id: 'second-error',
-      errors: { required: 'You need to fix also this' },
-      label: 'Test label',
+      errors: { required: 'Test label: You need to fix also this' },
     },
   };
 
   const firstErrorRemoveItem: FudisErrorSummaryRemoveError = {
-    id: 'first-error',
+    focusId: 'first-error',
     formId: 'test-form-id-1',
-    controlName: undefined,
     type: 'required',
   };
 
@@ -178,24 +174,24 @@ describe('InternalErrorSummaryService', () => {
       service.removeError(firstErrorRemoveItem, 'test-form-id-1');
 
       expect(service.errors['test-form-id-1']['first-error'].errors).toEqual({
-        email: 'Email is not valid',
+        email: 'Test label: Email is not valid',
       });
     });
 
     it('should reload errors when Error Summary Item content is changed', () => {
       const firstErrorWithContentUpdate: FudisErrorSummaryNewError = {
         ...firstError,
-        error: 'Something new',
+        message: 'Test label: Something new',
       };
 
       service.addNewError(firstError);
 
       expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
-        'There is something wrong',
+        'Test label: There is something wrong',
       );
       service.addNewError(firstErrorWithContentUpdate);
       expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
-        'Something new',
+        'Test label: Something new',
       );
 
       expect(service.reloadErrorsByFormId).toHaveBeenCalledWith(
