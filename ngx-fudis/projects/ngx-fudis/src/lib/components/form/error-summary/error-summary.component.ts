@@ -118,8 +118,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
     Object.keys(content).forEach((item) => {
       const errorId = content[item].id;
 
-      const { label } = content[item];
-
       Object.values(content[item].errors).forEach((error: string) => {
         const parentFieldset = Object.keys(fieldsets).find((fieldset) => {
           if (this.parentComponent?.querySelector(`#${fieldset} #${errorId}`)) {
@@ -143,7 +141,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
 
         const newItem: ErrorSummaryDOMListItem = {
           id: errorId,
-          message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
+          message: `${parentSectionString}${parentFieldsetString}${cleanedError}`,
           element: this.parentComponent.querySelector(`#${errorId}`),
         };
 

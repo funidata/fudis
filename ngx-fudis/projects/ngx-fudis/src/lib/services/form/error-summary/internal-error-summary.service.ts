@@ -171,19 +171,13 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this.registerNewForm(newError.formId);
     }
 
-    console.log(newError);
-
     const currentErrors = this._errorsStore?.[newError.formId];
 
-    const currentMessage = currentErrors?.[newError.id]?.errors[newError.type];
+    const currentMessage = currentErrors?.[newError.message]?.errors[newError.type];
 
-    const currentLabel = currentErrors?.[newError.id]?.label;
+    const messageChanged = currentMessage && currentMessage !== newError.message;
 
-    const messageChanged = currentMessage && currentMessage !== newError.error;
-
-    const labelChanged = currentLabel && currentLabel !== newError.label;
-
-    const contentChanged = currentErrors?.[newError.id] && (messageChanged || labelChanged);
+    const contentChanged = currentErrors?.[newError.focusId] && messageChanged;
 
     this._errorsStore[newError.formId] = this.getUpdatedErrorsByFormId(newError, currentErrors);
 
@@ -204,25 +198,22 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     newError: FudisErrorSummaryNewError,
     currentErrors: FudisErrorSummaryObject,
   ): FudisErrorSummaryObject {
-    const errorId = this.defineErrorId(newError.id, newError.controlName);
+    const errorId = this.defineErrorId(newError.focusId, newError.controlName);
 
     if (!currentErrors[errorId]) {
       currentErrors = {
         ...currentErrors,
         [errorId]: {
-          id: newError.id,
-          errors: { [newError.type]: newError.error },
-          label: newError.label,
+          id: newError.focusId,
+          errors: { [newError.type]: newError.message },
         },
       };
     } else {
       currentErrors = {
         ...currentErrors,
         [errorId]: {
-          id: newError.id,
-          errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
-
-          label: newError.label,
+          id: newError.focusId,
+          errors: { ...currentErrors[errorId].errors, [newError.type]: newError.message },
         },
       };
     }
@@ -237,7 +228,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   public removeError(error: FudisErrorSummaryRemoveError, formId: string): void {
     const currentErrorsOfForm = { ...this._errorsStore[formId] };
 
-    const errorId = this.defineErrorId(error.id, error.controlName);
+    const errorId = this.defineErrorId(error.focusId, error.controlName);
 
     if (currentErrorsOfForm[errorId]?.errors[error.type]) {
       delete currentErrorsOfForm[errorId].errors[error.type];

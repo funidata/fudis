@@ -4,22 +4,21 @@ import { WritableSignal } from '@angular/core';
  * To add Error to Error Summary
  */
 export type FudisErrorSummaryNewError = {
-  id: string;
+  focusId: string;
   formId: string;
-  label: string;
-  error: string;
+  message: string;
   type: string;
-  controlName: string | undefined;
+  controlName?: string;
 };
 
 /**
  * To remove Error from Error Summary
  */
 export type FudisErrorSummaryRemoveError = {
-  id: string;
+  focusId: string;
   formId: string | null;
-  controlName: string | undefined;
   type: string;
+  controlName?: string;
 };
 
 /**
@@ -39,7 +38,6 @@ export type FudisErrorSummaryObject = {
   [id: string]: {
     id: string;
     errors: FudisErrorSummaryObjectItemErrors;
-    label: string;
   };
 };
 
