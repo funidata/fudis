@@ -17,10 +17,7 @@
       [attr.tabindex]="_parentGroup.control.disabled || _parentGroup.disabled ? -1 : null"
       [attr.aria-disabled]="_parentGroup.control.disabled || _parentGroup.disabled || null"
       [attr.aria-invalid]="
-        (_parentGroup.control.touched && _parentGroup.control.invalid) ||
-        _parentGroup.control.invalid
-          ? true
-          : null
+        (_parentGroup.control.touched && _parentGroup.control.invalid) || null
       "
       (focus)="_parentGroup.onFocus($event)"
       (keyup)="_parentGroup.handleKeyUp.emit($event)"
