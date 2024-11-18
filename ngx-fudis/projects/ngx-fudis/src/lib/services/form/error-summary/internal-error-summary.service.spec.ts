@@ -85,6 +85,23 @@ describe('InternalErrorSummaryService', () => {
     jest.spyOn(service, 'reloadErrorsByFormId').mockImplementation(() => {});
   });
 
+  const changeAndCheckErrorContent = () => {
+    const firstErrorWithContentUpdate: FudisErrorSummaryNewError = {
+      ...firstError,
+      message: 'Test label: Something new',
+    };
+
+    service.addNewError(firstError);
+
+    expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
+      'Test label: There is something wrong',
+    );
+    service.addNewError(firstErrorWithContentUpdate);
+    expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
+      'Test label: Something new',
+    );
+  };
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -178,28 +195,18 @@ describe('InternalErrorSummaryService', () => {
       });
     });
 
-    it('should reload errors when Error Summary Item content is changed', () => {
-      const firstErrorWithContentUpdate: FudisErrorSummaryNewError = {
-        ...firstError,
-        message: 'Test label: Something new',
-      };
+    it('should reload errors when Error Summary Item content is changed and Error Summary is visible', () => {
+      service.setErrorSummaryVisibility('test-form-id-1', true);
 
-      service.addNewError(firstError);
+      changeAndCheckErrorContent();
 
-      expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
-        'Test label: There is something wrong',
-      );
-      service.addNewError(firstErrorWithContentUpdate);
-      expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
-        'Test label: Something new',
-      );
+      expect(service.reloadErrorsByFormId).toHaveBeenCalledWith('test-form-id-1', false);
+    });
 
-      expect(service.reloadErrorsByFormId).toHaveBeenCalledWith(
-        'test-form-id-1',
-        false,
-        false,
-        true,
-      );
+    it('should not reload errors when Error Summary Item content is changed and Error Summary is not set visible', () => {
+      changeAndCheckErrorContent();
+
+      expect(service.reloadErrorsByFormId).not.toHaveBeenCalled();
     });
 
     it('should set and return update strategy', () => {

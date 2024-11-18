@@ -142,15 +142,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param visible hide or show Error Summary
    */
   public setErrorSummaryVisibility(formId: string, visible: boolean) {
-    const currentValue = { ...this._errorSummaryVisibilityStatus };
-
-    if (!currentValue[formId]) {
-      currentValue[formId] = signal(visible);
-    } else {
-      currentValue[formId].set(visible);
+    if (!this._errorSummaryVisibilityStatus[formId]) {
+      this._errorSummaryVisibilityStatus[formId] = signal(visible);
+    } else if (this._errorSummaryVisibilityStatus[formId]() !== visible) {
+      this._errorSummaryVisibilityStatus[formId].set(visible);
     }
-
-    this._errorSummaryVisibilityStatus = currentValue;
   }
 
   /**
@@ -181,10 +177,14 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     this._errorsStore[newError.formId] = this.getUpdatedErrorsByFormId(newError, currentErrors);
 
-    if (contentChanged || this._updateStrategy === 'all') {
+    const reloadErrors =
+      (contentChanged || this._updateStrategy === 'all') &&
+      !!this._errorSummaryVisibilityStatus?.[newError.formId]();
+
+    if (reloadErrors) {
       this._focusToFormOnReload = null;
 
-      this.reloadErrorsByFormId(newError.formId, false, false, true);
+      this.reloadErrorsByFormId(newError.formId, false);
     }
   }
 
@@ -239,7 +239,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
       if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
         this._focusToFormOnReload = null;
-
         this.reloadErrorsByFormId(formId);
       }
     }
@@ -260,7 +259,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   public reloadAllErrors(): void {
     Object.keys(this._errorsStore).forEach((key) => {
-      this.reloadErrorsByFormId(key, false, true);
+      this.reloadErrorsByFormId(key, false);
     });
   }
 
@@ -271,42 +270,19 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param allErrorsReloaded
    * @param contentChanged
    */
-  public reloadErrorsByFormId(
-    formId: string,
-    focus?: boolean,
-    allErrorsReloaded?: boolean,
-    contentChanged?: boolean,
-  ): void {
+  public reloadErrorsByFormId(formId: string, focus?: boolean): void {
     if (focus) {
       this._focusToFormOnReload = formId;
     } else {
       this._focusToFormOnReload = null;
     }
 
-    this.setErrorSummaryVisibility(formId, true);
-
-    // If content has changed (usually because lang has changed) AND this ErrorSummary is already visible, or content hasn't changed but this ErrorSummary is hidden --> Update and set visible
-    const reloadOnContentChange =
-      (contentChanged && this._errorSummaryVisibilityStatus[formId]()) || !contentChanged;
-
-    if (
-      reloadOnContentChange &&
-      this._errorsStore[formId] &&
-      Object.keys(this._errorsStore[formId]).length !== 0
-    ) {
+    if (this._errorsStore[formId] && Object.keys(this._errorsStore[formId]).length !== 0) {
       setTimeout(() => {
         this._errorsSignal[formId].set(this._errorsStore[formId]);
       }, 50);
 
       this._errorsObservable.next({ ...this._errorsStore });
-
-      if (allErrorsReloaded) {
-        Object.keys(this.setErrorSummaryVisibility).forEach((id) => {
-          this.setErrorSummaryVisibility(id, true);
-        });
-      } else {
-        this.setErrorSummaryVisibility(formId, true);
-      }
     }
   }
 

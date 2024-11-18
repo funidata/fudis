@@ -181,8 +181,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
       injector: this._injector,
     }).subscribe((value) => {
       this._updateSummaryContent(value);
-
-      console.log(value);
     });
   }
 
