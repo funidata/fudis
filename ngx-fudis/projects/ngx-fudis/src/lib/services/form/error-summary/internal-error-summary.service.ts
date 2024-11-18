@@ -267,8 +267,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    *
    * @param formId
    * @param focus
-   * @param allErrorsReloaded
-   * @param contentChanged
    */
   public reloadErrorsByFormId(formId: string, focus?: boolean): void {
     if (focus) {
@@ -277,9 +275,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this._focusToFormOnReload = null;
     }
 
-    if (this._errorsStore[formId] && Object.keys(this._errorsStore[formId]).length !== 0) {
+    if (this._errorsStore[formId]) {
       setTimeout(() => {
         this._errorsSignal[formId].set(this._errorsStore[formId]);
+
+        if (
+          Object.keys(this._errorsStore[formId]).length === 0 &&
+          !!this._errorSummaryVisibilityStatus[formId]()
+        ) {
+          this._errorSummaryVisibilityStatus[formId].set(false);
+        }
       }, 50);
 
       this._errorsObservable.next({ ...this._errorsStore });
