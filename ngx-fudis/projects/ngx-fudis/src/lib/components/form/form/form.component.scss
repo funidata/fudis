@@ -34,10 +34,6 @@
         fudis-button:not(:first-of-type) {
           margin-left: spacing.$spacing-xs;
         }
-
-        fudis-button:not(:last-of-type) {
-          margin-bottom: spacing.$spacing-xxs;
-        }
       }
 
       @include breakpoints.breakpoint('sm') {

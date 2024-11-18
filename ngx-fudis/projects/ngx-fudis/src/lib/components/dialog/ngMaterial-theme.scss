@@ -99,6 +99,28 @@
         }
       }
 
+      /* Styles and overrides for Form inside Dialog */
+      .mat-mdc-dialog-content:has(.fudis-form) {
+        /* Originally overflow auto is set in dialog-content wrapper but since the HTML structure is different in Form, we have to override it and set it correctly in fudis-form__content below */
+        overflow: hidden;
+
+        /* Set inherited max-height from MatDialogContent in order for Action buttons to position correctly at the bottom */
+        fudis-form,
+        form {
+          max-height: inherit;
+        }
+
+        /* Make Form content scrollable when inside Dialog */
+        .fudis-form__content {
+          /* Necessary padding for content if ErrorSummary appears, otherwise its visible focus is cropped from the top */
+          padding-top: spacing.$spacing-xxs;
+
+          /* These styles can be found in MatDialogContent directive which enables scrollable content */
+          max-height: 65vh;
+          overflow: auto;
+        }
+      }
+
       .mat-mdc-dialog-actions {
         align-items: flex-end;
         margin-top: spacing.$spacing-xs;

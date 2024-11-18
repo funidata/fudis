@@ -53,7 +53,7 @@
           <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
         </div>
       </ng-container>
-      <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
+      <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible && !_dialogParent">
         <fudis-error-summary
           [formId]="id"
           [parentComponent]="_formElement"
@@ -69,6 +69,13 @@
   </ng-container>
   <ng-container *ngIf="_mainContent?.type === 'form'">
     <div class="fudis-form__content">
+      <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible && _dialogParent">
+        <fudis-error-summary
+          [formId]="id"
+          [parentComponent]="_formElement"
+          [helpText]="errorSummaryHelpText"
+        />
+      </ng-container>
       <ng-container *ngTemplateOutlet="_mainContent!.templateRef" />
     </div>
   </ng-container>

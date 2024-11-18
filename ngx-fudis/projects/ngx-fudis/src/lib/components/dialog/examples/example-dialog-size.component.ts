@@ -53,7 +53,7 @@ export class ExampleDialogSizeComponent {
 
   protected _size: FudisDialogSize;
 
-  sizes: FudisDialogSize[] = ['xs', 'md', 'md', 'lg', 'xl'];
+  sizes: FudisDialogSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 
   @ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
 

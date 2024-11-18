@@ -1,5 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { DialogComponent } from "./dialog.component.ts";
+import { DialogContentDirective } from "../../directives/dialog/dialog-directives.ts";
 import * as DialogStory from "./dialog.stories.ts";
 import { dialogExclude } from "../../utilities/storybook";
 
@@ -89,7 +90,7 @@ Size determines the horizontal size of the dialog. Available options are `xs`, `
 </fudis-dialog>
 ```
 
-## Directives
+## Content Directives
 
 Directives written with `camelCase` are meant to be used as inline attribute directives.
 
@@ -128,7 +129,7 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 </fudis-dialog>
 ```
 
-**fudisDialogClose**: Set dialog close button with no form submitting. This directive extends _MatDialogClose_.
+**fudisDialogClose**: To set element as close button. This directive extends _MatDialogClose_. With this directive, closing the Dialog will not forward any response data to the `.afterClosed()` observable.
 
 ```
 <fudis-dialog>
@@ -137,14 +138,6 @@ Directives written with `kebab-case` are meant to be used as HTML element.
   </fudis-dialog-actions>
 </fudis-dialog>
 ```
-
-## Examples
-
-<Canvas of={DialogStory.ExampleWithForm} />
-
-<Canvas of={DialogStory.ExampleWithGrid} />
-
-<Canvas of={DialogStory.ExampleWithNestedDialogs} />
 
 ### Full code example
 
@@ -175,62 +168,67 @@ class SimpleDialogComponent {
 }
 ```
 
-## Fudis Form inside Dialog
+## Form inside Dialog
 
-When using [Form](/docs/components-form-form--documentation) inside Dialog, wrap the Form inside `fudis-dialog-content` and use it normally. Meaning, add all the necessary Error Summary properties, such as `errorSummaryHelpText`. Also add `title`, `level` and possible `titleVariant`, this title will be the title of the dialog and have initial focus when dialog is opened with keyboard.
-
-In `fudisContent` template add form components and in `fudisActions` template add action button(s). Unlike normal form, where buttons are positioned on top of the form, **these action buttons will be positioned at the bottom** after the form content, in order to follow dialog look and feel.
+When using [Form](/docs/components-form-form--documentation) inside Dialog, wrap the Form inside `fudis-dialog-content` and use it normally adding all required input properties and content projection slots of Form. When nesting Form inside Dialog, Fudis will style the Form to be concise with other Dialogs.
 
 ### Full code example
 
 ```
 @Component({
-	selector: 'form-dialog',
-	template: `
-		<fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open form dialog'" />
-		<ng-template #dialogFromTemplate>
-			<fudis-dialog>
-				<fudis-dialog-content>
-					<fudis-form>
-						[title]="'Dialog with Form'"
-						[level]="1"
-            [titleVariant]="'xl'"
-						[errorSummaryHelpText]="'You need to fill up the information.'">
-						<ng-template fudisContent [type]="'form'">
-							<fudis-fieldset [label]="'Question about your power animal'">
-								<ng-template fudisContent [type]="'fieldset'">
-									<fudis-text-input
-										[id]="'example-input-power-animal'"
-										[label]="'What is your power animal?'"
-										[control]="exampleDialogFormGroup.controls['powerAnimal']"
-										[helpText]="'Please add some values'" />
-								</ng-template>
-							</fudis-fieldset>
-						</ng-template>
-						<ng-template fudisActions type="form">
-							<fudis-button fudisFormSubmit [formValid]="exampleDialogFormGroup.valid" (handleClick)="closeDialogWithForm()" [label]="'Submit'" />
-							<fudis-button fudisDialogClose [label]="'Cancel'" />
-						</ng-template>
-					</fudis-form>
-				</fudis-dialog-content>
-			</fudis-dialog>
-		</ng-template>
-	`,
+  selector: 'form-dialog',
+  template: `
+    <fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open form dialog'" />
+    <ng-template #dialogFromTemplate>
+      <fudis-dialog>
+        <fudis-dialog-content>
+          <fudis-form>
+            [title]="'Dialog with Form'"
+            [level]="1"
+            [errorSummaryHelpText]="'You need to fill up the information.'">
+            <ng-template fudisContent [type]="'form'">
+              <!-- Insert Form Content -->
+            </ng-template>
+            <ng-template fudisActions type="form">
+              <fudis-button fudisFormSubmit [formValid]="exampleDialogFormGroup.valid" (handleClick)="closeDialogWithForm()" [label]="'Submit'" />
+              <fudis-button fudisDialogClose [label]="'Cancel'" />
+            </ng-template>
+          </fudis-form>
+        </fudis-dialog-content>
+      </fudis-dialog>
+    </ng-template>
+  `,
 })
 class FormDialogComponent {
   constructor(private _dialogService: FudisDialogService) {}
 
   openDialog(dialogToOpen: TemplateRef<any>) {
     this._dialogService.open(dialogToOpen);
+    .afterClosed()
+    .subscribe((response: string) => {
+      if(response === 'success'){
+        // Logic here what to do with the response!
+        console.log("Form was valid and Dialog is now closed.")
+      }
+    });
   }
 
   closeDialogWithForm(): void {
     if (this.exampleDialogFormGroup.valid) {
-      this.dialog.close();
+      // Close Dialog and forward a response, so observable can trigger additional logic
+      this.dialog.close("success")
     }
   }
 }
 ```
+
+## Examples
+
+<Canvas of={DialogStory.ExampleWithForm} />
+
+<Canvas of={DialogStory.ExampleWithGrid} />
+
+<Canvas of={DialogStory.ExampleWithNestedDialogs} />
 
 ## Accessibility
 
@@ -240,7 +238,7 @@ class FormDialogComponent {
 - Dialog can't be closed with outside click
 - Dialog can be closed with keyboard Escape
 - Dialog content is scrollable with keyboard and mouse
-- Dialog heading (with fudisDialogTitle directive) and dialog buttons (with fudis-dialog-actions directive) are always visible even if content is scrollable (excl. dialog with form)
+- Dialog heading and action buttons are always visible, even if content is scrollable
 
 ## Related components
 
@@ -252,4 +250,10 @@ class FormDialogComponent {
 
 ## Properties
 
+### Dialog Component
+
 <ArgTypes of={DialogComponent} exclude={dialogExclude} />
+
+### Dialog Content Directive
+
+<ArgTypes of={DialogContentDirective} />
