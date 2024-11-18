@@ -81,6 +81,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
+   * Used prevent unnecessary frequent Signal updates
+   */
+  private _reloadGuard: string[] = [];
+
+  /**
    * ------------------
    *
    * GETTERS & SETTERS FOR CLASS VARIABLES
@@ -275,19 +280,14 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this._focusToFormOnReload = null;
     }
 
-    if (this._errorsStore[formId]) {
+    if (!this._reloadGuard.includes(formId) && this._errorsStore[formId]) {
+      this._reloadGuard.push(formId);
       setTimeout(() => {
         this._errorsSignal[formId].set(this._errorsStore[formId]);
+        this._errorsObservable.next({ ...this._errorsStore });
 
-        if (
-          Object.keys(this._errorsStore[formId]).length === 0 &&
-          !!this._errorSummaryVisibilityStatus[formId]()
-        ) {
-          this._errorSummaryVisibilityStatus[formId].set(false);
-        }
+        this._reloadGuard.splice(this._reloadGuard.indexOf(formId), 1);
       }, 50);
-
-      this._errorsObservable.next({ ...this._errorsStore });
     }
   }
 
