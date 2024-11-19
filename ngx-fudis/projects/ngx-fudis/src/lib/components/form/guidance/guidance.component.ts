@@ -214,7 +214,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
       }
 
       if (numberOfErrors === this._lazyLoadedErrors.length) {
-        this._errorSummaryService.reloadErrorsByFormId(this._parentFormId.value, false);
+        this._errorSummaryService.reloadFormErrors(this._parentFormId.value, false);
       }
     }
   }

@@ -43,7 +43,7 @@ export class FormSubmitDirective implements OnInit {
 
       if (parentFormId && !this.formValid) {
         this._errorSummaryService.setErrorSummaryVisibility(parentFormId, true);
-        this._errorSummaryService.reloadErrorsByFormId(parentFormId, true);
+        this._errorSummaryService.reloadFormErrors(parentFormId, true);
       } else if (parentFormId) {
         this._errorSummaryService.setErrorSummaryVisibility(parentFormId, false);
       }

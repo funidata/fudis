@@ -44,7 +44,7 @@ export class FudisErrorSummaryService {
    * @param focus focus to Error Summary
    */
   public reloadFormErrors(id: string, focus: boolean = true) {
-    this._errorSummaryService.reloadErrorsByFormId(id, focus);
+    this._errorSummaryService.reloadFormErrors(id, focus);
   }
 
   // TODO: This should be removed and replaced with getter for collection of Signals per individual Forms

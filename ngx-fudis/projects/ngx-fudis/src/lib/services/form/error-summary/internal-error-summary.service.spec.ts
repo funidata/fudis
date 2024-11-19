@@ -16,20 +16,20 @@ describe('InternalErrorSummaryService', () => {
     focusId: 'first-error',
     formId: 'test-form-id-1',
     message: 'Test label: There is something wrong',
-    type: 'required',
+    id: 'required',
   };
 
   const firstErrorAnotherErrorType: FudisErrorSummaryNewError = {
     ...firstError,
     message: 'Test label: Email is not valid',
-    type: 'email',
+    id: 'email',
   };
 
   const secondError: FudisErrorSummaryNewError = {
     focusId: 'second-error',
     formId: 'test-form-id-2',
     message: 'Test label: You need to fix also this',
-    type: 'required',
+    id: 'required',
   };
 
   const firstErrorFromService: FudisErrorSummaryObject = {
@@ -52,7 +52,7 @@ describe('InternalErrorSummaryService', () => {
   const firstErrorRemoveItem: FudisErrorSummaryRemoveError = {
     focusId: 'first-error',
     formId: 'test-form-id-1',
-    type: 'required',
+    id: 'required',
   };
 
   const fieldSetForErrorSummary = {
@@ -82,7 +82,7 @@ describe('InternalErrorSummaryService', () => {
     service.registerNewForm('test-form-id-1');
     service.registerNewForm('test-form-id-2');
 
-    jest.spyOn(service, 'reloadErrorsByFormId').mockImplementation(() => {});
+    jest.spyOn(service, 'reloadFormErrors').mockImplementation(() => {});
   });
 
   const changeAndCheckErrorContent = () => {
@@ -173,7 +173,7 @@ describe('InternalErrorSummaryService', () => {
         'test-form-id-2': secondErrorFromService,
       };
 
-      service.reloadErrorsByFormId('test-form-id-1');
+      service.reloadFormErrors('test-form-id-1');
 
       const errors = service.errors;
 
@@ -188,7 +188,7 @@ describe('InternalErrorSummaryService', () => {
       service.addNewError(firstErrorAnotherErrorType);
 
       // Remove only 'required' error message
-      service.removeError(firstErrorRemoveItem, 'test-form-id-1');
+      service.removeError(firstErrorRemoveItem);
 
       expect(service.errors['test-form-id-1']['first-error'].errors).toEqual({
         email: 'Test label: Email is not valid',
@@ -200,13 +200,13 @@ describe('InternalErrorSummaryService', () => {
 
       changeAndCheckErrorContent();
 
-      expect(service.reloadErrorsByFormId).toHaveBeenCalledWith('test-form-id-1', false);
+      expect(service.reloadFormErrors).toHaveBeenCalledWith('test-form-id-1', false);
     });
 
     it('should not reload errors when Error Summary Item content is changed and Error Summary is not set visible', () => {
       changeAndCheckErrorContent();
 
-      expect(service.reloadErrorsByFormId).not.toHaveBeenCalled();
+      expect(service.reloadFormErrors).not.toHaveBeenCalled();
     });
 
     it('should set and return update strategy', () => {

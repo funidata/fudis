@@ -189,7 +189,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     if (reloadErrors) {
       this._focusToFormOnReload = null;
 
-      this.reloadErrorsByFormId(newError.formId, false);
+      this.reloadFormErrors(newError.formId, false);
     }
   }
 
@@ -251,7 +251,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
       if (reloadErrors) {
         this._focusToFormOnReload = null;
-        this.reloadErrorsByFormId(errorToRemove.formId);
+        this.reloadFormErrors(errorToRemove.formId);
       }
     }
   }
@@ -274,9 +274,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       const formHasErrors = this._errorsStore[key];
       console.log(formHasErrors);
 
-      if(this._errorSummaryVisibilityStatus[key]())
-
-      this.reloadErrorsByFormId(key, false);
+      if (this._errorSummaryVisibilityStatus[key]()) this.reloadFormErrors(key, false);
     });
   }
 
@@ -285,7 +283,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param formId
    * @param focus
    */
-  public reloadErrorsByFormId(formId: string, focus?: boolean): void {
+  public reloadFormErrors(formId: string, focus?: boolean): void {
     if (focus) {
       this._focusToFormOnReload = formId;
     } else {
@@ -364,6 +362,10 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
   }
 
+  /**
+   * When Form Component is destroyed, it will remove itself from the service
+   * @param formId
+   */
   public removeForm(formId: string): void {
     if (this._errorsStore[formId]) {
       delete this._errorsStore[formId];
