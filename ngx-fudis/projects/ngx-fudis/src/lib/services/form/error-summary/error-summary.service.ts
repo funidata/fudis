@@ -55,12 +55,25 @@ export class FudisErrorSummaryService {
     return this._errorSummaryService.errorsObservable;
   }
 
+  /**
+   * To add message to spesific Form's Error Summary.
+   * @param id Identifier of the message, eg. 'app-custom-error-abc123'
+   * @param formId Id of Form component
+   * @param focusId HTML element's id, where user focus should be moved when user clicks the message.
+   * @param message Visible message to the user
+   */
   public addNewError(id: string, formId: string, focusId: string, message: string): void {
     const newError: FudisErrorSummaryNewError = { focusId, formId, message, id };
 
     this._errorSummaryService.addNewError(newError);
   }
 
+  /**
+   * To remove messages from Form's Error Summary
+   * @param id Identifier of provided message in 'addNewError'
+   * @param formId Id of Form component
+   * @param focusId HTML element's id, where user focus should be moved when user clicks the message.
+   */
   public removeError(id: string, formId: string, focusId: string): void {
     const removeError: FudisErrorSummaryRemoveError = { focusId, formId, id };
     this._errorSummaryService.removeError(removeError);
