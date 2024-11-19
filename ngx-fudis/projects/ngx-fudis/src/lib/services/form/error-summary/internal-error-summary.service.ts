@@ -280,10 +280,15 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       this._focusToFormOnReload = null;
     }
 
-    if (!this._reloadGuard.includes(formId) && this._errorsStore[formId]) {
+    const reloadConditions =
+      !this._reloadGuard.includes(formId) &&
+      this._errorsStore[formId] &&
+      this._errorsSignal[formId];
+
+    if (reloadConditions) {
       this._reloadGuard.push(formId);
       setTimeout(() => {
-        this._errorsSignal[formId].set(this._errorsStore[formId]);
+        this._errorsSignal[formId]?.set(this._errorsStore[formId]);
         this._errorsObservable.next({ ...this._errorsStore });
 
         this._reloadGuard.splice(this._reloadGuard.indexOf(formId), 1);
@@ -306,9 +311,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param element HTMLElement to check, if it has Form Component as ancestor
    * @returns if ancestor found, returns id of that Form and visibility status of Form's Error Summary
    */
-  public getFormAncestor(
-    element: HTMLElement,
-  ): null | { id: string; errorSummaryVisible: boolean } {
+  public getFormAncestorId(element: HTMLElement): null | string {
     let foundId: string | null = null;
 
     Object.keys(this._errorSummaryVisibilityStatus).find((id) => {
@@ -318,10 +321,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     });
 
     if (foundId) {
-      return {
-        id: foundId,
-        errorSummaryVisible: this._errorSummaryVisibilityStatus[foundId](),
-      };
+      return foundId;
     }
 
     return null;
@@ -332,19 +332,24 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param formId
    */
   public registerNewForm(formId: string, errorSummaryVisible: boolean = false): void {
-    this._formStructure = {
-      ...this._formStructure,
-      [formId]: {
+    if (!this._formStructure[formId]) {
+      this._formStructure[formId] = {
         sections: {},
         fieldsets: {},
-      },
-    };
+      };
+    }
 
-    this._errorSummaryVisibilityStatus[formId] = signal(errorSummaryVisible);
+    if (!this._errorSummaryVisibilityStatus[formId]) {
+      this._errorSummaryVisibilityStatus[formId] = signal(errorSummaryVisible);
+    }
 
-    this._errorsSignal[formId] = signal({});
+    if (!this._errorsSignal[formId]) {
+      this._errorsSignal[formId] = signal({});
+    }
 
-    this._errorsStore[formId] = {};
+    if (!this._errorsStore[formId]) {
+      this._errorsStore[formId] = {};
+    }
   }
 
   public removeForm(formId: string): void {
@@ -352,16 +357,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       delete this._errorsStore[formId];
     }
 
+    if (this._errorsSignal[formId]) {
+      delete this._errorsSignal[formId];
+    }
+
     if (this._formStructure[formId]) {
       delete this._formStructure[formId];
     }
 
-    const currentVisibilityStatus = { ...this._errorSummaryVisibilityStatus };
-
-    if (currentVisibilityStatus[formId]) {
-      delete currentVisibilityStatus[formId];
-
-      this._errorSummaryVisibilityStatus = currentVisibilityStatus;
+    if (this._errorSummaryVisibilityStatus[formId]) {
+      delete this._errorSummaryVisibilityStatus[formId];
     }
   }
 
