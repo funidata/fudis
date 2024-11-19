@@ -188,9 +188,9 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
     if (
       this._parentFormId.value &&
       this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId.value]() &&
-      !this._lazyLoadedErrors.includes(error.type)
+      !this._lazyLoadedErrors.includes(error.id)
     ) {
-      this._lazyLoadedErrors.push(error.type);
+      this._lazyLoadedErrors.push(error.id);
       this._errorSummaryService.focusToFormOnReload = null;
 
       let numberOfErrors = 0;

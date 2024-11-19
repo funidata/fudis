@@ -174,7 +174,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
     const currentErrors = this._errorsStore?.[newError.formId];
 
-    const currentMessage = currentErrors?.[newError.focusId]?.errors[newError.type];
+    const currentMessage = currentErrors?.[newError.focusId]?.errors[newError.id];
 
     const messageChanged = currentMessage && currentMessage !== newError.message;
 
@@ -208,7 +208,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
         ...currentErrors,
         [newError.focusId]: {
           id: newError.focusId,
-          errors: { [newError.type]: newError.message },
+          errors: { [newError.id]: newError.message },
         },
       };
     } else {
@@ -216,7 +216,10 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
         ...currentErrors,
         [newError.focusId]: {
           id: newError.focusId,
-          errors: { ...currentErrors[newError.focusId].errors, [newError.type]: newError.message },
+          errors: {
+            ...currentErrors[newError.focusId].errors,
+            [newError.id]: newError.message,
+          },
         },
       };
     }
@@ -228,23 +231,27 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * Removes error object from the current errors list if it contains matching error id
    * @param error Error object
    */
-  public removeError(error: FudisErrorSummaryRemoveError, formId: string): void {
-    const currentErrorsOfForm = { ...this._errorsStore[formId] };
+  public removeError(errorToRemove: FudisErrorSummaryRemoveError): void {
+    const currentErrorsOfForm = { ...this._errorsStore[errorToRemove.formId] };
 
-    if (currentErrorsOfForm[error.focusId]?.errors[error.type]) {
-      delete currentErrorsOfForm[error.focusId].errors[error.type];
+    if (currentErrorsOfForm[errorToRemove.focusId]?.errors[errorToRemove.id]) {
+      delete currentErrorsOfForm[errorToRemove.focusId].errors[errorToRemove.id];
 
-      const otherErrors = Object.keys(currentErrorsOfForm[error.focusId].errors).length;
+      const otherErrors = Object.keys(currentErrorsOfForm[errorToRemove.focusId].errors).length;
 
       if (otherErrors === 0) {
-        delete currentErrorsOfForm[error.focusId];
+        delete currentErrorsOfForm[errorToRemove.focusId];
       }
 
-      this._errorsStore[formId] = currentErrorsOfForm;
+      this._errorsStore[errorToRemove.formId] = currentErrorsOfForm;
 
-      if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
+      const reloadErrors =
+        (this._updateStrategy === 'onRemove' || this._updateStrategy === 'all') &&
+        !!this._errorSummaryVisibilityStatus?.[errorToRemove.formId]();
+
+      if (reloadErrors) {
         this._focusToFormOnReload = null;
-        this.reloadErrorsByFormId(formId);
+        this.reloadErrorsByFormId(errorToRemove.formId);
       }
     }
   }
@@ -264,6 +271,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   public reloadAllErrors(): void {
     Object.keys(this._errorsStore).forEach((key) => {
+      const formHasErrors = this._errorsStore[key];
+      console.log(formHasErrors);
+
+      if(this._errorSummaryVisibilityStatus[key]())
+
       this.reloadErrorsByFormId(key, false);
     });
   }

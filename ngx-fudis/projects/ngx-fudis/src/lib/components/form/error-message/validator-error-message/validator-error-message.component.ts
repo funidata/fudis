@@ -175,7 +175,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
         focusId: this.focusId,
         formId: this.formId,
         message: `${this.label}: ${this._currentMessage.value}`,
-        type: this.controlName ? `${this.type}_${this.controlName}` : this.type,
+        id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
       this._errorSummaryService.addNewError(newError);
@@ -189,10 +189,10 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
       const errorToRemove: FudisErrorSummaryRemoveError = {
         focusId: this.focusId,
         formId: this.formId,
-        type: this.controlName ? `${this.type}_${this.controlName}` : this.type,
+        id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
-      this._errorSummaryService.removeError(errorToRemove, this.formId);
+      this._errorSummaryService.removeError(errorToRemove);
       this.handleRemoveError.emit(errorToRemove);
     }
   }

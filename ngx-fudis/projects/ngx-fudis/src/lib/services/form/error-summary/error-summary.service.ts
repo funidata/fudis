@@ -3,6 +3,8 @@ import { FudisInternalErrorSummaryService } from './internal-error-summary.servi
 
 import {
   FudisErrorSummaryErrors,
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryRemoveError,
   FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/errorSummary';
 import { BehaviorSubject } from 'rxjs';
@@ -45,10 +47,22 @@ export class FudisErrorSummaryService {
     this._errorSummaryService.reloadErrorsByFormId(id, focus);
   }
 
+  // TODO: This should be removed and replaced with getter for collection of Signals per individual Forms
   /**
    * Returns an observable of all errors sent to Error Summary. Note, that Observable is updated only when ReloadErrors is called.
    */
   public getErrorsObservable(): BehaviorSubject<FudisErrorSummaryErrors> {
     return this._errorSummaryService.errorsObservable;
+  }
+
+  public addNewError(id: string, formId: string, focusId: string, message: string): void {
+    const newError: FudisErrorSummaryNewError = { focusId, formId, message, id };
+
+    this._errorSummaryService.addNewError(newError);
+  }
+
+  public removeError(id: string, formId: string, focusId: string): void {
+    const removeError: FudisErrorSummaryRemoveError = { focusId, formId, id };
+    this._errorSummaryService.removeError(removeError);
   }
 }
