@@ -1,11 +1,10 @@
 import { Injectable, OnDestroy, signal, WritableSignal } from '@angular/core';
 import {
-  FudisErrorSummaryObject,
   FudisErrorSummaryNewError,
   FudisErrorSummaryRemoveError,
   FudisFormErrorSummaryUpdateStrategy,
-  FudisErrorSummaryErrors,
-  FudisErrorSummaryErrorsSignal,
+  FudisErrorSummaryAllErrors,
+  FudisErrorSummaryAllErrorsSignal,
 } from '../../../types/errorSummary';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../translation/translation.service';
@@ -51,14 +50,14 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   /**
    * Collection of all registered errors categorised by parent Form id. Used as "temporary" storage and value will be passed to Observable when ReloadErrors is called.
    */
-  private _errorsStore: FudisErrorSummaryErrors = {};
+  private _errorsStore: FudisErrorSummaryAllErrors = {};
 
   /**
    * Collection of all registered categorised by parent Form id. This Observable is updated with new value only when ReloadErrors is called.
    */
-  private _errorsObservable = new BehaviorSubject<FudisErrorSummaryErrors>({});
+  private _errorsObservable = new BehaviorSubject<FudisErrorSummaryAllErrors>({});
 
-  private _errorsSignal: FudisErrorSummaryErrorsSignal = {};
+  private _errorsSignal: FudisErrorSummaryAllErrorsSignal = {};
 
   /**
    * Current Form ids with their Error Summary Visibility status
@@ -96,21 +95,21 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   /**
    * Used in Components to listen to Reload updates
    */
-  get errorsObservable(): BehaviorSubject<FudisErrorSummaryErrors> {
+  get errorsObservable(): BehaviorSubject<FudisErrorSummaryAllErrors> {
     return this._errorsObservable;
   }
 
   /**
    * For unit testing purposes
    */
-  get errors(): FudisErrorSummaryErrors {
+  get errors(): FudisErrorSummaryAllErrors {
     return this._errorsStore;
   }
 
   /**
    * For unit testing purposes
    */
-  get errorsSignal(): FudisErrorSummaryErrorsSignal {
+  get errorsSignal(): FudisErrorSummaryAllErrorsSignal {
     return this._errorsSignal;
   }
 
@@ -171,16 +170,21 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     if (!this._errorsStore[newError.formId]) {
       this.registerNewForm(newError.formId);
     }
+    const currentErrors = { ...this._errorsStore?.[newError.formId] };
 
-    const currentErrors = this._errorsStore?.[newError.formId];
+    if (!currentErrors?.[newError.focusId]) {
+      currentErrors[newError.focusId] = {};
+    }
 
-    const currentMessage = currentErrors?.[newError.focusId]?.errors[newError.id];
+    const currentMessage = currentErrors[newError.focusId][newError.id];
 
     const messageChanged = currentMessage && currentMessage !== newError.message;
 
     const contentChanged = currentErrors?.[newError.focusId] && messageChanged;
 
-    this._errorsStore[newError.formId] = this.getUpdatedErrorsByFormId(newError, currentErrors);
+    currentErrors[newError.focusId][newError.id] = newError.message;
+
+    this._errorsStore[newError.formId] = currentErrors;
 
     const reloadErrors =
       (contentChanged || this._updateStrategy === 'all') &&
@@ -194,50 +198,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   * Utility function used by addError()
-   * @param newError
-   * @param currentErrors
-   * @returns
-   */
-  private getUpdatedErrorsByFormId(
-    newError: FudisErrorSummaryNewError,
-    currentErrors: FudisErrorSummaryObject,
-  ): FudisErrorSummaryObject {
-    if (!currentErrors[newError.focusId]) {
-      currentErrors = {
-        ...currentErrors,
-        [newError.focusId]: {
-          id: newError.focusId,
-          errors: { [newError.id]: newError.message },
-        },
-      };
-    } else {
-      currentErrors = {
-        ...currentErrors,
-        [newError.focusId]: {
-          id: newError.focusId,
-          errors: {
-            ...currentErrors[newError.focusId].errors,
-            [newError.id]: newError.message,
-          },
-        },
-      };
-    }
-
-    return currentErrors;
-  }
-
-  /**
    * Removes error object from the current errors list if it contains matching error id
    * @param error Error object
    */
   public removeError(errorToRemove: FudisErrorSummaryRemoveError): void {
     const currentErrorsOfForm = { ...this._errorsStore[errorToRemove.formId] };
 
-    if (currentErrorsOfForm[errorToRemove.focusId]?.errors[errorToRemove.id]) {
-      delete currentErrorsOfForm[errorToRemove.focusId].errors[errorToRemove.id];
+    if (currentErrorsOfForm[errorToRemove.focusId]?.[errorToRemove.id]) {
+      delete currentErrorsOfForm[errorToRemove.focusId][errorToRemove.id];
 
-      const otherErrors = Object.keys(currentErrorsOfForm[errorToRemove.focusId].errors).length;
+      const otherErrors = Object.keys(currentErrorsOfForm[errorToRemove.focusId]).length;
 
       if (otherErrors === 0) {
         delete currentErrorsOfForm[errorToRemove.focusId];

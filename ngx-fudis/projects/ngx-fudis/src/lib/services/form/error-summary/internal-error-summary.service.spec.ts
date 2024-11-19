@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  FudisErrorSummaryErrors,
+  FudisErrorSummaryAllErrors,
   FudisErrorSummaryNewError,
-  FudisErrorSummaryObject,
+  FudisErrorSummaryFormErrors,
   FudisErrorSummaryRemoveError,
 } from '../../../types/errorSummary';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
@@ -10,7 +10,7 @@ import { FudisTranslationService } from '../../translation/translation.service';
 
 describe('InternalErrorSummaryService', () => {
   let service: FudisInternalErrorSummaryService;
-  let currentErrors: FudisErrorSummaryErrors;
+  let currentErrors: FudisErrorSummaryAllErrors;
 
   const firstError: FudisErrorSummaryNewError = {
     focusId: 'first-error',
@@ -32,20 +32,16 @@ describe('InternalErrorSummaryService', () => {
     id: 'required',
   };
 
-  const firstErrorFromService: FudisErrorSummaryObject = {
+  const firstErrorFromService: FudisErrorSummaryFormErrors = {
     'first-error': {
-      id: 'first-error',
-      errors: {
-        required: 'Test label: There is something wrong',
-        email: 'Test label: Email is not valid',
-      },
+      required: 'Test label: There is something wrong',
+      email: 'Test label: Email is not valid',
     },
   };
 
-  const secondErrorFromService: FudisErrorSummaryObject = {
+  const secondErrorFromService: FudisErrorSummaryFormErrors = {
     'second-error': {
-      id: 'second-error',
-      errors: { required: 'Test label: You need to fix also this' },
+      required: 'Test label: You need to fix also this',
     },
   };
 
@@ -93,11 +89,11 @@ describe('InternalErrorSummaryService', () => {
 
     service.addError(firstError);
 
-    expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
+    expect(service.errors['test-form-id-1']['first-error']['required']).toEqual(
       'Test label: There is something wrong',
     );
     service.addError(firstErrorWithContentUpdate);
-    expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
+    expect(service.errors['test-form-id-1']['first-error']['required']).toEqual(
       'Test label: Something new',
     );
   };
@@ -190,7 +186,7 @@ describe('InternalErrorSummaryService', () => {
       // Remove only 'required' error message
       service.removeError(firstErrorRemoveItem);
 
-      expect(service.errors['test-form-id-1']['first-error'].errors).toEqual({
+      expect(service.errors['test-form-id-1']['first-error']).toEqual({
         email: 'Test label: Email is not valid',
       });
     });

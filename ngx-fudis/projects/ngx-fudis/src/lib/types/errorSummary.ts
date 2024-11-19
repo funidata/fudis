@@ -20,27 +20,24 @@ export type FudisErrorSummaryRemoveError = {
 };
 
 /**
- * Collection of all Errors by th
+ * Collection of all errors of each Form.
  */
-export type FudisErrorSummaryErrors = {
-  [id: string]: FudisErrorSummaryObject;
+export type FudisErrorSummaryAllErrors = {
+  [formId: string]: FudisErrorSummaryFormErrors;
 };
 
-export type FudisErrorSummaryErrorsSignal = {
-  [id: string]: FudisErrorSummaryObjectSignal;
+/**
+ * Collection of all errors of each Form as nested Signal
+ */
+export type FudisErrorSummaryAllErrorsSignal = {
+  [formId: string]: WritableSignal<FudisErrorSummaryFormErrors>;
 };
 
-export type FudisErrorSummaryObjectSignal = WritableSignal<FudisErrorSummaryObject>;
-
-export type FudisErrorSummaryObject = {
-  [id: string]: {
-    id: string;
-    errors: FudisErrorSummaryObjectItemErrors;
-  };
-};
-
-export type FudisErrorSummaryObjectItemErrors = {
-  [errorType: string]: string;
+/**
+ * Collection of single Forms errors
+ */
+export type FudisErrorSummaryFormErrors = {
+  [formFieldId: string]: { [errorId: string]: string };
 };
 
 export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';

@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisErrorSummaryObject } from '../../../types/errorSummary';
+import { FudisErrorSummaryFormErrors } from '../../../types/errorSummary';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 
@@ -106,7 +106,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   /**
    * Update Error Summary content with possible parent Fieldsets, Sections and Expandables (Sections)
    */
-  private _updateSummaryContent(content: FudisErrorSummaryObject): void {
+  private _updateSummaryContent(content: FudisErrorSummaryFormErrors): void {
     const newErrorList: ErrorSummaryDOMListItem[] = [];
 
     const fieldsets: { [id: string]: string } =
@@ -115,10 +115,8 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
     const sections: { [id: string]: string } =
       this._errorSummaryService.formStructure[this.formId].sections;
 
-    Object.keys(content).forEach((item) => {
-      const errorId = content[item].id;
-
-      Object.values(content[item].errors).forEach((error: string) => {
+    Object.keys(content).forEach((errorId) => {
+      Object.values(content[errorId]).forEach((error: string) => {
         const parentFieldset = Object.keys(fieldsets).find((fieldset) => {
           if (this.parentComponent?.querySelector(`#${fieldset} #${errorId}`)) {
             return fieldset;
