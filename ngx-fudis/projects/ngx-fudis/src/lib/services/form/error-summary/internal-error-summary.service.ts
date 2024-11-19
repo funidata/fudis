@@ -167,7 +167,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * If new error item has a matching id on the list, new error is tied to that error list object
    * @param newError Form error summary item
    */
-  public addNewError(newError: FudisErrorSummaryNewError): void {
+  public addError(newError: FudisErrorSummaryNewError): void {
     if (!this._errorsStore[newError.formId]) {
       this.registerNewForm(newError.formId);
     }
@@ -194,7 +194,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   * Utility function used by addNewError()
+   * Utility function used by addError()
    * @param newError
    * @param currentErrors
    * @returns

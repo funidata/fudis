@@ -178,7 +178,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
         id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
-      this._errorSummaryService.addNewError(newError);
+      this._errorSummaryService.addError(newError);
       this._errorSent = true;
       this.handleCreateError.emit(newError);
     }

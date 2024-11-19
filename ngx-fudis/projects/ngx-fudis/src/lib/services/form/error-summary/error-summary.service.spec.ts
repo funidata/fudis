@@ -21,6 +21,8 @@ describe('ErrorSummaryService', () => {
 
     jest.spyOn(service, 'reloadAllErrors').mockImplementation(() => {});
     jest.spyOn(service, 'reloadFormErrors').mockImplementation(() => {});
+    jest.spyOn(service, 'addError').mockImplementation(() => {});
+    jest.spyOn(service, 'removeError').mockImplementation(() => {});
   });
 
   it('should be created', () => {

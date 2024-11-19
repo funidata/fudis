@@ -91,12 +91,12 @@ describe('InternalErrorSummaryService', () => {
       message: 'Test label: Something new',
     };
 
-    service.addNewError(firstError);
+    service.addError(firstError);
 
     expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
       'Test label: There is something wrong',
     );
-    service.addNewError(firstErrorWithContentUpdate);
+    service.addError(firstErrorWithContentUpdate);
     expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
       'Test label: Something new',
     );
@@ -164,9 +164,9 @@ describe('InternalErrorSummaryService', () => {
     });
 
     it('should return currentErrorList object containing given errors', () => {
-      service.addNewError(firstError);
-      service.addNewError(secondError);
-      service.addNewError(firstErrorAnotherErrorType);
+      service.addError(firstError);
+      service.addError(secondError);
+      service.addError(firstErrorAnotherErrorType);
 
       currentErrors = {
         'test-form-id-1': firstErrorFromService,
@@ -182,10 +182,10 @@ describe('InternalErrorSummaryService', () => {
 
     it('should remove object error for respective type', () => {
       // Add object with 'required' error message
-      service.addNewError(firstError);
+      service.addError(firstError);
 
       // Add 'email' error message to the same object
-      service.addNewError(firstErrorAnotherErrorType);
+      service.addError(firstErrorAnotherErrorType);
 
       // Remove only 'required' error message
       service.removeError(firstErrorRemoveItem);

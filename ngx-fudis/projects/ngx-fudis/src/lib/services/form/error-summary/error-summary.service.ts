@@ -62,15 +62,15 @@ export class FudisErrorSummaryService {
    * @param focusId HTML element's id, where user focus should be moved when user clicks the message.
    * @param message Visible message to the user
    */
-  public addNewError(id: string, formId: string, focusId: string, message: string): void {
+  public addError(id: string, formId: string, focusId: string, message: string): void {
     const newError: FudisErrorSummaryNewError = { focusId, formId, message, id };
 
-    this._errorSummaryService.addNewError(newError);
+    this._errorSummaryService.addError(newError);
   }
 
   /**
    * To remove messages from Form's Error Summary
-   * @param id Identifier of provided message in 'addNewError'
+   * @param id Identifier of provided message in 'addError()'
    * @param formId Id of Form component
    * @param focusId HTML element's id, where user focus should be moved when user clicks the message.
    */
