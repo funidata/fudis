@@ -11,14 +11,6 @@ describe('ErrorSummaryService', () => {
   let service: FudisErrorSummaryService;
   let internalService: FudisInternalErrorSummaryService;
 
-  const spy = {
-    reloadFormErrors: jest.fn(),
-    reloadAllErrors: jest.fn(),
-    addError: jest.fn(),
-    removeError: jest.fn(),
-    updateStrategy: 'reloadOnly',
-  };
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
