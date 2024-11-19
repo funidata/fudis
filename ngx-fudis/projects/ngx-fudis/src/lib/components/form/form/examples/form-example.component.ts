@@ -14,6 +14,7 @@ type MyForm = {
   courseType: FormControl<string | null>;
   startDate: FormControl<Date | null>;
   endDate: FormControl<Date | null>;
+  description: FormGroup;
 };
 
 @Component({
@@ -98,7 +99,7 @@ type MyForm = {
           [errorSummaryBreadcrumb]="true"
         >
           <ng-template fudisContent [type]="'expandable'">
-            <fudis-fieldset [label]="'More important dates'">
+            <fudis-fieldset [label]="'More important fields'">
               <ng-template fudisContent [type]="'fieldset'">
                 <fudis-date-range>
                   <fudis-datepicker
@@ -112,6 +113,11 @@ type MyForm = {
                     [control]="formGroup.controls.endDate"
                   />
                 </fudis-date-range>
+                <fudis-localized-text-group
+                  [formGroup]="formGroup.controls.description"
+                  [label]="'Description'"
+                  [helpText]="'Description in all languages is required'"
+                />
               </ng-template>
             </fudis-fieldset>
           </ng-template>
@@ -129,8 +135,6 @@ export class StorybookExampleFormComponent implements OnInit {
   @Input() formGroup: FormGroup<MyForm>;
 
   releaseDate: number = new Date(1991, 4, 1).getTime();
-  firstLoad: boolean = true;
-  fieldsetId = 'first-fieldset-id';
 
   courseTypeOptions: FudisRadioButtonOption<object>[] = [
     { value: 'basic', label: 'Basic' },

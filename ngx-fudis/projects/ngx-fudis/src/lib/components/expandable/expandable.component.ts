@@ -11,14 +11,14 @@ import {
   AfterContentInit,
   inject,
   DestroyRef,
+  Injector,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummarySection } from '../../types/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-expandable',
@@ -117,11 +117,6 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   protected _openedOnce: boolean = false;
 
   /**
-   * Object to send to Error Summary Service
-   */
-  private _errorSummaryInfo: FudisFormErrorSummarySection;
-
-  /**
    * Is info sent to Error Summary Service
    */
   private _errorSummaryInfoSent: boolean = false;
@@ -141,6 +136,8 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
     return this._closed;
   }
 
+  private _injector = inject(Injector);
+
   ngAfterContentInit(): void {
     this._getParentForm();
 
@@ -149,23 +146,13 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
         this._addToErrorSummary(this.title);
       }
 
-      this._errorSummaryService.allFormErrorsObservable
-        .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((errors) => {
-          this._getParentForm();
-          if (this._parentForm) {
-            const expandableErrors = errors?.[this._parentForm.id];
-
-            if (
-              this.closed &&
-              this.openOnErrorSummaryReload &&
-              expandableErrors &&
-              this._parentForm.errorSummaryVisible
-            ) {
-              this._setClosedStatus(false);
-            }
-          }
-        });
+      toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentForm.id], {
+        injector: this._injector,
+      }).subscribe((value) => {
+        if (this.closed && this.openOnErrorSummaryReload && value) {
+          this._setClosedStatus(false);
+        }
+      });
     }
   }
 
@@ -188,12 +175,12 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
    */
   private _addToErrorSummary(title: string): void {
     if (this.errorSummaryBreadcrumb && this._parentForm) {
-      this._errorSummaryInfo = {
+      const errorSummaryInfo = {
         id: this._id,
         formId: this._parentForm.id,
         title: title,
       };
-      this._errorSummaryService.addSection(this._errorSummaryInfo);
+      this._errorSummaryService.addSection(errorSummaryInfo);
       this._errorSummaryInfoSent = true;
     }
   }
@@ -202,8 +189,8 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
    * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
-    if (this._errorSummaryInfoSent) {
-      this._errorSummaryService.removeSection(this._errorSummaryInfo);
+    if (this._errorSummaryInfoSent && this._parentForm) {
+      this._errorSummaryService.removeSection(this._parentForm.id, this._id);
     }
   }
 

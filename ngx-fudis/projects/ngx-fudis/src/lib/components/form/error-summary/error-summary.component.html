@@ -1,13 +1,14 @@
-<ng-container *ngIf="_visibleErrorList | async as errors">
+<ng-container *ngIf="_visibleErrorList() as errors">
   <div *ngIf="errors.length > 0" class="fudis-error-summary__main-container">
     <fudis-notification [variant]="'danger'">
       <ng-template fudisContent type="notification">
         <div class="fudis-error-summary" #focusTarget tabindex="-1">
           <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
           <div class="fudis-error-summary__errors">
-            <ng-container *ngIf="helpText && (_attentionText | async) as attentionText">
+            <ng-container *ngIf="helpText">
               <fudis-body-text [variant]="'md-regular'" class="fudis-mt-xs">
-                <span class="fudis-visually-hidden">{{ attentionText }}:&nbsp;</span
+                <span class="fudis-visually-hidden"
+                  >{{ _translationService.getTranslations()().ICON.ATTENTION }}:&nbsp;</span
                 >{{ helpText }}</fudis-body-text
               >
             </ng-container>

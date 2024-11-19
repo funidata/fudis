@@ -9,7 +9,9 @@
   </fudis-body-text>
 
   <button
-    [attr.aria-label]="(message | async) + ', ' + (_closeLabel | async)"
+    [attr.aria-label]="
+      (message | async) + ', ' + _translateService.getTranslations()().DIALOG.CLOSE
+    "
     [id]="buttonId"
     (click)="_handleCloseClick($event)"
     (focus)="_handleFocus($event)"

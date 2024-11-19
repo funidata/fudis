@@ -155,11 +155,13 @@ describe('ErrorSummaryComponent', () => {
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
 
-    wrapperFixture = TestBed.createComponent(MockFormComponent);
-    wrapperComponent = wrapperFixture.componentInstance;
-    wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
-    wrapperComponent.reloadErrors();
-    wrapperFixture.detectChanges();
+    TestBed.runInInjectionContext(() => {
+      wrapperFixture = TestBed.createComponent(MockFormComponent);
+      wrapperComponent = wrapperFixture.componentInstance;
+      wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
+      wrapperComponent.reloadErrors();
+      wrapperFixture.detectChanges();
+    });
   });
 
   const getErrorListPromise = (): Promise<string[] | null> => {

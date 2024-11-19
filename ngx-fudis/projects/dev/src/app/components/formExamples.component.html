@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-  <fudis-expandable [title]="'Form with some transloco'" [closed]="true">
+  <fudis-expandable [title]="'Form with some transloco'" [closed]="formExpandableClosed">
     <ng-template fudisActions type="expandable">
       <fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
       <fudis-button

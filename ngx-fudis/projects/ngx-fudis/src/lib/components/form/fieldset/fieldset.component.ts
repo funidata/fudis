@@ -20,7 +20,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { BehaviorSubject } from 'rxjs';
@@ -147,11 +147,6 @@ export class FieldSetComponent
    */
   private _fieldsetSent: boolean = false;
 
-  /**
-   * Field Set object to send to Error Summary
-   */
-  private _fieldsetInfo: FudisFormErrorSummarySection;
-
   private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
 
   /**
@@ -218,13 +213,13 @@ export class FieldSetComponent
    */
   private _addToErrorSummary(label: string): void {
     if (this.errorSummaryBreadcrumb && this._parentForm) {
-      this._fieldsetInfo = {
+      const fieldsetInfo = {
         id: this.id,
         formId: this._parentForm.id,
         title: label,
       };
 
-      this._errorSummaryService.addFieldset(this._fieldsetInfo);
+      this._errorSummaryService.addFieldset(fieldsetInfo);
 
       this._fieldsetSent = true;
     }
@@ -234,8 +229,8 @@ export class FieldSetComponent
    * Remove Field Set label from Error Summary
    */
   private _removeFromErrorSummary(): void {
-    if (this.errorSummaryBreadcrumb && this._fieldsetSent) {
-      this._errorSummaryService.removeFieldset(this._fieldsetInfo);
+    if (this._fieldsetSent && this._parentForm?.id) {
+      this._errorSummaryService.removeFieldset(this._parentForm?.id, this.id);
     }
   }
 
