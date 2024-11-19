@@ -7,13 +7,13 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  effect,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dd',
@@ -34,17 +34,21 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       this._parentDlItem.id,
     );
 
-    effect(() => {
-      if (_parentDl.getVariant()() === 'regular') {
-        this._mainCssClass.next('fudis-dl-item-details__regular');
-      } else {
-        this._mainCssClass.next('fudis-dl-item-details__compact');
-      }
-    });
+    toObservable(_parentDl.getVariant())
+      .pipe(takeUntilDestroyed())
+      .subscribe((newVariant) => {
+        if (newVariant === 'regular') {
+          this._mainCssClass.next('fudis-dl-item-details__regular');
+        } else {
+          this._mainCssClass.next('fudis-dl-item-details__compact');
+        }
+      });
 
-    effect(() => {
-      this._langSelected.next(!!(this.lang && _parentDlItem.getSelectedLanguage()() === this.lang));
-    });
+    toObservable(_parentDlItem.getSelectedLanguage())
+      .pipe(takeUntilDestroyed())
+      .subscribe((newLang) => {
+        this._langSelected.next(!!(this.lang && newLang === this.lang));
+      });
   }
 
   /**

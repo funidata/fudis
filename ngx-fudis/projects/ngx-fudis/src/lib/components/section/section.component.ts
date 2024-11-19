@@ -18,7 +18,6 @@ import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { BehaviorSubject } from 'rxjs';
 
@@ -122,11 +121,6 @@ export class SectionComponent
   protected _classList = new BehaviorSubject<string>('');
 
   /**
-   * Object to send to error summary service
-   */
-  private _errorSummaryInfo: FudisFormErrorSummarySection;
-
-  /**
    * Is info sent to error summary service
    */
   private _errorSummaryInfoSent: boolean = false;
@@ -166,12 +160,12 @@ export class SectionComponent
    */
   private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb && this._parentForm) {
-      this._errorSummaryInfo = {
+      const errorSummaryInfo = {
         id: this.id,
         formId: this._parentForm.id,
         title: this.title,
       };
-      this._errorSummaryService.addSection(this._errorSummaryInfo);
+      this._errorSummaryService.addSection(errorSummaryInfo);
       this._errorSummaryInfoSent = true;
     }
   }
@@ -180,8 +174,8 @@ export class SectionComponent
    * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
-    if (this._errorSummaryInfoSent) {
-      this._errorSummaryService.removeSection(this._errorSummaryInfo);
+    if (this._errorSummaryInfoSent && this._parentForm) {
+      this._errorSummaryService.removeSection(this._parentForm.id, this.id);
     }
   }
 

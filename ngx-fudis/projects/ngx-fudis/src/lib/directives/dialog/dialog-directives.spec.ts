@@ -121,7 +121,8 @@ describe('DialogDirectives', () => {
 
   describe('DialogCloseDirective', () => {
     it('should contain text', () => {
-      const button = getElement(fixture, '[fudisDialogClose]');
+      const button = getElement(fixture, 'fudis-dialog-actions [fudisDialogClose]');
+
       expect(button.textContent).toEqual('Close this dialog');
     });
   });

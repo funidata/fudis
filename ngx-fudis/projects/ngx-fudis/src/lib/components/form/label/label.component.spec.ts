@@ -4,6 +4,8 @@ import { LabelComponent } from './label.component';
 import { ButtonComponent } from '../../button/button.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { IconComponent } from '../../icon/icon.component';
+import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 
 describe('LabelComponent', () => {
   let component: LabelComponent;
@@ -11,7 +13,7 @@ describe('LabelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LabelComponent, ButtonComponent],
+      declarations: [LabelComponent, ButtonComponent, IconComponent, TooltipDirective],
       providers: [FudisTranslationService, FudisIdService],
     }).compileComponents();
 

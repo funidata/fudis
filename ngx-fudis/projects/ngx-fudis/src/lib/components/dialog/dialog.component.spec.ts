@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
@@ -10,6 +9,7 @@ import { fudisDialogSizeArray } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisAlertService } from '../../services/alert/alert.service';
+import { IconComponent } from '../icon/icon.component';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -18,7 +18,7 @@ describe('DialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogComponent, AlertGroupComponent, MockComponent(ButtonComponent)],
+      declarations: [DialogComponent, AlertGroupComponent, ButtonComponent, IconComponent],
       imports: [MatDialogModule],
       providers: [
         FudisDialogService,
@@ -66,13 +66,16 @@ describe('DialogComponent', () => {
       });
     });
 
-    it('should have CSS class for close button', () => {
-      component.closeButtonPositionAbsolute = true;
+    it('should have CSS class for close button', async () => {
+      fixture.componentRef.instance.closeButtonPositionAbsolute.set(true);
+
       fixture.detectChanges();
 
-      const closeButtonEl = getElement(fixture, '.fudis-dialog fudis-button');
+      const closeButtonEl = getElement(fixture, '.fudis-dialog fudis-button.fudis-dialog__close');
 
-      expect(closeButtonEl.className).toEqual('fudis-dialog__close fudis-dialog__close__absolute');
+      expect(closeButtonEl.className).toEqual(
+        'fudis-dialog__close fudis-button-host fudis-dialog__close__absolute',
+      );
     });
   });
 

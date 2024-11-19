@@ -6,9 +6,9 @@ import { By } from '@angular/platform-browser';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import {
-  FudisFormErrorSummaryItem,
-  FudisFormErrorSummaryRemoveItem,
-} from '../../../../types/forms';
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryRemoveError,
+} from '../../../../types/errorSummary';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
@@ -123,13 +123,11 @@ describe('ValidatorErrorMessageComponent', () => {
 
       fixture.detectChanges();
 
-      const testError: FudisFormErrorSummaryItem = {
-        id: 'test-id',
-        error: 'Message for testing',
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
+        message: 'Test label: Message for testing',
         formId: 'test-form-id',
-        label: 'Test label',
         type: 'required',
-        controlName: undefined,
       };
 
       const errorElementText = getElement(fixture, '.fudis-error-message');
@@ -147,11 +145,10 @@ describe('ValidatorErrorMessageComponent', () => {
         message: new SimpleChange(null, component.message, true),
       });
 
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
-        id: 'test-id',
+      const errorToRemove: FudisErrorSummaryRemoveError = {
+        focusId: 'test-id',
         formId: 'test-form-id',
         type: 'required',
-        controlName: undefined,
       };
       component.ngOnDestroy();
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
@@ -172,13 +169,11 @@ describe('ValidatorErrorMessageComponent', () => {
 
       fixture.detectChanges();
 
-      const testError: FudisFormErrorSummaryItem = {
-        id: 'test-id',
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
         formId: 'test-form-id',
-        error: 'First message from observable',
-        label: 'Test label',
+        message: 'Test label: First message from observable',
         type: 'required',
-        controlName: undefined,
       };
 
       const errorElementTextFirst = getElement(fixture, '.fudis-error-message');
@@ -191,9 +186,9 @@ describe('ValidatorErrorMessageComponent', () => {
 
       fixture.detectChanges();
 
-      const updatedError: FudisFormErrorSummaryItem = {
+      const updatedError: FudisErrorSummaryNewError = {
         ...testError,
-        error: 'Second message after update',
+        message: 'Test label: Second message after update',
       };
 
       const errorElementTextSecond = getElement(fixture, '.fudis-error-message');
@@ -222,11 +217,10 @@ describe('ValidatorErrorMessageComponent', () => {
         controlName: new SimpleChange(null, component.controlName, true),
       });
 
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
-        id: 'test-observable-message-id',
+      const errorToRemove: FudisErrorSummaryRemoveError = {
+        focusId: 'test-observable-message-id',
         formId: 'test-form-id',
         type: 'required',
-        controlName: undefined,
       };
 
       component.ngOnDestroy();
@@ -241,33 +235,27 @@ describe('ValidatorErrorMessageComponent', () => {
 
       jest.spyOn(component.handleCreateError, 'emit');
 
-      component.message = messageAsObservable;
+      fixture.componentRef.setInput('message', messageAsObservable);
 
-      component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
-      });
+      fixture.detectChanges();
 
-      const testError: FudisFormErrorSummaryItem = {
-        id: 'test-id',
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
         formId: 'test-form-id',
-        error: 'First message from observable',
-        label: 'Test label',
+        message: 'Test label: First message from observable',
         type: 'required',
-        controlName: undefined,
       };
 
-      const updatedError: FudisFormErrorSummaryItem = {
+      const updatedError: FudisErrorSummaryNewError = {
         ...testError,
-        label: 'New better label',
+        message: 'Better label: First message from observable',
       };
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
 
-      component.label = updatedError.label;
+      fixture.componentRef.setInput('label', 'Better label');
 
-      component.ngOnChanges({
-        label: new SimpleChange('Test label', component.label, false),
-      });
+      fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
     });

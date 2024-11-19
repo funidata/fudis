@@ -1,7 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Inject } from '@angular/core';
-import { MockComponents } from 'ng-mocks';
 import { FudisDialogService } from './dialog.service';
 import { BodyTextComponent } from '../../components/typography/body-text/body-text.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
@@ -15,6 +14,8 @@ import {
 import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
 import { FudisIdService } from '../id/id.service';
 import { FudisTranslationService } from '../translation/translation.service';
+import { IconComponent } from '../../components/icon/icon.component';
+import { FudisAlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'fudis-dialog-test-content',
@@ -84,7 +85,10 @@ describe('DialogService', () => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
       declarations: [
-        MockComponents(HeadingComponent, BodyTextComponent, AlertGroupComponent),
+        HeadingComponent,
+        BodyTextComponent,
+        AlertGroupComponent,
+        IconComponent,
         ButtonComponent,
         DialogComponent,
         DialogContentDirective,
@@ -97,6 +101,7 @@ describe('DialogService', () => {
         FudisDialogService,
         FudisIdService,
         FudisTranslationService,
+        FudisAlertService,
         {
           provide: MatDialogRef,
           useValue: {},

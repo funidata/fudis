@@ -12,9 +12,9 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import {
-  FudisFormErrorSummaryItem,
-  FudisFormErrorSummaryRemoveItem,
-} from '../../../../types/forms';
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryRemoveError,
+} from '../../../../types/errorSummary';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
@@ -74,12 +74,12 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   /**
    * Output for handling a state when error is sent to Error Summary
    */
-  @Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
+  @Output() handleCreateError = new EventEmitter<FudisErrorSummaryNewError>();
 
   /**
    * Output for handling a state when error is removed from Error Summary
    */
-  @Output() handleRemoveError = new EventEmitter<FudisFormErrorSummaryRemoveItem>();
+  @Output() handleRemoveError = new EventEmitter<FudisErrorSummaryRemoveError>();
 
   /**
    * Error message to include in error summary item
@@ -171,13 +171,11 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   private _createError(): void {
     if (this.formId && this.focusId && this._currentMessage.value && this.label) {
-      const newError: FudisFormErrorSummaryItem = {
-        id: this.focusId,
-        error: this._currentMessage.value,
+      const newError: FudisErrorSummaryNewError = {
+        focusId: this.focusId,
         formId: this.formId,
-        label: this.label,
-        type: this.type,
-        controlName: this.controlName,
+        message: `${this.label}: ${this._currentMessage.value}`,
+        type: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
       this._errorSummaryService.addNewError(newError);
@@ -188,11 +186,10 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   private _removeError(): void {
     if (this._errorSent && this.formId) {
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
-        id: this.focusId,
+      const errorToRemove: FudisErrorSummaryRemoveError = {
+        focusId: this.focusId,
         formId: this.formId,
-        type: this.type,
-        controlName: this.controlName,
+        type: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
       this._errorSummaryService.removeError(errorToRemove, this.formId);

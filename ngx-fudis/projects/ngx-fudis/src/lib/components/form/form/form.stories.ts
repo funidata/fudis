@@ -116,6 +116,20 @@ export const Example: StoryFn = (args) => ({
           message: 'End date cannot be later than 20.10.2024',
         }),
       ]),
+      description: new FormGroup({
+        fi: new FormControl<string | null>(
+          null,
+          FudisValidators.required('Missing Finnish description'),
+        ),
+        sv: new FormControl<string | null>(
+          null,
+          FudisValidators.required('Missing Swedish description'),
+        ),
+        en: new FormControl<string | null>(
+          null,
+          FudisValidators.required('Missing English description'),
+        ),
+      }),
     }),
   },
   template: html`
@@ -142,7 +156,7 @@ export const Example: StoryFn = (args) => ({
           </fudis-dl-item>
           <fudis-dl-item>
             <fudis-dt [contentText]="'Another important person'" />
-            <fudis-dd [contentText]="'Mara Jase'" />
+            <fudis-dd [contentText]="'Mara Jade'" />
           </fudis-dl-item>
         </fudis-dl>
       </ng-template>

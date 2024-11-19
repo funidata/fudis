@@ -5,10 +5,9 @@ import {
   Inject,
   Input,
   Output,
-  effect,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FudisNotification } from '../../../types/miscellaneous';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -24,15 +23,11 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
 export class AlertComponent {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
+    protected _translateService: FudisTranslationService,
     private _alertService: FudisAlertService,
     private _focusService: FudisFocusService,
-    private _translateService: FudisTranslationService,
     private _dialogService: FudisDialogService,
-  ) {
-    effect(() => {
-      this._closeLabel.next(this._translateService.getTranslations()().DIALOG.CLOSE);
-    });
-  }
+  ) {}
 
   /**
    * Visible alert message
@@ -58,11 +53,6 @@ export class AlertComponent {
    * Output for close button click
    */
   @Output() handleClose = new EventEmitter<Event>();
-
-  /**
-   * Internal translated aria-label for close button
-   */
-  protected _closeLabel = new Subject<string>();
 
   /**
    * Handler for close button. Dismisses alert from service and sets focus to last alert in the list or to previously focused element stored with _handleFocus().
