@@ -4,6 +4,9 @@ test("error summary", async ({ page }) => {
   const invalidEmailText =
     "Section title / Fieldset legend / Contact email: Input must be an email address.";
 
+  const missingEmailText =
+    "Section title / Fieldset legend / Contact email: Missing email contact.";
+
   const missingTeacher =
     "Section title / Fieldset legend / Responsible teacher: Missing teacher's name who is responsible for this course.";
 
@@ -17,6 +20,7 @@ test("error summary", async ({ page }) => {
   await page.getByTestId("unique-input-4").focus();
   await page.getByTestId("unique-input-4").clear();
   await page.keyboard.type("hello", { delay: 25 });
+  await expect(page.getByText(missingEmailText)).toBeVisible();
   await expect(page).toHaveScreenshot("2-before-reload-only.png", { fullPage: true });
   await page.getByTestId("fudis-button-2").click();
   await expect(page).toHaveScreenshot("3-after-reload-only.png", { fullPage: true });

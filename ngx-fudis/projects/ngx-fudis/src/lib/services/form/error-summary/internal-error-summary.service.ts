@@ -241,10 +241,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   public reloadAllErrors(): void {
     Object.keys(this._errorsStore).forEach((key) => {
-      const formHasErrors = this._errorsStore[key];
-      console.log(formHasErrors);
-
-      if (this._errorSummaryVisibilityStatus[key]()) this.reloadFormErrors(key, false);
+      if (this._errorSummaryVisibilityStatus[key]()) {
+        this.reloadFormErrors(key, false);
+      }
     });
   }
 
