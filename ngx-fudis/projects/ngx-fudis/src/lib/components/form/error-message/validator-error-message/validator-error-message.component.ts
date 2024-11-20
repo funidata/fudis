@@ -39,7 +39,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   /**
    * Label text of input this message is related to. Sent to Error Summary service.
    */
-  @Input({ required: true }) label: string;
+  @Input() label: string;
 
   /**
    * Error type from different keys in e. g. control.errors such as 'required' and 'minlength'
@@ -170,11 +170,15 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   }
 
   private _createError(): void {
-    if (this.formId && this.focusId && this._currentMessage.value && this.label) {
+    if (this.formId && this.focusId && this._currentMessage.value) {
+      const message = this.label
+        ? `${this.label}: ${this._currentMessage.value}`
+        : this._currentMessage.value;
+
       const newError: FudisErrorSummaryNewError = {
         focusId: this.focusId,
         formId: this.formId,
-        message: `${this.label}: ${this._currentMessage.value}`,
+        message: message,
         id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
