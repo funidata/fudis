@@ -9,18 +9,25 @@
   >
     <ng-template fudisActions type="form">
       <fudis-button
+        [id]="'change-strategy-button'"
         [label]="t('changeStrategy')"
         [variant]="'tertiary'"
         [icon]="'settings'"
         (handleClick)="toggleLiveRemove()"
       />
       <fudis-button
+        [id]="'change-language-button'"
         [variant]="'tertiary'"
         (handleClick)="changeLanguage()"
         [icon]="'switch'"
         [label]="t('changeLanguage')"
       />
-      <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="t('submit')" />
+      <fudis-button
+        [id]="'submit-button'"
+        fudisFormSubmit
+        [formValid]="formExample.valid"
+        [label]="t('submit')"
+      />
     </ng-template>
     <ng-template fudisContent type="form">
       <fudis-section [title]="t('sectionTitle1')" [errorSummaryBreadcrumb]="true">
