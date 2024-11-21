@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { FudisFormErrorSummaryUpdateStrategy } from 'dist/ngx-fudis/lib/types/errorSummary';
+import { FudisFormErrorSummaryUpdateStrategy } from '../../../../types/errorSummary';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { Observable } from 'rxjs';
 import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
