@@ -2,38 +2,37 @@ import test, { expect } from "@playwright/test";
 
 test("error summary", async ({ page }) => {
   const invalidEmailText =
-    "Section title / Fieldset legend / Contact email: Input must be an email address.";
+    "Form Section Title / Fieldset Legend / Contact email: Input must be an email address.";
 
   const missingEmailText =
-    "Section title / Fieldset legend / Contact email: Missing email contact.";
+    "Form Section Title / Fieldset Legend / Contact email: Missing email contact.";
 
   const missingTeacher =
-    "Section title / Fieldset legend / Responsible teacher: Missing teacher's name who is responsible for this course.";
+    "Form Section Title / Fieldset Legend / Responsible Teacher: Missing teacher's name who is responsible for this course.";
 
   await page.goto("/iframe.html?args=&id=components-form-error-summary--example&viewMode=story");
 
-  await page.getByTestId("fudis-button-2").click();
+  await page.getByTestId("submit-button").click();
   await expect(page).toHaveScreenshot("1-init.png", { fullPage: true });
   await page.getByTestId("fudis-link-4").click();
   await expect(page.getByTestId("fudis-checkbox-group-1-legend")).toBeFocused();
 
   await page.getByTestId("unique-input-4").focus();
-  await page.getByTestId("unique-input-4").clear();
-  await page.keyboard.type("hello", { delay: 25 });
+  await page.keyboard.type("hello");
   await expect(page.getByText(missingEmailText)).toBeVisible();
+  await expect(page.getByText(invalidEmailText)).not.toBeVisible();
   await expect(page).toHaveScreenshot("2-before-reload-only.png", { fullPage: true });
-  await page.getByTestId("fudis-button-2").click();
+  await page.getByTestId("submit-button").click();
   await expect(page).toHaveScreenshot("3-after-reload-only.png", { fullPage: true });
-  await page.getByTestId("fudis-button-1").click();
+  await page.getByTestId("change-strategy-button").click();
   await expect(page.getByText(invalidEmailText)).toBeVisible();
   await expect(page).toHaveScreenshot("4-before-remove-only-1.png", { fullPage: true });
-
   await page.getByTestId("unique-input-4").focus();
   await page.getByTestId("unique-input-4").clear();
-  await page.keyboard.type("hello@hey.com", { delay: 25 });
+  await page.keyboard.type("hello@hey.com");
   await expect(page.getByText(invalidEmailText)).not.toBeVisible();
   await expect(page).toHaveScreenshot("5-after-removeonly.png", { fullPage: true });
-  await page.getByTestId("fudis-button-1").click();
+  await page.getByTestId("change-strategy-button").click();
   await expect(page.getByText(missingTeacher)).toBeVisible();
   await page.getByTestId("unique-input-4").focus();
   await page.getByTestId("unique-input-4").clear();
