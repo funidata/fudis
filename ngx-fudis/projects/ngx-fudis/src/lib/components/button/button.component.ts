@@ -34,8 +34,6 @@ import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component'
 export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit, OnDestroy {
   constructor(private _idService: FudisIdService) {
     super();
-
-    this._id = _idService.getNewId('button');
   }
 
   /**
@@ -94,6 +92,11 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   @Input() iconRotate: FudisIconRotate = 'none';
 
   /**
+   * Id for HTML button element. By default generated.
+   */
+  @Input() id: string;
+
+  /**
    * Assign button as menu button with dropdown
    */
   @Input() asMenuButton: boolean = false;
@@ -144,16 +147,17 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   protected _ariaLabel = new BehaviorSubject<string>('');
 
   /**
-   * Id generated with FudisIdService
-   */
-  protected _id: string;
-
-  /**
    * Is button focused or not
    */
   private _focused: boolean = false;
 
   ngOnInit() {
+    if (this.id) {
+      this._idService.addNewId('button', this.id);
+    } else {
+      this.id = this._idService.getNewId('button');
+    }
+
     if (this._classList.value.length === 0) {
       this._classList.next(this._getClasses());
     }
