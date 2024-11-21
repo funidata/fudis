@@ -16,5 +16,5 @@
     "../projects/ngx-fudis/src/lib/utilities/tests/utilities.ts",
     "../projects/ngx-fudis/src/public-api.ts"
   ],
-  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*", "./transloco.module.ts"]
+  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*", "transloco.module.ts"]
 }
