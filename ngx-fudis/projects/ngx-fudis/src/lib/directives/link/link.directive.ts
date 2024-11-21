@@ -114,7 +114,7 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
 
     const titleChanged = changes.title?.currentValue !== changes.title?.previousValue;
 
-    const externalChanged = changes.external?.currentValue !== changes.title?.previousValue;
+    const externalChanged = changes.external?.currentValue !== changes.external?.previousValue;
 
     if (titleChanged || externalChanged) {
       this._setHtmlAttributes();
