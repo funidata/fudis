@@ -1,8 +1,12 @@
 import { setCompodocJson } from "@storybook/addon-docs/angular";
 import { moduleMetadata } from "@storybook/angular";
-import docJson from "../documentation.json";
 import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
+
+import docJson from "../documentation.json";
+import { HttpClient } from "@angular/common/http";
+import { TranslocoService } from "@jsverse/transloco";
+import { TranslocoRootModule } from ".storybook/transloco.module";
 
 setCompodocJson(docJson);
 
@@ -116,12 +120,12 @@ const preview = {
   },
 
   tags: ["autodocs"],
+  decorators: [
+    moduleMetadata({
+      imports: [NgxFudisModule, TranslocoRootModule],
+      providers: [HttpClient, TranslocoService],
+    }),
+  ],
 };
-
-export const decorators = [
-  moduleMetadata({
-    imports: [NgxFudisModule],
-  }),
-];
 
 export default preview;
