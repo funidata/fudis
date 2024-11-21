@@ -6,6 +6,7 @@ import {
   FudisErrorSummaryNewError,
   FudisErrorSummaryRemoveError,
 } from '../../../types/errorSummary';
+import { BehaviorSubject } from 'rxjs';
 
 describe('ErrorSummaryService', () => {
   let service: FudisErrorSummaryService;
@@ -31,6 +32,7 @@ describe('ErrorSummaryService', () => {
     jest.spyOn(internalService, 'addError');
     jest.spyOn(service, 'removeError');
     jest.spyOn(internalService, 'removeError');
+    jest.spyOn(internalService, 'registerNewForm');
   });
 
   it('should be created', () => {
@@ -65,7 +67,7 @@ describe('ErrorSummaryService', () => {
     expect(internalService.updateStrategy).toEqual('reloadOnly');
   });
 
-  it('should send new error to service', () => {
+  it('should send new string error to service, and on update of same error, reload errors after Error Summary is set to true', () => {
     const newError: FudisErrorSummaryNewError = {
       id: 'my-error-id',
       formId: 'my-form-id',
@@ -82,6 +84,51 @@ describe('ErrorSummaryService', () => {
       newError.message,
     );
     expect(internalService.addError).toHaveBeenCalledWith(newError);
+
+    expect(internalService.registerNewForm).toHaveBeenCalledWith('my-form-id');
+
+    internalService.setErrorSummaryVisibility('my-form-id', true);
+
+    expect(internalService.reloadFormErrors).not.toHaveBeenCalled();
+
+    service.addError(newError.id, newError.formId, newError.focusId, 'message is updated');
+
+    expect(internalService.reloadFormErrors).toHaveBeenCalledWith('my-form-id', false);
+  });
+
+  it('should send new Observable error to service, and on update of same error, reload errors after Error Summary is set to true', () => {
+    const observableError = new BehaviorSubject<string>('First value of error');
+
+    const newError: FudisErrorSummaryNewError = {
+      id: 'my-error-id',
+      formId: 'my-form-id',
+      focusId: 'my-focus-id',
+      message: 'First value of error',
+    };
+
+    service.addError(newError.id, newError.formId, newError.focusId, observableError);
+
+    expect(service.addError).toHaveBeenCalledWith(
+      newError.id,
+      newError.formId,
+      newError.focusId,
+      observableError,
+    );
+    expect(internalService.addError).toHaveBeenCalledWith(newError);
+
+    expect(internalService.registerNewForm).toHaveBeenCalled();
+
+    internalService.setErrorSummaryVisibility('my-form-id', true);
+
+    expect(internalService.reloadFormErrors).not.toHaveBeenCalled();
+
+    observableError.next('Updated observable error value');
+
+    const updatedError = { ...newError, message: 'Updated observable error value' };
+
+    expect(internalService.addError).toHaveBeenCalledWith(updatedError);
+
+    expect(internalService.reloadFormErrors).toHaveBeenCalledWith('my-form-id', false);
   });
 
   it('should send remove error from service', () => {
@@ -100,5 +147,7 @@ describe('ErrorSummaryService', () => {
     );
 
     expect(internalService.removeError).toHaveBeenCalledWith(removeError);
+
+    expect(internalService.reloadFormErrors).not.toHaveBeenCalled();
   });
 });

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 
 import {
@@ -7,7 +7,8 @@ import {
   FudisErrorSummaryRemoveError,
   FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/errorSummary';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Error Summary Service public methods and tools
@@ -15,6 +16,8 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class FudisErrorSummaryService {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
+
+  private _destroyRef = inject(DestroyRef);
 
   /**
    * Get current updateStrategy of Error Summary. By default 'reloadOnly'.
@@ -62,10 +65,23 @@ export class FudisErrorSummaryService {
    * @param focusId HTML element's id, where user focus should be moved when user clicks the message.
    * @param message Visible message to the user
    */
-  public addError(id: string, formId: string, focusId: string, message: string): void {
-    const newError: FudisErrorSummaryNewError = { focusId, formId, message, id };
+  public addError(
+    id: string,
+    formId: string,
+    focusId: string,
+    message: string | Observable<string>,
+  ): void {
+    if (typeof message === 'string') {
+      const newError: FudisErrorSummaryNewError = { focusId, formId, message, id };
 
-    this._errorSummaryService.addError(newError);
+      this._errorSummaryService.addError(newError);
+    } else {
+      message.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((newMessage) => {
+        const newError: FudisErrorSummaryNewError = { focusId, formId, message: newMessage, id };
+
+        this._errorSummaryService.addError(newError);
+      });
+    }
   }
 
   /**
