@@ -194,34 +194,37 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   }
 
   private _setExternalHtml(): void {
-    if (this.external) {
-      // Create Icon Component and define properties
-      this._iconComponentRef = this._viewContainerRef.createComponent(IconComponent);
-      this._iconComponentRef.setInput('icon', 'new-tab');
-      this._iconComponentRef.setInput('color', 'primary-dark');
-
-      // Create HTML semantics
-      const html = String.raw;
-      if (this._parsedTitle.length === 1) {
-        this._bindedElement.nativeElement.innerHTML = html`<span
-          class="fudis-link__external__icon-wrapper"
-          >${this._parsedTitle[0]}<span class="fudis-link__external__icon"></span>
-        </span>`;
-      } else {
-        this._bindedElement.nativeElement.innerHTML = html`${this._parsedTitle[0]}
-          <span class="fudis-link__external__icon-wrapper"
-            >${this._parsedTitle[1]}<span class="fudis-link__external__icon"></span>
+    // Gives enough time for fudis-link__external__icon span to render
+    setTimeout(()=> {
+      if (this.external) {
+        // Create Icon Component and define properties
+        this._iconComponentRef = this._viewContainerRef.createComponent(IconComponent);
+        this._iconComponentRef.setInput('icon', 'new-tab');
+        this._iconComponentRef.setInput('color', 'primary-dark');
+  
+        // Create HTML semantics
+        const html = String.raw;
+        if (this._parsedTitle.length === 1) {
+          this._bindedElement.nativeElement.innerHTML = html`<span
+            class="fudis-link__external__icon-wrapper"
+            >${this._parsedTitle[0]}<span class="fudis-link__external__icon"></span>
           </span>`;
+        } else {
+          this._bindedElement.nativeElement.innerHTML = html`${this._parsedTitle[0]}
+            <span class="fudis-link__external__icon-wrapper"
+              >${this._parsedTitle[1]}<span class="fudis-link__external__icon"></span>
+            </span>`;
+        }
+  
+        // Append Icon Component to right place in the HTML
+        this._bindedElement.nativeElement
+          .querySelector('.fudis-link__external__icon')
+          ?.append(this._iconComponentRef.instance.elementRef.nativeElement);
+      } else {
+        // If not External, detach Icon Component instance
+        this._viewContainerRef.detach();
       }
-
-      // Append Icon Component to right place in the HTML
-      this._bindedElement.nativeElement
-        .querySelector('.fudis-link__external__icon')
-        ?.append(this._iconComponentRef.instance.elementRef.nativeElement);
-    } else {
-      // If not External, detach Icon Component instance
-      this._viewContainerRef.detach();
-    }
+    }, 100);
   }
 
   /**
