@@ -17,7 +17,7 @@
             <fudis-notification [variant]="'danger'"
               ><fudis-body-text
                 >Whoops! Here is danger notification</fudis-body-text
-              ></fudis-notification
+              ><a fudisLink [title]="t('notificationExternalLink')" [external]="true"></a></fudis-notification
             >
             <fudis-heading [level]="3" fudisGridItem [columns]="'auto'">
               <a fudisLink [href]="'#'" [title]="'Link inside a heading'"></a>

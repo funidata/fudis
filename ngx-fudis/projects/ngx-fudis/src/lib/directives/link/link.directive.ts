@@ -194,7 +194,7 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   }
 
   private _setExternalHtml(): void {
-    // Gives enough time for fudis-link__external__icon span to render
+    // HOTFIX: Gives enough time for fudis-link__external__icon span to render
     setTimeout(() => {
       if (this.external) {
         // Create Icon Component and define properties
