@@ -17,7 +17,6 @@ export type FudisErrorSummaryRemoveError = {
   formId: string;
   focusId: string;
   id: string;
-  message?: string;
 };
 
 /**

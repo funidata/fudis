@@ -149,7 +149,6 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: 'test-id',
         formId: 'test-form-id',
         id: 'required',
-        message: 'Test label: Error to be removed',
       };
       component.ngOnDestroy();
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
@@ -222,7 +221,6 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: 'test-observable-message-id',
         formId: 'test-form-id',
         id: 'required',
-        message: 'Test label: Message to be removed',
       };
 
       component.ngOnDestroy();
