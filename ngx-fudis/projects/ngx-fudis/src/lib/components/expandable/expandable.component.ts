@@ -10,7 +10,6 @@ import {
   ElementRef,
   AfterContentInit,
   inject,
-  DestroyRef,
   Injector,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
@@ -121,12 +120,10 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
    */
   private _errorSummaryInfoSent: boolean = false;
 
-  private _destroyRef = inject(DestroyRef);
-
-  private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
+  private _parentFormId: string | null;
 
   private _getParentForm(): void {
-    this._parentForm = this._errorSummaryService.getFormAncestor(this._element.nativeElement);
+    this._parentFormId = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
   }
 
   /**
@@ -141,12 +138,12 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   ngAfterContentInit(): void {
     this._getParentForm();
 
-    if (this._parentForm) {
+    if (this._parentFormId) {
       if (this.errorSummaryBreadcrumb) {
         this._addToErrorSummary(this.title);
       }
 
-      toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentForm.id], {
+      toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
         injector: this._injector,
       }).subscribe((value) => {
         if (this.closed && this.openOnErrorSummaryReload && value) {
@@ -174,10 +171,10 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
    * Send error object to Error Summary Service
    */
   private _addToErrorSummary(title: string): void {
-    if (this.errorSummaryBreadcrumb && this._parentForm) {
+    if (this.errorSummaryBreadcrumb && this._parentFormId) {
       const errorSummaryInfo = {
         id: this._id,
-        formId: this._parentForm.id,
+        formId: this._parentFormId,
         title: title,
       };
       this._errorSummaryService.addSection(errorSummaryInfo);
@@ -189,8 +186,8 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
    * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
-    if (this._errorSummaryInfoSent && this._parentForm) {
-      this._errorSummaryService.removeSection(this._parentForm.id, this._id);
+    if (this._errorSummaryInfoSent && this._parentFormId) {
+      this._errorSummaryService.removeSection(this._parentFormId, this._id);
     }
   }
 

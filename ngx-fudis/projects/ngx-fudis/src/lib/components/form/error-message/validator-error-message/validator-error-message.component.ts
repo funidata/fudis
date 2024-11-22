@@ -170,15 +170,15 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   }
 
   private _createError(): void {
-    if (this.formId && this.focusId && this._currentMessage.value && this.label) {
+    if (this.formId && this.focusId && this._currentMessage.value) {
       const newError: FudisErrorSummaryNewError = {
         focusId: this.focusId,
         formId: this.formId,
         message: `${this.label}: ${this._currentMessage.value}`,
-        type: this.controlName ? `${this.type}_${this.controlName}` : this.type,
+        id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
-      this._errorSummaryService.addNewError(newError);
+      this._errorSummaryService.addError(newError);
       this._errorSent = true;
       this.handleCreateError.emit(newError);
     }
@@ -189,10 +189,10 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
       const errorToRemove: FudisErrorSummaryRemoveError = {
         focusId: this.focusId,
         formId: this.formId,
-        type: this.controlName ? `${this.type}_${this.controlName}` : this.type,
+        id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
-      this._errorSummaryService.removeError(errorToRemove, this.formId);
+      this._errorSummaryService.removeError(errorToRemove);
       this.handleRemoveError.emit(errorToRemove);
     }
   }

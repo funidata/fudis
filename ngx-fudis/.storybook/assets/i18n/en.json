@@ -1,0 +1,67 @@
+{
+  "formTitle": "Example Form with Error Summary",
+  "currentStrategy": "Current Error Summary update strategy is: ",
+  "errorSummaryHelpText": "Toggle live remove button to see errors disappear when input value is corrected",
+  "submit": "Submit",
+  "changeLanguage": "Change language",
+  "changeStrategy": "Change Error Summary Update Strategy",
+  "sectionTitle1": "Form Section Title",
+  "sectionTitle2": "Add and Remove Error Summary Messages",
+  "fieldsetLegend": "Fieldset Legend",
+  "sectionHelptext1": "Following Buttons will toggle two messages, which are manually sent to Error Summary.",
+  "sectionHelptext2": "Errors will be displayed when Error Summary is reloaded.",
+  "customError1": "This is the first custom error sent to Error Summary",
+  "customError2": "Here is the second custom error",
+  "customError1Show": "Show First Error",
+  "customError2Show": "Show Second Error",
+  "customError1Hide": "Hide First Error",
+  "customError2Hide": "Hide Second Error",
+  "form": {
+    "teacherName": {
+      "label": "Responsible Teacher",
+      "helpText": "Someone has to be responsible for this.",
+      "errors": {
+        "required": "Missing teacher's name who is responsible for this course."
+      }
+    },
+    "teacherEmail": {
+      "label": "Contact email",
+      "helpText": "So that students can ask for more time on their homework.",
+      "errors": {
+        "required": "Missing email contact.",
+        "email": "Input must be an email address."
+      }
+    },
+    "courseType": {
+      "label": "Course Type",
+      "options": {
+        "basic": "Basic",
+        "advanced": "Advanced"
+      },
+      "errors": {
+        "required": "Course type must be selected."
+      }
+    },
+    "courseBooks": {
+      "label": "Course Books",
+      "helpText": "Select 1-2 coursebooks",
+      "options": {
+        "heir": "Heir to the Empire",
+        "dark": "Dark Force Rising",
+        "command": "The Last Command"
+      },
+      "errors": {
+        "min": "No book selected.",
+        "max": "Too many selected."
+      }
+    },
+    "startDate": {
+      "label": "Start Date",
+      "helpText": "You have to start from somewhere",
+
+      "errors": {
+        "required": "Start date is missing."
+      }
+    }
+  }
+}

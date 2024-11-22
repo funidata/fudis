@@ -4,43 +4,40 @@ import { WritableSignal } from '@angular/core';
  * To add Error to Error Summary
  */
 export type FudisErrorSummaryNewError = {
-  focusId: string;
   formId: string;
+  focusId: string;
+  id: string;
   message: string;
-  type: string;
 };
 
 /**
  * To remove Error from Error Summary
  */
 export type FudisErrorSummaryRemoveError = {
+  formId: string;
   focusId: string;
-  formId: string | null;
-  type: string;
+  id: string;
 };
 
 /**
- * Collection of all Errors by th
+ * Collection of all errors of each Form.
  */
-export type FudisErrorSummaryErrors = {
-  [id: string]: FudisErrorSummaryObject;
+export type FudisErrorSummaryAllErrors = {
+  [formId: string]: FudisErrorSummaryFormErrors;
 };
 
-export type FudisErrorSummaryErrorsSignal = {
-  [id: string]: FudisErrorSummaryObjectSignal;
+/**
+ * Collection of all errors of each Form as nested Signal
+ */
+export type FudisErrorSummaryAllErrorsSignal = {
+  [formId: string]: WritableSignal<FudisErrorSummaryFormErrors>;
 };
 
-export type FudisErrorSummaryObjectSignal = WritableSignal<FudisErrorSummaryObject>;
-
-export type FudisErrorSummaryObject = {
-  [id: string]: {
-    id: string;
-    errors: FudisErrorSummaryObjectItemErrors;
-  };
-};
-
-export type FudisErrorSummaryObjectItemErrors = {
-  [errorType: string]: string;
+/**
+ * Collection of single Forms errors
+ */
+export type FudisErrorSummaryFormErrors = {
+  [formFieldId: string]: { [errorId: string]: string };
 };
 
 export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';

@@ -147,7 +147,7 @@ export class FieldSetComponent
    */
   private _fieldsetSent: boolean = false;
 
-  private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
+  private _parentFormId: string | null;
 
   /**
    * Fudis translation key for required text
@@ -163,7 +163,7 @@ export class FieldSetComponent
   }
 
   ngAfterContentInit(): void {
-    this._parentForm = this._errorSummaryService.getFormAncestor(this._element.nativeElement);
+    this._parentFormId = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
 
     this._addToErrorSummary(this.label);
   }
@@ -212,10 +212,10 @@ export class FieldSetComponent
    * Add Field Set label to Error Summary
    */
   private _addToErrorSummary(label: string): void {
-    if (this.errorSummaryBreadcrumb && this._parentForm) {
+    if (this.errorSummaryBreadcrumb && this._parentFormId) {
       const fieldsetInfo = {
         id: this.id,
-        formId: this._parentForm.id,
+        formId: this._parentFormId,
         title: label,
       };
 
@@ -229,8 +229,8 @@ export class FieldSetComponent
    * Remove Field Set label from Error Summary
    */
   private _removeFromErrorSummary(): void {
-    if (this._fieldsetSent && this._parentForm?.id) {
-      this._errorSummaryService.removeFieldset(this._parentForm?.id, this.id);
+    if (this._fieldsetSent && this._parentFormId) {
+      this._errorSummaryService.removeFieldset(this._parentFormId, this.id);
     }
   }
 

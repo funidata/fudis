@@ -49,6 +49,29 @@ protected _submitButtonClick():void {
 
 If reloading single Form and its Error Summary one at the time, Service has function `reloadAllErrors()` which will then reload all Forms and their Error Summaries.
 
+### Add Error
+
+Application can manually send message to be displayed in Form's Error Summary with `addError()` method. It requires four parameters:
+
+- id: Identifier of the message, eg. 'app-custom-error-abc123'
+- formId: Id of Form component and Error Summary this error is linked to
+- focusId: HTML element's id, where user focus should be moved when user clicks the message.
+- message: Visible message to the user. It can either be a static `string`, or an `Observable<string>` for e. g. if message should be different in different application language.
+
+```
+this._service.addError('app-custom-error-abc123', 'app-create-user-form', 'app-username-input', 'This is message!')
+```
+
+_Note!_ Adding errors manually does not affect any FormControl's validity. It is app's responsibility to make sure that Form's Controls and FormGroups are properly set invalid, if these messages are set visible.
+
+### Remove Error
+
+To remove previously added error, three parameters described above, need to be spesified: `id`, `formId` and `focusId`
+
+```
+this._service.removeError('app-custom-error-abc123', 'app-create-user-form', 'app-username-input')
+```
+
 ### Update Strategy
 
 By default Error Summary updates only when calling Reload Errors function. All options are:
