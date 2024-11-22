@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  FudisErrorSummaryErrors,
+  FudisErrorSummaryAllErrors,
   FudisErrorSummaryNewError,
-  FudisErrorSummaryObject,
+  FudisErrorSummaryFormErrors,
   FudisErrorSummaryRemoveError,
 } from '../../../types/errorSummary';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
@@ -10,49 +10,45 @@ import { FudisTranslationService } from '../../translation/translation.service';
 
 describe('InternalErrorSummaryService', () => {
   let service: FudisInternalErrorSummaryService;
-  let currentErrors: FudisErrorSummaryErrors;
+  let currentErrors: FudisErrorSummaryAllErrors;
 
   const firstError: FudisErrorSummaryNewError = {
     focusId: 'first-error',
     formId: 'test-form-id-1',
     message: 'Test label: There is something wrong',
-    type: 'required',
+    id: 'required',
   };
 
   const firstErrorAnotherErrorType: FudisErrorSummaryNewError = {
     ...firstError,
     message: 'Test label: Email is not valid',
-    type: 'email',
+    id: 'email',
   };
 
   const secondError: FudisErrorSummaryNewError = {
     focusId: 'second-error',
     formId: 'test-form-id-2',
     message: 'Test label: You need to fix also this',
-    type: 'required',
+    id: 'required',
   };
 
-  const firstErrorFromService: FudisErrorSummaryObject = {
+  const firstErrorFromService: FudisErrorSummaryFormErrors = {
     'first-error': {
-      id: 'first-error',
-      errors: {
-        required: 'Test label: There is something wrong',
-        email: 'Test label: Email is not valid',
-      },
+      required: 'Test label: There is something wrong',
+      email: 'Test label: Email is not valid',
     },
   };
 
-  const secondErrorFromService: FudisErrorSummaryObject = {
+  const secondErrorFromService: FudisErrorSummaryFormErrors = {
     'second-error': {
-      id: 'second-error',
-      errors: { required: 'Test label: You need to fix also this' },
+      required: 'Test label: You need to fix also this',
     },
   };
 
   const firstErrorRemoveItem: FudisErrorSummaryRemoveError = {
     focusId: 'first-error',
     formId: 'test-form-id-1',
-    type: 'required',
+    id: 'required',
   };
 
   const fieldSetForErrorSummary = {
@@ -82,7 +78,7 @@ describe('InternalErrorSummaryService', () => {
     service.registerNewForm('test-form-id-1');
     service.registerNewForm('test-form-id-2');
 
-    jest.spyOn(service, 'reloadErrorsByFormId').mockImplementation(() => {});
+    jest.spyOn(service, 'reloadFormErrors').mockImplementation(() => {});
   });
 
   const changeAndCheckErrorContent = () => {
@@ -91,13 +87,13 @@ describe('InternalErrorSummaryService', () => {
       message: 'Test label: Something new',
     };
 
-    service.addNewError(firstError);
+    service.addError(firstError);
 
-    expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
+    expect(service.errors['test-form-id-1']['first-error']['required']).toEqual(
       'Test label: There is something wrong',
     );
-    service.addNewError(firstErrorWithContentUpdate);
-    expect(service.errors['test-form-id-1']['first-error'].errors['required']).toEqual(
+    service.addError(firstErrorWithContentUpdate);
+    expect(service.errors['test-form-id-1']['first-error']['required']).toEqual(
       'Test label: Something new',
     );
   };
@@ -164,16 +160,16 @@ describe('InternalErrorSummaryService', () => {
     });
 
     it('should return currentErrorList object containing given errors', () => {
-      service.addNewError(firstError);
-      service.addNewError(secondError);
-      service.addNewError(firstErrorAnotherErrorType);
+      service.addError(firstError);
+      service.addError(secondError);
+      service.addError(firstErrorAnotherErrorType);
 
       currentErrors = {
         'test-form-id-1': firstErrorFromService,
         'test-form-id-2': secondErrorFromService,
       };
 
-      service.reloadErrorsByFormId('test-form-id-1');
+      service.reloadFormErrors('test-form-id-1');
 
       const errors = service.errors;
 
@@ -182,15 +178,15 @@ describe('InternalErrorSummaryService', () => {
 
     it('should remove object error for respective type', () => {
       // Add object with 'required' error message
-      service.addNewError(firstError);
+      service.addError(firstError);
 
       // Add 'email' error message to the same object
-      service.addNewError(firstErrorAnotherErrorType);
+      service.addError(firstErrorAnotherErrorType);
 
       // Remove only 'required' error message
-      service.removeError(firstErrorRemoveItem, 'test-form-id-1');
+      service.removeError(firstErrorRemoveItem);
 
-      expect(service.errors['test-form-id-1']['first-error'].errors).toEqual({
+      expect(service.errors['test-form-id-1']['first-error']).toEqual({
         email: 'Test label: Email is not valid',
       });
     });
@@ -200,13 +196,13 @@ describe('InternalErrorSummaryService', () => {
 
       changeAndCheckErrorContent();
 
-      expect(service.reloadErrorsByFormId).toHaveBeenCalledWith('test-form-id-1', false);
+      expect(service.reloadFormErrors).toHaveBeenCalledWith('test-form-id-1', false);
     });
 
     it('should not reload errors when Error Summary Item content is changed and Error Summary is not set visible', () => {
       changeAndCheckErrorContent();
 
-      expect(service.reloadErrorsByFormId).not.toHaveBeenCalled();
+      expect(service.reloadFormErrors).not.toHaveBeenCalled();
     });
 
     it('should set and return update strategy', () => {

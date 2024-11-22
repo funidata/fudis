@@ -125,7 +125,7 @@ export class SectionComponent
    */
   private _errorSummaryInfoSent: boolean = false;
 
-  private _parentForm: { id: string; errorSummaryVisible: boolean } | null = null;
+  private _parentForm: string | null;
 
   ngOnInit(): void {
     this._setSectionId();
@@ -136,7 +136,7 @@ export class SectionComponent
   }
 
   ngAfterContentInit(): void {
-    this._parentForm = this._errorSummaryService.getFormAncestor(this._element.nativeElement);
+    this._parentForm = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
 
     this._addToErrorSummary();
   }
@@ -162,7 +162,7 @@ export class SectionComponent
     if (this.errorSummaryBreadcrumb && this._parentForm) {
       const errorSummaryInfo = {
         id: this.id,
-        formId: this._parentForm.id,
+        formId: this._parentForm,
         title: this.title,
       };
       this._errorSummaryService.addSection(errorSummaryInfo);
@@ -175,7 +175,7 @@ export class SectionComponent
    */
   private _removeFromErrorSummary(): void {
     if (this._errorSummaryInfoSent && this._parentForm) {
-      this._errorSummaryService.removeSection(this._parentForm.id, this.id);
+      this._errorSummaryService.removeSection(this._parentForm, this.id);
     }
   }
 

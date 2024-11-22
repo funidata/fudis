@@ -127,7 +127,7 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: 'test-id',
         message: 'Test label: Message for testing',
         formId: 'test-form-id',
-        type: 'required',
+        id: 'required',
       };
 
       const errorElementText = getElement(fixture, '.fudis-error-message');
@@ -148,7 +148,7 @@ describe('ValidatorErrorMessageComponent', () => {
       const errorToRemove: FudisErrorSummaryRemoveError = {
         focusId: 'test-id',
         formId: 'test-form-id',
-        type: 'required',
+        id: 'required',
       };
       component.ngOnDestroy();
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
@@ -173,7 +173,7 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: 'test-id',
         formId: 'test-form-id',
         message: 'Test label: First message from observable',
-        type: 'required',
+        id: 'required',
       };
 
       const errorElementTextFirst = getElement(fixture, '.fudis-error-message');
@@ -220,7 +220,7 @@ describe('ValidatorErrorMessageComponent', () => {
       const errorToRemove: FudisErrorSummaryRemoveError = {
         focusId: 'test-observable-message-id',
         formId: 'test-form-id',
-        type: 'required',
+        id: 'required',
       };
 
       component.ngOnDestroy();
@@ -243,7 +243,7 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: 'test-id',
         formId: 'test-form-id',
         message: 'Test label: First message from observable',
-        type: 'required',
+        id: 'required',
       };
 
       const updatedError: FudisErrorSummaryNewError = {

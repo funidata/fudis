@@ -33,5 +33,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "include": ["projects", "types", "jest.config.ts"]
+  "include": ["projects", "types", "jest.config.ts", "./.storybook/transloco.module.ts"]
 }

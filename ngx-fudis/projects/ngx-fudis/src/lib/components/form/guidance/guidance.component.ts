@@ -85,11 +85,6 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   @Input() groupBlurredOut: boolean = true;
 
   /**
-   * To trigger Error Summary reload when this Guidance's Validator Error Messages are initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before these Validator Error Messages existed.
-   */
-  protected _reloadErrorSummary: boolean | null = false;
-
-  /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
    */
   protected _maxLengthText = new BehaviorSubject<string>('');
@@ -134,14 +129,13 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   }
 
   ngAfterContentInit(): void {
-    const formParent = this._errorSummaryService.getFormAncestor(
+    const formParentId = this._errorSummaryService.getFormAncestorId(
       this._elementRef.nativeElement as HTMLElement,
     );
 
-    if (formParent) {
-      this._reloadErrorSummary = formParent.errorSummaryVisible;
-      this._parentFormId.next(formParent.id);
-      this._subscribeToErrors(formParent.id);
+    if (formParentId) {
+      this._parentFormId.next(formParentId);
+      this._subscribeToErrors(formParentId);
     } else {
       this._parentFormId.next(null);
     }
@@ -193,10 +187,10 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   protected _reloadErrorSummaryOnLazyLoad(error: FudisErrorSummaryNewError): void {
     if (
       this._parentFormId.value &&
-      this._reloadErrorSummary &&
-      !this._lazyLoadedErrors.includes(error.type)
+      this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId.value]() &&
+      !this._lazyLoadedErrors.includes(error.id)
     ) {
-      this._lazyLoadedErrors.push(error.type);
+      this._lazyLoadedErrors.push(error.id);
       this._errorSummaryService.focusToFormOnReload = null;
 
       let numberOfErrors = 0;
@@ -219,8 +213,8 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
         });
       }
 
-      if (numberOfErrors === this._lazyLoadedErrors.length) {
-        this._errorSummaryService.reloadErrorsByFormId(this._parentFormId.value, false);
+      if (numberOfErrors === this._lazyLoadedErrors.length && !this._afterViewInitDone()) {
+        this._errorSummaryService.reloadFormErrors(this._parentFormId.value, false);
       }
     }
   }

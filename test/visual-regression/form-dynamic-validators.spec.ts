@@ -47,9 +47,6 @@ test("form dynamic inputs", async ({ page }) => {
   await page.getByTestId("fudis-button-12").click(); /* remove required date validator */
   await page.getByTestId("fudis-button-15").click(); /* remove required option validator */
   await page
-    .getByTestId("fudis-checkbox-group-1-item-1")
-    .focus(); /** Focus on the first checkbox */
-  await page
     .getByText("Summer holidays")
     .click(); /** Check the first checkbox to remove error messages */
   await page
@@ -61,6 +58,8 @@ test("form dynamic inputs", async ({ page }) => {
     .click(); /* remove at least one required validator from Localized Text Group */
 
   await page.getByTestId("fudis-button-2").click(); /* submit form without errors */
+
+  await expect(page.getByText(errorSummaryText)).not.toBeVisible();
 
   await expect(page).toHaveScreenshot("dynamic-2-submit-without-errors.png", { fullPage: true });
 

@@ -1,11 +1,10 @@
 import { Injectable, OnDestroy, signal, WritableSignal } from '@angular/core';
 import {
-  FudisErrorSummaryObject,
   FudisErrorSummaryNewError,
   FudisErrorSummaryRemoveError,
   FudisFormErrorSummaryUpdateStrategy,
-  FudisErrorSummaryErrors,
-  FudisErrorSummaryErrorsSignal,
+  FudisErrorSummaryAllErrors,
+  FudisErrorSummaryAllErrorsSignal,
 } from '../../../types/errorSummary';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../translation/translation.service';
@@ -51,14 +50,14 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   /**
    * Collection of all registered errors categorised by parent Form id. Used as "temporary" storage and value will be passed to Observable when ReloadErrors is called.
    */
-  private _errorsStore: FudisErrorSummaryErrors = {};
+  private _errorsStore: FudisErrorSummaryAllErrors = {};
 
   /**
    * Collection of all registered categorised by parent Form id. This Observable is updated with new value only when ReloadErrors is called.
    */
-  private _errorsObservable = new BehaviorSubject<FudisErrorSummaryErrors>({});
+  private _errorsObservable = new BehaviorSubject<FudisErrorSummaryAllErrors>({});
 
-  private _errorsSignal: FudisErrorSummaryErrorsSignal = {};
+  private _errorsSignal: FudisErrorSummaryAllErrorsSignal = {};
 
   /**
    * Current Form ids with their Error Summary Visibility status
@@ -96,21 +95,21 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   /**
    * Used in Components to listen to Reload updates
    */
-  get errorsObservable(): BehaviorSubject<FudisErrorSummaryErrors> {
+  get errorsObservable(): BehaviorSubject<FudisErrorSummaryAllErrors> {
     return this._errorsObservable;
   }
 
   /**
    * For unit testing purposes
    */
-  get errors(): FudisErrorSummaryErrors {
+  get errors(): FudisErrorSummaryAllErrors {
     return this._errorsStore;
   }
 
   /**
    * For unit testing purposes
    */
-  get errorsSignal(): FudisErrorSummaryErrorsSignal {
+  get errorsSignal(): FudisErrorSummaryAllErrorsSignal {
     return this._errorsSignal;
   }
 
@@ -167,20 +166,25 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * If new error item has a matching id on the list, new error is tied to that error list object
    * @param newError Form error summary item
    */
-  public addNewError(newError: FudisErrorSummaryNewError): void {
+  public addError(newError: FudisErrorSummaryNewError): void {
     if (!this._errorsStore[newError.formId]) {
       this.registerNewForm(newError.formId);
     }
+    const currentErrors = { ...this._errorsStore?.[newError.formId] };
 
-    const currentErrors = this._errorsStore?.[newError.formId];
+    if (!currentErrors?.[newError.focusId]) {
+      currentErrors[newError.focusId] = {};
+    }
 
-    const currentMessage = currentErrors?.[newError.focusId]?.errors[newError.type];
+    const currentMessage = currentErrors[newError.focusId][newError.id];
 
     const messageChanged = currentMessage && currentMessage !== newError.message;
 
     const contentChanged = currentErrors?.[newError.focusId] && messageChanged;
 
-    this._errorsStore[newError.formId] = this.getUpdatedErrorsByFormId(newError, currentErrors);
+    currentErrors[newError.focusId][newError.id] = newError.message;
+
+    this._errorsStore[newError.formId] = currentErrors;
 
     const reloadErrors =
       (contentChanged || this._updateStrategy === 'all') &&
@@ -189,62 +193,35 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     if (reloadErrors) {
       this._focusToFormOnReload = null;
 
-      this.reloadErrorsByFormId(newError.formId, false);
+      this.reloadFormErrors(newError.formId, false);
     }
-  }
-
-  /**
-   * Utility function used by addNewError()
-   * @param newError
-   * @param currentErrors
-   * @returns
-   */
-  private getUpdatedErrorsByFormId(
-    newError: FudisErrorSummaryNewError,
-    currentErrors: FudisErrorSummaryObject,
-  ): FudisErrorSummaryObject {
-    if (!currentErrors[newError.focusId]) {
-      currentErrors = {
-        ...currentErrors,
-        [newError.focusId]: {
-          id: newError.focusId,
-          errors: { [newError.type]: newError.message },
-        },
-      };
-    } else {
-      currentErrors = {
-        ...currentErrors,
-        [newError.focusId]: {
-          id: newError.focusId,
-          errors: { ...currentErrors[newError.focusId].errors, [newError.type]: newError.message },
-        },
-      };
-    }
-
-    return currentErrors;
   }
 
   /**
    * Removes error object from the current errors list if it contains matching error id
    * @param error Error object
    */
-  public removeError(error: FudisErrorSummaryRemoveError, formId: string): void {
-    const currentErrorsOfForm = { ...this._errorsStore[formId] };
+  public removeError(errorToRemove: FudisErrorSummaryRemoveError): void {
+    const currentErrorsOfForm = { ...this._errorsStore[errorToRemove.formId] };
 
-    if (currentErrorsOfForm[error.focusId]?.errors[error.type]) {
-      delete currentErrorsOfForm[error.focusId].errors[error.type];
+    if (currentErrorsOfForm[errorToRemove.focusId]?.[errorToRemove.id]) {
+      delete currentErrorsOfForm[errorToRemove.focusId][errorToRemove.id];
 
-      const otherErrors = Object.keys(currentErrorsOfForm[error.focusId].errors).length;
+      const otherErrors = Object.keys(currentErrorsOfForm[errorToRemove.focusId]).length;
 
       if (otherErrors === 0) {
-        delete currentErrorsOfForm[error.focusId];
+        delete currentErrorsOfForm[errorToRemove.focusId];
       }
 
-      this._errorsStore[formId] = currentErrorsOfForm;
+      this._errorsStore[errorToRemove.formId] = currentErrorsOfForm;
 
-      if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
+      const reloadErrors =
+        (this._updateStrategy === 'onRemove' || this._updateStrategy === 'all') &&
+        !!this._errorSummaryVisibilityStatus?.[errorToRemove.formId]();
+
+      if (reloadErrors) {
         this._focusToFormOnReload = null;
-        this.reloadErrorsByFormId(formId);
+        this.reloadFormErrors(errorToRemove.formId);
       }
     }
   }
@@ -264,7 +241,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   public reloadAllErrors(): void {
     Object.keys(this._errorsStore).forEach((key) => {
-      this.reloadErrorsByFormId(key, false);
+      if (this._errorSummaryVisibilityStatus[key]()) {
+        this.reloadFormErrors(key, false);
+      }
     });
   }
 
@@ -273,17 +252,22 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param formId
    * @param focus
    */
-  public reloadErrorsByFormId(formId: string, focus?: boolean): void {
+  public reloadFormErrors(formId: string, focus?: boolean): void {
     if (focus) {
       this._focusToFormOnReload = formId;
     } else {
       this._focusToFormOnReload = null;
     }
 
-    if (!this._reloadGuard.includes(formId) && this._errorsStore[formId]) {
+    const reloadConditions =
+      !this._reloadGuard.includes(formId) &&
+      this._errorsStore[formId] &&
+      this._errorsSignal[formId];
+
+    if (reloadConditions) {
       this._reloadGuard.push(formId);
       setTimeout(() => {
-        this._errorsSignal[formId].set(this._errorsStore[formId]);
+        this._errorsSignal[formId]?.set(this._errorsStore[formId]);
         this._errorsObservable.next({ ...this._errorsStore });
 
         this._reloadGuard.splice(this._reloadGuard.indexOf(formId), 1);
@@ -306,9 +290,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param element HTMLElement to check, if it has Form Component as ancestor
    * @returns if ancestor found, returns id of that Form and visibility status of Form's Error Summary
    */
-  public getFormAncestor(
-    element: HTMLElement,
-  ): null | { id: string; errorSummaryVisible: boolean } {
+  public getFormAncestorId(element: HTMLElement): null | string {
     let foundId: string | null = null;
 
     Object.keys(this._errorSummaryVisibilityStatus).find((id) => {
@@ -318,10 +300,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     });
 
     if (foundId) {
-      return {
-        id: foundId,
-        errorSummaryVisible: this._errorSummaryVisibilityStatus[foundId](),
-      };
+      return foundId;
     }
 
     return null;
@@ -332,36 +311,45 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param formId
    */
   public registerNewForm(formId: string, errorSummaryVisible: boolean = false): void {
-    this._formStructure = {
-      ...this._formStructure,
-      [formId]: {
+    if (!this._formStructure[formId]) {
+      this._formStructure[formId] = {
         sections: {},
         fieldsets: {},
-      },
-    };
+      };
+    }
 
-    this._errorSummaryVisibilityStatus[formId] = signal(errorSummaryVisible);
+    if (!this._errorSummaryVisibilityStatus[formId]) {
+      this._errorSummaryVisibilityStatus[formId] = signal(errorSummaryVisible);
+    }
 
-    this._errorsSignal[formId] = signal({});
+    if (!this._errorsSignal[formId]) {
+      this._errorsSignal[formId] = signal({});
+    }
 
-    this._errorsStore[formId] = {};
+    if (!this._errorsStore[formId]) {
+      this._errorsStore[formId] = {};
+    }
   }
 
+  /**
+   * When Form Component is destroyed, it will remove itself from the service
+   * @param formId
+   */
   public removeForm(formId: string): void {
     if (this._errorsStore[formId]) {
       delete this._errorsStore[formId];
+    }
+
+    if (this._errorsSignal[formId]) {
+      delete this._errorsSignal[formId];
     }
 
     if (this._formStructure[formId]) {
       delete this._formStructure[formId];
     }
 
-    const currentVisibilityStatus = { ...this._errorSummaryVisibilityStatus };
-
-    if (currentVisibilityStatus[formId]) {
-      delete currentVisibilityStatus[formId];
-
-      this._errorSummaryVisibilityStatus = currentVisibilityStatus;
+    if (this._errorSummaryVisibilityStatus[formId]) {
+      delete this._errorSummaryVisibilityStatus[formId];
     }
   }
 
