@@ -46,3 +46,52 @@ test("error summary", async ({ page }) => {
   await expect(page.getByText(missingTeacher)).toBeVisible();
   await expect(page).toHaveScreenshot("7-after-remove-all-2.png", { fullPage: true });
 });
+
+test("error summary language change and manually sent errors", async ({ page }) => {
+  const firstManualError =
+    "Add and Remove Error Summary Messages / This is the first custom error sent to Error Summary";
+
+  const secondManualError =
+    "Add and Remove Error Summary Messages / Here is the second custom error";
+
+  const firstManualErrorFi =
+    "Lisää tai poista Error Summaryn viestejä / Tämä on ensimmäinen manuaalisesti Error Summaryyn lähetetty virheviesti";
+
+  const secondManualErrorFi =
+    "Lisää tai poista Error Summaryn viestejä / Tämä on toinen manuaalinen virheviesti";
+
+  await page.goto("/iframe.html?args=&id=components-form-error-summary--example&viewMode=story");
+
+  await page.getByTestId("submit-button").click();
+  await page.getByTestId("error-button-1").click();
+  await expect(page.getByText("Show first error")).not.toBeVisible();
+  await expect(page.getByText("Hide first error")).toBeVisible();
+  await page.getByTestId("submit-button").click();
+  await expect(page.getByText(firstManualError)).toBeVisible();
+  await expect(page.getByText(secondManualError)).not.toBeVisible();
+
+  // Change update strategy
+  await page.getByTestId("change-strategy-button").dblclick();
+  await expect(page.getByText("Current Error Summary update strategy is: all")).toBeVisible();
+
+  await page.getByTestId("error-button-2").click();
+  await expect(page.getByText(firstManualError)).toBeVisible();
+  await expect(page.getByText(secondManualError)).toBeVisible();
+  await page.waitForTimeout(150);
+  await expect(page).toHaveScreenshot("8-manual-errors-visible-en.png", { fullPage: true });
+
+  // Change language
+  await page.getByTestId("change-language-button").click();
+  await expect(page.getByText(firstManualError)).not.toBeVisible();
+  await expect(page.getByText(secondManualError)).not.toBeVisible();
+  await expect(page.getByText(firstManualErrorFi)).toBeVisible();
+  await expect(page.getByText(secondManualErrorFi)).toBeVisible();
+  await expect(page).toHaveScreenshot("9-manual-errors-visible-fi.png", { fullPage: true });
+
+  // Remove manual errors
+  await page.getByTestId("error-button-1").click();
+  await page.getByTestId("error-button-2").click();
+  await expect(page.getByText(firstManualErrorFi)).not.toBeVisible();
+  await expect(page.getByText(secondManualErrorFi)).not.toBeVisible();
+  await expect(page).toHaveScreenshot("10-manual-errors-remove.png", { fullPage: true });
+});
