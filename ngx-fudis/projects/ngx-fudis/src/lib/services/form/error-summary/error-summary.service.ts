@@ -7,7 +7,7 @@ import {
   FudisErrorSummaryRemoveError,
   FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/errorSummary';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
@@ -18,6 +18,20 @@ export class FudisErrorSummaryService {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
   private _destroyRef = inject(DestroyRef);
+
+  /**
+   * To store Subscriptions for each sent Observable, so it can be unsubscribed on removeError()
+   */
+  private _subscriptions: { [subscriptionId: string]: Subscription } = {};
+
+  /**
+   * To define ID for each subscription
+   * @param error with required properties
+   * @returns generated id
+   */
+  private _getSubscriptionId(error: FudisErrorSummaryRemoveError): string {
+    return `${error.formId}_${error.focusId}_${error.id}`;
+  }
 
   /**
    * Get current updateStrategy of Error Summary. By default 'reloadOnly'.
@@ -76,11 +90,15 @@ export class FudisErrorSummaryService {
 
       this._errorSummaryService.addError(newError);
     } else {
-      message.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((newMessage) => {
-        const newError: FudisErrorSummaryNewError = { focusId, formId, message: newMessage, id };
+      const subscriptionId = this._getSubscriptionId({ id, formId, focusId });
 
-        this._errorSummaryService.addError(newError);
-      });
+      this._subscriptions[subscriptionId] = message
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((newMessage) => {
+          const newError: FudisErrorSummaryNewError = { focusId, formId, message: newMessage, id };
+
+          this._errorSummaryService.addError(newError);
+        });
     }
   }
 
@@ -92,6 +110,15 @@ export class FudisErrorSummaryService {
    */
   public removeError(id: string, formId: string, focusId: string): void {
     const removeError: FudisErrorSummaryRemoveError = { focusId, formId, id };
+
+    const subscriptionId = this._getSubscriptionId(removeError);
+
+    if (this._subscriptions[subscriptionId]) {
+      this._subscriptions[subscriptionId].unsubscribe();
+
+      delete this._subscriptions[subscriptionId];
+    }
+
     this._errorSummaryService.removeError(removeError);
   }
 }

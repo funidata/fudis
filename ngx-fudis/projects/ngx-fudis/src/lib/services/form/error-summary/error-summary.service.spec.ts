@@ -17,7 +17,6 @@ describe('ErrorSummaryService', () => {
       providers: [
         FudisErrorSummaryService,
         FudisInternalErrorSummaryService,
-        // { provide: FudisInternalErrorSummaryService, useValue: spy },
         FudisTranslationService,
       ],
     });
@@ -149,5 +148,41 @@ describe('ErrorSummaryService', () => {
     expect(internalService.removeError).toHaveBeenCalledWith(removeError);
 
     expect(internalService.reloadFormErrors).not.toHaveBeenCalled();
+  });
+
+  it('should subscribe to Observable message, and on remove unsubscribe', () => {
+    const observableError = new BehaviorSubject<string>('First value of error');
+
+    const newError: FudisErrorSummaryNewError = {
+      id: 'my-error-id',
+      formId: 'my-form-id',
+      focusId: 'my-focus-id',
+      message: 'First value of error',
+    };
+
+    const removeError: FudisErrorSummaryRemoveError = {
+      id: 'my-error-id',
+      formId: 'my-form-id',
+      focusId: 'my-focus-id',
+    };
+
+    service.addError(newError.id, newError.formId, newError.focusId, observableError);
+
+    expect(service.addError).toHaveBeenCalledWith(
+      newError.id,
+      newError.formId,
+      newError.focusId,
+      observableError,
+    );
+    expect(internalService.addError).toHaveBeenCalledWith(newError);
+
+    service.removeError(removeError.id, removeError.formId, removeError.focusId);
+
+    expect(internalService.removeError).toHaveBeenCalledWith(removeError);
+
+    observableError.next('Updated observable error value');
+
+    expect(service.addError).not.toHaveBeenCalledTimes(2);
+    expect(internalService.addError).not.toHaveBeenCalledTimes(2);
   });
 });
