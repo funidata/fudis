@@ -15,7 +15,7 @@
   "customError1Show": "Näytä ensimmäinen virhe",
   "customError2Show": "Näytä toinen virhe",
   "customError1Hide": "Piilota ensimmäinen virhe",
-  "customError2Hide": "Näytä toinen virhe",
+  "customError2Hide": "Piilota toinen virhe",
   "form": {
     "teacherName": {
       "label": "Vastuuopettaja",
