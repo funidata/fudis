@@ -1,7 +1,7 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { FudisGridProperties } from '../../types/grid';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FudisGridService {
   /**
    * Grid values that can be set from application. By default an empty object.

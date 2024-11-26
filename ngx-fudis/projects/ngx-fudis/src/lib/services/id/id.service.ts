@@ -9,7 +9,7 @@ import {
   FudisIdDropdownMenuFamily,
 } from '../../types/id';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FudisIdService {
   private _idData: FudisIdData = {
     components: {
