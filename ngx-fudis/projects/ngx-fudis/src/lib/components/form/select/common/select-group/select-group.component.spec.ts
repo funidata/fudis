@@ -14,7 +14,6 @@ describe('SelectGroupComponent', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [SelectGroupComponent, SelectComponent],
-        providers: [FudisIdService],
       })
         .overrideComponent(SelectGroupComponent, {
           add: {
@@ -75,7 +74,6 @@ describe('SelectGroupComponent', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [SelectGroupComponent, SelectComponent],
-        providers: [FudisIdService],
       })
         .overrideComponent(SelectGroupComponent, {
           add: {

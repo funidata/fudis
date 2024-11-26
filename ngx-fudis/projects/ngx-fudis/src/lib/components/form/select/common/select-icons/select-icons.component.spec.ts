@@ -1,13 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SelectIconsComponent } from './select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { IconComponent } from '../../../../icon/icon.component';
 import { FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
 import { FormControl } from '@angular/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { FudisIdService } from '../../../../../services/id/id.service';
 
 describe('SelectIconsComponent', () => {
   let component: SelectIconsComponent;
@@ -16,7 +13,6 @@ describe('SelectIconsComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [SelectIconsComponent, ButtonComponent, IconComponent],
-      providers: [FudisTranslationService, FudisIdService],
     });
     fixture = TestBed.createComponent(SelectIconsComponent);
     component = fixture.componentInstance;

@@ -17,8 +17,6 @@ import {
 } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 const values = {
@@ -50,12 +48,7 @@ describe('LocalizedTextGroupComponent', () => {
         SelectIconsComponent,
         IconComponent,
       ],
-      providers: [
-        FudisTranslationService,
-        FudisIdService,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-      ],
+      providers: [FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 

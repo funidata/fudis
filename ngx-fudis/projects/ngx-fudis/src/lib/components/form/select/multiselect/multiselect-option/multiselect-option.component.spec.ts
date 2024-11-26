@@ -12,14 +12,11 @@ import { IconComponent } from '../../../../icon/icon.component';
 import { LabelComponent } from '../../../label/label.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { FudisIdService } from '../../../../../services/id/id.service';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { defaultOptions } from '../../common/mock_data';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
-import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
@@ -69,12 +66,7 @@ describe('MultiselectOptionComponent', () => {
         IconComponent,
         LabelComponent,
       ],
-      providers: [
-        FudisIdService,
-        FudisTranslationService,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-      ],
+      providers: [FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 

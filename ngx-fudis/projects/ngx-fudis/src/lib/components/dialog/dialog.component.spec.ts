@@ -6,8 +6,6 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { getElement } from '../../utilities/tests/utilities';
 import { fudisDialogSizeArray } from '../../types/miscellaneous';
-import { FudisIdService } from '../../services/id/id.service';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisAlertService } from '../../services/alert/alert.service';
 import { IconComponent } from '../icon/icon.component';
 
@@ -22,8 +20,6 @@ describe('DialogComponent', () => {
       imports: [MatDialogModule],
       providers: [
         FudisDialogService,
-        FudisIdService,
-        FudisTranslationService,
         FudisAlertService,
         {
           provide: MatDialogRef,

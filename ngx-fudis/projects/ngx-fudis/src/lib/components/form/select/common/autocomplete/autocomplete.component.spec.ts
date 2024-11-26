@@ -3,10 +3,6 @@ import { SelectAutocompleteComponent } from './autocomplete.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
 
-import { FudisIdService } from '../../../../../services/id/id.service';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../../../services/focus/focus.service';
-
 describe('AutocompleteComponent', () => {
   let component: SelectAutocompleteComponent;
   let fixture: ComponentFixture<SelectAutocompleteComponent>;
@@ -14,7 +10,6 @@ describe('AutocompleteComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SelectAutocompleteComponent],
-      providers: [FudisFocusService, FudisIdService, FudisTranslationService],
       imports: [ReactiveFormsModule],
     });
     fixture = TestBed.createComponent(SelectAutocompleteComponent);

@@ -12,8 +12,6 @@ import {
   DialogContentDirective,
 } from '../../directives/dialog/dialog-directives';
 import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
-import { FudisIdService } from '../id/id.service';
-import { FudisTranslationService } from '../translation/translation.service';
 import { IconComponent } from '../../components/icon/icon.component';
 import { FudisAlertService } from '../alert/alert.service';
 
@@ -99,8 +97,6 @@ describe('DialogService', () => {
       ],
       providers: [
         FudisDialogService,
-        FudisIdService,
-        FudisTranslationService,
         FudisAlertService,
         {
           provide: MatDialogRef,

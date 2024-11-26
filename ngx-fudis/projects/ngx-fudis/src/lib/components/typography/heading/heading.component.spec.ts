@@ -7,7 +7,6 @@ import {
   fudisHeadingVariantArray,
 } from '../../../types/typography';
 import { FudisTextAlign, fudisTextAlignArray } from '../../../types/typography';
-import { FudisIdService } from '../../../services/id/id.service';
 
 describe('HeadingComponent', () => {
   let component: HeadingComponent;
@@ -16,7 +15,6 @@ describe('HeadingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeadingComponent],
-      providers: [FudisIdService],
     }).compileComponents();
   });
 
