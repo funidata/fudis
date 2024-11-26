@@ -4,9 +4,7 @@ import { By } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import { IconComponent } from '../icon/icon.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
-import { FudisIdService } from '../../services/id/id.service';
 import { BreadcrumbsItemComponent } from './breadcrumbs-item/breadcrumbs-item.component';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 import { RouterModule } from '@angular/router';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { getElement } from '../../utilities/tests/utilities';
@@ -43,7 +41,6 @@ describe('BreadcrumbsComponent', () => {
         MockComponent,
       ],
       imports: [RouterModule.forRoot([])],
-      providers: [FudisIdService, FudisTranslationService],
     });
 
     fixture = TestBed.createComponent(MockComponent);

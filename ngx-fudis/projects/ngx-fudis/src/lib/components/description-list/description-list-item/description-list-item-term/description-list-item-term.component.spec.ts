@@ -5,7 +5,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
-import { FudisGridService } from '../../../../services/grid/grid.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from '../description-list-item-details/description-list-item-details.component';
@@ -15,7 +14,6 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
-import { FudisIdService } from '../../../../services/id/id.service';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 
@@ -78,12 +76,7 @@ describe('DescriptionListItemTermComponent', () => {
         TooltipApiDirective,
         MockDlComponent,
       ],
-      providers: [
-        FudisGridService,
-        FudisIdService,
-        FudisBreakpointService,
-        FudisTranslationService,
-      ],
+      providers: [FudisBreakpointService],
       imports: [MatTooltipModule],
     }).compileComponents();
   });

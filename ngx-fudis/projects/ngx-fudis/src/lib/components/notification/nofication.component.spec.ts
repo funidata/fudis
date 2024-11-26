@@ -5,7 +5,6 @@ import { FudisNotification } from '../../types/miscellaneous';
 import { getElement } from '../../utilities/tests/utilities';
 import { RouterModule } from '@angular/router';
 import { LinkDirective } from '../../directives/link/link.directive';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 
 describe('NotificationComponent', () => {
   let fixture: ComponentFixture<NotificationComponent>;
@@ -13,7 +12,6 @@ describe('NotificationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NotificationComponent, IconComponent, LinkDirective],
-      providers: [FudisTranslationService],
       imports: [RouterModule.forRoot([])],
     }).compileComponents();
   });

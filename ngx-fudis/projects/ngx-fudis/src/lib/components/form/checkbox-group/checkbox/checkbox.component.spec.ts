@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
-import { FudisGridService } from '../../../../services/grid/grid.service';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import {
   FudisCheckboxChangeEvent,
@@ -21,10 +20,7 @@ import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { IconComponent } from '../../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
-import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FudisIdService } from '../../../../services/id/id.service';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -104,14 +100,7 @@ describe('CheckboxComponent', () => {
         GuidanceComponent,
         IconComponent,
       ],
-      providers: [
-        FudisBreakpointService,
-        FudisGridService,
-        FudisIdService,
-        FudisTranslationService,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-      ],
+      providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

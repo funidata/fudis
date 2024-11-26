@@ -5,8 +5,6 @@ import { FormComponent } from './form.component';
 import { HeadingComponent } from '../../typography/heading/heading.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
@@ -25,8 +23,6 @@ import { BadgeComponent } from '../../badge/badge.component';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { NotificationComponent } from '../../notification/notification.component';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -104,12 +100,8 @@ describe('FormComponent', () => {
       ],
       providers: [
         FudisBreakpointService,
-        FudisGridService,
-        FudisFocusService,
-        FudisIdService,
         FudisInternalErrorSummaryService,
         FudisErrorSummaryService,
-        FudisTranslationService,
       ],
       imports: [ReactiveFormsModule],
     });

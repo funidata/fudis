@@ -12,7 +12,6 @@ import {
 } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
@@ -20,10 +19,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
@@ -137,14 +133,7 @@ describe('CheckboxGroupComponent', () => {
         IconComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [
-        FudisBreakpointService,
-        FudisGridService,
-        FudisIdService,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-        FudisTranslationService,
-      ],
+      providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

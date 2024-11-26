@@ -155,9 +155,7 @@ describe('FudisIdServiceService', () => {
   };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [FudisIdService],
-    });
+    TestBed.configureTestingModule({});
     idService = TestBed.inject(FudisIdService);
   });
 

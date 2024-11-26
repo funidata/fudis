@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectOptionBaseDirective } from './select-option-base.directive';
 import { SelectGroupComponent } from '../select-group/select-group.component';
 import { SelectComponent } from '../../select/select.component';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -16,12 +15,10 @@ import { LabelComponent } from '../../../label/label.component';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectBaseDirective } from '../select-base/select-base.directive';
-import { FudisIdService } from '../../../../../services/id/id.service';
 import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
-import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
@@ -86,13 +83,7 @@ describe('SelectOptionBaseDirective', () => {
         LabelComponent,
         BodyTextComponent,
       ],
-      providers: [
-        FudisIdService,
-        FudisTranslationService,
-        SelectBaseDirective,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-      ],
+      providers: [SelectBaseDirective, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 

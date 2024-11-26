@@ -13,9 +13,6 @@ import { MultiselectOptionComponent } from './multiselect-option/multiselect-opt
 import { SelectGroupComponent } from '../common/select-group/select-group.component';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../../services/focus/focus.service';
-import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
@@ -73,14 +70,7 @@ describe('MultiselectComponent', () => {
         LabelComponent,
         ContentDirective,
       ],
-      providers: [
-        FudisIdService,
-        FudisTranslationService,
-        FudisInternalErrorSummaryService,
-        FudisFocusService,
-        TooltipDirective,
-        SelectBaseDirective,
-      ],
+      providers: [FudisInternalErrorSummaryService, TooltipDirective, SelectBaseDirective],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

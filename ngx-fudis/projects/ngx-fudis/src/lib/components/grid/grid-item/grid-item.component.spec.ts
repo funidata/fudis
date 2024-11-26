@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { GridItemComponent } from './grid-item.component';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
 import { FudisGridItemAlignment } from '../../../types/grid';
@@ -48,7 +47,7 @@ describe('GridItemComponent', () => {
         MockComponent(BodyTextComponent),
         MockComponent(ButtonComponent),
       ],
-      providers: [FudisGridService, FudisBreakpointService],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 
