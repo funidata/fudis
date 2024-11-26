@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BodyTextComponent } from './body-text.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { fudisBodyTextArray, fudisTextAlignArray } from '../../../types/typography';
-import { FudisIdService } from '../../../services/id/id.service';
 
 describe('BodyTextComponent', () => {
   let fixture: ComponentFixture<BodyTextComponent>;
@@ -10,7 +9,6 @@ describe('BodyTextComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BodyTextComponent],
-      providers: [FudisIdService],
     }).compileComponents();
   });
 

@@ -12,7 +12,6 @@ import {
 import { HeadingComponent } from '../../../components/typography/heading/heading.component';
 import { BodyTextComponent } from '../../../components/typography/body-text/body-text.component';
 import { ButtonComponent } from '../../../components/button/button.component';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { GridDirective } from './grid.directive';
@@ -70,7 +69,7 @@ describe('GridDirective', () => {
         MockComponent(BodyTextComponent),
         MockComponent(ButtonComponent),
       ],
-      providers: [FudisGridService, FudisBreakpointService],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 

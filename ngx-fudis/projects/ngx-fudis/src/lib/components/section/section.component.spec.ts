@@ -8,8 +8,6 @@ import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { NotificationComponent } from '../notification/notification.component';
 import { IconComponent } from '../icon/icon.component';
-import { FudisGridService } from '../../services/grid/grid.service';
-import { FudisIdService } from '../../services/id/id.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
@@ -25,7 +23,6 @@ import {
   fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'mock-fudis-section',
@@ -81,13 +78,7 @@ describe('SectionComponent', () => {
         SectionComponent,
         TooltipDirective,
       ],
-      providers: [
-        FudisGridService,
-        FudisIdService,
-        FudisInternalErrorSummaryService,
-        FudisBreakpointService,
-        FudisTranslationService,
-      ],
+      providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
       imports: [MatTooltipModule],
     });
 
