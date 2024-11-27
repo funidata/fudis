@@ -33,8 +33,6 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   ) {
     this._id = this._idService.getNewId('expandable');
     this._headingId = `${this._id}-heading`;
-
-    // TODO: write test
   }
 
   /**
@@ -53,9 +51,9 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   @Input({ required: true }) title: string;
 
   /**
-   * Determines header's semantic aria-level for screen readers, default is equivalent for h2
+   * Set heading's semantic aria-level for screen readers
    */
-  @Input() level: number = 2;
+  @Input({ required: true }) level: number;
 
   /**
    * Type i.e visual variant of the expandable
