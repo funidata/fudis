@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
 import { getDirective } from '../../../utilities/tests/utilities';
 import { GridItemDirective } from './grid-item.directive';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridComponent } from '../../../components/grid/grid/grid.component';
 import { HeadingComponent } from '../../../components/typography/heading/heading.component';
@@ -49,7 +48,7 @@ describe('GridItemDirective', () => {
         MockComponent(BodyTextComponent),
         MockComponent(ButtonComponent),
       ],
-      providers: [FudisGridService, FudisBreakpointService],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 

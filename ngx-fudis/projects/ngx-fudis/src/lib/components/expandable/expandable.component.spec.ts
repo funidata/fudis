@@ -7,9 +7,7 @@ import { ExpandableComponent } from './expandable.component';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisExpandableType } from '../../types/miscellaneous';
-import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -72,7 +70,7 @@ describe('ExpandableComponent', () => {
         ButtonComponent,
         IconComponent,
       ],
-      providers: [FudisIdService, FudisInternalErrorSummaryService, FudisTranslationService],
+      providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 

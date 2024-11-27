@@ -10,11 +10,8 @@ import { LabelComponent } from '../../label/label.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
-import { FudisIdService } from '../../../../services/id/id.service';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
@@ -62,12 +59,7 @@ describe('DateRangeComponent', () => {
         MockDateRangeComponent,
         IconComponent,
       ],
-      providers: [
-        FudisIdService,
-        FudisTranslationService,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-      ],
+      providers: [FudisInternalErrorSummaryService],
       imports: [
         ReactiveFormsModule,
         MatDatepickerModule,

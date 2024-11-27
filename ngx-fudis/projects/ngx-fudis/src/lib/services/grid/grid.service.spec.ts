@@ -6,7 +6,7 @@ describe('FudisGridService', () => {
   let service: FudisGridService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [FudisGridService] });
+    TestBed.configureTestingModule({});
     service = TestBed.inject(FudisGridService);
   });
 

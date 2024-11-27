@@ -10,10 +10,7 @@ import { TextInputComponent } from '../../text-input/text-input.component';
 import { LabelComponent } from '../../label/label.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../validator-error-message/validator-error-message.component';
-import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFocusService } from '../../../../services/focus/focus.service';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 const observableMessage = new BehaviorSubject<string>('Test error message');
 
@@ -77,12 +74,7 @@ describe('ErrorMessageComponent', () => {
         MockComponents(LabelComponent, GuidanceComponent),
       ],
       imports: [ReactiveFormsModule],
-      providers: [
-        FudisFocusService,
-        FudisIdService,
-        FudisInternalErrorSummaryService,
-        FudisTranslationService,
-      ],
+      providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 

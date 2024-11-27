@@ -5,8 +5,6 @@ import { DropdownMenuItemComponent } from './dropdown-menu-item.component';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { defaultMenuItems } from '../mock_data';
 import { getElement } from '../../../utilities/tests/utilities';
 
@@ -52,7 +50,6 @@ describe('DropdownMenuItemComponent', () => {
         IconComponent,
         MockDropdownMenuComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockDropdownMenuComponent);

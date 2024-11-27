@@ -2,7 +2,7 @@ import { Injectable, Signal, signal } from '@angular/core';
 import { FudisTranslationConfig, FudisLanguageAbbr } from '../../types/miscellaneous';
 import { fi, sv, en } from './translationKeys';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FudisTranslationService {
   constructor() {}
 

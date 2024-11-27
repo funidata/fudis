@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GridComponent } from './grid.component';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 describe('GridComponent', () => {
@@ -11,7 +9,7 @@ describe('GridComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GridComponent],
-      providers: [FudisGridService, FudisBreakpointService],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 

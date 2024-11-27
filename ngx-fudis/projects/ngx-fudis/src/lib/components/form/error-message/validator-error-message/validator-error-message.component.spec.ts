@@ -15,10 +15,7 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { getElement } from '../../../../utilities/tests/utilities';
-import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FudisIdService } from '../../../../services/id/id.service';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 // TODO: write tests for input visible, controlName and variant
 @Component({
@@ -57,12 +54,7 @@ describe('ValidatorErrorMessageComponent', () => {
         LabelComponent,
       ],
       imports: [ReactiveFormsModule],
-      providers: [
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-        FudisIdService,
-        FudisTranslationService,
-      ],
+      providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 

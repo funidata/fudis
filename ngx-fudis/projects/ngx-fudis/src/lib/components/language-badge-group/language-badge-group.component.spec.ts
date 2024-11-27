@@ -7,8 +7,6 @@ import { LanguageBadgeComponent } from './language-badge/language-badge.componen
 import { getAllElements, getElement } from '../../utilities/tests/utilities';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
-import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisIdService } from '../../services/id/id.service';
 
 const providedLanguages: FudisLanguageAbbr[] = ['en', 'fi'];
 
@@ -31,7 +29,6 @@ describe('LanguageBadgeGroupComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LanguageBadgeGroupComponent],
-      providers: [FudisTranslationService, FudisIdService, FudisTranslationService],
     });
     fixture = TestBed.createComponent(LanguageBadgeGroupComponent);
     component = fixture.componentInstance;

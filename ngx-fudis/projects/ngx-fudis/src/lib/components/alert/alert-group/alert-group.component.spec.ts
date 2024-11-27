@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MockComponent } from 'ng-mocks';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
@@ -11,9 +10,6 @@ import { IconComponent } from '../../icon/icon.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { SimpleChange } from '@angular/core';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 
 describe('AlertGroupComponent', () => {
   let component: AlertGroupComponent;
@@ -24,18 +20,10 @@ describe('AlertGroupComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      declarations: [
-        AlertGroupComponent,
-        AlertComponent,
-        BodyTextComponent,
-        MockComponent(IconComponent),
-      ],
+      declarations: [AlertGroupComponent, AlertComponent, BodyTextComponent, IconComponent],
       providers: [
         FudisDialogService,
         FudisAlertService,
-        FudisIdService,
-        FudisTranslationService,
-        FudisFocusService,
         {
           provide: MatDialogRef,
           useValue: {},
