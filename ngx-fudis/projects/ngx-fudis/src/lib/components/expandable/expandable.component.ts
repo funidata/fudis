@@ -51,12 +51,12 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   @Input({ required: true }) title: string;
 
   /**
-   * Set heading's semantic aria-level for screen readers
+   * Expandable title's semantic aria-level for screen readers
    */
   @Input({ required: true }) level: number;
 
   /**
-   * Type i.e visual variant of the expandable
+   * Visual variant of the expandable
    */
   @Input() variant: FudisExpandableType = 'regular';
 
@@ -109,7 +109,7 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
   protected _headingId: string;
 
   /**
-   *  Lazy loading check for expanding content
+   * Lazy loading check for expanding content
    */
   protected _openedOnce: boolean = false;
 
