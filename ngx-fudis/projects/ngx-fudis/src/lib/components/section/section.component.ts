@@ -14,12 +14,12 @@ import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
-
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { BehaviorSubject } from 'rxjs';
+import { getVariant } from '../../utilities/typography/typography-utils';
 
 @Component({
   selector: 'fudis-section',
@@ -60,19 +60,25 @@ export class SectionComponent
   @Input({ required: true }) title: string;
 
   /**
+   * Heading level for the section title
+   */
+  @Input({ required: true }) level: FudisHeadingLevel;
+
+  /**
+   * Heading variant for the section title
+   */
+  @Input() set titleVariant(variant: FudisHeadingVariant) {
+    this._titleVariant = variant;
+  }
+
+  get titleVariant(): FudisHeadingVariant {
+    return this._titleVariant;
+  }
+
+  /**
    * Section id
    */
   @Input() id: string;
-
-  /**
-   * Heading level for the section title
-   */
-  @Input() level: FudisHeadingLevel = 2;
-
-  /**
-   * Heading size for the section title
-   */
-  @Input() titleVariant: FudisHeadingVariant = 'lg';
 
   /**
    * Add badge to the section title
@@ -121,6 +127,11 @@ export class SectionComponent
   protected _classList = new BehaviorSubject<string>('');
 
   /**
+   * Internal variable for handling title variant changes
+   */
+  protected _titleVariant: FudisHeadingVariant;
+
+  /**
    * Is info sent to error summary service
    */
   private _errorSummaryInfoSent: boolean = false;
@@ -132,6 +143,7 @@ export class SectionComponent
 
     this._headingId = `${this.id}-heading`;
     this._classList.next(this._getClasses());
+    this._setTitleVariant(this.titleVariant);
     this._addToErrorSummary();
   }
 
@@ -148,6 +160,10 @@ export class SectionComponent
 
     if (changes.title?.currentValue !== changes.title?.previousValue && this.id) {
       this._addToErrorSummary();
+    }
+
+    if (changes.titleVariant?.currentValue !== changes.titleVariant?.previousValue) {
+      this._setTitleVariant(changes.titleVariant?.currentValue);
     }
   }
 
@@ -177,6 +193,13 @@ export class SectionComponent
     if (this._errorSummaryInfoSent && this._parentForm) {
       this._errorSummaryService.removeSection(this._parentForm, this.id);
     }
+  }
+
+  /**
+   * Set Section's title variant based on Input or default value
+   */
+  private _setTitleVariant(variant: FudisHeadingVariant | undefined): void {
+    this._titleVariant = variant ?? getVariant(this.level);
   }
 
   /**
