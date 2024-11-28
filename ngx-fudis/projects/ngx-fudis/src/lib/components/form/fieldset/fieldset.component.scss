@@ -81,6 +81,10 @@
           font-size: typographyTokens.$body-text-sm-font-size;
         }
       }
+
+      &:has(+ fudis-fieldset-actions) {
+        margin-right: spacing.$spacing-xl;
+      }
     }
 
     &__tooltip-button {
@@ -104,9 +108,5 @@
       gap: spacing.$spacing-xs spacing.$spacing-sm;
       margin-bottom: spacing.$spacing-xs;
     }
-  }
-  
-  fudis-fieldset-actions {
-    margin-left: spacing.$spacing-xl;
   }
 }

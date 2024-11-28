@@ -7,44 +7,24 @@ import { FieldSetComponent } from "./fieldset.component";
 
 Field Set is a grouping tool for Fudis Form Components. There are three directives to project content: header actions, notifications and main content.
 
-## Directives
+## Content Directives
 
-### Header Actions
-
-Header actions are buttons positioned next to the Field Set label.
-Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
-Fudis Actions Directive also needs `type` input which has to be set as '_fieldset_'.
-There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
-
-```
-<ng-template fudisActions [type]="'fieldset'">
-  <your-content-here />
-</ng-template>
-```
-
-### Notifications
-
-Notifications are Fudis Notifications positioned under the Field Set label.
-Notifications are assigned through Fudis Notifications Directive content projection with **fudisNotifications** selector.
-Fudis Notifications Directive also needs a `type` input which has to be set as '_fieldset_'.
-There are no restrictions on header actions content but it is advised to use Fudis Notifications only.
-
-```
-<ng-template fudisNotifications [type]="'fieldset'">
-  <your-content-here />
-</ng-template>
-```
-
-### Main Content
-
-Main content is where the form components live. Main content is assigned through Fudis Content Directive content projection with **fudisContent** selector.
-Fudis Content Directive also needs `type` input which has to be set as '_fieldset_'.
+**fudis-fieldset-content**: Fudis Field Set Content Directive is the wrapper element for the Field Set main content where all form components live.
 There are no restrictions on main content but it is advised to use Fudis Form Components only.
 
 ```
-<ng-template fudisContent [type]="'fieldset'">
+<fudis-fieldset-content>
   <your-content-here />
-</ng-template>
+</fudis-fieldset-content>
+```
+
+**fudis-fieldset-actions**: Field Set Actions Directive is used for positioning buttons next to the Field Set label.
+There are no restrictions on Field Set Actions content but it is advised to use Fudis Buttons only. 
+**Note!** Field Set's `AlignActions` property can be used in positioning Field Set's header elements along with Field Set Actions.
+```
+<fudis-fieldset-actions>
+  <your-content-here />
+</fudis-fieldset-actions>
 ```
 
 ## Field Set Inputs
@@ -76,16 +56,16 @@ Boolean property `errorSummaryBreadcrumb` adds Field Set label to the clickable 
 
 Field Set can use some of the Fudis [Grid properties](/docs/foundations-grid--documentation), including `width` and `align`.
 
-{/* prettier-ignore */}
-{/* TODO: Expose this when Radio Button Group and Checkbox Group components are exposed
-
 ### Input Size
 
-This can be used to set Checkbox Group and Radio Button Group as wide as other form components by overriding 'width' input. \*/}
+This can be used to set Checkbox Group and Radio Button Group as wide as other form components by overriding `width` input.
 
 ### Initial Focus
 
 Visible focus can be set with `initialFocus` boolean property. It will add focus for the whole fieldset element when the component is initialized and appears for the first time.
+
+### Align Actions
+Field Set `alignActions` is used for positioning Field Set's Actions Directive flow to `bottom`, `end` or `start`.
 
 ## Code Example
 
@@ -98,15 +78,10 @@ HTML Template
       [label]="'Fieldset legend label'"
       [helpText]="'Some help text for the fieldset'"
     >
-      <ng-template fudisActions [type]="'fieldset'">
+      <fudis-fieldset-actions>
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
-      </ng-template>
-      <ng-template fudisNotifications [type]="'fieldset'">
-        <fudis-notification>
-          <fudis-body-text>This is notification inside fieldset</fudis-body-text>
-        </fudis-notification>
-      </ng-template>
-      <ng-template fudisContent [type]="'fieldset'">
+      </fudis-fieldset-actions>
+      <fudis-fieldset-content>
           <fudis-text-input
             [label]="'Example text-input nr.1'"
             [control]="fieldsetExample.controls['exampleTextInput1']"
@@ -115,7 +90,7 @@ HTML Template
             [label]="'Example text-input nr.2'"
             [control]="fieldsetExample.controls['exampleTextInput2']"
           />
-      </ng-template>
+      </fudis-fieldset-content>
     </fudis-fieldset>
 ```
 
