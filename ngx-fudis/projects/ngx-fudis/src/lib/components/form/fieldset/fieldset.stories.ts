@@ -15,17 +15,16 @@ import readme from './readme.mdx';
       [label]="'Example Field Set Title'"
       [helpText]="'Helptext for the fieldset'"
       [align]="'center'"
+      [alignActions]="'start'"
       [tooltip]="'Some additional information about this fieldset'"
     >
-      <ng-template fudisActions [type]="'fieldset'">
+      <fudis-fieldset-actions>
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
-      </ng-template>
-      <ng-template fudisNotifications [type]="'fieldset'">
-        <fudis-notification
+      </fudis-fieldset-actions>
+      <fudis-fieldset-content>
+      <fudis-notification
           ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
         >
-      </ng-template>
-      <ng-template fudisContent [type]="'fieldset'">
         <fudis-grid [columns]="{ md: 2 }">
           <fudis-text-input
             [control]="fieldsetExample.controls['teacher']"
@@ -60,7 +59,7 @@ import readme from './readme.mdx';
             />
           </fudis-date-range>
         </fudis-grid>
-      </ng-template>
+      </fudis-fieldset-content>
     </fudis-fieldset>
   `,
 })

@@ -51,6 +51,10 @@ export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdo
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message/error-message.component';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
+export { 
+  FieldsetContentDirective,
+  FieldsetActionsDirective,
+ } from './lib/directives/fieldset/fieldset.directive';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';

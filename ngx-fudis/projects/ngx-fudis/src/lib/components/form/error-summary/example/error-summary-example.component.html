@@ -33,7 +33,7 @@
       <fudis-section [title]="t('sectionTitle1')" [errorSummaryBreadcrumb]="true">
         <ng-template fudisContent [type]="'section'">
           <fudis-fieldset [label]="t('fieldsetLegend')">
-            <ng-template fudisContent type="fieldset">
+            <fudis-fieldset-content>
               <fudis-grid [columns]="{ xs: 1, sm: 2 }">
                 <fudis-text-input
                   [id]="'unique-input-3'"
@@ -86,7 +86,7 @@
                 >
                 </fudis-datepicker>
               </fudis-grid>
-            </ng-template>
+            </fudis-fieldset-content>
           </fudis-fieldset>
         </ng-template>
       </fudis-section>

@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  ContentChild,
   effect,
   ElementRef,
   Input,
@@ -13,11 +12,8 @@ import {
   AfterContentInit,
 } from '@angular/core';
 
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisInputSize } from '../../../types/forms';
@@ -50,21 +46,6 @@ export class FieldSetComponent
   }
 
   /**
-   * Content directive for Field Set Actions
-   */
-  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
-
-  /**
-   * Content directive for Field Set Notifications
-   */
-  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective;
-
-  /**
-   * Content directive for Field Set Content
-   */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
-
-  /**
    * Legend elementRef to trigger initialFocus
    */
   @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef;
@@ -73,6 +54,11 @@ export class FieldSetComponent
    * Label for the form component.
    */
   @Input({ required: true }) label: string;
+
+  /**
+   * Alignment of Fieldset Actions container
+   */
+  @Input() alignActions: 'bottom' | 'end' | 'start' = 'start';
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.

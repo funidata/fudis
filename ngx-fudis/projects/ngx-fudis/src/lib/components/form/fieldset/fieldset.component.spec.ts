@@ -7,17 +7,16 @@ import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
+import { FieldsetActionsDirective } from '../../../directives/fieldset/fieldset.directive';
+import { FieldsetContentDirective } from '../../../directives/fieldset/fieldset.directive';
 import { FieldSetComponent } from './fieldset.component';
-import { NotificationComponent } from '../../notification/notification.component';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { LabelComponent } from '../label/label.component';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
@@ -34,16 +33,14 @@ import { FudisIdService } from '../../../services/id/id.service';
     [labelSize]="labelSize"
     [initialFocus]="initialFocus"
     [inputSize]="inputSize"
+    [alignActions]="alignActions"
   >
-    <ng-template fudisActions [type]="'fieldset'">
+    <fudis-fieldset-actions>
       <p class="test-actions-content">This is actions content</p>
-    </ng-template>
-    <ng-template fudisNotifications [type]="'fieldset'">
-      <p class="test-notifications-content">This is notifications content</p>
-    </ng-template>
-    <ng-template fudisContent [type]="'fieldset'">
+    </fudis-fieldset-actions>
+    <fudis-fieldset-content>
       <p class="test-fieldset-content">This is fieldset content</p>
-    </ng-template>
+    </fudis-fieldset-content>
     <p class="test-do-not-find">You should not find me</p>
   </fudis-fieldset>`,
 })
@@ -65,7 +62,8 @@ describe('FieldSetComponent', () => {
         ActionsDirective,
         BodyTextComponent,
         ButtonComponent,
-        ContentDirective,
+        FieldsetActionsDirective,
+        FieldsetContentDirective,
         FieldSetComponent,
         GridComponent,
         GridApiDirective,
@@ -74,8 +72,6 @@ describe('FieldSetComponent', () => {
         IconComponent,
         LabelComponent,
         MockFieldSetComponent,
-        NotificationComponent,
-        NotificationsDirective,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
@@ -190,17 +186,6 @@ describe('FieldSetComponent', () => {
 
       expect(actionsContentDiv).toBeTruthy();
       expect(actionsContent.textContent).toEqual('This is actions content');
-    });
-
-    it('should have fieldset notifications content', () => {
-      const notificationsContentDiv = getElement(
-        fixtureMock,
-        '.fudis-fieldset__legend__notifications',
-      );
-      const notificationsContent = getElement(fixtureMock, '.test-notifications-content');
-
-      expect(notificationsContentDiv).toBeTruthy();
-      expect(notificationsContent.textContent).toEqual('This is notifications content');
     });
 
     it('should have fieldset content', () => {

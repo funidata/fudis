@@ -16,7 +16,7 @@
       >
         <ng-template fudisContent type="form">
           <fudis-fieldset [label]="t('fieldsetTitle')">
-            <ng-template fudisContent type="fieldset">
+            <fudis-fieldset-content>
               <fudis-checkbox-group
                 [label]="t('chooseBerry')"
                 [helpText]="t('chooseBerryHelp')"
@@ -71,7 +71,7 @@
                 [label]="'At least one required'"
                 [formGroup]="testFormGroup.controls.withLanguages"
               />
-            </ng-template>
+            </fudis-fieldset-content>
           </fudis-fieldset>
         </ng-template>
       </fudis-form>

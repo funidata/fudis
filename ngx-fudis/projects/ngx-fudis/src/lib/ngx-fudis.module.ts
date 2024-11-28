@@ -92,6 +92,9 @@ import {
 } from './directives/dialog/dialog-directives';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { 
+  FieldsetActionsDirective,
+  FieldsetContentDirective } from './directives/fieldset/fieldset.directive';
 import { FormCommonApiDirective } from './directives/form/form-common-api/form-common-api.directive';
 import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
@@ -159,6 +162,8 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ErrorMessageComponent,
     ErrorSummaryComponent,
     ExpandableComponent,
+    FieldsetActionsDirective,
+    FieldsetContentDirective,
     FieldSetComponent,
     FooterComponent,
     FooterContentLeftDirective,
@@ -262,6 +267,8 @@ import { FudisTranslationService } from './services/translation/translation.serv
     FooterComponent,
     FooterContentLeftDirective,
     FooterContentRightDirective,
+    FieldsetActionsDirective,
+    FieldsetContentDirective,
     FieldSetComponent,
     FormComponent,
     FormSubmitDirective,

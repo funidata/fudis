@@ -175,7 +175,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
           >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
-                <ng-template fudisContent type="fieldset">
+                <fudis-fieldset-content>
                   <fudis-select
                     [label]="'Pick a pet'"
                     [control]="allForms.controls.formFour.controls.select"
@@ -195,7 +195,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
                       />
                     </ng-template>
                   </fudis-multiselect>
-                </ng-template>
+                </fudis-fieldset-content>
               </fudis-fieldset>
             </ng-template>
           </fudis-expandable>

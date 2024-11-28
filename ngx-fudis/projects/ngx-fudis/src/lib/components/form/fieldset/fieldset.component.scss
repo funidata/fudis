@@ -54,10 +54,6 @@
         margin-bottom: spacing.$spacing-none;
       }
 
-      &__margin-right {
-        margin-right: spacing.$spacing-xl;
-      }
-
       &__main {
         display: flex;
         align-items: center;
@@ -108,5 +104,9 @@
       gap: spacing.$spacing-xs spacing.$spacing-sm;
       margin-bottom: spacing.$spacing-xs;
     }
+  }
+  
+  fudis-fieldset-actions {
+    margin-left: spacing.$spacing-xl;
   }
 }

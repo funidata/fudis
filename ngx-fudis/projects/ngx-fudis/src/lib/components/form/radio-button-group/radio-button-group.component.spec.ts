@@ -23,6 +23,7 @@ import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FieldsetContentDirective } from '../../../directives/fieldset/fieldset.directive';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -74,6 +75,7 @@ describe('Basic inputs of Radio Button Group', () => {
         RadioButtonGroupComponent,
         RadioButtonComponent,
         FieldSetComponent,
+        FieldsetContentDirective,
         GridDirective,
         GuidanceComponent,
         ContentDirective,

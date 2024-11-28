@@ -31,6 +31,7 @@ import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FieldsetContentDirective } from '../../../directives/fieldset/fieldset.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -44,7 +45,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   >
     <ng-template fudisContent type="form">
       <fudis-fieldset [label]="'Form information'">
-        <ng-template fudisContent type="fieldset">
+        <fudis-fieldset-content>
           <fudis-text-input
             [control]="formGroup.controls.name"
             [label]="'Name'"
@@ -55,7 +56,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
             [label]="'Contact email'"
             [helpText]="'So that we can contact you'"
           />
-        </ng-template>
+        </fudis-fieldset-content>
       </fudis-fieldset>
       <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'">
         <ng-template fudisContent type="section">
@@ -128,6 +129,7 @@ describe('ErrorSummaryComponent', () => {
         ExpandableComponent,
         ErrorSummaryComponent,
         FieldSetComponent,
+        FieldsetContentDirective,
         FormComponent,
         GridDirective,
         GridComponent,
