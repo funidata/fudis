@@ -53,7 +53,7 @@ import { getElement } from '../../../utilities/tests/utilities';
           />
         </ng-template>
       </fudis-fieldset>
-      <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'">
+      <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'" [level]="2">
         <ng-template fudisContent type="section">
           <fudis-text-input [control]="formGroup.controls.section" [label]="'Section input'" />
         </ng-template>
