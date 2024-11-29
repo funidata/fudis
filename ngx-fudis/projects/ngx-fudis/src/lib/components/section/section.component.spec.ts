@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SectionComponent } from './section.component';
-import { SectionContentDirective } from '../../directives/content-projection/section/section-content.directive';
+import { 
+  SectionActionsDirective,
+  SectionContentDirective } from '../../directives/content-projection/section/section-content.directive';
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
-import { NotificationComponent } from '../notification/notification.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisGridService } from '../../services/grid/grid.service';
 import { FudisIdService } from '../../services/id/id.service';
@@ -15,7 +16,6 @@ import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
@@ -39,14 +39,9 @@ import { FudisTranslationService } from '../../services/translation/translation.
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
   >
-    <ng-template fudisActions type="section">
+    <fudis-section-actions>
       <fudis-button [label]="'Some action'"></fudis-button>
-    </ng-template>
-    <ng-template fudisNotifications type="section">
-      <fudis-notification
-        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
-      >
-    </ng-template>
+    </fudis-section-actions>
     <fudis-section-content>
       <fudis-body-text>Some text content inside section</fudis-body-text>
     </fudis-section-content>
@@ -77,9 +72,8 @@ describe('SectionComponent', () => {
         HeadingComponent,
         IconComponent,
         MockFudisSectionComponent,
-        NotificationComponent,
-        NotificationsDirective,
         SectionComponent,
+        SectionActionsDirective,
         SectionContentDirective,
         TooltipDirective,
       ],
@@ -178,18 +172,6 @@ describe('SectionComponent', () => {
   });
 
   describe('Content projection', () => {
-    it('should render notification inside header if given', () => {
-      const notifications = mockFixture.nativeElement.querySelector(
-        '.fudis-section__notifications',
-      );
-      const notificationComponent = mockFixture.debugElement.query(
-        By.directive(NotificationComponent),
-      );
-
-      expect(notifications).toBeTruthy();
-      expect(notificationComponent).toBeTruthy();
-    });
-
     it('should render action button(s) inside header if given', () => {
       const actions = mockFixture.nativeElement.querySelector('.fudis-section__header__actions');
       const actionComponent = mockFixture.debugElement.query(By.directive(ButtonComponent));

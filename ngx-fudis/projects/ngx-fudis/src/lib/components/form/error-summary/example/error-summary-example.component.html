@@ -31,7 +31,7 @@
     </ng-template>
     <ng-template fudisContent type="form">
       <fudis-section [title]="t('sectionTitle1')" [errorSummaryBreadcrumb]="true">
-        <ng-template fudisContent [type]="'section'">
+        <fudis-section-content>
           <fudis-fieldset [label]="t('fieldsetLegend')">
             <fudis-fieldset-content>
               <fudis-grid [columns]="{ xs: 1, sm: 2 }">
@@ -88,14 +88,14 @@
               </fudis-grid>
             </fudis-fieldset-content>
           </fudis-fieldset>
-        </ng-template>
+        </fudis-section-content>
       </fudis-section>
       <fudis-section
         class="fudis-mt-lg"
         [title]="t('sectionTitle2')"
         [errorSummaryBreadcrumb]="true"
       >
-        <ng-template fudisContent [type]="'section'">
+        <fudis-section-content>
           <fudis-body-text>{{ t("sectionHelptext1") }}</fudis-body-text>
           <fudis-body-text>{{ t("sectionHelptext2") }}</fudis-body-text>
           <fudis-button
@@ -109,7 +109,7 @@
             [label]="secondError ? t('customError2Hide') : t('customError2Show')"
             (handleClick)="toggleSecondError()"
           />
-        </ng-template>
+        </fudis-section-content>
       </fudis-section>
     </ng-template>
   </fudis-form>

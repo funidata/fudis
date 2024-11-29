@@ -23,14 +23,7 @@ type MyForm = {
   selector: 'example-form-content',
   template: `
     <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
-      <ng-template fudisNotifications [type]="'section'">
-        <fudis-notification
-          ><fudis-body-text
-            >This is notification for the section</fudis-body-text
-          ></fudis-notification
-        >
-      </ng-template>
-      <ng-template fudisContent [type]="'section'">
+      <fudis-section-content>
         <fudis-expandable
           (closedChange)="handleClosedOutput($event)"
           [title]="'Expandable section 1'"
@@ -122,7 +115,7 @@ type MyForm = {
             </fudis-fieldset>
           </ng-template>
         </fudis-expandable>
-      </ng-template>
+      </fudis-section-content>
     </fudis-section>
   `,
 })

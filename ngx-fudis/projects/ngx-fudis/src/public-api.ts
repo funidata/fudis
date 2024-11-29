@@ -72,11 +72,11 @@ export { LanguageBadgeGroupComponent } from './lib/components/language-badge-gro
 export { LinkDirective } from './lib/directives/link/link.directive';
 export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
 export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
-export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 export { RadioButtonComponent } from './lib/components/form/radio-button-group/radio-button/radio-button.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SectionComponent } from './lib/components/section/section.component';
+export { SectionActionsDirective } from './lib/directives/content-projection/section/section-content.directive';
 export { SectionContentDirective } from './lib/directives/content-projection/section/section-content.directive';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';

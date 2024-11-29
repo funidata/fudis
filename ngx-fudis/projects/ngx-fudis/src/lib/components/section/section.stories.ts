@@ -61,23 +61,21 @@ const ExampleTemplate: StoryFn = (args) => ({
     [align]="align"
     [width]="width"
   >
-    <ng-template fudisActions [type]="'section'">
+    <fudis-section-actions>
       <fudis-button [label]="'Some action'"></fudis-button>
       <fudis-button [label]="'Another action'"></fudis-button>
-    </ng-template>
-    <ng-template fudisNotifications [type]="'section'">
-      <fudis-notification
-        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
-      >
-    </ng-template>
-    <ng-template fudisContent [type]="'section'">
+    </fudis-section-actions>
+    <fudis-section-content>
+    <fudis-notification>
+      <fudis-body-text>This is notification</fudis-body-text>
+    </fudis-notification>
       <fudis-expandable [title]="'Expandable inside section'" [closed]="false">
         <ng-template fudisContent type="expandable">
           <fudis-body-text>Some content inside expandable</fudis-body-text>
         </ng-template>
       </fudis-expandable>
       <fudis-body-text>More text content inside section</fudis-body-text>
-    </ng-template>
+    </fudis-section-content>
   </fudis-section> `,
 });
 
@@ -110,8 +108,8 @@ const NestedExampleTemplate: StoryFn = (args) => ({
     [width]="'md'"
   >
     // Empty Actions template, so that nested Actions will not be rendered to the parent!
-    <ng-template fudisActions [type]="'section'"></ng-template>
-    <ng-template fudisContent [type]="'section'">
+    <fudis-section-actions></fudis-section-actions>
+    <fudis-section-content>
       <fudis-body-text>Parent Section content</fudis-body-text>
       <fudis-body-text
         >This Section has an empty fudisActions template tag to make sure that nested Section's
@@ -124,14 +122,14 @@ const NestedExampleTemplate: StoryFn = (args) => ({
         [titleVariant]="'sm'"
         [level]="3"
       >
-        <ng-template fudisActions [type]="'section'">
+        <fudis-section-actions>
           <fudis-button [label]="'Nested Action button'" />
-        </ng-template>
-        <ng-template fudisContent [type]="'section'">
+        </fudis-section-actions>
+        <fudis-section-content>
           <fudis-body-text>Nested Section content</fudis-body-text>
-        </ng-template>
+        </fudis-section-content>
       </fudis-section>
-    </ng-template>
+      </fudis-section-content>
   </fudis-section>`,
 });
 

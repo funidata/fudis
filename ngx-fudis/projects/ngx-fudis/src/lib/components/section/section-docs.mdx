@@ -19,28 +19,23 @@ Each Section should be identified, therefore `title` is mandatory property which
 
 Heading can also include `tooltip` with all the [Tooltip](/docs/directives-tooltip--documentation) Inputs available.
 
-#### Notifications and Actions
+### Content Directives
 
-Notifications and buttons are added through `fudisNotifications` and `fudisActions` directives. Both notifications and buttons have fixed positions and cannot be altered.
+**fudis-section-content**: The main content of the Section is added through Fudis Section Content directive.
+
+<Source
+  code={`<fudis-section-content>
+  <fudis-body-text>Main content of the section</fudis-body-text>
+</fudis-section-content>`}
+/>
+
+**fudis-section-actions**: Buttons are added through Fudis Section Actions directive. Buttons have fixed positions and cannot be altered.
 
 <Source
   code={`
-  <ng-template fudisActions [type]="'section'">
+  <fudis-section-actions>
   <fudis-button [label]="'Some action'"></fudis-button>
-</ng-template>
-<ng-template fudisNotifications [type]="'section'">
-  <fudis-body-text [variant]="'lg-regular'">This is notification</fudis-body-text>
-</ng-template>`}
-/>
-
-### Content
-
-The main content of the Section is added through `fudisContent` directive
-
-<Source
-  code={`<ng-template fudisContent [type]="'section'">
-  <fudis-body-text>Main content of the section</fudis-body-text>
-</ng-template>`}
+</fudis-section-actions>`}
 />
 
 ### Nesting Sections Inside Sections
@@ -63,20 +58,20 @@ If you have Section inside Section, and the nested one has Actions-content but p
   [level]="2"
   >
   // Empty Actions template, so that nested Actions will not be rendered to the parent!
-  <ng-template fudisActions [type]="'section'"></ng-template>
-  <ng-template fudisContent [type]="'section'">
+  <fudis-section-actions></fudis-section-actions>
+  <fudis-section-content>
     <fudis-section
       [title]="'Nested Section'"
       [titleVariant]="'md'"
       [level]="3" >
-      <ng-template fudisActions [type]="'section'">
+      <fudis-section-actions>
         <fudis-button [label]="'Nested Action button'"/>
-      </ng-template>
-      <ng-template fudisContent [type]="'section'">
+      </fudis-section-actions>
+      <fudis-section-content>
         <fudis-body-text>Main content of the section</fudis-body-text>
-      </ng-template>
+      </fudis-section-content>
     </fudis-section>
-  </ng-template>
+  </fudis-section-content>
 </fudis-section>
   `}
 />
@@ -106,7 +101,6 @@ When using Section inside [Form](/docs/components-form-form--documentation) with
 ## Related components
 
 - [Button](/docs/components-button--documentation)
-- [Notification](/docs/components-notification--documentation)
 - [Heading](/docs/components-typography-heading--documentation)
 - [Tooltip](/docs/directives-tooltip--documentation)
 

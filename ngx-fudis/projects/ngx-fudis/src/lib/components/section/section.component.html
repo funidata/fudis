@@ -38,19 +38,8 @@
           ></fudis-button>
         </ng-container>
       </div>
-      <ng-container *ngIf="_headerActions?.type === 'section'">
-        <div class="fudis-section__header__actions">
-          <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-        </div>
-      </ng-container>
+      <ng-content select="fudis-section-actions"></ng-content>
     </div>
-    <ng-container *ngIf="_notifications?.type === 'section'">
-      <div class="fudis-section__notifications">
-        <ng-container *ngTemplateOutlet="_notifications!.templateRef" />
-      </div>
-    </ng-container>
   </div>
-  <div class="fudis-section__content">
-    <ng-content select="section"></ng-content>
-  </div>
+  <ng-content select="fudis-section-content"></ng-content>
 </section>

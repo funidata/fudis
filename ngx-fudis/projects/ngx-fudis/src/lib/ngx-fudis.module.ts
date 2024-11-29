@@ -105,7 +105,7 @@ import { GroupComponentBaseDirective } from './directives/form/group-component-b
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 
 import { LinkDirective } from './directives/link/link.directive';
-import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
+import { SectionActionsDirective } from './directives/content-projection/section/section-content.directive';
 import { SectionContentDirective } from './directives/content-projection/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
@@ -194,10 +194,10 @@ import { FudisTranslationService } from './services/translation/translation.serv
     MultiselectChipListComponent,
     MultiselectOptionComponent,
     NotificationComponent,
-    NotificationsDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,
+    SectionActionsDirective,
     SectionContentDirective,
     SelectAutocompleteComponent,
     SelectBaseDirective,
@@ -291,10 +291,10 @@ import { FudisTranslationService } from './services/translation/translation.serv
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,
-    NotificationsDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,
+    SectionActionsDirective,
     SectionContentDirective,
     SelectComponent,
     SelectOptionComponent,

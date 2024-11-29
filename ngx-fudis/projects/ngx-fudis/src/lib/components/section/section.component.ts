@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
-import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
@@ -38,21 +37,6 @@ export class SectionComponent
   ) {
     super();
   }
-
-  /**
-   * Content projection for notifications inside Section
-   */
-  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective | null;
-
-  /**
-   * Content projection for Section content
-   */
-  @ContentChild(ContentDirective) protected _content: ContentDirective | null;
-
-  /**
-   * Content projection for Section heading
-   */
-  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
 
   /**
    * Section title
