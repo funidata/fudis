@@ -11,7 +11,6 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
 import { ButtonComponent } from '../../button/button.component';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -33,6 +32,7 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
 import { SectionContentDirective } from '../../../directives/content-projection/section/section-content.directive';
+import { FormContentDirective } from '../../../directives/content-projection/form/form-content.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -44,7 +44,7 @@ import { SectionContentDirective } from '../../../directives/content-projection/
     [errorSummaryHelpText]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
-    <ng-template fudisContent type="form">
+    <fudis-form-content>
       <fudis-fieldset [label]="'Form information'">
         <fudis-fieldset-content>
           <fudis-text-input
@@ -76,7 +76,7 @@ import { SectionContentDirective } from '../../../directives/content-projection/
           />
         </ng-template>
       </fudis-expandable>
-    </ng-template>
+    </fudis-form-content>
   </fudis-form>`,
 })
 class MockFormComponent {
@@ -135,7 +135,7 @@ describe('ErrorSummaryComponent', () => {
         GridDirective,
         GridComponent,
         GuidanceComponent,
-        HeaderDirective,
+        FormContentDirective,
         HeadingComponent,
         IconComponent,
         LabelComponent,

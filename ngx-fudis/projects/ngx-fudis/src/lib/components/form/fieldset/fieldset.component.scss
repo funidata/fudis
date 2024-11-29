@@ -82,7 +82,7 @@
         }
       }
 
-      &:has(+ fudis-fieldset-actions) {
+      &:has(+ .fudis-fieldset__legend__actions) {
         margin-right: spacing.$spacing-xl;
       }
     }

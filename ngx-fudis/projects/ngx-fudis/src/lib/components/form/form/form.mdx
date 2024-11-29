@@ -8,46 +8,38 @@ import { formArgTypesExclude } from "../../../utilities/storybook";
 
 Fudis Form is a layout component which enables semantically coherent and easy flow for building forms. It constructs from three main sections: header content, header actions and main content.
 
-## Directives
+## Content Directives
 
-### Header Content
-
-Header content is additional information displayed under the actual form heading.
-Header content is assigned through Fudis Header Directive content projection with **fudisHeader** selector.
+**fudis-form-header**: Header content is additional information displayed under the actual form heading.
+Header content is assigned through Fudis Form Header Directive.
 There are no restrictions on header content but it is advised to use Fudis Components only.
 
 ```
-<ng-template fudisHeader>
+<fudis-form-header>
   <your-content-here />
-</ng-template>
+</fudis-form-header>
 ```
 
-### Header Actions
+**fudis-form-actions**: Form Actions are buttons positioned on top of the form.
+Form actions are assigned through Fudis Form Actions Directive.
 
-Header actions are buttons positioned on top of the form.
-Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
-Fudis Actions Directive also needs `type` input which has to be set as '_form_'.
-
-There are no restrictions on Header Actions content but it is advised to use Fudis Buttons only. Pairing Button with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
+There are no restrictions on Form Actions content but it is advised to use Fudis Buttons only. Pairing Button with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
 
 ```
-<ng-template fudisActions [type]="'form'">
+<fudis-form-actions>
   <fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit form'" (handleClick)="myFormSubmit()" />
   ...other content
-</ng-template>
+</fudis-form-actions>
 ```
 
-### Main Content
-
-Main content is where the form components live.
-Main content is assigned through Fudis Content Directive content projection with **fudisContent** selector.
-Fudis Content Directive also needs `type` input which has to be set as '_form_'.
+**fudis-form-content**: Form main content is where the form components live.
+Main content is assigned through Fudis Form Content Directive.
 There are no restrictions on main content but it is advised to use Fudis Form Components only.
 
 ```
-<ng-template fudisContent [type]="'form'">
+<fudis-form-content>
   <your-content-here />
-</ng-template>
+</fudis-form-content>
 ```
 
 ## Form Inputs

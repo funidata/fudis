@@ -97,12 +97,14 @@ import {
   FieldsetContentDirective } from './directives/content-projection/fieldset/fieldset-content.directive';
 import { FormCommonApiDirective } from './directives/form/form-common-api/form-common-api.directive';
 import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
-import { FormContentDirective } from './directives/content-projection/form/form-content.directive';
+import { 
+  FormActionsDirective,
+  FormContentDirective,
+  FormHeaderDirective } from './directives/content-projection/form/form-content.directive';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
-import { HeaderDirective } from './directives/content-projection/header/header.directive';
 
 import { LinkDirective } from './directives/link/link.directive';
 import { SectionActionsDirective } from './directives/content-projection/section/section-content.directive';
@@ -172,7 +174,9 @@ import { FudisTranslationService } from './services/translation/translation.serv
     FooterContentRightDirective,
     FormCommonApiDirective,
     FormComponent,
+    FormActionsDirective,
     FormContentDirective,
+    FormHeaderDirective,
     FormSubmitDirective,
     GridComponent,
     GridApiDirective,
@@ -181,7 +185,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     GridItemDirective,
     GroupComponentBaseDirective,
     GuidanceComponent,
-    HeaderDirective,
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,
@@ -275,13 +278,14 @@ import { FudisTranslationService } from './services/translation/translation.serv
     FieldsetContentDirective,
     FieldSetComponent,
     FormComponent,
+    FormActionsDirective,
     FormContentDirective,
+    FormHeaderDirective,
     FormSubmitDirective,
     GridComponent,
     GridDirective,
     GridItemComponent,
     GridItemDirective,
-    HeaderDirective,
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,

@@ -13,7 +13,6 @@ export class ContentDirective {
    */
   @Input({ required: true }) type:
     | 'expandable'
-    | 'form'
     | 'select-options';
 }
 

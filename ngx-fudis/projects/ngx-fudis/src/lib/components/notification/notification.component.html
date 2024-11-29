@@ -9,7 +9,5 @@
       <ng-content />
     </div>
   </ng-container>
-  <ng-container *ngIf="_content?.type === 'notification'">
-    <ng-container *ngTemplateOutlet="_content!.templateRef" />
-  </ng-container>
+  <ng-content></ng-content>
 </div>

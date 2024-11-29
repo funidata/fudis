@@ -48,11 +48,7 @@
           </ng-container>
         </div>
       </ng-container>
-      <ng-container *ngIf="_headerContent">
-        <div class="fudis-form__header__main__content">
-          <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
-        </div>
-      </ng-container>
+      <ng-content select="fudis-form-header"></ng-content>
       <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible && !_dialogParent">
         <fudis-error-summary
           [formId]="id"
@@ -62,13 +58,11 @@
       </ng-container>
     </div>
   </div>
-  <ng-container *ngIf="_headerActions?.type === 'form' && !_dialogParent">
-    <div class="fudis-form__header__actions">
-      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-    </div>
+  <ng-container *ngIf="!_dialogParent">
+      <ng-content select="fudis-form-actions"></ng-content>
   </ng-container>
-  <ng-container *ngIf="_mainContent?.type === 'form'">
-    <div class="fudis-form__content">
+  <div class="fudis-form__content">
+    <ng-content select="fudis-form-content">
       <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible && _dialogParent">
         <fudis-error-summary
           [formId]="id"
@@ -76,12 +70,9 @@
           [helpText]="errorSummaryHelpText"
         />
       </ng-container>
-      <ng-container *ngTemplateOutlet="_mainContent!.templateRef" />
-    </div>
-  </ng-container>
-  <ng-container *ngIf="_headerActions?.type === 'form' && _dialogParent">
-    <div class="fudis-form__header__actions__dialog">
-      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-    </div>
+  </ng-content>
+  </div>
+  <ng-container *ngIf="_dialogParent">
+      <ng-content select="fudis-form-actions" (dialogActions)="true"></ng-content>
   </ng-container>
 </form>
