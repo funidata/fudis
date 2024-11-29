@@ -13,41 +13,39 @@
 >
   <div [id]="id + '_header'" class="fudis-form__header">
     <div class="fudis-form__header__main">
-      <ng-container *ngIf="title && level">
-        <div class="fudis-form__header__title">
-          <ng-container *ngIf="_dialogParent">
-            <fudis-heading
-              class="fudis-form__header__title__dialog fudis-mb-xs"
-              fudisDialogTitle
-              [variant]="titleVariant"
-              [level]="level"
-              >{{ title
-              }}<ng-container *ngIf="badge && badgeText">
-                <fudis-badge
-                  class="fudis-form__header__title__badge"
-                  [variant]="badge"
-                  [content]="badgeText"
-                />
-              </ng-container>
-            </fudis-heading>
-          </ng-container>
-          <ng-container *ngIf="!_dialogParent">
-            <fudis-heading class="fudis-mb-xs" [variant]="titleVariant" [level]="level"
-              >{{ title
-              }}<ng-container *ngIf="badge && badgeText">
-                <fudis-badge
-                  class="fudis-form__header__title__badge"
-                  [variant]="badge"
-                  [content]="badgeText"
-                />
-              </ng-container>
-            </fudis-heading>
-          </ng-container>
-          <ng-container *ngIf="helpText">
-            <fudis-body-text class="fudis-mb-xs">{{ helpText }}</fudis-body-text>
-          </ng-container>
-        </div>
-      </ng-container>
+      <div class="fudis-form__header__title">
+        <ng-container *ngIf="_dialogParent">
+          <fudis-heading
+            class="fudis-form__header__title__dialog fudis-mb-xs"
+            fudisDialogTitle
+            [variant]="_titleVariant"
+            [level]="level"
+            >{{ title
+            }}<ng-container *ngIf="badge && badgeText">
+              <fudis-badge
+                class="fudis-form__header__title__badge"
+                [variant]="badge"
+                [content]="badgeText"
+              />
+            </ng-container>
+          </fudis-heading>
+        </ng-container>
+        <ng-container *ngIf="!_dialogParent">
+          <fudis-heading class="fudis-mb-xs" [variant]="titleVariant" [level]="level"
+            >{{ title
+            }}<ng-container *ngIf="badge && badgeText">
+              <fudis-badge
+                class="fudis-form__header__title__badge"
+                [variant]="badge"
+                [content]="badgeText"
+              />
+            </ng-container>
+          </fudis-heading>
+        </ng-container>
+        <ng-container *ngIf="helpText">
+          <fudis-body-text class="fudis-mb-xs">{{ helpText }}</fudis-body-text>
+        </ng-container>
+      </div>
       <ng-container *ngIf="_headerContent">
         <div class="fudis-form__header__main__content">
           <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />

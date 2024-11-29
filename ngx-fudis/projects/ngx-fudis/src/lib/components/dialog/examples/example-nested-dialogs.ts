@@ -25,7 +25,6 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
         <fudis-form
           [title]="title"
           [level]="2"
-          [titleVariant]="'xl'"
           [errorSummaryHelpText]="'You need to fill up the information.'"
         >
           <ng-template fudisContent [type]="'form'">
