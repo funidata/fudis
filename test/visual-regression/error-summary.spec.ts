@@ -65,6 +65,7 @@ test("error summary language change and manually sent errors", async ({ page }) 
   await page.getByTestId("submit-button").click();
   await page.getByTestId("error-button-1").click();
   await page.getByTestId("submit-button").click();
+  await page.waitForTimeout(200);
   await expect(page.getByText(firstManualError)).toBeVisible();
   await expect(page.getByText(secondManualError)).not.toBeVisible();
 
