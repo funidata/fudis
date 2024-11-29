@@ -77,6 +77,7 @@ export { NotificationComponent } from './lib/components/notification/notificatio
 export { RadioButtonComponent } from './lib/components/form/radio-button-group/radio-button/radio-button.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SectionComponent } from './lib/components/section/section.component';
+export { SectionContentDirective } from './lib/directives/content-projection/section/section-content.directive';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';

@@ -106,6 +106,7 @@ import { HeaderDirective } from './directives/content-projection/header/header.d
 
 import { LinkDirective } from './directives/link/link.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
+import { SectionContentDirective } from './directives/content-projection/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { TextFieldComponentBaseDirective } from './directives/form/text-field-component-base/text-field-component-base.directive';
@@ -197,6 +198,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,
+    SectionContentDirective,
     SelectAutocompleteComponent,
     SelectBaseDirective,
     SelectComponent,
@@ -293,6 +295,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,
+    SectionContentDirective,
     SelectComponent,
     SelectOptionComponent,
     SelectGroupComponent,

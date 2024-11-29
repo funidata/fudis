@@ -51,8 +51,6 @@
     </ng-container>
   </div>
   <div class="fudis-section__content">
-    <ng-container *ngIf="_content?.type === 'section'">
-      <ng-container *ngTemplateOutlet="_content!.templateRef" />
-    </ng-container>
+    <ng-content select="section"></ng-content>
   </div>
 </section>

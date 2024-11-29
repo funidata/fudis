@@ -32,6 +32,7 @@ import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { SectionContentDirective } from '../../../directives/content-projection/section/section-content.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -59,9 +60,9 @@ import { FieldsetContentDirective } from '../../../directives/content-projection
         </fudis-fieldset-content>
       </fudis-fieldset>
       <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'">
-        <ng-template fudisContent type="section">
+        <fudis-section-content>
           <fudis-text-input [control]="formGroup.controls.section" [label]="'Section input'" />
-        </ng-template>
+        </fudis-section-content>
       </fudis-section>
       <fudis-expandable
         [closed]="false"
@@ -142,6 +143,7 @@ describe('ErrorSummaryComponent', () => {
         MockFormComponent,
         NotificationComponent,
         SectionComponent,
+        SectionContentDirective,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],

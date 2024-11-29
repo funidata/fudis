@@ -14,8 +14,6 @@ export class ContentDirective {
   @Input({ required: true }) type:
     | 'expandable'
     | 'form'
-    | 'fieldset'
-    | 'section'
     | 'select-options';
 }
 

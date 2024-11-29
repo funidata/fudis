@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SectionComponent } from './section.component';
+import { SectionContentDirective } from '../../directives/content-projection/section/section-content.directive';
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
@@ -46,9 +47,9 @@ import { FudisTranslationService } from '../../services/translation/translation.
         ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
       >
     </ng-template>
-    <ng-template fudisContent type="section">
+    <fudis-section-content>
       <fudis-body-text>Some text content inside section</fudis-body-text>
-    </ng-template>
+    </fudis-section-content>
   </fudis-section>`,
 })
 class MockFudisSectionComponent {
@@ -79,6 +80,7 @@ describe('SectionComponent', () => {
         NotificationComponent,
         NotificationsDirective,
         SectionComponent,
+        SectionContentDirective,
         TooltipDirective,
       ],
       providers: [
