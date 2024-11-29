@@ -32,7 +32,7 @@ type MyForm = {
           [errorSummaryHelpText]="'You did not fill all the required information'"
           [level]="2"
         >
-          <ng-template fudisContent [type]="'form'">
+          <fudis-form-actions>
             <fudis-fieldset [label]="'We need some information'" [helpText]="_greetingFromOpener">
               <fudis-fieldset-content>
                 <fudis-checkbox-group
@@ -63,8 +63,8 @@ type MyForm = {
                 </fudis-radio-button-group>
               </fudis-fieldset-content>
             </fudis-fieldset>
-          </ng-template>
-          <ng-template fudisActions [type]="'form'">
+          </fudis-form-actions>
+          <fudis-form-actions>
             <fudis-button
               fudisFormSubmit
               [formValid]="testFormGroup.valid"
@@ -72,7 +72,7 @@ type MyForm = {
               [label]="'Submit'"
             ></fudis-button>
             <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
-          </ng-template>
+          </fudis-form-actions>
         </fudis-form>
       </fudis-dialog-content>
     </fudis-dialog>

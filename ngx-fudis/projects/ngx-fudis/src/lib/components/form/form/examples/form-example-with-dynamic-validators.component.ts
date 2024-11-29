@@ -43,15 +43,15 @@ type MyForm = {
       [errorSummaryHelpText]="errorSummaryHelpText"
       [errorSummaryVisible]="errorSummaryVisible"
     >
-      <ng-template fudisActions [type]="'form'">
+      <fudis-form-actions>
         <fudis-button
           (handleClick)="toggleErrorSummary()"
           [variant]="'secondary'"
           [label]="'Toggle Error Summary'"
         />
         <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
-      </ng-template>
-      <ng-template fudisContent [type]="'form'">
+      </fudis-form-actions>
+      <fudis-form-content>
         <fudis-fieldset [label]="'Add and remove validators dynamically'">
           <fudis-fieldset-content>
             <fudis-grid [rowGap]="'xs'" [width]="'md'">
@@ -249,7 +249,7 @@ type MyForm = {
             </fudis-grid>
           </fudis-fieldset-content>
         </fudis-fieldset>
-      </ng-template>
+      </fudis-form-content>
     </fudis-form>
   `,
 })

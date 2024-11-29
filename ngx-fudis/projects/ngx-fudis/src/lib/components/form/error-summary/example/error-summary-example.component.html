@@ -7,7 +7,7 @@
     [helpText]="t('currentStrategy') + toggleLive"
     [errorSummaryHelpText]="t('errorSummaryHelpText')"
   >
-    <ng-template fudisActions type="form">
+    <fudis-form-actions>
       <fudis-button
         [id]="'change-strategy-button'"
         [label]="t('changeStrategy')"
@@ -28,7 +28,7 @@
         [formValid]="formExample.valid"
         [label]="t('submit')"
       />
-    </ng-template>
+    </fudis-form-actions>
     <fudis-form-content>
       <fudis-section [title]="t('sectionTitle1')" [errorSummaryBreadcrumb]="true">
         <fudis-section-content>

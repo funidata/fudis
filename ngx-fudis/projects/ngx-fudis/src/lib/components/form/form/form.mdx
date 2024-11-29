@@ -87,10 +87,10 @@ This is a simple example on how to use Form Component.
   <ng-template fudisHeader>
     <fudis-body-text>Additional form information</fudis-body-text>
   </ng-template>
-  <ng-template fudisActions [type]="'form'">
+  <fudis-form-actions>
     <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" (handleClick)="submitForm()" />
-  </ng-template>
-  <ng-template fudisContent [type]="'form'">
+  </fudis-form-actions>
+  <fudis-form-content>
     <fudis-text-input
       [label]="'Example text-input'"
       [control]="formExample.controls.exampleTextInput"
@@ -102,7 +102,7 @@ This is a simple example on how to use Form Component.
       <fudis-checkbox [controlName]="'first'" [label]="'Choose option 1'" />
       <fudis-checkbox [controlName]="'second'" [label]="'Choose option 2'" />
     </fudis-checkbox-group>
-  </ng-template>
+  </fudis-form-content>
 </fudis-form>
 
 // TypeScript

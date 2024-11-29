@@ -40,21 +40,6 @@ export class FormComponent
     super();
   }
 
-  // /**
-  //  * Content directive for Form Header Actions
-  //  */
-  // @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective;
-
-  // /**
-  //  * Content directive for Form Header Content
-  //  */
-  // @ContentChild(HeaderDirective) protected _headerContent: HeaderDirective;
-
-  // /**
-  //  * Content directive for Form Main Content
-  //  */
-  // @ContentChild(ContentDirective) protected _mainContent: ContentDirective;
-
   /**
    * Help text displayed in Error Summary before listing individual errors
    */
