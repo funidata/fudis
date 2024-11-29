@@ -29,14 +29,14 @@ type TestForm = {
               [label]="'Question about your power animal'"
               [helpText]="_greetingFromOpeningComponent"
             >
-              <ng-template fudisContent [type]="'fieldset'">
+              <fudis-fieldset-content>
                 <fudis-text-input
                   [id]="'example-input-power-animal'"
                   [label]="'What is your power animal?'"
                   [control]="exampleDialogFormGroup.controls['powerAnimal']"
                   [helpText]="'Please add some values'"
                 />
-              </ng-template>
+              </fudis-fieldset-content>
             </fudis-fieldset>
             <fudis-body-text>
               Her companions instrument set estimating sex remarkably solicitude motionless.

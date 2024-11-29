@@ -71,7 +71,7 @@ type MyForm = {
                 [label]="'Tearcher info'"
                 [tooltip]="'Quite many fields are required.'"
               >
-                <ng-template fudisContent [type]="'fieldset'">
+                <fudis-fieldset-content>
                   <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
                     <fudis-text-input
                       [initialFocus]="true"
@@ -88,7 +88,7 @@ type MyForm = {
                       [helpText]="'So that students can ask for more time on their homework.'"
                     />
                   </fudis-grid>
-                </ng-template>
+                </fudis-fieldset-content>
               </fudis-fieldset>
             </fudis-grid>
           </ng-template>
@@ -100,7 +100,7 @@ type MyForm = {
         >
           <ng-template fudisContent [type]="'expandable'">
             <fudis-fieldset [label]="'More important fields'">
-              <ng-template fudisContent [type]="'fieldset'">
+              <fudis-fieldset-content>
                 <fudis-date-range>
                   <fudis-datepicker
                     fudisDateStart
@@ -118,7 +118,7 @@ type MyForm = {
                   [label]="'Description'"
                   [helpText]="'Description in all languages is required'"
                 />
-              </ng-template>
+              </fudis-fieldset-content>
             </fudis-fieldset>
           </ng-template>
         </fudis-expandable>

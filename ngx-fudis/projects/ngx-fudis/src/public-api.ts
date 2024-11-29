@@ -54,10 +54,11 @@ export { ExpandableComponent } from './lib/components/expandable/expandable.comp
 export { 
   FieldsetContentDirective,
   FieldsetActionsDirective,
- } from './lib/directives/fieldset/fieldset.directive';
+ } from './lib/directives/content-projection/fieldset/fieldset-content.directive';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
+export { FormContentDirective } from './lib/directives/content-projection/form/form-content.directive';
 export { FormSubmitDirective } from './lib/directives/form/form-actions/form-actions.directive';
 export { LocalizedTextGroupComponent } from './lib/components/form/localized-text-group/localized-text-group.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';

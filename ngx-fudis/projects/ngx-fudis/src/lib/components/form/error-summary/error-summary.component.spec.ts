@@ -31,7 +31,7 @@ import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { FieldsetContentDirective } from '../../../directives/fieldset/fieldset.directive';
+import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',

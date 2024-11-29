@@ -34,7 +34,7 @@ type MyForm = {
         >
           <ng-template fudisContent [type]="'form'">
             <fudis-fieldset [label]="'We need some information'" [helpText]="_greetingFromOpener">
-              <ng-template fudisContent [type]="'fieldset'">
+              <fudis-fieldset-content>
                 <fudis-checkbox-group
                   [label]="'Choose berry'"
                   [helpText]="'Berries are yummy'"
@@ -61,7 +61,7 @@ type MyForm = {
                     [value]="option.value"
                   />
                 </fudis-radio-button-group>
-              </ng-template>
+              </fudis-fieldset-content>
             </fudis-fieldset>
           </ng-template>
           <ng-template fudisActions [type]="'form'">
