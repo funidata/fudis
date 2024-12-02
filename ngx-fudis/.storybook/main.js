@@ -22,7 +22,7 @@ export const features = {
 export const staticDirs = [
   "./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
   "./../projects/ngx-fudis/src/lib/assets/images",
-  "./../projects/ngx-fudis/src/assets/i18n",
+  "./assets/i18n",
 ];
 export const docs = {
   defaultName: "Documentation",
