@@ -8,7 +8,36 @@ import { formArgTypesExclude } from "../../../utilities/storybook";
 
 Fudis Form is a layout component which enables semantically coherent and easy flow for building forms. It constructs from three main sections: header content, header actions and main content.
 
-## Directives
+## Mandatory and Commonly Used Properties
+
+### Heading
+
+Fudis Form is not valid without a heading.
+
+Mandatory properties are `title` (visual heading) and `level` (semantic heading level), additionally it is possible to change the variant (visual size) of the heading with `titleVariant`, which otherwise defaults to corresponding level value.
+
+See possible heading levels and variants from [Heading Documentation](/docs/components-typography-heading--documentation).
+
+#### Badge
+
+Fudis Badge can be attached to form heading by adding `badge` (variant) and `badgeText` (text content) properties.
+See badge variants from [Badge Documentation](/docs/components-badge--documentation).
+
+### Error Summary
+
+`errorSummaryVisible`: Boolean property controlling the visibility of the Error Summary. This is automatically managed if your Form has Button with `fudisFormSubmit` directive with boolean property `formValid`. Further documentation of [Form Submit Directive](/docs/directives-form-actions--documentation).
+
+`errorSummaryHelpText`: Mandatory helper text displayed as describing guidance text for the Error Summary.
+
+More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](/docs/services-error-summary--documentation).
+
+### Layout
+
+Fudis Form extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/directives-grid-grid--documentation).
+The complete list of allowed properties can be found from Properties table at the bottom of this page.
+
+
+## Content Projection Directives
 
 ### Header Content
 
@@ -49,34 +78,6 @@ There are no restrictions on main content but it is advised to use Fudis Form Co
   <your-content-here />
 </ng-template>
 ```
-
-## Form Inputs
-
-Aside from content projection Fudis Form will create heading, badge and error-summary based on given properties.
-
-Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation).
-The complete list of allowed properties can be found from Properties table at the bottom of this page.
-
-### Heading
-
-Fudis Form is not valid without a heading.
-
-**Mandatory properties** are `title` (visual heading) and `level` (semantic heading level), additionally it is possible to change the variant (visual size) of the heading with `titleVariant`, which otherwise defaults to corresponding level value.
-
-See possible heading levels and variants from [Heading Documentation](/docs/components-typography-heading--documentation).
-
-### Badge
-
-Fudis Badge can be attached to form heading by adding `badge` (variant) and `badgeText` (text content) properties.
-See badge variants from [Badge Documentation](/docs/components-badge--documentation).
-
-### Error Summary
-
-`errorSummaryVisible`: Boolean property controlling the visibility of the Error Summary. This is automatically managed if your Form has Button with `fudisFormSubmit` directive with boolean property `formValid`. Further documentation of [Form Submit Directive](/docs/directives-form-actions--documentation).
-
-`errorSummaryHelpText`: Mandatory helper text displayed as describing guidance text for the Error Summary.
-
-More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](/docs/services-error-summary--documentation).
 
 ## Code Example
 
