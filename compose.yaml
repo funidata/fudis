@@ -11,6 +11,7 @@ services:
     volumes:
       - ./ngx-fudis/projects/ngx-fudis/src:/usr/src/app/projects/ngx-fudis/src
       - ./ngx-fudis/projects/documentation:/usr/src/app/projects/documentation
+      - ./ngx-fudis/.storybook/assets:/usr/src/app/.storybook/assets
 
   fudis-sandbox:
     image: fudis
