@@ -11,5 +11,5 @@ export class ActionsDirective {
   /**
    * Component type to protect wrong content projection to nested components
    */
-  @Input({ required: true }) type: 'expandable' | 'form' ;
+  @Input({ required: true }) type: 'expandable' | 'form';
 }

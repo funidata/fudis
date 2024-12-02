@@ -34,7 +34,7 @@
   }
 
   &__content {
-    & fudis-notification {
+    fudis-notification {
       margin-bottom: spacing.$spacing-xs;
     }
   }

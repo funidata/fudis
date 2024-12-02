@@ -6,7 +6,10 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { FieldsetActionsDirective,FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
+import {
+  FieldsetActionsDirective,
+  FieldsetContentDirective,
+} from '../../../directives/content-projection/fieldset/fieldset-content.directive';
 import { FieldSetComponent } from './fieldset.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { GuidanceComponent } from '../guidance/guidance.component';

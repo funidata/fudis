@@ -26,7 +26,6 @@ import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
 import { SectionContentDirective } from '../../../directives/content-projection/section/section-content.directive';
 import { FormContentDirective } from '../../../directives/content-projection/form/form-content.directive';

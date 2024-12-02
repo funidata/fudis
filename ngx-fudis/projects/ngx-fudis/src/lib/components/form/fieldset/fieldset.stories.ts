@@ -22,7 +22,7 @@ import readme from './readme.mdx';
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </fudis-fieldset-actions>
       <fudis-fieldset-content>
-      <fudis-notification
+        <fudis-notification
           ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
         >
         <fudis-grid [columns]="{ md: 2 }">

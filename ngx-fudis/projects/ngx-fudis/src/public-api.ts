@@ -51,17 +51,18 @@ export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdo
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message/error-message.component';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
-export { 
+export {
   FieldsetContentDirective,
   FieldsetActionsDirective,
- } from './lib/directives/content-projection/fieldset/fieldset-content.directive';
+} from './lib/directives/content-projection/fieldset/fieldset-content.directive';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
-export { 
+export {
   FormActionsDirective,
   FormContentDirective,
-  FormHeaderDirective } from './lib/directives/content-projection/form/form-content.directive';
+  FormHeaderDirective,
+} from './lib/directives/content-projection/form/form-content.directive';
 export { FormSubmitDirective } from './lib/directives/form/form-actions/form-actions.directive';
 export { LocalizedTextGroupComponent } from './lib/components/form/localized-text-group/localized-text-group.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';

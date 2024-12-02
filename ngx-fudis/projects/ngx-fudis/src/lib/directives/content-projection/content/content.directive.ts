@@ -11,9 +11,7 @@ export class ContentDirective {
   /**
    * Component type to protect wrong content projection to nested components
    */
-  @Input({ required: true }) type:
-    | 'expandable'
-    | 'select-options';
+  @Input({ required: true }) type: 'expandable' | 'select-options';
 }
 
 /**

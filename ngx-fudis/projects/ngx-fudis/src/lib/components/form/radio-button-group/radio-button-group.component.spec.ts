@@ -19,7 +19,6 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
 
 @Component({

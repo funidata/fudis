@@ -5,9 +5,11 @@ import { FormComponent } from './form.component';
 import { HeadingComponent } from '../../typography/heading/heading.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-import { FormActionsDirective, FormContentDirective, FormHeaderDirective } from '../../../directives/content-projection/form/form-content.directive';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisGridService } from '../../../services/grid/grid.service';
+import {
+  FormActionsDirective,
+  FormContentDirective,
+  FormHeaderDirective,
+} from '../../../directives/content-projection/form/form-content.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';

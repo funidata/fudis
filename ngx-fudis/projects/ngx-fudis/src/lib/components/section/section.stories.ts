@@ -66,9 +66,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       <fudis-button [label]="'Another action'"></fudis-button>
     </fudis-section-actions>
     <fudis-section-content>
-    <fudis-notification>
-      <fudis-body-text>This is notification</fudis-body-text>
-    </fudis-notification>
+      <fudis-notification>
+        <fudis-body-text>This is notification</fudis-body-text>
+      </fudis-notification>
       <fudis-expandable [title]="'Expandable inside section'" [closed]="false">
         <ng-template fudisContent type="expandable">
           <fudis-body-text>Some content inside expandable</fudis-body-text>
@@ -129,7 +129,7 @@ const NestedExampleTemplate: StoryFn = (args) => ({
           <fudis-body-text>Nested Section content</fudis-body-text>
         </fudis-section-content>
       </fudis-section>
-      </fudis-section-content>
+    </fudis-section-content>
   </fudis-section>`,
 });
 

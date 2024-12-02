@@ -1,28 +1,33 @@
 <ng-container *ngIf="_visibleErrorList() as errors">
-  <div *ngIf="errors.length > 0" class="fudis-error-summary__main-container" #focusTarget tabindex="-1">
+  <div
+    *ngIf="errors.length > 0"
+    class="fudis-error-summary__main-container"
+    #focusTarget
+    tabindex="-1"
+  >
     <fudis-notification [variant]="'danger'">
-        <div class="fudis-error-summary">
-          <div class="fudis-error-summary__errors">
-            <ng-container *ngIf="helpText">
-              <fudis-body-text [variant]="'md-regular'" class="fudis-mt-xxs">
-                <span class="fudis-visually-hidden"
-                  >{{ _translationService.getTranslations()().ICON.ATTENTION }}:&nbsp;</span
-                >{{ helpText }}</fudis-body-text
-              >
-            </ng-container>
-            <ul class="fudis-error-summary__error-list">
-              <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
-                <a
-                  fudisLink
-                  href=""
-                  [size]="'md'"
-                  (click)="handleErrorClick($event, error.id)"
-                  [title]="error.message"
-                ></a>
-              </li>
-            </ul>
-          </div>
+      <div class="fudis-error-summary">
+        <div class="fudis-error-summary__errors">
+          <ng-container *ngIf="helpText">
+            <fudis-body-text [variant]="'md-regular'" class="fudis-mt-xxs">
+              <span class="fudis-visually-hidden"
+                >{{ _translationService.getTranslations()().ICON.ATTENTION }}:&nbsp;</span
+              >{{ helpText }}</fudis-body-text
+            >
+          </ng-container>
+          <ul class="fudis-error-summary__error-list">
+            <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
+              <a
+                fudisLink
+                href=""
+                [size]="'md'"
+                (click)="handleErrorClick($event, error.id)"
+                [title]="error.message"
+              ></a>
+            </li>
+          </ul>
         </div>
+      </div>
     </fudis-notification>
   </div>
 </ng-container>

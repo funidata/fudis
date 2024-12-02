@@ -50,6 +50,11 @@
     &__title {
       margin-bottom: spacing.$spacing-xs;
 
+      /* stylelint-disable selector-class-pattern */
+      &:has(+ .fudis-fieldset__legend__actions) {
+        margin-right: spacing.$spacing-xl;
+      }
+
       &__with-inputs {
         margin-bottom: spacing.$spacing-none;
       }
@@ -80,10 +85,6 @@
           /* stylelint-disable-next-line property-disallowed-list */
           font-size: typographyTokens.$body-text-sm-font-size;
         }
-      }
-
-      &:has(+ .fudis-fieldset__legend__actions) {
-        margin-right: spacing.$spacing-xl;
       }
     }
 
