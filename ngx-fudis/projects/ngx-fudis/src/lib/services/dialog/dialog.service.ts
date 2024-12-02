@@ -41,7 +41,7 @@ export class FudisDialogService {
    * @param dialogResult Data sent to Component which opened this dialog.
    */
   public close(dialogResult?: any): void {
-    this._dialogRefs[this._dialogRefs.length - 1].close(dialogResult);
+    this._dialogRefs[this._dialogRefs.length - 1]?.close(dialogResult);
   }
 
   /**
