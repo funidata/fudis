@@ -3,8 +3,6 @@ import { DropdownMenuComponent } from './dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
 import { DropdownMenuItemComponent } from './dropdown-menu-item/dropdown-menu-item.component';
 import { IconComponent } from '../icon/icon.component';
-import { FudisIdService } from '../../services/id/id.service';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
@@ -22,7 +20,6 @@ describe('DropdownMenuComponent', () => {
         DropdownMenuComponent,
         IconComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
     })
       .overrideComponent(DropdownMenuComponent, {
         add: {

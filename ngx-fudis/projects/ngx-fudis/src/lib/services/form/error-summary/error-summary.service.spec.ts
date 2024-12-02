@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { FudisErrorSummaryService } from './error-summary.service';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
-import { FudisTranslationService } from '../../translation/translation.service';
 import {
   FudisErrorSummaryNewError,
   FudisErrorSummaryRemoveError,
@@ -14,11 +13,7 @@ describe('ErrorSummaryService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        FudisErrorSummaryService,
-        FudisInternalErrorSummaryService,
-        FudisTranslationService,
-      ],
+      providers: [FudisErrorSummaryService, FudisInternalErrorSummaryService],
     });
     service = TestBed.inject(FudisErrorSummaryService);
     internalService = TestBed.inject(FudisInternalErrorSummaryService);

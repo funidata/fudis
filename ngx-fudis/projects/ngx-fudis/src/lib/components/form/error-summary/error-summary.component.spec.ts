@@ -14,9 +14,6 @@ import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisGridService } from '../../../services/grid/grid.service';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { IconComponent } from '../../icon/icon.component';
 import { NotificationComponent } from '../../notification/notification.component';
@@ -149,12 +146,8 @@ describe('ErrorSummaryComponent', () => {
       ],
       providers: [
         FudisInternalErrorSummaryService,
-        FudisGridService,
-        FudisIdService,
         FudisBreakpointService,
-        FudisTranslationService,
         FudisErrorSummaryService,
-        FudisFocusService,
       ],
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();

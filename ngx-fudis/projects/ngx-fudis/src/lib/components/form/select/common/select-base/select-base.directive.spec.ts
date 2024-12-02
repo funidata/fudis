@@ -9,8 +9,6 @@ import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { LabelComponent } from '../../../label/label.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-import { FudisIdService } from '../../../../../services/id/id.service';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
@@ -18,7 +16,6 @@ import { FudisInputSize, FudisSelectOption, FudisSelectVariant } from '../../../
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
-import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { getAllElements, getElement } from '../../../../../utilities/tests/utilities';
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
 import { By } from '@angular/platform-browser';
@@ -105,12 +102,7 @@ describe('SelectBaseDirective', () => {
         BodyTextComponent,
         ButtonComponent,
       ],
-      providers: [
-        FudisFocusService,
-        FudisIdService,
-        FudisTranslationService,
-        FudisInternalErrorSummaryService,
-      ],
+      providers: [FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

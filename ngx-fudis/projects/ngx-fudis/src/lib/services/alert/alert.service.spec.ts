@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { FudisAlertService } from './alert.service';
 import { FudisAlert, FudisAlertElement } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
-import { FudisIdService } from '../id/id.service';
 
 describe('FudisAlertService', () => {
   let service: FudisAlertService;
@@ -35,7 +34,7 @@ describe('FudisAlertService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FudisAlertService, FudisIdService],
+      providers: [FudisAlertService],
     });
     service = TestBed.inject(FudisAlertService);
   });

@@ -1,16 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { RadioButtonComponent } from './radio-button.component';
-import { FudisIdService } from '../../../../services/id/id.service';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
 import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { FieldSetComponent } from '../../fieldset/fieldset.component';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.directive';
-import { FudisGridService } from '../../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { IconComponent } from '../../../icon/icon.component';
@@ -19,7 +16,6 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { By } from '@angular/platform-browser';
 import { getElement } from '../../../../utilities/tests/utilities';
-import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
@@ -68,14 +64,7 @@ describe('RadioButtonComponent', () => {
         IconComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [
-        FudisIdService,
-        FudisBreakpointService,
-        FudisGridService,
-        FudisTranslationService,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-      ],
+      providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

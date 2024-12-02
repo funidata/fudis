@@ -10,7 +10,6 @@ import {
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { FudisIdService } from '../../../services/id/id.service';
 import { getElement } from '../../../utilities/tests/utilities';
 import { Component } from '@angular/core';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
@@ -18,9 +17,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
@@ -82,14 +79,7 @@ describe('Basic inputs of Radio Button Group', () => {
         IconComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [
-        FudisBreakpointService,
-        FudisIdService,
-        FudisGridService,
-        FudisFocusService,
-        FudisInternalErrorSummaryService,
-        FudisTranslationService,
-      ],
+      providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

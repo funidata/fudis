@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FieldsetActionsDirective,FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
@@ -19,9 +18,6 @@ import { ActionsDirective } from '../../../directives/content-projection/actions
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
-import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-mock-fieldset-component',
@@ -74,14 +70,7 @@ describe('FieldSetComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [
-        FudisGridService,
-        FudisInternalErrorSummaryService,
-        FudisBreakpointService,
-        FudisTranslationService,
-        FudisFocusService,
-        FudisIdService,
-      ],
+      providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 
