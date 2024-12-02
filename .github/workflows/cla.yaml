@@ -31,6 +31,6 @@ jobs:
           path-to-document: "https://github.com/funidata/fudis/blob/main/CLA"
           branch: "main"
           # Add users here to bypass CLA requirements (teams/orgs not supported).
-          allowlist: "dependabot[bot],videoeero,RiinaKuu,xanxan,Aleksuo,MayaMarjut"
+          allowlist: "dependabot[bot],videoeero,RiinaKuu,xanxan,Aleksuo,MayaMarjut,marisanity"
           remote-organization-name: funidata
           remote-repository-name: cla-signature-store
