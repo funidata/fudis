@@ -24,6 +24,11 @@ type MyForm = {
   template: `
     <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
       <fudis-section-content>
+        <fudis-notification
+          ><fudis-body-text
+            >This is notification for the section</fudis-body-text
+          ></fudis-notification
+        >
         <fudis-expandable
           (closedChange)="handleClosedOutput($event)"
           [title]="'Expandable section 1'"

@@ -216,7 +216,7 @@ describe('FormComponent', () => {
 
   describe('Content directives', () => {
     it('should have form header content', () => {
-      const headerContentDiv = getElement(fixtureMock, '.fudis-form__header__main__content');
+      const headerContentDiv = getElement(fixtureMock, 'fudis-form-header');
       const headerContent = getElement(fixtureMock, '.test-header-content');
 
       expect(headerContentDiv).toBeTruthy();

@@ -12,9 +12,9 @@
         max-width: calc(100% - spacing.$spacing-lg);
       }
     }
-
     &__main {
-      &__content {
+      fudis-form-header {
+        display: block;
         margin-bottom: spacing.$spacing-sm;
       }
     }
