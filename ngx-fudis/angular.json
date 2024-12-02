@@ -16,14 +16,7 @@
             "tsConfig": ".storybook/tsconfig.json",
             "styles": ["projects/ngx-fudis/style.scss"],
             "compodoc": true,
-            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"],
-            "assets": [
-              {
-                "glob": "*.json",
-                "input": "./projects/ngx-fudis/src/assets/i18n",
-                "output": "./"
-              }
-            ]
+            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
           }
         },
         "start": {
