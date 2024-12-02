@@ -1,4 +1,4 @@
-import { Component, Input, effect, OnChanges, signal } from '@angular/core';
+import { Component, Input, effect, OnChanges } from '@angular/core';
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
