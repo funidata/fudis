@@ -180,7 +180,6 @@ describe('SelectDropdownComponent', () => {
 
           expect(helpTextAfterDelay.textContent).toEqual('Hello from help text');
           if (index === autocompleteVariants.length - 1) {
-            console.log('kyllä');
             done();
           }
         }, 500);
