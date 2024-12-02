@@ -1,23 +1,20 @@
 import {
-  AfterContentInit,
   Component,
-  ContentChild,
   ElementRef,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   ViewEncapsulation,
+  AfterViewInit,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -28,7 +25,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SectionComponent
   extends TooltipApiDirective
-  implements OnInit, AfterContentInit, OnChanges, OnDestroy
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy, AfterViewInit
 {
   constructor(
     private _element: ElementRef,
@@ -119,7 +116,7 @@ export class SectionComponent
     this._addToErrorSummary();
   }
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     this._parentForm = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
 
     this._addToErrorSummary();
