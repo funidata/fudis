@@ -1,4 +1,4 @@
-import { Component, Input, effect, OnChanges } from '@angular/core';
+import { Component, Input, effect, OnChanges, signal } from '@angular/core';
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
@@ -70,7 +70,7 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   /**
    * Boolean which toggles status updates for screen readers about changed option results
    */
-  protected _displayStatus: boolean = false;
+  protected _displayStatus = new BehaviorSubject<boolean>(false);
 
   /**
    * Internal translated label for situations where no results with current filters were found
@@ -96,11 +96,11 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
       newFilterText !== changes.filterText?.previousValue ||
       newResults !== changes.results?.previousValue
     ) {
-      this._displayStatus = false;
+      this._displayStatus.next(false);
 
       setTimeout(() => {
         if (newFilterText === this.filterText || newResults === 0) {
-          this._displayStatus = true;
+          this._displayStatus.next(true);
         }
       }, 500);
     }

@@ -157,13 +157,14 @@ describe('SelectDropdownComponent', () => {
       });
     });
 
-    it('should have help text status for screen readers if filter text updates', () => {
-      component.results = 42;
-      component.open = true;
-      component.filterText = 'hello';
-      component.autocompleteHelpText = 'Hello from help text';
-      autocompleteVariants.forEach((variant) => {
-        component.selectVariant = variant;
+    it('should have help text status for screen readers if filter text updates', (done) => {
+      fixture.componentRef.setInput('results', 42);
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+      fixture.componentRef.setInput('autocompleteHelpText', 'Hello from help text');
+      autocompleteVariants.forEach((variant, index) => {
+        fixture.componentRef.setInput('selectVariant', variant);
+
         fixture.detectChanges();
 
         const helpText = getElement(fixture, '.fudis-visually-hidden');
@@ -178,6 +179,10 @@ describe('SelectDropdownComponent', () => {
           expect(helpTextAfterDelay.getAttribute('role')).toEqual('alert');
 
           expect(helpTextAfterDelay.textContent).toEqual('Hello from help text');
+          if (index === autocompleteVariants.length - 1) {
+            console.log('kyllä');
+            done();
+          }
         }, 500);
       });
     });
