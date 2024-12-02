@@ -15,9 +15,6 @@ import { HeaderDirective } from '../../../directives/content-projection/header/h
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisGridService } from '../../../services/grid/grid.service';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { IconComponent } from '../../icon/icon.component';
 import { NotificationComponent } from '../../notification/notification.component';
@@ -30,7 +27,6 @@ import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -145,12 +141,8 @@ describe('ErrorSummaryComponent', () => {
       ],
       providers: [
         FudisInternalErrorSummaryService,
-        FudisGridService,
-        FudisIdService,
         FudisBreakpointService,
-        FudisTranslationService,
         FudisErrorSummaryService,
-        FudisFocusService,
       ],
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();

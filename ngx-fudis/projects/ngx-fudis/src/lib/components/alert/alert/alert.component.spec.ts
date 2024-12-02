@@ -15,8 +15,6 @@ import { LinkDirective } from '../../../directives/link/link.directive';
 import { BehaviorSubject } from 'rxjs';
 import { Component } from '@angular/core';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 const testMessage = new BehaviorSubject<string>('Test message for alert');
 const testHtmlId = 'test-html-id';
@@ -71,9 +69,6 @@ describe('AlertComponent', () => {
       providers: [
         FudisDialogService,
         FudisAlertService,
-        FudisIdService,
-        FudisFocusService,
-        FudisTranslationService,
         {
           provide: MatDialogRef,
           useValue: {},

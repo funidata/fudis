@@ -2,9 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GuidanceComponent } from './guidance.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisIdService } from '../../../services/id/id.service';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { IconComponent } from '../../icon/icon.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement, getAllElements } from '../../../utilities/tests/utilities';
@@ -54,7 +52,7 @@ describe('GuidanceComponent', () => {
         ValidatorErrorMessageComponent,
         MockComponent(IconComponent),
       ],
-      providers: [FudisInternalErrorSummaryService, FudisIdService, FudisTranslationService],
+      providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 

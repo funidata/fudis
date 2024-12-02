@@ -3,7 +3,6 @@ import { By } from '@angular/platform-browser';
 import { GridComponent } from '../grid/grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from './description-list.component';
-import { FudisGridService } from '../../services/grid/grid.service';
 import { DescriptionListItemComponent } from './description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
@@ -12,8 +11,6 @@ import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.ser
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { Component, DebugElement, SimpleChange } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../types/miscellaneous';
-import { FudisIdService } from '../../services/id/id.service';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-dl',
@@ -72,12 +69,7 @@ describe('DescriptionListComponent', () => {
         LanguageBadgeGroupComponent,
         MockDlComponent,
       ],
-      providers: [
-        FudisGridService,
-        FudisIdService,
-        FudisBreakpointService,
-        FudisTranslationService,
-      ],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 

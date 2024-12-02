@@ -8,11 +8,7 @@ describe('ControlComponentBaseDirective', () => {
   let focusService: FudisFocusService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [],
-      providers: [FudisIdService, FudisFocusService],
-      imports: [],
-    });
+    TestBed.configureTestingModule({});
 
     idService = TestBed.inject(FudisIdService);
     focusService = TestBed.inject(FudisFocusService);

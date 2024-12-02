@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FooterComponent } from './footer.component';
 import { GridComponent } from '../grid/grid/grid.component';
-import { FudisGridService } from '../../services/grid/grid.service';
 import {
   FooterContentLeftDirective,
   FooterContentRightDirective,
@@ -13,8 +12,6 @@ import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisFocusService } from '../../services/focus/focus.service';
-import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
   selector: 'fudis-mock-footer',
@@ -49,13 +46,7 @@ describe('FooterComponent', () => {
         FooterContentRightDirective,
         MockFooterComponent,
       ],
-      providers: [
-        FudisGridService,
-        FudisBreakpointService,
-        FudisTranslationService,
-        FudisFocusService,
-        FudisIdService,
-      ],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 

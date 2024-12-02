@@ -18,8 +18,8 @@
   }}</span
   ><span [class]="(_mainCssClass | async) + '__content'" [attr.aria-label]="ariaLabel">
     <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'"> &#40;</span
-    >{{ contentText
-    }}<span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
+    ><span [attr.aria-hidden]="ariaLabel ? true : null">{{ contentText }}</span
+    ><span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
     ><ng-content
   /></span>
   <span aria-hidden="true" [class]="(_mainCssClass | async) + '__comma'">&comma;</span>
