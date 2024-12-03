@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MockComponents } from 'ng-mocks';
 import { BehaviorSubject } from 'rxjs';
 import { IconComponent } from '../../../icon/icon.component';
 import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
-import { ErrorMessageComponent } from './error-message.component';
+import { ErrorMessageDirective } from './error-message.directive';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { LabelComponent } from '../../label/label.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
@@ -45,16 +45,25 @@ const errorToRemove: FudisValidationErrors = {
   selector: 'fudis-mock-test-error',
   template: `
     <fudis-text-input [control]="control" [label]="'Test label'">
-      <fudis-error-message #testError *ngIf="errorVisible" [message]="message" />
+      <fudis-error-message
+        #testError
+        *ngIf="errorVisible"
+        (handleAddError)="handleAddError.emit($event)"
+        (handleRemoveError)="handleRemoveError.emit($event)"
+        [message]="message"
+      />
     </fudis-text-input>
   `,
 })
 class MockTestErrorComponent {
-  @ViewChild('testError') testError: ErrorMessageComponent;
+  @ViewChild('testError') testError: ErrorMessageDirective;
 
   message = 'Test error message';
 
   errorVisible: boolean;
+
+  @Output() handleAddError = new EventEmitter<FudisValidationErrors>();
+  @Output() handleRemoveError = new EventEmitter<FudisValidationErrors>();
 
   control: FormControl = new FormControl('', FudisValidators.required('This is required'));
 }
@@ -66,7 +75,7 @@ describe('ErrorMessageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ErrorMessageComponent,
+        ErrorMessageDirective,
         IconComponent,
         MockTestErrorComponent,
         TextInputComponent,
@@ -91,14 +100,6 @@ describe('ErrorMessageComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should emit addError', () => {
-      jest.spyOn(component.testError.handleAddError, 'emit');
-      component.testError.ngOnInit();
-      fixture.detectChanges();
-
-      expect(component.testError.handleAddError.emit).toHaveBeenCalledWith(errorReceived);
-    });
-
     it('should have proper errors in control when component is created', () => {
       expect(component.control.errors).toEqual(controlErrors);
     });
@@ -108,14 +109,6 @@ describe('ErrorMessageComponent', () => {
       fixture.detectChanges();
 
       expect(component.control.errors).toEqual(controlOnlyRequiredError);
-    });
-
-    it('should emit removeError message when component is destroyed', () => {
-      jest.spyOn(component.testError.handleRemoveError, 'emit');
-      component.testError.ngOnDestroy();
-      fixture.detectChanges();
-
-      expect(component.testError.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
 
     it('should have first invalid and then valid control when all errors are removed', () => {
@@ -137,6 +130,29 @@ describe('ErrorMessageComponent', () => {
       fixture.detectChanges();
 
       expect(component.control.errors).toEqual(controlErrors);
+    });
+  });
+
+  describe('emitters', () => {
+    it('should emit addError when directive is created', () => {
+      jest.spyOn(component.handleAddError, 'emit');
+      component.errorVisible = true;
+      fixture.detectChanges();
+
+      expect(component.handleAddError.emit).toHaveBeenCalledWith(errorReceived);
+    });
+
+    it('should emit removeError message when directive is destroyed', () => {
+      jest.spyOn(component.handleRemoveError, 'emit');
+      component.errorVisible = true;
+      fixture.detectChanges();
+
+      expect(component.handleRemoveError.emit).not.toHaveBeenCalled();
+
+      component.errorVisible = false;
+      fixture.detectChanges();
+
+      expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
   });
 });
