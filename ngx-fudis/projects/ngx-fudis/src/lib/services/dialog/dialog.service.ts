@@ -10,8 +10,6 @@ export class FudisDialogService {
 
   private _dialogOpen = new BehaviorSubject<boolean>(false);
 
-  private _dialogRefs: MatDialogRef<any, any>[] = [];
-
   /**
    * Open new dialog.
    * @param component Component or template to show in the dialog.
@@ -27,12 +25,6 @@ export class FudisDialogService {
       FudisDialogService._createConfig(config),
     );
 
-    this._dialogRefs.push(newDialog);
-
-    newDialog.afterClosed().subscribe(() => {
-      this._dialogRefs.pop();
-    });
-
     return newDialog;
   }
 
@@ -41,7 +33,9 @@ export class FudisDialogService {
    * @param dialogResult Data sent to Component which opened this dialog.
    */
   public close(dialogResult?: any): void {
-    this._dialogRefs[this._dialogRefs.length - 1].close(dialogResult);
+    const currentDialogs = this.ngMaterialDialog.openDialogs;
+
+    currentDialogs?.[currentDialogs.length - 1].close(dialogResult);
   }
 
   /**
@@ -67,10 +61,10 @@ export class FudisDialogService {
 
   /**
    *
-   * @returns Amount of dialogs opened
+   * @returns Currently open Dialogs
    */
-  public dialogsOpen(): number {
-    return this._dialogRefs.length;
+  public dialogsOpen(): MatDialogRef<any, any>[] {
+    return this.ngMaterialDialog.openDialogs;
   }
 
   /**

@@ -50,7 +50,7 @@ export class DialogComponent implements OnDestroy, OnInit {
   private _orderNumber: number;
 
   ngOnInit(): void {
-    this._orderNumber = this._dialogService.dialogsOpen();
+    this._orderNumber = this._dialogService.dialogsOpen().length;
   }
 
   ngOnDestroy(): void {
@@ -61,7 +61,7 @@ export class DialogComponent implements OnDestroy, OnInit {
 
   @HostListener('window:keyup.escape', ['$event'])
   private _handleEscapePress() {
-    if (this._dialogService.dialogsOpen() === this._orderNumber) {
+    if (this._dialogService.dialogsOpen().length === this._orderNumber) {
       this._dialogService.close();
     }
   }
