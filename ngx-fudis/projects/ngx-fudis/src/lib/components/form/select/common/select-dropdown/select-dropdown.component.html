@@ -25,12 +25,12 @@
       ><ng-container *ngTemplateOutlet="noResults" />
     </fudis-body-text>
     <span
-      *ngIf="autocompleteHelpText !== false && _displayStatus && results && filterText"
+      *ngIf="autocompleteHelpText !== false && (_displayStatus | async) && results && filterText"
       class="fudis-visually-hidden"
       role="alert"
       ><ng-container *ngTemplateOutlet="helpText"
     /></span>
-    <span *ngIf="!results && _displayStatus" class="fudis-visually-hidden" role="alert"
+    <span *ngIf="!results && (_displayStatus | async)" class="fudis-visually-hidden" role="alert"
       ><ng-container *ngTemplateOutlet="noResults"
     /></span>
   </ng-container>
