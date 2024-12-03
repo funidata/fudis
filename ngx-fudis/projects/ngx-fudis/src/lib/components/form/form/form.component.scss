@@ -24,13 +24,13 @@
   .fudis-form-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: spacing.$spacing-xs spacing.$spacing-sm;
   }
 
   &__default {
     .fudis-form-actions {
       margin-right: spacing.$spacing-xs;
       margin-bottom: spacing.$spacing-sm;
+      gap: spacing.$spacing-xs spacing.$spacing-sm;
 
       @include breakpoints.breakpoint('sm') {
         display: flex;
@@ -48,6 +48,10 @@
   &__dialog {
     .fudis-form-actions {
       justify-content: flex-end;
+
+      fudis-button:not(:first-of-type) {
+        margin-left: spacing.$spacing-xs;
+      }
     }
   }
 }
