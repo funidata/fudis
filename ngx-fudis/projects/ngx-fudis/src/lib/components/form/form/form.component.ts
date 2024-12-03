@@ -82,13 +82,7 @@ export class FormComponent
   /**
    * Heading variant for the form title
    */
-  @Input() set titleVariant(variant: FudisHeadingVariant) {
-    this._titleVariant = variant;
-  }
-
-  get titleVariant(): FudisHeadingVariant {
-    return this._titleVariant;
-  }
+  @Input() titleVariant: FudisHeadingVariant;
 
   /**
    * Help text positioned under form title
@@ -115,16 +109,14 @@ export class FormComponent
    */
   protected _formElement: HTMLFormElement | undefined;
 
-  /**
-   * Internal variable for handling title variant changes
-   */
-  protected _titleVariant: FudisHeadingVariant;
-
   private _injector = inject(Injector);
 
   ngOnInit(): void {
     this._setFormId();
-    this._setTitleVariant(this.titleVariant);
+
+    if (!this.titleVariant) {
+      this.titleVariant = getVariant(this.level);
+    }
 
     this._errorSummaryService.registerNewForm(this.id, this.errorSummaryVisible);
 
@@ -156,17 +148,6 @@ export class FormComponent
     ) {
       this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
     }
-
-    if (changes.titleVariant?.currentValue !== changes.titleVariant?.previousValue) {
-      this._setTitleVariant(changes.titleVariant?.currentValue);
-    }
-  }
-
-  /**
-   * Set Section's title variant based on Input or default value
-   */
-  private _setTitleVariant(variant: FudisHeadingVariant | undefined): void {
-    this._titleVariant = variant ?? getVariant(this.level);
   }
 
   /**

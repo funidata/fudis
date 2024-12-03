@@ -67,13 +67,7 @@ export class SectionComponent
   /**
    * Heading variant for the section title
    */
-  @Input() set titleVariant(variant: FudisHeadingVariant) {
-    this._titleVariant = variant;
-  }
-
-  get titleVariant(): FudisHeadingVariant {
-    return this._titleVariant;
-  }
+  @Input() titleVariant: FudisHeadingVariant;
 
   /**
    * Section id
@@ -127,11 +121,6 @@ export class SectionComponent
   protected _classList = new BehaviorSubject<string>('');
 
   /**
-   * Internal variable for handling title variant changes
-   */
-  protected _titleVariant: FudisHeadingVariant;
-
-  /**
    * Is info sent to error summary service
    */
   private _errorSummaryInfoSent: boolean = false;
@@ -141,9 +130,12 @@ export class SectionComponent
   ngOnInit(): void {
     this._setSectionId();
 
+    if (!this.titleVariant) {
+      this.titleVariant = getVariant(this.level);
+    }
+
     this._headingId = `${this.id}-heading`;
     this._classList.next(this._getClasses());
-    this._setTitleVariant(this.titleVariant);
     this._addToErrorSummary();
   }
 
@@ -160,10 +152,6 @@ export class SectionComponent
 
     if (changes.title?.currentValue !== changes.title?.previousValue && this.id) {
       this._addToErrorSummary();
-    }
-
-    if (changes.titleVariant?.currentValue !== changes.titleVariant?.previousValue) {
-      this._setTitleVariant(changes.titleVariant?.currentValue);
     }
   }
 
@@ -193,13 +181,6 @@ export class SectionComponent
     if (this._errorSummaryInfoSent && this._parentForm) {
       this._errorSummaryService.removeSection(this._parentForm, this.id);
     }
-  }
-
-  /**
-   * Set Section's title variant based on Input or default value
-   */
-  private _setTitleVariant(variant: FudisHeadingVariant | undefined): void {
-    this._titleVariant = variant ?? getVariant(this.level);
   }
 
   /**
