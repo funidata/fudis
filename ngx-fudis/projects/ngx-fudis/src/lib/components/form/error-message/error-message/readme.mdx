@@ -1,19 +1,19 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import * as ErrorMessageStories from "./error-message.stories";
-import { ErrorMessageComponent } from "./error-message.component";
+import { ErrorMessageDirective } from "./error-message.directive";
 
 <Meta title="Components/Form/Error Message" />
 
 # Error Message
 
-Form component's errors can be achieved in two ways:
+Form field components' errors can be achieved in two ways:
 
-- Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
-- As an Error Message child component, for cases when using a validator or creating a custom one can be tricky.
+- Through Form Control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
+- As an Error Message Directive, for cases when using a validator or creating a custom one can be tricky.
 
 If your error message repeats multiple times across your form or application, it is recommended to create your own [Fudis Validator](/docs/utilities-validators--documentation).
 
-This page is documentation for the latter Error Message Component, which binds custom error message to Fudis Form components through content projection.
+This page is documentation for the latter Error Message Directive, which binds custom error message to form field components through content projection.
 
 This requires the use of selector `fudis-error-message`. Both Error Message and Fudis Validator errors create the same UI result and renders errors under the Guidance Component.
 
@@ -63,8 +63,4 @@ The following example demostrates how custom error message can be used along wit
 
 - [Error Summary](/docs/components-form-error-summary--documentation)
 
-<ArgTypes of={ErrorMessageComponent} />
-
-```
-
-```
+<ArgTypes of={ErrorMessageDirective} />

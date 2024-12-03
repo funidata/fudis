@@ -1,10 +1,11 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { FormControl, ReactiveFormsModule, FormsModule, FormControlOptions } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { ErrorMessageComponent } from './error-message.component';
+import { ErrorMessageDirective } from './error-message.directive';
 import readme from './readme.mdx';
-import { FudisValidators } from '../../../../utilities/form/validators';
+import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
 import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/storybook';
 
 @Component({
@@ -17,8 +18,18 @@ import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/stor
         [control]="control"
         [label]="'Focus to input'"
       >
-        <fudis-error-message *ngIf="_errorExists" [message]="observableMessage" />
-        <fudis-error-message *ngIf="_errorExists" [message]="stringMessage" />
+        <fudis-error-message
+          *ngIf="_errorExists"
+          (handleAddError)="handleAddError.emit($event)"
+          (handleRemoveError)="handleRemoveError.emit($event)"
+          [message]="observableMessage"
+        />
+        <fudis-error-message
+          *ngIf="_errorExists"
+          (handleAddError)="handleAddError.emit($event)"
+          (handleRemoveError)="handleRemoveError.emit($event)"
+          [message]="stringMessage"
+        />
       </fudis-text-input>
       <fudis-button
         (click)="toggleCustomError()"
@@ -56,6 +67,9 @@ class TextInputWithErrorMessageComponent {
 
   protected _errorExists: boolean = false;
 
+  @Output() handleAddError = new EventEmitter<FudisValidationErrors>();
+  @Output() handleRemoveError = new EventEmitter<FudisValidationErrors>();
+
   toggleCustomError(): void {
     this._errorExists = !this._errorExists;
   }
@@ -79,7 +93,7 @@ class TextInputWithErrorMessageComponent {
 
 export default {
   title: 'Components/Form/Error Message',
-  component: ErrorMessageComponent,
+  component: ErrorMessageDirective,
   decorators: [
     moduleMetadata({
       declarations: [TextInputWithErrorMessageComponent],
@@ -110,6 +124,7 @@ const Template: StoryFn = (args) => ({
       '',
       FudisValidators.required('This validation message is send by Fudis Validators'),
     ),
+    addError: action('addError'),
   },
   template: html`
     <fudis-body-text
@@ -121,7 +136,7 @@ const Template: StoryFn = (args) => ({
       message.</fudis-body-text
     >
     <fudis-text-input [control]="control" [label]="'Focus to input'">
-      <fudis-error-message [message]="message" />
+      <fudis-error-message (handleAddError)="addError($event)" [message]="message" />
     </fudis-text-input>
   `,
 });
@@ -133,8 +148,14 @@ Example.args = {
 
 export const ExampleWithObservableError: StoryFn = (args) => ({
   ...args,
+  props: {
+    handleAddError: action('handleAddError'),
+    handleRemoveError: action('handleRemoveError'),
+  },
   template: `
-<example-text-input-with-error-message></example-text-input-with-error-message>
+<example-text-input-with-error-message
+(handleAddError)="handleAddError($event)"
+(handleRemoveError)="handleRemoveError($event)"></example-text-input-with-error-message>
 	`,
 });
 
