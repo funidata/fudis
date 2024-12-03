@@ -22,6 +22,14 @@ import { IconComponent } from '../../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
+type TestForm = {
+  apple: FormControl<boolean | null | undefined>;
+  fairTradeBanana: FormControl<boolean | null | undefined>;
+  pear: FormControl<boolean | null | undefined>;
+  pineapple: FormControl<boolean | null | undefined>;
+  orange: FormControl<boolean | null | undefined>;
+};
+
 @Component({
   selector: 'fudis-mock-container',
   template: `<fudis-checkbox-group
@@ -46,10 +54,12 @@ import { FudisInternalErrorSummaryService } from '../../../../services/form/erro
     </fudis-checkbox-group> `,
 })
 class MockContainerComponent {
-  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent;
-  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent;
+  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup<object>>;
+  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent<
+    FudisCheckboxGroupFormGroup<object>
+  >;
 
-  public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+  public testFromGroup = new FormGroup<TestForm>(
     {
       apple: new FormControl<boolean | null | undefined>(null),
       fairTradeBanana: new FormControl<boolean | null | undefined>(false),

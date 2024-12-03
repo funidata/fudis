@@ -1,13 +1,19 @@
 import { OnInit, Input, Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
-import { FudisRadioButtonOption } from '../../../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisRadioButtonOption } from '../../../../types/forms';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
+type MyCheckboxGroup = {
+  first: FormControl<boolean>;
+  second: FormControl<boolean>;
+  third: FormControl<boolean>;
+};
+
 type MyForm = {
-  courseBooks: FormGroup;
+  courseBooks: FormGroup<FudisCheckboxGroupFormGroup<MyCheckboxGroup>>;
   teacher: FormControl<string | null>;
   email: FormControl<string | null>;
   importantDate: FormControl<Date | null>;

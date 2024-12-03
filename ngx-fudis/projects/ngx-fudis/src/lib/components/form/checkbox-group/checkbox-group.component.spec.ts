@@ -5,11 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-import {
-  FudisCheckboxGroupChangeEvent,
-  FudisCheckboxGroupFormGroup,
-  fudisInputSizeArray,
-} from '../../../types/forms';
+import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridComponent } from '../../grid/grid/grid.component';
@@ -21,7 +17,15 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
-const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+type TestForm = {
+  apple: FormControl<boolean | null | undefined>;
+  fairTradeBanana: FormControl<boolean | null | undefined>;
+  pear: FormControl<boolean | null | undefined>;
+  pineapple: FormControl<boolean | null | undefined>;
+  orange: FormControl<boolean | null | undefined>;
+};
+
+const testFormGroup = new FormGroup<TestForm>(
   {
     apple: new FormControl<boolean | null | undefined>(null),
     fairTradeBanana: new FormControl<boolean | null | undefined>(null),
@@ -73,8 +77,8 @@ type TestFormGroup = {
     </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
-  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent;
-  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent;
+  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<TestForm>;
+  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent<TestForm>;
 
   public testFromGroup = new FormGroup<TestFormGroup>(
     {
@@ -114,8 +118,10 @@ class MockContainerComponent {
 }
 
 describe('CheckboxGroupComponent', () => {
-  let component: CheckboxGroupComponent;
-  let fixture: ComponentFixture<CheckboxGroupComponent> | ComponentFixture<MockContainerComponent>;
+  let component: CheckboxGroupComponent<TestForm>;
+  let fixture:
+    | ComponentFixture<CheckboxGroupComponent<TestForm>>
+    | ComponentFixture<MockContainerComponent>;
   let fieldsetElement: HTMLFieldSetElement;
 
   beforeEach(async () => {
@@ -140,7 +146,7 @@ describe('CheckboxGroupComponent', () => {
 
   describe('Basic inputs of Checkbox Group', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(CheckboxGroupComponent);
+      fixture = TestBed.createComponent(CheckboxGroupComponent<TestForm>);
       component = fixture.componentInstance;
       component.formGroup = testFormGroup;
       component.label = 'Checkbox Group test title';
