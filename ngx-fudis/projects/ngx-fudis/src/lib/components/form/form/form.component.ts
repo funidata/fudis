@@ -61,7 +61,7 @@ export class FormComponent
   /**
    * Help text displayed in Error Summary before listing individual errors
    */
-  @Input({ required: true }) errorSummaryHelpText: string;
+  @Input({ required: true }) errorSummaryTitle: string;
 
   /**
    * Form id. If not given, id will be generated with IdService. Set only in component initialisation.

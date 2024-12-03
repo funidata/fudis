@@ -26,7 +26,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
           [title]="title"
           [level]="2"
           [titleVariant]="'xl'"
-          [errorSummaryHelpText]="'You need to fill up the information.'"
+          [errorSummaryTitle]="'You need to fill up the information.'"
         >
           <ng-template fudisContent [type]="'form'">
             <ng-container *ngTemplateOutlet="favoriteVeggies" />

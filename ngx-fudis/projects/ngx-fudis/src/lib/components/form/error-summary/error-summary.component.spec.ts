@@ -35,7 +35,7 @@ import { getElement } from '../../../utilities/tests/utilities';
     [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
-    [errorSummaryHelpText]="'There were errors you need to fix'"
+    [errorSummaryTitle]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisContent type="form">

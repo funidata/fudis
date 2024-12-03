@@ -74,7 +74,7 @@ See badge variants from [Badge Documentation](/docs/components-badge--documentat
 
 `errorSummaryVisible`: Boolean property controlling the visibility of the Error Summary. This is automatically managed if your Form has Button with `fudisFormSubmit` directive with boolean property `formValid`. Further documentation of [Form Submit Directive](/docs/directives-form-actions--documentation).
 
-`errorSummaryHelpText`: Mandatory helper text displayed as describing guidance text for the Error Summary.
+`errorSummaryTitle`: Mandatory title displayed as describing guidance text for the Error Summary.
 
 More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](/docs/services-error-summary--documentation).
 
@@ -90,7 +90,7 @@ This is a simple example on how to use Form Component.
   [title]="'Example form heading'"
   [level]="2"
   [helpText]="'Here is some more information about this form'"
-  [errorSummaryHelpText]="'There are errors in this form.'"
+  [errorSummaryTitle]="'There are errors in this form.'"
 >
   <ng-template fudisHeader>
     <fudis-body-text>Additional form information</fudis-body-text>

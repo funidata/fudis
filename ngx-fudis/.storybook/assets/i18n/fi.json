@@ -1,7 +1,7 @@
 {
   "formTitle": "Esimerkkilomake Error Summaryn kanssa",
   "currentStrategy": "Nykyinen Error Summaryn päivitysstrategia on: ",
-  "errorSummaryHelpText": "Voit vaihtaa virheiden päivitysstrategiaa alla olevasta painikkeesta",
+  "errorSummaryTitle": "Voit vaihtaa virheiden päivitysstrategiaa alla olevasta painikkeesta",
   "submit": "Lähetä",
   "changeStrategy": "Vaihda Error Summaryn päivitysstrategiaa",
   "changeLanguage": "Vaihda kieltä",

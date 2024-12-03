@@ -40,7 +40,7 @@ type MyForm = {
       [title]="title"
       [titleVariant]="titleVariant"
       [helpText]="helpText"
-      [errorSummaryHelpText]="errorSummaryHelpText"
+      [errorSummaryTitle]="errorSummaryTitle"
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <ng-template fudisActions [type]="'form'">
@@ -322,7 +322,7 @@ export class StorybookExampleDynamicValidatorsComponent {
   @Input() helpText: string;
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;
-  @Input() errorSummaryHelpText: string;
+  @Input() errorSummaryTitle: string;
   @Input() errorSummaryVisible: boolean;
 
   minLength = 5;
