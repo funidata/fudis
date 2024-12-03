@@ -7,9 +7,7 @@
           <div class="fudis-error-summary__errors">
             <ng-container *ngIf="helpText">
               <fudis-body-text [variant]="'md-regular'" class="fudis-mt-xs">
-                <span class="fudis-visually-hidden"
-                  >{{ _translationService.getTranslations()().ICON.ATTENTION }}:&nbsp;</span
-                >{{ helpText }}</fudis-body-text
+                {{ helpText }}</fudis-body-text
               >
             </ng-container>
             <ul class="fudis-error-summary__error-list">
