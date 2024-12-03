@@ -28,9 +28,9 @@
 
   &__default {
     .fudis-form-actions {
+      gap: spacing.$spacing-xs spacing.$spacing-sm;
       margin-right: spacing.$spacing-xs;
       margin-bottom: spacing.$spacing-sm;
-      gap: spacing.$spacing-xs spacing.$spacing-sm;
 
       @include breakpoints.breakpoint('sm') {
         display: flex;

@@ -88,8 +88,8 @@
         // Additional padding for error-summary in dialog content so that focus style is not cropped
         fudis-error-summary {
           display: block;
-          padding-left: spacing.$spacing-xxs;
           padding-right: spacing.$spacing-xxs;
+          padding-left: spacing.$spacing-xxs;
         }
 
         // Additional padding for dialog content buttons so that focus style is not cropped in any case
