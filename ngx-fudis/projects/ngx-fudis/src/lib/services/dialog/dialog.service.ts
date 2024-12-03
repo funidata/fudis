@@ -25,9 +25,6 @@ export class FudisDialogService {
       FudisDialogService._createConfig(config),
     );
 
-    console.log('opening');
-    console.log(this.ngMaterialDialog.openDialogs);
-
     return newDialog;
   }
 
