@@ -123,13 +123,13 @@ describe('DialogService', () => {
 
   it('should open fudis-dialog with greeting from component to dialog', () => {
     const openDialogSpy = jest.spyOn(service, 'open');
-    expect(service.dialogsOpen()).toEqual(0);
+    expect(service.dialogsOpen().length).toEqual(0);
     component.openTestDialog();
 
     expect(openDialogSpy).toHaveBeenCalledWith(DialogTestContentComponent, {
       data: { greeting: 'Message to dialog!' },
     });
-    expect(service.dialogsOpen()).toEqual(1);
+    expect(service.dialogsOpen().length).toEqual(1);
   });
 
   it('close should close dialog and pass data from dialog to component', () => {
