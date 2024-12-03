@@ -36,6 +36,9 @@ export const en: FudisTranslationConfig = {
       DISABLED: 'Disabled',
     },
   },
+  ERROR_SUMMARY: {
+    TITLE: 'The information is incomplete or incorrect. Please correct the following items:'
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Language',
     MISSING: 'Missing',
@@ -116,6 +119,9 @@ export const fi: FudisTranslationConfig = {
       DISABLED: 'Ei valittavissa',
     },
   },
+  ERROR_SUMMARY: {
+    TITLE: 'Tiedoissa on puutteita tai virheitä. Korjaa seuraavat kohdat:'
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Kieli',
     MISSING: 'Puuttuu',
@@ -195,6 +201,9 @@ export const sv: FudisTranslationConfig = {
     ITEM: {
       DISABLED: 'Inaktiverad',
     },
+  },
+  ERROR_SUMMARY: {
+    TITLE: 'Det finns brister eller fel i uppgifterna. Korrigera följande punkter:'
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Språk',
