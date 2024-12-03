@@ -3,7 +3,7 @@ import { FudisHeadingLevel, FudisHeadingVariant } from '../../types/typography';
 /**
  * Get corresponding default variant for heading level
  */
-export const getVariant = (level: FudisHeadingLevel): FudisHeadingVariant => {
+export const getHeadingVariant = (level: FudisHeadingLevel): FudisHeadingVariant => {
   switch (level) {
     case 1:
       return 'xxl';

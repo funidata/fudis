@@ -23,7 +23,7 @@ import { FudisBadgeVariant, FudisComponentChanges } from '../../../types/miscell
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { getVariant } from '../../../utilities/typography/typography-utils';
+import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 @Component({
   selector: 'fudis-form',
@@ -115,7 +115,7 @@ export class FormComponent
     this._setFormId();
 
     if (!this.titleVariant) {
-      this.titleVariant = getVariant(this.level);
+      this.titleVariant = getHeadingVariant(this.level);
     }
 
     this._errorSummaryService.registerNewForm(this.id, this.errorSummaryVisible);

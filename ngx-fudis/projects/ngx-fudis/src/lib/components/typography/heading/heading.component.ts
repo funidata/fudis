@@ -11,7 +11,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FudisTextAlign } from '../../../types/typography';
 import { BehaviorSubject } from 'rxjs';
-import { getVariant } from '../../../utilities/typography/typography-utils';
+import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 @Component({
   selector: 'fudis-heading',
@@ -64,7 +64,7 @@ export class HeadingComponent implements OnInit, OnChanges {
    * Set CSS classes for heading
    */
   private _setClasses(): void {
-    const calcVariant = this.variant || getVariant(this.level);
+    const calcVariant = this.variant || getHeadingVariant(this.level);
 
     const newClasses = [
       `fudis-heading`,

@@ -19,7 +19,7 @@ import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellane
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { BehaviorSubject } from 'rxjs';
-import { getVariant } from '../../utilities/typography/typography-utils';
+import { getHeadingVariant } from '../../utilities/typography/typography-utils';
 
 @Component({
   selector: 'fudis-section',
@@ -131,7 +131,7 @@ export class SectionComponent
     this._setSectionId();
 
     if (!this.titleVariant) {
-      this.titleVariant = getVariant(this.level);
+      this.titleVariant = getHeadingVariant(this.level);
     }
 
     this._headingId = `${this.id}-heading`;
