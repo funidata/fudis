@@ -57,7 +57,7 @@
         <fudis-error-summary
           [formId]="id"
           [parentComponent]="_formElement"
-          [helpText]="errorSummaryHelpText"
+          [title]="errorSummaryHelpText"
         />
       </ng-container>
     </div>
@@ -73,7 +73,7 @@
         <fudis-error-summary
           [formId]="id"
           [parentComponent]="_formElement"
-          [helpText]="errorSummaryHelpText"
+          [title]="errorSummaryHelpText"
         />
       </ng-container>
       <ng-container *ngTemplateOutlet="_mainContent!.templateRef" />

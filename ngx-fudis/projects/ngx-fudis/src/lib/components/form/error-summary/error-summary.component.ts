@@ -42,9 +42,9 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   @Input({ required: true }) parentComponent: HTMLFormElement;
 
   /**
-   * Help text displayed in Error Summary before listing individual errors
+   * Title displayed in Error Summary before listing individual errors
    */
-  @Input({ required: true }) helpText: string;
+  @Input({ required: true }) title: string;
 
   /**
    * Id of parent Form component
