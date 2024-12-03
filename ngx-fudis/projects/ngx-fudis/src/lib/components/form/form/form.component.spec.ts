@@ -224,7 +224,7 @@ describe('FormComponent', () => {
     });
 
     it('should have form actions content', () => {
-      const actionsContentDiv = getElement(fixtureMock, '.fudis-form__header__actions');
+      const actionsContentDiv = getElement(fixtureMock, '.fudis-form-actions');
       const actionsContent = getElement(fixtureMock, '.test-actions-content');
 
       expect(actionsContentDiv).toBeTruthy();

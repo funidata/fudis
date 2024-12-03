@@ -7,7 +7,7 @@
   [serviceDefaults]="false"
   [alignItemsX]="alignItemsX"
   [alignItemsY]="alignItemsY"
-  [classes]="'fudis-form'"
+  [classes]="_dialogParent ? 'fudis-form fudis-form__dialog' : 'fudis-form fudis-form__default'"
   [columnGap]="columnGap"
   [rowGap]="'none'"
 >
@@ -59,7 +59,7 @@
     </div>
   </div>
   <ng-container *ngIf="!_dialogParent">
-    <ng-content select="fudis-form-actions"></ng-content>
+    <ng-container *ngTemplateOutlet="actions" />
   </ng-container>
   <div class="fudis-form__content">
     <ng-content select="fudis-form-content">
@@ -73,6 +73,10 @@
     </ng-content>
   </div>
   <ng-container *ngIf="_dialogParent">
-    <ng-content select="fudis-form-actions" (dialogActions)="(true)"></ng-content>
+    <ng-container *ngTemplateOutlet="actions" />
   </ng-container>
 </form>
+
+<ng-template #actions>
+  <ng-content select="fudis-form-actions" />
+</ng-template>

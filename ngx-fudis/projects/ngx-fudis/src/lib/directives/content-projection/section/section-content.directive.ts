@@ -13,4 +13,9 @@ export class SectionActionsDirective {
 @Directive({
   selector: 'fudis-section-content',
 })
-export class SectionContentDirective {}
+export class SectionContentDirective {
+  /**
+   * Binding fudis-section__content CSS class to section content wrapper
+   */
+  @HostBinding('class') public hostClass = 'fudis-section__content';
+}

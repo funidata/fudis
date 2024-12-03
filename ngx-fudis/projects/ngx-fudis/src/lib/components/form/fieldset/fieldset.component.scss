@@ -92,10 +92,6 @@
       margin-top: auto;
     }
 
-    &__notifications {
-      margin-bottom: spacing.$spacing-xs;
-    }
-
     &__help-text {
       @include colors.text-color('gray-dark');
       @include typography.body-text-sm-regular;
@@ -109,5 +105,9 @@
       gap: spacing.$spacing-xs spacing.$spacing-sm;
       margin-bottom: spacing.$spacing-xs;
     }
+  }
+
+  .fudis-notification {
+    margin-bottom: spacing.$spacing-xs;
   }
 }
