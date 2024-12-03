@@ -114,9 +114,9 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
 
     const titleChanged = changes.title?.currentValue !== changes.title?.previousValue;
 
-    const externalChanged = changes.external?.currentValue !== changes.title?.previousValue;
+    const externalChanged = changes.external?.currentValue !== changes.external?.previousValue;
 
-    if (titleChanged || externalChanged) {
+    if (titleChanged || (externalChanged && changes.title?.currentValue)) {
       this._setHtmlAttributes();
 
       if (titleChanged) {
@@ -127,9 +127,7 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
         }
       }
 
-      if (externalChanged) {
-        this._setExternalHtml();
-      }
+      this._setExternalHtml();
     }
   }
 
@@ -195,13 +193,9 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
 
   private _setExternalHtml(): void {
     if (this.external) {
-      // Create Icon Component and define properties
-      this._iconComponentRef = this._viewContainerRef.createComponent(IconComponent);
-      this._iconComponentRef.setInput('icon', 'new-tab');
-      this._iconComponentRef.setInput('color', 'primary-dark');
-
       // Create HTML semantics
       const html = String.raw;
+
       if (this._parsedTitle.length === 1) {
         this._bindedElement.nativeElement.innerHTML = html`<span
           class="fudis-link__external__icon-wrapper"
@@ -214,10 +208,31 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
           </span>`;
       }
 
-      // Append Icon Component to right place in the HTML
-      this._bindedElement.nativeElement
-        .querySelector('.fudis-link__external__icon')
-        ?.append(this._iconComponentRef.instance.elementRef.nativeElement);
+      // Create Icon Component and define properties
+      this._iconComponentRef = this._viewContainerRef.createComponent(IconComponent);
+      this._iconComponentRef.setInput('icon', 'new-tab');
+      this._iconComponentRef.setInput('color', 'primary-dark');
+
+      // Append Icon Component to right place in the HTML when DOM is updated
+      const component = this._iconComponentRef.instance.elementRef.nativeElement;
+
+      const observer = new MutationObserver(() => {
+        const iconLocation = this._bindedElement.nativeElement.querySelector(
+          '.fudis-link__external__icon',
+        );
+
+        if (iconLocation) {
+          iconLocation.append(component);
+          observer.disconnect();
+        }
+      });
+
+      observer.observe(this._document, {
+        attributes: false,
+        childList: true,
+        characterData: false,
+        subtree: true,
+      });
     } else {
       // If not External, detach Icon Component instance
       this._viewContainerRef.detach();

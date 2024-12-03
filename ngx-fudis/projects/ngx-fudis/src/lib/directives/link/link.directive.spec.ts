@@ -73,13 +73,21 @@ describe('LinkDirective', () => {
     fixture.detectChanges();
   };
 
-  const changeExternal = (external: boolean, firstChange = false, title = defaultTitle) => {
-    const previousValue = component.dirRef.external;
+  const changeExternal = (
+    external: boolean,
+    externalFirstChange = false,
+    title = defaultTitle,
+    titleFirstChange = false,
+  ) => {
+    const previousExternal = component.dirRef.external;
+    const previousTitle = component.dirRef.title;
 
     component.dirRef.external = external;
+    component.dirRef.title = title;
 
     component.dirRef.ngOnChanges({
-      external: new SimpleChange(previousValue, external, firstChange),
+      external: new SimpleChange(previousExternal, external, externalFirstChange),
+      title: new SimpleChange(previousTitle, external, titleFirstChange),
     });
 
     fixture.detectChanges();
@@ -225,8 +233,8 @@ describe('LinkDirective', () => {
       expect(linkElement.innerHTML).toEqual(longChangedTitle);
       expect(linkElement.getAttribute('aria-label')).toEqual(longChangedTitle);
 
-      changeExternal(true, true, longChangedTitle);
-      changeExternal(false, true, longChangedTitle);
+      changeExternal(true, true, longChangedTitle, false);
+      changeExternal(false, true, longChangedTitle, false);
 
       linkElement = getElement(fixture, '.fudis-link');
 
@@ -298,6 +306,7 @@ describe('LinkDirective', () => {
       externalTitleUpdatedCorrectlty(singleWordTitle);
 
       changeExternal(false, true, singleWordTitle);
+
       changeExternal(true, false, singleWordTitle);
 
       externalTitleUpdatedCorrectlty(singleWordTitle);
