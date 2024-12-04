@@ -62,9 +62,9 @@ test("error summary language change and manually sent errors", async ({ page }) 
 
   await page.goto("/iframe.html?args=&id=components-form-error-summary--example&viewMode=story");
 
-  await page.getByTestId("submit-button").click();
   await page.getByTestId("error-button-1").click();
   await page.getByTestId("submit-button").click();
+  await page.waitForTimeout(100);
   await expect(page.getByText(firstManualError)).toBeVisible();
   await expect(page.getByText(secondManualError)).not.toBeVisible();
 
