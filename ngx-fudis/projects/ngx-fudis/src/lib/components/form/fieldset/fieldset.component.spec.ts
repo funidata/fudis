@@ -171,7 +171,7 @@ describe('FieldSetComponent', () => {
 
   describe('Content directives', () => {
     it('should have fieldset actions content', () => {
-      const actionsContentDiv = getElement(fixtureMock, '.fudis-fieldset__legend__actions');
+      const actionsContentDiv = getElement(fixtureMock, '.fudis-fieldset-actions');
       const actionsContent = getElement(fixtureMock, '.test-actions-content');
 
       expect(actionsContentDiv).toBeTruthy();
