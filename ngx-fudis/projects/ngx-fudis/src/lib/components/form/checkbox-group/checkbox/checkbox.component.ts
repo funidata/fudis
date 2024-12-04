@@ -12,7 +12,11 @@ import {
 } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
-import { FudisCheckboxChangeEvent, FudisCheckboxOption } from '../../../../types/forms';
+import {
+  FudisCheckboxChangeEvent,
+  FudisCheckboxGroupFormGroup,
+  FudisCheckboxOption,
+} from '../../../../types/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -24,7 +28,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class CheckboxComponent implements OnInit, OnDestroy {
   constructor(
     private _idService: FudisIdService,
-    @Host() protected _checkboxGroup: CheckboxGroupComponent,
+    @Host() protected _checkboxGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup>,
   ) {}
 
   /**
@@ -74,15 +78,13 @@ export class CheckboxComponent implements OnInit, OnDestroy {
       this.id = this._idService.getNewChildId('checkbox-group', this._checkboxGroup.id);
     }
 
-    if (
-      !this.control &&
-      this.controlName &&
-      this._checkboxGroup.formGroup.controls?.[this.controlName]
-    ) {
+    const parentControl = this._checkboxGroup.formGroup.controls?.[this.controlName];
+
+    if (!this.control && this.controlName && parentControl) {
       /**
        * Set Checkbox's control to match one in parent FormGroup.
        */
-      this.control = this._checkboxGroup.formGroup.controls[this.controlName];
+      this.control = parentControl;
     } else if (this.control && this._checkboxGroup.internalFormGroup) {
       /**
        * If no name was provided, use id instead.
@@ -94,14 +96,16 @@ export class CheckboxComponent implements OnInit, OnDestroy {
       /**
        * If parent has no FormGroup provided, add this control to internally created FormGroup.
        */
-      this._checkboxGroup.formGroup.addControl(this.controlName, this.control);
+      (this._checkboxGroup.formGroup as FormGroup).addControl(this.controlName, this.control);
       this._controlAddedToParent = true;
     }
   }
 
   ngOnDestroy(): void {
     if (this._controlAddedToParent && this.controlName) {
-      if (this._checkboxGroup.formGroup.controls[this.controlName]) {
+      const parentControl = this._checkboxGroup.formGroup.controls?.[this.controlName];
+
+      if (parentControl) {
         (this._checkboxGroup.formGroup as FormGroup).removeControl(this.controlName);
       }
     }
@@ -116,7 +120,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
       groupName: this._checkboxGroup.id,
       controlName: this.controlName,
       label: this.label,
-      value: this._checkboxGroup.formGroup.controls[this.controlName].value,
+      value: (this._checkboxGroup.formGroup as FormGroup).controls[this.controlName].value,
     };
 
     /**

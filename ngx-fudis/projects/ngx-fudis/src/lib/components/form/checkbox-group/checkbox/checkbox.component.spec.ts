@@ -46,10 +46,10 @@ import { FudisInternalErrorSummaryService } from '../../../../services/form/erro
     </fudis-checkbox-group> `,
 })
 class MockContainerComponent {
-  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent;
-  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent;
+  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup>;
+  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup>;
 
-  public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+  public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
     {
       apple: new FormControl<boolean | null | undefined>(null),
       fairTradeBanana: new FormControl<boolean | null | undefined>(false),

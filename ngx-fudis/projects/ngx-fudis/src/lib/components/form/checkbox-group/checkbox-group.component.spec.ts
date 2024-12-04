@@ -21,7 +21,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
-const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
   {
     apple: new FormControl<boolean | null | undefined>(null),
     fairTradeBanana: new FormControl<boolean | null | undefined>(null),
@@ -73,8 +73,8 @@ type TestFormGroup = {
     </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
-  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent;
-  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent;
+  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup>;
+  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup>;
 
   public testFromGroup = new FormGroup<TestFormGroup>(
     {
@@ -114,8 +114,10 @@ class MockContainerComponent {
 }
 
 describe('CheckboxGroupComponent', () => {
-  let component: CheckboxGroupComponent;
-  let fixture: ComponentFixture<CheckboxGroupComponent> | ComponentFixture<MockContainerComponent>;
+  let component: CheckboxGroupComponent<FudisCheckboxGroupFormGroup>;
+  let fixture:
+    | ComponentFixture<CheckboxGroupComponent<FudisCheckboxGroupFormGroup>>
+    | ComponentFixture<MockContainerComponent>;
   let fieldsetElement: HTMLFieldSetElement;
 
   beforeEach(async () => {

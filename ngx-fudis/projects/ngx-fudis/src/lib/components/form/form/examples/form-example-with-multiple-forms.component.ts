@@ -290,7 +290,7 @@ export class StorybookExampleWithMultipleFormsComponent {
         FudisValidators.maxLength(20, 'Max length is 20 chars'),
       ]),
     }),
-    formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+    formThree: new FormGroup<FudisCheckboxGroupFormGroup>(
       {
         apple: new FormControl<boolean | null>(null),
         fairTradeBanana: new FormControl<boolean | null>(null),

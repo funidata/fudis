@@ -20,9 +20,9 @@ type MyForm = {
   number: FormControl<number | null>;
   date: FormControl<Date | null>;
   animal: FormControl<FudisSelectOption<object> | null>;
-  summer: FormGroup<FudisCheckboxGroupFormGroup<object>>;
-  winter: FormGroup<FudisCheckboxGroupFormGroup<object>>;
-  working: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  summer: FormGroup<FudisCheckboxGroupFormGroup>;
+  winter: FormGroup<FudisCheckboxGroupFormGroup>;
+  working: FormGroup<FudisCheckboxGroupFormGroup>;
   sport: FormControl;
   dj: FormGroup;
 };
@@ -280,19 +280,19 @@ export class StorybookExampleDynamicValidatorsComponent {
         null,
         this._requiredValidatorInstance,
       ),
-      summer: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+      summer: new FormGroup<FudisCheckboxGroupFormGroup>(
         {
           summer1: new FormControl(null),
         },
         this._oneRequiredValidatorInstance,
       ),
-      winter: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+      winter: new FormGroup<FudisCheckboxGroupFormGroup>(
         {
           winter1: new FormControl(null),
         },
         this._oneRequiredValidatorInstance,
       ),
-      working: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+      working: new FormGroup<FudisCheckboxGroupFormGroup>(
         {
           working1: new FormControl(null),
         },
@@ -467,7 +467,7 @@ export class StorybookExampleDynamicValidatorsComponent {
     }
   }
 
-  toggleRequiredFromOthers(removeControls: FormGroup<FudisCheckboxGroupFormGroup<object>>[]): void {
+  toggleRequiredFromOthers(removeControls: FormGroup<FudisCheckboxGroupFormGroup>[]): void {
     removeControls.forEach((control) => {
       const required = control.hasValidator(this._oneRequiredValidatorInstance);
 

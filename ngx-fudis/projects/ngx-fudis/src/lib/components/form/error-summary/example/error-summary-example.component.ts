@@ -34,7 +34,7 @@ export class ErrorSummaryExampleComponent implements OnInit {
   toggleLive: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   formExample = new FormGroup({
-    courseBooks: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+    courseBooks: new FormGroup<FudisCheckboxGroupFormGroup>(
       {
         first: new FormControl(null),
         second: new FormControl(null),

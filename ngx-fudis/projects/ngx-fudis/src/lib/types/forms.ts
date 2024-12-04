@@ -61,7 +61,7 @@ export type FudisLocalizedTextGroup<T extends object> = T & {
   [lang: string | 'fi' | 'sv' | 'en']: FormControl<string | null>;
 };
 
-export type FudisCheckboxGroupFormGroup<T extends object> = T & {
+export type FudisCheckboxGroupFormGroup = {
   [key: string]: FormControl<boolean | null | undefined>;
 };
 
@@ -72,7 +72,7 @@ export type FudisCheckboxChangeEvent = {
 
 export type FudisCheckboxGroupChangeEvent = {
   changedControlName: string;
-  formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
 };
 
 export type FudisRadioButtonChangeEvent = {
