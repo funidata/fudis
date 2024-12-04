@@ -37,7 +37,7 @@ export const en: FudisTranslationConfig = {
     },
   },
   ERROR_SUMMARY: {
-    TITLE: 'The information is incomplete or incorrect. Please correct the following items:'
+    TITLE: 'The information is incomplete or incorrect. Please correct the following items:',
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Language',
@@ -120,7 +120,7 @@ export const fi: FudisTranslationConfig = {
     },
   },
   ERROR_SUMMARY: {
-    TITLE: 'Tiedoissa on puutteita tai virheitä. Korjaa seuraavat kohdat:'
+    TITLE: 'Tiedoissa on puutteita tai virheitä. Korjaa seuraavat kohdat:',
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Kieli',
@@ -203,7 +203,7 @@ export const sv: FudisTranslationConfig = {
     },
   },
   ERROR_SUMMARY: {
-    TITLE: 'Det finns brister eller fel i uppgifterna. Korrigera följande punkter:'
+    TITLE: 'Det finns brister eller fel i uppgifterna. Korrigera följande punkter:',
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Språk',

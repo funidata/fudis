@@ -121,7 +121,7 @@ export interface FudisTranslationConfig {
   };
   ERROR_SUMMARY: {
     TITLE: string;
-  },
+  };
   INPUT_WITH_LANGUAGE_OPTIONS: {
     // Label for language selection dropdown
     LANGUAGE: string;

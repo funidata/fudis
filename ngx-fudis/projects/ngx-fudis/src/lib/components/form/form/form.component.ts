@@ -63,7 +63,8 @@ export class FormComponent
   /**
    * Title displayed in Error Summary before listing individual errors
    */
-  @Input() errorSummaryTitle: string  = this._translationService.getTranslations()().ERROR_SUMMARY.TITLE;
+  @Input() errorSummaryTitle: string =
+    this._translationService.getTranslations()().ERROR_SUMMARY.TITLE;
 
   /**
    * Form id. If not given, id will be generated with IdService. Set only in component initialisation.
