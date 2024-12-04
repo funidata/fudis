@@ -13,7 +13,7 @@ import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
   template: `
     <fudis-fieldset
       [width]="'md'"
-      [label]="'Example Field Set Title'"
+      [label]="'Example Fieldset Title'"
       [helpText]="'Helptext for the fieldset'"
       [align]="'center'"
       [tooltip]="'Some additional information about this fieldset'"
@@ -91,7 +91,7 @@ class FieldsetExampleComponent {
 }
 
 export default {
-  title: 'Components/Form/Field Set',
+  title: 'Components/Form/Fieldset',
   component: FieldSetComponent,
   decorators: [
     moduleMetadata({

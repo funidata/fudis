@@ -1,16 +1,17 @@
 import { Meta, ArgTypes } from "@storybook/blocks";
 import { FieldSetComponent } from "./fieldset.component";
+import { FieldsetActionsDirective } from "../../../directives/content-projection/fieldset/fieldset-content.directive";
 
-<Meta title="Components/Form/Field Set" />
+<Meta title="Components/Form/Fieldset" />
 
-# Field Set
+# Fieldset
 
-Field Set is a grouping tool for Fudis Form Components. There are three directives to project content: header actions, notifications and main content.
+Fieldset is a grouping tool for Form Components. There are three directives to project content: header actions, notifications and main content.
 
 ## Content Directives
 
-**fudis-fieldset-content**: Fudis Field Set Content Directive is the wrapper element for the Field Set main content where all form components live.
-There are no restrictions on main content but it is advised to use Fudis Form Components only.
+**fudis-fieldset-content**: Fieldset Content Directive is the wrapper element for the Fieldset main content where all form components live.
+There are no restrictions on main content but it is advised to use form field components provided by Fudis to use Form's Error Summary features with less effort.
 
 ```
 <fudis-fieldset-content>
@@ -18,9 +19,9 @@ There are no restrictions on main content but it is advised to use Fudis Form Co
 </fudis-fieldset-content>
 ```
 
-**fudis-fieldset-actions**: Field Set Actions Directive is used for positioning buttons next to the Field Set label.
-There are no restrictions on Field Set Actions content but it is advised to use Buttons only.
-**Note!** Fieldset's `AlignActions` property can be used in positioning Field Set's header elements along with Field Set Actions.
+**fudis-fieldset-actions**: Fieldset Actions Directive is used for positioning buttons next to the Fieldset label.
+There are no restrictions on Fieldset Actions content but it is advised to use Buttons only.
+**Note!** Fieldset's `AlignActions` property can be used in positioning Fieldset's header elements along with Fieldset Actions.
 
 ```
 <fudis-fieldset-actions>
@@ -28,22 +29,22 @@ There are no restrictions on Field Set Actions content but it is advised to use 
 </fudis-fieldset-actions>
 ```
 
-## Field Set Inputs
+## Fieldset Inputs
 
-Aside from content projection Field Set will create a legend with optional tooltip and help text based on given properties.
+Aside from content projection Fieldset will create a legend with optional tooltip and help text based on given properties.
 
 ### Legend
 
-Field Set is not valid without a **mandatory** `label` property which is semantically legend element for the HTML fieldset.
+Fieldset is not valid without a **mandatory** `label` property which is semantically legend element for the HTML fieldset.
 
 ### Required
 
-If the whole Field Set is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
-Note that this has no other logic and is not concerned about validation of the components used inside the Field Set.
+If the whole Fieldset is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
+Note that this has no other logic and is not concerned about validation of the components used inside the Fieldset.
 
 ### Help Text
 
-Field Set help text is displayed under legend and can be added through `helpText` property.
+Fieldset help text is displayed under legend and can be added through `helpText` property.
 
 ### Tooltip
 
@@ -51,11 +52,11 @@ Tooltip can be included in legend with properties from [Tooltip Directive](/docs
 
 ### Error Summary Breadcrumb
 
-Boolean property `errorSummaryBreadcrumb` adds Field Set label to the clickable link in Error Symmary when used inside Fudis Form with visible Error Summary. Set `false` by default.
+Boolean property `errorSummaryBreadcrumb` adds Fieldset label to the clickable link in Error Symmary when used inside Form with visible Error Summary. Set `false` by default.
 
 ### Grid Properties
 
-Field Set can use some of the Fudis [Grid properties](/docs/foundations-grid--documentation), including `width` and `align`.
+Fieldset can use some of the [Grid properties](/docs/foundations-grid--documentation), including `width` and `align`.
 
 ### Input Size
 
@@ -67,7 +68,7 @@ Visible focus can be set with `initialFocus` boolean property. It will add focus
 
 ### Align Actions
 
-Field Set `alignActions` is used for positioning Field Set's Actions Directive flow to `bottom`, `end` or `start`.
+Fieldset `alignActions` is used for positioning Fieldset's Actions Directive flow to `bottom`, `end` or `start`.
 
 ## Code Example
 
@@ -99,3 +100,5 @@ HTML Template
 ## Properties
 
 <ArgTypes of={FieldSetComponent} />
+
+<ArgTypes of={FieldsetActionsDirective} />
