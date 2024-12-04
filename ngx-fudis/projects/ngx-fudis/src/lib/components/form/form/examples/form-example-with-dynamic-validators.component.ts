@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { FormGroup, FormControl } from '@angular/forms';
-import {
-  FudisCheckboxGroupFormGroup,
-  FudisRadioButtonOption,
-  FudisSelectOption,
-} from '../../../../types/forms';
+import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
 import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
@@ -14,15 +10,26 @@ import { FudisGroupValidators } from '../../../../utilities/form/groupValidators
 
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
+type SummerCheckbox = {
+  summer: FormControl<boolean | null>;
+};
+interface WinterCheckbox {
+  winter: FormControl<boolean | null>;
+}
+
+type WorkingCheckbox = {
+  working: FormControl<boolean | null>;
+};
+
 type MyForm = {
   text: FormControl<string | null>;
   email: FormControl<string | null>;
   number: FormControl<number | null>;
   date: FormControl<Date | null>;
   animal: FormControl<FudisSelectOption<object> | null>;
-  summer: FormGroup<FudisCheckboxGroupFormGroup<object>>;
-  winter: FormGroup<FudisCheckboxGroupFormGroup<object>>;
-  working: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  summer: FormGroup<SummerCheckbox>;
+  winter: FormGroup<WinterCheckbox>;
+  working: FormGroup<WorkingCheckbox>;
   sport: FormControl;
   dj: FormGroup;
 };
@@ -168,7 +175,7 @@ type MyForm = {
                   [formGroup]="formExample.controls.summer"
                 >
                   <fudis-checkbox
-                    [controlName]="'summer1'"
+                    [controlName]="'summer'"
                     [label]="'Summer holidays'"
                     (handleChange)="
                       toggleRequiredFromOthers([
@@ -183,7 +190,7 @@ type MyForm = {
                   [formGroup]="formExample.controls.winter"
                 >
                   <fudis-checkbox
-                    [controlName]="'winter1'"
+                    [controlName]="'winter'"
                     [label]="'Winter holidays'"
                     (handleChange)="
                       toggleRequiredFromOthers([
@@ -198,7 +205,7 @@ type MyForm = {
                   [formGroup]="formExample.controls.working"
                 >
                   <fudis-checkbox
-                    [controlName]="'working1'"
+                    [controlName]="'working'"
                     [label]="'Working holidays'"
                     (handleChange)="
                       toggleRequiredFromOthers([
@@ -280,21 +287,21 @@ export class StorybookExampleDynamicValidatorsComponent {
         null,
         this._requiredValidatorInstance,
       ),
-      summer: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+      summer: new FormGroup<SummerCheckbox>(
         {
-          summer1: new FormControl(null),
+          summer: new FormControl(null),
         },
         this._oneRequiredValidatorInstance,
       ),
-      winter: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+      winter: new FormGroup<WinterCheckbox>(
         {
-          winter1: new FormControl(null),
+          winter: new FormControl(null),
         },
         this._oneRequiredValidatorInstance,
       ),
-      working: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+      working: new FormGroup<WorkingCheckbox>(
         {
-          working1: new FormControl(null),
+          working: new FormControl(null),
         },
         this._oneRequiredValidatorInstance,
       ),
@@ -467,7 +474,7 @@ export class StorybookExampleDynamicValidatorsComponent {
     }
   }
 
-  toggleRequiredFromOthers(removeControls: FormGroup<FudisCheckboxGroupFormGroup<object>>[]): void {
+  toggleRequiredFromOthers(removeControls: FormGroup[]): void {
     removeControls.forEach((control) => {
       const required = control.hasValidator(this._oneRequiredValidatorInstance);
 

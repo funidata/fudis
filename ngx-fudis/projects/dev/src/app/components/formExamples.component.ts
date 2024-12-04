@@ -16,11 +16,18 @@ import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/valid
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { defaultOptions } from 'projects/ngx-fudis/src/lib/components/form/select/common/mock_data';
 
+type MyCheckboxGroup = {
+  blueberry: FormControl<boolean | null>;
+  cloudberry: FormControl<boolean | null>;
+  raspberry: FormControl<boolean | null>;
+  strawberry: FormControl<boolean | null>;
+};
+
 type MyForm = {
   textArea: FormControl<string | null>;
   textInput: FormControl<string | null | number>;
   truth: FormControl<boolean | null>;
-  checkboxFormGroup: FormGroup;
+  checkboxFormGroup: FormGroup<MyCheckboxGroup>;
   date: FormControl<Date | null>;
   withLanguages: FormGroup;
 };
@@ -129,10 +136,10 @@ export class AppFormExampleComponent {
     ),
     checkboxFormGroup: new FormGroup(
       {
-        blueberry: new FormControl<boolean | null | undefined>(null),
-        cloudberry: new FormControl<boolean | null | undefined>(null),
-        raspberry: new FormControl<boolean | null | undefined>(null),
-        strawberry: new FormControl<boolean | null | undefined>(null),
+        blueberry: new FormControl<boolean | null>(null),
+        cloudberry: new FormControl<boolean | null>(null),
+        raspberry: new FormControl<boolean | null>(null),
+        strawberry: new FormControl<boolean | null>(null),
       },
       [
         FudisGroupValidators.min({

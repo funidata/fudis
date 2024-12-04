@@ -23,11 +23,11 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 type TestForm = {
-  apple: FormControl<boolean | null | undefined>;
-  fairTradeBanana: FormControl<boolean | null | undefined>;
-  pear: FormControl<boolean | null | undefined>;
-  pineapple: FormControl<boolean | null | undefined>;
-  orange: FormControl<boolean | null | undefined>;
+  apple: FormControl<boolean | null>;
+  fairTradeBanana: FormControl<boolean | null>;
+  pear: FormControl<boolean | null>;
+  pineapple: FormControl<boolean | null>;
+  orange: FormControl<boolean | null>;
 };
 
 @Component({
@@ -54,18 +54,20 @@ type TestForm = {
     </fudis-checkbox-group> `,
 })
 class MockContainerComponent {
-  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup<object>>;
+  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<
+    FudisCheckboxGroupFormGroup<TestForm>
+  >;
   @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent<
-    FudisCheckboxGroupFormGroup<object>
+    FudisCheckboxGroupFormGroup<TestForm>
   >;
 
   public testFromGroup = new FormGroup<TestForm>(
     {
-      apple: new FormControl<boolean | null | undefined>(null),
-      fairTradeBanana: new FormControl<boolean | null | undefined>(false),
-      orange: new FormControl<boolean | null | undefined>(undefined),
-      pear: new FormControl<boolean | null | undefined>(true),
-      pineapple: new FormControl<boolean | null | undefined>({ value: false, disabled: true }),
+      apple: new FormControl<boolean | null>(null),
+      fairTradeBanana: new FormControl<boolean | null>(false),
+      orange: new FormControl<boolean | null>(null),
+      pear: new FormControl<boolean | null>(true),
+      pineapple: new FormControl<boolean | null>({ value: false, disabled: true }),
     },
     [
       FudisGroupValidators.min({ value: 2, message: new BehaviorSubject('Too few selected') }),

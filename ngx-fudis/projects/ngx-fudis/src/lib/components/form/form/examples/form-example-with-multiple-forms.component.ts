@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import {
   FudisRadioButtonOption,
-  FudisCheckboxGroupFormGroup,
   FudisSelectOption,
   FudisLocalizedTextGroup,
 } from '../../../../types/forms';
@@ -13,6 +12,10 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { defaultOptions } from '../../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
+
+interface MyCheckboxGroup {
+  [key: string]: FormControl<boolean | null>;
+}
 
 @Component({
   standalone: true,
@@ -290,13 +293,13 @@ export class StorybookExampleWithMultipleFormsComponent {
         FudisValidators.maxLength(20, 'Max length is 20 chars'),
       ]),
     }),
-    formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+    formThree: new FormGroup<MyCheckboxGroup>(
       {
         apple: new FormControl<boolean | null>(null),
         fairTradeBanana: new FormControl<boolean | null>(null),
         pear: new FormControl<boolean | null>(null),
         pineapple: new FormControl<boolean | null>(null),
-        orange: new FormControl<boolean | null | undefined>(null),
+        orange: new FormControl<boolean | null>(null),
       },
       [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
     ),

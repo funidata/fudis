@@ -25,7 +25,7 @@ Checkbox Group can be built in two ways:
 
 Checkbox Group can be provided with `formGroup` property, which is an Angular FormGroup typed object. Mandatory `label` property must also be provided.
 
-Form Group must be built with Angular Form Controls, which can have a type of `FormControl<boolean | null | undefined>`.
+Form Group must be built with Angular Form Controls, which can have a type of `FormControl<boolean | null>`.
 
 Providing `formGroup` for the parent allows including [Validators for the Checkbox Group](#validators-with-form-group) as well.
 
@@ -38,11 +38,17 @@ For child Checkbox components mandatory properties are `controlName` and `label`
 ```
 // In TypeScript file
 
-myFormGroup = new FormGroup(
+interface MyCheckboxGroup {
+  apple: FormControl<boolean | null>;
+  fairTradeBanana: FormControl<boolean | null>;
+  pear: FormControl<boolean | null>;
+}
+
+myFormGroup = new FormGroup<MyCheckboxGroup>(
   {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined>(null),
-    pear: new FormControl<boolean | null | undefined>(null),
+    apple: new FormControl<boolean | null>(null),
+    fairTradeBanana: new FormControl<boolean | null>(null),
+    pear: new FormControl<boolean | null>(null),
   }
 );
 
@@ -75,7 +81,7 @@ When parent isn't provided with `formGroup` property, it will create one interna
 
 ### Child Checkboxes
 
-Property `control` is Angular `FormControl<boolean | null | undefined>` typed object. When it is provided, it will be added to the internally created Form Group of the Checkbox Group. If `controlName` property is provided, it will be used as this control's key in the Form Group. Otherwise internally generated id will be used.
+Property `control` is Angular `FormControl<boolean | null>` typed object. When it is provided, it will be added to the internally created Form Group of the Checkbox Group. If `controlName` property is provided, it will be used as this control's key in the Form Group. Otherwise internally generated id will be used.
 
 ### Code Example
 
@@ -86,9 +92,9 @@ myOptionsWithControls = [
 
   // Note! Provided controlName property is optional this way. If it is not given, Fudis will use the id of the checkbox as controlName.
 
-  {label: 'Apple', controlName: 'apple', control: new FormControl<boolean | null | undefined>(null)},
-  {label: 'Fair Trade Banana', controlName: 'fairTradeBanana', new FormControl<boolean | null | undefined>(true)},
-  {label: 'Pear', controlName: 'pear', new FormControl<boolean | null | undefined>(null)},
+  {label: 'Apple', controlName: 'apple', control: new FormControl<boolean | null>(null)},
+  {label: 'Fair Trade Banana', controlName: 'fairTradeBanana', new FormControl<boolean | null>(true)},
+  {label: 'Pear', controlName: 'pear', new FormControl<boolean | null>(null)},
 ]
 
 // HTML template
