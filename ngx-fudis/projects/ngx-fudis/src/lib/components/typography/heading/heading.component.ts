@@ -11,6 +11,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FudisTextAlign } from '../../../types/typography';
 import { BehaviorSubject } from 'rxjs';
+import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 @Component({
   selector: 'fudis-heading',
@@ -60,32 +61,10 @@ export class HeadingComponent implements OnInit, OnChanges {
   protected _id: string;
 
   /**
-   * Get corresponding default variant for a heading level
-   */
-  private _getVariant(): FudisHeadingVariant {
-    switch (this.level) {
-      case 1:
-        return 'xxl';
-      case 2:
-        return 'xl';
-      case 3:
-        return 'lg';
-      case 4:
-        return 'md';
-      case 5:
-        return 'sm';
-      case 6:
-        return 'xs';
-      default:
-        return 'lg';
-    }
-  }
-
-  /**
    * Set CSS classes for heading
    */
   private _setClasses(): void {
-    const calcVariant = this.variant || this._getVariant();
+    const calcVariant = this.variant || getHeadingVariant(this.level);
 
     const newClasses = [
       `fudis-heading`,

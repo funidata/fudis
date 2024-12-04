@@ -54,7 +54,11 @@ interface MyCheckboxGroup {
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
-          <fudis-expandable [title]="'Expandable with Text Input'" [errorSummaryBreadcrumb]="true">
+          <fudis-expandable
+            [title]="'Expandable with Text Input'"
+            [level]="3"
+            [errorSummaryBreadcrumb]="true"
+          >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-input
                 [label]="'Name'"
@@ -79,7 +83,11 @@ interface MyCheckboxGroup {
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
-          <fudis-expandable [title]="'Expandable with Text Area'" [errorSummaryBreadcrumb]="true">
+          <fudis-expandable
+            [title]="'Expandable with Text Area'"
+            [level]="3"
+            [errorSummaryBreadcrumb]="true"
+          >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-area
                 [label]="'Description'"
@@ -106,6 +114,7 @@ interface MyCheckboxGroup {
         <ng-template fudisContent [type]="'form'">
           <fudis-expandable
             [title]="'Expandable with Checkbox Group'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
@@ -140,6 +149,7 @@ interface MyCheckboxGroup {
         <ng-template fudisContent [type]="'form'">
           <fudis-expandable
             [title]="'Expandable with Radio Button Group'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
@@ -174,6 +184,7 @@ interface MyCheckboxGroup {
         <ng-template fudisContent [type]="'form'">
           <fudis-expandable
             [title]="'Expandable with Select and Multiselect'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
@@ -221,6 +232,7 @@ interface MyCheckboxGroup {
         <ng-template fudisContent [type]="'form'">
           <fudis-expandable
             [title]="'Expandable with Localized Text Group'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">

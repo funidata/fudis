@@ -20,8 +20,7 @@ type TestForm = {
       <fudis-dialog-content>
         <fudis-form
           [title]="'Dialog with Form and some random text'"
-          [level]="1"
-          [titleVariant]="'xl'"
+          [level]="2"
           [errorSummaryHelpText]="'You need to fill up the information.'"
         >
           <ng-template fudisContent [type]="'form'">
