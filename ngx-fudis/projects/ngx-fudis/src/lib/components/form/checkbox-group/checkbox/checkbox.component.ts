@@ -44,7 +44,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   /**
    * Provide FormControl for each checkbox, when you do not provide FormGroup for the parent Checkbox Group.
    */
-  @Input() control: FormControl<boolean | null | undefined>;
+  @Input() control: FormControl<boolean | null>;
 
   /**
    * Visible label of checkbox
