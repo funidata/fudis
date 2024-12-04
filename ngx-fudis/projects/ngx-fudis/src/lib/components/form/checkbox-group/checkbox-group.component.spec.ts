@@ -18,20 +18,20 @@ import { ValidatorErrorMessageComponent } from '../error-message/validator-error
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 type TestForm = {
-  apple: FormControl<boolean | null | undefined>;
-  fairTradeBanana: FormControl<boolean | null | undefined>;
-  pear: FormControl<boolean | null | undefined>;
-  pineapple: FormControl<boolean | null | undefined>;
-  orange: FormControl<boolean | null | undefined>;
+  apple: FormControl<boolean | null>;
+  fairTradeBanana: FormControl<boolean | null>;
+  pear: FormControl<boolean | null>;
+  pineapple: FormControl<boolean | null>;
+  orange: FormControl<boolean | null>;
 };
 
 const testFormGroup = new FormGroup<TestForm>(
   {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined>(null),
-    pear: new FormControl<boolean | null | undefined>(null),
-    pineapple: new FormControl<boolean | null | undefined>(null),
-    orange: new FormControl<boolean | null | undefined>(null),
+    apple: new FormControl<boolean | null>(null),
+    fairTradeBanana: new FormControl<boolean | null>(null),
+    pear: new FormControl<boolean | null>(null),
+    pineapple: new FormControl<boolean | null>(null),
+    orange: new FormControl<boolean | null>(null),
   },
   [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
@@ -39,11 +39,11 @@ const testFormGroup = new FormGroup<TestForm>(
 type TestOption = {
   controlName?: string;
   label: string;
-  control?: FormControl<boolean | null | undefined>;
+  control?: FormControl<boolean | null>;
 };
 
 type TestFormGroup = {
-  [key: string]: FormControl<boolean | null | undefined>;
+  [key: string]: FormControl<boolean | null>;
 };
 
 @Component({
@@ -82,11 +82,11 @@ class MockContainerComponent {
 
   public testFromGroup = new FormGroup<TestFormGroup>(
     {
-      apple: new FormControl<boolean | null | undefined>(null),
-      fairTradeBanana: new FormControl<boolean | null | undefined>(false),
-      orange: new FormControl<boolean | null | undefined>(undefined),
-      pear: new FormControl<boolean | null | undefined>(true),
-      pineapple: new FormControl<boolean | null | undefined>({ value: false, disabled: true }),
+      apple: new FormControl<boolean | null>(null),
+      fairTradeBanana: new FormControl<boolean | null>(false),
+      orange: new FormControl<boolean | null>(null),
+      pear: new FormControl<boolean | null>(true),
+      pineapple: new FormControl<boolean | null>({ value: false, disabled: true }),
     },
     [
       FudisGroupValidators.min({ value: 2, message: new BehaviorSubject('Too few selected') }),
