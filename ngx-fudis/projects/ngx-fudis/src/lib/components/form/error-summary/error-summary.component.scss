@@ -20,12 +20,6 @@
     }
   }
 
-  fudis-notification {
-    .fudis-icon-host {
-      margin-top: spacing.$spacing-xs;
-    }
-  }
-
   &__error-list {
     @include utilities.box-reset;
 
