@@ -39,6 +39,7 @@ type MyForm = {
         <fudis-expandable
           (closedChange)="handleClosedOutput($event)"
           [title]="'Expandable section 1'"
+          [level]="3"
           [closed]="_closed"
         >
           <ng-template fudisContent [type]="'expandable'">
@@ -101,6 +102,7 @@ type MyForm = {
         <fudis-expandable
           [closed]="_closed"
           [title]="'Expandable section 2'"
+          [level]="3"
           [errorSummaryBreadcrumb]="true"
         >
           <ng-template fudisContent [type]="'expandable'">

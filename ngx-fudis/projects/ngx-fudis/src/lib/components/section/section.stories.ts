@@ -71,7 +71,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       >
     </ng-template>
     <ng-template fudisContent [type]="'section'">
-      <fudis-expandable [title]="'Expandable inside section'" [closed]="false">
+      <fudis-expandable [title]="'Expandable inside section'" [level]="3" [closed]="false">
         <ng-template fudisContent type="expandable">
           <fudis-body-text>Some content inside expandable</fudis-body-text>
         </ng-template>
