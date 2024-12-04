@@ -62,12 +62,12 @@ export type FudisLocalizedTextGroup<T extends object> = T & {
 };
 
 export type FudisCheckboxGroupFormGroup<T> = {
-  [K in keyof T]: FormControl<boolean | null | undefined>;
+  [K in keyof T]: FormControl<boolean | null>;
 };
 
 export type FudisCheckboxChangeEvent = {
   checkbox: FudisCheckboxOption<object>;
-  control: FormControl<boolean | null | undefined>;
+  control: FormControl<boolean | null>;
 };
 
 export type FudisCheckboxGroupChangeEvent = {
