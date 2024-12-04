@@ -22,7 +22,12 @@ type MyForm = {
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-form-content',
   template: `
-    <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
+    <fudis-section
+      [title]="'Main section'"
+      [level]="2"
+      [titleVariant]="'lg'"
+      [errorSummaryBreadcrumb]="true"
+    >
       <ng-template fudisNotifications [type]="'section'">
         <fudis-notification
           ><fudis-body-text
@@ -34,6 +39,7 @@ type MyForm = {
         <fudis-expandable
           (closedChange)="handleClosedOutput($event)"
           [title]="'Expandable section 1'"
+          [level]="3"
           [closed]="_closed"
         >
           <ng-template fudisContent [type]="'expandable'">
@@ -96,6 +102,7 @@ type MyForm = {
         <fudis-expandable
           [closed]="_closed"
           [title]="'Expandable section 2'"
+          [level]="3"
           [errorSummaryBreadcrumb]="true"
         >
           <ng-template fudisContent [type]="'expandable'">

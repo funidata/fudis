@@ -8,6 +8,8 @@ import { ActionsDirective } from '../../directives/content-projection/actions/ac
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisExpandableType } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
+import { getElement } from '../../utilities/tests/utilities';
+import { fudisHeadingLevelArray } from '../../types/typography';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -31,13 +33,9 @@ import { FudisInternalErrorSummaryService } from '../../services/form/error-summ
 })
 class MockContainerComponent {
   closed: boolean;
-
   variant: FudisExpandableType;
-
   padding: string;
-
   subTitle: string;
-
   contentInitializationCount = 0;
 }
 
@@ -62,13 +60,13 @@ describe('ExpandableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ContentDirective,
         ActionsDirective,
+        ButtonComponent,
+        ContentDirective,
         ExpandableComponent,
+        IconComponent,
         MockContainerComponent,
         MockContentComponent,
-        ButtonComponent,
-        IconComponent,
       ],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
@@ -194,7 +192,7 @@ describe('ExpandableComponent', () => {
   });
 
   describe('header buttons', () => {
-    it('should render fudis-button when one is given through a fudisExpandableHeaderButtons template', () => {
+    it('should render fudis-button when one is given through fudisActions directive', () => {
       fixture.detectChanges();
 
       expect(headerHasButtons()).toBeTruthy();
@@ -262,6 +260,43 @@ describe('ExpandableComponent', () => {
           'fudis-expandable .fudis-expandable__content[hidden] fudis-mock-component',
         ),
       ).not.toEqual(null);
+    });
+  });
+
+  describe('expandable title', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ExpandableComponent);
+      component = fixture.componentInstance;
+      component.title = 'Test title';
+      fixture.detectChanges();
+    });
+
+    it('should have visible title', () => {
+      const title = getElement(fixture, '.fudis-expandable__header__heading__button');
+
+      expect(title.textContent).toBe('Test title');
+    });
+
+    it('should have title level', () => {
+      fudisHeadingLevelArray.forEach((level) => {
+        component.level = level;
+        fixture.detectChanges();
+
+        const heading = getElement(fixture, '.fudis-expandable .fudis-expandable__header__heading');
+
+        expect(heading.getAttribute('aria-level')).toEqual(`${level}`);
+      });
+    });
+
+    it('should emit event when closedChange is called', () => {
+      jest.spyOn(component.closedChange, 'emit');
+      expect(component.closedChange.emit).not.toHaveBeenCalled();
+
+      component.closed = false;
+      expect(component.closedChange.emit).toHaveBeenCalledTimes(1);
+
+      component.closed = true;
+      expect(component.closedChange.emit).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -367,5 +402,3 @@ describe('ExpandableComponent', () => {
     });
   });
 });
-
-// TODO: add tests for title existing, heading level, closed input, closedChange output
