@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { MockComponents } from 'ng-mocks';
-import { BehaviorSubject } from 'rxjs';
-import { IconComponent } from '../../../icon/icon.component';
 import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
 import { ErrorMessageDirective } from './error-message.directive';
 import { TextInputComponent } from '../../text-input/text-input.component';
@@ -12,15 +9,9 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
-const observableMessage = new BehaviorSubject<string>('Test error message');
-
 const controlErrors = {
-  required: {
-    message: 'This is required',
-  },
-  'fudis-error-message-1': {
-    message: observableMessage,
-  },
+  required: 'This is required',
+  'fudis-error-message-1': 'Test error message',
 };
 
 const controlOnlyRequiredError = {
@@ -76,11 +67,11 @@ describe('ErrorMessageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ErrorMessageDirective,
-        IconComponent,
         MockTestErrorComponent,
         TextInputComponent,
         ValidatorErrorMessageComponent,
-        MockComponents(LabelComponent, GuidanceComponent),
+        LabelComponent,
+        GuidanceComponent,
       ],
       imports: [ReactiveFormsModule],
       providers: [FudisInternalErrorSummaryService],
@@ -101,7 +92,10 @@ describe('ErrorMessageComponent', () => {
     });
 
     it('should have proper errors in control when component is created', () => {
-      expect(component.control.errors).toEqual(controlErrors);
+      expect(component.control.errors?.['required'].message).toEqual(controlErrors.required);
+      expect(component.control.errors?.['fudis-error-message-1'].message.value).toEqual(
+        controlErrors['fudis-error-message-1'],
+      );
     });
 
     it('should have only required error in control when component is destroyed', () => {
@@ -122,14 +116,14 @@ describe('ErrorMessageComponent', () => {
       expect(component.control.valid).toBe(true);
     });
 
-    it('should update string message', () => {
+    it('should update string message', async () => {
       const newError = 'Error message updated';
 
-      observableMessage.next(newError);
       component.message = newError;
+
       fixture.detectChanges();
 
-      expect(component.control.errors).toEqual(controlErrors);
+      expect(component.control?.errors?.['fudis-error-message-1'].message.value).toEqual(newError);
     });
   });
 
