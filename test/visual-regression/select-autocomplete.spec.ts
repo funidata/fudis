@@ -111,6 +111,7 @@ test("Select autocompletes", async ({ page }) => {
     page.getByTestId("fudis-select-6-dropdown").getByText("No results found"),
   ).not.toBeVisible();
   await page.keyboard.press("Space");
+  await page.waitForTimeout(200); // Seemed that Safari needed a small timeout here
   await expect(
     page.getByTestId("fudis-select-6-dropdown").getByText("No results found"),
   ).toBeVisible();

@@ -30,7 +30,7 @@
       />
     </ng-template>
     <ng-template fudisContent type="form">
-      <fudis-section [title]="t('sectionTitle1')" [errorSummaryBreadcrumb]="true">
+      <fudis-section [title]="t('sectionTitle1')" [level]="2" [errorSummaryBreadcrumb]="true">
         <ng-template fudisContent [type]="'section'">
           <fudis-fieldset [label]="t('fieldsetLegend')">
             <ng-template fudisContent type="fieldset">
@@ -93,6 +93,7 @@
       <fudis-section
         class="fudis-mt-lg"
         [title]="t('sectionTitle2')"
+        [level]="2"
         [errorSummaryBreadcrumb]="true"
       >
         <ng-template fudisContent [type]="'section'">

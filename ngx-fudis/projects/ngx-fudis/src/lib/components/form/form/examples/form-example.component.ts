@@ -22,7 +22,12 @@ type MyForm = {
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-form-content',
   template: `
-    <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
+    <fudis-section
+      [title]="'Main section'"
+      [level]="2"
+      [titleVariant]="'lg'"
+      [errorSummaryBreadcrumb]="true"
+    >
       <ng-template fudisNotifications [type]="'section'">
         <fudis-notification
           ><fudis-body-text
