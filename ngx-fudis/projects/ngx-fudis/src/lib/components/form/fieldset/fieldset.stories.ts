@@ -1,11 +1,12 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component, importProvidersFrom, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
+import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
 
 @Component({
   selector: 'example-fieldset',
@@ -15,10 +16,9 @@ import readme from './readme.mdx';
       [label]="'Example Field Set Title'"
       [helpText]="'Helptext for the fieldset'"
       [align]="'center'"
-      [alignActions]="'start'"
       [tooltip]="'Some additional information about this fieldset'"
     >
-      <fudis-fieldset-actions>
+      <fudis-fieldset-actions [align]="alignActions">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </fudis-fieldset-actions>
       <fudis-fieldset-content>
@@ -64,6 +64,8 @@ import readme from './readme.mdx';
   `,
 })
 class FieldsetExampleComponent {
+  @Input() alignActions = 'start';
+
   fieldsetExample = new FormGroup({
     teacher: new FormControl(
       '',
@@ -111,11 +113,22 @@ const html = String.raw;
 
 export const Example: StoryFn = (args) => ({
   props: args,
-  template: html` <example-fieldset /> `,
+  template: html` <example-fieldset [alignActions]="alignActions" /> `,
 });
+
+Example.args = {
+  alignActions: 'start',
+};
+
+Example.argTypes = {
+  alignActions: {
+    options: ['start', 'end', 'below'],
+    control: { type: 'radio' },
+  },
+};
 
 Example.parameters = {
   controls: {
-    exclude: /.*/g,
+    exclude: excludeEverythingExceptRegex(['alignActions']),
   },
 };

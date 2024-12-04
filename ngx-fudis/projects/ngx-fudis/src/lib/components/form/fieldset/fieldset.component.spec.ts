@@ -31,7 +31,6 @@ import { FudisInputSize } from '../../../types/forms';
     [labelSize]="labelSize"
     [initialFocus]="initialFocus"
     [inputSize]="inputSize"
-    [alignActions]="alignActions"
   >
     <fudis-fieldset-actions>
       <p class="test-actions-content">This is actions content</p>

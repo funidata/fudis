@@ -55,11 +55,6 @@ export class FieldSetComponent
   @Input({ required: true }) label: string;
 
   /**
-   * Alignment of Fieldset Actions container
-   */
-  @Input() alignActions: 'bottom' | 'end' | 'start' = 'start';
-
-  /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
    * xxl = Default value. Viewports of 1600px and larger
    * xl = Viewports smaller than 1600px
