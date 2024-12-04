@@ -1,8 +1,13 @@
 <ng-container *ngIf="_visibleErrorList() as errors">
-  <div *ngIf="errors.length > 0" class="fudis-error-summary__main-container">
+  <div
+    *ngIf="errors.length > 0"
+    class="fudis-error-summary__main-container"
+    #focusTarget
+    tabindex="-1"
+  >
     <fudis-notification [variant]="'danger'">
       <ng-template fudisContent type="notification">
-        <div class="fudis-error-summary" #focusTarget tabindex="-1">
+        <div class="fudis-error-summary">
           <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
           <div class="fudis-error-summary__errors">
             <ng-container *ngIf="helpText">

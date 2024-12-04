@@ -18,10 +18,16 @@
 
   &__main-container {
     margin-bottom: spacing.$spacing-sm;
+
+    &:focus {
+      @include focus.focus-generic;
+    }
   }
 
-  &__icon {
-    margin-top: spacing.$spacing-xs;
+  fudis-notification {
+    .fudis-icon-host {
+      margin-top: spacing.$spacing-xs;
+    }
   }
 
   &__error-list {
