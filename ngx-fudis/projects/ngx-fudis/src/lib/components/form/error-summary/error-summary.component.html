@@ -5,16 +5,13 @@
         <div class="fudis-error-summary" #focusTarget tabindex="-1">
           <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
           <div class="fudis-error-summary__errors">
-            <ng-container *ngIf="title">
-              <fudis-body-text
-                [attr.role]="'heading'"
-                [attr.aria-level]="2"
-                [variant]="'md-regular'"
-                class="fudis-mt-xs"
-              >
-                {{ title }}</fudis-body-text
-              >
-            </ng-container>
+            <fudis-body-text
+              [attr.role]="'heading'"
+              [attr.aria-level]="2"
+              [variant]="'md-regular'"
+              class="fudis-mt-xs"
+              >{{ title }}</fudis-body-text
+            >
             <ul class="fudis-error-summary__error-list">
               <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
                 <a

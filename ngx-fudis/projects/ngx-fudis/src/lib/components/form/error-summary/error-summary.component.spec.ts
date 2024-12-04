@@ -35,7 +35,6 @@ import { getElement } from '../../../utilities/tests/utilities';
     [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
-    [errorSummaryTitle]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisContent type="form">
@@ -194,17 +193,16 @@ describe('ErrorSummaryComponent', () => {
   };
 
   describe('Contents', () => {
-    it('helper texts are displayed properly', async () => {
+    it('default title is displayed properly', async () => {
       await wrapperFixture.whenStable().then(() => {
         wrapperFixture.detectChanges();
-        const renderedHelpText = getElement(
+        const renderedTitle = getElement(
           wrapperFixture,
           '.fudis-error-summary__errors fudis-body-text',
         );
 
-        // Hidden icon text + Help Text
-        expect(renderedHelpText.textContent).toBe(
-          'Attention:\u00A0There were errors you need to fix',
+        expect(renderedTitle.textContent).toBe(
+          'The information is incomplete or incorrect. Please correct the following items:',
         );
       });
     });

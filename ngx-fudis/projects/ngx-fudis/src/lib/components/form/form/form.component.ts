@@ -23,6 +23,7 @@ import { FudisBadgeVariant, FudisComponentChanges } from '../../../types/miscell
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-form',
@@ -38,6 +39,7 @@ export class FormComponent
     private _idService: FudisIdService,
     private _elementRef: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
+    private _translationService: FudisTranslationService,
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
     super();
@@ -59,9 +61,9 @@ export class FormComponent
   @ContentChild(ContentDirective) protected _mainContent: ContentDirective;
 
   /**
-   * Help text displayed in Error Summary before listing individual errors
+   * Title displayed in Error Summary before listing individual errors
    */
-  @Input({ required: true }) errorSummaryTitle: string;
+  @Input() errorSummaryTitle: string  = this._translationService.getTranslations()().ERROR_SUMMARY.TITLE;
 
   /**
    * Form id. If not given, id will be generated with IdService. Set only in component initialisation.
