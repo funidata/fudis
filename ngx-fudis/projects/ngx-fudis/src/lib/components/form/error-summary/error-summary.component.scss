@@ -8,10 +8,6 @@
 
   display: flex;
 
-  &:focus {
-    @include focus.focus-generic;
-  }
-
   &--hidden {
     display: none;
   }
