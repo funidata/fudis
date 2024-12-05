@@ -34,7 +34,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
     protected _translationService: FudisTranslationService,
   ) {}
 
-  @ViewChild('focusTarget') private _focusTarget: ElementRef;
+  @ViewChild('focusTarget') private _focusTarget: ElementRef<HTMLDivElement>;
 
   /**
    * Form parent element of this ErrorSummaryComponent

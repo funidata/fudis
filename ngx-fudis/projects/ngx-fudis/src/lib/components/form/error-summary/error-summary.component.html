@@ -1,24 +1,27 @@
 <ng-container *ngIf="_visibleErrorList() as errors">
-  <fudis-notification *ngIf="errors.length > 0" class="fudis-mb-sm" [variant]="'danger'">
+  <fudis-notification
+    *ngIf="errors.length > 0"
+    class="fudis-error-summary fudis-mb-sm"
+    [variant]="'danger'"
+    #focusTarget
+  >
     <ng-template fudisContent type="notification">
-      <div class="fudis-error-summary" #focusTarget tabindex="-1">
-        <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
-        <div class="fudis-error-summary__errors">
-          <h2 class="fudis-error-summary__errors__title">{{
-            title || _translationService.getTranslations()().ERROR_SUMMARY.TITLE
-          }}</h2>
-          <ul class="fudis-error-summary__error-list">
-            <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
-              <a
-                fudisLink
-                href=""
-                [size]="'md'"
-                (click)="handleErrorClick($event, error.id)"
-                [title]="error.message"
-              ></a>
-            </li>
-          </ul>
-        </div>
+      <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
+      <div class="fudis-error-summary__errors">
+        <h2 class="fudis-error-summary__errors__title">{{
+          title || _translationService.getTranslations()().ERROR_SUMMARY.TITLE
+        }}</h2>
+        <ul class="fudis-error-summary__error-list">
+          <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
+            <a
+              fudisLink
+              href=""
+              [size]="'md'"
+              (click)="handleErrorClick($event, error.id)"
+              [title]="error.message"
+            ></a>
+          </li>
+        </ul>
       </div>
     </ng-template>
   </fudis-notification>
