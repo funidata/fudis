@@ -1,22 +1,22 @@
 @use '../../../foundations/colors/mixins.scss' as colors;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../foundations/focus/mixins.scss' as focus;
+@use '../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-error-summary {
-  @include utilities.box-reset;
-
-  display: flex;
+  margin-bottom: spacing.$spacing-sm;
 
   &--hidden {
     display: none;
   }
 
-  &__main-container {
-    margin-bottom: spacing.$spacing-sm;
+  &__errors {
+    &__title {
+      @include utilities.box-reset;
+      @include colors.text-color('gray-dark');
+      @include typography.body-text-md-regular;
 
-    &:focus {
-      @include focus.focus-generic;
+      margin-top: spacing.$spacing-xs;
     }
   }
 

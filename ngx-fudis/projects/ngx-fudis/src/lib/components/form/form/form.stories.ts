@@ -141,7 +141,7 @@ export const Example: StoryFn = (args) => ({
       [title]="title"
       [titleVariant]="titleVariant"
       [helpText]="helpText"
-      [errorSummaryHelpText]="errorSummaryHelpText"
+      [errorSummaryTitle]="errorSummaryTitle"
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <ng-template fudisHeader>
@@ -178,7 +178,7 @@ Example.args = {
   helpText: 'This is an additional help text to give user more information about the form',
   badge: 'primary',
   badgeText: 'Example',
-  errorSummaryHelpText:
+  errorSummaryTitle:
     'There are errors in this form. Please address these before trying to submit again.',
   errorSummaryVisible: false,
 };
@@ -207,7 +207,7 @@ export const ExampleWithDynamicValidators: StoryFn = (args) => ({
     [helpText]="helpText"
     [titleVariant]="titleVariant"
     [level]="level"
-    [errorSummaryHelpText]="errorSummaryHelpText"
+    [errorSummaryTitle]="errorSummaryTitle"
     [errorSummaryVisible]="errorSummaryVisible"
     [badge]="badge"
     [badgeText]="badgeText"
@@ -220,7 +220,7 @@ ExampleWithDynamicValidators.args = {
     "This example page is used to test, that when validators are added or removed from the FormControls, components' HTML attributes such as 'required' and max/min length are updated correctly.",
   titleVariant: 'xl',
   level: 1,
-  errorSummaryHelpText:
+  errorSummaryTitle:
     'There are errors in this form. Please address these before trying to submit again.',
   errorSummaryVisible: false,
   badge: null,

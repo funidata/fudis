@@ -1,6 +1,7 @@
 @use '../../foundations/colors/mixins.scss' as colors;
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/focus/mixins.scss' as focus;
 
 .fudis-notification {
   @include borders.border-radius('2px');
@@ -11,6 +12,10 @@
   padding: 0 spacing.$spacing-sm 0 spacing.$spacing-xxs;
   width: 100%;
   min-height: spacing.$spacing-md;
+
+  &:focus {
+    @include focus.focus-generic;
+  }
 
   &__content {
     display: inline-block;
