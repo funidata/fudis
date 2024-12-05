@@ -14,12 +14,15 @@
     @include utilities.box-reset;
     @include colors.text-color('gray-dark');
     @include typography.body-text-md-regular;
+
+    margin-top: spacing.$pixel-2;
   }
 
   &__error-list {
     @include utilities.box-reset;
 
     margin-top: spacing.$spacing-xs;
+    margin-bottom: spacing.$pixel-2;
     padding-left: 0;
     list-style: none;
 
