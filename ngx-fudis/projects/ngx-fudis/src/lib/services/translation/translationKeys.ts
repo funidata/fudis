@@ -1,9 +1,104 @@
-import { FudisTranslationConfig } from '../../types/miscellaneous';
-
 /**
  * This file contains translations for static translation keys used by Fudis components.
  * These are not supposed to be modified by the using application.
  */
+
+export interface FudisTranslationConfig {
+  BREADCRUMBS: {
+    // Prefix visible to screen reader
+    PREFIX: string;
+  };
+  // Shown with form inputs
+  REQUIRED: string;
+  // Necessary keys for ngMaterial Datepicker
+  DATEPICKER: {
+    CALENDAR: string;
+    CLOSE: string;
+    OPEN: string;
+    PLACEHOLDER: string;
+    PREV_MONTH: string;
+    NEXT_MONTH: string;
+    PREV_YEAR: string;
+    NEXT_YEAR: string;
+    PREV_MULTIYEAR: string;
+    NEXT_MULTIYEAR: string;
+    SWITCH_MONTH_VIEW: string;
+    SWITCH_MULTIYEAR_VIEW: string;
+    // Error message keys for universal Datepicker and Date Range validation
+    VALIDATION: {
+      START_DATE_INVALID: string;
+      END_DATE_INVALID: string;
+      DATE_PARSE: string;
+    };
+  };
+  DIALOG: {
+    // Label for close button
+    CLOSE: string;
+  };
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: string;
+    };
+  };
+  ERROR_SUMMARY: {
+    TITLE: string;
+  };
+  INPUT_WITH_LANGUAGE_OPTIONS: {
+    // Label for language selection dropdown
+    LANGUAGE: string;
+    // Text shown in dropdown options if input for a language is missing
+    MISSING: string;
+    // Assistive text of max character count for screen readers
+    MAX_LENGTH: string;
+  };
+  LINK: {
+    // External link icon aria-label
+    EXTERNAL_LINK: string;
+  };
+  SELECT: {
+    DISABLED: string;
+    OPEN_DROPDOWN: string;
+    CLOSE_DROPDOWN: string;
+    MULTISELECT: {
+      REMOVE_ITEM: string;
+    };
+    AUTOCOMPLETE: {
+      // Clear filter button label for screen readers
+      CLEAR: string;
+      NO_RESULTS: string;
+      SHOWING: string;
+      RESULTS: string;
+    };
+  };
+  IMAGE: {
+    // Alternative text for screen readers.
+    FUNIDATA_LOGO: string;
+  };
+  ATTENTION: string;
+  LANGUAGE_BADGE: {
+    ARIA_LABEL: FudisTranslationLanguageBadgeAriaLabel;
+  };
+  TEXTAREA: {
+    // Assistive text of max character count for screen readers
+    MAX_LENGTH: string;
+  };
+  TEXTINPUT: {
+    // Assistive text of max character count for screen readers
+    MAX_LENGTH: string;
+  };
+  ALERT: {
+    HEADING_LABEL: string;
+  };
+}
+
+export interface FudisTranslationLanguageBadgeAriaLabel {
+  FI: string;
+  SV: string;
+  EN: string;
+  TRANSLATIONS: string;
+  SELECTED: string;
+  MISSING_TRANSLATION: string;
+}
 
 /**
  * English translations
@@ -36,6 +131,9 @@ export const en: FudisTranslationConfig = {
       DISABLED: 'Disabled',
     },
   },
+  ERROR_SUMMARY: {
+    TITLE: 'The information is incomplete or incorrect. Please correct the following items:',
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Language',
     MISSING: 'Missing',
@@ -61,9 +159,7 @@ export const en: FudisTranslationConfig = {
   IMAGE: {
     FUNIDATA_LOGO: 'Funidata homepage',
   },
-  ICON: {
-    ATTENTION: 'Attention',
-  },
+  ATTENTION: 'Attention',
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Change translation to Finnish',
@@ -116,6 +212,9 @@ export const fi: FudisTranslationConfig = {
       DISABLED: 'Ei valittavissa',
     },
   },
+  ERROR_SUMMARY: {
+    TITLE: 'Tiedoissa on puutteita tai virheitä. Korjaa seuraavat kohdat:',
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Kieli',
     MISSING: 'Puuttuu',
@@ -141,9 +240,7 @@ export const fi: FudisTranslationConfig = {
   IMAGE: {
     FUNIDATA_LOGO: 'Funidatan kotisivut',
   },
-  ICON: {
-    ATTENTION: 'Huomio',
-  },
+  ATTENTION: 'Huomio',
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Vaihda käännöskieleksi Suomi',
@@ -196,6 +293,9 @@ export const sv: FudisTranslationConfig = {
       DISABLED: 'Inaktiverad',
     },
   },
+  ERROR_SUMMARY: {
+    TITLE: 'Det finns brister eller fel i uppgifterna. Korrigera följande punkter:',
+  },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Språk',
     MISSING: 'Saknas',
@@ -221,9 +321,7 @@ export const sv: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(öppnas i en ny flik)',
   },
-  ICON: {
-    ATTENTION: 'Observera',
-  },
+  ATTENTION: 'Observera',
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Ändra översättning till Finska',

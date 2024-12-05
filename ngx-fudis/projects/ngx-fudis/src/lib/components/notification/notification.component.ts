@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input, effect } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-notification',
@@ -11,24 +17,23 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotificationComponent {
-  constructor(private _translateService: FudisTranslationService) {
-    effect(() => {
-      this._attentionText.next(this._translateService.getTranslations()().ICON.ATTENTION);
-    });
-  }
+  constructor(protected _translateService: FudisTranslationService) {}
 
   /**
    * Content projection directive fudisContent for internal use. Error Summary Component is Notification Component with content projection.
    */
   @ContentChild(ContentDirective) protected _content: ContentDirective | null;
 
+  @ViewChild('articleElement') articleElement: ElementRef;
+
   /**
    * Notification variant
    */
   @Input() variant: FudisNotification = 'warning';
 
-  /**
-   * Screen reader text for icon
-   */
-  protected _attentionText = new Subject<string>();
+  public focus(): void {
+    if (this.articleElement?.nativeElement) {
+      this.articleElement.nativeElement.focus();
+    }
+  }
 }
