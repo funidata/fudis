@@ -43,18 +43,18 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
-        <ng-template fudisActions [type]="'form'">
+        <fudis-form-actions>
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formOne.valid"
             [label]="'Submit Form 1'"
           />
-        </ng-template>
-        <ng-template fudisContent [type]="'form'">
+        </fudis-form-actions>
+        <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Text Input'"
-            [level]="3"
             [errorSummaryBreadcrumb]="true"
+            [level]="3"
           >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-input
@@ -63,7 +63,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
               />
             </ng-template>
           </fudis-expandable>
-        </ng-template>
+        </fudis-form-content>
       </fudis-form>
       <fudis-form
         [level]="2"
@@ -72,18 +72,18 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
-        <ng-template fudisActions [type]="'form'">
+        <fudis-form-actions>
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formTwo.valid"
             [label]="'Submit Form 2'"
           />
-        </ng-template>
-        <ng-template fudisContent [type]="'form'">
+        </fudis-form-actions>
+        <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Text Area'"
-            [level]="3"
             [errorSummaryBreadcrumb]="true"
+            [level]="3"
           >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-area
@@ -92,7 +92,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
               />
             </ng-template>
           </fudis-expandable>
-        </ng-template>
+        </fudis-form-content>
       </fudis-form>
       <fudis-form
         [level]="2"
@@ -101,14 +101,14 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
-        <ng-template fudisActions [type]="'form'">
+        <fudis-form-actions>
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formThree.valid"
             [label]="'Submit Form 3'"
           />
-        </ng-template>
-        <ng-template fudisContent [type]="'form'">
+        </fudis-form-actions>
+        <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Checkbox Group'"
             [level]="3"
@@ -127,7 +127,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
               </fudis-checkbox-group>
             </ng-template>
           </fudis-expandable>
-        </ng-template>
+        </fudis-form-content>
       </fudis-form>
       <fudis-form
         [level]="2"
@@ -136,14 +136,14 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
-        <ng-template fudisActions [type]="'form'">
+        <fudis-form-actions>
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formFive.valid"
             [label]="'Submit Form 4'"
           />
-        </ng-template>
-        <ng-template fudisContent [type]="'form'">
+        </fudis-form-actions>
+        <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Radio Button Group'"
             [level]="3"
@@ -162,7 +162,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
               </fudis-radio-button-group>
             </ng-template>
           </fudis-expandable>
-        </ng-template>
+        </fudis-form-content>
       </fudis-form>
       <fudis-form
         [level]="2"
@@ -171,14 +171,14 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
-        <ng-template fudisActions [type]="'form'">
+        <fudis-form-actions>
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formFour.valid"
             [label]="'Submit Form 5'"
           />
-        </ng-template>
-        <ng-template fudisContent [type]="'form'">
+        </fudis-form-actions>
+        <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Select and Multiselect'"
             [level]="3"
@@ -186,7 +186,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
           >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
-                <ng-template fudisContent type="fieldset">
+                <fudis-fieldset-content>
                   <fudis-select
                     [label]="'Pick a pet'"
                     [control]="allForms.controls.formFour.controls.select"
@@ -206,11 +206,11 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
                       />
                     </ng-template>
                   </fudis-multiselect>
-                </ng-template>
+                </fudis-fieldset-content>
               </fudis-fieldset>
             </ng-template>
           </fudis-expandable>
-        </ng-template>
+        </fudis-form-content>
       </fudis-form>
       <fudis-form
         [level]="2"
@@ -219,14 +219,14 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
-        <ng-template fudisActions [type]="'form'">
+        <fudis-form-actions>
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formSix.valid"
             [label]="'Submit Form 6'"
           />
-        </ng-template>
-        <ng-template fudisContent [type]="'form'">
+        </fudis-form-actions>
+        <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Localized Text Group'"
             [level]="3"
@@ -245,7 +245,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
               <fudis-button [label]="'Patch value'" (handleClick)="patchValue()"></fudis-button>
             </ng-template>
           </fudis-expandable>
-        </ng-template>
+        </fudis-form-content>
       </fudis-form>
     </fudis-grid>
   `,

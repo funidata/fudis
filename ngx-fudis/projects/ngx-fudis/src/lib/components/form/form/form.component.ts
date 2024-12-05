@@ -1,6 +1,5 @@
 import {
   Component,
-  ContentChild,
   ElementRef,
   Host,
   Input,
@@ -14,9 +13,6 @@ import {
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
-import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant, FudisComponentChanges } from '../../../types/miscellaneous';
 import { DialogComponent } from '../../dialog/dialog.component';
@@ -39,21 +35,6 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   ) {
     super();
   }
-
-  /**
-   * Content directive for Form Header Actions
-   */
-  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective;
-
-  /**
-   * Content directive for Form Header Content
-   */
-  @ContentChild(HeaderDirective) protected _headerContent: HeaderDirective;
-
-  /**
-   * Content directive for Form Main Content
-   */
-  @ContentChild(ContentDirective) protected _mainContent: ContentDirective;
 
   /**
    * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis will display its default helper title text

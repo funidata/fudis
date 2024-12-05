@@ -11,7 +11,7 @@
   [tooltipToggle]="tooltipToggle"
   [initialFocus]="initialFocus"
 >
-  <ng-template fudisContent type="fieldset">
+  <fudis-fieldset-content>
     <ng-content select="fudis-radio-button" />
     <fudis-guidance
       *ngIf="control && !disableGuidance"
@@ -22,5 +22,5 @@
     >
       <ng-content select="fudis-error-message" />
     </fudis-guidance>
-  </ng-template>
+  </fudis-fieldset-content>
 </fudis-fieldset>

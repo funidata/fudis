@@ -1,31 +1,30 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component, importProvidersFrom, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
+import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
 
 @Component({
   selector: 'example-fieldset',
   template: `
     <fudis-fieldset
       [width]="'md'"
-      [label]="'Example Field Set Title'"
+      [label]="'Example Fieldset Title'"
       [helpText]="'Helptext for the fieldset'"
       [align]="'center'"
       [tooltip]="'Some additional information about this fieldset'"
     >
-      <ng-template fudisActions [type]="'fieldset'">
+      <fudis-fieldset-actions [align]="alignActions">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
-      </ng-template>
-      <ng-template fudisNotifications [type]="'fieldset'">
+      </fudis-fieldset-actions>
+      <fudis-fieldset-content>
         <fudis-notification
           ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
         >
-      </ng-template>
-      <ng-template fudisContent [type]="'fieldset'">
         <fudis-grid [columns]="{ md: 2 }">
           <fudis-text-input
             [control]="fieldsetExample.controls['teacher']"
@@ -60,11 +59,13 @@ import readme from './readme.mdx';
             />
           </fudis-date-range>
         </fudis-grid>
-      </ng-template>
+      </fudis-fieldset-content>
     </fudis-fieldset>
   `,
 })
 class FieldsetExampleComponent {
+  @Input() alignActions = 'start';
+
   fieldsetExample = new FormGroup({
     teacher: new FormControl(
       '',
@@ -90,7 +91,7 @@ class FieldsetExampleComponent {
 }
 
 export default {
-  title: 'Components/Form/Field Set',
+  title: 'Components/Form/Fieldset',
   component: FieldSetComponent,
   decorators: [
     moduleMetadata({
@@ -112,11 +113,22 @@ const html = String.raw;
 
 export const Example: StoryFn = (args) => ({
   props: args,
-  template: html` <example-fieldset /> `,
+  template: html` <example-fieldset [alignActions]="alignActions" /> `,
 });
+
+Example.args = {
+  alignActions: 'start',
+};
+
+Example.argTypes = {
+  alignActions: {
+    options: ['start', 'end', 'below'],
+    control: { type: 'radio' },
+  },
+};
 
 Example.parameters = {
   controls: {
-    exclude: /.*/g,
+    exclude: excludeEverythingExceptRegex(['alignActions']),
   },
 };

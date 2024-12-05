@@ -7,7 +7,7 @@
     [helpText]="t('currentStrategy') + toggleLive"
     [errorSummaryTitle]="t('errorSummaryTitle')"
   >
-    <ng-template fudisActions type="form">
+    <fudis-form-actions>
       <fudis-button
         [id]="'change-strategy-button'"
         [label]="t('changeStrategy')"
@@ -28,12 +28,12 @@
         [formValid]="formExample.valid"
         [label]="t('submit')"
       />
-    </ng-template>
-    <ng-template fudisContent type="form">
-      <fudis-section [title]="t('sectionTitle1')" [level]="2" [errorSummaryBreadcrumb]="true">
-        <ng-template fudisContent [type]="'section'">
+    </fudis-form-actions>
+    <fudis-form-content>
+      <fudis-section [title]="t('sectionTitle1')" [errorSummaryBreadcrumb]="true" [level]="2">
+        <fudis-section-content>
           <fudis-fieldset [label]="t('fieldsetLegend')">
-            <ng-template fudisContent type="fieldset">
+            <fudis-fieldset-content>
               <fudis-grid [columns]="{ xs: 1, sm: 2 }">
                 <fudis-text-input
                   [id]="'unique-input-3'"
@@ -86,9 +86,9 @@
                 >
                 </fudis-datepicker>
               </fudis-grid>
-            </ng-template>
+            </fudis-fieldset-content>
           </fudis-fieldset>
-        </ng-template>
+        </fudis-section-content>
       </fudis-section>
       <fudis-section
         class="fudis-mt-lg"
@@ -96,7 +96,7 @@
         [level]="2"
         [errorSummaryBreadcrumb]="true"
       >
-        <ng-template fudisContent [type]="'section'">
+        <fudis-section-content>
           <fudis-body-text>{{ t("sectionHelptext1") }}</fudis-body-text>
           <fudis-body-text>{{ t("sectionHelptext2") }}</fudis-body-text>
           <fudis-button
@@ -110,8 +110,8 @@
             [label]="secondError ? t('customError2Hide') : t('customError2Show')"
             (handleClick)="toggleSecondError()"
           />
-        </ng-template>
+        </fudis-section-content>
       </fudis-section>
-    </ng-template>
+    </fudis-form-content>
   </fudis-form>
 </ng-container>

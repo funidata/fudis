@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  ElementRef,
-  Input,
-  ViewChild,
-} from '@angular/core';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FudisNotification } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
@@ -18,11 +10,6 @@ import { FudisTranslationService } from '../../services/translation/translation.
 })
 export class NotificationComponent {
   constructor(protected _translateService: FudisTranslationService) {}
-
-  /**
-   * Content projection directive fudisContent for internal use. Error Summary Component is Notification Component with content projection.
-   */
-  @ContentChild(ContentDirective) protected _content: ContentDirective | null;
 
   @ViewChild('articleElement') articleElement: ElementRef;
 
