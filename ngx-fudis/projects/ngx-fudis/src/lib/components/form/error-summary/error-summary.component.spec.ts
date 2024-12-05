@@ -55,7 +55,7 @@ import { FormContentDirective } from '../../../directives/content-projection/for
           />
         </fudis-fieldset-content>
       </fudis-fieldset>
-      <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'">
+      <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'" [level]="2">
         <fudis-section-content>
           <fudis-text-input [control]="formGroup.controls.section" [label]="'Section input'" />
         </fudis-section-content>

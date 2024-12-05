@@ -6,60 +6,21 @@ import { formArgTypesExclude } from "../../../utilities/storybook";
 
 # Form
 
-Fudis Form is a layout component which enables semantically coherent and easy flow for building forms. It constructs from three main sections: header content, header actions and main content.
+Form Component is a layout component which enables semantically coherent and easy flow for building forms. It constructs from three main sections: header content, header actions and main content.
 
-## Content Directives
-
-**fudis-form-header**: Header content is additional information displayed under the actual form heading.
-Header content is assigned through Fudis Form Header Directive.
-There are no restrictions on header content but it is advised to use Fudis Components only.
-
-```
-<fudis-form-header>
-  <your-content-here />
-</fudis-form-header>
-```
-
-**fudis-form-actions**: Form Actions are buttons positioned on top of the form.
-Form actions are assigned through Fudis Form Actions Directive.
-
-There are no restrictions on Form Actions content but it is advised to use Fudis Buttons only. Pairing Button with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
-
-```
-<fudis-form-actions>
-  <fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit form'" (handleClick)="myFormSubmit()" />
-  ...other content
-</fudis-form-actions>
-```
-
-**fudis-form-content**: Form main content is where the form components live.
-Main content is assigned through Fudis Form Content Directive.
-There are no restrictions on main content but it is advised to use Fudis Form Components only.
-
-```
-<fudis-form-content>
-  <your-content-here />
-</fudis-form-content>
-```
-
-## Form Inputs
-
-Aside from content projection Fudis Form will create heading, badge and error-summary based on given properties.
-
-Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation).
-The complete list of allowed properties can be found from Properties table at the bottom of this page.
+## Mandatory and Commonly Used Properties
 
 ### Heading
 
-Fudis Form is not valid without a heading.
+Form is not valid without a heading.
 
-**Mandatory properties** are `title` (title text content) and `level` (the semantic heading level), additionally it is possible to change the visual size of the heading with `titleVariant`, which otherwise defaults to `xl`.
+Mandatory properties are `title` (visual heading) and `level` (semantic heading level), additionally it is possible to change the variant (visual size) of the heading with `titleVariant`, which otherwise defaults to corresponding level value.
 
-See possible heading levels and sizes from [Heading Documentation](/docs/components-typography-heading--documentation).
+See possible heading levels and variants from [Heading Documentation](/docs/components-typography-heading--documentation).
 
-### Badge
+#### Badge
 
-Fudis Badge can be attached to form heading by adding `badge` (badge variant) and `badgeText` (badge text content) properties.
+Badge can be attached to form heading by adding `badge` (variant) and `badgeText` (text content) properties.
 See badge variants from [Badge Documentation](/docs/components-badge--documentation).
 
 ### Error Summary
@@ -70,23 +31,58 @@ See badge variants from [Badge Documentation](/docs/components-badge--documentat
 
 More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](/docs/services-error-summary--documentation).
 
+### Layout
+
+Form Component extends Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/directives-grid-grid--documentation).
+The complete list of allowed properties can be found from Properties table at the bottom of this page.
+
+## Content Directives
+
+**fudis-form-header**: Header content is optional information displayed under the actual form heading.
+There are no restrictions on content, but it is adviced to only add instructions and other non-interactive content to the header.
+
+```
+<fudis-form-header>
+  <your-content-here />
+</fudis-form-header>
+```
+
+**fudis-form-actions**: Form Actions are buttons positioned on top of the form.
+Form actions are assigned through Fudis Form Actions Directive.
+
+There are no restrictions on Form Actions content, but it is advised to interactive button elements only. Including Button Component with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
+
+```
+<fudis-form-actions>
+  <fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit form'" (handleClick)="myFormSubmit()" />
+  ...other content
+</fudis-form-actions>
+```
+
+**fudis-form-content**: Form main content is where the form components live.
+There are no restrictions on main content but it is advised to use Form Components provided by Fudis as this enables [Error Summary](/docs/components-form-error-summary--documentation) logic with less effort.
+
+```
+<fudis-form-content>
+  <your-content-here />
+</fudis-form-content>
+```
+
 ## Code Example
 
 This is a simple example on how to use Form Component.
 
 ```
-
 // HTML Template
 
 <fudis-form
   [title]="'Example form heading'"
   [level]="2"
   [helpText]="'Here is some more information about this form'"
-  [errorSummaryHelpText]="'There are errors in this form.'"
 >
-  <ng-template fudisHeader>
-    <fudis-body-text>Additional form information</fudis-body-text>
-  </ng-template>
+  <fudis-form-header>
+    <fudis-body-text>Even more additional Form information</fudis-body-text>
+  </fudis-form-header>
   <fudis-form-actions>
     <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" (handleClick)="submitForm()" />
   </fudis-form-actions>
@@ -95,27 +91,13 @@ This is a simple example on how to use Form Component.
       [label]="'Example text-input'"
       [control]="formExample.controls.exampleTextInput"
     />
-    <fudis-checkbox-group
-      [formGroup]="formExample.controls.exampleCheckboxGroup"
-      [label]="'Example CheckboxGroup'"
-    >
-      <fudis-checkbox [controlName]="'first'" [label]="'Choose option 1'" />
-      <fudis-checkbox [controlName]="'second'" [label]="'Choose option 2'" />
-    </fudis-checkbox-group>
   </fudis-form-content>
 </fudis-form>
 
 // TypeScript
 
 formExample = new FormGroup({
-  exampleTextInput: new FormControl(null, FudisValidators.minLength(5, 'Input requires at least 5 characters.')),
-  exampleCheckboxGroup: new FormGroup(
-    {
-      first: new FormControl(null),
-      second: new FormControl(null),
-    },
-    [FudisGroupValidators.oneRequired(new BehaviorSubject('Select at least one checkbox!'))],
-  ),
+  exampleTextInput: new FormControl(null, FudisValidators.required('This field is required')),
 });
 
 submitForm(): void {

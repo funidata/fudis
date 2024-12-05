@@ -11,11 +11,11 @@ import {
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
-
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { BehaviorSubject } from 'rxjs';
+import { getHeadingVariant } from '../../utilities/typography/typography-utils';
 
 @Component({
   selector: 'fudis-section',
@@ -41,19 +41,19 @@ export class SectionComponent
   @Input({ required: true }) title: string;
 
   /**
+   * Heading level for the section title
+   */
+  @Input({ required: true }) level: FudisHeadingLevel;
+
+  /**
+   * Heading variant for the section title
+   */
+  @Input() titleVariant: FudisHeadingVariant;
+
+  /**
    * Section id
    */
   @Input() id: string;
-
-  /**
-   * Heading level for the section title
-   */
-  @Input() level: FudisHeadingLevel = 2;
-
-  /**
-   * Heading size for the section title
-   */
-  @Input() titleVariant: FudisHeadingVariant = 'lg';
 
   /**
    * Add badge to the section title
@@ -110,6 +110,10 @@ export class SectionComponent
 
   ngOnInit(): void {
     this._setSectionId();
+
+    if (!this.titleVariant) {
+      this.titleVariant = getHeadingVariant(this.level);
+    }
 
     this._headingId = `${this.id}-heading`;
     this._classList.next(this._getClasses());

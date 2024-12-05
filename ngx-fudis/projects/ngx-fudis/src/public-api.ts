@@ -48,7 +48,7 @@ export { FudisValidators } from './lib/utilities/form/validators';
 export { DropdownMenuGroupComponent } from './lib/components/dropdown-menu/dropdown-menu-group/dropdown-menu-group.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
-export { ErrorMessageComponent } from './lib/components/form/error-message/error-message/error-message.component';
+export { ErrorMessageDirective } from './lib/components/form/error-message/error-message/error-message.directive';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export {

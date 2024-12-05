@@ -15,6 +15,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
       [title]="'Multiselect showcase'"
       [errorSummaryHelpText]="'There are errors'"
       [level]="1"
+      [titleVariant]="'xl'"
       [width]="'md'"
     >
       <fudis-form-header>

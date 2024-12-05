@@ -51,7 +51,11 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
           />
         </fudis-form-actions>
         <fudis-form-content>
-          <fudis-expandable [title]="'Expandable with Text Input'" [errorSummaryBreadcrumb]="true">
+          <fudis-expandable
+            [title]="'Expandable with Text Input'"
+            [errorSummaryBreadcrumb]="true"
+            [level]="3"
+          >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-input
                 [label]="'Name'"
@@ -76,7 +80,12 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
           />
         </fudis-form-actions>
         <fudis-form-content>
-          <fudis-expandable [title]="'Expandable with Text Area'" [errorSummaryBreadcrumb]="true">
+          <fudis-expandable
+            [title]="'Expandable with Text Area'"
+            [errorSummaryBreadcrumb]="true"
+            [level]="3"
+            ]
+          >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-area
                 [label]="'Description'"
@@ -103,6 +112,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Checkbox Group'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
@@ -137,6 +147,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Radio Button Group'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
@@ -171,6 +182,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Select and Multiselect'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
@@ -218,6 +230,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         <fudis-form-content>
           <fudis-expandable
             [title]="'Expandable with Localized Text Group'"
+            [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">

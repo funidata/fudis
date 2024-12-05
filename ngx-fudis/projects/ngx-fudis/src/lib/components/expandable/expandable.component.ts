@@ -33,8 +33,6 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
   ) {
     this._id = this._idService.getNewId('expandable');
     this._headingId = `${this._id}-heading`;
-
-    // TODO: write test
   }
 
   /**
@@ -53,12 +51,12 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
   @Input({ required: true }) title: string;
 
   /**
-   * Determines header's semantic aria-level for screen readers, default is equivalent for h2
+   * Expandable title's semantic aria-level for screen readers
    */
-  @Input() level: number = 2;
+  @Input({ required: true }) level: number;
 
   /**
-   * Type i.e visual variant of the expandable
+   * Visual variant of the expandable
    */
   @Input() variant: FudisExpandableType = 'regular';
 
@@ -111,7 +109,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
   protected _headingId: string;
 
   /**
-   *  Lazy loading check for expanding content
+   * Lazy loading check for expanding content
    */
   protected _openedOnce: boolean = false;
 
