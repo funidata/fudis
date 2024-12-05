@@ -84,7 +84,6 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
             [title]="'Expandable with Text Area'"
             [errorSummaryBreadcrumb]="true"
             [level]="3"
-            ]
           >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-area
