@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   Component,
   ElementRef,
   Host,
@@ -27,13 +26,10 @@ import { getHeadingVariant } from '../../../utilities/typography/typography-util
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class FormComponent
-  extends GridApiDirective
-  implements OnInit, AfterContentInit, OnDestroy, OnChanges
-{
+export class FormComponent extends GridApiDirective implements OnInit, OnDestroy, OnChanges {
   constructor(
     private _idService: FudisIdService,
-    private _elementRef: ElementRef,
+    protected _elementRef: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
@@ -41,9 +37,9 @@ export class FormComponent
   }
 
   /**
-   * Help text displayed in Error Summary before listing individual errors
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis will display its default helper title text
    */
-  @Input({ required: true }) errorSummaryHelpText: string;
+  @Input() errorSummaryTitle: string;
 
   /**
    * Form title
@@ -85,11 +81,6 @@ export class FormComponent
    */
   @Input() errorSummaryVisible: boolean = false;
 
-  /**
-   * HTML FormElement
-   */
-  protected _formElement: HTMLFormElement | undefined;
-
   private _injector = inject(Injector);
 
   ngOnInit(): void {
@@ -112,10 +103,6 @@ export class FormComponent
         this.errorSummaryVisible = !this.errorSummaryVisible;
       }
     });
-  }
-
-  ngAfterContentInit(): void {
-    this._formElement = this._elementRef.nativeElement as HTMLFormElement;
   }
 
   ngOnDestroy(): void {

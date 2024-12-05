@@ -1,33 +1,23 @@
 <ng-container *ngIf="_visibleErrorList() as errors">
-  <div
+  <fudis-notification
     *ngIf="errors.length > 0"
-    class="fudis-error-summary__main-container"
+    class="fudis-error-summary"
+    [variant]="'danger'"
     #focusTarget
-    tabindex="-1"
   >
-    <fudis-notification [variant]="'danger'">
-      <div class="fudis-error-summary">
-        <div class="fudis-error-summary__errors">
-          <ng-container *ngIf="helpText">
-            <fudis-body-text [variant]="'md-regular'">
-              <span class="fudis-visually-hidden"
-                >{{ _translationService.getTranslations()().ICON.ATTENTION }}:&nbsp;</span
-              >{{ helpText }}</fudis-body-text
-            >
-          </ng-container>
-          <ul class="fudis-error-summary__error-list">
-            <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
-              <a
-                fudisLink
-                href=""
-                [size]="'md'"
-                (click)="handleErrorClick($event, error.id)"
-                [title]="error.message"
-              ></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </fudis-notification>
-  </div>
+    <h2 class="fudis-error-summary__title">{{
+      title || _translationService.getTranslations()().ERROR_SUMMARY.TITLE
+    }}</h2>
+    <ul class="fudis-error-summary__error-list">
+      <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
+        <a
+          fudisLink
+          href=""
+          [size]="'md'"
+          (click)="handleErrorClick($event, error.id)"
+          [title]="error.message"
+        ></a>
+      </li>
+    </ul>
+  </fudis-notification>
 </ng-container>

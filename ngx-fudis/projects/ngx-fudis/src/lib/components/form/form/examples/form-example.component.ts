@@ -97,12 +97,7 @@ type MyForm = {
             </fudis-grid>
           </ng-template>
         </fudis-expandable>
-        <fudis-expandable
-          [closed]="_closed"
-          [title]="'Expandable section 2'"
-          [level]="3"
-          [errorSummaryBreadcrumb]="true"
-        >
+        <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [level]="3">
           <ng-template fudisContent [type]="'expandable'">
             <fudis-fieldset [label]="'More important fields'">
               <fudis-fieldset-content>

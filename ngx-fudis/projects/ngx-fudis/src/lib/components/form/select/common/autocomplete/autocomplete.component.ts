@@ -12,8 +12,9 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { FudisComponentChanges, FudisTranslationConfig } from '../../../../../types/miscellaneous';
+import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FudisTranslationConfig } from '../../../../../services/translation/translationKeys';
 
 @Component({
   selector: 'fudis-select-autocomplete',

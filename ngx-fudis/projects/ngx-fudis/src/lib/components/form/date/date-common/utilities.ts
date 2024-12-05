@@ -1,5 +1,5 @@
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import { FudisTranslationConfig } from '../../../../types/miscellaneous';
+import { FudisTranslationConfig } from '../../../../services/translation/translationKeys';
 
 /**
  * Update locale for Fudis translations in Datepicker

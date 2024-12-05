@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   Input,
   ViewChild,
   signal,
@@ -15,6 +14,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FudisErrorSummaryFormErrors } from '../../../types/errorSummary';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { NotificationComponent } from '../../notification/notification.component';
 
 type ErrorSummaryDOMListItem = {
   id: string;
@@ -34,7 +34,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
     protected _translationService: FudisTranslationService,
   ) {}
 
-  @ViewChild('focusTarget') private _focusTarget: ElementRef<HTMLDivElement>;
+  @ViewChild('focusTarget') private _focusTarget: NotificationComponent;
 
   /**
    * Form parent element of this ErrorSummaryComponent
@@ -42,9 +42,9 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   @Input({ required: true }) parentComponent: HTMLFormElement;
 
   /**
-   * Help text displayed in Error Summary before listing individual errors
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis will display its default helper title text
    */
-  @Input({ required: true }) helpText: string;
+  @Input() title: string;
 
   /**
    * Id of parent Form component
@@ -158,9 +158,9 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
    * Move focus to Error Summary if errors are visible
    */
   private _focusToErrorSummary(): void {
-    if (this._focusTarget && this._visibleErrorList().length > 0) {
+    if (this._focusTarget?.articleElement && this._visibleErrorList().length > 0) {
       this._numberOfFocusTries = 0;
-      (this._focusTarget.nativeElement as HTMLDivElement).focus();
+      this._focusTarget.focus();
     } else if (this._numberOfFocusTries < 20) {
       setTimeout(() => {
         this._numberOfFocusTries += 1;

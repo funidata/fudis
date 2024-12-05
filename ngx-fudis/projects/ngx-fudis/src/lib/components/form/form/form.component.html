@@ -13,48 +13,37 @@
 >
   <div [id]="id + '_header'" class="fudis-form__header">
     <div class="fudis-form__header__main">
-      <ng-container *ngIf="title && level">
-        <div class="fudis-form__header__title">
-          <ng-container *ngIf="_dialogParent">
-            <fudis-heading
-              class="fudis-form__header__title__dialog fudis-mb-xs"
-              fudisDialogTitle
-              [variant]="titleVariant"
-              [level]="level"
-              >{{ title
-              }}<ng-container *ngIf="badge && badgeText">
-                <fudis-badge
-                  class="fudis-form__header__title__badge"
-                  [variant]="badge"
-                  [content]="badgeText"
-                />
-              </ng-container>
-            </fudis-heading>
-          </ng-container>
-          <ng-container *ngIf="!_dialogParent">
-            <fudis-heading class="fudis-mb-xs" [variant]="titleVariant" [level]="level"
-              >{{ title
-              }}<ng-container *ngIf="badge && badgeText">
-                <fudis-badge
-                  class="fudis-form__header__title__badge"
-                  [variant]="badge"
-                  [content]="badgeText"
-                />
-              </ng-container>
-            </fudis-heading>
-          </ng-container>
-          <ng-container *ngIf="helpText">
-            <fudis-body-text class="fudis-mb-xs">{{ helpText }}</fudis-body-text>
-          </ng-container>
-        </div>
-      </ng-container>
-      <ng-content select="fudis-form-header"></ng-content>
-      <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible && !_dialogParent">
-        <fudis-error-summary
-          [formId]="id"
-          [parentComponent]="_formElement"
-          [helpText]="errorSummaryHelpText"
-        />
+      <div class="fudis-form__header__title">
+        <fudis-heading
+          *ngIf="_dialogParent"
+          class="fudis-form__header__title__dialog fudis-mb-xs"
+          fudisDialogTitle
+          [variant]="titleVariant"
+          [level]="level"
+          >{{ title
+          }}<fudis-badge
+            *ngIf="badge && badgeText"
+            class="fudis-form__header__title__badge"
+            [variant]="badge"
+            [content]="badgeText"
+        /></fudis-heading>
+        <fudis-heading
+          *ngIf="!_dialogParent"
+          class="fudis-mb-xs"
+          [variant]="titleVariant"
+          [level]="level"
+          >{{ title
+          }}<fudis-badge
+            *ngIf="badge && badgeText"
+            class="fudis-form__header__title__badge"
+            [variant]="badge"
+            [content]="badgeText"
+        /></fudis-heading>
+        <fudis-body-text *ngIf="helpText" class="fudis-mb-xs">{{ helpText }}</fudis-body-text>
+      </div>
+      <ng-content select="fudis-form-header" />
+      <ng-container *ngIf="!_dialogParent">
+        <ng-container *ngTemplateOutlet="errorSummary" />
       </ng-container>
     </div>
   </div>
@@ -62,12 +51,8 @@
     <ng-container *ngTemplateOutlet="actions" />
   </ng-container>
   <div class="fudis-form__content">
-    <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible && _dialogParent">
-      <fudis-error-summary
-        [formId]="id"
-        [parentComponent]="_formElement"
-        [helpText]="errorSummaryHelpText"
-      />
+    <ng-container *ngIf="_dialogParent">
+      <ng-container *ngTemplateOutlet="errorSummary" />
     </ng-container>
     <ng-content select="fudis-form-content"></ng-content>
   </div>
@@ -75,6 +60,15 @@
     <ng-container *ngTemplateOutlet="actions" />
   </ng-container>
 </form>
+
+<ng-template #errorSummary>
+  <fudis-error-summary
+    *ngIf="_elementRef.nativeElement && errorSummaryVisible"
+    [formId]="id"
+    [parentComponent]="_elementRef.nativeElement"
+    [title]="errorSummaryTitle"
+  />
+</ng-template>
 
 <ng-template #actions>
   <ng-content select="fudis-form-actions" />

@@ -41,7 +41,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [titleVariant]="'lg'"
         [title]="'Form 1 with Text Input'"
         [errorSummaryVisible]="errorSummaryVisible"
-        [errorSummaryHelpText]="errorSummaryHelpText"
+        [errorSummaryTitle]="errorSummaryTitle"
       >
         <fudis-form-actions>
           <fudis-button
@@ -70,7 +70,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [titleVariant]="'lg'"
         [title]="'Form 2 with Text Area'"
         [errorSummaryVisible]="errorSummaryVisible"
-        [errorSummaryHelpText]="errorSummaryHelpText"
+        [errorSummaryTitle]="errorSummaryTitle"
       >
         <fudis-form-actions>
           <fudis-button
@@ -99,7 +99,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [titleVariant]="'lg'"
         [title]="'Form 3 with Checkbox Group'"
         [errorSummaryVisible]="errorSummaryVisible"
-        [errorSummaryHelpText]="errorSummaryHelpText"
+        [errorSummaryTitle]="errorSummaryTitle"
       >
         <fudis-form-actions>
           <fudis-button
@@ -134,7 +134,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [titleVariant]="'lg'"
         [title]="'Form 4 with Radio Button Group'"
         [errorSummaryVisible]="errorSummaryVisible"
-        [errorSummaryHelpText]="errorSummaryHelpText"
+        [errorSummaryTitle]="errorSummaryTitle"
       >
         <fudis-form-actions>
           <fudis-button
@@ -169,7 +169,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [titleVariant]="'lg'"
         [title]="'Form 5 with Select and Multiselect'"
         [errorSummaryVisible]="errorSummaryVisible"
-        [errorSummaryHelpText]="errorSummaryHelpText"
+        [errorSummaryTitle]="errorSummaryTitle"
       >
         <fudis-form-actions>
           <fudis-button
@@ -217,7 +217,7 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
         [titleVariant]="'lg'"
         [title]="'Form 6 with Localized Text Group'"
         [errorSummaryVisible]="errorSummaryVisible"
-        [errorSummaryHelpText]="errorSummaryHelpText"
+        [errorSummaryTitle]="errorSummaryTitle"
       >
         <fudis-form-actions>
           <fudis-button
@@ -255,7 +255,7 @@ export class StorybookExampleWithMultipleFormsComponent {
 
   errorSummaryVisible = false;
 
-  errorSummaryHelpText = 'There are incorrect form fields.';
+  errorSummaryTitle = 'There are incorrect form fields.';
 
   selectOptions = defaultOptions;
 

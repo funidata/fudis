@@ -37,8 +37,8 @@ import { FormContentDirective } from '../../../directives/content-projection/for
     [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
-    [errorSummaryHelpText]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
+    [errorSummaryTitle]="errorSummaryTitle"
   >
     <fudis-form-content>
       <fudis-fieldset [label]="'Form information'">
@@ -198,18 +198,27 @@ describe('ErrorSummaryComponent', () => {
   };
 
   describe('Contents', () => {
-    it('helper texts are displayed properly', async () => {
+    it('default title is displayed properly', async () => {
       await wrapperFixture.whenStable().then(() => {
         wrapperFixture.detectChanges();
-        const renderedHelpText = getElement(
-          wrapperFixture,
-          '.fudis-error-summary__errors fudis-body-text',
-        );
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
 
-        // Hidden icon text + Help Text
-        expect(renderedHelpText.textContent).toBe(
-          'Attention:\u00A0There were errors you need to fix',
+        expect(renderedTitle.textContent).toBe(
+          'The information is incomplete or incorrect. Please correct the following items:',
         );
+      });
+    });
+
+    it('app provided title is displayed properly', async () => {
+      const appTitle = 'Something is definetely wrong!';
+
+      wrapperComponent.formRef.errorSummaryTitle = appTitle;
+
+      await wrapperFixture.whenStable().then(() => {
+        wrapperFixture.detectChanges();
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
+
+        expect(renderedTitle.textContent).toBe(appTitle);
       });
     });
 

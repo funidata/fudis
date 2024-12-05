@@ -13,7 +13,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
   template: `
     <fudis-form
       class="fudis-mb-xxl"
-      [errorSummaryHelpText]="'There are errors'"
+      [errorSummaryTitle]="'There are errors'"
       [title]="'Select showcase'"
       [level]="1"
       [titleVariant]="'xl'"

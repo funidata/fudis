@@ -20,8 +20,9 @@ type TestForm = {
       <fudis-dialog-content>
         <fudis-form
           [title]="'Dialog with Form and some random text'"
-          [level]="2"
-          [errorSummaryHelpText]="'You need to fill up the information.'"
+          [level]="1"
+          [titleVariant]="'xl'"
+          [errorSummaryTitle]="'You need to fill up the information.'"
         >
           <fudis-form-content>
             <fudis-fieldset

@@ -25,7 +25,8 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
         <fudis-form
           [title]="title"
           [level]="2"
-          [errorSummaryHelpText]="'You need to fill up the information.'"
+          [titleVariant]="'xl'"
+          [errorSummaryTitle]="'You need to fill up the information.'"
         >
           <fudis-form-content>
             <ng-container *ngTemplateOutlet="favoriteVeggies" />

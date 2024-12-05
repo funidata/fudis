@@ -38,7 +38,7 @@ import { NotificationComponent } from '../../notification/notification.component
     [helpText]="'Some help for the form'"
     [badge]="badge"
     [badgeText]="badgeText"
-    [errorSummaryHelpText]="'There were errors you need to fix'"
+    [errorSummaryTitle]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <fudis-form-content>

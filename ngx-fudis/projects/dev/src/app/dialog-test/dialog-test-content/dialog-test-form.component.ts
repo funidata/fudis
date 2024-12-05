@@ -29,7 +29,7 @@ type MyForm = {
       <fudis-dialog-content>
         <fudis-form
           [title]="'Dialog with fudis-form'"
-          [errorSummaryHelpText]="'You did not fill all the required information'"
+          [errorSummaryTitle]="'You did not fill all the required information'"
           [level]="2"
         >
           <fudis-form-actions>
