@@ -4,6 +4,8 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-error-summary {
+  margin-bottom: spacing.$spacing-sm;
+
   &--hidden {
     display: none;
   }

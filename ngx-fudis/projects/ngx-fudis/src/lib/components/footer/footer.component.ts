@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-
 import {
   FooterContentLeftDirective,
   FooterContentRightDirective,

@@ -158,7 +158,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
    * Move focus to Error Summary if errors are visible
    */
   private _focusToErrorSummary(): void {
-    if (this._focusTarget && this._visibleErrorList().length > 0) {
+    if (this._focusTarget?.articleElement && this._visibleErrorList().length > 0) {
       this._numberOfFocusTries = 0;
       this._focusTarget.focus();
     } else if (this._numberOfFocusTries < 20) {
