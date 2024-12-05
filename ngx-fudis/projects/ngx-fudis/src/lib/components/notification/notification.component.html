@@ -1,6 +1,6 @@
 <article
   class="fudis-notification fudis-notification__{{ variant }}"
-  [attr.aria-label]="_translateService.getTranslations()().ICON.ATTENTION"
+  [attr.aria-label]="_translateService.getTranslations()().ATTENTION"
 >
   <ng-container *ngIf="!_content">
     <fudis-icon *ngIf="variant === 'warning'" [icon]="'exclamation-mark-circle'" />
