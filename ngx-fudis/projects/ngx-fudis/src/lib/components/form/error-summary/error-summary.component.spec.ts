@@ -201,7 +201,7 @@ describe('ErrorSummaryComponent', () => {
     it('default title is displayed properly', async () => {
       await wrapperFixture.whenStable().then(() => {
         wrapperFixture.detectChanges();
-        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__title');
 
         expect(renderedTitle.textContent).toBe(
           'The information is incomplete or incorrect. Please correct the following items:',
@@ -216,7 +216,7 @@ describe('ErrorSummaryComponent', () => {
 
       await wrapperFixture.whenStable().then(() => {
         wrapperFixture.detectChanges();
-        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__title');
 
         expect(renderedTitle.textContent).toBe(appTitle);
       });
