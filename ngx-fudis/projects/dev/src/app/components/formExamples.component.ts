@@ -16,6 +16,12 @@ import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/valid
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { defaultOptions } from 'projects/ngx-fudis/src/lib/components/form/select/common/mock_data';
 
+interface MyLocalizedTextGroup {
+  fi: FormControl<string | null>;
+  en: FormControl<string | null>;
+  sv: FormControl<string | null>;
+}
+
 type MyCheckboxGroup = {
   blueberry: FormControl<boolean | null>;
   cloudberry: FormControl<boolean | null>;
@@ -29,7 +35,7 @@ type MyForm = {
   truth: FormControl<boolean | null>;
   checkboxFormGroup: FormGroup<MyCheckboxGroup>;
   date: FormControl<Date | null>;
-  withLanguages: FormGroup;
+  withLanguages: FormGroup<MyLocalizedTextGroup>;
 };
 
 type SelectForm = {
@@ -153,7 +159,7 @@ export class AppFormExampleComponent {
       ],
     ),
 
-    withLanguages: new FormGroup(
+    withLanguages: new FormGroup<MyLocalizedTextGroup>(
       {
         fi: new FormControl<string | null>(null),
         sv: new FormControl<string | null>(null),
