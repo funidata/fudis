@@ -32,7 +32,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   /**
    * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
    */
-  @Input() override formGroup: FormGroup<FudisCheckboxGroupFormGroup<T>>;
+  @Input() override formGroup: FormGroup<T>;
 
   /**
    * Width size of the group.
