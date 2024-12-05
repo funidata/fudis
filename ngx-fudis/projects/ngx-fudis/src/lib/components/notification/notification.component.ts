@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
@@ -17,8 +24,16 @@ export class NotificationComponent {
    */
   @ContentChild(ContentDirective) protected _content: ContentDirective | null;
 
+  @ViewChild('articleElement') articleElement: ElementRef;
+
   /**
    * Notification variant
    */
   @Input() variant: FudisNotification = 'warning';
+
+  public focus(): void {
+    if (this.articleElement?.nativeElement) {
+      this.articleElement.nativeElement.focus();
+    }
+  }
 }
