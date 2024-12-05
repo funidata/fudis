@@ -16,7 +16,10 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent extends GroupComponentBaseDirective implements OnInit {
+export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
+  extends GroupComponentBaseDirective
+  implements OnInit
+{
   constructor(_idService: FudisIdService, _focusService: FudisFocusService) {
     super(_idService, _focusService);
 
@@ -29,7 +32,7 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
   /**
    * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
    */
-  @Input() override formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  @Input() override formGroup: FormGroup<T>;
 
   /**
    * Width size of the group.
@@ -84,11 +87,12 @@ export class CheckboxGroupComponent extends GroupComponentBaseDirective implemen
     this._setParentComponentId('checkbox-group');
 
     /**
-     * If there's no formGroup provided when component is initialised, create one internally.
+     * If there's no FormGroup provided when component is initialised, create one internally.
      */
     if (!this.formGroup) {
       this._internalFormGroup = true;
-      this.formGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>({});
+
+      this.formGroup = new FormGroup({}) as FormGroup;
     } else {
       /**
        * Validation check can be currently be done only for App provided formGroup

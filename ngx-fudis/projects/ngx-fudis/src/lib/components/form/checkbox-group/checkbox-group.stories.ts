@@ -3,7 +3,6 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angul
 import { action } from '@storybook/addon-actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
-import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
 import docs from './checkbox-group.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
@@ -44,37 +43,37 @@ const options = [
   {
     controlName: 'apple',
     label: 'Apple',
-    control: new FormControl<boolean | null | undefined>(null),
+    control: new FormControl<boolean | null>(null),
   },
   {
     controlName: 'fairTradeBanana',
     label: 'Fair trade banana',
-    control: new FormControl<boolean | null | undefined>(null),
+    control: new FormControl<boolean | null>(null),
   },
   {
     controlName: 'pear',
     label: 'Pear',
-    control: new FormControl<boolean | null | undefined>(null),
+    control: new FormControl<boolean | null>(null),
   },
   {
     controlName: 'pineapple',
     label: 'Pineapple',
-    control: new FormControl<boolean | null | undefined>(null),
+    control: new FormControl<boolean | null>(null),
   },
   {
     controlName: 'orange',
     label: 'Orange',
-    control: new FormControl<boolean | null | undefined>(null),
+    control: new FormControl<boolean | null>(null),
   },
 ];
 
-const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+const basicFormGroup = new FormGroup(
   {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined>(null),
-    pear: new FormControl<boolean | null | undefined>(null),
-    pineapple: new FormControl<boolean | null | undefined>(null),
-    orange: new FormControl<boolean | null | undefined>(null),
+    apple: new FormControl<boolean | null>(null),
+    fairTradeBanana: new FormControl<boolean | null>(null),
+    pear: new FormControl<boolean | null>(null),
+    pineapple: new FormControl<boolean | null>(null),
+    orange: new FormControl<boolean | null>(null),
   },
   [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
@@ -118,13 +117,13 @@ Example.args = {
   tooltipPosition: 'right',
 };
 
-const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+const withDisabledFormGroupOptions = new FormGroup(
   {
-    apple: new FormControl<boolean | null | undefined>({ value: true, disabled: true }),
-    fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
-    pear: new FormControl<boolean | null | undefined | null>({ value: false, disabled: true }),
-    pineapple: new FormControl<boolean | null | undefined | null>(null),
-    orange: new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
+    apple: new FormControl<boolean | null>({ value: true, disabled: true }),
+    fairTradeBanana: new FormControl<boolean | null | null>(null),
+    pear: new FormControl<boolean | null | null>({ value: false, disabled: true }),
+    pineapple: new FormControl<boolean | null | null>(null),
+    orange: new FormControl<boolean | null | null>({ value: null, disabled: true }),
   },
   [FudisGroupValidators.oneRequired(new BehaviorSubject('Please pick one! :('))],
 );
@@ -168,13 +167,13 @@ ExampleWithDisabledOption.args = {
   tooltipPosition: 'right',
 };
 
-const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+const withMinMaxFormGroupOptions = new FormGroup(
   {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
-    pear: new FormControl<boolean | null | undefined | null>(null),
-    pineapple: new FormControl<boolean | null | undefined | null>(null),
-    orange: new FormControl<boolean | null | undefined | null>(null),
+    apple: new FormControl<boolean | null>(null),
+    fairTradeBanana: new FormControl<boolean | null | null>(null),
+    pear: new FormControl<boolean | null | null>(null),
+    pineapple: new FormControl<boolean | null | null>(null),
+    orange: new FormControl<boolean | null | null>(null),
   },
   [
     FudisGroupValidators.min({

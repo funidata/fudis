@@ -11,8 +11,10 @@ test("dialog with form", async ({ page }) => {
   await page.getByTestId("example-input-power-animal").focus();
   await page.keyboard.type("Holiday Armadillo");
   await page.getByText("SUBMIT").focus();
+  await page.waitForTimeout(100);
   await expect(page).toHaveScreenshot("form-3-before-submit.png");
   await page.getByText("SUBMIT").click();
+  await page.waitForTimeout(100);
   await expect(page).toHaveScreenshot("form-4-after-submit.png");
 });
 

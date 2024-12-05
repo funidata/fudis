@@ -6,8 +6,14 @@ import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
+interface MyCheckboxGroup {
+  first: FormControl<boolean | null>;
+  second: FormControl<boolean | null>;
+  third: FormControl<boolean | null>;
+}
+
 type MyForm = {
-  courseBooks: FormGroup;
+  courseBooks: FormGroup<MyCheckboxGroup>;
   teacher: FormControl<string | null>;
   email: FormControl<string | null>;
   importantDate: FormControl<Date | null>;
