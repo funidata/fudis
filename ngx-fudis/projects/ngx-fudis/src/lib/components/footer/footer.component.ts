@@ -13,8 +13,9 @@ import {
   FooterContentLeftDirective,
   FooterContentRightDirective,
 } from '../../directives/content-projection/content/content.directive';
-import { FudisTranslationConfig } from '../../types/miscellaneous';
+
 import { BehaviorSubject } from 'rxjs';
+import { FudisTranslationConfig } from '../../services/translation/translationKeys';
 
 @Component({
   selector: 'fudis-footer',

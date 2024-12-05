@@ -8,13 +8,10 @@ import {
   Output,
   effect,
 } from '@angular/core';
-import {
-  FudisComponentChanges,
-  FudisLanguageAbbr,
-  FudisTranslationLanguageBadgeAriaLabel,
-} from '../../../types/miscellaneous';
+import { FudisComponentChanges, FudisLanguageAbbr } from '../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisTranslationLanguageBadgeAriaLabel } from '../../../services/translation/translationKeys';
 import { FudisIdService } from '../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 
