@@ -36,6 +36,7 @@ import { getElement } from '../../../utilities/tests/utilities';
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
     [errorSummaryVisible]="errorSummaryVisible"
+    [errorSummaryTitle]="errorSummaryTitle"
   >
     <ng-template fudisContent type="form">
       <fudis-fieldset [label]="'Form information'">
@@ -196,14 +197,24 @@ describe('ErrorSummaryComponent', () => {
     it('default title is displayed properly', async () => {
       await wrapperFixture.whenStable().then(() => {
         wrapperFixture.detectChanges();
-        const renderedTitle = getElement(
-          wrapperFixture,
-          '.fudis-error-summary__errors fudis-body-text',
-        );
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
 
         expect(renderedTitle.textContent).toBe(
           'The information is incomplete or incorrect. Please correct the following items:',
         );
+      });
+    });
+
+    it('app provided title is displayed properly', async () => {
+      const appTitle = 'Something is definetely wrong!';
+
+      wrapperComponent.formRef.errorSummaryTitle = appTitle;
+
+      await wrapperFixture.whenStable().then(() => {
+        wrapperFixture.detectChanges();
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
+
+        expect(renderedTitle.textContent).toBe(appTitle);
       });
     });
 

@@ -23,7 +23,6 @@ import { FudisBadgeVariant, FudisComponentChanges } from '../../../types/miscell
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 @Component({
@@ -40,7 +39,6 @@ export class FormComponent
     private _idService: FudisIdService,
     private _elementRef: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
-    private _translationService: FudisTranslationService,
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
     super();
@@ -62,10 +60,9 @@ export class FormComponent
   @ContentChild(ContentDirective) protected _mainContent: ContentDirective;
 
   /**
-   * Title displayed in Error Summary before listing individual errors
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis will display its default helper title text
    */
-  @Input() errorSummaryTitle: string =
-    this._translationService.getTranslations()().ERROR_SUMMARY.TITLE;
+  @Input() errorSummaryTitle: string;
 
   /**
    * Form title

@@ -42,9 +42,9 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   @Input({ required: true }) parentComponent: HTMLFormElement;
 
   /**
-   * Title displayed in Error Summary before listing individual errors
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis will display its default helper title text
    */
-  @Input({ required: true }) title: string;
+  @Input() title: string;
 
   /**
    * Id of parent Form component
