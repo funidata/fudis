@@ -15,28 +15,24 @@
       <div class="fudis-section__header__heading">
         <fudis-heading class="fudis-mb-none" [level]="level" [variant]="titleVariant"
           >{{ title
-          }}<ng-container *ngIf="badge && badgeText">
-            <fudis-badge
-              class="fudis-section__header__heading__badge"
-              [variant]="badge"
-              [content]="badgeText"
-            >
-            </fudis-badge>
-          </ng-container>
-        </fudis-heading>
-        <ng-container *ngIf="tooltip">
-          <fudis-button
-            class="fudis-section__header__heading__tooltip"
-            [size]="'icon-only'"
-            [variant]="'tertiary'"
-            [icon]="'info-circle'"
-            [labelHidden]="true"
-            [label]="tooltip"
-            [tooltip]="tooltip"
-            [tooltipPosition]="tooltipPosition"
-            [tooltipToggle]="tooltipToggle"
-          ></fudis-button>
-        </ng-container>
+          }}<fudis-badge
+            *ngIf="badge && badgeText"
+            class="fudis-section__header__heading__badge"
+            [variant]="badge"
+            [content]="badgeText"
+        /></fudis-heading>
+        <fudis-button
+          *ngIf="tooltip"
+          class="fudis-section__header__heading__tooltip"
+          [size]="'icon-only'"
+          [variant]="'tertiary'"
+          [icon]="'info-circle'"
+          [labelHidden]="true"
+          [label]="tooltip"
+          [tooltip]="tooltip"
+          [tooltipPosition]="tooltipPosition"
+          [tooltipToggle]="tooltipToggle"
+        />
       </div>
       <ng-container *ngIf="_headerActions?.type === 'section'">
         <div class="fudis-section__header__actions">

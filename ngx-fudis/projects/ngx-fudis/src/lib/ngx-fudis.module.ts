@@ -38,7 +38,6 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 import { DropdownMenuGroupComponent } from './components/dropdown-menu/dropdown-menu-group/dropdown-menu-group.component';
-import { ErrorMessageComponent } from './components/form/error-message/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
@@ -92,6 +91,7 @@ import {
 } from './directives/dialog/dialog-directives';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { ErrorMessageDirective } from './components/form/error-message/error-message/error-message.directive';
 import { FormCommonApiDirective } from './directives/form/form-common-api/form-common-api.directive';
 import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
@@ -156,7 +156,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     DropdownMenuComponent,
     DropdownItemBaseDirective,
     DropdownMenuItemComponent,
-    ErrorMessageComponent,
+    ErrorMessageDirective,
     ErrorSummaryComponent,
     ExpandableComponent,
     FieldSetComponent,
@@ -257,7 +257,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     DropdownMenuGroupComponent,
     DropdownMenuComponent,
     DropdownMenuItemComponent,
-    ErrorMessageComponent,
+    ErrorMessageDirective,
     ExpandableComponent,
     FooterComponent,
     FooterContentLeftDirective,

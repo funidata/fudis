@@ -1,5 +1,9 @@
 <ng-container *transloco="let t">
-  <fudis-expandable [title]="'Form with some transloco'" [closed]="formExpandableClosed">
+  <fudis-expandable
+    [title]="'Form with some transloco'"
+    [level]="2"
+    [closed]="formExpandableClosed"
+  >
     <ng-template fudisActions type="expandable">
       <fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
       <fudis-button
@@ -79,7 +83,7 @@
       <fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
     </ng-template>
   </fudis-expandable>
-  <fudis-expandable [title]="'Select Examples'" [closed]="false">
+  <fudis-expandable [title]="'Select Examples'" [level]="2" [closed]="false">
     <ng-template fudisContent type="expandable">
       <fudis-grid [columns]="'inputLg'">
         <fudis-heading [level]="3" [variant]="'md'"

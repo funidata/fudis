@@ -114,20 +114,21 @@ export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-grid [align]="'start'" [width]="'xl'">
-      <fudis-expandable [title]="'Regular expandable'">
+      <fudis-expandable [title]="'Regular expandable'" [level]="2">
         <ng-template fudisContent type="expandable">
           <fudis-body-text>The content of the expandable.</fudis-body-text>
         </ng-template>
       </fudis-expandable>
       <fudis-expandable
         [title]="'Regular expandable with sub title'"
+        [level]="2"
         [subTitle]="'Use me for an additional information'"
       >
         <ng-template fudisContent type="expandable">
           <fudis-body-text>The content of the expandable.</fudis-body-text>
         </ng-template>
       </fudis-expandable>
-      <fudis-expandable [title]="'Regular expandable with an action button'">
+      <fudis-expandable [title]="'Regular expandable with an action button'" [level]="2">
         <ng-template fudisActions type="expandable">
           <fudis-button label="Button"></fudis-button>
         </ng-template>
@@ -135,7 +136,12 @@ export const AllVariants: StoryFn = (args) => ({
           <fudis-body-text>The content of the expandable.</fudis-body-text>
         </ng-template>
       </fudis-expandable>
-      <fudis-expandable [title]="'Lite expandable'" [variant]="'lite'" [padding]="'small'">
+      <fudis-expandable
+        [title]="'Lite expandable'"
+        [level]="2"
+        [variant]="'lite'"
+        [padding]="'small'"
+      >
         <ng-template fudisContent type="expandable">
           <fudis-body-text>The content of the expandable with padding small.</fudis-body-text>
         </ng-template>

@@ -1,7 +1,6 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
+  Directive,
   EventEmitter,
   Host,
   inject,
@@ -33,12 +32,10 @@ import { MultiselectComponent } from '../../select/multiselect/multiselect.compo
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-@Component({
+@Directive({
   selector: 'fudis-error-message',
-  template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
+export class ErrorMessageDirective implements OnInit, OnChanges, OnDestroy {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _translationService: FudisTranslationService,
@@ -132,7 +129,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  ngOnChanges(changes: FudisComponentChanges<ErrorMessageComponent>): void {
+  ngOnChanges(changes: FudisComponentChanges<ErrorMessageDirective>): void {
     const newMessage = changes.message?.currentValue;
 
     if (newMessage !== changes.message?.previousValue) {

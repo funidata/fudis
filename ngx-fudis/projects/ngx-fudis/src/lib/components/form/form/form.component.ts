@@ -24,6 +24,7 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 @Component({
   selector: 'fudis-form',
@@ -67,24 +68,24 @@ export class FormComponent
     this._translationService.getTranslations()().ERROR_SUMMARY.TITLE;
 
   /**
+   * Form title
+   */
+  @Input({ required: true }) title: string;
+
+  /**
+   * Heading level for the form title
+   */
+  @Input({ required: true }) level: FudisHeadingLevel;
+
+  /**
    * Form id. If not given, id will be generated with IdService. Set only in component initialisation.
    */
   @Input() id: string;
 
   /**
-   * Form title
+   * Heading variant for the form title
    */
-  @Input() title: string;
-
-  /**
-   * Heading level for the form title
-   */
-  @Input() level: FudisHeadingLevel;
-
-  /**
-   * Heading size for the form title
-   */
-  @Input() titleVariant: FudisHeadingVariant = 'xl';
+  @Input() titleVariant: FudisHeadingVariant;
 
   /**
    * Help text positioned under form title
@@ -115,6 +116,10 @@ export class FormComponent
 
   ngOnInit(): void {
     this._setFormId();
+
+    if (!this.titleVariant) {
+      this.titleVariant = getHeadingVariant(this.level);
+    }
 
     this._errorSummaryService.registerNewForm(this.id, this.errorSummaryVisible);
 

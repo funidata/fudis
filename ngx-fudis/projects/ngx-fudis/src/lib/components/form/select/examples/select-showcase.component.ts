@@ -16,6 +16,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
       [errorSummaryTitle]="'There are errors'"
       [title]="'Select showcase'"
       [level]="1"
+      [titleVariant]="'xl'"
       [width]="'md'"
     >
       <ng-template fudisHeader type="form">
