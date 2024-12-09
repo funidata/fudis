@@ -9,8 +9,8 @@ test("dialog with form", async ({ page }) => {
   await expect(page.getByText("You need to fill up the information")).toBeVisible();
   await expect(page).toHaveScreenshot("form-2-errors.png");
   await page.getByTestId("example-input-power-animal").focus();
-  await page.keyboard.type("Holiday Armadillo");
-  await page.waitForTimeout(100);
+  await page.getByTestId("example-input-power-animal").fill("Holiday Armadillo");
+  await page.waitForTimeout(200);
   await page.getByText("SUBMIT").focus();
   await page.getByText("You need to fill up the information.").scrollIntoViewIfNeeded();
   await expect(page).toHaveScreenshot("form-3-before-submit.png");
