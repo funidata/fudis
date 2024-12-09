@@ -37,6 +37,7 @@ export const body = {
 };
 
 export const table_caption_text = "Fudis table caption text";
+export const emptystate_text = "Fudis empty state text";
 
 export const text_xxl = "Fudis heading XXL (2.25rem) 500";
 export const text_xl = "Fudis heading XL (1.75rem) 500";
@@ -164,7 +165,7 @@ export const body_lg_light =
   fontFamily={body.type.primary}
 />
 
-## Table Caption
+## Other
 
 <table>
   <th>Mixin</th>
@@ -188,5 +189,20 @@ export const body_lg_light =
       </td>
     </tr>
 
+    <tr>
+      <td>text-emptystate</td>
+
+      <td>
+        <p>Size: 14px / 0.875rem</p>
+        <p>Weight: 500 / Medium</p>
+        <p>Style: Italic</p>
+      </td>
+
+      <td>
+        <p class="fudis-text-emptystate">
+          {emptystate_text}
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
