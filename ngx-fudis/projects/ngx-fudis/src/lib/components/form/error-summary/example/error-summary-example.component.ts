@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import { FudisCheckboxGroupFormGroup } from '../../../../types/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
@@ -17,6 +16,12 @@ type Error = {
   id: string;
   message: Observable<string>;
 };
+
+interface CourseBooksFormGroup {
+  first: FormControl<boolean | null>;
+  second: FormControl<boolean | null>;
+  third: FormControl<boolean | null>;
+}
 
 @Component({
   standalone: true,
@@ -34,7 +39,7 @@ export class ErrorSummaryExampleComponent implements OnInit {
   toggleLive: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   formExample = new FormGroup({
-    courseBooks: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+    courseBooks: new FormGroup<CourseBooksFormGroup>(
       {
         first: new FormControl(null),
         second: new FormControl(null),
