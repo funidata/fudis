@@ -40,15 +40,7 @@ Heading can also include `tooltip` with all the [Tooltip](/docs/directives-toolt
 
 ### Nesting Sections Inside Sections
 
-Avoiding too complex page structure is recommended, but if you have a need to nest Sections inside Sections here are few guidelines and known caveats.
-
-#### Heading Levels
-
-Just as with any HTML content, proper heading level order is important for the accessibility. If you are nesting Sections, make sure that `level` of nested Section is lower than its parent's.
-
-#### Actions
-
-If you have Section inside Section, and the nested one has Actions-content but parent does not, the parent Section thinks that child's Action content should be included with the parent as well! As a workaround, include an empty Actions container with the parent as well.
+Avoiding too complex page structure is recommended, but if you have a need to nest Sections inside Sections, make sure that heading level order is considered for accessibility. Nested Section's `level` input property should be lower than its parent Section's `level`.
 
 <Source
   code={`
@@ -57,8 +49,6 @@ If you have Section inside Section, and the nested one has Actions-content but p
   [titleVariant]="'lg'"
   [level]="2"
   >
-  // Empty Actions template, so that nested Actions will not be rendered to the parent!
-  <fudis-section-actions></fudis-section-actions>
   <fudis-section-content>
     <fudis-section
       [title]="'Nested Section'"
