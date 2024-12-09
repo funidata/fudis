@@ -20,42 +20,40 @@
       [tabIndex]="-1"
       (blur)="_handleLegendBlur()"
     >
-      <div class="fudis-fieldset__legend__container">
+      <div
+        class="fudis-fieldset__legend__title"
+        [class.fudis-fieldset__legend__title__with-inputs]="inputSize"
+      >
         <div
-          class="fudis-fieldset__legend__title"
-          [class.fudis-fieldset__legend__title__with-inputs]="inputSize"
+          class="fudis-fieldset__legend__title__main fudis-fieldset__legend__title__main__{{
+            labelSize
+          }}"
         >
-          <div
-            class="fudis-fieldset__legend__title__main fudis-fieldset__legend__title__main__{{
-              labelSize
-            }}"
+          <span class="fudis-fieldset__legend__title__text"
+            >{{ label
+            }}<span *ngIf="required" class="fudis-fieldset__legend__title__text__required">
+              ({{ _requiredText | async }})</span
+            ></span
           >
-            <span class="fudis-fieldset__legend__title__text"
-              >{{ label
-              }}<span *ngIf="required" class="fudis-fieldset__legend__title__text__required">
-                ({{ _requiredText | async }})</span
-              ></span
-            >
-            <ng-container *ngIf="tooltip">
-              <fudis-button
-                class="fudis-fieldset__legend__tooltip-button"
-                [size]="'icon-only'"
-                [variant]="'tertiary'"
-                [icon]="'info-circle'"
-                [labelHidden]="true"
-                [label]="tooltip"
-                [tooltip]="tooltip"
-                [tooltipPosition]="tooltipPosition"
-                [tooltipToggle]="tooltipToggle"
-              />
-            </ng-container>
-          </div>
-          <ng-container *ngIf="helpText">
-            <span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
+          <ng-container *ngIf="tooltip">
+            <fudis-button
+              class="fudis-fieldset__legend__tooltip-button"
+              [size]="'icon-only'"
+              [variant]="'tertiary'"
+              [icon]="'info-circle'"
+              [labelHidden]="true"
+              [label]="tooltip"
+              [tooltip]="tooltip"
+              [tooltipPosition]="tooltipPosition"
+              [tooltipToggle]="tooltipToggle"
+            />
           </ng-container>
         </div>
-        <ng-content select="fudis-fieldset-actions"></ng-content>
+        <ng-container *ngIf="helpText">
+          <span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
+        </ng-container>
       </div>
+      <ng-content select="fudis-fieldset-actions"></ng-content>
     </legend>
     <ng-content select="fudis-fieldset-content"></ng-content>
   </fieldset>
