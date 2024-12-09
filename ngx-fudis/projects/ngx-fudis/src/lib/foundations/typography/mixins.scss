@@ -271,3 +271,14 @@
 
   font-size: inherit;
 }
+
+// Empty state
+
+@mixin text-emptystate {
+  @include colors.text-color('gray-middle');
+
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-medium;
+  font-style: tokens.$font-style-italic;
+}

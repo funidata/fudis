@@ -20,8 +20,13 @@ a.sbdocs {
   font-weight: 600;
 }
 
-tr td p.fudis-table-caption {
-  @include fudis.table-caption();
+tr td p {
+  &.fudis-table-caption {
+    @include fudis.table-caption();
+  }
+  &.fudis-text-emptystate {
+    @include fudis.text-emptystate();
+  }
 }
 
 .storybook {
