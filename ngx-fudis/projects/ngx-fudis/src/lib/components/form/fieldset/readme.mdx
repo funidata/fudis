@@ -21,11 +21,11 @@ There are no restrictions on main content but it is advised to use form field co
 
 **fudis-fieldset-actions**: Fieldset Actions Directive is used for positioning buttons next to the Fieldset label.
 There are no restrictions on Fieldset Actions content but it is advised to use Buttons only.
-**Note!** Fieldset Actions have an `align` property that can be used to determine the flow direction of Fieldset header elements with Fieldset Actions.
+**Note!** Fieldset Actions has an `align` property that can be used to determine the positions of Fieldset Actions. By default `align` has value `start`.
 
 ```
-<fudis-fieldset-actions [align]="'start'">
-  <your-content-here />
+<fudis-fieldset-actions [align]="'below'">
+  <your-action-buttons-here />
 </fudis-fieldset-actions>
 ```
 
@@ -68,7 +68,7 @@ Visible focus can be set with `initialFocus` boolean property. It will add focus
 
 ### Align (Fieldset Actions)
 
-Fieldset Action's `align` is used for positioning Fieldset's Actions Directive flow to `bottom`, `end` or `start`.
+Fieldset Action's `align` is used for positioning Fieldset's Actions Directive flow to `bottom`, `end` or `start`. By default has value of `start`.
 
 ## Code Example
 
@@ -78,21 +78,14 @@ This is a simple example on how to use `fudis-fieldset`
 HTML Template
 
     <fudis-fieldset
-      [label]="'Fieldset legend label'"
-      [helpText]="'Some help text for the fieldset'"
+      [label]="'Fieldset Legend Label'"
+      [helpText]="'Some help text for the Fieldset'"
     >
-      <fudis-fieldset-actions [align]="'start'">
+      <fudis-fieldset-actions [align]="'end'">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </fudis-fieldset-actions>
       <fudis-fieldset-content>
-          <fudis-text-input
-            [label]="'Example text-input nr.1'"
-            [control]="fieldsetExample.controls['exampleTextInput1']"
-          />
-          <fudis-text-input
-            [label]="'Example text-input nr.2'"
-            [control]="fieldsetExample.controls['exampleTextInput2']"
-          />
+          <!-- Your Fieldset content -->
       </fudis-fieldset-content>
     </fudis-fieldset>
 ```
