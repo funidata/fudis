@@ -6,7 +6,7 @@ import { FudisRadioButtonOption } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
-import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
+import { excludeAllRegex } from '../../../utilities/storybook';
 
 @Component({
   selector: 'example-fieldset',
@@ -18,7 +18,7 @@ import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
       [align]="'center'"
       [tooltip]="'Some additional information about this fieldset'"
     >
-      <fudis-fieldset-actions [align]="alignActions">
+      <fudis-fieldset-actions>
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </fudis-fieldset-actions>
       <fudis-fieldset-content>
@@ -64,7 +64,6 @@ import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
   `,
 })
 class FieldsetExampleComponent {
-  @Input() alignActions = 'start';
 
   fieldsetExample = new FormGroup({
     teacher: new FormControl(
@@ -113,22 +112,11 @@ const html = String.raw;
 
 export const Example: StoryFn = (args) => ({
   props: args,
-  template: html` <example-fieldset [alignActions]="alignActions" /> `,
+  template: html` <example-fieldset/> `,
 });
-
-Example.args = {
-  alignActions: 'start',
-};
-
-Example.argTypes = {
-  alignActions: {
-    options: ['start', 'end', 'below'],
-    control: { type: 'radio' },
-  },
-};
 
 Example.parameters = {
   controls: {
-    exclude: excludeEverythingExceptRegex(['alignActions']),
+    exclude: excludeAllRegex,
   },
 };

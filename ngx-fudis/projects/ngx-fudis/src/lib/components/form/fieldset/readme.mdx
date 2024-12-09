@@ -21,10 +21,10 @@ There are no restrictions on main content but it is advised to use form field co
 
 **fudis-fieldset-actions**: Fieldset Actions Directive is used for positioning buttons next to the Fieldset label.
 There are no restrictions on Fieldset Actions content but it is advised to use Buttons only.
-**Note!** Fieldset's `AlignActions` property can be used in positioning Fieldset's header elements along with Fieldset Actions.
+**Note!** Fieldset Actions have an `align` property that can be used to determine the flow direction of Fieldset header elements with Fieldset Actions.
 
 ```
-<fudis-fieldset-actions>
+<fudis-fieldset-actions [align]="'start'">
   <your-content-here />
 </fudis-fieldset-actions>
 ```
@@ -66,9 +66,9 @@ This can be used to set Checkbox Group and Radio Button Group as wide as other f
 
 Visible focus can be set with `initialFocus` boolean property. It will add focus for the whole fieldset element when the component is initialized and appears for the first time.
 
-### Align Actions
+### Align (Fieldset Actions)
 
-Fieldset `alignActions` is used for positioning Fieldset's Actions Directive flow to `bottom`, `end` or `start`.
+Fieldset Action's `align` is used for positioning Fieldset's Actions Directive flow to `bottom`, `end` or `start`.
 
 ## Code Example
 
@@ -81,7 +81,7 @@ HTML Template
       [label]="'Fieldset legend label'"
       [helpText]="'Some help text for the fieldset'"
     >
-      <fudis-fieldset-actions>
+      <fudis-fieldset-actions [align]="'start'">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </fudis-fieldset-actions>
       <fudis-fieldset-content>
