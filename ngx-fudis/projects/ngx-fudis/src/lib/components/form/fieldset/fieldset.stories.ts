@@ -1,6 +1,6 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
-import { Component, importProvidersFrom, Input } from '@angular/core';
+import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
@@ -18,12 +18,20 @@ import { excludeAllRegex } from '../../../utilities/storybook';
       [align]="'center'"
       [tooltip]="'Some additional information about this fieldset'"
     >
-      <fudis-fieldset-actions>
-        <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
+      <fudis-fieldset-actions [align]="alignActions">
+        <fudis-button
+          (handleClick)="changeAlign()"
+          [id]="'change-actions-align-button'"
+          [variant]="'tertiary'"
+          [icon]="'switch'"
+          [label]="'Change Actions Align'"
+        />
       </fudis-fieldset-actions>
       <fudis-fieldset-content>
         <fudis-notification
-          ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
+          ><fudis-body-text
+            >Currently Fieldset Actions are aligned: {{ alignActions }}</fudis-body-text
+          ></fudis-notification
         >
         <fudis-grid [columns]="{ md: 2 }">
           <fudis-text-input
@@ -64,6 +72,17 @@ import { excludeAllRegex } from '../../../utilities/storybook';
   `,
 })
 class FieldsetExampleComponent {
+  alignActions: 'start' | 'end' | 'below';
+
+  changeAlign(): void {
+    if (this.alignActions === 'start') {
+      this.alignActions = 'end';
+    } else if (this.alignActions === 'end') {
+      this.alignActions = 'below';
+    } else {
+      this.alignActions = 'start';
+    }
+  }
 
   fieldsetExample = new FormGroup({
     teacher: new FormControl(
@@ -112,7 +131,7 @@ const html = String.raw;
 
 export const Example: StoryFn = (args) => ({
   props: args,
-  template: html` <example-fieldset/> `,
+  template: html` <example-fieldset /> `,
 });
 
 Example.parameters = {
