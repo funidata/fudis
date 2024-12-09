@@ -92,16 +92,25 @@ import {
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { ErrorMessageDirective } from './components/form/error-message/error-message/error-message.directive';
+import {
+  FieldsetActionsDirective,
+  FieldsetContentDirective,
+} from './directives/content-projection/fieldset/fieldset-content.directive';
 import { FormCommonApiDirective } from './directives/form/form-common-api/form-common-api.directive';
 import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
+import {
+  FormActionsDirective,
+  FormContentDirective,
+  FormHeaderDirective,
+} from './directives/content-projection/form/form-content.directive';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
-import { HeaderDirective } from './directives/content-projection/header/header.directive';
 
 import { LinkDirective } from './directives/link/link.directive';
-import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
+import { SectionActionsDirective } from './directives/content-projection/section/section-content.directive';
+import { SectionContentDirective } from './directives/content-projection/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { TextFieldComponentBaseDirective } from './directives/form/text-field-component-base/text-field-component-base.directive';
@@ -159,12 +168,17 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ErrorMessageDirective,
     ErrorSummaryComponent,
     ExpandableComponent,
+    FieldsetActionsDirective,
+    FieldsetContentDirective,
     FieldSetComponent,
     FooterComponent,
     FooterContentLeftDirective,
     FooterContentRightDirective,
     FormCommonApiDirective,
     FormComponent,
+    FormActionsDirective,
+    FormContentDirective,
+    FormHeaderDirective,
     FormSubmitDirective,
     GridComponent,
     GridApiDirective,
@@ -173,7 +187,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     GridItemDirective,
     GroupComponentBaseDirective,
     GuidanceComponent,
-    HeaderDirective,
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,
@@ -186,10 +199,11 @@ import { FudisTranslationService } from './services/translation/translation.serv
     MultiselectChipListComponent,
     MultiselectOptionComponent,
     NotificationComponent,
-    NotificationsDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,
+    SectionActionsDirective,
+    SectionContentDirective,
     SelectAutocompleteComponent,
     SelectBaseDirective,
     SelectComponent,
@@ -262,14 +276,18 @@ import { FudisTranslationService } from './services/translation/translation.serv
     FooterComponent,
     FooterContentLeftDirective,
     FooterContentRightDirective,
+    FieldsetActionsDirective,
+    FieldsetContentDirective,
     FieldSetComponent,
     FormComponent,
+    FormActionsDirective,
+    FormContentDirective,
+    FormHeaderDirective,
     FormSubmitDirective,
     GridComponent,
     GridDirective,
     GridItemComponent,
     GridItemDirective,
-    HeaderDirective,
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,
@@ -279,10 +297,11 @@ import { FudisTranslationService } from './services/translation/translation.serv
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,
-    NotificationsDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,
+    SectionActionsDirective,
+    SectionContentDirective,
     SelectComponent,
     SelectOptionComponent,
     SelectGroupComponent,

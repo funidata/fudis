@@ -4,16 +4,11 @@
   class="fudis-notification fudis-notification__{{ variant }}"
   [attr.aria-label]="_translateService.getTranslations()().ATTENTION"
 >
-  <ng-container *ngIf="!_content">
-    <fudis-icon *ngIf="variant === 'warning'" [icon]="'exclamation-mark-circle'" />
-    <fudis-icon *ngIf="variant === 'danger'" [icon]="'alert'" />
-    <fudis-icon *ngIf="variant === 'success'" [icon]="'checkmark-circle'" />
-    <fudis-icon *ngIf="variant === 'info'" [icon]="'info-circle'" />
-    <div class="fudis-notification__content">
-      <ng-content />
-    </div>
-  </ng-container>
-  <ng-container *ngIf="_content?.type === 'notification'">
-    <ng-container *ngTemplateOutlet="_content!.templateRef" />
-  </ng-container>
+  <fudis-icon *ngIf="variant === 'warning'" [icon]="'exclamation-mark-circle'" />
+  <fudis-icon *ngIf="variant === 'danger'" [icon]="'alert'" />
+  <fudis-icon *ngIf="variant === 'success'" [icon]="'checkmark-circle'" />
+  <fudis-icon *ngIf="variant === 'info'" [icon]="'info-circle'" />
+  <div class="fudis-notification__content">
+    <ng-content />
+  </div>
 </article>

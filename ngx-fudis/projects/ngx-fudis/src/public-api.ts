@@ -51,27 +51,36 @@ export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdo
 export { ErrorMessageDirective } from './lib/components/form/error-message/error-message/error-message.directive';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
+export {
+  FieldsetContentDirective,
+  FieldsetActionsDirective,
+} from './lib/directives/content-projection/fieldset/fieldset-content.directive';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
+export {
+  FormActionsDirective,
+  FormContentDirective,
+  FormHeaderDirective,
+} from './lib/directives/content-projection/form/form-content.directive';
 export { FormSubmitDirective } from './lib/directives/form/form-actions/form-actions.directive';
 export { LocalizedTextGroupComponent } from './lib/components/form/localized-text-group/localized-text-group.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
-export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LanguageBadgeGroupComponent } from './lib/components/language-badge-group/language-badge-group.component';
 export { LinkDirective } from './lib/directives/link/link.directive';
 export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
 export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
-export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 export { RadioButtonComponent } from './lib/components/form/radio-button-group/radio-button/radio-button.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SectionComponent } from './lib/components/section/section.component';
+export { SectionActionsDirective } from './lib/directives/content-projection/section/section-content.directive';
+export { SectionContentDirective } from './lib/directives/content-projection/section/section-content.directive';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';

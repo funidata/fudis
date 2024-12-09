@@ -17,8 +17,26 @@
     @include utilities.box-reset;
 
     display: flex;
-    flex-direction: column;
+    align-items: center;
     width: 100%;
+    min-height: spacing.$spacing-lg;
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    &:has(.fudis-fieldset-actions__align--start) {
+      flex-wrap: wrap;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    &:has(.fudis-fieldset-actions__align--end) {
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    &:has(.fudis-fieldset-actions__align--below) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     &:focus-visible {
       @include focus.focus-generic;
@@ -28,34 +46,16 @@
       @include focus.focus-generic;
     }
 
-    &__container {
-      display: flex;
-      align-items: center;
-      min-height: spacing.$spacing-lg;
-
-      &__row-start {
-        flex-wrap: wrap;
-      }
-
-      &__row-end {
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-
-      &__column {
-        flex-direction: column;
-      }
-    }
-
     &__title {
       margin-bottom: spacing.$spacing-xs;
 
-      &__with-inputs {
-        margin-bottom: spacing.$spacing-none;
+      /* stylelint-disable selector-class-pattern */
+      &:has(+ .fudis-fieldset-actions) {
+        margin-right: spacing.$spacing-xl;
       }
 
-      &__margin-right {
-        margin-right: spacing.$spacing-xl;
+      &__with-inputs {
+        margin-bottom: spacing.$spacing-none;
       }
 
       &__main {
@@ -91,22 +91,22 @@
       margin-top: auto;
     }
 
-    &__notifications {
-      margin-bottom: spacing.$spacing-xs;
-    }
-
     &__help-text {
       @include colors.text-color('gray-dark');
       @include typography.body-text-sm-regular;
 
       display: block;
     }
-
-    &__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: spacing.$spacing-xs spacing.$spacing-sm;
-      margin-bottom: spacing.$spacing-xs;
-    }
   }
+
+  .fudis-notification {
+    margin-bottom: spacing.$spacing-xs;
+  }
+}
+
+.fudis-fieldset-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing.$spacing-xs spacing.$spacing-sm;
+  margin-bottom: spacing.$spacing-xs;
 }

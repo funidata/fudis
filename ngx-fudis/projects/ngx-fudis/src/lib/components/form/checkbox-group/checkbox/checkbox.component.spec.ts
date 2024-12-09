@@ -21,6 +21,7 @@ import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { IconComponent } from '../../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { FieldsetContentDirective } from '../../../../directives/content-projection/fieldset/fieldset-content.directive';
 
 type TestForm = {
   apple: FormControl<boolean | null>;
@@ -105,6 +106,7 @@ describe('CheckboxComponent', () => {
         MockContainerComponent,
         CheckboxGroupComponent,
         FieldSetComponent,
+        FieldsetContentDirective,
         GridComponent,
         GridApiDirective,
         GridDirective,

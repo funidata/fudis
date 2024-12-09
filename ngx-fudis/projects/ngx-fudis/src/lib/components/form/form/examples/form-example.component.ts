@@ -34,14 +34,12 @@ type MyForm = {
       [titleVariant]="'lg'"
       [errorSummaryBreadcrumb]="true"
     >
-      <ng-template fudisNotifications [type]="'section'">
+      <fudis-section-content>
         <fudis-notification
           ><fudis-body-text
             >This is notification for the section</fudis-body-text
           ></fudis-notification
         >
-      </ng-template>
-      <ng-template fudisContent [type]="'section'">
         <fudis-expandable
           (closedChange)="handleClosedOutput($event)"
           [title]="'Expandable section 1'"
@@ -83,7 +81,7 @@ type MyForm = {
                 [label]="'Tearcher info'"
                 [tooltip]="'Quite many fields are required.'"
               >
-                <ng-template fudisContent [type]="'fieldset'">
+                <fudis-fieldset-content>
                   <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
                     <fudis-text-input
                       [initialFocus]="true"
@@ -100,20 +98,15 @@ type MyForm = {
                       [helpText]="'So that students can ask for more time on their homework.'"
                     />
                   </fudis-grid>
-                </ng-template>
+                </fudis-fieldset-content>
               </fudis-fieldset>
             </fudis-grid>
           </ng-template>
         </fudis-expandable>
-        <fudis-expandable
-          [closed]="_closed"
-          [title]="'Expandable section 2'"
-          [level]="3"
-          [errorSummaryBreadcrumb]="true"
-        >
+        <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [level]="3">
           <ng-template fudisContent [type]="'expandable'">
             <fudis-fieldset [label]="'More important fields'">
-              <ng-template fudisContent [type]="'fieldset'">
+              <fudis-fieldset-content>
                 <fudis-date-range>
                   <fudis-datepicker
                     fudisDateStart
@@ -131,11 +124,11 @@ type MyForm = {
                   [label]="'Description'"
                   [helpText]="'Description in all languages is required'"
                 />
-              </ng-template>
+              </fudis-fieldset-content>
             </fudis-fieldset>
           </ng-template>
         </fudis-expandable>
-      </ng-template>
+      </fudis-section-content>
     </fudis-section>
   `,
 })

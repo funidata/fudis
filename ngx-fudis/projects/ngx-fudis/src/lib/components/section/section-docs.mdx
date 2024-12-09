@@ -19,41 +19,28 @@ Each Section should be identified, therefore `title` and its `level` are mandato
 
 Heading can also include `tooltip` with all the [Tooltip](/docs/directives-tooltip--documentation) Inputs available.
 
-#### Notifications and Actions
+### Content Directives
 
-Notifications and buttons are added through `fudisNotifications` and `fudisActions` directives. Both notifications and buttons have fixed positions and cannot be altered.
+**fudis-section-content**: The main content of the Section is added through Fudis Section Content directive.
+
+<Source
+  code={`<fudis-section-content>
+  <fudis-body-text>Main content of the section</fudis-body-text>
+</fudis-section-content>`}
+/>
+
+**fudis-section-actions**: Buttons are added through Fudis Section Actions directive. Buttons have fixed positions and cannot be altered.
 
 <Source
   code={`
-  <ng-template fudisActions [type]="'section'">
+  <fudis-section-actions>
   <fudis-button [label]="'Some action'"></fudis-button>
-</ng-template>
-<ng-template fudisNotifications [type]="'section'">
-  <fudis-body-text [variant]="'lg-regular'">This is notification</fudis-body-text>
-</ng-template>`}
-/>
-
-### Content
-
-The main content of the Section is added through `fudisContent` directive
-
-<Source
-  code={`<ng-template fudisContent [type]="'section'">
-  <fudis-body-text>Main content of the section</fudis-body-text>
-</ng-template>`}
+</fudis-section-actions>`}
 />
 
 ### Nesting Sections Inside Sections
 
-Avoiding too complex page structure is recommended, but if you have a need to nest Sections inside Sections here are few guidelines and known caveats.
-
-#### Heading Levels
-
-Just as with any HTML content, proper heading level order is important for the accessibility. If you are nesting Sections, make sure that `level` of nested Section is lower than its parent's.
-
-#### Actions
-
-If you have Section inside Section, and the nested one has Actions-content but parent does not, the parent Section thinks that child's Action content should be included with the parent as well! As a workaround, include an empty Actions container with the parent as well.
+Avoiding too complex page structure is recommended, but if you have a need to nest Sections inside Sections, make sure that heading level order is considered for accessibility. Nested Section's `level` input property should be lower than its parent Section's `level`.
 
 <Source
   code={`
@@ -62,21 +49,19 @@ If you have Section inside Section, and the nested one has Actions-content but p
   [titleVariant]="'lg'"
   [level]="2"
   >
-  // Empty Actions template, so that nested Actions will not be rendered to the parent!
-  <ng-template fudisActions [type]="'section'"></ng-template>
-  <ng-template fudisContent [type]="'section'">
+  <fudis-section-content>
     <fudis-section
       [title]="'Nested Section'"
       [titleVariant]="'md'"
       [level]="3" >
-      <ng-template fudisActions [type]="'section'">
+      <fudis-section-actions>
         <fudis-button [label]="'Nested Action button'"/>
-      </ng-template>
-      <ng-template fudisContent [type]="'section'">
+      </fudis-section-actions>
+      <fudis-section-content>
         <fudis-body-text>Main content of the section</fudis-body-text>
-      </ng-template>
+      </fudis-section-content>
     </fudis-section>
-  </ng-template>
+  </fudis-section-content>
 </fudis-section>
   `}
 />
@@ -106,7 +91,6 @@ When using Section inside [Form](/docs/components-form-form--documentation) with
 ## Related components
 
 - [Button](/docs/components-button--documentation)
-- [Notification](/docs/components-notification--documentation)
 - [Heading](/docs/components-typography-heading--documentation)
 - [Tooltip](/docs/directives-tooltip--documentation)
 
