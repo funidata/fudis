@@ -32,7 +32,7 @@ type MyForm = {
           [errorSummaryTitle]="'You did not fill all the required information'"
           [level]="2"
         >
-          <fudis-form-actions>
+          <fudis-form-content>
             <fudis-fieldset [label]="'We need some information'" [helpText]="_greetingFromOpener">
               <fudis-fieldset-content>
                 <fudis-checkbox-group
@@ -63,7 +63,7 @@ type MyForm = {
                 </fudis-radio-button-group>
               </fudis-fieldset-content>
             </fudis-fieldset>
-          </fudis-form-actions>
+          </fudis-form-content>
           <fudis-form-actions>
             <fudis-button
               fudisFormSubmit

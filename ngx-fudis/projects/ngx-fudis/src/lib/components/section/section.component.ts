@@ -25,7 +25,7 @@ import { getHeadingVariant } from '../../utilities/typography/typography-utils';
 })
 export class SectionComponent
   extends TooltipApiDirective
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy, AfterViewInit
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy
 {
   constructor(
     private _element: ElementRef,
