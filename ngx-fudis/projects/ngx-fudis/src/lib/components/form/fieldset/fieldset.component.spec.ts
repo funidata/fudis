@@ -17,7 +17,6 @@ import { ValidatorErrorMessageComponent } from '../error-message/validator-error
 import { LabelComponent } from '../label/label.component';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
@@ -56,7 +55,6 @@ describe('FieldSetComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
         BodyTextComponent,
         ButtonComponent,
         FieldsetActionsDirective,

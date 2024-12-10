@@ -12,7 +12,6 @@ import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { Component } from '@angular/core';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -74,7 +73,6 @@ describe('Basic inputs of Radio Button Group', () => {
         FieldsetContentDirective,
         GridDirective,
         GuidanceComponent,
-        ContentDirective,
         IconComponent,
         ValidatorErrorMessageComponent,
       ],

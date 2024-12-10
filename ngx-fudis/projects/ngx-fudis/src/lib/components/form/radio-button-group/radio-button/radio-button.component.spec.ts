@@ -5,7 +5,6 @@ import { RadioButtonComponent } from './radio-button.component';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
 import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { FieldSetComponent } from '../../fieldset/fieldset.component';
-import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
@@ -61,7 +60,6 @@ describe('RadioButtonComponent', () => {
         GridComponent,
         GridApiDirective,
         GridDirective,
-        ContentDirective,
         GuidanceComponent,
         IconComponent,
         ValidatorErrorMessageComponent,

@@ -12,7 +12,7 @@ import { BodyTextComponent } from '../../../../typography/body-text/body-text.co
 import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
+import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
@@ -29,7 +29,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
     [control]="control"
     [size]="'md'"
   >
-    <ng-template fudisContent type="select-options">
+    <ng-template fudisSelectOptions>
       <fudis-select-option *ngFor="let option of testOptions" [data]="option"></fudis-select-option>
     </ng-template>
   </fudis-select>`,
@@ -50,7 +50,7 @@ describe('SelectOptionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ContentDirective,
+        SelectOptionsDirective,
         SelectComponent,
         SelectOptionComponent,
         SelectGroupComponent,

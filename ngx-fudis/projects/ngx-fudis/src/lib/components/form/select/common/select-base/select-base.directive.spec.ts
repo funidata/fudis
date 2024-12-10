@@ -9,7 +9,6 @@ import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { LabelComponent } from '../../../label/label.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisInputSize, FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
@@ -22,6 +21,7 @@ import { By } from '@angular/platform-browser';
 import { groupedTestData } from '../mock_data';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 
 @Component({
   selector: 'fudis-mock-select',
@@ -34,7 +34,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
       [control]="control"
       [size]="size"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
           <fudis-multiselect-option
             *ngFor="let groupedOption of group.options"
@@ -54,7 +54,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
       [size]="'md'"
       [selectionClearButton]="clearButton"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
           <fudis-multiselect-option
             *ngFor="let groupedOption of group.options"
@@ -83,13 +83,13 @@ describe('SelectBaseDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ContentDirective,
         SelectComponent,
         SelectBaseDirective,
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectOptionComponent,
         SelectIconsComponent,
+        SelectOptionsDirective,
         IconComponent,
         GuidanceComponent,
         IconComponent,

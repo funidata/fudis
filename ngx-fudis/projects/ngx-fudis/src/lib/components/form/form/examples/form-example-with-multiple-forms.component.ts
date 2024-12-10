@@ -194,7 +194,7 @@ interface MyCheckboxGroup {
                     [label]="'Pick a pet'"
                     [control]="allForms.controls.formFour.controls.select"
                   >
-                    <ng-template fudisContent type="select-options">
+                    <ng-template fudisSelectOptions>
                       <fudis-select-option *ngFor="let option of selectOptions" [data]="option" />
                     </ng-template>
                   </fudis-select>
@@ -202,7 +202,7 @@ interface MyCheckboxGroup {
                     [label]="'Pick multiple pets'"
                     [control]="allForms.controls.formFour.controls.multiselect"
                   >
-                    <ng-template fudisContent type="select-options">
+                    <ng-template fudisSelectOptions>
                       <fudis-multiselect-option
                         *ngFor="let option of selectOptions"
                         [data]="option"

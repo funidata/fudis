@@ -68,7 +68,7 @@ const SelectAutocompleteTemplate: StoryFn = (args) => ({
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-select-option
           *ngFor="let option of defaultOptions"
           [data]="option"
@@ -103,7 +103,7 @@ const MultiselectAutocompleteTemplate: StoryFn = (args) => ({
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-multiselect-option
           *ngFor="let option of defaultOptions"
           [data]="option"
@@ -137,7 +137,7 @@ const SelectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
           <fudis-select-option
             *ngFor="let groupedOption of group.options"
@@ -173,7 +173,7 @@ const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
           <fudis-multiselect-option
             *ngFor="let groupedOption of group.options"

@@ -41,7 +41,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [helpText]="'Example help text'"
       [placeholder]="'Example placeholder text'"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-select-option [data]="data"></fudis-select-option>
       </ng-template>
     </fudis-select>

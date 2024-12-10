@@ -14,8 +14,6 @@ import { IconComponent } from '../icon/icon.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
 import {
@@ -62,10 +60,8 @@ describe('SectionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
         BodyTextComponent,
         ButtonComponent,
-        ContentDirective,
         GridDirective,
         HeadingComponent,
         IconComponent,

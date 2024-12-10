@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
-import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import {
   FudisCheckboxChangeEvent,
   FudisCheckboxGroupFormGroup,
@@ -110,7 +109,6 @@ describe('CheckboxComponent', () => {
         GridComponent,
         GridApiDirective,
         GridDirective,
-        ContentDirective,
         GuidanceComponent,
         IconComponent,
       ],

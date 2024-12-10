@@ -46,7 +46,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
-              <ng-template fudisContent type="select-options">
+              <ng-template fudisSelectOptions>
                 <fudis-select-option
                   *ngFor="let option of defaultOptions"
                   [data]="option"
@@ -74,7 +74,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
-              <ng-template fudisContent type="select-options">
+              <ng-template fudisSelectOptions>
                 <fudis-select-option
                   *ngFor="let option of defaultOptions"
                   [data]="option"
@@ -103,7 +103,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
-              <ng-template fudisContent type="select-options">
+              <ng-template fudisSelectOptions>
                 <fudis-select-option
                   *ngFor="let option of defaultOptions"
                   [data]="option"
@@ -132,7 +132,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
-              <ng-template fudisContent type="select-options">
+              <ng-template fudisSelectOptions>
                 <fudis-select-option
                   *ngFor="let option of defaultOptions"
                   [data]="option"
@@ -160,7 +160,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
-              <ng-template fudisContent type="select-options">
+              <ng-template fudisSelectOptions>
                 <fudis-select-option
                   *ngFor="let option of defaultOptions"
                   [data]="option"
@@ -189,7 +189,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
-              <ng-template fudisContent type="select-options">
+              <ng-template fudisSelectOptions>
                 <fudis-select-option
                   *ngFor="let option of defaultOptions"
                   [data]="option"
