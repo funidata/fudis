@@ -5,7 +5,6 @@
 
 export * from './lib/ngx-fudis.module';
 
-export { ActionsDirective } from './lib/directives/content-projection/actions/actions.directive';
 export { AlertComponent } from './lib/components/alert/alert/alert.component';
 export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
@@ -23,10 +22,9 @@ export {
   DateEndDirective,
 } from './lib/directives/form/datepicker/datepicker.directive';
 export {
-  ContentDirective,
   FooterContentLeftDirective,
   FooterContentRightDirective,
-} from './lib/directives/content-projection/content/content.directive';
+} from './lib/components/footer/footer-content.directive';
 export {
   DialogActionsDirective,
   DialogCloseDirective,
@@ -48,9 +46,13 @@ export { FudisValidators } from './lib/utilities/form/validators';
 export { DropdownMenuGroupComponent } from './lib/components/dropdown-menu/dropdown-menu-group/dropdown-menu-group.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
+export { ExpandableComponent } from './lib/components/expandable/expandable.component';
+export {
+  ExpandableActionsDirective,
+  ExpandableContentDirective,
+} from './lib/components/expandable/expandable-content-projection.directive';
 export { ErrorMessageDirective } from './lib/components/form/error-message/error-message/error-message.directive';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
-export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export {
   FieldsetContentDirective,
   FieldsetActionsDirective,
@@ -84,6 +86,7 @@ export { SectionContentDirective } from './lib/directives/content-projection/sec
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
+export { SelectOptionsDirective } from './lib/components/form/select/common/select-options-directive/select-options.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';

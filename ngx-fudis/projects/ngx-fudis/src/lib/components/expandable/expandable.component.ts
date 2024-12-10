@@ -13,11 +13,10 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { ExpandableContentDirective } from './expandable-content-projection.directive';
 
 @Component({
   selector: 'fudis-expandable',
@@ -38,12 +37,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
   /**
    * Content directive for Fudis Expandable Content
    */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
-
-  /**
-   * Content directive for Fudis Expandable Actions
-   */
-  @ContentChild(ActionsDirective) protected _headerButtons: ActionsDirective | null;
+  @ContentChild(ExpandableContentDirective) protected _content: ExpandableContentDirective;
 
   /**
    * Title of the expandable

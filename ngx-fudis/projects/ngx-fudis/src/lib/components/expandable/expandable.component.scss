@@ -62,20 +62,6 @@
       }
     }
 
-    &__buttons {
-      display: flex;
-      margin-top: spacing.$spacing-xs;
-
-      fudis-button {
-        margin-left: spacing.$spacing-xs;
-      }
-
-      @include breakpoint.breakpoint('sm') {
-        margin-top: 0;
-        margin-left: 0;
-      }
-    }
-
     @include breakpoint.breakpoint('sm') {
       display: flex;
     }
@@ -96,6 +82,17 @@
 
     &__padding-small {
       padding: spacing.$spacing-sm;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    gap: spacing.$spacing-xs;
+    margin-top: spacing.$spacing-xs;
+
+    @include breakpoint.breakpoint('sm') {
+      margin-top: 0;
+      margin-left: 0;
     }
   }
 }
