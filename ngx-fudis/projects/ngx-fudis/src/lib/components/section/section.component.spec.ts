@@ -3,10 +3,7 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SectionComponent } from './section.component';
-import {
-  SectionActionsDirective,
-  SectionContentDirective,
-} from '../../directives/content-projection/section/section-content.directive';
+import { SectionActionsDirective, SectionContentDirective } from './section-content.directive';
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';

@@ -16,7 +16,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { By } from '@angular/platform-browser';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FieldsetContentDirective } from '../../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { FieldsetContentDirective } from '../../fieldset/fieldset-content.directive';
 
 @Component({
   selector: 'fudis-mock-component',

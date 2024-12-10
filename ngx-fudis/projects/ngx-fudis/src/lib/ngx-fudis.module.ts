@@ -87,7 +87,7 @@ import {
   DialogContentDirective,
   DialogTitleDirective,
   DialogActionsDirective,
-} from './directives/dialog/dialog-directives';
+} from './components/dialog/dialog-directives';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
 import {
@@ -98,22 +98,22 @@ import { ErrorMessageDirective } from './components/form/error-message/error-mes
 import {
   FieldsetActionsDirective,
   FieldsetContentDirective,
-} from './directives/content-projection/fieldset/fieldset-content.directive';
+} from './components/form/fieldset/fieldset-content.directive';
 import { FormCommonApiDirective } from './directives/form/form-common-api/form-common-api.directive';
 import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
 import {
   FormActionsDirective,
   FormContentDirective,
   FormHeaderDirective,
-} from './directives/content-projection/form/form-content.directive';
+} from './components/form/form/form-content.directive';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
 
 import { LinkDirective } from './directives/link/link.directive';
-import { SectionActionsDirective } from './directives/content-projection/section/section-content.directive';
-import { SectionContentDirective } from './directives/content-projection/section/section-content.directive';
+import { SectionActionsDirective } from './components/section/section-content.directive';
+import { SectionContentDirective } from './components/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { SelectOptionsDirective } from './components/form/select/common/select-options-directive/select-options.directive';

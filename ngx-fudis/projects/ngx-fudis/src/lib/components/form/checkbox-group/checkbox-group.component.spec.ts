@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';

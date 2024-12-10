@@ -9,7 +9,7 @@ import {
   FormActionsDirective,
   FormContentDirective,
   FormHeaderDirective,
-} from '../../../directives/content-projection/form/form-content.directive';
+} from './form-content.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';

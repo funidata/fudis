@@ -30,7 +30,7 @@ export {
   DialogCloseDirective,
   DialogContentDirective,
   DialogTitleDirective,
-} from './lib/directives/dialog/dialog-directives';
+} from './lib/components/dialog/dialog-directives';
 export { DialogComponent } from './lib/components/dialog/dialog.component';
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
 export { DescriptionListItemComponent } from './lib/components/description-list/description-list-item/description-list-item.component';
@@ -56,7 +56,7 @@ export { FudisErrorSummaryService } from './lib/services/form/error-summary/erro
 export {
   FieldsetContentDirective,
   FieldsetActionsDirective,
-} from './lib/directives/content-projection/fieldset/fieldset-content.directive';
+} from './lib/components/form/fieldset/fieldset-content.directive';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
@@ -64,7 +64,7 @@ export {
   FormActionsDirective,
   FormContentDirective,
   FormHeaderDirective,
-} from './lib/directives/content-projection/form/form-content.directive';
+} from './lib/components/form/form/form-content.directive';
 export { FormSubmitDirective } from './lib/directives/form/form-actions/form-actions.directive';
 export { LocalizedTextGroupComponent } from './lib/components/form/localized-text-group/localized-text-group.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
@@ -81,8 +81,8 @@ export { NotificationComponent } from './lib/components/notification/notificatio
 export { RadioButtonComponent } from './lib/components/form/radio-button-group/radio-button/radio-button.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SectionComponent } from './lib/components/section/section.component';
-export { SectionActionsDirective } from './lib/directives/content-projection/section/section-content.directive';
-export { SectionContentDirective } from './lib/directives/content-projection/section/section-content.directive';
+export { SectionActionsDirective } from './lib/components/section/section-content.directive';
+export { SectionContentDirective } from './lib/components/section/section-content.directive';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';

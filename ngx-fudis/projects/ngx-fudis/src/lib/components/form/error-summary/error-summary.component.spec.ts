@@ -24,9 +24,9 @@ import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
-import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
-import { SectionContentDirective } from '../../../directives/content-projection/section/section-content.directive';
-import { FormContentDirective } from '../../../directives/content-projection/form/form-content.directive';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
+import { SectionContentDirective } from '../../section/section-content.directive';
+import { FormContentDirective } from '../form/form-content.directive';
 import { ExpandableContentDirective } from '../../expandable/expandable-content-projection.directive';
 
 @Component({
