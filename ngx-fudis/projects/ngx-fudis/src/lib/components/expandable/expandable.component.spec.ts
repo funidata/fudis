@@ -194,7 +194,7 @@ describe('ExpandableComponent', () => {
   });
 
   describe('header buttons', () => {
-    it('should render fudis-button when one is given through fudisActions directive', () => {
+    it('should render fudis-button when one is given through fudis-expandable-actions directive', () => {
       fixture.detectChanges();
 
       expect(headerHasButtons()).toBeTruthy();

@@ -156,7 +156,7 @@ type MyForm = {
                   [size]="'md'"
                   [control]="formExample.controls.animal"
                 >
-                  <ng-template fudisContent [type]="'select-options'">
+                  <ng-template fudisSelectOptions>
                     <fudis-select-option [data]="{ value: 'option-1', label: 'Otter' }" />
                     <fudis-select-option [data]="{ value: 'option-2', label: 'Rattle snake' }" />
                     <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />

@@ -59,7 +59,7 @@ interface MyCheckboxGroup {
             [errorSummaryBreadcrumb]="true"
             [level]="3"
           >
-            <ng-template fudisContent [type]="'expandable'">
+            <ng-template fudisExpandableContent>
               <fudis-text-input
                 [label]="'Name'"
                 [control]="allForms.controls.formOne.controls.name"
@@ -88,7 +88,7 @@ interface MyCheckboxGroup {
             [errorSummaryBreadcrumb]="true"
             [level]="3"
           >
-            <ng-template fudisContent [type]="'expandable'">
+            <ng-template fudisExpandableContent>
               <fudis-text-area
                 [label]="'Description'"
                 [control]="allForms.controls.formTwo.controls.description"
@@ -117,7 +117,7 @@ interface MyCheckboxGroup {
             [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
-            <ng-template fudisContent [type]="'expandable'">
+            <ng-template fudisExpandableContent>
               <fudis-checkbox-group
                 [label]="'Pick a fruit'"
                 [formGroup]="allForms.controls.formThree"
@@ -152,7 +152,7 @@ interface MyCheckboxGroup {
             [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
-            <ng-template fudisContent [type]="'expandable'">
+            <ng-template fudisExpandableContent>
               <fudis-radio-button-group
                 [label]="'Pick a fruit'"
                 [control]="allForms.controls.formFive"
@@ -187,7 +187,7 @@ interface MyCheckboxGroup {
             [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
-            <ng-template fudisContent [type]="'expandable'">
+            <ng-template fudisExpandableContent>
               <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
                 <fudis-fieldset-content>
                   <fudis-select
@@ -235,7 +235,7 @@ interface MyCheckboxGroup {
             [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
-            <ng-template fudisContent [type]="'expandable'">
+            <ng-template fudisExpandableContent>
               <fudis-localized-text-group
                 [label]="'At least one required'"
                 [formGroup]="allForms.controls.formSix.controls.oneRequired"
