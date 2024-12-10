@@ -26,7 +26,7 @@ import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.compon
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { SelectComponent } from '../../select/select.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
-import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
+import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
@@ -49,7 +49,7 @@ export class SelectBaseDirective
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required.next(hasRequiredValidator(this.control));
+        this._required.next(FudisValidatorUtilities.required(this.control));
       }
     });
 
