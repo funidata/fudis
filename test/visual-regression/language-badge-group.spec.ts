@@ -29,14 +29,17 @@ test("language badge group default", async ({ page }) => {
 
   // Hover fi
   await page.getByTestId("fudis-language-badge-group-1-item-1").focus();
+  await page.waitForTimeout(100);
   await expect(page).toHaveScreenshot("language-badge-group-focus-fi.png");
 
   // Hover sv
   await page.getByTestId("fudis-language-badge-group-1-item-2").focus();
+  await page.waitForTimeout(100);
   await expect(page).toHaveScreenshot("language-badge-group-focus-sv.png");
 
   // Hover en
   await page.getByTestId("fudis-language-badge-group-1-item-3").focus();
+  await page.waitForTimeout(100);
   await expect(page).toHaveScreenshot("language-badge-group-focus-en.png");
 });
 
