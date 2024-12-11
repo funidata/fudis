@@ -144,7 +144,7 @@ export const Example: StoryFn = (args) => ({
       [errorSummaryTitle]="errorSummaryTitle"
       [errorSummaryVisible]="errorSummaryVisible"
     >
-      <ng-template fudisHeader>
+      <fudis-form-header>
         <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
             <fudis-dt [contentText]="'Important person'" />
@@ -159,14 +159,14 @@ export const Example: StoryFn = (args) => ({
             <fudis-dd [contentText]="'Mara Jade'" />
           </fudis-dl-item>
         </fudis-dl>
-      </ng-template>
-      <ng-template fudisActions [type]="'form'">
+      </fudis-form-header>
+      <fudis-form-actions>
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
         <fudis-button fudisFormSubmit [formValid]="formGroup.valid" [label]="'Submit'" />
-      </ng-template>
-      <ng-template fudisContent [type]="'form'">
+      </fudis-form-actions>
+      <fudis-form-content>
         <example-form-content [formGroup]="formGroup" />
-      </ng-template>
+      </fudis-form-content>
     </fudis-form>
   `,
 });

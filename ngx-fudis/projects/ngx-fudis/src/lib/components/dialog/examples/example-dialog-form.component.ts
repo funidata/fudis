@@ -24,19 +24,19 @@ type TestForm = {
           [titleVariant]="'xl'"
           [errorSummaryTitle]="'You need to fill up the information.'"
         >
-          <ng-template fudisContent [type]="'form'">
+          <fudis-form-content>
             <fudis-fieldset
               [label]="'Question about your power animal'"
               [helpText]="_greetingFromOpeningComponent"
             >
-              <ng-template fudisContent [type]="'fieldset'">
+              <fudis-fieldset-content>
                 <fudis-text-input
                   [id]="'example-input-power-animal'"
                   [label]="'What is your power animal?'"
                   [control]="exampleDialogFormGroup.controls['powerAnimal']"
                   [helpText]="'Please add some values'"
                 />
-              </ng-template>
+              </fudis-fieldset-content>
             </fudis-fieldset>
             <fudis-body-text>
               Her companions instrument set estimating sex remarkably solicitude motionless.
@@ -63,8 +63,8 @@ type TestForm = {
               at. Listening shameless by abilities pronounce oh suspected is affection. Next it draw
               in draw much bred.
             </fudis-body-text>
-          </ng-template>
-          <ng-template fudisActions [type]="'form'">
+          </fudis-form-content>
+          <fudis-form-actions>
             <fudis-button
               fudisDialogClose
               [label]="'Cancel'"
@@ -76,7 +76,7 @@ type TestForm = {
               (handleClick)="closeDialogWithForm()"
               [label]="'Submit'"
             ></fudis-button>
-          </ng-template>
+          </fudis-form-actions>
         </fudis-form>
       </fudis-dialog-content>
     </fudis-dialog>

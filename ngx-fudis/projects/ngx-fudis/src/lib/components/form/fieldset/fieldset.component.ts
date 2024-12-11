@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  ContentChild,
   effect,
   ElementRef,
   Input,
@@ -10,14 +9,10 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation,
-  AfterContentInit,
 } from '@angular/core';
 
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisInputSize } from '../../../types/forms';
@@ -34,7 +29,7 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
 })
 export class FieldSetComponent
   extends TooltipApiDirective
-  implements AfterViewInit, OnInit, OnDestroy, OnChanges, AfterContentInit
+  implements AfterViewInit, OnInit, OnDestroy, OnChanges
 {
   constructor(
     private _element: ElementRef,
@@ -48,21 +43,6 @@ export class FieldSetComponent
       this._requiredText.next(_translationService.getTranslations()().REQUIRED);
     });
   }
-
-  /**
-   * Content directive for Field Set Actions
-   */
-  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
-
-  /**
-   * Content directive for Field Set Notifications
-   */
-  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective;
-
-  /**
-   * Content directive for Field Set Content
-   */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
 
   /**
    * Legend elementRef to trigger initialFocus
@@ -96,18 +76,18 @@ export class FieldSetComponent
   @Input() align: FudisGridAlign = 'start';
 
   /**
-   * Set focus to Field Set when it appears first time
+   * Set focus to Fieldset when it appears first time
    */
   @Input() initialFocus: boolean = false;
 
   /**
-   * Send information about current Field Set to Error Summary Service.
-   * Error Summary Breadcrumb is the label of the current Field Set and is visible in the clickable link in Error Summary.
+   * Send information about current Fieldset to Error Summary Service.
+   * Error Summary Breadcrumb is the label of the current Fieldset and is visible in the clickable link in Error Summary.
    */
   @Input() errorSummaryBreadcrumb: boolean = true;
 
   /**
-   * Display "Required" text next to Field Set main label.
+   * Display "Required" text next to Fieldset main label.
    */
   @Input() required: boolean | null;
 
@@ -143,7 +123,7 @@ export class FieldSetComponent
   protected _legendFocusVisible: boolean = false;
 
   /**
-   * Has Field Set been added to Error Summary
+   * Has Fieldset been added to Error Summary
    */
   private _fieldsetSent: boolean = false;
 
@@ -162,13 +142,10 @@ export class FieldSetComponent
     this._setClasses();
   }
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     this._parentFormId = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
 
     this._addToErrorSummary(this.label);
-  }
-
-  ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this._fieldsetLegend?.nativeElement?.focus();
     }
@@ -209,7 +186,7 @@ export class FieldSetComponent
   }
 
   /**
-   * Add Field Set label to Error Summary
+   * Add Fieldset label to Error Summary
    */
   private _addToErrorSummary(label: string): void {
     if (this.errorSummaryBreadcrumb && this._parentFormId) {
@@ -226,7 +203,7 @@ export class FieldSetComponent
   }
 
   /**
-   * Remove Field Set label from Error Summary
+   * Remove Fieldset label from Error Summary
    */
   private _removeFromErrorSummary(): void {
     if (this._fieldsetSent && this._parentFormId) {

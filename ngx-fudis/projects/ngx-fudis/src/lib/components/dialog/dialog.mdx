@@ -185,14 +185,13 @@ When using [Form](/docs/components-form-form--documentation) inside Dialog, wrap
           <fudis-form>
             [title]="'Dialog with Form'"
             [level]="2"
-            [errorSummaryTitle]="'You need to fill up the information.'">
-            <ng-template fudisContent [type]="'form'">
+            <fudis-form-content>
               <!-- Insert Form Content -->
-            </ng-template>
-            <ng-template fudisActions type="form">
+            </fudis-form-content>
+            <fudis-form-actions>
               <fudis-button fudisFormSubmit [formValid]="exampleDialogFormGroup.valid" (handleClick)="closeDialogWithForm()" [label]="'Submit'" />
               <fudis-button fudisDialogClose [label]="'Cancel'" />
-            </ng-template>
+            </fudis-form-actions>
           </fudis-form>
         </fudis-dialog-content>
       </fudis-dialog>

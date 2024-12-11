@@ -73,6 +73,7 @@ test("error summary language change and manually sent errors", async ({ page }) 
   await expect(page.getByText("Current Error Summary update strategy is: all")).toBeVisible();
 
   await page.getByTestId("error-button-2").click();
+  await page.waitForTimeout(100);
   await expect(page.getByText(firstManualError)).toBeVisible();
   await expect(page.getByText(secondManualError)).toBeVisible();
   await page.getByTestId("error-button-2").focus();
