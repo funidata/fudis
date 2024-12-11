@@ -88,7 +88,7 @@ const preview = {
               "Date",
               "Error Message",
               "Error Summary",
-              "Field Set",
+              "Fieldset",
               "Form",
               "Localized Text Group",
               "Radio Button Group",

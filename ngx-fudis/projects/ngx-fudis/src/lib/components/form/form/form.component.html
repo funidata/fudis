@@ -7,7 +7,7 @@
   [serviceDefaults]="false"
   [alignItemsX]="alignItemsX"
   [alignItemsY]="alignItemsY"
-  [classes]="'fudis-form'"
+  [classes]="_dialogParent ? 'fudis-form fudis-form__dialog' : 'fudis-form fudis-form__default'"
   [columnGap]="columnGap"
   [rowGap]="'none'"
 >
@@ -41,32 +41,23 @@
         /></fudis-heading>
         <fudis-body-text *ngIf="helpText" class="fudis-mb-xs">{{ helpText }}</fudis-body-text>
       </div>
-
-      <div *ngIf="_headerContent" class="fudis-form__header__main__content">
-        <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
-      </div>
+      <ng-content select="fudis-form-header" />
       <ng-container *ngIf="!_dialogParent">
         <ng-container *ngTemplateOutlet="errorSummary" />
       </ng-container>
     </div>
   </div>
-  <ng-container *ngIf="_headerActions?.type === 'form' && !_dialogParent">
-    <div class="fudis-form__header__actions">
-      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-    </div>
+  <ng-container *ngIf="!_dialogParent">
+    <ng-container *ngTemplateOutlet="actions" />
   </ng-container>
-  <ng-container *ngIf="_mainContent?.type === 'form'">
-    <div class="fudis-form__content">
-      <ng-container *ngIf="_dialogParent">
-        <ng-container *ngTemplateOutlet="errorSummary" />
-      </ng-container>
-      <ng-container *ngTemplateOutlet="_mainContent!.templateRef" />
-    </div>
-  </ng-container>
-  <ng-container *ngIf="_headerActions?.type === 'form' && _dialogParent">
-    <div class="fudis-form__header__actions__dialog">
-      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-    </div>
+  <div class="fudis-form__content">
+    <ng-container *ngIf="_dialogParent">
+      <ng-container *ngTemplateOutlet="errorSummary" />
+    </ng-container>
+    <ng-content select="fudis-form-content"></ng-content>
+  </div>
+  <ng-container *ngIf="_dialogParent">
+    <ng-container *ngTemplateOutlet="actions" />
   </ng-container>
 </form>
 
@@ -77,4 +68,8 @@
     [parentComponent]="_elementRef.nativeElement"
     [title]="errorSummaryTitle"
   />
+</ng-template>
+
+<ng-template #actions>
+  <ng-content select="fudis-form-actions" />
 </ng-template>

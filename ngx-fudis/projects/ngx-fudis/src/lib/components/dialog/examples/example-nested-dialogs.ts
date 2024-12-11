@@ -28,7 +28,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
           [titleVariant]="'xl'"
           [errorSummaryTitle]="'You need to fill up the information.'"
         >
-          <ng-template fudisContent [type]="'form'">
+          <fudis-form-content>
             <ng-container *ngTemplateOutlet="favoriteVeggies" />
             <fudis-text-input
               class="fudis-mb-md"
@@ -36,8 +36,8 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
               [label]="'What is your favorite ' + id"
               [control]="exampleDialogFormGroup.controls['favoriteVeggie']"
             />
-          </ng-template>
-          <ng-template fudisActions [type]="'form'">
+          </fudis-form-content>
+          <fudis-form-actions>
             <fudis-button
               fudisFormSubmit
               (handleClick)="closeDialog()"
@@ -50,7 +50,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
               (handleClick)="openDialogTemplate(nextDialogToOpen)"
               [label]="'Save and open next Dialog'"
             />
-          </ng-template>
+          </fudis-form-actions>
         </fudis-form>
       </fudis-dialog-content>
       <ng-container *ngIf="!id">

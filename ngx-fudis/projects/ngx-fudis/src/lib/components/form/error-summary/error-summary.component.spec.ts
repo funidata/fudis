@@ -11,7 +11,6 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
 import { ButtonComponent } from '../../button/button.component';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -27,6 +26,9 @@ import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { SectionContentDirective } from '../../../directives/content-projection/section/section-content.directive';
+import { FormContentDirective } from '../../../directives/content-projection/form/form-content.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -38,9 +40,9 @@ import { getElement } from '../../../utilities/tests/utilities';
     [errorSummaryVisible]="errorSummaryVisible"
     [errorSummaryTitle]="errorSummaryTitle"
   >
-    <ng-template fudisContent type="form">
+    <fudis-form-content>
       <fudis-fieldset [label]="'Form information'">
-        <ng-template fudisContent type="fieldset">
+        <fudis-fieldset-content>
           <fudis-text-input
             [control]="formGroup.controls.name"
             [label]="'Name'"
@@ -51,12 +53,12 @@ import { getElement } from '../../../utilities/tests/utilities';
             [label]="'Contact email'"
             [helpText]="'So that we can contact you'"
           />
-        </ng-template>
+        </fudis-fieldset-content>
       </fudis-fieldset>
       <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'" [level]="2">
-        <ng-template fudisContent type="section">
+        <fudis-section-content>
           <fudis-text-input [control]="formGroup.controls.section" [label]="'Section input'" />
-        </ng-template>
+        </fudis-section-content>
       </fudis-section>
       <fudis-expandable
         [closed]="false"
@@ -70,7 +72,7 @@ import { getElement } from '../../../utilities/tests/utilities';
           />
         </ng-template>
       </fudis-expandable>
-    </ng-template>
+    </fudis-form-content>
   </fudis-form>`,
 })
 class MockFormComponent {
@@ -124,11 +126,12 @@ describe('ErrorSummaryComponent', () => {
         ExpandableComponent,
         ErrorSummaryComponent,
         FieldSetComponent,
+        FieldsetContentDirective,
         FormComponent,
         GridDirective,
         GridComponent,
         GuidanceComponent,
-        HeaderDirective,
+        FormContentDirective,
         HeadingComponent,
         IconComponent,
         LabelComponent,
@@ -136,6 +139,7 @@ describe('ErrorSummaryComponent', () => {
         MockFormComponent,
         NotificationComponent,
         SectionComponent,
+        SectionContentDirective,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
@@ -197,7 +201,7 @@ describe('ErrorSummaryComponent', () => {
     it('default title is displayed properly', async () => {
       await wrapperFixture.whenStable().then(() => {
         wrapperFixture.detectChanges();
-        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__title');
 
         expect(renderedTitle.textContent).toBe(
           'The information is incomplete or incorrect. Please correct the following items:',
@@ -212,7 +216,7 @@ describe('ErrorSummaryComponent', () => {
 
       await wrapperFixture.whenStable().then(() => {
         wrapperFixture.detectChanges();
-        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__errors__title');
+        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__title');
 
         expect(renderedTitle.textContent).toBe(appTitle);
       });

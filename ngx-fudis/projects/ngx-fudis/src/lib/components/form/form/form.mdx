@@ -36,46 +36,36 @@ More about [Error Summary](/docs/components-form-error-summary--documentation) a
 Form Component extends Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/directives-grid-grid--documentation).
 The complete list of allowed properties can be found from Properties table at the bottom of this page.
 
-## Content Projection Directives
+## Content Directives
 
-### Header Content
-
-Header content is additional information displayed under the actual form heading.
-Header content is assigned through Header Directive content projection with **fudisHeader** selector.
-There are no restrictions on header content but it is advised to use Fudis Components only.
+**fudis-form-header**: Header content is optional information displayed under the actual form heading.
+There are no restrictions on content, but it is adviced to only add instructions and other non-interactive content to the header.
 
 ```
-<ng-template fudisHeader>
+<fudis-form-header>
   <your-content-here />
-</ng-template>
+</fudis-form-header>
 ```
 
-### Header Actions
+**fudis-form-actions**: Form Actions are buttons positioned on top of the form.
+Form actions are assigned through Fudis Form Actions Directive.
 
-Header actions are buttons positioned on top of the form.
-Header actions are assigned through Actions Directive content projection with **fudisActions** selector.
-Actions Directive also needs `type` input which has to be set as '_form_'.
-
-There are no restrictions on Header Actions content but it is advised to use Button Components only. Pairing Button with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
+There are no restrictions on Form Actions content, but it is advised to interactive button elements only. Including Button Component with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
 
 ```
-<ng-template fudisActions [type]="'form'">
+<fudis-form-actions>
   <fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit form'" (handleClick)="myFormSubmit()" />
   ...other content
-</ng-template>
+</fudis-form-actions>
 ```
 
-### Main Content
-
-Main content is where the form components live.
-Main content is assigned through Content Directive content projection with **fudisContent** selector.
-Content Directive also needs `type` input which has to be set as '_form_'.
+**fudis-form-content**: Form main content is where the form components live.
 There are no restrictions on main content but it is advised to use Form Components provided by Fudis as this enables [Error Summary](/docs/components-form-error-summary--documentation) logic with less effort.
 
 ```
-<ng-template fudisContent [type]="'form'">
+<fudis-form-content>
   <your-content-here />
-</ng-template>
+</fudis-form-content>
 ```
 
 ## Code Example
@@ -83,47 +73,31 @@ There are no restrictions on main content but it is advised to use Form Componen
 This is a simple example on how to use Form Component.
 
 ```
-
 // HTML Template
 
 <fudis-form
   [title]="'Example form heading'"
   [level]="2"
   [helpText]="'Here is some more information about this form'"
-  [errorSummaryTitle]="'There are errors in this form.'"
 >
-  <ng-template fudisHeader>
-    <fudis-body-text>Additional form information</fudis-body-text>
-  </ng-template>
-  <ng-template fudisActions [type]="'form'">
+  <fudis-form-header>
+    <fudis-body-text>Even more additional Form information</fudis-body-text>
+  </fudis-form-header>
+  <fudis-form-actions>
     <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" (handleClick)="submitForm()" />
-  </ng-template>
-  <ng-template fudisContent [type]="'form'">
+  </fudis-form-actions>
+  <fudis-form-content>
     <fudis-text-input
       [label]="'Example text-input'"
       [control]="formExample.controls.exampleTextInput"
     />
-    <fudis-checkbox-group
-      [formGroup]="formExample.controls.exampleCheckboxGroup"
-      [label]="'Example CheckboxGroup'"
-    >
-      <fudis-checkbox [controlName]="'first'" [label]="'Choose option 1'" />
-      <fudis-checkbox [controlName]="'second'" [label]="'Choose option 2'" />
-    </fudis-checkbox-group>
-  </ng-template>
+  </fudis-form-content>
 </fudis-form>
 
 // TypeScript
 
 formExample = new FormGroup({
-  exampleTextInput: new FormControl(null, FudisValidators.minLength(5, 'Input requires at least 5 characters.')),
-  exampleCheckboxGroup: new FormGroup(
-    {
-      first: new FormControl(null),
-      second: new FormControl(null),
-    },
-    [FudisGroupValidators.oneRequired(new BehaviorSubject('Select at least one checkbox!'))],
-  ),
+  exampleTextInput: new FormControl(null, FudisValidators.required('This field is required')),
 });
 
 submitForm(): void {

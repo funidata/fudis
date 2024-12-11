@@ -18,9 +18,9 @@
         [errorSummaryTitle]="'There were some errors'"
         [level]="2"
       >
-        <ng-template fudisContent type="form">
+        <fudis-form-content>
           <fudis-fieldset [label]="t('fieldsetTitle')">
-            <ng-template fudisContent type="fieldset">
+            <fudis-fieldset-content>
               <fudis-checkbox-group
                 [label]="t('chooseBerry')"
                 [helpText]="t('chooseBerryHelp')"
@@ -75,9 +75,9 @@
                 [label]="'At least one required'"
                 [formGroup]="testFormGroup.controls.withLanguages"
               />
-            </ng-template>
+            </fudis-fieldset-content>
           </fudis-fieldset>
-        </ng-template>
+        </fudis-form-content>
       </fudis-form>
 
       <fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
