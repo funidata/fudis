@@ -5,8 +5,8 @@ import { FudisValidatorUtilities } from './validator-utilities';
 import { FudisCheckboxGroupFormGroup, FudisLocalizedTextGroup } from '../../types/forms';
 import { FudisGroupValidators } from './groupValidators';
 
-describe('getValidators utility function', () => {
-  describe('FudisValidatorUtilities.required', () => {
+describe('FudisValidatorUtilities functions', () => {
+  describe('required', () => {
     it('should return true with Fudis Validators', () => {
       const fudisControl = new FormControl('', FudisValidators.required('This is required'));
       const fudisRequired = FudisValidatorUtilities.required(fudisControl);
@@ -84,7 +84,7 @@ describe('getValidators utility function', () => {
     });
   });
 
-  describe('getmaxLength', () => {
+  describe('maxLength', () => {
     const fudisControl = new FormControl('', FudisValidators.maxLength(42, 'You cannot exceed 42'));
 
     it('should return correct value with Fudis Validator', () => {
@@ -101,7 +101,7 @@ describe('getValidators utility function', () => {
     });
   });
 
-  describe('getminLength', () => {
+  describe('minLength', () => {
     const fudisControl = new FormControl('', FudisValidators.minLength(66, 'Minimum of 66'));
 
     it('should return correct value with Fudis Validator', () => {
@@ -118,7 +118,7 @@ describe('getValidators utility function', () => {
     });
   });
 
-  describe('getmax', () => {
+  describe('max', () => {
     const fudisControl = new FormControl('', FudisValidators.max(9000, 'Maximum number is 9000'));
 
     it('should return correct value with Fudis Validator', () => {
@@ -135,7 +135,7 @@ describe('getValidators utility function', () => {
     });
   });
 
-  describe('getmin', () => {
+  describe('min', () => {
     const fudisControl = new FormControl('', FudisValidators.min(5555, 'Minimum number is 5555'));
 
     it('should return correct value with Fudis Validator', () => {
@@ -152,7 +152,7 @@ describe('getValidators utility function', () => {
     });
   });
 
-  describe('getmaxDate', () => {
+  describe('maxDate', () => {
     it('should return correct value with YYYY-MM-DD format string date', () => {
       const fudisControl = new FormControl(
         null,
@@ -193,7 +193,7 @@ describe('getValidators utility function', () => {
     });
   });
 
-  describe('getminDate', () => {
+  describe('minDate', () => {
     it('should return correct value with YYYY-MM-DD format string date', () => {
       const fudisControl = new FormControl(
         null,
