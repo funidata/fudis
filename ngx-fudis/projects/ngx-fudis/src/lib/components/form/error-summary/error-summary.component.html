@@ -5,24 +5,19 @@
     [variant]="'danger'"
     #focusTarget
   >
-    <ng-template fudisContent type="notification">
-      <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
-      <div class="fudis-error-summary__errors">
-        <h2 class="fudis-error-summary__errors__title">{{
-          title || _translationService.getTranslations()().ERROR_SUMMARY.TITLE
-        }}</h2>
-        <ul class="fudis-error-summary__error-list">
-          <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
-            <a
-              fudisLink
-              href=""
-              [size]="'md'"
-              (click)="handleErrorClick($event, error.id)"
-              [title]="error.message"
-            ></a>
-          </li>
-        </ul>
-      </div>
-    </ng-template>
+    <h2 class="fudis-error-summary__title">{{
+      title || _translationService.getTranslations()().ERROR_SUMMARY.TITLE
+    }}</h2>
+    <ul class="fudis-error-summary__error-list">
+      <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
+        <a
+          fudisLink
+          href=""
+          [size]="'md'"
+          (click)="handleErrorClick($event, error.id)"
+          [title]="error.message"
+        ></a>
+      </li>
+    </ul>
   </fudis-notification>
 </ng-container>
