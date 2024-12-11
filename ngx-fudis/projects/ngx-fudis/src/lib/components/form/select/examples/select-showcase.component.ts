@@ -19,16 +19,16 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
       [titleVariant]="'xl'"
       [width]="'md'"
     >
-      <ng-template fudisHeader type="form">
+      <fudis-form-header>
         <fudis-body-text
           >Following Select components share all same Form Control. When you change value in one,
           all of them are updated.</fudis-body-text
         >
-      </ng-template>
-      <ng-template fudisActions type="form">
+      </fudis-form-header>
+      <fudis-form-actions>
         <fudis-button (handleClick)="onClick()" [label]="'Toggle Disabled State'"></fudis-button>
-      </ng-template>
-      <ng-template fudisContent type="form">
+      </fudis-form-actions>
+      <fudis-form-content>
         <fudis-grid [columns]="{ lg: 2 }" [classes]="'fudis-mt-sm'">
           <fudis-grid-item>
             <fudis-heading [level]="2" [variant]="'md'"
@@ -219,7 +219,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 <fudis-dd [contentText]="control.value.label"></fudis-dd>
               </fudis-dl-item>
             </fudis-dl> </fudis-grid-item></fudis-grid
-      ></ng-template>
+      ></fudis-form-content>
     </fudis-form>
   `,
 })

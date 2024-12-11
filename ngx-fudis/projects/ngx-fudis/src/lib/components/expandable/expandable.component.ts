@@ -8,9 +8,9 @@ import {
   OnDestroy,
   OnChanges,
   ElementRef,
-  AfterContentInit,
   inject,
   Injector,
+  AfterViewInit,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
@@ -25,7 +25,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChanges {
+export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -133,7 +133,7 @@ export class ExpandableComponent implements OnDestroy, AfterContentInit, OnChang
 
   private _injector = inject(Injector);
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     this._getParentForm();
 
     if (this._parentFormId) {

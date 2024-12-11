@@ -33,7 +33,9 @@
     }
   }
 
-  &__notifications {
-    margin-bottom: spacing.$spacing-xs;
+  &__content {
+    fudis-notification {
+      margin-bottom: spacing.$spacing-xs;
+    }
   }
 }

@@ -5,12 +5,16 @@ import { FormComponent } from './form.component';
 import { HeadingComponent } from '../../typography/heading/heading.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
+import {
+  FormActionsDirective,
+  FormContentDirective,
+  FormHeaderDirective,
+} from '../../../directives/content-projection/form/form-content.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
-import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
@@ -37,19 +41,19 @@ import { NotificationComponent } from '../../notification/notification.component
     [errorSummaryTitle]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
-    <ng-template fudisContent type="form">
+    <fudis-form-content>
       <fudis-text-input
         [control]="formGroup.controls.name"
         [label]="'Name'"
         [helpText]="'We need to know who you are'"
       />
-    </ng-template>
-    <ng-template fudisHeader>
+    </fudis-form-content>
+    <fudis-form-header>
       <p class="test-header-content">This is header content</p>
-    </ng-template>
-    <ng-template fudisActions type="form">
+    </fudis-form-header>
+    <fudis-form-actions>
       <p class="test-actions-content">This is actions content</p>
-    </ng-template>
+    </fudis-form-actions>
     <p class="test-do-not-find">You should not find me</p>
   </fudis-form>`,
 })
@@ -86,9 +90,11 @@ describe('FormComponent', () => {
         ContentDirective,
         ErrorSummaryComponent,
         FormComponent,
+        FormActionsDirective,
+        FormContentDirective,
+        FormHeaderDirective,
         GridDirective,
         GuidanceComponent,
-        HeaderDirective,
         HeadingComponent,
         IconComponent,
         LabelComponent,
@@ -210,7 +216,7 @@ describe('FormComponent', () => {
 
   describe('Content directives', () => {
     it('should have form header content', () => {
-      const headerContentDiv = getElement(fixtureMock, '.fudis-form__header__main__content');
+      const headerContentDiv = getElement(fixtureMock, 'fudis-form-header');
       const headerContent = getElement(fixtureMock, '.test-header-content');
 
       expect(headerContentDiv).toBeTruthy();
@@ -218,7 +224,7 @@ describe('FormComponent', () => {
     });
 
     it('should have form actions content', () => {
-      const actionsContentDiv = getElement(fixtureMock, '.fudis-form__header__actions');
+      const actionsContentDiv = getElement(fixtureMock, '.fudis-form-actions');
       const actionsContent = getElement(fixtureMock, '.test-actions-content');
 
       expect(actionsContentDiv).toBeTruthy();

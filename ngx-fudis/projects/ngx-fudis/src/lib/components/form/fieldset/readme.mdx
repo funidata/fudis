@@ -1,68 +1,50 @@
 import { Meta, ArgTypes } from "@storybook/blocks";
 import { FieldSetComponent } from "./fieldset.component";
+import { FieldsetActionsDirective } from "../../../directives/content-projection/fieldset/fieldset-content.directive";
 
-<Meta title="Components/Form/Field Set" />
+<Meta title="Components/Form/Fieldset" />
 
-# Field Set
+# Fieldset
 
-Field Set is a grouping tool for Fudis Form Components. There are three directives to project content: header actions, notifications and main content.
+Fieldset is a grouping tool for Form Components. There are two directives to project content: header actions and main content.
 
-## Directives
+## Content Directives
 
-### Header Actions
-
-Header actions are buttons positioned next to the Field Set label.
-Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
-Fudis Actions Directive also needs `type` input which has to be set as '_fieldset_'.
-There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
+**fudis-fieldset-content**: Fieldset Content Directive is the wrapper element for the Fieldset main content where all form components live.
+There are no restrictions on main content but it is advised to use form field components provided by Fudis to use Form's Error Summary features with less effort.
 
 ```
-<ng-template fudisActions [type]="'fieldset'">
+<fudis-fieldset-content>
   <your-content-here />
-</ng-template>
+</fudis-fieldset-content>
 ```
 
-### Notifications
-
-Notifications are Fudis Notifications positioned under the Field Set label.
-Notifications are assigned through Fudis Notifications Directive content projection with **fudisNotifications** selector.
-Fudis Notifications Directive also needs a `type` input which has to be set as '_fieldset_'.
-There are no restrictions on header actions content but it is advised to use Fudis Notifications only.
+**fudis-fieldset-actions**: Fieldset Actions Directive is used for positioning buttons next to the Fieldset label.
+There are no restrictions on Fieldset Actions content but it is advised to use Buttons only.
+**Note!** Fieldset Actions has an `align` property that can be used to determine the positions of Fieldset Actions. By default `align` has value `start`.
 
 ```
-<ng-template fudisNotifications [type]="'fieldset'">
-  <your-content-here />
-</ng-template>
+<fudis-fieldset-actions [align]="'below'">
+  <your-action-buttons-here />
+</fudis-fieldset-actions>
 ```
 
-### Main Content
+## Fieldset Inputs
 
-Main content is where the form components live. Main content is assigned through Fudis Content Directive content projection with **fudisContent** selector.
-Fudis Content Directive also needs `type` input which has to be set as '_fieldset_'.
-There are no restrictions on main content but it is advised to use Fudis Form Components only.
-
-```
-<ng-template fudisContent [type]="'fieldset'">
-  <your-content-here />
-</ng-template>
-```
-
-## Field Set Inputs
-
-Aside from content projection Field Set will create a legend with optional tooltip and help text based on given properties.
+Aside from content projection Fieldset will create a legend with optional tooltip and help text based on given properties.
 
 ### Legend
 
-Field Set is not valid without a **mandatory** `label` property which is semantically legend element for the HTML fieldset.
+Fieldset is not valid without a **mandatory** `label` property which is semantically legend element for the HTML fieldset.
 
 ### Required
 
-If the whole Field Set is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
-Note that this has no other logic and is not concerned about validation of the components used inside the Field Set.
+If the whole Fieldset is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
+Note that this has no other logic and is not concerned about validation of the components used inside the Fieldset.
 
 ### Help Text
 
-Field Set help text is displayed under legend and can be added through `helpText` property.
+Fieldset help text is displayed under legend and can be added through `helpText` property.
 
 ### Tooltip
 
@@ -70,55 +52,44 @@ Tooltip can be included in legend with properties from [Tooltip Directive](/docs
 
 ### Error Summary Breadcrumb
 
-Boolean property `errorSummaryBreadcrumb` adds Field Set label to the clickable link in Error Symmary when used inside Fudis Form with visible Error Summary. Set `false` by default.
+Boolean property `errorSummaryBreadcrumb` adds Fieldset label to the clickable link in Error Symmary when used inside Form with visible Error Summary. Set `false` by default.
 
 ### Grid Properties
 
-Field Set can use some of the Fudis [Grid properties](/docs/foundations-grid--documentation), including `width` and `align`.
-
-{/* prettier-ignore */}
-{/* TODO: Expose this when Radio Button Group and Checkbox Group components are exposed
+Fieldset can use some of the [Grid properties](/docs/foundations-grid--documentation), including `width` and `align`.
 
 ### Input Size
 
-This can be used to set Checkbox Group and Radio Button Group as wide as other form components by overriding 'width' input. \*/}
+This can be used to set Checkbox Group and Radio Button Group as wide as other form components by overriding `width` input.
 
 ### Initial Focus
 
 Visible focus can be set with `initialFocus` boolean property. It will add focus for the whole fieldset element when the component is initialized and appears for the first time.
 
-## Code Example
+### Align (Fieldset Actions)
 
-This is a simple example on how to use `fudis-fieldset`
+Fieldset Action's `align` is used for positioning Fieldset's Actions Directive flow to `below`, `end` or `start`. By default has value of `start`.
+
+## Code Example
 
 ```
 HTML Template
 
     <fudis-fieldset
-      [label]="'Fieldset legend label'"
-      [helpText]="'Some help text for the fieldset'"
+      [label]="'Fieldset Legend Label'"
+      [helpText]="'Some help text for the Fieldset'"
     >
-      <ng-template fudisActions [type]="'fieldset'">
+      <fudis-fieldset-actions [align]="'end'">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
-      </ng-template>
-      <ng-template fudisNotifications [type]="'fieldset'">
-        <fudis-notification>
-          <fudis-body-text>This is notification inside fieldset</fudis-body-text>
-        </fudis-notification>
-      </ng-template>
-      <ng-template fudisContent [type]="'fieldset'">
-          <fudis-text-input
-            [label]="'Example text-input nr.1'"
-            [control]="fieldsetExample.controls['exampleTextInput1']"
-          />
-          <fudis-text-input
-            [label]="'Example text-input nr.2'"
-            [control]="fieldsetExample.controls['exampleTextInput2']"
-          />
-      </ng-template>
+      </fudis-fieldset-actions>
+      <fudis-fieldset-content>
+          <!-- Your Fieldset content -->
+      </fudis-fieldset-content>
     </fudis-fieldset>
 ```
 
 ## Properties
 
 <ArgTypes of={FieldSetComponent} />
+
+<ArgTypes of={FieldsetActionsDirective} />
