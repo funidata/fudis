@@ -81,7 +81,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [autocompleteHelpText]="autocompleteHelpText"
       [initialFocus]="initialFocus"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-multiselect-option
           *ngFor="let option of defaultOptions"
           [data]="option"

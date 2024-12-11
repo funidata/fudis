@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ButtonComponent } from '../../components/button/button.component';
-import { DialogComponent } from '../../components/dialog/dialog.component';
-import { IconComponent } from '../../components/icon/icon.component';
-import { BodyTextComponent } from '../../components/typography/body-text/body-text.component';
-import { HeadingComponent } from '../../components/typography/heading/heading.component';
+import { ButtonComponent } from '../button/button.component';
+import { DialogComponent } from './dialog.component';
+import { IconComponent } from '../icon/icon.component';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
+import { HeadingComponent } from '../typography/heading/heading.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import {
   DialogTitleDirective,
@@ -14,7 +14,7 @@ import {
   DialogCloseDirective,
 } from './dialog-directives';
 import { getElement } from '../../utilities/tests/utilities';
-import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
+import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { FudisAlertService } from '../../services/alert/alert.service';
 
 @Component({

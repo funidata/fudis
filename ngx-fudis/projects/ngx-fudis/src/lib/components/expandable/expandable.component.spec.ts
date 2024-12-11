@@ -4,12 +4,14 @@ import { By } from '@angular/platform-browser';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { ExpandableComponent } from './expandable.component';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisExpandableType } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { getElement } from '../../utilities/tests/utilities';
 import { fudisHeadingLevelArray } from '../../types/typography';
+import {
+  ExpandableActionsDirective,
+  ExpandableContentDirective,
+} from './expandable-content.directive';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -21,10 +23,10 @@ import { fudisHeadingLevelArray } from '../../types/typography';
     [variant]="variant"
     [padding]="padding"
   >
-    <ng-template fudisActions type="expandable">
-      <fudis-button [label]="'Action button'"></fudis-button>
-    </ng-template>
-    <ng-template fudisContent type="expandable">
+    <fudis-expandable-actions
+      ><fudis-button [label]="'Action button'"></fudis-button
+    ></fudis-expandable-actions>
+    <ng-template fudisExpandableContent>
       <fudis-mock-component
         (initialized)="contentInitializationCount = contentInitializationCount + 1"
       ></fudis-mock-component>
@@ -60,9 +62,9 @@ describe('ExpandableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
+        ExpandableActionsDirective,
+        ExpandableContentDirective,
         ButtonComponent,
-        ContentDirective,
         ExpandableComponent,
         IconComponent,
         MockContainerComponent,
@@ -95,7 +97,7 @@ describe('ExpandableComponent', () => {
 
   function headerHasButtons(): boolean {
     return !!fixture.nativeElement.querySelector(
-      'fudis-expandable div.fudis-expandable__header__buttons fudis-button',
+      'fudis-expandable .fudis-expandable-actions fudis-button',
     );
   }
 
@@ -192,7 +194,7 @@ describe('ExpandableComponent', () => {
   });
 
   describe('header buttons', () => {
-    it('should render fudis-button when one is given through fudisActions directive', () => {
+    it('should render fudis-button when one is given through fudis-expandable-actions directive', () => {
       fixture.detectChanges();
 
       expect(headerHasButtons()).toBeTruthy();

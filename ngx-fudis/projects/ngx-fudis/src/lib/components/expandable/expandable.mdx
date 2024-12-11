@@ -25,21 +25,22 @@ To define which h-level the Expandable heading is, provide suitable `level` attr
 
 ## Content Projection
 
-Expandable's content and additional header buttons are provided via content projection by using `fudisContent` and `fudisAction` directives:
+Expandable's content and additional header buttons are provided via content projection by using directive selectors `fudisExpandableContent` and `fudis-expandable-actions`:
+
+Reason why Expandable Content is not used with similar syntax as other content projection, is to enable lazy loading of its contents. Other content slots should be visible right from the start, but closed Expandables content is initialized only after it is opened for the first time.
 
 ```
 <fudis-expandable [title]="'Some title'" [level]="2">
-  <ng-template fudisActions [type]="'expandable'">
+  <fudis-expandable-actions>
     <fudis-button />
-  </ng-template>
-
-  <ng-template fudisContent [type]="'expandable'">
+  </fudis-expandable-actions>
+  <ng-template fudisExpandableContent>
     <your-body-template />
   </ng-template>
 </fudis-expandable>
 ```
 
-All buttons wrapped in the fudisActions ng-template will appear to the right side of the header bar and on sm-sized screen they move to their own level.
+All buttons wrapped in the `<fudis-expandable-actions>` tags will appear to the right side of the header bar and on sm-sized screen they move to their own level.
 
 The content of the Expandable is not initially rendered to the DOM. Content will be initialized when the Expandable is expanded for the first time. This helps to avoid unnecessary requests to the backend (among other expensive operations). Subsequent closing/expanding only hides the content instead of removing it from the DOM, for the same reason.
 

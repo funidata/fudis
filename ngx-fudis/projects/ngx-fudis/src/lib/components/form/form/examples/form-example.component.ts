@@ -46,7 +46,7 @@ type MyForm = {
           [level]="3"
           [closed]="_closed"
         >
-          <ng-template fudisContent [type]="'expandable'">
+          <ng-template fudisExpandableContent>
             <fudis-grid>
               <fudis-radio-button-group
                 [label]="'Course type'"
@@ -104,7 +104,7 @@ type MyForm = {
           </ng-template>
         </fudis-expandable>
         <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [level]="3">
-          <ng-template fudisContent [type]="'expandable'">
+          <ng-template fudisExpandableContent>
             <fudis-fieldset [label]="'More important fields'">
               <fudis-fieldset-content>
                 <fudis-date-range>

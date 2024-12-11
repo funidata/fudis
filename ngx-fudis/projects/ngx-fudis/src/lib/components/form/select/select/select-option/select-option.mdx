@@ -10,11 +10,11 @@ Select Option and Multiselect Option Components are separate but really similar 
 
 ## Content Directive Properties
 
-To include Select or Multiselect Options, you need to wrap them with **fudisContent** directive and include `type` property with `select-options` value.
+To include Select or Multiselect Options, you need to wrap them with directive selector **fudisSelectOptions**. This enables lazy loading of options only after dropdown has been opened for the first time.
 
 ```
 <fudis-select>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     ...
     options here
     ...
@@ -52,7 +52,7 @@ interface FudisSelectOption {
 <Source
   code={`
 <fudis-select>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     <fudis-select-option
       [data]=
         "{value: 'unique-option-value',
@@ -68,7 +68,7 @@ interface FudisSelectOption {
 <Source
   code={`
 <fudis-multiselect>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     <fudis-multiselect-option
       [data]=
         "{value: 'unique-option-value',

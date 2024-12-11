@@ -11,7 +11,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import {
   FooterContentLeftDirective,
   FooterContentRightDirective,
-} from '../../directives/content-projection/content/content.directive';
+} from './footer-content.directive';
 
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationConfig } from '../../services/translation/translationKeys';

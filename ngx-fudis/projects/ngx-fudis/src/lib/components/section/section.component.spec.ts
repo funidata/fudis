@@ -3,10 +3,7 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SectionComponent } from './section.component';
-import {
-  SectionActionsDirective,
-  SectionContentDirective,
-} from '../../directives/content-projection/section/section-content.directive';
+import { SectionActionsDirective, SectionContentDirective } from './section-content.directive';
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
@@ -14,8 +11,6 @@ import { IconComponent } from '../icon/icon.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
 import {
@@ -62,10 +57,8 @@ describe('SectionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
         BodyTextComponent,
         ButtonComponent,
-        ContentDirective,
         GridDirective,
         HeadingComponent,
         IconComponent,
@@ -165,7 +158,7 @@ describe('SectionComponent', () => {
 
   describe('Content projection', () => {
     it('should render action button(s) inside header if given', () => {
-      const actions = mockFixture.nativeElement.querySelector('.fudis-section__header__actions');
+      const actions = mockFixture.nativeElement.querySelector('.fudis-section-actions');
       const actionComponent = mockFixture.debugElement.query(By.directive(ButtonComponent));
 
       expect(actions).toBeTruthy();
@@ -173,7 +166,7 @@ describe('SectionComponent', () => {
     });
 
     it('should render content', () => {
-      const content = mockFixture.nativeElement.querySelector('.fudis-section__content');
+      const content = mockFixture.nativeElement.querySelector('.fudis-section-content');
       const contentComponent = mockFixture.debugElement.query(By.directive(BodyTextComponent));
 
       expect(content).toBeTruthy();

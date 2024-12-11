@@ -72,12 +72,11 @@ import { ValidatorErrorMessageComponent } from './components/form/error-message/
 /**
  * Fudis Directives
  */
-import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
+
 import {
-  ContentDirective,
   FooterContentLeftDirective,
   FooterContentRightDirective,
-} from './directives/content-projection/content/content.directive';
+} from './components/footer/footer-content.directive';
 import { ControlComponentBaseDirective } from './directives/form/control-component-base/control-component-base.directive';
 import {
   DateEndDirective,
@@ -88,31 +87,38 @@ import {
   DialogContentDirective,
   DialogTitleDirective,
   DialogActionsDirective,
-} from './directives/dialog/dialog-directives';
+} from './components/dialog/dialog-directives';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
+import {
+  ExpandableActionsDirective,
+  ExpandableContentDirective,
+} from './components/expandable/expandable-content.directive';
 import { ErrorMessageDirective } from './components/form/error-message/error-message/error-message.directive';
 import {
   FieldsetActionsDirective,
   FieldsetContentDirective,
-} from './directives/content-projection/fieldset/fieldset-content.directive';
+} from './components/form/fieldset/fieldset-content.directive';
 import { FormCommonApiDirective } from './directives/form/form-common-api/form-common-api.directive';
 import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
 import {
   FormActionsDirective,
   FormContentDirective,
   FormHeaderDirective,
-} from './directives/content-projection/form/form-content.directive';
+} from './components/form/form/form-content.directive';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
 
 import { LinkDirective } from './directives/link/link.directive';
-import { SectionActionsDirective } from './directives/content-projection/section/section-content.directive';
-import { SectionContentDirective } from './directives/content-projection/section/section-content.directive';
+import {
+  SectionActionsDirective,
+  SectionContentDirective,
+} from './components/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
+import { SelectOptionsDirective } from './components/form/select/common/select-options-directive/select-options.directive';
 import { TextFieldComponentBaseDirective } from './directives/form/text-field-component-base/text-field-component-base.directive';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 
@@ -135,7 +141,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
    * Include both internal and external Fudis components in 'declarations' array below.
    */
   declarations: [
-    ActionsDirective,
     AlertComponent,
     AlertGroupComponent,
     BadgeComponent,
@@ -146,7 +151,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     CheckboxComponent,
     CheckboxGroupComponent,
     ControlComponentBaseDirective,
-    ContentDirective,
     DatepickerComponent,
     DateRangeComponent,
     DateStartDirective,
@@ -168,6 +172,8 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ErrorMessageDirective,
     ErrorSummaryComponent,
     ExpandableComponent,
+    ExpandableActionsDirective,
+    ExpandableContentDirective,
     FieldsetActionsDirective,
     FieldsetContentDirective,
     FieldSetComponent,
@@ -209,6 +215,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     SelectComponent,
     SelectDropdownComponent,
     SelectGroupComponent,
+    SelectOptionsDirective,
     SelectOptionBaseDirective,
     SelectOptionComponent,
     TextAreaComponent,
@@ -244,7 +251,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
    * when you want to expose it outside
    */
   exports: [
-    ActionsDirective,
     AlertComponent,
     AlertGroupComponent,
     BadgeComponent,
@@ -254,7 +260,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ButtonComponent,
     CheckboxComponent,
     CheckboxGroupComponent,
-    ContentDirective,
     DatepickerComponent,
     DateRangeComponent,
     DateStartDirective,
@@ -273,6 +278,8 @@ import { FudisTranslationService } from './services/translation/translation.serv
     DropdownMenuItemComponent,
     ErrorMessageDirective,
     ExpandableComponent,
+    ExpandableActionsDirective,
+    ExpandableContentDirective,
     FooterComponent,
     FooterContentLeftDirective,
     FooterContentRightDirective,
@@ -304,6 +311,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     SectionContentDirective,
     SelectComponent,
     SelectOptionComponent,
+    SelectOptionsDirective,
     SelectGroupComponent,
     TextAreaComponent,
     TextInputComponent,

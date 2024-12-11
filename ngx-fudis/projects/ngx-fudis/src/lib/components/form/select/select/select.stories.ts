@@ -77,7 +77,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [variant]="variant"
       (selectionUpdate)="selectionUpdate($event)"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-select-option
           *ngFor="let option of defaultOptions"
           [data]="option"

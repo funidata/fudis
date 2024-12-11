@@ -18,8 +18,6 @@ import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
-import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
-
 @Component({
   selector: 'fudis-mock-dl',
   template: `
@@ -70,7 +68,6 @@ describe('DescriptionListItemDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
         ButtonComponent,
         GridDirective,
         GridComponent,

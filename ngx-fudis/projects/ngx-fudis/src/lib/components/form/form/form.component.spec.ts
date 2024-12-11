@@ -9,12 +9,10 @@ import {
   FormActionsDirective,
   FormContentDirective,
   FormHeaderDirective,
-} from '../../../directives/content-projection/form/form-content.directive';
+} from './form-content.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
@@ -84,10 +82,8 @@ describe('FormComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
         BadgeComponent,
         BodyTextComponent,
-        ContentDirective,
         ErrorSummaryComponent,
         FormComponent,
         FormActionsDirective,

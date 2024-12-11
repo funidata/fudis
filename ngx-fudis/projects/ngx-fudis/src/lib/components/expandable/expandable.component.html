@@ -37,11 +37,7 @@
         >
       </button>
     </div>
-    <ng-container *ngIf="_headerButtons?.type === 'expandable'">
-      <div class="fudis-expandable__header__buttons">
-        <ng-container *ngTemplateOutlet="_headerButtons!.templateRef"></ng-container>
-      </div>
-    </ng-container>
+    <ng-content select="fudis-expandable-actions" />
   </div>
   <div
     class="fudis-expandable__content fudis-expandable__content__padding-{{ padding }}"
@@ -50,7 +46,7 @@
     [attr.aria-hidden]="_closed"
     [hidden]="_closed"
   >
-    <ng-container *ngIf="_content?.type === 'expandable'">
+    <ng-container *ngIf="_content">
       <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
     </ng-container>
   </div>

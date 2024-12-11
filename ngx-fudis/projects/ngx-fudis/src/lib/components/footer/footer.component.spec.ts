@@ -6,7 +6,7 @@ import { GridComponent } from '../grid/grid/grid.component';
 import {
   FooterContentLeftDirective,
   FooterContentRightDirective,
-} from '../../directives/content-projection/content/content.directive';
+} from './footer-content.directive';
 import { GridItemComponent } from '../grid/grid-item/grid-item.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';

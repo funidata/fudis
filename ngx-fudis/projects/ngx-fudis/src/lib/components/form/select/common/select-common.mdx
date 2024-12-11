@@ -149,7 +149,7 @@ Select Group Component **requires** `label` string property.
 
 ```
 <fudis-select>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     <fudis-select-group [label]="'First Group'">
       <fudis-select-option />
       ... and rest of the options for the First Group
@@ -166,7 +166,7 @@ The exactly same component can be used as well with Multiselect Component. Altho
 
 ```
 <fudis-multiselect>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     <fudis-multiselect-group [label]="'First Group'">
       <fudis-multiselect-option/>
       ... and rest of the options for the First Group

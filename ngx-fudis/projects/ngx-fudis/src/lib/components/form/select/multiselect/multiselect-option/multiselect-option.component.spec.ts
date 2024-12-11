@@ -12,12 +12,12 @@ import { IconComponent } from '../../../../icon/icon.component';
 import { LabelComponent } from '../../../label/label.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { defaultOptions } from '../../common/mock_data';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -27,7 +27,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
     [placeholder]="'Select your favourites'"
     [control]="control"
   >
-    <ng-template fudisContent type="select-options">
+    <ng-template fudisSelectOptions>
       <fudis-multiselect-option
         *ngFor="let option of multiOptions"
         #multiOption
@@ -61,7 +61,7 @@ describe('MultiselectOptionComponent', () => {
         SelectIconsComponent,
         IconComponent,
         ButtonComponent,
-        ContentDirective,
+        SelectOptionsDirective,
         GuidanceComponent,
         IconComponent,
         LabelComponent,

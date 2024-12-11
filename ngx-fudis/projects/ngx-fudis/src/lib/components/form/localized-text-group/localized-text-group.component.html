@@ -92,7 +92,7 @@
     [size]="'xs'"
     [id]="id + '_language-select'"
   >
-    <ng-template fudisContent type="select-options">
+    <ng-template fudisSelectOptions>
       <fudis-select-option
         *ngFor="let option of _selectOptions"
         [data]="{ value: option.value, label: option.label, disabled: option.disabled }"

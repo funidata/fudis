@@ -102,11 +102,19 @@
   .fudis-notification {
     margin-bottom: spacing.$spacing-xs;
   }
-}
 
-.fudis-fieldset-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: spacing.$spacing-xs spacing.$spacing-sm;
-  margin-bottom: spacing.$spacing-xs;
+  &-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacing.$spacing-xs spacing.$spacing-sm;
+    margin-bottom: spacing.$spacing-xs;
+  }
+
+  &-content {
+    @include utilities.box-reset;
+    @include borders.border-none;
+
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -16,7 +16,7 @@ import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directi
 import { FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
-import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
+import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -31,7 +31,7 @@ import { FudisInternalErrorSummaryService } from '../../../../services/form/erro
     [label]="'Multiselect label'"
     [helpText]="'Multiselect help text'"
   >
-    <ng-template fudisContent type="select-options">
+    <ng-template fudisSelectOptions>
       <fudis-multiselect-option
         *ngFor="let option of options"
         [data]="option"
@@ -68,7 +68,7 @@ describe('MultiselectComponent', () => {
         GuidanceComponent,
         IconComponent,
         LabelComponent,
-        ContentDirective,
+        SelectOptionsDirective,
       ],
       providers: [FudisInternalErrorSummaryService, TooltipDirective, SelectBaseDirective],
       imports: [ReactiveFormsModule],

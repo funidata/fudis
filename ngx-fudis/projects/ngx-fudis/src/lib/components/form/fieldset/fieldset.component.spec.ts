@@ -6,10 +6,7 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import {
-  FieldsetActionsDirective,
-  FieldsetContentDirective,
-} from '../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { FieldsetActionsDirective, FieldsetContentDirective } from './fieldset-content.directive';
 import { FieldSetComponent } from './fieldset.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -17,7 +14,6 @@ import { ValidatorErrorMessageComponent } from '../error-message/validator-error
 import { LabelComponent } from '../label/label.component';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
@@ -56,7 +52,6 @@ describe('FieldSetComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
         BodyTextComponent,
         ButtonComponent,
         FieldsetActionsDirective,

@@ -6,10 +6,8 @@ import { ErrorSummaryComponent } from './error-summary.component';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FormComponent } from '../form/form.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { ButtonComponent } from '../../button/button.component';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -26,9 +24,10 @@ import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { getElement } from '../../../utilities/tests/utilities';
-import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
-import { SectionContentDirective } from '../../../directives/content-projection/section/section-content.directive';
-import { FormContentDirective } from '../../../directives/content-projection/form/form-content.directive';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
+import { SectionContentDirective } from '../../section/section-content.directive';
+import { FormContentDirective } from '../form/form-content.directive';
+import { ExpandableContentDirective } from '../../expandable/expandable-content.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -65,7 +64,7 @@ import { FormContentDirective } from '../../../directives/content-projection/for
         [errorSummaryBreadcrumb]="true"
         [title]="'Expandable title'"
       >
-        <ng-template fudisContent type="expandable">
+        <ng-template fudisExpandableContent>
           <fudis-text-input
             [control]="formGroup.controls.expandable"
             [label]="'Expandable input'"
@@ -119,11 +118,10 @@ describe('ErrorSummaryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
         BodyTextComponent,
         ButtonComponent,
-        ContentDirective,
         ExpandableComponent,
+        ExpandableContentDirective,
         ErrorSummaryComponent,
         FieldSetComponent,
         FieldsetContentDirective,

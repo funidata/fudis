@@ -42,7 +42,7 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
       (selectionUpdate)="selectionUpdate.emit($event)"
       (filterTextUpdate)="searchTextUpdateSubject.next($event)"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         @if (searchResults | async; as options) {
           <fudis-select-option *ngFor="let option of options" [data]="option"></fudis-select-option>
         }</ng-template
