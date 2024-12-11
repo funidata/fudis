@@ -1,37 +1,28 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { FudisValidators } from './validators';
-import {
-  getMaxDateFromValidator,
-  getMinDateFromValidator,
-  getMaxFromValidator,
-  getMaxLengthFromValidator,
-  getMinFromValidator,
-  getMinLengthFromValidator,
-  hasRequiredValidator,
-  hasOneRequiredOrMinValidator,
-} from './getValidators';
+import { FudisValidatorUtilities } from './validator-utilities';
 import { FudisCheckboxGroupFormGroup, FudisLocalizedTextGroup } from '../../types/forms';
 import { FudisGroupValidators } from './groupValidators';
 
-describe('getValidators utility function', () => {
-  describe('hasRequiredValidator', () => {
+describe('FudisValidatorUtilities functions', () => {
+  describe('required', () => {
     it('should return true with Fudis Validators', () => {
       const fudisControl = new FormControl('', FudisValidators.required('This is required'));
-      const fudisRequired = hasRequiredValidator(fudisControl);
+      const fudisRequired = FudisValidatorUtilities.required(fudisControl);
 
       expect(fudisRequired).toEqual(true);
     });
 
     it('should return true with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.required);
-      const nativeRequired = hasRequiredValidator(nativeControl);
+      const nativeRequired = FudisValidatorUtilities.required(nativeControl);
 
       expect(nativeRequired).toEqual(true);
     });
   });
 
-  describe('hasOneRequiredOrMinValidator', () => {
+  describe('oneRequiredOrMin', () => {
     it('should return true with oneRequired validator group with checkbox group', () => {
       const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
@@ -42,7 +33,7 @@ describe('getValidators utility function', () => {
         [FudisGroupValidators.oneRequired('No fruit picked! :(')],
       );
 
-      const isRequired = hasOneRequiredOrMinValidator(testFormGroup);
+      const isRequired = FudisValidatorUtilities.oneRequiredOrMin(testFormGroup);
 
       expect(isRequired).toEqual(true);
     });
@@ -57,7 +48,7 @@ describe('getValidators utility function', () => {
         [FudisGroupValidators.oneRequired('One must have some value!')],
       );
 
-      const isRequired = hasOneRequiredOrMinValidator(testFormGroup);
+      const isRequired = FudisValidatorUtilities.oneRequiredOrMin(testFormGroup);
 
       expect(isRequired).toEqual(true);
     });
@@ -72,7 +63,7 @@ describe('getValidators utility function', () => {
         [FudisGroupValidators.min({ value: 1, message: 'Pick one!' })],
       );
 
-      const isRequired = hasOneRequiredOrMinValidator(testFormGroup);
+      const isRequired = FudisValidatorUtilities.oneRequiredOrMin(testFormGroup);
 
       expect(isRequired).toEqual(true);
     });
@@ -87,81 +78,81 @@ describe('getValidators utility function', () => {
         [FudisGroupValidators.min({ value: 0, message: 'No need to select any actually' })],
       );
 
-      const isRequired = hasOneRequiredOrMinValidator(testFormGroup);
+      const isRequired = FudisValidatorUtilities.oneRequiredOrMin(testFormGroup);
 
       expect(isRequired).toEqual(false);
     });
   });
 
-  describe('getMaxLengthFromValidator', () => {
+  describe('maxLength', () => {
     const fudisControl = new FormControl('', FudisValidators.maxLength(42, 'You cannot exceed 42'));
 
     it('should return correct value with Fudis Validator', () => {
-      const fudisMaxLength = getMaxLengthFromValidator(fudisControl);
+      const fudisMaxLength = FudisValidatorUtilities.maxLength(fudisControl);
 
       expect(fudisMaxLength).toEqual(42);
     });
 
     it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.maxLength(42));
-      const nativeMaxLength = getMaxLengthFromValidator(nativeControl);
+      const nativeMaxLength = FudisValidatorUtilities.maxLength(nativeControl);
 
       expect(nativeMaxLength).toEqual(42);
     });
   });
 
-  describe('getMinLengthFromValidator', () => {
+  describe('minLength', () => {
     const fudisControl = new FormControl('', FudisValidators.minLength(66, 'Minimum of 66'));
 
     it('should return correct value with Fudis Validator', () => {
-      const fudisMinLength = getMinLengthFromValidator(fudisControl);
+      const fudisMinLength = FudisValidatorUtilities.minLength(fudisControl);
 
       expect(fudisMinLength).toEqual(66);
     });
 
     it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.minLength(66));
-      const nativeMinLength = getMinLengthFromValidator(nativeControl);
+      const nativeMinLength = FudisValidatorUtilities.minLength(nativeControl);
 
       expect(nativeMinLength).toEqual(66);
     });
   });
 
-  describe('getMaxFromValidator', () => {
+  describe('max', () => {
     const fudisControl = new FormControl('', FudisValidators.max(9000, 'Maximum number is 9000'));
 
     it('should return correct value with Fudis Validator', () => {
-      const fudisMax = getMaxFromValidator(fudisControl);
+      const fudisMax = FudisValidatorUtilities.max(fudisControl);
 
       expect(fudisMax).toEqual(9000);
     });
 
     it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.max(9000));
-      const nativeMax = getMaxFromValidator(nativeControl);
+      const nativeMax = FudisValidatorUtilities.max(nativeControl);
 
       expect(nativeMax).toEqual(9000);
     });
   });
 
-  describe('getMinFromValidator', () => {
+  describe('min', () => {
     const fudisControl = new FormControl('', FudisValidators.min(5555, 'Minimum number is 5555'));
 
     it('should return correct value with Fudis Validator', () => {
-      const fudisMin = getMinFromValidator(fudisControl);
+      const fudisMin = FudisValidatorUtilities.min(fudisControl);
 
       expect(fudisMin).toEqual(5555);
     });
 
     it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.min(5555));
-      const nativeMin = getMinFromValidator(nativeControl);
+      const nativeMin = FudisValidatorUtilities.min(nativeControl);
 
       expect(nativeMin).toEqual(5555);
     });
   });
 
-  describe('getMaxDateFromValidator', () => {
+  describe('maxDate', () => {
     it('should return correct value with YYYY-MM-DD format string date', () => {
       const fudisControl = new FormControl(
         null,
@@ -170,7 +161,7 @@ describe('getValidators utility function', () => {
           message: 'Trying date as string 12.1.2024',
         }),
       );
-      const fudisDate = getMaxDateFromValidator(fudisControl)?.toJSON();
+      const fudisDate = FudisValidatorUtilities.maxDate(fudisControl)?.toJSON();
 
       expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
     });
@@ -183,7 +174,7 @@ describe('getValidators utility function', () => {
           message: 'Trying date as string 2.1.2024',
         }),
       );
-      const fudisDate = getMaxDateFromValidator(fudisControl)?.toJSON();
+      const fudisDate = FudisValidatorUtilities.maxDate(fudisControl)?.toJSON();
 
       expect(fudisDate).toEqual('2024-01-02T00:00:00.000Z');
     });
@@ -196,13 +187,13 @@ describe('getValidators utility function', () => {
           message: 'Trying date as string 12.1.2024',
         }),
       );
-      const fudisDate = getMaxDateFromValidator(fudisControl)?.toJSON();
+      const fudisDate = FudisValidatorUtilities.maxDate(fudisControl)?.toJSON();
 
       expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
     });
   });
 
-  describe('getMinDateFromValidator', () => {
+  describe('minDate', () => {
     it('should return correct value with YYYY-MM-DD format string date', () => {
       const fudisControl = new FormControl(
         null,
@@ -211,7 +202,7 @@ describe('getValidators utility function', () => {
           message: 'Trying date as string 12.1.2024',
         }),
       );
-      const fudisDate = getMinDateFromValidator(fudisControl)?.toJSON();
+      const fudisDate = FudisValidatorUtilities.minDate(fudisControl)?.toJSON();
 
       expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
     });
@@ -224,7 +215,7 @@ describe('getValidators utility function', () => {
           message: 'Trying date as string 2.1.2024',
         }),
       );
-      const fudisDate = getMinDateFromValidator(fudisControl)?.toJSON();
+      const fudisDate = FudisValidatorUtilities.minDate(fudisControl)?.toJSON();
 
       expect(fudisDate).toEqual('2024-01-02T00:00:00.000Z');
     });
@@ -237,7 +228,7 @@ describe('getValidators utility function', () => {
           message: 'Trying date as string 12.1.2024',
         }),
       );
-      const fudisDate = getMinDateFromValidator(fudisControl)?.toJSON();
+      const fudisDate = FudisValidatorUtilities.minDate(fudisControl)?.toJSON();
 
       expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
     });
@@ -248,13 +239,13 @@ describe('getValidators utility function', () => {
       const control = new FormControl('');
 
       const zeroTrue =
-        hasRequiredValidator(control) ||
-        getMaxLengthFromValidator(control) ||
-        getMinLengthFromValidator(control) ||
-        getMaxFromValidator(control) ||
-        getMinFromValidator(control) ||
-        getMaxDateFromValidator(control) ||
-        getMinDateFromValidator(control);
+        FudisValidatorUtilities.required(control) ||
+        FudisValidatorUtilities.maxLength(control) ||
+        FudisValidatorUtilities.minLength(control) ||
+        FudisValidatorUtilities.max(control) ||
+        FudisValidatorUtilities.min(control) ||
+        FudisValidatorUtilities.maxDate(control) ||
+        FudisValidatorUtilities.minDate(control);
 
       expect(zeroTrue).toBeUndefined();
     });

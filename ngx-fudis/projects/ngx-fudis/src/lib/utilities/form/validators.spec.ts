@@ -51,30 +51,30 @@ describe('Fudis Validators', () => {
 
   describe('MaxLength Validator', () => {
     const maxLengthValidator = FudisValidators.maxLength(5, 'Text should not exceed 5 characters');
-    const maxLenghtControl = new FormControl<string | null>(null, maxLengthValidator);
+    const maxLengthControl = new FormControl<string | null>(null, maxLengthValidator);
 
     it('should return maxlength error if control has maxLength validator', () => {
-      maxLenghtControl.patchValue('Too long text');
+      maxLengthControl.patchValue('Too long text');
 
-      expect(maxLenghtControl.errors).toEqual({
+      expect(maxLengthControl.errors).toEqual({
         maxlength: { message: 'Text should not exceed 5 characters', requiredLength: 5 },
       });
 
-      expect(maxLenghtControl.valid).toEqual(false);
+      expect(maxLengthControl.valid).toEqual(false);
     });
 
     it('should not return maxlength error if control value is short enough', () => {
-      maxLenghtControl.patchValue('Ok');
+      maxLengthControl.patchValue('Ok');
 
-      expect(maxLenghtControl.errors).toEqual(null);
-      expect(maxLenghtControl.valid).toEqual(true);
+      expect(maxLengthControl.errors).toEqual(null);
+      expect(maxLengthControl.valid).toEqual(true);
     });
 
     it('should not return maxlength error if control value is null', () => {
-      maxLenghtControl.patchValue(null);
+      maxLengthControl.patchValue(null);
 
-      expect(maxLenghtControl.errors).toEqual(null);
-      expect(maxLenghtControl.valid).toEqual(true);
+      expect(maxLengthControl.errors).toEqual(null);
+      expect(maxLengthControl.valid).toEqual(true);
     });
   });
 
@@ -91,7 +91,7 @@ describe('Fudis Validators', () => {
       false,
     );
 
-    const minLenghtControl = new FormControl<string | null>(null, minLengthValidator);
+    const minLengthControl = new FormControl<string | null>(null, minLengthValidator);
 
     const minLengthNullIgnoredControl = new FormControl<string | null>(
       null,
@@ -99,15 +99,15 @@ describe('Fudis Validators', () => {
     );
 
     it('should return minlength error if control has minLength validator', () => {
-      minLenghtControl.patchValue('Short value');
+      minLengthControl.patchValue('Short value');
 
       minLengthNullIgnoredControl.patchValue('Short value');
 
-      expect(minLenghtControl.errors).toEqual({
+      expect(minLengthControl.errors).toEqual({
         minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
       });
 
-      expect(minLenghtControl.valid).toEqual(false);
+      expect(minLengthControl.valid).toEqual(false);
 
       expect(minLengthNullIgnoredControl.errors).toEqual({
         minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
@@ -117,10 +117,10 @@ describe('Fudis Validators', () => {
     });
 
     it('should not return minlength error if control value is long enough', () => {
-      minLenghtControl.patchValue('This is very long text to test as valid content.');
+      minLengthControl.patchValue('This is very long text to test as valid content.');
 
-      expect(minLenghtControl.errors).toEqual(null);
-      expect(minLenghtControl.valid).toEqual(true);
+      expect(minLengthControl.errors).toEqual(null);
+      expect(minLengthControl.valid).toEqual(true);
 
       minLengthNullIgnoredControl.patchValue('This is very long text to test as valid content.');
 
@@ -141,12 +141,12 @@ describe('Fudis Validators', () => {
     });
 
     it('should return minlength error if control value is empty', () => {
-      minLenghtControl.patchValue('');
+      minLengthControl.patchValue('');
 
-      expect(minLenghtControl.errors).toEqual({
+      expect(minLengthControl.errors).toEqual({
         minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
       });
-      expect(minLenghtControl.valid).toEqual(false);
+      expect(minLengthControl.valid).toEqual(false);
     });
   });
 

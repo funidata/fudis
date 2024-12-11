@@ -18,11 +18,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { parseDate, updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
-import {
-  getMaxDateFromValidator,
-  getMinDateFromValidator,
-  hasRequiredValidator,
-} from '../../../../utilities/form/getValidators';
+import { FudisValidatorUtilities } from '../../../../utilities/form/validator-utilities';
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
@@ -93,9 +89,9 @@ export class DatepickerComponent
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required.next(hasRequiredValidator(this.control));
-        this._minDate = getMinDateFromValidator(this.control);
-        this._maxDate = getMaxDateFromValidator(this.control);
+        this._required.next(FudisValidatorUtilities.required(this.control));
+        this._minDate = FudisValidatorUtilities.minDate(this.control);
+        this._maxDate = FudisValidatorUtilities.maxDate(this.control);
       }
     });
 

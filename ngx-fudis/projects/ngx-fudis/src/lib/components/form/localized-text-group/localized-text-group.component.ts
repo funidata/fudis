@@ -16,12 +16,7 @@ import {
 } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import {
-  getMinLengthFromValidator,
-  hasOneRequiredOrMinValidator,
-  getMaxLengthFromValidator,
-  hasRequiredValidator,
-} from '../../../utilities/form/getValidators';
+import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -158,9 +153,9 @@ export class LocalizedTextGroupComponent
   private _isInputRequired(control: FormControl<string | null>): boolean {
     const groupRequiredError = this.formGroup?.errors?.['oneRequired'];
 
-    const controlRequiredValidator = hasRequiredValidator(control);
+    const controlRequiredValidator = FudisValidatorUtilities.required(control);
 
-    const groupRequiredValidator = hasOneRequiredOrMinValidator(this.formGroup);
+    const groupRequiredValidator = FudisValidatorUtilities.oneRequiredOrMin(this.formGroup);
 
     const nonEmptyControls = Object.keys(this.formGroup.controls).filter((control) => {
       return this.formGroup.controls[control].value;
@@ -179,8 +174,8 @@ export class LocalizedTextGroupComponent
   protected _checkHtmlAttributes(controlName: string): void {
     const control = this.formGroup.controls[controlName];
 
-    this._minLength.next(getMinLengthFromValidator(control));
-    this._maxLength.next(getMaxLengthFromValidator(control));
+    this._minLength.next(FudisValidatorUtilities.minLength(control));
+    this._maxLength.next(FudisValidatorUtilities.maxLength(control));
     this._required.next(this._isInputRequired(control));
   }
 
