@@ -5,9 +5,9 @@ import { Directive, HostBinding } from '@angular/core';
 })
 export class SectionActionsDirective {
   /**
-   * Binding fudis-section__header__actions CSS class to section actions wrapper
+   * Binding CSS class to section actions wrapper
    */
-  @HostBinding('class') public hostClass = 'fudis-section__header__actions';
+  @HostBinding('class') public hostClass = 'fudis-section-actions';
 }
 
 @Directive({
@@ -15,7 +15,7 @@ export class SectionActionsDirective {
 })
 export class SectionContentDirective {
   /**
-   * Binding fudis-section__content CSS class to section content wrapper
+   * Binding CSS class to section content wrapper
    */
-  @HostBinding('class') public hostClass = 'fudis-section__content';
+  @HostBinding('class') public hostClass = 'fudis-section-content';
 }

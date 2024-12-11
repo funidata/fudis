@@ -158,7 +158,7 @@ describe('SectionComponent', () => {
 
   describe('Content projection', () => {
     it('should render action button(s) inside header if given', () => {
-      const actions = mockFixture.nativeElement.querySelector('.fudis-section__header__actions');
+      const actions = mockFixture.nativeElement.querySelector('.fudis-section-actions');
       const actionComponent = mockFixture.debugElement.query(By.directive(ButtonComponent));
 
       expect(actions).toBeTruthy();
@@ -166,7 +166,7 @@ describe('SectionComponent', () => {
     });
 
     it('should render content', () => {
-      const content = mockFixture.nativeElement.querySelector('.fudis-section__content');
+      const content = mockFixture.nativeElement.querySelector('.fudis-section-content');
       const contentComponent = mockFixture.debugElement.query(By.directive(BodyTextComponent));
 
       expect(content).toBeTruthy();
