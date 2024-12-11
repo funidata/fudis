@@ -15,6 +15,7 @@
 
 .fudis-form-input {
   @include border.border('1px', 'solid', 'gray-middle');
+  @include colors.bg-color('white');
 
   /* stylelint-disable-next-line selector-class-pattern */
   &.ng-touched,

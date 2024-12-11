@@ -15,6 +15,7 @@
 @use '../../../../foundations/typography/tokens.scss' as typography;
 
 // When navigating calendar pop-up with Tab key, close button appears at the very end. Button does not appear when using mouse.
+
 .mat-datepicker-close-button {
   text-transform: uppercase !important;
   color: colors.$color-white !important;
@@ -95,8 +96,19 @@
 
         &.mat-calendar-next-button,
         &.mat-calendar-previous-button {
+          position: relative;
           width: spacing.$spacing-xl;
           height: spacing.$spacing-xl;
+
+          /* stylelint-disable-next-line max-nesting-depth */
+          & svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: spacing.$spacing-md;
+            height: spacing.$spacing-md;
+          }
         }
       }
 

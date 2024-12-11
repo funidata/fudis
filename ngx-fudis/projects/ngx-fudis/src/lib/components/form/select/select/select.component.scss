@@ -23,7 +23,6 @@
   &__input {
     @include typography.text-field-input;
     @include borders.border-radius('2px');
-    @include colorMixins.bg-color('white');
 
     box-sizing: border-box;
     display: flex;
