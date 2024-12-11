@@ -50,7 +50,7 @@ export { ExpandableComponent } from './lib/components/expandable/expandable.comp
 export {
   ExpandableActionsDirective,
   ExpandableContentDirective,
-} from './lib/components/expandable/expandable-content-projection.directive';
+} from './lib/components/expandable/expandable-content.directive';
 export { ErrorMessageDirective } from './lib/components/form/error-message/error-message/error-message.directive';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export {

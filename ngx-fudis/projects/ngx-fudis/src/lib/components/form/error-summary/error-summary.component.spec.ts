@@ -27,7 +27,7 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { SectionContentDirective } from '../../section/section-content.directive';
 import { FormContentDirective } from '../form/form-content.directive';
-import { ExpandableContentDirective } from '../../expandable/expandable-content-projection.directive';
+import { ExpandableContentDirective } from '../../expandable/expandable-content.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',

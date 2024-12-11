@@ -93,7 +93,7 @@ import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/
 import {
   ExpandableActionsDirective,
   ExpandableContentDirective,
-} from './components/expandable/expandable-content-projection.directive';
+} from './components/expandable/expandable-content.directive';
 import { ErrorMessageDirective } from './components/form/error-message/error-message/error-message.directive';
 import {
   FieldsetActionsDirective,
@@ -112,8 +112,10 @@ import { GridItemDirective } from './directives/grid/grid-item/grid-item.directi
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
 
 import { LinkDirective } from './directives/link/link.directive';
-import { SectionActionsDirective } from './components/section/section-content.directive';
-import { SectionContentDirective } from './components/section/section-content.directive';
+import {
+  SectionActionsDirective,
+  SectionContentDirective,
+} from './components/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { SelectOptionsDirective } from './components/form/select/common/select-options-directive/select-options.directive';

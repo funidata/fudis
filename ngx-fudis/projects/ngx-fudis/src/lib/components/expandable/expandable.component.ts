@@ -16,7 +16,7 @@ import { FudisComponentChanges, FudisExpandableType } from '../../types/miscella
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { ExpandableContentDirective } from './expandable-content-projection.directive';
+import { ExpandableContentDirective } from './expandable-content.directive';
 
 @Component({
   selector: 'fudis-expandable',

@@ -11,7 +11,7 @@ import { fudisHeadingLevelArray } from '../../types/typography';
 import {
   ExpandableActionsDirective,
   ExpandableContentDirective,
-} from './expandable-content-projection.directive';
+} from './expandable-content.directive';
 
 @Component({
   selector: 'fudis-mock-container',
