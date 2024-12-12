@@ -1,22 +1,26 @@
 import test, { expect } from "@playwright/test";
 
+const formErrorSummaryText =
+  "Question about your power animal / What is your power animal?: You need to choose your power animal";
+
+const dialogFormTitle = "Dialog with Form and some random text";
+
+const dialogFormResultAfterClose = "Great choise, your power animal is Holiday armadillo.";
+
 test("dialog with form", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-form&viewMode=story");
   await page.getByTestId("fudis-button-1").click();
   await expect(page.getByTestId("fudis-button-2")).toBeVisible();
   await expect(page).toHaveScreenshot("form-1-init.png");
   await page.getByText("SUBMIT").click();
-  await expect(page.getByText("You need to fill up the information")).toBeVisible();
+  await expect(page.getByText(formErrorSummaryText)).toBeVisible();
   await expect(page).toHaveScreenshot("form-2-errors.png");
   await page.getByTestId("example-input-power-animal").focus();
   await page.getByTestId("example-input-power-animal").fill("Holiday Armadillo");
-  await page.waitForTimeout(200);
-  await page.getByText("SUBMIT").focus();
-  await page.getByText("You need to fill up the information.").scrollIntoViewIfNeeded();
-  await expect(page).toHaveScreenshot("form-3-before-submit.png");
+  await expect(page.getByTestId("fudis-validator-error-message-1")).not.toBeVisible();
   await page.getByText("SUBMIT").click();
-  await page.waitForTimeout(100);
-  await expect(page).toHaveScreenshot("form-4-after-submit.png");
+  await expect(page.getByText(dialogFormTitle)).not.toBeVisible();
+  await expect(page.getByText(dialogFormResultAfterClose)).toBeVisible();
 });
 
 test("dialog with grid", async ({ page }) => {

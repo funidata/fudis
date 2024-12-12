@@ -87,7 +87,7 @@ test("form dynamic inputs", async ({ page }) => {
 
   await expect(page.getByText("At least one option must be selected")).toHaveCount(3);
 
-  await page.waitForTimeout(100).then(async () => {
+  await page.waitForTimeout(150).then(async () => {
     await page.getByTestId("fudis-button-2").click(); /* submit form with errors */
     await expect(page).toHaveScreenshot("dynamic-3-submit-with-invalid-data.png", {
       fullPage: true,
