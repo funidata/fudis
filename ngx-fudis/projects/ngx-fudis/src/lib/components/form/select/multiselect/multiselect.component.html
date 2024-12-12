@@ -95,8 +95,8 @@
       [parentId]="id"
       [size]="size"
     >
-      <ng-container *ngIf="_content?.type === 'select-options'">
-        <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
+      <ng-container *ngIf="_selectOptionsDirective">
+        <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
       </ng-container>
     </fudis-select-dropdown>
   </div>

@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -13,7 +13,6 @@ import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { IconComponent } from '../../icon/icon.component';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -136,7 +135,6 @@ describe('CheckboxGroupComponent', () => {
         GridComponent,
         GridApiDirective,
         GridDirective,
-        ContentDirective,
         GuidanceComponent,
         IconComponent,
         ValidatorErrorMessageComponent,

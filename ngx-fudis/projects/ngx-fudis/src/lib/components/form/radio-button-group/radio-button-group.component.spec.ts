@@ -12,14 +12,13 @@ import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { Component } from '@angular/core';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FieldsetContentDirective } from '../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -74,7 +73,6 @@ describe('Basic inputs of Radio Button Group', () => {
         FieldsetContentDirective,
         GridDirective,
         GuidanceComponent,
-        ContentDirective,
         IconComponent,
         ValidatorErrorMessageComponent,
       ],
