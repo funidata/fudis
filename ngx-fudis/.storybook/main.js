@@ -1,4 +1,5 @@
 export const stories = [
+  "../projects/ngx-fudis/src/test-playgrounds/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.mdx",
   "../projects/documentation/**/*.mdx",
