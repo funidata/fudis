@@ -35,6 +35,7 @@ export function managerHead(head) {
     <link rel="shortcut icon" href="favicon.ico">
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
+      .sidebar-item:has(#components-test-playground)  { display: none;}
     </style>
   `;
 }
