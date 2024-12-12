@@ -15,7 +15,7 @@ import {
   signal,
   AfterViewInit,
 } from '@angular/core';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
+
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
@@ -31,6 +31,7 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
+import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -82,7 +83,7 @@ export class SelectBaseDirective
   /**
    * To lazy load options on first open
    */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
+  @ContentChild(SelectOptionsDirective) protected _selectOptionsDirective: SelectOptionsDirective;
 
   /**
    * Reference to child DropdownComponent listing all options

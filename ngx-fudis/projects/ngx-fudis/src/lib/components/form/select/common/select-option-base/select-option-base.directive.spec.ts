@@ -7,7 +7,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { defaultOptions } from '../../common/mock_data';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
+import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { IconComponent } from '../../../../icon/icon.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
@@ -32,7 +32,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
     [selectionClearButton]="false"
     [size]="'md'"
   >
-    <ng-template fudisContent type="select-options">
+    <ng-template fudisSelectOptions>
       <fudis-select-option
         *ngFor="let option of testOptions"
         [data]="option"
@@ -68,13 +68,13 @@ describe('SelectOptionBaseDirective', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ContentDirective,
         SelectComponent,
         SelectOptionBaseDirective,
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
+        SelectOptionsDirective,
         ButtonComponent,
         MockComponent,
         SelectAutocompleteComponent,

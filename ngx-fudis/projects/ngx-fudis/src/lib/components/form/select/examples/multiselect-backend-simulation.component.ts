@@ -39,7 +39,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
       (selectionUpdate)="selectionUpdate.emit($event)"
       (filterTextUpdate)="searchTextUpdateSubject.next($event)"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         @if (searchResults | async; as options) {
           <fudis-multiselect-option
             *ngFor="let option of options"

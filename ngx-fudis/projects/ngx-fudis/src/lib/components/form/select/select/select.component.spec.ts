@@ -28,7 +28,7 @@ import { FudisInternalErrorSummaryService } from '../../../../services/form/erro
     [control]="control"
     [size]="'md'"
   >
-    <ng-template fudisContent type="select-options">
+    <ng-template fudisSelectOptions>
       <fudis-select-option *ngFor="let option of testOptions" [data]="option"></fudis-select-option>
     </ng-template>
   </fudis-select>`,

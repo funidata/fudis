@@ -12,7 +12,7 @@
     <fudis-grid [columns]="1" [classes]="'fudis-mt-xl'">
       <fudis-heading [level]="1">Welcome to Fudis sandbox </fudis-heading>
       <fudis-expandable [title]="'Random stuff'" [level]="2">
-        <ng-template fudisContent type="expandable">
+        <ng-template fudisExpandableContent>
           <fudis-grid [classes]="'fudis-mt-md'">
             <fudis-notification [variant]="'danger'"
               ><fudis-body-text>Whoops! Here is danger notification</fudis-body-text
@@ -39,7 +39,7 @@
       <app-form-examples fudisGridItem [columns]="'stretch'" />
 
       <fudis-expandable [title]="'Grid stuff'" [level]="2">
-        <ng-template fudisContent type="expandable">
+        <ng-template fudisExpandableContent>
           <fudis-grid [columns]="1" [rowGap]="'xxl'">
             <fudis-grid [columns]="2">
               <fudis-heading [level]="3" [variant]="'xl'">Grid stuff!</fudis-heading>
@@ -95,7 +95,7 @@
         [variant]="'lite'"
         [padding]="'small'"
       >
-        <ng-template fudisContent type="expandable">
+        <ng-template fudisExpandableContent>
           <fudis-body-text>Expandable lite without large content padding.</fudis-body-text>
         </ng-template>
       </fudis-expandable>
