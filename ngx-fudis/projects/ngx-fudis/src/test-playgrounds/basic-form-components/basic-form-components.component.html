@@ -1,78 +1,92 @@
+<fudis-button
+  class="fudis-mr-sm fudis-mb-sm"
+  [label]="'Touch all controls'"
+  (handleClick)="touchControls()"
+/>
+<fudis-button
+  class="fudis-mb-sm"
+  [label]="'Toggle Form disabled'"
+  (handleClick)="toggleFormDisabled()"
+/>
+
 <fudis-heading [level]="2">Text Inputs</fudis-heading>
-<fudis-grid [columns]="{ sm: 1, md: 2, lg: 'inputSm inputMd inputLg' }">
+<fudis-grid [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
   <fudis-text-input
     [size]="'sm'"
-    [control]="myForm.controls.textInput"
+    [control]="myForm.controls.textInputRequired"
     [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
   />
   <fudis-text-input
     [size]="'md'"
-    [control]="myForm.controls.textInput"
+    [control]="myForm.controls.textInputRequired"
     [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
   />
   <fudis-text-input
     [size]="'lg'"
-    [control]="myForm.controls.textInput"
+    [control]="myForm.controls.textInputRequired"
     [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
   />
   <fudis-text-input
     [size]="'sm'"
-    [control]="myForm.controls.textInput"
-    [label]="textInputProps.longLabel"
+    [control]="myForm.controls.textInputRequired"
+    [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
+    [tooltip]="textInputProps.tooltip"
   />
   <fudis-text-input
     [size]="'md'"
-    [control]="myForm.controls.textInput"
-    [label]="textInputProps.longLabel"
+    [control]="myForm.controls.textInputRequired"
+    [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
+    [tooltip]="textInputProps.tooltip"
   />
   <fudis-text-input
     [size]="'lg'"
-    [control]="myForm.controls.textInput"
-    [label]="textInputProps.longLabel"
+    [control]="myForm.controls.textInputRequired"
+    [label]="textInputProps.label"
+    [helpText]="textInputProps.helpText"
+    [tooltip]="textInputProps.tooltip"
+  />
+</fudis-grid>
+<fudis-heading class="fudis-mt-lg" [level]="2">Text Areas</fudis-heading>
+<fudis-grid [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
+  <fudis-text-area
+    [size]="'sm'"
+    [control]="myForm.controls.textArea"
+    [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
   />
-  <fudis-text-input
+  <fudis-text-area
+    [size]="'md'"
+    [control]="myForm.controls.textArea"
+    [label]="textInputProps.label"
+    [helpText]="textInputProps.helpText"
+  />
+  <fudis-text-area
+    [size]="'lg'"
+    [control]="myForm.controls.textArea"
+    [label]="textInputProps.label"
+    [helpText]="textInputProps.helpText"
+  />
+  <fudis-text-area
     [size]="'sm'"
     [control]="myForm.controls.textAreaRequired"
-    [label]="textInputProps.longLabel"
+    [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
   />
-  <fudis-text-input
+  <fudis-text-area
     [size]="'md'"
     [control]="myForm.controls.textAreaRequired"
-    [label]="textInputProps.longLabel"
+    [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
   />
-  <fudis-text-input
+  <fudis-text-area
     [size]="'lg'"
     [control]="myForm.controls.textAreaRequired"
-    [label]="textInputProps.longLabel"
+    [label]="textInputProps.label"
     [helpText]="textInputProps.helpText"
-  />
-  <fudis-text-input
-    [size]="'sm'"
-    [control]="myForm.controls.textAreaRequired"
-    [label]="textInputProps.longLabel"
-    [helpText]="textInputProps.helpText"
-    [tooltip]="textInputProps.tooltip"
-  />
-  <fudis-text-input
-    [size]="'md'"
-    [control]="myForm.controls.textAreaRequired"
-    [label]="textInputProps.longLabel"
-    [helpText]="textInputProps.helpText"
-    [tooltip]="textInputProps.tooltip"
-  />
-  <fudis-text-input
-    [size]="'lg'"
-    [control]="myForm.controls.textAreaRequired"
-    [label]="textInputProps.longLabel"
-    [helpText]="textInputProps.helpText"
-    [tooltip]="textInputProps.tooltip"
   />
 </fudis-grid>

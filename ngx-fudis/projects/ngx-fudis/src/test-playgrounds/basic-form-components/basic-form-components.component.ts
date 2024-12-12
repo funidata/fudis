@@ -29,16 +29,32 @@ export class StorybookExampleBasicFormComponentsComponent {
       textInput: new FormControl(null),
       textInputRequired: new FormControl(null, FudisValidators.required('This is required!')),
       textArea: new FormControl(null),
-      textAreaRequired: new FormControl(null, FudisValidators.required('This is required!')),
+      textAreaRequired: new FormControl(null, [
+        FudisValidators.required('This is required!'),
+        FudisValidators.maxLength(50, 'Too long input!'),
+      ]),
+    });
+  }
+
+  toggleFormDisabled(): void {
+    if (this.myForm.disabled) {
+      this.myForm.enable();
+    } else {
+      this.myForm.disable();
+    }
+  }
+
+  touchControls(): void {
+    Object.keys(this.myForm.controls).forEach((control) => {
+      this.myForm.controls[control as keyof MyForm].markAsTouched();
     });
   }
 
   myForm: FormGroup<MyForm>;
 
   textInputProps = {
-    label: 'Input Label',
-    longLabel: 'Longer probably multiline label',
-    helpText: 'Helptext for text input',
+    label: 'Longer probably multiline label text',
+    helpText: 'Quite long helptext to make sure things go multiline!',
     tooltip: 'Tooltip!',
   };
 }
