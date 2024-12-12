@@ -2,7 +2,7 @@ import test, { expect } from "@playwright/test";
 
 test("basic form components playground", async ({ page }) => {
   await page.goto(
-    "/iframe.html?globals=&args=&id=components-test-playground-basic-form-components--example&viewMode=story",
+    "/iframe.html?globals=&id=components-test-playground--basic-form-components&viewMode=story",
   );
   await expect(page.getByTestId("fudis-text-area-3"))
     .toBeVisible()
