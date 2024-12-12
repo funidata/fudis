@@ -11,10 +11,10 @@ import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 // }
 
 type MyForm = {
-  textInput: FormControl<string | null>;
+  textInputToBeLeftEmpty: FormControl<string | null>;
   textInputRequired: FormControl<string | null>;
-  textArea: FormControl<string | null>;
   textAreaRequired: FormControl<string | null>;
+  textAreaToBeLeftEmpty: FormControl<string | null>;
 };
 
 @Component({
@@ -26,11 +26,18 @@ type MyForm = {
 export class StorybookExampleBasicFormComponentsComponent {
   constructor() {
     this.myForm = new FormGroup<MyForm>({
-      textInput: new FormControl(null),
       textInputRequired: new FormControl(null, FudisValidators.required('This is required!')),
-      textArea: new FormControl(null),
+      textInputToBeLeftEmpty: new FormControl(null, FudisValidators.required('This is required!')),
       textAreaRequired: new FormControl(null, [
-        FudisValidators.required('This is required!'),
+        FudisValidators.required(
+          'This is definitely even required as this error has so many words!',
+        ),
+        FudisValidators.maxLength(50, 'Too long input!'),
+      ]),
+      textAreaToBeLeftEmpty: new FormControl(null, [
+        FudisValidators.required(
+          'This is definitely even required as this error has so many words!',
+        ),
         FudisValidators.maxLength(50, 'Too long input!'),
       ]),
     });
