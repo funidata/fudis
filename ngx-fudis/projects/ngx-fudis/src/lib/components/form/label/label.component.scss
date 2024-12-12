@@ -17,13 +17,17 @@
   }
 
   &__content {
-    display: inline-flex;
-    flex-wrap: wrap;
     margin: spacing.$spacing-xxs 0;
     min-height: spacing.$spacing-md;
+    white-space: break-spaces;
 
     &__text {
       margin-right: spacing.$spacing-xs;
+    }
+
+    &__space {
+      display: inline-block;
+      width: 0;
     }
 
     &__required {
