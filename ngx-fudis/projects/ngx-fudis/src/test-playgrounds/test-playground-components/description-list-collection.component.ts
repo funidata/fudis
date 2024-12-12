@@ -9,17 +9,15 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
   selector: 'example-description-list-collection',
   template: `
     @for (gridConfig of gridConfigs; track gridConfig) {
-      <fudis-heading [level]="1" [variant]="'xl'">Grid Config: {{ gridConfig }}</fudis-heading>
-
       @for (variant of variants; track variant.value) {
         <fudis-heading [level]="2" [variant]="'xl'"
-          >Test cases for variant: {{ variant.title }}</fudis-heading
-        >
+          >Test cases for variant: {{ variant.title }} with Grid {{ gridConfig.title }}
+        </fudis-heading>
         <fudis-hr class="fudis-my-lg" />
         <fudis-heading [level]="3" [variant]="'md'"
           >{{ variant.title }} Description List</fudis-heading
         >
-        <fudis-dl [variant]="variant.value" [columns]="2" [disableGrid]="gridConfig">
+        <fudis-dl [variant]="variant.value" [columns]="2" [disableGrid]="gridConfig.value">
           @for (data of basicData; track data) {
             <fudis-dl-item>
               <fudis-dt [contentText]="data.dt"></fudis-dt>
@@ -32,7 +30,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           >Nested {{ variant.title }} Description Lists with Indiana Jones Movies</fudis-heading
         >
 
-        <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig">
+        <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value">
           @for (movie of indianaJonesData; track movie) {
             <fudis-dl-item>
               <fudis-dt [contentText]="movie.title" />
@@ -60,7 +58,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           <fudis-heading [level]="3" [variant]="'md'"
             >{{ variant.title }} Description List as Grid's Child Component</fudis-heading
           >
-          <fudis-dl [disableGrid]="gridConfig" [variant]="variant.value">
+          <fudis-dl [disableGrid]="gridConfig.value" [variant]="variant.value">
             <fudis-dl-item>
               <fudis-dt [contentText]="'Teacher email'"></fudis-dt>
               <fudis-dd
@@ -82,7 +80,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-heading [level]="2" [variant]="'md'"
           >{{ variant.title }} Description List With Sub Components</fudis-heading
         >
-        <fudis-dl class="fudis-mt-sm" [disableGrid]="gridConfig" [variant]="variant.value">
+        <fudis-dl class="fudis-mt-sm" [disableGrid]="gridConfig.value" [variant]="variant.value">
           <fudis-dl-item>
             <fudis-dt [contentText]="'First name'"></fudis-dt>
             <fudis-dd [contentText]="'Rex'"></fudis-dd>
@@ -132,7 +130,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           class="fudis-mt-sm"
           [variant]="'regular'"
           [columns]="'1fr 1fr'"
-          [disableGrid]="gridConfig"
+          [disableGrid]="gridConfig.value"
           [variant]="variant.value"
           [tag]="'p'"
         >
@@ -148,7 +146,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-dl
           class="fudis-mt-sm"
           [columns]="'1fr 1fr'"
-          [disableGrid]="gridConfig"
+          [disableGrid]="gridConfig.value"
           [variant]="variant.value"
         >
           <fudis-dl-item>
@@ -164,6 +162,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
             <fudis-dd [contentText]="'Anakin Skywalker'"></fudis-dd>
           </fudis-dl-item>
         </fudis-dl>
+        <fudis-hr class="fudis-my-lg" />
       }
     }
   `,
@@ -242,5 +241,8 @@ export class StorybookExampleDescriptionListCollectionComponent {
     quote: 'Famous Quote',
   };
 
-  gridConfigs = [true, false];
+  gridConfigs = [
+    { title: 'Enabled', value: true },
+    { title: 'Disabled', value: false },
+  ];
 }
