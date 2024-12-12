@@ -6,7 +6,6 @@ import { ValidatorErrorMessageComponent } from '../error-message/validator-error
 import { IconComponent } from '../../icon/icon.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement, getAllElements } from '../../../utilities/tests/utilities';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { MockComponent } from 'ng-mocks';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
@@ -48,7 +47,6 @@ describe('GuidanceComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         GuidanceComponent,
-        ContentDirective,
         ValidatorErrorMessageComponent,
         MockComponent(IconComponent),
       ],

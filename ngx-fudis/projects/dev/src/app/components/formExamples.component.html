@@ -4,14 +4,14 @@
     [level]="2"
     [closed]="formExpandableClosed"
   >
-    <ng-template fudisActions type="expandable">
+    <fudis-expandable-actions>
       <fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
       <fudis-button
         [label]="'Custom error status: ' + customError"
         (handleClick)="toggleCustomError()"
       ></fudis-button>
-    </ng-template>
-    <ng-template fudisContent type="expandable">
+    </fudis-expandable-actions>
+    <ng-template fudisExpandableContent>
       <fudis-form
         [errorSummaryVisible]="errorSummaryVisible"
         [title]="'Form title here hello'"
@@ -84,7 +84,7 @@
     </ng-template>
   </fudis-expandable>
   <fudis-expandable [title]="'Select Examples'" [level]="2" [closed]="false">
-    <ng-template fudisContent type="expandable">
+    <ng-template fudisExpandableContent>
       <fudis-grid [columns]="'inputLg'">
         <fudis-heading [level]="3" [variant]="'md'"
           >Autocomplete multiselect dropdown</fudis-heading
@@ -93,7 +93,7 @@
           [label]="'Translated Select Dropdown'"
           [control]="selectForm.controls.translatedSelect"
         >
-          <ng-template fudisContent type="select-options">
+          <ng-template fudisSelectOptions>
             <fudis-select-option *ngFor="let option of translatedSelectOptions" [data]="option" />
           </ng-template>
         </fudis-select>
@@ -102,7 +102,7 @@
           [variant]="'autocompleteDropdown'"
           [control]="selectForm.controls.translatedSelect"
         >
-          <ng-template fudisContent type="select-options">
+          <ng-template fudisSelectOptions>
             <fudis-select-option *ngFor="let option of translatedSelectOptions" [data]="option" />
           </ng-template>
         </fudis-select>
@@ -111,7 +111,7 @@
           [label]="'Translated Multiselect Dropdown'"
           [control]="selectForm.controls.translatedMultiselect"
         >
-          <ng-template fudisContent type="select-options">
+          <ng-template fudisSelectOptions>
             <fudis-multiselect-option
               *ngFor="let option of translatedSelectOptions"
               [data]="option"
@@ -124,7 +124,7 @@
           [label]="'Pick a pet Autocomplete Dropdown Multiselect'"
           [control]="selectForm.controls.autocompleteSearch"
         >
-          <ng-template fudisContent type="select-options">
+          <ng-template fudisSelectOptions>
             <fudis-multiselect-option *ngFor="let option of selectOptions" [data]="option" />
           </ng-template>
         </fudis-multiselect>
