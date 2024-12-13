@@ -6,11 +6,13 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   signal,
+  OnChanges,
 } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisDialogSize } from '../../types/miscellaneous';
+import { FudisComponentChanges, FudisDialogSize } from '../../types/miscellaneous';
+import { FudisDOMUtilitiesService } from '../../services/dom/dom-utilities.service';
 
 @Component({
   selector: 'fudis-dialog',
@@ -18,11 +20,12 @@ import { FudisDialogSize } from '../../types/miscellaneous';
   styleUrls: ['./dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogComponent implements OnDestroy, OnInit {
+export class DialogComponent implements OnDestroy, OnInit, OnChanges {
   constructor(
     protected _translateService: FudisTranslationService,
     private _dialogService: FudisDialogService,
     private _idService: FudisIdService,
+    protected _DOMUtilitiesService: FudisDOMUtilitiesService,
   ) {
     this._id = _idService.getNewId('dialog');
 
@@ -56,6 +59,12 @@ export class DialogComponent implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     if (this._orderNumber === 1 || this._orderNumber === 0) {
       this._dialogService.setDialogOpenStatus(false);
+    }
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<DialogComponent>): void {
+    if(changes.size?.currentValue !== changes.size?.previousValue) {
+      this._DOMUtilitiesService.isDialogScrollable();
     }
   }
 

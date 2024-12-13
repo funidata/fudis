@@ -16,8 +16,16 @@ export class FudisDOMUtilitiesService {
         if (this.labelHeightMatched.value) {
           this.setLabelHeight();
         }
+        if (this.dialogScrollableContent.value) {
+          this.isDialogScrollable();
+        }
       });
   }
+
+  /**
+   * 
+   */
+  public dialogScrollableContent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Is setting components' label heights to equal completed
@@ -61,4 +69,29 @@ export class FudisDOMUtilitiesService {
       delay ? 100 : 0,
     );
   }
+
+    /**
+     * From: https://phuoc.ng/collection/html-dom/check-if-an-element-is-scrollable/
+     */
+      isDialogScrollable(): void {
+
+        const dialogContent = (this._elementRef?.nativeElement as HTMLDivElement)?.querySelectorAll(
+          '.fudis-dialog-content',
+        );
+
+        // Compare the height to see if the element has scrollable content
+        const hasScrollableContent =
+          this._elementRef.nativeElement.scrollHeight > this._elementRef.nativeElement.clientHeight;
+    
+        // It's not enough because the element's `overflow-y` style can be set as
+        // * `hidden`
+        // * `hidden !important`
+        // In those cases, the scrollbar isn't shown
+        const overflowYStyle = window.getComputedStyle(this._elementRef.nativeElement).overflowY;
+        const isOverflowHidden = overflowYStyle.indexOf('hidden') !== -1;
+    
+        if (hasScrollableContent && !isOverflowHidden){
+          this.dialogScrollableContent.next(true);
+        }
+      }
 }
