@@ -17,7 +17,8 @@
     visibility: hidden;
   }
 
-  &:hover {
+  /* stylelint-disable-next-line selector-class-pattern */
+  &:hover:not(:has(.fudis-multiselect-option__label__checkbox__input[aria-disabled='true'])) {
     @include colorMixins.bg-color('primary-light');
   }
 
@@ -66,7 +67,7 @@
         position: absolute;
         place-content: center;
 
-        &:focus {
+        &:not([aria-disabled='true']):focus {
           @include focus.focus-checkbox;
         }
       }

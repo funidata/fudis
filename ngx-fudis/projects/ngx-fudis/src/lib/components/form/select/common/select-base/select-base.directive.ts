@@ -136,7 +136,7 @@ export class SelectBaseDirective
   /**
    * CSS selector for querying focus states
    */
-  public focusSelector: string = '.fudis-select-option__focusable';
+  public focusSelector: string = ".fudis-select-option__focusable:not([aria-disabled='true'])";
 
   /**
    * Selected option or options label for non-autocomplete dropdowns

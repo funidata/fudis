@@ -13,8 +13,8 @@
   tabindex="-1"
   [attr.id]="_id"
   [attr.aria-disabled]="data.disabled || null"
-  (focus)="_focus()"
-  (keydown)="_keyDown($event)"
+  (focus)="!data.disabled && _focus()"
+  (keydown)="!data.disabled && _keyDown($event)"
   (blur)="_blur($event)"
   (click)="!data.disabled && _clickOption($event)"
 >

@@ -24,10 +24,10 @@
         role="option"
         [attr.id]="_id + '-checkbox-input'"
         [attr.aria-disabled]="data.disabled || null"
-        (click)="_clickOption($event)"
+        (click)="!data.disabled && _clickOption($event)"
         [attr.aria-selected]="checked"
-        (focus)="_focus()"
-        (keydown)="_keyDown($event)"
+        (focus)="!data.disabled && _focus()"
+        (keydown)="!data.disabled && _keyDown($event)"
         (blur)="_blur($event)"
       />
       <fudis-icon
