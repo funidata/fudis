@@ -29,7 +29,7 @@ Major changes are backward incompatible and will have breaking changes.\
 
 Find release notes for the latest [Fudis Version](https://github.com/funidata/fudis/releases).
 
-## Release Pipeline
+## Release Flow
 
 ### Create New Release
 
@@ -49,6 +49,10 @@ Find release notes for the latest [Fudis Version](https://github.com/funidata/fu
 - Publish release
 - Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
 
-### Note!
+### Problems After Releasing
 
-If something goes wrong with the release, create a new patch version instead of trying to fix already published version. Overwriting released version might produce unwanted concequences with the work of other project developers.
+NPM does not allow modifying published packages to protect downstream dependents. If there is something wrong with a published version, you should release a new version incrementing the version as appropriate.
+
+For extreme cases, there exists an option to unpublish a package from NPM. This should be a last resort as it will break any downstream projects depending on the unpublished version. Note that even unpublishing will not allow you to use the same version again in a release, i.e., it is not a workaround to overwrite a published package. See [NPM Unpublish documentation](https://docs.npmjs.com/policies/unpublish).
+
+If something goes wrong in the release pipeline before the package has been published to NPM, you should anyhow increment the version and create a new release. This provides clarity and consistency to other Fudis developers as well as users of the library. Please also refrain from removing releases from GitHub and rather edit the release notes to make clear what has wrong and that the package should not be used. The bad code will anyway be forever available in the public repository so it is better to have the problems documented in release notes and thus provide an "audit trail" to users rather than undue surprises.
