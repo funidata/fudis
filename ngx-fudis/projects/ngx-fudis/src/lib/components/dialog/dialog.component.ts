@@ -7,6 +7,7 @@ import {
   ChangeDetectionStrategy,
   signal,
   OnChanges,
+  AfterViewInit,
 } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
@@ -18,9 +19,10 @@ import { FudisDOMUtilitiesService } from '../../services/dom/dom-utilities.servi
   selector: 'fudis-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
+  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'dialog' }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogComponent implements OnDestroy, OnInit, OnChanges {
+export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewInit {
   constructor(
     protected _translateService: FudisTranslationService,
     private _dialogService: FudisDialogService,
@@ -52,19 +54,23 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges {
    */
   private _orderNumber: number;
 
+  ngOnChanges(changes: FudisComponentChanges<DialogComponent>): void {
+    if (changes.size?.currentValue !== changes.size?.previousValue) {
+      this._DOMUtilitiesService.isDialogScrollable();
+    }
+  }
+
   ngOnInit(): void {
     this._orderNumber = this._dialogService.dialogsOpen().length;
+  }
+
+  ngAfterViewInit(): void {
+    this._DOMUtilitiesService.isDialogScrollable();
   }
 
   ngOnDestroy(): void {
     if (this._orderNumber === 1 || this._orderNumber === 0) {
       this._dialogService.setDialogOpenStatus(false);
-    }
-  }
-
-  ngOnChanges(changes: FudisComponentChanges<DialogComponent>): void {
-    if(changes.size?.currentValue !== changes.size?.previousValue) {
-      this._DOMUtilitiesService.isDialogScrollable();
     }
   }
 

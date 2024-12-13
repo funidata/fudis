@@ -1,4 +1,8 @@
-<div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
+<div
+  class="fudis-dialog fudis-dialog__size__{{ size }}"
+  [class.fudis-dialog--scrollable]="_DOMUtilitiesService.dialogScrollable()"
+  [attr.id]="_id"
+>
   <fudis-button
     fudisDialogClose
     class="fudis-dialog__close"

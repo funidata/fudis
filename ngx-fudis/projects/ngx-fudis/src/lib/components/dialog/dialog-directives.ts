@@ -1,4 +1,12 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import {
   MatDialog,
   MatDialogActions,
@@ -42,7 +50,7 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 
 @Directive({
   selector: 'fudis-dialog-content',
-  providers: [FudisDOMUtilitiesService]
+  providers: [FudisDOMUtilitiesService],
 })
 export class DialogContentDirective extends MatDialogContent implements OnChanges {
   constructor(
@@ -56,7 +64,7 @@ export class DialogContentDirective extends MatDialogContent implements OnChange
   /**
    * Binding fudis-dialog-content CSS class to directive
    */
-    @HostBinding('class') public hostClass = 'fudis-dialog-content';
+  @HostBinding('class') public hostClass = 'fudis-dialog-content';
 
   /**
    * Dialog contentFocus sets a visual focus to dialog content. Preferred to be used with read-only content.

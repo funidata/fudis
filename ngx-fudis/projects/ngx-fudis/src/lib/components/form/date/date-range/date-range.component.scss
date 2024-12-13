@@ -6,11 +6,6 @@
   opacity: 1;
   max-width: spacing.$input-width-lg;
 
-  /* Show Date Range only after it has calculated the label height for each Datepicker */
-  &--hidden {
-    opacity: 0;
-  }
-
   &__gutter {
     display: block;
     width: spacing.$spacing-md;

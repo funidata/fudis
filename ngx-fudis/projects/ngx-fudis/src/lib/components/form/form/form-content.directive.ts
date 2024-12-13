@@ -9,7 +9,11 @@ export class FormActionsDirective {
 }
 
 @Directive({ selector: 'fudis-form-header' })
-export class FormHeaderDirective {}
+export class FormHeaderDirective {
+  @HostBinding('class') public hostClass = 'fudis-form-header';
+}
 
 @Directive({ selector: 'fudis-form-content' })
-export class FormContentDirective {}
+export class FormContentDirective {
+  @HostBinding('class') public hostClass = 'fudis-form-content';
+}
