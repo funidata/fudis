@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
-import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import {
   FudisCheckboxChangeEvent,
   FudisCheckboxGroupFormGroup,
@@ -21,7 +20,7 @@ import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { IconComponent } from '../../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FieldsetContentDirective } from '../../../../directives/content-projection/fieldset/fieldset-content.directive';
+import { FieldsetContentDirective } from '../../fieldset/fieldset-content.directive';
 
 type TestForm = {
   apple: FormControl<boolean | null>;
@@ -110,7 +109,6 @@ describe('CheckboxComponent', () => {
         GridComponent,
         GridApiDirective,
         GridDirective,
-        ContentDirective,
         GuidanceComponent,
         IconComponent,
       ],

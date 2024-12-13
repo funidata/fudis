@@ -70,7 +70,7 @@ const ExampleTemplate: StoryFn = (args) => ({
         <fudis-body-text>This is notification</fudis-body-text>
       </fudis-notification>
       <fudis-expandable [level]="3" [title]="'Expandable inside section'" [closed]="false">
-        <ng-template fudisContent type="expandable">
+        <ng-template fudisExpandableContent>
           <fudis-body-text>Some content inside expandable</fudis-body-text>
         </ng-template>
       </fudis-expandable>

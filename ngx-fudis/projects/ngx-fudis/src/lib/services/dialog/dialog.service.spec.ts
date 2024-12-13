@@ -10,7 +10,7 @@ import {
   DialogActionsDirective,
   DialogCloseDirective,
   DialogContentDirective,
-} from '../../directives/dialog/dialog-directives';
+} from '../../components/dialog/dialog-directives';
 import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
 import { IconComponent } from '../../components/icon/icon.component';
 import { FudisAlertService } from '../alert/alert.service';
