@@ -11,7 +11,6 @@ import {
   Signal,
   ViewChild,
   WritableSignal,
-  effect,
   signal,
   AfterViewInit,
 } from '@angular/core';
@@ -29,7 +28,6 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 
@@ -52,16 +50,6 @@ export class SelectBaseDirective
       if (this.control) {
         this._required.next(hasRequiredValidator(this.control));
       }
-    });
-
-    effect(() => {
-      const translations = _translationService.getTranslations()();
-
-      this.translationOptionDisabledText.next(translations.SELECT.DISABLED);
-
-      // TODO: after a11y audit, check if these can be removed
-      this._translationOpenAriaLabel.next(translations.SELECT.OPEN_DROPDOWN);
-      this._translationCloseAriaLabel.next(translations.SELECT.CLOSE_DROPDOWN);
     });
   }
 
@@ -151,11 +139,6 @@ export class SelectBaseDirective
   public focusSelector: string = '.fudis-select-option__focusable';
 
   /**
-   * Internal translated text for disabled select option, used in Select and Multiselect Option
-   */
-  public translationOptionDisabledText = new BehaviorSubject<string>('string');
-
-  /**
    * Selected option or options label for non-autocomplete dropdowns
    */
   protected _dropdownSelectionLabelText = signal<string | null>(null);
@@ -169,16 +152,6 @@ export class SelectBaseDirective
    * For setting dropdown open / closed
    */
   protected _dropdownOpen = signal<boolean>(false);
-
-  /**
-   * Internal translated text for icon-only button aria-label when opening dropdown
-   */
-  protected _translationOpenAriaLabel = new BehaviorSubject<string>('');
-
-  /**
-   * Internal translated text for icon-only button aria-label when closing dropdown
-   */
-  protected _translationCloseAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Signal to Select & MultiselectOption for listening autocomplete filter text changes

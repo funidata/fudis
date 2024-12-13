@@ -28,6 +28,6 @@
     [color]="'primary'"
   />
   <span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text">
-    ({{ _parentSelect.translationOptionDisabledText | async }})</span
+    ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
   >
 </div>
