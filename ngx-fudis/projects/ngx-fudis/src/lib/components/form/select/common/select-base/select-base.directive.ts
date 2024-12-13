@@ -168,7 +168,7 @@ export class SelectBaseDirective
   /**
    * For setting dropdown open / closed
    */
-  protected _dropdownOpen = new BehaviorSubject<boolean>(false);
+  protected _dropdownOpen = signal<boolean>(false);
 
   /**
    * Internal translated text for icon-only button aria-label when opening dropdown
@@ -302,7 +302,7 @@ export class SelectBaseDirective
   public openDropdown(): void {
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
-      this._dropdownOpen.next(true);
+      this._dropdownOpen.set(true);
     }
   }
 
@@ -312,7 +312,7 @@ export class SelectBaseDirective
    * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
-    this._dropdownOpen.next(false);
+    this._dropdownOpen.set(false);
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
@@ -427,11 +427,11 @@ export class SelectBaseDirective
       !this._preventDropdownReopen &&
       openDropdown &&
       !this._mouseDownInsideComponent &&
-      !this._dropdownOpen.value
+      !this._dropdownOpen()
     ) {
       this.openDropdown();
     } else if (this._clickFromIcon) {
-      if (this._dropdownOpen.value) {
+      if (this._dropdownOpen()) {
         this.closeDropdown();
       } else {
         this.openDropdown();
@@ -498,7 +498,7 @@ export class SelectBaseDirective
           break;
         case 'ArrowDown':
           event.preventDefault();
-          if (!this._dropdownOpen.value) {
+          if (!this._dropdownOpen()) {
             this._toggleDropdown();
           }
           if (this._inputFocused) {
@@ -534,7 +534,7 @@ export class SelectBaseDirective
    * Toggle dropdown
    */
   protected _toggleDropdown(): void {
-    if (this._dropdownOpen.value) {
+    if (this._dropdownOpen()) {
       this.closeDropdown();
     } else {
       this.openDropdown();
@@ -690,7 +690,7 @@ export class SelectBaseDirective
    */
   @HostListener('window:keydown.escape', ['$event'])
   private _handleEscapePress(event: KeyboardEvent) {
-    if (this._dropdownOpen.value) {
+    if (this._dropdownOpen()) {
       event.preventDefault();
 
       this.closeDropdown(true, true);
@@ -704,7 +704,7 @@ export class SelectBaseDirective
   @HostListener('document:mouseup', ['$event.target'])
   private _handleWindowClick(targetElement: HTMLElement) {
     this._mouseDownInsideComponent = false;
-    if (this._dropdownOpen.value && !this._selectRef.nativeElement.contains(targetElement)) {
+    if (this._dropdownOpen() && !this._selectRef.nativeElement.contains(targetElement)) {
       this.closeDropdown(false);
     }
   }
