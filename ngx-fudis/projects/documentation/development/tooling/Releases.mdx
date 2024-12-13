@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/blocks";
 
-<Meta title="Documentation/Development/Tooling/Creating a Release" />
+<Meta title="Documentation/Development/Tooling/Releases" />
 
-# Creating a Release
+# Releases
 
 New versions are published to NPM using GitHub Releases. After tagging and creating a release on GitHub, an automatic workflow handles packaging and publishing Fudis to NPM.
 
@@ -25,13 +25,13 @@ Minor updates are compatible with previous versions and usually includes additio
 Major changes are backward incompatible and will have breaking changes.\
 **Example:** Changes in API endpoint name, remove of an endpoint.
 
-## Release notes
+## Release Notes
 
 Find release notes for the latest [Fudis Version](https://github.com/funidata/fudis/releases).
 
 ## Release Pipeline
 
-**Steps for creating a new release:**
+### Create New Release
 
 - Depending on the changes included in the release, run the following command with the correct argument `npm run fudis-release -- <major|minor|patch>`. **Example:** `npm run fudis-release -- patch`
   > This will run a release shell script which creates a new branch named `release` and automatically runs `npm version` command with given argument.\
