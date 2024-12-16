@@ -1,28 +1,36 @@
 import { DOCUMENT } from '@angular/common';
-import { ElementRef, Inject, Injectable } from '@angular/core';
+import { ElementRef, Inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, debounceTime, fromEvent } from 'rxjs';
+import { debounceTime, fromEvent } from 'rxjs';
 
 @Injectable()
 export class FudisDOMUtilitiesService {
   constructor(
+    @Inject('componentType') componentType: 'dialog' | 'label',
     @Inject(DOCUMENT) private _document: Document,
     private _elementRef: ElementRef,
   ) {
-    // Check label heights also when screen in resized
+    // Run needed checks on resize
     fromEvent(window, 'resize')
       .pipe(takeUntilDestroyed(), debounceTime(10))
       .subscribe(() => {
-        if (this.labelHeightMatched.value) {
+        if (componentType === 'label' && this.labelHeightMatched()) {
           this.setLabelHeight();
+        } else if (componentType === 'dialog' && this.dialogScrollable() !== null) {
+          this.isDialogScrollable();
         }
       });
   }
 
   /**
+   * Does Dialog have scrollable content
+   */
+  public dialogScrollable: WritableSignal<boolean | null> = signal(null);
+
+  /**
    * Is setting components' label heights to equal completed
    */
-  public labelHeightMatched: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public labelHeightMatched: WritableSignal<boolean | null> = signal(null);
 
   /**
    * Utility function to match two Fudis Labels height, if components are designed to be always side by side. E. g. LocalizedTextGroup and DateRange
@@ -55,10 +63,49 @@ export class FudisDOMUtilitiesService {
           } else if (labelTwoHeigth > labelOneHeigth) {
             (labels[0] as HTMLLabelElement).style.height = `${labelTwoHeigth / fontSize}rem`;
           }
-          this.labelHeightMatched.next(true);
+          this.labelHeightMatched.set(true);
         }
       },
       delay ? 100 : 0,
     );
+  }
+
+  /**
+   * From: https://phuoc.ng/collection/html-dom/check-if-an-element-is-scrollable/
+   */
+  public isDialogScrollable(): void {
+    const dialogContentElement = (this._elementRef?.nativeElement as HTMLDivElement)?.querySelector(
+      '.fudis-dialog-content',
+    );
+
+    const dialogContentVisible = dialogContentElement?.clientHeight;
+    const dialogContentScrollable = dialogContentElement?.scrollHeight;
+
+    const formContent = (this._elementRef?.nativeElement as HTMLDivElement)?.querySelector(
+      '.fudis-form-content',
+    )?.clientHeight;
+
+    const formScrollableContent = (
+      this._elementRef?.nativeElement as HTMLDivElement
+    )?.querySelector('.fudis-form__content-wrapper')?.clientHeight;
+
+    // Compare the height to see if the element has scrollable content
+    const hasScrollableContent =
+      (formScrollableContent && formContent && formContent > formScrollableContent) ||
+      (dialogContentScrollable &&
+        dialogContentVisible &&
+        dialogContentScrollable > dialogContentVisible);
+    // It's not enough because the element's `overflow-y` style can be set as
+    // * `hidden`
+    // * `hidden !important`
+    // In those cases, the scrollbar isn't shown
+    const overflowYStyle = window.getComputedStyle(this._elementRef.nativeElement).overflowY;
+    const isOverflowHidden = overflowYStyle.indexOf('hidden') !== -1;
+
+    if (hasScrollableContent && !isOverflowHidden) {
+      this.dialogScrollable.set(true);
+    } else {
+      this.dialogScrollable.set(false);
+    }
   }
 }

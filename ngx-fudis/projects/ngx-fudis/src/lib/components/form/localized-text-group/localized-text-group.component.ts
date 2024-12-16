@@ -35,7 +35,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   selector: 'fudis-localized-text-group',
   templateUrl: './localized-text-group.component.html',
   styleUrls: ['./localized-text-group.component.scss'],
-  providers: [FudisDOMUtilitiesService],
+  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'label' }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocalizedTextGroupComponent
@@ -198,7 +198,7 @@ export class LocalizedTextGroupComponent
 
     if (
       changes.size?.currentValue !== changes.size?.previousValue &&
-      this._DOMUtilitiesService.labelHeightMatched.value
+      this._DOMUtilitiesService.labelHeightMatched()
     ) {
       this._DOMUtilitiesService.setLabelHeight(true);
     }
