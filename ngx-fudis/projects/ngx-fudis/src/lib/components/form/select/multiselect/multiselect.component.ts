@@ -1,11 +1,20 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  WritableSignal,
+  effect,
+  signal,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { joinInputValues } from '../common/utilities/selectUtilities';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
@@ -54,7 +63,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
   /**
    * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
    */
-  protected _sortedSelectedOptions: FudisSelectOption<object>[] = [];
+  protected _sortedSelectedOptions: WritableSignal<FudisSelectOption<object>[] | null> =
+    signal(null);
 
   /**
    * Set component's id and subscribe to value changes for form control coming from application
@@ -95,60 +105,64 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     }
   }
 
-  /**
-   * Function called by multiselect option if they are checked
-   * @param checkedOption FudisSelectOption to handle
-   * @param type add or remove option from sorting
-   */
-  public handleCheckedSort(checkedOption: FudisSelectOption<object>, type: 'add' | 'remove'): void {
-    let currentSelectedOptions = [...this._sortedSelectedOptions];
-
-    // Check if checkedOption exists in registeredOptions
-    const foundIndex: number = currentSelectedOptions.findIndex((option) => {
-      return option.value === checkedOption.value;
-    });
-
-    // If found, remove it
-    if (foundIndex !== -1 && type === 'remove') {
-      currentSelectedOptions = currentSelectedOptions.filter((_item, index) => {
-        return foundIndex !== index;
-      });
-      // If not found, add it
-    } else if (foundIndex === -1 && type === 'add') {
-      currentSelectedOptions.push(checkedOption);
-      // If found, replace it
-    } else if (foundIndex !== -1 && type === 'add') {
-      currentSelectedOptions[foundIndex] = checkedOption;
-    }
-
-    // Compare control value with registered options, if it matches, then sort options for the visible input field label text and for the chips
-
-    let valuesInSync = true;
-
-    if (this.control.value && currentSelectedOptions.length === this.control.value.length) {
-      currentSelectedOptions.forEach((registeredOption) => {
-        const matchFound = this.control.value?.find((controlOption) => {
-          return registeredOption.value === controlOption.value;
-        });
-
-        if (!matchFound) {
-          valuesInSync = false;
-        }
-      });
-    }
-
-    if (valuesInSync && this.control.value) {
-      const dropdown = this._dropdownRef?.dropdownElement?.nativeElement;
-
-      this._sortedSelectedOptions = currentSelectedOptions.sort(
-        this._sortSelectedOptions(dropdown),
-      );
-      this._dropdownSelectionLabelText.set(joinInputValues(this._sortedSelectedOptions));
-    } else {
-      this._sortedSelectedOptions = [];
-      this._dropdownSelectionLabelText.set(null);
-    }
+  protected _updateSortedSelectedOptions(newValue: FudisSelectOption<object>[] | null) {
+    this._sortedSelectedOptions.set(newValue);
   }
+
+  // /**
+  //  * Function called by multiselect option if they are checked
+  //  * @param checkedOption FudisSelectOption to handle
+  //  * @param type add or remove option from sorting
+  //  */
+  // public handleCheckedSort(checkedOption: FudisSelectOption<object>, type: 'add' | 'remove'): void {
+  //   let currentSelectedOptions = [...this._sortedSelectedOptions()];
+
+  //   // Check if checkedOption exists in registeredOptions
+  //   const foundIndex: number = currentSelectedOptions.findIndex((option) => {
+  //     return option.value === checkedOption.value;
+  //   });
+
+  //   // If found, remove it
+  //   if (foundIndex !== -1 && type === 'remove') {
+  //     currentSelectedOptions = currentSelectedOptions.filter((_item, index) => {
+  //       return foundIndex !== index;
+  //     });
+  //     // If not found, add it
+  //   } else if (foundIndex === -1 && type === 'add') {
+  //     currentSelectedOptions.push(checkedOption);
+  //     // If found, replace it
+  //   } else if (foundIndex !== -1 && type === 'add') {
+  //     currentSelectedOptions[foundIndex] = checkedOption;
+  //   }
+
+  //   // Compare control value with registered options, if it matches, then sort options for the visible input field label text and for the chips
+
+  //   let valuesInSync = true;
+
+  //   if (this.control.value && currentSelectedOptions.length === this.control.value.length) {
+  //     currentSelectedOptions.forEach((registeredOption) => {
+  //       const matchFound = this.control.value?.find((controlOption) => {
+  //         return registeredOption.value === controlOption.value;
+  //       });
+
+  //       if (!matchFound) {
+  //         valuesInSync = false;
+  //       }
+  //     });
+  //   }
+
+  //   if (valuesInSync && this.control.value) {
+  //     const dropdown = this._dropdownRef?.dropdownElement?.nativeElement;
+
+  //     this._sortedSelectedOptions = currentSelectedOptions.sort(
+  //       this._sortSelectedOptions(dropdown),
+  //     );
+  //     this._dropdownSelectionLabelText.set(joinInputValues(this._sortedSelectedOptions));
+  //   } else {
+  //     this._sortedSelectedOptions = [];
+  //     this._dropdownSelectionLabelText.set(null);
+  //   }
+  // }
 
   /**
    * Update internal states when Application updates control value

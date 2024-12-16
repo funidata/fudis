@@ -238,20 +238,29 @@ export class FudisIdService {
     selectType: 'select' | 'multiselect' | 'dropdown-menu',
     selectParentId: string,
     groupParentId?: string,
+    dataValue?: string,
   ): string {
     let newId = '';
 
     if (groupParentId) {
-      const orderNumber =
-        this._idData.grandParents[selectType][selectParentId].groups[groupParentId].length + 1;
+      if (dataValue) {
+        newId = `${groupParentId}-option-${dataValue}`;
+      } else {
+        const orderNumber =
+          this._idData.grandParents[selectType][selectParentId].groups[groupParentId].length + 1;
 
-      newId = `${groupParentId}-option-${orderNumber}`;
+        newId = `${groupParentId}-option-${orderNumber}`;
+      }
 
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
     } else {
-      const orderNumber =
-        this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.length + 1;
-      newId = `${selectParentId}-option-${orderNumber}`;
+      if (dataValue) {
+        newId = `${selectParentId}-option-${dataValue}`;
+      } else {
+        const orderNumber =
+          this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.length + 1;
+        newId = `${selectParentId}-option-${orderNumber}`;
+      }
 
       this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.push(newId);
     }

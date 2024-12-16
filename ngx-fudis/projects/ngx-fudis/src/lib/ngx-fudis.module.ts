@@ -117,6 +117,10 @@ import {
   SectionContentDirective,
 } from './components/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
+import {
+  SelectControlValueAccessorDirective,
+  MultiselectControlValueAccessorDirective,
+} from './components/form/select/common/select-control-value-accessor/select-control-value-accessor.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { SelectOptionsDirective } from './components/form/select/common/select-options-directive/select-options.directive';
 import { TextFieldComponentBaseDirective } from './directives/form/text-field-component-base/text-field-component-base.directive';
@@ -213,8 +217,11 @@ import { FudisTranslationService } from './services/translation/translation.serv
     SelectAutocompleteComponent,
     SelectBaseDirective,
     SelectComponent,
+    SelectControlValueAccessorDirective,
+    MultiselectControlValueAccessorDirective,
     SelectDropdownComponent,
     SelectGroupComponent,
+    SelectIconsComponent,
     SelectOptionsDirective,
     SelectOptionBaseDirective,
     SelectOptionComponent,
@@ -223,7 +230,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     TextInputComponent,
     TooltipDirective,
     ValidatorErrorMessageComponent,
-    SelectIconsComponent,
   ],
   /*
    * Include imports outside of Fudis components in 'imports' array below.

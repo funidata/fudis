@@ -12,7 +12,12 @@
   </fudis-label>
   <div #selectRef>
     <div class="fudis-select__input-wrapper fudis-input-size__{{ size }}">
-      <div
+      <input
+        type="text"
+        [attr.readonly]="true"
+        [attr.placeholder]="placeholder"
+        [formControl]="control"
+        fudisSelectControlValueAccessor
         *ngIf="variant === 'dropdown' || control.disabled || disabled"
         #inputRef
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
@@ -23,10 +28,10 @@
         aria-haspopup="listbox"
         [attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
         (click)="!control.disabled && !disabled && _clickInput()"
-        (focus)="_selectInputFocus($event)"
+        (focus)="!control.disabled && !disabled && _selectInputFocus($event)"
         (blur)="_inputBlur($event)"
-        (keydown)="_inputKeyDown($event)"
-        (keyup)="_inputKeyUp($event)"
+        (keydown)="!control.disabled && !disabled && _inputKeyDown($event)"
+        (keyup)="!control.disabled && !disabled && _inputKeyUp($event)"
         [attr.tabindex]="!control.disabled && !disabled ? 0 : null"
         [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="dropdownOpen"
@@ -35,17 +40,7 @@
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.aria-invalid]="control.invalid || null"
-      >
-        <span *ngIf="!_dropdownSelectionLabelText()" class="fudis-select__input__placeholder">{{
-          placeholder
-        }}</span>
-        <span
-          *ngIf="_dropdownSelectionLabelText()"
-          [id]="id + '-input-label'"
-          class="fudis-select__input__label"
-          >{{ _dropdownSelectionLabelText() }}</span
-        >
-      </div>
+      />
       <fudis-select-autocomplete
         *ngIf="variant !== 'dropdown' && control.enabled && !disabled"
         #autocompleteRef

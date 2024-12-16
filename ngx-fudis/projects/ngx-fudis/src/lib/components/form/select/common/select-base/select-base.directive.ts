@@ -378,9 +378,11 @@ export class SelectBaseDirective
    * Set control value to null
    */
   protected _setControlNull(): void {
-    this._controlValueChangedInternally = true;
-    this.control.patchValue(null);
-    this.selectionUpdate.emit(null);
+    if (this.control.value) {
+      this._controlValueChangedInternally = true;
+      this.control.patchValue(null);
+      this.selectionUpdate.emit(null);
+    }
 
     this.updateInputValueTexts('');
   }

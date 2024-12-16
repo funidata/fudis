@@ -19,21 +19,17 @@ export class MultiselectOptionComponent
   implements OnDestroy, OnChanges
 {
   constructor(
-    private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentMultiselect: MultiselectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
+    _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_document, _parentGroup, _translationService);
+    super(_document, _parentGroup, _translationService, _idService);
 
     this._parent = this._parentMultiselect;
 
-    this._id = this._idService.getNewSelectOptionId(
-      'multiselect',
-      this._parent.id,
-      this._parentGroup?.id,
-    );
+    this._componentVariant = 'multiselect';
 
     _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
       this._isOptionChecked(newValue);
@@ -103,12 +99,12 @@ export class MultiselectOptionComponent
     if (this.data) {
       const result = options?.find((option) => option.value === this.data.value);
 
-      if (this.checked !== !!result) {
-        this._parentMultiselect.handleCheckedSort(
-          { ...this.data, fudisGeneratedHtmlId: this._id },
-          result ? 'add' : 'remove',
-        );
-      }
+      // if (this.checked !== !!result) {
+      //   this._parentMultiselect.handleCheckedSort(
+      //     { ...this.data, fudisGeneratedHtmlId: this._id },
+      //     result ? 'add' : 'remove',
+      //   );
+      // }
 
       this.checked = !!result;
     }

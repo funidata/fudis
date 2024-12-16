@@ -20,21 +20,17 @@ export class SelectOptionComponent
   implements OnChanges, OnDestroy
 {
   constructor(
-    private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentSelect: SelectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
     _translationService: FudisTranslationService,
+    _idService: FudisIdService,
   ) {
-    super(_document, _parentGroup, _translationService);
+    super(_document, _parentGroup, _translationService, _idService);
 
     this._parent = _parentSelect;
 
-    this._id = this._idService.getNewSelectOptionId(
-      'select',
-      this._parent.id,
-      this._parentGroup?.id,
-    );
+    this._componentVariant = 'select'
 
     toObservable(this._parent.getAutocompleteFilterText())
       .pipe(takeUntilDestroyed())
