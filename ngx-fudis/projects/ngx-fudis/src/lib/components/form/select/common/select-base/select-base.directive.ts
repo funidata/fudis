@@ -382,9 +382,10 @@ export class SelectBaseDirective
       this._controlValueChangedInternally = true;
       this.control.patchValue(null);
       this.selectionUpdate.emit(null);
+      this._filterTextUpdate('');
     }
 
-    this.updateInputValueTexts('');
+    //this.updateInputValueTexts('');
   }
 
   /**
@@ -439,7 +440,11 @@ export class SelectBaseDirective
     this._preventDropdownReopen = true;
 
     if (this._inputFocused || this._mouseUpOnInput) {
-      this._toggleDropdown();
+      if (this.variant === 'dropdown') {
+        this._toggleDropdown();
+      } else {
+        this.openDropdown();
+      }
     }
     this._focusToSelectInput();
   }
@@ -467,9 +472,20 @@ export class SelectBaseDirective
     if (key === this._keyDown) {
       switch (key) {
         case ' ':
+          if (this.variant === 'dropdown') {
+            event.preventDefault();
+            this._toggleDropdown();
+          }
+          break;
         case 'Enter':
           event.preventDefault();
-          this._toggleDropdown();
+
+          if (this._visibleOptions.length === 1) {
+            this._focusToFirstOption(true);
+          } else {
+            this._toggleDropdown();
+          }
+
           break;
         case 'ArrowDown':
           event.preventDefault();
@@ -575,15 +591,15 @@ export class SelectBaseDirective
   /**
    * Manually set typed text in input fields
    */
-  public updateInputValueTexts(value: string): void {
-    if (this.variant !== 'dropdown' && this.autocompleteRef) {
-      this.autocompleteRef.preventSpaceKeypress = true;
+  // public updateInputValueTexts(value: string): void {
+  //   if (this.variant !== 'dropdown' && this.autocompleteRef) {
+  //     this.autocompleteRef.preventSpaceKeypress = true;
 
-      this.autocompleteRef.updateInputValue(value);
-    } else {
-      this._dropdownSelectionLabelText.set(value);
-    }
-  }
+  //     this.autocompleteRef.updateInputValue(value);
+  //   } else {
+  //     this._dropdownSelectionLabelText.set(value);
+  //   }
+  // }
 
   /**
    * To focus on first option when dropdown opens
@@ -647,11 +663,13 @@ export class SelectBaseDirective
    * Focus to input field
    */
   protected _focusToSelectInput() {
-    if (this.variant !== 'dropdown') {
-      this.autocompleteRef.inputRef.nativeElement.focus();
-    } else {
-      this._inputRef.nativeElement.focus();
-    }
+    this._inputRef?.nativeElement.focus();
+
+    // if (this.variant !== 'dropdown') {
+    //   this.autocompleteRef.inputRef.nativeElement.focus();
+    // } else {
+    //   this._inputRef.nativeElement.focus();
+    // }
   }
 
   /**

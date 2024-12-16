@@ -117,6 +117,7 @@ import {
   SectionContentDirective,
 } from './components/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
+import { SelectAutocompleteDirective } from './components/form/select/common/autocomplete/new-autocomplete.directive';
 import {
   SelectControlValueAccessorDirective,
   MultiselectControlValueAccessorDirective,
@@ -215,6 +216,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     SectionActionsDirective,
     SectionContentDirective,
     SelectAutocompleteComponent,
+    SelectAutocompleteDirective,
     SelectBaseDirective,
     SelectComponent,
     SelectControlValueAccessorDirective,

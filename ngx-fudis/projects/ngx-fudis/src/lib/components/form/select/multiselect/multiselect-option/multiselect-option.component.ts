@@ -29,8 +29,6 @@ export class MultiselectOptionComponent
 
     this._parent = this._parentMultiselect;
 
-    this._componentVariant = 'multiselect';
-
     _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
       this._isOptionChecked(newValue);
     });
@@ -49,6 +47,13 @@ export class MultiselectOptionComponent
 
   ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent>) {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
+      this._id = this._idService.getNewSelectOptionId(
+        'multiselect',
+        this._parent.id,
+        this._parentGroup?.id,
+        this.data.value,
+      );
+
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
 
       const parentControlValue = this._parentMultiselect.control.value;

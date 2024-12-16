@@ -55,7 +55,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   public handleSelectionChange(
     value: FudisSelectOption<object> | null,
-    disableSignalEmit?: boolean,
+    // disableSignalEmit?: boolean,
   ): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
@@ -65,11 +65,11 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
 
-      this.updateInputValueTexts(value?.label || '');
+      //      this.updateInputValueTexts(value?.label || '');
 
-      if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
-        this._filterTextUpdate(value.label);
-      }
+      // if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
+      //   this._filterTextUpdate(value.label);
+      // }
     }
   }
 
@@ -91,8 +91,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   protected override _updateSelectionFromControlValue(): void {
     const currentLabel = this.control.value?.label;
     this._dropdownSelectionLabelText.set(currentLabel || '');
-    if (this.variant !== 'dropdown' && this.autocompleteRef) {
-      this.autocompleteRef.updateInputValue(currentLabel || '');
+    if (this.variant !== 'dropdown') {
+      this._autocompleteFilterText.set(currentLabel || '');
     }
   }
 }

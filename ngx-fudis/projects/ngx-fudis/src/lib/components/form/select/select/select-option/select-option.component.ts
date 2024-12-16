@@ -30,8 +30,6 @@ export class SelectOptionComponent
 
     this._parent = _parentSelect;
 
-    this._componentVariant = 'select'
-
     toObservable(this._parent.getAutocompleteFilterText())
       .pipe(takeUntilDestroyed())
       .subscribe((filterText) => {
@@ -46,7 +44,14 @@ export class SelectOptionComponent
 
   ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective>): void {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
-      this._updateVisibleLabel();
+      this._id = this._idService.getNewSelectOptionId(
+        'select',
+        this._parent.id,
+        this._parentGroup?.id,
+        this.data.value,
+      );
+
+      //      this._updateVisibleLabel();
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
     }
@@ -83,11 +88,11 @@ export class SelectOptionComponent
     }
   }
 
-  private _updateVisibleLabel(): void {
-    if (this._parent.control.value?.value === this.data.value) {
-      this._parent.updateInputValueTexts(this.data.label);
-    }
-  }
+  // private _updateVisibleLabel(): void {
+  //   if (this._parent.control.value?.value === this.data.value) {
+  //     this._parent.updateInputValueTexts(this.data.label);
+  //   }
+  // }
 
   /**
    * Used with autocomplete to check if filter text matches this option. If yes, then trigger selection change in the parent
@@ -100,7 +105,8 @@ export class SelectOptionComponent
           ...this.data,
           fudisGeneratedHtmlId: this._id,
         };
-        this._parentSelect.handleSelectionChange(selectedOption, true);
+        // this._parentSelect.handleSelectionChange(selectedOption, true);
+        this._parentSelect.handleSelectionChange(selectedOption);
       }
     }
   }

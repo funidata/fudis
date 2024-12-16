@@ -1,13 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  Host,
-  Inject,
-  Input,
-  Optional,
-  ViewChild,
-  OnInit,
-} from '@angular/core';
+import { Directive, ElementRef, Host, Inject, Input, Optional, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
@@ -20,7 +11,7 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 @Directive({
   selector: '[fudisSelectOptionBase]',
 })
-export class SelectOptionBaseDirective extends DropdownItemBaseDirective implements OnInit {
+export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   constructor(
     @Inject(DOCUMENT) _document: Document,
     @Host() @Optional() protected _parentGroup: SelectGroupComponent,
@@ -56,17 +47,6 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective impleme
    * Common parent and its properties for both Select and Multiselect
    */
   protected _parent: SelectComponent | MultiselectComponent;
-
-  protected _componentVariant: 'select' | 'multiselect';
-
-  ngOnInit(): void {
-    this._id = this._idService.getNewSelectOptionId(
-      this._componentVariant,
-      this._parent.id,
-      this._parentGroup?.id,
-      this.data.value,
-    );
-  }
 
   /**
    * Get visibility status of this option
