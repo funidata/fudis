@@ -3,10 +3,10 @@ import { moduleMetadata } from "@storybook/angular";
 import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
 
-import docJson from "../documentation.json";
+import { TranslocoRootModule } from ".storybook/transloco.module";
 import { HttpClient } from "@angular/common/http";
 import { TranslocoService } from "@jsverse/transloco";
-import { TranslocoRootModule } from ".storybook/transloco.module";
+import docJson from "../documentation.json";
 
 setCompodocJson(docJson);
 
@@ -44,7 +44,7 @@ const preview = {
                 "Command Reference",
                 "Testing Local Changes with Symlink",
                 "Git and GitHub Conventions",
-                "Creating a Release",
+                "Releases",
               ],
               "DS Practises",
               [
