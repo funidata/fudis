@@ -12,8 +12,15 @@
   </fudis-label>
   <div #selectRef>
     <div class="fudis-select__input-wrapper">
-      <div
+      <input
+        type="text"
         *ngIf="variant === 'dropdown'"
+        [attr.readonly]="true"
+        [attr.placeholder]="placeholder"
+        [formControl]="control"
+        [dropdownRef]="_dropdownRef"
+        [selectedOptions]="_sortedSelectedOptions"
+        fudisMultiselectControlValueAccessor
         #inputRef
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
         [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
@@ -34,17 +41,7 @@
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.aria-invalid]="control.invalid || null"
-      >
-        <span *ngIf="!_dropdownSelectionLabelText()" class="fudis-select__input__placeholder">{{
-          placeholder
-        }}</span>
-        <span
-          *ngIf="_dropdownSelectionLabelText()"
-          [id]="id + '-input-label'"
-          class="fudis-select__input__label"
-          >{{ _dropdownSelectionLabelText() }}</span
-        >
-      </div>
+      />
       <fudis-select-autocomplete
         *ngIf="variant !== 'dropdown'"
         #autocompleteRef

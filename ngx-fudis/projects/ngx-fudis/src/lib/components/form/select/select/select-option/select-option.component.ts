@@ -50,8 +50,6 @@ export class SelectOptionComponent
 
   ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective>): void {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
-      this._updateVisibleLabel();
-
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
     }
   }
@@ -84,12 +82,6 @@ export class SelectOptionComponent
       this._isOptionTyped(filterText);
     } else {
       this._isOptionVisible('');
-    }
-  }
-
-  private _updateVisibleLabel(): void {
-    if (this._parent.control.value?.value === this.data.value) {
-      this._parent.updateInputValueTexts(this.data.label);
     }
   }
 

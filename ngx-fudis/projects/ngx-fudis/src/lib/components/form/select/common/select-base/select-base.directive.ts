@@ -378,17 +378,21 @@ export class SelectBaseDirective
    * Set control value to null
    */
   protected _setControlNull(): void {
-    this._controlValueChangedInternally = true;
-    this.control.patchValue(null);
-    this.selectionUpdate.emit(null);
+    if (this.control.value) {
+      this._controlValueChangedInternally = true;
+      this.control.patchValue(null);
+      this.selectionUpdate.emit(null);
+    }
 
-    this.updateInputValueTexts('');
+    this._emptyHtmlInputElement();
   }
 
   /**
    * To handle input focus
    */
   protected _selectInputFocus(event: FocusEvent): void {
+    this.control.markAsTouched();
+
     this._inputFocused = true;
 
     const openDropdown =
@@ -571,19 +575,6 @@ export class SelectBaseDirective
   }
 
   /**
-   * Manually set typed text in input fields
-   */
-  public updateInputValueTexts(value: string): void {
-    if (this.variant !== 'dropdown' && this.autocompleteRef) {
-      this.autocompleteRef.preventSpaceKeypress = true;
-
-      this.autocompleteRef.updateInputValue(value);
-    } else {
-      this._dropdownSelectionLabelText.set(value);
-    }
-  }
-
-  /**
    * To focus on first option when dropdown opens
    * @param cssfocusSelector CSS class to focus to
    */
@@ -656,6 +647,11 @@ export class SelectBaseDirective
    * Function declaration overridden and implemented by Select and Multiselect
    */
   protected _updateSelectionFromControlValue(): void {}
+
+  /**
+   * Function declaration overridden and implemented by Select and Multiselect
+   */
+  protected _emptyHtmlInputElement(): void {}
 
   /**
    * When pressing keyboard Esc, focus to Select input and close dropdown

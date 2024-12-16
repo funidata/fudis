@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -16,6 +17,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { DOCUMENT } from '@angular/common';
+import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
   selector: 'fudis-select',
@@ -32,6 +34,9 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   ) {
     super(_document, _translationService, _focusService, _idService);
   }
+
+  @ViewChild(SelectControlValueAccessorDirective)
+  private _selectCVAinput: SelectControlValueAccessorDirective;
 
   /*
    * FormControl for single select
@@ -65,8 +70,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
 
-      this.updateInputValueTexts(value?.label || '');
-
       if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
         this._filterTextUpdate(value.label);
       }
@@ -93,6 +96,17 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     this._dropdownSelectionLabelText.set(currentLabel || '');
     if (this.variant !== 'dropdown' && this.autocompleteRef) {
       this.autocompleteRef.updateInputValue(currentLabel || '');
+    }
+  }
+
+  /**
+   * Set HTML input element's value as null
+   */
+  protected override _emptyHtmlInputElement(): void {
+    if (this.variant !== 'dropdown' && this.autocompleteRef) {
+      this.autocompleteRef.updateInputValue('');
+    } else {
+      this._selectCVAinput.writeValue(null);
     }
   }
 }

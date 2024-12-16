@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  effect,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -8,6 +17,7 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues } from '../common/utilities/selectUtilities';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -29,6 +39,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
       );
     });
   }
+
+  @ViewChild(MultiselectControlValueAccessorDirective)
+  private _multiselectCVAinput: MultiselectControlValueAccessorDirective;
 
   /**
    * Array type control for selected FudisSelectOptions
@@ -138,11 +151,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     }
 
     if (valuesInSync && this.control.value) {
-      const dropdown = this._dropdownRef?.dropdownElement?.nativeElement;
+      this._sortedSelectedOptions = currentSelectedOptions;
 
-      this._sortedSelectedOptions = currentSelectedOptions.sort(
-        this._sortSelectedOptions(dropdown),
-      );
       this._dropdownSelectionLabelText.set(joinInputValues(this._sortedSelectedOptions));
     } else {
       this._sortedSelectedOptions = [];
@@ -162,6 +172,17 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
   }
 
   /**
+   * Set HTML input element's value as null
+   */
+  protected override _emptyHtmlInputElement(): void {
+    if (this.variant !== 'dropdown' && this.autocompleteRef) {
+      this.autocompleteRef.updateInputValue('');
+    } else {
+      this._multiselectCVAinput.writeValue(null);
+    }
+  }
+
+  /**
    * Handle chip remove. If there are no selections done, focus back to input on last item removal.
    * @param option removed option
    */
@@ -171,40 +192,5 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     if (!this.control.value) {
       this._focusToSelectInput();
     }
-  }
-
-  /**
-   * Sort selected options the same order they appear in the DOM
-   */
-  private _sortSelectedOptions(dropdown: HTMLElement | null) {
-    return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
-      if (a['fudisGeneratedHtmlId'] === b['fudisGeneratedHtmlId']) {
-        return 0;
-      }
-
-      if (a['fudisGeneratedHtmlId'] && b['fudisGeneratedHtmlId'] && dropdown) {
-        const firstEl = dropdown.querySelector(`#${a['fudisGeneratedHtmlId']}`);
-
-        const secondEl = dropdown.querySelector(`#${b['fudisGeneratedHtmlId']}`);
-
-        if (firstEl && secondEl) {
-          const position = firstEl.compareDocumentPosition(secondEl);
-
-          if (
-            position & Node.DOCUMENT_POSITION_FOLLOWING ||
-            position & Node.DOCUMENT_POSITION_CONTAINED_BY
-          ) {
-            return -1;
-          } else if (
-            position & Node.DOCUMENT_POSITION_PRECEDING ||
-            position & Node.DOCUMENT_POSITION_CONTAINS
-          ) {
-            return 1;
-          }
-        }
-      }
-
-      return 0;
-    };
   }
 }
