@@ -60,7 +60,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                   ></fudis-multiselect-option>
                 </fudis-multiselect-group> </ng-template></fudis-multiselect
           ></fudis-grid-item>
-          <fudis-grid-item
+          <!-- <fudis-grid-item
             ><fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Dropdown without Clear button</fudis-heading
             >
@@ -90,7 +90,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                     [data]="groupedOption"
                   ></fudis-multiselect-option>
                 </fudis-multiselect-group> </ng-template></fudis-multiselect
-          ></fudis-grid-item>
+          ></fudis-grid-item> -->
 
           <fudis-grid-item
             ><fudis-heading [level]="2" [variant]="'md'"
@@ -124,7 +124,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 </fudis-multiselect-group> </ng-template></fudis-multiselect
           ></fudis-grid-item>
 
-          <fudis-grid-item
+          <!-- <fudis-grid-item
             ><fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Autocomplete Dropdown without Clear button</fudis-heading
             >
@@ -217,7 +217,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                     [data]="groupedOption"
                   ></fudis-multiselect-option>
                 </fudis-multiselect-group> </ng-template></fudis-multiselect
-          ></fudis-grid-item>
+          ></fudis-grid-item> -->
           <fudis-grid-item [columns]="'stretch'">
             <fudis-heading [level]="3" [variant]="'md'">Current control value</fudis-heading>
             <ng-container *ngIf="!control.value">

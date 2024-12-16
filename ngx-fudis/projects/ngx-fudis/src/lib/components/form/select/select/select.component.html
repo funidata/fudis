@@ -13,27 +13,27 @@
   <div #selectRef>
     <div class="fudis-select__input-wrapper fudis-input-size__{{ size }}">
       <input
-        type="text"
-        [attr.readonly]="true"
-        [attr.placeholder]="placeholder"
-        [formControl]="control"
-        fudisSelectControlValueAccessor
         *ngIf="variant === 'dropdown' || control.disabled || disabled"
         #inputRef
+        fudisSelectControlValueAccessor
+        [id]="id"
+        [formControl]="control"
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
         [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
-        [id]="id"
-        role="combobox"
-        [attr.aria-controls]="id + '-dropdown'"
-        aria-haspopup="listbox"
-        [attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
         (click)="!control.disabled && !disabled && _clickInput()"
         (focus)="!control.disabled && !disabled && _selectInputFocus($event)"
         (blur)="_inputBlur($event)"
         (keydown)="!control.disabled && !disabled && _inputKeyDown($event)"
         (keyup)="!control.disabled && !disabled && _inputKeyUp($event)"
+        type="text"
+        readonly="true"
+        aria-haspopup="listbox"
+        aria-autocomplete="none"
+        [attr.placeholder]="placeholder"
+        role="combobox"
+        [attr.aria-controls]="id + '-dropdown'"
+        [attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
         [attr.tabindex]="!control.disabled && !disabled ? 0 : null"
-        [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="dropdownOpen"
         [attr.aria-disabled]="control.disabled || disabled || null"
         [attr.required]="(_required | async) || null"
