@@ -25,11 +25,6 @@ export class SelectAutocompleteBaseDirective {
   @Input({ required: true }) typeThreshold: 0 | 3;
 
   /**
-   * List of visible options
-   */
-  @Input() visibleOptions: number | null;
-
-  /**
    * Id of binded Select element
    */
   @Input() id: string;
@@ -37,7 +32,7 @@ export class SelectAutocompleteBaseDirective {
   /**
    * To clear input field when Clear Button is clicked
    */
-  @Input() clearButtonClick: void | null;
+  @Input() clearButtonClick: boolean | null;
 
   /**
    * Output event for updating parent's filter text signal
@@ -55,17 +50,28 @@ export class SelectAutocompleteBaseDirective {
   @Output() triggerDropdownClose = new EventEmitter<void>();
 
   /**
-   * Keyboard button pressed down
+   * Output event for closing parent dropdown
    */
-  private _keyDown: string | null = null;
+  @Output() triggerClearButtonReset = new EventEmitter<void>();
+
+  /**
+   * Keyboard button pressed
+   */
+  private _keyDown: string | null;
+
+  private _focusFromClearButton: boolean = false;
 
   private _inputText: string | null = null;
 
   protected _focused: boolean = false;
 
   @HostListener('focus', ['$event'])
-  private _handleFocus() {
+  private _handleFocus(event: FocusEvent) {
     this._focused = true;
+
+    if ((event.relatedTarget as HTMLElement)?.getAttribute('id') === `${this.id}-clear-button`) {
+      this._focusFromClearButton = true;
+    }
   }
 
   @HostListener('blur', ['$event'])
@@ -75,7 +81,9 @@ export class SelectAutocompleteBaseDirective {
 
   @HostListener('keydown', ['$event'])
   private _handleKeyDown(event: KeyboardEvent) {
-    this._keyDown = event.key;
+    if (event.target) {
+      this._keyDown = event.key;
+    }
   }
 
   @HostListener('keyup', ['$event'])
@@ -95,8 +103,20 @@ export class SelectAutocompleteBaseDirective {
             this.triggerDropdownClose.emit();
           }
         }
+      } else if (
+        this._focused &&
+        this._focusFromClearButton &&
+        (event.key === 'Enter' || event.key === ' ')
+      ) {
+        this._elementRef.nativeElement.value = '';
+        this.triggerFilterTextUpdate.emit('');
+        if (this.typeThreshold === 0) {
+          this.triggerDropdownOpen.emit();
+        } else {
+          this.triggerDropdownClose.emit();
+        }
       }
-
+      this._focusFromClearButton = false;
       this._keyDown = null;
     }
   }
@@ -115,10 +135,12 @@ export class SelectAutocompleteDirective
   ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteDirective>): void {
     if (this.enableAutocomplete) {
       const selectedLabel = changes.selectedLabel?.currentValue;
+      const clearButtonClick = changes.clearButtonClick?.currentValue;
 
-      if (changes.clearButtonClick && changes.clearButtonClick?.currentValue !== null) {
+      if (clearButtonClick && clearButtonClick !== changes.clearButtonClick?.previousValue) {
         // Clear Button click
         this._elementRef.nativeElement.value = '';
+        this.triggerClearButtonReset.emit();
       } else if (
         // Selected label is proper value
         selectedLabel &&
@@ -145,9 +167,13 @@ export class MultiselectAutocompleteDirective
   }
   ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteDirective>): void {
     if (this.enableAutocomplete) {
-      if (changes.clearButtonClick && changes.clearButtonClick?.currentValue !== null) {
+      if (
+        changes.clearButtonClick?.currentValue &&
+        changes.clearButtonClick?.currentValue !== changes.clearButtonClick?.previousValue
+      ) {
         // Clear Button click
         this._elementRef.nativeElement.value = '';
+        this.triggerClearButtonReset.emit();
       }
     }
   }

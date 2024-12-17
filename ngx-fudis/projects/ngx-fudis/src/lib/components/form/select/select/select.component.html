@@ -1,4 +1,5 @@
 @let dropdownOpen = _dropdownOpen();
+@let autocompleteFilterText = _autocompleteFilterText();
 <div class="fudis-select fudis-input-size__{{ size }}" [id]="id + '-main-wrapper'">
   <fudis-label
     [text]="label"
@@ -30,12 +31,14 @@
         (keyup)="!control.disabled && !disabled && _inputKeyUp($event)"
         [enableAutocomplete]="variant !== 'dropdown'"
         [selectedLabel]="control.value ? control.value.label : null"
-        [visibleOptions]="_visibleOptions.length"
         [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
-        [clearButtonClick]="_clearButtonClickTrigger | async"
+        [clearButtonClick]="_clearButtonClickTrigger()"
         (triggerDropdownOpen)="openDropdown()"
         (triggerDropdownClose)="closeDropdown()"
-        (triggerFilterTextUpdate)="_filterTextUpdate($event); _checkIfAutocompleteValueNull($event)"
+        (triggerClearButtonReset)="_clearButtonClickTrigger.set(false)"
+        (triggerFilterTextUpdate)="
+          _filterTextUpdate($event, 'autocomp'); _checkIfAutocompleteValueNull($event)
+        "
         type="text"
         autocomplete="off"
         aria-haspopup="listbox"
@@ -78,7 +81,7 @@
       /> -->
       <div #selectIconsRef class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
-          [filterText]="!!_autocompleteFilterText()"
+          [filterText]="!!autocompleteFilterText"
           [parentControl]="control"
           [parentVariant]="variant"
           [dropdownOpen]="dropdownOpen"
@@ -100,7 +103,7 @@
       [results]="_visibleOptions.length"
       [autocompleteHelpText]="autocompleteHelpText"
       [autocompleteNoResultsText]="autocompleteNoResultsText"
-      [filterText]="_autocompleteFilterText()"
+      [filterText]="autocompleteFilterText"
       [size]="size"
       [parentId]="id"
       [size]="size"

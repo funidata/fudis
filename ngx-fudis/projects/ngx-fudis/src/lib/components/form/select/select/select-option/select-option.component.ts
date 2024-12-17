@@ -51,8 +51,6 @@ export class SelectOptionComponent
         this.data.value,
       );
 
-      //      this._updateVisibleLabel();
-
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
     }
   }
@@ -88,12 +86,6 @@ export class SelectOptionComponent
     }
   }
 
-  // private _updateVisibleLabel(): void {
-  //   if (this._parent.control.value?.value === this.data.value) {
-  //     this._parent.updateInputValueTexts(this.data.label);
-  //   }
-  // }
-
   /**
    * Used with autocomplete to check if filter text matches this option. If yes, then trigger selection change in the parent
    * @param filterText autocomplete filter text from parent
@@ -105,7 +97,7 @@ export class SelectOptionComponent
           ...this.data,
           fudisGeneratedHtmlId: this._id,
         };
-        // this._parentSelect.handleSelectionChange(selectedOption, true);
+
         this._parentSelect.handleSelectionChange(selectedOption);
       }
     }

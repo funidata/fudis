@@ -30,7 +30,6 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
-import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -222,7 +221,7 @@ export class SelectBaseDirective
   /**
    * Used to pass info, that Clear Button was clicked
    */
-  protected _clearButtonClickTrigger = new BehaviorSubject<void | null>(null);
+  protected _clearButtonClickTrigger = signal<boolean>(false);
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
@@ -249,7 +248,7 @@ export class SelectBaseDirective
       changes.variant?.currentValue === 'dropdown' &&
       !changes.variant.firstChange
     ) {
-      this._filterTextUpdate('');
+      this._filterTextUpdate('', 'init');
     }
 
     if (
@@ -366,9 +365,9 @@ export class SelectBaseDirective
    */
   protected _clearButtonClick(): void {
     if (!this.control.disabled && !this.disabled) {
+      this._clearButtonClickTrigger.set(true);
       this._setControlNull();
       this._focusToSelectInput();
-      this._clearButtonClickTrigger.next();
     }
   }
 
@@ -379,10 +378,8 @@ export class SelectBaseDirective
     if (this.control.value) {
       this.control.patchValue(null);
       this.selectionUpdate.emit(null);
-      this._filterTextUpdate('');
+      this._filterTextUpdate('', 'nulleri');
     }
-
-    //this.updateInputValueTexts('');
   }
 
   /**
@@ -578,7 +575,8 @@ export class SelectBaseDirective
   /**
    * Update input filter
    */
-  protected _filterTextUpdate(text: string): void {
+  protected _filterTextUpdate(text: string, who: string): void {
+    console.log(text, who);
     if (this._autocompleteFilterText() !== text) {
       this._autocompleteFilterText.set(text);
       this.filterTextUpdate.emit(text);
@@ -648,12 +646,6 @@ export class SelectBaseDirective
    */
   protected _focusToSelectInput() {
     this._inputRef?.nativeElement.focus();
-
-    // if (this.variant !== 'dropdown') {
-    //   this.autocompleteRef.inputRef.nativeElement.focus();
-    // } else {
-    //   this._inputRef.nativeElement.focus();
-    // }
   }
 
   /**

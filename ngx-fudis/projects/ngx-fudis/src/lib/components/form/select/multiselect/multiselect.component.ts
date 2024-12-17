@@ -108,14 +108,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     }
   }
 
-  protected override _updateComponentStateFromControlValue(): void {
-    // if (this._multiselectCVA) {
-    //   console.log('setting TRUE' + this.id);
-    //   this._loadingInProgress.set(true);
-    //   this._multiselectCVA.writeValue(this.control.value);
-    // }
-  }
-
   protected _updateSortedSelectedOptions(newValue: FudisSelectOption<object>[] | null) {
     this._sortedSelectedOptions.set(newValue);
   }

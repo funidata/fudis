@@ -104,13 +104,6 @@ export class MultiselectOptionComponent
     if (this.data) {
       const result = options?.find((option) => option.value === this.data.value);
 
-      // if (this.checked !== !!result) {
-      //   this._parentMultiselect.handleCheckedSort(
-      //     { ...this.data, fudisGeneratedHtmlId: this._id },
-      //     result ? 'add' : 'remove',
-      //   );
-      // }
-
       this.checked = !!result;
     }
   }
