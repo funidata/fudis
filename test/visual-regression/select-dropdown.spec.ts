@@ -21,7 +21,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByTestId("fudis-select-1-option-5")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-value-5-armadillo")).toBeFocused();
   await page.keyboard.press("ArrowDown", { delay: 20 });
   await page.keyboard.press("ArrowDown", { delay: 20 });
   await page.keyboard.press("ArrowDown", { delay: 20 });
@@ -29,11 +29,13 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown", { delay: 20 });
   await page.keyboard.press("ArrowUp", { delay: 20 });
   await page.keyboard.press("ArrowUp", { delay: 20 });
-  await expect(page.getByTestId("fudis-select-1-group-1-option-2")).toBeVisible();
+  await expect(page.getByTestId("fudis-select-1-option-value-2-capybara")).toBeVisible();
   await expect(page).toHaveScreenshot("A-4-focus-mountain-lion.png", {
     fullPage: true,
   });
-  await page.getByTestId("fudis-select-1-group-1-option-3").hover();
+  await page
+    .getByTestId("fudis-select-1-group-1-option-0cf7dff9-10e4-400b-b8e0-828b2e0baf30")
+    .hover();
   await expect(page).toHaveScreenshot("A-5-hover-cat.png", {
     fullPage: true,
   });
@@ -49,26 +51,38 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await page.keyboard.press("ArrowDown");
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  await expect(page.getByTestId("fudis-select-1-option-1")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-value-1-dog")).toBeFocused();
   await page.keyboard.press("ArrowUp");
-  await expect(page.getByTestId("fudis-select-1-group-10-option-5")).toBeInViewport();
-  await expect(page.getByTestId("fudis-select-1-group-10-option-5")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-select-1-group-10-option-f00849ca-38fd-4255-b833-ce23e8f17058"),
+  ).toBeInViewport();
+  await expect(
+    page.getByTestId("fudis-select-1-group-10-option-f00849ca-38fd-4255-b833-ce23e8f17058"),
+  ).toBeFocused();
 
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByTestId("fudis-select-1-option-1")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-value-1-dog")).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await page.keyboard.press("ArrowDown", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  await expect(page.getByTestId("fudis-select-1-option-1")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-value-1-dog")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-group-10-option-5")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-select-1-group-10-option-f00849ca-38fd-4255-b833-ce23e8f17058"),
+  ).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-group-10-option-4")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-select-1-group-10-option-b1fb350c-5977-4e81-b25c-c2507181ebd0"),
+  ).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-group-10-option-3")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-select-1-group-10-option-bbf08d11-88cf-4d3e-b411-5409db3cb57c"),
+  ).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-group-10-option-2")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-select-1-group-10-option-e4cb0061-020c-4a5f-b6d9-8acb9a3bb0bb"),
+  ).toBeFocused();
   await page.keyboard.press("Enter", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("A-7-enter-select-dolphin.png", {
@@ -130,7 +144,9 @@ test("Select dropdown without clear button", async ({ page }) => {
   await page.getByTestId("fudis-select-2").focus();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await expect(
-    page.getByTestId("fudis-select-2-group-1-option-1").getByText("Golden jackal"),
+    page
+      .getByTestId("fudis-select-2-group-1-option-4257d865-872c-4ea6-80e6-8bd04ce56ad7")
+      .getByText("Golden jackal"),
   ).toBeVisible();
   await page.getByTestId("fudis-select-2").click();
   await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
