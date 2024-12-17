@@ -4,9 +4,10 @@ import {
   ElementRef,
   Input,
   Renderer2,
-  OnChanges,
   EventEmitter,
   Output,
+  Inject,
+  AfterViewInit,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -17,9 +18,8 @@ import {
   Validator,
 } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { joinInputValues } from '../utilities/selectUtilities';
-import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { DOCUMENT } from '@angular/common';
 
 @Directive({
   selector: '[fudisSelectBaseControlValueAccessor]',
@@ -113,9 +113,10 @@ export class SelectControlValueAccessorDirective extends SelectBaseControlValueA
 })
 export class MultiselectControlValueAccessorDirective
   extends SelectBaseControlValueAccessorDirective
-  implements OnChanges
+  implements AfterViewInit
 {
   constructor(
+    @Inject(DOCUMENT) private _document: Document,
     private _elementRef: ElementRef<HTMLInputElement>,
     private _renderer: Renderer2,
   ) {
@@ -123,18 +124,21 @@ export class MultiselectControlValueAccessorDirective
   }
 
   @Input() id: string;
-  @Input() dropdownRef: SelectDropdownComponent | null;
   @Input() enableAutocomplete: boolean = false;
 
   @Output() handleSortedSelectedOptions = new EventEmitter<FudisSelectOption<object>[] | null>();
 
-  ngOnChanges(changes: FudisComponentChanges<MultiselectControlValueAccessorDirective>): void {
-    if (
-      changes.dropdownRef?.currentValue &&
-      changes.dropdownRef?.currentValue !== changes.dropdownRef?.previousValue
-    ) {
-      this.writeValue(this._selectedOptions);
-    }
+  // ngOnChanges(changes: FudisComponentChanges<MultiselectControlValueAccessorDirective>): void {
+  //   if (
+  //     changes.dropdownRef?.currentValue &&
+  //     changes.dropdownRef?.currentValue !== changes.dropdownRef?.previousValue
+  //   ) {
+  //     this.writeValue(this._selectedOptions);
+  //   }
+  // }
+
+  ngAfterViewInit(): void {
+    this.writeValue(this._selectedOptions);
   }
 
   /**
@@ -149,10 +153,12 @@ export class MultiselectControlValueAccessorDirective
   }
 
   private _setVisibleLabel(value: FudisSelectOption<object>[] | null): void {
-    const dropdown = this.dropdownRef?.dropdownElement?.nativeElement;
+    const dropdown = this._document.getElementById(`${this.id}-dropdown`);
 
     if (value && dropdown) {
-      const sortedSelectedOptions = [...value].sort(this._sortSelectedOptionsDOMOrder(dropdown));
+      const sortedSelectedOptions = [...value].sort(
+        this._sortSelectedOptionsDOMOrder(dropdown, this.id),
+      );
 
       this.handleSortedSelectedOptions.emit(sortedSelectedOptions);
 
@@ -170,16 +176,14 @@ export class MultiselectControlValueAccessorDirective
   /**
    * Sort selected options the same order they appear in the DOM
    */
-  private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null) {
-    const dropdownId = this._elementRef?.nativeElement.getAttribute('id');
-
+  private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null, id: string) {
     return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
       if (a.value === b.value) {
         return 0;
       }
 
-      const aSelector = `#${dropdownId}-option-${a.value}`;
-      const bSelector = `#${dropdownId}-option-${b.value}`;
+      const aSelector = `#${id}-option-${a.value}`;
+      const bSelector = `#${id}-option-${b.value}`;
 
       if (dropdown) {
         const firstEl = dropdown.querySelector(aSelector);

@@ -82,9 +82,9 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     console.log(this._clearButtonClickTrigger());
     if (this.variant !== 'dropdown') {
       if (currentLabel) {
-        this._filterTextUpdate(currentLabel, 'comp update');
+        this.setAutocompleteFilterText(currentLabel);
       } else if (!this._inputFocused) {
-        this._filterTextUpdate('', 'comp update');
+        this.setAutocompleteFilterText('');
       }
     }
   }

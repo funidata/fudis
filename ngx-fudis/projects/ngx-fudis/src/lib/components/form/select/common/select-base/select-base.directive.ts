@@ -21,7 +21,7 @@ import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
+
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { SelectComponent } from '../../select/select.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
@@ -52,11 +52,6 @@ export class SelectBaseDirective
       }
     });
   }
-
-  /**
-   * Reference to autocomplete element, used to focus to it
-   */
-  @ViewChild('autocompleteRef') public autocompleteRef: SelectAutocompleteComponent;
 
   /**
    * Reference to child DropdownComponent listing all options
@@ -248,7 +243,7 @@ export class SelectBaseDirective
       changes.variant?.currentValue === 'dropdown' &&
       !changes.variant.firstChange
     ) {
-      this._filterTextUpdate('', 'init');
+      this.setAutocompleteFilterText('');
     }
 
     if (
@@ -378,7 +373,7 @@ export class SelectBaseDirective
     if (this.control.value) {
       this.control.patchValue(null);
       this.selectionUpdate.emit(null);
-      this._filterTextUpdate('', 'nulleri');
+      this.setAutocompleteFilterText('');
     }
   }
 
@@ -575,8 +570,7 @@ export class SelectBaseDirective
   /**
    * Update input filter
    */
-  protected _filterTextUpdate(text: string, who: string): void {
-    console.log(text, who);
+  public setAutocompleteFilterText(text: string): void {
     if (this._autocompleteFilterText() !== text) {
       this._autocompleteFilterText.set(text);
       this.filterTextUpdate.emit(text);
@@ -631,7 +625,6 @@ export class SelectBaseDirective
   protected _dropdownFocus(event: FocusEvent): void {
     const focusFromInputOrClearButton =
       event.relatedTarget === this._inputRef?.nativeElement ||
-      event.relatedTarget === this.autocompleteRef?.inputRef.nativeElement ||
       this._selectIconsRef.nativeElement.contains(event.relatedTarget as HTMLElement);
 
     if (focusFromInputOrClearButton) {
@@ -691,9 +684,7 @@ export class SelectBaseDirective
 
     this._mouseUpOnInput =
       targetElement &&
-      (!!this._inputRef?.nativeElement.contains(targetElement) ||
-        !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement) ||
-        this._clickFromIcon);
+      (!!this._inputRef?.nativeElement.contains(targetElement) || this._clickFromIcon);
 
     if (this._clickFromIcon) {
       if (!this.control.disabled) {

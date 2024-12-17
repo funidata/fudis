@@ -12,7 +12,6 @@ import { IconComponent } from '../../../../icon/icon.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { LabelComponent } from '../../../label/label.component';
-import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectBaseDirective } from '../select-base/select-base.directive';
 import { getAllElements } from '../../../../../utilities/tests/utilities';
@@ -77,7 +76,6 @@ describe('SelectOptionBaseDirective', () => {
         SelectOptionsDirective,
         ButtonComponent,
         MockComponent,
-        SelectAutocompleteComponent,
         GuidanceComponent,
         IconComponent,
         LabelComponent,

@@ -62,7 +62,6 @@ import { SectionComponent } from './components/section/section.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { SelectComponent } from './components/form/select/select/select.component';
-import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionComponent } from './components/form/select/select/select-option/select-option.component';
 import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
 import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
@@ -219,7 +218,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     SectionComponent,
     SectionActionsDirective,
     SectionContentDirective,
-    SelectAutocompleteComponent,
     SelectAutocompleteBaseDirective,
     SelectAutocompleteDirective,
     SelectBaseDirective,

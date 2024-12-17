@@ -11,7 +11,6 @@ import { LabelComponent } from '../../../label/label.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
@@ -56,7 +55,6 @@ describe('SelectOptionComponent', () => {
         SelectGroupComponent,
         SelectDropdownComponent,
         MockContainerComponent,
-        SelectAutocompleteComponent,
         GuidanceComponent,
         SelectIconsComponent,
         ButtonComponent,

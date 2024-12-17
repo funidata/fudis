@@ -5,7 +5,6 @@ import { MultiselectComponent } from './multiselect.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { LabelComponent } from '../../label/label.component';
-import { SelectAutocompleteComponent } from '../common/autocomplete/autocomplete.component';
 import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
 import { BodyTextComponent } from '../../../typography/body-text/body-text.component';
 import { MultiselectChipListComponent } from './multiselect-chip-list/multiselect-chip-list.component';
@@ -59,7 +58,6 @@ describe('MultiselectComponent', () => {
         MultiselectOptionComponent,
         MultiselectMockComponent,
         MultiselectChipListComponent,
-        SelectAutocompleteComponent,
         SelectDropdownComponent,
         SelectGroupComponent,
         SelectIconsComponent,

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SelectAutocompleteComponent } from './autocomplete.component';
+import { SelectAutocompleteComponent } from './old-autocomplete.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
 
-describe('AutocompleteComponent', () => {
+describe.skip('AutocompleteComponent', () => {
   let component: SelectAutocompleteComponent;
   let fixture: ComponentFixture<SelectAutocompleteComponent>;
 

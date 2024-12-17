@@ -37,7 +37,7 @@
         (triggerDropdownClose)="closeDropdown()"
         (triggerClearButtonReset)="_clearButtonClickTrigger.set(false)"
         (triggerFilterTextUpdate)="
-          _filterTextUpdate($event, 'autocomp'); _checkIfAutocompleteValueNull($event)
+          setAutocompleteFilterText($event); _checkIfAutocompleteValueNull($event)
         "
         type="text"
         autocomplete="off"
@@ -56,29 +56,6 @@
         [attr.aria-describedby]="id + '_guidance'"
         [attr.aria-invalid]="control.invalid || null"
       />
-      <!-- <fudis-select-autocomplete
-        *ngIf="variant !== 'dropdown' && control.enabled && !disabled"
-        #autocompleteRef
-        [id]="id"
-        [placeholder]="placeholder"
-        [disabled]="control.disabled || disabled"
-        [dropdownOpen]="dropdownOpen"
-        [required]="_required | async"
-        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
-        [selectedLabel]="_dropdownSelectionLabelText()"
-        [visibleOptions]="_visibleOptions"
-        [invalidState]="control.touched && control.invalid"
-        [selectionClearButton]="selectionClearButton"
-        (triggerInputClick)="!control.disabled && !disabled && _clickInput()"
-        (triggerFocusToFirstOption)="_focusToFirstOption()"
-        (triggerFilterTextUpdate)="_filterTextUpdate($event); _checkIfAutocompleteValueNull($event)"
-        (triggerSelectOnlyVisibleOption)="_focusToFirstOption(true)"
-        (triggerDropdownOpen)="openDropdown()"
-        (triggerDropdownClose)="closeDropdown()"
-        (triggerDropdownToggle)="_toggleDropdown()"
-        (triggerFocus)="_selectInputFocus($event)"
-        (triggerBlur)="_inputBlur($event)"
-      /> -->
       <div #selectIconsRef class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
           [filterText]="!!autocompleteFilterText"

@@ -7,7 +7,6 @@ import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directi
 import { LabelComponent } from '../../label/label.component';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
-import { SelectAutocompleteComponent } from '../common/autocomplete/autocomplete.component';
 import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
 import { BodyTextComponent } from '../../../typography/body-text/body-text.component';
 import { By } from '@angular/platform-browser';
@@ -56,7 +55,6 @@ describe('SelectComponent', () => {
         IconComponent,
         LabelComponent,
         MockAutocompleteComponent,
-        SelectAutocompleteComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
         BodyTextComponent,
