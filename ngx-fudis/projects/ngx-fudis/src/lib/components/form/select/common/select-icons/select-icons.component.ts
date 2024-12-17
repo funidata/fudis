@@ -60,6 +60,11 @@ export class SelectIconsComponent implements OnChanges {
   @Input() parentControl: FormControl;
 
   /**
+   * Id of parent Select
+   */
+  @Input() parentId: string;
+
+  /**
    * Output event for Clear Button click
    */
   @Output() handleClearButtonClick: EventEmitter<Event> = new EventEmitter<Event>();
