@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
+test.only("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-select--multiselect-showcase&viewMode=story",
   );
@@ -23,7 +23,9 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   });
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByTestId("fudis-multiselect-1-option-5-checkbox-input")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-value-5-armadillo-checkbox-input"),
+  ).toBeFocused();
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
@@ -33,9 +35,11 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowUp");
 
   await expect(
-    page.getByTestId("fudis-multiselect-1-group-10-option-2-checkbox-input"),
+    page.getByTestId(
+      "fudis-multiselect-1-option-e4cb0061-020c-4a5f-b6d9-8acb9a3bb0bb-checkbox-input",
+    ),
   ).toBeFocused();
-  await page.getByTestId("fudis-multiselect-1-group-10-option-1").hover();
+  await page.getByTestId("fudis-multiselect-1-option-3a2860af-88d1-4d9e-ba14-f290fce32a26").hover();
   await expect(page).toHaveScreenshot("A-4-hover-alligator.png", {
     fullPage: true,
   });
@@ -51,9 +55,12 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page).toHaveScreenshot("A-6-deselect-dolphin.png", {
     fullPage: true,
   });
-  await page.getByTestId("fudis-multiselect-1-group-7-option-5").click();
+  await page.getByTestId("fudis-multiselect-1-option-60747b93-2f8e-40f6-8063-cc79d01d5205").click();
 
-  await page.getByTestId("fudis-multiselect-1-group-3-option-3").click();
+  await page.getByTestId("fudis-multiselect-1-option-967d39b8-f85a-45aa-952e-8d0607dde1f6").click();
+
+  // fudis-multiselect-3-group-7-option-925e74ab-9e00-49ff-a301-300bade8ff21-checkbox-input
+  // fudis-multiselect-3-group-3-option-967d39b8-f85a-45aa-952e-8d0607dde1f6
 
   await page.getByTestId("fudis-heading-1").hover();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
@@ -117,12 +124,14 @@ test("Dropdown and autocompletes", async ({ page }) => {
   /**
    * Dropdown without Clear button
    */
-  await page.getByTestId("fudis-multiselect-clear-button").click();
+  await page.getByTestId("fudis-multiselect-1-clear-button").click();
   await page.getByTestId("fudis-multiselect-2").focus();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
   await expect(
-    page.getByTestId("fudis-multiselect-2-group-1-option-1").getByText("Golden jackal"),
+    page
+      .getByTestId("fudis-multiselect-2-option-4257d865-872c-4ea6-80e6-8bd04ce56ad7")
+      .getByText("Golden jackal"),
   ).toBeVisible();
   await expect(page).toHaveScreenshot("B-1-focus-to-second.png", {
     fullPage: true,
@@ -240,9 +249,17 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("Space");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByTestId("fudis-multiselect-5-group-7-option-2")).toBeInViewport();
+  await expect(
+    page.getByTestId(
+      "fudis-multiselect-5-option-f6777bbd-b234-4a0b-8232-f70367986688-checkbox-input",
+    ),
+  ).toBeInViewport();
   await page.keyboard.press("Space");
-  await expect(page.getByTestId("fudis-multiselect-5-group-7-option-2")).toHaveClass(
+  await expect(
+    page.getByTestId(
+      "fudis-multiselect-5-option-f6777bbd-b234-4a0b-8232-f70367986688-checkbox-input",
+    ),
+  ).toHaveClass(
     "fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--focused fudis-multiselect-option--checked",
   );
   await expect(page).toHaveScreenshot("E-4-autocomplete-type-cats-selected.png", {
