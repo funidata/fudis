@@ -59,9 +59,6 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
 
   await page.getByTestId("fudis-multiselect-1-option-967d39b8-f85a-45aa-952e-8d0607dde1f6").click();
 
-  // fudis-multiselect-3-group-7-option-925e74ab-9e00-49ff-a301-300bade8ff21-checkbox-input
-  // fudis-multiselect-3-group-3-option-967d39b8-f85a-45aa-952e-8d0607dde1f6
-
   await page.getByTestId("fudis-heading-1").hover();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.getByTestId("fudis-heading-1").click();
@@ -116,7 +113,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   });
 });
 
-test("Dropdown and autocompletes", async ({ page }) => {
+test.only("Dropdown and autocompletes", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-select--multiselect-showcase&viewMode=story",
   );

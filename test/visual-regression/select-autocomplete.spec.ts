@@ -118,6 +118,7 @@ test("Select autocompletes", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByTestId("fudis-select-6-dropdown")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
+  await expect(page.getByTestId("fudis-select-5-clear-button")).toBeVisible();
   await expect(page).toHaveScreenshot("D-1-autocomplete-type-end.png", {
     fullPage: true,
   });
