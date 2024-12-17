@@ -3,6 +3,7 @@
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable selector-class-pattern */
+/* stylelint-disable declaration-no-important */
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/colors/tokens.scss' as colors;
 @use '../../foundations/colors/mixins.scss' as colorMixins;
@@ -20,6 +21,19 @@
     .fudis-body-text__default {
       @include typography.body-text-md-light;
     }
+  }
+}
+
+/* Adding extra padding when scrollbar is visible */
+.fudis-dialog--scrollable {
+  .fudis-dialog-content:has(.fudis-form) {
+    .fudis-form__content-wrapper {
+      padding-right: spacing.$spacing-sm !important;
+    }
+  }
+
+  .fudis-dialog-content:not(:has(.fudis-form)) {
+    padding-right: spacing.$spacing-sm !important;
   }
 }
 
@@ -101,7 +115,7 @@
 
       /* Styles and overrides for Form inside Dialog */
       .mat-mdc-dialog-content:has(.fudis-form) {
-        /* Originally overflow auto is set in dialog-content wrapper but since the HTML structure is different in Form, we have to override it and set it correctly in fudis-form__content below */
+        /* Originally overflow auto is set in dialog-content wrapper but since the HTML structure is different in Form, we have to override it and set it correctly in fudis-form__content-wrapper below */
         overflow: hidden;
 
         /* Set inherited max-height from MatDialogContent in order for Action buttons to position correctly at the bottom */
@@ -111,7 +125,7 @@
         }
 
         /* Make Form content scrollable when inside Dialog */
-        .fudis-form__content {
+        .fudis-form__content-wrapper {
           /* Necessary padding for content if ErrorSummary appears, otherwise its visible focus is cropped from the top */
           padding: spacing.$spacing-xxs spacing.$spacing-xxs 0 spacing.$spacing-xxs;
 
@@ -144,7 +158,6 @@
 
   &.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
     top: -50vh;
-    /* stylelint-disable-next-line declaration-no-important */
     opacity: 0.95 !important;
     width: 300vw;
     height: 350vh;

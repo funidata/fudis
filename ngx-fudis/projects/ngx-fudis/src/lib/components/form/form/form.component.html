@@ -50,7 +50,7 @@
   <ng-container *ngIf="!_dialogParent">
     <ng-container *ngTemplateOutlet="actions" />
   </ng-container>
-  <div class="fudis-form__content">
+  <div class="fudis-form__content-wrapper">
     <ng-container *ngIf="_dialogParent">
       <ng-container *ngTemplateOutlet="errorSummary" />
     </ng-container>
