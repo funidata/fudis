@@ -22,6 +22,8 @@ import { groupedTestData } from '../mock_data';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
+import { SelectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
+import { SelectAutocompleteDirective } from '../autocomplete/new-autocomplete.directive';
 
 @Component({
   selector: 'fudis-mock-select',
@@ -85,6 +87,8 @@ describe('SelectBaseDirective', () => {
       declarations: [
         SelectComponent,
         SelectBaseDirective,
+        SelectControlValueAccessorDirective,
+        SelectAutocompleteDirective,
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectOptionComponent,
@@ -395,17 +399,6 @@ describe('SelectBaseDirective', () => {
       const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
 
       expect(openDropdownEl).toBeNull();
-    });
-  });
-
-  describe('Aucomplete Default values', () => {
-    it('should have placeholder text', () => {
-      const selectElement = getElement(fixture, 'fudis-select-autocomplete');
-
-      const value = selectElement
-        .querySelector('.fudis-select-autocomplete')
-        ?.getAttribute('placeholder');
-      expect(value).toContain('Test placeholder for autocomplete');
     });
   });
 });

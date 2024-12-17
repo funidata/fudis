@@ -101,7 +101,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   });
   await page.getByTestId("fudis-button-1").click();
   await page.getByTestId("fudis-select-1").focus();
-  await page.getByTestId("fudis-button-2").focus();
+  await page.getByTestId("fudis-select-1-clear-button").focus();
   await page.keyboard.press("Enter");
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
 
@@ -126,7 +126,7 @@ test("Select dropdown without clear button", async ({ page }) => {
   /**
    * Dropdown without clear button
    */
-  await page.getByTestId("fudis-button-2").click();
+  await page.getByTestId("fudis-select-1-clear-button").click();
   await page.getByTestId("fudis-select-2").focus();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await expect(

@@ -18,6 +18,8 @@ import {
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { SelectControlValueAccessorDirective } from '../select/common/select-control-value-accessor/select-control-value-accessor.directive';
+import { SelectAutocompleteDirective } from '../select/common/autocomplete/new-autocomplete.directive';
 
 const values = {
   label: 'Label for testing purposes',
@@ -43,6 +45,8 @@ describe('LocalizedTextGroupComponent', () => {
         LocalizedTextGroupComponent,
         LabelComponent,
         SelectComponent,
+        SelectControlValueAccessorDirective,
+        SelectAutocompleteDirective,
         GuidanceComponent,
         ValidatorErrorMessageComponent,
         SelectIconsComponent,
@@ -149,7 +153,8 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should have default option in Select`, () => {
-        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
+        const selectElement = (getElement(fixture, '.fudis-select__input') as HTMLInputElement)
+          .value;
 
         expect(selectElement).toEqual('FI (Missing)');
       });
@@ -177,7 +182,8 @@ describe('LocalizedTextGroupComponent', () => {
 
         fixture.detectChanges();
 
-        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
+        const selectElement = (getElement(fixture, '.fudis-select__input') as HTMLInputElement)
+          .value;
 
         expect(selectElement).toEqual('KLI (Missing)');
       });
@@ -186,8 +192,8 @@ describe('LocalizedTextGroupComponent', () => {
         translationService.setLanguage('fi');
         fixture.detectChanges();
 
-        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
-
+        const selectElement = (getElement(fixture, '.fudis-select__input') as HTMLInputElement)
+          .value;
         const requiredText = getElement(fixture, '.fudis-label__content__required').textContent;
 
         expect(selectElement).toEqual('FI (Puuttuu)');
@@ -318,14 +324,17 @@ describe('LocalizedTextGroupComponent', () => {
         expect(element.getAttribute('readonly')).toBeNull();
       });
 
-      it(`should update Select menu option, when control is updated`, () => {
+      it(`should update Select menu option, when control is updated`, async () => {
         component.formGroup.controls['fi'].patchValue('Hello');
 
         fixture.detectChanges();
 
-        const selectElement = getElement(fixture, '.fudis-select__input__label').textContent;
+        await fixture.whenStable().then(() => {
+          const selectElement = (getElement(fixture, '.fudis-select__input') as HTMLInputElement)
+            .value;
 
-        expect(selectElement).toEqual('FI');
+          expect(selectElement).toEqual('FI');
+        });
       });
     });
 
@@ -386,7 +395,7 @@ describe('LocalizedTextGroupComponent', () => {
           fixture.detectChanges();
           const selectInput = getElement(fixture, '#fudis-localized-text-group-1_language-select');
 
-          expect(selectInput.getAttribute('tabindex')).toBeNull();
+          expect(selectInput.getAttribute('tabindex')).toEqual('-1');
           expect(selectInput.getAttribute('aria-disabled')).toBeTruthy();
 
           component.formGroup.enable();
@@ -396,7 +405,7 @@ describe('LocalizedTextGroupComponent', () => {
 
           const selectInput = getElement(fixture, '#fudis-localized-text-group-1_language-select');
 
-          expect(selectInput.getAttribute('tabindex')).toEqual('0');
+          expect(selectInput.getAttribute('tabindex')).toBeNull();
           expect(selectInput.getAttribute('aria-disabled')).toBeNull();
         });
     });
