@@ -13,7 +13,11 @@ describe('FudisDOMUtilitiesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      providers: [FudisDOMUtilitiesService, { provide: ElementRef, useClass: MockElementRef }],
+      providers: [
+        FudisDOMUtilitiesService,
+        { provide: ElementRef, useClass: MockElementRef },
+        { provide: 'componentType', useValue: 'label' },
+      ],
     });
 
     service = TestBed.inject(FudisDOMUtilitiesService);

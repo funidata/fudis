@@ -1,7 +1,4 @@
-<div
-  class="fudis-date-range"
-  [class.fudis-date-range--hidden]="(_DOMUtilitiesService.labelHeightMatched | async) === false"
->
+<div class="fudis-date-range">
   <ng-content select="[fudisDateStart]"></ng-content>
   <span class="fudis-date-range__gutter"></span>
   <ng-content select="[fudisDateEnd]"></ng-content>

@@ -8,7 +8,7 @@ import { FudisDOMUtilitiesService } from '../../../../services/dom/dom-utilities
   selector: 'fudis-date-range',
   templateUrl: './date-range.component.html',
   styleUrls: ['./date-range.component.scss'],
-  providers: [FudisDOMUtilitiesService],
+  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'label' }],
 })
 export class DateRangeComponent implements OnChanges {
   constructor(
