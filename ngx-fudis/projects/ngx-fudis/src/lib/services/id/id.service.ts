@@ -244,12 +244,12 @@ export class FudisIdService {
 
     if (groupParentId) {
       if (dataValue) {
-        newId = `${groupParentId}-option-${dataValue}`;
+        newId = `${selectParentId}-option-${dataValue}`;
       } else {
         const orderNumber =
           this._idData.grandParents[selectType][selectParentId].groups[groupParentId].length + 1;
 
-        newId = `${groupParentId}-option-${orderNumber}`;
+        newId = `${selectParentId}-option-${orderNumber}`;
       }
 
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
