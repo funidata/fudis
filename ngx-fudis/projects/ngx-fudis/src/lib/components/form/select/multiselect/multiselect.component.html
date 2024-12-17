@@ -14,36 +14,46 @@
   <div #selectRef>
     <div class="fudis-select__input-wrapper">
       <input
-        type="text"
-        *ngIf="variant === 'dropdown'"
-        [attr.readonly]="true"
-        [attr.placeholder]="placeholder"
-        [formControl]="control"
-        [dropdownRef]="_dropdownRef"
-        fudisMultiselectControlValueAccessor
         #inputRef
-        class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
-        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
+        fudisMultiselectControlValueAccessor
+        fudisMultiselectAutocomplete
         [id]="id"
-        role="combobox"
-        [attr.aria-controls]="id + '-dropdown'"
-        aria-haspopup="listbox"
+        [formControl]="control"
+        class="fudis-form-input fudis-select__input"
+        [class.fudis-select__input__dropdown]="variant === 'dropdown'"
+        [class.fudis-select-autocomplete]="variant !== 'dropdown'"
+        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
         (click)="!control.disabled && !disabled && _clickInput()"
         (focus)="!control.disabled && !disabled && _selectInputFocus($event)"
         (blur)="_inputBlur($event)"
         (keydown)="!control.disabled && !disabled && _inputKeyDown($event)"
         (keyup)="!control.disabled && !disabled && _inputKeyUp($event)"
+        [enableAutocomplete]="variant !== 'dropdown'"
+        [visibleOptions]="_visibleOptions.length"
+        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
+        [dropdownRef]="_dropdownRef"
+        [clearButtonClick]="_clearButtonClickTrigger | async"
+        (handleSortedSelectedOptions)="_updateSortedSelectedOptions($event)"
+        (triggerDropdownOpen)="openDropdown()"
+        (triggerDropdownClose)="closeDropdown()"
+        (triggerFilterTextUpdate)="_filterTextUpdate($event)"
+        type="text"
+        role="combobox"
+        aria-haspopup="listbox"
+        [attr.id]="id"
+        [attr.readonly]="variant === 'dropdown' ? true : null"
+        [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
+        [attr.placeholder]="placeholder"
+        [attr.aria-controls]="id + '-dropdown'"
         [attr.tabindex]="!control.disabled && !disabled ? 0 : null"
-        [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="dropdownOpen"
         [attr.aria-disabled]="control.disabled || disabled"
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.aria-invalid]="control.invalid || null"
-        (handleSortedSelectedOptions)="_updateSortedSelectedOptions($event)"
       />
-      <fudis-select-autocomplete
+      <!-- <fudis-select-autocomplete
         *ngIf="variant !== 'dropdown'"
         #autocompleteRef
         [id]="id"
@@ -66,13 +76,14 @@
         (triggerDropdownToggle)="_toggleDropdown()"
         (triggerFocus)="_selectInputFocus($event)"
         (triggerBlur)="_inputBlur($event)"
-      />
+      /> -->
       <div class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
           *ngIf="size !== 'xs'"
           [filterText]="!!_autocompleteFilterText()"
           [parentControl]="control"
           [parentVariant]="variant"
+          [parentId]="id"
           [dropdownOpen]="dropdownOpen"
           (handleClearButtonClick)="_clearButtonClick()"
           (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"

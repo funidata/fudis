@@ -30,6 +30,7 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
+import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -228,6 +229,11 @@ export class SelectBaseDirective
    */
   private _keyDown: string | null = null;
 
+  /**
+   * Used to pass info, that Clear Button was clicked
+   */
+  protected _clearButtonClickTrigger = new BehaviorSubject<void | null>(null);
+
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
@@ -369,8 +375,9 @@ export class SelectBaseDirective
   protected _clearButtonClick(): void {
     if (!this.control.disabled && !this.disabled) {
       this._setControlNull();
-
       this._focusToSelectInput();
+      this._clearButtonClickTrigger.next();
+      console.log('juu elikkäs');
     }
   }
 
