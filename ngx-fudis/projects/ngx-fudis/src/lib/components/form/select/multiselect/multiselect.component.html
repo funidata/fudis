@@ -1,5 +1,6 @@
 @let dropdownOpen = _dropdownOpen();
 @let sortedSelectedOptions = _sortedSelectedOptions();
+
 <div class="fudis-select fudis-input-size__{{ size }}" [id]="id + '-main-wrapper'">
   <fudis-label
     [text]="label"
@@ -94,7 +95,7 @@
       </div>
     </div>
     <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce"
+      *ngIf="_optionsLoadedOnce && !control.disabled && !disabled"
       #dropdownRef
       [open]="dropdownOpen"
       [selectVariant]="variant"
@@ -120,6 +121,7 @@
   >
     <ng-content select="fudis-error-message"
   /></fudis-guidance>
+
   <ng-container *ngIf="showSelectionChips && sortedSelectedOptions && control.enabled && !disabled">
     <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
       _translationRemoveItem | async

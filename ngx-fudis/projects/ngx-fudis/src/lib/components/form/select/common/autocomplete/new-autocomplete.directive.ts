@@ -12,8 +12,8 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 @Directive({
   selector: '[fudisSelectAutocompleteBase]',
 })
-export class SelectAutocompleteBaseDirective implements OnChanges {
-  constructor(private _elementRef: ElementRef<HTMLInputElement>) {}
+export class SelectAutocompleteBaseDirective {
+  constructor(protected _elementRef: ElementRef<HTMLInputElement>) {}
 
   @Input() selectedLabel: string | null;
 
@@ -61,43 +61,10 @@ export class SelectAutocompleteBaseDirective implements OnChanges {
 
   private _inputText: string | null = null;
 
-  private _focused: boolean = false;
-
-  private _tempSelectedLabel: string | null;
-
-  ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteDirective>): void {
-    if (this.enableAutocomplete) {
-      const selectedLabel = changes.selectedLabel?.currentValue;
-
-      console.log(changes);
-
-      if (changes.clearButtonClick && changes.clearButtonClick?.currentValue !== null) {
-        // Clear Button click
-        console.log('täällä');
-
-        this._elementRef.nativeElement.value = '';
-      } else if (
-        selectedLabel &&
-        changes.selectedLabel?.currentValue !== changes.selectedLabel?.previousValue
-      ) {
-        // Selected label is proper value
-        console.log('toka if');
-        this._elementRef.nativeElement.value = selectedLabel;
-      } else if (changes.selectedLabel && !selectedLabel && !this._focused) {
-        // Selected label is null, but focus is not on input
-        console.log('kolmas if');
-
-        this._elementRef.nativeElement.value = '';
-      }
-    }
-  }
+  protected _focused: boolean = false;
 
   @HostListener('focus', ['$event'])
-  private _handleFocus(event: FocusEvent) {
-    if ((event.relatedTarget as HTMLElement)?.getAttribute('id') === this.id + '-clear-button') {
-      this._tempSelectedLabel = this.selectedLabel;
-    }
-
+  private _handleFocus() {
     this._focused = true;
   }
 
@@ -138,17 +105,50 @@ export class SelectAutocompleteBaseDirective implements OnChanges {
 @Directive({
   selector: '[fudisSelectAutocomplete]',
 })
-export class SelectAutocompleteDirective extends SelectAutocompleteBaseDirective {
+export class SelectAutocompleteDirective
+  extends SelectAutocompleteBaseDirective
+  implements OnChanges
+{
   constructor(_elementRef: ElementRef<HTMLInputElement>) {
     super(_elementRef);
+  }
+  ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteDirective>): void {
+    if (this.enableAutocomplete) {
+      const selectedLabel = changes.selectedLabel?.currentValue;
+
+      if (changes.clearButtonClick && changes.clearButtonClick?.currentValue !== null) {
+        // Clear Button click
+        this._elementRef.nativeElement.value = '';
+      } else if (
+        // Selected label is proper value
+        selectedLabel &&
+        changes.selectedLabel?.currentValue !== changes.selectedLabel?.previousValue
+      ) {
+        this._elementRef.nativeElement.value = selectedLabel;
+      } else if (changes.selectedLabel && !selectedLabel && !this._focused) {
+        // Selected label is null, but focus is not on input
+        this._elementRef.nativeElement.value = '';
+      }
+    }
   }
 }
 
 @Directive({
   selector: '[fudisMultiselectAutocomplete]',
 })
-export class MultiselectAutocompleteDirective extends SelectAutocompleteBaseDirective {
+export class MultiselectAutocompleteDirective
+  extends SelectAutocompleteBaseDirective
+  implements OnChanges
+{
   constructor(_elementRef: ElementRef<HTMLInputElement>) {
     super(_elementRef);
+  }
+  ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteDirective>): void {
+    if (this.enableAutocomplete) {
+      if (changes.clearButtonClick && changes.clearButtonClick?.currentValue !== null) {
+        // Clear Button click
+        this._elementRef.nativeElement.value = '';
+      }
+    }
   }
 }

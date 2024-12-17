@@ -140,16 +140,6 @@ export class SelectBaseDirective
   public focusSelector: string = ".fudis-select-option__focusable:not([aria-disabled='true'])";
 
   /**
-   * Selected option or options label for non-autocomplete dropdowns
-   */
-  protected _dropdownSelectionLabelText = signal<string | null>(null);
-
-  /**
-   * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
-   */
-  protected _controlValueChangedInternally: boolean = false;
-
-  /**
    * For setting dropdown open / closed
    */
   protected _dropdownOpen = signal<boolean>(false);
@@ -239,16 +229,18 @@ export class SelectBaseDirective
       this._applyControlUpdateCheck();
       this._updateValueAndValidityTrigger.next();
 
-      if (changes.control?.currentValue?.value) {
-        this._updateSelectionFromControlValue();
+      this._updateComponentStateFromControlValue();
+
+      if (this.control.value) {
+        this._optionsLoadedOnce = true;
       }
 
-      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-        if (!this._controlValueChangedInternally) {
-          this._updateSelectionFromControlValue();
+      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+        if (value) {
+          this._optionsLoadedOnce = true;
         }
 
-        this._controlValueChangedInternally = false;
+        this._updateComponentStateFromControlValue();
       });
     }
 
@@ -377,7 +369,6 @@ export class SelectBaseDirective
       this._setControlNull();
       this._focusToSelectInput();
       this._clearButtonClickTrigger.next();
-      console.log('juu elikkäs');
     }
   }
 
@@ -386,7 +377,6 @@ export class SelectBaseDirective
    */
   protected _setControlNull(): void {
     if (this.control.value) {
-      this._controlValueChangedInternally = true;
       this.control.patchValue(null);
       this.selectionUpdate.emit(null);
       this._filterTextUpdate('');
@@ -596,19 +586,6 @@ export class SelectBaseDirective
   }
 
   /**
-   * Manually set typed text in input fields
-   */
-  // public updateInputValueTexts(value: string): void {
-  //   if (this.variant !== 'dropdown' && this.autocompleteRef) {
-  //     this.autocompleteRef.preventSpaceKeypress = true;
-
-  //     this.autocompleteRef.updateInputValue(value);
-  //   } else {
-  //     this._dropdownSelectionLabelText.set(value);
-  //   }
-  // }
-
-  /**
    * To focus on first option when dropdown opens
    * @param cssfocusSelector CSS class to focus to
    */
@@ -682,7 +659,7 @@ export class SelectBaseDirective
   /**
    * Function declaration overridden and implemented by Select and Multiselect
    */
-  protected _updateSelectionFromControlValue(): void {}
+  protected _updateComponentStateFromControlValue(): void {}
 
   /**
    * When pressing keyboard Esc, focus to Select input and close dropdown

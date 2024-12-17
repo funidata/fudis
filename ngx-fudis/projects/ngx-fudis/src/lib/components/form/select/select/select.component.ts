@@ -53,23 +53,13 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    * @param value option to be selected
    * @param disableSignalEmit disable signal update to reduce unneeded state updates
    */
-  public handleSelectionChange(
-    value: FudisSelectOption<object> | null,
-    // disableSignalEmit?: boolean,
-  ): void {
+  public handleSelectionChange(value: FudisSelectOption<object> | null): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
     if (!equalValues) {
-      this._controlValueChangedInternally = true;
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
-
-      //      this.updateInputValueTexts(value?.label || '');
-
-      // if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
-      //   this._filterTextUpdate(value.label);
-      // }
     }
   }
 
@@ -79,7 +69,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   protected _checkIfAutocompleteValueNull(text: string): void {
     if (this.control.value && text.toLowerCase() !== this.control.value?.label?.toLowerCase()) {
-      this._controlValueChangedInternally = true;
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
     }
@@ -88,9 +77,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   /**
    * If control value is updated from the Application, update component's state accordingly
    */
-  protected override _updateSelectionFromControlValue(): void {
+  protected override _updateComponentStateFromControlValue(): void {
     const currentLabel = this.control.value?.label;
-    this._dropdownSelectionLabelText.set(currentLabel || '');
     if (this.variant !== 'dropdown') {
       this._autocompleteFilterText.set(currentLabel || '');
     }

@@ -122,11 +122,17 @@ export class MultiselectControlValueAccessorDirective
     super();
   }
 
-  @Input() dropdownRef: SelectDropdownComponent;
+  @Input() id: string;
+  @Input() dropdownRef: SelectDropdownComponent | null;
+  @Input() enableAutocomplete: boolean = false;
+
   @Output() handleSortedSelectedOptions = new EventEmitter<FudisSelectOption<object>[] | null>();
 
   ngOnChanges(changes: FudisComponentChanges<MultiselectControlValueAccessorDirective>): void {
-    if (changes.dropdownRef?.currentValue !== changes.dropdownRef?.previousValue) {
+    if (
+      changes.dropdownRef?.currentValue &&
+      changes.dropdownRef?.currentValue !== changes.dropdownRef?.previousValue
+    ) {
       this.writeValue(this._selectedOptions);
     }
   }
@@ -144,14 +150,17 @@ export class MultiselectControlValueAccessorDirective
 
   private _setVisibleLabel(value: FudisSelectOption<object>[] | null): void {
     const dropdown = this.dropdownRef?.dropdownElement?.nativeElement;
+
     if (value && dropdown) {
-      const sortedSelectedOptions = value.sort(this._sortSelectedOptionsDOMOrder(dropdown));
+      const sortedSelectedOptions = [...value].sort(this._sortSelectedOptionsDOMOrder(dropdown));
 
       this.handleSortedSelectedOptions.emit(sortedSelectedOptions);
 
-      const labelToSet = joinInputValues(sortedSelectedOptions);
+      if (!this.enableAutocomplete) {
+        const labelToSet = joinInputValues(sortedSelectedOptions);
 
-      this._renderer.setAttribute(this._elementRef.nativeElement, 'value', labelToSet);
+        this._renderer.setAttribute(this._elementRef.nativeElement, 'value', labelToSet);
+      }
     } else {
       this._renderer.removeAttribute(this._elementRef.nativeElement, 'value');
       this.handleSortedSelectedOptions.emit(null);

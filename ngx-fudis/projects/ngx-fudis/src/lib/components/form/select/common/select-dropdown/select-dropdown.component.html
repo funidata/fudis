@@ -1,8 +1,8 @@
 <div
   #dropdownElement
-  *ngIf="selectVariant !== 'autocompleteType' || filterText"
+  [class.fudis-select-dropdown--hidden]="selectVariant === 'autocompleteType' || !filterText"
   class="fudis-select-dropdown fudis-input-size__{{ size }}"
-  [class.fudis-select-dropdown--open]="open"
+  [class.fudis-select-dropdown--open]="(open && selectVariant !== 'autocompleteType') || filterText"
   [class.fudis-select-dropdown__multiselect]="multiselect"
   [attr.id]="parentId + '-dropdown'"
   [attr.aria-labelledby]="parentId + '-label'"
