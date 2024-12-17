@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test.only("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
+test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-select--multiselect-showcase&viewMode=story",
   );
@@ -171,9 +171,10 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await expect(page).toHaveScreenshot("D-1-autocomplete-dropdown-2-focused.png", {
     fullPage: true,
   });
-  await page.getByTestId("fudis-multiselect-4").fill("golden");
-
+  await page.getByTestId("fudis-multiselect-4").focus();
+  await page.keyboard.type("golden");
   await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
+  await expect(page.getByText("Showing 3 results")).toBeVisible();
   await expect(page).toHaveScreenshot("D-2-autocomplete-dropdown-2-golden-typed.png", {
     fullPage: true,
   });
@@ -230,12 +231,13 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("KeyU");
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
 
-  await page.keyboard.type("ntain lion", { delay: 50 });
+  await page.keyboard.type("ntain lion");
   await expect(page.getByText("Showing 1 results")).toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
   await page.keyboard.press("Enter");
   await page.getByTestId("fudis-multiselect-5").focus();
-  await page.getByTestId("fudis-multiselect-5").fill("cat");
+  await page.getByTestId("fudis-multiselect-5").clear();
+  await page.keyboard.type("cat");
   await expect(page.getByText("Showing 4 results")).toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("E-3-autocomplete-type-cat-typed.png", {
@@ -256,9 +258,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   ).toBeInViewport();
   await page.keyboard.press("Space");
   await expect(
-    page.getByTestId(
-      "fudis-multiselect-5-option-f6777bbd-b234-4a0b-8232-f70367986688-checkbox-input",
-    ),
+    page.getByTestId("fudis-multiselect-5-option-f6777bbd-b234-4a0b-8232-f70367986688"),
   ).toHaveClass(
     "fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--focused fudis-multiselect-option--checked",
   );

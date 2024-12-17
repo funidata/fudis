@@ -35,11 +35,11 @@
     left: initial;
   }
 
-  &--hidden {
-    display: none;
-  }
-
   &--open {
     display: flex;
+  }
+
+  &--hidden {
+    display: none;
   }
 }
