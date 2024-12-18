@@ -12,7 +12,7 @@ describe('NewAutocompleteDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      providers: [ElementRef],
+      providers: [{ provide: ElementRef, useClass: MockElementRef }],
     });
 
     elementRef = TestBed.inject(ElementRef);
