@@ -4,8 +4,27 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
  * All of these functions are used to check if component's control has different validators.
  * The return value of these functions is usually assigned for internal variable to sort out wanted logic.
  */
+/**
+ * All of these functions are used to check if component's control has different validators.
+ * The return value of these functions is usually assigned for internal variable to sort out wanted logic.
+ */
+export const FudisValidatorUtilities = {
+  required,
+  oneRequiredOrMin,
+  maxLength,
+  minLength,
+  max,
+  min,
+  minDate,
+  maxDate,
+};
 
-export const hasRequiredValidator = (control: AbstractControl): boolean => {
+/**
+ *
+ * @param control
+ * @returns if provided FormControl has 'required' validator
+ */
+function required(control: AbstractControl): boolean {
   const nativeRequired = control.hasValidator(Validators.required);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,9 +34,14 @@ export const hasRequiredValidator = (control: AbstractControl): boolean => {
     return true;
   }
   return false;
-};
+}
 
-export const hasOneRequiredOrMinValidator = (group: FormGroup): boolean => {
+/**
+ *
+ * @param group FormGroup
+ * @returns if provided FormGroup has oneRequired or min validator
+ */
+function oneRequiredOrMin(group: FormGroup): boolean {
   const validatorFn = group.validator;
 
   if (validatorFn === null) {
@@ -35,9 +59,13 @@ export const hasOneRequiredOrMinValidator = (group: FormGroup): boolean => {
   const hasProperErrors: boolean = !!(errors?.['oneRequired'] || errors?.['min'].value > 0);
 
   return hasProperErrors;
-};
-
-export const getMaxLengthFromValidator = (control: AbstractControl): number | null => {
+}
+/**
+ *
+ * @param control
+ * @returns if provided FormControl has max length value binded to its validators
+ */
+function maxLength(control: AbstractControl): number | null {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
@@ -47,9 +75,14 @@ export const getMaxLengthFromValidator = (control: AbstractControl): number | nu
   const errors = validatorFn(new FormControl({ length: Infinity }));
 
   return errors?.['maxlength']?.requiredLength;
-};
+}
 
-export const getMinLengthFromValidator = (control: AbstractControl): number | null => {
+/**
+ *
+ * @param control
+ * @returns if provided FormControl has min length value binded to its validators
+ */
+function minLength(control: AbstractControl): number | null {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
@@ -59,9 +92,14 @@ export const getMinLengthFromValidator = (control: AbstractControl): number | nu
   const errors = validatorFn(new FormControl({ length: -Infinity }));
 
   return errors?.['minlength']?.requiredLength;
-};
+}
 
-export const getMaxFromValidator = (control: AbstractControl): number | null => {
+/**
+ *
+ * @param control
+ * @returns if provided FormControl has max value binded to its validators
+ */
+function max(control: AbstractControl): number | null {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
@@ -70,9 +108,14 @@ export const getMaxFromValidator = (control: AbstractControl): number | null => 
 
   const errors = validatorFn(new FormControl(Infinity)) ?? {};
   return errors?.['max']?.max;
-};
+}
 
-export const getMinFromValidator = (control: AbstractControl): number | null => {
+/**
+ *
+ * @param control
+ * @returns if provided FormControl has min value binded to its validators
+ */
+function min(control: AbstractControl): number | null {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
@@ -81,9 +124,14 @@ export const getMinFromValidator = (control: AbstractControl): number | null => 
 
   const errors = validatorFn(new FormControl(-Infinity)) ?? {};
   return errors?.['min']?.min;
-};
+}
 
-export const getMinDateFromValidator = (control: AbstractControl): Date | undefined => {
+/**
+ *
+ * @param control
+ * @returns if provided FormControl has datepickerMin value binded to its validators
+ */
+function minDate(control: AbstractControl): Date | undefined {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
@@ -100,9 +148,14 @@ export const getMinDateFromValidator = (control: AbstractControl): Date | undefi
     return returnValue;
   }
   return undefined;
-};
+}
 
-export const getMaxDateFromValidator = (control: AbstractControl): Date | undefined => {
+/**
+ *
+ * @param control
+ * @returns if provided FormControl has datepickerMax value binded to its validators
+ */
+function maxDate(control: AbstractControl): Date | undefined {
   const validatorFn = control.validator;
 
   if (validatorFn === null) {
@@ -119,4 +172,4 @@ export const getMaxDateFromValidator = (control: AbstractControl): Date | undefi
     return returnValue;
   }
   return undefined;
-};
+}
