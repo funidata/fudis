@@ -20,6 +20,7 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { SelectControlValueAccessorDirective } from '../select/common/select-control-value-accessor/select-control-value-accessor.directive';
 import { SelectAutocompleteDirective } from '../select/common/autocomplete/new-autocomplete.directive';
+import { SelectDropdownComponent } from '../select/common/select-dropdown/select-dropdown.component';
 
 const values = {
   label: 'Label for testing purposes',
@@ -47,6 +48,7 @@ describe('LocalizedTextGroupComponent', () => {
         SelectComponent,
         SelectControlValueAccessorDirective,
         SelectAutocompleteDirective,
+        SelectDropdownComponent,
         GuidanceComponent,
         ValidatorErrorMessageComponent,
         SelectIconsComponent,
