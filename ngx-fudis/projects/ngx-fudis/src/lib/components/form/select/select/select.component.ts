@@ -79,7 +79,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   protected override _updateComponentStateFromControlValue(): void {
     const currentLabel = this.control.value?.label;
-    console.log(this._clearButtonClickTrigger());
     if (this.variant !== 'dropdown') {
       if (currentLabel) {
         this.setAutocompleteFilterText(currentLabel);
