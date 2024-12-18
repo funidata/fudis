@@ -13,22 +13,17 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
    */
   await page.getByTestId("fudis-multiselect-1").focus();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-2-focus-input.png", {
+  await page.keyboard.press("ArrowDown");
+  await expect(page).toHaveScreenshot("A-2-focus-option.png", {
     fullPage: true,
   });
   await page.keyboard.press("ArrowDown");
-  await expect(page).toHaveScreenshot("A-3-focus-option.png", {
-    fullPage: true,
-  });
-  await page.keyboard.press("ArrowDown");
-  await expect(page).toHaveScreenshot("A-4-focus-selected.png", {
+  await expect(page).toHaveScreenshot("A-3-focus-selected.png", {
     fullPage: true,
   });
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
-  await expect(page).toHaveScreenshot("A-5-focus-disabled.png", {
-    fullPage: true,
-  });
+  await expect(page.getByTestId("fudis-multiselect-1-option-5-checkbox-input")).toBeFocused();
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
@@ -36,23 +31,24 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
-  await expect(page).toHaveScreenshot("A-6-focus-dolphin.png", {
-    fullPage: true,
-  });
+
+  await expect(
+    page.getByTestId("fudis-multiselect-1-group-10-option-2-checkbox-input"),
+  ).toBeFocused();
   await page.getByTestId("fudis-multiselect-1-group-10-option-1").hover();
-  await expect(page).toHaveScreenshot("A-7-hover-alligator.png", {
+  await expect(page).toHaveScreenshot("A-4-hover-alligator.png", {
     fullPage: true,
   });
   await page.getByTestId("fudis-heading-1").hover();
 
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-8-select-dolphin.png", {
+  await expect(page).toHaveScreenshot("A-5-select-dolphin.png", {
     fullPage: true,
   });
   await page.keyboard.press("Space");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-9-deselect-dolphin.png", {
+  await expect(page).toHaveScreenshot("A-6-deselect-dolphin.png", {
     fullPage: true,
   });
   await page.getByTestId("fudis-multiselect-1-group-7-option-5").click();
@@ -64,7 +60,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.getByTestId("fudis-heading-1").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
 
-  await expect(page).toHaveScreenshot("A-10-select-two-more.png", {
+  await expect(page).toHaveScreenshot("A-7-select-two-more.png", {
     fullPage: true,
   });
 
@@ -75,7 +71,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-11-selection-before-reset.png", {
+  await expect(page).toHaveScreenshot("A-8-selection-before-reset.png", {
     fullPage: true,
   });
 
@@ -90,7 +86,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
 
   await page.getByTestId("fudis-button-1").click();
 
-  await expect(page).toHaveScreenshot("A-12-disabled-selected.png", {
+  await expect(page).toHaveScreenshot("A-9-disabled-selected.png", {
     fullPage: true,
   });
 
@@ -102,13 +98,13 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-13-clear-click.png", {
+  await expect(page).toHaveScreenshot("A-10-clear-click.png", {
     fullPage: true,
   });
 
   await page.getByTestId("fudis-button-1").click();
 
-  await expect(page).toHaveScreenshot("A-14-disabled-cleared.png", {
+  await expect(page).toHaveScreenshot("A-11-disabled-cleared.png", {
     fullPage: true,
   });
 });
@@ -237,7 +233,6 @@ test("Dropdown and autocompletes", async ({ page }) => {
     fullPage: true,
   });
 
-  await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Space");

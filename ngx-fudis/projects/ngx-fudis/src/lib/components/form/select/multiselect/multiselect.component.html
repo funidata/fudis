@@ -1,7 +1,9 @@
+@let dropdownOpen = _dropdownOpen();
 <div class="fudis-select fudis-input-size__{{ size }}" [id]="id + '-main-wrapper'">
   <fudis-label
     [text]="label"
     [id]="id + '-label'"
+    [for]="id + '-dropdown'"
     [required]="_required | async"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
@@ -26,7 +28,7 @@
         (keyup)="_inputKeyUp($event)"
         [attr.tabindex]="!control.disabled && !disabled ? 0 : null"
         [attr.aria-autocomplete]="'none'"
-        [attr.aria-expanded]="_dropdownOpen"
+        [attr.aria-expanded]="dropdownOpen"
         [attr.aria-disabled]="control.disabled || disabled"
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
@@ -49,7 +51,7 @@
         [id]="id"
         [placeholder]="placeholder"
         [disabled]="control.disabled || disabled"
-        [dropdownOpen]="_dropdownOpen | async"
+        [dropdownOpen]="dropdownOpen"
         [required]="_required | async"
         [invalidState]="control.touched && control.invalid"
         [multiselect]="true"
@@ -73,7 +75,7 @@
           [filterText]="!!_autocompleteFilterText()"
           [parentControl]="control"
           [parentVariant]="variant"
-          [dropdownOpen]="_dropdownOpen | async"
+          [dropdownOpen]="dropdownOpen"
           (handleClearButtonClick)="_clearButtonClick()"
           (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
@@ -85,7 +87,7 @@
     <fudis-select-dropdown
       *ngIf="_optionsLoadedOnce"
       #dropdownRef
-      [open]="_dropdownOpen | async"
+      [open]="dropdownOpen"
       [selectVariant]="variant"
       [results]="_visibleOptions.length"
       [autocompleteNoResultsText]="autocompleteNoResultsText"
