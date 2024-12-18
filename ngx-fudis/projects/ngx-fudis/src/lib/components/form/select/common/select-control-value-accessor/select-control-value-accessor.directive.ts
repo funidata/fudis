@@ -128,15 +128,6 @@ export class MultiselectControlValueAccessorDirective
 
   @Output() handleSortedSelectedOptions = new EventEmitter<FudisSelectOption<object>[] | null>();
 
-  // ngOnChanges(changes: FudisComponentChanges<MultiselectControlValueAccessorDirective>): void {
-  //   if (
-  //     changes.dropdownRef?.currentValue &&
-  //     changes.dropdownRef?.currentValue !== changes.dropdownRef?.previousValue
-  //   ) {
-  //     this.writeValue(this._selectedOptions);
-  //   }
-  // }
-
   ngAfterViewInit(): void {
     this.writeValue(this._selectedOptions);
   }
@@ -155,10 +146,10 @@ export class MultiselectControlValueAccessorDirective
   private _setVisibleLabel(value: FudisSelectOption<object>[] | null): void {
     const dropdown = this._document.getElementById(`${this.id}-dropdown`);
 
-    if (value && dropdown) {
-      const sortedSelectedOptions = [...value].sort(
-        this._sortSelectedOptionsDOMOrder(dropdown, this.id),
-      );
+    if (value) {
+      const sortedSelectedOptions = dropdown
+        ? [...value].sort(this._sortSelectedOptionsDOMOrder(dropdown, this.id))
+        : [...value];
 
       this.handleSortedSelectedOptions.emit(sortedSelectedOptions);
 
