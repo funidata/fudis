@@ -314,7 +314,6 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
  */
 export const selectArgsTableExclude: RegExp = excludeRegex([
   'componentFocused',
-  'translationOptionDisabledText',
   'setFocusedOption',
   'autocompleteRef',
   'focusSelector',
@@ -333,7 +332,6 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'selectionUpdate',
   'filterTextUpdate',
   'focusSelector',
-  'translationOptionDisabledText',
   'visibleOptionsUpdate',
   'handleSelectionChange',
   'closeDropdown',

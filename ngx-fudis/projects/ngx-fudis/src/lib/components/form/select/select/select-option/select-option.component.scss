@@ -30,19 +30,21 @@
     visibility: hidden;
   }
 
-  &:hover {
-    @include colorMixins.bg-color('primary-light');
-  }
+  &:not([aria-disabled='true']) {
+    &:hover {
+      @include colorMixins.bg-color('primary-light');
+    }
 
-  &:focus-visible,
-  &:focus {
-    @include colorMixins.bg-color('primary-light');
-    @include focus.focus-dropdown;
-  }
+    &:active {
+      @include colorMixins.bg-color('primary');
+      @include colorMixins.text-color('white');
+    }
 
-  &:active {
-    @include colorMixins.bg-color('primary');
-    @include colorMixins.text-color('white');
+    &:focus-visible,
+    &:focus {
+      @include colorMixins.bg-color('primary-light');
+      @include focus.focus-dropdown;
+    }
   }
 
   &--disabled {
