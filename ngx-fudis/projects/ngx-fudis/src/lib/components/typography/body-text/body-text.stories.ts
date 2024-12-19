@@ -36,7 +36,7 @@ const Template: StoryFn = (args) => ({
 
 export const Example = Template.bind({});
 Example.args = {
-  variant: 'lg-regular',
+  variant: 'md-regular',
   align: 'left',
   content:
     'Mutiny Pirate Round execution dock spanker broadside schooner aye reef sails quarter yo-ho-ho.',
