@@ -10,6 +10,9 @@ import {
   OnChanges,
   inject,
   Injector,
+  signal,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -81,7 +84,17 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
    */
   @Input() errorSummaryVisible: boolean = false;
 
+  /**
+   * Each time Error Summary List is updated, this emitter will output the list
+   */
+  @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
+
   private _injector = inject(Injector);
+
+  /**
+   * Angular Change Detection did not trigger when we tried to update only our internal errorSummaryVisible input, hence we need this "helper signal"
+   */
+  protected _errorSummaryVisibleSignal = signal<boolean>(false);
 
   ngOnInit(): void {
     this._setFormId();
@@ -101,6 +114,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
     }).subscribe((value) => {
       if (value !== this.errorSummaryVisible) {
         this.errorSummaryVisible = !this.errorSummaryVisible;
+        this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
       }
     });
   }
@@ -115,6 +129,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
       this.id
     ) {
       this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
+      this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
     }
   }
 

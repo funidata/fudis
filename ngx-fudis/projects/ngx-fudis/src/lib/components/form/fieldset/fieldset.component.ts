@@ -143,9 +143,14 @@ export class FieldSetComponent
   }
 
   ngAfterViewInit(): void {
-    this._parentFormId = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
-
-    this._addToErrorSummary(this.label);
+    this._errorSummaryService
+      .getFormAncestorId(this._element.nativeElement)
+      .then((parentFormId) => {
+        if (parentFormId) {
+          this._parentFormId = parentFormId;
+          this._addToErrorSummary(this.label);
+        }
+      });
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this._fieldsetLegend?.nativeElement?.focus();
     }

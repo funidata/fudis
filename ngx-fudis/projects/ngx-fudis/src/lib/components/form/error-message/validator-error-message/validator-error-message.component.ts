@@ -120,11 +120,8 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
   ngOnChanges(changes: FudisComponentChanges<ValidatorErrorMessageComponent>): void {
     if (
-      changes.focusId?.currentValue !== changes.focusId?.previousValue ||
       changes.message?.currentValue !== changes.message?.previousValue ||
       changes.label?.currentValue !== changes.label?.previousValue ||
-      changes.type?.currentValue !== changes.type?.previousValue ||
-      changes.controlName?.currentValue !== changes.controlName?.previousValue ||
       changes.formId?.currentValue !== changes.formId?.previousValue
     ) {
       /**
@@ -133,6 +130,7 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
       const newMessage = changes.message?.currentValue;
       const newLabel = changes.label?.currentValue;
+      const newFormId = changes.formId?.currentValue;
 
       if (newMessage) {
         if (typeof newMessage === 'string') {
@@ -144,6 +142,10 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
       }
 
       if (newLabel) {
+        this._createError();
+      }
+
+      if (newFormId) {
         this._createError();
       }
     }
