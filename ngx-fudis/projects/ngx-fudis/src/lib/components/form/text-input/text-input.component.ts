@@ -3,13 +3,7 @@ import { FormControl } from '@angular/forms';
 import { FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import {
-  getMaxFromValidator,
-  getMaxLengthFromValidator,
-  getMinFromValidator,
-  getMinLengthFromValidator,
-  hasRequiredValidator,
-} from '../../../utilities/form/getValidators';
+import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
@@ -29,16 +23,16 @@ export class TextInputComponent
     super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required.next(hasRequiredValidator(this.control));
+        this._required.next(FudisValidatorUtilities.required(this.control));
 
         if (this.type === 'number') {
           this._maxLength.next(null);
           this._minLength.next(null);
-          this._minNumber.next(getMinFromValidator(this.control));
-          this._maxNumber.next(getMaxFromValidator(this.control));
+          this._minNumber.next(FudisValidatorUtilities.min(this.control));
+          this._maxNumber.next(FudisValidatorUtilities.max(this.control));
         } else {
-          this._maxLength.next(getMaxLengthFromValidator(this.control));
-          this._minLength.next(getMinLengthFromValidator(this.control));
+          this._maxLength.next(FudisValidatorUtilities.maxLength(this.control));
+          this._minLength.next(FudisValidatorUtilities.minLength(this.control));
           this._minNumber.next(null);
           this._maxNumber.next(null);
         }

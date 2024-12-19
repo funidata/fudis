@@ -2,11 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@a
 import { FormControl } from '@angular/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import {
-  getMaxLengthFromValidator,
-  getMinLengthFromValidator,
-  hasRequiredValidator,
-} from '../../../utilities/form/getValidators';
+import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
@@ -25,9 +21,9 @@ export class TextAreaComponent
     super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required.next(hasRequiredValidator(this.control));
-        this._maxLength.next(getMaxLengthFromValidator(this.control));
-        this._minLength.next(getMinLengthFromValidator(this.control));
+        this._required.next(FudisValidatorUtilities.required(this.control));
+        this._maxLength.next(FudisValidatorUtilities.maxLength(this.control));
+        this._minLength.next(FudisValidatorUtilities.minLength(this.control));
       }
     });
   }
