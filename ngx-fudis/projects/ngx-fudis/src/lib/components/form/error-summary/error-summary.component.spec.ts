@@ -7,7 +7,6 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
 import { FormComponent } from '../form/form.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-import { ButtonComponent } from '../../button/button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -23,7 +22,7 @@ import { TextInputComponent } from '../text-input/text-input.component';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
-import { getElement } from '../../../utilities/tests/utilities';
+import { getAllElements, getElement } from '../../../utilities/tests/utilities';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { SectionContentDirective } from '../../section/section-content.directive';
 import { FormContentDirective } from '../form/form-content.directive';
@@ -133,7 +132,6 @@ describe('ErrorSummaryComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         BodyTextComponent,
-        ButtonComponent,
         ExpandableComponent,
         ExpandableContentDirective,
         ErrorSummaryComponent,
@@ -163,16 +161,26 @@ describe('ErrorSummaryComponent', () => {
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
 
-    TestBed.runInInjectionContext(() => {
+    TestBed.runInInjectionContext(async () => {
       fixture = TestBed.createComponent(MockFormComponent);
       component = fixture.componentInstance;
       jest.spyOn(component.handleUpdatedErrorList, 'emit');
       component.errorSummaryService.setUpdateStrategy('reloadOnly');
       component.reloadErrors();
+      fixture.detectChanges();
+
       fixture.autoDetectChanges(true);
       fixture.detectChanges();
     });
   });
+
+  const delay = (): Promise<void> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 100);
+    });
+  };
 
   describe('Contents', () => {
     it('default title is displayed properly', async () => {
@@ -196,7 +204,9 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should remove errors dynamically without reload', async () => {
+      await delay();
       component.errorSummaryService.setUpdateStrategy('onRemove');
+      expect(component.handleUpdatedErrorList.emit).not.toHaveBeenCalledWith(threeErrors);
       component.formGroup.controls.name.patchValue('Chewbacca');
 
       fixture.detectChanges();
@@ -206,18 +216,21 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should add & remove errors dynamically without reload', async () => {
+      await delay();
       component.errorSummaryService.setUpdateStrategy('all');
       component.formGroup.controls.name.patchValue('Chewbacca');
 
       fixture.detectChanges();
       await fixture.whenStable();
-      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(threeErrors);
 
+      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(threeErrors);
+      expect(getAllElements(fixture, '.fudis-error-summary__error-list__item').length).toEqual(3);
       component.formGroup.controls.name.patchValue(null);
       fixture.detectChanges();
       await fixture.whenStable();
 
       expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(fourErrors);
+      expect(getAllElements(fixture, '.fudis-error-summary__error-list__item').length).toEqual(4);
     });
 
     it('error list have right messages', async () => {
@@ -227,14 +240,19 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should not update error messages without reload', async () => {
+      await delay();
       component.formGroup.controls.name.patchValue('Chewbacca');
       fixture.detectChanges();
       await fixture.whenStable();
+      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(fourErrors);
       expect(component.handleUpdatedErrorList.emit).not.toHaveBeenCalledWith(threeErrors);
+
       component.reloadErrors();
+      await delay();
       fixture.detectChanges();
-      await fixture.whenStable();
-      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(threeErrors);
+      await fixture.whenStable().then(() => {
+        expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(threeErrors);
+      });
     });
   });
 });
