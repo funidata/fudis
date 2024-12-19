@@ -19,6 +19,8 @@ import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectAutocompleteDirective } from '../autocomplete/new-autocomplete.directive';
+import { SelectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
   selector: 'fudis-mock-select-option-base-directive',
@@ -68,6 +70,8 @@ describe('SelectOptionBaseDirective', () => {
     await TestBed.configureTestingModule({
       declarations: [
         SelectComponent,
+        SelectAutocompleteDirective,
+        SelectControlValueAccessorDirective,
         SelectOptionBaseDirective,
         SelectOptionComponent,
         SelectGroupComponent,
@@ -144,7 +148,7 @@ describe('SelectOptionBaseDirective', () => {
 
       expect(focusableOptions().length).toEqual(7);
 
-      component.selectElem.autocompleteRef.updateInputValue('p');
+      component.selectElem.setAutocompleteFilterText('p');
 
       fixture.detectChanges();
 
@@ -152,7 +156,7 @@ describe('SelectOptionBaseDirective', () => {
 
       expect(focusableOptions()).toEqual(['Capybara', 'Platypus']);
 
-      component.selectElem.autocompleteRef.updateInputValue('roa');
+      component.selectElem.setAutocompleteFilterText('roa');
 
       fixture.detectChanges();
 
@@ -168,10 +172,10 @@ describe('SelectOptionBaseDirective', () => {
       jest.spyOn(component, 'handleOptionBlur');
 
       const firstElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-2',
+        '#fudis-select-1-option-value-2-capybara',
       ) as HTMLInputElement;
       const secondElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-4',
+        '#fudis-select-1-option-value-3-platypys',
       ) as HTMLInputElement;
 
       firstElement.focus();

@@ -153,10 +153,7 @@ export class FudisIdService {
   /**
    * Add grand parent id to data collection
    */
-  public addNewGrandParentId(
-    componentType: 'select' | 'multiselect' | 'description-list' | 'dropdown-menu',
-    newId: string,
-  ): void {
+  public addNewGrandParentId(componentType: FudisIdGrandParent, newId: string): void {
     if (componentType === 'description-list') {
       const newGrandParent: FudisIdDlFamily = {
         id: newId,
@@ -231,25 +228,47 @@ export class FudisIdService {
     }
   }
 
+  public getNewDropdownMenuId(parentId: string, groupParentId?: string): string {
+    let newId = '';
+
+    if (groupParentId) {
+      const orderNumber =
+        this._idData.grandParents['dropdown-menu'][parentId].groups[groupParentId].length + 1;
+
+      newId = `${groupParentId}-option-${orderNumber}`;
+
+      this._idData.grandParents['dropdown-menu'][parentId].groups[groupParentId].push(newId);
+    } else {
+      const orderNumber =
+        this._idData.grandParents['dropdown-menu'][parentId].nonGroupedOptions.length + 1;
+      newId = `${parentId}-option-${orderNumber}`;
+
+      this._idData.grandParents['dropdown-menu'][parentId].nonGroupedOptions.push(newId);
+    }
+    return newId;
+  }
+
   /**
    * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-1
    */
   public getNewSelectOptionId(
-    selectType: 'select' | 'multiselect' | 'dropdown-menu',
+    selectType: 'select' | 'multiselect',
     selectParentId: string,
+    dataValue: string,
     groupParentId?: string,
-    dataValue?: string,
   ): string {
     let newId = '';
 
     if (groupParentId) {
-      if (dataValue) {
-        newId = `${selectParentId}-option-${dataValue}`;
-      } else {
+      if (!dataValue) {
         const orderNumber =
           this._idData.grandParents[selectType][selectParentId].groups[groupParentId].length + 1;
 
-        newId = `${selectParentId}-option-${orderNumber}`;
+        newId = `${groupParentId}-option-${orderNumber}`;
+
+        this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
+      } else {
+        newId = `${selectParentId}-option-${dataValue}`;
       }
 
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);

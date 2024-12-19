@@ -16,6 +16,8 @@ import { ButtonComponent } from '../../../button/button.component';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectAutocompleteDirective } from '../common/autocomplete/new-autocomplete.directive';
+import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -50,6 +52,8 @@ describe('SelectComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         SelectComponent,
+        SelectAutocompleteDirective,
+        SelectControlValueAccessorDirective,
         ButtonComponent,
         GuidanceComponent,
         IconComponent,
@@ -117,29 +121,22 @@ describe('SelectComponent', () => {
       expect(componentClasses).toEqual(expectedValue.split(' ').sort());
     });
 
-    it('should have default form control option set instead of placeholder on init', () => {
+    it('should have default form control option set on init', () => {
       initWithControlValue();
 
-      const placeholderAnimal = fixture.debugElement.query(By.css('.fudis-select__input__label'));
+      const inputElement = fixture.debugElement.query(By.css('.fudis-select__input'));
 
-      expect(placeholderAnimal.nativeElement.innerHTML).toEqual('Really dangerous cat');
+      expect(inputElement.nativeElement.value).toEqual('Really dangerous cat');
     });
 
-    it('should have placeholder text present when control value is updated to null', () => {
+    it('should have placeholder text present', () => {
       initWithControlValue();
-      component.control.setValue(null);
+
       fixture.detectChanges();
 
-      const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
+      const inputElement = fixture.debugElement.query(By.css('.fudis-select__input'));
 
-      expect(placeholder.nativeElement.outerHTML).toContain('Test placeholder');
-    });
-
-    it('should have placeholder text present when control value is null on init', () => {
-      initWithControlNull();
-      const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
-
-      expect(placeholder.nativeElement.outerHTML).toContain('Test placeholder');
+      expect(inputElement.nativeElement.getAttribute('placeholder')).toBe('Test placeholder');
     });
 
     it('should update component state when handleSelectionChange is called', () => {
@@ -147,7 +144,7 @@ describe('SelectComponent', () => {
       component.handleSelectionChange(defaultOptions[5]);
       fixture.detectChanges();
 
-      const value = getElement(fixture, '.fudis-select__input__label').textContent;
+      const value = (getElement(fixture, '.fudis-select__input') as HTMLInputElement).value;
 
       expect(value).toEqual('Southern Titiwangsa Bent-Toed Gecko');
       expect(component.control.value).toEqual(defaultOptions[5]);
