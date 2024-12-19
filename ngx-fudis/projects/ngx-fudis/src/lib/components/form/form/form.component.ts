@@ -10,6 +10,7 @@ import {
   OnChanges,
   inject,
   Injector,
+  signal,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -83,6 +84,11 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
 
   private _injector = inject(Injector);
 
+  /**
+   * Angular Change Detection did not trigger when we tried to update only our internal errorSummaryVisible input, hence we need this "helper signal"
+   */
+  protected _errorSummaryVisibleSignal = signal<boolean>(false);
+
   ngOnInit(): void {
     this._setFormId();
 
@@ -101,6 +107,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
     }).subscribe((value) => {
       if (value !== this.errorSummaryVisible) {
         this.errorSummaryVisible = !this.errorSummaryVisible;
+        this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
       }
     });
   }
