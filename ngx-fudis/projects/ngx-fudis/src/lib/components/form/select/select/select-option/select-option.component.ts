@@ -8,6 +8,7 @@ import { SelectOptionBaseDirective } from '../../common/select-option-base/selec
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { FudisSelectOption } from '../../../../../types/forms';
 
 @Component({
   selector: 'fudis-select-option',
@@ -51,6 +52,10 @@ export class SelectOptionComponent
       );
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
+
+      if (changes.data?.currentValue) {
+        this._onLangChangeCheckIfLabelRequiresUpdate(changes.data.currentValue);
+      }
     }
   }
 
@@ -77,6 +82,21 @@ export class SelectOptionComponent
       this._isOptionTyped(filterText);
     } else {
       this._isOptionVisible('');
+    }
+  }
+
+  /**
+   * When app language is changed, it will not change Form Control's value, which is intended, but visible label should be updated
+   */
+  protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+    const controlValue = this._parent?.control.value;
+
+    if (this._appLanguage !== this._translationService.getLanguage()) {
+      this._appLanguage = this._translationService.getLanguage();
+
+      if (controlValue?.value === newData.value) {
+        this._parent.selectCVA.writeValue(newData);
+      }
     }
   }
 

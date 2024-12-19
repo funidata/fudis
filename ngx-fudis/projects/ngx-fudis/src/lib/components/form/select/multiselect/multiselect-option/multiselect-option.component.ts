@@ -63,6 +63,10 @@ export class MultiselectOptionComponent
       } else {
         this.checked = false;
       }
+
+      if (changes.data?.currentValue) {
+        this._onLangChangeCheckIfLabelRequiresUpdate(changes.data?.currentValue);
+      }
     }
   }
 
@@ -105,6 +109,32 @@ export class MultiselectOptionComponent
       const result = options?.find((option) => option.value === this.data.value);
 
       this.checked = !!result;
+    }
+  }
+
+  /**
+   * When app language is changed, it will not change Form Control's value, which is intended, but visible label should be updated
+   */
+  protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+    const controlValue = this._parent?.control.value;
+
+    if (this._appLanguage !== this._translationService.getLanguage()) {
+      this._appLanguage = this._translationService.getLanguage();
+
+      const foundMatch = controlValue?.find((selectedOption) => {
+        return selectedOption.value === newData.value;
+      });
+
+      if (foundMatch) {
+        this._parent.selectedOptionsFromLangChange.push(newData);
+
+        if (
+          this._parent.selectedOptionsFromLangChange.length === this._parent.control.value?.length
+        ) {
+          this._parent._multiselectCVA.writeValue(this._parent.selectedOptionsFromLangChange);
+          this._parent.selectedOptionsFromLangChange = [];
+        }
+      }
     }
   }
 }

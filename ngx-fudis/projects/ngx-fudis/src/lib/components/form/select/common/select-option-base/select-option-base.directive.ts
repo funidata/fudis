@@ -8,6 +8,8 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 
+import { FudisLanguageAbbr } from '../../../../../types/miscellaneous';
+
 @Directive({
   selector: '[fudisSelectOptionBase]',
 })
@@ -19,6 +21,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     protected _idService: FudisIdService,
   ) {
     super(_document);
+    this._appLanguage = _translationService.getLanguage();
   }
 
   /**
@@ -42,6 +45,11 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    * Focus state
    */
   protected _focused: boolean = false;
+
+  /**
+   * App language
+   */
+  protected _appLanguage: FudisLanguageAbbr;
 
   /**
    * Common parent and its properties for both Select and Multiselect

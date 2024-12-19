@@ -61,6 +61,11 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     new EventEmitter<FudisSelectOption<object>[] | null>();
 
   /**
+   * When app language and option labels are changed, selected Multiselect Options push themselves here, which will be then used to update visible UI labels managed by MultiselectCVA
+   */
+  public selectedOptionsFromLangChange: FudisSelectOption<object>[] = [];
+
+  /**
    * Internal translated text to indicate deleting item chip aria-label
    */
   protected _translationRemoveItem = new BehaviorSubject<string>('');
