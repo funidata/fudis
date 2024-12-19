@@ -153,7 +153,7 @@ describe('LinkDirective', () => {
     it('should have default CSS classes', () => {
       const currentClasses = sortClasses(component.linkRefOne.nativeElement.className);
 
-      const toEqual = sortClasses('fudis-link fudis-link__size__lg test-link-element');
+      const toEqual = sortClasses('fudis-link fudis-link__size__md test-link-element');
 
       expect(currentClasses).toEqual(toEqual);
     });

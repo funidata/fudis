@@ -126,7 +126,7 @@ export const AllCombinations: StoryFn = (args) => ({
 Example.args = {
   title: 'This is an example title',
   external: false,
-  size: 'lg',
+  size: 'md',
 };
 
 AllCombinations.parameters = {
