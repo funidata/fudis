@@ -11,6 +11,8 @@ import {
   inject,
   Injector,
   signal,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -82,6 +84,11 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
    */
   @Input() errorSummaryVisible: boolean = false;
 
+  /**
+   * Each time Error Summary List is updated, this emitter will output the list
+   */
+  @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
+
   private _injector = inject(Injector);
 
   /**
@@ -122,6 +129,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
       this.id
     ) {
       this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
+      this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
     }
   }
 
