@@ -575,7 +575,15 @@ export class SelectBaseDirective
       this._autocompleteFilterText.set(text);
       this.filterTextUpdate.emit(text);
     }
+    this._checkIfAutocompleteValueNull(text);
   }
+
+  /**
+   * Checks if currently typed filter text is not same as control label value
+   * @param text filter text value emitted from autocomplete
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected _checkIfAutocompleteValueNull(text: string): void {}
 
   /**
    * To focus on first option when dropdown opens

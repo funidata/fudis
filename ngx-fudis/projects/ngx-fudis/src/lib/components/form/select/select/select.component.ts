@@ -67,7 +67,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    * Checks if currently typed filter text is not same as control label value
    * @param text filter text value emitted from autocomplete
    */
-  protected _checkIfAutocompleteValueNull(text: string): void {
+  protected override _checkIfAutocompleteValueNull(text: string): void {
     if (this.control.value && text.toLowerCase() !== this.control.value?.label?.toLowerCase()) {
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);

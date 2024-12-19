@@ -123,39 +123,4 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
       this._focusToSelectInput();
     }
   }
-
-  /**
-   * Sort selected options the same order they appear in the DOM
-   */
-  private _sortSelectedOptions(dropdown: HTMLElement | null) {
-    return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
-      if (a['fudisGeneratedHtmlId'] === b['fudisGeneratedHtmlId']) {
-        return 0;
-      }
-
-      if (a['fudisGeneratedHtmlId'] && b['fudisGeneratedHtmlId'] && dropdown) {
-        const firstEl = dropdown.querySelector(`#${a['fudisGeneratedHtmlId']}`);
-
-        const secondEl = dropdown.querySelector(`#${b['fudisGeneratedHtmlId']}`);
-
-        if (firstEl && secondEl) {
-          const position = firstEl.compareDocumentPosition(secondEl);
-
-          if (
-            position & Node.DOCUMENT_POSITION_FOLLOWING ||
-            position & Node.DOCUMENT_POSITION_CONTAINED_BY
-          ) {
-            return -1;
-          } else if (
-            position & Node.DOCUMENT_POSITION_PRECEDING ||
-            position & Node.DOCUMENT_POSITION_CONTAINS
-          ) {
-            return 1;
-          }
-        }
-      }
-
-      return 0;
-    };
-  }
 }

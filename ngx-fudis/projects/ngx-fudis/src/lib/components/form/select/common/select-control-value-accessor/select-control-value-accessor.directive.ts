@@ -8,6 +8,7 @@ import {
   Output,
   Inject,
   AfterViewInit,
+  OnChanges,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -20,6 +21,7 @@ import {
 import { FudisSelectOption } from '../../../../../types/forms';
 import { joinInputValues } from '../utilities/selectUtilities';
 import { DOCUMENT } from '@angular/common';
+import { FudisComponentChanges } from '../../../../../../lib/types/miscellaneous';
 
 @Directive({
   selector: '[fudisSelectBaseControlValueAccessor]',
@@ -77,7 +79,10 @@ class SelectBaseControlValueAccessorDirective implements ControlValueAccessor, V
     },
   ],
 })
-export class SelectControlValueAccessorDirective extends SelectBaseControlValueAccessorDirective {
+export class SelectControlValueAccessorDirective
+  extends SelectBaseControlValueAccessorDirective
+  implements OnChanges
+{
   constructor(
     private _elementRef: ElementRef<HTMLInputElement>,
     private _renderer: Renderer2,
@@ -85,11 +90,21 @@ export class SelectControlValueAccessorDirective extends SelectBaseControlValueA
     super();
   }
 
-  override writeValue(value: FudisSelectOption<object> | null): void {
+  @Input() filterText: string | null;
+
+  ngOnChanges(changes: FudisComponentChanges<SelectControlValueAccessorDirective>): void {
+    if (changes.filterText?.currentValue !== changes.filterText?.previousValue) {
+      this.writeValue();
+    }
+  }
+
+  override writeValue(value?: FudisSelectOption<object> | null): void {
     const valueToSet = value?.label || null;
 
     if (valueToSet) {
       this._renderer.setAttribute(this._elementRef.nativeElement, 'value', valueToSet);
+    } else if (this.filterText) {
+      this._renderer.setAttribute(this._elementRef.nativeElement, 'value', this.filterText);
     } else {
       this._renderer.removeAttribute(this._elementRef.nativeElement, 'value');
     }
