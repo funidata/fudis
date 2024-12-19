@@ -129,16 +129,16 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   }
 
   ngAfterContentInit(): void {
-    const formParentId = this._errorSummaryService.getFormAncestorId(
-      this._elementRef.nativeElement as HTMLElement,
-    );
-
-    if (formParentId) {
-      this._parentFormId.next(formParentId);
-      this._subscribeToErrors(formParentId);
-    } else {
-      this._parentFormId.next(null);
-    }
+    this._errorSummaryService
+      .getFormAncestorId(this._elementRef.nativeElement as HTMLElement)
+      .then((formParentId) => {
+        if (formParentId) {
+          this._parentFormId.next(formParentId);
+          this._subscribeToErrors(formParentId);
+        } else {
+          this._parentFormId.next(null);
+        }
+      });
   }
 
   ngAfterViewInit(): void {
@@ -213,7 +213,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
         });
       }
 
-      if (numberOfErrors === this._lazyLoadedErrors.length && !this._afterViewInitDone()) {
+      if (numberOfErrors === this._lazyLoadedErrors.length && this._afterViewInitDone()) {
         this._errorSummaryService.reloadFormErrors(this._parentFormId.value, false);
       }
     }

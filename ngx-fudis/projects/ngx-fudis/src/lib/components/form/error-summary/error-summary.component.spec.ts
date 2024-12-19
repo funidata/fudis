@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ErrorSummaryComponent } from './error-summary.component';
@@ -7,7 +7,6 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
 import { FormComponent } from '../form/form.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-import { ButtonComponent } from '../../button/button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -23,7 +22,7 @@ import { TextInputComponent } from '../text-input/text-input.component';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { LinkDirective } from '../../../directives/link/link.directive';
-import { getElement } from '../../../utilities/tests/utilities';
+import { getAllElements, getElement } from '../../../utilities/tests/utilities';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { SectionContentDirective } from '../../section/section-content.directive';
 import { FormContentDirective } from '../form/form-content.directive';
@@ -36,6 +35,7 @@ import { ExpandableContentDirective } from '../../expandable/expandable-content.
     [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
+    (handleUpdatedErrorList)="handleUpdatedErrorList.emit($event)"
     [errorSummaryVisible]="errorSummaryVisible"
     [errorSummaryTitle]="errorSummaryTitle"
   >
@@ -79,6 +79,8 @@ class MockFormComponent {
 
   @ViewChild('formRef') formRef: FormComponent;
 
+  @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
+
   errorSummaryVisible: boolean = false;
 
   formGroup = new FormGroup({
@@ -98,28 +100,38 @@ class MockFormComponent {
   }
 }
 
-const errorList3 = [
-  'Expandable title / Expandable input: Not an email',
-  'Form information / Contact email: Missing email contact',
-  'Section title / Section input: Too short input',
+const fourErrors = [
+  { id: 'fudis-text-input-1', message: 'Form information / Name: Missing your name' },
+  { id: 'fudis-text-input-2', message: 'Form information / Contact email: Missing email contact' },
+  {
+    id: 'fudis-text-input-3',
+    message: 'Section title / Section input: Too short input',
+  },
+  {
+    id: 'fudis-text-input-4',
+    message: 'Expandable title / Expandable input: Not an email',
+  },
 ];
-
-const errorList4 = [
-  'Expandable title / Expandable input: Not an email',
-  'Form information / Contact email: Missing email contact',
-  'Form information / Name: Missing your name',
-  'Section title / Section input: Too short input',
+const threeErrors = [
+  { id: 'fudis-text-input-2', message: 'Form information / Contact email: Missing email contact' },
+  {
+    id: 'fudis-text-input-3',
+    message: 'Section title / Section input: Too short input',
+  },
+  {
+    id: 'fudis-text-input-4',
+    message: 'Expandable title / Expandable input: Not an email',
+  },
 ];
 
 describe('ErrorSummaryComponent', () => {
-  let wrapperComponent: MockFormComponent;
-  let wrapperFixture: ComponentFixture<MockFormComponent>;
+  let component: MockFormComponent;
+  let fixture: ComponentFixture<MockFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         BodyTextComponent,
-        ButtonComponent,
         ExpandableComponent,
         ExpandableContentDirective,
         ErrorSummaryComponent,
@@ -149,125 +161,97 @@ describe('ErrorSummaryComponent', () => {
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
 
-    TestBed.runInInjectionContext(() => {
-      wrapperFixture = TestBed.createComponent(MockFormComponent);
-      wrapperComponent = wrapperFixture.componentInstance;
-      wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
-      wrapperComponent.reloadErrors();
-      wrapperFixture.detectChanges();
+    TestBed.runInInjectionContext(async () => {
+      fixture = TestBed.createComponent(MockFormComponent);
+      component = fixture.componentInstance;
+      jest.spyOn(component.handleUpdatedErrorList, 'emit');
+      component.errorSummaryService.setUpdateStrategy('reloadOnly');
+      component.reloadErrors();
+      fixture.detectChanges();
+
+      fixture.autoDetectChanges(true);
+      fixture.detectChanges();
     });
   });
 
-  const getErrorListPromise = (): Promise<string[] | null> => {
+  const delay = (): Promise<void> => {
     return new Promise((resolve) => {
-      let tempErrorsArray: string[] = [];
-
-      let tryCounter = 0;
-
-      const interval = setInterval(() => {
-        wrapperFixture.detectChanges();
-
-        const errorsArray: string[] = [];
-
-        const errors: NodeList = wrapperFixture.nativeElement.querySelectorAll(
-          'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-        );
-
-        errors.forEach((item) => {
-          if (item.textContent) {
-            errorsArray.push(item.textContent);
-          }
-        });
-
-        if (tempErrorsArray.sort().toString() == errorsArray.sort().toString()) {
-          clearInterval(interval);
-
-          resolve(errorsArray.sort());
-        } else {
-          tempErrorsArray = errorsArray;
-          tryCounter = tryCounter + 1;
-        }
-
-        if (tryCounter === 5) {
-          resolve(null);
-        }
+      setTimeout(() => {
+        resolve();
       }, 100);
     });
   };
 
   describe('Contents', () => {
     it('default title is displayed properly', async () => {
-      await wrapperFixture.whenStable().then(() => {
-        wrapperFixture.detectChanges();
-        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__title');
+      await fixture.whenStable();
+      const renderedTitle = getElement(fixture, '.fudis-error-summary__title');
 
-        expect(renderedTitle.textContent).toBe(
-          'The information is incomplete or incorrect. Please correct the following items:',
-        );
-      });
+      expect(renderedTitle.textContent).toBe(
+        'The information is incomplete or incorrect. Please correct the following items:',
+      );
     });
 
     it('app provided title is displayed properly', async () => {
       const appTitle = 'Something is definetely wrong!';
 
-      wrapperComponent.formRef.errorSummaryTitle = appTitle;
+      component.formRef.errorSummaryTitle = appTitle;
 
-      await wrapperFixture.whenStable().then(() => {
-        wrapperFixture.detectChanges();
-        const renderedTitle = getElement(wrapperFixture, '.fudis-error-summary__title');
+      await fixture.whenStable();
+      const renderedTitle = getElement(fixture, '.fudis-error-summary__title');
 
-        expect(renderedTitle.textContent).toBe(appTitle);
-      });
+      expect(renderedTitle.textContent).toBe(appTitle);
     });
 
     it('should remove errors dynamically without reload', async () => {
-      wrapperComponent.errorSummaryService.setUpdateStrategy('onRemove');
-      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      await delay();
+      component.errorSummaryService.setUpdateStrategy('onRemove');
+      expect(component.handleUpdatedErrorList.emit).not.toHaveBeenCalledWith(threeErrors);
+      component.formGroup.controls.name.patchValue('Chewbacca');
 
-      await wrapperFixture.whenStable().then(async () => {
-        wrapperFixture.detectChanges();
-        await expect(getErrorListPromise()).resolves.toEqual(errorList3);
-      });
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(threeErrors);
     });
 
     it('should add & remove errors dynamically without reload', async () => {
-      wrapperComponent.errorSummaryService.setUpdateStrategy('all');
-      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      await delay();
+      component.errorSummaryService.setUpdateStrategy('all');
+      component.formGroup.controls.name.patchValue('Chewbacca');
 
-      await wrapperFixture.whenStable().then(async () => {
-        wrapperFixture.detectChanges();
-        await expect(getErrorListPromise())
-          .resolves.toEqual(errorList3)
-          .finally(async () => {
-            wrapperComponent.formGroup.controls.name.patchValue(null);
-            wrapperFixture.detectChanges();
-            await wrapperFixture.whenStable().then(async () => {
-              await expect(getErrorListPromise()).resolves.toEqual(errorList4);
-            });
-          });
-      });
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(threeErrors);
+      expect(getAllElements(fixture, '.fudis-error-summary__error-list__item').length).toEqual(3);
+      component.formGroup.controls.name.patchValue(null);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(fourErrors);
+      expect(getAllElements(fixture, '.fudis-error-summary__error-list__item').length).toEqual(4);
     });
 
     it('error list have right messages', async () => {
-      await wrapperFixture.whenStable().then(async () => {
-        await expect(getErrorListPromise()).resolves.toEqual(errorList4);
-      });
+      await fixture.whenStable();
+
+      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(fourErrors);
     });
 
     it('should not update error messages without reload', async () => {
-      wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
-      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      await delay();
+      component.formGroup.controls.name.patchValue('Chewbacca');
+      fixture.detectChanges();
+      await fixture.whenStable();
+      expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(fourErrors);
+      expect(component.handleUpdatedErrorList.emit).not.toHaveBeenCalledWith(threeErrors);
 
-      await wrapperFixture.whenStable().then(async () => {
-        await expect(getErrorListPromise())
-          .resolves.toEqual(errorList4)
-          .then(async () => {
-            wrapperComponent.reloadErrors();
-
-            await wrapperFixture.whenStable().then(async () => {
-              await expect(getErrorListPromise()).resolves.toEqual(errorList3);
-            });
-          });
+      component.reloadErrors();
+      await delay();
+      fixture.detectChanges();
+      await fixture.whenStable().then(() => {
+        expect(component.handleUpdatedErrorList.emit).toHaveBeenCalledWith(threeErrors);
       });
     });
   });
