@@ -1,7 +1,6 @@
 import { Component, Host, Inject, OnChanges, OnDestroy, Optional } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
-import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
@@ -47,8 +46,8 @@ export class SelectOptionComponent
       this._id = this._idService.getNewSelectOptionId(
         'select',
         this._parent.id,
-        this._parentGroup?.id,
         this.data.value,
+        this._parentGroup?.id,
       );
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
@@ -66,12 +65,7 @@ export class SelectOptionComponent
    */
   protected override _clickOption(event: Event): void {
     if (!this.data.disabled) {
-      const selectedOption: FudisSelectOption<object> = {
-        ...this.data,
-        fudisGeneratedHtmlId: this._id,
-      };
-
-      this._parentSelect.handleSelectionChange(selectedOption);
+      this._parentSelect.handleSelectionChange(this.data);
       this.handleClick.emit(event);
     }
     this._parent.closeDropdown(true, true);
@@ -93,12 +87,7 @@ export class SelectOptionComponent
   private _isOptionTyped(filterText: string | undefined): void {
     if (!this.data?.disabled && this.data?.label?.toLowerCase() === filterText?.toLowerCase()) {
       if (this._parent.control.value !== this.data) {
-        const selectedOption: FudisSelectOption<object> = {
-          ...this.data,
-          fudisGeneratedHtmlId: this._id,
-        };
-
-        this._parentSelect.handleSelectionChange(selectedOption);
+        this._parentSelect.handleSelectionChange(this.data);
       }
     }
   }

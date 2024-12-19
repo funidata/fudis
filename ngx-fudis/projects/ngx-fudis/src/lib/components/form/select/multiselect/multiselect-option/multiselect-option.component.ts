@@ -50,8 +50,8 @@ export class MultiselectOptionComponent
       this._id = this._idService.getNewSelectOptionId(
         'multiselect',
         this._parent.id,
-        this._parentGroup?.id,
         this.data.value,
+        this._parentGroup?.id,
       );
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
