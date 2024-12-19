@@ -115,7 +115,24 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
   private _parentFormId: string | null;
 
   private _getParentForm(): void {
-    this._parentFormId = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
+    this._errorSummaryService
+      .getFormAncestorId(this._element.nativeElement)
+      .then((parentFormId) => {
+        if (parentFormId) {
+          this._parentFormId = parentFormId;
+          if (this.errorSummaryBreadcrumb) {
+            this._addToErrorSummary(this.title);
+          }
+
+          toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
+            injector: this._injector,
+          }).subscribe((value) => {
+            if (this.closed && this.openOnErrorSummaryReload && value) {
+              this._setClosedStatus(false);
+            }
+          });
+        }
+      });
   }
 
   /**
@@ -129,20 +146,6 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
 
   ngAfterViewInit(): void {
     this._getParentForm();
-
-    if (this._parentFormId) {
-      if (this.errorSummaryBreadcrumb) {
-        this._addToErrorSummary(this.title);
-      }
-
-      toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
-        injector: this._injector,
-      }).subscribe((value) => {
-        if (this.closed && this.openOnErrorSummaryReload && value) {
-          this._setClosedStatus(false);
-        }
-      });
-    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<ExpandableComponent>): void {
