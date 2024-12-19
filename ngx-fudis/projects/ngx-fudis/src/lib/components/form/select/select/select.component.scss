@@ -25,14 +25,12 @@
     @include borders.border-radius('2px');
 
     box-sizing: border-box;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
     padding: spacing.$spacing-xxs spacing.$spacing-lg spacing.$spacing-xxs spacing.$spacing-sm;
     width: 100%;
     height: spacing.$spacing-xl;
     max-height: spacing.$spacing-xl;
     overflow: hidden;
+    text-overflow: ellipsis;
     /* stylelint-disable-next-line property-disallowed-list */
     line-height: spacing.$spacing-lg;
 

@@ -62,6 +62,24 @@
       "errors": {
         "required": "Start date is missing."
       }
+    },
+    "maskot": {
+      "label": "Course Mascot",
+      "options": {
+        "option-1": "Grogu (The Child)",
+        "option-2": "R2-D2 (Astromech Droid)",
+        "option-3": "Jabba the Hutt (Crime Lord)"
+      }
+    },
+    "courseTopics": {
+      "label": "Course Topics",
+      "options": {
+        "option-1": "The High Ground",
+        "option-2": "Unlimited Power",
+        "option-3": "Darth Jar Jar Theory",
+        "option-4": "Death Star Employee Benefits",
+        "option-5": "The Tragedy of Darth Plagueis the Wise"
+      }
     }
   }
 }

@@ -18,6 +18,8 @@ import { SelectIconsComponent } from '../../common/select-icons/select-icons.com
 import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
+import { MultiselectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { MultiselectAutocompleteDirective } from '../../common/autocomplete/new-autocomplete.directive';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -53,6 +55,8 @@ describe('MultiselectOptionComponent', () => {
       declarations: [
         MultiselectMockComponent,
         MultiselectOptionComponent,
+        MultiselectControlValueAccessorDirective,
+        MultiselectAutocompleteDirective,
         MultiselectComponent,
         MultiselectChipListComponent,
         SelectOptionComponent,
