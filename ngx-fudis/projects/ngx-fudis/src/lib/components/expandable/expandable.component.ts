@@ -10,7 +10,7 @@ import {
   ElementRef,
   inject,
   Injector,
-  AfterViewInit,
+  AfterContentInit,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
@@ -24,7 +24,7 @@ import { ExpandableContentDirective } from './expandable-content.directive';
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit {
+export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -144,7 +144,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
 
   private _injector = inject(Injector);
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this._getParentForm();
   }
 

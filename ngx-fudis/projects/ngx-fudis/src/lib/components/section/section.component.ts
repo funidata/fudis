@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
   ViewEncapsulation,
-  AfterViewInit,
+  AfterContentInit,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
@@ -25,7 +25,7 @@ import { getHeadingVariant } from '../../utilities/typography/typography-utils';
 })
 export class SectionComponent
   extends TooltipApiDirective
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy
+  implements OnInit, OnChanges, OnDestroy, AfterContentInit
 {
   constructor(
     private _element: ElementRef,
@@ -120,7 +120,7 @@ export class SectionComponent
     this._addToErrorSummary();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this._errorSummaryService
       .getFormAncestorId(this._element.nativeElement)
       .then((parentFormId) => {

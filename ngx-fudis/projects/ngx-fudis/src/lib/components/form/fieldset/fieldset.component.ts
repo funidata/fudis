@@ -9,6 +9,7 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation,
+  AfterContentInit,
 } from '@angular/core';
 
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
@@ -29,7 +30,7 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
 })
 export class FieldSetComponent
   extends TooltipApiDirective
-  implements AfterViewInit, OnInit, OnDestroy, OnChanges
+  implements AfterViewInit, OnInit, OnDestroy, OnChanges, AfterContentInit
 {
   constructor(
     private _element: ElementRef,
@@ -142,7 +143,7 @@ export class FieldSetComponent
     this._setClasses();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this._errorSummaryService
       .getFormAncestorId(this._element.nativeElement)
       .then((parentFormId) => {
@@ -151,6 +152,9 @@ export class FieldSetComponent
           this._addToErrorSummary(this.label);
         }
       });
+  }
+
+  ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this._fieldsetLegend?.nativeElement?.focus();
     }
