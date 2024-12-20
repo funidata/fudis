@@ -103,12 +103,15 @@ export class SelectControlValueAccessorDirective
 
     if (valueToSet) {
       this._renderer.setAttribute(this._elementRef.nativeElement, 'value', valueToSet);
-      this._elementRef.nativeElement.value = valueToSet;
+      if (this._elementRef.nativeElement.value !== valueToSet) {
+        this._elementRef.nativeElement.value = valueToSet;
+      }
     } else if (this.filterText) {
       this._renderer.setAttribute(this._elementRef.nativeElement, 'value', this.filterText);
-      this._elementRef.nativeElement.value = this.filterText;
+      if (this._elementRef.nativeElement.value !== this.filterText) {
+        this._elementRef.nativeElement.value = this.filterText;
+      }
     } else {
-      this._elementRef.nativeElement.value = '';
       this._renderer.removeAttribute(this._elementRef.nativeElement, 'value');
     }
   }
