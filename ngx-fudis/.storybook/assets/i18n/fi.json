@@ -8,6 +8,7 @@
   "sectionTitle1": "Lomakkeen osion otsikko",
   "sectionTitle2": "Lisää tai poista Error Summaryn viestejä",
   "fieldsetLegend": "Lomakeryhmän otsikko",
+  "fieldsetSelectLegend": "Pudotusvalikkokomponentteja",
   "sectionHelptext1": "Seuraavat painikkeet vaihtavat manuaalisten Error Summaryn virheviestien näkyvyyttä",
   "sectionHelptext2": "Virheet näytetään, kun Error Summary ladataan uudelleen.",
   "customError1": "Tämä on ensimmäinen manuaalisesti Error Summaryyn lähetetty virheviesti",
@@ -16,6 +17,12 @@
   "customError2Show": "Näytä toinen virhe",
   "customError1Hide": "Piilota ensimmäinen virhe",
   "customError2Hide": "Piilota toinen virhe",
+  "selectedOption": "Valittu maskotti lomakekentän kontrollerissa",
+  "multiSelectedOption": "Valitut kurssin aiheet lomakekentän kontrollerissa",
+  "selectedNullOption": "Ei valintaa",
+  "selectOption": "Valinta",
+  "value": "Arvo",
+  "label": "Nimike",
   "form": {
     "teacherName": {
       "label": "Vastuuopettaja",
@@ -75,7 +82,7 @@
       "label": "Kurssin aiheita",
       "options": {
         "option-1": "Korkeampi maankamara",
-        "option-2": "Loppumaton voima",
+        "option-2": "Rajaton voima",
         "option-3": "Darth Jar Jar -teoria",
         "option-4": "Kuolemantähden henkilöstöedut",
         "option-5": "Darth Plagueis viisaan tragedia"

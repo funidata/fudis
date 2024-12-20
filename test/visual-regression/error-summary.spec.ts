@@ -68,6 +68,13 @@ test("error summary language change and manually sent errors", async ({ page }) 
   await expect(page.getByText(firstManualError)).toBeVisible();
   await expect(page.getByText(secondManualError)).not.toBeVisible();
 
+  // Set Select components
+  await page.getByTestId("fudis-select-1").click();
+  await page.getByTestId("fudis-select-1-option-maskot-2").click();
+  await page.getByTestId("fudis-multiselect-1").click();
+  await page.getByTestId("fudis-multiselect-1-option-topic-1").click();
+  await page.getByTestId("fudis-multiselect-1-option-topic-4").click();
+
   // Change update strategy
   await page.getByTestId("change-strategy-button").dblclick();
   await expect(page.getByText("Current Error Summary update strategy is: all")).toBeVisible();
@@ -93,4 +100,35 @@ test("error summary language change and manually sent errors", async ({ page }) 
   await expect(page.getByText(firstManualErrorFi)).not.toBeVisible();
   await expect(page.getByText(secondManualErrorFi)).not.toBeVisible();
   await expect(page).toHaveScreenshot("10-manual-errors-remove.png", { fullPage: true });
+
+  // Check that Select options are translated correctly
+  await expect(
+    page
+      .getByTestId("fudis-description-list-1-item-2-details-1")
+      .getByText("R2-D2 (Astromech Droid)"),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByTestId("fudis-description-list-4-item-2-details-1")
+      .getByText("Death Star Employee Benefits"),
+  ).toBeVisible();
+  await expect(page.getByTestId("fudis-select-1")).toHaveValue("R2-D2 (Astromekaanikkodroidi)");
+  await expect(page.getByTestId("fudis-select-2")).toHaveValue("R2-D2 (Astromekaanikkodroidi)");
+  await expect(page.getByTestId("fudis-multiselect-1")).toHaveValue(
+    "Korkeampi maankamara, Kuolemantähden henkilöstöedut",
+  );
+  await page.getByTestId("fudis-select-1").click();
+  await expect(
+    page.getByTestId("fudis-select-1-option-maskot-3").getByText("Jabba the Hutt (Rikollispomo)"),
+  ).toBeVisible();
+  await page.getByTestId("fudis-select-2").click();
+  await page.getByTestId("fudis-multiselect-1").click();
+  await expect(page.getByText("Rajaton voima")).toBeVisible();
+
+  await page.getByTestId("change-language-button").click();
+  await expect(page.getByTestId("fudis-select-1")).toHaveValue("R2-D2 (Astromech Droid)");
+  await expect(page.getByTestId("fudis-select-2")).toHaveValue("R2-D2 (Astromech Droid)");
+  await expect(page.getByTestId("fudis-multiselect-1")).toHaveValue(
+    "The High Ground, Death Star Employee Benefits",
+  );
 });

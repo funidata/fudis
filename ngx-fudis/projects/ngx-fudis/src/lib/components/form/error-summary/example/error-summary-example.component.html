@@ -87,7 +87,7 @@
               </fudis-grid>
             </fudis-fieldset-content>
           </fudis-fieldset>
-          <fudis-fieldset [label]="t('fieldsetLegend')">
+          <fudis-fieldset class="fudis-mt-xl" [label]="t('fieldsetSelectLegend')">
             <fudis-fieldset-content>
               <fudis-grid [columns]="{ xs: 1, sm: 2 }">
                 <fudis-select
@@ -138,6 +138,56 @@
                     />
                   </ng-template>
                 </fudis-multiselect>
+                <div>
+                  <fudis-heading [level]="3" [variant]="'sm'">{{
+                    t("selectedOption")
+                  }}</fudis-heading>
+                  @if (formExample.controls.courseMainMaskot.value) {
+                    <fudis-dl [variant]="'compact'">
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="t('value')" />
+                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.value }}</fudis-dd>
+                      </fudis-dl-item>
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="t('label')" />
+                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.label }}</fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+                  } @else {
+                    <fudis-body-text>{{ t("selectedNullOption") }}</fudis-body-text>
+                  }
+                </div>
+                <div>
+                  <fudis-heading [level]="3" [variant]="'sm'">{{
+                    t("multiSelectedOption")
+                  }}</fudis-heading>
+                  @if (formExample.controls.courseTopics.value) {
+                    <fudis-dl>
+                      <fudis-dl-item
+                        *ngFor="
+                          let option of formExample.controls.courseTopics.value;
+                          let index = index
+                        "
+                      >
+                        <fudis-dt [contentText]="t('selectOption') + ' ' + (index + 1)" />
+                        <fudis-dd>
+                          <fudis-dl [variant]="'compact'">
+                            <fudis-dl-item>
+                              <fudis-dt [contentText]="t('value')" />
+                              <fudis-dd>{{ option.value }}</fudis-dd>
+                            </fudis-dl-item>
+                            <fudis-dl-item>
+                              <fudis-dt [contentText]="t('label')" />
+                              <fudis-dd>{{ option.label }}</fudis-dd>
+                            </fudis-dl-item>
+                          </fudis-dl>
+                        </fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+                  } @else {
+                    <fudis-body-text>{{ t("selectedNullOption") }}</fudis-body-text>
+                  }
+                </div>
               </fudis-grid>
             </fudis-fieldset-content>
           </fudis-fieldset>
