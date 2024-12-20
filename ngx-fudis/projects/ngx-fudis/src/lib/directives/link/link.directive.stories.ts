@@ -86,67 +86,37 @@ export const AllCombinations: StoryFn = (args) => ({
 
       <fudis-body-text [variant]="'lg-regular'"
         >This Body Text lg-regular has
-        <a fudisLink href="" [size]="'inherit'" [title]="'non-external link of size inherit'"></a>
+        <a fudisLink href="" [title]="'non-external link'"></a>
         and
-        <a
-          fudisLink
-          href=""
-          [external]="true"
-          [size]="'inherit'"
-          [title]="'external link of size inherit'"
-        ></a>
+        <a fudisLink href="" [external]="true" [title]="'external link'"></a>
         as its child element.</fudis-body-text
       >
       <fudis-body-text [variant]="'md-regular'"
         >This Body Text md-regular has
-        <a fudisLink href="" [size]="'inherit'" [title]="'non-external link of size inherit'"></a>
+        <a fudisLink href="" [title]="'non-external link'"></a>
         and
-        <a
-          fudisLink
-          href=""
-          [external]="true"
-          [size]="'inherit'"
-          [title]="'external link of size inherit'"
-        ></a>
+        <a fudisLink href="" [external]="true" [title]="'external link'"></a>
         as its child elements.</fudis-body-text
       >
       <fudis-body-text [variant]="'sm-regular'"
         >This Body Text sm-regular has
-        <a fudisLink href="" [size]="'inherit'" [title]="'non-external link of size inherit'"></a>
+        <a fudisLink href="" [title]="'non-external link'"></a>
         and
-        <a
-          fudisLink
-          href=""
-          [external]="true"
-          [size]="'inherit'"
-          [title]="'external link of size inherit'"
-        ></a>
+        <a fudisLink href="" [external]="true" [title]="'external link'"></a>
         as its child elements.</fudis-body-text
       >
       <fudis-body-text [variant]="'lg-light'"
         >This Body Text lg-light has
-        <a fudisLink href="" [size]="'inherit'" [title]="'non-external link of size inherit'"></a>
+        <a fudisLink href="" [title]="'non-external link'"></a>
         and
-        <a
-          fudisLink
-          href=""
-          [external]="true"
-          [size]="'inherit'"
-          [title]="'external link of size inherit'"
-        ></a
-        >as its child elements.</fudis-body-text
+        <a fudisLink href="" [external]="true" [title]="'external link'"></a>as its child
+        elements.</fudis-body-text
       >
       <fudis-body-text [variant]="'md-light'"
         >This Body Text md-light has
-        <a fudisLink href="" [size]="'inherit'" [title]="'non-external link of size inherit'"></a>
+        <a fudisLink href="" [title]="'non-external link'"></a>
         and
-        <a
-          fudisLink
-          href=""
-          [external]="true"
-          [size]="'inherit'"
-          [title]="'external link of size inherit'"
-        ></a>
+        <a fudisLink href="" [external]="true" [title]="'external link'"></a>
         as its child elements.</fudis-body-text
       >
     </fudis-grid>
@@ -156,7 +126,7 @@ export const AllCombinations: StoryFn = (args) => ({
 Example.args = {
   title: 'This is an example title',
   external: false,
-  size: 'inherit',
+  size: 'md',
 };
 
 AllCombinations.parameters = {

@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
   ViewEncapsulation,
-  AfterViewInit,
+  AfterContentInit,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
@@ -25,7 +25,7 @@ import { getHeadingVariant } from '../../utilities/typography/typography-utils';
 })
 export class SectionComponent
   extends TooltipApiDirective
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy
+  implements OnInit, OnChanges, OnDestroy, AfterContentInit
 {
   constructor(
     private _element: ElementRef,
@@ -106,7 +106,7 @@ export class SectionComponent
    */
   private _errorSummaryInfoSent: boolean = false;
 
-  private _parentForm: string | null;
+  private _parentFormId: string | null;
 
   ngOnInit(): void {
     this._setSectionId();
@@ -120,10 +120,15 @@ export class SectionComponent
     this._addToErrorSummary();
   }
 
-  ngAfterViewInit(): void {
-    this._parentForm = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
-
-    this._addToErrorSummary();
+  ngAfterContentInit(): void {
+    this._errorSummaryService
+      .getFormAncestorId(this._element.nativeElement)
+      .then((parentFormId) => {
+        if (parentFormId) {
+          this._parentFormId = parentFormId;
+          this._addToErrorSummary();
+        }
+      });
   }
 
   ngOnChanges(changes: FudisComponentChanges<SectionComponent>): void {
@@ -144,10 +149,10 @@ export class SectionComponent
    * Send error object to Error Summary Service
    */
   private _addToErrorSummary(): void {
-    if (this.errorSummaryBreadcrumb && this._parentForm) {
+    if (this.errorSummaryBreadcrumb && this._parentFormId) {
       const errorSummaryInfo = {
         id: this.id,
-        formId: this._parentForm,
+        formId: this._parentFormId,
         title: this.title,
       };
       this._errorSummaryService.addSection(errorSummaryInfo);
@@ -159,8 +164,8 @@ export class SectionComponent
    * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
-    if (this._errorSummaryInfoSent && this._parentForm) {
-      this._errorSummaryService.removeSection(this._parentForm, this.id);
+    if (this._errorSummaryInfoSent && this._parentFormId) {
+      this._errorSummaryService.removeSection(this._parentFormId, this.id);
     }
   }
 

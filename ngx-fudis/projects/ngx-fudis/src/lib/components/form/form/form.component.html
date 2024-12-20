@@ -63,8 +63,9 @@
 
 <ng-template #errorSummary>
   <fudis-error-summary
-    *ngIf="_elementRef.nativeElement && errorSummaryVisible"
+    *ngIf="_elementRef.nativeElement && (errorSummaryVisible || _errorSummaryVisibleSignal())"
     [formId]="id"
+    (handleUpdatedErrorList)="handleUpdatedErrorList.emit($event)"
     [parentComponent]="_elementRef.nativeElement"
     [title]="errorSummaryTitle"
   />
