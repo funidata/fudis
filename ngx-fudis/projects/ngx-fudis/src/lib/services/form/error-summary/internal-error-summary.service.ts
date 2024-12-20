@@ -305,13 +305,13 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
         if (foundId) {
           clearInterval(interval);
           resolve(foundId);
-        } else if (tryCounter < 10) {
+        } else if (tryCounter < 50) {
           tryCounter = tryCounter + 1;
         } else {
           clearInterval(interval);
           resolve(null);
         }
-      }, 50);
+      }, 10);
     });
   }
 
