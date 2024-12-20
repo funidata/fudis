@@ -121,9 +121,27 @@ test("error summary language change and manually sent errors", async ({ page }) 
   await expect(
     page.getByTestId("fudis-select-1-option-maskot-3").getByText("Jabba the Hutt (Rikollispomo)"),
   ).toBeVisible();
-  await page.getByTestId("fudis-select-2").click();
+
+  await page.getByTestId("fudis-select-2").focus();
+  await expect(
+    page.getByTestId("fudis-body-text-7").getByText("Näytetään 1 tulosta"),
+  ).toBeVisible();
+  await expect(
+    page.getByTestId("fudis-select-2-option-maskot-2").getByText("R2-D2 (Astromekaanikkodroidi)"),
+  ).toBeVisible();
+
+  await expect(page.getByTestId("fudis-select-2-option-maskot-2")).toHaveClass(
+    "fudis-select-option fudis-select-option--selected fudis-select-option__focusable",
+  );
+  await expect(page.getByTestId("fudis-select-2-option-maskot-2")).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+
   await page.getByTestId("fudis-multiselect-1").click();
-  await expect(page.getByText("Rajaton voima")).toBeVisible();
+  await expect(
+    page.getByTestId("fudis-multiselect-1-dropdown").getByText("Rajaton voima"),
+  ).toBeVisible();
 
   await page.getByTestId("change-language-button").click();
   await expect(page.getByTestId("fudis-select-1")).toHaveValue("R2-D2 (Astromech Droid)");

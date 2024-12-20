@@ -568,14 +568,18 @@ export class SelectBaseDirective
   }
 
   /**
-   * Update input filter
+   * Update input filter text
+   * @param text string to set as filter text
+   * @param nullCheck true by default, check if control should be set as null
    */
-  public setAutocompleteFilterText(text: string): void {
+  public setAutocompleteFilterText(text: string, nullCheck = true): void {
     if (this._autocompleteFilterText() !== text) {
       this._autocompleteFilterText.set(text);
       this.filterTextUpdate.emit(text);
     }
-    this._checkIfAutocompleteValueNull(text);
+    if (nullCheck) {
+      this._checkIfAutocompleteValueNull(text);
+    }
   }
 
   /**

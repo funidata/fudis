@@ -96,6 +96,7 @@ export class SelectOptionComponent
 
       if (controlValue?.value === newData.value) {
         this._parent.selectCVA.writeValue(newData);
+        this._parent.setAutocompleteFilterText(newData.label, false);
       }
     }
   }
@@ -106,7 +107,7 @@ export class SelectOptionComponent
    */
   private _isOptionTyped(filterText: string | undefined): void {
     if (!this.data?.disabled && this.data?.label?.toLowerCase() === filterText?.toLowerCase()) {
-      if (this._parent.control.value !== this.data) {
+      if (this._parent.control.value?.value !== this.data.value) {
         this._parentSelect.handleSelectionChange(this.data);
       }
     }

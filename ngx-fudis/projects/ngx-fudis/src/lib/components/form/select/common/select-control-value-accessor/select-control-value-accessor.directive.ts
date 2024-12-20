@@ -108,6 +108,7 @@ export class SelectControlValueAccessorDirective
       this._renderer.setAttribute(this._elementRef.nativeElement, 'value', this.filterText);
       this._elementRef.nativeElement.value = this.filterText;
     } else {
+      this._elementRef.nativeElement.value = '';
       this._renderer.removeAttribute(this._elementRef.nativeElement, 'value');
     }
   }
