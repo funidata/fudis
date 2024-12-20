@@ -15,8 +15,14 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 export class SelectAutocompleteBaseDirective {
   constructor(protected _elementRef: ElementRef<HTMLInputElement>) {}
 
+  /**
+   * Currently selected visible label
+   */
   @Input() selectedLabel: string | null;
 
+  /**
+   * To enable autocomplete
+   */
   @Input() enableAutocomplete: boolean = false;
 
   /**
@@ -59,10 +65,19 @@ export class SelectAutocompleteBaseDirective {
    */
   private _keyDown: string | null;
 
+  /**
+   * If Focus came from related clear button
+   */
   private _focusFromClearButton: boolean = false;
 
+  /**
+   * Currently typed input text
+   */
   private _inputText: string | null = null;
 
+  /**
+   * If input is focused or not
+   */
   protected _focused: boolean = false;
 
   @HostListener('focus', ['$event'])
