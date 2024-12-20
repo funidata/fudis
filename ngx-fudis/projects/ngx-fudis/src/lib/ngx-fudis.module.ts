@@ -120,7 +120,7 @@ import {
   SelectAutocompleteDirective,
   SelectAutocompleteBaseDirective,
   MultiselectAutocompleteDirective,
-} from './components/form/select/common/autocomplete/new-autocomplete.directive';
+} from './components/form/select/common/autocomplete/autocomplete.directive';
 import {
   SelectControlValueAccessorDirective,
   MultiselectControlValueAccessorDirective,

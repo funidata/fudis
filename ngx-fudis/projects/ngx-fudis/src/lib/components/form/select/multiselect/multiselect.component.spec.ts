@@ -19,7 +19,7 @@ import { SelectOptionsDirective } from '../common/select-options-directive/selec
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { MultiselectAutocompleteDirective } from '../common/autocomplete/new-autocomplete.directive';
+import { MultiselectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({

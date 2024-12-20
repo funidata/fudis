@@ -22,7 +22,7 @@ import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 import { MultiselectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
-import { MultiselectAutocompleteDirective } from '../autocomplete/new-autocomplete.directive';
+import { MultiselectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
 
 @Component({
   selector: 'fudis-mock-select',

@@ -18,7 +18,7 @@ import { ButtonComponent } from '../../../../button/button.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
-import { SelectAutocompleteDirective } from '../../common/autocomplete/new-autocomplete.directive';
+import { SelectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
 
 @Component({
   selector: 'fudis-mock-container',

@@ -19,7 +19,7 @@ import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
-import { SelectAutocompleteDirective } from '../autocomplete/new-autocomplete.directive';
+import { SelectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
 import { SelectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({

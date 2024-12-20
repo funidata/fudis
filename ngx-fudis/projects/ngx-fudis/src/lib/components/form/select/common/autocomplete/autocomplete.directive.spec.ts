@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { SelectAutocompleteDirective } from './new-autocomplete.directive';
+import { SelectAutocompleteDirective } from './autocomplete.directive';
 import { ElementRef } from '@angular/core';
 
 class MockElementRef implements ElementRef {
