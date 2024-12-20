@@ -4,13 +4,17 @@
 
 fudis-body-text {
   /**
- * Add spacing between multiple following Body Text elements.
- * Body Text does not have bottom margin if it does not have other Body Text element underneath.
- */
+  * Add spacing between multiple following Body Text elements.
+  * Body Text does not have bottom margin if it does not have other Body Text element underneath.
+  */
   &:has(+ fudis-body-text) {
     margin-bottom: spacing.$spacing-xs;
   }
 
+  /**
+  * Link directive's size property will not have an effect when link is wrapped inside of Body Text component.
+  * Instead link will inherit Body Text font-size.
+  */
   .fudis-link {
     @include typography.link-inherit;
   }
