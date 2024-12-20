@@ -260,26 +260,10 @@ export class FudisIdService {
     let newId = '';
 
     if (groupParentId) {
-      if (!dataValue) {
-        const orderNumber =
-          this._idData.grandParents[selectType][selectParentId].groups[groupParentId].length + 1;
-
-        newId = `${groupParentId}-option-${orderNumber}`;
-
-        this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
-      } else {
-        newId = `${selectParentId}-option-${dataValue}`;
-      }
-
+      newId = `${selectParentId}-option-${dataValue}`;
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
     } else {
-      if (dataValue) {
-        newId = `${selectParentId}-option-${dataValue}`;
-      } else {
-        const orderNumber =
-          this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.length + 1;
-        newId = `${selectParentId}-option-${orderNumber}`;
-      }
+      newId = `${selectParentId}-option-${dataValue}`;
 
       this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.push(newId);
     }
