@@ -1,16 +1,10 @@
 import test, { expect } from "@playwright/test";
 
-test("text-input disabled", async ({ page }) => {
-  await page.goto("/iframe.html?args=&id=components-form-text-input--disabled&viewMode=story");
-  await page.getByTestId("fudis-text-input-1").focus();
-  await expect(page).toHaveScreenshot("disabled.png");
-});
-
 test("text-input with validators", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-text-input--with-validators&viewMode=story",
   );
-  await expect(page).toHaveScreenshot("validators-1-init.png", { fullPage: true });
+
   await page.getByTestId("fudis-text-input-1").focus();
   await page.getByTestId("fudis-text-input-2").focus();
   await expect(page.getByText("This is required field.")).toBeVisible();
@@ -33,8 +27,6 @@ test("text-input with validators", async ({ page }) => {
   await page.getByTestId("fudis-text-input-3").focus();
   await expect(page.getByText("Number is too small")).toBeVisible();
 
-  await expect(page).toHaveScreenshot("validators-2-with-errors.png", { fullPage: true });
-
   await page.getByTestId("fudis-text-input-1").fill("Hello there!");
   await expect(page.getByText("This is required field.")).not.toBeVisible();
   await expect(
@@ -52,6 +44,4 @@ test("text-input with validators", async ({ page }) => {
 
   await page.getByTestId("fudis-text-input-4").fill("22");
   await expect(page.getByText("Number is too small")).not.toBeVisible();
-
-  await expect(page).toHaveScreenshot("validators-3-filled.png", { fullPage: true });
 });

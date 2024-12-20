@@ -1,4 +1,5 @@
 export const stories = [
+  "../projects/ngx-fudis/src/test-playgrounds/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.mdx",
   "../projects/documentation/**/*.mdx",
@@ -34,6 +35,7 @@ export function managerHead(head) {
     <link rel="shortcut icon" href="favicon.ico">
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
+      .sidebar-item:has(#components-test-playground)  { display: none;}
     </style>
   `;
 }
