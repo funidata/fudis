@@ -62,7 +62,6 @@ import { SectionComponent } from './components/section/section.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { SelectComponent } from './components/form/select/select/select.component';
-import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionComponent } from './components/form/select/select/select-option/select-option.component';
 import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
 import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
@@ -117,6 +116,15 @@ import {
   SectionContentDirective,
 } from './components/section/section-content.directive';
 import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
+import {
+  SelectAutocompleteDirective,
+  SelectAutocompleteBaseDirective,
+  MultiselectAutocompleteDirective,
+} from './components/form/select/common/autocomplete/autocomplete.directive';
+import {
+  SelectControlValueAccessorDirective,
+  MultiselectControlValueAccessorDirective,
+} from './components/form/select/common/select-control-value-accessor/select-control-value-accessor.directive';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { SelectOptionsDirective } from './components/form/select/common/select-options-directive/select-options.directive';
 import { TextFieldComponentBaseDirective } from './directives/form/text-field-component-base/text-field-component-base.directive';
@@ -210,11 +218,16 @@ import { FudisTranslationService } from './services/translation/translation.serv
     SectionComponent,
     SectionActionsDirective,
     SectionContentDirective,
-    SelectAutocompleteComponent,
+    SelectAutocompleteBaseDirective,
+    SelectAutocompleteDirective,
     SelectBaseDirective,
     SelectComponent,
+    SelectControlValueAccessorDirective,
+    MultiselectAutocompleteDirective,
+    MultiselectControlValueAccessorDirective,
     SelectDropdownComponent,
     SelectGroupComponent,
+    SelectIconsComponent,
     SelectOptionsDirective,
     SelectOptionBaseDirective,
     SelectOptionComponent,
@@ -223,7 +236,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     TextInputComponent,
     TooltipDirective,
     ValidatorErrorMessageComponent,
-    SelectIconsComponent,
   ],
   /*
    * Include imports outside of Fudis components in 'imports' array below.

@@ -11,13 +11,14 @@ import { LabelComponent } from '../../../label/label.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { SelectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -52,11 +53,12 @@ describe('SelectOptionComponent', () => {
       declarations: [
         SelectOptionsDirective,
         SelectComponent,
+        SelectControlValueAccessorDirective,
+        SelectAutocompleteDirective,
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
         MockContainerComponent,
-        SelectAutocompleteComponent,
         GuidanceComponent,
         SelectIconsComponent,
         ButtonComponent,
@@ -181,8 +183,8 @@ describe('SelectOptionComponent', () => {
 
       fixture.detectChanges();
 
-      const disabledOption = getElement(fixture, '#fudis-select-1-option-4');
-      const enabledOption = getElement(fixture, '#fudis-select-1-option-5');
+      const disabledOption = getElement(fixture, '#fudis-select-1-option-value-4-cat');
+      const enabledOption = getElement(fixture, '#fudis-select-1-option-value-5-armadillo');
 
       disabledOption.click();
 
@@ -191,7 +193,6 @@ describe('SelectOptionComponent', () => {
       enabledOption.click();
 
       expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-        fudisGeneratedHtmlId: 'fudis-select-1-option-5',
         label: 'Screaming hairy armadillo',
         sound: "Rollin' rollin' rollin'!",
         value: 'value-5-armadillo',
@@ -208,19 +209,19 @@ describe('SelectOptionComponent', () => {
 
     fixture.detectChanges();
 
-    component.testSelect.autocompleteRef.updateInputValue('Platypus');
+    component.testSelect.setAutocompleteFilterText('Platypus');
 
     fixture.detectChanges();
 
     expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-      fudisGeneratedHtmlId: 'fudis-select-1-option-3',
       label: 'Platypus',
       sound: 'Plat plat!',
       value: 'value-3-platypys',
     });
 
-    component.testSelect.autocompleteRef.updateInputValue('Platypu');
+    component.testSelect.setAutocompleteFilterText('Platy');
 
+    fixture.detectChanges();
     expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith(null);
   });
 });

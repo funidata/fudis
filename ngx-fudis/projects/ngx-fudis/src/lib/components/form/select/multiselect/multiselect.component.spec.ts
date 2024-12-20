@@ -5,7 +5,6 @@ import { MultiselectComponent } from './multiselect.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { LabelComponent } from '../../label/label.component';
-import { SelectAutocompleteComponent } from '../common/autocomplete/autocomplete.component';
 import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
 import { BodyTextComponent } from '../../../typography/body-text/body-text.component';
 import { MultiselectChipListComponent } from './multiselect-chip-list/multiselect-chip-list.component';
@@ -20,6 +19,8 @@ import { SelectOptionsDirective } from '../common/select-options-directive/selec
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { MultiselectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
+import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -59,7 +60,8 @@ describe('MultiselectComponent', () => {
         MultiselectOptionComponent,
         MultiselectMockComponent,
         MultiselectChipListComponent,
-        SelectAutocompleteComponent,
+        MultiselectAutocompleteDirective,
+        MultiselectControlValueAccessorDirective,
         SelectDropdownComponent,
         SelectGroupComponent,
         SelectIconsComponent,
@@ -123,12 +125,10 @@ describe('MultiselectComponent', () => {
 
     it('should have placeholder text present when control value is null on init', () => {
       initWithControlNull();
-      const placeholder = getElement(fixture, '.fudis-select__input__placeholder');
+      const inputElement = getElement(fixture, '.fudis-select__input') as HTMLInputElement;
 
-      const labelText = getElement(fixture, '.fudis-select__input__label');
-
-      expect(labelText).toBeFalsy();
-      expect(placeholder.outerHTML).toContain('Multiselect placeholder');
+      expect(inputElement.getAttribute('value')).toBeFalsy();
+      expect(inputElement.getAttribute('placeholder')).toBe('Multiselect placeholder');
     });
 
     it('should have HTML input value from control value if control value is set on init', () => {
@@ -136,31 +136,9 @@ describe('MultiselectComponent', () => {
 
       const expectedValue = 'Dog, Platypus';
 
-      const labelText = getElement(fixture, '.fudis-select__input__label');
-      const placeholderItems = getAllElements(fixture, '.fudis-select__input__label');
-      const placeholerItemsArray: (string | null)[] = [];
+      const inputElement = getElement(fixture, '.fudis-select__input') as HTMLInputElement;
 
-      placeholderItems.forEach((item) => {
-        placeholerItemsArray.push(item.textContent);
-      });
-
-      const placeholder = getElement(fixture, '.fudis-select__input__placeholder');
-
-      expect(labelText.textContent).toEqual(expectedValue);
-      expect(placeholder).toBeFalsy();
-    });
-
-    it('should have placehorder text present when control value is updated to null', () => {
-      initWithControlValue();
-      component.control.patchValue(null);
-      fixture.detectChanges();
-
-      const placeholder = getElement(fixture, '.fudis-select__input__placeholder');
-
-      const labelText = getElement(fixture, '.fudis-select__input__label');
-
-      expect(placeholder.outerHTML).toContain('Multiselect placeholder');
-      expect(labelText).toBeFalsy();
+      expect(inputElement.getAttribute('value')).toEqual(expectedValue);
     });
   });
 
@@ -170,18 +148,20 @@ describe('MultiselectComponent', () => {
       component = fixture.componentInstance;
     });
 
-    it('should update component and control state when handleMultiSelectionChange is called with type "add" and control value is null', () => {
+    it('should update component and control state when handleMultiSelectionChange is called with type "add" and control value is null', async () => {
       initWithControlNull();
 
       component.multiselectEl.openDropdown();
-
-      component.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
       fixture.detectChanges();
 
-      const value = getElement(fixture, '.fudis-select__input__label').textContent;
+      await fixture.whenStable().then(() => {
+        component.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
 
-      expect(value).toEqual('Southern Titiwangsa Bent-Toed Gecko');
-      expect(component.control.value).toEqual([defaultOptions[5]]);
+        const element = getElement(fixture, '.fudis-select__input');
+
+        expect(component.control.value).toEqual([defaultOptions[5]]);
+        expect(element.getAttribute('value')).toEqual('Southern Titiwangsa Bent-Toed Gecko');
+      });
     });
 
     it('should update component state when handleMultiSelectionChange is called with "add"', () => {
@@ -190,7 +170,7 @@ describe('MultiselectComponent', () => {
       component.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
       fixture.detectChanges();
 
-      const value = getElement(fixture, '.fudis-select__input__label').textContent;
+      const value = getElement(fixture, '.fudis-select__input').getAttribute('value');
 
       expect(value).toEqual('Dog, Platypus, Southern Titiwangsa Bent-Toed Gecko');
       expect(component.control.value).toEqual([
@@ -205,7 +185,7 @@ describe('MultiselectComponent', () => {
       component.multiselectEl.handleMultiSelectionChange(defaultOptions[0], 'remove');
       fixture.detectChanges();
 
-      const value = getElement(fixture, '.fudis-select__input__label').textContent;
+      const value = getElement(fixture, '.fudis-select__input').getAttribute('value');
 
       expect(value).toEqual('Platypus');
       expect(component.control.value).toEqual([defaultOptions[2]]);
@@ -218,14 +198,17 @@ describe('MultiselectComponent', () => {
       component = fixture.componentInstance;
     });
 
-    it('should be visible by default', () => {
+    it('should be visible by default', async () => {
       initWithControlNull();
       component.control.patchValue([defaultOptions[0], defaultOptions[2]]);
+
       fixture.detectChanges();
 
-      const chipList = getElement(fixture, '.fudis-multiselect-chip-list');
+      await fixture.whenStable().then(() => {
+        const chipList = getElement(fixture, '.fudis-multiselect-chip-list');
 
-      expect(chipList).toBeTruthy();
+        expect(chipList).toBeTruthy();
+      });
     });
 
     it('should not be visible if showSelectionChips is set to false', () => {

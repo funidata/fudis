@@ -83,8 +83,111 @@
                   [label]="t('form.startDate.label')"
                   [helpText]="t('form.startDate.helpText')"
                   [control]="formExample.controls['importantDate']"
+                />
+              </fudis-grid>
+            </fudis-fieldset-content>
+          </fudis-fieldset>
+          <fudis-fieldset class="fudis-mt-xl" [label]="t('fieldsetSelectLegend')">
+            <fudis-fieldset-content>
+              <fudis-grid [columns]="{ xs: 1, sm: 2 }">
+                <fudis-select
+                  [variant]="'dropdown'"
+                  [control]="formExample.controls.courseMainMaskot"
+                  [label]="t('form.maskot.label') + ' (Dropdown)'"
                 >
-                </fudis-datepicker>
+                  <ng-template fudisSelectOptions>
+                    <fudis-select-option
+                      *ngFor="let option of mainMaskotOptions"
+                      [data]="{ value: option.value, label: t(option.label) }"
+                    />
+                  </ng-template>
+                </fudis-select>
+                <fudis-select
+                  [variant]="'autocompleteDropdown'"
+                  [control]="formExample.controls.courseMainMaskot"
+                  [label]="t('form.maskot.label') + ' (Autocomplete)'"
+                >
+                  <ng-template fudisSelectOptions>
+                    <fudis-select-option
+                      *ngFor="let option of mainMaskotOptions"
+                      [data]="{ value: option.value, label: t(option.label) }"
+                    />
+                  </ng-template>
+                </fudis-select>
+                <fudis-multiselect
+                  [variant]="'dropdown'"
+                  [control]="formExample.controls.courseTopics"
+                  [label]="t('form.courseTopics.label') + ' (Dropdown)'"
+                >
+                  <ng-template fudisSelectOptions>
+                    <fudis-multiselect-option
+                      *ngFor="let option of topicOptions"
+                      [data]="{ value: option.value, label: t(option.label) }"
+                    />
+                  </ng-template>
+                </fudis-multiselect>
+                <fudis-multiselect
+                  [variant]="'autocompleteDropdown'"
+                  [control]="formExample.controls.courseTopics"
+                  [label]="t('form.courseTopics.label') + ' (Autocomplete)'"
+                >
+                  <ng-template fudisSelectOptions>
+                    <fudis-multiselect-option
+                      *ngFor="let option of topicOptions"
+                      [data]="{ value: option.value, label: t(option.label) }"
+                    />
+                  </ng-template>
+                </fudis-multiselect>
+                <div>
+                  <fudis-heading [level]="3" [variant]="'sm'">{{
+                    t("selectedOption")
+                  }}</fudis-heading>
+                  @if (formExample.controls.courseMainMaskot.value) {
+                    <fudis-dl [variant]="'compact'">
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="t('value')" />
+                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.value }}</fudis-dd>
+                      </fudis-dl-item>
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="t('label')" />
+                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.label }}</fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+                  } @else {
+                    <fudis-body-text>{{ t("selectedNullOption") }}</fudis-body-text>
+                  }
+                </div>
+                <div>
+                  <fudis-heading [level]="3" [variant]="'sm'">{{
+                    t("multiSelectedOption")
+                  }}</fudis-heading>
+                  @if (formExample.controls.courseTopics.value) {
+                    <fudis-dl>
+                      <fudis-dl-item
+                        *ngFor="
+                          let option of formExample.controls.courseTopics.value;
+                          let index = index
+                        "
+                      >
+                        <fudis-dt [contentText]="t('selectOption') + ' ' + (index + 1)" />
+                        <fudis-dd>
+                          <fudis-dl [variant]="'compact'">
+                            <fudis-dl-item>
+                              <fudis-dt [contentText]="t('value')" />
+                              <fudis-dd>{{ option.value }}</fudis-dd>
+                            </fudis-dl-item>
+                            <fudis-dl-item>
+                              <fudis-dt [contentText]="t('label')" />
+                              <fudis-dd>{{ option.label }}</fudis-dd>
+                            </fudis-dl-item>
+                          </fudis-dl>
+                        </fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+                  } @else {
+                    <fudis-body-text>{{ t("selectedNullOption") }}</fudis-body-text>
+                  }
+                </div>
               </fudis-grid>
             </fudis-fieldset-content>
           </fudis-fieldset>

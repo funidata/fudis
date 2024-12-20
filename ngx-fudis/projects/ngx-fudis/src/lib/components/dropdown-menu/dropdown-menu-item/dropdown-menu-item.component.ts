@@ -33,8 +33,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
   ) {
     super(_document);
 
-    this._id = this._idService.getNewSelectOptionId(
-      'dropdown-menu',
+    this._id = this._idService.getNewDropdownMenuId(
       this._parentDropdownMenu.id,
       this._parentGroup?.id,
     );
