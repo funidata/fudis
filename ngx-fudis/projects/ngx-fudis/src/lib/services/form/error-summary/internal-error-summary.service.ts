@@ -53,7 +53,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   private _errorsStore: FudisErrorSummaryAllErrors = {};
 
   /**
-   * Collection of all registered categorised by parent Form id. This Observable is updated with new value only when ReloadErrors is called.
+   * Collection of all registered errors categorised by parent Form id. This Observable is updated with new value only when ReloadErrors is called.
    */
   private _errorsObservable = new BehaviorSubject<FudisErrorSummaryAllErrors>({});
 
@@ -290,20 +290,29 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    * @param element HTMLElement to check, if it has Form Component as ancestor
    * @returns if ancestor found, returns id of that Form and visibility status of Form's Error Summary
    */
-  public getFormAncestorId(element: HTMLElement): null | string {
+  public getFormAncestorId(element: HTMLElement): Promise<null | string> {
     let foundId: string | null = null;
+    let tryCounter: number = 0;
 
-    Object.keys(this._errorSummaryVisibilityStatus).find((id) => {
-      if (element.closest(`#${id}`)) {
-        foundId = id;
-      }
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        Object.keys(this._errorSummaryVisibilityStatus).find((id) => {
+          if (element.closest(`#${id}`)) {
+            foundId = id;
+          }
+        });
+
+        if (foundId) {
+          clearInterval(interval);
+          resolve(foundId);
+        } else if (tryCounter < 50) {
+          tryCounter = tryCounter + 1;
+        } else {
+          clearInterval(interval);
+          resolve(null);
+        }
+      }, 10);
     });
-
-    if (foundId) {
-      return foundId;
-    }
-
-    return null;
   }
 
   /**
