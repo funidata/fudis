@@ -99,7 +99,6 @@ export class SelectAutocompleteBaseDirective {
             this.triggerFilterTextUpdate.emit(newValue);
             this.triggerDropdownOpen.emit();
           } else {
-            this.triggerFilterTextUpdate.emit('');
             this.triggerDropdownClose.emit();
           }
         }
