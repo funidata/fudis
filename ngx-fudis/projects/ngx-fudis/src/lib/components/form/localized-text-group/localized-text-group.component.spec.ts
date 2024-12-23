@@ -12,8 +12,9 @@ import { SelectIconsComponent } from '../select/common/select-icons/select-icons
 import { IconComponent } from '../../icon/icon.component';
 import {
   fudisInputSizeArray,
-  FudisLocalizedTextGroup,
-  FudisLocalizedTextGroupOptions,
+  FudisLocalizedTextGroupDefaultFormGroup,
+  FudisLocalizedTextGroupFormGroup,
+  FudisLocalizedTextGroupFormGroupOptions,
 } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -33,8 +34,14 @@ const minLength = FudisValidators.minLength(5, 'Min length is 5');
 const maxlength = FudisValidators.maxLength(25, 'Max length is 25');
 
 describe('LocalizedTextGroupComponent', () => {
-  let component: LocalizedTextGroupComponent;
-  let fixture: ComponentFixture<LocalizedTextGroupComponent>;
+  let component: LocalizedTextGroupComponent<
+    FudisLocalizedTextGroupFormGroup<FudisLocalizedTextGroupDefaultFormGroup>
+  >;
+  let fixture: ComponentFixture<
+    LocalizedTextGroupComponent<
+      FudisLocalizedTextGroupFormGroup<FudisLocalizedTextGroupDefaultFormGroup>
+    >
+  >;
   let translationService: FudisTranslationService;
 
   beforeEach(() => {
@@ -56,7 +63,7 @@ describe('LocalizedTextGroupComponent', () => {
     translationService = TestBed.inject(FudisTranslationService);
     component = fixture.componentInstance;
 
-    const formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
+    const formGroup = new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>({
       fi: new FormControl('', controlRequired),
       sv: new FormControl(''),
       en: new FormControl('', FudisValidators.required('Required in English')),
@@ -155,13 +162,14 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should have custom default option in Select`, () => {
-        const formGroupSecond = new FormGroup<FudisLocalizedTextGroup<object>>({
+        // By purpose false type casting, as it would be tedious to either make this component instance to accept two interface types or to just create another whole test component case for this single unit test. So therefore on purpose typecasting falsely to supress TS lint errors.
+        const formGroupSecond = new FormGroup({
           klingon: new FormControl<string | null>(null),
           elvish: new FormControl<string | null>(null),
           dothraki: new FormControl<string | null>(null),
-        });
+        }) as unknown as FormGroup<FudisLocalizedTextGroupDefaultFormGroup>;
 
-        const optionsSecond: FudisLocalizedTextGroupOptions[] = [
+        const optionsSecond: FudisLocalizedTextGroupFormGroupOptions[] = [
           { controlName: 'klingon', label: 'KLI' },
           { controlName: 'elvish', label: 'ELV' },
           { controlName: 'dothraki', label: 'DOT' },

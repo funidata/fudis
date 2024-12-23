@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
-  FudisLocalizedTextGroup,
+  FudisLocalizedTextGroupFormGroup,
   FudisSelectOption,
-  FudisLocalizedTextGroupOptions,
+  FudisLocalizedTextGroupFormGroupOptions,
   FudisInputSize,
 } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -33,7 +33,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'labelPair' }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LocalizedTextGroupComponent
+export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGroup<T>>
   extends GroupComponentBaseDirective
   implements OnInit, OnChanges, AfterViewInit
 {
@@ -65,12 +65,12 @@ export class LocalizedTextGroupComponent
   /**
    * FormGroup including controls.
    */
-  @Input({ required: true }) override formGroup: FormGroup<FudisLocalizedTextGroup<object>>;
+  @Input({ required: true }) override formGroup: FormGroup<T>;
 
   /**
    * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'en', label: 'EN'}" pairs with Form Group's "en: new FormControl('')"
    */
-  @Input() options: FudisLocalizedTextGroupOptions[] = [
+  @Input() options: FudisLocalizedTextGroupFormGroupOptions[] = [
     { controlName: 'fi', label: 'FI' },
     { controlName: 'sv', label: 'SV' },
     { controlName: 'en', label: 'EN' },
@@ -128,8 +128,8 @@ export class LocalizedTextGroupComponent
       let newOption: FudisSelectOption<object> | null = null;
 
       if (
-        this.formGroup.controls[option.controlName].invalid ||
-        !this.formGroup.controls[option.controlName].value
+        this.formGroup.controls[option.controlName as keyof T].invalid ||
+        !this.formGroup.controls[option.controlName as keyof T].value
       ) {
         newOption = {
           value: option.controlName,
@@ -158,7 +158,7 @@ export class LocalizedTextGroupComponent
     const groupRequiredValidator = FudisValidatorUtilities.oneRequiredOrMin(this.formGroup);
 
     const nonEmptyControls = Object.keys(this.formGroup.controls).filter((control) => {
-      return this.formGroup.controls[control].value;
+      return this.formGroup.controls[control as keyof T].value;
     });
 
     if (
@@ -172,7 +172,7 @@ export class LocalizedTextGroupComponent
   }
 
   protected _checkHtmlAttributes(controlName: string): void {
-    const control = this.formGroup.controls[controlName];
+    const control = this.formGroup.controls[controlName as keyof T] as FormControl<string | null>;
 
     this._minLength.next(FudisValidatorUtilities.minLength(control));
     this._maxLength.next(FudisValidatorUtilities.maxLength(control));
@@ -183,7 +183,7 @@ export class LocalizedTextGroupComponent
     this._setComponentId('localized-text-group');
   }
 
-  ngOnChanges(changes: FudisComponentChanges<LocalizedTextGroupComponent>): void {
+  ngOnChanges(changes: FudisComponentChanges<LocalizedTextGroupComponent<T>>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
       this._applyGroupUpdateCheck();
       this._updateSelectOptions();
