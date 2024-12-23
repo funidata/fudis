@@ -6,11 +6,12 @@ import {
   AfterViewInit,
   OnDestroy,
   ViewChild,
+  OnChanges,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisLabelHeightService } from '../../../services/dom/label-height.service';
-import { FudisLabelData } from '../../../types/miscellaneous';
+import { FudisComponentChanges, FudisLabelData } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-label',
@@ -18,7 +19,10 @@ import { FudisLabelData } from '../../../types/miscellaneous';
   styleUrls: ['./label.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LabelComponent extends TooltipApiDirective implements AfterViewInit, OnDestroy {
+export class LabelComponent
+  extends TooltipApiDirective
+  implements AfterViewInit, OnDestroy, OnChanges
+{
   constructor(
     protected _translationService: FudisTranslationService,
     private _labelHeightService: FudisLabelHeightService,
@@ -50,6 +54,22 @@ export class LabelComponent extends TooltipApiDirective implements AfterViewInit
    * Show text indicating if form element associated with the label is required or not
    */
   @Input() required: boolean | null;
+
+  ngOnChanges(changes: FudisComponentChanges<LabelComponent>): void {
+    if (
+      (changes.required?.currentValue !== changes.required?.previousValue &&
+        !changes.required?.firstChange) ||
+      (changes.text?.currentValue !== changes.required?.previousValue &&
+        !changes.required?.firstChange)
+    ) {
+      const data: FudisLabelData = {
+        id: this.id,
+        element: this._labelElementRef.nativeElement,
+      };
+
+      this._labelHeightService.registerNewLabel(data);
+    }
+  }
 
   ngAfterViewInit(): void {
     const data: FudisLabelData = {
