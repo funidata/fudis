@@ -27,5 +27,5 @@ describe('FudisDOMUtilitiesService', () => {
     expect(service).toBeTruthy();
   });
 
-  // Testing setLabelHeight() functionality in unit test is not the most meaningful. This is tested with Playwright visual regression tests in each component using this method.
+  // Testing setLabelPairHeight() functionality in unit test is not the most meaningful. This is tested with Playwright visual regression tests in each component using this method.
 });

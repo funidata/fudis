@@ -6,20 +6,28 @@ import { debounceTime, fromEvent } from 'rxjs';
 @Injectable()
 export class FudisDOMUtilitiesService {
   constructor(
-    @Inject('componentType') componentType: 'dialog' | 'label',
+    @Inject('componentType') componentType: 'dialog' | 'label' | 'labelPair',
     @Inject(DOCUMENT) private _document: Document,
     private _elementRef: ElementRef,
   ) {
     // Run needed checks on resize
-    fromEvent(window, 'resize')
-      .pipe(takeUntilDestroyed(), debounceTime(10))
-      .subscribe(() => {
-        if (componentType === 'label' && this.labelHeightMatched()) {
-          this.setLabelHeight();
-        } else if (componentType === 'dialog' && this.dialogScrollable() !== null) {
-          this.isDialogScrollable();
-        }
-      });
+    if (componentType === 'labelPair') {
+      fromEvent(window, 'resize')
+        .pipe(takeUntilDestroyed(), debounceTime(10))
+        .subscribe(() => {
+          if (this.labelPairHeightMatched()) {
+            this.setLabelPairHeight();
+          }
+        });
+    } else if (componentType === 'dialog') {
+      fromEvent(window, 'resize')
+        .pipe(takeUntilDestroyed(), debounceTime(10))
+        .subscribe(() => {
+          if (componentType === 'dialog' && this.dialogScrollable() !== null) {
+            this.isDialogScrollable();
+          }
+        });
+    }
   }
 
   /**
@@ -30,14 +38,14 @@ export class FudisDOMUtilitiesService {
   /**
    * Is setting components' label heights to equal completed
    */
-  public labelHeightMatched: WritableSignal<boolean | null> = signal(null);
+  public labelPairHeightMatched: WritableSignal<boolean | null> = signal(null);
 
   /**
    * Utility function to match two Fudis Labels height, if components are designed to be always side by side. E. g. LocalizedTextGroup and DateRange
    *
    * Height of components might vary if other one has tooltip and other one not, or if other one has longer label.
    */
-  public setLabelHeight(delay: boolean = false): void {
+  public setLabelPairHeight(delay: boolean = false): void {
     setTimeout(
       () => {
         const labels = (this._elementRef?.nativeElement as HTMLDivElement)?.querySelectorAll(
@@ -63,7 +71,7 @@ export class FudisDOMUtilitiesService {
           } else if (labelTwoHeigth > labelOneHeigth) {
             (labels[0] as HTMLLabelElement).style.height = `${labelTwoHeigth / fontSize}rem`;
           }
-          this.labelHeightMatched.set(true);
+          this.labelPairHeightMatched.set(true);
         }
       },
       delay ? 100 : 0,
