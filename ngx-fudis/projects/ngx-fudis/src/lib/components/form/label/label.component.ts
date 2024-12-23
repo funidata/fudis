@@ -1,7 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, effect } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { BehaviorSubject } from 'rxjs';
+import { FudisLabelHeightService } from '../../../services/dom/label-height.service';
+import { FudisLabelData } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-label',
@@ -9,14 +18,18 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./label.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LabelComponent extends TooltipApiDirective {
-  constructor(private _translationService: FudisTranslationService) {
+export class LabelComponent extends TooltipApiDirective implements AfterViewInit, OnDestroy {
+  constructor(
+    protected _translationService: FudisTranslationService,
+    private _labelHeightService: FudisLabelHeightService,
+  ) {
     super();
-
-    effect(() => {
-      this._requiredText.next(_translationService.getTranslations()().REQUIRED);
-    });
   }
+
+  /**
+   * Template reference for dropdown item button element
+   */
+  @ViewChild('labelElementRef') private _labelElementRef: ElementRef<HTMLLabelElement>;
 
   /**
    * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to fudis-label
@@ -38,10 +51,16 @@ export class LabelComponent extends TooltipApiDirective {
    */
   @Input() required: boolean | null;
 
-  /**
-   * Fudis translation key for required text
-   */
-  protected _requiredText = new BehaviorSubject<string>(
-    this._translationService.getTranslations()().REQUIRED,
-  );
+  ngAfterViewInit(): void {
+    const data: FudisLabelData = {
+      id: this.id,
+      element: this._labelElementRef.nativeElement,
+    };
+
+    this._labelHeightService.registerNewLabel(data);
+  }
+
+  ngOnDestroy(): void {
+    this._labelHeightService.deleteLabelData(this.id);
+  }
 }

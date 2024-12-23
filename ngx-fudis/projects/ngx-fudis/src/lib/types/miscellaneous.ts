@@ -78,6 +78,14 @@ export type FudisNotification = (typeof fudisNotificationVariantArray)[number];
  */
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
+// For Label Component to send data to DOM Utility Service to match "same row" Label heights
+export interface FudisLabelData {
+  id: string;
+  element: HTMLLabelElement;
+  height?: number;
+  yPosition?: number;
+}
+
 /**
  * Types for extending ngOnChanges SimpleChanges type
  * T = any FudisComponent which have @Input() properties
