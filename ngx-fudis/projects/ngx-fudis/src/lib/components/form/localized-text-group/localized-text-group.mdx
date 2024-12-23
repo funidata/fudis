@@ -88,7 +88,7 @@ The `formGroup` property of this example is defined like this:
 
 <Source
   code={`
-formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
+formGroup = new FormGroup<T>({
   fi: new FormControl<string | null>(null, [
     FudisValidators.maxLength(15, 'Too long Finnish name'),
   ]),
@@ -111,7 +111,7 @@ The `formGroup` property of this example is defined like this:
 
 <Source
   code={`
-formGroup = new FormGroup<FudisLocalizedTextGroup<object>>({
+formGroup = new FormGroup<T>({
   fi: new FormControl<string | null>(null, [
     FudisValidators.required('Missing superhero name on Finnish.'),
     FudisValidators.minLength(5, 'Too short Finnish name'),

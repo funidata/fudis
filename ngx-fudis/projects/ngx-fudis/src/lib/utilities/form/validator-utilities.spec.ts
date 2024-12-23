@@ -2,7 +2,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { FudisValidators } from './validators';
 import { FudisValidatorUtilities } from './validator-utilities';
-import { FudisCheckboxGroupFormGroup, FudisLocalizedTextGroup } from '../../types/forms';
+import {
+  FudisCheckboxGroupFormGroup,
+  FudisLocalizedTextGroupDefaultFormGroup,
+} from '../../types/forms';
 import { FudisGroupValidators } from './groupValidators';
 
 describe('FudisValidatorUtilities functions', () => {
@@ -39,7 +42,7 @@ describe('FudisValidatorUtilities functions', () => {
     });
 
     it('should return true with oneRequired validator group with LocalizedTextGroup', () => {
-      const testFormGroup = new FormGroup<FudisLocalizedTextGroup<object>>(
+      const testFormGroup = new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>(
         {
           fi: new FormControl<string | null>(null),
           sv: new FormControl<string | null>(''),
