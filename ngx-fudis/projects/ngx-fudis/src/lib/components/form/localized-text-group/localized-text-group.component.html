@@ -15,7 +15,7 @@
         #inputRef
         class="fudis-form-input fudis-localized-text-group__inputs__text"
         [class.fudis-form-input--touched]="
-          formGroup.controls[control.key].touched || formGroup.touched
+          $any(formGroup).controls[control.key].touched || formGroup.touched
         "
         [attr.aria-invalid]="formGroup.invalid || null"
         [attr.aria-label]="
@@ -25,7 +25,7 @@
         "
         [attr.minlength]="_minLength | async"
         [attr.maxlength]="_maxLength | async"
-        [formControl]="formGroup.controls[control.key]"
+        [formControl]="$any(formGroup).controls[control.key]"
         (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
         (blur)="handleBlur.emit($event)"
         (focus)="onFocus($event)"
@@ -34,10 +34,10 @@
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="(_required | async) || null"
         [attr.aria-disabled]="
-          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+          formGroup.disabled || $any(formGroup).controls[control.key].disabled || disabled || null
         "
         [readonly]="
-          formGroup.disabled || formGroup.controls[control.key].disabled || disabled || null
+          formGroup.disabled || $any(formGroup).controls[control.key].disabled || disabled || null
         "
       />
       <textarea
@@ -45,7 +45,7 @@
         *ngIf="variant === 'text-area' && control.key === _selectControl.value.value"
         class="fudis-form-input fudis-localized-text-group__inputs__area"
         [class.fudis-form-input--touched]="
-          formGroup.controls[control.key].touched || formGroup.touched
+          $any(formGroup).controls[control.key].touched || formGroup.touched
         "
         [attr.aria-invalid]="formGroup.invalid || null"
         [attr.aria-label]="
@@ -55,7 +55,7 @@
         "
         [attr.minlength]="_minLength | async"
         [attr.maxlength]="_maxLength | async"
-        [formControl]="formGroup.controls[control.key]"
+        [formControl]="$any(formGroup).controls[control.key]"
         (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
         (blur)="handleBlur.emit($event)"
         (focus)="onFocus($event)"
@@ -63,8 +63,8 @@
         [attr.tabindex]="disabled ? -1 : null"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.required]="(_required | async) || null"
-        [attr.aria-disabled]="formGroup.controls[control.key].disabled || disabled || null"
-        [readonly]="formGroup.controls[control.key].disabled || disabled || null"
+        [attr.aria-disabled]="$any(formGroup).controls[control.key].disabled || disabled || null"
+        [readonly]="$any(formGroup).controls[control.key].disabled || disabled || null"
       >
       </textarea>
     </ng-container>
