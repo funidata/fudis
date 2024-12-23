@@ -30,7 +30,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   selector: 'fudis-localized-text-group',
   templateUrl: './localized-text-group.component.html',
   styleUrls: ['./localized-text-group.component.scss'],
-  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'label' }],
+  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'labelPair' }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGroup<T>>
@@ -193,9 +193,9 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
 
     if (
       changes.size?.currentValue !== changes.size?.previousValue &&
-      this._DOMUtilitiesService.labelHeightMatched()
+      this._DOMUtilitiesService.labelPairHeightMatched()
     ) {
-      this._DOMUtilitiesService.setLabelHeight(true);
+      this._DOMUtilitiesService.setLabelPairHeight(true);
     }
   }
 }

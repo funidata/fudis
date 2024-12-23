@@ -8,7 +8,7 @@ import { FudisDOMUtilitiesService } from '../../../../services/dom/dom-utilities
   selector: 'fudis-date-range',
   templateUrl: './date-range.component.html',
   styleUrls: ['./date-range.component.scss'],
-  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'label' }],
+  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'labelPair' }],
 })
 export class DateRangeComponent implements OnChanges {
   constructor(
@@ -36,8 +36,8 @@ export class DateRangeComponent implements OnChanges {
    */
   private _endDateValue: Date | null;
 
-  public setLabelHeight(recheck?: boolean): void {
-    this._DOMUtilitiesService.setLabelHeight(recheck);
+  public setLabelPairHeight(recheck?: boolean): void {
+    this._DOMUtilitiesService.setLabelPairHeight(recheck);
   }
 
   ngOnChanges(changes: FudisComponentChanges<DateRangeComponent>): void {
