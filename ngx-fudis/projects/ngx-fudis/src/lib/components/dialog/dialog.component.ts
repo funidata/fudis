@@ -16,6 +16,8 @@ import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisComponentChanges, FudisDialogSize } from '../../types/miscellaneous';
 import { throttle } from '../../utilities/resizeThrottle';
+import { debounceTime, fromEvent } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dialog',
@@ -41,6 +43,14 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
         }
       }, 10),
     );
+
+    fromEvent(window, 'resize')
+      .pipe(takeUntilDestroyed(), debounceTime(10))
+      .subscribe(() => {
+        if (this._dialogScrollable() !== null) {
+          this._isDialogScrollable();
+        }
+      });
   }
 
   /**
