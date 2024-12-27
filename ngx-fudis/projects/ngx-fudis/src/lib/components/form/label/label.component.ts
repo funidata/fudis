@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisLabelHeightService } from './label-height-service/label-height.service';
+import { FudisLabelHeightService } from '../../../services/dom/label-height.service';
 import { FudisComponentChanges, FudisLabelData } from '../../../types/miscellaneous';
 import { FudisInputSize } from '../../../types/forms';
 import { throttle } from '../../../utilities/resizeThrottle';

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { FudisLabelData } from '../../../../types/miscellaneous';
+import { FudisLabelData } from '../../types/miscellaneous';
 import { DOCUMENT } from '@angular/common';
 import { debounceTime, fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
