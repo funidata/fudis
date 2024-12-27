@@ -48,7 +48,7 @@ export class FieldSetComponent
   /**
    * Legend elementRef to trigger initialFocus
    */
-  @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef;
+  @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef<HTMLDivElement>;
 
   /**
    * Label for the form component.
@@ -112,6 +112,11 @@ export class FieldSetComponent
    * Help text, aligned underneath the input.
    */
   @Input() helpText: string | undefined;
+
+  /**
+   * Used to vertically align Legend label with similar Label elements with varying heights. By default `false`, but set `true` in Checkbox Group and Radio Button Group
+   */
+  @Input() syncLegendHeight = false;
 
   /**
    * CSS classes for the native fieldset HTMLelement

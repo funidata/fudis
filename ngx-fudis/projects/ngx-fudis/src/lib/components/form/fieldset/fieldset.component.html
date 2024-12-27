@@ -16,6 +16,7 @@
       <div
         #fieldsetLegend
         class="fudis-fieldset__legend__main"
+        [class.fudis-label]="syncLegendHeight"
         [class.fudis-fieldset__legend--focused]="_legendFocusVisible"
         [attr.id]="id + '-legend'"
         [tabIndex]="-1"
