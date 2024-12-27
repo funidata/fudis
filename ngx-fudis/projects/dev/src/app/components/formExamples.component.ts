@@ -17,7 +17,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { defaultOptions } from 'projects/ngx-fudis/src/lib/components/form/select/common/mock_data';
 
 interface MyLocalizedTextGroup {
-  [key: string]: FormControl<string | null>;
+  fi: FormControl<string | null>;
+  sv: FormControl<string | null>;
+  en: FormControl<string | null>;
 }
 
 type MyCheckboxGroup = {

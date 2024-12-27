@@ -4,9 +4,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import {
+  FudisLocalizedTextGroupDefaultFormGroup,
   FudisRadioButtonOption,
   FudisSelectOption,
-  FudisLocalizedTextGroup,
 } from '../../../../types/forms';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
@@ -327,7 +327,7 @@ export class StorybookExampleWithMultipleFormsComponent {
     }),
     formFive: new FormControl(null, FudisValidators.required('No fruit picked! :(')),
     formSix: new FormGroup({
-      oneRequired: new FormGroup<FudisLocalizedTextGroup<object>>(
+      oneRequired: new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>(
         {
           fi: new FormControl<string | null>(null),
           sv: new FormControl<string | null>(null),
@@ -335,7 +335,7 @@ export class StorybookExampleWithMultipleFormsComponent {
         },
         [FudisGroupValidators.oneRequired('Provide name in atleast one language')],
       ),
-      allRequired: new FormGroup<FudisLocalizedTextGroup<object>>({
+      allRequired: new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>({
         fi: new FormControl<string | null>('Lorem ipsum', [
           FudisValidators.required('Missing Finnish description'),
           FudisValidators.maxLength(10, 'Too long Finnish description'),

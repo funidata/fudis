@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalizedTextGroupComponent } from './localized-text-group.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
-import { fudisInputSizeArray, FudisLocalizedTextGroup } from '../../../types/forms';
+import { fudisInputSizeArray, FudisLocalizedTextGroupDefaultFormGroup } from '../../../types/forms';
 import { LocalizedTextGroupStoryExclude } from '../../../utilities/storybook';
 import docs from './localized-text-group.mdx';
 import { action } from '@storybook/addon-actions';
@@ -49,7 +49,7 @@ export default {
 
 const html = String.raw;
 
-const commonArgs: Partial<LocalizedTextGroupComponent> = {
+const commonArgs: Partial<LocalizedTextGroupComponent<object>> = {
   size: 'lg',
   initialFocus: false,
   tooltip: 'Your city needs you!',
@@ -65,7 +65,7 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
     handleBlur: action('handleBlur'),
     handleViewInit: action('handleViewInit'),
     handleKeyUp: action('handleKeyUp'),
-    formGroup: new FormGroup<FudisLocalizedTextGroup<object>>({
+    formGroup: new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>({
       fi: new FormControl<string | null>(null, [
         FudisValidators.required('Missing backstory in Finnish.'),
         FudisValidators.minLength(10, 'Too short backstory in Finnish'),
@@ -115,7 +115,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       { controlName: 'sv', label: 'SV' },
       { controlName: 'en', label: 'EN' },
     ],
-    formGroup: new FormGroup<FudisLocalizedTextGroup<object>>(
+    formGroup: new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>(
       {
         fi: new FormControl<string | null>(null, [
           FudisValidators.maxLength(15, 'Too long Finnish name'),
