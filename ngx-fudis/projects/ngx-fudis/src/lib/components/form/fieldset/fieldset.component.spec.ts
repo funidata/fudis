@@ -116,13 +116,13 @@ describe('FieldSetComponent', () => {
 
   describe('Component inputs', () => {
     it('should have Fieldset label as given', () => {
-      const fieldsetLabel = getElement(fixtureMock, '.fudis-fieldset__legend__title__text');
+      const fieldsetLabel = getElement(fixtureMock, '.fudis-fieldset__legend__main__text');
 
       expect(fieldsetLabel.textContent).toEqual('Fieldset label');
     });
 
     it('should have fieldset helpText as given', () => {
-      const fieldsetHelpText = getElement(fixtureMock, '.fudis-fieldset__legend__help-text');
+      const fieldsetHelpText = getElement(fixtureMock, '.fudis-fieldset__help-text');
 
       expect(fieldsetHelpText?.textContent).toEqual('Fieldset help text');
     });
@@ -133,7 +133,7 @@ describe('FieldSetComponent', () => {
 
       const requiredTextElement = getElement(
         fixtureMock,
-        '.fudis-fieldset__legend__title__text__required',
+        '.fudis-fieldset__legend__main__text__required',
       );
 
       expect(requiredTextElement).toBeTruthy();
@@ -154,13 +154,13 @@ describe('FieldSetComponent', () => {
     });
 
     it('should have label size with respective CSS class', () => {
-      const labelSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend__title__main');
+      const labelSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend');
 
-      expect(labelSizeClass.className).toContain('fudis-fieldset__legend__title__main__md');
+      expect(labelSizeClass.className).toContain('fudis-fieldset__legend__md');
 
       componentMock.labelSize = 'sm';
       fixtureMock.detectChanges();
-      expect(labelSizeClass.className).toContain('fudis-fieldset__legend__title__main__sm');
+      expect(labelSizeClass.className).toContain('fudis-fieldset__legend__sm');
     });
   });
 

@@ -56,7 +56,6 @@ export class FudisLabelHeightService {
     this._labelCalculateGuard = triggerId;
     setTimeout(() => {
       if (this._labelCalculateGuard === triggerId) {
-        console.log('hello');
         this._labelData = this._calculateLabelHeights();
         this._setLabelHeights();
         this._labelCalculateGuard = null;

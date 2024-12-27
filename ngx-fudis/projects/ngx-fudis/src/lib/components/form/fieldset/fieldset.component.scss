@@ -5,71 +5,41 @@
 @use '../../../foundations/focus/mixins.scss' as focus;
 @use '../../../foundations/borders/mixins.scss' as borders;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
 
 .fudis-fieldset {
   @include utilities.box-reset;
   @include borders.border-none;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
 
   &__legend {
     @include utilities.box-reset;
 
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-height: spacing.$spacing-lg;
-
-    /* stylelint-disable-next-line selector-class-pattern */
-    &:has(.fudis-fieldset-actions__align--start) {
-      flex-wrap: wrap;
-    }
-
-    /* stylelint-disable-next-line selector-class-pattern */
-    &:has(.fudis-fieldset-actions__align--end) {
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    /* stylelint-disable-next-line selector-class-pattern */
-    &:has(.fudis-fieldset-actions__align--below) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+    display: contents;
 
     &:focus-visible {
       @include focus.focus-generic;
+    }
+
+    &__sm {
+      @include typography.text-field-label;
+    }
+
+    &__md {
+      @include typography.heading-xs;
     }
 
     &--focused {
       @include focus.focus-generic;
     }
 
-    &__title {
-      margin-bottom: spacing.$spacing-xs;
-
-      /* stylelint-disable selector-class-pattern */
-      &:has(+ .fudis-fieldset-actions) {
-        margin-right: spacing.$spacing-xl;
-      }
-
-      &__with-inputs {
-        margin-bottom: spacing.$spacing-none;
-      }
-
-      &__main {
-        display: flex;
-        align-items: center;
-
-        &__sm {
-          @include typography.text-field-label;
-        }
-
-        &__md {
-          @include typography.heading-xs;
-        }
-      }
+    &__main {
+      display: flex;
+      align-items: center;
+      margin-right: calc(spacing.$spacing-xl / var(--fudis-rem-multiplier));
+      min-height: spacing.$spacing-lg;
 
       &__text {
         @include colors.text-color('gray-dark');
@@ -85,29 +55,55 @@
           font-size: typographyTokens.$body-text-sm-font-size;
         }
       }
-    }
 
-    &__tooltip-button {
-      margin-top: auto;
+      &__tooltip-button {
+        margin-top: auto;
+      }
     }
+  }
 
-    &__help-text {
-      @include colors.text-color('gray-dark');
-      @include typography.body-text-sm-regular;
-
-      display: block;
-    }
+  &__gutter {
+    grid-column: 1/-1;
+    height: spacing.$spacing-xs;
   }
 
   .fudis-notification {
     margin-bottom: spacing.$spacing-xs;
   }
 
+  &__help-text {
+    flex: 1;
+  }
+
   &-actions {
     display: flex;
     flex-wrap: wrap;
     gap: spacing.$spacing-xs spacing.$spacing-sm;
-    margin-bottom: spacing.$spacing-xs;
+    align-items: center;
+    justify-content: flex-start;
+
+    &__align {
+      &--end {
+        @include breakpoints.breakpoint('sm') {
+          justify-content: flex-end;
+        }
+      }
+
+      &--below {
+        margin-top: spacing.$spacing-xs;
+      }
+
+      &--start,
+      &--end {
+        margin-top: spacing.$spacing-xs;
+
+        @include breakpoints.breakpoint('sm') {
+          grid-row: 1 / 3;
+          grid-column: 2 / 2;
+          margin-top: spacing.$spacing-none;
+        }
+      }
+    }
   }
 
   &-content {
@@ -116,5 +112,32 @@
 
     display: flex;
     flex-direction: column;
+    grid-column: 1/-1;
+    order: 4;
+    width: 100%;
+  }
+
+  @include breakpoints.breakpoint('sm') {
+    /* stylelint-disable-next-line selector-class-pattern */
+    &:not(:has(.fudis-fieldset-actions__align--below)) {
+      grid-template-columns: auto 1fr;
+    }
   }
 }
+
+//  /* stylelint-disable-next-line selector-class-pattern */
+//  &:has(.fudis-fieldset-actions__align--start) {
+//   flex-wrap: wrap;
+// }
+
+// /* stylelint-disable-next-line selector-class-pattern */
+// &:has(.fudis-fieldset-actions__align--end) {
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+// }
+
+// /* stylelint-disable-next-line selector-class-pattern */
+// &:has(.fudis-fieldset-actions__align--below) {
+//   flex-direction: column;
+//   align-items: flex-start;
+// }
