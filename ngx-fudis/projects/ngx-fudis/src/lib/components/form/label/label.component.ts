@@ -12,6 +12,7 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisLabelHeightService } from '../../../services/dom/label-height.service';
 import { FudisComponentChanges, FudisLabelData } from '../../../types/miscellaneous';
+import { FudisInputSize } from '../../../types/forms';
 
 @Component({
   selector: 'fudis-label',
@@ -55,13 +56,28 @@ export class LabelComponent
    */
   @Input() required: boolean | null;
 
+  /**
+   * Size of Label's parent. Used to trigger Label height calculation if parent's size changes.
+   */
+  @Input() parentSize: FudisInputSize | 'xs';
+
   ngOnChanges(changes: FudisComponentChanges<LabelComponent>): void {
-    if (
-      (changes.required?.currentValue !== changes.required?.previousValue &&
-        !changes.required?.firstChange) ||
-      (changes.text?.currentValue !== changes.required?.previousValue &&
-        !changes.required?.firstChange)
-    ) {
+    const requiredChange =
+      changes.required &&
+      changes.required.currentValue !== changes.required.previousValue &&
+      !changes.required.firstChange;
+
+    const textChange =
+      changes.text &&
+      changes.text.currentValue !== changes.text.previousValue &&
+      !changes.text.firstChange;
+
+    const sizeChange =
+      changes.parentSize &&
+      changes.parentSize.currentValue !== changes.parentSize.previousValue &&
+      !changes.parentSize.firstChange;
+
+    if (requiredChange || textChange || sizeChange) {
       const data: FudisLabelData = {
         id: this.id,
         element: this._labelElementRef.nativeElement,
