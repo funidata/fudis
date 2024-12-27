@@ -18,7 +18,7 @@
       *ngIf="control && !disableGuidance"
       [inputLabel]="label"
       [helpText]="helpText"
-      [for]="id"
+      [for]="id + '-legend'"
       [control]="control"
     >
       <ng-content select="fudis-error-message" />

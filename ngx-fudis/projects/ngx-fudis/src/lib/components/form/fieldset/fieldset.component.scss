@@ -20,14 +20,15 @@
 
     display: contents;
 
-    &:focus-visible {
-      @include focus.focus-generic;
-    }
-
     &__main {
       display: flex;
       align-items: center;
       min-height: spacing.$spacing-lg;
+
+      &:focus,
+      &:focus-visible {
+        @include focus.focus-generic;
+      }
 
       &__text {
         @include colors.text-color('gray-dark');

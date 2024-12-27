@@ -12,15 +12,15 @@
     [attr.aria-describedby]="describedbyId ? describedbyId : null"
     (focus)="_handleFocus($event)"
   >
-    <legend
-      #fieldsetLegend
-      class="fudis-fieldset__legend fudis-fieldset__legend__{{ labelSize }}"
-      [class.fudis-fieldset__legend--focused]="_legendFocusVisible"
-      [attr.id]="id + '-legend'"
-      [tabIndex]="-1"
-      (blur)="_handleLegendBlur()"
-    >
-      <div class="fudis-fieldset__legend__main">
+    <legend class="fudis-fieldset__legend fudis-fieldset__legend__{{ labelSize }}">
+      <div
+        #fieldsetLegend
+        class="fudis-fieldset__legend__main"
+        [class.fudis-fieldset__legend--focused]="_legendFocusVisible"
+        [attr.id]="id + '-legend'"
+        [tabIndex]="-1"
+        (blur)="_handleLegendBlur()"
+      >
         <span class="fudis-fieldset__legend__main__text"
           >{{ label
           }}<span *ngIf="required" class="fudis-fieldset__legend__main__text__required">
