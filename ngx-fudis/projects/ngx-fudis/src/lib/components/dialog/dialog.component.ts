@@ -8,18 +8,20 @@ import {
   signal,
   OnChanges,
   AfterViewInit,
+  WritableSignal,
+  ElementRef,
 } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisComponentChanges, FudisDialogSize } from '../../types/miscellaneous';
-import { FudisDOMUtilitiesService } from '../../services/dom/dom-utilities.service';
+import { debounceTime, fromEvent } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'dialog' }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewInit {
@@ -27,11 +29,19 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
     protected _translateService: FudisTranslationService,
     private _dialogService: FudisDialogService,
     private _idService: FudisIdService,
-    protected _DOMUtilitiesService: FudisDOMUtilitiesService,
+    private _elementRef: ElementRef,
   ) {
     this._id = _idService.getNewId('dialog');
 
     _dialogService.setDialogOpenStatus(true);
+
+    fromEvent(window, 'resize')
+      .pipe(takeUntilDestroyed(), debounceTime(10))
+      .subscribe(() => {
+        if (this._dialogScrollable() !== null) {
+          this._isDialogScrollable();
+        }
+      });
   }
 
   /**
@@ -54,9 +64,14 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
    */
   private _orderNumber: number;
 
+  /**
+   * Does Dialog have scrollable content
+   */
+  protected _dialogScrollable: WritableSignal<boolean | null> = signal(null);
+
   ngOnChanges(changes: FudisComponentChanges<DialogComponent>): void {
     if (changes.size?.currentValue !== changes.size?.previousValue) {
-      this._DOMUtilitiesService.isDialogScrollable();
+      this._isDialogScrollable();
     }
   }
 
@@ -65,12 +80,51 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    this._DOMUtilitiesService.isDialogScrollable();
+    this._isDialogScrollable();
   }
 
   ngOnDestroy(): void {
     if (this._orderNumber === 1 || this._orderNumber === 0) {
       this._dialogService.setDialogOpenStatus(false);
+    }
+  }
+
+  /**
+   * From: https://phuoc.ng/collection/html-dom/check-if-an-element-is-scrollable/
+   */
+  private _isDialogScrollable(): void {
+    const dialogContentElement = (this._elementRef?.nativeElement as HTMLDivElement)?.querySelector(
+      '.fudis-dialog-content',
+    );
+
+    const dialogContentVisible = dialogContentElement?.clientHeight;
+    const dialogContentScrollable = dialogContentElement?.scrollHeight;
+
+    const formContent = (this._elementRef?.nativeElement as HTMLDivElement)?.querySelector(
+      '.fudis-form-content',
+    )?.clientHeight;
+
+    const formScrollableContent = (
+      this._elementRef?.nativeElement as HTMLDivElement
+    )?.querySelector('.fudis-form__content-wrapper')?.clientHeight;
+
+    // Compare the height to see if the element has scrollable content
+    const hasScrollableContent =
+      (formScrollableContent && formContent && formContent > formScrollableContent) ||
+      (dialogContentScrollable &&
+        dialogContentVisible &&
+        dialogContentScrollable > dialogContentVisible);
+    // It's not enough because the element's `overflow-y` style can be set as
+    // * `hidden`
+    // * `hidden !important`
+    // In those cases, the scrollbar isn't shown
+    const overflowYStyle = window.getComputedStyle(this._elementRef.nativeElement).overflowY;
+    const isOverflowHidden = overflowYStyle.indexOf('hidden') !== -1;
+
+    if (hasScrollableContent && !isOverflowHidden) {
+      this._dialogScrollable.set(true);
+    } else {
+      this._dialogScrollable.set(false);
     }
   }
 

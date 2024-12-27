@@ -128,7 +128,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
 import { FudisDialogService } from './services/dialog/dialog.service';
-import { FudisDOMUtilitiesService } from './services/dom/dom-utilities.service';
 import { FudisFocusService } from './services/focus/focus.service';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
 import { FudisGridService } from './services/grid/grid.service';
@@ -322,7 +321,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
     FudisAlertService,
     FudisBreakpointService,
     FudisDialogService,
-    FudisDOMUtilitiesService,
     FudisErrorSummaryService,
     FudisInternalErrorSummaryService,
     FudisFocusService,
