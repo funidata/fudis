@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  effect,
   ElementRef,
   Input,
   OnChanges,
@@ -19,7 +18,6 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { BehaviorSubject } from 'rxjs';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
@@ -33,16 +31,13 @@ export class FieldSetComponent
   implements AfterViewInit, OnInit, OnDestroy, OnChanges, AfterContentInit
 {
   constructor(
+    protected _translationService: FudisTranslationService,
     private _element: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
-    private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
   ) {
     super();
-    effect(() => {
-      this._requiredText.next(_translationService.getTranslations()().REQUIRED);
-    });
   }
 
   /**
@@ -134,13 +129,6 @@ export class FieldSetComponent
   private _fieldsetSent: boolean = false;
 
   private _parentFormId: string | null;
-
-  /**
-   * Fudis translation key for required text
-   */
-  protected _requiredText = new BehaviorSubject<string>(
-    this._translationService.getTranslations()().REQUIRED,
-  );
 
   ngOnInit(): void {
     this._setFieldsetId();

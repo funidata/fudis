@@ -22,27 +22,38 @@
 
     &__main {
       display: flex;
-      align-items: center;
-      min-height: spacing.$spacing-lg;
+      align-items: flex-end;
 
-      &:focus,
       &:focus-visible {
         @include focus.focus-generic;
+      }
+
+      &__text-content {
+        margin: spacing.$spacing-xxs 0;
+        min-height: spacing.$spacing-md;
+        white-space: break-spaces;
       }
 
       &__text {
         @include colors.text-color('gray-dark');
 
-        display: inline-block;
         margin-right: spacing.$spacing-xs;
+      }
 
-        &__required {
-          @include colors.text-color('gray-middle');
+      &__space {
+        display: inline-block;
+        width: 0;
+      }
 
-          text-transform: initial;
-          /* stylelint-disable-next-line property-disallowed-list */
-          font-size: typographyTokens.$body-text-sm-font-size;
-        }
+      &__required {
+        @include typography.text-field-label;
+        @include colors.text-color('gray-middle');
+
+        display: inline-block;
+        vertical-align: bottom;
+        text-transform: initial;
+        /* stylelint-disable-next-line property-disallowed-list */
+        font-size: typographyTokens.$body-text-sm-font-size;
       }
 
       &__tooltip-button {
@@ -66,6 +77,10 @@
 
     &__md {
       @include typography.heading-xs;
+
+      .fudis-fieldset__legend__main__text {
+        vertical-align: sub;
+      }
     }
 
     &--focused {
