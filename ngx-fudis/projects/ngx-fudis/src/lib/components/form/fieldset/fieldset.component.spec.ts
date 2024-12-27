@@ -133,11 +133,11 @@ describe('FieldSetComponent', () => {
 
       const requiredTextElement = getElement(
         fixtureMock,
-        '.fudis-fieldset__legend__main__text__required',
+        '.fudis-fieldset__legend__main__required',
       );
 
       expect(requiredTextElement).toBeTruthy();
-      expect(requiredTextElement?.textContent).toEqual(' (Required)');
+      expect(requiredTextElement?.textContent).toEqual('(Required)');
     });
 
     it('should have initial focus', () => {
@@ -154,7 +154,7 @@ describe('FieldSetComponent', () => {
     });
 
     it('should have label size with respective CSS class', () => {
-      const labelSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend');
+      const labelSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend__main');
 
       expect(labelSizeClass.className).toContain('fudis-fieldset__legend__md');
 

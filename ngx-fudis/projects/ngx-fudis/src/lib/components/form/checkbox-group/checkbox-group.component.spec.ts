@@ -177,7 +177,7 @@ describe('CheckboxGroupComponent', () => {
 
     it('should display required text', () => {
       const requiredText = fixture.nativeElement.querySelector(
-        '.fudis-fieldset__legend__main__text__required',
+        '.fudis-fieldset__legend__main__required',
       ) as HTMLElement;
 
       expect(requiredText.textContent).toContain('(Required)');
