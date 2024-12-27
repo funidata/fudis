@@ -123,7 +123,8 @@
   }
 
   @include breakpoints.breakpoint('sm') {
-    &:not(:has(.fudis-fieldset-actions__align--below)) {
+    &:has(.fudis-fieldset-actions__align--start),
+    &:has(.fudis-fieldset-actions__align--end) {
       grid-template-columns: auto 1fr;
     }
   }
