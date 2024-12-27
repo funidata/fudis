@@ -93,8 +93,7 @@ export class FudisLabelHeightService {
   }
 
   /**
-   *
-   * @returns
+   * Group all Labels living in the same row, check which is highest and match rest with that height
    */
   private _setLabelHeights(): void {
     const fontSize = Number(
