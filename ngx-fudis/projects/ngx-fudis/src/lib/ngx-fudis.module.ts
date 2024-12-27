@@ -133,7 +133,7 @@ import { FudisErrorSummaryService } from './services/form/error-summary/error-su
 import { FudisGridService } from './services/grid/grid.service';
 import { FudisIdService } from './services/id/id.service';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
-import { FudisLabelHeightService } from './services/dom/label-height.service';
+import { FudisLabelHeightService } from './components/form/label/label-height-service/label-height.service';
 import { FudisTranslationService } from './services/translation/translation.service';
 
 @NgModule({

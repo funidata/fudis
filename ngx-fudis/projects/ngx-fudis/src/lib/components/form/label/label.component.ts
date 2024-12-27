@@ -10,9 +10,10 @@ import {
 } from '@angular/core';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisLabelHeightService } from '../../../services/dom/label-height.service';
+import { FudisLabelHeightService } from './label-height-service/label-height.service';
 import { FudisComponentChanges, FudisLabelData } from '../../../types/miscellaneous';
 import { FudisInputSize } from '../../../types/forms';
+import { throttle } from '../../../utilities/resizeThrottle';
 
 @Component({
   selector: 'fudis-label',
@@ -29,6 +30,12 @@ export class LabelComponent
     private _labelHeightService: FudisLabelHeightService,
   ) {
     super();
+
+    this._resizeObserver = new ResizeObserver(
+      throttle(() => {
+        _labelHeightService.triggerLabelHeightSet(this.id);
+      }, 25),
+    );
   }
 
   /**
@@ -60,6 +67,11 @@ export class LabelComponent
    * Size of Label's parent. Used to trigger Label height calculation if parent's size changes.
    */
   @Input() parentSize: FudisInputSize | 'xs';
+
+  /**
+   * To observe size changes of this Label and trigger height calculation as needed
+   */
+  private _resizeObserver: ResizeObserver;
 
   ngOnChanges(changes: FudisComponentChanges<LabelComponent>): void {
     const requiredChange =
@@ -94,9 +106,12 @@ export class LabelComponent
     };
 
     this._labelHeightService.registerNewLabel(data);
+
+    this._resizeObserver.observe(this._labelElementRef.nativeElement);
   }
 
   ngOnDestroy(): void {
+    this._resizeObserver.disconnect();
     this._labelHeightService.deleteLabelData(this.id);
   }
 }

@@ -1,20 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, fromEvent } from 'rxjs';
-import { FudisLabelData } from '../../types/miscellaneous';
+import { FudisLabelData } from '../../../../types/miscellaneous';
 import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FudisLabelHeightService {
-  constructor(@Inject(DOCUMENT) private _document: Document) {
-    fromEvent(window, 'resize')
-      .pipe(takeUntilDestroyed(), debounceTime(10))
-      .subscribe(() => {
-        this.triggerLabelHeightSet();
-      });
-  }
+  constructor(@Inject(DOCUMENT) private _document: Document) {}
 
   /**
    * Collection of Labels
@@ -33,13 +25,7 @@ export class FudisLabelHeightService {
   public registerNewLabel(data: FudisLabelData): void {
     this._labelData.push(data);
 
-    this._labelCalculateGuard = data.id;
-
-    setTimeout(() => {
-      if (this._labelCalculateGuard === data.id) {
-        this.triggerLabelHeightSet();
-      }
-    }, 10);
+    this.triggerLabelHeightSet(data.id);
   }
 
   /**
@@ -57,10 +43,15 @@ export class FudisLabelHeightService {
   /**
    * Calculate Label heights and match and set heights
    */
-  public triggerLabelHeightSet(): void {
-    this._labelData = this._calculateLabelHeights();
-    this._setLabelHeights();
-    this._labelCalculateGuard = null;
+  public triggerLabelHeightSet(triggerId: string): void {
+    this._labelCalculateGuard = triggerId;
+    setTimeout(() => {
+      if (this._labelCalculateGuard === triggerId) {
+        this._labelData = this._calculateLabelHeights();
+        this._setLabelHeights();
+        this._labelCalculateGuard = null;
+      }
+    }, 50);
   }
 
   /**

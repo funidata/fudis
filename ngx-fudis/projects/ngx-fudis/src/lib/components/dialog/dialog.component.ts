@@ -15,8 +15,7 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisComponentChanges, FudisDialogSize } from '../../types/miscellaneous';
-import { debounceTime, fromEvent } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { throttle } from '../../utilities/resizeThrottle';
 
 @Component({
   selector: 'fudis-dialog',
@@ -35,13 +34,13 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
 
     _dialogService.setDialogOpenStatus(true);
 
-    fromEvent(window, 'resize')
-      .pipe(takeUntilDestroyed(), debounceTime(10))
-      .subscribe(() => {
+    this._resizeObserver = new ResizeObserver(
+      throttle(() => {
         if (this._dialogScrollable() !== null) {
           this._isDialogScrollable();
         }
-      });
+      }, 10),
+    );
   }
 
   /**
@@ -69,6 +68,11 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
    */
   protected _dialogScrollable: WritableSignal<boolean | null> = signal(null);
 
+  /**
+   * To observe size changes of this Label and trigger height calculation as needed
+   */
+  private _resizeObserver: ResizeObserver;
+
   ngOnChanges(changes: FudisComponentChanges<DialogComponent>): void {
     if (changes.size?.currentValue !== changes.size?.previousValue) {
       this._isDialogScrollable();
@@ -87,6 +91,8 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
     if (this._orderNumber === 1 || this._orderNumber === 0) {
       this._dialogService.setDialogOpenStatus(false);
     }
+
+    this._resizeObserver.disconnect();
   }
 
   /**
