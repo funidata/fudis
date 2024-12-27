@@ -12,13 +12,15 @@ import {
 } from '@angular/core';
 
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisComponentChanges, FudisLabelData } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { FudisLabelHeightService } from '../../../services/dom/label-height.service';
+import { throttle } from '../../../utilities/resizeThrottle';
 
 @Component({
   selector: 'fudis-fieldset',
@@ -36,6 +38,7 @@ export class FieldSetComponent
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
     private _idService: FudisIdService,
+    private _labelHeightService: FudisLabelHeightService,
   ) {
     super();
   }
@@ -130,6 +133,11 @@ export class FieldSetComponent
 
   private _parentFormId: string | null;
 
+  /**
+   * To observe size changes of this Label and trigger height calculation as needed
+   */
+  private _resizeObserver: ResizeObserver;
+
   ngOnInit(): void {
     this._setFieldsetId();
     this._addToErrorSummary(this.label);
@@ -151,6 +159,25 @@ export class FieldSetComponent
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this._fieldsetLegend?.nativeElement?.focus();
     }
+
+    if (this.syncLegendHeight) {
+      const id = `${this.id}-legend`;
+
+      const data: FudisLabelData = {
+        id: id,
+        element: this._fieldsetLegend.nativeElement,
+      };
+
+      this._labelHeightService.registerNewLabel(data);
+
+      this._resizeObserver = new ResizeObserver(
+        throttle(() => {
+          this._labelHeightService.triggerLabelHeightSet(id);
+        }, 25),
+      );
+
+      this._resizeObserver.observe(this._fieldsetLegend.nativeElement);
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
@@ -168,6 +195,10 @@ export class FieldSetComponent
 
   ngOnDestroy(): void {
     this._removeFromErrorSummary();
+
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+    }
   }
 
   protected _handleLegendBlur(): void {
