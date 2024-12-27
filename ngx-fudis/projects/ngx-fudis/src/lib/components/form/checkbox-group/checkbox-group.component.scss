@@ -1,1 +1,12 @@
-/* stylelint-disable-next-line no-empty-source */
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-checkbox-group {
+  @include borders.border('1px', 'solid', 'transparent');
+  @include utilities.box-reset;
+
+  .fudis-fieldset-content {
+    margin-top: spacing.$spacing-none;
+  }
+}

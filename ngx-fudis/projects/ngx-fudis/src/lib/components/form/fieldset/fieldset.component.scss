@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/typography/tokens.scss' as typographyTokens;
@@ -23,22 +24,9 @@
       @include focus.focus-generic;
     }
 
-    &__sm {
-      @include typography.text-field-label;
-    }
-
-    &__md {
-      @include typography.heading-xs;
-    }
-
-    &--focused {
-      @include focus.focus-generic;
-    }
-
     &__main {
       display: flex;
       align-items: center;
-      margin-right: calc(spacing.$spacing-xl / var(--fudis-rem-multiplier));
       min-height: spacing.$spacing-lg;
 
       &__text {
@@ -60,11 +48,28 @@
         margin-top: auto;
       }
     }
-  }
 
-  &__gutter {
-    grid-column: 1/-1;
-    height: spacing.$spacing-xs;
+    /* stylelint-disable-next-line order/order */
+    &:has(~ .fudis-fieldset-actions__align--start),
+    &:has(~ .fudis-fieldset-actions__align--end) {
+      .fudis-fieldset__legend__main {
+        @include breakpoints.breakpoint('sm') {
+          margin-right: calc(spacing.$spacing-xl / var(--fudis-rem-multiplier));
+        }
+      }
+    }
+
+    &__sm {
+      @include typography.text-field-label;
+    }
+
+    &__md {
+      @include typography.heading-xs;
+    }
+
+    &--focused {
+      @include focus.focus-generic;
+    }
   }
 
   .fudis-notification {
@@ -73,6 +78,7 @@
 
   &__help-text {
     flex: 1;
+    margin-bottom: spacing.$spacing-xs;
   }
 
   &-actions {
@@ -86,11 +92,8 @@
       &--end {
         @include breakpoints.breakpoint('sm') {
           justify-content: flex-end;
+          margin-top: spacing.$spacing-none;
         }
-      }
-
-      &--below {
-        margin-top: spacing.$spacing-xs;
       }
 
       &--start,
@@ -114,11 +117,11 @@
     flex-direction: column;
     grid-column: 1/-1;
     order: 4;
+    margin-top: spacing.$spacing-xs;
     width: 100%;
   }
 
   @include breakpoints.breakpoint('sm') {
-    /* stylelint-disable-next-line selector-class-pattern */
     &:not(:has(.fudis-fieldset-actions__align--below)) {
       grid-template-columns: auto 1fr;
     }
