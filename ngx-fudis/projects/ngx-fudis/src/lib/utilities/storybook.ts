@@ -132,7 +132,6 @@ export const datepickerExclude: RegExp = excludeRegex([...formCommonDocsExclude]
 export const dateRangeExclude: RegExp = excludeRegex([
   'checkDateCrossings',
   'showDateComparisonErrors',
-  'setLabelPairHeight',
 ]);
 
 /**

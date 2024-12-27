@@ -244,16 +244,6 @@ export class DatepickerComponent
         this._addParseValidator();
       }
     }
-
-    if (changes.size?.currentValue !== changes.size?.previousValue && this._parentDateRange) {
-      this._parentDateRange?.setLabelPairHeight();
-    }
-  }
-
-  override ngAfterViewInit(): void {
-    this._afterViewInitCommon();
-
-    this._parentDateRange?.setLabelPairHeight(true);
   }
 
   ngOnDestroy(): void {

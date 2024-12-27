@@ -20,8 +20,6 @@ import { FudisValidatorUtilities } from '../../../utilities/form/validator-utili
 
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FudisDOMUtilitiesService } from '../../../services/dom/dom-utilities.service';
-
 import { BehaviorSubject } from 'rxjs';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -30,7 +28,6 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   selector: 'fudis-localized-text-group',
   templateUrl: './localized-text-group.component.html',
   styleUrls: ['./localized-text-group.component.scss'],
-  providers: [FudisDOMUtilitiesService, { provide: 'componentType', useValue: 'labelPair' }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGroup<T>>
@@ -39,7 +36,6 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
 {
   constructor(
     private _translationService: FudisTranslationService,
-    protected _DOMUtilitiesService: FudisDOMUtilitiesService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
   ) {
@@ -189,13 +185,6 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
-    }
-
-    if (
-      changes.size?.currentValue !== changes.size?.previousValue &&
-      this._DOMUtilitiesService.labelPairHeightMatched()
-    ) {
-      this._DOMUtilitiesService.setLabelPairHeight(true);
     }
   }
 }

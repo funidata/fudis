@@ -86,7 +86,6 @@
     [disabled]="this.formGroup.disabled || disabled"
     [label]="label"
     [selectionClearButton]="false"
-    (handleViewInit)="_DOMUtilitiesService.setLabelPairHeight(true)"
     (selectionUpdate)="_checkHtmlAttributes($event?.value)"
     [control]="_selectControl"
     [size]="'xs'"
