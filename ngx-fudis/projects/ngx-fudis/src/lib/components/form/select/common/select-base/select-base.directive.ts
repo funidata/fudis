@@ -15,7 +15,6 @@ import {
   AfterViewInit,
 } from '@angular/core';
 
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
@@ -40,7 +39,6 @@ export class SelectBaseDirective
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
-    private _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
   ) {

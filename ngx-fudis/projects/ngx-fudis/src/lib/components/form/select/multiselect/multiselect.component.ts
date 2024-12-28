@@ -7,7 +7,6 @@ import {
   Output,
   ViewChild,
   WritableSignal,
-  effect,
   signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -17,7 +16,6 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
@@ -28,17 +26,11 @@ import { MultiselectControlValueAccessorDirective } from '../common/select-contr
 export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(
     @Inject(DOCUMENT) _document: Document,
-    _translationService: FudisTranslationService,
+    protected _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
   ) {
-    super(_document, _translationService, _focusService, _idService);
-
-    effect(() => {
-      this._translationRemoveItem.next(
-        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM,
-      );
-    });
+    super(_document, _focusService, _idService);
   }
 
   @ViewChild(MultiselectControlValueAccessorDirective)
@@ -64,11 +56,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
    * When app language and option labels are changed, selected Multiselect Options push themselves here, which will be then used to update visible UI labels managed by MultiselectCVA
    */
   public selectedOptionsFromLangChange: FudisSelectOption<object>[] = [];
-
-  /**
-   * Internal translated text to indicate deleting item chip aria-label
-   */
-  protected _translationRemoveItem = new BehaviorSubject<string>('');
 
   /**
    * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)

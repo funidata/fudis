@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
@@ -29,10 +28,9 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   constructor(
     @Inject(DOCUMENT) _document: Document,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
   ) {
-    super(_document, _translationService, _focusService, _idService);
+    super(_document, _focusService, _idService);
   }
 
   @ViewChild(SelectControlValueAccessorDirective)
