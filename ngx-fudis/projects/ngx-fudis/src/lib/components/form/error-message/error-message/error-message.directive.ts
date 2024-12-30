@@ -31,7 +31,10 @@ import { SelectComponent } from '../../select/select/select.component';
 import { MultiselectComponent } from '../../select/multiselect/multiselect.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FudisCheckboxGroupFormGroup } from '../../../../types/forms';
+import {
+  FudisCheckboxGroupFormGroup,
+  FudisLocalizedTextGroupFormGroup,
+} from '../../../../types/forms';
 
 @Directive({
   selector: 'fudis-error-message',
@@ -44,7 +47,11 @@ export class ErrorMessageDirective implements OnInit, OnChanges, OnDestroy {
     @Host() @Optional() private _textInput: TextInputComponent,
     @Host() @Optional() private _textArea: TextAreaComponent,
     @Host() @Optional() private _datePicker: DatepickerComponent,
-    @Host() @Optional() private _LocalizedTextGroup: LocalizedTextGroupComponent,
+    @Host()
+    @Optional()
+    private _LocalizedTextGroup: LocalizedTextGroupComponent<
+      FudisLocalizedTextGroupFormGroup<object>
+    >,
     @Host()
     @Optional()
     private _checkboxGroup: CheckboxGroupComponent<FudisCheckboxGroupFormGroup<object>>,
@@ -118,7 +125,7 @@ export class ErrorMessageDirective implements OnInit, OnChanges, OnDestroy {
    * Possible parent group components to used with Error Message
    */
   private _parentGroup:
-    | LocalizedTextGroupComponent
+    | LocalizedTextGroupComponent<FudisLocalizedTextGroupFormGroup<object>>
     | CheckboxGroupComponent<FudisCheckboxGroupFormGroup<object>>;
 
   /**

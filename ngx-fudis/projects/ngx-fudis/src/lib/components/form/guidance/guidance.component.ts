@@ -109,12 +109,17 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
    */
   protected _lazyLoadedErrors: string[] = [];
 
-  protected _parentFormId = new BehaviorSubject<string | null>(null);
+  protected _parentFormId = signal<string | null>(null);
 
   /**
    * Used prevent checks in HTML DOM before content has been loaded
    */
   protected _afterViewInitDone = signal<boolean>(false);
+
+  /**
+   * To prevent Error Summary reloading after lazy load check
+   */
+  private _reloadGuard = false;
 
   private _injector = inject(Injector);
 
@@ -129,20 +134,24 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   }
 
   ngAfterContentInit(): void {
-    const formParentId = this._errorSummaryService.getFormAncestorId(
-      this._elementRef.nativeElement as HTMLElement,
-    );
-
-    if (formParentId) {
-      this._parentFormId.next(formParentId);
-      this._subscribeToErrors(formParentId);
-    } else {
-      this._parentFormId.next(null);
-    }
+    this._errorSummaryService
+      .getFormAncestorId(this._elementRef.nativeElement as HTMLElement)
+      .then((formParentId) => {
+        if (formParentId) {
+          this._parentFormId.set(formParentId);
+          this._subscribeToErrors(formParentId);
+        } else {
+          this._parentFormId.set(null);
+        }
+      });
   }
 
   ngAfterViewInit(): void {
     this._afterViewInitDone.set(true);
+
+    setTimeout(() => {
+      this._reloadGuard = true;
+    }, 100);
   }
 
   private _subscribeToErrors(formId: string): void {
@@ -182,12 +191,12 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   }
 
   /**
-   * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made. It will only trigger reload once all errors of this Guidance are registered.
+   * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made. It should only trigger reload one time, when all errors of this Guidance are registered.
    */
   protected _reloadErrorSummaryOnLazyLoad(error: FudisErrorSummaryNewError): void {
     if (
-      this._parentFormId.value &&
-      this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId.value]() &&
+      this._parentFormId() &&
+      this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId()!]() &&
       !this._lazyLoadedErrors.includes(error.id)
     ) {
       this._lazyLoadedErrors.push(error.id);
@@ -213,8 +222,8 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
         });
       }
 
-      if (numberOfErrors === this._lazyLoadedErrors.length && !this._afterViewInitDone()) {
-        this._errorSummaryService.reloadFormErrors(this._parentFormId.value, false);
+      if (numberOfErrors === this._lazyLoadedErrors.length && !this._reloadGuard) {
+        this._errorSummaryService.reloadFormErrors(this._parentFormId()!, false);
       }
     }
   }

@@ -18,8 +18,8 @@ import { defaultOptions } from 'projects/ngx-fudis/src/lib/components/form/selec
 
 interface MyLocalizedTextGroup {
   fi: FormControl<string | null>;
-  en: FormControl<string | null>;
   sv: FormControl<string | null>;
+  en: FormControl<string | null>;
 }
 
 type MyCheckboxGroup = {
@@ -158,7 +158,6 @@ export class AppFormExampleComponent {
         }),
       ],
     ),
-
     withLanguages: new FormGroup<MyLocalizedTextGroup>(
       {
         fi: new FormControl<string | null>(null),

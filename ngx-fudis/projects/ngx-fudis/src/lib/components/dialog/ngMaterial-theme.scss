@@ -85,7 +85,7 @@
         line-height: tokens.$body-text-md-line-height;
         letter-spacing: normal;
         /* stylelint-disable-next-line property-disallowed-list */
-        font-size: tokens.$body-text-md-line-height;
+        font-size: tokens.$body-text-md-font-size;
 
         &:focus-visible,
         &:focus {

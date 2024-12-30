@@ -8,6 +8,8 @@ import {
   OnInit,
   inject,
   Injector,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -50,6 +52,8 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
    * Id of parent Form component
    */
   @Input({ required: true }) formId: string;
+
+  @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
 
   /**
    * Visible errors
@@ -147,7 +151,21 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
       });
     });
 
-    this._visibleErrorList.set(newErrorList.sort(this._sortErrorOrder));
+    const sortedList = newErrorList.sort(this._sortErrorOrder);
+
+    this._visibleErrorList.set(sortedList);
+
+    if (sortedList.length > 0) {
+      const newOutputList: { id: string; message: string }[] = [];
+
+      sortedList.forEach((item) => {
+        newOutputList.push({ id: item.id, message: item.message });
+      });
+
+      this.handleUpdatedErrorList.emit(newOutputList);
+    } else {
+      this.handleUpdatedErrorList.emit(null);
+    }
 
     if (this._errorSummaryService.focusToFormOnReload === this.formId) {
       this._focusToErrorSummary();

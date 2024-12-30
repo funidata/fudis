@@ -10,7 +10,7 @@ import {
   ElementRef,
   inject,
   Injector,
-  AfterViewInit,
+  AfterContentInit,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
@@ -24,7 +24,7 @@ import { ExpandableContentDirective } from './expandable-content.directive';
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit {
+export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -115,7 +115,24 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
   private _parentFormId: string | null;
 
   private _getParentForm(): void {
-    this._parentFormId = this._errorSummaryService.getFormAncestorId(this._element.nativeElement);
+    this._errorSummaryService
+      .getFormAncestorId(this._element.nativeElement)
+      .then((parentFormId) => {
+        if (parentFormId) {
+          this._parentFormId = parentFormId;
+          if (this.errorSummaryBreadcrumb) {
+            this._addToErrorSummary(this.title);
+          }
+
+          toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
+            injector: this._injector,
+          }).subscribe((value) => {
+            if (this.closed && this.openOnErrorSummaryReload && value) {
+              this._setClosedStatus(false);
+            }
+          });
+        }
+      });
   }
 
   /**
@@ -127,22 +144,8 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterViewInit 
 
   private _injector = inject(Injector);
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this._getParentForm();
-
-    if (this._parentFormId) {
-      if (this.errorSummaryBreadcrumb) {
-        this._addToErrorSummary(this.title);
-      }
-
-      toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
-        injector: this._injector,
-      }).subscribe((value) => {
-        if (this.closed && this.openOnErrorSummaryReload && value) {
-          this._setClosedStatus(false);
-        }
-      });
-    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<ExpandableComponent>): void {

@@ -51,14 +51,20 @@ export type FudisSelectOption<T extends object> = T & {
   [key: string]: unknown;
 };
 
-export type FudisLocalizedTextGroupOptions =
+export type FudisLocalizedTextGroupFormGroupOptions =
   | { controlName: 'fi'; label: 'FI' }
   | { controlName: 'sv'; label: 'SV' }
   | { controlName: 'en'; label: 'EN' }
   | { controlName: string; label: string };
 
-export type FudisLocalizedTextGroup<T extends object> = T & {
-  [lang: string | 'fi' | 'sv' | 'en']: FormControl<string | null>;
+export interface FudisLocalizedTextGroupDefaultFormGroup {
+  fi: FormControl<string | null>;
+  en: FormControl<string | null>;
+  sv: FormControl<string | null>;
+}
+
+export type FudisLocalizedTextGroupFormGroup<T> = {
+  [K in keyof T]: FormControl<string | null>;
 };
 
 export type FudisCheckboxGroupFormGroup<T> = {

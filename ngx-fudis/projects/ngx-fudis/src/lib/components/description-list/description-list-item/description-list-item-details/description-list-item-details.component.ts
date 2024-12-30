@@ -74,7 +74,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   /**
    * Aria-label for classified/hidden Details content
    */
-  @Input() ariaLabel: string | undefined;
+  @Input() ariaLabel: string | null | undefined;
 
   /**
    * Id generated with Id Service

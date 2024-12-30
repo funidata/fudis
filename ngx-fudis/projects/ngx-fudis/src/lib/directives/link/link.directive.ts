@@ -38,9 +38,9 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   }
 
   /**
-   * Link size. By default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'md' (14px) or 'lg' (16px).
+   * Link default size is 'md' (14px) which is the default size of <fudis-body-text> component. If link is used inside of Body Text it will always inherit its parent's font-size.
    */
-  @Input() size: 'inherit' | 'md' | 'lg' = 'inherit';
+  @Input() size: 'inherit' | 'md' | 'lg' = 'md';
 
   /**
    * Set browser focus to link on the first load.
@@ -65,7 +65,7 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   /**
    * Helper class for link size
    */
-  private _sizeCssClass: string = `fudis-link__size__inherit`;
+  private _sizeCssClass: string = `fudis-link__size__md`;
 
   /**
    * Container ref to attach Icon Component
