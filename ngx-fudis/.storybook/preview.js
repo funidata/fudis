@@ -106,6 +106,7 @@ const preview = {
             "Link",
             "Notification",
             "Section",
+            "Spinner",
             "Typography",
           ],
           "Directives",
