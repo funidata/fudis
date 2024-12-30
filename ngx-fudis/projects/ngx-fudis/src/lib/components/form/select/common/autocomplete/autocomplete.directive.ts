@@ -85,6 +85,7 @@ export class SelectAutocompleteBaseDirective {
     this._focused = true;
 
     if ((event.relatedTarget as HTMLElement)?.getAttribute('id') === `${this.id}-clear-button`) {
+      console.log('hello');
       this._focusFromClearButton = true;
     }
   }
@@ -104,6 +105,8 @@ export class SelectAutocompleteBaseDirective {
   @HostListener('keyup', ['$event'])
   private _handleKeyUp(event: KeyboardEvent) {
     if (this.enableAutocomplete) {
+      console.log('jees', event.key);
+
       if (this._keyDown) {
         const newValue = (event.target as HTMLInputElement).value;
 
