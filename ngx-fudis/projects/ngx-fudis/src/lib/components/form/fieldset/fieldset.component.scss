@@ -93,7 +93,6 @@
   }
 
   &__help-text {
-    flex: 1;
     margin-bottom: spacing.$spacing-xs;
   }
 
@@ -144,20 +143,3 @@
     }
   }
 }
-
-//  /* stylelint-disable-next-line selector-class-pattern */
-//  &:has(.fudis-fieldset-actions__align--start) {
-//   flex-wrap: wrap;
-// }
-
-// /* stylelint-disable-next-line selector-class-pattern */
-// &:has(.fudis-fieldset-actions__align--end) {
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-// }
-
-// /* stylelint-disable-next-line selector-class-pattern */
-// &:has(.fudis-fieldset-actions__align--below) {
-//   flex-direction: column;
-//   align-items: flex-start;
-// }

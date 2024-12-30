@@ -39,7 +39,7 @@ export class LabelComponent
   }
 
   /**
-   * Template reference for dropdown item button element
+   * Template reference Label HTML element
    */
   @ViewChild('labelElementRef') private _labelElementRef: ElementRef<HTMLLabelElement>;
 
