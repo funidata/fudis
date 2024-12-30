@@ -1,0 +1,45 @@
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+
+/* stylelint-disable-next-line unit-disallowed-list */
+$lg-size: calc(3rem / var(--fudis-rem-multiplier)); // 48px
+/* stylelint-disable-next-line unit-disallowed-list */
+$max-width: calc(16rem / var(--fudis-rem-multiplier)); // 256px
+
+.fudis-spinner {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: $max-width;
+
+  &__variant {
+    &__sm {
+      margin-top: spacing.$spacing-xxs;
+      margin-bottom: spacing.$spacing-xs;
+      width: spacing.$spacing-md;
+      height: spacing.$spacing-md;
+    }
+
+    &__lg {
+      margin-bottom: spacing.$spacing-sm;
+      width: $lg-size;
+      height: $lg-size;
+    }
+  }
+
+  &__svg {
+    animation: spin 1.5s linear infinite;
+    fill: colors.$color-primary;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

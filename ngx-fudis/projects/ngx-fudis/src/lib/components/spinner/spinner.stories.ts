@@ -17,11 +17,21 @@ export default {
       page: docs,
     },
   },
+  argTypes: {
+    variant: {
+      options: ['sm', 'lg'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
-const html = String.raw;
-
-export const Example: StoryFn = (args) => ({
-  ...args,
-  template: html` <fudis-spinner />`,
+const Template: StoryFn = (args) => ({
+  props: args,
 });
+
+export const Example = Template.bind({});
+
+Example.args = {
+  variant: 'sm',
+  label: 'Loading text. Erase me to revert to default text.',
+};

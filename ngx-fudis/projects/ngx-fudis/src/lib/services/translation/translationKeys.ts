@@ -75,6 +75,7 @@ export interface FudisTranslationConfig {
     FUNIDATA_LOGO: string;
   };
   ATTENTION: string;
+  LOADING: string;
   LANGUAGE_BADGE: {
     ARIA_LABEL: FudisTranslationLanguageBadgeAriaLabel;
   };
@@ -160,6 +161,7 @@ export const en: FudisTranslationConfig = {
     FUNIDATA_LOGO: 'Funidata homepage',
   },
   ATTENTION: 'Attention',
+  LOADING: 'Loading',
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Change translation to Finnish',
@@ -241,6 +243,7 @@ export const fi: FudisTranslationConfig = {
     FUNIDATA_LOGO: 'Funidatan kotisivut',
   },
   ATTENTION: 'Huomio',
+  LOADING: 'Ladataan',
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Vaihda käännöskieleksi Suomi',
@@ -322,6 +325,7 @@ export const sv: FudisTranslationConfig = {
     EXTERNAL_LINK: '(öppnas i en ny flik)',
   },
   ATTENTION: 'Observera',
+  LOADING: 'Laddar',
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Ändra översättning till Finska',
