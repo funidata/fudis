@@ -16,7 +16,6 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FudisComponentChanges } from '../../types/miscellaneous';
-import { FudisDOMUtilitiesService } from '../../services/dom/dom-utilities.service';
 
 @Directive({
   selector: '[fudisDialogTitle]',
@@ -50,13 +49,11 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 
 @Directive({
   selector: 'fudis-dialog-content',
-  providers: [FudisDOMUtilitiesService],
 })
 export class DialogContentDirective extends MatDialogContent implements OnChanges {
   constructor(
     private _elRef: ElementRef,
     private _renderer: Renderer2,
-    private _DOMUtilitiesService: FudisDOMUtilitiesService,
   ) {
     super();
   }

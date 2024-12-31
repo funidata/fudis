@@ -1,4 +1,5 @@
 <fudis-fieldset
+  class="fudis-radio-button-group"
   [id]="id"
   [labelSize]="'sm'"
   [label]="label"
@@ -10,6 +11,7 @@
   [tooltipPosition]="tooltipPosition"
   [tooltipToggle]="tooltipToggle"
   [initialFocus]="initialFocus"
+  [syncLegendHeight]="true"
 >
   <fudis-fieldset-content>
     <ng-content select="fudis-radio-button" />
@@ -17,7 +19,7 @@
       *ngIf="control && !disableGuidance"
       [inputLabel]="label"
       [helpText]="helpText"
-      [for]="id"
+      [for]="id + '-legend'"
       [control]="control"
     >
       <ng-content select="fudis-error-message" />

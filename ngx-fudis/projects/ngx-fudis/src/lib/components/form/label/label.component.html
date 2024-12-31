@@ -1,22 +1,21 @@
-<label class="fudis-label" [attr.for]="for" [id]="id">
+<label #labelElementRef class="fudis-label" [attr.for]="for" [id]="id">
   <span class="fudis-label__content"
     ><span class="fudis-label__content__text">{{ text }}</span
     ><span *ngIf="required" class="fudis-label__content__space">{{ " " }}</span
     ><span class="fudis-label__content__required" *ngIf="required"
-      >({{ _requiredText | async }})</span
+      >({{ _translationService.getTranslations()().REQUIRED }})</span
     ></span
   >
-  <ng-container *ngIf="tooltip">
-    <fudis-button
-      class="fudis-label__content__button"
-      [size]="'icon-only'"
-      [variant]="'tertiary'"
-      [icon]="'info-circle'"
-      [labelHidden]="true"
-      [label]="tooltip"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
-    ></fudis-button>
-  </ng-container>
+  <fudis-button
+    *ngIf="tooltip"
+    class="fudis-label__content__button"
+    [size]="'icon-only'"
+    [variant]="'tertiary'"
+    [icon]="'info-circle'"
+    [labelHidden]="true"
+    [label]="tooltip"
+    [tooltip]="tooltip"
+    [tooltipPosition]="tooltipPosition"
+    [tooltipToggle]="tooltipToggle"
+  />
 </label>
