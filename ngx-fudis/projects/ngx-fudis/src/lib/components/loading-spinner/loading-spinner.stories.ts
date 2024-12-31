@@ -22,6 +22,10 @@ export default {
       options: ['sm', 'lg'],
       control: { type: 'radio' },
     },
+    enabled: {
+      options: [true, false],
+      control: { type: 'radio' },
+    },
   },
 } as Meta;
 
@@ -36,6 +40,7 @@ export const Example = Template.bind({});
 Example.args = {
   variant: 'sm',
   label: '',
+  enabled: true,
 };
 
 const loadingText = 'Longer spinner loading text to see that alignment and linebreaks work.';
