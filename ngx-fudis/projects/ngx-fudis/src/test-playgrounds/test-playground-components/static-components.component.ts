@@ -5,7 +5,6 @@ import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 import { LoadingSpinnerComponent } from '../../lib/components/loading-spinner/loading-spinner.component';
 import { fudisIconArray } from '../../lib/types/icons';
 
-
 @Component({
   standalone: true,
   imports: [CommonModule, NgxFudisModule, LoadingSpinnerComponent],
@@ -15,7 +14,7 @@ import { fudisIconArray } from '../../lib/types/icons';
 export class StorybookExampleStaticComponentsComponent {
   loadingText = 'Longer spinner loading text to see that alignment and linebreaks work.';
 
-  iconArray = fudisIconArray
+  iconArray = fudisIconArray;
 
   breadcrumbLinks = [
     { label: 'My Legos', url: '/my-legos' },
