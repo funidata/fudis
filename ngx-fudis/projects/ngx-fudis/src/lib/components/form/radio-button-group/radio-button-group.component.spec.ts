@@ -100,7 +100,7 @@ describe('Basic inputs of Radio Button Group', () => {
 
   it('should have correct label as legend', () => {
     const legendLabel = fixture.nativeElement.querySelector(
-      '.fudis-fieldset__legend__title__text',
+      '.fudis-fieldset__legend__main__text',
     ) as HTMLElement;
 
     expect(legendLabel.textContent).toContain('Radio Button Group test label');
@@ -116,7 +116,7 @@ describe('Basic inputs of Radio Button Group', () => {
 
   it('should display required text', () => {
     const requiredText = fixture.nativeElement.querySelector(
-      '.fudis-fieldset__legend__title__text__required',
+      '.fudis-fieldset__legend__main__required',
     ) as HTMLElement;
 
     expect(requiredText.textContent).toContain('(Required)');

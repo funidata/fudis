@@ -127,7 +127,7 @@ describe('SectionComponent', () => {
 
   describe('HTML elements and properties', () => {
     it('should have id related props', () => {
-      expect(getSectionElement().getAttribute('aria-describedby')).toEqual(
+      expect(getSectionElement().getAttribute('aria-labelledby')).toEqual(
         'fudis-section-1-heading',
       );
       expect(getSectionElement().getAttribute('id')).toEqual('fudis-section-1');
