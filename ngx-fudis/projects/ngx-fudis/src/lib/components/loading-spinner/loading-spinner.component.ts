@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { NgxFudisModule } from '../../ngx-fudis.module';
-import { FudisComponentChanges } from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-loading-spinner',
@@ -11,7 +10,7 @@ import { FudisComponentChanges } from '../../types/miscellaneous';
   templateUrl: './loading-spinner.component.html',
   styleUrl: './loading-spinner.component.scss',
 })
-export class LoadingSpinnerComponent implements OnChanges {
+export class LoadingSpinnerComponent {
   constructor(protected _translationService: FudisTranslationService) {}
 
   /**
@@ -32,19 +31,5 @@ export class LoadingSpinnerComponent implements OnChanges {
   /**
    * For variant 'lg' and better screen reader experience, instead of using *ngIf for displaying component, set this property true when loading is in progress and false, when loading is not in progress. This will trigger screen reader `statusMessage` properties accordingly.
    */
-  @Input() enabled: boolean = true;
-
-  ngOnChanges(changes: FudisComponentChanges<LoadingSpinnerComponent>): void {
-    const enabled = changes.enabled;
-
-    if (enabled && enabled.currentValue !== enabled.previousValue) {
-      if (enabled.currentValue) {
-        // From false to true
-        console.log('From false to true');
-      } else {
-        // From true to false
-        console.log('From true to false');
-      }
-    }
-  }
+  @Input() visible: boolean = true;
 }

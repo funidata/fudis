@@ -23,9 +23,10 @@ export class StorybookExampleLoadingSpinnerComponent {
     setTimeout(() => {
       this.loadingState.set(false);
 
+      // Enough delay, so that screen reader has time to announce from Loading Spinner that page load is finished
       setTimeout(() => {
         this.headingRef.headingRef.nativeElement.focus();
-      }, 100);
+      }, 500);
     }, 3000);
   }
 }

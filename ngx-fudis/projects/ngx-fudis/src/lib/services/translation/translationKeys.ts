@@ -76,7 +76,7 @@ export interface FudisTranslationConfig {
   };
   ATTENTION: string;
   LOADING_SPINNER: {
-    LOADING: string;
+    VISIBLE_LABEL: string;
     PAGE_LOADING: string;
     PAGE_LOAD_FINISHED: string;
   };
@@ -166,7 +166,7 @@ export const en: FudisTranslationConfig = {
   },
   ATTENTION: 'Attention',
   LOADING_SPINNER: {
-    LOADING: 'Loading',
+    VISIBLE_LABEL: 'Loading',
     PAGE_LOADING: 'Page is loading',
     PAGE_LOAD_FINISHED: 'Page load finished',
   },
@@ -252,7 +252,7 @@ export const fi: FudisTranslationConfig = {
   },
   ATTENTION: 'Huomio',
   LOADING_SPINNER: {
-    LOADING: 'Ladataan',
+    VISIBLE_LABEL: 'Ladataan',
     PAGE_LOADING: 'Sivua ladataan',
     PAGE_LOAD_FINISHED: 'Sivu on ladattu',
   },
@@ -338,7 +338,7 @@ export const sv: FudisTranslationConfig = {
   },
   ATTENTION: 'Observera',
   LOADING_SPINNER: {
-    LOADING: 'Laddar',
+    VISIBLE_LABEL: 'Laddar',
     PAGE_LOADING: 'Sidan laddas',
     PAGE_LOAD_FINISHED: 'Sidan har laddats klart',
   },

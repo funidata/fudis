@@ -7,11 +7,15 @@ $lg-size: calc(3rem / var(--fudis-rem-multiplier)); // 48px
 $max-width: calc(16rem / var(--fudis-rem-multiplier)); // 256px
 
 .fudis-loading-spinner {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   max-width: $max-width;
+
+  &__ui-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   &__variant {
     &__sm {
