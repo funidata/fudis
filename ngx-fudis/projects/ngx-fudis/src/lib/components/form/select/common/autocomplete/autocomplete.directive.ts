@@ -16,11 +16,6 @@ export class SelectAutocompleteBaseDirective {
   constructor(protected _elementRef: ElementRef<HTMLInputElement>) {}
 
   /**
-   * Currently selected visible label
-   */
-  @Input() selectedLabel: string | null;
-
-  /**
    * To enable autocomplete
    */
   @Input() enableAutocomplete: boolean = false;
@@ -43,22 +38,32 @@ export class SelectAutocompleteBaseDirective {
   /**
    * Output event for updating parent's filter text signal
    */
-  @Output() triggerFilterTextUpdate = new EventEmitter<string>();
+  @Output() handleFilterTextUpdate = new EventEmitter<string>();
 
   /**
    * Output event for opening parent dropdown
    */
-  @Output() triggerDropdownOpen = new EventEmitter<void>();
+  @Output() handleDropdownOpen = new EventEmitter<void>();
 
   /**
    * Output event for closing parent dropdown
    */
-  @Output() triggerDropdownClose = new EventEmitter<void>();
+  @Output() handleDropdownClose = new EventEmitter<void>();
 
   /**
    * Output event for closing parent dropdown
    */
-  @Output() triggerClearButtonReset = new EventEmitter<void>();
+  @Output() handleClearButtonReset = new EventEmitter<void>();
+
+  /**
+   * Output event for input focus
+   */
+  @Output() handleFocus = new EventEmitter<{ event: FocusEvent; focusFromClearButton: boolean }>();
+
+  /**
+   * Output event for input blur
+   */
+  @Output() handleBlur = new EventEmitter<FocusEvent>();
 
   /**
    * Keyboard button pressed
@@ -87,11 +92,13 @@ export class SelectAutocompleteBaseDirective {
     if ((event.relatedTarget as HTMLElement)?.getAttribute('id') === `${this.id}-clear-button`) {
       this._focusFromClearButton = true;
     }
+    this.handleFocus.emit({ event: event, focusFromClearButton: this._focusFromClearButton });
   }
 
   @HostListener('blur', ['$event'])
-  private _handleBlur() {
+  private _handleBlur(event: FocusEvent) {
     this._focused = false;
+    this.handleBlur.emit(event);
   }
 
   @HostListener('keydown', ['$event'])
@@ -111,10 +118,10 @@ export class SelectAutocompleteBaseDirective {
           this._inputText = newValue;
 
           if (newValue.length >= this.typeThreshold) {
-            this.triggerFilterTextUpdate.emit(newValue);
-            this.triggerDropdownOpen.emit();
+            this.handleFilterTextUpdate.emit(newValue);
+            this.handleDropdownOpen.emit();
           } else {
-            this.triggerDropdownClose.emit();
+            this.handleDropdownClose.emit();
           }
         }
       } else if (
@@ -123,11 +130,11 @@ export class SelectAutocompleteBaseDirective {
         (event.key === 'Enter' || event.key === ' ')
       ) {
         this._elementRef.nativeElement.value = '';
-        this.triggerFilterTextUpdate.emit('');
+        this.handleFilterTextUpdate.emit('');
         if (this.typeThreshold === 0) {
-          this.triggerDropdownOpen.emit();
+          this.handleDropdownOpen.emit();
         } else {
-          this.triggerDropdownClose.emit();
+          this.handleDropdownClose.emit();
         }
       }
       this._focusFromClearButton = false;
@@ -146,6 +153,12 @@ export class SelectAutocompleteDirective
   constructor(_elementRef: ElementRef<HTMLInputElement>) {
     super(_elementRef);
   }
+
+  /**
+   * Currently selected visible label
+   */
+  @Input() selectedLabel: string | null;
+
   ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteDirective>): void {
     if (this.enableAutocomplete) {
       const selectedLabel = changes.selectedLabel?.currentValue;
@@ -154,7 +167,7 @@ export class SelectAutocompleteDirective
       if (clearButtonClick && clearButtonClick !== changes.clearButtonClick?.previousValue) {
         // Clear Button click
         this._elementRef.nativeElement.value = '';
-        this.triggerClearButtonReset.emit();
+        this.handleClearButtonReset.emit();
       } else if (
         // Selected label is proper value
         selectedLabel &&
@@ -187,7 +200,7 @@ export class MultiselectAutocompleteDirective
       ) {
         // Clear Button click
         this._elementRef.nativeElement.value = '';
-        this.triggerClearButtonReset.emit();
+        this.handleClearButtonReset.emit();
       }
     }
   }
