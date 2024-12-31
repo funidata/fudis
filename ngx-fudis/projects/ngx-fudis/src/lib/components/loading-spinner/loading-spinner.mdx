@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
 import { LoadingSpinnerComponent } from "./loading-spinner.component.ts";
 import * as LoadingSpinnerStories from "./loading-spinner.stories.ts";
 
@@ -13,10 +13,6 @@ Components consists of:
 - Icon SVG
 - Customisable Label text, where Fudis will provide default 'Loading' text for English, Finnish and Swedish.
 
-## Example
-
-<Canvas of={LoadingSpinnerStories.Example} />
-
 ## Usage Guidelines
 
 Application should determine case by case, if use of Loading Spinner would make sense.
@@ -25,13 +21,14 @@ Application should determine case by case, if use of Loading Spinner would make 
 
 - Loading Spinner should be displayed, if loading takes longer than 2 seconds.
 - When loading is in progress, user focus should not be automatically moved to loadable section during loading.
+- Component has default 'Loading' text provided, which can be overriden through `label` input property.
 
-### Section or part of the page
+### Section or other Smaller Part of the Page
 
 - Use smaller `variant` of `sm`.
 - If user focus is in the Loading Spinner, focus should moved to the first meaningful element after loading is finished.
 
-### Full page
+### Full Page
 
 - **IMPORTANT**: Instead of using `<fudis-loading-spinner *ngIf="appLoading"/>` use `<fudis-loading-spinner [visible]="appLoading"/>`. This will help screen reader users, as component exists in DOM although it is not visually visible.
 - Use larger `variant` of `lg`
@@ -41,7 +38,23 @@ Application should determine case by case, if use of Loading Spinner would make 
 
 <Canvas of={LoadingSpinnerStories.LoadingSpinnerDemo} />
 
-## Design
+## Example
+
+<Canvas of={LoadingSpinnerStories.Example} />
+
+### Code Example
+
+<Source
+  code={`
+<fudis-loading-spinner
+  [variant]="'lg'" // default 'sm'
+  [label]="'Page loading is in progress'" // Overrides default value
+  [statusRole]="'Screen reader can see this message'" // Overrides default value
+  [visible]="true" // Set this false, when loading is finished
+/>`}
+/>
+
+## Design Guidelines
 
 ### Common
 
