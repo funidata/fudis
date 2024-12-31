@@ -4,13 +4,13 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { NgxFudisModule } from '../../ngx-fudis.module';
 
 @Component({
-  selector: 'fudis-spinner',
+  selector: 'fudis-loading-spinner',
   standalone: true,
   imports: [CommonModule, NgxFudisModule],
-  templateUrl: './spinner.component.html',
-  styleUrl: './spinner.component.scss',
+  templateUrl: './loading-spinner.component.html',
+  styleUrl: './loading-spinner.component.scss',
 })
-export class SpinnerComponent {
+export class LoadingSpinnerComponent {
   constructor(protected _translationService: FudisTranslationService) {}
 
   /**
@@ -22,6 +22,4 @@ export class SpinnerComponent {
    * Size variant
    */
   @Input() variant: 'sm' | 'lg' = 'sm';
-
-  tempVariantArray = ['sm', 'lg'];
 }

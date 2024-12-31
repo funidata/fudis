@@ -1,0 +1,35 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { LoadingSpinnerComponent } from "./loading-spinner.component.ts";
+import * as LoadingSpinnerStories from "./loading-spinner.stories.ts";
+
+<Meta title="Components/Loading Spinner" />
+
+# Loading Spinner Component
+
+Loading Spinner Component is used to communicate about delayed application loading state of the full page, or part of the viewed page.
+
+Components consists of:
+
+- Icon SVG
+- Customisable Label text, where Fudis will provide default 'Loading' text for English, Finnish and Swedish.
+
+## Usage Guidelines
+
+Application should determine case by case, if use of Loading Spinner would make sense.
+
+### General Guidelines
+
+- Loading Spinner is displayed, if loading takes longer than 2 seconds
+
+### Section or part of the page
+
+- Use smaller `variant` of `sm`
+- If user focus is in the Loading Spinner, when loading is finished, focus should moved to the first element meaningful element.
+
+### Full page
+
+- Use larger `variant` of `lg`
+
+<Canvas of={LoadingSpinnerStories.Example} />
+
+<ArgTypes of={LoadingSpinnerComponent} />

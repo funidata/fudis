@@ -87,7 +87,7 @@ export { SelectComponent } from './lib/components/form/select/select/select.comp
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
 export { SelectOptionsDirective } from './lib/components/form/select/common/select-options-directive/select-options.directive';
-export { SpinnerComponent } from './lib/components/spinner/spinner.component';
+export { LoadingSpinnerComponent } from './lib/components/loading-spinner/loading-spinner.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
