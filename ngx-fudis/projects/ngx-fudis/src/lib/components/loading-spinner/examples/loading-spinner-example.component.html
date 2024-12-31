@@ -8,7 +8,7 @@
     <fudis-loading-spinner [variant]="'lg'" [enabled]="loading"
   /></div>
   <fudis-grid [alignItemsX]="'center'" *ngIf="!loading">
-    <fudis-heading [align]="'center'" [level]="1"
+    <fudis-heading #headingRef tabindex="-1" [align]="'center'" [level]="1"
       >Welcome to Loading Spinner Demo Page</fudis-heading
     >
     <fudis-body-text>Click Button below to set loading state for 3 seconds</fudis-body-text>
