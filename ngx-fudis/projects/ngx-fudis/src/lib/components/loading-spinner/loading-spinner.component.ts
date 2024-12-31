@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { NgxFudisModule } from '../../ngx-fudis.module';
 
@@ -9,6 +9,7 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
   imports: [CommonModule, NgxFudisModule],
   templateUrl: './loading-spinner.component.html',
   styleUrl: './loading-spinner.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadingSpinnerComponent {
   constructor(protected _translationService: FudisTranslationService) {}

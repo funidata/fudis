@@ -1,16 +1,17 @@
 @let translations = _translationService.getTranslations()();
+
 <div class="fudis-loading-spinner">
   <p
     *ngIf="variant === 'lg'"
     class="fudis-loading-spinner__status fudis-visually-hidden"
     role="status"
+    >{{
+      statusMessage ||
+        (visible
+          ? translations.LOADING_SPINNER.PAGE_LOADING
+          : translations.LOADING_SPINNER.PAGE_LOAD_FINISHED)
+    }}</p
   >
-    {{
-      statusMessage || visible
-        ? translations.LOADING_SPINNER.PAGE_LOADING
-        : translations.LOADING_SPINNER.PAGE_LOAD_FINISHED
-    }}
-  </p>
   <div *ngIf="visible" class="fudis-loading-spinner__ui-content">
     <svg
       class="fudis-loading-spinner__svg fudis-loading-spinner__variant__{{ variant }}"
