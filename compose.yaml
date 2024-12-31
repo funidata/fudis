@@ -12,6 +12,14 @@ services:
       - ./ngx-fudis/projects/ngx-fudis/src:/usr/src/app/projects/ngx-fudis/src
       - ./ngx-fudis/projects/documentation:/usr/src/app/projects/documentation
 
+  fudis-lib:
+    image: fudis
+    container_name: fudis-lib
+    command: npm run build:watch
+    volumes:
+      - ./ngx-fudis/projects/ngx-fudis/src:/usr/src/app/projects/ngx-fudis/src
+      - ./ngx-fudis/dist/ngx-fudis:/usr/src/app/dist/ngx-fudis
+
   fudis-sandbox:
     image: fudis
     container_name: fudis-sandbox
@@ -21,6 +29,7 @@ services:
       - 4200:4200
     volumes:
       - ./ngx-fudis/projects/dev/src:/usr/src/app/projects/dev/src
+      - ./ngx-fudis/dist/ngx-fudis:/usr/src/app/dist/ngx-fudis
 
   fudis-vr:
     build: ./test
@@ -35,3 +44,6 @@ services:
       - ./test/visual-regression:/usr/src/app/visual-regression
       - ./test/playwright-report:/usr/src/app/playwright-report
       - ./test/test-results:/usr/src/app/test-results
+
+volumes:
+  lib:

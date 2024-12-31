@@ -254,6 +254,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
     ),
   ).toBeInViewport();
   await page.keyboard.press("Space");
+  await page.getByTestId("fudis-heading-1").hover();
   await expect(
     page.getByTestId("fudis-multiselect-5-option-f6777bbd-b234-4a0b-8232-f70367986688"),
   ).toHaveClass(

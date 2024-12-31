@@ -161,7 +161,7 @@ describe('CheckboxGroupComponent', () => {
 
     it('should have correct label as legend', () => {
       const legendLabel = fixture.nativeElement.querySelector(
-        '.fudis-fieldset__legend__title__text',
+        '.fudis-fieldset__legend__main__text',
       ) as HTMLElement;
 
       expect(legendLabel.textContent).toContain('Checkbox Group test title');
@@ -177,7 +177,7 @@ describe('CheckboxGroupComponent', () => {
 
     it('should display required text', () => {
       const requiredText = fixture.nativeElement.querySelector(
-        '.fudis-fieldset__legend__title__text__required',
+        '.fudis-fieldset__legend__main__required',
       ) as HTMLElement;
 
       expect(requiredText.textContent).toContain('(Required)');
