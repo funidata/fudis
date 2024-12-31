@@ -113,7 +113,6 @@ describe('SelectAutocompleteBaseDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SelectAutocompleteBaseDirective, MockAutocompleteBaseComponent],
-      providers: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockAutocompleteBaseComponent);
@@ -260,7 +259,7 @@ describe('SelectAutocompleteBaseDirective', () => {
       expect(inputElement.value).toBeFalsy();
     });
 
-    it('should NOT empty the value and emit open, when Enter is pressed and if focused from clear button', () => {
+    it('should NOT empty the value or emit open, when Enter is pressed and if NOT focused from clear button', () => {
       const value = 'Rebel Scum';
       inputElement.value = value;
 
@@ -285,7 +284,6 @@ describe('SelectAutocompleteDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SelectAutocompleteDirective, MockSelectAutocompleteComponent],
-      providers: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockSelectAutocompleteComponent);

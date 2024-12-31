@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   MultiselectControlValueAccessorDirective,
   SelectControlValueAccessorDirective,
@@ -19,8 +19,6 @@ import { joinInputValues } from '../utilities/selectUtilities';
   />`,
 })
 class MockSelectCVAComponent {
-  @ViewChild('fudisSelectControlValueAccessor') inputRef: SelectControlValueAccessorDirective;
-
   filterText: null | string;
   control = new FormControl<FudisSelectOption<object> | null>(null);
 }
@@ -78,12 +76,10 @@ describe('SelectAutocompleteDirective', () => {
 });
 
 @Component({
-  selector: 'fudis-mock-select-cva-base',
+  selector: 'fudis-mock-multiselect-cva-base',
   template: `<input fudisMultiselectControlValueAccessor [formControl]="control" />`,
 })
 class MockMultiselectCVAComponent {
-  @ViewChild('fudisSelectControlValueAccessor') inputRef: MultiselectControlValueAccessorDirective;
-
   control = new FormControl<FudisSelectOption<object>[] | null>(null);
 }
 
