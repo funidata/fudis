@@ -1,0 +1,17 @@
+@let loading = loadingState();
+<div class="fudis-loading-spinner-demo fudis-p-md">
+  <div
+    class="fudis-loading-spinner-demo__backdrop"
+    [class.fudis-loading-spinner-demo__backdrop--visible]="loading"
+    [class.fudis-loading-spinner-demo__backdrop--hidden]="!loading"
+  >
+    <fudis-loading-spinner [variant]="'lg'" [enabled]="loading"
+  /></div>
+  <fudis-grid [alignItemsX]="'center'" *ngIf="!loading">
+    <fudis-heading [align]="'center'" [level]="1"
+      >Welcome to Loading Spinner Demo Page</fudis-heading
+    >
+    <fudis-body-text>Click Button below to set loading state for 3 seconds</fudis-body-text>
+    <fudis-button [label]="'Set loading on!'" (handleClick)="toggleLoading()" />
+  </fudis-grid>
+</div>

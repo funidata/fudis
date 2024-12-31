@@ -1,13 +1,14 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import docs from './loading-spinner.mdx';
 import { LoadingSpinnerComponent } from './loading-spinner.component';
+import { StorybookExampleLoadingSpinnerComponent } from './examples/loading-spinner-example.component';
 
 export default {
   title: 'Components/Loading Spinner',
   component: LoadingSpinnerComponent,
   decorators: [
     moduleMetadata({
-      imports: [LoadingSpinnerComponent],
+      imports: [LoadingSpinnerComponent, StorybookExampleLoadingSpinnerComponent],
       providers: [],
       declarations: [],
     }),
@@ -26,6 +27,9 @@ export default {
       options: [true, false],
       control: { type: 'radio' },
     },
+    statusMessage: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
@@ -41,17 +45,20 @@ Example.args = {
   variant: 'sm',
   label: '',
   enabled: true,
+  statusMessage: '',
 };
 
 const loadingText = 'Longer spinner loading text to see that alignment and linebreaks work.';
 
-const AllVariantsTemplate: StoryFn = () => ({
-  props: { label: loadingText },
-  template: html` <fudis-grid [width]="'xs'">
+const AllVariantsTemplate: StoryFn = (args) => ({
+  props: { ...args, label: loadingText },
+  template: html` <fudis-grid [width]="'xs'" [alignItemsX]="'center'">
+    <fudis-heading [level]="2" [variant]="'md'">Small variants</fudis-heading>
     <fudis-loading-spinner [variant]="'sm'" />
     <fudis-hr />
     <fudis-loading-spinner [variant]="'sm'" [label]="label" />
     <fudis-hr />
+    <fudis-heading [level]="2" [variant]="'md'">Large variants</fudis-heading>
     <fudis-loading-spinner [variant]="'lg'" />
     <fudis-hr />
     <fudis-loading-spinner [variant]="'lg'" [label]="label" />
@@ -59,3 +66,22 @@ const AllVariantsTemplate: StoryFn = () => ({
 });
 
 export const AllVariants = AllVariantsTemplate.bind({});
+
+AllVariants.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
+
+const LoadingSpinnerDemoTemplate: StoryFn = (args) => ({
+  props: args,
+  template: `<example-loading-spinner-demo/>`,
+});
+
+export const LoadingSpinnerDemo = LoadingSpinnerDemoTemplate.bind({});
+
+LoadingSpinnerDemo.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
