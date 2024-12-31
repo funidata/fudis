@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  effect,
   ElementRef,
   Input,
   OnChanges,
@@ -13,14 +12,15 @@ import {
 } from '@angular/core';
 
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisComponentChanges, FudisLabelData } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { BehaviorSubject } from 'rxjs';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { FudisLabelHeightService } from '../../../services/dom/label-height.service';
+import { throttle } from '../../../utilities/resizeThrottle';
 
 @Component({
   selector: 'fudis-fieldset',
@@ -33,22 +33,20 @@ export class FieldSetComponent
   implements AfterViewInit, OnInit, OnDestroy, OnChanges, AfterContentInit
 {
   constructor(
+    protected _translationService: FudisTranslationService,
     private _element: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
-    private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
+    private _labelHeightService: FudisLabelHeightService,
   ) {
     super();
-    effect(() => {
-      this._requiredText.next(_translationService.getTranslations()().REQUIRED);
-    });
   }
 
   /**
    * Legend elementRef to trigger initialFocus
    */
-  @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef;
+  @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef<HTMLDivElement>;
 
   /**
    * Label for the form component.
@@ -114,6 +112,11 @@ export class FieldSetComponent
   @Input() helpText: string | undefined;
 
   /**
+   * Used to vertically align Legend label with similar Label elements with varying heights. By default `false`, but set `true` in Checkbox Group and Radio Button Group
+   */
+  @Input() syncLegendHeight = false;
+
+  /**
    * CSS classes for the native fieldset HTMLelement
    */
   protected _classes: string[];
@@ -131,11 +134,9 @@ export class FieldSetComponent
   private _parentFormId: string | null;
 
   /**
-   * Fudis translation key for required text
+   * To observe size changes of this Label and trigger height calculation as needed
    */
-  protected _requiredText = new BehaviorSubject<string>(
-    this._translationService.getTranslations()().REQUIRED,
-  );
+  private _resizeObserver: ResizeObserver;
 
   ngOnInit(): void {
     this._setFieldsetId();
@@ -158,6 +159,25 @@ export class FieldSetComponent
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this._fieldsetLegend?.nativeElement?.focus();
     }
+
+    if (this.syncLegendHeight) {
+      const id = `${this.id}-legend`;
+
+      const data: FudisLabelData = {
+        id: id,
+        element: this._fieldsetLegend.nativeElement,
+      };
+
+      this._labelHeightService.registerNewLabel(data);
+
+      this._resizeObserver = new ResizeObserver(
+        throttle(() => {
+          this._labelHeightService.triggerLabelHeightSet(id);
+        }, 25),
+      );
+
+      this._resizeObserver.observe(this._fieldsetLegend.nativeElement);
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
@@ -175,6 +195,10 @@ export class FieldSetComponent
 
   ngOnDestroy(): void {
     this._removeFromErrorSummary();
+
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+    }
   }
 
   protected _handleLegendBlur(): void {
