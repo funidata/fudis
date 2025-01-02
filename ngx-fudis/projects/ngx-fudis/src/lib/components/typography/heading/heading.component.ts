@@ -32,7 +32,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Rendered HTML Heading element, e.g. <h1> or <h3> tag.
+   * Rendered HTML Heading element, e.g.`<h1>` or `<h3>` tag.
    */
   @ViewChild('headingRef') public headingRef: ElementRef<HTMLHeadingElement>;
 

@@ -8,10 +8,10 @@ import * as LoadingSpinnerStories from "./loading-spinner.stories.ts";
 
 Loading Spinner Component is used to communicate about delayed application loading state of the full page, or part of the viewed page.
 
-Components consists of:
+Component consists of:
 
 - Icon SVG
-- Customisable Label text, where Fudis will provide default 'Loading' text for English, Finnish and Swedish.
+- Customisable label text, where Fudis will provide default '_Loading_' text for English, Finnish and Swedish.
 
 ## Usage Guidelines
 
@@ -21,19 +21,20 @@ Application should determine case by case, if use of Loading Spinner would make 
 
 - Loading Spinner should be displayed, if loading takes longer than 2 seconds.
 - When loading is in progress, user focus should not be automatically moved to loadable section during loading.
-- Component has default 'Loading' text provided, which can be overriden through `label` input property.
+- Component has default '_Loading_' text provided, which can be overriden through `label` input property.
 
-### Section or other Smaller Part of the Page
+### Section or Other Smaller Part of the Page
 
 - Use smaller `variant` of `sm`.
-- If user focus is in the Loading Spinner, focus should moved to the first meaningful element after loading is finished.
+- Necessary margins can be added through Fudis [CSS helper classes](/docs/foundations-spacing-css-helper-classes--documentation)
+- If user focus is in the Loading Spinner, focus should be moved to the first meaningful element after loading is finished.
 
 ### Full Page
 
 - **IMPORTANT**: Instead of using `<fudis-loading-spinner *ngIf="appLoading"/>` use `<fudis-loading-spinner [visible]="appLoading"/>`. This will help screen reader users, as component exists in DOM although it is not visually visible.
 - Use larger `variant` of `lg`
-- Component communicates loading status for screen reader. With variant `lg` component automatically communicates status messages 'Page is loading' and 'Page load finished'. This can be overriden by app using `statusMessage` property.
-- After loading is finished, user focus should be as initially after page load, e. g. in the `h1` title element. If focus is manually changed by the Application, there should be small delay before focus, so that screen reader has time to announce 'Page load finished' status.
+- Component communicates its loading status for screen reader. With variant `lg` component automatically communicates status messages '_Page is loading_' and '_Page load finished_'. This can be overriden by app using `statusMessage` property.
+- After loading is finished, user focus should be where initially intended after page load, e. g. in the `h1` title element. If focus is manually changed by the Application, there should be small delay before focus, so that screen reader has time to announce '_Page load finished_' status.
 - For code example, check repository's `StorybookExampleLoadingSpinnerComponent` example, seen below as well. Located `./ngx-fudis/projects/ngx-fudis/src/lib/components/loading-spinner/examples`.
 
 <Canvas of={LoadingSpinnerStories.LoadingSpinnerDemo} />

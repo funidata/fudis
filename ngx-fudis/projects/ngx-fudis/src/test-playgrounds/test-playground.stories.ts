@@ -9,7 +9,6 @@ export default {
   component: TextInputComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
       imports: [
         StorybookExampleStaticComponentsComponent,
         StorybookExampleBasicFormComponentsComponent,

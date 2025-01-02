@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 import { LoadingSpinnerComponent } from '../../lib/components/loading-spinner/loading-spinner.component';

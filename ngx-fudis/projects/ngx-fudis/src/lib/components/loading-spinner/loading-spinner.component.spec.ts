@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoadingSpinnerComponent } from './loading-spinner.component';
-
 import { getElement } from '../../utilities/tests/utilities';
 import { NgxFudisModule } from '../../ngx-fudis.module';
 
@@ -11,7 +9,6 @@ describe('LoadingSpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [],
       imports: [LoadingSpinnerComponent, NgxFudisModule],
     }).compileComponents();
 
@@ -104,6 +101,7 @@ describe('LoadingSpinnerComponent', () => {
       });
     });
   });
+
   describe('screen reader elements', () => {
     beforeEach(() => {
       fixture.componentRef.setInput('variant', 'lg');

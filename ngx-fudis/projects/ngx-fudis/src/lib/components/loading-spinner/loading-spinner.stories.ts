@@ -9,8 +9,6 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [LoadingSpinnerComponent, StorybookExampleLoadingSpinnerComponent],
-      providers: [],
-      declarations: [],
     }),
   ],
   parameters: {
@@ -21,10 +19,6 @@ export default {
   argTypes: {
     variant: {
       options: ['sm', 'lg'],
-      control: { type: 'radio' },
-    },
-    enabled: {
-      options: [true, false],
       control: { type: 'radio' },
     },
     statusMessage: {
@@ -44,7 +38,6 @@ export const Example = Template.bind({});
 Example.args = {
   variant: 'sm',
   label: '',
-  enabled: true,
   statusMessage: '',
 };
 
