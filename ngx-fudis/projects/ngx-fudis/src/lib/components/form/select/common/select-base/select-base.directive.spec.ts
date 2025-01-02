@@ -12,7 +12,6 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisInputSize, FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
-import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { getAllElements, getElement } from '../../../../../utilities/tests/utilities';
@@ -22,6 +21,8 @@ import { groupedTestData } from '../mock_data';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
+import { MultiselectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
+import { MultiselectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
 
 @Component({
   selector: 'fudis-mock-select',
@@ -85,6 +86,8 @@ describe('SelectBaseDirective', () => {
       declarations: [
         SelectComponent,
         SelectBaseDirective,
+        MultiselectControlValueAccessorDirective,
+        MultiselectAutocompleteDirective,
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectOptionComponent,
@@ -98,7 +101,6 @@ describe('SelectBaseDirective', () => {
         MultiselectComponent,
         MultiselectOptionComponent,
         MultiselectChipListComponent,
-        SelectAutocompleteComponent,
         BodyTextComponent,
         ButtonComponent,
       ],
@@ -206,7 +208,7 @@ describe('SelectBaseDirective', () => {
 
       fixture.detectChanges();
 
-      component.multiSelectAuto.autocompleteRef.updateInputValue('hello');
+      component.multiSelectAuto.setAutocompleteFilterText('hello');
 
       fixture.detectChanges();
 
@@ -220,7 +222,7 @@ describe('SelectBaseDirective', () => {
       autocompleteInput.focus();
       fixture.detectChanges();
 
-      component.multiSelectAuto.autocompleteRef.updateInputValue('salmon');
+      component.multiSelectAuto.setAutocompleteFilterText('salmon');
 
       fixture.detectChanges();
 
@@ -235,7 +237,7 @@ describe('SelectBaseDirective', () => {
 
       fixture.detectChanges();
 
-      component.multiSelectAuto.autocompleteRef.updateInputValue('salmo');
+      component.multiSelectAuto.setAutocompleteFilterText('salmo');
 
       fixture.detectChanges();
 
@@ -280,9 +282,9 @@ describe('SelectBaseDirective', () => {
       expect(dropdownElementAttribute).toEqual('This is autocomplete help text');
     });
 
-    it('should show sorted selected options as form input value for both input sharing the same control', () => {
-      patchControlValue();
+    it('should show sorted selected options as form input value for both input sharing the same control', async () => {
       setMultiSelectDropdownOpen();
+      patchControlValue();
 
       fixture.detectChanges();
 
@@ -304,15 +306,11 @@ describe('SelectBaseDirective', () => {
         'Falcon, prairie',
       ]);
 
-      const inputTexts = getAllElements(fixture, '.fudis-select__input__label');
+      await fixture.whenStable().then(() => {
+        const inputText = getElement(fixture, '.fudis-select__input') as HTMLInputElement;
 
-      const sortedInputValues: (string | null)[] = [];
-
-      inputTexts.forEach((item) => {
-        sortedInputValues.push(item.textContent);
+        expect(inputText.getAttribute('value')).toEqual("Golden jackal, 'Falcon, prairie'");
       });
-
-      expect(sortedInputValues).toEqual(["Golden jackal, 'Falcon, prairie'"]);
     });
 
     it('should open and close dropdown', () => {
@@ -358,7 +356,7 @@ describe('SelectBaseDirective', () => {
     it('should emit filterTextUpdate', () => {
       jest.spyOn(component.multiSelectAuto.filterTextUpdate, 'emit');
 
-      component.multiSelectAuto.autocompleteRef.updateInputValue('hello');
+      component.multiSelectAuto.setAutocompleteFilterText('hello');
 
       expect(component.multiSelectAuto.filterTextUpdate.emit).toHaveBeenCalledWith('hello');
     });
@@ -395,17 +393,6 @@ describe('SelectBaseDirective', () => {
       const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
 
       expect(openDropdownEl).toBeNull();
-    });
-  });
-
-  describe('Aucomplete Default values', () => {
-    it('should have placeholder text', () => {
-      const selectElement = getElement(fixture, 'fudis-select-autocomplete');
-
-      const value = selectElement
-        .querySelector('.fudis-select-autocomplete')
-        ?.getAttribute('placeholder');
-      expect(value).toContain('Test placeholder for autocomplete');
     });
   });
 });

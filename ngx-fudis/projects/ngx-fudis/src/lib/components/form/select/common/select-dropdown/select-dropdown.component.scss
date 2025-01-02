@@ -38,4 +38,8 @@
   &--open {
     display: flex;
   }
+
+  &--hidden {
+    display: none;
+  }
 }

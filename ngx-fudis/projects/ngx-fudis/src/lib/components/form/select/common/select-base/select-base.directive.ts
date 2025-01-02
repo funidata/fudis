@@ -15,13 +15,12 @@ import {
   AfterViewInit,
 } from '@angular/core';
 
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
+
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { SelectComponent } from '../../select/select.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
@@ -40,7 +39,6 @@ export class SelectBaseDirective
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
-    private _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
   ) {
@@ -52,11 +50,6 @@ export class SelectBaseDirective
       }
     });
   }
-
-  /**
-   * Reference to autocomplete element, used to focus to it
-   */
-  @ViewChild('autocompleteRef') public autocompleteRef: SelectAutocompleteComponent;
 
   /**
    * Reference to child DropdownComponent listing all options
@@ -139,16 +132,6 @@ export class SelectBaseDirective
   public focusSelector: string = ".fudis-select-option__focusable:not([aria-disabled='true'])";
 
   /**
-   * Selected option or options label for non-autocomplete dropdowns
-   */
-  protected _dropdownSelectionLabelText = signal<string | null>(null);
-
-  /**
-   * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
-   */
-  protected _controlValueChangedInternally: boolean = false;
-
-  /**
    * For setting dropdown open / closed
    */
   protected _dropdownOpen = signal<boolean>(false);
@@ -228,21 +211,28 @@ export class SelectBaseDirective
    */
   private _keyDown: string | null = null;
 
+  /**
+   * Used to pass info, that Clear Button was clicked
+   */
+  protected _clearButtonClickTrigger = signal<boolean>(false);
+
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._applyControlUpdateCheck();
       this._updateValueAndValidityTrigger.next();
 
-      if (changes.control?.currentValue?.value) {
-        this._updateSelectionFromControlValue();
+      this._updateComponentStateFromControlValue();
+
+      if (this.control.value) {
+        this._optionsLoadedOnce = true;
       }
 
-      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-        if (!this._controlValueChangedInternally) {
-          this._updateSelectionFromControlValue();
+      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+        if (value) {
+          this._optionsLoadedOnce = true;
         }
 
-        this._controlValueChangedInternally = false;
+        this._updateComponentStateFromControlValue();
       });
     }
 
@@ -251,7 +241,7 @@ export class SelectBaseDirective
       changes.variant?.currentValue === 'dropdown' &&
       !changes.variant.firstChange
     ) {
-      this._filterTextUpdate('');
+      this.setAutocompleteFilterText('');
     }
 
     if (
@@ -368,8 +358,8 @@ export class SelectBaseDirective
    */
   protected _clearButtonClick(): void {
     if (!this.control.disabled && !this.disabled) {
+      this._clearButtonClickTrigger.set(true);
       this._setControlNull();
-
       this._focusToSelectInput();
     }
   }
@@ -378,11 +368,11 @@ export class SelectBaseDirective
    * Set control value to null
    */
   protected _setControlNull(): void {
-    this._controlValueChangedInternally = true;
-    this.control.patchValue(null);
-    this.selectionUpdate.emit(null);
-
-    this.updateInputValueTexts('');
+    if (this.control.value) {
+      this.control.patchValue(null);
+      this.selectionUpdate.emit(null);
+      this.setAutocompleteFilterText('');
+    }
   }
 
   /**
@@ -437,7 +427,11 @@ export class SelectBaseDirective
     this._preventDropdownReopen = true;
 
     if (this._inputFocused || this._mouseUpOnInput) {
-      this._toggleDropdown();
+      if (this.variant === 'dropdown') {
+        this._toggleDropdown();
+      } else {
+        this.openDropdown();
+      }
     }
     this._focusToSelectInput();
   }
@@ -465,9 +459,20 @@ export class SelectBaseDirective
     if (key === this._keyDown) {
       switch (key) {
         case ' ':
+          if (this.variant === 'dropdown') {
+            event.preventDefault();
+            this._toggleDropdown();
+          }
+          break;
         case 'Enter':
           event.preventDefault();
-          this._toggleDropdown();
+
+          if (this._visibleOptions.length === 1) {
+            this._focusToFirstOption(true);
+          } else {
+            this._toggleDropdown();
+          }
+
           break;
         case 'ArrowDown':
           event.preventDefault();
@@ -561,27 +566,26 @@ export class SelectBaseDirective
   }
 
   /**
-   * Update input filter
+   * Update input filter text
+   * @param text string to set as filter text
+   * @param nullCheck true by default, check if control should be set as null
    */
-  protected _filterTextUpdate(text: string): void {
+  public setAutocompleteFilterText(text: string, nullCheck = true): void {
     if (this._autocompleteFilterText() !== text) {
       this._autocompleteFilterText.set(text);
       this.filterTextUpdate.emit(text);
     }
+    if (nullCheck) {
+      this._checkIfAutocompleteValueNull(text);
+    }
   }
 
   /**
-   * Manually set typed text in input fields
+   * Checks if currently typed filter text is not same as control label value
+   * @param text filter text value emitted from autocomplete
    */
-  public updateInputValueTexts(value: string): void {
-    if (this.variant !== 'dropdown' && this.autocompleteRef) {
-      this.autocompleteRef.preventSpaceKeypress = true;
-
-      this.autocompleteRef.updateInputValue(value);
-    } else {
-      this._dropdownSelectionLabelText.set(value);
-    }
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected _checkIfAutocompleteValueNull(text: string): void {}
 
   /**
    * To focus on first option when dropdown opens
@@ -631,7 +635,6 @@ export class SelectBaseDirective
   protected _dropdownFocus(event: FocusEvent): void {
     const focusFromInputOrClearButton =
       event.relatedTarget === this._inputRef?.nativeElement ||
-      event.relatedTarget === this.autocompleteRef?.inputRef.nativeElement ||
       this._selectIconsRef.nativeElement.contains(event.relatedTarget as HTMLElement);
 
     if (focusFromInputOrClearButton) {
@@ -645,17 +648,13 @@ export class SelectBaseDirective
    * Focus to input field
    */
   protected _focusToSelectInput() {
-    if (this.variant !== 'dropdown') {
-      this.autocompleteRef.inputRef.nativeElement.focus();
-    } else {
-      this._inputRef.nativeElement.focus();
-    }
+    this._inputRef?.nativeElement.focus();
   }
 
   /**
    * Function declaration overridden and implemented by Select and Multiselect
    */
-  protected _updateSelectionFromControlValue(): void {}
+  protected _updateComponentStateFromControlValue(): void {}
 
   /**
    * When pressing keyboard Esc, focus to Select input and close dropdown
@@ -695,9 +694,7 @@ export class SelectBaseDirective
 
     this._mouseUpOnInput =
       targetElement &&
-      (!!this._inputRef?.nativeElement.contains(targetElement) ||
-        !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement) ||
-        this._clickFromIcon);
+      (!!this._inputRef?.nativeElement.contains(targetElement) || this._clickFromIcon);
 
     if (this._clickFromIcon) {
       if (!this.control.disabled) {

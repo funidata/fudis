@@ -1,4 +1,6 @@
 @let dropdownOpen = _dropdownOpen();
+@let autocompleteFilterText = _autocompleteFilterText();
+
 <div class="fudis-select fudis-input-size__{{ size }}" [id]="id + '-main-wrapper'">
   <fudis-label
     [text]="label"
@@ -13,69 +15,55 @@
   </fudis-label>
   <div #selectRef>
     <div class="fudis-select__input-wrapper fudis-input-size__{{ size }}">
-      <div
-        *ngIf="variant === 'dropdown' || control.disabled || disabled"
+      <input
         #inputRef
-        class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
-        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
+        fudisSelectControlValueAccessor
+        fudisSelectAutocomplete
         [id]="id"
-        role="combobox"
-        [attr.aria-controls]="id + '-dropdown'"
-        aria-haspopup="listbox"
-        [attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
+        [attr.id]="id"
+        [formControl]="control"
+        [class.fudis-select__input__dropdown]="variant === 'dropdown'"
+        [class.fudis-select-autocomplete]="variant !== 'dropdown'"
+        class="fudis-form-input fudis-select__input"
+        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
         (click)="!control.disabled && !disabled && _clickInput()"
-        (focus)="_selectInputFocus($event)"
+        (focus)="!control.disabled && !disabled && _selectInputFocus($event)"
         (blur)="_inputBlur($event)"
-        (keydown)="_inputKeyDown($event)"
-        (keyup)="_inputKeyUp($event)"
-        [attr.tabindex]="!control.disabled && !disabled ? 0 : null"
-        [attr.aria-autocomplete]="'none'"
+        (keydown)="!control.disabled && !disabled && _inputKeyDown($event)"
+        (keyup)="!control.disabled && !disabled && _inputKeyUp($event)"
+        [enableAutocomplete]="variant !== 'dropdown'"
+        [selectedLabel]="control.value ? control.value.label : null"
+        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
+        [filterText]="autocompleteFilterText"
+        [clearButtonClick]="_clearButtonClickTrigger()"
+        (handleDropdownOpen)="openDropdown()"
+        (handleDropdownClose)="closeDropdown()"
+        (handleClearButtonReset)="_clearButtonClickTrigger.set(false)"
+        (handleFilterTextUpdate)="setAutocompleteFilterText($event)"
+        type="text"
+        autocomplete="off"
+        aria-haspopup="listbox"
+        role="combobox"
+        [attr.readonly]="variant === 'dropdown' ? true : null"
+        [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
+        [attr.placeholder]="placeholder"
+        [attr.aria-controls]="id + '-dropdown'"
+        [attr.aria-activedescendant]="control.value ? id + '-option-' + control.value.value : null"
+        [attr.tabindex]="!control.disabled && !disabled ? null : -1"
         [attr.aria-expanded]="dropdownOpen"
         [attr.aria-disabled]="control.disabled || disabled || null"
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.aria-invalid]="control.invalid || null"
-      >
-        <span *ngIf="!_dropdownSelectionLabelText()" class="fudis-select__input__placeholder">{{
-          placeholder
-        }}</span>
-        <span
-          *ngIf="_dropdownSelectionLabelText()"
-          [id]="id + '-input-label'"
-          class="fudis-select__input__label"
-          >{{ _dropdownSelectionLabelText() }}</span
-        >
-      </div>
-      <fudis-select-autocomplete
-        *ngIf="variant !== 'dropdown' && control.enabled && !disabled"
-        #autocompleteRef
-        [id]="id"
-        [placeholder]="placeholder"
-        [disabled]="control.disabled || disabled"
-        [dropdownOpen]="dropdownOpen"
-        [required]="_required | async"
-        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
-        [selectedLabel]="_dropdownSelectionLabelText()"
-        [visibleOptions]="_visibleOptions"
-        [invalidState]="control.touched && control.invalid"
-        [selectionClearButton]="selectionClearButton"
-        (triggerInputClick)="!control.disabled && !disabled && _clickInput()"
-        (triggerFocusToFirstOption)="_focusToFirstOption()"
-        (triggerFilterTextUpdate)="_filterTextUpdate($event); _checkIfAutocompleteValueNull($event)"
-        (triggerSelectOnlyVisibleOption)="_focusToFirstOption(true)"
-        (triggerDropdownOpen)="openDropdown()"
-        (triggerDropdownClose)="closeDropdown()"
-        (triggerDropdownToggle)="_toggleDropdown()"
-        (triggerFocus)="_selectInputFocus($event)"
-        (triggerBlur)="_inputBlur($event)"
       />
       <div #selectIconsRef class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
-          [filterText]="!!_autocompleteFilterText()"
+          [filterText]="!!autocompleteFilterText"
           [parentControl]="control"
           [parentVariant]="variant"
           [dropdownOpen]="dropdownOpen"
+          [parentId]="id"
           (handleClearButtonClick)="_clearButtonClick()"
           (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
@@ -93,7 +81,7 @@
       [results]="_visibleOptions.length"
       [autocompleteHelpText]="autocompleteHelpText"
       [autocompleteNoResultsText]="autocompleteNoResultsText"
-      [filterText]="_autocompleteFilterText()"
+      [filterText]="autocompleteFilterText"
       [size]="size"
       [parentId]="id"
       [size]="size"

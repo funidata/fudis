@@ -7,7 +7,7 @@
     "build": "ng build",
     "build:watch": "ng build ngx-fudis --watch",
     "build:ngx-fudis": "ng build ngx-fudis -c production",
-    "test": "jest --coverage false",
+    "test": "jest --coverage true",
     "test:watch": "jest --coverage false --watch",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "ng run storybook:start",

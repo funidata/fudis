@@ -19,21 +19,15 @@ export class MultiselectOptionComponent
   implements OnDestroy, OnChanges
 {
   constructor(
-    private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentMultiselect: MultiselectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
+    _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_document, _parentGroup, _translationService);
+    super(_document, _parentGroup, _translationService, _idService);
 
     this._parent = this._parentMultiselect;
-
-    this._id = this._idService.getNewSelectOptionId(
-      'multiselect',
-      this._parent.id,
-      this._parentGroup?.id,
-    );
 
     _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
       this._isOptionChecked(newValue);
@@ -53,6 +47,13 @@ export class MultiselectOptionComponent
 
   ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent>) {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
+      this._id = this._idService.getNewSelectOptionId(
+        'multiselect',
+        this._parent.id,
+        this.data.value,
+        this._parentGroup?.id,
+      );
+
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
 
       const parentControlValue = this._parentMultiselect.control.value;
@@ -61,6 +62,10 @@ export class MultiselectOptionComponent
         this._isOptionChecked(parentControlValue);
       } else {
         this.checked = false;
+      }
+
+      if (changes.data?.currentValue) {
+        this._onLangChangeCheckIfLabelRequiresUpdate(changes.data?.currentValue);
       }
     }
   }
@@ -103,14 +108,33 @@ export class MultiselectOptionComponent
     if (this.data) {
       const result = options?.find((option) => option.value === this.data.value);
 
-      if (this.checked !== !!result) {
-        this._parentMultiselect.handleCheckedSort(
-          { ...this.data, fudisGeneratedHtmlId: this._id },
-          result ? 'add' : 'remove',
-        );
-      }
-
       this.checked = !!result;
+    }
+  }
+
+  /**
+   * When app language is changed, it will not change Form Control's value, which is intended, but visible label should be updated
+   */
+  protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+    const controlValue = this._parent?.control.value;
+
+    if (this._appLanguage !== this._translationService.getLanguage()) {
+      this._appLanguage = this._translationService.getLanguage();
+
+      const foundMatch = controlValue?.find((selectedOption) => {
+        return selectedOption.value === newData.value;
+      });
+
+      if (foundMatch) {
+        this._parent.selectedOptionsFromLangChange.push(newData);
+
+        if (
+          this._parent.selectedOptionsFromLangChange.length === this._parent.control.value?.length
+        ) {
+          this._parent._multiselectCVA.writeValue(this._parent.selectedOptionsFromLangChange);
+          this._parent.selectedOptionsFromLangChange = [];
+        }
+      }
     }
   }
 }

@@ -1,4 +1,7 @@
 @let dropdownOpen = _dropdownOpen();
+@let sortedSelectedOptions = _sortedSelectedOptions();
+@let autocompleteFilterText = _autocompleteFilterText();
+
 <div class="fudis-select fudis-input-size__{{ size }}" [id]="id + '-main-wrapper'">
   <fudis-label
     [text]="label"
@@ -13,69 +16,52 @@
   </fudis-label>
   <div #selectRef>
     <div class="fudis-select__input-wrapper">
-      <div
-        *ngIf="variant === 'dropdown'"
+      <input
         #inputRef
-        class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
-        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
+        fudisMultiselectControlValueAccessor
+        fudisMultiselectAutocomplete
         [id]="id"
-        role="combobox"
-        [attr.aria-controls]="id + '-dropdown'"
-        aria-haspopup="listbox"
-        (click)="_clickInput()"
-        (focus)="_selectInputFocus($event)"
+        [formControl]="control"
+        class="fudis-form-input fudis-select__input"
+        [class.fudis-select__input__dropdown]="variant === 'dropdown'"
+        [class.fudis-select-autocomplete]="variant !== 'dropdown'"
+        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
+        (click)="!control.disabled && !disabled && _clickInput()"
+        (focus)="!control.disabled && !disabled && _selectInputFocus($event)"
         (blur)="_inputBlur($event)"
-        (keydown)="_inputKeyDown($event)"
-        (keyup)="_inputKeyUp($event)"
-        [attr.tabindex]="!control.disabled && !disabled ? 0 : null"
-        [attr.aria-autocomplete]="'none'"
+        (keydown)="!control.disabled && !disabled && _inputKeyDown($event)"
+        (keyup)="!control.disabled && !disabled && _inputKeyUp($event)"
+        [enableAutocomplete]="variant !== 'dropdown'"
+        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
+        [clearButtonClick]="_clearButtonClickTrigger()"
+        (handleSortedSelectedOptions)="_updateSortedSelectedOptions($event)"
+        (handleClearButtonReset)="_clearButtonClickTrigger.set(false)"
+        (handleDropdownOpen)="openDropdown()"
+        (handleDropdownClose)="closeDropdown()"
+        (handleFilterTextUpdate)="setAutocompleteFilterText($event)"
+        type="text"
+        role="combobox"
+        aria-haspopup="listbox"
+        [attr.id]="id"
+        [attr.readonly]="variant === 'dropdown' ? true : null"
+        [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
+        [attr.placeholder]="placeholder"
+        [attr.aria-controls]="id + '-dropdown'"
+        [attr.tabindex]="!control.disabled && !disabled ? null : -1"
         [attr.aria-expanded]="dropdownOpen"
         [attr.aria-disabled]="control.disabled || disabled"
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.aria-invalid]="control.invalid || null"
-      >
-        <span *ngIf="!_dropdownSelectionLabelText()" class="fudis-select__input__placeholder">{{
-          placeholder
-        }}</span>
-        <span
-          *ngIf="_dropdownSelectionLabelText()"
-          [id]="id + '-input-label'"
-          class="fudis-select__input__label"
-          >{{ _dropdownSelectionLabelText() }}</span
-        >
-      </div>
-      <fudis-select-autocomplete
-        *ngIf="variant !== 'dropdown'"
-        #autocompleteRef
-        [id]="id"
-        [placeholder]="placeholder"
-        [disabled]="control.disabled || disabled"
-        [dropdownOpen]="dropdownOpen"
-        [required]="_required | async"
-        [invalidState]="control.touched && control.invalid"
-        [multiselect]="true"
-        [selectedLabel]="_dropdownSelectionLabelText()"
-        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
-        [visibleOptions]="_visibleOptions"
-        [selectionClearButton]="selectionClearButton"
-        (triggerInputClick)="_clickInput()"
-        (triggerFocusToFirstOption)="_focusToFirstOption()"
-        (triggerFilterTextUpdate)="_filterTextUpdate($event)"
-        (triggerSelectOnlyVisibleOption)="_focusToFirstOption(true)"
-        (triggerDropdownOpen)="openDropdown()"
-        (triggerDropdownClose)="closeDropdown()"
-        (triggerDropdownToggle)="_toggleDropdown()"
-        (triggerFocus)="_selectInputFocus($event)"
-        (triggerBlur)="_inputBlur($event)"
       />
       <div class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
           *ngIf="size !== 'xs'"
-          [filterText]="!!_autocompleteFilterText()"
+          [filterText]="!!autocompleteFilterText"
           [parentControl]="control"
           [parentVariant]="variant"
+          [parentId]="id"
           [dropdownOpen]="dropdownOpen"
           (handleClearButtonClick)="_clearButtonClick()"
           (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
@@ -86,14 +72,14 @@
       </div>
     </div>
     <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce"
+      *ngIf="_optionsLoadedOnce && !control.disabled && !disabled"
       #dropdownRef
       [open]="dropdownOpen"
       [selectVariant]="variant"
       [results]="_visibleOptions.length"
       [autocompleteNoResultsText]="autocompleteNoResultsText"
       [autocompleteHelpText]="autocompleteHelpText"
-      [filterText]="_autocompleteFilterText()"
+      [filterText]="autocompleteFilterText"
       [multiselect]="true"
       [parentId]="id"
       [size]="size"
@@ -112,14 +98,13 @@
   >
     <ng-content select="fudis-error-message"
   /></fudis-guidance>
-  <ng-container
-    *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0 && control.enabled && !disabled"
-  >
+
+  <ng-container *ngIf="showSelectionChips && sortedSelectedOptions && control.enabled && !disabled">
     <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
-      _translationRemoveItem | async
+      _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM
     }}</span>
     <fudis-multiselect-chip-list
-      [selectedItems]="_sortedSelectedOptions"
+      [selectedItems]="sortedSelectedOptions"
       [parentId]="id"
       (handleClick)="_handleRemoveChip($event)"
     />

@@ -57,8 +57,6 @@ export interface FudisTranslationConfig {
   };
   SELECT: {
     DISABLED: string;
-    OPEN_DROPDOWN: string;
-    CLOSE_DROPDOWN: string;
     MULTISELECT: {
       REMOVE_ITEM: string;
     };
@@ -144,10 +142,8 @@ export const en: FudisTranslationConfig = {
   },
   SELECT: {
     DISABLED: 'Disabled',
-    OPEN_DROPDOWN: 'Open dropdown',
-    CLOSE_DROPDOWN: 'Close dropdown',
     MULTISELECT: {
-      REMOVE_ITEM: 'Remove search filters',
+      REMOVE_ITEM: 'Remove selections',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Clear selection',
@@ -225,10 +221,8 @@ export const fi: FudisTranslationConfig = {
   },
   SELECT: {
     DISABLED: 'Ei valittavissa',
-    OPEN_DROPDOWN: 'Avaa pudostuvalikko',
-    CLOSE_DROPDOWN: 'Sulje pudotusvalikko',
     MULTISELECT: {
-      REMOVE_ITEM: 'Poista hakukriteerejä',
+      REMOVE_ITEM: 'Poista valintoja',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Tyhjennä valinta',
@@ -303,10 +297,8 @@ export const sv: FudisTranslationConfig = {
   },
   SELECT: {
     DISABLED: 'Inaktiverad',
-    OPEN_DROPDOWN: 'Öppna menyn',
-    CLOSE_DROPDOWN: 'Stäng menyn',
     MULTISELECT: {
-      REMOVE_ITEM: 'Radera filtrering',
+      REMOVE_ITEM: 'Ta bort val',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Radera val',

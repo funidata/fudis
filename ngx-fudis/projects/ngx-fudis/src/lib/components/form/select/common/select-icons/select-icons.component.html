@@ -35,6 +35,7 @@
       (handleDestroy)="handleClearButtonDestroy.emit()"
       (handleFocus)="_handleClearButtonFocus($event)"
       (handleBlur)="_handleClearButtonBlur($event)"
+      [id]="parentId + '-clear-button'"
       [size]="'icon-only'"
       [variant]="'tertiary'"
       [icon]="'close'"

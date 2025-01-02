@@ -1,7 +1,6 @@
 import { Component, Host, Inject, OnChanges, OnDestroy, Optional } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
-import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
@@ -9,6 +8,7 @@ import { SelectOptionBaseDirective } from '../../common/select-option-base/selec
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { FudisSelectOption } from '../../../../../types/forms';
 
 @Component({
   selector: 'fudis-select-option',
@@ -20,21 +20,15 @@ export class SelectOptionComponent
   implements OnChanges, OnDestroy
 {
   constructor(
-    private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentSelect: SelectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
     _translationService: FudisTranslationService,
+    _idService: FudisIdService,
   ) {
-    super(_document, _parentGroup, _translationService);
+    super(_document, _parentGroup, _translationService, _idService);
 
     this._parent = _parentSelect;
-
-    this._id = this._idService.getNewSelectOptionId(
-      'select',
-      this._parent.id,
-      this._parentGroup?.id,
-    );
 
     toObservable(this._parent.getAutocompleteFilterText())
       .pipe(takeUntilDestroyed())
@@ -50,9 +44,18 @@ export class SelectOptionComponent
 
   ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective>): void {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
-      this._updateVisibleLabel();
+      this._id = this._idService.getNewSelectOptionId(
+        'select',
+        this._parent.id,
+        this.data.value,
+        this._parentGroup?.id,
+      );
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
+
+      if (changes.data?.currentValue) {
+        this._onLangChangeCheckIfLabelRequiresUpdate(changes.data.currentValue);
+      }
     }
   }
 
@@ -67,12 +70,7 @@ export class SelectOptionComponent
    */
   protected override _clickOption(event: Event): void {
     if (!this.data.disabled) {
-      const selectedOption: FudisSelectOption<object> = {
-        ...this.data,
-        fudisGeneratedHtmlId: this._id,
-      };
-
-      this._parentSelect.handleSelectionChange(selectedOption);
+      this._parentSelect.handleSelectionChange(this.data);
       this.handleClick.emit(event);
     }
     this._parent.closeDropdown(true, true);
@@ -87,9 +85,19 @@ export class SelectOptionComponent
     }
   }
 
-  private _updateVisibleLabel(): void {
-    if (this._parent.control.value?.value === this.data.value) {
-      this._parent.updateInputValueTexts(this.data.label);
+  /**
+   * When app language is changed, it will not change Form Control's value, which is intended, but visible label should be updated
+   */
+  protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+    const controlValue = this._parent?.control.value;
+
+    if (this._appLanguage !== this._translationService.getLanguage()) {
+      this._appLanguage = this._translationService.getLanguage();
+
+      if (controlValue?.value === newData.value) {
+        this._parent.selectCVA.writeValue(newData);
+        this._parent.setAutocompleteFilterText(newData.label, false);
+      }
     }
   }
 
@@ -99,12 +107,8 @@ export class SelectOptionComponent
    */
   private _isOptionTyped(filterText: string | undefined): void {
     if (!this.data?.disabled && this.data?.label?.toLowerCase() === filterText?.toLowerCase()) {
-      if (this._parent.control.value !== this.data) {
-        const selectedOption: FudisSelectOption<object> = {
-          ...this.data,
-          fudisGeneratedHtmlId: this._id,
-        };
-        this._parentSelect.handleSelectionChange(selectedOption, true);
+      if (this._parent.control.value?.value !== this.data.value) {
+        this._parentSelect.handleSelectionChange(this.data);
       }
     }
   }
