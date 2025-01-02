@@ -35,11 +35,8 @@ export const AllCombinations: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-grid [width]="'sm'" [rowGap]="'md'">
-      <fudis-heading class="fudis-mb-none">All Link Combinations</fudis-heading>
-      <fudis-body-text
-        >This page has all combinations from Link's properties. Used for visual regression
-        tests.</fudis-body-text
-      >
+      <fudis-heading [level]="1" class="fudis-mb-none">All Link Combinations</fudis-heading>
+      <fudis-body-text>This page has all combinations from Link's properties</fudis-body-text>
       <a
         fudisLink
         href=""
