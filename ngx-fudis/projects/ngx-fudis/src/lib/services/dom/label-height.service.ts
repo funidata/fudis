@@ -123,7 +123,7 @@ export class FudisLabelHeightService {
 
       labelGroups[groupKey].data.forEach((option) => {
         const remHeight = `${height / fontSize}rem`;
-        option.element.style.height = "calc(" + remHeight + "/ var(--fudis-rem-multiplier))";
+        option.element.style.height = 'calc(' + remHeight + '/ var(--fudis-rem-multiplier))';
       });
     });
   }
