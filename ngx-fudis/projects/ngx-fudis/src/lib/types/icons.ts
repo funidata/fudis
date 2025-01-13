@@ -57,6 +57,7 @@ export const fudisIconArray = [
   'notebook',
   'notification',
   'numbering',
+  'paperclip',
   'pdf',
   'people',
   'person',
