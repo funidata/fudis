@@ -35,15 +35,15 @@
       @include colorMixins.bg-color('primary-light');
     }
 
-    &:active {
-      @include colorMixins.bg-color('primary');
-      @include colorMixins.text-color('white');
-    }
-
     &:focus-visible,
     &:focus {
       @include colorMixins.bg-color('primary-light');
       @include focus.focus-dropdown;
+    }
+
+    &:active {
+      @include colorMixins.bg-color('primary');
+      @include colorMixins.text-color('white');
     }
   }
 

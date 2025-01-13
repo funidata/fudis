@@ -45,8 +45,6 @@ export type FudisSelectOption<T extends object> = T & {
   subLabel?: string;
   /** Is option disabled in the dropdown */
   disabled?: boolean;
-  /** Fudis generates an id for each SelectOption. This is used in internal logic. */
-  fudisGeneratedHtmlId?: string;
   /** To store additional data */
   [key: string]: unknown;
 };
