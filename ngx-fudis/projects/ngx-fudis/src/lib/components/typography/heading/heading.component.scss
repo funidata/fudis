@@ -1,11 +1,17 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-heading {
   @include colorMixins.text-color('gray-dark');
 
   box-sizing: border-box;
   margin-top: 0;
+
+  // For keyboard users, where Heading tag is focused manually
+  &:focus-visible {
+    @include focus.focus-generic;
+  }
 
   &__variant {
     &__xxs {

@@ -5,6 +5,7 @@ import {
   OnInit,
   OnChanges,
   ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { FudisHeadingLevel, FudisHeadingVariant } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -22,13 +23,18 @@ import { getHeadingVariant } from '../../../utilities/typography/typography-util
 export class HeadingComponent implements OnInit, OnChanges {
   constructor(
     private _idService: FudisIdService,
-    private _headingElement: ElementRef,
+    private _wrapperElement: ElementRef,
   ) {
     /**
      * Set Heading wrapper to be "full width" if used inside Grid
      */
-    (_headingElement.nativeElement as HTMLHeadingElement).style.gridColumn = '1/-1';
+    (_wrapperElement.nativeElement as HTMLHeadingElement).style.gridColumn = '1/-1';
   }
+
+  /**
+   * Rendered HTML Heading element, e.g.`<h1>` or `<h3>` tag.
+   */
+  @ViewChild('headingRef') public headingRef: ElementRef<HTMLHeadingElement>;
 
   /**
    * Semantic level of heading
