@@ -8,7 +8,6 @@ fudis-expandable,
 fudis-fieldset,
 fudis-footer,
 fudis-form,
-fudis-hr,
 fudis-localized-text-group,
 fudis-heading,
 fudis-horizontal-rule,
@@ -17,9 +16,15 @@ fudis-radio-button-group,
 fudis-multiselect,
 fudis-section,
 fudis-select,
+fudis-loading-spinner,
 fudis-text-area,
 fudis-text-input {
   display: block;
+}
+
+fudis-hr {
+  display: block;
+  width: 100%; // To enable full width, when used inside Grid
 }
 
 fudis-button {
