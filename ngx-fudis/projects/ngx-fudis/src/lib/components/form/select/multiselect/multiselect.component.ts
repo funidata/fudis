@@ -1,13 +1,22 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  WritableSignal,
+  signal,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { joinInputValues } from '../common/utilities/selectUtilities';
 import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
+import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -17,18 +26,15 @@ import { BehaviorSubject } from 'rxjs';
 export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(
     @Inject(DOCUMENT) _document: Document,
-    _translationService: FudisTranslationService,
+    protected _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
   ) {
-    super(_document, _translationService, _focusService, _idService);
-
-    effect(() => {
-      this._translationRemoveItem.next(
-        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM,
-      );
-    });
+    super(_document, _focusService, _idService);
   }
+
+  @ViewChild(MultiselectControlValueAccessorDirective)
+  _multiselectCVA: MultiselectControlValueAccessorDirective;
 
   /**
    * Array type control for selected FudisSelectOptions
@@ -47,14 +53,15 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     new EventEmitter<FudisSelectOption<object>[] | null>();
 
   /**
-   * Internal translated text to indicate deleting item chip aria-label
+   * When app language and option labels are changed, selected Multiselect Options push themselves here, which will be then used to update visible UI labels managed by MultiselectCVA
    */
-  protected _translationRemoveItem = new BehaviorSubject<string>('');
+  public selectedOptionsFromLangChange: FudisSelectOption<object>[] = [];
 
   /**
    * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
    */
-  protected _sortedSelectedOptions: FudisSelectOption<object>[] = [];
+  protected _sortedSelectedOptions: WritableSignal<FudisSelectOption<object>[] | null> =
+    signal(null);
 
   /**
    * Set component's id and subscribe to value changes for form control coming from application
@@ -84,8 +91,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
       updatedValue.push(option);
     }
 
-    this._controlValueChangedInternally = true;
-
     if (updatedValue?.length === 0) {
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
@@ -95,70 +100,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     }
   }
 
-  /**
-   * Function called by multiselect option if they are checked
-   * @param checkedOption FudisSelectOption to handle
-   * @param type add or remove option from sorting
-   */
-  public handleCheckedSort(checkedOption: FudisSelectOption<object>, type: 'add' | 'remove'): void {
-    let currentSelectedOptions = [...this._sortedSelectedOptions];
-
-    // Check if checkedOption exists in registeredOptions
-    const foundIndex: number = currentSelectedOptions.findIndex((option) => {
-      return option.value === checkedOption.value;
-    });
-
-    // If found, remove it
-    if (foundIndex !== -1 && type === 'remove') {
-      currentSelectedOptions = currentSelectedOptions.filter((_item, index) => {
-        return foundIndex !== index;
-      });
-      // If not found, add it
-    } else if (foundIndex === -1 && type === 'add') {
-      currentSelectedOptions.push(checkedOption);
-      // If found, replace it
-    } else if (foundIndex !== -1 && type === 'add') {
-      currentSelectedOptions[foundIndex] = checkedOption;
-    }
-
-    // Compare control value with registered options, if it matches, then sort options for the visible input field label text and for the chips
-
-    let valuesInSync = true;
-
-    if (this.control.value && currentSelectedOptions.length === this.control.value.length) {
-      currentSelectedOptions.forEach((registeredOption) => {
-        const matchFound = this.control.value?.find((controlOption) => {
-          return registeredOption.value === controlOption.value;
-        });
-
-        if (!matchFound) {
-          valuesInSync = false;
-        }
-      });
-    }
-
-    if (valuesInSync && this.control.value) {
-      const dropdown = this._dropdownRef?.dropdownElement?.nativeElement;
-
-      this._sortedSelectedOptions = currentSelectedOptions.sort(
-        this._sortSelectedOptions(dropdown),
-      );
-      this._dropdownSelectionLabelText.set(joinInputValues(this._sortedSelectedOptions));
-    } else {
-      this._sortedSelectedOptions = [];
-      this._dropdownSelectionLabelText.set(null);
-    }
-  }
-
-  /**
-   * Update internal states when Application updates control value
-   */
-  protected override _updateSelectionFromControlValue(): void {
-    this._optionsLoadedOnce = true;
-
-    if (!this.control.value || this.control.value.length === 0) {
-      this._dropdownSelectionLabelText.set(null);
-    }
+  protected _updateSortedSelectedOptions(newValue: FudisSelectOption<object>[] | null) {
+    this._sortedSelectedOptions.set(newValue);
   }
 
   /**
@@ -171,40 +114,5 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     if (!this.control.value) {
       this._focusToSelectInput();
     }
-  }
-
-  /**
-   * Sort selected options the same order they appear in the DOM
-   */
-  private _sortSelectedOptions(dropdown: HTMLElement | null) {
-    return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
-      if (a['fudisGeneratedHtmlId'] === b['fudisGeneratedHtmlId']) {
-        return 0;
-      }
-
-      if (a['fudisGeneratedHtmlId'] && b['fudisGeneratedHtmlId'] && dropdown) {
-        const firstEl = dropdown.querySelector(`#${a['fudisGeneratedHtmlId']}`);
-
-        const secondEl = dropdown.querySelector(`#${b['fudisGeneratedHtmlId']}`);
-
-        if (firstEl && secondEl) {
-          const position = firstEl.compareDocumentPosition(secondEl);
-
-          if (
-            position & Node.DOCUMENT_POSITION_FOLLOWING ||
-            position & Node.DOCUMENT_POSITION_CONTAINED_BY
-          ) {
-            return -1;
-          } else if (
-            position & Node.DOCUMENT_POSITION_PRECEDING ||
-            position & Node.DOCUMENT_POSITION_CONTAINS
-          ) {
-            return 1;
-          }
-        }
-      }
-
-      return 0;
-    };
   }
 }

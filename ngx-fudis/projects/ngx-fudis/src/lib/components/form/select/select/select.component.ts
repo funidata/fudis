@@ -6,16 +6,17 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { DOCUMENT } from '@angular/common';
+import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
   selector: 'fudis-select',
@@ -27,11 +28,13 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   constructor(
     @Inject(DOCUMENT) _document: Document,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
   ) {
-    super(_document, _translationService, _focusService, _idService);
+    super(_document, _focusService, _idService);
   }
+
+  @ViewChild(SelectControlValueAccessorDirective)
+  public selectCVA: SelectControlValueAccessorDirective;
 
   /*
    * FormControl for single select
@@ -53,23 +56,13 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    * @param value option to be selected
    * @param disableSignalEmit disable signal update to reduce unneeded state updates
    */
-  public handleSelectionChange(
-    value: FudisSelectOption<object> | null,
-    disableSignalEmit?: boolean,
-  ): void {
+  public handleSelectionChange(value: FudisSelectOption<object> | null): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
     if (!equalValues) {
-      this._controlValueChangedInternally = true;
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
-
-      this.updateInputValueTexts(value?.label || '');
-
-      if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
-        this._filterTextUpdate(value.label);
-      }
     }
   }
 
@@ -77,9 +70,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    * Checks if currently typed filter text is not same as control label value
    * @param text filter text value emitted from autocomplete
    */
-  protected _checkIfAutocompleteValueNull(text: string): void {
+  protected override _checkIfAutocompleteValueNull(text: string): void {
     if (this.control.value && text.toLowerCase() !== this.control.value?.label?.toLowerCase()) {
-      this._controlValueChangedInternally = true;
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
     }
@@ -88,11 +80,14 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   /**
    * If control value is updated from the Application, update component's state accordingly
    */
-  protected override _updateSelectionFromControlValue(): void {
+  protected override _updateComponentStateFromControlValue(): void {
     const currentLabel = this.control.value?.label;
-    this._dropdownSelectionLabelText.set(currentLabel || '');
-    if (this.variant !== 'dropdown' && this.autocompleteRef) {
-      this.autocompleteRef.updateInputValue(currentLabel || '');
+    if (this.variant !== 'dropdown') {
+      if (currentLabel) {
+        this.setAutocompleteFilterText(currentLabel);
+      } else if (!this._inputFocused) {
+        this.setAutocompleteFilterText('');
+      }
     }
   }
 }
