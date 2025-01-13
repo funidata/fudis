@@ -25,7 +25,6 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { BreadcrumbsItemComponent } from './components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
-import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
 import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
@@ -47,6 +46,7 @@ import { GridComponent } from './components/grid/grid/grid.component';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
+import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LocalizedTextGroupComponent } from './components/form/localized-text-group/localized-text-group.component';
 import { LabelComponent } from './components/form/label/label.component';
@@ -59,19 +59,18 @@ import { NotificationComponent } from './components/notification/notification.co
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SectionComponent } from './components/section/section.component';
-import { TextAreaComponent } from './components/form/text-area/text-area.component';
-import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { SelectComponent } from './components/form/select/select/select.component';
 import { SelectOptionComponent } from './components/form/select/select/select-option/select-option.component';
 import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
 import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
 import { SelectIconsComponent } from './components/form/select/common/select-icons/select-icons.component';
+import { TextAreaComponent } from './components/form/text-area/text-area.component';
+import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
 
 /**
  * Fudis Directives
  */
-
 import {
   FooterContentLeftDirective,
   FooterContentRightDirective,

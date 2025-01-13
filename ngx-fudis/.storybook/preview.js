@@ -104,6 +104,7 @@ const preview = {
             "Icon",
             "Language Badge Group",
             "Link",
+            "Loading Spinner",
             "Notification",
             "Section",
             "Typography",

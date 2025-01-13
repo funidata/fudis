@@ -73,6 +73,11 @@ export interface FudisTranslationConfig {
     FUNIDATA_LOGO: string;
   };
   ATTENTION: string;
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: string;
+    PAGE_LOADING: string;
+    PAGE_LOAD_FINISHED: string;
+  };
   LANGUAGE_BADGE: {
     ARIA_LABEL: FudisTranslationLanguageBadgeAriaLabel;
   };
@@ -156,6 +161,11 @@ export const en: FudisTranslationConfig = {
     FUNIDATA_LOGO: 'Funidata homepage',
   },
   ATTENTION: 'Attention',
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: 'Loading',
+    PAGE_LOADING: 'Page is loading',
+    PAGE_LOAD_FINISHED: 'Page load finished',
+  },
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Change translation to Finnish',
@@ -235,6 +245,11 @@ export const fi: FudisTranslationConfig = {
     FUNIDATA_LOGO: 'Funidatan kotisivut',
   },
   ATTENTION: 'Huomio',
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: 'Ladataan',
+    PAGE_LOADING: 'Sivua ladataan',
+    PAGE_LOAD_FINISHED: 'Sivu on ladattu',
+  },
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Vaihda käännöskieleksi Suomi',
@@ -314,6 +329,11 @@ export const sv: FudisTranslationConfig = {
     EXTERNAL_LINK: '(öppnas i en ny flik)',
   },
   ATTENTION: 'Observera',
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: 'Laddar',
+    PAGE_LOADING: 'Sidan laddas',
+    PAGE_LOAD_FINISHED: 'Sidan har laddats klart',
+  },
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
       FI: 'Ändra översättning till Finska',
