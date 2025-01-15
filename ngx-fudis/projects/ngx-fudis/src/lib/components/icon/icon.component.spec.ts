@@ -72,6 +72,7 @@ const arrayForComparing: string[] = [
   'notebook',
   'notification',
   'numbering',
+  'paperclip',
   'pdf',
   'people',
   'person',
