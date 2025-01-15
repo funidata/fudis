@@ -4,10 +4,6 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
  * All of these functions are used to check if component's control has different validators.
  * The return value of these functions is usually assigned for internal variable to sort out wanted logic.
  */
-/**
- * All of these functions are used to check if component's control has different validators.
- * The return value of these functions is usually assigned for internal variable to sort out wanted logic.
- */
 export const FudisValidatorUtilities = {
   required,
   oneRequiredOrMin,

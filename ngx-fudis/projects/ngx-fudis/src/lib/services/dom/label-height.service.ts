@@ -122,7 +122,8 @@ export class FudisLabelHeightService {
       const height = labelGroups[groupKey].highest;
 
       labelGroups[groupKey].data.forEach((option) => {
-        option.element.style.height = `${height / fontSize}rem`;
+        const remHeight = `${height / fontSize}rem`;
+        option.element.style.height = 'calc(' + remHeight + '/ var(--fudis-rem-multiplier))';
       });
     });
   }
