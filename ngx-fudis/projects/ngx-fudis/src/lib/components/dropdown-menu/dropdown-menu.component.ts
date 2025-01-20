@@ -143,8 +143,8 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
     if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
       this._maxWidth = `${elementInViewWidth + elementInViewX}px`;
-    } else if (window?.innerWidth && elementInViewX) {
-      this._maxWidth = `${window.innerWidth - elementInViewX}px`;
+    } else if (window?.visualViewport?.width && elementInViewX) {
+      this._maxWidth = `${window.visualViewport.width - elementInViewX}px`;
     } else {
       this._maxWidth = 'initial';
     }
