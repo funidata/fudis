@@ -3,6 +3,7 @@ import { linkTo } from "@storybook/addon-links";
 import { Source } from "@storybook/blocks";
 import { DropdownMenuComponent } from "./dropdown-menu.component.ts";
 import { DropdownMenuItemComponent } from "./dropdown-menu-item/dropdown-menu-item.component.ts";
+import { DropdownMenuGroupComponent } from "./dropdown-menu-group/dropdown-menu-group.component.ts"
 import * as DropdownMenuStories from "./dropdown-menu.stories.ts";
 import { dropdownMenuExclude, dropdownMenuItemExclude } from "../../utilities/storybook";
 
@@ -96,6 +97,10 @@ To group items, wrap them using `DropdownMenuGroupComponent` with `fudis-dropdow
 ## Dropdown Menu Properties
 
 <ArgTypes of={DropdownMenuComponent} exclude={dropdownMenuExclude} />
+
+## Dropdown Menu Group Properties
+
+<ArgTypes of={DropdownMenuGroupComponent} exclude={dropdownMenuExclude} />
 
 ## Dropdown Menu Item Properties
 
