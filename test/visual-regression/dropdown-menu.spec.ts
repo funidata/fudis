@@ -16,7 +16,11 @@ test("dropdown menu", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Space");
-  await expect(page.getByText("Latest clicked item was: Third item with really long label to push it to the limit!")).toBeVisible();
+  await expect(
+    page.getByText(
+      "Latest clicked item was: Third item with really long label to push it to the limit!",
+    ),
+  ).toBeVisible();
 
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
