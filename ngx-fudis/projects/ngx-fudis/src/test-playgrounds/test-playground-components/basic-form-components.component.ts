@@ -25,15 +25,11 @@ export class StorybookExampleBasicFormComponentsComponent {
       textInputRequired: new FormControl(null, FudisValidators.required('This is required')),
       textInputToBeLeftEmpty: new FormControl(null, FudisValidators.required('This is required')),
       textAreaRequired: new FormControl(null, [
-        FudisValidators.required(
-          'This is definitely required as this error has so many words',
-        ),
+        FudisValidators.required('This is definitely required as this error has so many words'),
         FudisValidators.maxLength(50, 'Too long input!'),
       ]),
       textAreaToBeLeftEmpty: new FormControl(null, [
-        FudisValidators.required(
-          'This is definitely required as this error has so many words',
-        ),
+        FudisValidators.required('This is definitely required as this error has so many words'),
         FudisValidators.maxLength(50, 'Too long input!'),
       ]),
       datepickerRequired: new FormControl(null, FudisValidators.required('This is required')),
