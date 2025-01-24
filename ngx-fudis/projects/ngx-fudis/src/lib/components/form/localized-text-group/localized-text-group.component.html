@@ -1,4 +1,10 @@
-<div *ngIf="_selectControl.value" class="fudis-localized-text-group fudis-input-size__{{ size }}">
+<p [attr.id]="id + '-group-label'" class="fudis-visually-hidden">{{ label }}</p>
+<div
+  *ngIf="_selectControl.value"
+  role="group"
+  [attr.aria-labelledby]="id + '-group-label'"
+  class="fudis-localized-text-group fudis-input-size__{{ size }}"
+>
   <div class="fudis-localized-text-group__inputs">
     <fudis-label
       [for]="id"
