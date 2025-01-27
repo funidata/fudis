@@ -91,7 +91,7 @@ export class SelectBaseDirective
   @Input() variant: FudisSelectVariant = 'dropdown';
 
   /**
-   * Enable / disable button, which clears user selectionw when there is a selected value
+   * Enable / disable button, which clears user selection when there is a selected value
    */
   @Input() selectionClearButton: boolean = true;
 
@@ -366,11 +366,15 @@ export class SelectBaseDirective
 
   /**
    * Set control value to null
+   * Control value should reset even when user input does not match any option value (i.e. control value is null), so that dropdown shows options correctly
    */
   protected _setControlNull(): void {
     if (this.control.value) {
       this.control.patchValue(null);
       this.selectionUpdate.emit(null);
+      this.setAutocompleteFilterText('');
+    } else {
+      this.control.patchValue(null);
       this.setAutocompleteFilterText('');
     }
   }
