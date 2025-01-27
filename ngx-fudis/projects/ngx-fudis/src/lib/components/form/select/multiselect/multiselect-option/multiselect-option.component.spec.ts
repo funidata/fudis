@@ -120,18 +120,18 @@ describe('MultiselectOptionComponent', () => {
       const controlValueArray = component.selectEl.control.value;
 
       expect(controlValueArray).toMatchObject([
-        { label: 'Screaming hairy armadillo' },
+        { label: 'Screaming hairy armadillo (partly endangered)' },
         { label: 'Dog' },
         { label: 'Platypus' },
       ]);
 
       expect(component.selectEl.selectionUpdate.emit).toHaveBeenCalledWith([
         {
-          label: 'Screaming hairy armadillo',
+          label: 'Screaming hairy armadillo (partly endangered)',
           sound: "Rollin' rollin' rollin'!",
-          value: 'value-5-armadillo',
+          value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
         },
-        { label: 'Dog', sound: 'Wuf!', value: 'value-1-dog' },
+        { label: 'Dog', sound: 'Wuf!', value: { name: 'Max The Great', breed: 'Staffy' } },
         { label: 'Platypus', sound: 'Plat plat!', value: 'value-3-platypys' },
       ]);
     });
@@ -152,7 +152,7 @@ describe('MultiselectOptionComponent', () => {
       expect(controlValueArray).toMatchObject([
         { label: 'Dog' },
         { label: 'Capybara' },
-        { label: 'Screaming hairy armadillo' },
+        { label: 'Screaming hairy armadillo (partly endangered)' },
       ]);
 
       // Remove one of the already selected options
