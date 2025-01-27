@@ -249,21 +249,23 @@ export class FudisIdService {
   }
 
   /**
-   * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-1
+   * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-my-label
    */
   public getNewSelectOptionId(
     selectType: 'select' | 'multiselect',
     selectParentId: string,
-    dataValue: string,
+    dataLabel: string,
     groupParentId?: string,
   ): string {
     let newId = '';
+    // Trim label for the id creation and to match the label needed in DOM ordering in Select CVA
+    const trimmedLabel = dataLabel.replace(/[()]/g, '').replaceAll(' ', '-');
 
     if (groupParentId) {
-      newId = `${selectParentId}-option-${dataValue}`;
+      newId = `${selectParentId}-option-${trimmedLabel}`;
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
     } else {
-      newId = `${selectParentId}-option-${dataValue}`;
+      newId = `${selectParentId}-option-${trimmedLabel}`;
 
       this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.push(newId);
     }

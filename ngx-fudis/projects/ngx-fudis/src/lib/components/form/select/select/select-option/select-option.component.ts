@@ -47,7 +47,7 @@ export class SelectOptionComponent
       this._id = this._idService.getNewSelectOptionId(
         'select',
         this._parent.id,
-        this.data.value,
+        this.data.label,
         this._parentGroup?.id,
       );
 
