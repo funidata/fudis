@@ -1,4 +1,6 @@
-<p [attr.id]="id + '-group-label'" class="fudis-visually-hidden">{{ label }}</p>
+<p *ngIf="_selectControl.value" [attr.id]="id + '-group-label'" class="fudis-visually-hidden">{{
+  label
+}}</p>
 <div
   *ngIf="_selectControl.value"
   role="group"
