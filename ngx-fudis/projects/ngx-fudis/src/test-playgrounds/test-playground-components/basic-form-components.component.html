@@ -14,41 +14,41 @@
   <fudis-text-input
     [size]="'sm'"
     [control]="myForm.controls.textInputRequired"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
   />
   <fudis-text-input
     [size]="'md'"
     [control]="myForm.controls.textInputToBeLeftEmpty"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
   />
   <fudis-text-input
     [size]="'lg'"
     [control]="myForm.controls.textInputToBeLeftEmpty"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
   />
   <fudis-text-input
     [size]="'sm'"
     [control]="myForm.controls.textInputToBeLeftEmpty"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
-    [tooltip]="textInputProps.tooltip"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
+    [tooltip]="inputProps.tooltip"
   />
   <fudis-text-input
     [size]="'md'"
     [control]="myForm.controls.textInputToBeLeftEmpty"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
-    [tooltip]="textInputProps.tooltip"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
+    [tooltip]="inputProps.tooltip"
   />
   <fudis-text-input
     [size]="'lg'"
     [control]="myForm.controls.textInputToBeLeftEmpty"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
-    [tooltip]="textInputProps.tooltip"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
+    [tooltip]="inputProps.tooltip"
   />
 </fudis-grid>
 <fudis-heading class="fudis-mt-lg" [level]="2">Text Areas</fudis-heading>
@@ -56,19 +56,57 @@
   <fudis-text-area
     [size]="'sm'"
     [control]="myForm.controls.textAreaRequired"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
   />
   <fudis-text-area
     [size]="'md'"
     [control]="myForm.controls.textAreaToBeLeftEmpty"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
   />
   <fudis-text-area
     [size]="'lg'"
     [control]="myForm.controls.textAreaToBeLeftEmpty"
-    [label]="textInputProps.label"
-    [helpText]="textInputProps.helpText"
+    [label]="inputProps.label"
+    [helpText]="inputProps.helpText"
   />
+</fudis-grid>
+<fudis-heading class="fudis-mt-lg" [level]="2">Datepicker</fudis-heading>
+<fudis-grid [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
+  <fudis-datepicker
+    [size]="'sm'"
+    [label]="inputProps.label"
+    [control]="myForm.controls.datepickerRequired"
+    [helpText]="inputProps.helpText"
+  ></fudis-datepicker>
+  <fudis-datepicker
+    [size]="'md'"
+    [label]="inputProps.label"
+    [control]="myForm.controls.datepickerToBeLeftEmpty"
+    [helpText]="inputProps.helpText"
+  ></fudis-datepicker>
+  <fudis-datepicker
+    [size]="'lg'"
+    [label]="inputProps.label"
+    [control]="myForm.controls.datepickerToBeLeftEmpty"
+    [helpText]="inputProps.helpText"
+  ></fudis-datepicker>
+</fudis-grid>
+<fudis-heading class="fudis-mt-lg" [level]="2">Date Range</fudis-heading>
+<fudis-grid>
+  <fudis-date-range>
+    <fudis-datepicker
+      fudisDateStart
+      [label]="inputProps.label"
+      [control]="myForm.controls.datepickerToBeLeftEmpty"
+      [helpText]="inputProps.helpText"
+    ></fudis-datepicker>
+    <fudis-datepicker
+      fudisDateEnd
+      [label]="inputProps.label"
+      [control]="myForm.controls.datepickerToBeLeftEmpty"
+      [helpText]="inputProps.helpText"
+    ></fudis-datepicker>
+  </fudis-date-range>
 </fudis-grid>
