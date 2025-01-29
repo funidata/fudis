@@ -169,7 +169,7 @@ export class MultiselectControlValueAccessorDirective
 
     if (value) {
       const sortedSelectedOptions = dropdown
-        ? [...value].sort(this._sortSelectedOptionsDOMOrder(dropdown, this.id))
+        ? [...value].sort(this._sortSelectedOptionsDOMOrder(dropdown))
         : [...value];
 
       this.handleSortedSelectedOptions.emit(sortedSelectedOptions);
@@ -188,23 +188,27 @@ export class MultiselectControlValueAccessorDirective
   /**
    * Sort selected options the same order they appear in the DOM
    */
-  private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null, id: string) {
+  private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null) {
     return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
-      // Option ordering not working if there are special characters (such as parenthesis)
-      // TODO: At the moment no other special characters (than ()) are taken into consideration, probably should?
-      const trimmedA = a.label.replace(/[()]/g, '').replaceAll(' ', '-');
-      const trimmedB = b.label.replace(/[()]/g, '').replaceAll(' ', '-');
+      const aElementId = a['elementId'];
+      const bElementId = b['elementId'];
 
-      if (trimmedA === trimmedB) {
+      console.log(aElementId);
+      console.log(bElementId);
+
+      if (aElementId === bElementId) {
         return 0;
       }
 
-      const aSelector = `#${id}-option-${trimmedA}`;
-      const bSelector = `#${id}-option-${trimmedB}`;
+      const aSelector = `#${aElementId}`;
+      const bSelector = `#${bElementId}`;
 
       if (dropdown) {
         const firstEl = dropdown.querySelector(aSelector);
         const secondEl = dropdown.querySelector(bSelector);
+
+        console.log('first el: ', firstEl);
+        console.log('second el', secondEl);
 
         if (firstEl && secondEl) {
           const position = firstEl.compareDocumentPosition(secondEl);

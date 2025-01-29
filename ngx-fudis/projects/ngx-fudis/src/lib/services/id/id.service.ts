@@ -254,18 +254,20 @@ export class FudisIdService {
   public getNewSelectOptionId(
     selectType: 'select' | 'multiselect',
     selectParentId: string,
-    dataLabel: string,
     groupParentId?: string,
   ): string {
     let newId = '';
-    // Trim label for the id creation and to match the label needed in DOM ordering in Select CVA
-    const trimmedLabel = dataLabel.replace(/[()]/g, '').replaceAll(' ', '-');
 
     if (groupParentId) {
-      newId = `${selectParentId}-option-${trimmedLabel}`;
+      const orderNumber =
+        this._idData.grandParents[selectType][selectParentId].groups[groupParentId].length + 1;
+
+      newId = `${groupParentId}-option-${orderNumber}`;
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
     } else {
-      newId = `${selectParentId}-option-${trimmedLabel}`;
+      const orderNumber =
+        this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.length + 1;
+      newId = `${selectParentId}-option-${orderNumber}`;
 
       this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.push(newId);
     }
