@@ -136,15 +136,24 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
    */
   @HostListener('window:click', ['$event'])
   private _getMaxWidth(): void {
+    const fontSize = Number(
+      window.getComputedStyle(this._document.body).getPropertyValue('font-size').replace('px', ''),
+    );
+
     const elementInViewWidth =
       this._dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.width;
 
+    // Left boundary edge of the element in the viewport
     const elementInViewX = this._dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.x;
 
     if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
-      this._maxWidth = `${elementInViewWidth + elementInViewX}px`;
-    } else if (window?.innerWidth && elementInViewX) {
-      this._maxWidth = `${window.innerWidth - elementInViewX}px`;
+      const viewWidthAndViewXInRem = `${(elementInViewWidth + elementInViewX) / fontSize}rem`;
+      this._maxWidth = 'calc(' + viewWidthAndViewXInRem + '/ var(--fudis-rem-multiplier))';
+    } else if (window?.visualViewport?.width && elementInViewX) {
+      // elementInViewX + 1 is a hack for Firefox. In desktop mode (but in small screen) the dropdown menu's right border did not show.
+      // TODO: This could be improved if better solution comes to mind.
+      const viewportWidthAndViewXInRem = `${(window.visualViewport.width - (elementInViewX + 1)) / fontSize}rem`;
+      this._maxWidth = 'calc(' + viewportWidthAndViewXInRem + '/ var(--fudis-rem-multiplier))';
     } else {
       this._maxWidth = 'initial';
     }
