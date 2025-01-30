@@ -89,8 +89,7 @@ describe('DescriptionListItemTermComponent', () => {
     mockFixture = TestBed.createComponent(MockDlComponent);
     mockComponent = mockFixture.componentInstance;
     mockComponent.langVisible = false;
-
-    mockFixture.autoDetectChanges();
+    mockFixture.detectChanges();
   });
 
   function getDlItemTermElement(
@@ -109,6 +108,24 @@ describe('DescriptionListItemTermComponent', () => {
     const itemArray = [...dlItemTermElements];
 
     return itemArray[index];
+  }
+  
+  function getAllLanguageBadgeGroups() {
+    const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
+      By.directive(LanguageBadgeGroupComponent),
+    );
+    mockFixture.detectChanges();
+
+    return allLanguageBadgeGroups;
+  }
+
+  function getAllLanguageBadges() {
+    const allLanguageBadges = mockFixture.debugElement.queryAll(
+      By.directive(LanguageBadgeComponent),
+    );
+    mockFixture.detectChanges();
+
+    return allLanguageBadges;
   }
 
   it('should create', () => {
@@ -134,21 +151,21 @@ describe('DescriptionListItemTermComponent', () => {
   });
 
   describe('CSS classes', () => {
-    it('should have main CSS class', () => {
+    it('should have main CSS class', async () => {
       expect(getDlItemTermElement('dt').className).toEqual('fudis-dl-item-term__regular');
       expect(getDlItemTermElement('span').className).toEqual('fudis-dl-item-term__regular');
 
       mockComponent.variant = 'compact';
       mockFixture.detectChanges();
+      mockFixture.detectChanges();
 
-      mockFixture.whenRenderingDone().then(() => {
-        expect(getDlItemTermElement('dt', 'compact').className).toEqual(
-          'fudis-dl-item-term__compact',
-        );
-        expect(getDlItemTermElement('span', 'compact').className).toEqual(
-          'fudis-dl-item-term__compact',
-        );
-      });
+      expect(getDlItemTermElement('dt', 'compact').className).toEqual(
+        'fudis-dl-item-term__compact',
+      );
+
+      expect(getDlItemTermElement('span', 'compact').className).toEqual(
+        'fudis-dl-item-term__compact',
+      );
     });
   });
 
@@ -174,68 +191,40 @@ describe('DescriptionListItemTermComponent', () => {
     });
   });
 
-  describe('With languages', () => {
-    beforeEach(() => {
-      mockComponent.langVisible = true;
-
-      mockFixture.detectChanges();
-    });
-
-    it('should have Language Badge Group visible', () => {
+  describe('Language options hidden', () => {
+    it('should have only one visible Language Badge Group', () => {
       mockComponent.langVisible = false;
+      mockFixture.detectChanges();
+
+      const allLanguageBadgeGroups = getAllLanguageBadgeGroups(); 
+      const allLanguageBadges = getAllLanguageBadges();
 
       mockFixture.detectChanges();
-      const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeGroupComponent),
-      );
-
-      const allLanguageBadges = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeComponent),
-      );
 
       expect(allLanguageBadgeGroups.length).toEqual(1);
       expect(allLanguageBadgeGroups).toBeTruthy();
       expect(allLanguageBadges.length).toEqual(3);
     });
+  });
 
-    it('should have Language Badge Group visible if one details has lang property', () => {
-      mockFixture.whenRenderingDone().then(() => {
-        const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
-          By.directive(LanguageBadgeGroupComponent),
-        );
-
-        const allLanguageBadges = mockFixture.debugElement.queryAll(
-          By.directive(LanguageBadgeComponent),
-        );
-
-        expect(allLanguageBadgeGroups.length).toEqual(2);
-        expect(allLanguageBadgeGroups).toBeTruthy();
-        expect(allLanguageBadges.length).toEqual(6);
-      });
+  describe('All language options visible', () => {
+    beforeEach(() => {
+      mockFixture = TestBed.createComponent(MockDlComponent);
+      mockComponent = mockFixture.componentInstance;
+      mockComponent.langVisible = true;
+      mockFixture.detectChanges();
     });
 
-    it('should remove Language badge group if dd elements with lang do not exists', () => {
-      mockFixture.whenRenderingDone().then(() => {
-        const allLanguageBadgeGroupsBefore = mockFixture.debugElement.queryAll(
-          By.directive(LanguageBadgeGroupComponent),
-        );
-
-        expect(allLanguageBadgeGroupsBefore.length).toEqual(2);
-      });
-
-      mockComponent.langVisible = false;
+    it('should have all Language Badge Groups visible if one details has lang property', async () => {
+      mockComponent.langVisible = true;
       mockFixture.detectChanges();
 
-      const allLanguageBadgeGroupsAfter = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeGroupComponent),
-      );
+      const allLanguageBadgeGroups = getAllLanguageBadgeGroups(); 
+      const allLanguageBadges = getAllLanguageBadges();
 
-      const allLanguageBadges = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeComponent),
-      );
-
-      expect(allLanguageBadgeGroupsAfter.length).toEqual(1);
-      expect(allLanguageBadges.length).toEqual(3);
+      expect(allLanguageBadgeGroups.length).toEqual(2);
+      expect(allLanguageBadgeGroups).toBeTruthy();
+      expect(allLanguageBadges.length).toEqual(6);
     });
   });
 });
