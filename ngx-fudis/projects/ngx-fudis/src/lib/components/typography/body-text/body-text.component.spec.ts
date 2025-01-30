@@ -5,6 +5,7 @@ import { fudisBodyTextArray, fudisTextAlignArray } from '../../../types/typograp
 
 describe('BodyTextComponent', () => {
   let fixture: ComponentFixture<BodyTextComponent>;
+  let component: BodyTextComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -14,6 +15,8 @@ describe('BodyTextComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BodyTextComponent);
+    component = fixture.componentInstance;
+    component.lang = 'fi';
     fixture.detectChanges();
   });
 
@@ -48,4 +51,12 @@ describe('BodyTextComponent', () => {
       });
     });
   });
+
+  describe('Language input', () => {
+    it('should have correct lang attribute', () => {
+      const element = getElement(fixture, '.fudis-body-text');
+      
+      expect(element.lang).toEqual('fi');
+    })
+  })
 });
