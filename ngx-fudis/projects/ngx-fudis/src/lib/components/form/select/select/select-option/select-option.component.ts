@@ -45,6 +45,7 @@ export class SelectOptionComponent
   ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective>): void {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
       this._id = this._idService.getNewSelectOptionId(
+        this.data.label,
         'select',
         this._parent.id,
         this._parentGroup?.id,

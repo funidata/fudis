@@ -22,6 +22,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { joinInputValues } from '../utilities/selectUtilities';
 import { DOCUMENT } from '@angular/common';
 import { FudisComponentChanges } from '../../../../../../lib/types/miscellaneous';
+import { FudisIdService } from '../../../../../services/id/id.service';
 
 @Directive({
   selector: '[fudisSelectBaseControlValueAccessor]',
@@ -169,7 +170,7 @@ export class MultiselectControlValueAccessorDirective
 
     if (value) {
       const sortedSelectedOptions = dropdown
-        ? [...value].sort(this._sortSelectedOptionsDOMOrder(dropdown))
+        ? [...value].sort(this._sortSelectedOptionsDOMOrder(dropdown, this.id))
         : [...value];
 
       this.handleSortedSelectedOptions.emit(sortedSelectedOptions);
@@ -188,27 +189,18 @@ export class MultiselectControlValueAccessorDirective
   /**
    * Sort selected options the same order they appear in the DOM
    */
-  private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null) {
+  private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null, id: string) {
     return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
-      const aElementId = a['elementId'];
-      const bElementId = b['elementId'];
-
-      console.log(aElementId);
-      console.log(bElementId);
+      const aElementId = FudisIdService.createSelectOptionId(id, a.label);
+      const bElementId = FudisIdService.createSelectOptionId(id, b.label);
 
       if (aElementId === bElementId) {
         return 0;
       }
 
-      const aSelector = `#${aElementId}`;
-      const bSelector = `#${bElementId}`;
-
       if (dropdown) {
-        const firstEl = dropdown.querySelector(aSelector);
-        const secondEl = dropdown.querySelector(bSelector);
-
-        console.log('first el: ', firstEl);
-        console.log('second el', secondEl);
+        const firstEl = dropdown.querySelector(`#${aElementId}`);
+        const secondEl = dropdown.querySelector(`#${bElementId}`);
 
         if (firstEl && secondEl) {
           const position = firstEl.compareDocumentPosition(secondEl);

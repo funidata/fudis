@@ -48,6 +48,7 @@ export class MultiselectOptionComponent
   ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent>) {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
       this._id = this._idService.getNewSelectOptionId(
+        this.data.label,
         'multiselect',
         this._parent.id,
         this._parentGroup?.id,
