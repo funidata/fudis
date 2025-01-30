@@ -92,7 +92,7 @@ describe('DescriptionListItemComponent', () => {
   function getDlItemElement(type: string): HTMLElement {
     const dlItemElement = getElement(mockFixture, `fudis-dl-item ${type}`);
     mockFixture.detectChanges();
-    
+
     return dlItemElement;
   }
 

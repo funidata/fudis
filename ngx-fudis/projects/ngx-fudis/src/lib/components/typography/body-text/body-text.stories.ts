@@ -32,8 +32,12 @@ const Template: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-grid [width]="'md'" [align]="'start'">
     <div>
-      <fudis-body-text [variant]="variant" [align]="align" [lang]="lang">{{content}}</fudis-body-text>
-      <fudis-body-text [variant]="variant" [align]="align" [lang]="lang">{{content}}</fudis-body-text>
+      <fudis-body-text [variant]="variant" [align]="align" [lang]="lang"
+        >{{content}}</fudis-body-text
+      >
+      <fudis-body-text [variant]="variant" [align]="align" [lang]="lang"
+        >{{content}}</fudis-body-text
+      >
     </div>
   </fudis-grid>`,
 });

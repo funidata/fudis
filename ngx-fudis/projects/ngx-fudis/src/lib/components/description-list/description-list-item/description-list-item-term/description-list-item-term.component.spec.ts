@@ -109,7 +109,7 @@ describe('DescriptionListItemTermComponent', () => {
 
     return itemArray[index];
   }
-  
+
   function getAllLanguageBadgeGroups() {
     const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
       By.directive(LanguageBadgeGroupComponent),
@@ -196,7 +196,7 @@ describe('DescriptionListItemTermComponent', () => {
       mockComponent.langVisible = false;
       mockFixture.detectChanges();
 
-      const allLanguageBadgeGroups = getAllLanguageBadgeGroups(); 
+      const allLanguageBadgeGroups = getAllLanguageBadgeGroups();
       const allLanguageBadges = getAllLanguageBadges();
 
       mockFixture.detectChanges();
@@ -219,7 +219,7 @@ describe('DescriptionListItemTermComponent', () => {
       mockComponent.langVisible = true;
       mockFixture.detectChanges();
 
-      const allLanguageBadgeGroups = getAllLanguageBadgeGroups(); 
+      const allLanguageBadgeGroups = getAllLanguageBadgeGroups();
       const allLanguageBadges = getAllLanguageBadges();
 
       expect(allLanguageBadgeGroups.length).toEqual(2);

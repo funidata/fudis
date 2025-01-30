@@ -224,9 +224,7 @@ describe('DescriptionListItemDetailsComponent', () => {
 
   describe('Language content', () => {
     it('should have selected language visible', () => {
-      let dlWithLanguages: DebugElement;
-
-      dlWithLanguages = getDlWithLanguages(2);
+      const dlWithLanguages = getDlWithLanguages(2);
       mockFixture.detectChanges();
 
       const currentLanguage = dlWithLanguages.nativeElement.querySelector(
@@ -245,19 +243,17 @@ describe('DescriptionListItemDetailsComponent', () => {
       expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
     });
 
-  it('should have correct language attribute', () => {
-    let dlWithLanguages: DebugElement;
+    it('should have correct language attribute', () => {
+      const dlWithLanguages = getDlWithLanguages(2);
+      mockFixture.detectChanges();
 
-    dlWithLanguages = getDlWithLanguages(2);
-    mockFixture.detectChanges();
+      const changedLanguage = dlWithLanguages.nativeElement.querySelector(
+        '.fudis-dl-item-details__regular',
+      );
 
-    const changedLanguage = dlWithLanguages.nativeElement.querySelector(
-      '.fudis-dl-item-details__regular',
-    );
-
-    expect(changedLanguage.lang).toEqual('en');
+      expect(changedLanguage.lang).toEqual('en');
+    });
   });
-});
 
   describe('Nested content', () => {
     it('should render button', () => {

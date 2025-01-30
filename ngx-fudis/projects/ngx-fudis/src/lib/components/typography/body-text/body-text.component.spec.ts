@@ -55,8 +55,8 @@ describe('BodyTextComponent', () => {
   describe('Language input', () => {
     it('should have correct lang attribute', () => {
       const element = getElement(fixture, '.fudis-body-text');
-      
+
       expect(element.lang).toEqual('fi');
-    })
-  })
+    });
+  });
 });
