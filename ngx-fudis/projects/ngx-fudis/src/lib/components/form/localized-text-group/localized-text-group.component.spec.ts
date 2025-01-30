@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LocalizedTextGroupComponent } from './localized-text-group.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -135,6 +136,15 @@ describe('LocalizedTextGroupComponent', () => {
         const labelText = getElement(fixture, '.fudis-label__content__text').textContent;
 
         expect(labelText).toEqual(values.label);
+      });
+
+      it(`should have correct group label`, () => {
+        const labelText = getElement(fixture, '.fudis-label__content__text').textContent;
+        const groupLabelId = fixture.debugElement.query(By.css('.fudis-localized-text-group'))
+          .attributes['aria-labelledby'];
+        const groupLabelText = getElement(fixture, `#${groupLabelId}`).textContent;
+
+        expect(groupLabelText).toEqual(labelText);
       });
 
       it(`should have correct help text`, () => {
