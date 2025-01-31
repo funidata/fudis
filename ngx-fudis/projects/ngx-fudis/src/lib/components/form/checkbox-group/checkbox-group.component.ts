@@ -100,7 +100,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
       this._required.next(FudisValidatorUtilities.oneRequiredOrMin(this.formGroup));
     }
 
-		this.formGroup.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
+    this.formGroup.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
     this._applyGroupMarkAsTouched();
   }
 
