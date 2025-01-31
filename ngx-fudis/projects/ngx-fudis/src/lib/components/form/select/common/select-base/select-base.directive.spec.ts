@@ -339,6 +339,7 @@ describe('SelectBaseDirective', () => {
 
       expect(component.multiSelect.selectionUpdate.emit).toHaveBeenCalledWith([
         {
+					elementId: 'fudis-multiselect-2-option-e05e75',
           label: 'Golden jackal',
           subLabel: 'Canis aureus',
           value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
