@@ -127,12 +127,23 @@ describe('MultiselectOptionComponent', () => {
 
       expect(component.selectEl.selectionUpdate.emit).toHaveBeenCalledWith([
         {
+          elementId: 'fudis-multiselect-1-option-100zewl',
           label: 'Screaming hairy armadillo (partly endangered)',
           sound: "Rollin' rollin' rollin'!",
           value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
         },
-        { label: 'Dog', sound: 'Wuf!', value: { name: 'Max The Great', breed: 'Staffy' } },
-        { label: 'Platypus', sound: 'Plat plat!', value: 'value-3-platypys' },
+        {
+          elementId: 'fudis-multiselect-1-option-1h5o',
+          label: 'Dog',
+          sound: 'Wuf!',
+          value: { name: 'Max The Great', breed: 'Staffy' },
+        },
+        {
+          elementId: 'fudis-multiselect-1-option-w2yoqs',
+          label: 'Platypus',
+          sound: 'Plat plat!',
+          value: 'value-3-platypys',
+        },
       ]);
     });
 

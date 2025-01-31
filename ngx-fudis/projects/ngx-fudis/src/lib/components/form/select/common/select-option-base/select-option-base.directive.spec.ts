@@ -154,7 +154,11 @@ describe('SelectOptionBaseDirective', () => {
 
       expect(component.selectOption.visible).toEqual(false);
 
-      expect(focusableOptions()).toEqual(['Capybara', 'Platypus']);
+      expect(focusableOptions()).toEqual([
+        'Capybara',
+        'Platypus',
+        'Screaming hairy armadillo (partly endangered)',
+      ]);
 
       component.selectElem.setAutocompleteFilterText('roa');
 
@@ -172,10 +176,10 @@ describe('SelectOptionBaseDirective', () => {
       jest.spyOn(component, 'handleOptionBlur');
 
       const firstElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-value-2-capybara',
+        '#fudis-select-1-option-ba3at',
       ) as HTMLInputElement;
       const secondElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-value-3-platypys',
+        '#fudis-select-1-option-w2yoqs',
       ) as HTMLInputElement;
 
       firstElement.focus();

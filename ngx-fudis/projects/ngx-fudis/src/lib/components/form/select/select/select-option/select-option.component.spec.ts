@@ -147,7 +147,7 @@ describe('SelectOptionComponent', () => {
         By.css('.fudis-select-option--selected'),
       ).nativeElement;
 
-      expect(selectedValue.textContent).toEqual('Screaming hairy armadillo');
+      expect(selectedValue.textContent).toEqual('Screaming hairy armadillo (partly endangered)');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -183,8 +183,8 @@ describe('SelectOptionComponent', () => {
 
       fixture.detectChanges();
 
-      const disabledOption = getElement(fixture, '#fudis-select-1-option-value-4-cat');
-      const enabledOption = getElement(fixture, '#fudis-select-1-option-value-5-armadillo');
+      const disabledOption = getElement(fixture, '#fudis-select-1-option-13slwtn');
+      const enabledOption = getElement(fixture, '#fudis-select-1-option-100zewl');
 
       disabledOption.click();
 
@@ -193,9 +193,10 @@ describe('SelectOptionComponent', () => {
       enabledOption.click();
 
       expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-        label: 'Screaming hairy armadillo',
+        elementId: 'fudis-select-1-option-100zewl',
+        label: 'Screaming hairy armadillo (partly endangered)',
         sound: "Rollin' rollin' rollin'!",
-        value: 'value-5-armadillo',
+        value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
       });
     });
   });
@@ -214,6 +215,7 @@ describe('SelectOptionComponent', () => {
     fixture.detectChanges();
 
     expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
+      elementId: 'fudis-select-1-option-w2yoqs',
       label: 'Platypus',
       sound: 'Plat plat!',
       value: 'value-3-platypys',

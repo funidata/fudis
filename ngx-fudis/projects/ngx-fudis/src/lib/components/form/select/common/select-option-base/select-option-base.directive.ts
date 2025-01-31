@@ -1,4 +1,13 @@
-import { Directive, ElementRef, Host, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Host,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  ViewChild,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
