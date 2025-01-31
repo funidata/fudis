@@ -82,7 +82,7 @@ class MockSelectAutocompleteComponent {
 }
 
 @Component({
-  selector: 'fudis-mock-select-autocomplete',
+  selector: 'fudis-mock-multiselect-autocomplete',
   template: `<input
       #inputRef
       fudisMultiselectAutocomplete
@@ -199,7 +199,7 @@ describe('SelectAutocompleteBaseDirective', () => {
 
       expect(component.handleDropdownOpen.emit).not.toHaveBeenCalled();
       expect(component.handleDropdownClose.emit).toHaveBeenCalled();
-      expect(component.handleFilterTextUpdate.emit).not.toHaveBeenCalled();
+      expect(component.handleFilterTextUpdate.emit).toHaveBeenCalledWith('');
     });
 
     it('should empty the value and emit open, when Space is pressed and if focused from clear button', () => {
