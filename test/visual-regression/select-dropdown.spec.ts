@@ -38,12 +38,8 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
   await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
   await page.keyboard.press("ArrowUp");
-  await expect(
-    page.getByTestId("fudis-select-1-option-c46h35"),
-  ).toBeInViewport();
-  await expect(
-    page.getByTestId("fudis-select-1-option-c46h35"),
-  ).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeInViewport();
+  await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeFocused();
 
   await page.keyboard.press("ArrowDown");
   await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
@@ -53,21 +49,13 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
   await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(
-    page.getByTestId("fudis-select-1-option-c46h35"),
-  ).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(
-    page.getByTestId("fudis-select-1-option-1ap8lze"),
-  ).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-1ap8lze")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(
-    page.getByTestId("fudis-select-1-option-11u6ihc"),
-  ).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-11u6ihc")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(
-    page.getByTestId("fudis-select-1-option-nr48pp"),
-  ).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-nr48pp")).toBeFocused();
   await page.keyboard.press("Enter", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
 
@@ -116,9 +104,7 @@ test("Select dropdown without clear button", async ({ page }) => {
   await page.getByTestId("fudis-select-2").focus();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await expect(
-    page
-      .getByTestId("fudis-select-2-option-e05e75")
-      .getByText("Golden jackal"),
+    page.getByTestId("fudis-select-2-option-e05e75").getByText("Golden jackal"),
   ).toBeVisible();
   await page.getByTestId("fudis-select-2").click();
   await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
