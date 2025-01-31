@@ -1,11 +1,11 @@
 import test, { expect } from "@playwright/test";
 
 test("Multiselect Autocomplete with filtering false", async ({ page }) => {
-  const hotelRoomsId = "fudis-multiselect-1-option-86a27212-b5a5-41a6-bfc4-c0b88248ad6f";
+  const hotelRoomsId = "fudis-multiselect-1-option-1iaar8y";
 
-  const jurassicParkId = "fudis-multiselect-1-option-195da6a2-8a81-48a2-88c7-66a6307d3612";
+  const jurassicParkId = "fudis-multiselect-1-option-1w8a4ie";
 
-  const dalmatiansId = "fudis-multiselect-1-option-70c15d93-e846-425b-bae0-2313a5c91d90";
+  const dalmatiansId = "fudis-multiselect-1-option-gnfvby";
 
   /**
    * @param database How many options from 'database' was checked to match results
