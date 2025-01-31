@@ -249,7 +249,7 @@ export class FudisIdService {
   }
 
   /**
-   * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-my-label
+   * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-g3n3ratedh4sh
    */
   public getNewSelectOptionId(
     label: string,
