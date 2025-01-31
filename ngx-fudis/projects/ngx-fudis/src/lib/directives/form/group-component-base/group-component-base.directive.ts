@@ -16,16 +16,4 @@ export class GroupComponentBaseDirective extends FormCommonApiDirective {
    * Angular FormGroup for the component
    */
   @Input() formGroup: FormGroup;
-
-  /**
-   * Update value and validity of FormGroup
-   */
-  protected _applyGroupUpdateCheck(): void {
-    const original = this.formGroup.updateValueAndValidity;
-
-    this.formGroup.updateValueAndValidity = () => {
-      original.apply(this.formGroup);
-      this._updateValueAndValidityTrigger.next();
-    };
-  }
 }

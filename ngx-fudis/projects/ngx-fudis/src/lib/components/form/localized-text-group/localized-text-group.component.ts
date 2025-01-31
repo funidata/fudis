@@ -181,7 +181,7 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
 
   ngOnChanges(changes: FudisComponentChanges<LocalizedTextGroupComponent<T>>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
-      this._applyGroupUpdateCheck();
+      this.formGroup.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);

@@ -68,7 +68,7 @@ export class TextInputComponent
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
+      this.control.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
     }
 
     if (changes.type?.currentValue !== changes.type?.previousValue) {

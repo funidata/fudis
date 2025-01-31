@@ -218,7 +218,6 @@ export class SelectBaseDirective
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
       this._updateValueAndValidityTrigger.next();
 
       this._updateComponentStateFromControlValue();
@@ -228,6 +227,7 @@ export class SelectBaseDirective
       }
 
       this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+        this._updateValueAndValidityTrigger.next();
         if (value) {
           this._optionsLoadedOnce = true;
         }

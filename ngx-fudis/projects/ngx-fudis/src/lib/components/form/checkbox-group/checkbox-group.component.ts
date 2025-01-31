@@ -86,6 +86,8 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   public ngOnInit() {
     this._setParentComponentId('checkbox-group');
 
+    this.formGroup.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
+
     /**
      * If there's no FormGroup provided when component is initialised, create one internally.
      */
@@ -101,8 +103,6 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
     }
 
     this._applyGroupMarkAsTouched();
-
-    this._applyGroupUpdateCheck();
   }
 
   /**

@@ -41,7 +41,7 @@ export class TextAreaComponent
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
+      this.control.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
     }
 
     if (changes.nullControlOnEmptyString?.currentValue !== changes.control?.previousValue) {

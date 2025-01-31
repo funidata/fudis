@@ -228,15 +228,12 @@ export class DatepickerComponent
 
     // Do checks for the control to define attributes used in e.g. HTML
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
-
       // Subscribe to control value changes and call parent's date crossing check with current value and Date Range input type
       if (this._parentDateRange && this.dateRangeType) {
-        this.control.valueChanges
-          .pipe(takeUntilDestroyed(this._destroyRef))
-          .subscribe((value) =>
-            this._parentDateRange?.checkDateCrossings(value, this.dateRangeType!),
-          );
+        this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+          this._updateValueAndValidityTrigger.next();
+          this._parentDateRange?.checkDateCrossings(value, this.dateRangeType!);
+        });
       }
 
       // If control changes and these checks are on, add parseValidator

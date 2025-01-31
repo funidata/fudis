@@ -44,12 +44,7 @@ export class RadioButtonGroupComponent
   /** Add value and validity check when control value changes */
   ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      const original = this.control.updateValueAndValidity;
-
-      this.control.updateValueAndValidity = () => {
-        original.apply(this.control);
-        this._updateValueAndValidityTrigger.next();
-      };
+      this.control.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
     }
   }
 
