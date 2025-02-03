@@ -13,8 +13,9 @@ export class FudisAlertService {
   private _alerts = new BehaviorSubject<FudisAlertElement[]>([]);
 
   /**
-   * To add new alert, which will be rendered by Alert Group component.
-   * Note that 'id' doesn't necessarily need to be unique. All errors with the same 'id' can be dismissed with dismissAlert() using that particular 'id'.
+   * To add new alert, which will be rendered by Alert Group component. Note that 'id' doesn't
+   * necessarily need to be unique. All errors with the same 'id' can be dismissed with
+   * dismissAlert() using that particular 'id'.
    */
   public addAlert(newAlert: FudisAlert): void {
     const htmlId = this._idService.getNewId('alert');
@@ -27,7 +28,8 @@ export class FudisAlertService {
   }
 
   /**
-   * To dismiss alert by 'id' provided in 'addAlert()'. It will dismiss all alerts matching the 'id'.
+   * To dismiss alert by 'id' provided in 'addAlert()'. It will dismiss all alerts matching the
+   * 'id'.
    */
   public dismissAlert(id: string): void {
     const filteredAlerts = this._alerts.getValue().filter((alert) => alert.id !== id);
@@ -57,7 +59,8 @@ export class FudisAlertService {
   }
 
   /**
-   * Set 'initialFocus' attribute of alert to false, so that if same alert with link is rendered again, the initial focus will not jump there anymore.
+   * Set 'initialFocus' attribute of alert to false, so that if same alert with link is rendered
+   * again, the initial focus will not jump there anymore.
    */
   public updateAlertLinkFocusState(htmlId: string): void {
     let alertIndex: number;

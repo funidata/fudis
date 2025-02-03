@@ -117,7 +117,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   @Output() handleBlur = new EventEmitter<FocusEvent>();
 
   /**
-   * onDestroy handler emit
+   * OnDestroy handler emit
    */
   @Output() handleDestroy = new EventEmitter<void>();
 

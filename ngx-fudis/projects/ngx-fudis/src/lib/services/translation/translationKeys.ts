@@ -1,6 +1,6 @@
 /**
- * This file contains translations for static translation keys used by Fudis components.
- * These are not supposed to be modified by the using application.
+ * This file contains translations for static translation keys used by Fudis components. These are
+ * not supposed to be modified by the using application.
  */
 
 export interface FudisTranslationConfig {

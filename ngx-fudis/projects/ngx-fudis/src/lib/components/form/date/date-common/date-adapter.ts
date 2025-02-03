@@ -36,8 +36,9 @@ export class FudisDateAdapter extends NativeDateAdapter {
   }
 
   /**
-   * Determines from displayFormat value if the Date value is coming from the input field or from the datepicker calendar.
-   * This ensures, that visible input value is always in Finnish DD.MM.YYYY format, but calendar uses HTML lang in other context.
+   * Determines from displayFormat value if the Date value is coming from the input field or from
+   * the datepicker calendar. This ensures, that visible input value is always in Finnish DD.MM.YYYY
+   * format, but calendar uses HTML lang in other context.
    */
   protected _selectLanguage(displayFormat: object): string {
     if (Object.prototype.valueOf.call(displayFormat) === FudisDateInputFormat) {
@@ -47,7 +48,8 @@ export class FudisDateAdapter extends NativeDateAdapter {
   }
 
   /**
-   * @param dtf Intl.DateTimeFormat object, containing the desired string format. It must have timeZone set to 'utc' to work fine
+   * @param dtf Intl.DateTimeFormat object, containing the desired string format. It must have
+   *   timeZone set to 'utc' to work fine
    * @param date Date from which we want to get the string representation according to dtf
    * @returns A Date object with its UTC representation based on the passed date info
    */

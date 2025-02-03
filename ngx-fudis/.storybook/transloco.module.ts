@@ -8,8 +8,8 @@ import {
 } from '@jsverse/transloco';
 
 /**
- * TranslocoHttpLoader implementation to use in 'loader' in the module.
- * This is where the language files loaded.
+ * TranslocoHttpLoader implementation to use in 'loader' in the module. This is where the language
+ * files loaded.
  */
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {

@@ -154,7 +154,8 @@ export class MultiselectControlValueAccessorDirective
   }
 
   /**
-   * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
+   * When selecting / deselecting options, variable for storing them in the order of their id's
+   * (usually the DOM order)
    */
   protected _selectedOptions: FudisSelectOption<object>[] | null = null;
 

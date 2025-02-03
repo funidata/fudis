@@ -64,7 +64,9 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   @Input({ required: true }) override formGroup: FormGroup<T>;
 
   /**
-   * Option list for language Selection. To pair controls with corresponding Select option, FormControl's name must match with the controlName defined here. E.g. by default "{controlName: 'en', label: 'EN'}" pairs with Form Group's "en: new FormControl('')"
+   * Option list for language Selection. To pair controls with corresponding Select option,
+   * FormControl's name must match with the controlName defined here. E.g. by default "{controlName:
+   * 'en', label: 'EN'}" pairs with Form Group's "en: new FormControl('')"
    */
   @Input() options: FudisLocalizedTextGroupFormGroupOptions[] = [
     { controlName: 'fi', label: 'FI' },
@@ -144,7 +146,8 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   }
 
   /**
-   * On init and when Select option changes, check if now visible input should be marked as required.
+   * On init and when Select option changes, check if now visible input should be marked as
+   * required.
    */
   private _isInputRequired(control: FormControl<string | null>): boolean {
     const groupRequiredError = this.formGroup?.errors?.['oneRequired'];

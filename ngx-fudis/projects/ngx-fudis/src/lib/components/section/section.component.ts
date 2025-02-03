@@ -67,12 +67,9 @@ export class SectionComponent
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-   * xxl = Default value. Viewports of 1600px and larger
-   * xl = Viewports smaller than 1600px
-   * lg = Viewports smaller than 1200px
-   * md = Viewports smaller than 992px
-   * sm = Viewports smaller than 768px
-   * xs = Viewports smaller than 576px
+   * xxl = Default value. Viewports of 1600px and larger xl = Viewports smaller than 1600px lg =
+   * Viewports smaller than 1200px md = Viewports smaller than 992px sm = Viewports smaller than
+   * 768px xs = Viewports smaller than 576px
    */
   @Input() width: FudisGridWidth = 'initial';
 

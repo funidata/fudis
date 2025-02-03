@@ -38,7 +38,8 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   }
 
   /**
-   * Link default size is 'md' (14px) which is the default size of <fudis-body-text> component. If link is used inside of Body Text it will always inherit its parent's font-size.
+   * Link default size is 'md' (14px) which is the default size of <fudis-body-text> component. If
+   * link is used inside of Body Text it will always inherit its parent's font-size.
    */
   @Input() size: 'inherit' | 'md' | 'lg' = 'md';
 
@@ -240,7 +241,8 @@ export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   }
 
   /**
-   * Used with external links to split the last word of the title to be paired with the Icon, so that on line break, the icon sticks with the last word of the title.
+   * Used with external links to split the last word of the title to be paired with the Icon, so
+   * that on line break, the icon sticks with the last word of the title.
    */
   private _parseTitle(): void {
     const toArray = this.title.split(' ').filter((n) => n);

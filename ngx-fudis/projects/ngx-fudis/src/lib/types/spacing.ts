@@ -17,9 +17,9 @@ export type FudisSpacingResponsive = {
 export const defaultSpacingValue = '0';
 
 /**
- * Spacing tokens
- * TODO: Would be better to not allow string type since we only want to allow spacing directive to take in predefined spacing token values.
- * This affects in breakpoint-utils.ts when pushing new spacing value to FudisBreakpointStyleResponsive array
+ * Spacing tokens TODO: Would be better to not allow string type since we only want to allow spacing
+ * directive to take in predefined spacing token values. This affects in breakpoint-utils.ts when
+ * pushing new spacing value to FudisBreakpointStyleResponsive array
  */
 type FudisSpacingValues = {
   [key in FudisSpacing | 'default' | string]: string;

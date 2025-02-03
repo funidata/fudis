@@ -152,7 +152,9 @@ describe('SelectComponent', () => {
   });
 
   /**
-   * These tests somewhat overlap with SelectAutocomplete component's tests, but as some logic is handled in parent Select component these tests aim to check that those are working and passing them properly to child SelectAutocomplete
+   * These tests somewhat overlap with SelectAutocomplete component's tests, but as some logic is
+   * handled in parent Select component these tests aim to check that those are working and passing
+   * them properly to child SelectAutocomplete
    */
   describe('Autocomplete', () => {
     beforeEach(() => {

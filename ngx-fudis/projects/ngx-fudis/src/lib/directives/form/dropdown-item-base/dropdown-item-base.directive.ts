@@ -38,7 +38,8 @@ export class DropdownItemBaseDirective {
   protected _id: string;
 
   /**
-   * Trigger focus based on keyboard interaction. Used to focus on next / previous dropdown item element
+   * Trigger focus based on keyboard interaction. Used to focus on next / previous dropdown item
+   * element
    */
 
   protected _baseHandleKeyDown(

@@ -178,7 +178,8 @@ export class FudisIdService {
   }
 
   /**
-   * Get an id and add it to collection for first child of grandparent. E.g. Select Group or Description List Item
+   * Get an id and add it to collection for first child of grandparent. E.g. Select Group or
+   * Description List Item
    */
   public getNewGroupId(
     componentType: 'select' | 'multiselect' | 'description-list' | 'dropdown-menu',
@@ -271,7 +272,8 @@ export class FudisIdService {
   }
 
   /**
-   * Get an id and add it to collection for Descrition List Term & Details --> fudis-description-list-1-item-1-term & fudis-description-list-1-item-1-details-1
+   * Get an id and add it to collection for Descrition List Term & Details -->
+   * fudis-description-list-1-item-1-term & fudis-description-list-1-item-1-details-1
    */
   public getNewDlGrandChilId(
     childType: 'term' | 'details',

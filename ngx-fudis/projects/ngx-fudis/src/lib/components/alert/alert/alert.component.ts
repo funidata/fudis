@@ -55,7 +55,8 @@ export class AlertComponent {
   @Output() handleClose = new EventEmitter<Event>();
 
   /**
-   * Handler for close button. Dismisses alert from service and sets focus to last alert in the list or to previously focused element stored with _handleFocus().
+   * Handler for close button. Dismisses alert from service and sets focus to last alert in the list
+   * or to previously focused element stored with _handleFocus().
    */
   protected _handleCloseClick(event: Event): void {
     this._alertService.dismissAlertFromButton(this.buttonId);
@@ -74,7 +75,8 @@ export class AlertComponent {
   }
 
   /**
-   * Focus handler for close Button inside alert. Saves the element focus originated from, to restore focus there when there are no alerts left.
+   * Focus handler for close Button inside alert. Saves the element focus originated from, to
+   * restore focus there when there are no alerts left.
    */
   protected _handleFocus(focusEvent: FocusEvent): void {
     const relatedTarget = focusEvent?.relatedTarget as HTMLElement;
@@ -82,8 +84,10 @@ export class AlertComponent {
     const isDialogOpen = this._dialogService.getDialogOpenStatus().value;
 
     /**
-     * First if: when keyboard tabbing through ngMaterial dialog, focus goes through its hidden focus-trap helper element which focuses on either first alert on the list or dialog close. So we store the dialog close as focus target.
-     * Else if: Store source of focus event unless it originated inside Alert
+     * First if: when keyboard tabbing through ngMaterial dialog, focus goes through its hidden
+     * focus-trap helper element which focuses on either first alert on the list or dialog close. So
+     * we store the dialog close as focus target. Else if: Store source of focus event unless it
+     * originated inside Alert
      */
 
     if (

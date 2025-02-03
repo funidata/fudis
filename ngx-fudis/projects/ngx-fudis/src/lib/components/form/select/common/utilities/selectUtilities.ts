@@ -2,7 +2,8 @@ import { FudisSelectOption } from '../../../../../types/forms';
 
 /**
  * Function to loop array of options and join their labels to a single string
- * @param values array of selected Options
+ *
+ * @param values Array of selected Options
  * @returns
  */
 export const joinInputValues = (values: FudisSelectOption<object>[]): string => {
@@ -20,10 +21,11 @@ export const joinInputValues = (values: FudisSelectOption<object>[]): string => 
 
 /**
  * Add or remove a value from current list and returned updated one
+ *
  * @param currentList
  * @param valueToUpdate
  * @param visible
- * @returns updated List
+ * @returns Updated List
  */
 export const setVisibleOptionsList = (
   currentList: string[],

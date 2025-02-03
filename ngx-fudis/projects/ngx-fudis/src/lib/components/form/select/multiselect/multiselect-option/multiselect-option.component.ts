@@ -77,6 +77,7 @@ export class MultiselectOptionComponent
 
   /**
    * Click handler for clicking the option
+   *
    * @param event Event
    */
   protected override _clickOption(event: Event): void {
@@ -102,7 +103,8 @@ export class MultiselectOptionComponent
 
   /**
    * Checks if this option is checked or not and updates parents state accordingly
-   * @param options currently selected options
+   *
+   * @param options Currently selected options
    */
   private _isOptionChecked(options: FudisSelectOption<object>[] | null): void {
     if (this.data) {
@@ -113,7 +115,8 @@ export class MultiselectOptionComponent
   }
 
   /**
-   * When app language is changed, it will not change Form Control's value, which is intended, but visible label should be updated
+   * When app language is changed, it will not change Form Control's value, which is intended, but
+   * visible label should be updated
    */
   protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
     const controlValue = this._parent?.control.value;

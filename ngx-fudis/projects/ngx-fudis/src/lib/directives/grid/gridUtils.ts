@@ -1,8 +1,8 @@
 import { FudisGridProperties, FudisGridPropertyCollection } from '../../types/grid';
 
 /**
- * Utility function used with GridDirective.
- * Takes in object of Input() attributes and creates CSS classlist out of those to be passed to Grid element.
+ * Utility function used with GridDirective. Takes in object of Input() attributes and creates CSS
+ * classlist out of those to be passed to Grid element.
  */
 export const getGridClasses = (values: FudisGridProperties): string => {
   const classList = [
@@ -44,7 +44,8 @@ export const replaceFormInputWidthsToRem = (value: string): string => {
 };
 
 /**
- * Utility function to convert parameters to either Grid CSS value 'grid-column-template' or CSS grid item value 'grid-column'
+ * Utility function to convert parameters to either Grid CSS value 'grid-column-template' or CSS
+ * grid item value 'grid-column'
  */
 export const getGridCssValue = (value: number | string, isGridItem?: boolean): string => {
   if (typeof value === 'number') {
@@ -71,7 +72,8 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
 };
 
 /**
- * Determine Grid Input Properties based on if Service defaults should be ignored or if application has provided values
+ * Determine Grid Input Properties based on if Service defaults should be ignored or if application
+ * has provided values
  */
 export const getValuesForCSSClasses = (
   properties: FudisGridPropertyCollection,
@@ -81,7 +83,8 @@ export const getValuesForCSSClasses = (
 
   if (!serviceDefaults) {
     /**
-     * Set values from Inputs, if not provided, use default values. Ignore default values from FudisGridService
+     * Set values from Inputs, if not provided, use default values. Ignore default values from
+     * FudisGridService
      */
     return {
       width: appValues.width ?? defaultValues.width,
@@ -94,7 +97,8 @@ export const getValuesForCSSClasses = (
     };
   } else {
     /**
-     * Set values from Inputs, if not provided, check if FudisGridService has defaults, if not, use defaults.
+     * Set values from Inputs, if not provided, check if FudisGridService has defaults, if not, use
+     * defaults.
      */
     return {
       width: appValues.width ?? serviceValues.width ?? defaultValues.width,

@@ -2,7 +2,8 @@ import { Directive, HostBinding, TemplateRef } from '@angular/core';
 
 // TODO: Write tests for Actions Directive
 /**
- * A marker directive used to tag action buttons that will be rendered inside the allowed components.
+ * A marker directive used to tag action buttons that will be rendered inside the allowed
+ * components.
  */
 @Directive({ selector: 'fudis-expandable-actions' })
 export class ExpandableActionsDirective {
