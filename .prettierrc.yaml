@@ -1,3 +1,4 @@
 printWidth: 100
 htmlWhitespaceSensitivity: strict
 plugins: ["prettier-plugin-jsdoc"]
+jsdocCommentLineStrategy: "multiline"
