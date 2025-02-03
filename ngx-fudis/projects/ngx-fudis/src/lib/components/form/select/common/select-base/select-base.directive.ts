@@ -29,6 +29,7 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -212,6 +213,11 @@ export class SelectBaseDirective
   private _keyDown: string | null = null;
 
   /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
+  /**
    * Used to pass info, that Clear Button was clicked
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
@@ -226,14 +232,17 @@ export class SelectBaseDirective
         this._optionsLoadedOnce = true;
       }
 
-      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-        this._updateValueAndValidityTrigger.next();
-        if (value) {
-          this._optionsLoadedOnce = true;
-        }
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((value) => {
+          this._updateValueAndValidityTrigger.next();
+          if (value) {
+            this._optionsLoadedOnce = true;
+          }
 
-        this._updateComponentStateFromControlValue();
-      });
+          this._updateComponentStateFromControlValue();
+        });
     }
 
     if (

@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fudis-radio-button-group',
@@ -36,6 +37,11 @@ export class RadioButtonGroupComponent
    */
   @Output() handleChange = new EventEmitter<FudisRadioButtonChangeEvent>();
 
+  /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
   ngOnInit() {
     this._setParentComponentId('radio-button-group');
     this._updateValueAndValidityTrigger.next();
@@ -44,7 +50,10 @@ export class RadioButtonGroupComponent
   /** Add value and validity check when control value changes */
   ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this.control.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._updateValueAndValidityTrigger.next());
     }
   }
 

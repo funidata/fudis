@@ -22,7 +22,7 @@ import { FudisValidatorUtilities } from '../../../../utilities/form/validator-ut
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateRangeComponent } from '../date-range/date-range.component';
 import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
@@ -169,6 +169,11 @@ export class DatepickerComponent
   private _parseValidatorInstance: FudisValidatorFn | null;
 
   /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
+  /**
    * Validator reads HTML input field and checks if it can be converted to valid Date object
    */
   private _datepickerParseValidatorFn(): FudisValidatorFn {
@@ -190,14 +195,12 @@ export class DatepickerComponent
   private _addParseValidator(): void {
     this._parseValidatorInstance = this._datepickerParseValidatorFn();
     this.control.addValidators(this._parseValidatorInstance);
-    this.control.updateValueAndValidity();
   }
 
   private _removeParseValidator(): void {
     if (this._parseValidatorInstance) {
       this.control.removeValidators(this._parseValidatorInstance);
       this._parseValidatorInstance = null;
-      this.control.updateValueAndValidity();
     }
   }
 
@@ -228,13 +231,20 @@ export class DatepickerComponent
 
     // Do checks for the control to define attributes used in e.g. HTML
     if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._subscription?.unsubscribe();
       this._updateValueAndValidityTrigger.next();
       // Subscribe to control value changes and call parent's date crossing check with current value and Date Range input type
       if (this._parentDateRange && this.dateRangeType) {
-        this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-          this._updateValueAndValidityTrigger.next();
-          this._parentDateRange?.checkDateCrossings(value, this.dateRangeType!);
-        });
+        this._subscription = this.control.valueChanges
+          .pipe(takeUntilDestroyed(this._destroyRef))
+          .subscribe((value) => {
+            this._updateValueAndValidityTrigger.next();
+            this._parentDateRange?.checkDateCrossings(value, this.dateRangeType!);
+          });
+      } else {
+        this._subscription = this.control.valueChanges
+          .pipe(takeUntilDestroyed(this._destroyRef))
+          .subscribe(() => this._updateValueAndValidityTrigger.next());
       }
 
       // If control changes and these checks are on, add parseValidator

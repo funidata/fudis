@@ -8,7 +8,6 @@ import { IconComponent } from '../../icon/icon.component';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement } from '../../../utilities/tests/utilities';
-import { SimpleChange } from '@angular/core';
 import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -39,7 +38,6 @@ describe('TextInputComponent', () => {
     fixture = TestBed.createComponent(TextInputComponent);
     component = fixture.componentInstance;
     component.control = textInputControl;
-    fixture.detectChanges();
   });
 
   function assertTextInputHasClasses(classes: string): void {
@@ -66,11 +64,13 @@ describe('TextInputComponent', () => {
   }
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   describe('HTML attributes', () => {
     it('should have correct type attribute', () => {
+      fixture.detectChanges();
       textInputTypeCheck('text');
       textInputTypeCheck('email');
       textInputTypeCheck('number');
@@ -80,12 +80,14 @@ describe('TextInputComponent', () => {
     });
 
     it('should have generated id', () => {
+      fixture.detectChanges();
       const inputElement = getElement(fixture, 'input');
 
       expect(inputElement.getAttribute('id')).toEqual('fudis-text-input-1');
     });
 
     it('should have custom id', () => {
+      fixture.detectChanges();
       const inputElement = getElement(fixture, 'input');
       fixture.componentRef.setInput('id', 'my-custom-id');
       fixture.detectChanges();
@@ -96,6 +98,7 @@ describe('TextInputComponent', () => {
 
   describe('Control', () => {
     it('should set control as invalid if required text-input is touched and empty', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', FudisValidators.required('This field is required'));
 
       expect(component.control.value).toEqual('');
@@ -103,6 +106,7 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if text is too short according to given minLength validator value', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short')]);
       component.control.patchValue('too short');
 
@@ -111,6 +115,7 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if text is too long according to given maxLength validator value', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', [FudisValidators.maxLength(10, 'Too long text')]);
       component.control.patchValue('too longy long text');
 
@@ -119,6 +124,7 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if number is not respective to given min validator value', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', [FudisValidators.min(1, 'Too small')]);
       component.control.patchValue('-10');
 
@@ -127,6 +133,7 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if number is not respective to given max validator value', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', [
         FudisValidators.max(99, 'The given number is too big'),
       ]);
@@ -137,6 +144,7 @@ describe('TextInputComponent', () => {
     });
 
     it('should set value as null, if empty string is passed as value', () => {
+      fixture.detectChanges();
       component.control.patchValue('');
 
       expect(component.control.value).toEqual(null);
@@ -147,30 +155,19 @@ describe('TextInputComponent', () => {
     });
 
     it('should not set value as null, if empty string is passed as value', () => {
-      const previousValue = component.nullControlOnEmptyString;
-
       component.nullControlOnEmptyString = false;
 
-      component.ngOnChanges({
-        nullControlOnEmptyString: new SimpleChange(
-          previousValue,
-          component.nullControlOnEmptyString,
-          true,
-        ),
-      });
-
-      expect(component.control.value).toEqual(null);
+      fixture.detectChanges();
 
       component.control.patchValue('');
-
       expect(component.control.value).toEqual('');
 
       component.control.patchValue('  ');
-
       expect(component.control.value).toEqual('  ');
     });
 
     it('should be disabled', () => {
+      fixture.detectChanges();
       const inputElement = getElement(fixture, 'input');
 
       component.control.disable(); // Disabled through control
@@ -199,6 +196,7 @@ describe('TextInputComponent', () => {
 
   describe('CSS classes', () => {
     it('should have respective classes according to given size Input', () => {
+      fixture.detectChanges();
       textInputSizeCheck('sm');
       textInputSizeCheck('md');
       textInputSizeCheck('lg');
@@ -207,6 +205,7 @@ describe('TextInputComponent', () => {
 
   describe('Tooltip', () => {
     it('should be visible', () => {
+      fixture.detectChanges();
       fixture.componentRef.setInput('tooltip', 'This is tooltip text');
       fixture.detectChanges();
 

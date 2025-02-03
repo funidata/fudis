@@ -7,7 +7,7 @@ import { FudisValidatorUtilities } from '../../../utilities/form/validator-utili
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'fudis-text-input',
@@ -60,6 +60,11 @@ export class TextInputComponent
    */
   protected _minNumber = new BehaviorSubject<number | null>(null);
 
+  /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
   ngOnInit(): void {
     this._setComponentId('text-input');
     this._updateValueAndValidityTrigger.next();
@@ -68,14 +73,25 @@ export class TextInputComponent
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this.control.valueChanges.subscribe(() => this._updateValueAndValidityTrigger.next());
+      if (!changes.control?.firstChange) {
+        this._setControlValueSubscription();
+      }
+
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._updateValueAndValidityTrigger.next());
     }
 
     if (changes.type?.currentValue !== changes.type?.previousValue) {
       this._updateValueAndValidityTrigger.next();
     }
 
-    if (changes.nullControlOnEmptyString?.currentValue !== changes.control?.previousValue) {
+    if (
+      !changes.nullControlOnEmptyString?.firstChange &&
+      changes.nullControlOnEmptyString?.currentValue !==
+        changes.nullControlOnEmptyString?.previousValue
+    ) {
       this._setControlValueSubscription();
     }
   }
