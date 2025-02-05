@@ -96,6 +96,7 @@ describe('DescriptionListItemTermComponent', () => {
     variant: FudisDescriptionListVariant = 'regular',
   ): HTMLElement {
     mockFixture.detectChanges();
+
     const dlItemElement = getElement(
       mockFixture,
       `fudis-dt ${type}.fudis-dl-item-term__${variant}`,
