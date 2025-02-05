@@ -101,6 +101,7 @@ describe('DescriptionListItemDetailsComponent', () => {
     type: string,
     variant: FudisDescriptionListVariant = 'regular',
   ): HTMLElement {
+    mockFixture.detectChanges();
     const dlItemDetailsElement = getElement(
       mockFixture,
       `fudis-dd ${type}.fudis-dl-item-details__${variant}`,
@@ -150,7 +151,6 @@ describe('DescriptionListItemDetailsComponent', () => {
       expect(getDlItemDetailsElement('span').className).toEqual('fudis-dl-item-details__regular');
 
       mockComponent.variant = 'compact';
-      mockFixture.detectChanges();
       mockFixture.detectChanges();
 
       expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(

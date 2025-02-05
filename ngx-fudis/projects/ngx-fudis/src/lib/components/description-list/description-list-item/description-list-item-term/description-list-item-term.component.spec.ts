@@ -88,7 +88,6 @@ describe('DescriptionListItemTermComponent', () => {
 
     mockFixture = TestBed.createComponent(MockDlComponent);
     mockComponent = mockFixture.componentInstance;
-    mockComponent.langVisible = false;
     mockFixture.detectChanges();
   });
 
@@ -96,6 +95,7 @@ describe('DescriptionListItemTermComponent', () => {
     type: string,
     variant: FudisDescriptionListVariant = 'regular',
   ): HTMLElement {
+    mockFixture.detectChanges();
     const dlItemElement = getElement(
       mockFixture,
       `fudis-dt ${type}.fudis-dl-item-term__${variant}`,
@@ -151,12 +151,11 @@ describe('DescriptionListItemTermComponent', () => {
   });
 
   describe('CSS classes', () => {
-    it('should have main CSS class', async () => {
+    it('should have main CSS class', () => {
       expect(getDlItemTermElement('dt').className).toEqual('fudis-dl-item-term__regular');
       expect(getDlItemTermElement('span').className).toEqual('fudis-dl-item-term__regular');
 
       mockComponent.variant = 'compact';
-      mockFixture.detectChanges();
       mockFixture.detectChanges();
 
       expect(getDlItemTermElement('dt', 'compact').className).toEqual(
@@ -193,7 +192,6 @@ describe('DescriptionListItemTermComponent', () => {
 
   describe('Language options hidden', () => {
     it('should have only one visible Language Badge Group', () => {
-      mockComponent.langVisible = false;
       mockFixture.detectChanges();
 
       const allLanguageBadgeGroups = getAllLanguageBadgeGroups();
@@ -216,7 +214,6 @@ describe('DescriptionListItemTermComponent', () => {
     });
 
     it('should have all Language Badge Groups visible if one details has lang property', async () => {
-      mockComponent.langVisible = true;
       mockFixture.detectChanges();
 
       const allLanguageBadgeGroups = getAllLanguageBadgeGroups();

@@ -85,13 +85,12 @@ describe('DescriptionListItemComponent', () => {
   beforeEach(() => {
     mockFixture = TestBed.createComponent(MockDlComponent);
     mockComponent = mockFixture.componentInstance;
-    mockComponent.disableGrid = false;
     mockFixture.detectChanges();
   });
 
   function getDlItemElement(type: string): HTMLElement {
-    const dlItemElement = getElement(mockFixture, `fudis-dl-item ${type}`);
     mockFixture.detectChanges();
+    const dlItemElement = getElement(mockFixture, `fudis-dl-item ${type}`);
 
     return dlItemElement;
   }
@@ -123,14 +122,12 @@ describe('DescriptionListItemComponent', () => {
       expect(getDlItemElement('p').className).toEqual('fudis-dl-item');
     });
 
-    it('should have respective class if grid is disabled from parent DL', async () => {
+    it('should have respective class if grid is disabled from parent DL', () => {
       mockComponent.disableGrid = true;
       mockFixture.detectChanges();
 
-      await mockFixture.whenStable().then(() => {
-        expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
-        expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
-      });
+      expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
+      expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
     });
   });
 
