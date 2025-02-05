@@ -1,13 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  Host,
-  Inject,
-  Input,
-  OnInit,
-  Optional,
-  ViewChild,
-} from '@angular/core';
+import { Directive, ElementRef, Host, Inject, Input, Optional, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
@@ -22,7 +13,7 @@ import { FudisLanguageAbbr } from '../../../../../types/miscellaneous';
 @Directive({
   selector: '[fudisSelectOptionBase]',
 })
-export class SelectOptionBaseDirective extends DropdownItemBaseDirective implements OnInit {
+export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   constructor(
     @Inject(DOCUMENT) _document: Document,
     @Host() @Optional() protected _parentGroup: SelectGroupComponent,
@@ -156,8 +147,4 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective impleme
    */
   // eslint-disable-next-line
   protected _clickOption(event: Event): void {}
-
-  ngOnInit() {
-    this.data['elementId'] = this._id;
-  }
 }
