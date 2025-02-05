@@ -20,6 +20,7 @@ test("alert group default", async ({ page }) => {
   await page.getByTestId("fudis-alert-6-button").click(); // Dismiss one Alert
   await page.getByTestId("fudis-button-3").click(); // Add success Alert
   await page.getByTestId("fudis-button-7").click(); // Open dialog
+  await expect(page.getByText("Small test dialog")).toBeVisible();
 
   await page.getByTestId("fudis-alert-5-button").click(); // Dismiss one Alert
   await page.keyboard.press("Tab"); // Tab away from the last Alert
@@ -28,6 +29,7 @@ test("alert group default", async ({ page }) => {
   await page.keyboard.press("Tab"); // Tab to the first Alert since we are inside focus trap
   await expect(page).toHaveScreenshot("2-open-dialog-and-dismiss-alert.png");
   await page.keyboard.press("Escape"); // Close dialog
+  await expect(page.getByText("Small test dialog")).not.toBeVisible();
 
   // Dismiss all alerts
   await page.getByTestId("fudis-button-6").click();
