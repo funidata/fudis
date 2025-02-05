@@ -47,12 +47,16 @@ export class MultiselectOptionComponent
 
   ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent>) {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
-      this._id = this._idService.getNewSelectOptionId(
+      const newOptionId = this._idService.getNewSelectOptionId(
         this.data.label,
         'multiselect',
         this._parent.id,
         this._parentGroup?.id,
       );
+
+      if (this._id && this._id !== newOptionId) this.clearParentOptionVisibility();
+
+      this._id = newOptionId;
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
 
@@ -71,6 +75,10 @@ export class MultiselectOptionComponent
   }
 
   ngOnDestroy(): void {
+    this.clearParentOptionVisibility();
+  }
+
+  private clearParentOptionVisibility() {
     this._parentMultiselect.setOptionVisibility(this._id, false);
     this._parentGroup?.setOptionVisibility(this._id, false);
   }

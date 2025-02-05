@@ -44,12 +44,16 @@ export class SelectOptionComponent
 
   ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective>): void {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
-      this._id = this._idService.getNewSelectOptionId(
+      const newOptionId = this._idService.getNewSelectOptionId(
         this.data.label,
         'select',
         this._parent.id,
         this._parentGroup?.id,
       );
+
+      if (this._id && this._id !== newOptionId) this.clearParentOptionVisibility();
+
+      this._id = newOptionId;
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
 
@@ -60,6 +64,10 @@ export class SelectOptionComponent
   }
 
   ngOnDestroy(): void {
+    this.clearParentOptionVisibility();
+  }
+
+  private clearParentOptionVisibility() {
     this._parentSelect.setOptionVisibility(this._id, false);
     this._parentGroup?.setOptionVisibility(this._id, false);
   }
