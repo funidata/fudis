@@ -193,7 +193,6 @@ describe('SelectOptionComponent', () => {
       enabledOption.click();
 
       expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-        elementId: 'fudis-select-1-option-100zewl',
         label: 'Screaming hairy armadillo (partly endangered)',
         sound: "Rollin' rollin' rollin'!",
         value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
@@ -215,7 +214,6 @@ describe('SelectOptionComponent', () => {
     fixture.detectChanges();
 
     expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-      elementId: 'fudis-select-1-option-w2yoqs',
       label: 'Platypus',
       sound: 'Plat plat!',
       value: 'value-3-platypys',
