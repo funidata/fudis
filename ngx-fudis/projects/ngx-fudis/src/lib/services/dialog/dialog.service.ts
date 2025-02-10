@@ -38,7 +38,9 @@ export class FudisDialogService {
   public close(dialogResult?: any): void {
     const currentDialogs = this.ngMaterialDialog.openDialogs;
 
-    currentDialogs?.[currentDialogs.length - 1].close(dialogResult);
+    if (currentDialogs.length > 0) {
+      currentDialogs?.[currentDialogs.length - 1].close(dialogResult);
+    }
   }
 
   /**
