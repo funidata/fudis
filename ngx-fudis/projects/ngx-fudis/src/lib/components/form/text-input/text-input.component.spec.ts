@@ -63,9 +63,22 @@ describe('TextInputComponent', () => {
     expect(typeAttribute).toEqual(type);
   }
 
-  it('should create', () => {
+  it('should init the component successfully', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { _updateValueAndValidityTrigger } = component as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jest.spyOn(component as any, '_setControlValueSubscription');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jest.spyOn(component as any, '_setComponentId');
+    jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
     fixture.detectChanges();
-    expect(component).toBeTruthy();
+
+    expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._setControlValueSubscription).toHaveBeenCalledTimes(1);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._setComponentId).toHaveBeenCalledTimes(1);
   });
 
   describe('HTML attributes', () => {
@@ -97,11 +110,21 @@ describe('TextInputComponent', () => {
 
   describe('Control', () => {
     it('should not trigger valueChages', () => {
+      let didEmit = false;
+      component.control.valueChanges.subscribe(() => (didEmit = true));
       fixture.detectChanges();
+      expect(didEmit).toBeFalsy();
     });
 
     it('should unsubscribe on destroy', () => {
       fixture.detectChanges();
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeFalsy();
+
+      fixture.destroy();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeTruthy();
     });
 
     it('should set control as invalid if required text-input is touched and empty', () => {
