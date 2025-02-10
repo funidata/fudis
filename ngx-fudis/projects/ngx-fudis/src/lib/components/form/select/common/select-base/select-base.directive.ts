@@ -390,8 +390,8 @@ export class SelectBaseDirective
   }
 
   /**
-   * Set control value to null
-   * Control value should reset even when user input does not match any option value (i.e. control value is null), so that dropdown shows options correctly
+   * Set control value to null Control value should reset even when user input does not match any
+   * option value (i.e. control value is null), so that dropdown shows options correctly
    */
   protected _setControlNull(): void {
     if (this.control.value) {

@@ -250,7 +250,8 @@ export class FudisIdService {
   }
 
   /**
-   * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-g3n3ratedh4sh
+   * Get an id and add it to collection for Select Options -->
+   * fudis-select-4-group-2-option-g3n3ratedh4sh
    */
   public getNewSelectOptionId(
     label: string,
@@ -272,9 +273,10 @@ export class FudisIdService {
     return `${id}-option-${FudisIdService.hashLabel(label)}`;
   }
 
-  /** djb2 hash for hashing the label for the option id.
-   * It doesn't have to be this, it can be anything as long
-   * as it's fast and short */
+  /**
+   * Djb2 hash for hashing the label for the option id. It doesn't have to be this, it can be
+   * anything as long as it's fast and short
+   */
   private static hashLabel(label: string): string {
     let hash = 0;
     for (let i = 0; i < label.length; i++) {
