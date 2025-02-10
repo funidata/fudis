@@ -39,12 +39,18 @@ Otherwise the first selectable language with provided translation will be the de
 
 <Canvas of={LanguageBadgeGroupStories.WithInteractiveContent} />
 
+### Accessibility concern
+
+If parts of the text are changed to another language, it is important to address this to assistive technology so that they can correctly pronounce foreign language.
+When Language Badge Group is combined with [Body Text](/docs/components-typography-body-text--documentation) component, use body text's `lang` attribute to define parts of text in a different language.
+
 ### Accessibility
 
 - Language badge has visible focus state
 - Badge group can be navigated with keyboard tab key
 - Badge click can be triggered with keyboard enter and space key
 - Each badge has an aria-label informing the full language name and possible missing and selected states
+- Lang attribute is used with parts of text that are in a different language
 
 ### Related directives / services
 
