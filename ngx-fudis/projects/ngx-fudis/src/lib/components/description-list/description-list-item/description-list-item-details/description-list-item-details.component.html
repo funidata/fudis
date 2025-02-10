@@ -1,12 +1,12 @@
 <ng-container *ngIf="!lang || (_langSelected | async)">
   <ng-container *ngIf="_parentDl.tag === 'p'">
-    <span [id]="_id" [class]="_mainCssClass | async">
+    <span [id]="_id" [attr.lang]="lang" [class]="_mainCssClass | async">
       <ng-container *ngTemplateOutlet="ddContent"></ng-container>
     </span>
   </ng-container>
 
   <ng-container *ngIf="_parentDl.tag === 'dl'">
-    <dd [id]="_id" [class]="_mainCssClass | async">
+    <dd [id]="_id" [attr.lang]="lang" [class]="_mainCssClass | async">
       <ng-container *ngTemplateOutlet="ddContent"></ng-container>
     </dd>
   </ng-container>

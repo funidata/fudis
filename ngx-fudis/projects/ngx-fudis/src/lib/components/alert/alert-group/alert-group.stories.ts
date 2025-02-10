@@ -1,7 +1,6 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { AfterViewInit, Component, TemplateRef, ViewChild, effect } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
@@ -12,7 +11,7 @@ import docs from '../alert.mdx';
 @Component({
   selector: 'example-add-alerts',
   template: `<div [style]="'margin-top:' + _marginCounter + 'rem'">
-      <fudis-grid [columns]="'repeat(4,auto)'" [width]="'sm'">
+      <fudis-grid [columns]="{ sm: 1, md: '1fr 1fr 1fr 1fr' }">
         <fudis-button [label]="'Add danger'" (handleClick)="addDanger()" />
         <fudis-button [label]="'Add warning'" (handleClick)="addWarning()" />
         <fudis-button [label]="'Add success'" (handleClick)="addSuccess()" />
@@ -129,7 +128,6 @@ export default {
   component: AlertGroupComponent,
   decorators: [
     moduleMetadata({
-      imports: [RouterTestingModule],
       declarations: [AddAlertsComponent],
     }),
   ],
