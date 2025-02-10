@@ -87,10 +87,12 @@ export interface FudisLabelData {
 }
 
 /**
- * Types for extending ngOnChanges SimpleChanges type 
- * - T = any FudisComponent which have @Input() properties 
- * - P = property of component. E. g. for Grid columns and rowGap or for Heading level and size. 
- * - So T[P] translates to e.g. HeadingComponent['level'] --> HeadingComponent.level --> values from 1-6
+ * Types for extending ngOnChanges SimpleChanges type
+ *
+ * - T = any FudisComponent which have @Input() properties
+ * - P = property of component. E. g. for Grid columns and rowGap or for Heading level and size.
+ * - So T[P] translates to e.g. HeadingComponent['level'] --> HeadingComponent.level --> values from
+ *   1-6
  */
 interface FudisComponentChange<T, P extends keyof T> extends SimpleChange {
   previousValue: T[P] | undefined;

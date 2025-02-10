@@ -55,12 +55,12 @@ export class FieldSetComponent
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-   * 
+   *
    * - Xxl = Default value. Viewports of 1600px and larger
-   * - Xl = Viewports smaller than 1600px 
-   * - Lg = Viewports smaller than 1200px 
-   * - Md = Viewports smaller than 992px 
-   * - Sm = Viewports smaller than 768px 
+   * - Xl = Viewports smaller than 1600px
+   * - Lg = Viewports smaller than 1200px
+   * - Md = Viewports smaller than 992px
+   * - Sm = Viewports smaller than 768px
    * - Xs = Viewports smaller than 576px
    */
   @Input() width: FudisGridWidth = 'xxl';
