@@ -19,7 +19,7 @@ import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';
       (handleClick)="languageChange($event)"
     />
 
-    <fudis-body-text style="margin-top: 1rem;margin-bottom: 3rem;">{{
+    <fudis-body-text [lang]="selected" style="margin-top: 1rem;margin-bottom: 3rem;">{{
       translations[selected]
     }}</fudis-body-text>
 
