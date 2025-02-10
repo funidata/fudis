@@ -214,7 +214,7 @@ describe('DescriptionListItemTermComponent', () => {
       mockFixture.detectChanges();
     });
 
-    it('should have all Language Badge Groups visible if one details has lang property', async () => {
+    it('should have all Language Badge Groups visible if one details has lang property', () => {
       mockFixture.detectChanges();
 
       const allLanguageBadgeGroups = getAllLanguageBadgeGroups();
