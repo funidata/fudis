@@ -39,9 +39,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       });
   }
 
-  /**
-   * CLASS VARIABLES
-   */
+  // --------------------
+  //
+  // CLASS VARIABLES
+  //
+  // --------------------
 
   /**
    * Collection of all registered errors categorised by parent Form id. Used as "temporary" storage
@@ -82,9 +84,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   private _reloadGuard: string[] = [];
 
-  /**
-   * GETTERS & SETTERS FOR CLASS VARIABLES
-   */
+  // --------------------
+  //
+  // GETTERS & SETTERS FOR CLASS VARIABLES
+  //
+  // --------------------
 
   /**
    * Used in Components to listen to Reload updates
@@ -149,9 +153,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
   }
 
-  /**
-   * ADD AND REMOVE ERRORS
-   */
+  // --------------------
+  //
+  // ADD AND REMOVE ERRORS
+  //
+  // --------------------
 
   /**
    * Adds a new error to the list of current errors If new error item has a matching id on the list,
@@ -220,12 +226,14 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
   }
 
-  /**
-   * RELOADING LIST OF ERRORS TO HTML DOM
-   *
-   * Functions to actually update Components which listen to Error changes. These will update the
-   * Observables components are listening to.
-   */
+  // --------------------
+  //
+  // RELOADING LIST OF ERRORS TO HTML DOM
+  //
+  // Functions to actually update Components which listen to Error changes. These will update the
+  // Observables components are listening to.
+  //
+  // --------------------
 
   /**
    * Updates the visible and dynamic lists of all form and errors with the current error list
@@ -265,12 +273,14 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
   }
 
-  /**
-   * DOM RELATED FUNCTIONS
-   *
-   * Usually called by Components when they are initialized and they register themselves to Error
-   * Summary Service
-   */
+  // --------------------
+  //
+  // DOM RELATED FUNCTIONS
+  //
+  // Usually called by Components when they are initialized and they register themselves to Error
+  // Summary Service
+  //
+  // --------------------
 
   /**
    * @param element HTMLElement to check, if it has Form Component as ancestor
@@ -394,9 +404,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     delete this._formStructure?.[formId]?.sections[sectionId];
   }
 
-  /**
-   * MISC
-   */
+  // --------------------
+  //
+  // MISC
+  //
+  // --------------------
 
   ngOnDestroy(): void {
     this._errorsObservable.complete();

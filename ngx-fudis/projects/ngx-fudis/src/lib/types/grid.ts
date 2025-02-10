@@ -1,9 +1,11 @@
 import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
 import { FudisSpacing } from './spacing';
 
-/**
- * ## Grid related types
- */
+// --------------------
+//
+// Grid related types
+//
+// --------------------
 
 /**
  * Default 'columns' value for Grid component
@@ -73,9 +75,11 @@ export interface FudisGridPropertyCollection {
   serviceValues: FudisGridProperties;
 }
 
-/**
- * ## Grid Item related types
- */
+// --------------------
+//
+// Grid Item related types
+//
+// --------------------
 
 /**
  * Default value for 'columns' input of Grid Item
