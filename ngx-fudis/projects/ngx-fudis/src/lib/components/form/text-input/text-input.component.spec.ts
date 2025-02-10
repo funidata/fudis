@@ -109,7 +109,7 @@ describe('TextInputComponent', () => {
   });
 
   describe('Control', () => {
-    it('should not trigger valueChages', () => {
+    it('should not trigger valueChanges', () => {
       let didEmit = false;
       component.control.valueChanges.subscribe(() => (didEmit = true));
       fixture.detectChanges();
