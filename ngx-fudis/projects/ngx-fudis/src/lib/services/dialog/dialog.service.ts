@@ -12,8 +12,10 @@ export class FudisDialogService {
 
   /**
    * Open new dialog.
+   *
    * @param component Component or template to show in the dialog.
-   * @param config Optional configuration object. Use the `data` field to inject data into `component`.
+   * @param config Optional configuration object. Use the `data` field to inject data into
+   *   `component`.
    * @returns Reference to the dialog that was opened.
    */
   public open<T, R = any>(
@@ -30,6 +32,7 @@ export class FudisDialogService {
 
   /**
    * Close opened Dialog
+   *
    * @param dialogResult Data sent to Component which opened this dialog.
    */
   public close(dialogResult?: any): void {
@@ -62,7 +65,6 @@ export class FudisDialogService {
   }
 
   /**
-   *
    * @returns Currently open Dialogs
    */
   public dialogsOpen(): MatDialogRef<any, any>[] {

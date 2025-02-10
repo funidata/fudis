@@ -29,6 +29,7 @@ export class FudisLabelHeightService {
 
   /**
    * Register new Label to service. Triggers calculation of all Labels
+   *
    * @param data
    */
   public registerNewLabel(data: FudisLabelData): void {
@@ -39,6 +40,7 @@ export class FudisLabelHeightService {
 
   /**
    * Delete Label from service
+   *
    * @param id
    */
   public deleteLabelData(id: string): void {
@@ -65,6 +67,7 @@ export class FudisLabelHeightService {
 
   /**
    * Calculate height and position of all registered Labels
+   *
    * @returns FudisLabelData array with freshly calculated values
    */
   private _calculateLabelHeights(): FudisLabelData[] {

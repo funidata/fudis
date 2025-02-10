@@ -30,7 +30,8 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
     });
   }
   /**
-   * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
+   * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox
+   * children.
    */
   @Input() override formGroup: FormGroup<T>;
 
@@ -45,12 +46,14 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   @Output() handleChange = new EventEmitter<FudisCheckboxGroupChangeEvent>();
 
   /**
-   * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
+   * To determine if focus has been moved out from the whole checkbox group, so possible errors will
+   * not show before that.
    */
   private _groupBlurredOut = false;
 
   /**
-   * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created FormGroup or one provided from the App.
+   * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created
+   * FormGroup or one provided from the App.
    */
   protected _internalFormGroup: boolean = false;
 
@@ -59,7 +62,8 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
       this._groupBlurredOut = true;
     } else {
       /**
-       * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
+       * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so
+       * error messages are loaded when e.g. on Submit touched value is changed programatically.
        */
       const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
       this.formGroup.markAllAsTouched = () => {
@@ -106,7 +110,8 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   }
 
   /**
-   * Used to display possible error messages only when focus has moved out from all the group's checkboxes.
+   * Used to display possible error messages only when focus has moved out from all the group's
+   * checkboxes.
    */
   public setGroupBlurredOut(value: boolean): void {
     if (value) {
@@ -117,8 +122,10 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   }
 
   /**
-   * When child Checkbox component is clicked, it calls this parent's function, which will then trigger Output emit.
-   * @param changedControlName name of the clicked control
+   * When child Checkbox component is clicked, it calls this parent's function, which will then
+   * trigger Output emit.
+   *
+   * @param changedControlName Name of the clicked control
    */
   public triggerEmit(changedControlName: string): void {
     this.handleChange.emit({

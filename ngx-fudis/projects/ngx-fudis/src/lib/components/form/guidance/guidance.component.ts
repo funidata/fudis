@@ -40,12 +40,14 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   }
 
   /**
-   * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service.
+   * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in
+   * emit information for Error Summary Service.
    */
   @Input({ required: true }) for: string;
 
   /**
-   * Label text of input, fieldset or similar Guidance is related to. Used in emit information for Error Summary service.
+   * Label text of input, fieldset or similar Guidance is related to. Used in emit information for
+   * Error Summary service.
    */
   @Input({ required: true }) inputLabel: string;
 
@@ -65,7 +67,9 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   @Input() helpText: string | undefined;
 
   /**
-   * If there is no Fudis FieldSet and Error Summary associated with this input and its Guidance, 'polite' can be considered so that screen reader will get notified if there are new errors related to the input.
+   * If there is no Fudis FieldSet and Error Summary associated with this input and its Guidance,
+   * 'polite' can be considered so that screen reader will get notified if there are new errors
+   * related to the input.
    */
   @Input() ariaLive: 'off' | 'polite' | 'assertive' = 'off';
 
@@ -75,17 +79,20 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   @Input() maxLength: number | null = null;
 
   /**
-   * Used to match FormControl value for the Localized Text Group component so that the component can display the length of the entered input for the connected language option.
+   * Used to match FormControl value for the Localized Text Group component so that the component
+   * can display the length of the entered input for the connected language option.
    */
   @Input() selectedOption: string;
 
   /**
-   * Used with together with Checkbox Group component, to display errors only when focus has moved outside of whole Checkbox Group.
+   * Used with together with Checkbox Group component, to display errors only when focus has moved
+   * outside of whole Checkbox Group.
    */
   @Input() groupBlurredOut: boolean = true;
 
   /**
-   * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
+   * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where
+   * "characters used" is "maxLengthText".
    */
   protected _maxLengthText = new BehaviorSubject<string>('');
 
@@ -95,7 +102,8 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   protected _maxLengthAlertThreshold: number;
 
   /**
-   * The width of the character-limit-indicator, determined by how many digits are in the maxLength input value
+   * The width of the character-limit-indicator, determined by how many digits are in the maxLength
+   * input value
    */
   protected _maxLengthWidth: 'sm' | 'md' | 'lg';
 
@@ -156,7 +164,9 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
 
   private _subscribeToErrors(formId: string): void {
     /**
-     * If there's a function call of errorSummaryService.reloadFormErrors('id-of-this-form'), and this Guidance's parent Form id is that 'id-for-this-form', this effect() check will trigger and set this Guidance's control / group as touched, so possible errors are set as visible.
+     * If there's a function call of errorSummaryService.reloadFormErrors('id-of-this-form'), and
+     * this Guidance's parent Form id is that 'id-for-this-form', this effect() check will trigger
+     * and set this Guidance's control / group as touched, so possible errors are set as visible.
      */
 
     toObservable(this._errorSummaryService.errorsSignal[formId], {
@@ -191,7 +201,10 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   }
 
   /**
-   * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made. It should only trigger reload one time, when all errors of this Guidance are registered.
+   * This function is triggered, if this component is loaded to the DOM after Error Summary has been
+   * loaded and there are new validation errors which didn't exist at the time original reload
+   * errors call was made. It should only trigger reload one time, when all errors of this Guidance
+   * are registered.
    */
   protected _reloadErrorSummaryOnLazyLoad(error: FudisErrorSummaryNewError): void {
     if (

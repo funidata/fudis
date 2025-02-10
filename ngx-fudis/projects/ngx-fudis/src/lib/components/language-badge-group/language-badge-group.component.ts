@@ -109,9 +109,6 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
     this._languageLabels.next(tempLangLabels);
   }
 
-  /**
-   *
-   */
   private _determineSelectedBadge(translatedLanguages: FudisLanguageAbbr[]): void {
     let determinedLanguage: FudisLanguageAbbr | null;
 

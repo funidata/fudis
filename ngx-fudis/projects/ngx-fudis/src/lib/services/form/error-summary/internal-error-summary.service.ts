@@ -39,21 +39,21 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
       });
   }
 
-  /**
-   * ------------------
-   *
-   * CLASS VARIABLES
-   *
-   * ------------------
-   */
+  // --------------------
+  //
+  // CLASS VARIABLES
+  //
+  // --------------------
 
   /**
-   * Collection of all registered errors categorised by parent Form id. Used as "temporary" storage and value will be passed to Observable when ReloadErrors is called.
+   * Collection of all registered errors categorised by parent Form id. Used as "temporary" storage
+   * and value will be passed to Observable when ReloadErrors is called.
    */
   private _errorsStore: FudisErrorSummaryAllErrors = {};
 
   /**
-   * Collection of all registered errors categorised by parent Form id. This Observable is updated with new value only when ReloadErrors is called.
+   * Collection of all registered errors categorised by parent Form id. This Observable is updated
+   * with new value only when ReloadErrors is called.
    */
   private _errorsObservable = new BehaviorSubject<FudisErrorSummaryAllErrors>({});
 
@@ -84,13 +84,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   private _reloadGuard: string[] = [];
 
-  /**
-   * ------------------
-   *
-   * GETTERS & SETTERS FOR CLASS VARIABLES
-   *
-   * ------------------
-   */
+  // --------------------
+  //
+  // GETTERS & SETTERS FOR CLASS VARIABLES
+  //
+  // --------------------
 
   /**
    * Used in Components to listen to Reload updates
@@ -114,7 +112,8 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   * Observable to store each Form's Error Summary's visibility status. Form component will listen to these changes, if visiblity changes elsewhere than the @Input() prop
+   * Observable to store each Form's Error Summary's visibility status. Form component will listen
+   * to these changes, if visiblity changes elsewhere than the @Input() prop
    */
   get errorSummaryVisibilityStatus(): { [formId: string]: WritableSignal<boolean> } {
     return this._errorSummaryVisibilityStatus;
@@ -142,8 +141,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * Hide or show Error Summary of spesific Form Component
+   *
    * @param formId Form to target
-   * @param visible hide or show Error Summary
+   * @param visible Hide or show Error Summary
    */
   public setErrorSummaryVisibility(formId: string, visible: boolean) {
     if (!this._errorSummaryVisibilityStatus[formId]) {
@@ -153,17 +153,16 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
   }
 
-  /**
-   * -------------------------
-   *
-   * ADD AND REMOVE ERRORS
-   *
-   * -------------------------
-   */
+  // --------------------
+  //
+  // ADD AND REMOVE ERRORS
+  //
+  // --------------------
 
   /**
-   * Adds a new error to the list of current errors
-   * If new error item has a matching id on the list, new error is tied to that error list object
+   * Adds a new error to the list of current errors If new error item has a matching id on the list,
+   * new error is tied to that error list object
+   *
    * @param newError Form error summary item
    */
   public addError(newError: FudisErrorSummaryNewError): void {
@@ -199,6 +198,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * Removes error object from the current errors list if it contains matching error id
+   *
    * @param error Error object
    */
   public removeError(errorToRemove: FudisErrorSummaryRemoveError): void {
@@ -226,15 +226,14 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
   }
 
-  /**
-   * ------------
-   *
-   * RELOADING LIST OF ERRORS TO HTML DOM
-   *
-   * Functions to actually update Components which listen to Error changes. These will update the Observables components are listening to.
-   *
-   * ------------
-   */
+  // --------------------
+  //
+  // RELOADING LIST OF ERRORS TO HTML DOM
+  //
+  // Functions to actually update Components which listen to Error changes. These will update the
+  // Observables components are listening to.
+  //
+  // --------------------
 
   /**
    * Updates the visible and dynamic lists of all form and errors with the current error list
@@ -248,7 +247,6 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   *
    * @param formId
    * @param focus
    */
@@ -275,20 +273,19 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
     }
   }
 
-  /**
-   * ----------------------
-   *
-   * DOM RELATED FUNCTIONS
-   *
-   * usually called by Components when they are initialized and they register themselves to Error Summary Service
-   *
-   * ----------------------
-   */
+  // --------------------
+  //
+  // DOM RELATED FUNCTIONS
+  //
+  // Usually called by Components when they are initialized and they register themselves to Error
+  // Summary Service
+  //
+  // --------------------
 
   /**
-   *
    * @param element HTMLElement to check, if it has Form Component as ancestor
-   * @returns if ancestor found, returns id of that Form and visibility status of Form's Error Summary
+   * @returns If ancestor found, returns id of that Form and visibility status of Form's Error
+   *   Summary
    */
   public getFormAncestorId(element: HTMLElement): Promise<null | string> {
     let foundId: string | null = null;
@@ -316,7 +313,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   * When new Form Component is initialized, it will register itself for child components and error messages related to it
+   * When new Form Component is initialized, it will register itself for child components and error
+   * messages related to it
+   *
    * @param formId
    */
   public registerNewForm(formId: string, errorSummaryVisible: boolean = false): void {
@@ -342,6 +341,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * When Form Component is destroyed, it will remove itself from the service
+   *
    * @param formId
    */
   public removeForm(formId: string): void {
@@ -363,8 +363,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   * Adds new fieldset to the list of current fieldsets
-   * If a fieldset with a matching id exists, replace the old fieldset with the new one
+   * Adds new fieldset to the list of current fieldsets If a fieldset with a matching id exists,
+   * replace the old fieldset with the new one
+   *
    * @param fieldset Form error summary fieldset
    */
   public addFieldset(fieldset: FudisFormErrorSummarySection): void {
@@ -375,6 +376,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * Removes the fieldset from the current fieldsets
+   *
    * @param fieldset Form error summary fieldset
    */
   public removeFieldset(formId: string, fieldsetId: string): void {
@@ -382,8 +384,9 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   * Adds new section to the list of current sections
-   * If a section with a matching id exists, replace the old section with the new one
+   * Adds new section to the list of current sections If a section with a matching id exists,
+   * replace the old section with the new one
+   *
    * @param section Form error summary section
    */
   public addSection(section: FudisFormErrorSummarySection): void {
@@ -394,19 +397,18 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * Removes the section from the current sections
+   *
    * @param section Form error summary section
    */
   public removeSection(formId: string, sectionId: string): void {
     delete this._formStructure?.[formId]?.sections[sectionId];
   }
 
-  /**
-   * -------------
-   *
-   * MISC
-   *
-   * -------------
-   */
+  // --------------------
+  //
+  // MISC
+  //
+  // --------------------
 
   ngOnDestroy(): void {
     this._errorsObservable.complete();
@@ -414,6 +416,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * Returns an error id including a control name if one is given
+   *
    * @param id Id of the form error summary item
    * @param controlName Control name of the form error summary item
    */

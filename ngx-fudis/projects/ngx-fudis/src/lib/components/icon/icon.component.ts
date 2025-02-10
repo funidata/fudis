@@ -51,7 +51,8 @@ export class IconComponent implements OnChanges {
   protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
-   * Determines icon size by its name. If icon name has suffix "-small", iconSize is set to sm, otherwise lg.
+   * Determines icon size by its name. If icon name has suffix "-small", iconSize is set to sm,
+   * otherwise lg.
    */
   private _iconSize: string;
 

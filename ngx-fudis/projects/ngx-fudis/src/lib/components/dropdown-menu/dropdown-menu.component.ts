@@ -91,8 +91,9 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
   /**
    * Check if focus is inside the Dropdown Menu component
-   * @param event focus event
-   * @returns boolean
+   *
+   * @param event Focus event
+   * @returns Boolean
    */
   private _componentFocused(event: FocusEvent): Promise<boolean> {
     return new Promise((resolve) => {

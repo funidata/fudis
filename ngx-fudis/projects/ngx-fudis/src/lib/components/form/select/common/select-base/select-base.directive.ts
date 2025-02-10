@@ -82,11 +82,11 @@ export class SelectBaseDirective
   @Input() placeholder: string;
 
   /**
-   * Determine if Select has autocompletion filter for user typed text
-   * When set to:
-   * "dropdown": default, normal select dropdown
-   * "autocompleteDropdown": dropdown with autocomplete input field
-   * "autocompleteType": autocomplete but user must type 3 letters before any results are displayed
+   * Determine if Select has autocompletion filter for user typed text When set to:
+   *
+   * - Dropdown: default, normal select dropdown
+   * - AutocompleteDropdown": dropdown with autocomplete input field
+   * - AutocompleteType: autocomplete but user must type 3 letters before any results are displayed
    */
   @Input() variant: FudisSelectVariant = 'dropdown';
 
@@ -96,17 +96,24 @@ export class SelectBaseDirective
   @Input() selectionClearButton: boolean = true;
 
   /**
-   * By default Autocomplete filters options loaded to the DOM based on user input. When this is set to 'false', filtering is disabled and all options available in DOM are displayed regardless of user's input. Disabling can be useful, if application wants to implement their own filtering logic. E. g. get user's input, run a backend search and create list of options for the Select.
+   * By default Autocomplete filters options loaded to the DOM based on user input. When this is set
+   * to 'false', filtering is disabled and all options available in DOM are displayed regardless of
+   * user's input. Disabling can be useful, if application wants to implement their own filtering
+   * logic. E. g. get user's input, run a backend search and create list of options for the Select.
    */
   @Input() autocompleteFilter: boolean = true;
 
   /**
-   * For Autocomplete variants optional helper text displayed as first item in opened dropdown list. By default uses internal Fudis translation, which can be disabled by setting this property to boolean 'false'
+   * For Autocomplete variants optional helper text displayed as first item in opened dropdown list.
+   * By default uses internal Fudis translation, which can be disabled by setting this property to
+   * boolean 'false'
    */
   @Input() autocompleteHelpText: string | false;
 
   /**
-   * By default, Autocomplete variant will display "No results found" text when there are 0 options matching. When combined with 'autocompleteFilter' false, application can set their own 'Fetching options...' etc. text while their own filtering is in progress.
+   * By default, Autocomplete variant will display "No results found" text when there are 0 options
+   * matching. When combined with 'autocompleteFilter' false, application can set their own
+   * 'Fetching options...' etc. text while their own filtering is in progress.
    */
   @Input() autocompleteNoResultsText: string | null = null;
 
@@ -142,7 +149,9 @@ export class SelectBaseDirective
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
   /**
-   *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically, so that comparing available options match given control value.
+   * Lazy loading check for expanding content, unless component control gets values from
+   * application, then set to true automatically, so that comparing available options match given
+   * control value.
    */
   protected _optionsLoadedOnce: boolean = false;
 
@@ -157,7 +166,8 @@ export class SelectBaseDirective
   protected _inputFocused: boolean = false;
 
   /**
-   * Used to handle exceptions when mouse click event fires before / after focus event or user has clicked autocomplete clear button
+   * Used to handle exceptions when mouse click event fires before / after focus event or user has
+   * clicked autocomplete clear button
    */
   protected _preventDropdownReopen: boolean | undefined = false;
 
@@ -197,7 +207,8 @@ export class SelectBaseDirective
   private _mouseUpOnInput: boolean = false;
 
   /**
-   * Used to not update visible options to HTML template before some delay has passed in case new options are still loading
+   * Used to not update visible options to HTML template before some delay has passed in case new
+   * options are still loading
    */
   private _optionLoadInterval: null | NodeJS.Timeout = null;
 
@@ -253,7 +264,7 @@ export class SelectBaseDirective
   }
 
   /**
-   * @returns signal value of autocomplete filter text
+   * @returns Signal value of autocomplete filter text
    */
   public getAutocompleteFilterText(): Signal<string> {
     return this._autocompleteFilterText.asReadonly();
@@ -271,8 +282,11 @@ export class SelectBaseDirective
 
   /**
    * Close dropdown
-   * @param focusToInput: when dropdown closes, focus or not to the input
-   * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
+   *
+   * @param focusToInput: When dropdown closes, focus or not to the input
+   * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking
+   *   an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to
+   *   the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
@@ -285,8 +299,9 @@ export class SelectBaseDirective
 
   /**
    * Each option sends information to parent if they are visible or not
-   * @param value option value
-   * @param visible is this option visible or not
+   *
+   * @param value Option value
+   * @param visible Is this option visible or not
    */
   public setOptionVisibility(value: string, visible: boolean) {
     this._latestVisibleOption = value;
@@ -316,6 +331,7 @@ export class SelectBaseDirective
 
   /**
    * Promise which determines, if some of the components used in this Select has focus or not.
+   *
    * @param event FocusEvent
    * @returns
    */
@@ -407,6 +423,7 @@ export class SelectBaseDirective
 
   /**
    * To handle input field blur events
+   *
    * @param event FocusEvent
    */
   protected _inputBlur(event: FocusEvent): void {
@@ -437,7 +454,8 @@ export class SelectBaseDirective
   }
 
   /**
-   * Register pressed key inside input field. Used to check that both key down and key up originated from same source.
+   * Register pressed key inside input field. Used to check that both key down and key up originated
+   * from same source.
    */
   protected _inputKeyDown(event: KeyboardEvent): void {
     this._keyDown = event.key;
@@ -450,6 +468,7 @@ export class SelectBaseDirective
 
   /**
    * Handle keypress for dropdown select
+   *
    * @param event KeyboardEvent
    * @param focusSelector CSS selector to focus to on ArrowDown event
    */
@@ -521,7 +540,8 @@ export class SelectBaseDirective
 
   /**
    * Resolve a promise after delay if there hasn't been new options
-   * @returns boolean
+   *
+   * @returns Boolean
    */
   private _optionsLoadDelay(): Promise<boolean> {
     let tempLatestOptions: string;
@@ -549,7 +569,9 @@ export class SelectBaseDirective
   }
 
   /**
-   * Set focus state of Clear Button and determine if Dropdown should be closed when this function is called
+   * Set focus state of Clear Button and determine if Dropdown should be closed when this function
+   * is called
+   *
    * @param event FocusEvent
    * @param state
    */
@@ -567,8 +589,9 @@ export class SelectBaseDirective
 
   /**
    * Update input filter text
-   * @param text string to set as filter text
-   * @param nullCheck true by default, check if control should be set as null
+   *
+   * @param text String to set as filter text
+   * @param nullCheck True by default, check if control should be set as null
    */
   public setAutocompleteFilterText(text: string, nullCheck = true): void {
     if (this._autocompleteFilterText() !== text) {
@@ -582,13 +605,15 @@ export class SelectBaseDirective
 
   /**
    * Checks if currently typed filter text is not same as control label value
-   * @param text filter text value emitted from autocomplete
+   *
+   * @param text Filter text value emitted from autocomplete
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected _checkIfAutocompleteValueNull(text: string): void {}
 
   /**
    * To focus on first option when dropdown opens
+   *
    * @param cssfocusSelector CSS class to focus to
    */
   protected _focusToFirstOption(clickFirstOption?: boolean): void {
@@ -630,7 +655,8 @@ export class SelectBaseDirective
   }
 
   /**
-   * Browser focus logic differs. E. g. Firefox tries to focus to Dropdown menu wrapper. This function determines that if it should focus to first option or back to input field.
+   * Browser focus logic differs. E. g. Firefox tries to focus to Dropdown menu wrapper. This
+   * function determines that if it should focus to first option or back to input field.
    */
   protected _dropdownFocus(event: FocusEvent): void {
     const focusFromInputOrClearButton =
@@ -658,6 +684,7 @@ export class SelectBaseDirective
 
   /**
    * When pressing keyboard Esc, focus to Select input and close dropdown
+   *
    * @param event
    */
   @HostListener('window:keydown.escape', ['$event'])
@@ -671,6 +698,7 @@ export class SelectBaseDirective
 
   /**
    * When user clicks, set status whether click is inside or outside the Select element
+   *
    * @param targetElement
    */
   @HostListener('document:mouseup', ['$event.target'])

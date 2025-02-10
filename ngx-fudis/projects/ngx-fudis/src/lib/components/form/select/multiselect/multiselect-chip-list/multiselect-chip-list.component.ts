@@ -41,7 +41,8 @@ export class MultiselectChipListComponent {
 
   /**
    * Focuses to the sibling and emits clicked index
-   * @param index clicked index
+   *
+   * @param index Clicked index
    */
   protected _clickChip(clickedOption: FudisSelectOption<object>, index: number) {
     this.handleClick.emit(clickedOption);

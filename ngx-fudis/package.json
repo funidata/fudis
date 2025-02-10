@@ -29,7 +29,7 @@
     "@angular/platform-browser": "^18.2.13",
     "@angular/platform-browser-dynamic": "^18.2.13",
     "@angular/router": "^18.2.13",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.1",
     "rxjs": "^7.8.1",
     "tslib": "^2.8.1",
     "zone.js": "^0.14.10"
@@ -63,7 +63,6 @@
     "jest-preset-angular": "^14.4.2",
     "ng-mocks": "^14.13.1",
     "ng-packagr": "^18.2.1",
-    "prettier": "^3.4.2",
     "semver-parser": "^4.1.7",
     "storybook": "^8.4.7",
     "stylelint": "^16.11.0",

@@ -38,7 +38,8 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   @Input({ required: true }) label: string;
 
   /**
-   * Provide additional information for screen reader users by extending text content of the label. Used in e. g. Localized Text Group for providing info about currently selected language.
+   * Provide additional information for screen reader users by extending text content of the label.
+   * Used in e. g. Localized Text Group for providing info about currently selected language.
    */
   @Input() ariaLabel: string;
 
@@ -48,7 +49,11 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   @Input() id: string;
 
   /**
-   * If component is a child of Form component, Form's Error Summary is visible, this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
+   * If component is a child of Form component, Form's Error Summary is visible, this component's
+   * control has errors and when this component is loaded for the first time, it will by default
+   * call Error Summary to reload itself again and mark control as touched. This is because if
+   * component is lazy loaded to the DOM after the initial reload errors call was made, errors of
+   * this component might not appear on the list. To disable this feature, set this to false.
    */
   @Input() errorSummaryReloadOnInit: boolean = true;
 
@@ -63,7 +68,8 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   @Input() initialFocus: boolean = false;
 
   /**
-   * Preferred way to disable input is to set formControl as disabled. This Input property should be used in edge cases only.
+   * Preferred way to disable input is to set formControl as disabled. This Input property should be
+   * used in edge cases only.
    */
   @Input() disabled: boolean = false;
 

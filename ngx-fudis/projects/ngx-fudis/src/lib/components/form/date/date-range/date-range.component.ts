@@ -12,7 +12,8 @@ export class DateRangeComponent implements OnChanges {
   constructor(private _idService: FudisIdService) {}
 
   /**
-   * Internal date comparison parse. By setting to false date comparison parsing is not executed and comparison errors are not shown.
+   * Internal date comparison parse. By setting to false date comparison parsing is not executed and
+   * comparison errors are not shown.
    */
   @Input() dateComparisonParse: boolean = true;
 
