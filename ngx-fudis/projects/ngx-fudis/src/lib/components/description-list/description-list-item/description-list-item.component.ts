@@ -65,7 +65,8 @@ export class DescriptionListItemComponent {
   protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
 
   /**
-   * DL Item has combined styles for both regular and compact versions but some styles only apply to regular version if parent's disableGrid is true.
+   * DL Item has combined styles for both regular and compact versions but some styles only apply to
+   * regular version if parent's disableGrid is true.
    */
   private _setClasses(disabledGrid: boolean, parentVariant: FudisDescriptionListVariant): void {
     if (disabledGrid && parentVariant !== 'compact') {

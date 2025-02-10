@@ -1,8 +1,8 @@
 /**
  * Targets strings which start with underscore or with 'ng'. E.g. _internalStuff or ngOnInit.
  *
- * This has been set as default value for Storybook stories controls in preview.js
- * If you need to append the list, just provide a string[] with list of props to exclude.
+ * This has been set as default value for Storybook stories controls in preview.js If you need to
+ * append the list, just provide a string[] with list of props to exclude.
  */
 
 export const excludeRegex = (array?: string[]): RegExp => {
@@ -16,7 +16,8 @@ export const excludeRegex = (array?: string[]): RegExp => {
 };
 
 /**
- * Regex for excluding everything except given strings. E. g. to exclude everything but variant property: excludeEverythingExceptRegex(['variant'])
+ * Regex for excluding everything except given strings. E. g. to exclude everything but variant
+ * property: excludeEverythingExceptRegex(['variant'])
  */
 export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
   const joined: string | null = array ? array.join('|') : null;

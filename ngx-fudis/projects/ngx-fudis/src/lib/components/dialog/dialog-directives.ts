@@ -64,7 +64,8 @@ export class DialogContentDirective extends MatDialogContent implements OnChange
   @HostBinding('class') public hostClass = 'fudis-dialog-content';
 
   /**
-   * Dialog contentFocus sets a visual focus to dialog content. Preferred to be used with read-only content.
+   * Dialog contentFocus sets a visual focus to dialog content. Preferred to be used with read-only
+   * content.
    */
   @Input() contentFocus: boolean = false;
 

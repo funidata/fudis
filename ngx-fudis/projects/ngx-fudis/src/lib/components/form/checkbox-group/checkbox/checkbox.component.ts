@@ -37,12 +37,14 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   @ViewChild('inputRef') private _inputRef: ElementRef<HTMLInputElement>;
 
   /**
-   * Control name for this checkbox from FormGroup. Required if FormGroup is given to the parent. Used to link each Checkbox with their Checkbox Group parent's FormGroup.
+   * Control name for this checkbox from FormGroup. Required if FormGroup is given to the parent.
+   * Used to link each Checkbox with their Checkbox Group parent's FormGroup.
    */
   @Input() controlName: string;
 
   /**
-   * Provide FormControl for each checkbox, when you do not provide FormGroup for the parent Checkbox Group.
+   * Provide FormControl for each checkbox, when you do not provide FormGroup for the parent
+   * Checkbox Group.
    */
   @Input() control: FormControl<boolean | null>;
 
@@ -67,7 +69,8 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   protected _focused = false;
 
   /**
-   * Boolean for syncing, if this Checkbox had 'control' property provided and parent had no 'formGroup' provided.
+   * Boolean for syncing, if this Checkbox had 'control' property provided and parent had no
+   * 'formGroup' provided.
    */
   private _controlAddedToParent: boolean = false;
 
@@ -146,7 +149,9 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * When focusing out from checkbox, determine if next focus target is outside of the same checkbox group. If yes, then tell parent Checkbox Group, that focus has moved outside. --> If there are validation errors, those should become visible.
+   * When focusing out from checkbox, determine if next focus target is outside of the same checkbox
+   * group. If yes, then tell parent Checkbox Group, that focus has moved outside. --> If there are
+   * validation errors, those should become visible.
    */
   protected _onBlur(event: FocusEvent): void {
     this._focused = false;

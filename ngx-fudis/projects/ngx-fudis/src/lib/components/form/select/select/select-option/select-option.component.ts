@@ -66,7 +66,8 @@ export class SelectOptionComponent
 
   /**
    * Click handler for Select Option click
-   * @param event event emitted
+   *
+   * @param event Event emitted
    */
   protected override _clickOption(event: Event): void {
     if (!this.data.disabled) {
@@ -86,7 +87,8 @@ export class SelectOptionComponent
   }
 
   /**
-   * When app language is changed, it will not change Form Control's value, which is intended, but visible label should be updated
+   * When app language is changed, it will not change Form Control's value, which is intended, but
+   * visible label should be updated
    */
   protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
     const controlValue = this._parent?.control.value;
@@ -102,8 +104,10 @@ export class SelectOptionComponent
   }
 
   /**
-   * Used with autocomplete to check if filter text matches this option. If yes, then trigger selection change in the parent
-   * @param filterText autocomplete filter text from parent
+   * Used with autocomplete to check if filter text matches this option. If yes, then trigger
+   * selection change in the parent
+   *
+   * @param filterText Autocomplete filter text from parent
    */
   private _isOptionTyped(filterText: string | undefined): void {
     if (!this.data?.disabled && this.data?.label?.toLowerCase() === filterText?.toLowerCase()) {

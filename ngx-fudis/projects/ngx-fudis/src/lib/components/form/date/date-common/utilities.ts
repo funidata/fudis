@@ -3,8 +3,9 @@ import { FudisTranslationConfig } from '../../../../services/translation/transla
 
 /**
  * Update locale for Fudis translations in Datepicker
+ *
  * @param value Language Signal string value
- * @returns locale code
+ * @returns Locale code
  */
 export const updateLocale = (value: string): string => {
   switch (value) {
@@ -46,7 +47,8 @@ export const updateMatDatePickerTranslations = (
 
 /**
  * Parse date input to number array
- * @returns new Date(year, monthIndex, day) or null
+ *
+ * @returns New Date(year, monthIndex, day) or null
  */
 export const parseDate = (value: string | null | undefined): Date | null => {
   // Split input value by non number values, e.g. 25/5/1977 or 25.5.1977 --> [25,5,1977]

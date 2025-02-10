@@ -23,7 +23,8 @@ export class DropdownMenuGroupComponent {
   @Input({ required: true }) label: string;
 
   /**
-   * Id for this Dropdown Menu Group. Generated with FudisIdService and used for accessibility attributes.
+   * Id for this Dropdown Menu Group. Generated with FudisIdService and used for accessibility
+   * attributes.
    */
   public id: string;
 }

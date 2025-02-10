@@ -44,7 +44,8 @@ export class LabelComponent
   @ViewChild('labelElementRef') private _labelElementRef: ElementRef<HTMLLabelElement>;
 
   /**
-   * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to fudis-label
+   * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to
+   * fudis-label
    */
   @Input({ required: true }) id: string;
 
@@ -54,7 +55,8 @@ export class LabelComponent
   @Input({ required: true }) text: string;
 
   /**
-   * HTML 'for' attribute. E.g. if text-input's id is 'text-input-1', give this id as 'for' attribute to the label
+   * HTML 'for' attribute. E.g. if text-input's id is 'text-input-1', give this id as 'for'
+   * attribute to the label
    */
   @Input() for: string;
 

@@ -8,44 +8,74 @@ export type FudisInputSize = (typeof fudisInputSizeArray)[number];
 export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 'url';
 
 export type FudisCheckboxOption<T extends object> = T & {
-  /** Unique id for single checkbox option */
+  /**
+   * Unique id for single checkbox option
+   */
   id?: string;
-  /** Name for the group of checkboxes */
+  /**
+   * Name for the group of checkboxes
+   */
   groupName?: string;
-  /** If using FormGroup, name of the option */
+  /**
+   * If using FormGroup, name of the option
+   */
   controlName?: string;
-  /** Visible label that is shown in the UI */
+  /**
+   * Visible label that is shown in the UI
+   */
   label: string;
-  /** Is option selected */
+  /**
+   * Is option selected
+   */
   value?: boolean | null | undefined;
-  /** To store additional data */
+  /**
+   * To store additional data
+   */
   [key: string]: unknown;
 };
 
 export type FudisRadioButtonOption<T extends object> = T & {
-  /** Generated id for single radio option */
+  /**
+   * Generated id for single radio option
+   */
   id?: string;
-  /** Underlying value of the option */
+  /**
+   * Underlying value of the option
+   */
   value: string | boolean | null | unknown;
-  /** Value that is shown in the UI */
+  /**
+   * Value that is shown in the UI
+   */
   label: string;
-  /** To store additional data */
+  /**
+   * To store additional data
+   */
   [key: string]: unknown;
 };
 
 export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';
 
 export type FudisSelectOption<T extends object> = T & {
-  /** Underlying value of the option */
+  /**
+   * Underlying value of the option
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
-  /** Value that is shown in the UI */
+  /**
+   * Value that is shown in the UI
+   */
   label: string;
-  /** Secondary, optional label for the option */
+  /**
+   * Secondary, optional label for the option
+   */
   subLabel?: string;
-  /** Is option disabled in the dropdown */
+  /**
+   * Is option disabled in the dropdown
+   */
   disabled?: boolean;
-  /** To store additional data */
+  /**
+   * To store additional data
+   */
   [key: string]: unknown;
 };
 

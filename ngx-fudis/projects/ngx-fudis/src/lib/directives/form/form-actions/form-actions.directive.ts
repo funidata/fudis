@@ -5,7 +5,8 @@ import { DOCUMENT } from '@angular/common';
 
 // TODO: Write tests
 /**
- * A marker directive to set any element, mostly Button Component to work as submit button, which will trigger Error Summary on click
+ * A marker directive to set any element, mostly Button Component to work as submit button, which
+ * will trigger Error Summary on click
  */
 @Directive({ selector: '[fudisFormSubmit]' })
 export class FormSubmitDirective implements OnInit {
@@ -16,8 +17,9 @@ export class FormSubmitDirective implements OnInit {
   ) {}
 
   /**
-   * If false, Button will set parent Form's 'errorSummaryVisible' to true and call reloadErrors() from Error Summary Service
-   * If true, Button will set parent Form's 'errorSummaryVisible' to false
+   * If false, Button will set parent Form's 'errorSummaryVisible' to true and call reloadErrors()
+   * from Error Summary Service If true, Button will set parent Form's 'errorSummaryVisible' to
+   * false
    */
   @Input() formValid: boolean = false;
 

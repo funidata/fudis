@@ -71,7 +71,8 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
 
   // TODO: write test
   /**
-   * If Expandable is used inside Form component, by default it will open itself when ReloadErrors is called in Error Summary Service. To disable this behavior, set this to false.
+   * If Expandable is used inside Form component, by default it will open itself when ReloadErrors
+   * is called in Error Summary Service. To disable this behavior, set this to false.
    */
   @Input() openOnErrorSummaryReload: boolean = true;
 

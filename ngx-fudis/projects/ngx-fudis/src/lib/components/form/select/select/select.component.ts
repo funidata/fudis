@@ -53,8 +53,9 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 
   /**
    * Handler for triggered option selection change
-   * @param value option to be selected
-   * @param disableSignalEmit disable signal update to reduce unneeded state updates
+   *
+   * @param value Option to be selected
+   * @param disableSignalEmit Disable signal update to reduce unneeded state updates
    */
   public handleSelectionChange(value: FudisSelectOption<object> | null): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
@@ -68,7 +69,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 
   /**
    * Checks if currently typed filter text is not same as control label value
-   * @param text filter text value emitted from autocomplete
+   *
+   * @param text Filter text value emitted from autocomplete
    */
   protected override _checkIfAutocompleteValueNull(text: string): void {
     if (this.control.value && text.toLowerCase() !== this.control.value?.label?.toLowerCase()) {

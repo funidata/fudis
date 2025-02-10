@@ -44,7 +44,8 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   @Input({ required: true }) parentComponent: HTMLFormElement;
 
   /**
-   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis will display its default helper title text
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis
+   * will display its default helper title text
    */
   @Input() title: string;
 
@@ -66,7 +67,9 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   private _numberOfFocusTries: number = 0;
 
   /**
-   * To enable clicking Error Summary links and then moving focus to corresponding form field. This was needed, as not all Fudis applications use Angular Router, so alternative approach was needed.
+   * To enable clicking Error Summary links and then moving focus to corresponding form field. This
+   * was needed, as not all Fudis applications use Angular Router, so alternative approach was
+   * needed.
    *
    * @param event Original click event
    * @param clickedId Id of clicked link in Error Summary
@@ -108,7 +111,8 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   }
 
   /**
-   * Update Error Summary content with possible parent Fieldsets, Sections and Expandables (Sections)
+   * Update Error Summary content with possible parent Fieldsets, Sections and Expandables
+   * (Sections)
    */
   private _updateSummaryContent(content: FudisErrorSummaryFormErrors): void {
     const newErrorList: ErrorSummaryDOMListItem[] = [];

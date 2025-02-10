@@ -50,7 +50,8 @@ export class DescriptionListItemTermComponent {
   }
 
   /**
-   * Renders Fudis Language Badge Group Component for displaying Description List Item Detail values in given languages
+   * Renders Fudis Language Badge Group Component for displaying Description List Item Detail values
+   * in given languages
    */
   @Input() languages: boolean = true;
 
@@ -78,6 +79,7 @@ export class DescriptionListItemTermComponent {
 
   /**
    * When Language Badge is clicked, update clicked language to parent item
+   *
    * @param lang FudisLanguageAbbr
    */
   protected _setSelectedLanguage(lang: FudisLanguageAbbr | null): void {

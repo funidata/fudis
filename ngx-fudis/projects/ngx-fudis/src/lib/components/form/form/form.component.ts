@@ -40,7 +40,8 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   }
 
   /**
-   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis will display its default helper title text
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis
+   * will display its default helper title text
    */
   @Input() errorSummaryTitle: string;
 
@@ -55,7 +56,8 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Input({ required: true }) level: FudisHeadingLevel;
 
   /**
-   * Form id. If not given, id will be generated with IdService. Set only in component initialisation.
+   * Form id. If not given, id will be generated with IdService. Set only in component
+   * initialisation.
    */
   @Input() id: string;
 
@@ -80,7 +82,8 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Input() badgeText: string | null;
 
   /**
-   * Set Error Summary visibility manually. Usually set true on form submit with Button binded with 'fudisFormSubmit' directive.
+   * Set Error Summary visibility manually. Usually set true on form submit with Button binded with
+   * 'fudisFormSubmit' directive.
    */
   @Input() errorSummaryVisible: boolean = false;
 
@@ -92,7 +95,8 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   private _injector = inject(Injector);
 
   /**
-   * Angular Change Detection did not trigger when we tried to update only our internal errorSummaryVisible input, hence we need this "helper signal"
+   * Angular Change Detection did not trigger when we tried to update only our internal
+   * errorSummaryVisible input, hence we need this "helper signal"
    */
   protected _errorSummaryVisibleSignal = signal<boolean>(false);
 

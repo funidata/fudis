@@ -72,8 +72,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   }
 
   /**
-   * For autocompletes, compare if current filter text is contained in this option's label. If not, hide the option from the dropdown list.
-   * @param filterText autocomplete filter text from parent
+   * For autocompletes, compare if current filter text is contained in this option's label. If not,
+   * hide the option from the dropdown list.
+   *
+   * @param filterText Autocomplete filter text from parent
    */
   protected _isOptionVisible(filterText: string): void {
     if (this.data) {
@@ -106,6 +108,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
 
   /**
    * Handler for keydown keyboard events
+   *
    * @param event Keyboard event
    */
   protected _keyDown(event: KeyboardEvent) {
@@ -122,6 +125,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
 
   /**
    * Handler for blurring out from focused option
+   *
    * @param event FocusEvent to emit
    */
   protected _blur(event: FocusEvent): void {
@@ -137,13 +141,15 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   }
 
   /**
-   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own implementations
+   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own
+   * implementations
    */
   // eslint-disable-next-line
   protected _checkVisibilityFromFilterText(filterText: string): void {}
 
   /**
-   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own implementations
+   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own
+   * implementations
    */
   // eslint-disable-next-line
   protected _clickOption(event: Event): void {}
