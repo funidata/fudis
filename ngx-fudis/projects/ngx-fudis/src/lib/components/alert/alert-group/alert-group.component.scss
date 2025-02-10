@@ -18,4 +18,12 @@
   &__static {
     position: static;
   }
+
+  @media (orientation: landscape) {
+    width: 100%;
+  }
+
+  @media (orientation: portrait) {
+    width: 100vw;
+  }
 }

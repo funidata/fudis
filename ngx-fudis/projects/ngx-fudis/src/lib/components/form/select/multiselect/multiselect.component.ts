@@ -53,12 +53,14 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
     new EventEmitter<FudisSelectOption<object>[] | null>();
 
   /**
-   * When app language and option labels are changed, selected Multiselect Options push themselves here, which will be then used to update visible UI labels managed by MultiselectCVA
+   * When app language and option labels are changed, selected Multiselect Options push themselves
+   * here, which will be then used to update visible UI labels managed by MultiselectCVA
    */
   public selectedOptionsFromLangChange: FudisSelectOption<object>[] = [];
 
   /**
-   * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
+   * When selecting / deselecting options, variable for storing them in the order of their id's
+   * (usually the DOM order)
    */
   protected _sortedSelectedOptions: WritableSignal<FudisSelectOption<object>[] | null> =
     signal(null);
@@ -72,8 +74,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
 
   /**
    * Handler for adding / removing selections
+   *
    * @param option FudisSelectOption to handle
-   * @param type add or remove multiselect option
+   * @param type Add or remove multiselect option
    */
   public handleMultiSelectionChange(
     option: FudisSelectOption<object>,
@@ -106,7 +109,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
 
   /**
    * Handle chip remove. If there are no selections done, focus back to input on last item removal.
-   * @param option removed option
+   *
+   * @param option Removed option
    */
   protected _handleRemoveChip(option: FudisSelectOption<object>): void {
     this.handleMultiSelectionChange(option, 'remove');

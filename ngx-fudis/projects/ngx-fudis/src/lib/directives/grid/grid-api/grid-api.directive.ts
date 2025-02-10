@@ -32,12 +32,14 @@ export class GridApiDirective {
   @Input() classes: string;
 
   /**
-   * Gutter gap between columns. Using Fudis spacing token values of xxs to xxl, none and responsive.
+   * Gutter gap between columns. Using Fudis spacing token values of xxs to xxl, none and
+   * responsive.
    */
   @Input() columnGap: FudisGridGap = 'responsive';
 
   /**
-   * Setting of columns for the Grid. Input will be converted to native CSS grid grid-template-columns values.
+   * Setting of columns for the Grid. Input will be converted to native CSS grid
+   * grid-template-columns values.
    */
   @Input() columns: FudisGridColumns = '1fr';
 

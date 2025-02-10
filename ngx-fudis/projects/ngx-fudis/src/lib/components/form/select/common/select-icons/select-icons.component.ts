@@ -47,8 +47,7 @@ export class SelectIconsComponent implements OnChanges {
   @Input() clearButton: boolean;
 
   /**
-   * If parent'c control is disabled
-   * TODO: to be removed when Fudis is refactored only to use FormControl's disabled state
+   * If clear button is disabled
    */
   @Input() disabled: boolean;
 

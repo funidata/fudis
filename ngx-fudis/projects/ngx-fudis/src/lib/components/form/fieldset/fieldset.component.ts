@@ -55,17 +55,19 @@ export class FieldSetComponent
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-   * xxl = Default value. Viewports of 1600px and larger
-   * xl = Viewports smaller than 1600px
-   * lg = Viewports smaller than 1200px
-   * md = Viewports smaller than 992px
-   * sm = Viewports smaller than 768px
-   * xs = Viewports smaller than 576px
+   *
+   * - Xxl = Default value. Viewports of 1600px and larger
+   * - Xl = Viewports smaller than 1600px
+   * - Lg = Viewports smaller than 1200px
+   * - Md = Viewports smaller than 992px
+   * - Sm = Viewports smaller than 768px
+   * - Xs = Viewports smaller than 576px
    */
   @Input() width: FudisGridWidth = 'xxl';
 
   /**
-   * Overrides 'width' input. Used to set Checkbox Group and Radio Button Group as wide as other basic form components.
+   * Overrides 'width' input. Used to set Checkbox Group and Radio Button Group as wide as other
+   * basic form components.
    */
   @Input() inputSize: FudisInputSize;
 
@@ -80,8 +82,8 @@ export class FieldSetComponent
   @Input() initialFocus: boolean = false;
 
   /**
-   * Send information about current Fieldset to Error Summary Service.
-   * Error Summary Breadcrumb is the label of the current Fieldset and is visible in the clickable link in Error Summary.
+   * Send information about current Fieldset to Error Summary Service. Error Summary Breadcrumb is
+   * the label of the current Fieldset and is visible in the clickable link in Error Summary.
    */
   @Input() errorSummaryBreadcrumb: boolean = true;
 
@@ -91,13 +93,13 @@ export class FieldSetComponent
   @Input() required: boolean | null;
 
   /**
-   * Visual size of label legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
+   * Visual size of label legend. Default 'md' and 'sm' is similar to standard input label, used in
+   * e. g. RadioButtonGroup.
    */
   @Input() labelSize: 'md' | 'sm' = 'md';
 
   /**
-   * Accessibility attribute for describing the whole Fieldset.
-   * Used internally in CheckboxGroup.
+   * Accessibility attribute for describing the whole Fieldset. Used internally in CheckboxGroup.
    */
   @Input() describedbyId: string;
 
@@ -112,7 +114,8 @@ export class FieldSetComponent
   @Input() helpText: string | undefined;
 
   /**
-   * Used to vertically align Legend label with similar Label elements with varying heights. By default `false`, but set `true` in Checkbox Group and Radio Button Group
+   * Used to vertically align Legend label with similar Label elements with varying heights. By
+   * default `false`, but set `true` in Checkbox Group and Radio Button Group
    */
   @Input() syncLegendHeight = false;
 

@@ -3,9 +3,10 @@ type GenericObject = { [key: string]: any };
 
 /**
  * Utility function to test, if two objects have the exactly same properties
- * @param x first object
- * @param y second object
- * @returns boolean
+ *
+ * @param x First object
+ * @param y Second object
+ * @returns Boolean
  */
 
 export const areObjectsDeepEquals = (x: GenericObject | null, y: GenericObject | null): boolean => {

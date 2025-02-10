@@ -2,13 +2,8 @@
 
 .fudis-date-range {
   display: grid;
-  grid-template-columns: 1fr spacing.$spacing-md 1fr;
+  grid-template-columns: 1fr 1fr;
+  column-gap: spacing.$spacing-sm;
   opacity: 1;
   max-width: spacing.$input-width-lg;
-
-  &__gutter {
-    display: block;
-    width: spacing.$spacing-md;
-    height: 100%;
-  }
 }

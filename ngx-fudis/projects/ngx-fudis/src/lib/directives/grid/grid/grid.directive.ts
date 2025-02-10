@@ -83,7 +83,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   private _element: HTMLElement;
 
   /**
-   * Collection of properties collected from Input props and GridService defaults to be applied as CSS values for the Grid
+   * Collection of properties collected from Input props and GridService defaults to be applied as
+   * CSS values for the Grid
    */
   private _valuesForCssClasses: FudisGridProperties;
 
@@ -138,7 +139,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   }
 
   /**
-   * Set default values. These are used as back up, if application does not provide any input properties.
+   * Set default values. These are used as back up, if application does not provide any input
+   * properties.
    */
   private _setDefaultValuesToPropertyObject(): void {
     this._gridInputProperties.defaultValues = gridInputPropertyDefaults;
@@ -160,7 +162,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   }
 
   /**
-   * Function which converts application's input or service values to CSS values which will applied to Grid element.
+   * Function which converts application's input or service values to CSS values which will applied
+   * to Grid element.
    */
   private _calculateColumnsCssValue(): string | FudisBreakpointStyleResponsive[] {
     const columnsToApply = this._gridInputProperties.appValues?.columns;

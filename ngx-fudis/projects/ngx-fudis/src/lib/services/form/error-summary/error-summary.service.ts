@@ -26,8 +26,9 @@ export class FudisErrorSummaryService {
 
   /**
    * To define ID for each subscription
-   * @param error with required properties
-   * @returns generated id
+   *
+   * @param error With required properties
+   * @returns Generated id
    */
   private _getSubscriptionId(error: FudisErrorSummaryRemoveError): string {
     return `${error.formId}_${error.focusId}_${error.id}`;
@@ -57,8 +58,9 @@ export class FudisErrorSummaryService {
 
   /**
    * Reload a spesific Form Id
+   *
    * @param id Form Id
-   * @param focus focus to Error Summary
+   * @param focus Focus to Error Summary
    */
   public reloadFormErrors(id: string, focus: boolean = true) {
     this._errorSummaryService.reloadFormErrors(id, focus);
@@ -66,7 +68,8 @@ export class FudisErrorSummaryService {
 
   // TODO: This should be removed and replaced with getter for collection of Signals per individual Forms
   /**
-   * Returns an observable of all errors sent to Error Summary. Note, that Observable is updated only when ReloadErrors is called.
+   * Returns an observable of all errors sent to Error Summary. Note, that Observable is updated
+   * only when ReloadErrors is called.
    */
   public getErrorsObservable(): BehaviorSubject<FudisErrorSummaryAllErrors> {
     return this._errorSummaryService.errorsObservable;
@@ -74,9 +77,11 @@ export class FudisErrorSummaryService {
 
   /**
    * To add message to spesific Form's Error Summary.
+   *
    * @param id Identifier of the message, eg. 'app-custom-error-abc123'
    * @param formId Id of Form component
-   * @param focusId HTML element's id, where user focus should be moved when user clicks the message.
+   * @param focusId HTML element's id, where user focus should be moved when user clicks the
+   *   message.
    * @param message Visible message to the user
    */
   public addError(
@@ -104,9 +109,11 @@ export class FudisErrorSummaryService {
 
   /**
    * To remove messages from Form's Error Summary
+   *
    * @param id Identifier of provided message in 'addError()'
    * @param formId Id of Form component
-   * @param focusId HTML element's id, where user focus should be moved when user clicks the message.
+   * @param focusId HTML element's id, where user focus should be moved when user clicks the
+   *   message.
    */
   public removeError(id: string, formId: string, focusId: string): void {
     const removeError: FudisErrorSummaryRemoveError = { focusId, formId, id };

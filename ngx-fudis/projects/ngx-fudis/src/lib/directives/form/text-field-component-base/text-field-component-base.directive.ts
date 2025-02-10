@@ -40,7 +40,8 @@ export class TextFieldComponentBaseDirective extends ControlComponentBaseDirecti
   protected _baseSubscription: Subscription;
 
   /**
-   * Depending on input prop 'nullControlOnEmptyString' either subscribe or unsubscribe to control's value changes
+   * Depending on input prop 'nullControlOnEmptyString' either subscribe or unsubscribe to control's
+   * value changes
    */
   protected _setControlValueSubscription(): void {
     if (this.nullControlOnEmptyString) {

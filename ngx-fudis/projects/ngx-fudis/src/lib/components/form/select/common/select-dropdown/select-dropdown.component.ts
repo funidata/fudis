@@ -38,7 +38,9 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   @Input() autocompleteHelpText: string | false;
 
   /**
-   * By default, Autocomplete variant will display "No results found" text when there are 0 options matching. When combined with 'autocompleteFilter' false, application can set their own 'Fetching options...' etc. text while their own filtering is in progress.
+   * By default, Autocomplete variant will display "No results found" text when there are 0 options
+   * matching. When combined with 'autocompleteFilter' false, application can set their own
+   * 'Fetching options...' etc. text while their own filtering is in progress.
    */
   @Input() autocompleteNoResultsText: string | null = null;
 

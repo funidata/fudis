@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FudisBodyText, FudisTextAlign } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisComponentChanges, FudisLanguageAbbr } from '../../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 
@@ -41,6 +41,11 @@ export class BodyTextComponent implements OnChanges {
    * Text alignment
    */
   @Input() align: FudisTextAlign = 'left';
+
+  /**
+   * Optional language attribute, possible values 'fi', 'sv' and 'en'.
+   */
+  @Input() lang: FudisLanguageAbbr;
 
   /**
    * Id generated from Id Service

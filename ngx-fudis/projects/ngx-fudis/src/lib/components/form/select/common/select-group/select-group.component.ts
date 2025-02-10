@@ -39,8 +39,9 @@ export class SelectGroupComponent {
 
   /**
    * Called from SelectOption and MultiselectOption to set if the option is visible or not
-   * @param value value of option
-   * @param visible state of option's visibility
+   *
+   * @param value Value of option
+   * @param visible State of option's visibility
    */
   public setOptionVisibility(value: string, visible: boolean) {
     this._visibleOptions = setVisibleOptionsList(this._visibleOptions, value, visible);
