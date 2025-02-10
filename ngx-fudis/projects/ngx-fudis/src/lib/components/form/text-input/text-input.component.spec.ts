@@ -37,7 +37,7 @@ describe('TextInputComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TextInputComponent);
     component = fixture.componentInstance;
-    component.control = textInputControl;
+    fixture.componentRef.setInput('control', textInputControl);
   });
 
   function assertTextInputHasClasses(classes: string): void {
@@ -69,8 +69,9 @@ describe('TextInputComponent', () => {
   });
 
   describe('HTML attributes', () => {
+    beforeEach(() => fixture.detectChanges());
+
     it('should have correct type attribute', () => {
-      fixture.detectChanges();
       textInputTypeCheck('text');
       textInputTypeCheck('email');
       textInputTypeCheck('number');
@@ -80,14 +81,12 @@ describe('TextInputComponent', () => {
     });
 
     it('should have generated id', () => {
-      fixture.detectChanges();
       const inputElement = getElement(fixture, 'input');
 
       expect(inputElement.getAttribute('id')).toEqual('fudis-text-input-1');
     });
 
     it('should have custom id', () => {
-      fixture.detectChanges();
       const inputElement = getElement(fixture, 'input');
       fixture.componentRef.setInput('id', 'my-custom-id');
       fixture.detectChanges();
@@ -97,6 +96,14 @@ describe('TextInputComponent', () => {
   });
 
   describe('Control', () => {
+    it('should not trigger valueChages', () => {
+      fixture.detectChanges();
+    });
+
+    it('should unsubscribe on destroy', () => {
+      fixture.detectChanges();
+    });
+
     it('should set control as invalid if required text-input is touched and empty', () => {
       fixture.detectChanges();
       component.control = new FormControl('', FudisValidators.required('This field is required'));
