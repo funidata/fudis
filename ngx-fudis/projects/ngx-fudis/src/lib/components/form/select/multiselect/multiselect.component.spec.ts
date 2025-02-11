@@ -53,6 +53,9 @@ describe('MultiselectComponent', () => {
   let component: MultiselectMockComponent;
   let fixture: ComponentFixture<MultiselectMockComponent>;
 
+  let multiselectComponent: MultiselectComponent;
+  let multiselectComponentFixture: ComponentFixture<MultiselectComponent>;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -94,6 +97,82 @@ describe('MultiselectComponent', () => {
 
     fixture.detectChanges();
   }
+
+  describe('Control', () => {
+    beforeEach(() => {
+      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent);
+      multiselectComponent = multiselectComponentFixture.componentInstance;
+      multiselectComponentFixture.componentRef.setInput(
+        'control',
+        new FormControl<FudisSelectOption<TestAnimalSound>[]>([
+          defaultOptions[0],
+          defaultOptions[2],
+        ]),
+      );
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      jest.spyOn(multiselectComponent as any, '_setParentId');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      jest.spyOn(multiselectComponent as any, '_updateComponentStateFromControlValue');
+    });
+
+    it('should init the component successfully', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { _updateValueAndValidityTrigger } = multiselectComponent as any;
+      jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
+      multiselectComponentFixture.detectChanges();
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((multiselectComponent as any)._setParentId).toHaveBeenCalledTimes(1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((multiselectComponent as any)._setParentId).toHaveBeenCalledWith('multiselect');
+      expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (multiselectComponent as any)._updateComponentStateFromControlValue,
+      ).toHaveBeenCalledTimes(1);
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not trigger valueChanges', () => {
+      let didEmit = false;
+      multiselectComponent.control.valueChanges.subscribe(() => (didEmit = true));
+      multiselectComponentFixture.detectChanges();
+      expect(didEmit).toBeFalsy();
+    });
+
+    it('should trigger valueChanges', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { _updateValueAndValidityTrigger } = multiselectComponent as any;
+      jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
+      let didEmit = false;
+      multiselectComponent.control.valueChanges.subscribe(() => (didEmit = true));
+
+      multiselectComponentFixture.detectChanges();
+
+      expect(didEmit).toBeFalsy();
+
+      multiselectComponent.control.setValue([defaultOptions[2]]);
+
+      expect(didEmit).toBeTruthy();
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(2);
+      expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (multiselectComponent as any)._updateComponentStateFromControlValue,
+      ).toHaveBeenCalledTimes(2);
+    });
+
+    it('should close subscription on destroy', () => {
+      multiselectComponentFixture.detectChanges();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((multiselectComponent as any)._subscription.closed).toBeFalsy();
+
+      multiselectComponentFixture.destroy();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((multiselectComponent as any)._subscription.closed).toBeTruthy();
+    });
+  });
 
   describe('Input', () => {
     beforeEach(() => {
