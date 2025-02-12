@@ -219,4 +219,21 @@ describe('FudisIdServiceService', () => {
 
     expect(idService.getIdData()).toEqual(testGrandParentDataAfter);
   });
+
+  describe('Option id', () => {
+    it('should generate identical id for the same label', () => {
+      const someLabel = 'I`m a label!';
+      expect(FudisIdService.createSelectOptionId('multiselect', someLabel)).toEqual(
+        'multiselect-option-kkq5na',
+      );
+      expect(FudisIdService.createSelectOptionId('multiselect', someLabel)).toEqual(
+        'multiselect-option-kkq5na',
+      );
+    });
+
+    it('should generate a safe hash with special characters', () => {
+      const id = FudisIdService.createSelectOptionId('select', "</i'm \n a weird _ label !! £$^*-");
+      expect(id).toEqual('select-option-1cnnyrd');
+    });
+  });
 });
