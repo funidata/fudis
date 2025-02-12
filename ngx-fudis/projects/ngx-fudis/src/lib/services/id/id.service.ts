@@ -250,25 +250,39 @@ export class FudisIdService {
   }
 
   /**
-   * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-1
+   * Get an id and add it to collection for Select Options -->
+   * fudis-select-4-group-2-option-g3n3ratedh4sh
    */
   public getNewSelectOptionId(
+    label: string,
     selectType: 'select' | 'multiselect',
     selectParentId: string,
-    dataValue: string,
     groupParentId?: string,
   ): string {
-    let newId = '';
+    const newId = FudisIdService.createSelectOptionId(selectParentId, label);
 
     if (groupParentId) {
-      newId = `${selectParentId}-option-${dataValue}`;
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
     } else {
-      newId = `${selectParentId}-option-${dataValue}`;
-
       this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.push(newId);
     }
     return newId;
+  }
+
+  public static createSelectOptionId(id: string, label: string) {
+    return `${id}-option-${FudisIdService.hashLabel(label)}`;
+  }
+
+  /**
+   * Djb2 hash for hashing the label for the option id. It doesn't have to be this, it can be
+   * anything as long as it's fast and short
+   */
+  private static hashLabel(label: string): string {
+    let hash = 0;
+    for (let i = 0; i < label.length; i++) {
+      hash = (hash * 31 + label.charCodeAt(i)) >>> 0;
+    }
+    return hash.toString(36);
   }
 
   /**

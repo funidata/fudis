@@ -29,6 +29,7 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -91,7 +92,7 @@ export class SelectBaseDirective
   @Input() variant: FudisSelectVariant = 'dropdown';
 
   /**
-   * Enable / disable button, which clears user selectionw when there is a selected value
+   * Enable / disable button, which clears user selection when there is a selected value
    */
   @Input() selectionClearButton: boolean = true;
 
@@ -223,13 +224,17 @@ export class SelectBaseDirective
   private _keyDown: string | null = null;
 
   /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
+  /**
    * Used to pass info, that Clear Button was clicked
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
       this._updateValueAndValidityTrigger.next();
 
       this._updateComponentStateFromControlValue();
@@ -238,13 +243,17 @@ export class SelectBaseDirective
         this._optionsLoadedOnce = true;
       }
 
-      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-        if (value) {
-          this._optionsLoadedOnce = true;
-        }
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((value) => {
+          this._updateValueAndValidityTrigger.next();
+          if (value) {
+            this._optionsLoadedOnce = true;
+          }
 
-        this._updateComponentStateFromControlValue();
-      });
+          this._updateComponentStateFromControlValue();
+        });
     }
 
     if (
@@ -381,12 +390,16 @@ export class SelectBaseDirective
   }
 
   /**
-   * Set control value to null
+   * Set control value to null Control value should reset even when user input does not match any
+   * option value (i.e. control value is null), so that dropdown shows options correctly
    */
   protected _setControlNull(): void {
     if (this.control.value) {
       this.control.patchValue(null);
       this.selectionUpdate.emit(null);
+      this.setAutocompleteFilterText('');
+    } else {
+      this.control.patchValue(null);
       this.setAutocompleteFilterText('');
     }
   }

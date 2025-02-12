@@ -37,8 +37,7 @@ describe('TextAreaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TextAreaComponent);
     component = fixture.componentInstance;
-    component.control = textAreaControl;
-    fixture.detectChanges();
+    fixture.componentRef.setInput('control', textAreaControl);
   });
 
   function assertTextAreaHasClasses(classes: string): void {
@@ -54,11 +53,27 @@ describe('TextAreaComponent', () => {
     assertTextAreaHasClasses(`fudis-text-area fudis-input-size__${size}`);
   }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should init the component successfully', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { _updateValueAndValidityTrigger } = component as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jest.spyOn(component as any, '_setControlValueSubscription');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jest.spyOn(component as any, '_setComponentId');
+    jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
+    fixture.detectChanges();
+
+    expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._setControlValueSubscription).toHaveBeenCalledTimes(1);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._setComponentId).toHaveBeenCalledTimes(1);
   });
 
   describe('HTML attributes', () => {
+    beforeEach(() => fixture.detectChanges());
+
     it('should have generated id', () => {
       const inputElement = getElement(fixture, 'textarea');
 
@@ -75,7 +90,26 @@ describe('TextAreaComponent', () => {
   });
 
   describe('Control', () => {
+    it('should not trigger valueChanges', () => {
+      let didEmit = false;
+      component.control.valueChanges.subscribe(() => (didEmit = true));
+      fixture.detectChanges();
+      expect(didEmit).toBeFalsy();
+    });
+
+    it('should unsubscribe on destroy', () => {
+      fixture.detectChanges();
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeFalsy();
+
+      fixture.destroy();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeTruthy();
+    });
+
     it('should set control as invalid if required textarea is touched and empty', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', FudisValidators.required('This is required'));
 
       expect(component.control.value).toEqual('');
@@ -83,6 +117,7 @@ describe('TextAreaComponent', () => {
     });
 
     it('should set control as invalid if text is too short according to given minLength validator value', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short')]);
       component.control.patchValue('too short');
 
@@ -91,6 +126,7 @@ describe('TextAreaComponent', () => {
     });
 
     it('should set control as invalid if text is too long according to given maxLength validator value', () => {
+      fixture.detectChanges();
       component.control = new FormControl('', [FudisValidators.maxLength(10, 'Too long text')]);
       component.control.patchValue('too longy long text');
 
@@ -99,6 +135,7 @@ describe('TextAreaComponent', () => {
     });
 
     it('should be disabled', () => {
+      fixture.detectChanges();
       const inputElement = getElement(fixture, 'textarea');
 
       component.control.disable(); // Disabled through control
@@ -127,6 +164,7 @@ describe('TextAreaComponent', () => {
 
   describe('CSS classes', () => {
     it('should have respective classes according to given size Input', () => {
+      fixture.detectChanges();
       textAreaSizeCheck('sm');
       textAreaSizeCheck('md');
       textAreaSizeCheck('lg');
@@ -135,6 +173,7 @@ describe('TextAreaComponent', () => {
 
   describe('Tooltip', () => {
     it('should be visible', () => {
+      fixture.detectChanges();
       fixture.componentRef.setInput('tooltip', 'This is tooltip text');
       fixture.detectChanges();
 

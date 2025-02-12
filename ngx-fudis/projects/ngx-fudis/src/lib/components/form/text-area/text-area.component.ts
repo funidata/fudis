@@ -6,6 +6,7 @@ import { FudisValidatorUtilities } from '../../../utilities/form/validator-utili
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fudis-text-area',
@@ -33,6 +34,11 @@ export class TextAreaComponent
    */
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
+  /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
   ngOnInit(): void {
     this._setComponentId('text-area');
     this._updateValueAndValidityTrigger.next();
@@ -41,10 +47,21 @@ export class TextAreaComponent
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
+      if (!changes.control?.firstChange) {
+        this._setControlValueSubscription();
+      }
+
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._updateValueAndValidityTrigger.next());
     }
 
-    if (changes.nullControlOnEmptyString?.currentValue !== changes.control?.previousValue) {
+    if (
+      !changes.nullControlOnEmptyString?.firstChange &&
+      changes.nullControlOnEmptyString?.currentValue !==
+        changes.nullControlOnEmptyString?.previousValue
+    ) {
       this._setControlValueSubscription();
     }
   }

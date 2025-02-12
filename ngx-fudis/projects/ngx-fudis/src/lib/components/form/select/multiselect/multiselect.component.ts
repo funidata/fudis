@@ -117,6 +117,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit 
 
     if (!this.control.value) {
       this._focusToSelectInput();
+      this.setAutocompleteFilterText('');
     }
   }
 }

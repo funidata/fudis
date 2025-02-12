@@ -70,10 +70,10 @@ test("error summary language change and manually sent errors", async ({ page }) 
 
   // Set Select components
   await page.getByTestId("fudis-select-1").click();
-  await page.getByTestId("fudis-select-1-option-maskot-2").click();
+  await page.getByTestId("fudis-select-1-option-4fs6ok").click();
   await page.getByTestId("fudis-multiselect-1").click();
-  await page.getByTestId("fudis-multiselect-1-option-topic-1").click();
-  await page.getByTestId("fudis-multiselect-1-option-topic-4").click();
+  await page.getByTestId("fudis-multiselect-1-option-odo5ti").click();
+  await page.getByTestId("fudis-multiselect-1-option-152akng").click();
 
   // Change update strategy
   await page.getByTestId("change-strategy-button").dblclick();
@@ -119,7 +119,7 @@ test("error summary language change and manually sent errors", async ({ page }) 
   );
   await page.getByTestId("fudis-select-1").click();
   await expect(
-    page.getByTestId("fudis-select-1-option-maskot-3").getByText("Jabba the Hutt (Rikollispomo)"),
+    page.getByTestId("fudis-select-1-option-b6n1bd").getByText("Jabba the Hutt (Rikollispomo)"),
   ).toBeVisible();
 
   await page.getByTestId("fudis-select-2").focus();
@@ -127,13 +127,13 @@ test("error summary language change and manually sent errors", async ({ page }) 
     page.getByTestId("fudis-body-text-7").getByText("Näytetään 1 tulosta"),
   ).toBeVisible();
   await expect(
-    page.getByTestId("fudis-select-2-option-maskot-2").getByText("R2-D2 (Astromekaanikkodroidi)"),
+    page.getByTestId("fudis-select-2-option-95nokf").getByText("R2-D2 (Astromekaanikkodroidi)"),
   ).toBeVisible();
 
-  await expect(page.getByTestId("fudis-select-2-option-maskot-2")).toHaveClass(
+  await expect(page.getByTestId("fudis-select-2-option-95nokf")).toHaveClass(
     "fudis-select-option fudis-select-option--selected fudis-select-option__focusable",
   );
-  await expect(page.getByTestId("fudis-select-2-option-maskot-2")).toHaveAttribute(
+  await expect(page.getByTestId("fudis-select-2-option-95nokf")).toHaveAttribute(
     "aria-selected",
     "true",
   );

@@ -102,6 +102,74 @@ describe('SelectComponent', () => {
 
   // TODO: add test for disabled states
 
+  describe('Control', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(SelectComponent);
+      component = fixture.componentInstance;
+
+      fixture.componentRef.setInput('control', new FormControl(defaultOptions[3]));
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      jest.spyOn(component as any, '_setParentId');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      jest.spyOn(component as any, '_updateComponentStateFromControlValue');
+    });
+
+    it('should init the component successfully', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { _updateValueAndValidityTrigger } = component as any;
+      jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
+      fixture.detectChanges();
+
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._updateComponentStateFromControlValue).toHaveBeenCalledTimes(1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._setParentId).toHaveBeenCalledTimes(1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._setParentId).toHaveBeenCalledWith('select');
+    });
+
+    it('should not trigger valueChanges', () => {
+      let didEmit = false;
+      component.control.valueChanges.subscribe(() => (didEmit = true));
+      fixture.detectChanges();
+      expect(didEmit).toBeFalsy();
+    });
+
+    it('should trigger valueChanges', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { _updateValueAndValidityTrigger } = component as any;
+      jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
+      let didEmit = false;
+      component.control.valueChanges.subscribe(() => (didEmit = true));
+
+      fixture.detectChanges();
+
+      expect(didEmit).toBeFalsy();
+
+      component.control.setValue(defaultOptions[2]);
+
+      expect(didEmit).toBeTruthy();
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(2);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._updateComponentStateFromControlValue).toHaveBeenCalledTimes(2);
+    });
+
+    it('should close subscription on destroy', () => {
+      fixture.detectChanges();
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeFalsy();
+
+      fixture.destroy();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeTruthy();
+    });
+  });
+
   describe('Dropdown', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(SelectComponent);

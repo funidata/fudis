@@ -10,20 +10,20 @@ interface MockSelectOptionGroupData {
 }
 
 export type TestAnimalSound = {
-  value: string;
+  value: string | object;
   label: string;
   sound: string;
   disabled?: boolean;
 };
 
 export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
-  { value: 'value-1-dog', label: 'Dog', sound: 'Wuf!' },
+  { value: { name: 'Max The Great', breed: 'Staffy' }, label: 'Dog', sound: 'Wuf!' },
   { value: 'value-2-capybara', label: 'Capybara', sound: 'Squek!' },
   { value: 'value-3-platypys', label: 'Platypus', sound: 'Plat plat!' },
   { value: 'value-4-cat', label: 'Really dangerous cat', disabled: true, sound: 'PurrROAR!' },
   {
-    value: 'value-5-armadillo',
-    label: 'Screaming hairy armadillo',
+    value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
+    label: 'Screaming hairy armadillo (partly endangered)',
     sound: "Rollin' rollin' rollin'!",
   },
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
@@ -37,7 +37,7 @@ export const multiselectChipListMockData: FudisSelectOption<object>[] = [
 ];
 
 export type TestAnimalScience = {
-  value: string;
+  value: string | object;
   label: string;
   subLabel: string;
   disabled?: boolean;
@@ -5969,7 +5969,10 @@ export const groupedMockData: MockSelectOptionGroupData[] = [
     country: 'Netherlands',
     options: [
       {
-        value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
+        value: {
+          mainId: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
+          secondaryId: 'Golden-jackal-8bd04ce56ad7',
+        },
         label: 'Golden jackal',
         subLabel: 'Canis aureus',
       },

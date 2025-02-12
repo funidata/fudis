@@ -16,16 +16,4 @@ export class ControlComponentBaseDirective extends FormCommonApiDirective {
    * FormControl for the input
    */
   @Input({ required: true }) control: FormControl;
-
-  /**
-   * Update value and validity of control
-   */
-  protected _applyControlUpdateCheck(): void {
-    const original = this.control.updateValueAndValidity;
-
-    this.control.updateValueAndValidity = () => {
-      original.apply(this.control);
-      this._updateValueAndValidityTrigger.next();
-    };
-  }
 }

@@ -22,6 +22,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { joinInputValues } from '../utilities/selectUtilities';
 import { DOCUMENT } from '@angular/common';
 import { FudisComponentChanges } from '../../../../../../lib/types/miscellaneous';
+import { FudisIdService } from '../../../../../services/id/id.service';
 
 @Directive({
   selector: '[fudisSelectBaseControlValueAccessor]',
@@ -191,17 +192,16 @@ export class MultiselectControlValueAccessorDirective
    */
   private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null, id: string) {
     return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
-      if (a.value === b.value) {
+      const aElementId = FudisIdService.createSelectOptionId(id, a.label);
+      const bElementId = FudisIdService.createSelectOptionId(id, b.label);
+
+      if (aElementId === bElementId) {
         return 0;
       }
 
-      const aSelector = `#${id}-option-${a.value}`;
-      const bSelector = `#${id}-option-${b.value}`;
-
       if (dropdown) {
-        const firstEl = dropdown.querySelector(aSelector);
-
-        const secondEl = dropdown.querySelector(bSelector);
+        const firstEl = dropdown.querySelector(`#${aElementId}`);
+        const secondEl = dropdown.querySelector(`#${bElementId}`);
 
         if (firstEl && secondEl) {
           const position = firstEl.compareDocumentPosition(secondEl);

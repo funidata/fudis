@@ -37,7 +37,7 @@ export class TextFieldComponentBaseDirective extends ControlComponentBaseDirecti
   /**
    * Subscription to listen to control's value changes
    */
-  protected _subscription: Subscription;
+  protected _baseSubscription: Subscription;
 
   /**
    * Depending on input prop 'nullControlOnEmptyString' either subscribe or unsubscribe to control's
@@ -45,17 +45,14 @@ export class TextFieldComponentBaseDirective extends ControlComponentBaseDirecti
    */
   protected _setControlValueSubscription(): void {
     if (this.nullControlOnEmptyString) {
-      if (!this._subscription) {
-        this._subscription = this.control.valueChanges
-          .pipe(takeUntilDestroyed(this._destroyRef))
-          .subscribe((value) => {
-            if (typeof value === 'string' && value.trim() === '') {
-              this.control.setValue(null);
-            }
-          });
-      }
-    } else {
-      this._subscription?.unsubscribe();
+      this._baseSubscription?.unsubscribe();
+      this._baseSubscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            this.control.setValue(null);
+          }
+        });
     }
   }
 }

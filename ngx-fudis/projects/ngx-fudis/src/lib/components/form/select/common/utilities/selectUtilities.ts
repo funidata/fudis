@@ -43,6 +43,5 @@ export const setVisibleOptionsList = (
 
     listToReturn.splice(index, 1);
   }
-
   return listToReturn;
 };

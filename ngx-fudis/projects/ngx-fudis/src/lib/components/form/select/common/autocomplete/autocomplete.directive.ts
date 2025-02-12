@@ -122,6 +122,7 @@ export class SelectAutocompleteBaseDirective {
             this.handleDropdownOpen.emit();
           } else {
             this.handleDropdownClose.emit();
+            this.handleFilterTextUpdate.emit('');
           }
         }
       } else if (

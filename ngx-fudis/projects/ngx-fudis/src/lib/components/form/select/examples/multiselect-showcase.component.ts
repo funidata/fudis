@@ -232,7 +232,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                   <fudis-dl [variant]="'compact'">
                     <fudis-dl-item>
                       <fudis-dt [contentText]="'Value'"></fudis-dt>
-                      <fudis-dd [contentText]="option.value"></fudis-dd>
+                      <fudis-dd [contentText]="printControlValue(option.value)"></fudis-dd>
                     </fudis-dl-item>
                     <fudis-dl-item>
                       <fudis-dt [contentText]="'Label'"></fudis-dt>
@@ -254,6 +254,10 @@ export class StorybookExampleMultiselectShowcaseComponent {
     [defaultOptions[4], defaultOptions[1]],
     [FudisValidators.minLength(2, 'Pick at least two pets', true)],
   );
+
+  printControlValue(value: object | string) {
+    return typeof value === 'object' ? JSON.stringify(value) : value;
+  }
 
   onClick() {
     if (!this.control.disabled) {

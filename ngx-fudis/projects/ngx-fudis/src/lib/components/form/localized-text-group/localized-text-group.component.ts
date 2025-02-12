@@ -20,7 +20,7 @@ import { FudisValidatorUtilities } from '../../../utilities/form/validator-utili
 
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
@@ -110,6 +110,11 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   protected _missingLanguage: string;
 
   /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
+  /**
    * Fudis translation
    */
   protected _languageLabel = new BehaviorSubject<string>(
@@ -184,7 +189,10 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
 
   ngOnChanges(changes: FudisComponentChanges<LocalizedTextGroupComponent<T>>): void {
     if (changes.formGroup?.currentValue !== changes.formGroup?.previousValue) {
-      this._applyGroupUpdateCheck();
+      this._subscription?.unsubscribe();
+      this._subscription = this.formGroup.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._updateValueAndValidityTrigger.next());
       this._updateSelectOptions();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
