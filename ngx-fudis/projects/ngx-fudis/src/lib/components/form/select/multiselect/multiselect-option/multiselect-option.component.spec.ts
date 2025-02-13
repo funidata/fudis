@@ -13,7 +13,7 @@ import { LabelComponent } from '../../../label/label.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
-import { defaultOptions } from '../../common/mock_data';
+import { defaultOptions, defaultOptionsSecondaryLang } from '../../common/mock_data';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
@@ -76,7 +76,6 @@ describe('MultiselectOptionComponent', () => {
 
     fixture = TestBed.createComponent(MultiselectMockComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   function setMultiSelectDropdownOpen() {
@@ -85,11 +84,14 @@ describe('MultiselectOptionComponent', () => {
   }
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   describe('Options reflect on parent control value', () => {
     it('should have respective HTML attributes after parent control value changes', () => {
+      fixture.detectChanges();
+
       component.control.patchValue([defaultOptions[2]]);
       fixture.detectChanges();
 
@@ -104,7 +106,21 @@ describe('MultiselectOptionComponent', () => {
       expect(selectedOptionLabel).toEqual('Platypus');
     });
 
+    it('should change visible input value when options are changed', () => {
+      component.control.patchValue([defaultOptions[2]]);
+      fixture.detectChanges();
+
+      const element = getElement(fixture, '.fudis-select__input');
+      expect(element.getAttribute('value')).toEqual('Platypus');
+
+      component.multiOptions = defaultOptionsSecondaryLang;
+      fixture.detectChanges();
+      expect(element.getAttribute('value')).toEqual('Vesinokkaeläin');
+    });
+
     it('should add value to control with already existing values when another option is selected and emit selection', () => {
+      fixture.detectChanges();
+
       jest.spyOn(component.selectEl.selectionUpdate, 'emit');
 
       component.control.patchValue([defaultOptions[4], defaultOptions[0]]);
@@ -145,6 +161,8 @@ describe('MultiselectOptionComponent', () => {
     });
 
     it('should remove value from control when already selected option is clicked and set as null, if no selected options are left', () => {
+      fixture.detectChanges();
+
       setMultiSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('fudis-multiselect-option'));
@@ -181,6 +199,10 @@ describe('MultiselectOptionComponent', () => {
   });
 
   describe('Single option HTML attributes', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
     it('should have respective attributes if selected', () => {
       setMultiSelectDropdownOpen();
 

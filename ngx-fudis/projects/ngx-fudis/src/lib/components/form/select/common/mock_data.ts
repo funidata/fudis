@@ -29,6 +29,19 @@ export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
 ];
 
+export const defaultOptionsSecondaryLang: FudisSelectOption<TestAnimalSound>[] = [
+  { value: { name: 'Max The Great', breed: 'Staffy' }, label: 'Koira', sound: 'Hau!' },
+  { value: 'value-2-capybara', label: 'Kapybara', sound: 'Sviik!' },
+  { value: 'value-3-platypys', label: 'Vesinokkaeläin', sound: 'Läisk!' },
+  { value: 'value-4-cat', label: 'Erittäin vaarallinen kissa', disabled: true, sound: 'HurrRRuR!' },
+  {
+    value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
+    label: 'Kirkuva karvainen armadillo (osittain uhanalainen)',
+    sound: "Klinks klanks klonks'!",
+  },
+  { value: 'value-6-gecko', label: 'Gekko', sound: 'Kukkuu!' },
+];
+
 export const multiselectChipListMockData: FudisSelectOption<object>[] = [
   { value: 'hereford', label: 'Hereford' },
   { value: 'texas-longhorn', label: 'Texas Longhorn' },
