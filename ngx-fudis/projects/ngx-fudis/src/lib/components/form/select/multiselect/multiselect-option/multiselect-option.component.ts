@@ -138,7 +138,7 @@ export class MultiselectOptionComponent
       if (
         this._parent.selectedOptionsFromLangChange.length === this._parent.control.value?.length
       ) {
-        this._parent._multiselectCVA.writeValue(this._parent.selectedOptionsFromLangChange);
+        this._parent._multiselectCVA?.writeValue(this._parent.selectedOptionsFromLangChange);
         this._parent.selectedOptionsFromLangChange = [];
       }
     }
