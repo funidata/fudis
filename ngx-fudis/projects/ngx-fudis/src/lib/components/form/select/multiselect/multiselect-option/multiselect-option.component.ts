@@ -6,7 +6,6 @@ import { SelectGroupComponent } from '../../common/select-group/select-group.com
 import { MultiselectComponent } from '../multiselect.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
@@ -23,9 +22,8 @@ export class MultiselectOptionComponent
     @Host() protected _parentMultiselect: MultiselectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
   ) {
-    super(_document, _parentGroup, _translationService, _idService);
+    super(_document, _parentGroup, _idService);
 
     this._parent = this._parentMultiselect;
 
@@ -68,8 +66,8 @@ export class MultiselectOptionComponent
         this.checked = false;
       }
 
-      if (changes.data?.currentValue) {
-        this._onLangChangeCheckIfLabelRequiresUpdate(changes.data?.currentValue);
+      if (changes.data?.currentValue && changes.data.currentValue !== changes.data.previousValue) {
+        this._checkIfLabelRequiresUpdate(changes.data?.currentValue);
       }
     }
   }
@@ -123,28 +121,23 @@ export class MultiselectOptionComponent
   }
 
   /**
-   * When app language is changed, it will not change Form Control's value, which is intended, but
-   * visible label should be updated
+   * When option is changed, it will not change Form Control's value, which is intended, but visible
+   * label should be updated
    */
-  protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+  protected _checkIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
     const controlValue = this._parent?.control.value;
+    const foundMatch = controlValue?.find((selectedOption) => {
+      return selectedOption.value === newData.value;
+    });
 
-    if (this._appLanguage !== this._translationService.getLanguage()) {
-      this._appLanguage = this._translationService.getLanguage();
+    if (foundMatch) {
+      this._parent.selectedOptionsFromLangChange.push(newData);
 
-      const foundMatch = controlValue?.find((selectedOption) => {
-        return selectedOption.value === newData.value;
-      });
-
-      if (foundMatch) {
-        this._parent.selectedOptionsFromLangChange.push(newData);
-
-        if (
-          this._parent.selectedOptionsFromLangChange.length === this._parent.control.value?.length
-        ) {
-          this._parent._multiselectCVA.writeValue(this._parent.selectedOptionsFromLangChange);
-          this._parent.selectedOptionsFromLangChange = [];
-        }
+      if (
+        this._parent.selectedOptionsFromLangChange.length === this._parent.control.value?.length
+      ) {
+        this._parent._multiselectCVA.writeValue(this._parent.selectedOptionsFromLangChange);
+        this._parent.selectedOptionsFromLangChange = [];
       }
     }
   }

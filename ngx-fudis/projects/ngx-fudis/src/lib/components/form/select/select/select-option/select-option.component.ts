@@ -5,7 +5,6 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisSelectOption } from '../../../../../types/forms';
@@ -23,10 +22,9 @@ export class SelectOptionComponent
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentSelect: SelectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
-    _translationService: FudisTranslationService,
     _idService: FudisIdService,
   ) {
-    super(_document, _parentGroup, _translationService, _idService);
+    super(_document, _parentGroup, _idService);
 
     this._parent = _parentSelect;
 
@@ -56,9 +54,8 @@ export class SelectOptionComponent
       this._id = newOptionId;
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
-
-      if (changes.data?.currentValue) {
-        this._onLangChangeCheckIfLabelRequiresUpdate(changes.data.currentValue);
+      if (changes.data?.currentValue && changes.data.currentValue !== changes.data.previousValue) {
+        this._checkIfLabelRequiresUpdate(changes.data.currentValue);
       }
     }
   }
@@ -95,19 +92,14 @@ export class SelectOptionComponent
   }
 
   /**
-   * When app language is changed, it will not change Form Control's value, which is intended, but
-   * visible label should be updated
+   * When option is changed, it will not change Form Control's value, which is intended, but visible
+   * label should be updated
    */
-  protected _onLangChangeCheckIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+  protected _checkIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
     const controlValue = this._parent?.control.value;
-
-    if (this._appLanguage !== this._translationService.getLanguage()) {
-      this._appLanguage = this._translationService.getLanguage();
-
-      if (controlValue?.value === newData.value) {
-        this._parent.selectCVA.writeValue(newData);
-        this._parent.setAutocompleteFilterText(newData.label, false);
-      }
+    if (controlValue?.value === newData.value) {
+      this._parent.selectCVA?.writeValue(newData);
+      this._parent.setAutocompleteFilterText(newData.label, false);
     }
   }
 
