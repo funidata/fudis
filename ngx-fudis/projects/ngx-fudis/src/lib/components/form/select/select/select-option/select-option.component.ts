@@ -5,6 +5,7 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisSelectOption } from '../../../../../types/forms';
@@ -22,9 +23,10 @@ export class SelectOptionComponent
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentSelect: SelectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
+    _translationService: FudisTranslationService,
     _idService: FudisIdService,
   ) {
-    super(_document, _parentGroup, _idService);
+    super(_document, _parentGroup, _translationService, _idService);
 
     this._parent = _parentSelect;
 

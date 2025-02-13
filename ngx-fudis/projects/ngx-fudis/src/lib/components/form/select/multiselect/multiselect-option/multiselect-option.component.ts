@@ -6,6 +6,7 @@ import { SelectGroupComponent } from '../../common/select-group/select-group.com
 import { MultiselectComponent } from '../multiselect.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
@@ -22,8 +23,9 @@ export class MultiselectOptionComponent
     @Host() protected _parentMultiselect: MultiselectComponent,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
     _idService: FudisIdService,
+    _translationService: FudisTranslationService,
   ) {
-    super(_document, _parentGroup, _idService);
+    super(_document, _parentGroup, _translationService, _idService);
 
     this._parent = this._parentMultiselect;
 
