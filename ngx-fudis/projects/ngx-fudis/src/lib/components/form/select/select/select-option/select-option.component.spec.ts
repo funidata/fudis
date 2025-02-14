@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectOptionComponent } from './select-option.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectComponent } from '../select.component';
-import { defaultOptions } from '../../common/mock_data';
+import { defaultOptions, defaultOptionsSecondaryLang } from '../../common/mock_data';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
@@ -150,6 +150,21 @@ describe('SelectOptionComponent', () => {
       expect(selectedValue.textContent).toEqual('Screaming hairy armadillo (partly endangered)');
 
       expect(checkIcon).toBeTruthy();
+    });
+
+    it('should change visible input value when options are changed', () => {
+      initializeFormControlWithValue();
+      setSelectDropdownOpen();
+
+      const selectElement = getElement(fixture, '.fudis-select');
+      let value = selectElement.querySelector('.fudis-select input')?.getAttribute('value');
+      expect(value).toEqual('Screaming hairy armadillo (partly endangered)');
+
+      component.testOptions = defaultOptionsSecondaryLang;
+      fixture.detectChanges();
+
+      value = selectElement.querySelector('.fudis-select input')?.getAttribute('value');
+      expect(value).toContain('Kirkuva karvainen armadillo (osittain uhanalainen)');
     });
   });
 
