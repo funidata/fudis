@@ -77,10 +77,12 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   protected handleErrorClick(event: Event, clickedId: string): void {
     event.preventDefault();
 
-    const linkToFocus = this.parentComponent.querySelector(`#${clickedId}`) as HTMLInputElement;
+    const elementToFocus = this.parentComponent.querySelector(`#${clickedId}`) as
+      | HTMLInputElement
+      | HTMLDivElement;
 
-    if (linkToFocus) {
-      linkToFocus.focus();
+    if (elementToFocus) {
+      elementToFocus.focus();
     }
   }
 
