@@ -16,13 +16,15 @@ import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
+import { ButtonComponent } from '../../../button/button.component';
+import { IconComponent } from '../../../icon/icon.component';
 
 @Component({
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [contentText]="'First DT'" />
+        <fudis-dt [contentText]="'First DT'" [tooltip]="'Tooltip text'" />
         <fudis-dd [contentText]="'This is my DD'" />
       </fudis-dl-item>
       <fudis-dl-item>
@@ -64,12 +66,14 @@ describe('DescriptionListItemTermComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
+        ButtonComponent,
         GridDirective,
         GridComponent,
         DescriptionListComponent,
         DescriptionListItemComponent,
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
+        IconComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
         TooltipDirective,
@@ -188,6 +192,19 @@ describe('DescriptionListItemTermComponent', () => {
           .query(By.css('span.fudis-dl-item-term__regular'))
           .nativeElement.getAttribute('id'),
       ).toEqual('fudis-description-list-2-item-1-term-1');
+    });
+  });
+
+  describe('Tooltip', () => {
+    it('should be visible if tooltip properties are given', () => {
+      expect(
+        getDlItemTermFromArrayIndex(0).query(By.css('.fudis-dl-item-term__regular__tooltip')),
+      ).toBeTruthy();
+      expect(
+        getDlItemTermFromArrayIndex(0)
+          .query(By.css('.fudis-dl-item-term__regular__tooltip button'))
+          .nativeElement.getAttribute('aria-label'),
+      ).toEqual('Tooltip text');
     });
   });
 
