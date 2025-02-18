@@ -182,7 +182,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
     let combinedValues: FudisBreakpointValueResponsive | undefined;
 
-    if (columnsFromService && typeof columnsFromService === 'object' && columnsToApply) {
+    if (columnsFromService && columnsToApply) {
       combinedValues = { ...columnsFromService, ...columnsToApply };
       return getBreakpointDataArray(combinedValues, gridColumnDefault);
     }
@@ -191,7 +191,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
       return getBreakpointDataArray(columnsToApply, gridColumnDefault);
     }
 
-    if (columnsFromService && typeof columnsFromService === 'object') {
+    if (columnsFromService) {
       return getBreakpointDataArray(columnsFromService, gridColumnDefault);
     }
 
