@@ -22,7 +22,14 @@ export interface FudisAlertElement extends FudisAlert {
 /**
  * Badge
  */
-export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
+export const fudisBadgeVariantArray = [
+  'accent',
+  'danger',
+  'primary',
+  'secondary',
+  'success',
+] as const;
+export type FudisBadgeVariant = (typeof fudisBadgeVariantArray)[number];
 
 /**
  * Button

@@ -4,7 +4,11 @@ import { By } from '@angular/platform-browser';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { ExpandableComponent } from './expandable.component';
-import { FudisExpandableType } from '../../types/miscellaneous';
+import {
+  FudisBadgeVariant,
+  fudisBadgeVariantArray,
+  FudisExpandableType,
+} from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { getElement } from '../../utilities/tests/utilities';
 import { fudisHeadingLevelArray } from '../../types/typography';
@@ -12,6 +16,7 @@ import {
   ExpandableActionsDirective,
   ExpandableContentDirective,
 } from './expandable-content.directive';
+import { BadgeComponent } from '../badge/badge.component';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -22,6 +27,8 @@ import {
     [level]="3"
     [variant]="variant"
     [padding]="padding"
+    [badge]="badge"
+    [badgeText]="'This is badge'"
   >
     <fudis-expandable-actions
       ><fudis-button [label]="'Action button'"></fudis-button
@@ -39,6 +46,7 @@ class MockContainerComponent {
   padding: string;
   subTitle: string;
   contentInitializationCount = 0;
+  badge: FudisBadgeVariant;
 }
 
 @Component({
@@ -64,6 +72,7 @@ describe('ExpandableComponent', () => {
       declarations: [
         ExpandableActionsDirective,
         ExpandableContentDirective,
+        BadgeComponent,
         ButtonComponent,
         ExpandableComponent,
         IconComponent,
@@ -91,7 +100,7 @@ describe('ExpandableComponent', () => {
 
   function hasSubTitle(): boolean {
     return !!fixture.nativeElement.querySelector(
-      'span.fudis-expandable__header__heading__button__sub-heading',
+      'span.fudis-expandable__header__heading__button__title__sub-heading',
     );
   }
 
@@ -157,6 +166,15 @@ describe('ExpandableComponent', () => {
     ).toBeTruthy();
   }
 
+  function assertExpandableBadge(badge: FudisBadgeVariant): void {
+    fixture.detectChanges();
+    const badgeElement = getElement(
+      fixture,
+      '.fudis-expandable__header__heading__button__title__badge',
+    );
+    expect(badgeElement.querySelector(`.fudis-badge__${badge}`)).toBeTruthy();
+  }
+
   describe('expandable variant features', () => {
     it('should change the expandable class according to the given expandable variant', () => {
       assertExpandableClassHasVariant('regular');
@@ -198,6 +216,15 @@ describe('ExpandableComponent', () => {
       fixture.detectChanges();
 
       expect(headerHasButtons()).toBeTruthy();
+    });
+  });
+
+  describe('badge', () => {
+    it('should render badge with given badge variant', () => {
+      fudisBadgeVariantArray.forEach((badge) => {
+        containerComponent.badge = badge;
+        assertExpandableBadge(badge);
+      });
     });
   });
 
