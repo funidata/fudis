@@ -1,19 +1,36 @@
-import { Directive, HostListener, OnInit, ElementRef, OnChanges } from '@angular/core';
+import {
+  Directive,
+  HostListener,
+  OnInit,
+  ElementRef,
+  OnChanges,
+  AfterViewInit,
+  inject,
+  DestroyRef,
+} from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TooltipApiDirective } from './tooltip-api.directive';
+import { ScrollDispatcher } from '@angular/cdk/overlay';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
   selector: '[fudisTooltip]',
   exportAs: 'tooltip',
   providers: [MatTooltip],
 })
-export class TooltipDirective extends TooltipApiDirective implements OnInit, OnChanges {
+export class TooltipDirective
+  extends TooltipApiDirective
+  implements OnInit, OnChanges, AfterViewInit
+{
   constructor(
     private _ngMaterialTooltip: MatTooltip,
     private _tooltipElement: ElementRef,
+    private _scrollDispatcher: ScrollDispatcher,
   ) {
     super();
   }
+
+  private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this._setTooltip();
@@ -21,6 +38,36 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
 
   ngOnChanges(): void {
     this._setTooltip();
+  }
+
+  ngAfterViewInit() {
+    /**
+     * Scroll tracking with 1s audit time, so it's not triggered constantly
+     */
+    this._scrollDispatcher
+      .scrolled(1000)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        if (
+          this._ngMaterialTooltip._isTooltipVisible() &&
+          !this.isTooltipInViewport(this._tooltipElement?.nativeElement)
+        ) {
+          this._ngMaterialTooltip.hide();
+        }
+      });
+  }
+
+  /**
+   * This function is for checking if the tooltip is visible
+   */
+  private isTooltipInViewport(el: HTMLElement): boolean {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= window.innerHeight &&
+      rect.right <= window.innerWidth
+    );
   }
 
   /**
