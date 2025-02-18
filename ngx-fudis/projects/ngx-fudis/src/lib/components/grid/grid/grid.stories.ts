@@ -4,11 +4,7 @@ import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utili
 import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
-import {
-  FudisDefaultGridProperties,
-  FudisGridAlign,
-  FudisGridProperties,
-} from '../../../types/grid';
+import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid';
 
 @Component({
   selector: 'example-grid-with-service',
