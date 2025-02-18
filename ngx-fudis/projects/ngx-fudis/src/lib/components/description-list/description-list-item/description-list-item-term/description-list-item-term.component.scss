@@ -18,6 +18,13 @@
     &__colon {
       display: none;
     }
+
+    &__tooltip {
+      display: inline-flex;
+      align-items: center;
+      margin-left: spacing.$spacing-xxs;
+      height: spacing.$spacing-md;
+    }
   }
 
   &__compact {
