@@ -223,6 +223,16 @@ export const expandableControlExclude: RegExp = excludeRegex([
   'openOnErrorSummaryReload',
 ]);
 
+export const expandableLiteExclude: RegExp = excludeRegex([
+  ...expandableCommonExclude,
+  'closedChange',
+  'errorSummaryBreadcrumb',
+  'openOnErrorSummaryReload',
+  'subTitle',
+  'badge',
+  'badgeText',
+]);
+
 /**
  * Form
  */
