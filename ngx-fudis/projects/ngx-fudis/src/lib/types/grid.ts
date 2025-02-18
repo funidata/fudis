@@ -63,7 +63,7 @@ export interface FudisGridProperties {
   alignItemsY?: FudisGridAlignItems;
   alignItemsX?: FudisGridAlignItems;
   classes?: string;
-  columns?: FudisBreakpointValueResponsive;
+  columns?: FudisBreakpointValueResponsive | string | number;
   columnGap?: FudisGridGap;
   rowGap?: FudisGridGap;
   width?: FudisGridWidth;
