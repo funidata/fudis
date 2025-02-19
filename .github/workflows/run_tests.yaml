@@ -93,8 +93,22 @@ jobs:
           path: /tmp
       - name: Load image
         run: docker load --input /tmp/fudis-test.image.tar
-      - name: Run unit tests
+      - name: Run unit tests with coverage
         run: docker run -te CI=true fudis-test npm test
+      - name: Create coverage directory
+        run: mkdir -p coverage && docker cp $(docker create fudis-test):/usr/src/app/projects/ngx-fudis/coverage/coverage-final.json coverage/
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+      - name: Comment Coverage Summary on PR
+        if: github.event_name == 'pull_request'
+        uses: MishaKav/jest-coverage-comment@main
+        with:
+          coverage-summary-path: coverage/coverage-final.json
+          hide-comment: false
+          create-new-comment: false
 
   visual-regression-tests:
     name: Visual regression tests
