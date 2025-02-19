@@ -1,7 +1,11 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
 import docs from './expandable.mdx';
-import { expandableExclude, expandableControlExclude } from '../../utilities/storybook';
+import {
+  expandableExclude,
+  expandableControlExclude,
+  expandableLiteExclude,
+} from '../../utilities/storybook';
 
 export default {
   title: 'Components/Expandable',
@@ -26,6 +30,11 @@ export default {
       options: [1, 2, 3, 4, 5, 6],
       control: { type: 'select' },
     },
+    badge: {
+      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
+      control: { type: 'radio' },
+    },
+    badgeText: { control: 'text' },
   },
 } as Meta;
 
@@ -41,6 +50,8 @@ const Template: StoryFn = (args) => ({
       [variant]="variant"
       [closed]="closed"
       [padding]="padding"
+      [badge]="badge"
+      [badgeText]="badgeText"
     >
       <ng-template fudisExpandableContent>
         <fudis-body-text>The content of the expandable.</fudis-body-text>
@@ -59,6 +70,8 @@ const ActionTemplate: StoryFn = (args) => ({
       [variant]="variant"
       [closed]="closed"
       [padding]="padding"
+      [badge]="badge"
+      [badgeText]="badgeText"
     >
       <fudis-expandable-actions>
         <fudis-button label="Button"></fudis-button>
@@ -78,6 +91,18 @@ Example.args = {
   subTitle: undefined,
   closed: true,
   padding: 'default',
+};
+
+export const ExampleWithBadge = Template.bind({});
+ExampleWithBadge.args = {
+  variant: 'regular',
+  level: 2,
+  title: 'Regular expandable with a badge',
+  subTitle: undefined,
+  closed: true,
+  padding: 'default',
+  badge: 'accent',
+  badgeText: 'Badge',
 };
 
 export const ExampleWithSubTitle = Template.bind({});
@@ -120,6 +145,16 @@ export const AllVariants: StoryFn = (args) => ({
         </ng-template>
       </fudis-expandable>
       <fudis-expandable
+        [title]="'Regular expandable with a badge'"
+        [level]="2"
+        [badge]="'accent'"
+        [badgeText]="'Badge'"
+      >
+        <ng-template fudisExpandableContent>
+          <fudis-body-text>The content of the expandable.</fudis-body-text>
+        </ng-template>
+      </fudis-expandable>
+      <fudis-expandable
         [title]="'Regular expandable with sub title'"
         [level]="2"
         [subTitle]="'Use me for an additional information'"
@@ -153,5 +188,11 @@ export const AllVariants: StoryFn = (args) => ({
 AllVariants.parameters = {
   controls: {
     exclude: /.*/g,
+  },
+};
+
+ExampleLite.parameters = {
+  controls: {
+    exclude: expandableLiteExclude,
   },
 };

@@ -34,6 +34,7 @@
         @include color.bg-color('transparent');
         @include typography.expandable-regular-typography;
 
+        display: flex;
         cursor: pointer;
         width: 100%;
         text-align: left;
@@ -46,11 +47,20 @@
           margin-right: spacing.$spacing-xs;
         }
 
-        &__sub-heading {
-          @include typography.expandable-sub-title-typography;
+        &__title {
+          align-self: center;
 
-          display: block;
-          margin-left: spacing.$spacing-xl;
+          /* stylelint-disable-next-line max-nesting-depth */
+          &__text {
+            margin-right: spacing.$spacing-xs;
+          }
+
+          /* stylelint-disable-next-line max-nesting-depth */
+          &__sub-heading {
+            @include typography.expandable-sub-title-typography;
+
+            display: block;
+          }
         }
 
         &__lite {

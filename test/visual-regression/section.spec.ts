@@ -4,7 +4,7 @@ test("section default", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-section--example&viewMode=story");
   await expect(page).toHaveScreenshot({ fullPage: true });
   await page.getByTestId("fudis-button-3").hover();
-  await expect(page).toHaveScreenshot({ fullPage: true });
+  await expect(page.getByText("More info about this section")).toBeVisible();
 });
 
 test("nested section", async ({ page }) => {

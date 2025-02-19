@@ -12,7 +12,11 @@ import {
   Injector,
   AfterContentInit,
 } from '@angular/core';
-import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
+import {
+  FudisBadgeVariant,
+  FudisComponentChanges,
+  FudisExpandableType,
+} from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -63,6 +67,16 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
    * Optional sub title, placed underneath the main title
    */
   @Input() subTitle: string;
+
+  /**
+   * Add badge next to the expandable title
+   */
+  @Input() badge: FudisBadgeVariant | null;
+
+  /**
+   * Badge text
+   */
+  @Input() badgeText: string | null;
 
   /**
    * Display Expandable title in the breadcrumb of Error Summary
