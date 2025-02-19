@@ -1,21 +1,21 @@
 import { Injectable, Signal, signal } from '@angular/core';
-import { FudisGridProperties } from '../../types/grid';
+import { FudisDefaultGridProperties } from '../../types/grid';
 
 @Injectable({ providedIn: 'root' })
 export class FudisGridService {
   /**
    * Grid values that can be set from application. By default an empty object.
    */
-  private _defaultGridValues = signal<FudisGridProperties>({});
+  private _defaultGridValues = signal<FudisDefaultGridProperties>({});
 
   /**
    * To set default values for all Grids application uses from application.
    */
-  public setDefaultValues(newDefaultValues: FudisGridProperties): void | never {
-    let checkedNewValues: FudisGridProperties = {};
+  public setDefaultValues(newDefaultValues: FudisDefaultGridProperties): void | never {
+    let checkedNewValues: FudisDefaultGridProperties = {};
 
     Object.keys(newDefaultValues).forEach((key) => {
-      const keyName = key as keyof FudisGridProperties;
+      const keyName = key as keyof FudisDefaultGridProperties;
       const newValue = newDefaultValues[keyName];
 
       if (newValue) {
@@ -33,7 +33,7 @@ export class FudisGridService {
   /**
    * Get application's default values for Grid
    */
-  public getDefaultValues(): Signal<FudisGridProperties> {
+  public getDefaultValues(): Signal<FudisDefaultGridProperties> {
     return this._defaultGridValues.asReadonly();
   }
 }

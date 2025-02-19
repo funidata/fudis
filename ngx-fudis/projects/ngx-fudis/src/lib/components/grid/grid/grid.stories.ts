@@ -4,7 +4,7 @@ import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utili
 import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
-import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
+import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid';
 
 @Component({
   selector: 'example-grid-with-service',
@@ -82,7 +82,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
 })
 class GridWithServiceExampleComponent {
   constructor(private _gridService: FudisGridService) {
-    const defaultValue: FudisGridProperties = {
+    const defaultValue: FudisDefaultGridProperties = {
       columns: { xs: 1, sm: 2 },
       alignItemsX: 'end',
     };
