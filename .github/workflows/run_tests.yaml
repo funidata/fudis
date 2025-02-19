@@ -93,10 +93,14 @@ jobs:
           path: /tmp
       - name: Load image
         run: docker load --input /tmp/fudis-test.image.tar
+      - name: Create directory for coverage
+        run: mkdir coverage
       - name: Run unit tests with coverage
-        run: docker run -te CI=true fudis-test npm test
-      - name: Create coverage directory
-        run: mkdir -p coverage && docker cp $(docker create fudis-test):/usr/src/app/projects/ngx-fudis/coverage/coverage-final.json coverage/
+        run: |
+          docker run -t \
+            -e CI=true \
+            --mount type=bind,source=./coverage,target=/usr/src/app/projects/ngx-fudis/coverage \
+            fudis-test npm test
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
