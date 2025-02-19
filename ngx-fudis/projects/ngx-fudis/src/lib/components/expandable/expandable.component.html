@@ -29,11 +29,18 @@
           [color]="variant === 'lite' ? 'primary' : 'gray-dark'"
           [rotate]="_closed ? 'none' : 'cw-90'"
         ></fudis-icon
-        >{{ title
-        }}<span
-          *ngIf="variant !== 'lite' && subTitle"
-          class="fudis-expandable__header__heading__button__sub-heading"
-          >{{ subTitle }}</span
+        ><span class="fudis-expandable__header__heading__button__title"
+          ><span class="fudis-expandable__header__heading__button__title__text">{{ title }}</span>
+          <fudis-badge
+            *ngIf="badge && badgeText"
+            class="fudis-expandable__header__heading__button__title__badge"
+            [variant]="badge"
+            [content]="badgeText"
+          /><span
+            *ngIf="variant !== 'lite' && subTitle"
+            class="fudis-expandable__header__heading__button__title__sub-heading"
+            >{{ subTitle }}</span
+          ></span
         >
       </button>
     </div>

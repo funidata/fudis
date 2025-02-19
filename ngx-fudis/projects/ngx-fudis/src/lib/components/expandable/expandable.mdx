@@ -25,9 +25,9 @@ To define which h-level the Expandable heading is, provide suitable `level` attr
 
 ## Content Projection
 
-Expandable's content and additional header buttons are provided via content projection by using directive selectors `fudisExpandableContent` and `fudis-expandable-actions`:
+Expandable's content and additional header buttons are provided via content projection by using directive selectors `fudisExpandableContent` and `fudis-expandable-actions`.
 
-Reason why Expandable Content is not used with similar syntax as other content projection, is to enable lazy loading of its contents. Other content slots should be visible right from the start, but closed Expandables content is initialized only after it is opened for the first time.
+Reason why Expandable Content is not used with similar syntax as other content projection, is to enable lazy loading of its contents. Other content slots should be visible right from the start, but closed Expandable content is initialized only after it is opened for the first time.
 
 ```
 <fudis-expandable [title]="'Some title'" [level]="2">
