@@ -32,7 +32,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   ) {
     super();
 
-    this._element = _gridElement.nativeElement;
+    this._element = this._gridElement.nativeElement;
 
     /**
      * Set default values to property collection object
@@ -44,7 +44,6 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
      */
     effect(() => {
       _breakpointService.getBreakpointState();
-
       if (
         typeof this._calculatedColumns !== 'string' &&
         typeof this._calculatedColumns !== 'number'
@@ -60,7 +59,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
       /**
        * Get GridServices values
        */
-      this._gridInputProperties.serviceValues = _gridService.getDefaultValues()();
+      this._gridInputProperties.serviceValues = this._gridService.getDefaultValues()();
 
       /**
        * Re-run Columns and CSS class calculations if GridService's values udpate
@@ -75,7 +74,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   /**
    * Used to apply grid-template-columns CSS values for the Grid
    */
-  protected _calculatedColumns: string | FudisBreakpointStyleResponsive[] = gridColumnDefault;
+  protected _calculatedColumns: string | number | FudisBreakpointStyleResponsive[] =
+    gridColumnDefault;
 
   /**
    * Internal reference for the this Grid element
