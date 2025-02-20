@@ -22,26 +22,25 @@ const config: Config = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
+  collectCoverageFrom: [
+    'src/lib/**/*.ts',
+    '!src/lib/**/*.module.ts',
+    '!src/lib/**/*.spec.ts',
+    '!src/lib/**/*.stories.ts',
+    '!src/lib/utilities/storybook.ts',
+  ],
+
+  // An array of regexp pattern strings used to skip coverage collection
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/examples/', '/types/'],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
-
-  // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
-  // coverageReporters: [
-  //   "json",
-  //   "text",
-  //   "lcov",
-  //   "clover"
-  // ],
+  coverageReporters: ['json', 'text-summary', 'text'],
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
