@@ -42,15 +42,16 @@ export class TooltipDirective
 
   ngAfterViewInit() {
     /**
-     * Scroll tracking with 1s audit time, so it's not triggered constantly
+     * Scroll tracking with 100s audit time
      */
     this._scrollDispatcher
-      .scrolled(1000)
+      .scrolled(100)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(() => {
         if (
+          this._tooltipElement?.nativeElement &&
           this._ngMaterialTooltip._isTooltipVisible() &&
-          !this.isTooltipInViewport(this._tooltipElement?.nativeElement)
+          !this.isTooltipInViewport(this._tooltipElement.nativeElement)
         ) {
           this._ngMaterialTooltip.hide();
         }

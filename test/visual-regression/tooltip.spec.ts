@@ -18,7 +18,7 @@ test("tooltip should be hidden when scrolled out of view", async ({ page }) => {
 
   await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight));
 
-  await page.waitForTimeout(1000).then(async () => {
+  await page.waitForTimeout(100).then(async () => {
     await expect(page.locator("mat-tooltip-component")).not.toBeVisible();
   });
 });
