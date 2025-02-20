@@ -111,8 +111,10 @@ jobs:
         uses: MishaKav/jest-coverage-comment@main
         with:
           coverage-summary-path: coverage/coverage-summary.json
+          coverage-path: coverage/coverage.txt
           hide-comment: false
           create-new-comment: false
+          report-only-changed-files: true
 
   visual-regression-tests:
     name: Visual regression tests
