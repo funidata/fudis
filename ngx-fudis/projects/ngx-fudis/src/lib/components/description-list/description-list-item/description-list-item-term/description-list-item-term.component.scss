@@ -18,6 +18,14 @@
     &__colon {
       display: none;
     }
+
+    /* By design, tooltip is only supported in regular variant */
+    &__tooltip {
+      display: inline-flex;
+      align-items: center;
+      margin-left: spacing.$spacing-xxs;
+      height: spacing.$spacing-md;
+    }
   }
 
   &__compact {
