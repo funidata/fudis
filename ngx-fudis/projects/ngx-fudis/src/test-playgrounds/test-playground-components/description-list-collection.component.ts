@@ -165,6 +165,22 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-hr class="fudis-my-lg" />
       }
     }
+    <fudis-heading [level]="2" [variant]="'xl'">Test cases for others</fudis-heading>
+    <fudis-hr class="fudis-my-lg" />
+    <fudis-heading [level]="2" [variant]="'md'"
+      >Regular Description List With Tooltip (no compact support)</fudis-heading
+    >
+    <fudis-dl class="fudis-mt-sm" [variant]="'regular'" [tag]="'p'">
+      <fudis-dl-item>
+        <fudis-dt
+          [contentText]="'First name'"
+          [tooltip]="'Second name unknown'"
+          [tooltipPosition]="'right'"
+        ></fudis-dt>
+        <fudis-dd [contentText]="'Rex'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+    <fudis-hr class="fudis-my-lg" />
   `,
 })
 export class StorybookExampleDescriptionListCollectionComponent {

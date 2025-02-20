@@ -5,6 +5,7 @@ import { DescriptionListItemComponent } from '../description-list-item.component
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
+import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
   selector: 'fudis-dt',
@@ -12,13 +13,15 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./description-list-item-term.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListItemTermComponent {
+export class DescriptionListItemTermComponent extends TooltipApiDirective {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
+    super();
+
     this._id = this._idService.getNewDlGrandChilId(
       'term',
       this._parentDl.id,

@@ -6,8 +6,7 @@ import {
   fudisBreakpointsMinWidth,
 } from '../../types/breakpoints';
 import { FudisGridColumnsResponsive } from '../../types/grid';
-import { FudisSpacing } from '../../types/spacing';
-import { FudisSpacingResponsive, fudisSpacingValues } from '../../types/spacing';
+import { FudisSpacing, FudisSpacingResponsive, fudisSpacingValues } from '../../types/spacing';
 
 // TODO: Write tests and possible missing/extra internal documentation about these functions
 export const getBreakpointRules = (
