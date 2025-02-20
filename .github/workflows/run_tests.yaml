@@ -116,6 +116,7 @@ jobs:
           create-new-comment: false
           report-only-changed-files: true
           remove-links-to-files: true
+          remove-links-to-lines: true
 
   visual-regression-tests:
     name: Visual regression tests
