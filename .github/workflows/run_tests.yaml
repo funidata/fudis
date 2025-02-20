@@ -110,7 +110,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: MishaKav/jest-coverage-comment@main
         with:
-          coverage-summary-path: coverage/coverage-final.json
+          coverage-summary-path: coverage/coverage-summary.json
           hide-comment: false
           create-new-comment: false
 
