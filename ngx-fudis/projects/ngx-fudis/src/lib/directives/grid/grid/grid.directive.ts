@@ -204,6 +204,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   private _setColumnsForBreakpoints(
     columnsCssValue: string | FudisBreakpointStyleResponsive[],
   ): void {
+    // also for science
     this._breakpointService.setStyleAttributes(
       this._element,
       'grid-template-columns',
