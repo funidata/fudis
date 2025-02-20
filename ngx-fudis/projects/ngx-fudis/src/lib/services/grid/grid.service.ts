@@ -34,7 +34,6 @@ export class FudisGridService {
    * Get application's default values for Grid
    */
   public getDefaultValues(): Signal<FudisDefaultGridProperties> {
-    // just for science
     return this._defaultGridValues.asReadonly();
   }
 }

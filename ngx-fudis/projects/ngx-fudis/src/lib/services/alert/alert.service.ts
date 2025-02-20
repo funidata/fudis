@@ -48,7 +48,6 @@ export class FudisAlertService {
    * Dismiss all alerts
    */
   public dismissAll(): void {
-    // science continues
     this._alerts.next([]);
   }
 
