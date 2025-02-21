@@ -83,19 +83,21 @@ When nesting Description List as sublist, the nested one should have `variant` s
 
 <Canvas of={DescriptionListStories.NestedDescriptionLists} />
 
-It is possible to incluce e.g. [Button Component](/docs/components-button--documentation) or other interactive elements inside Description List Item Details (`<fudis-dd>`). This following example displays, how button is used inside the Description List in various ways.
+[Tooltip](/docs/directives-tooltip--documentation) can be added to Description List Item Term (`<fudis-dt>`) element by using `tooltip`, `tooltipPosition` and `tooltipToggle` properties. While it works on both Description List variants, it is designed to be used only with **regular** variant.
+
+Also, it is possible to incluce e.g. [Button Component](/docs/components-button--documentation) or other interactive elements inside Description List Item Details (`<fudis-dd>`). The following example displays, how button is used inside the Description List in various ways.
 Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
 
 <Canvas of={DescriptionListStories.NestedSubComponents} />
 
 ### With Language Badge Group
 
-Description List with [Language Badge Group](/docs/components-language-badge-group--documentation) displays Term element with clickable language badges. Clicking a badge sets Details content visible, which have corresponding language set. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
+Description List with [Language Badge Group](/docs/components-language-badge-group--documentation) displays Term element with clickable language badges. Clicking a badge sets Details content visible, which have corresponding language set. While it works on both Description List variants, Language Badge Group is designed to be used only with **regular** variant.
 
 By default Language Badge Group always displays badges for Finnish, Swedish and English, in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()`.
 Check documentation at [FudisTranslationService](/docs/services-translation--documentation#translation-service).
 
-Set `fudis-dd` element's `lang` attribute to tell which translation it represents.
+Set `<fudis-dd>` element's `lang` attribute to tell which translation it represents.
 
 <Source
   code={`

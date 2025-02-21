@@ -17,13 +17,11 @@ export const getGridClasses = (values: FudisGridProperties): string => {
     classList.push(values.classes);
   }
 
-  const arrayToString = classList
+  return classList
     .filter((item) => {
       return !!item;
     })
     .join(' ');
-
-  return arrayToString;
 };
 
 export const replaceFormInputWidthsToRem = (value: string): string => {
@@ -58,13 +56,7 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
     return '1/-1';
   }
 
-  if (
-    typeof value === 'string' &&
-    value !== 'start' &&
-    value !== 'stretch' &&
-    value !== 'end' &&
-    value !== 'center'
-  ) {
+  if (value !== 'start' && value !== 'stretch' && value !== 'end' && value !== 'center') {
     return replaceFormInputWidthsToRem(value);
   }
 

@@ -12,7 +12,7 @@ import { FudisSpacing } from './spacing';
  */
 export const gridColumnDefault = '1fr';
 
-export const gridInputPropertyDefaults: FudisGridProperties = {
+export const gridInputPropertyDefaults: FudisDefaultGridProperties = {
   align: 'start',
   alignItemsX: 'stretch',
   alignItemsY: 'stretch',
@@ -56,23 +56,36 @@ export type FudisGridColumnsResponsive = {
 };
 
 /**
- * Attributes for managing Grid
+ * Base attributes for managing Grid
  */
-export interface FudisGridProperties {
+interface FudisGridBase {
   align?: FudisGridAlign;
   alignItemsY?: FudisGridAlignItems;
   alignItemsX?: FudisGridAlignItems;
   classes?: string;
-  columns?: FudisBreakpointValueResponsive;
   columnGap?: FudisGridGap;
   rowGap?: FudisGridGap;
   width?: FudisGridWidth;
 }
 
+/**
+ * Attributes for managing Grid properties
+ */
+export interface FudisGridProperties extends FudisGridBase {
+  columns?: FudisBreakpointValueResponsive | string | number;
+}
+
+/**
+ * Attributes for managing Grid defaults
+ */
+export interface FudisDefaultGridProperties extends FudisGridBase {
+  columns?: FudisBreakpointValueResponsive;
+}
+
 export interface FudisGridPropertyCollection {
   appValues: FudisGridProperties;
-  defaultValues: FudisGridProperties;
-  serviceValues: FudisGridProperties;
+  defaultValues: FudisDefaultGridProperties;
+  serviceValues: FudisDefaultGridProperties;
 }
 
 // --------------------
