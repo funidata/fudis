@@ -112,8 +112,6 @@ jobs:
         with:
           coverage-summary-path: coverage/coverage-summary.json
           coverage-path: coverage/coverage.txt
-          hide-comment: false
-          create-new-comment: false
           report-only-changed-files: true
           remove-links-to-files: true
           remove-links-to-lines: true
