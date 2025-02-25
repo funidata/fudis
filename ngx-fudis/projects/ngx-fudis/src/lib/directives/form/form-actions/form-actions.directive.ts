@@ -34,11 +34,11 @@ export class FormSubmitDirective implements OnInit {
     /**
      * Make sure that click event is from this submit Button and not any parent Form element
      */
+    const buttonElement = this._button.buttonEl.nativeElement;
     const submitButton =
-      this._document.activeElement === this._button.buttonEl.nativeElement ||
-      targetElement === this._button.buttonEl.nativeElement;
+      this._document.activeElement === buttonElement || targetElement === buttonElement;
 
-    if (submitButton) {
+    if (submitButton && !buttonElement?.ariaDisabled) {
       this._errorSummaryService
         .getFormAncestorId(this._button.buttonEl.nativeElement)
         .then((parentFormId) => {
