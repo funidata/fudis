@@ -94,4 +94,29 @@ export class DialogActionsDirective extends MatDialogActions {
 @Directive({
   selector: '[fudisDialogClose]',
 })
-export class DialogCloseDirective extends MatDialogClose {}
+export class DialogCloseDirective extends MatDialogClose implements OnInit, OnChanges {
+  private hostButtonElement: HTMLElement;
+  constructor(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    _dialogRef: MatDialogRef<any>,
+    _elementRef: ElementRef<HTMLElement>,
+    _dialog: MatDialog,
+  ) {
+    super(_dialogRef, _elementRef, _dialog);
+    this.hostButtonElement = _elementRef?.nativeElement;
+  }
+
+  override _onButtonClick() {
+    /**
+     * Here we check if the button element is disabled. If it is, close action is not triggered. In
+     * case of a _elementRef, it takes the exact element that is attached to, so if it is a
+     * fudis-button, we have to check the underlying button element with firstElementChild, that has
+     * the aria-disabled attribute. If it is just a button, the hostButtonElement check is enough.
+     */
+    if (
+      !this.hostButtonElement?.ariaDisabled &&
+      !this.hostButtonElement?.firstElementChild?.ariaDisabled
+    )
+      this.dialogRef.close();
+  }
+}
