@@ -94,7 +94,7 @@ export class DialogActionsDirective extends MatDialogActions {
 @Directive({
   selector: '[fudisDialogClose]',
 })
-export class DialogCloseDirective extends MatDialogClose implements OnInit, OnChanges {
+export class DialogCloseDirective extends MatDialogClose {
   private hostButtonElement: HTMLElement;
   constructor(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
