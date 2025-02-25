@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
 import { IconComponent } from '../icon/icon.component';
@@ -38,6 +38,7 @@ class HostComponent {
 describe('DialogDirectives', () => {
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
+  let mockDialogRef: jest.Mocked<MatDialogRef<DialogComponent>>;
 
   // Let's mock the scrollHeight to be bigger than client height, so we can mock that the dialog is scrollable
   const originalScrollHeight =
@@ -69,7 +70,11 @@ describe('DialogDirectives', () => {
         DialogCloseDirective,
         HostComponent,
       ],
-      providers: [FudisDialogService, FudisAlertService],
+      providers: [
+        FudisDialogService,
+        FudisAlertService,
+        { provide: MatDialogRef, useValue: mockDialogRef },
+      ],
       imports: [MatDialogModule],
     }).compileComponents();
   });
