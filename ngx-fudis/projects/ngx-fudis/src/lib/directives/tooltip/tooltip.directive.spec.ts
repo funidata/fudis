@@ -7,14 +7,21 @@ import { TooltipDirective } from './tooltip.directive';
 @Component({
   selector: 'fudis-mock-tooltip',
   template: ` <button fudisTooltip [tooltip]="'You should see me!'" [tooltipToggle]="false">
-      On focus and hover tooltip should appear</button
-    ><button
+      On focus and hover tooltip should appear
+    </button>
+    <button
       fudisTooltip
       [tooltip]="'I am toggle button!'"
       [tooltipToggle]="true"
       [tooltipPosition]="'left'"
     >
       Tooltip should appear on toggle
+    </button>
+    <button fudisTooltip [tooltip]="'I am tooltip on top!'" [tooltipPosition]="'top'">
+      Test button 2
+    </button>
+    <button fudisTooltip [tooltip]="'I am tooltip on right!'" [tooltipPosition]="'right'">
+      Test button 3
     </button>`,
 })
 class HostComponent {}
@@ -51,7 +58,7 @@ describe('TooltipDirective', () => {
   it('should find 2 directives with correct tooltip text', () => {
     const all = getTooltipDirective();
 
-    expect(all.length).toEqual(2);
+    expect(all.length).toEqual(4);
 
     const button1 = all[0].injector.get<TooltipDirective>(TooltipDirective);
     const button2 = all[1].injector.get<TooltipDirective>(TooltipDirective);
@@ -60,14 +67,17 @@ describe('TooltipDirective', () => {
     expect(button2.tooltip).toEqual('I am toggle button!');
   });
 
-  // TODO: Test all tooltipPosition values
   it('buttons should return correct tooltipPositions', () => {
     const all = getTooltipDirective();
 
-    const button1 = all[0].injector.get<TooltipDirective>(TooltipDirective);
-    const button2 = all[1].injector.get<TooltipDirective>(TooltipDirective);
+    const button0 = all[0].injector.get<TooltipDirective>(TooltipDirective);
+    const button1 = all[1].injector.get<TooltipDirective>(TooltipDirective);
+    const button2 = all[2].injector.get<TooltipDirective>(TooltipDirective);
+    const button3 = all[3].injector.get<TooltipDirective>(TooltipDirective);
 
-    expect(button1.tooltipPosition).toEqual('below');
-    expect(button2.tooltipPosition).toEqual('left');
+    expect(button0.tooltipPosition).toEqual('below');
+    expect(button1.tooltipPosition).toEqual('left');
+    expect(button2.tooltipPosition).toEqual('top');
+    expect(button3.tooltipPosition).toEqual('right');
   });
 });
