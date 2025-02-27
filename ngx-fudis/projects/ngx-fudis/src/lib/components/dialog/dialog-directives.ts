@@ -113,10 +113,14 @@ export class DialogCloseDirective extends MatDialogClose {
      * fudis-button, we have to check the underlying button element with firstElementChild, that has
      * the aria-disabled attribute. If it is just a button, the hostButtonElement check is enough.
      */
-    if (
-      !this.hostButtonElement?.ariaDisabled &&
-      !this.hostButtonElement?.firstElementChild?.ariaDisabled
-    )
-      this.dialogRef.close();
+    if (!this.isButtonDisabled()) this.dialogRef.close();
   }
+
+  private isButtonDisabled = () => {
+    return (
+      (this.hostButtonElement?.ariaDisabled && this.hostButtonElement?.ariaDisabled === 'true') ||
+      (this.hostButtonElement?.firstElementChild?.ariaDisabled &&
+        this.hostButtonElement?.firstElementChild?.ariaDisabled === 'true')
+    );
+  };
 }
