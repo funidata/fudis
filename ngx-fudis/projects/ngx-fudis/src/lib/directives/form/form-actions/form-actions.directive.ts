@@ -2,6 +2,7 @@ import { Directive, Host, HostListener, Inject, Input, OnInit } from '@angular/c
 import { ButtonComponent } from '../../../components/button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { DOCUMENT } from '@angular/common';
+import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
 
 // TODO: Write tests
 /**
@@ -38,7 +39,7 @@ export class FormSubmitDirective implements OnInit {
     const submitButton =
       this._document.activeElement === buttonElement || targetElement === buttonElement;
 
-    if (submitButton && !buttonElement?.ariaDisabled) {
+    if (submitButton && !isButtonDisabled(buttonElement)) {
       this._errorSummaryService
         .getFormAncestorId(this._button.buttonEl.nativeElement)
         .then((parentFormId) => {
