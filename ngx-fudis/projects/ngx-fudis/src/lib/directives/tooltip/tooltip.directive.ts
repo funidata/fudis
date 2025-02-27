@@ -27,22 +27,34 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
    * When user's mouse enters to tooltip HTMLElement
    */
   @HostListener('mouseenter') private _onMouseEnter() {
-    if (!this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
-      this._ngMaterialTooltip.show();
+    if (this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
+      if (!this.tooltipToggle) {
+        this._ngMaterialTooltip.show();
+      }
     }
   }
 
   /**
-   * When user's mouse leaves tooltip HTMLElement
+   * When user's mouse leaves either trigger or tooltip HTMLElement
    */
-  @HostListener('mouseleave') private _onMouseLeave() {
+  @HostListener('mouseleave', ['$event']) private _onMouseLeave(event: MouseEvent) {
     if (!this.tooltipToggle) {
-      this._ngMaterialTooltip.hide();
+      this._closeTooltip(event);
     }
   }
 
   /**
-   * When tooltip HTMLElement receives focus
+   * When tooltip's trigger HTMLElement receives mouse down click
+   */
+  @HostListener('mousedown', ['$event']) private _onMouseDown(event: MouseEvent) {
+    console.log('mousedown event');
+    if (this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
+      event.preventDefault();
+    }
+  }
+
+  /**
+   * When tooltip's trigger HTMLElement receives focus
    */
   @HostListener('focus') private _onFocus() {
     if (!this.tooltipToggle) {
@@ -51,23 +63,25 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
   }
 
   /**
-   * When tooltip HTMLElement is blurred out
+   * When tooltip's trigger HTMLElement is blurred out
    */
-  @HostListener('blur') private _onBlur() {
+  @HostListener('blur', ['$event']) private _onBlur() {
+    console.log('blur event');
     this._ngMaterialTooltip.hide();
   }
 
   /**
-   * When user clicks tooltip HTMLElement
+   * When user clicks tooltip's triggering HTMLElement
    */
   @HostListener('click') private _onClick() {
+    console.log('click event');
     if (this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
       this._ngMaterialTooltip.toggle();
     }
   }
 
   /**
-   * When key is pressed on tooltip HTMLElement
+   * When key is pressed on tooltip's triggering HTMLElement
    */
   @HostListener('keyup', ['$event']) private _onKeyUp(event: KeyboardEvent) {
     if (
@@ -78,6 +92,10 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
     ) {
       event.preventDefault();
       this._ngMaterialTooltip.toggle();
+    }
+
+    if (event.key === 'Escape') {
+      this._ngMaterialTooltip.hide();
     }
   }
 
@@ -90,6 +108,16 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
     }
     if (this.tooltipPosition) {
       this._ngMaterialTooltip.position = this.tooltipPosition;
+    }
+  }
+
+  /**
+   * Close Tooltip only when hovering out of either triggering element or tooltip itself
+   */
+  private _closeTooltip(event: MouseEvent): void {
+    const relatedTarget = event?.relatedTarget as HTMLDivElement;
+    if (!relatedTarget?.classList.contains('mdc-tooltip')) {
+      this._ngMaterialTooltip.hide();
     }
   }
 }
