@@ -21,6 +21,18 @@ test("tooltip toggle", async ({ page }) => {
 
   await page.mouse.click(0, 0); // Click away from the tooltip
   await expect(page.locator("mat-tooltip-component")).not.toBeVisible();
+
+  await page.getByTestId("fudis-button-1").click();
+  await expect(page.locator("mat-tooltip-component")).toBeVisible();
+  await page.keyboard.press("Escape"); // Dismiss tooltip with Esc
+  await expect(page.locator("mat-tooltip-component")).not.toBeVisible();
+
+  await page.getByTestId("fudis-button-1").focus();
+  await expect(page.locator("mat-tooltip-component")).not.toBeVisible();
+  await page.getByTestId("fudis-button-1").click();
+  await expect(page.locator("mat-tooltip-component")).toBeVisible();
+  await page.getByTestId("fudis-button-1").blur(); // Dismiss tooltip by blurring away
+  await expect(page.locator("mat-tooltip-component")).not.toBeVisible();
 });
 
 test("tooltip hover", async ({ page }) => {
