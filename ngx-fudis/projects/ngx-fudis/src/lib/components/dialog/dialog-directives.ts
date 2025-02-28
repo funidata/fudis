@@ -96,7 +96,7 @@ export class DialogActionsDirective extends MatDialogActions {
   selector: '[fudisDialogClose]',
 })
 export class DialogCloseDirective extends MatDialogClose {
-  private hostButtonElement: HTMLElement;
+  private _hostButtonElement: HTMLElement;
   constructor(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     _dialogRef: MatDialogRef<any>,
@@ -104,10 +104,10 @@ export class DialogCloseDirective extends MatDialogClose {
     _dialog: MatDialog,
   ) {
     super(_dialogRef, _elementRef, _dialog);
-    this.hostButtonElement = _elementRef?.nativeElement;
+    this._hostButtonElement = _elementRef?.nativeElement;
   }
 
   override _onButtonClick() {
-    if (!isButtonDisabled(this.hostButtonElement)) this.dialogRef.close();
+    if (!isButtonDisabled(this._hostButtonElement)) this.dialogRef.close();
   }
 }
