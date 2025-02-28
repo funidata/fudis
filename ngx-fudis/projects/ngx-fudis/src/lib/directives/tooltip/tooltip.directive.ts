@@ -60,7 +60,7 @@ export class TooltipDirective
   }
 
   /**
-   * When user's mouse enters to tooltip HTMLElement
+   * When user's mouse enters to tooltip's triggering HTMLElement
    */
   @HostListener('mouseenter') private _onMouseEnter() {
     if (!this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
@@ -69,7 +69,7 @@ export class TooltipDirective
   }
 
   /**
-   * When user's mouse leaves tooltip HTMLElement
+   * When user's mouse leaves either tooltip or tooltip's triggering HTMLElement
    */
   @HostListener('mouseleave', ['$event']) private _onMouseLeave(event: MouseEvent) {
     const targetElement = event?.relatedTarget as HTMLElement;
@@ -79,7 +79,7 @@ export class TooltipDirective
   }
 
   /**
-   * When tooltip HTMLElement receives focus
+   * When tooltip's triggering HTMLElement receives focus
    */
   @HostListener('focus') private _onFocus() {
     if (!this.tooltipToggle) {
@@ -88,7 +88,7 @@ export class TooltipDirective
   }
 
   /**
-   * When tooltip HTMLElement is blurred out
+   * When tooltip's triggering HTMLElement is blurred out
    */
   @HostListener('blur') private _onBlur() {
     if (!this.preventBlur) this._ngMaterialTooltip.hide();
@@ -96,7 +96,7 @@ export class TooltipDirective
   }
 
   /**
-   * When user clicks tooltip HTMLElement
+   * When user clicks tooltip's triggering HTMLElement
    */
   @HostListener('click') private _onClick() {
     if (this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
@@ -105,17 +105,11 @@ export class TooltipDirective
   }
 
   /**
-   * When key is pressed on tooltip HTMLElement
+   * When key is pressed on tooltip's triggering HTMLElement
    */
   @HostListener('keyup', ['$event']) private _onKeyUp(event: KeyboardEvent) {
-    if (
-      this.tooltipToggle &&
-      (event.key === 'Enter' || event.key === ' ') &&
-      this._tooltipElement.nativeElement.hasAttribute('fudisTooltip') &&
-      !this.tooltipToggle
-    ) {
-      event.preventDefault();
-      this._toggleTooltip();
+    if (event.key === 'Escape') {
+      this._ngMaterialTooltip.hide();
     }
   }
 
@@ -144,6 +138,9 @@ export class TooltipDirective
     );
   }
 
+  /**
+   * Toggle tooltip visibility
+   */
   private _toggleTooltip = () => {
     if (!this._ngMaterialTooltip._isTooltipVisible()) {
       this._showTooltip();
@@ -152,6 +149,9 @@ export class TooltipDirective
     }
   };
 
+  /**
+   * Helper to detect hover on tooltip element
+   */
   private _targetOnToolTip(element: HTMLElement) {
     return element?.classList?.contains('mdc-tooltip');
   }
@@ -165,6 +165,9 @@ export class TooltipDirective
     }
   }
 
+  /**
+   * Helper for preventing blur when interacting with text content inside tooltip
+   */
   private _createTooltipEventListener() {
     this.preventBlur = true;
   }
