@@ -19,8 +19,8 @@
       [attr.aria-invalid]="
         (_checkboxGroup.formGroup &&
           _checkboxGroup.formGroup.touched &&
-          _checkboxGroup.formGroup.invalid) &&
-          _checkboxGroup.groupBlurredOut ||
+          _checkboxGroup.formGroup.invalid &&
+          _checkboxGroup.groupBlurredOut) ||
         null
       "
       (change)="_onChange()"
