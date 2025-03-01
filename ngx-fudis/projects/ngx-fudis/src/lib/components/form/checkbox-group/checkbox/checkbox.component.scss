@@ -71,6 +71,7 @@
 
   &__input {
     @include utilities.box-reset;
+    
     opacity: 0;
     display: grid;
     place-content: center;
