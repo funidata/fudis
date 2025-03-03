@@ -72,8 +72,11 @@
   &__input {
     @include utilities.box-reset;
 
-    position: absolute;
+    display: grid;
+    place-content: center;
     opacity: 0;
+    width: spacing.$pixel-1;
+    height: spacing.$pixel-1;
   }
 
   /*
