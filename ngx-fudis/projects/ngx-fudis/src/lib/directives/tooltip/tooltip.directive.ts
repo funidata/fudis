@@ -31,6 +31,7 @@ export class TooltipDirective
   }
 
   private _destroyRef = inject(DestroyRef);
+  private preventBlur: boolean = false;
 
   ngOnInit(): void {
     this._setTooltip();
@@ -51,7 +52,7 @@ export class TooltipDirective
         if (
           this._tooltipElement?.nativeElement &&
           this._ngMaterialTooltip._isTooltipVisible() &&
-          !this.isTooltipInViewport(this._tooltipElement.nativeElement)
+          !this._isTooltipInViewport(this._tooltipElement.nativeElement)
         ) {
           this._ngMaterialTooltip.hide();
         }
@@ -59,73 +60,56 @@ export class TooltipDirective
   }
 
   /**
-   * This function is for checking if the tooltip is visible
-   */
-  private isTooltipInViewport(el: HTMLElement): boolean {
-    const rect = el.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= window.innerHeight &&
-      rect.right <= window.innerWidth
-    );
-  }
-
-  /**
-   * When user's mouse enters to tooltip HTMLElement
+   * When user's mouse enters to tooltip's triggering HTMLElement
    */
   @HostListener('mouseenter') private _onMouseEnter() {
     if (!this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
-      this._ngMaterialTooltip.show();
+      this._showTooltip();
     }
   }
 
   /**
-   * When user's mouse leaves tooltip HTMLElement
+   * When user's mouse leaves either tooltip or tooltip's triggering HTMLElement
    */
-  @HostListener('mouseleave') private _onMouseLeave() {
-    if (!this.tooltipToggle) {
+  @HostListener('mouseleave', ['$event']) private _onMouseLeave(event: MouseEvent) {
+    const targetElement = event?.relatedTarget as HTMLElement;
+    if (!this.tooltipToggle && !this._targetOnToolTip(targetElement)) {
       this._ngMaterialTooltip.hide();
     }
   }
 
   /**
-   * When tooltip HTMLElement receives focus
+   * When tooltip's triggering HTMLElement receives focus
    */
   @HostListener('focus') private _onFocus() {
     if (!this.tooltipToggle) {
-      this._ngMaterialTooltip.show();
+      this._showTooltip();
     }
   }
 
   /**
-   * When tooltip HTMLElement is blurred out
+   * When tooltip's triggering HTMLElement is blurred out
    */
   @HostListener('blur') private _onBlur() {
-    this._ngMaterialTooltip.hide();
+    if (!this.preventBlur) this._ngMaterialTooltip.hide();
+    this.preventBlur = false;
   }
 
   /**
-   * When user clicks tooltip HTMLElement
+   * When user clicks tooltip's triggering HTMLElement
    */
   @HostListener('click') private _onClick() {
     if (this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
-      this._ngMaterialTooltip.toggle();
+      this._toggleTooltip();
     }
   }
 
   /**
-   * When key is pressed on tooltip HTMLElement
+   * When key is pressed on tooltip's triggering HTMLElement
    */
   @HostListener('keyup', ['$event']) private _onKeyUp(event: KeyboardEvent) {
-    if (
-      this.tooltipToggle &&
-      (event.key === 'Enter' || event.key === ' ') &&
-      this._tooltipElement.nativeElement.hasAttribute('fudisTooltip') &&
-      !this.tooltipToggle
-    ) {
-      event.preventDefault();
-      this._ngMaterialTooltip.toggle();
+    if (event.key === 'Escape') {
+      this._ngMaterialTooltip.hide();
     }
   }
 
@@ -139,5 +123,52 @@ export class TooltipDirective
     if (this.tooltipPosition) {
       this._ngMaterialTooltip.position = this.tooltipPosition;
     }
+  }
+
+  /**
+   * This function is for checking if the tooltip is visible
+   */
+  private _isTooltipInViewport(el: HTMLElement): boolean {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= window.innerHeight &&
+      rect.right <= window.innerWidth
+    );
+  }
+
+  /**
+   * Toggle tooltip visibility
+   */
+  private _toggleTooltip = () => {
+    if (!this._ngMaterialTooltip._isTooltipVisible()) {
+      this._showTooltip();
+    } else {
+      this._ngMaterialTooltip.hide();
+    }
+  };
+
+  /**
+   * Helper to detect hover on tooltip element
+   */
+  private _targetOnToolTip(element: HTMLElement) {
+    return element?.classList?.contains('mdc-tooltip');
+  }
+
+  private _showTooltip() {
+    this._ngMaterialTooltip.show();
+
+    if (this.tooltipToggle) {
+      const el = document.querySelector('mat-tooltip-component');
+      el?.addEventListener('pointerdown', this._createTooltipEventListener.bind(this));
+    }
+  }
+
+  /**
+   * Helper for preventing blur when interacting with text content inside tooltip
+   */
+  private _createTooltipEventListener() {
+    this.preventBlur = true;
   }
 }
