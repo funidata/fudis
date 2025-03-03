@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
 import { IconComponent } from '../icon/icon.component';
@@ -16,6 +16,7 @@ import {
 import { getElement } from '../../utilities/tests/utilities';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { FudisAlertService } from '../../services/alert/alert.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'fudis-mock-dialog',
@@ -26,13 +27,18 @@ import { FudisAlertService } from '../../services/alert/alert.service';
         <fudis-body-text>Dialog Content</fudis-body-text>
       </fudis-dialog-content>
       <fudis-dialog-actions [align]="'start'">
-        <fudis-button fudisDialogClose [label]="'Close this dialog'"></fudis-button>
+        <fudis-button
+          fudisDialogClose
+          [disabled]="disabled"
+          [label]="'Close this dialog'"
+        ></fudis-button>
       </fudis-dialog-actions>
     </fudis-dialog>
   `,
 })
 class HostComponent {
   @Input() contentFocus: boolean = false;
+  @Input() disabled: boolean = false;
 }
 
 describe('DialogDirectives', () => {
@@ -69,7 +75,11 @@ describe('DialogDirectives', () => {
         DialogCloseDirective,
         HostComponent,
       ],
-      providers: [FudisDialogService, FudisAlertService],
+      providers: [
+        FudisDialogService,
+        FudisAlertService,
+        { provide: MatDialogRef, useValue: { close: jest.fn() } },
+      ],
       imports: [MatDialogModule],
     }).compileComponents();
   });
@@ -77,11 +87,12 @@ describe('DialogDirectives', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HostComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   describe('DialogTitleDirective', () => {
     it('should set mat dialog class, tab index and focus', () => {
+      fixture.detectChanges();
+
       const title = getElement(fixture, '[fudisDialogTitle]');
       expect(title.getAttribute('class')).toContain('mat-mdc-dialog-title');
       expect(title.getAttribute('tabIndex')).toEqual('-1');
@@ -91,6 +102,9 @@ describe('DialogDirectives', () => {
   });
 
   describe('DialogContentDirective', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
     it('should set mat dialog class, tab index, and role', () => {
       const content = getElement(fixture, 'fudis-dialog-content');
       expect(content.getAttribute('class')).toContain('mat-mdc-dialog-content');
@@ -112,16 +126,71 @@ describe('DialogDirectives', () => {
 
   describe('DialogActionsDirective', () => {
     it('should set mat dialog and mat dialog align classes', () => {
+      fixture.detectChanges();
+
       const actions = getElement(fixture, 'fudis-dialog-actions');
       expect(actions.getAttribute('class')).toContain('mat-mdc-dialog-actions-align-start');
     });
   });
 
   describe('DialogCloseDirective', () => {
-    it('should contain text', () => {
-      const button = getElement(fixture, 'fudis-dialog-actions [fudisDialogClose]');
+    let dialog: MatDialog;
+    let overlayContainerElement: HTMLElement;
+    let viewContainerFixture: ComponentFixture<ViewContainerComponent>;
+    let testViewContainerRef: ViewContainerRef;
+    let dialogRef: MatDialogRef<HostComponent>;
+
+    beforeEach(() => {
+      dialog = TestBed.inject(MatDialog);
+      overlayContainerElement = TestBed.inject(OverlayContainer).getContainerElement();
+      viewContainerFixture = TestBed.createComponent(ViewContainerComponent);
+      testViewContainerRef = viewContainerFixture.componentInstance.container;
+      dialogRef = dialog.open(HostComponent, {
+        viewContainerRef: testViewContainerRef,
+      });
+    });
+
+    it('should close the dialog from the close button', () => {
+      const dialogSpy = jest.spyOn(dialogRef, 'close');
+      viewContainerFixture.detectChanges();
+
+      const button: HTMLButtonElement = overlayContainerElement.querySelector(
+        'fudis-dialog-actions [fudisDialogClose]',
+      )!;
 
       expect(button.textContent).toEqual('Close this dialog');
+
+      expect(button.ariaDisabled).toEqual(undefined);
+      button.click();
+
+      button.ariaDisabled = 'false';
+      button.click();
+
+      expect(dialogSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('should not close the dialog from the close button', () => {
+      const dialogSpy = jest.spyOn(dialogRef, 'close');
+      viewContainerFixture.detectChanges();
+
+      const button: HTMLButtonElement = overlayContainerElement.querySelector(
+        'fudis-dialog-actions [fudisDialogClose]',
+      )!;
+
+      button.ariaDisabled = 'true';
+
+      button.click();
+      expect(dialogSpy).toHaveBeenCalledTimes(0);
     });
   });
 });
+
+/* View container for testing purposes */
+@Component({
+  selector: 'dialog-container-component',
+  template: ' <ng-container #container></ng-container>',
+  standalone: true,
+})
+class ViewContainerComponent {
+  @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
+}

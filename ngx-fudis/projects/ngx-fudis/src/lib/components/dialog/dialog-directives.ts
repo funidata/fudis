@@ -16,6 +16,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FudisComponentChanges } from '../../types/miscellaneous';
+import { isButtonDisabled } from '../../utilities/dialog/dialog-utils';
 
 @Directive({
   selector: '[fudisDialogTitle]',
@@ -94,4 +95,19 @@ export class DialogActionsDirective extends MatDialogActions {
 @Directive({
   selector: '[fudisDialogClose]',
 })
-export class DialogCloseDirective extends MatDialogClose {}
+export class DialogCloseDirective extends MatDialogClose {
+  private _hostButtonElement: HTMLElement;
+  constructor(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    _dialogRef: MatDialogRef<any>,
+    _elementRef: ElementRef<HTMLElement>,
+    _dialog: MatDialog,
+  ) {
+    super(_dialogRef, _elementRef, _dialog);
+    this._hostButtonElement = _elementRef?.nativeElement;
+  }
+
+  override _onButtonClick() {
+    if (!isButtonDisabled(this._hostButtonElement)) this.dialogRef.close();
+  }
+}
