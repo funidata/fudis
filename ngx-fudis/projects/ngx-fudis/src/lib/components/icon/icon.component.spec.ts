@@ -187,6 +187,10 @@ describe('IconComponent', () => {
       ]);
     });
 
+    it('should have CSS host class', () => {
+      expect(component['_classes']).toEqual('fudis-icon-host');
+    });
+
     it('should change color class according to given color Input value', () => {
       fudisIconColorArray.forEach((color) => {
         iconColorCheck(color);
