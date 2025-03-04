@@ -16,11 +16,11 @@
       [name]="_checkboxGroup.id"
       [attr.tabindex]="control.disabled || _checkboxGroup.disabled ? -1 : null"
       [attr.aria-disabled]="control.disabled || _checkboxGroup.disabled || null"
-      [attr.checked]="control.value || null"
       [attr.aria-invalid]="
         (_checkboxGroup.formGroup &&
           _checkboxGroup.formGroup.touched &&
-          _checkboxGroup.formGroup.invalid) ||
+          _checkboxGroup.formGroup.invalid &&
+          _checkboxGroup.groupBlurredOut) ||
         null
       "
       (change)="_onChange()"
