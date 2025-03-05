@@ -19,6 +19,7 @@ import { FudisAlertService } from '../../services/alert/alert.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dialog',
   template: `
     <fudis-dialog [size]="'lg'">

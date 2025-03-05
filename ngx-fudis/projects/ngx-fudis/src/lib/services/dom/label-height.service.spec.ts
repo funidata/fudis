@@ -12,6 +12,7 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 import { FudisInternalErrorSummaryService } from '../form/error-summary/internal-error-summary.service';
 
 @Component({
+  standalone: false,
   selector: 'mock-text-input',
   template: `<fudis-text-input
     [id]="'my-test-id'"

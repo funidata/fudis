@@ -11,6 +11,7 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
 import { ButtonComponent } from '../../button/button.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-grid-item-component',
   template: `<fudis-grid [columns]="6">
     <fudis-heading [level]="2">I am test heading</fudis-heading>

@@ -19,6 +19,7 @@ import {
 import { BadgeComponent } from '../badge/badge.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-container',
   template: `<fudis-expandable
     [closed]="closed"
@@ -50,6 +51,7 @@ class MockContainerComponent {
 }
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: 'Mock!',
 })

@@ -16,6 +16,7 @@ import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { GridDirective } from './grid.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-grid-directive',
   template: `<div
       fudisGrid

@@ -20,6 +20,7 @@ const testHtmlId = 'test-html-id';
 const testButtonId = 'test-button-id';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: `<div class="mock-container">
     <fudis-alert-group />

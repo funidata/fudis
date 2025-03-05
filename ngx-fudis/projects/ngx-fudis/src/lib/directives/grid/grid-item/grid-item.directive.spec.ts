@@ -11,6 +11,7 @@ import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
 import { BodyTextComponent } from '../../../components/typography/body-text/body-text.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-grid-item-directive',
   template: `<fudis-grid [columns]="4">
     <fudis-heading [level]="3">I am test heading</fudis-heading>
