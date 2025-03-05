@@ -14,11 +14,11 @@ import { BehaviorSubject } from 'rxjs';
 import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 
 @Component({
-    selector: 'fudis-body-text',
-    templateUrl: './body-text.component.html',
-    styleUrls: ['./body-text.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'fudis-body-text',
+  templateUrl: './body-text.component.html',
+  styleUrls: ['./body-text.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class BodyTextComponent implements OnChanges {
   constructor(

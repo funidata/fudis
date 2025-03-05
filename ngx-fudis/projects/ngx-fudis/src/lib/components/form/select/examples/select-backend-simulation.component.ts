@@ -7,9 +7,9 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { StorybookExampleBackendSimulationBaseDirective } from './backend-simulation-base.directive';
 
 @Component({
-    imports: [NgxFudisModule, CommonModule],
-    selector: 'example-select-backend-simulation',
-    template: `
+  imports: [NgxFudisModule, CommonModule],
+  selector: 'example-select-backend-simulation',
+  template: `
     <fudis-body-text
       >This example Select component has property <code>autocompleteFilter</code> set false and
       filtering is done outside of Select with a delay to simulate fetching options from the
@@ -46,7 +46,7 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
           <fudis-select-option *ngFor="let option of options" [data]="option"></fudis-select-option>
         }</ng-template
     ></fudis-select>
-  `
+  `,
 })
 export class StorybookExampleSelectBackendSimulationComponent extends StorybookExampleBackendSimulationBaseDirective {
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object> | null>();

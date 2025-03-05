@@ -6,8 +6,8 @@ import { Directive, HostBinding, TemplateRef } from '@angular/core';
  * components.
  */
 @Directive({
-    selector: 'fudis-expandable-actions',
-    standalone: false
+  selector: 'fudis-expandable-actions',
+  standalone: false,
 })
 export class ExpandableActionsDirective {
   @HostBinding('class') private _classes = 'fudis-expandable-actions';
@@ -17,8 +17,8 @@ export class ExpandableActionsDirective {
  * A marker directive used to tag the template that will be rendered inside the Expandable
  */
 @Directive({
-    selector: '[fudisExpandableContent]',
-    standalone: false
+  selector: '[fudisExpandableContent]',
+  standalone: false,
 })
 export class ExpandableContentDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}

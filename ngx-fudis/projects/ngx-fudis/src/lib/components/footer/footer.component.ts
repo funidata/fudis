@@ -17,12 +17,12 @@ import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationConfig } from '../../services/translation/translationKeys';
 
 @Component({
-    selector: 'fudis-footer',
-    templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'fudis-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class FooterComponent {
   constructor(private _translationService: FudisTranslationService) {

@@ -9,12 +9,12 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { BreadcrumbsComponent } from '../breadcrumbs.component';
 
 @Component({
-    selector: 'fudis-breadcrumbs-item',
-    templateUrl: './breadcrumbs-item.component.html',
-    styleUrls: ['./breadcrumbs-item.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'fudis-breadcrumbs-item',
+  templateUrl: './breadcrumbs-item.component.html',
+  styleUrls: ['./breadcrumbs-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class BreadcrumbsItemComponent {
   constructor(

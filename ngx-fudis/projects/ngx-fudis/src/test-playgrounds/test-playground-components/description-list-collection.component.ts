@@ -4,9 +4,9 @@ import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
 
 @Component({
-    imports: [CommonModule, NgxFudisModule],
-    selector: 'example-description-list-collection',
-    template: `
+  imports: [CommonModule, NgxFudisModule],
+  selector: 'example-description-list-collection',
+  template: `
     @for (gridConfig of gridConfigs; track gridConfig) {
       @for (variant of variants; track variant.value) {
         <fudis-heading [level]="2" [variant]="'xl'"
@@ -180,7 +180,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
       </fudis-dl-item>
     </fudis-dl>
     <fudis-hr class="fudis-my-lg" />
-  `
+  `,
 })
 export class StorybookExampleDescriptionListCollectionComponent {
   classified = true;

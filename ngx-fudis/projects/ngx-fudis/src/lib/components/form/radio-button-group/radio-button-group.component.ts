@@ -9,10 +9,10 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'fudis-radio-button-group',
-    templateUrl: './radio-button-group.component.html',
-    styleUrls: ['./radio-button-group.component.scss'],
-    standalone: false
+  selector: 'fudis-radio-button-group',
+  templateUrl: './radio-button-group.component.html',
+  styleUrls: ['./radio-button-group.component.scss'],
+  standalone: false,
 })
 export class RadioButtonGroupComponent
   extends ControlComponentBaseDirective

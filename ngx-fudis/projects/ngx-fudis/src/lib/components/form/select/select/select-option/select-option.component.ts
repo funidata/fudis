@@ -11,10 +11,10 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisSelectOption } from '../../../../../types/forms';
 
 @Component({
-    selector: 'fudis-select-option',
-    templateUrl: './select-option.component.html',
-    styleUrls: ['./select-option.component.scss'],
-    standalone: false
+  selector: 'fudis-select-option',
+  templateUrl: './select-option.component.html',
+  styleUrls: ['./select-option.component.scss'],
+  standalone: false,
 })
 export class SelectOptionComponent
   extends SelectOptionBaseDirective

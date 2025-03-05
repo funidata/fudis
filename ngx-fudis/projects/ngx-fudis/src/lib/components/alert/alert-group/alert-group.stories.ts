@@ -9,8 +9,8 @@ import { alertGroupExclude } from '../../../utilities/storybook';
 import docs from '../alert.mdx';
 
 @Component({
-    selector: 'example-add-alerts',
-    template: `<div [style]="'margin-top:' + _marginCounter + 'rem'">
+  selector: 'example-add-alerts',
+  template: `<div [style]="'margin-top:' + _marginCounter + 'rem'">
       <fudis-grid [columns]="{ sm: 1, md: '1fr 1fr 1fr 1fr' }">
         <fudis-button [label]="'Add danger'" (handleClick)="addDanger()" />
         <fudis-button [label]="'Add warning'" (handleClick)="addWarning()" />
@@ -32,7 +32,7 @@ import docs from '../alert.mdx';
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>`,
-    standalone: false
+  standalone: false,
 })
 class AddAlertsComponent implements AfterViewInit {
   constructor(

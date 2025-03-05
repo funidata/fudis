@@ -15,11 +15,11 @@ import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
 @Component({
-    selector: 'fudis-alert',
-    templateUrl: './alert.component.html',
-    styleUrls: ['./alert.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'fudis-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AlertComponent {
   constructor(

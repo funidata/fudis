@@ -10,11 +10,11 @@ import { TextFieldComponentBaseDirective } from '../../../directives/form/text-f
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
-    selector: 'fudis-text-input',
-    templateUrl: './text-input.component.html',
-    styleUrls: ['./text-input.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'fudis-text-input',
+  templateUrl: './text-input.component.html',
+  styleUrls: ['./text-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TextInputComponent
   extends TextFieldComponentBaseDirective

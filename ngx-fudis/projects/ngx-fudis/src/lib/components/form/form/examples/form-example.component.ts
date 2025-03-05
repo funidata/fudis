@@ -24,9 +24,9 @@ type MyForm = {
 };
 
 @Component({
-    imports: [NgxFudisModule, CommonModule],
-    selector: 'example-form-content',
-    template: `
+  imports: [NgxFudisModule, CommonModule],
+  selector: 'example-form-content',
+  template: `
     <fudis-section
       [title]="'Main section'"
       [level]="2"
@@ -129,7 +129,7 @@ type MyForm = {
         </fudis-expandable>
       </fudis-section-content>
     </fudis-section>
-  `
+  `,
 })
 export class StorybookExampleFormComponent implements OnInit {
   constructor(

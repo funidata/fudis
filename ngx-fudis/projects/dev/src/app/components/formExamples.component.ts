@@ -45,9 +45,9 @@ type SelectForm = {
 };
 
 @Component({
-    selector: 'app-form-examples',
-    templateUrl: 'formExamples.component.html',
-    standalone: false
+  selector: 'app-form-examples',
+  templateUrl: 'formExamples.component.html',
+  standalone: false,
 })
 export class AppFormExampleComponent {
   constructor(

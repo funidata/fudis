@@ -10,8 +10,8 @@ import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
  * will trigger Error Summary on click
  */
 @Directive({
-    selector: '[fudisFormSubmit]',
-    standalone: false
+  selector: '[fudisFormSubmit]',
+  standalone: false,
 })
 export class FormSubmitDirective implements OnInit {
   constructor(

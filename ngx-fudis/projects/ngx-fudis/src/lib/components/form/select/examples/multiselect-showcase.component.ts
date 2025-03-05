@@ -7,9 +7,9 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { defaultOptions, groupedMockData } from '../common/mock_data';
 
 @Component({
-    imports: [NgxFudisModule, CommonModule],
-    selector: 'example-multiselect-showcase',
-    template: `
+  imports: [NgxFudisModule, CommonModule],
+  selector: 'example-multiselect-showcase',
+  template: `
     <fudis-form
       [title]="'Multiselect showcase'"
       [errorSummaryTitle]="'There are errors'"
@@ -240,7 +240,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                       ></fudis-dd> </fudis-dl-item></fudis-dl></fudis-dd></fudis-dl-item></fudis-dl></fudis-grid-item></fudis-grid
       ></fudis-form-content>
     </fudis-form>
-  `
+  `,
 })
 export class StorybookExampleMultiselectShowcaseComponent {
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object>[] | null>();

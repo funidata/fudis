@@ -9,8 +9,8 @@ import { FudisValidationErrors, FudisValidators } from '../../../../utilities/fo
 import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/storybook';
 
 @Component({
-    selector: 'example-text-input-with-error-message',
-    template: `
+  selector: 'example-text-input-with-error-message',
+  template: `
     <fudis-grid [columns]="2" [width]="'xs'">
       <fudis-text-input
         fudisGridItem
@@ -43,7 +43,7 @@ import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/stor
       />
     </fudis-grid>
   `,
-    standalone: false
+  standalone: false,
 })
 class TextInputWithErrorMessageComponent {
   constructor() {

@@ -25,12 +25,12 @@ import { BehaviorSubject } from 'rxjs';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 
 @Component({
-    selector: 'fudis-button',
-    templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'fudis-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit, OnDestroy {
   constructor(private _idService: FudisIdService) {

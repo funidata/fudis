@@ -17,11 +17,11 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'fudis-select-icons',
-    templateUrl: './select-icons.component.html',
-    styleUrls: ['./select-icons.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'fudis-select-icons',
+  templateUrl: './select-icons.component.html',
+  styleUrls: ['./select-icons.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SelectIconsComponent implements OnChanges {
   constructor(protected _translationService: FudisTranslationService) {

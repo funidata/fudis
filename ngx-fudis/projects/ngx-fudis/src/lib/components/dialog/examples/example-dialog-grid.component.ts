@@ -6,9 +6,9 @@ import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    imports: [NgxFudisModule, CommonModule],
-    selector: 'example-dialog-with-grid',
-    template: `
+  imports: [NgxFudisModule, CommonModule],
+  selector: 'example-dialog-with-grid',
+  template: `
     <fudis-button
       (handleClick)="openDialogTemplate(dialogWithGrid)"
       [label]="'Open dialog with grid'"
@@ -90,7 +90,7 @@ import { CommonModule } from '@angular/common';
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>
-  `
+  `,
 })
 export class ExampleDialogWithGridComponent {
   constructor(private _dialogService: FudisDialogService) {}

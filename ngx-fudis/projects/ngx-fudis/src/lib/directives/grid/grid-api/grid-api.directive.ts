@@ -8,8 +8,8 @@ import {
 } from '../../../types/grid';
 
 @Directive({
-    selector: '[fudisGridApi]',
-    standalone: false
+  selector: '[fudisGridApi]',
+  standalone: false,
 })
 export class GridApiDirective {
   /**

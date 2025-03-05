@@ -7,9 +7,9 @@ import { FormControl } from '@angular/forms';
 import { FudisValidators } from '../../../../utilities/form/validators';
 
 @Component({
-    imports: [NgxFudisModule, CommonModule],
-    selector: 'example-multiselect-backend-simulation',
-    template: `
+  imports: [NgxFudisModule, CommonModule],
+  selector: 'example-multiselect-backend-simulation',
+  template: `
     <fudis-body-text
       >This example Multiselect component has property <code>autocompleteFilter</code> set false and
       filtering is done outside of Select with a delay to simulate fetching options from the
@@ -46,7 +46,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
           ></fudis-multiselect-option>
         }</ng-template
     ></fudis-multiselect>
-  `
+  `,
 })
 export class StorybookExampleMultiselectBackendSimulationComponent extends StorybookExampleBackendSimulationBaseDirective {
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object>[] | null>();

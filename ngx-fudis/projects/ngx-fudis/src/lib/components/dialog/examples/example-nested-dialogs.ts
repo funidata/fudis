@@ -16,9 +16,9 @@ type Veggie = 'fruit' | 'berry' | 'vegetable';
 type Veggies = { [veg in Veggie]?: string | null | undefined };
 
 @Component({
-    selector: 'example-nested-dialog',
-    imports: [NgxFudisModule, CommonModule],
-    template: `
+  selector: 'example-nested-dialog',
+  imports: [NgxFudisModule, CommonModule],
+  template: `
     <fudis-dialog [size]="size">
       <fudis-dialog-content *ngIf="id">
         <fudis-form
@@ -73,7 +73,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
         >.
       </fudis-body-text>
     </ng-template>
-  `
+  `,
 })
 export class ExampleNestedDialogComponent {
   constructor(
@@ -129,9 +129,9 @@ export class ExampleNestedDialogComponent {
 }
 
 @Component({
-    selector: 'example-nested-dialogs',
-    imports: [NgxFudisModule, CommonModule, ExampleNestedDialogComponent],
-    template: `
+  selector: 'example-nested-dialogs',
+  imports: [NgxFudisModule, CommonModule, ExampleNestedDialogComponent],
+  template: `
     <fudis-body-text class="fudis-mb-md">
       NOTE: It is recommended to have only one Dialog open at a time.
     </fudis-body-text>
@@ -177,7 +177,7 @@ export class ExampleNestedDialogComponent {
     <ng-template #fourthDialog>
       <example-nested-dialog [title]="'Fourth and last opened Dialog'" [size]="size" />
     </ng-template>
-  `
+  `,
 })
 export class ExampleNestedDialogsComponent {
   constructor(private _dialogService: FudisDialogService) {}

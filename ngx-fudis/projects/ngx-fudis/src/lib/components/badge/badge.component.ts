@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisBadgeVariant } from '../../types/miscellaneous';
 
 @Component({
-    selector: 'fudis-badge',
-    templateUrl: './badge.component.html',
-    styleUrls: ['./badge.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'fudis-badge',
+  templateUrl: './badge.component.html',
+  styleUrls: ['./badge.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class BadgeComponent {
   /**

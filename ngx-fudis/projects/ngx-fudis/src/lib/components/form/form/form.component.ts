@@ -24,11 +24,11 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 @Component({
-    selector: 'fudis-form',
-    templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'fudis-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class FormComponent extends GridApiDirective implements OnInit, OnDestroy, OnChanges {
   constructor(

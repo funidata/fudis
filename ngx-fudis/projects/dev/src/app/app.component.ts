@@ -17,9 +17,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: 'app.component.html',
-    standalone: false
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   constructor(

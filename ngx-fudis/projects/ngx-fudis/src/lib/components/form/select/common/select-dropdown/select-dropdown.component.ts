@@ -6,10 +6,10 @@ import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
-    selector: 'fudis-select-dropdown',
-    templateUrl: './select-dropdown.component.html',
-    styleUrls: ['./select-dropdown.component.scss'],
-    standalone: false
+  selector: 'fudis-select-dropdown',
+  templateUrl: './select-dropdown.component.html',
+  styleUrls: ['./select-dropdown.component.scss'],
+  standalone: false,
 })
 export class SelectDropdownComponent extends DropdownBaseDirective implements OnChanges {
   constructor(private _translationService: FudisTranslationService) {

@@ -5,10 +5,10 @@ import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 
 @Component({
-    selector: 'fudis-select-group, fudis-multiselect-group',
-    templateUrl: './select-group.component.html',
-    styleUrls: ['./select-group.component.scss'],
-    standalone: false
+  selector: 'fudis-select-group, fudis-multiselect-group',
+  templateUrl: './select-group.component.html',
+  styleUrls: ['./select-group.component.scss'],
+  standalone: false,
 })
 export class SelectGroupComponent {
   constructor(

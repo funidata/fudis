@@ -6,8 +6,8 @@ import { Directive, TemplateRef } from '@angular/core';
  * components
  */
 @Directive({
-    selector: '[fudisSelectOptions]',
-    standalone: false
+  selector: '[fudisSelectOptions]',
+  standalone: false,
 })
 export class SelectOptionsDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}

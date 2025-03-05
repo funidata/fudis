@@ -3,10 +3,10 @@ import { FudisDialogService } from 'ngx-fudis';
 import { DialogTestContentComponent } from './dialog-test-content/dialog-test-content.component';
 
 @Component({
-    selector: 'app-dialog-test',
-    template: '<button mat-button (click)="openDialog()">Open dialog</button>',
-    styles: [],
-    standalone: false
+  selector: 'app-dialog-test',
+  template: '<button mat-button (click)="openDialog()">Open dialog</button>',
+  styles: [],
+  standalone: false,
 })
 export class DialogTestComponent {
   constructor(public dialog: FudisDialogService) {}

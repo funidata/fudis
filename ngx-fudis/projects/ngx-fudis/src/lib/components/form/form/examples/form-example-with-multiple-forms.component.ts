@@ -18,9 +18,9 @@ interface MyCheckboxGroup {
 }
 
 @Component({
-    imports: [NgxFudisModule, CommonModule],
-    selector: 'example-with-multiple-forms',
-    template: `
+  imports: [NgxFudisModule, CommonModule],
+  selector: 'example-with-multiple-forms',
+  template: `
     <fudis-grid [align]="'center'" [columns]="{ sm: 2 }" [width]="'lg'" [classes]="'fudis-mt-xl'">
       <div fudisGridItem [columns]="'stretch'">
         <fudis-heading [level]="1">Multiple Form Components</fudis-heading>
@@ -250,7 +250,7 @@ interface MyCheckboxGroup {
         </fudis-form-content>
       </fudis-form>
     </fudis-grid>
-  `
+  `,
 })
 export class StorybookExampleWithMultipleFormsComponent {
   constructor(private _errorSummaryService: FudisErrorSummaryService) {}

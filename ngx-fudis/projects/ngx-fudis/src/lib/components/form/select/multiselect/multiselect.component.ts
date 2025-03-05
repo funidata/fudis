@@ -19,10 +19,10 @@ import { DOCUMENT } from '@angular/common';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
-    selector: 'fudis-multiselect',
-    templateUrl: './multiselect.component.html',
-    styleUrls: ['../select/select.component.scss'],
-    standalone: false
+  selector: 'fudis-multiselect',
+  templateUrl: './multiselect.component.html',
+  styleUrls: ['../select/select.component.scss'],
+  standalone: false,
 })
 export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(

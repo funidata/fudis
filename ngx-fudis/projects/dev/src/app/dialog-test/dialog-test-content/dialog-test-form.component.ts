@@ -23,8 +23,8 @@ type MyForm = {
 };
 
 @Component({
-    selector: 'app-dialog-test-form',
-    template: `
+  selector: 'app-dialog-test-form',
+  template: `
     <fudis-dialog [size]="'sm'">
       <fudis-dialog-content>
         <fudis-form
@@ -77,8 +77,8 @@ type MyForm = {
       </fudis-dialog-content>
     </fudis-dialog>
   `,
-    styles: [],
-    standalone: false
+  styles: [],
+  standalone: false,
 })
 export class DialogTestFormComponent {
   constructor(

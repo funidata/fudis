@@ -25,9 +25,9 @@ interface CourseBooksFormGroup {
 }
 
 @Component({
-    imports: [NgxFudisModule, CommonModule, TranslocoDirective],
-    selector: 'example-error-summary',
-    templateUrl: './error-summary-example.component.html'
+  imports: [NgxFudisModule, CommonModule, TranslocoDirective],
+  selector: 'example-error-summary',
+  templateUrl: './error-summary-example.component.html',
 })
 export class ErrorSummaryExampleComponent implements OnInit {
   constructor(

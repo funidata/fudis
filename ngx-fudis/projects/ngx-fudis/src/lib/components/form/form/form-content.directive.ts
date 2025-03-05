@@ -1,8 +1,8 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: 'fudis-form-actions',
-    standalone: false
+  selector: 'fudis-form-actions',
+  standalone: false,
 })
 export class FormActionsDirective {
   /**
@@ -12,16 +12,16 @@ export class FormActionsDirective {
 }
 
 @Directive({
-    selector: 'fudis-form-header',
-    standalone: false
+  selector: 'fudis-form-header',
+  standalone: false,
 })
 export class FormHeaderDirective {
   @HostBinding('class') public hostClass = 'fudis-form-header';
 }
 
 @Directive({
-    selector: 'fudis-form-content',
-    standalone: false
+  selector: 'fudis-form-content',
+  standalone: false,
 })
 export class FormContentDirective {
   @HostBinding('class') public hostClass = 'fudis-form-content';

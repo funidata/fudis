@@ -10,8 +10,8 @@ import {
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Directive({
-    selector: '[fudisSelectAutocompleteBase]',
-    standalone: false
+  selector: '[fudisSelectAutocompleteBase]',
+  standalone: false,
 })
 export class SelectAutocompleteBaseDirective {
   constructor(protected _elementRef: ElementRef<HTMLInputElement>) {}
@@ -146,8 +146,8 @@ export class SelectAutocompleteBaseDirective {
 }
 
 @Directive({
-    selector: '[fudisSelectAutocomplete]',
-    standalone: false
+  selector: '[fudisSelectAutocomplete]',
+  standalone: false,
 })
 export class SelectAutocompleteDirective
   extends SelectAutocompleteBaseDirective
@@ -186,8 +186,8 @@ export class SelectAutocompleteDirective
 }
 
 @Directive({
-    selector: '[fudisMultiselectAutocomplete]',
-    standalone: false
+  selector: '[fudisMultiselectAutocomplete]',
+  standalone: false,
 })
 export class MultiselectAutocompleteDirective
   extends SelectAutocompleteBaseDirective

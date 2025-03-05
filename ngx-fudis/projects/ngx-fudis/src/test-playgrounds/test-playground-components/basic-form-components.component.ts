@@ -14,9 +14,9 @@ type MyForm = {
 };
 
 @Component({
-    imports: [CommonModule, NgxFudisModule],
-    selector: 'example-basic-form-components',
-    templateUrl: './basic-form-components.component.html'
+  imports: [CommonModule, NgxFudisModule],
+  selector: 'example-basic-form-components',
+  templateUrl: './basic-form-components.component.html',
 })
 export class StorybookExampleBasicFormComponentsComponent {
   constructor() {

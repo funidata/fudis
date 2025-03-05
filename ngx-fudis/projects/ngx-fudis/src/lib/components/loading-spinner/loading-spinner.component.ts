@@ -4,11 +4,11 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { NgxFudisModule } from '../../ngx-fudis.module';
 
 @Component({
-    selector: 'fudis-loading-spinner',
-    imports: [CommonModule, NgxFudisModule],
-    templateUrl: './loading-spinner.component.html',
-    styleUrl: './loading-spinner.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'fudis-loading-spinner',
+  imports: [CommonModule, NgxFudisModule],
+  templateUrl: './loading-spinner.component.html',
+  styleUrl: './loading-spinner.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadingSpinnerComponent {
   constructor(protected _translationService: FudisTranslationService) {}

@@ -19,11 +19,11 @@ import { DOCUMENT } from '@angular/common';
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
-    selector: 'fudis-select',
-    templateUrl: './select.component.html',
-    styleUrls: ['./select.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'fudis-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(

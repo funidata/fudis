@@ -8,8 +8,8 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';
 
 @Component({
-    selector: 'interactive-example-with-language-service-change-component',
-    template: `
+  selector: 'interactive-example-with-language-service-change-component',
+  template: `
     <fudis-heading [level]="3" [variant]="'sm'" style="display: inline-block;"
       >Harry Potter and the Philosopher's Stone
     </fudis-heading>
@@ -41,7 +41,7 @@ import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';
       <fudis-button [label]="'Set App Lang to Sv'" (handleClick)="changeAppLang('sv')" />
     </fudis-grid>
   `,
-    standalone: false
+  standalone: false,
 })
 class LanguageChangeComponent {
   protected readonly translations = {

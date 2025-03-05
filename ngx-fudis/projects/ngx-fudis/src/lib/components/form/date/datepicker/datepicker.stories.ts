@@ -9,12 +9,12 @@ import { datepickerControlsExclude } from '../../../../utilities/storybook';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 @Component({
-    selector: 'example-language-change-component',
-    template: ` <fudis-grid [classes]="'fudis-mt-sm'" [rowGap]="'xs'">
+  selector: 'example-language-change-component',
+  template: ` <fudis-grid [classes]="'fudis-mt-sm'" [rowGap]="'xs'">
     <fudis-button [label]="_label" (handleClick)="changeLanguage()" />
     <fudis-body-text>Current language: {{ _translationService.getLanguage() }}</fudis-body-text>
   </fudis-grid>`,
-    standalone: false
+  standalone: false,
 })
 class LanguageChangeComponent {
   constructor(private _translationService: FudisTranslationService) {

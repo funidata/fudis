@@ -25,20 +25,20 @@ import { FudisComponentChanges } from '../../../../../../lib/types/miscellaneous
 import { FudisIdService } from '../../../../../services/id/id.service';
 
 @Directive({
-    selector: '[fudisSelectBaseControlValueAccessor]',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: SelectBaseControlValueAccessorDirective,
-            multi: true,
-        },
-        {
-            provide: NG_VALIDATORS,
-            useExisting: SelectBaseControlValueAccessorDirective,
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: '[fudisSelectBaseControlValueAccessor]',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: SelectBaseControlValueAccessorDirective,
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: SelectBaseControlValueAccessorDirective,
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 class SelectBaseControlValueAccessorDirective implements ControlValueAccessor, Validator {
   constructor() {}
@@ -67,20 +67,20 @@ class SelectBaseControlValueAccessorDirective implements ControlValueAccessor, V
 }
 
 @Directive({
-    selector: '[fudisSelectControlValueAccessor]',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: SelectControlValueAccessorDirective,
-            multi: true,
-        },
-        {
-            provide: NG_VALIDATORS,
-            useExisting: SelectControlValueAccessorDirective,
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: '[fudisSelectControlValueAccessor]',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: SelectControlValueAccessorDirective,
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: SelectControlValueAccessorDirective,
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class SelectControlValueAccessorDirective
   extends SelectBaseControlValueAccessorDirective
@@ -121,20 +121,20 @@ export class SelectControlValueAccessorDirective
 }
 
 @Directive({
-    selector: '[fudisMultiselectControlValueAccessor]',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: MultiselectControlValueAccessorDirective,
-            multi: true,
-        },
-        {
-            provide: NG_VALIDATORS,
-            useExisting: MultiselectControlValueAccessorDirective,
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: '[fudisMultiselectControlValueAccessor]',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: MultiselectControlValueAccessorDirective,
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: MultiselectControlValueAccessorDirective,
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class MultiselectControlValueAccessorDirective
   extends SelectBaseControlValueAccessorDirective

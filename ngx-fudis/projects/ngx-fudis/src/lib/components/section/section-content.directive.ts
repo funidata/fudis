@@ -1,8 +1,8 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: 'fudis-section-actions',
-    standalone: false
+  selector: 'fudis-section-actions',
+  standalone: false,
 })
 export class SectionActionsDirective {
   /**
@@ -12,8 +12,8 @@ export class SectionActionsDirective {
 }
 
 @Directive({
-    selector: 'fudis-section-content',
-    standalone: false
+  selector: 'fudis-section-content',
+  standalone: false,
 })
 export class SectionContentDirective {
   /**

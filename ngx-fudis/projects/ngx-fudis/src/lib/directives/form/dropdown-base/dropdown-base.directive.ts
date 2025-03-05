@@ -1,8 +1,8 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, Output, ViewChild } from '@angular/core';
 
 @Directive({
-    selector: '[fudisDropdownBase]',
-    standalone: false
+  selector: '[fudisDropdownBase]',
+  standalone: false,
 })
 export class DropdownBaseDirective {
   /**

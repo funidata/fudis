@@ -2,10 +2,10 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { FudisSelectOption } from '../../../../../types/forms';
 
 @Component({
-    selector: 'fudis-multiselect-chip-list',
-    templateUrl: './multiselect-chip-list.component.html',
-    styleUrls: ['./multiselect-chip-list.component.scss'],
-    standalone: false
+  selector: 'fudis-multiselect-chip-list',
+  templateUrl: './multiselect-chip-list.component.html',
+  styleUrls: ['./multiselect-chip-list.component.scss'],
+  standalone: false,
 })
 export class MultiselectChipListComponent {
   /**

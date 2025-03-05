@@ -23,11 +23,11 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { ExpandableContentDirective } from './expandable-content.directive';
 
 @Component({
-    selector: 'fudis-expandable',
-    templateUrl: './expandable.component.html',
-    styleUrls: ['./expandable.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'fudis-expandable',
+  templateUrl: './expandable.component.html',
+  styleUrls: ['./expandable.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
   constructor(
