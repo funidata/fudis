@@ -232,18 +232,18 @@ describe('ExpandableComponent', () => {
     containerComponent.variant = variant;
     fixture.detectChanges();
 
-    const elem = fixture.nativeElement.querySelector(
-      'fudis-icon.fudis-expandable__header__heading__button__icon',
-    ) as HTMLElement;
+    const svg = fixture.debugElement.query(By.css('fudis-icon svg'));
+    const elem = svg.nativeElement as HTMLElement;
+    const componentClasses = elem.getAttribute('class');
 
     if (variant === 'regular') {
-      expect(elem.getAttribute('ng-reflect-icon')).toEqual('chevron-ring-fill');
-      expect(elem.getAttribute('ng-reflect-color')).toEqual('gray-dark');
+      expect(svg.nativeElement.getAttribute('id')).toEqual('chevron-ring-fill');
+      expect(componentClasses).toContain('fudis-icon__color__gray-dark');
     }
 
     if (variant === 'lite') {
-      expect(elem.getAttribute('ng-reflect-icon')).toEqual('chevron');
-      expect(elem.getAttribute('ng-reflect-color')).toEqual('primary');
+      expect(svg.nativeElement.getAttribute('id')).toEqual('chevron');
+      expect(componentClasses).toContain('fudis-icon__color__primary');
     }
   }
 
