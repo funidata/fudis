@@ -72,13 +72,15 @@
   &__input {
     @include utilities.box-reset;
 
-    appearance: none;
     display: grid;
     place-content: center;
+    opacity: 0;
+    width: spacing.$pixel-1;
+    height: spacing.$pixel-1;
   }
 
-  /* 
-  * If CheckboxGroup is disabled through "disabled" Input, we need to set pointer-event to none for each checkbox. 
+  /*
+  * If CheckboxGroup is disabled through "disabled" Input, we need to set pointer-event to none for each checkbox.
   * This is not necessary when disabling comes through formControl.
   */
   &--disabled {
