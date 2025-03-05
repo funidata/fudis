@@ -48,13 +48,13 @@ describe('TooltipDirective', () => {
   it('tooltipToggle should be set correctly', () => {
     const all = getTooltipDirective();
 
-    let tooltipToggles = [false, true, false, false];
+    const tooltipToggles = [false, true, false, false];
     let count = 0;
 
     all.forEach((directive) => {
-      let button = directive.injector.get<TooltipDirective>(TooltipDirective);
-      expect(button.tooltipToggle).toEqual(tooltipToggles[count ++]);
-    })
+      const button = directive.injector.get<TooltipDirective>(TooltipDirective);
+      expect(button.tooltipToggle).toEqual(tooltipToggles[count++]);
+    });
   });
 
   it('should find 4 directives with correct tooltip text', () => {
@@ -62,24 +62,29 @@ describe('TooltipDirective', () => {
 
     expect(all.length).toEqual(4);
 
-    let tooltipTexts = ['You should see me!','I am toggle button!','I am tooltip on top!','I am tooltip on right!'];
+    const tooltipTexts = [
+      'You should see me!',
+      'I am toggle button!',
+      'I am tooltip on top!',
+      'I am tooltip on right!',
+    ];
     let count = 0;
 
     all.forEach((directive) => {
-      let button = directive.injector.get<TooltipDirective>(TooltipDirective);
-      expect(button.tooltip).toEqual(tooltipTexts[count ++]);
-    })
+      const button = directive.injector.get<TooltipDirective>(TooltipDirective);
+      expect(button.tooltip).toEqual(tooltipTexts[count++]);
+    });
   });
 
   it('buttons should return correct tooltipPositions', () => {
     const all = getTooltipDirective();
 
-    let positions = ['below', 'left', 'top', 'right'];
+    const positions = ['below', 'left', 'top', 'right'];
     let count = 0;
 
     all.forEach((directive) => {
-      let button = directive.injector.get<TooltipDirective>(TooltipDirective);
-      expect(button.tooltipPosition).toEqual(positions[count ++]);
-    })
+      const button = directive.injector.get<TooltipDirective>(TooltipDirective);
+      expect(button.tooltipPosition).toEqual(positions[count++]);
+    });
   });
 });
