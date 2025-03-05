@@ -9,6 +9,8 @@ export const addons = [
   "@storybook/addon-essentials",
   "@storybook/addon-interactions",
   "@storybook/addon-a11y",
+  "@storybook/addon-mdx-gfm",
+  "@chromatic-com/storybook"
 ];
 export const framework = {
   name: "@storybook/angular",
@@ -27,6 +29,7 @@ export const staticDirs = [
 ];
 export const docs = {
   defaultName: "Documentation",
+  autodocs: true
 };
 
 export function managerHead(head) {
