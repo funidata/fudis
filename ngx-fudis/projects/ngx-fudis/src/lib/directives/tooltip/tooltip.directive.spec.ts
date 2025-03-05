@@ -18,10 +18,10 @@ import { TooltipDirective } from './tooltip.directive';
       Tooltip should appear on toggle
     </button>
     <button fudisTooltip [tooltip]="'I am tooltip on top!'" [tooltipPosition]="'top'">
-      Test button 2
+      Tooltip should appear on top
     </button>
     <button fudisTooltip [tooltip]="'I am tooltip on right!'" [tooltipPosition]="'right'">
-      Test button 3
+      Tooltip should appear on right
     </button>`,
 })
 class HostComponent {}
@@ -48,36 +48,38 @@ describe('TooltipDirective', () => {
   it('tooltipToggle should be set correctly', () => {
     const all = getTooltipDirective();
 
-    const button1 = all[0].injector.get<TooltipDirective>(TooltipDirective);
-    const button2 = all[1].injector.get<TooltipDirective>(TooltipDirective);
+    let tooltipToggles = [false, true, false, false];
+    let count = 0;
 
-    expect(button1.tooltipToggle).toBe(false);
-    expect(button2.tooltipToggle).toBe(true);
+    all.forEach((directive) => {
+      let button = directive.injector.get<TooltipDirective>(TooltipDirective);
+      expect(button.tooltipToggle).toEqual(tooltipToggles[count ++]);
+    })
   });
 
-  it('should find 2 directives with correct tooltip text', () => {
+  it('should find 4 directives with correct tooltip text', () => {
     const all = getTooltipDirective();
 
     expect(all.length).toEqual(4);
 
-    const button1 = all[0].injector.get<TooltipDirective>(TooltipDirective);
-    const button2 = all[1].injector.get<TooltipDirective>(TooltipDirective);
+    let tooltipTexts = ['You should see me!','I am toggle button!','I am tooltip on top!','I am tooltip on right!'];
+    let count = 0;
 
-    expect(button1.tooltip).toEqual('You should see me!');
-    expect(button2.tooltip).toEqual('I am toggle button!');
+    all.forEach((directive) => {
+      let button = directive.injector.get<TooltipDirective>(TooltipDirective);
+      expect(button.tooltip).toEqual(tooltipTexts[count ++]);
+    })
   });
 
   it('buttons should return correct tooltipPositions', () => {
     const all = getTooltipDirective();
 
-    const button0 = all[0].injector.get<TooltipDirective>(TooltipDirective);
-    const button1 = all[1].injector.get<TooltipDirective>(TooltipDirective);
-    const button2 = all[2].injector.get<TooltipDirective>(TooltipDirective);
-    const button3 = all[3].injector.get<TooltipDirective>(TooltipDirective);
+    let positions = ['below', 'left', 'top', 'right'];
+    let count = 0;
 
-    expect(button0.tooltipPosition).toEqual('below');
-    expect(button1.tooltipPosition).toEqual('left');
-    expect(button2.tooltipPosition).toEqual('top');
-    expect(button3.tooltipPosition).toEqual('right');
+    all.forEach((directive) => {
+      let button = directive.injector.get<TooltipDirective>(TooltipDirective);
+      expect(button.tooltipPosition).toEqual(positions[count ++]);
+    })
   });
 });
