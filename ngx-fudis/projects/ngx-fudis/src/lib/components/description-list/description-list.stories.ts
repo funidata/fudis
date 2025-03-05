@@ -8,8 +8,8 @@ import { descriptionListExclude, nestedDescriptionListExclude } from '../../util
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
-  selector: 'example-language-service-change-component',
-  template: `
+    selector: 'example-language-service-change-component',
+    template: `
     <fudis-grid [columns]="3" [width]="'sm'">
       <fudis-button
         [label]="'Change to: fi, sv'"
@@ -28,6 +28,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
       <fudis-button [label]="'Set App Lang to Sv'" (handleClick)="changeAppLang('sv')" />
     </fudis-grid>
   `,
+    standalone: false
 })
 class LanguageChangeComponent {
   constructor(private _languageService: FudisTranslationService) {

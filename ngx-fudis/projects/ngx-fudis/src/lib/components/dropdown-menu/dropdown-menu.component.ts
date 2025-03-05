@@ -20,11 +20,12 @@ import { Subject } from 'rxjs';
 import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 
 @Component({
-  selector: 'fudis-dropdown-menu',
-  templateUrl: './dropdown-menu.component.html',
-  styleUrls: ['./dropdown-menu.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-dropdown-menu',
+    templateUrl: './dropdown-menu.component.html',
+    styleUrls: ['./dropdown-menu.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit {
   constructor(

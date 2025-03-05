@@ -12,7 +12,8 @@ import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
 import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
 
 @Directive({
-  selector: '[fudisGridItem]',
+    selector: '[fudisGridItem]',
+    standalone: false
 })
 export class GridItemDirective implements OnInit, OnChanges {
   constructor(

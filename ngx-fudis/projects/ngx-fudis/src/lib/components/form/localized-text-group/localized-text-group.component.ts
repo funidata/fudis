@@ -25,10 +25,11 @@ import { GroupComponentBaseDirective } from '../../../directives/form/group-comp
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
-  selector: 'fudis-localized-text-group',
-  templateUrl: './localized-text-group.component.html',
-  styleUrls: ['./localized-text-group.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-localized-text-group',
+    templateUrl: './localized-text-group.component.html',
+    styleUrls: ['./localized-text-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGroup<T>>
   extends GroupComponentBaseDirective

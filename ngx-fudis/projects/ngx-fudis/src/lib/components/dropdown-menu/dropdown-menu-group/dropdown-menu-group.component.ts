@@ -3,9 +3,10 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 
 @Component({
-  selector: 'fudis-dropdown-menu-group',
-  templateUrl: './dropdown-menu-group.component.html',
-  styleUrls: ['./dropdown-menu-group.component.scss'],
+    selector: 'fudis-dropdown-menu-group',
+    templateUrl: './dropdown-menu-group.component.html',
+    styleUrls: ['./dropdown-menu-group.component.scss'],
+    standalone: false
 })
 export class DropdownMenuGroupComponent {
   constructor(

@@ -35,10 +35,9 @@ type MyForm = {
 };
 
 @Component({
-  standalone: true,
-  imports: [NgxFudisModule, CommonModule],
-  selector: 'example-dynamic-validator',
-  template: `
+    imports: [NgxFudisModule, CommonModule],
+    selector: 'example-dynamic-validator',
+    template: `
     <fudis-form
       class="fudis-mt-xl"
       [badge]="badge"
@@ -258,7 +257,7 @@ type MyForm = {
         </fudis-fieldset>
       </fudis-form-content>
     </fudis-form>
-  `,
+  `
 })
 export class StorybookExampleDynamicValidatorsComponent {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {

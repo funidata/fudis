@@ -32,7 +32,8 @@ import { SelectOptionsDirective } from '../select-options-directive/select-optio
 import { Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[fudisSelectBase]',
+    selector: '[fudisSelectBase]',
+    standalone: false
 })
 export class SelectBaseDirective
   extends ControlComponentBaseDirective

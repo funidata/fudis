@@ -14,8 +14,8 @@ import { textInputControlsExclude } from '../../../utilities/storybook';
 import { fudisInputSizeArray } from '../../../types/forms';
 
 @Component({
-  selector: 'example-text-input-with-validators',
-  template: `
+    selector: 'example-text-input-with-validators',
+    template: `
     <form [formGroup]="mainFormGroup">
       <fudis-text-input
         [control]="mainFormGroup.controls['required']"
@@ -48,6 +48,7 @@ import { fudisInputSizeArray } from '../../../types/forms';
       />
     </form>
   `,
+    standalone: false
 })
 class TextInputWithFormControlExampleComponent {
   constructor(private _formBuilder: FormBuilder) {}

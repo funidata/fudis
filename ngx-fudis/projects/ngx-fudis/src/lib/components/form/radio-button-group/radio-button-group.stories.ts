@@ -63,8 +63,8 @@ Example.args = {
 };
 
 @Component({
-  selector: 'disabled-radio-group-example',
-  template: `
+    selector: 'disabled-radio-group-example',
+    template: `
     <fudis-radio-button-group
       [label]="'Choose a pet'"
       [helpText]="'We all should have a pet.'"
@@ -78,6 +78,7 @@ Example.args = {
       ></fudis-radio-button>
     </fudis-radio-button-group>
   `,
+    standalone: false
 })
 class DisabledRadioGroupExampleComponent {
   petOptions: FudisRadioButtonOption<object>[] = [

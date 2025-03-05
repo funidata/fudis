@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-dialog-test-content',
-  template: `
+    selector: 'app-dialog-test-content',
+    template: `
     <fudis-dialog [size]="'lg'">
       <fudis-heading fudisDialogTitle [level]="2"
         >Dialog with fudis-grid and scrollable content</fudis-heading
@@ -90,6 +90,7 @@ import { Component } from '@angular/core';
       </fudis-dialog-actions>
     </fudis-dialog>
   `,
-  styles: [],
+    styles: [],
+    standalone: false
 })
 export class DialogTestContentComponent {}

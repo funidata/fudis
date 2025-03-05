@@ -12,10 +12,9 @@ type TestForm = {
 };
 
 @Component({
-  standalone: true,
-  imports: [NgxFudisModule, CommonModule],
-  selector: 'example-dialog-with-form',
-  template: `
+    imports: [NgxFudisModule, CommonModule],
+    selector: 'example-dialog-with-form',
+    template: `
     <fudis-dialog [size]="_size">
       <fudis-dialog-content>
         <fudis-form
@@ -80,7 +79,7 @@ type TestForm = {
         </fudis-form>
       </fudis-dialog-content>
     </fudis-dialog>
-  `,
+  `
 })
 export class ExampleDialogFormComponent {
   constructor(

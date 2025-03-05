@@ -10,9 +10,10 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
-  selector: 'fudis-multiselect-option',
-  templateUrl: './multiselect-option.component.html',
-  styleUrls: ['./multiselect-option.component.scss'],
+    selector: 'fudis-multiselect-option',
+    templateUrl: './multiselect-option.component.html',
+    styleUrls: ['./multiselect-option.component.scss'],
+    standalone: false
 })
 export class MultiselectOptionComponent
   extends SelectOptionBaseDirective

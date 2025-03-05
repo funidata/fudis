@@ -18,10 +18,11 @@ type LanguageLabel = { key: FudisLanguageAbbr; variant: 'standard' | 'missing' }
 
 type LanguageLabelArray = LanguageLabel[];
 @Component({
-  selector: 'fudis-language-badge-group',
-  templateUrl: './language-badge-group.component.html',
-  styleUrls: ['./language-badge-group.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-language-badge-group',
+    templateUrl: './language-badge-group.component.html',
+    styleUrls: ['./language-badge-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnChanges {
   constructor(

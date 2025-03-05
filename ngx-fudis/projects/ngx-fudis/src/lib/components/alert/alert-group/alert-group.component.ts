@@ -11,10 +11,11 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'fudis-alert-group',
-  templateUrl: './alert-group.component.html',
-  styleUrls: ['./alert-group.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-alert-group',
+    templateUrl: './alert-group.component.html',
+    styleUrls: ['./alert-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AlertGroupComponent implements OnChanges {
   constructor(

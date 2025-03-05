@@ -5,7 +5,8 @@ import { FormGroup } from '@angular/forms';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Directive({
-  selector: '[fudisGroupComponentBase]',
+    selector: '[fudisGroupComponentBase]',
+    standalone: false
 })
 export class GroupComponentBaseDirective extends FormCommonApiDirective {
   constructor(_idService: FudisIdService, _focusService: FudisFocusService) {

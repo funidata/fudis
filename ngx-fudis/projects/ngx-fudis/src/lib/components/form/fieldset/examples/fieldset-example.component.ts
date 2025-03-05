@@ -19,10 +19,9 @@ interface MyFieldsetForm {
 }
 
 @Component({
-  standalone: true,
-  imports: [NgxFudisModule, CommonModule],
-  selector: 'example-fieldset',
-  template: `
+    imports: [NgxFudisModule, CommonModule],
+    selector: 'example-fieldset',
+    template: `
     <fudis-fieldset
       [width]="'md'"
       [label]="'Example Fieldset Title'"
@@ -81,7 +80,7 @@ interface MyFieldsetForm {
         </fudis-grid>
       </fudis-fieldset-content>
     </fudis-fieldset>
-  `,
+  `
 })
 export class FieldsetExampleComponent {
   alignActions: 'start' | 'end' | 'below' = 'start';

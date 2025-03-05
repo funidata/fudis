@@ -22,7 +22,8 @@ import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Directive({
-  selector: '[fudisGrid]',
+    selector: '[fudisGrid]',
+    standalone: false
 })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
   constructor(

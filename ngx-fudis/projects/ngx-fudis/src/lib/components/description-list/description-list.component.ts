@@ -14,10 +14,11 @@ import { FudisGridGap } from '../../types/grid';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'fudis-dl',
-  templateUrl: './description-list.component.html',
-  styleUrls: ['./description-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-dl',
+    templateUrl: './description-list.component.html',
+    styleUrls: ['./description-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {

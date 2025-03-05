@@ -16,10 +16,11 @@ import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'fudis-dd',
-  styleUrls: ['./description-list-item-details.component.scss'],
-  templateUrl: './description-list-item-details.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-dd',
+    styleUrls: ['./description-list-item-details.component.scss'],
+    templateUrl: './description-list-item-details.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy {
   constructor(

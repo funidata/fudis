@@ -28,18 +28,19 @@ import { DateRangeComponent } from '../date-range/date-range.component';
 import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
 
 @Component({
-  selector: 'fudis-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    {
-      provide: DateAdapter,
-      useClass: FudisDateAdapter,
-      deps: [MAT_DATE_LOCALE],
-    },
-    { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
-  ],
+    selector: 'fudis-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: DateAdapter,
+            useClass: FudisDateAdapter,
+            deps: [MAT_DATE_LOCALE],
+        },
+        { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
+    ],
+    standalone: false
 })
 export class DatepickerComponent
   extends ControlComponentBaseDirective

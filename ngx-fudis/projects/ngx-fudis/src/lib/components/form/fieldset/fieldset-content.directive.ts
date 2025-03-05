@@ -2,7 +2,8 @@ import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Directive({
-  selector: 'fudis-fieldset-actions',
+    selector: 'fudis-fieldset-actions',
+    standalone: false
 })
 export class FieldsetActionsDirective implements OnChanges {
   @HostBinding('class') private _hostClass =
@@ -21,7 +22,8 @@ export class FieldsetActionsDirective implements OnChanges {
 }
 
 @Directive({
-  selector: 'fudis-fieldset-content',
+    selector: 'fudis-fieldset-content',
+    standalone: false
 })
 export class FieldsetContentDirective {
   /**

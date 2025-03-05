@@ -15,10 +15,11 @@ import { BehaviorSubject } from 'rxjs';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 @Component({
-  selector: 'fudis-heading',
-  templateUrl: './heading.component.html',
-  styleUrls: ['./heading.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-heading',
+    templateUrl: './heading.component.html',
+    styleUrls: ['./heading.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HeadingComponent implements OnInit, OnChanges {
   constructor(

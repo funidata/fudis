@@ -13,10 +13,11 @@ import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../..
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
 
 @Component({
-  selector: 'fudis-radio-button',
-  templateUrl: './radio-button.component.html',
-  styleUrls: ['./radio-button.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'fudis-radio-button',
+    templateUrl: './radio-button.component.html',
+    styleUrls: ['./radio-button.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class RadioButtonComponent implements OnInit {
   constructor(

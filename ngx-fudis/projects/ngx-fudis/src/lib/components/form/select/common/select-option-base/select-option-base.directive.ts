@@ -9,7 +9,8 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { FudisIdService } from '../../../../../services/id/id.service';
 
 @Directive({
-  selector: '[fudisSelectOptionBase]',
+    selector: '[fudisSelectOptionBase]',
+    standalone: false
 })
 export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   constructor(

@@ -8,10 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
-  selector: 'fudis-dt',
-  templateUrl: './description-list-item-term.component.html',
-  styleUrls: ['./description-list-item-term.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-dt',
+    templateUrl: './description-list-item-term.component.html',
+    styleUrls: ['./description-list-item-term.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DescriptionListItemTermComponent extends TooltipApiDirective {
   constructor(

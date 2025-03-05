@@ -12,10 +12,9 @@ type TestForm = {
 };
 
 @Component({
-  standalone: true,
-  imports: [NgxFudisModule, CommonModule],
-  selector: 'example-dialog-laucher',
-  template: ` <fudis-button
+    imports: [NgxFudisModule, CommonModule],
+    selector: 'example-dialog-laucher',
+    template: ` <fudis-button
       (handleClick)="openDialogComponent()"
       [label]="'Open dialog with form'"
     ></fudis-button>
@@ -24,7 +23,7 @@ type TestForm = {
       <fudis-body-text
         >Great choise, your power animal is {{ this._chosenPowerAnimal }}.</fudis-body-text
       >
-    </ng-container>`,
+    </ng-container>`
 })
 export class ExampleDialogLaucherComponent {
   constructor(private _dialogService: FudisDialogService) {}

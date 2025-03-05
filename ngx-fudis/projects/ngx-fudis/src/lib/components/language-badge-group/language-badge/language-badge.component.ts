@@ -16,10 +16,11 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'fudis-language-badge',
-  styleUrls: ['./language-badge.component.scss'],
-  templateUrl: './language-badge.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-language-badge',
+    styleUrls: ['./language-badge.component.scss'],
+    templateUrl: './language-badge.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges, OnInit {
   constructor(

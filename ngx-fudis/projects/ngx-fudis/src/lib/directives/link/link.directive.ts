@@ -20,7 +20,8 @@ import { IconComponent } from '../../components/icon/icon.component';
 import { DOCUMENT } from '@angular/common';
 
 @Directive({
-  selector: '[fudisLink]',
+    selector: '[fudisLink]',
+    standalone: false
 })
 export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   constructor(

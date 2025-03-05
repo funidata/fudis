@@ -12,9 +12,10 @@ import { GroupComponentBaseDirective } from '../../../directives/form/group-comp
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
-  selector: 'fudis-checkbox-group',
-  templateUrl: './checkbox-group.component.html',
-  styleUrls: ['./checkbox-group.component.scss'],
+    selector: 'fudis-checkbox-group',
+    templateUrl: './checkbox-group.component.html',
+    styleUrls: ['./checkbox-group.component.scss'],
+    standalone: false
 })
 export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   extends GroupComponentBaseDirective

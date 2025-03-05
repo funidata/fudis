@@ -23,10 +23,11 @@ import { FudisLabelHeightService } from '../../../services/dom/label-height.serv
 import { throttle } from '../../../utilities/resizeThrottle';
 
 @Component({
-  selector: 'fudis-fieldset',
-  templateUrl: './fieldset.component.html',
-  styleUrls: ['./fieldset.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'fudis-fieldset',
+    templateUrl: './fieldset.component.html',
+    styleUrls: ['./fieldset.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class FieldSetComponent
   extends TooltipApiDirective

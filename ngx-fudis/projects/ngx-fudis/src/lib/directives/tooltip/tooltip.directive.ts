@@ -14,9 +14,10 @@ import { ScrollDispatcher } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
-  selector: '[fudisTooltip]',
-  exportAs: 'tooltip',
-  providers: [MatTooltip],
+    selector: '[fudisTooltip]',
+    exportAs: 'tooltip',
+    providers: [MatTooltip],
+    standalone: false
 })
 export class TooltipDirective
   extends TooltipApiDirective

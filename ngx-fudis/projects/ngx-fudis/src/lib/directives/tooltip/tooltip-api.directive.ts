@@ -3,8 +3,9 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
 
 @Directive({
-  selector: '[fudisTooltipApi]',
-  providers: [MatTooltip],
+    selector: '[fudisTooltipApi]',
+    providers: [MatTooltip],
+    standalone: false
 })
 export class TooltipApiDirective {
   /**

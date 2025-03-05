@@ -18,10 +18,11 @@ import {
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
-  selector: 'fudis-validator-error-message',
-  templateUrl: './validator-error-message.component.html',
-  styleUrls: ['./validator-error-message.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fudis-validator-error-message',
+    templateUrl: './validator-error-message.component.html',
+    styleUrls: ['./validator-error-message.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(

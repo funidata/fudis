@@ -4,9 +4,10 @@ import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
-  selector: 'fudis-date-range',
-  templateUrl: './date-range.component.html',
-  styleUrls: ['./date-range.component.scss'],
+    selector: 'fudis-date-range',
+    templateUrl: './date-range.component.html',
+    styleUrls: ['./date-range.component.scss'],
+    standalone: false
 })
 export class DateRangeComponent implements OnChanges {
   constructor(private _idService: FudisIdService) {}

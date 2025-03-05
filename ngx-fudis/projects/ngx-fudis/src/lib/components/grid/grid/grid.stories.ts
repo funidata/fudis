@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid';
 
 @Component({
-  selector: 'example-grid-with-service',
-  template: `
+    selector: 'example-grid-with-service',
+    template: `
     <fudis-grid
       [columns]="1"
       [rowGap]="'sm'"
@@ -79,6 +79,7 @@ import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid'
       </fudis-grid>
     </fudis-grid>
   `,
+    standalone: false
 })
 class GridWithServiceExampleComponent {
   constructor(private _gridService: FudisGridService) {

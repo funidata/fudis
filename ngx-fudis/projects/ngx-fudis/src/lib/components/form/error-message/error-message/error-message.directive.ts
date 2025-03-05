@@ -37,7 +37,8 @@ import {
 } from '../../../../types/forms';
 
 @Directive({
-  selector: 'fudis-error-message',
+    selector: 'fudis-error-message',
+    standalone: false
 })
 export class ErrorMessageDirective implements OnInit, OnChanges, OnDestroy {
   constructor(

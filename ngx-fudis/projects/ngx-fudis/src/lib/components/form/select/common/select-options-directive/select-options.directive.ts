@@ -5,7 +5,10 @@ import { Directive, TemplateRef } from '@angular/core';
  * A marker directive used to tag the template that will be rendered inside the Select options
  * components
  */
-@Directive({ selector: '[fudisSelectOptions]' })
+@Directive({
+    selector: '[fudisSelectOptions]',
+    standalone: false
+})
 export class SelectOptionsDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }

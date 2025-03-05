@@ -5,10 +5,9 @@ import { LoadingSpinnerComponent } from '../../lib/components/loading-spinner/lo
 import { fudisIconArray } from '../../lib/types/icons';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, NgxFudisModule, LoadingSpinnerComponent],
-  selector: 'example-static-components',
-  templateUrl: './static-components.component.html',
+    imports: [CommonModule, NgxFudisModule, LoadingSpinnerComponent],
+    selector: 'example-static-components',
+    templateUrl: './static-components.component.html'
 })
 export class StorybookExampleStaticComponentsComponent {
   loadingText = 'Longer spinner loading text to see that alignment and linebreaks work.';

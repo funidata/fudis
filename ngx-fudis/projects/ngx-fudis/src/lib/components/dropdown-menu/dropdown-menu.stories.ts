@@ -10,8 +10,8 @@ import { FudisInputSize } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
 
 @Component({
-  selector: 'example-dropdown-menu',
-  template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
+    selector: 'example-dropdown-menu',
+    template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
     <fudis-grid-item>
       <fudis-heading [level]="4">Random items menu</fudis-heading>
       <fudis-button
@@ -65,6 +65,7 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
       >
     </fudis-grid-item>
   </fudis-grid>`,
+    standalone: false
 })
 class DropdownMenuExampleComponent {
   protected _latestClickItem: string | null = null;

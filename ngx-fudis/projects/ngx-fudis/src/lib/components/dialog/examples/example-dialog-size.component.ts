@@ -6,10 +6,9 @@ import { FudisDialogSize } from '../../../types/miscellaneous';
 import { ExampleDialogFormComponent } from './example-dialog-form.component';
 
 @Component({
-  standalone: true,
-  imports: [NgxFudisModule, CommonModule],
-  selector: 'example-dialog-size',
-  template: `
+    imports: [NgxFudisModule, CommonModule],
+    selector: 'example-dialog-size',
+    template: `
     <fudis-heading [level]="1">Dialog size examples</fudis-heading>
     <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">
       <fudis-heading [level]="2" [variant]="'lg'">Regular Dialogs</fudis-heading>
@@ -46,7 +45,7 @@ import { ExampleDialogFormComponent } from './example-dialog-form.component';
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>
-  `,
+  `
 })
 export class ExampleDialogSizeComponent {
   constructor(private _dialogService: FudisDialogService) {}
