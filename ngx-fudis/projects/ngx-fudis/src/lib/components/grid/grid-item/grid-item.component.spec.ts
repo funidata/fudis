@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { GridItemComponent } from './grid-item.component';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -43,9 +42,9 @@ describe('GridItemComponent', () => {
         HostComponent,
         GridItemComponent,
         GridComponent,
-        MockComponent(HeadingComponent),
-        MockComponent(BodyTextComponent),
-        MockComponent(ButtonComponent),
+        HeadingComponent,
+        BodyTextComponent,
+        ButtonComponent,
       ],
       providers: [FudisBreakpointService],
     }).compileComponents();

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { MockComponent } from 'ng-mocks';
 import { getDirective } from '../../../utilities/tests/utilities';
 import { GridItemDirective } from './grid-item.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -44,9 +43,9 @@ describe('GridItemDirective', () => {
         HostComponent,
         GridItemDirective,
         GridComponent,
-        MockComponent(HeadingComponent),
-        MockComponent(BodyTextComponent),
-        MockComponent(ButtonComponent),
+        HeadingComponent,
+        BodyTextComponent,
+        ButtonComponent,
       ],
       providers: [FudisBreakpointService],
     }).compileComponents();

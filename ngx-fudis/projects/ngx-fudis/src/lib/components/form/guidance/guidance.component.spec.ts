@@ -6,7 +6,6 @@ import { ValidatorErrorMessageComponent } from '../error-message/validator-error
 import { IconComponent } from '../../icon/icon.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement, getAllElements } from '../../../utilities/tests/utilities';
-import { MockComponent } from 'ng-mocks';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
 const testMaxLength = 20;
@@ -48,7 +47,7 @@ describe('GuidanceComponent', () => {
       declarations: [
         GuidanceComponent,
         ValidatorErrorMessageComponent,
-        MockComponent(IconComponent),
+        IconComponent,
       ],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();

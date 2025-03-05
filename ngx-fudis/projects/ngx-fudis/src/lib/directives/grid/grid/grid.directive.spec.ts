@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { MockComponent } from 'ng-mocks';
 import { getDirective } from '../../../utilities/tests/utilities';
 import {
   FudisGridAlign,
@@ -65,9 +64,9 @@ describe('GridDirective', () => {
         HostComponent,
         GridApiDirective,
         GridDirective,
-        MockComponent(HeadingComponent),
-        MockComponent(BodyTextComponent),
-        MockComponent(ButtonComponent),
+        HeadingComponent,
+        BodyTextComponent,
+        ButtonComponent,
       ],
       providers: [FudisBreakpointService],
     }).compileComponents();
