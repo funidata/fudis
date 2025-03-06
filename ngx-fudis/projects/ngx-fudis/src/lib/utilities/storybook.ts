@@ -420,3 +420,33 @@ export const tooltipExclude: RegExp = excludeRegex([
   'dropdownMenuId',
   'asMenuButton',
 ]);
+
+/**
+ * Popover
+ */
+export const popoverExclude: RegExp = excludeRegex([
+  'id',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+  'handleClick',
+  'handleBlur',
+  'handleDestroy',
+  'handleFocus',
+  'buttonEl',
+  'label',
+  'labelHidden',
+  'ariaLabel',
+  'disabled',
+  'icon',
+  'iconRotate',
+  'size',
+  'type',
+  'variant',
+  'buttonClick',
+  'toggleMenu',
+  'closeMenu',
+  'dropdownOpen',
+  'dropdownMenuId',
+  'asMenuButton',
+]);

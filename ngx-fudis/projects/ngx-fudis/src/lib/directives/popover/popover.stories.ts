@@ -2,6 +2,7 @@ import { ButtonComponent } from '../../components/button/button.component';
 import readme from '../popover/popover.mdx';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { PopoverDirective } from './popover.directive';
+import { popoverExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Directives/Popover',
@@ -14,6 +15,9 @@ export default {
   parameters: {
     docs: {
       page: readme,
+    },
+    controls: {
+      exclude: popoverExclude,
     },
   },
   argTypes: {
@@ -33,21 +37,21 @@ export const ExampleWithNativeButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <button fudisPopover [popoverText]="popoverText" [popoverPosition]="popoverPosition">
-      Popover will display on click
+      Popover will display and close on click
     </button>
   `,
 });
 
 ExampleWithNativeButton.args = {
   popoverText: 'Greetings from popover, I hope you can see me!',
-  popoverPosition: 'right',
+  popoverPosition: 'below',
 };
 
 export const ExampleWithFudisButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-button
-      [label]="'Popover will display on click'"
+      [label]="'Popover will display and close on click'"
       [popoverPosition]="popoverPosition"
       [popoverText]="popoverText"
     >
@@ -57,5 +61,5 @@ export const ExampleWithFudisButton: StoryFn = (args) => ({
 
 ExampleWithFudisButton.args = {
   popoverText: 'Greetings from popover, I hope you can see me!',
-  popoverPosition: 'right',
+  popoverPosition: 'below',
 };
