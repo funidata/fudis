@@ -25,7 +25,13 @@ export class TooltipApiDirective {
    */
   @Input() tooltipPosition: FudisTooltipPosition = 'below';
 
+  /**
+   * Text placed inside popover
+   */
   @Input() popoverText: string;
 
+  /**
+   * Position of the popover on the parent element
+   */
   @Input() popoverPosition: FudisPopoverPosition = 'below';
 }
