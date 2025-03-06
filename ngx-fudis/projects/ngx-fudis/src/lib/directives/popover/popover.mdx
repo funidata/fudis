@@ -1,0 +1,28 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import * as PopoverStories from "./popover.stories.ts";
+import { PopoverDirective } from "./popover.directive.ts";
+
+<Meta title="Directives/Popover" />
+
+# Popover Directive
+
+## Usage Guideline
+
+### Fudis Components Using Popover Directive
+
+## Examples
+
+### Native HTML Button Using Tooltip Directive
+
+<Canvas of={PopoverStories.ExampleWithNativeButton} />
+
+### Fudis Button Component Implementing Popover API
+
+<Canvas of={PopoverStories.ExampleWithFudisButton} />
+
+### Accessibility
+
+## Properties
+
+<ArgTypes of={PopoverDirective} />
+

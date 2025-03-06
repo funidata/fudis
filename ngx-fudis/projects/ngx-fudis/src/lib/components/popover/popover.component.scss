@@ -1,0 +1,14 @@
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/borders/mixins.scss' as borders;
+
+.fudis-popover {
+  @include borders.border-radius('3px');
+  @include typography.body-text-sm-regular;
+  background-color: colors.$color-gray-dark;
+  letter-spacing: normal;
+  color: colors.$color-white;
+  padding: spacing.$spacing-xxs spacing.$spacing-xs;
+  max-width: calc(12rem / var(--fudis-rem-multiplier));
+}
