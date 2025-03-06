@@ -1,4 +1,4 @@
-<ng-container *ngIf="tooltip">
+<ng-container *ngIf="tooltip && !popoverText">
   <button
     #buttonElement
     fudisTooltip
@@ -34,7 +34,38 @@
   </button>
 </ng-container>
 
-<ng-container *ngIf="!tooltip">
+<ng-container *ngIf="popoverText && !tooltip">
+  <button
+    fudisPopover
+    #buttonElement
+    [class]="_classList | async"
+    [type]="type"
+    (click)="!disabled && buttonClick($event)"
+    (blur)="!disabled && _handleButtonBlur($event)"
+    (focus)="!disabled && _handleButtonFocus($event)"
+    (keydown)="!disabled && _handleMenuButtonKeyDown($event)"
+    [attr.tabIndex]="disabled ? -1 : null"
+    [attr.aria-disabled]="disabled || null"
+    [attr.aria-label]="_ariaLabel | async"
+    [attr.id]="id"
+    [popoverPosition]="popoverPosition"
+    [popoverText]="popoverText"
+    >
+    <ng-container *ngIf="icon">
+      <div class="fudis-button__icon">
+        <fudis-icon
+          *ngIf="_iconColor | async as iconColor"
+          class="fudis-button__icon__component"
+          [color]="iconColor"
+          [icon]="icon"
+          [rotate]="iconRotate"
+        ></fudis-icon>
+      </div> </ng-container
+    >{{ labelHidden || (size === "icon-only" && icon) ? "" : label }}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="!tooltip && !popoverText">
   <button
     #buttonElement
     [class]="_classList | async"
