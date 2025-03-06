@@ -3,12 +3,16 @@
 @use '../../foundations/typography/mixins.scss' as typography;
 @use '../../foundations/borders/mixins.scss' as borders;
 
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
+
 .fudis-popover {
   @include borders.border-radius('3px');
   @include typography.body-text-sm-regular;
+
   background-color: colors.$color-gray-dark;
-  letter-spacing: normal;
-  color: colors.$color-white;
   padding: spacing.$spacing-xxs spacing.$spacing-xs;
   max-width: calc(12rem / var(--fudis-rem-multiplier));
+  letter-spacing: normal;
+  color: colors.$color-white;
 }
