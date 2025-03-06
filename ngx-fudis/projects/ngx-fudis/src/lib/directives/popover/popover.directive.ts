@@ -23,7 +23,7 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     super();
   }
 
-  private readonly offset: number = 8;
+  private readonly _offset: number = 8;
   private _overlayRef: OverlayRef | null = null;
   private _popoverElementId: string;
   private _isPopoverOpen: boolean = false;
@@ -33,28 +33,28 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
       originY: 'top',
       overlayX: 'center',
       overlayY: 'bottom',
-      offsetY: -this.offset,
+      offsetY: -this._offset,
     },
     left: {
       originX: 'start',
       originY: 'center',
       overlayX: 'end',
       overlayY: 'center',
-      offsetX: -this.offset,
+      offsetX: -this._offset,
     },
     right: {
       originX: 'end',
       originY: 'center',
       overlayX: 'start',
       overlayY: 'center',
-      offsetX: this.offset,
+      offsetX: this._offset,
     },
     below: {
       originX: 'center',
       originY: 'bottom',
       overlayX: 'center',
       overlayY: 'top',
-      offsetY: this.offset,
+      offsetY: this._offset,
     },
   };
 
