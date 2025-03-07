@@ -32,10 +32,10 @@ export default {
       options: ['flip-180', 'cw-90', 'ccw-90', 'none'],
       control: { type: 'select' },
     },
-    tooltip: {
+    popoverText: {
       control: { type: 'text' },
     },
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'select' },
     },
@@ -60,7 +60,6 @@ Example.args = {
   icon: undefined,
   iconRotate: undefined,
   disabled: false,
-  tooltipToggle: false,
 };
 
 export const WithIcon = Template.bind({});

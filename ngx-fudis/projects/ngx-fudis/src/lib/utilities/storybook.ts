@@ -32,6 +32,15 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 export const excludeAllRegex: RegExp = /.*/;
 
 /**
+ * Fieldset
+ */
+export const fieldsetExclude: RegExp = excludeRegex([
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+]);
+
+/**
  * Alert
  */
 export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisibleStatus']);
@@ -75,6 +84,10 @@ const buttonCommonExclude: string[] = [
   'buttonClick',
   'closeMenu',
   'toggleMenu',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+  'popoverTriggerLabel',
 ];
 
 export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
@@ -106,12 +119,18 @@ export const checkboxGroupExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
   'triggerEmit',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
   'setGroupBlurredOut',
   'triggerEmit',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
 ]);
 
 /**
@@ -426,6 +445,7 @@ export const tooltipExclude: RegExp = excludeRegex([
  */
 export const popoverExclude: RegExp = excludeRegex([
   'id',
+  'popoverTriggerLabel',
   'tooltip',
   'tooltipPosition',
   'tooltipToggle',
