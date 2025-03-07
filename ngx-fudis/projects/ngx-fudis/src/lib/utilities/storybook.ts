@@ -345,7 +345,19 @@ export const radioButtonGroupExclude: RegExp = excludeRegex([...formCommonDocsEx
 /**
  * Section
  */
-export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBreadcrumb', 'id']);
+export const sectionPropertiesExclude: RegExp = excludeRegex([
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+]);
+export const sectionExclude: RegExp = excludeRegex([
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+  'classes',
+  'errorSummaryBreadcrumb',
+  'id',
+]);
 
 /**
  * Select and Multiselect
