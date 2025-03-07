@@ -70,7 +70,14 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
@@ -82,9 +89,9 @@ const commonArgs: Partial<DatepickerComponent> = {
   size: 'md',
   dateParse: true,
   initialFocus: false,
-  tooltip: 'Is it your birthday?',
-  tooltipPosition: 'left',
-  tooltipToggle: false,
+  popoverText: 'Is it your birthday?',
+  popoverPosition: 'left',
+  popoverTriggerLabel: 'Additional information',
 };
 
 const ExampleTemplate: StoryFn = (args) => ({
@@ -101,9 +108,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [control]="control"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
@@ -131,9 +138,9 @@ const PreselectedTemplate: StoryFn = (args) => ({
       [control]="control"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
@@ -160,9 +167,9 @@ const DisabledTemplate: StoryFn = (args) => ({
       [control]="control"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
@@ -198,9 +205,9 @@ const MinMaxTemplate: StoryFn = (args) => ({
       [control]="control"
       [dateParse]="dateParse"
       [initialFocus]="initialFocus"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
