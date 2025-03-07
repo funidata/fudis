@@ -41,6 +41,16 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
+    popoverPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
@@ -55,6 +65,9 @@ const commonArgs: Partial<SelectComponent> = {
   selectionClearButton: true,
   variant: 'dropdown',
   initialFocus: false,
+  popoverText: '',
+  popoverTriggerLabel: '',
+  popoverPosition: 'right',
 };
 
 const ExampleTemplate: StoryFn = (args) => ({
@@ -76,6 +89,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [selectionClearButton]="selectionClearButton"
       [variant]="variant"
       (selectionUpdate)="selectionUpdate($event)"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
         <fudis-select-option

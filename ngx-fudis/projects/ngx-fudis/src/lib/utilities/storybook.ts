@@ -363,6 +363,9 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'focusToInput',
   'handleCheckedSort',
   'handleMultiSelectionChange',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
 ]);
 
 export const selectStoryControlExclude: RegExp = excludeRegex([
