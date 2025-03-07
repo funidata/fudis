@@ -37,9 +37,9 @@ const ExampleTestTemplate: StoryFn = (args) => ({
     [label]="label"
     [helpText]="helpText"
     [initialFocus]="initialFocus"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
     (handleChange)="handleChange($event)"
   >
     <fudis-radio-button
@@ -57,9 +57,9 @@ Example.args = {
   helpText: 'Fruits are important for your health.',
   size: 'lg',
   initialFocus: false,
-  tooltip: 'Fair Trade Banana is right choise',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  popoverText: 'Fair Trade Banana is right choise',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };
 
 @Component({
@@ -122,11 +122,14 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },

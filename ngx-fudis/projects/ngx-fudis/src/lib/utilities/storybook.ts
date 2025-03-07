@@ -49,6 +49,9 @@ export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisib
  * Common Form Component excludes
  */
 const formCommonControlsExclude: string[] = [
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
   'control',
   'group',
   'handleFocus',
@@ -71,7 +74,13 @@ const formCommonControlsExclude: string[] = [
 /**
  * Common Form Component excludes
  */
-const formCommonDocsExclude: string[] = ['onFocus', 'focusToInput'];
+const formCommonDocsExclude: string[] = [
+  'onFocus',
+  'focusToInput',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+];
 
 /**
  * Button
