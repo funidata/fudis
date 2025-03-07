@@ -34,4 +34,9 @@ export class TooltipApiDirective {
    * Position of the popover on the parent element
    */
   @Input() popoverPosition: FudisPopoverPosition = 'below';
+
+  /**
+   * Label for the element that triggers the popover
+   */
+  @Input() popoverTriggerLabel: string;
 }
