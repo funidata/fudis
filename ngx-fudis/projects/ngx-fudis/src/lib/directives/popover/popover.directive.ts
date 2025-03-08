@@ -1,10 +1,20 @@
-import { AfterViewInit, ComponentRef, Directive, ElementRef, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ComponentRef,
+  DestroyRef,
+  Directive,
+  ElementRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { TooltipApiDirective } from '../tooltip/tooltip-api.directive';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverComponent } from '../../components/popover/popover.component';
 import { FudisPopoverPosition } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
+import { fromEvent, Subscription, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type PopoverPosition = {
   [key in FudisPopoverPosition]: ConnectedPosition;
@@ -23,7 +33,11 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     super();
   }
 
+  private _destroyRef = inject(DestroyRef);
+
   private readonly _offset: number = 8;
+  private clickSubscription: Subscription;
+  private keydownSubscription: Subscription;
   private _overlayRef: OverlayRef | null = null;
   private _popoverElementId: string;
   private _isPopoverOpen: boolean = false;
@@ -65,6 +79,8 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
 
   ngAfterViewInit(): void {
     this._boundElement?.nativeElement?.addEventListener('click', this._clickHandler.bind(this));
+    this._boundElement?.nativeElement?.addEventListener('keydown', this._onEscPress.bind(this));
+
     this._setAriaForBoundedElement('false');
   }
 
@@ -74,6 +90,10 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     } else {
       this._closePopover();
     }
+  }
+
+  private _onEscPress(event: KeyboardEvent): void {
+    if (event.key === 'Escape') this._closePopover();
   }
 
   private _openPopover() {
@@ -86,9 +106,16 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
 
     this._overlayRef = this._overlay.create({
       positionStrategy,
-      hasBackdrop: false,
       scrollStrategy: this._overlay.scrollStrategies.reposition(),
     });
+
+    this.clickSubscription = fromEvent(document, 'click')
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((event: Event) => this._focusOutHandler(event));
+
+    this.keydownSubscription = fromEvent(document, 'keyup')
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((event: Event) => this._focusOutHandler(event));
 
     const popoverPortal = new ComponentPortal(PopoverComponent);
 
@@ -96,8 +123,20 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     componentRef.instance.popoverText = this.popoverText;
     componentRef.instance.id = this._popoverElementId;
 
+    this._overlayRef._outsidePointerEvents.pipe(tap((halo) => console.log(halo)));
+
     this._isPopoverOpen = true;
     this._setAriaForBoundedElement('true');
+  }
+
+  private _focusOutHandler(event: Event): void {
+    if (
+      this._overlayRef &&
+      !this._boundElement?.nativeElement?.contains(event?.target as Node) &&
+      !document.getElementById(this._popoverElementId)?.contains(event?.target as Node)
+    ) {
+      this._closePopover();
+    }
   }
 
   private _closePopover() {
@@ -105,6 +144,8 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
       this._overlayRef.dispose();
       this._overlayRef = null;
     }
+    this.keydownSubscription?.unsubscribe();
+    this.clickSubscription?.unsubscribe();
     this._isPopoverOpen = false;
     this._setAriaForBoundedElement('false');
   }
