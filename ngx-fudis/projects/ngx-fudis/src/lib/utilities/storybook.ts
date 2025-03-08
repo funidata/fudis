@@ -189,6 +189,12 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'serviceDefaults',
 ]);
 
+export const descriptionListItemTermExclude: RegExp = excludeRegex([
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+]);
+
 export const nestedDescriptionListExclude: RegExp = excludeRegex([
   ...descriptionListCommonExclude,
   'variant',
