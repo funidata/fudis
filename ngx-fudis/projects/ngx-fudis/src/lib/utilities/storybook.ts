@@ -311,6 +311,9 @@ const languageBadgeGroupCommonExclude: string[] = [
   'tooltip',
   'tooltipPosition',
   'tooltipToggle',
+  'popoverPosition',
+  'popoverText',
+  'popoverTriggerLabel',
   'invalidOptions',
 ];
 
