@@ -1,22 +1,48 @@
-import { Component, EventEmitter, OnInit, Output, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { BadgeComponent } from '../badge/badge.component';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { ButtonComponent } from '../button/button.component';
+import { By } from '@angular/platform-browser';
 import { IconComponent } from '../icon/icon.component';
+import { ErrorSummaryComponent } from '../form/error-summary/error-summary.component';
+import {
+  ExpandableActionsDirective,
+  ExpandableContentDirective,
+} from './expandable-content.directive';
 import { ExpandableComponent } from './expandable.component';
+import { FieldSetComponent } from '../form/fieldset/fieldset.component';
+import { FieldsetContentDirective } from '../form/fieldset/fieldset-content.directive';
+import { FormComponent } from '../form/form/form.component';
+import {
+  FormActionsDirective,
+  FormContentDirective,
+  FormHeaderDirective,
+} from '../form/form/form-content.directive';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormSubmitDirective } from '../../directives/form/form-actions/form-actions.directive';
 import {
   FudisBadgeVariant,
   fudisBadgeVariantArray,
   FudisExpandableType,
 } from '../../types/miscellaneous';
-import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { getElement } from '../../utilities/tests/utilities';
+import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
+import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 import { fudisHeadingLevelArray } from '../../types/typography';
-import {
-  ExpandableActionsDirective,
-  ExpandableContentDirective,
-} from './expandable-content.directive';
-import { BadgeComponent } from '../badge/badge.component';
+import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
+import { FudisValidators } from '../../utilities/form/validators';
+import { getElement } from '../../utilities/tests/utilities';
+import { GridDirective } from '../../directives/grid/grid/grid.directive';
+import { GuidanceComponent } from '../form/guidance/guidance.component';
+import { HeadingComponent } from '../typography/heading/heading.component';
+import { LabelComponent } from '../form/label/label.component';
+import { LinkDirective } from '../../directives/link/link.directive';
+import { NotificationComponent } from '../notification/notification.component';
+import { RouterModule } from '@angular/router';
+import { SectionComponent } from '../section/section.component';
+import { SectionContentDirective } from '../section/section-content.directive';
+import { TextInputComponent } from '../form/text-input/text-input.component';
+import { ValidatorErrorMessageComponent } from '../form/error-message/validator-error-message/validator-error-message.component';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -61,8 +87,50 @@ class MockContentComponent implements OnInit {
   }
 }
 
+@Component({
+  selector: 'fudis-mock-form-component',
+  template: `<fudis-form
+    [id]="'my-own-id'"
+    [level]="1"
+    [title]="'Form title'"
+    [errorSummaryTitle]="'There were errors you need to fix'"
+    [errorSummaryVisible]="errorSummaryVisible"
+  >
+    <fudis-form-content>
+      <fudis-expandable
+        #testExpandable
+        [closed]="false"
+        [errorSummaryBreadcrumb]="errorSummaryBreadcrumb"
+        [title]="title"
+      >
+        <ng-template fudisExpandableContent>
+          <fudis-text-input
+            [control]="formGroup.controls.name"
+            [label]="'Name'"
+            [helpText]="'We need to know who you are'"
+          />
+        </ng-template>
+      </fudis-expandable>
+    </fudis-form-content>
+    <fudis-form-actions>
+      <fudis-button fudisFormSubmit [formValid]="formGroup.valid" [label]="'Submit'" />
+    </fudis-form-actions>
+  </fudis-form>`,
+})
+class MockFormComponent {
+  @ViewChild('testExpandable') testExpandable: ExpandableComponent;
+
+  title: string = 'Expandable test title';
+
+  formGroup = new FormGroup({
+    name: new FormControl<string | null>(null, FudisValidators.required('Missing your name')),
+  });
+
+  errorSummaryVisible: boolean = false;
+  errorSummaryBreadcrumb: boolean;
+}
+
 describe('ExpandableComponent', () => {
-  let errorService: FudisInternalErrorSummaryService;
   let component: ExpandableComponent;
   let containerComponent: MockContainerComponent;
   let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<ExpandableComponent>;
@@ -70,16 +138,41 @@ describe('ExpandableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ExpandableActionsDirective,
-        ExpandableContentDirective,
         BadgeComponent,
+        BodyTextComponent,
         ButtonComponent,
+        ErrorSummaryComponent,
+        ExpandableActionsDirective,
         ExpandableComponent,
+        ExpandableContentDirective,
+        FieldSetComponent,
+        FieldsetContentDirective,
+        FormActionsDirective,
+        FormComponent,
+        FormContentDirective,
+        FormHeaderDirective,
+        FormSubmitDirective,
+        GridDirective,
+        GuidanceComponent,
+        HeadingComponent,
         IconComponent,
+        LabelComponent,
+        LinkDirective,
         MockContainerComponent,
         MockContentComponent,
+        MockFormComponent,
+        NotificationComponent,
+        SectionComponent,
+        SectionContentDirective,
+        TextInputComponent,
+        ValidatorErrorMessageComponent,
       ],
-      providers: [FudisInternalErrorSummaryService],
+      providers: [
+        FudisBreakpointService,
+        FudisErrorSummaryService,
+        FudisInternalErrorSummaryService,
+      ],
+      imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
   });
 
@@ -139,18 +232,18 @@ describe('ExpandableComponent', () => {
     containerComponent.variant = variant;
     fixture.detectChanges();
 
-    const elem = fixture.nativeElement.querySelector(
-      'fudis-icon.fudis-expandable__header__heading__button__icon',
-    ) as HTMLElement;
+    const svg = fixture.debugElement.query(By.css('fudis-icon svg'));
+    const elem = svg.nativeElement as HTMLElement;
+    const componentClasses = elem.getAttribute('class');
 
     if (variant === 'regular') {
-      expect(elem.getAttribute('ng-reflect-icon')).toEqual('chevron-ring-fill');
-      expect(elem.getAttribute('ng-reflect-color')).toEqual('gray-dark');
+      expect(svg.nativeElement.getAttribute('id')).toEqual('chevron-ring-fill');
+      expect(componentClasses).toContain('fudis-icon__color__gray-dark');
     }
 
     if (variant === 'lite') {
-      expect(elem.getAttribute('ng-reflect-icon')).toEqual('chevron');
-      expect(elem.getAttribute('ng-reflect-color')).toEqual('primary');
+      expect(svg.nativeElement.getAttribute('id')).toEqual('chevron');
+      expect(componentClasses).toContain('fudis-icon__color__primary');
     }
   }
 
@@ -329,105 +422,86 @@ describe('ExpandableComponent', () => {
     });
   });
 
-  describe('error summary', () => {
+  describe('expandable with error summary', () => {
+    let errorService: FudisInternalErrorSummaryService;
+    let component: MockFormComponent;
+    let fixture: ComponentFixture<MockFormComponent>;
+
     beforeEach(() => {
-      fixture = TestBed.createComponent(ExpandableComponent);
+      fixture = TestBed.createComponent(MockFormComponent);
       component = fixture.componentInstance;
-      component.title = 'Test title';
       errorService = TestBed.inject(FudisInternalErrorSummaryService);
       jest.spyOn(errorService, 'addSection').mockImplementation(() => {});
       jest.spyOn(errorService, 'removeSection').mockImplementation(() => {});
       fixture.detectChanges();
     });
 
-    // TODO: create example with Form as parent
-    it.skip('onInit, should add section to error summary if errorSummaryBreadcrumb is true', () => {
+    it('should add section to error summary if errorSummaryBreadcrumb is true', async () => {
       expect(errorService.addSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
 
-      component.ngOnChanges({
-        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
-      });
-
       fixture.detectChanges();
+      await fixture.whenStable();
 
       expect(errorService.addSection).toHaveBeenCalledWith({
+        formId: 'my-own-id',
         id: 'fudis-expandable-2',
-        title: 'Test title',
+        title: 'Expandable test title',
       });
     });
 
-    // TODO: create example with Form as parent
-    it.skip('onChanges, should add section to error summary if errorSummaryBreadcrumb is true and title is updated', () => {
+    it('should add section to error summary if errorSummaryBreadcrumb is true and title is updated', async () => {
       expect(errorService.addSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
       component.title = 'New test title';
 
-      component.ngOnChanges({
-        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
-      });
-
       fixture.detectChanges();
+      await fixture.whenStable();
 
       expect(errorService.addSection).toHaveBeenCalledWith({
+        formId: 'my-own-id',
         id: 'fudis-expandable-2',
         title: 'New test title',
       });
     });
 
-    // TODO: create example with Form as parent
-    it.skip('onChanges, should remove section to error summary if errorSummaryBreadcrumb is false', () => {
+    it('should remove section to error summary if errorSummaryBreadcrumb is false', async () => {
       expect(errorService.addSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
 
-      component.ngOnChanges({
-        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
-      });
-
       fixture.detectChanges();
+      await fixture.whenStable();
 
       expect(errorService.addSection).toHaveBeenCalledWith({
+        formId: 'my-own-id',
         id: 'fudis-expandable-2',
-        title: 'Test title',
+        title: 'Expandable test title',
       });
 
       component.errorSummaryBreadcrumb = false;
 
-      component.ngOnChanges({
-        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, false),
-      });
-
       fixture.detectChanges();
+      await fixture.whenStable();
 
-      expect(errorService.removeSection).toHaveBeenCalledWith({
-        id: 'fudis-expandable-2',
-        title: 'Test title',
-      });
+      expect(errorService.removeSection).toHaveBeenCalledWith('my-own-id', 'fudis-expandable-2');
     });
 
-    // TODO: create example with Form as parent
-    it.skip('onDestroy, should remove section from error summary if error summary info is sent', () => {
-      component.ngOnDestroy();
+    it('when destroyed, should remove section from error summary if error summary info is sent', async () => {
+      component.testExpandable.ngOnDestroy();
 
       expect(errorService.removeSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
 
-      component.ngOnChanges({
-        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
-      });
-
       fixture.detectChanges();
+      await fixture.whenStable();
 
-      component.ngOnDestroy();
+      component.testExpandable.ngOnDestroy();
 
-      expect(errorService.removeSection).toHaveBeenCalledWith({
-        id: 'fudis-expandable-2',
-        title: 'Test title',
-      });
+      expect(errorService.removeSection).toHaveBeenCalledWith('my-own-id', 'fudis-expandable-2');
     });
   });
 });
