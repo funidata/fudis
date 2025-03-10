@@ -56,6 +56,10 @@ describe('ButtonComponent', () => {
       );
     });
 
+    it('should have CSS host class', () => {
+      expect(component['_classes']).toEqual('fudis-button-host');
+    });
+
     it('should update button type according to given type Input', () => {
       fudisButtonTypeArray.forEach((type) => {
         fixture.componentRef.setInput('type', `${type}`);
