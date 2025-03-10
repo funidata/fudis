@@ -1,3 +1,5 @@
+import remarkGfm from "remark-gfm";
+
 export const stories = [
   "../projects/ngx-fudis/src/test-playgrounds/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
@@ -9,8 +11,16 @@ export const addons = [
   "@storybook/addon-essentials",
   "@storybook/addon-interactions",
   "@storybook/addon-a11y",
-  "@storybook/addon-mdx-gfm",
-  "@chromatic-com/storybook"
+  {
+    name: "@storybook/addon-docs",
+    options: {
+      mdxPluginOptions: {
+        mdxCompileOptions: {
+          remarkPlugins: [remarkGfm],
+        },
+      },
+    },
+  },
 ];
 export const framework = {
   name: "@storybook/angular",
@@ -29,7 +39,7 @@ export const staticDirs = [
 ];
 export const docs = {
   defaultName: "Documentation",
-  autodocs: true
+  autodocs: true,
 };
 
 export function managerHead(head) {
