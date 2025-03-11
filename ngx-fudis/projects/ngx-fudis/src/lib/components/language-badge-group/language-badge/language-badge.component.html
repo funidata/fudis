@@ -1,11 +1,8 @@
 <button
   *ngIf="_badgeLabel | async as badgeLabel"
   type="button"
-  fudisPopover
   class="fudis-language-badge"
-  [popoverText]="badgeLabel"
-  [popoverPosition]="tooltipPosition"
-  [attr.aria-label]="language"
+  [attr.aria-label]="badgeLabel"
   [attr.id]="_id"
   (click)="_handleLanguageSelect()"
 >
