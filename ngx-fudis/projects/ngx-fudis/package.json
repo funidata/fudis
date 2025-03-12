@@ -26,10 +26,10 @@
   "author": "Funidata Ltd",
   "homepage": "https://fudis.funidata.fi/",
   "peerDependencies": {
-    "@angular/cdk": "^18.2.14",
-    "@angular/common": "^18.2.13",
-    "@angular/core": "^18.2.13",
-    "@angular/material": "^18.2.14"
+    "@angular/cdk": "^19.2.1",
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/material": "^19.2.1"
   },
   "devDependencies": {
     "tslib": "^2.7.0",
