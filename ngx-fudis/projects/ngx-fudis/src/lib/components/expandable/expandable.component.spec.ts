@@ -90,6 +90,7 @@ class MockContentComponent implements OnInit {
 }
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-form-component',
   template: `<fudis-form
     [id]="'my-own-id'"
