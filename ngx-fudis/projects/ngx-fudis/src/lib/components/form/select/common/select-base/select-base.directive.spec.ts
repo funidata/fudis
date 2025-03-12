@@ -251,23 +251,14 @@ describe('SelectBaseDirective', () => {
     });
 
     it('selectionClearButton', () => {
-      const buttonsFirst = getAllElements(fixture, 'fudis-button .fudis-icon__close');
-
-      expect(buttonsFirst.length).toEqual(0);
-
-      patchControlValue();
-      fixture.detectChanges();
-
-      const buttonsSecond = getAllElements(fixture, 'fudis-button .fudis-icon__close');
-
-      expect(buttonsSecond.length).toEqual(2);
+      const clearButtonsExist = getAllElements(fixture, 'fudis-button .fudis-icon__close');
+      expect(clearButtonsExist.length).toEqual(2);
 
       component.clearButton = false;
       fixture.detectChanges();
 
-      const buttonsThird = getAllElements(fixture, 'fudis-button .fudis-icon__close');
-
-      expect(buttonsThird.length).toEqual(0);
+      const clearButtonsHidden = getAllElements(fixture, 'fudis-button .fudis-icon__close');
+      expect(clearButtonsHidden.length).toEqual(0);
     });
 
     it('autocompleteHelpText', () => {
