@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.3",
-    "@angular-eslint/eslint-plugin": "^18.4.3",
-    "@angular-eslint/eslint-plugin-template": "^18.4.3",
-    "@angular-eslint/template-parser": "^18.4.3",
+    "@angular-eslint/eslint-plugin": "^19.2.1",
+    "@angular-eslint/eslint-plugin-template": "^19.2.1",
+    "@angular-eslint/template-parser": "^19.2.1",
     "@angular/cli": "^19.2.3",
     "@angular/compiler-cli": "^19.2.2",
     "@babel/core": "^7.26.0",
