@@ -7,6 +7,7 @@ import { TranslocoRootModule } from ".storybook/transloco.module";
 import { HttpClient } from "@angular/common/http";
 import { TranslocoService } from "@jsverse/transloco";
 import docJson from "../documentation.json";
+import "zone.js";
 
 setCompodocJson(docJson);
 
