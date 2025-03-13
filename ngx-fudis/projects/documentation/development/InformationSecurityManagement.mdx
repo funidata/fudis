@@ -1,4 +1,4 @@
-import { Meta, Markdown } from "@storybook/blocks";
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Documentation/Information Security Management" />
 
@@ -6,13 +6,28 @@ import { Meta, Markdown } from "@storybook/blocks";
 
 ## General
 
-<Markdown>
-  {`
-| GitHub Source Code | Owner | Description |
-| :--- | :---- | :---- |
-| [Fudis (Funidata Design System)](https://github.com/funidata/fudis)| [Funidata Oy](https://www.funidata.fi/en) | [Design System library](https://fudis.funidata.fi) |
-`}
-</Markdown>
+<table>
+  <thead>
+    <tr>
+      <th>GitHub Source Code</th>
+      <th>Owner</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>[Fudis (Funidata Design System)](https://github.com/funidata/fudis)</code>
+      </td>
+      <td>
+        <code>[Funidata Oy](https://www.funidata.fi/en)</code>
+      </td>
+      <td>
+        <code>[Design System library](https://fudis.funidata.fi)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 Fudis is an open-source project for maintaining and developing a design system for Funidata's web applications.
 With each new version release, Fudis Design System developer documentation is deployed to public Storybook and component library as public [package to NPM](https://www.npmjs.com/package/@funidata/ngx-fudis). More in depth designs guidelines are maintained in Funidata's private Figma account for the use of Funidata's other products.
