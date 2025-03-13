@@ -1,5 +1,3 @@
-import remarkGfm from "remark-gfm";
-
 export const stories = [
   "../projects/ngx-fudis/src/test-playgrounds/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
@@ -11,16 +9,6 @@ export const addons = [
   "@storybook/addon-essentials",
   "@storybook/addon-interactions",
   "@storybook/addon-a11y",
-  {
-    name: "@storybook/addon-docs",
-    options: {
-      mdxPluginOptions: {
-        mdxCompileOptions: {
-          remarkPlugins: [remarkGfm],
-        },
-      },
-    },
-  },
 ];
 export const framework = {
   name: "@storybook/angular",
