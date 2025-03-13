@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { AfterViewInit, Component, TemplateRef, ViewChild, effect } from '@angular/core';
+import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
@@ -39,9 +39,9 @@ class AddAlertsComponent implements AfterViewInit {
     private _dialog: FudisDialogService,
     private _alertService: FudisAlertService,
   ) {
-    effect(() => {
-      this._alerts = this._alertService.alerts;
-      this._marginCounter = 2 + this._alerts.getValue().length * 2;
+    this._alertService.alerts.subscribe((alerts) => {
+      this._marginCounter = 2 + alerts.length * 2;
+      this._alerts = alerts;
     });
   }
 
@@ -49,7 +49,7 @@ class AddAlertsComponent implements AfterViewInit {
 
   protected _marginCounter: number = 2;
 
-  protected _alerts: BehaviorSubject<FudisAlertElement[]>;
+  protected _alerts: FudisAlertElement[] = [];
 
   openDialog(): void {
     this._dialog.open(this.templateRef);
@@ -104,11 +104,9 @@ class AddAlertsComponent implements AfterViewInit {
   }
 
   dismissRandom(): void {
-    const alerts = this._alertService.alerts.getValue();
-
-    if (alerts.length > 0) {
-      const random = Math.floor(Math.random() * alerts.length);
-      this._alertService.dismissAlert(alerts[random].id);
+    if (this._alerts.length > 0) {
+      const random = Math.floor(Math.random() * this._alerts.length);
+      this._alertService.dismissAlert(this._alerts[random].id);
     }
   }
 
