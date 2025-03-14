@@ -190,7 +190,6 @@ describe('DialogDirectives', () => {
 @Component({
   selector: 'dialog-container-component',
   template: ' <ng-container #container></ng-container>',
-  standalone: true,
 })
 class ViewContainerComponent {
   @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
