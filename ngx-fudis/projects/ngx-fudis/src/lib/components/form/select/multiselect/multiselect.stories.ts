@@ -37,6 +37,16 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
+    popoverPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
@@ -53,6 +63,9 @@ const commonProps: Partial<MultiselectComponent> = {
   autocompleteHelpText: 'Hello from Dropdown Help Text!',
   variant: 'dropdown',
   initialFocus: false,
+  popoverText: '',
+  popoverTriggerLabel: '',
+  popoverPosition: 'right',
 };
 
 const ExampleTemplate: StoryFn = (args) => ({
@@ -71,7 +84,6 @@ const ExampleTemplate: StoryFn = (args) => ({
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
-      [variant]="'dropdown'"
       [label]="label"
       [helpText]="helpText"
       [variant]="variant"
@@ -80,6 +92,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [selectionClearButton]="selectionClearButton"
       [autocompleteHelpText]="autocompleteHelpText"
       [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
         <fudis-multiselect-option

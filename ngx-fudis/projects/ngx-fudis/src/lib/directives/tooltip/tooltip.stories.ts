@@ -46,22 +46,3 @@ ExampleWithNativeButton.args = {
   tooltipPosition: 'right',
   tooltipToggle: false,
 };
-
-export const ExampleWithFudisButton: StoryFn = (args) => ({
-  props: args,
-  template: html`
-    <fudis-button
-      [label]="tooltipToggle ? 'Tooltip will display on: click' : 'Tooltip will display on: hover'"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
-    >
-    </fudis-button>
-  `,
-});
-
-ExampleWithFudisButton.args = {
-  tooltip: 'Greetings from tooltip, I hope you can see me!',
-  tooltipPosition: 'right',
-  tooltipToggle: false,
-};

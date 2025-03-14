@@ -111,11 +111,14 @@ export default {
     type: {
       options: ['email', 'number', 'password', 'tel', 'text', 'url'],
     },
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
@@ -127,9 +130,9 @@ const commonArgs: Partial<TextInputComponent> = {
   size: 'lg',
   initialFocus: false,
   type: 'text',
-  tooltip: '',
-  tooltipPosition: 'left',
-  tooltipToggle: false,
+  popoverText: '',
+  popoverPosition: 'left',
+  popoverTriggerLabel: '',
 };
 
 const ExampleTemplate: StoryFn = (args) => ({
@@ -145,9 +148,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [type]="type"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
     </fudis-text-input>
   `,
@@ -171,9 +174,9 @@ const DisabledTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [type]="type"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
     </fudis-text-input>
   `,

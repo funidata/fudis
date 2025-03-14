@@ -29,6 +29,7 @@ export class FudisIdService {
       heading: [],
       'localized-text-group': [],
       link: [],
+      popover: [],
       section: [],
       'text-area': [],
       'text-input': [],

@@ -7,15 +7,14 @@
     ></span
   >
   <fudis-button
-    *ngIf="tooltip"
+    *ngIf="popoverText && popoverTriggerLabel"
     class="fudis-label__content__button"
     [size]="'icon-only'"
     [variant]="'tertiary'"
     [icon]="'info-circle'"
     [labelHidden]="true"
-    [label]="tooltip"
-    [tooltip]="tooltip"
-    [tooltipPosition]="tooltipPosition"
-    [tooltipToggle]="tooltipToggle"
+    [label]="popoverTriggerLabel"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
   />
 </label>

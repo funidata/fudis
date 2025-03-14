@@ -85,6 +85,8 @@ export type FudisNotification = (typeof fudisNotificationVariantArray)[number];
  */
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
+export type FudisPopoverPosition = 'left' | 'right' | 'above' | 'below';
+
 // For Label Component to send data to DOM Utility Service to match "same row" Label heights
 export interface FudisLabelData {
   id: string;

@@ -28,18 +28,16 @@
             >({{ _translationService.getTranslations()().REQUIRED }})</span
           >
         </div>
-
         <fudis-button
-          *ngIf="tooltip"
+          *ngIf="popoverText && popoverTriggerLabel"
           class="fudis-fieldset__legend__main__tooltip-button"
           [size]="'icon-only'"
           [variant]="'tertiary'"
           [icon]="'info-circle'"
           [labelHidden]="true"
-          [label]="tooltip"
-          [tooltip]="tooltip"
-          [tooltipPosition]="tooltipPosition"
-          [tooltipToggle]="tooltipToggle"
+          [popoverText]="popoverText"
+          [popoverPosition]="popoverPosition"
+          [label]="popoverTriggerLabel"
         />
       </div>
     </legend>

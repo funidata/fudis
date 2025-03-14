@@ -1,6 +1,7 @@
 import { Meta, ArgTypes } from "@storybook/blocks";
 import { FieldSetComponent } from "./fieldset.component";
 import { FieldsetActionsDirective } from "./fieldset-content.directive";
+import { fieldsetExclude } from "../../../utilities/storybook.ts";
 
 <Meta title="Components/Form/Fieldset" />
 
@@ -46,9 +47,9 @@ Note that this has no other logic and is not concerned about validation of the c
 
 Fieldset help text is displayed under legend and can be added through `helpText` property.
 
-### Tooltip
+### Popover
 
-Tooltip can be included in legend with properties from [Tooltip Directive](/docs/directives-tooltip--documentation).
+Popover can be included in legend with properties from [Popover Directive](/docs/directives-popover--documentation). It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screenreaders.
 
 ### Error Summary Breadcrumb
 
@@ -90,6 +91,6 @@ HTML Template
 
 ## Properties
 
-<ArgTypes of={FieldSetComponent} />
+<ArgTypes of={FieldSetComponent} exclude={fieldsetExclude} />
 
 <ArgTypes of={FieldsetActionsDirective} />

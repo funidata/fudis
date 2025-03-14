@@ -22,16 +22,15 @@
             [content]="badgeText"
         /></fudis-heading>
         <fudis-button
-          *ngIf="tooltip"
+          *ngIf="popoverTriggerLabel && popoverText"
           class="fudis-section__header__heading__tooltip"
           [size]="'icon-only'"
           [variant]="'tertiary'"
           [icon]="'info-circle'"
           [labelHidden]="true"
-          [label]="tooltip"
-          [tooltip]="tooltip"
-          [tooltipPosition]="tooltipPosition"
-          [tooltipToggle]="tooltipToggle"
+          [label]="popoverTriggerLabel"
+          [popoverPosition]="popoverPosition"
+          [popoverText]="popoverText"
         />
       </div>
       <ng-content select="fudis-section-actions"></ng-content>

@@ -142,6 +142,7 @@ import { FudisIdService } from './services/id/id.service';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
 import { FudisLabelHeightService } from './services/dom/label-height.service';
 import { FudisTranslationService } from './services/translation/translation.service';
+import { PopoverDirective } from './directives/popover/popover.directive';
 
 @NgModule({
   /*
@@ -254,6 +255,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     ReactiveFormsModule,
     RouterModule,
     ScrollingModule,
+    PopoverDirective,
   ],
 
   /*
@@ -315,6 +317,7 @@ import { FudisTranslationService } from './services/translation/translation.serv
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,
+    PopoverDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,

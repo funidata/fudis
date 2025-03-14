@@ -37,11 +37,14 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
@@ -92,9 +95,9 @@ const ExampleAllRequiredTemplate: StoryFn = (args) => ({
       [label]="label"
       [helpText]="helpText"
       [initialFocus]="initialFocus"
-      [tooltip]="tooltip"
-      [tooltipToggle]="tooltipToggle"
-      [tooltipPosition]="tooltipPosition"
+      [popoverText]="popoverText"
+      [popoverTriggerLabel]="popoverTriggerLabel"
+      [popoverPosition]="popoverPosition"
       (handleBlur)="handleBlur($event)"
       (handleFocus)="handleFocus($event)"
       (handleKeyUp)="handleKeyUp($event)"
@@ -138,9 +141,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [label]="label"
       [helpText]="helpText"
       [initialFocus]="initialFocus"
-      [tooltip]="tooltip"
-      [tooltipToggle]="tooltipToggle"
-      [tooltipPosition]="tooltipPosition"
+      [popoverText]="popoverText"
+      [popoverTriggerLabel]="popoverTriggerLabel"
+      [popoverPosition]="popoverPosition"
       (handleBlur)="handleBlur($event)"
       (handleFocus)="handleFocus($event)"
       (handleKeyUp)="handleKeyUp($event)"

@@ -1,7 +1,7 @@
 import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
 import { SectionComponent } from "./section.component.ts";
 import * as SectionStories from "./section.stories.ts";
-import { sectionExclude } from "../../utilities/storybook.ts";
+import { sectionExclude, sectionPropertiesExclude } from "../../utilities/storybook.ts";
 
 <Meta title="Components/Section" />
 
@@ -17,7 +17,7 @@ Section has two main areas: header and content. Inside header, addition to headi
 
 Each Section should be identified, therefore `title` and its `level` are mandatory properties. Title variant can be modified with `titleVariant` property. As in [Heading Component](/docs/components-typography-heading--documentation), title variant is visual and level is semantic adjustment.
 
-Heading can also include `tooltip` with all the [Tooltip](/docs/directives-tooltip--documentation) Inputs available.
+Heading can also include `popover` with all the [Popover](/docs/directives-popover--documentation) Inputs available. It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screenreaders.
 
 ### Content Directives
 
@@ -92,8 +92,8 @@ When using Section inside [Form](/docs/components-form-form--documentation) with
 
 - [Button](/docs/components-button--documentation)
 - [Heading](/docs/components-typography-heading--documentation)
-- [Tooltip](/docs/directives-tooltip--documentation)
+- [Popover](/docs/directives-popover--documentation)
 
 ## Properties
 
-<ArgTypes of={SectionComponent} />
+<ArgTypes of={SectionComponent} exclude={sectionPropertiesExclude} />

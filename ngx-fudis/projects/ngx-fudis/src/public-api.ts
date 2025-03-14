@@ -92,6 +92,7 @@ export { SectionActionsDirective } from './lib/components/section/section-conten
 export { SectionContentDirective } from './lib/components/section/section-content.directive';
 export { SelectOptionsDirective } from './lib/components/form/select/common/select-options-directive/select-options.directive';
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
+export { PopoverDirective } from './lib/directives/popover/popover.directive';
 
 /**
  * SERVICES

@@ -4,7 +4,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FieldSetComponent } from './fieldset.component';
 import readme from './readme.mdx';
-import { excludeAllRegex } from '../../../utilities/storybook';
+import { fieldsetExclude } from '../../../utilities/storybook';
 import { FieldsetExampleComponent } from './examples/fieldset-example.component';
 
 export default {
@@ -22,6 +22,9 @@ export default {
     docs: {
       page: readme,
     },
+    controls: {
+      exclude: fieldsetExclude,
+    },
   },
 } as Meta;
 
@@ -29,11 +32,22 @@ const html = String.raw;
 
 export const Example: StoryFn = (args) => ({
   props: args,
-  template: html` <example-fieldset /> `,
+  template: html`
+    <example-fieldset
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
+      [popoverText]="popoverText"
+    />
+  `,
 });
+Example.args = {
+  popoverText: 'I contain additional information!',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'below',
+};
 
 Example.parameters = {
   controls: {
-    exclude: excludeAllRegex,
+    exclude: fieldsetExclude,
   },
 };
