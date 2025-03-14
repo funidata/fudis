@@ -29,6 +29,7 @@ type ErrorSummaryDOMListItem = {
   templateUrl: './error-summary.component.html',
   styleUrls: ['./error-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   constructor(

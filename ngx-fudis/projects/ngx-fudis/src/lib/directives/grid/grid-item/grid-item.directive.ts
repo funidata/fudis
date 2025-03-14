@@ -13,6 +13,7 @@ import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint
 
 @Directive({
   selector: '[fudisGridItem]',
+  standalone: false,
 })
 export class GridItemDirective implements OnInit, OnChanges {
   constructor(

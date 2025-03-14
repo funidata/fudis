@@ -9,7 +9,10 @@ import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
  * A marker directive to set any element, mostly Button Component to work as submit button, which
  * will trigger Error Summary on click
  */
-@Directive({ selector: '[fudisFormSubmit]' })
+@Directive({
+  selector: '[fudisFormSubmit]',
+  standalone: false,
+})
 export class FormSubmitDirective implements OnInit {
   constructor(
     @Inject(DOCUMENT) private _document: Document,

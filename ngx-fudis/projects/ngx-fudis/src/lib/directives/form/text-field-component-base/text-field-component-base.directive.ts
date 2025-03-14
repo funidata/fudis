@@ -8,6 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
   selector: '[fudisTextFieldComponentBase]',
+  standalone: false,
 })
 export class TextFieldComponentBaseDirective extends ControlComponentBaseDirective {
   constructor(_idService: FudisIdService, _focusService: FudisFocusService) {

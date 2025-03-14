@@ -14,6 +14,7 @@ import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-footer',
   template: `<fudis-footer>
     <ng-template fudisFooterContentRight>

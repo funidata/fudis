@@ -25,6 +25,7 @@ import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
   styleUrls: ['./dropdown-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit {
   constructor(

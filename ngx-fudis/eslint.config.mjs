@@ -30,6 +30,7 @@ export default [
     })),
   {
     files: ["**/*.ts"],
+    rules: { "@angular-eslint/prefer-standalone": "off" },
 
     languageOptions: {
       parser: tsParser,

@@ -6,6 +6,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Directive({
   selector: '[fudisControlComponentBase]',
+  standalone: false,
 })
 export class ControlComponentBaseDirective extends FormCommonApiDirective {
   constructor(_idService: FudisIdService, _focusService: FudisFocusService) {

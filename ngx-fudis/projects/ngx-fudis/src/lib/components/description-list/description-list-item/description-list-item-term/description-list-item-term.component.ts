@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Host, Input, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, Input, signal, effect } from '@angular/core';
 import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
@@ -12,6 +12,7 @@ import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DescriptionListItemTermComponent extends TooltipApiDirective {
   constructor(
@@ -47,7 +48,7 @@ export class DescriptionListItemTermComponent extends TooltipApiDirective {
             translated.push(<FudisLanguageAbbr>key);
           }
         }
-        this._parentLanguageTranslations = translated;
+        this._parentLanguageTranslations.set(translated);
       }
     });
   }
@@ -66,7 +67,7 @@ export class DescriptionListItemTermComponent extends TooltipApiDirective {
   /**
    * Available translated languages of sibling dt elements fetched from the parent dl-item element
    */
-  protected _parentLanguageTranslations: FudisLanguageAbbr[];
+  protected _parentLanguageTranslations = signal<FudisLanguageAbbr[]>([]);
 
   /**
    * Main CSS class

@@ -27,6 +27,7 @@ import { LinkDirective } from '../../../directives/link/link.directive';
 import { NotificationComponent } from '../../notification/notification.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-form-component',
   template: `<fudis-form
     [id]="'my-own-id'"

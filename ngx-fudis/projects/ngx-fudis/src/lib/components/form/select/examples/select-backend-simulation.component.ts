@@ -7,7 +7,6 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { StorybookExampleBackendSimulationBaseDirective } from './backend-simulation-base.directive';
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-select-backend-simulation',
   template: `

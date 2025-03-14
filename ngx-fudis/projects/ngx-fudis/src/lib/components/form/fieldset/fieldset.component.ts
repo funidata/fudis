@@ -27,6 +27,7 @@ import { throttle } from '../../../utilities/resizeThrottle';
   templateUrl: './fieldset.component.html',
   styleUrls: ['./fieldset.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class FieldSetComponent
   extends TooltipApiDirective

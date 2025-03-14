@@ -18,6 +18,7 @@ import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/bre
   templateUrl: './body-text.component.html',
   styleUrls: ['./body-text.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class BodyTextComponent implements OnChanges {
   constructor(

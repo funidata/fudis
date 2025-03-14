@@ -6,6 +6,7 @@ import { FudisBadgeVariant } from '../../types/miscellaneous';
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class BadgeComponent {
   /**

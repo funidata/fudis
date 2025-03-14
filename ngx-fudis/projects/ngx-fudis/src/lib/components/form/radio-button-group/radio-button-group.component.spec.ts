@@ -21,6 +21,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: `<fudis-radio-button-group
     [id]="'radio-button-test-group'"

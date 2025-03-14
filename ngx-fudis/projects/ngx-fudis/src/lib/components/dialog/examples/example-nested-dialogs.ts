@@ -17,7 +17,6 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
 
 @Component({
   selector: 'example-nested-dialog',
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   template: `
     <fudis-dialog [size]="size">
@@ -131,7 +130,6 @@ export class ExampleNestedDialogComponent {
 
 @Component({
   selector: 'example-nested-dialogs',
-  standalone: true,
   imports: [NgxFudisModule, CommonModule, ExampleNestedDialogComponent],
   template: `
     <fudis-body-text class="fudis-mb-md">

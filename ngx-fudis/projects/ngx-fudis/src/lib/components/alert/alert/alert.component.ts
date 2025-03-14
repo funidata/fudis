@@ -19,6 +19,7 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AlertComponent {
   constructor(

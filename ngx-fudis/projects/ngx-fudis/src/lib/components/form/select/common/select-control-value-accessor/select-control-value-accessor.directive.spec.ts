@@ -11,6 +11,7 @@ import { By } from '@angular/platform-browser';
 import { joinInputValues } from '../utilities/selectUtilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-select-cva-base',
   template: `<input
     fudisSelectControlValueAccessor
@@ -76,6 +77,7 @@ describe('SelectAutocompleteDirective', () => {
 });
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-multiselect-cva-base',
   template: `<input fudisMultiselectControlValueAccessor [formControl]="control" />`,
 })

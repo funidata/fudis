@@ -20,6 +20,7 @@ import { ButtonComponent } from '../../../button/button.component';
 import { IconComponent } from '../../../icon/icon.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">

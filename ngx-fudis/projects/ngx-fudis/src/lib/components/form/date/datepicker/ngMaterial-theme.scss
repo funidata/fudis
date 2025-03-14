@@ -42,6 +42,7 @@
       border-radius: 0;
       width: spacing.$spacing-lg;
       height: spacing.$spacing-lg;
+      font-size: typography.$body-text-md-font-size; // Needed for overwriting ngMaterial font-size which affects Firefox and Safari
 
       &:focus {
         @include focus.focus-generic;

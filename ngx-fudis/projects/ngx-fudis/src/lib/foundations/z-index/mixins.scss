@@ -2,7 +2,7 @@
 @use './tokens' as tokens;
 
 @mixin z-index($layer-name) {
-  @if map_has_key(tokens.$layer-names, $layer-name) {
+  @if map.has-key(tokens.$layer-names, $layer-name) {
     /* stylelint-disable-next-line property-disallowed-list */
     z-index: map.get(tokens.$layer-names, $layer-name);
   } @else {

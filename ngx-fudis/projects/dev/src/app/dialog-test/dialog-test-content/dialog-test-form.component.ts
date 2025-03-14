@@ -78,6 +78,7 @@ type MyForm = {
     </fudis-dialog>
   `,
   styles: [],
+  standalone: false,
 })
 export class DialogTestFormComponent {
   constructor(

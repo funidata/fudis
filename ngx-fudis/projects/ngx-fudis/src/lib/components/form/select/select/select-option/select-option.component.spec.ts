@@ -21,6 +21,7 @@ import { SelectControlValueAccessorDirective } from '../../common/select-control
 import { SelectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-container',
   template: `<fudis-select
     #testSelect

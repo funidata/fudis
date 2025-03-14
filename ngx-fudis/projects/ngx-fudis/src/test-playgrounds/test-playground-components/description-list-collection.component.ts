@@ -4,7 +4,6 @@ import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, NgxFudisModule],
   selector: 'example-description-list-collection',
   template: `

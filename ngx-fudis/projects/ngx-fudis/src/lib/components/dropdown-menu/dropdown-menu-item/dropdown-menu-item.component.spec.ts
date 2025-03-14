@@ -9,6 +9,7 @@ import { defaultMenuItems } from '../mock_data';
 import { getElement } from '../../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dropdown-menu',
   template: ` <fudis-button
     #testButton

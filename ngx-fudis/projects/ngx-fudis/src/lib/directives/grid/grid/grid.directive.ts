@@ -23,6 +23,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Directive({
   selector: '[fudisGrid]',
+  standalone: false,
 })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
   constructor(

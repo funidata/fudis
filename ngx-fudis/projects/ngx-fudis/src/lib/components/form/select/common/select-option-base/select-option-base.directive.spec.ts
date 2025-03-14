@@ -23,6 +23,7 @@ import { SelectAutocompleteDirective } from '../autocomplete/autocomplete.direct
 import { SelectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-select-option-base-directive',
   template: `<fudis-select
     #selectElem

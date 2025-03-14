@@ -7,6 +7,7 @@ import { IconComponent } from '../../../../icon/icon.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-with-parent',
   template: `<div [id]="id">
     <fudis-multiselect-chip-list

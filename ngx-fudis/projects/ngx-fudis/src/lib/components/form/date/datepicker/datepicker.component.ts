@@ -40,6 +40,7 @@ import { ControlComponentBaseDirective } from '../../../../directives/form/contr
     },
     { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
   ],
+  standalone: false,
 })
 export class DatepickerComponent
   extends ControlComponentBaseDirective

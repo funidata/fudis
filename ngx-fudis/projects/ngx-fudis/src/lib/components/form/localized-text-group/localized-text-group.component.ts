@@ -29,6 +29,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   templateUrl: './localized-text-group.component.html',
   styleUrls: ['./localized-text-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGroup<T>>
   extends GroupComponentBaseDirective

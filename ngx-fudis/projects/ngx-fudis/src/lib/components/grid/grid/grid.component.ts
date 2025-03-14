@@ -6,6 +6,7 @@ import { GridDirective } from '../../../directives/grid/grid/grid.directive';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 
 /**

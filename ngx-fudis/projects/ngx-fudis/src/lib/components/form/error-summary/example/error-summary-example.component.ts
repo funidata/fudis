@@ -25,7 +25,6 @@ interface CourseBooksFormGroup {
 }
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule, TranslocoDirective],
   selector: 'example-error-summary',
   templateUrl: './error-summary-example.component.html',

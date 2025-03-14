@@ -45,6 +45,7 @@ import { TextInputComponent } from '../form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from '../form/error-message/validator-error-message/validator-error-message.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-container',
   template: `<fudis-expandable
     [closed]="closed"
@@ -76,6 +77,7 @@ class MockContainerComponent {
 }
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: 'Mock!',
 })
@@ -88,6 +90,7 @@ class MockContentComponent implements OnInit {
 }
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-form-component',
   template: `<fudis-form
     [id]="'my-own-id'"

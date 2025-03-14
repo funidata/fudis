@@ -17,6 +17,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: '[fudisTooltip]',
   exportAs: 'tooltip',
   providers: [MatTooltip],
+  standalone: false,
 })
 export class TooltipDirective
   extends TooltipApiDirective

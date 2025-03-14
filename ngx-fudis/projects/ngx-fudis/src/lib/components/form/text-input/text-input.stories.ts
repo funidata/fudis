@@ -48,6 +48,7 @@ import { fudisInputSizeArray } from '../../../types/forms';
       />
     </form>
   `,
+  standalone: false,
 })
 class TextInputWithFormControlExampleComponent {
   constructor(private _formBuilder: FormBuilder) {}

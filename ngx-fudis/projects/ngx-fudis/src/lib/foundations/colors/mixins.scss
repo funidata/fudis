@@ -2,7 +2,7 @@
 @use './tokens' as colors;
 
 @mixin text-color($color) {
-  @if map_has_key(colors.$colors, $color) {
+  @if map.has-key(colors.$colors, $color) {
     /* stylelint-disable-next-line property-disallowed-list */
     color: map.get(colors.$colors, $color);
   } @else {
@@ -11,7 +11,7 @@
 }
 
 @mixin bg-color($color) {
-  @if map_has_key(colors.$colors, $color) {
+  @if map.has-key(colors.$colors, $color) {
     /* stylelint-disable-next-line property-disallowed-list */
     background-color: map.get(colors.$colors, $color);
   } @else {

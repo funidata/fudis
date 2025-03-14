@@ -29,6 +29,7 @@ import { FormContentDirective } from '../form/form-content.directive';
 import { ExpandableContentDirective } from '../../expandable/expandable-content.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-form-component',
   template: ` <fudis-form
     #formRef

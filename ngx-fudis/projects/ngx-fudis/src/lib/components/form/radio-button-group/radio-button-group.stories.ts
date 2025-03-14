@@ -78,6 +78,7 @@ Example.args = {
       ></fudis-radio-button>
     </fudis-radio-button-group>
   `,
+  standalone: false,
 })
 class DisabledRadioGroupExampleComponent {
   petOptions: FudisRadioButtonOption<object>[] = [

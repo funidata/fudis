@@ -14,6 +14,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
     <fudis-button [label]="_label" (handleClick)="changeLanguage()" />
     <fudis-body-text>Current language: {{ _translationService.getLanguage() }}</fudis-body-text>
   </fudis-grid>`,
+  standalone: false,
 })
 class LanguageChangeComponent {
   constructor(private _translationService: FudisTranslationService) {

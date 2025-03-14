@@ -6,7 +6,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 
 @Directive({
-  standalone: true,
   selector: 'example-select-backend-simulation-directive',
 })
 export class StorybookExampleBackendSimulationBaseDirective {

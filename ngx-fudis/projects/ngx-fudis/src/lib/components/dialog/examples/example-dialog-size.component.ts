@@ -6,7 +6,6 @@ import { FudisDialogSize } from '../../../types/miscellaneous';
 import { ExampleDialogFormComponent } from './example-dialog-form.component';
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-dialog-size',
   template: `

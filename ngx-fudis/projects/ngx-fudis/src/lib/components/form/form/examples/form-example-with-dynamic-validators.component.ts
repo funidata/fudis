@@ -35,7 +35,6 @@ type MyForm = {
 };
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-dynamic-validator',
   template: `

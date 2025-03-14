@@ -7,6 +7,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
   selector: 'fudis-date-range',
   templateUrl: './date-range.component.html',
   styleUrls: ['./date-range.component.scss'],
+  standalone: false,
 })
 export class DateRangeComponent implements OnChanges {
   constructor(private _idService: FudisIdService) {}

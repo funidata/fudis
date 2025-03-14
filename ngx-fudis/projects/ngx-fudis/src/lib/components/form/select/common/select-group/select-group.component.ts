@@ -8,6 +8,7 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
   selector: 'fudis-select-group, fudis-multiselect-group',
   templateUrl: './select-group.component.html',
   styleUrls: ['./select-group.component.scss'],
+  standalone: false,
 })
 export class SelectGroupComponent {
   constructor(

@@ -19,6 +19,7 @@ import { FudisInternalErrorSummaryService } from '../../../../services/form/erro
 
 // TODO: write tests for input visible, controlName and variant
 @Component({
+  standalone: false,
   selector: 'fudis-text-input-with-validator-error-message',
   template: `
     <fudis-text-input

@@ -20,6 +20,7 @@ import { SelectAutocompleteDirective } from '../common/autocomplete/autocomplete
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-container',
   template: `<fudis-select
     #testSelect

@@ -23,6 +23,7 @@ import { SelectControlValueAccessorDirective } from '../common/select-control-va
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(

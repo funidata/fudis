@@ -7,7 +7,6 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { defaultOptions, groupedMockData } from '../common/mock_data';
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-multiselect-showcase',
   template: `

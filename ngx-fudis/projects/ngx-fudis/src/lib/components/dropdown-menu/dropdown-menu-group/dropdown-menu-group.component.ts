@@ -6,6 +6,7 @@ import { DropdownMenuComponent } from '../dropdown-menu.component';
   selector: 'fudis-dropdown-menu-group',
   templateUrl: './dropdown-menu-group.component.html',
   styleUrls: ['./dropdown-menu-group.component.scss'],
+  standalone: false,
 })
 export class DropdownMenuGroupComponent {
   constructor(

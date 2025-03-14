@@ -17,6 +17,7 @@ import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive'
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">

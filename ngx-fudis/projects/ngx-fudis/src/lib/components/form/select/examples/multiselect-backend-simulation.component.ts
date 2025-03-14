@@ -7,7 +7,6 @@ import { FormControl } from '@angular/forms';
 import { FudisValidators } from '../../../../utilities/form/validators';
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-multiselect-backend-simulation',
   template: `

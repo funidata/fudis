@@ -22,6 +22,7 @@ import { DropdownMenuGroupComponent } from '../dropdown-menu-group/dropdown-menu
   templateUrl: './dropdown-menu-item.component.html',
   styleUrls: ['./dropdown-menu-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
   constructor(

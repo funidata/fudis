@@ -65,6 +65,7 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
       >
     </fudis-grid-item>
   </fudis-grid>`,
+  standalone: false,
 })
 class DropdownMenuExampleComponent {
   protected _latestClickItem: string | null = null;

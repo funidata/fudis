@@ -20,6 +20,7 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy {
   constructor(

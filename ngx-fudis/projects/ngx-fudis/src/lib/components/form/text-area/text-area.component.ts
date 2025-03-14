@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './text-area.component.html',
   styleUrls: ['./text-area.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TextAreaComponent
   extends TextFieldComponentBaseDirective

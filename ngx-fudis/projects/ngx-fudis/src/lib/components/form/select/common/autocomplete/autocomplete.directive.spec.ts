@@ -8,6 +8,7 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
 import { getDirective, getElement } from '../../../../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-autocomplete-base',
   template: `<input
       #inputRef
@@ -57,6 +58,7 @@ class MockAutocompleteBaseComponent {
 }
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-select-autocomplete',
   template: `<input
       #inputRef
@@ -82,6 +84,7 @@ class MockSelectAutocompleteComponent {
 }
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-multiselect-autocomplete',
   template: `<input
       #inputRef

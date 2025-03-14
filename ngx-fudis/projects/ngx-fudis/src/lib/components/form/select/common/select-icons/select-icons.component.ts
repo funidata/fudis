@@ -21,6 +21,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './select-icons.component.html',
   styleUrls: ['./select-icons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SelectIconsComponent implements OnChanges {
   constructor(protected _translationService: FudisTranslationService) {

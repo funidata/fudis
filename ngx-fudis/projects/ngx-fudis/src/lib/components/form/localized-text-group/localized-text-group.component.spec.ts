@@ -92,7 +92,7 @@ describe('LocalizedTextGroupComponent', () => {
     beforeEach(() => {
       const previous = component.variant;
 
-      component.variant = variant;
+      fixture.componentRef.setInput('variant', variant);
       component.ngOnChanges({
         variant: new SimpleChange(previous, variant, false),
       });

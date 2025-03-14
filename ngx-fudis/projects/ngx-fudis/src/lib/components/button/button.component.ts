@@ -30,6 +30,7 @@ import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component'
   styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit, OnDestroy {
   constructor(private _idService: FudisIdService) {

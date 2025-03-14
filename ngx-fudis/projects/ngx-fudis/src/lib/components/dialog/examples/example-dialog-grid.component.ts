@@ -6,7 +6,6 @@ import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-dialog-with-grid',
   template: `
