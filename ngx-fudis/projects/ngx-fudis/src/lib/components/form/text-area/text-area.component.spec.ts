@@ -5,12 +5,11 @@ import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { PopoverDirective } from '../../../directives/popover/popover.directive';
 
 const textAreaControl: FormControl = new FormControl('');
 
@@ -26,10 +25,8 @@ describe('TextAreaComponent', () => {
         GuidanceComponent,
         IconComponent,
         LabelComponent,
-        TooltipDirective,
-        TooltipApiDirective,
       ],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
@@ -171,16 +168,22 @@ describe('TextAreaComponent', () => {
     });
   });
 
-  describe('Tooltip', () => {
+  describe('Popover', () => {
     it('should be visible', () => {
       fixture.detectChanges();
-      fixture.componentRef.setInput('tooltip', 'This is tooltip text');
+      fixture.componentRef.setInput('popoverTriggerLabel', 'Additional information');
+      fixture.componentRef.setInput('popoverText', 'This is popover text');
       fixture.detectChanges();
 
       const tooltipTriggerElem = getElement(fixture, 'fudis-button');
 
       expect(tooltipTriggerElem).toBeTruthy();
-      expect(tooltipTriggerElem.getAttribute('ng-reflect-tooltip')).toEqual('This is tooltip text');
+      expect(tooltipTriggerElem.getAttribute('ng-reflect-aria-label')).toEqual(
+        'Additional information',
+      );
+      expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
+        'This is popover text',
+      );
     });
   });
 });
