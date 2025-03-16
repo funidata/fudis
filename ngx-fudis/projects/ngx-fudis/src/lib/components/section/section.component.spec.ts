@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { SectionComponent } from './section.component';
 import { SectionActionsDirective, SectionContentDirective } from './section-content.directive';
 import { HeadingComponent } from '../typography/heading/heading.component';
@@ -11,8 +10,6 @@ import { IconComponent } from '../icon/icon.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
-import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
-import { FudisTooltipPosition } from '../../types/miscellaneous';
 import {
   FudisHeadingLevel,
   FudisHeadingVariant,
@@ -20,6 +17,7 @@ import {
   fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { PopoverDirective } from '../../directives/popover/popover.directive';
 
 @Component({
   selector: 'mock-fudis-section',
@@ -28,9 +26,8 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
     [titleVariant]="titleVariant"
     [level]="level"
     [classes]="classes"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
+    [popoverText]="popoverText"
   >
     <fudis-section-actions>
       <fudis-button [label]="'Some action'"></fudis-button>
@@ -45,9 +42,8 @@ class MockFudisSectionComponent {
   titleVariant: FudisHeadingVariant = 'lg';
   level: FudisHeadingLevel = 2;
   classes: string[];
-  tooltip: string = 'This is tooltip in section';
-  tooltipToggle: boolean = false;
-  tooltipPosition: FudisTooltipPosition = 'below';
+  popoverText: string = 'This is tooltip in section';
+  popoverTriggerLabel: string = 'Additional info';
 }
 
 describe('SectionComponent', () => {
@@ -55,7 +51,7 @@ describe('SectionComponent', () => {
   let mockFixture: ComponentFixture<MockFudisSectionComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [
         BodyTextComponent,
         ButtonComponent,
@@ -66,10 +62,9 @@ describe('SectionComponent', () => {
         SectionComponent,
         SectionActionsDirective,
         SectionContentDirective,
-        TooltipDirective,
       ],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
-      imports: [MatTooltipModule],
+      imports: [PopoverDirective],
     });
 
     mockFixture = TestBed.createComponent(MockFudisSectionComponent);

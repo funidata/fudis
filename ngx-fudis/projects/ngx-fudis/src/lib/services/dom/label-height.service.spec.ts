@@ -7,8 +7,6 @@ import { GuidanceComponent } from '../../components/form/guidance/guidance.compo
 import { IconComponent } from '../../components/icon/icon.component';
 import { LabelComponent } from '../../components/form/label/label.component';
 import { TextInputComponent } from '../../components/form/text-input/text-input.component';
-import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
-import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisInternalErrorSummaryService } from '../form/error-summary/internal-error-summary.service';
 
 @Component({
@@ -36,8 +34,6 @@ describe('LabelHeightService', () => {
         IconComponent,
         LabelComponent,
         TextInputComponent,
-        TooltipDirective,
-        TooltipApiDirective,
       ],
       imports: [ReactiveFormsModule],
       providers: [FudisInternalErrorSummaryService],
