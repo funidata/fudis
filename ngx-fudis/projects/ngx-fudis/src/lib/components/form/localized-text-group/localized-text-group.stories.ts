@@ -55,9 +55,9 @@ const html = String.raw;
 const commonArgs: Partial<LocalizedTextGroupComponent<object>> = {
   size: 'lg',
   initialFocus: false,
-  tooltip: 'Your city needs you!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  popoverText: 'Your city needs you!',
+  popoverTriggerLabel: 'Important information',
+  popoverPosition: 'right',
 };
 
 const ExampleAllRequiredTemplate: StoryFn = (args) => ({

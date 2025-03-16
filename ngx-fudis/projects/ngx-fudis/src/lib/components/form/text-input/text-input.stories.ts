@@ -20,8 +20,9 @@ import { fudisInputSizeArray } from '../../../types/forms';
       <fudis-text-input
         [control]="mainFormGroup.controls['required']"
         [label]="'Required text input'"
-        [tooltip]="'This is a tooltip text'"
-        [tooltipPosition]="'right'"
+        [popoverText]="'This is a popover text'"
+        [popoverPosition]="'right'"
+        [popoverTriggerLabel]="'This opens up a popover'"
         [helpText]="'Please add some content.'"
       >
         <fudis-error-message

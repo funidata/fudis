@@ -24,7 +24,8 @@
               <fudis-checkbox-group
                 [label]="t('chooseBerry')"
                 [helpText]="t('chooseBerryHelp')"
-                [tooltip]="t('chooseBerryTooltip')"
+                [popoverText]="t('chooseBerryPopover')"
+                [popoverTriggerLabel]="t('popoverAria')"
                 [formGroup]="testFormGroup.controls.checkboxFormGroup"
               >
                 <fudis-checkbox
@@ -38,9 +39,10 @@
                 [label]="t('label')"
                 [helpText]="t('helpText')"
                 [control]="testFormGroup.controls.textInput"
-                [tooltip]="
+                [popoverText]="
                   'This text-input has multiple validators: required, minlength and maxlength'
                 "
+                [popoverTriggerLabel]="t('popoverAria')"
               >
                 <fudis-error-message
                   *ngIf="customError"

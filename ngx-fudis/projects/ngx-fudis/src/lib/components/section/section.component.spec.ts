@@ -42,7 +42,7 @@ class MockFudisSectionComponent {
   titleVariant: FudisHeadingVariant = 'lg';
   level: FudisHeadingLevel = 2;
   classes: string[];
-  popoverText: string = 'This is tooltip in section';
+  popoverText: string = 'This is popover in section';
   popoverTriggerLabel: string = 'Additional info';
 }
 

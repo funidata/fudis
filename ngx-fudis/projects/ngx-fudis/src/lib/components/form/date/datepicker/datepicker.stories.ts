@@ -56,10 +56,6 @@ export default {
     }),
   ],
   argTypes: {
-    tooltipPosition: {
-      options: ['left', 'right', 'above', 'below'],
-      control: { type: 'radio' },
-    },
     label: {
       control: { type: 'text' },
     },

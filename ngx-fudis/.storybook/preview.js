@@ -111,7 +111,7 @@ const preview = {
             "Typography",
           ],
           "Directives",
-          ["Introduction", "Form", "Grid", ["Introduction", "Grid", "Grid Item"], "Tooltip"],
+          ["Introduction", "Form", "Grid", ["Introduction", "Grid", "Grid Item"], "Popover"],
           "Services",
           ["Introduction", "Error Summary", "Grid", "Translation"],
           "Utilities",

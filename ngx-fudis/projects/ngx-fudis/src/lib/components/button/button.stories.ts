@@ -71,7 +71,6 @@ WithIcon.args = {
   icon: 'search',
   iconRotate: undefined,
   disabled: false,
-  tooltipToggle: false,
 };
 
 export const IconOnly = Template.bind({});
@@ -84,7 +83,6 @@ IconOnly.args = {
   iconRotate: undefined,
   labelHidden: true,
   disabled: false,
-  tooltipToggle: false,
 };
 
 IconOnly.parameters = {

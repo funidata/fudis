@@ -275,8 +275,9 @@ const NestedSubComponentsTemplate: StoryFn = (args) => ({
       <fudis-dl-item>
         <fudis-dt
           [contentText]="'First name'"
-          [tooltip]="'Second name unknown'"
-          [tooltipPosition]="'right'"
+          [popoverText]="'Second name unknown'"
+          [popoverPosition]="'right'"
+          [popoverTriggerLabel]="'Additional information'"
         ></fudis-dt>
         <fudis-dd [contentText]="'Rex'"></fudis-dd>
       </fudis-dl-item>

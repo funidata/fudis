@@ -56,6 +56,7 @@ export class StorybookExampleBasicFormComponentsComponent {
   inputProps = {
     label: 'Longer probably multiline label text',
     helpText: 'Quite long helptext to make sure things go multiline',
-    tooltip: 'Tooltip!',
+    popoverText: 'Popover!',
+    popoverLabel: 'This opens a popover!',
   };
 }
