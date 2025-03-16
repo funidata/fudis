@@ -80,7 +80,7 @@ type MyForm = {
               <fudis-fieldset
                 [label]="'Tearcher info'"
                 [popoverText]="'Quite many fields are required.'"
-                [popoverTriggerLabel]="'Additional information''"
+                [popoverTriggerLabel]="'Additional information'"
               >
                 <fudis-fieldset-content>
                   <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
