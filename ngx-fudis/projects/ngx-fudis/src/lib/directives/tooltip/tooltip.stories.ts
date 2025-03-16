@@ -31,6 +31,7 @@ export const ExampleWithNativeButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <button
+      id="button-1"
       fudisTooltip
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
