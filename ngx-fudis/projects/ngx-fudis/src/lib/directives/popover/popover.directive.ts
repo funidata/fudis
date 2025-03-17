@@ -123,8 +123,6 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     componentRef.instance.popoverText = this.popoverText;
     componentRef.instance.id = this._popoverElementId;
 
-    this._overlayRef._outsidePointerEvents.pipe(tap((halo) => console.log(halo)));
-
     this._isPopoverOpen = true;
     this._setAriaForBoundedElement('true');
   }
