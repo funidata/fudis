@@ -118,7 +118,7 @@ describe('GridUtils', () => {
 
       const emptyAppValues = {};
       const emptyServiceValues = {};
-      
+
       const valuesFromDefaults: FudisDefaultGridProperties = {
         align: 'center',
         alignItemsY: 'center',

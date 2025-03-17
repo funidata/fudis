@@ -28,12 +28,7 @@ describe('GridItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        HostComponent,
-        GridItemComponent,
-        GridComponent,
-        BodyTextComponent,
-      ],
+      declarations: [HostComponent, GridItemComponent, GridComponent, BodyTextComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });
