@@ -1,7 +1,10 @@
-import { FudisGridProperties } from '../../types/grid';
+import {
+  FudisDefaultGridProperties,
+  fudisGridAlignItemsArray,
+  FudisGridProperties,
+  FudisGridPropertyCollection,
+} from '../../types/grid';
 import * as utils from './gridUtils';
-
-// TODO: Add tests for replaceFormInputWidthsToRem, getGridInputPropertyObject functions. Check if other tests are missing.
 
 describe('GridUtils', () => {
   describe('getGridCssValue function', () => {
@@ -28,6 +31,13 @@ describe('GridUtils', () => {
 
       expect(correctReturnString).toBe('1/-1');
 
+      fudisGridAlignItemsArray.forEach((value) => {
+        isGridItem = false;
+        correctReturnString = utils.getGridCssValue(value, isGridItem);
+
+        expect(correctReturnString).toBe(value);
+      });
+
       value = 'inputXs';
       correctReturnString = utils.getGridCssValue(value);
 
@@ -47,6 +57,27 @@ describe('GridUtils', () => {
       correctReturnString = utils.getGridCssValue(value);
 
       expect(correctReturnString).toBe('calc(23rem / var(--fudis-rem-multiplier))');
+    });
+  });
+
+  describe('replaceFormInputWidthsToRem function', () => {
+    it('should return corresponding string with rem calculation', () => {
+      let values: string;
+      let returnValue: string;
+
+      values = 'inputXs inputSm';
+      returnValue = utils.replaceFormInputWidthsToRem(values);
+
+      expect(returnValue).toBe(
+        'calc(4rem / var(--fudis-rem-multiplier)) calc(10rem / var(--fudis-rem-multiplier))',
+      );
+
+      values = 'inputMd inputLg';
+      returnValue = utils.replaceFormInputWidthsToRem(values);
+
+      expect(returnValue).toBe(
+        'calc(14rem / var(--fudis-rem-multiplier)) calc(23rem / var(--fudis-rem-multiplier))',
+      );
     });
   });
 
@@ -76,6 +107,87 @@ describe('GridUtils', () => {
       expect(utils.getGridClasses(values)).toBe(
         'fudis-grid fudis-grid__xxl fudis-grid__align__end my-custom-class my-other-custom-class',
       );
+    });
+  });
+
+  describe('getValuesForCSSClasses', () => {
+    it('should return correct values depending on defualt settings', () => {
+      let properties: FudisGridPropertyCollection;
+      let serviceDefaults: boolean;
+      let returnObject: FudisGridProperties;
+
+      const emptyAppValues = {};
+      const emptyServiceValues = {};
+      
+      const valuesFromDefaults: FudisDefaultGridProperties = {
+        align: 'center',
+        alignItemsY: 'center',
+        alignItemsX: 'center',
+        classes: 'default-test-class',
+        columnGap: 'none',
+        rowGap: 'none',
+        width: 'xxl',
+      };
+
+      const valuesFromApp: FudisGridProperties = {
+        align: 'start',
+        alignItemsY: 'start',
+        alignItemsX: 'start',
+        classes: 'app-test-class',
+        columnGap: 'md',
+        rowGap: 'sm',
+        width: 'lg',
+      };
+
+      const valuesFromService: FudisDefaultGridProperties = {
+        align: 'center',
+        alignItemsY: 'start',
+        alignItemsX: 'start',
+        classes: 'service-test-class',
+        columnGap: 'lg',
+        rowGap: 'md',
+        width: 'md',
+      };
+
+      // Returns appValues
+      properties = {
+        appValues: valuesFromApp,
+        defaultValues: valuesFromDefaults,
+        serviceValues: valuesFromService,
+      };
+      serviceDefaults = false;
+      returnObject = utils.getValuesForCSSClasses(properties, serviceDefaults);
+      expect(returnObject).toStrictEqual(valuesFromApp);
+
+      // Returns defaultValues
+      properties = {
+        appValues: emptyAppValues,
+        defaultValues: valuesFromDefaults,
+        serviceValues: valuesFromService,
+      };
+      serviceDefaults = false;
+      returnObject = utils.getValuesForCSSClasses(properties, serviceDefaults);
+      expect(returnObject).toStrictEqual(valuesFromDefaults);
+
+      // Returns serviceValues
+      properties = {
+        appValues: emptyAppValues,
+        defaultValues: valuesFromDefaults,
+        serviceValues: valuesFromService,
+      };
+      serviceDefaults = true;
+      returnObject = utils.getValuesForCSSClasses(properties, serviceDefaults);
+      expect(returnObject).toStrictEqual(valuesFromService);
+
+      // Returns defaultValues
+      properties = {
+        appValues: emptyAppValues,
+        defaultValues: valuesFromDefaults,
+        serviceValues: emptyServiceValues,
+      };
+      serviceDefaults = true;
+      returnObject = utils.getValuesForCSSClasses(properties, serviceDefaults);
+      expect(returnObject).toStrictEqual(valuesFromDefaults);
     });
   });
 });
