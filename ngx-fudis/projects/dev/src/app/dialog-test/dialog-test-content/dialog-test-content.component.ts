@@ -91,5 +91,6 @@ import { Component } from '@angular/core';
     </fudis-dialog>
   `,
   styles: [],
+  standalone: false,
 })
 export class DialogTestContentComponent {}

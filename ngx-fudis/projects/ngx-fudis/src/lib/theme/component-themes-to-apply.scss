@@ -21,6 +21,9 @@
 // Emit theme-dependent styles for common features used across multiple Material components.
 
 html {
+  // Angular Material documentation is lacking proper information but it seems that their core mixin is deprecated.
+  // It has no effect according to their own code and will be removed in v21 (https://github.com/angular/components/blob/main/src/material/core/_core.scss)
+  // TODO: Check the Material theming system if changes are required
   @include mat.core;
   @include mat.core-theme(m3.$fudis-theme);
   @include mat.button-theme(m3.$fudis-theme);

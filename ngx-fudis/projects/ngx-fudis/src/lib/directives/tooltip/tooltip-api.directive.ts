@@ -5,6 +5,7 @@ import { FudisPopoverPosition, FudisTooltipPosition } from '../../types/miscella
 @Directive({
   selector: '[fudisTooltipApi]',
   providers: [MatTooltip],
+  standalone: false,
 })
 export class TooltipApiDirective {
   /**

@@ -28,6 +28,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
       <fudis-button [label]="'Set App Lang to Sv'" (handleClick)="changeAppLang('sv')" />
     </fudis-grid>
   `,
+  standalone: false,
 })
 class LanguageChangeComponent {
   constructor(private _languageService: FudisTranslationService) {

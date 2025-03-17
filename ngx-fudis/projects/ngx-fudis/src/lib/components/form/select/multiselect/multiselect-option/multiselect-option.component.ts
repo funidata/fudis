@@ -13,6 +13,7 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
   selector: 'fudis-multiselect-option',
   templateUrl: './multiselect-option.component.html',
   styleUrls: ['./multiselect-option.component.scss'],
+  standalone: false,
 })
 export class MultiselectOptionComponent
   extends SelectOptionBaseDirective

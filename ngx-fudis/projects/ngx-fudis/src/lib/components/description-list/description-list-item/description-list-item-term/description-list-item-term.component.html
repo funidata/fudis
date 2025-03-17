@@ -34,8 +34,8 @@
   </span>
 
   <fudis-language-badge-group
-    *ngIf="languages && _parentLanguageTranslations"
-    [translatedLanguages]="_parentLanguageTranslations"
+    *ngIf="languages && _parentLanguageTranslations().length > 0"
+    [translatedLanguages]="_parentLanguageTranslations()"
     (handleClick)="_setSelectedLanguage($event)"
   />
 </ng-template>

@@ -26,6 +26,7 @@ import { isButtonDisabled } from '../../utilities/dialog/dialog-utils';
       useValue: {},
     },
   ],
+  standalone: false,
 })
 export class DialogTitleDirective extends MatDialogTitle implements OnInit {
   constructor(
@@ -50,6 +51,7 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 
 @Directive({
   selector: 'fudis-dialog-content',
+  standalone: false,
 })
 export class DialogContentDirective extends MatDialogContent implements OnChanges {
   constructor(
@@ -87,6 +89,7 @@ export class DialogContentDirective extends MatDialogContent implements OnChange
 
 @Directive({
   selector: 'fudis-dialog-actions',
+  standalone: false,
 })
 export class DialogActionsDirective extends MatDialogActions {
   override align: 'start' | 'center' | 'end' = 'end';
@@ -94,6 +97,7 @@ export class DialogActionsDirective extends MatDialogActions {
 
 @Directive({
   selector: '[fudisDialogClose]',
+  standalone: false,
 })
 export class DialogCloseDirective extends MatDialogClose {
   private _hostButtonElement: HTMLElement;

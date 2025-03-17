@@ -22,6 +22,7 @@ import { getHeadingVariant } from '../../utilities/typography/typography-utils';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class SectionComponent
   extends TooltipApiDirective

@@ -19,6 +19,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./language-badge.component.scss'],
   templateUrl: './language-badge.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LanguageBadgeComponent implements OnChanges, OnInit {
   constructor(

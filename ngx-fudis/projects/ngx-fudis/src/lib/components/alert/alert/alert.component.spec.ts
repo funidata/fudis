@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MockComponent } from 'ng-mocks';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { AlertComponent } from './alert.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
@@ -21,6 +20,7 @@ const testHtmlId = 'test-html-id';
 const testButtonId = 'test-button-id';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: `<div class="mock-container">
     <fudis-alert-group />
@@ -63,7 +63,7 @@ describe('AlertComponent', () => {
         ButtonComponent,
         LinkDirective,
         MockAlertComponent,
-        MockComponent(IconComponent),
+        IconComponent,
       ],
       imports: [MatDialogModule, RouterModule.forRoot([])],
       providers: [

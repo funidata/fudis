@@ -18,6 +18,7 @@ import { IconComponent } from '../../../icon/icon.component';
 import { PopoverDirective } from '../../../../directives/popover/popover.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">

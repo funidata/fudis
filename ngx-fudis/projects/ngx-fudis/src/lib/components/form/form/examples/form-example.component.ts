@@ -24,7 +24,6 @@ type MyForm = {
 };
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-form-content',
   template: `

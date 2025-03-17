@@ -19,6 +19,7 @@ import { FudisAlertService } from '../../services/alert/alert.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dialog',
   template: `
     <fudis-dialog [size]="'lg'">
@@ -189,7 +190,6 @@ describe('DialogDirectives', () => {
 @Component({
   selector: 'dialog-container-component',
   template: ' <ng-container #container></ng-container>',
-  standalone: true,
 })
 class ViewContainerComponent {
   @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;

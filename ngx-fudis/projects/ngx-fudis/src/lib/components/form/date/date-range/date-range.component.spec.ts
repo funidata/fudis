@@ -15,6 +15,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-date-range',
   template: `<fudis-date-range [dateComparisonParse]="comparisonParse">
     <p class="do-not-find-me">This should not be shown</p>

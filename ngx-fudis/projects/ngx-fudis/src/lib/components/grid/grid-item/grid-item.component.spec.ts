@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { GridItemComponent } from './grid-item.component';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -12,6 +11,7 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
 import { ButtonComponent } from '../../button/button.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-grid-item-component',
   template: `<fudis-grid [columns]="6">
     <fudis-heading [level]="2">I am test heading</fudis-heading>
@@ -43,9 +43,9 @@ describe('GridItemComponent', () => {
         HostComponent,
         GridItemComponent,
         GridComponent,
-        MockComponent(HeadingComponent),
-        MockComponent(BodyTextComponent),
-        MockComponent(ButtonComponent),
+        HeadingComponent,
+        BodyTextComponent,
+        ButtonComponent,
       ],
       providers: [FudisBreakpointService],
     }).compileComponents();

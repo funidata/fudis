@@ -20,7 +20,6 @@ interface MyFieldsetForm {
 }
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-fieldset',
   template: `

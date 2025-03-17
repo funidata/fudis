@@ -20,6 +20,7 @@ import { throttle } from '../../../utilities/resizeThrottle';
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LabelComponent
   extends TooltipApiDirective

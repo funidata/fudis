@@ -14,6 +14,7 @@ import { FudisDescriptionListVariant } from '../../../types/miscellaneous';
 import { LanguageBadgeComponent } from '../../language-badge-group/language-badge/language-badge.component';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">

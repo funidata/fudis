@@ -5,6 +5,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
   selector: 'fudis-multiselect-chip-list',
   templateUrl: './multiselect-chip-list.component.html',
   styleUrls: ['./multiselect-chip-list.component.scss'],
+  standalone: false,
 })
 export class MultiselectChipListComponent {
   /**
