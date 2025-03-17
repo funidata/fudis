@@ -38,6 +38,7 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
   private readonly _offset: number = 8;
   private clickSubscription: Subscription;
   private keydownSubscription: Subscription;
+  private scrollSubscription: Subscription;
   private _overlayRef: OverlayRef | null = null;
   private _popoverElementId: string;
   private _isPopoverOpen: boolean = false;
@@ -106,7 +107,7 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
 
     this._overlayRef = this._overlay.create({
       positionStrategy,
-      scrollStrategy: this._overlay.scrollStrategies.reposition(),
+      scrollStrategy: this._overlay.scrollStrategies.close(),
     });
 
     this.clickSubscription = fromEvent(document, 'click')
@@ -116,6 +117,10 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     this.keydownSubscription = fromEvent(document, 'keyup')
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((event: Event) => this._focusOutHandler(event));
+
+    this.scrollSubscription = fromEvent(document, 'scroll', { capture: true })
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => this._scrollHandler());
 
     const popoverPortal = new ComponentPortal(PopoverComponent);
 
@@ -137,6 +142,10 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     }
   }
 
+  private _scrollHandler(): void {
+    this._closePopover();
+  }
+
   private _closePopover() {
     if (this._overlayRef) {
       this._overlayRef.dispose();
@@ -144,6 +153,7 @@ export class PopoverDirective extends TooltipApiDirective implements OnInit, Aft
     }
     this.keydownSubscription?.unsubscribe();
     this.clickSubscription?.unsubscribe();
+    this.scrollSubscription?.unsubscribe();
     this._isPopoverOpen = false;
     this._setAriaForBoundedElement('false');
   }
