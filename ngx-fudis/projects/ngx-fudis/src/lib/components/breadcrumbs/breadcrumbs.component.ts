@@ -3,7 +3,6 @@ import {
   Input,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisIdService } from '../../services/id/id.service';
@@ -22,10 +21,7 @@ export class BreadcrumbsComponent {
     private _idService: FudisIdService,
   ) {
     this._id = this._idService.getNewParentId('breadcrumbs');
-
-    effect(() => {
-      this._breadcrumbsPrefix.next(this._translationService.getTranslations()().BREADCRUMBS.PREFIX);
-    });
+    this._breadcrumbsPrefix.next(this._translationService.getTranslations()().BREADCRUMBS.PREFIX);
   }
 
   /**
