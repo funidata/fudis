@@ -24,6 +24,7 @@ import { FudisErrorSummaryNewError } from '../../../types/errorSummary';
   selector: 'fudis-guidance',
   templateUrl: './guidance.component.html',
   styleUrls: ['./guidance.component.scss'],
+  standalone: false,
 })
 export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
   constructor(

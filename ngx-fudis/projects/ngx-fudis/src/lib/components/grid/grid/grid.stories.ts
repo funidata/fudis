@@ -79,6 +79,7 @@ import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid'
       </fudis-grid>
     </fudis-grid>
   `,
+  standalone: false,
 })
 class GridWithServiceExampleComponent {
   constructor(private _gridService: FudisGridService) {

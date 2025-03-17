@@ -19,6 +19,7 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   constructor(

@@ -13,6 +13,7 @@ import { Component, DebugElement, SimpleChange } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../types/miscellaneous';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">

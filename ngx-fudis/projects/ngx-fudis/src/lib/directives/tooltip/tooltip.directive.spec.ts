@@ -5,6 +5,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TooltipDirective } from './tooltip.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-tooltip',
   template: ` <button fudisTooltip [tooltip]="'You should see me!'" [tooltipToggle]="false">
       On focus and hover tooltip should appear

@@ -10,6 +10,7 @@ import { LinkDirective } from '../../directives/link/link.directive';
 import { getElement } from '../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: `<fudis-breadcrumbs [label]="'Test breadcrumbs navigation'">
     <p class="do-not-find-me">This should not be shown</p>

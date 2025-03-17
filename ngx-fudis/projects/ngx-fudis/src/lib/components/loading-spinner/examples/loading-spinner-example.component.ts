@@ -6,7 +6,6 @@ import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { HeadingComponent } from '../../typography/heading/heading.component';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, LoadingSpinnerComponent, NgxFudisModule],
   selector: 'example-loading-spinner-demo',
   styleUrl: './loading-spinner-example.component.scss',

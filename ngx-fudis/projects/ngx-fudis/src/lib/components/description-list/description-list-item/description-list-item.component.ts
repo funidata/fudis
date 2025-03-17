@@ -21,6 +21,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./description-list-item.component.scss'],
   templateUrl: './description-list-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DescriptionListItemComponent {
   constructor(

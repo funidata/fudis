@@ -12,7 +12,6 @@ type TestForm = {
 };
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-dialog-with-form',
   template: `

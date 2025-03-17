@@ -214,7 +214,7 @@
 }
 
 @mixin letter-spacing($width) {
-  @if map_has_key(spacing.$pixel-tokens, $width) {
+  @if map.has-key(spacing.$pixel-tokens, $width) {
     letter-spacing: map.get(spacing.$pixel-tokens, $width);
   } @else {
     @error 'Unknown letter-spacing parameter. It can only be "1px", "2px" or "3px"';

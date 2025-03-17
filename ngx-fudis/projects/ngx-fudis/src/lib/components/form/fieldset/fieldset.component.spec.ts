@@ -19,6 +19,7 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-fieldset-component',
   template: ` <fudis-fieldset
     [label]="'Fieldset label'"
