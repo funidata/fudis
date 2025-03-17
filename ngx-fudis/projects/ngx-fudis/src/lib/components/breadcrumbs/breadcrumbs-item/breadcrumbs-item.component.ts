@@ -14,6 +14,7 @@ import { BreadcrumbsComponent } from '../breadcrumbs.component';
   styleUrls: ['./breadcrumbs-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class BreadcrumbsItemComponent {
   constructor(

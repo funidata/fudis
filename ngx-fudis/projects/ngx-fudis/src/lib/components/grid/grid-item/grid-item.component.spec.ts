@@ -10,6 +10,7 @@ import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.
 // Visual Regression tests (grid-item.spec.ts) should be sufficient to cover testing these.
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-grid-item-component',
   template: `<fudis-grid [columns]="6">
     <fudis-grid-item [columns]="1">

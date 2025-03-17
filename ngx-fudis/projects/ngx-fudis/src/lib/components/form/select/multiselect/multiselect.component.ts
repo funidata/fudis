@@ -22,6 +22,7 @@ import { MultiselectControlValueAccessorDirective } from '../common/select-contr
   selector: 'fudis-multiselect',
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
+  standalone: false,
 })
 export class MultiselectComponent extends SelectBaseDirective implements OnInit {
   constructor(

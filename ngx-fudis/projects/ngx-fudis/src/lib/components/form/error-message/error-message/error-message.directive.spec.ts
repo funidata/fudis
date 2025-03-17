@@ -33,6 +33,7 @@ const errorToRemove: FudisValidationErrors = {
 };
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-test-error',
   template: `
     <fudis-text-input [control]="control" [label]="'Test label'">

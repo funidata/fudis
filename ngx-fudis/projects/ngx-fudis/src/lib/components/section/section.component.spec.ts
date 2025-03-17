@@ -22,6 +22,7 @@ import {
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'mock-fudis-section',
   template: `<fudis-section
     [title]="title"

@@ -7,6 +7,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NotificationComponent {
   constructor(protected _translateService: FudisTranslationService) {}

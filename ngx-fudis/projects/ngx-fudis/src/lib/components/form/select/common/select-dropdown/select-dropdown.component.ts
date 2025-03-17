@@ -9,6 +9,7 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
   selector: 'fudis-select-dropdown',
   templateUrl: './select-dropdown.component.html',
   styleUrls: ['./select-dropdown.component.scss'],
+  standalone: false,
 })
 export class SelectDropdownComponent extends DropdownBaseDirective implements OnChanges {
   constructor(private _translationService: FudisTranslationService) {

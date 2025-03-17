@@ -18,7 +18,6 @@ interface MyCheckboxGroup {
 }
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-with-multiple-forms',
   template: `

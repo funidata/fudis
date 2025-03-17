@@ -24,6 +24,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class CheckboxComponent implements OnInit, OnDestroy {
   constructor(

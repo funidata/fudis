@@ -14,6 +14,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./breadcrumbs.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class BreadcrumbsComponent {
   constructor(
