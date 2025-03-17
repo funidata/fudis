@@ -13,7 +13,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverComponent } from '../../components/popover/popover.component';
 import { FudisPopoverPosition } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
-import { fromEvent, Subscription, tap } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type PopoverPosition = {
