@@ -22,6 +22,7 @@ import { MultiselectControlValueAccessorDirective } from '../../common/select-co
 import { MultiselectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-multiselect-mock',
   template: `<fudis-multiselect
     #selectEl

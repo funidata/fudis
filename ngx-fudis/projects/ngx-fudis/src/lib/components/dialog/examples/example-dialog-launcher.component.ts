@@ -12,7 +12,6 @@ type TestForm = {
 };
 
 @Component({
-  standalone: true,
   imports: [NgxFudisModule, CommonModule],
   selector: 'example-dialog-laucher',
   template: ` <fudis-button

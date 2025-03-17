@@ -18,6 +18,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Directive({
   selector: '[fudisFormCommonApi]',
+  standalone: false,
 })
 export class FormCommonApiDirective extends TooltipApiDirective implements AfterViewInit {
   constructor(

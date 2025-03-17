@@ -47,6 +47,7 @@ type TestFormGroup = {
 };
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: ` <fudis-checkbox-group
       #firstGroup

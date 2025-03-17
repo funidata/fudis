@@ -14,6 +14,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
   selector: 'fudis-select-option',
   templateUrl: './select-option.component.html',
   styleUrls: ['./select-option.component.scss'],
+  standalone: false,
 })
 export class SelectOptionComponent
   extends SelectOptionBaseDirective

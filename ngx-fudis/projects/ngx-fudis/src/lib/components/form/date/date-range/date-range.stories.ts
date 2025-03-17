@@ -11,6 +11,7 @@ import { dateRangeExclude } from '../../../../utilities/storybook';
 @Component({
   selector: 'example-language-change-component',
   template: `<fudis-button [label]="_label" (handleClick)="changeLanguage()"></fudis-button>`,
+  standalone: false,
 })
 class LanguageChangeComponent {
   constructor(private _translationService: FudisTranslationService) {

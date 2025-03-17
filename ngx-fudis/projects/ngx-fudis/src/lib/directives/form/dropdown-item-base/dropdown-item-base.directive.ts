@@ -3,6 +3,7 @@ import { Directive, ElementRef, EventEmitter, Inject, Input, Output } from '@ang
 
 @Directive({
   selector: '[fudisDropdownItemBase]',
+  standalone: false,
 })
 export class DropdownItemBaseDirective {
   constructor(@Inject(DOCUMENT) protected _document: Document) {}

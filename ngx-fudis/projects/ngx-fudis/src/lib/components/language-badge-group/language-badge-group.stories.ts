@@ -41,6 +41,7 @@ import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';
       <fudis-button [label]="'Set App Lang to Sv'" (handleClick)="changeAppLang('sv')" />
     </fudis-grid>
   `,
+  standalone: false,
 })
 class LanguageChangeComponent {
   protected readonly translations = {

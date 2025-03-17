@@ -9,6 +9,7 @@ import {
 
 @Directive({
   selector: '[fudisGridApi]',
+  standalone: false,
 })
 export class GridApiDirective {
   /**

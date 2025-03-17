@@ -2,7 +2,7 @@
 @use './tokens';
 
 @mixin breakpoint($breakpoint) {
-  @if map_has_key(tokens.$breakpoints, $breakpoint) {
+  @if map.has-key(tokens.$breakpoints, $breakpoint) {
     $breakpoint-value: map.get(tokens.$breakpoints, $breakpoint);
 
     @media screen and (min-width: #{$breakpoint-value}) {
@@ -14,7 +14,7 @@
 }
 
 @mixin breakpoint-max($breakpoint) {
-  @if map_has_key(tokens.$max-breakpoints, $breakpoint) and $breakpoint != 'xs' {
+  @if map.has-key(tokens.$max-breakpoints, $breakpoint) and $breakpoint != 'xs' {
     $breakpoint-value: map.get(tokens.$max-breakpoints, $breakpoint);
     $calc-max-width: calc($breakpoint-value - 0.01em);
 

@@ -6,6 +6,7 @@ import { IconComponent } from '../../components/icon/icon.component';
 import { LinkDirective } from '../../directives/link/link.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: `<div class="mock-container">
     <a
