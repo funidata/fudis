@@ -13,7 +13,7 @@ Popover shows contextual help or information about specific element when user cl
 
 To add popover to any HTML element, add `fudisPopover` directive to it with a string text property `popoverText`. You can also specify a desired position for the popover with optional property `popoverPosition`. The default value is `below`. If the popover does not have enough space in the viewport, it will fallback to a position where is enough space.
 
-Popover is triggered on mouse click and on keyboard enter or space press. Popover content is announced for screen reader users when the element where the popover is anchored is triggered. Popover content is hidden only when the anchored element is triggered again or when focus is moved outside the popover with mouse click or keypress.
+Popover is triggered on mouse click and on keyboard enter or space press. Popover content is announced for screen reader users when the element where the popover is anchored is triggered. Popover content is hidden only when the anchored element is triggered again, page content is scrolled or when focus is moved outside the popover with mouse click or keypress.
 
 The interactive element where the popover is anchored to, should always have a aria-label, that describes the what is the purpose of the element.
 

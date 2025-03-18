@@ -505,4 +505,7 @@ export const popoverExclude: RegExp = excludeRegex([
   'dropdownOpen',
   'dropdownMenuId',
   'asMenuButton',
+  'clickSubscription',
+  'keydownSubscription',
+  'scrollSubscription',
 ]);
