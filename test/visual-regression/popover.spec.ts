@@ -43,7 +43,13 @@ test("open and close popover with key press correctly", async ({ page }) => {
 
 test("popover should match the screenshot", async ({ page }) => {
   await page.getByTestId(buttonId).click();
-  await expect(page).toHaveScreenshot("popover.png");
+  await expect(page).toHaveScreenshot("popover-bottom.png");
+
+  await page.goto(
+    "/iframe.html?args=popoverPosition:right;&id=directives-popover--example-with-fudis-button&viewMode=story",
+  );
+  await page.getByTestId(buttonId).click();
+  await expect(page).toHaveScreenshot("popover-right.png");
 });
 
 const assertPopoverVisibility = async (page: Page, visible: boolean) => {
