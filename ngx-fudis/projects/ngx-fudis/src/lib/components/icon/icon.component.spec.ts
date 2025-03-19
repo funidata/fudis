@@ -7,6 +7,7 @@ import {
   FudisIconRotate,
   fudisIconColorArray,
   fudisIconArray,
+  fudisIconRotateArray,
 } from '../../types/icons';
 import { getElement } from '../../utilities/tests/utilities';
 
@@ -187,6 +188,10 @@ describe('IconComponent', () => {
       ]);
     });
 
+    it('should have CSS host class', () => {
+      expect(component['_classes']).toEqual('fudis-icon-host');
+    });
+
     it('should change color class according to given color Input value', () => {
       fudisIconColorArray.forEach((color) => {
         iconColorCheck(color);
@@ -194,10 +199,31 @@ describe('IconComponent', () => {
     });
 
     it('should change rotate class according to given rotate Input value', () => {
-      iconRotateCheck('flip-180');
-      iconRotateCheck('cw-90');
-      iconRotateCheck('ccw-90');
-      iconRotateCheck('none');
+      fudisIconRotateArray.forEach((rotate) => {
+        iconRotateCheck(rotate);
+      });
+    });
+
+    it('small icons should have className fudis-icon__sm', () => {
+      const fudisSmallIconsArray: string[] = [];
+      const regex = /-small/gm;
+
+      arrayForComparing.forEach((icon) => {
+        if (icon.match(regex)) {
+          fudisSmallIconsArray.push(icon);
+        }
+      });
+
+      fudisSmallIconsArray.forEach((icon) => {
+        fixture.componentRef.setInput('icon', icon);
+        fixture.detectChanges();
+
+        const svg = fixture.debugElement.query(By.css('svg'));
+        const elem = svg.nativeElement as HTMLElement;
+        const iconClasses = elem.getAttribute('class');
+
+        expect(iconClasses).toContain('fudis-icon__sm');
+      });
     });
   });
 

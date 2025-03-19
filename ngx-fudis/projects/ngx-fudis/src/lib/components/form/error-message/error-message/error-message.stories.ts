@@ -43,6 +43,7 @@ import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/stor
       />
     </fudis-grid>
   `,
+  standalone: false,
 })
 class TextInputWithErrorMessageComponent {
   constructor() {

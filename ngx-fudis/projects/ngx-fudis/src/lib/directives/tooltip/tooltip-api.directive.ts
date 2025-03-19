@@ -5,6 +5,7 @@ import { FudisTooltipPosition } from '../../types/miscellaneous';
 @Directive({
   selector: '[fudisTooltipApi]',
   providers: [MatTooltip],
+  standalone: false,
 })
 export class TooltipApiDirective {
   /**

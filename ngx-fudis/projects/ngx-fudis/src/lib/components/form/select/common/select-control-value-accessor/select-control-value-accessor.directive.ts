@@ -38,6 +38,7 @@ import { FudisIdService } from '../../../../../services/id/id.service';
       multi: true,
     },
   ],
+  standalone: false,
 })
 class SelectBaseControlValueAccessorDirective implements ControlValueAccessor, Validator {
   constructor() {}
@@ -79,6 +80,7 @@ class SelectBaseControlValueAccessorDirective implements ControlValueAccessor, V
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class SelectControlValueAccessorDirective
   extends SelectBaseControlValueAccessorDirective
@@ -132,6 +134,7 @@ export class SelectControlValueAccessorDirective
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class MultiselectControlValueAccessorDirective
   extends SelectBaseControlValueAccessorDirective

@@ -18,6 +18,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './description-list.component.html',
   styleUrls: ['./description-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {

@@ -21,6 +21,7 @@ import { DOCUMENT } from '@angular/common';
 
 @Directive({
   selector: '[fudisLink]',
+  standalone: false,
 })
 export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   constructor(

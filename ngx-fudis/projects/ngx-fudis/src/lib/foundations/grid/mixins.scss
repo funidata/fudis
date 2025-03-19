@@ -3,7 +3,7 @@
 @use '../spacing/tokens.scss' as spacing;
 
 @mixin grid-max-width($width) {
-  @if map_has_key(tokens.$grid-widths, $width) {
+  @if map.has-key(tokens.$grid-widths, $width) {
     $grid-width-value: map.get(tokens.$grid-widths, $width);
 
     max-width: $grid-width-value;

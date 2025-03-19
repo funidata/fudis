@@ -16,6 +16,7 @@ import { IconComponent } from '../../components/icon/icon.component';
 import { FudisAlertService } from '../alert/alert.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-dialog-test-content',
   template: `
     <fudis-dialog [size]="'lg'">
@@ -57,6 +58,7 @@ class DialogTestContentComponent {
 }
 
 @Component({
+  standalone: false,
   selector: 'fudis-dialog-test-button',
   template: `<fudis-button
     (handleClick)="openTestDialog()"

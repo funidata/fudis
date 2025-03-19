@@ -131,7 +131,7 @@ test("error summary language change and manually sent errors", async ({ page }) 
   ).toBeVisible();
 
   await expect(page.getByTestId("fudis-select-2-option-95nokf")).toHaveClass(
-    "fudis-select-option fudis-select-option--selected fudis-select-option__focusable",
+    "fudis-select-option fudis-select-option__focusable fudis-select-option--selected",
   );
   await expect(page.getByTestId("fudis-select-2-option-95nokf")).toHaveAttribute(
     "aria-selected",

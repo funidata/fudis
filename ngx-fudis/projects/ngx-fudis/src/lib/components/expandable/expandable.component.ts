@@ -27,6 +27,7 @@ import { ExpandableContentDirective } from './expandable-content.directive';
   templateUrl: './expandable.component.html',
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
   constructor(

@@ -5,7 +5,6 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
 
 @Component({
   selector: 'fudis-loading-spinner',
-  standalone: true,
   imports: [CommonModule, NgxFudisModule],
   templateUrl: './loading-spinner.component.html',
   styleUrl: './loading-spinner.component.scss',

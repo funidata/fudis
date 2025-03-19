@@ -5,6 +5,7 @@ import { IconComponent } from '../../components/icon/icon.component';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-link-directive',
   template: `<a
       *ngIf="!linkWithInitialFocus"

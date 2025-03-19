@@ -14,6 +14,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TextInputComponent
   extends TextFieldComponentBaseDirective

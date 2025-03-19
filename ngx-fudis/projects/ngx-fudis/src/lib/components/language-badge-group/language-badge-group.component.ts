@@ -22,6 +22,7 @@ type LanguageLabelArray = LanguageLabel[];
   templateUrl: './language-badge-group.component.html',
   styleUrls: ['./language-badge-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnChanges {
   constructor(
