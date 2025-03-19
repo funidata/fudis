@@ -1,34 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { FudisBreakpointService } from './breakpoint.service';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
-import {
-  FudisBreakpointStyleProperty,
-  FudisBreakpointStyleResponsive,
-  breakpointsMinWidthToObserve,
-} from '../../types/breakpoints';
-
-
+import { Subject } from 'rxjs';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 describe('FudisBreakpointService', () => {
   let service: FudisBreakpointService;
-  let breakpointObserverMock: jest.Mocked<BreakpointObserver>;
+  let breakpointObserverMock: Partial<jest.Mocked<BreakpointObserver>>;
   let breakpointSubject: Subject<BreakpointState>;
 
   beforeEach(() => {
 
     breakpointSubject = new Subject<BreakpointState>();
 
-    const mock: Partial<jest.Mocked<BreakpointObserver>> = {
+    breakpointObserverMock = {
       observe : jest.fn().mockReturnValue(breakpointSubject.asObservable())
     };
-    breakpointObserverMock = mock as jest.Mocked<BreakpointObserver>;
     
     TestBed.configureTestingModule({
       providers: [FudisBreakpointService, 
-      //   { 
-      //   provide: BreakpointObserver, useValue: breakpointObserverMock 
-      // },
+        { 
+        provide: BreakpointObserver, useValue: breakpointObserverMock 
+      },
     ],
     });
 
@@ -39,7 +31,19 @@ describe('FudisBreakpointService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return small on mobile breakpoints', () => {
-    // breakpointSubject.next({})
+  it('should return matches', () => {
+    breakpointSubject.next(
+      {
+        matches: true,
+        breakpoints: {
+          '(min-width: 100em)': false,
+          '(min-width: 75em)': false,
+          '(min-width: 62em)': true,
+          '(min-width: 48em)': false,
+          '(min-width: 36em)': false,
+          '(min-width: 0)': false
+        }
+      }
+    )
   });
 });
