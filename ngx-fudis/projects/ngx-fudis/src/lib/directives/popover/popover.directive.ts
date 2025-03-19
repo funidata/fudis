@@ -22,7 +22,6 @@ type PopoverPosition = {
 
 @Directive({
   selector: '[fudisPopover]',
-  standalone: true,
 })
 export class PopoverDirective extends TooltipApiDirective implements OnInit, AfterViewInit {
   constructor(

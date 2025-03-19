@@ -11,10 +11,19 @@ test("open and close popover with mouse click correctly", async ({ page }) => {
   await page.getByTestId(buttonId).click();
   await assertPopoverVisibility(page, true);
 
-  await page.getByTestId(popoverId).click();
+  await page.getByTestId(buttonId).click();
   await assertPopoverVisibility(page, true);
 
   await page.getByTestId(buttonId).click();
+  await assertPopoverVisibility(page, false);
+
+  /**
+   * Close the popover with mouse click
+   */
+  await page.getByTestId(popoverId).click();
+  await assertPopoverVisibility(page, true);
+
+  await page.mouse.click(0, 0);
   await assertPopoverVisibility(page, false);
 });
 
