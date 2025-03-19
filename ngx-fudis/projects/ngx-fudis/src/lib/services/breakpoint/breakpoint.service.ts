@@ -6,7 +6,6 @@ import {
   FudisBreakpointStyleResponsive,
   breakpointsMinWidthToObserve,
 } from '../../types/breakpoints';
-import { tap } from 'rxjs';
 
 // TODO: Write tests and add Storybook documentation under Services
 
@@ -18,7 +17,7 @@ export class FudisBreakpointService {
   constructor(fudisBreakpointObserver: BreakpointObserver) {
     fudisBreakpointObserver
       .observe(breakpointsMinWidthToObserve)
-      .pipe(takeUntilDestroyed(), tap((args) => {console.log(args)}))
+      .pipe(takeUntilDestroyed())
       .subscribe((state: BreakpointState) => {
         this._currentScreenSize.set(state);
       });
