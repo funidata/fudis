@@ -9,19 +9,20 @@ describe('FudisBreakpointService', () => {
   let breakpointSubject: Subject<BreakpointState>;
 
   beforeEach(() => {
-
     breakpointSubject = new Subject<BreakpointState>();
 
     breakpointObserverMock = {
-      observe : jest.fn().mockReturnValue(breakpointSubject.asObservable())
+      observe: jest.fn().mockReturnValue(breakpointSubject.asObservable()),
     };
-    
+
     TestBed.configureTestingModule({
-      providers: [FudisBreakpointService, 
-        { 
-        provide: BreakpointObserver, useValue: breakpointObserverMock 
-      },
-    ],
+      providers: [
+        FudisBreakpointService,
+        {
+          provide: BreakpointObserver,
+          useValue: breakpointObserverMock,
+        },
+      ],
     });
 
     service = TestBed.inject(FudisBreakpointService);
@@ -32,9 +33,7 @@ describe('FudisBreakpointService', () => {
   });
 
   it('should return current BreakpointStates', () => {
-
-    let expectedBreakpointState =
-    {
+    let expectedBreakpointState = {
       matches: true,
       breakpoints: {
         '(min-width: 100em)': false,
@@ -42,17 +41,16 @@ describe('FudisBreakpointService', () => {
         '(min-width: 62em)': false,
         '(min-width: 48em)': false,
         '(min-width: 36em)': false,
-        '(min-width: 0)': true
-      }
-    }
+        '(min-width: 0)': true,
+      },
+    };
 
     breakpointSubject.next(expectedBreakpointState);
     let currentBrakepointState = service.getBreakpointState();
 
     expect(currentBrakepointState).toEqual(expectedBreakpointState);
 
-    expectedBreakpointState =
-    {
+    expectedBreakpointState = {
       matches: true,
       breakpoints: {
         '(min-width: 100em)': true,
@@ -60,9 +58,9 @@ describe('FudisBreakpointService', () => {
         '(min-width: 62em)': true,
         '(min-width: 48em)': false,
         '(min-width: 36em)': false,
-        '(min-width: 0)': false
-      }
-    }
+        '(min-width: 0)': false,
+      },
+    };
 
     breakpointSubject.next(expectedBreakpointState);
     currentBrakepointState = service.getBreakpointState();
