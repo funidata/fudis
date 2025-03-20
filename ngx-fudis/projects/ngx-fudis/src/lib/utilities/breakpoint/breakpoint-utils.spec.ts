@@ -1,6 +1,7 @@
+import { FudisBreakpointStyleResponsive } from "../../types/breakpoints";
 import { FudisGridColumnsResponsive } from "../../types/grid";
 import { FudisSpacingResponsive } from "../../types/spacing";
-import { getBreakpointRules } from "./breakpoint-utils";
+import { getBreakpointDataArray, getBreakpointRules } from "./breakpoint-utils";
 
 let spacingValues: FudisSpacingResponsive = {
   default: 'none',
@@ -16,9 +17,29 @@ let gridColumnValues: FudisGridColumnsResponsive = {
   "sm":2,"md":"1fr 2fr","lg":3,"xl":"1fr 2fr 1fr","xxl":6
 };
 
+let breakpointData: FudisBreakpointStyleResponsive[] =
+[
+  {
+    name: 'default',
+    value: 'calc(1.5rem / var(--fudis-rem-multiplier))',
+    breakpoint: '(min-width: 0)'
+  },
+  { name: 'xs', value: 'none', breakpoint: '(min-width: 0)' },
+  {
+    name: 'sm',
+    value: 'calc(1rem / var(--fudis-rem-multiplier))',
+    breakpoint: '(min-width: 36em)'
+  },
+  {
+    name: 'xxl',
+    value: 'calc(2rem / var(--fudis-rem-multiplier))',
+    breakpoint: '(min-width: 100em)'
+  }
+]
+
 describe('Breakpoint Utility functions', () => {
   describe('getBreakpointRules', () => {
-    it('should return correct style breakpoint object when FudisSpacing tokens are used', () => {
+    it('should return correct breakpoint style object when FudisSpacing tokens are used', () => {
 
       const includesFudisSpacingTokens = getBreakpointRules(
         spacingValues,
@@ -64,7 +85,7 @@ describe('Breakpoint Utility functions', () => {
       expect(includesFudisSpacingTokens).toEqual(expectedValues);
     });
 
-    it('should return correct style breakpoint object when responsive grid column values are passed as numbers and fraction', () => {
+    it('should return correct breakpoint style object when responsive grid column values are passed as numbers and fractions', () => {
       
       const doNotIncludeFudisSpacingTokens = getBreakpointRules(
         gridColumnValues,
@@ -94,6 +115,23 @@ describe('Breakpoint Utility functions', () => {
       ]
 
       expect(doNotIncludeFudisSpacingTokens).toEqual(expectedValues);
+    })
+  })
+
+  describe('getBreakpointDataArray', () => {
+    it('should return responsive style object values in correct order', () => {
+      
+      const expectedValues = getBreakpointDataArray(
+        { 
+          xxl: 'lg',
+          default: 'md',
+          sm : 'sm',
+          xs: 'none'
+        },
+        '1fr'
+      );
+
+      expect(expectedValues).toEqual(breakpointData);
     })
   })
 });
