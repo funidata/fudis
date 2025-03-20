@@ -6,10 +6,8 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  standalone: true,
   imports: [PopoverDirective],
   selector: 'mock-popover-component',
-  animations: [],
   template: `<ng-container #container>
     <button fudisPopover [popoverText]="popoverText" [popoverPosition]="popoverPosition"
       >Open a popover</button
