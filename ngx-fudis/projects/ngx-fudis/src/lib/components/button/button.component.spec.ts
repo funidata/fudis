@@ -8,6 +8,7 @@ import {
 } from '../../types/miscellaneous';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisIconRotateArray } from '../../types/icons';
+import { PopoverDirective } from '../../directives/popover/popover.directive';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
@@ -16,6 +17,7 @@ describe('ButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ButtonComponent, IconComponent],
+      imports: [PopoverDirective],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);

@@ -167,13 +167,14 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
     <fudis-heading [level]="2" [variant]="'xl'">Test cases for others</fudis-heading>
     <fudis-hr class="fudis-my-lg" />
     <fudis-heading [level]="2" [variant]="'md'"
-      >Regular Description List With Tooltip (no compact support)</fudis-heading
+      >Regular Description List With Popover (no compact support)</fudis-heading
     >
     <fudis-dl class="fudis-mt-sm" [variant]="'regular'" [tag]="'p'">
       <fudis-dl-item>
         <fudis-dt
           [contentText]="'First name'"
-          [tooltip]="'Second name unknown'"
+          [popoverText]="'Second name unknown'"
+          [popoverTriggerLabel]="'Additional information'"
           [tooltipPosition]="'right'"
         ></fudis-dt>
         <fudis-dd [contentText]="'Rex'"></fudis-dd>

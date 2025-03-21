@@ -20,8 +20,9 @@ import { fudisInputSizeArray } from '../../../types/forms';
       <fudis-text-input
         [control]="mainFormGroup.controls['required']"
         [label]="'Required text input'"
-        [tooltip]="'This is a tooltip text'"
-        [tooltipPosition]="'right'"
+        [popoverText]="'This is a popover text'"
+        [popoverPosition]="'right'"
+        [popoverTriggerLabel]="'This opens up a popover'"
         [helpText]="'Please add some content.'"
       >
         <fudis-error-message
@@ -112,11 +113,14 @@ export default {
     type: {
       options: ['email', 'number', 'password', 'tel', 'text', 'url'],
     },
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
@@ -128,9 +132,9 @@ const commonArgs: Partial<TextInputComponent> = {
   size: 'lg',
   initialFocus: false,
   type: 'text',
-  tooltip: '',
-  tooltipPosition: 'left',
-  tooltipToggle: false,
+  popoverText: '',
+  popoverPosition: 'left',
+  popoverTriggerLabel: '',
 };
 
 const ExampleTemplate: StoryFn = (args) => ({
@@ -146,9 +150,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [type]="type"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
     </fudis-text-input>
   `,
@@ -172,9 +176,9 @@ const DisabledTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [type]="type"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
     </fudis-text-input>
   `,

@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
@@ -14,10 +13,9 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
-import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
-import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { ButtonComponent } from '../../../button/button.component';
 import { IconComponent } from '../../../icon/icon.component';
+import { PopoverDirective } from '../../../../directives/popover/popover.directive';
 
 @Component({
   standalone: false,
@@ -25,7 +23,11 @@ import { IconComponent } from '../../../icon/icon.component';
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [contentText]="'First DT'" [tooltip]="'Tooltip text'" />
+        <fudis-dt
+          [contentText]="'First DT'"
+          [popoverText]="'Popover text'"
+          [popoverTriggerLabel]="'Additional information'"
+        />
         <fudis-dd [contentText]="'This is my DD'" />
       </fudis-dl-item>
       <fudis-dl-item>
@@ -77,12 +79,10 @@ describe('DescriptionListItemTermComponent', () => {
         IconComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
-        TooltipDirective,
-        TooltipApiDirective,
         MockDlComponent,
       ],
       providers: [FudisBreakpointService],
-      imports: [MatTooltipModule],
+      imports: [PopoverDirective],
     }).compileComponents();
   });
 
@@ -196,8 +196,8 @@ describe('DescriptionListItemTermComponent', () => {
     });
   });
 
-  describe('Tooltip', () => {
-    it('should be visible if tooltip properties are given', () => {
+  describe('Popover', () => {
+    it('should be visible if popover properties are given', () => {
       expect(
         getDlItemTermFromArrayIndex(0).query(By.css('.fudis-dl-item-term__regular__tooltip')),
       ).toBeTruthy();
@@ -205,7 +205,7 @@ describe('DescriptionListItemTermComponent', () => {
         getDlItemTermFromArrayIndex(0)
           .query(By.css('.fudis-dl-item-term__regular__tooltip button'))
           .nativeElement.getAttribute('aria-label'),
-      ).toEqual('Tooltip text');
+      ).toEqual('Additional information');
     });
   });
 

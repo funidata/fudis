@@ -22,6 +22,7 @@ export const testDataBefore: FudisIdData = {
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    popover: [],
   },
   parents: {
     breadcrumbs: {},
@@ -75,6 +76,7 @@ export const testComponentDataAfter: FudisIdData = {
       'custom-id-for-validator-error-message',
       'fudis-validator-error-message-3',
     ],
+    popover: ['fudis-popover-1', 'custom-id-for-popover', 'fudis-popover-3'],
   },
   parents: {
     breadcrumbs: {},
@@ -112,6 +114,7 @@ export const testParentDataAfter: FudisIdData = {
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    popover: [],
   },
   parents: {
     breadcrumbs: {
@@ -213,6 +216,7 @@ export const testGrandParentDataAfter: FudisIdData = {
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    popover: [],
   },
   parents: {
     breadcrumbs: {},
