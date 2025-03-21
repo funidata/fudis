@@ -29,6 +29,10 @@ export default {
       controls: { type: 'select' },
     },
   },
+  args: {
+    popoverPosition: 'below',
+    popoverText: 'Greetings from popover, I hope you can see me!',
+  },
 } as Meta;
 
 const html = String.raw;
@@ -36,30 +40,23 @@ const html = String.raw;
 export const ExampleWithNativeButton: StoryFn = (args) => ({
   props: args,
   template: html`
-    <button fudisPopover [popoverText]="popoverText" [popoverPosition]="popoverPosition">
-      Popover will display and close on click
-    </button>
+    <div style="display: flex; min-height: 50vh; align-items: center; justify-content: center"
+      ><button fudisPopover [popoverText]="popoverText" [popoverPosition]="popoverPosition">
+        Popover will display and close on click
+      </button></div
+    >
   `,
 });
-
-ExampleWithNativeButton.args = {
-  popoverText: 'Greetings from popover, I hope you can see me!',
-  popoverPosition: 'below',
-};
 
 export const ExampleWithFudisButton: StoryFn = (args) => ({
   props: args,
   template: html`
-    <fudis-button
-      [label]="'Popover will display and close on click'"
-      [popoverPosition]="popoverPosition"
-      [popoverText]="popoverText"
-    >
-    </fudis-button>
+    <div style="display: flex; min-height: 50vh; align-items: center; justify-content: center">
+      <fudis-button
+        [label]="'Popover will display and close on click'"
+        [popoverPosition]="popoverPosition"
+        [popoverText]="popoverText"
+      ></fudis-button>
+    </div>
   `,
 });
-
-ExampleWithFudisButton.args = {
-  popoverText: 'Greetings from popover, I hope you can see me!',
-  popoverPosition: 'below',
-};
