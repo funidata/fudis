@@ -7,8 +7,6 @@ import {
   breakpointsMinWidthToObserve,
 } from '../../types/breakpoints';
 
-// TODO: Write tests and add Storybook documentation under Services
-
 @Injectable()
 export class FudisBreakpointService {
   /**

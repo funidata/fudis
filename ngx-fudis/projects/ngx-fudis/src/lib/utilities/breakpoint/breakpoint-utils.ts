@@ -8,7 +8,12 @@ import {
 import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisSpacing, FudisSpacingResponsive, fudisSpacingValues } from '../../types/spacing';
 
-// TODO: Write tests and possible missing/extra internal documentation about these functions
+/**
+ * Returns an array of FudisBreakpointStyleResponsive objects that applies FudisSpacingValues for a
+ * given breakpoints. Determines if breakpoint data consists FudisSpacing values, fractions or
+ * numbers. If fractions or numbers are used, calls grid utility function that returns native grid
+ * CSS layout properties as a value.
+ */
 export const getBreakpointRules = (
   values: FudisSpacingResponsive | FudisGridColumnsResponsive,
   defaultValue: string,
@@ -16,6 +21,10 @@ export const getBreakpointRules = (
 ): FudisBreakpointStyleResponsive[] => {
   const valueArray: FudisBreakpointStyleResponsive[] = [];
 
+  /**
+   * If application values do not contain default value, assign defaultValue from Grid components
+   * gridColumnDefault type.
+   */
   if (!values.default) {
     valueArray.push({
       name: 'default',
