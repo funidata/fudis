@@ -3,6 +3,7 @@ import { StorybookExampleBasicFormComponentsComponent } from './test-playground-
 import { TextInputComponent } from '../lib/components/form/text-input/text-input.component';
 import { StorybookExampleDescriptionListCollectionComponent } from './test-playground-components/description-list-collection.component';
 import { StorybookExampleStaticComponentsComponent } from './test-playground-components/static-components.component';
+import { StorybookExampleGridCollectionComponent } from './test-playground-components/grid-collection.component';
 
 export default {
   title: 'Components/Test Playground',
@@ -13,6 +14,7 @@ export default {
         StorybookExampleStaticComponentsComponent,
         StorybookExampleBasicFormComponentsComponent,
         StorybookExampleDescriptionListCollectionComponent,
+        StorybookExampleGridCollectionComponent,
       ],
     }),
   ],
@@ -37,3 +39,9 @@ const StaticComponentsTemplate: StoryFn = () => ({
 });
 
 export const StaticComponents = StaticComponentsTemplate.bind({});
+
+const GridCollectionTemplate: StoryFn = () => ({
+  template: html`<example-grid-collection></example-grid-collection>`,
+});
+
+export const GridCollection = GridCollectionTemplate.bind({});
