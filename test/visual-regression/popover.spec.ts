@@ -50,6 +50,18 @@ test("popover should match the screenshot", async ({ page }) => {
   );
   await page.getByTestId(buttonId).click();
   await expect(page).toHaveScreenshot("popover-right.png");
+
+  await page.goto(
+    "/iframe.html?args=popoverPosition:above;&id=directives-popover--example-with-fudis-button&viewMode=story",
+  );
+  await page.getByTestId(buttonId).click();
+  await expect(page).toHaveScreenshot("popover-above.png");
+
+  await page.goto(
+    "/iframe.html?args=popoverPosition:left;&id=directives-popover--example-with-fudis-button&viewMode=story",
+  );
+  await page.getByTestId(buttonId).click();
+  await expect(page).toHaveScreenshot("popover-left.png");
 });
 
 const assertPopoverVisibility = async (page: Page, visible: boolean) => {
