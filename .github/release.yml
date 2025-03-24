@@ -6,6 +6,9 @@ changelog:
     - title: "Breaking Changes"
       labels:
         - "breaking change"
+    - title: "Deprecated"
+      labels:
+        - "deprecated"
     - title: "Features"
       labels:
         - "feature"

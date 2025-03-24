@@ -4,7 +4,7 @@ import { tooltipExclude } from '../../utilities/storybook';
 import readme from './tooltip.mdx';
 
 export default {
-  title: 'Directives/Tooltip',
+  title: 'Directives/Tooltip - Deprecated',
   component: ButtonComponent,
   parameters: {
     docs: {
@@ -31,6 +31,7 @@ export const ExampleWithNativeButton: StoryFn = (args) => ({
   props: args,
   template: html`
     <button
+      id="button-1"
       fudisTooltip
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
@@ -42,25 +43,6 @@ export const ExampleWithNativeButton: StoryFn = (args) => ({
 });
 
 ExampleWithNativeButton.args = {
-  tooltip: 'Greetings from tooltip, I hope you can see me!',
-  tooltipPosition: 'right',
-  tooltipToggle: false,
-};
-
-export const ExampleWithFudisButton: StoryFn = (args) => ({
-  props: args,
-  template: html`
-    <fudis-button
-      [label]="tooltipToggle ? 'Tooltip will display on: click' : 'Tooltip will display on: hover'"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
-    >
-    </fudis-button>
-  `,
-});
-
-ExampleWithFudisButton.args = {
   tooltip: 'Greetings from tooltip, I hope you can see me!',
   tooltipPosition: 'right',
   tooltipToggle: false,

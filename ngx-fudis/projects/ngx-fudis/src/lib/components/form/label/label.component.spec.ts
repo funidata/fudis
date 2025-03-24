@@ -3,7 +3,8 @@ import { By } from '@angular/platform-browser';
 import { LabelComponent } from './label.component';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
+import { PopoverDirective } from '../../../directives/popover/popover.directive';
+import { getElement } from '../../../utilities/tests/utilities';
 
 describe('LabelComponent', () => {
   let component: LabelComponent;
@@ -11,7 +12,8 @@ describe('LabelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LabelComponent, ButtonComponent, IconComponent, TooltipDirective],
+      declarations: [LabelComponent, ButtonComponent, IconComponent],
+      imports: [PopoverDirective],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LabelComponent);
@@ -42,11 +44,16 @@ describe('LabelComponent', () => {
       expect(elem.nativeElement.innerHTML).toEqual('(Required)');
     });
 
-    it('should have tooltip button visible if tooltip text is given', async () => {
-      fixture.componentRef.setInput('tooltip', 'I give more info');
+    it('should have popover button visible if popover text and aria label is given', () => {
+      fixture.componentRef.setInput('popoverText', 'I am the info');
+      fixture.componentRef.setInput('popoverTriggerLabel', 'This gives more info');
       fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('fudis-button'));
-      expect(elem.nativeElement).toBeTruthy();
+      const tooltipTriggerElem = getElement(fixture, 'fudis-button');
+      expect(tooltipTriggerElem).toBeTruthy();
+      expect(tooltipTriggerElem.getAttribute('ng-reflect-aria-label')).toEqual(
+        'This gives more info',
+      );
+      expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual('I am the info');
     });
 
     // TODO: Should have written tests for id and for attributes.

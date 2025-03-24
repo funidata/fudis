@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
@@ -16,8 +15,7 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
-import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
-import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
+
 @Component({
   standalone: false,
   selector: 'fudis-mock-dl',
@@ -79,12 +77,9 @@ describe('DescriptionListItemDetailsComponent', () => {
         IconComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
-        TooltipDirective,
-        TooltipApiDirective,
         MockDlComponent,
       ],
       providers: [FudisBreakpointService],
-      imports: [MatTooltipModule],
     }).compileComponents();
   });
 

@@ -27,7 +27,6 @@ export const staticDirs = [
 ];
 export const docs = {
   defaultName: "Documentation",
-  autodocs: true,
 };
 
 export function managerHead(head) {

@@ -12,9 +12,6 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../../types/miscellaneous';
 import { LanguageBadgeComponent } from '../../language-badge-group/language-badge/language-badge.component';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
-import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   standalone: false,
@@ -74,11 +71,8 @@ describe('DescriptionListItemComponent', () => {
         DescriptionListItemDetailsComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
-        TooltipApiDirective,
-        TooltipDirective,
         MockDlComponent,
       ],
-      imports: [MatTooltipModule],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

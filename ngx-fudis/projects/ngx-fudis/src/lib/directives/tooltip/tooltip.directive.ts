@@ -13,6 +13,10 @@ import { TooltipApiDirective } from './tooltip-api.directive';
 import { ScrollDispatcher } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+/**
+ * @deprecated Since 5.0. Tooltip directive will be removed in Fudis version 7.0. Use Fudis Popover
+ *   Directive instead.
+ */
 @Directive({
   selector: '[fudisTooltip]',
   exportAs: 'tooltip',

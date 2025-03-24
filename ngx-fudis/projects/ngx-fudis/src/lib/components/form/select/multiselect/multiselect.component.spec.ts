@@ -11,7 +11,6 @@ import { MultiselectChipListComponent } from './multiselect-chip-list/multiselec
 import { MultiselectOptionComponent } from './multiselect-option/multiselect-option.component';
 import { SelectGroupComponent } from '../common/select-group/select-group.component';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
-import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
@@ -76,7 +75,7 @@ describe('MultiselectComponent', () => {
         LabelComponent,
         SelectOptionsDirective,
       ],
-      providers: [FudisInternalErrorSummaryService, TooltipDirective, SelectBaseDirective],
+      providers: [FudisInternalErrorSummaryService, SelectBaseDirective],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

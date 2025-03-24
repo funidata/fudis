@@ -14,9 +14,9 @@
       [id]="id + '-label'"
       [required]="_required | async"
       [parentSize]="size"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     />
     <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
       <input

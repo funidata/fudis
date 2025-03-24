@@ -1,23 +1,19 @@
-<ng-container *ngIf="tooltip">
+<ng-container *ngIf="popoverText">
   <button
+    fudisPopover
     #buttonElement
-    fudisTooltip
     [class]="_classList | async"
     [type]="type"
     (click)="!disabled && buttonClick($event)"
-    (blur)="_handleButtonBlur($event)"
-    (focus)="_handleButtonFocus($event)"
-    (keydown)="_handleMenuButtonKeyDown($event)"
-    [tabIndex]="disabled ? -1 : 0"
+    (blur)="!disabled && _handleButtonBlur($event)"
+    (focus)="!disabled && _handleButtonFocus($event)"
+    (keydown)="!disabled && _handleMenuButtonKeyDown($event)"
+    [attr.tabIndex]="disabled ? -1 : null"
     [attr.aria-disabled]="disabled || null"
     [attr.aria-label]="_ariaLabel | async"
     [attr.id]="id"
-    [attr.aria-expanded]="!asMenuButton ? null : (dropdownOpen | async)"
-    [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
-    [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
-    [tooltip]="tooltip"
-    [tooltipPosition]="tooltipPosition"
-    [tooltipToggle]="tooltipToggle"
+    [popoverPosition]="popoverPosition"
+    [popoverText]="popoverText"
   >
     <ng-container *ngIf="icon">
       <div class="fudis-button__icon">
@@ -28,13 +24,12 @@
           [icon]="icon"
           [rotate]="iconRotate"
         ></fudis-icon>
-      </div>
-    </ng-container>
-    {{ labelHidden || (size === "icon-only" && icon) ? "" : label }}
+      </div> </ng-container
+    >{{ labelHidden || (size === "icon-only" && icon) ? "" : label }}
   </button>
 </ng-container>
 
-<ng-container *ngIf="!tooltip">
+<ng-container *ngIf="!popoverText">
   <button
     #buttonElement
     [class]="_classList | async"

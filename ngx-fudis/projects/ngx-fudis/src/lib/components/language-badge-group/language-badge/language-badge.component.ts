@@ -9,7 +9,6 @@ import {
   effect,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../types/miscellaneous';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationLanguageBadgeAriaLabel } from '../../../services/translation/translationKeys';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -22,13 +21,11 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges, OnInit {
+export class LanguageBadgeComponent implements OnChanges, OnInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
   ) {
-    super();
-
     effect(() => {
       const translations = this._translationService.getTranslations()();
 

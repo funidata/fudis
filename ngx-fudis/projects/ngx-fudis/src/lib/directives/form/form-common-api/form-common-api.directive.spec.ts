@@ -16,6 +16,7 @@ const defaultValues: Partial<FormCommonApiDirective> = {
   label: undefined,
   tooltip: undefined,
   tooltipPosition: 'below',
+  popoverPosition: 'below',
   tooltipToggle: false,
 };
 
