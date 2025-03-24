@@ -46,9 +46,9 @@ describe('FudisBreakpointService', () => {
     };
 
     breakpointSubject.next(expectedBreakpointState);
-    let currentBrakepointState = service.getBreakpointState();
+    let currentBreakpointState = service.getBreakpointState();
 
-    expect(currentBrakepointState).toEqual(expectedBreakpointState);
+    expect(currentBreakpointState).toEqual(expectedBreakpointState);
 
     expectedBreakpointState = {
       matches: true,
@@ -63,8 +63,8 @@ describe('FudisBreakpointService', () => {
     };
 
     breakpointSubject.next(expectedBreakpointState);
-    currentBrakepointState = service.getBreakpointState();
+    currentBreakpointState = service.getBreakpointState();
 
-    expect(currentBrakepointState).toEqual(expectedBreakpointState);
+    expect(currentBreakpointState).toEqual(expectedBreakpointState);
   });
 });
