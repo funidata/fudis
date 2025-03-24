@@ -4,7 +4,7 @@ import { tooltipExclude } from '../../utilities/storybook';
 import readme from './tooltip.mdx';
 
 export default {
-  title: 'Directives/Tooltip',
+  title: 'Directives/Tooltip - Deprecated',
   component: ButtonComponent,
   parameters: {
     docs: {

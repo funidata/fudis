@@ -2,7 +2,7 @@ import test, { expect } from "@playwright/test";
 
 test("tooltip toggle", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=tooltipToggle:!true&id=directives-tooltip--example-with-native-button&viewMode=story",
+    "/iframe.html?args=tooltipToggle:!true&id=directives-tooltip-deprecated--example-with-native-button&viewMode=story",
   );
 
   await page.getByTestId("button-1").click();
@@ -37,7 +37,7 @@ test("tooltip toggle", async ({ page }) => {
 
 test("tooltip hover", async ({ page }) => {
   await page.goto(
-    "/iframe.html?globals=&id=directives-tooltip--example-with-native-button&viewMode=story",
+    "/iframe.html?globals=&id=directives-tooltip-deprecated--example-with-native-button&viewMode=story",
   );
 
   await expect(page.locator("mat-tooltip-component")).not.toBeVisible();
