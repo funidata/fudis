@@ -1,0 +1,42 @@
+import { Meta, ArgTypes, Source } from "@storybook/blocks";
+import { FudisBreakpointService } from "./breakpoint.service";
+
+<Meta title="Services/Breakpoint" />
+
+# Breakpoint Service
+
+Breakpoint Service is used by [Grid Component](/docs/components-grid-grid--documentation) in adding responsive CSS styling in various breakpoints.
+
+## How to Use
+
+Breakpoint Service uses Angular Material [BreakpointObserver](https://v6.material.angular.io/cdk/layout/overview) in detecting application media widths.
+
+### getBreakpointState()
+
+`FudisBreakpointService.getBreakpointState()` returns BreakpointState object, with booleans for all currently matching breakpoints.
+
+```
+
+interface BreakpointState = {
+    /** Whether the breakpoint is currently matching. */
+      matches: true,
+
+    /**
+     * A key boolean pair for each query provided to the observe method,
+     * with its current matched state.
+     */
+      breakpoints: {
+        '(min-width: 100em)': false,
+        '(min-width: 75em)': false,
+        '(min-width: 62em)': false,
+        '(min-width: 48em)': false,
+        '(min-width: 36em)': false,
+        '(min-width: 0)': true,
+      },
+    };
+
+```
+
+## Properties
+
+<ArgTypes of={FudisBreakpointService} />
