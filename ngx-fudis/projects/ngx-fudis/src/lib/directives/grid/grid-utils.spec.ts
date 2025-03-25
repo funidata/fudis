@@ -7,7 +7,57 @@ import {
 import * as utils from './gridUtils';
 
 describe('GridUtils', () => {
-  describe('getGridCssValue function', () => {
+  describe('getGridClasses', () => {
+    it('should return one big string out of given grid attributes', () => {
+      const values: FudisGridProperties = {
+        width: 'xxl',
+        align: 'end',
+        rowGap: 'sm',
+        columnGap: 'lg',
+      };
+
+      expect(utils.getGridClasses(values)).toBe(
+        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__row-gap__sm fudis-grid__column-gap__lg',
+      );
+    });
+
+    it('should add custom classes to grid class if given', () => {
+      const values: FudisGridProperties = {
+        width: 'xxl',
+        align: 'end',
+        rowGap: 'responsive',
+        columnGap: 'responsive',
+        classes: 'my-custom-class my-other-custom-class',
+      };
+
+      expect(utils.getGridClasses(values)).toBe(
+        'fudis-grid fudis-grid__xxl fudis-grid__align__end my-custom-class my-other-custom-class',
+      );
+    });
+  });
+
+  describe('replaceFormInputWidthsToRem', () => {
+    it('should return corresponding string with rem calculation', () => {
+      let values: string;
+      let returnValue: string;
+
+      values = 'inputXs inputSm';
+      returnValue = utils.replaceFormInputWidthsToRem(values);
+
+      expect(returnValue).toBe(
+        'calc(4rem / var(--fudis-rem-multiplier)) calc(10rem / var(--fudis-rem-multiplier))',
+      );
+
+      values = 'inputMd inputLg';
+      returnValue = utils.replaceFormInputWidthsToRem(values);
+
+      expect(returnValue).toBe(
+        'calc(14rem / var(--fudis-rem-multiplier)) calc(23rem / var(--fudis-rem-multiplier))',
+      );
+    });
+  });
+
+  describe('getGridCssValue', () => {
     it('should return correct value for grid style property', () => {
       let value: string | number;
       let isGridItem: boolean;
@@ -57,56 +107,6 @@ describe('GridUtils', () => {
       correctReturnString = utils.getGridCssValue(value);
 
       expect(correctReturnString).toBe('calc(23rem / var(--fudis-rem-multiplier))');
-    });
-  });
-
-  describe('replaceFormInputWidthsToRem function', () => {
-    it('should return corresponding string with rem calculation', () => {
-      let values: string;
-      let returnValue: string;
-
-      values = 'inputXs inputSm';
-      returnValue = utils.replaceFormInputWidthsToRem(values);
-
-      expect(returnValue).toBe(
-        'calc(4rem / var(--fudis-rem-multiplier)) calc(10rem / var(--fudis-rem-multiplier))',
-      );
-
-      values = 'inputMd inputLg';
-      returnValue = utils.replaceFormInputWidthsToRem(values);
-
-      expect(returnValue).toBe(
-        'calc(14rem / var(--fudis-rem-multiplier)) calc(23rem / var(--fudis-rem-multiplier))',
-      );
-    });
-  });
-
-  describe('getGridClasses function', () => {
-    it('should return one big string out of given grid attributes', () => {
-      const values: FudisGridProperties = {
-        width: 'xxl',
-        align: 'end',
-        rowGap: 'sm',
-        columnGap: 'lg',
-      };
-
-      expect(utils.getGridClasses(values)).toBe(
-        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__row-gap__sm fudis-grid__column-gap__lg',
-      );
-    });
-
-    it('should add custom classes to grid class if given', () => {
-      const values: FudisGridProperties = {
-        width: 'xxl',
-        align: 'end',
-        rowGap: 'responsive',
-        columnGap: 'responsive',
-        classes: 'my-custom-class my-other-custom-class',
-      };
-
-      expect(utils.getGridClasses(values)).toBe(
-        'fudis-grid fudis-grid__xxl fudis-grid__align__end my-custom-class my-other-custom-class',
-      );
     });
   });
 
