@@ -6,7 +6,6 @@ import { IconComponent } from '../icon/icon.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { BreadcrumbsItemComponent } from './breadcrumbs-item/breadcrumbs-item.component';
 import { RouterModule } from '@angular/router';
-import { LinkDirective } from '../../directives/link/link.directive';
 import { getElement } from '../../utilities/tests/utilities';
 
 @Component({
@@ -29,14 +28,13 @@ class MockComponent {
 }
 
 describe('BreadcrumbsComponent', () => {
-  let fixture: ComponentFixture<BreadcrumbsComponent> | ComponentFixture<MockComponent>;
+  let fixture: ComponentFixture<MockComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [
         BreadcrumbsComponent,
         BreadcrumbsItemComponent,
-        LinkDirective,
         IconComponent,
         BodyTextComponent,
         MockComponent,
@@ -45,8 +43,7 @@ describe('BreadcrumbsComponent', () => {
     });
 
     fixture = TestBed.createComponent(MockComponent);
-
-    fixture.autoDetectChanges();
+    fixture.detectChanges();
   });
 
   it('should render the correct number of breadcrumb items', () => {
@@ -76,7 +73,7 @@ describe('BreadcrumbsComponent', () => {
       const linkHrefs: (string | null | undefined)[] = [];
 
       items.forEach((item) => {
-        const linkElement: Element | null = (item as Element)!.querySelector(
+        const linkElement: HTMLAnchorElement | null = (item as HTMLAnchorElement)!.querySelector(
           '.fudis-breadcrumbs-item a',
         );
 
