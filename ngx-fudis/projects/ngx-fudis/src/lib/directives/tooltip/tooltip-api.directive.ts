@@ -1,6 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
-import { FudisTooltipPosition } from '../../types/miscellaneous';
+import { FudisPopoverPosition, FudisTooltipPosition } from '../../types/miscellaneous';
 
 @Directive({
   selector: '[fudisTooltipApi]',
@@ -25,4 +25,19 @@ export class TooltipApiDirective {
    * Position of the tooltip on the parent element
    */
   @Input() tooltipPosition: FudisTooltipPosition = 'below';
+
+  /**
+   * Text placed inside popover
+   */
+  @Input() popoverText: string;
+
+  /**
+   * Position of the popover on the parent element
+   */
+  @Input() popoverPosition: FudisPopoverPosition = 'below';
+
+  /**
+   * Label for the element that triggers the popover
+   */
+  @Input() popoverTriggerLabel: string;
 }

@@ -8,9 +8,8 @@ import { IconComponent } from '../../icon/icon.component';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement } from '../../../utilities/tests/utilities';
-import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { PopoverDirective } from '../../../directives/popover/popover.directive';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -26,10 +25,8 @@ describe('TextInputComponent', () => {
         IconComponent,
         LabelComponent,
         TextInputComponent,
-        TooltipDirective,
-        TooltipApiDirective,
       ],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
@@ -233,16 +230,22 @@ describe('TextInputComponent', () => {
     });
   });
 
-  describe('Tooltip', () => {
+  describe('Popover', () => {
     it('should be visible', () => {
       fixture.detectChanges();
-      fixture.componentRef.setInput('tooltip', 'This is tooltip text');
+      let tooltipTriggerElem = getElement(fixture, 'fudis-button');
+      expect(tooltipTriggerElem).toBeFalsy();
+
+      fixture.componentRef.setInput('popoverText', 'This is popover text');
+      fixture.componentRef.setInput('popoverTriggerLabel', 'Additional information');
       fixture.detectChanges();
 
-      const tooltipTriggerElem = getElement(fixture, 'fudis-button');
+      tooltipTriggerElem = getElement(fixture, 'fudis-button');
 
       expect(tooltipTriggerElem).toBeTruthy();
-      expect(tooltipTriggerElem.getAttribute('ng-reflect-tooltip')).toEqual('This is tooltip text');
+      expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
+        'This is popover text',
+      );
     });
   });
 });

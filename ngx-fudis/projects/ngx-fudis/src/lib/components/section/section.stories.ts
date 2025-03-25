@@ -42,6 +42,16 @@ export default {
       options: fudisHeadingVariantArray,
       control: { type: 'select' },
     },
+    popoverPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
@@ -55,9 +65,9 @@ const ExampleTemplate: StoryFn = (args) => ({
     [level]="level"
     [badge]="badge"
     [badgeText]="badgeText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
     [align]="align"
     [width]="width"
   >
@@ -84,9 +94,9 @@ Example.args = {
   title: 'This is title of section',
   titleVariant: 'xl',
   level: 2,
-  tooltip: 'More info about this section',
-  tooltipToggle: false,
-  tooltipPosition: 'below',
+  popoverText: 'More info about this section',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'below',
   badge: 'primary',
   badgeText: 'Example',
   align: 'start',

@@ -2,6 +2,7 @@
   "alertText": "Something dangerous MIGHT happen",
   "label": "This is text input",
   "change_language": "Change language",
+  "popoverAria": "Additional information",
   "helpText": "This is English.",
   "required": "Required",
   "form_errors": {
@@ -22,7 +23,7 @@
   "chooseBerryError": "No berries picked!",
   "chooseBerryErrorMin": "Not enough berries picked!",
   "chooseBerryErrorMax": "Too much berries picked!",
-  "chooseBerryTooltip": "This checkbox-group has multiple validators: required, min and max",
+  "chooseBerryPopover": "This checkbox-group has multiple validators: required, min and max",
   "chooseTruth": "Choose a truth",
   "chooseTruthHelp": "We all perceive truth differently.",
   "chooseTruthError": "Truth is missing!",

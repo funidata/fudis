@@ -3,7 +3,6 @@ import { SelectComponent } from './select.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { IconComponent } from '../../../icon/icon.component';
-import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { LabelComponent } from '../../label/label.component';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
@@ -64,7 +63,7 @@ describe('SelectComponent', () => {
         SelectIconsComponent,
         BodyTextComponent,
       ],
-      providers: [FudisInternalErrorSummaryService, TooltipDirective, SelectBaseDirective],
+      providers: [FudisInternalErrorSummaryService, SelectBaseDirective],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

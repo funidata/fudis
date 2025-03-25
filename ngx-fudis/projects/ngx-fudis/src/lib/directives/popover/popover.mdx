@@ -1,0 +1,43 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import * as PopoverStories from "./popover.stories.ts";
+import { PopoverDirective } from "./popover.directive.ts";
+import { popoverExclude } from "../../utilities/storybook.ts";
+
+<Meta title="Directives/Popover" />
+
+# Popover Directive
+
+Popover shows contextual help or information about specific element when user clicks on it or presses enter/space key.
+
+## Usage Guideline
+
+To add popover to any HTML element, add `fudisPopover` directive to it with a string text property `popoverText`. You can also specify a desired position for the popover with optional property `popoverPosition`. The default value is `below`. If the popover does not have enough space in the viewport, it will fallback to a position where is enough space.
+
+Popover is triggered on mouse click and on keyboard enter or space press. Popover content is announced for screen reader users when the element where the popover is anchored is triggered. Popover content is hidden only when the anchored element is triggered again, page content is scrolled or when focus is moved outside the popover with mouse click or keypress.
+
+### Fudis Components Using Popover Directive
+
+Following components implement Popover Directive to apply popover in semantically correct place.
+
+- [Description List Item Term](/docs/components-description-list--documentation)
+- [Datepicker](/docs/components-form-date-datepicker--documentation)
+- [Section](/docs/components-section--documentation)
+- [MultiSelect](/docs/components-form-select-multiselect--documentation)
+- [Select](/docs/components-form-select-select--documentation)
+- [Button](/docs/components-button--documentation)
+- [FieldSet](/docs/components-form-fieldset--documentation)
+- [Localized Text Group](/docs/components-form-localized-text-group--documentation)
+- [Radio Button Group](/docs/components-form-radio-button-group--documentation)
+- [Checkbox Group](/docs/components-form-checkbox-group--documentation)
+- [Text Input](/docs/components-form-text-input--documentation)
+- [Text Area](/docs/components-form-text-area--documentation)
+
+### Accessibility
+
+- Element where popover is binded should always be an interactive element e. g. button.
+- Popover content is read to screen readers when the element where the popover is anchored is triggered by key press or mouse click.
+- The triggering element relays the information whether the popover content is hidden or visible. This alone is not enough, so the when implementing this popover, it's important to add a describing label, that informs the user what the button is for, for example: "Additional information"
+
+## Properties
+
+<ArgTypes of={PopoverDirective} exclude={popoverExclude} />

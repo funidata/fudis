@@ -3,7 +3,10 @@ import { linkTo } from "@storybook/addon-links";
 import { DescriptionListComponent } from "./description-list.component.ts";
 import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/blocks";
-import { descriptionListArgsTypesExclude } from "../../utilities/storybook.ts";
+import {
+  descriptionListArgsTypesExclude,
+  descriptionListItemTermExclude,
+} from "../../utilities/storybook.ts";
 import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
 import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
 
@@ -83,7 +86,7 @@ When nesting Description List as sublist, the nested one should have `variant` s
 
 <Canvas of={DescriptionListStories.NestedDescriptionLists} />
 
-[Tooltip](/docs/directives-tooltip--documentation) can be added to Description List Item Term (`<fudis-dt>`) element by using `tooltip`, `tooltipPosition` and `tooltipToggle` properties. While it works on both Description List variants, it is designed to be used only with **regular** variant.
+[Popover](/docs/directives-popover--documentation) can be added to Description List Item Term (`<fudis-dt>`) element by using `popoverText` and `popoverPosition` (optional) properties. It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screenreaders. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information". While it works on both Description List variants, it is designed to be used only with **regular** variant.
 
 Also, it is possible to incluce e.g. [Button Component](/docs/components-button--documentation) or other interactive elements inside Description List Item Details (`<fudis-dd>`). The following example displays, how button is used inside the Description List in various ways.
 Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
@@ -137,7 +140,7 @@ Description List components communicate with each other and automatically define
 
 ## Description List Item Term Properties
 
-<ArgTypes of={DescriptionListItemTermComponent} />
+<ArgTypes of={DescriptionListItemTermComponent} exclude={descriptionListItemTermExclude} />
 
 ## Description List Item Details Properties
 

@@ -23,6 +23,7 @@ export const fudisIdComponents = [
   'text-area',
   'text-input',
   'validator-error-message',
+  'popover',
 ] as const;
 
 export const fudisIdParents = [

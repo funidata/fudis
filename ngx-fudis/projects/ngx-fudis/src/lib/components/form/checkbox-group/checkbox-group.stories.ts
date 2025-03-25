@@ -27,11 +27,14 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
@@ -91,9 +94,9 @@ const ExampleTemplate: StoryFn = (args) => ({
     [formGroup]="formGroup"
     [label]="label"
     [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
@@ -111,10 +114,10 @@ Example.args = {
   label: 'Choose your preferred fruits',
   helpText: 'Pick at least one fruit.',
   size: 'lg',
-  tooltip: 'Fruit sugar is great in small doces!',
   initialFocus: false,
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  popoverText: 'Fruit sugar is great in small doses!',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };
 
 const withDisabledFormGroupOptions = new FormGroup(
@@ -141,9 +144,9 @@ const ExampleWithDisabledTemplate: StoryFn = (args) => ({
     [formGroup]="formGroup"
     [label]="label"
     [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
@@ -162,9 +165,9 @@ ExampleWithDisabledOption.args = {
   helpText: 'Some options are disabled and cannot be toggled.',
   size: 'lg',
   initialFocus: false,
-  tooltip: 'Fruit sugar is great in small doces!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  popoverText: 'Fruit sugar is great in small doses!',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };
 
 const withMinMaxFormGroupOptions = new FormGroup(
@@ -200,9 +203,9 @@ const ExampleWithMinMaxTemplate: StoryFn = (args) => ({
     [formGroup]="formGroup"
     [label]="label"
     [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
@@ -220,10 +223,10 @@ ExampleWithMinMax.args = {
   label: 'Choose your preferred fruits',
   helpText: 'Pick two to three fruits.',
   size: 'lg',
-  tooltip: 'Fruit sugar is great in small doces!',
   initialFocus: false,
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  popoverText: 'Fruit sugar is great in small doses!',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };
 
 const ExampleWithoutFormGroupTemplate: StoryFn = (args) => ({
@@ -237,9 +240,9 @@ const ExampleWithoutFormGroupTemplate: StoryFn = (args) => ({
     [size]="size"
     [label]="label"
     [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
@@ -258,7 +261,7 @@ ExampleWithoutFormGroup.args = {
   helpText: 'This Checkbox Group has no App provided FormGroup.',
   size: 'lg',
   initialFocus: false,
-  tooltip: 'Fruit sugar is great in small doces!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  popoverText: 'Choose your preferred fruits',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };
