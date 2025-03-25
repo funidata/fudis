@@ -13,7 +13,7 @@ import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.
   standalone: false,
   selector: 'fudis-mock-grid-item-component',
   template: `<fudis-grid [columns]="6">
-    <fudis-grid-item [columns]="1">
+    <fudis-grid-item>
       <fudis-body-text> Paragraph text for testing grid item existance. </fudis-body-text>
     </fudis-grid-item>
     <fudis-grid-item [alignSelfY]="'stretch'" [alignSelfX]="'stretch'">
