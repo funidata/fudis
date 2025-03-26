@@ -22,7 +22,7 @@ export class FudisDialogService {
     component: ComponentType<T> | TemplateRef<T>,
     config?: MatDialogConfig<D>,
   ): MatDialogRef<T, R> {
-    return this.ngMaterialDialog.open(component, FudisDialogService._createConfig(config));
+    return this.ngMaterialDialog.open(component, FudisDialogService._createConfig<D>(config));
   }
 
   /**
