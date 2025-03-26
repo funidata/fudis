@@ -18,16 +18,11 @@ export class FudisDialogService {
    *   `component`.
    * @returns Reference to the dialog that was opened.
    */
-  public open<T, R = any>(
+  public open<T, R = any, D = any>(
     component: ComponentType<T> | TemplateRef<T>,
-    config?: MatDialogConfig<any>,
+    config?: MatDialogConfig<D>,
   ): MatDialogRef<T, R> {
-    const newDialog = this.ngMaterialDialog.open(
-      component,
-      FudisDialogService._createConfig(config),
-    );
-
-    return newDialog;
+    return this.ngMaterialDialog.open(component, FudisDialogService._createConfig(config));
   }
 
   /**
