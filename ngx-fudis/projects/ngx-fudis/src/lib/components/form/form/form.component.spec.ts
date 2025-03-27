@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './form.component';
 import { HeadingComponent } from '../../typography/heading/heading.component';
@@ -25,7 +26,17 @@ import { BadgeComponent } from '../../badge/badge.component';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { LinkDirective } from '../../../directives/link/link.directive';
 import { NotificationComponent } from '../../notification/notification.component';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
+import { DialogComponent } from '../../dialog/dialog.component';
+import { DialogContentDirective, DialogTitleDirective } from '../../dialog/dialog-directives';
+import { AlertGroupComponent } from '../../alert/alert-group/alert-group.component';
+import { FudisAlertService } from '../../../services/alert/alert.service';
+import { ButtonComponent } from '../../button/button.component';
+import { FormSubmitDirective } from '../../../directives/form/form-actions/form-actions.directive';
 
+/**
+ * Basic Form example
+ */
 @Component({
   standalone: false,
   selector: 'fudis-mock-form-component',
@@ -40,16 +51,13 @@ import { NotificationComponent } from '../../notification/notification.component
     [errorSummaryTitle]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
-    <fudis-form-content>
-      <fudis-text-input
-        [control]="formGroup.controls.name"
-        [label]="'Name'"
-        [helpText]="'We need to know who you are'"
-      />
-    </fudis-form-content>
     <fudis-form-header>
       <p class="test-header-content">This is header content</p>
     </fudis-form-header>
+    <fudis-form-content>
+      <p class="test-form-content">This is form content</p>
+      <fudis-text-input [control]="formGroup.controls.name" [label]="'Name'" />
+    </fudis-form-content>
     <fudis-form-actions>
       <p class="test-actions-content">This is actions content</p>
     </fudis-form-actions>
@@ -74,22 +82,66 @@ class MockFormComponent {
   }
 }
 
+/**
+ * Form inside Dialog example
+ */
+@Component({
+  standalone: false,
+  selector: 'mock-dialog-with-form',
+  template: `
+    <fudis-dialog>
+      <fudis-dialog-content>
+        <fudis-form
+          [title]="'Dialog with Form'"
+          [level]="1"
+          [errorSummaryVisible]="errorSummaryVisible"
+        >
+          <fudis-form-content>
+            <fudis-text-input
+              [label]="'What is your name?'"
+              [control]="exampleFormGroup.controls.name"
+            />
+          </fudis-form-content>
+          <fudis-form-actions>
+            <p class="test-actions-content">This is actions content</p>
+          </fudis-form-actions>
+        </fudis-form>
+      </fudis-dialog-content>
+    </fudis-dialog>
+  `,
+})
+class ExampleDialogWithFormComponent {
+  errorSummaryVisible: boolean = false;
+  exampleFormGroup = new FormGroup({
+    name: new FormControl<string | null>(null, FudisValidators.required('State your name')),
+  });
+}
+
 describe('FormComponent', () => {
   let componentMock: MockFormComponent;
   let fixtureMock: ComponentFixture<MockFormComponent>;
+  let formInsideDialogComponent: ExampleDialogWithFormComponent;
+  let formInsideDialogFixture: ComponentFixture<ExampleDialogWithFormComponent>;
   let formElement: HTMLFormElement;
   let errorSummaryElement: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AlertGroupComponent,
         BadgeComponent,
         BodyTextComponent,
+        ButtonComponent,
+        DialogComponent,
+        DialogContentDirective,
+        DialogTitleDirective,
         ErrorSummaryComponent,
+        ExampleDialogWithFormComponent,
         FormComponent,
         FormActionsDirective,
         FormContentDirective,
         FormHeaderDirective,
+        FormSubmitDirective,
         GridDirective,
         GuidanceComponent,
         HeadingComponent,
@@ -102,7 +154,9 @@ describe('FormComponent', () => {
         ValidatorErrorMessageComponent,
       ],
       providers: [
+        FudisAlertService,
         FudisBreakpointService,
+        FudisDialogService,
         FudisInternalErrorSummaryService,
         FudisErrorSummaryService,
       ],
@@ -112,6 +166,10 @@ describe('FormComponent', () => {
       fixtureMock = TestBed.createComponent(MockFormComponent);
       componentMock = fixtureMock.componentInstance;
       fixtureMock.detectChanges();
+
+      formInsideDialogFixture = TestBed.createComponent(ExampleDialogWithFormComponent);
+      formInsideDialogComponent = formInsideDialogFixture.componentInstance;
+      formInsideDialogFixture.detectChanges();
     });
   });
 
@@ -133,7 +191,7 @@ describe('FormComponent', () => {
     });
 
     it('should have default CSS class for fudis-form', () => {
-      expect(formElement.className).toContain('fudis-form');
+      expect(formElement.className).toContain('fudis-form fudis-form__default');
     });
 
     it('should have default CSS classes coming from fudisGrid directive', () => {
@@ -145,7 +203,7 @@ describe('FormComponent', () => {
   });
 
   describe('Component inputs', () => {
-    it('should have helpText visible is given', () => {
+    it('should have helpText visible if given', () => {
       const titleElement = getElement(fixtureMock, '.fudis-form__header__title');
       const helpTextElement = titleElement.querySelector('fudis-body-text');
 
@@ -162,7 +220,7 @@ describe('FormComponent', () => {
       expect(headingContent?.className).toContain('fudis-heading__variant__md');
     });
 
-    it('should have badge and badgeText if given', () => {
+    it('should have badge and badgeText visible if given', () => {
       componentMock.badge = 'secondary';
       componentMock.badgeText = 'Form badge';
       fixtureMock.detectChanges();
@@ -182,7 +240,7 @@ describe('FormComponent', () => {
     beforeEach(() => {
       errorSummaryElement = getElement(
         fixtureMock,
-        '.fudis-form__header__main__content fudis-error-summary fudis-notification',
+        '.fudis-form__header__main fudis-error-summary',
       );
     });
 
@@ -213,33 +271,78 @@ describe('FormComponent', () => {
 
   describe('Content directives', () => {
     it('should have form header content', () => {
-      const headerContentDiv = getElement(fixtureMock, 'fudis-form-header');
+      const headerSelector = getElement(fixtureMock, 'fudis-form-header');
       const headerContent = getElement(fixtureMock, '.test-header-content');
 
-      expect(headerContentDiv).toBeTruthy();
+      expect(headerSelector).toBeTruthy();
       expect(headerContent.textContent).toEqual('This is header content');
     });
 
     it('should have form actions content', () => {
-      const actionsContentDiv = getElement(fixtureMock, '.fudis-form-actions');
+      const actionsSelector = getElement(fixtureMock, 'fudis-form-actions');
       const actionsContent = getElement(fixtureMock, '.test-actions-content');
 
-      expect(actionsContentDiv).toBeTruthy();
+      expect(actionsSelector).toBeTruthy();
       expect(actionsContent.textContent).toEqual('This is actions content');
     });
 
     it('should have form content', () => {
-      const contentDiv = getElement(fixtureMock, '.fudis-form-content');
+      const contentSelector = getElement(fixtureMock, 'fudis-form-content');
+      const formContent = getElement(fixtureMock, '.test-form-content');
 
-      expect(contentDiv).toBeTruthy();
+      expect(contentSelector).toBeTruthy();
+      expect(formContent.textContent).toEqual('This is form content');
     });
 
-    it('should not find elements without proper content type', () => {
+    it('should not find elements without proper content selector', () => {
       const incorrectElement = getElement(fixtureMock, '.test-do-not-find');
 
       expect(incorrectElement).toBeNull();
     });
   });
-});
 
-// TODO: add tests for Form inside dialog
+  describe('Inside Dialog', () => {
+    beforeEach(() => {
+      const dialogContent = getElement(formInsideDialogFixture, 'fudis-dialog-content');
+      formElement = dialogContent.querySelector('form') as HTMLFormElement;
+    });
+
+    it('should have native form element inside dialog content', () => {
+      expect(formElement).toBeTruthy();
+    });
+
+    it('should have default CSS class for form inside dialog', () => {
+      expect(formElement.className).toContain('fudis-form fudis-form__dialog');
+    });
+
+    it('should have id constructed through Fudis id service', () => {
+      expect(formElement.id).toEqual('fudis-form-2');
+    });
+
+    it('should have aria-describedby constructed with form id', () => {
+      expect(formElement.getAttribute('aria-describedby')).toEqual('fudis-form-2_header');
+    });
+
+    it('should have dialog title directive in form header', () => {
+      const dialogHeading = formElement.querySelector('fudis-heading');
+      const dialogTitleDirective = formInsideDialogFixture.debugElement.query(
+        By.directive(DialogTitleDirective),
+      );
+
+      expect(dialogHeading?.className).toContain('fudis-form__header__title__dialog');
+      expect(dialogTitleDirective).toBeTruthy();
+    });
+
+    it('should show error summary inside form content wrapper instead of form header', () => {
+      formInsideDialogComponent.errorSummaryVisible = true;
+      formInsideDialogFixture.detectChanges();
+
+      const errorSummaryElement = getElement(
+        formInsideDialogFixture,
+        '.fudis-form__content-wrapper fudis-error-summary',
+      );
+
+      expect(errorSummaryElement).toBeTruthy();
+    });
+  });
+});
