@@ -187,7 +187,7 @@ describe('FormComponent', () => {
     });
 
     it('should have aria-describedby constructed with form id', () => {
-      expect(formElement.getAttribute('aria-describedby')).toEqual('my-own-id_header');
+      expect(formElement.getAttribute('aria-describedby')).toEqual('my-own-id-header');
     });
 
     it('should have default CSS class for fudis-form', () => {
@@ -320,7 +320,7 @@ describe('FormComponent', () => {
     });
 
     it('should have aria-describedby constructed with form id', () => {
-      expect(formElement.getAttribute('aria-describedby')).toEqual('fudis-form-2_header');
+      expect(formElement.getAttribute('aria-describedby')).toEqual('fudis-form-2-header');
     });
 
     it('should have dialog title directive in form header', () => {
