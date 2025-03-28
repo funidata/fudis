@@ -103,7 +103,7 @@ describe('ValidatorErrorMessageComponent', () => {
       component.type = 'required';
       component.visible = true;
       component.controlName = undefined;
-      
+
       fixture.detectChanges();
     });
 
