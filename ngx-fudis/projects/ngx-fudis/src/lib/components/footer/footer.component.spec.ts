@@ -12,6 +12,7 @@ import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { getElement } from '../../utilities/tests/utilities';
 
 @Component({
   standalone: false,
@@ -25,6 +26,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
     <ng-template fudisFooterContentLeft>
       <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
     </ng-template>
+    <p class="test-do-not-find">You should not find me</p>
   </fudis-footer>`,
 })
 class MockFooterComponent {
@@ -80,6 +82,11 @@ describe('FooterComponent', () => {
 
     it('should have fudis-grid-item elements present', () => {
       expect(getFooterGridElem().nativeElement.children.length).toEqual(2);
+    });
+
+    it('should not find elements without proper content type', () => {
+      const incorrectElement = getElement(fixture, '.test-do-not-find');
+      expect(incorrectElement).toBeNull();
     });
 
     describe('Footer right side', () => {

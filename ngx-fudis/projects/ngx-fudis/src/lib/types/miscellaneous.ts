@@ -70,6 +70,12 @@ export type FudisDropdownMenuAlign = (typeof fudisDropdownMenuAlignArray)[number
 export type FudisExpandableType = 'regular' | 'lite';
 
 /**
+ * FieldsetActions
+ */
+export const fudisFieldsetActionsAlignArray = ['start', 'below', 'end'] as const;
+export type fudisFieldsetActionsAlign = (typeof fudisFieldsetActionsAlignArray)[number];
+
+/**
  * Language Badge
  */
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
