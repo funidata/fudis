@@ -8,26 +8,23 @@ import {
 describe('Form Content Directives', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [  
-        FormActionsDirective,
-        FormContentDirective,
-        FormHeaderDirective],
+      declarations: [FormActionsDirective, FormContentDirective, FormHeaderDirective],
     });
   });
 
   describe('FormActionsDirective', () => {
     it('should find instance', () => {
       const directive = new FormActionsDirective();
-  
+
       expect(directive).toBeTruthy();
     });
-  
+
     it('should have host class', () => {
       const directive = new FormActionsDirective();
-  
+
       expect(directive.hostClass).toBe('fudis-form-actions');
     });
-  })
+  });
 
   describe('FormHeaderDirective', () => {
     it('should find instance', () => {
@@ -48,10 +45,10 @@ describe('Form Content Directives', () => {
       const directive = new FormContentDirective();
       expect(directive).toBeTruthy();
     });
-  
+
     it('should have host class', () => {
       const directive = new FormContentDirective();
-  
+
       expect(directive.hostClass).toBe('fudis-form-content');
     });
   });

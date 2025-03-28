@@ -4,8 +4,7 @@ import { ExpandableActionsDirective } from './expandable-content.directive';
 describe('ExpandableActionsDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [  
-        ExpandableActionsDirective ]
+      declarations: [ExpandableActionsDirective],
     });
   });
   it('should find instance', () => {

@@ -33,8 +33,7 @@ describe('FieldsetContentDirectives', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [  
-        FieldsetActionsDirective, FieldsetContentDirective, MockFieldSetComponent ]
+      declarations: [FieldsetActionsDirective, FieldsetContentDirective, MockFieldSetComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockFieldSetComponent);
@@ -42,15 +41,17 @@ describe('FieldsetContentDirectives', () => {
     fixture.detectChanges();
   });
 
-  describe('FieldsetActionsDirective',() => {
+  describe('FieldsetActionsDirective', () => {
     it('should find instance', () => {
       const directive = new FieldsetActionsDirective();
       expect(directive).toBeTruthy();
     });
-  
+
     it('should have host class and default alignment', () => {
       const directive = new FieldsetActionsDirective();
-      expect(directive['_hostClass']).toBe('fudis-fieldset-actions fudis-fieldset-actions__align--start');
+      expect(directive['_hostClass']).toBe(
+        'fudis-fieldset-actions fudis-fieldset-actions__align--start',
+      );
     });
 
     it('should have correct align Input', () => {
@@ -59,17 +60,19 @@ describe('FieldsetContentDirectives', () => {
         fixture.detectChanges();
 
         const element = getElement(fixture, 'fudis-fieldset-actions');
-        expect(element.outerHTML).toContain(`fudis-fieldset-actions fudis-fieldset-actions__align--${align}`);
-      })
+        expect(element.outerHTML).toContain(
+          `fudis-fieldset-actions fudis-fieldset-actions__align--${align}`,
+        );
+      });
     });
   });
 
-  describe('FieldsetContentDirective',() => {
+  describe('FieldsetContentDirective', () => {
     it('should find instance', () => {
       const directive = new FieldsetContentDirective();
       expect(directive).toBeTruthy();
     });
-  
+
     it('should have host class', () => {
       const directive = new FieldsetContentDirective();
       expect(directive['_hostClass']).toBe('fudis-fieldset-content');
