@@ -48,14 +48,14 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
   @Input({ required: true }) type: string;
 
   /**
-   * If error is visible or not.
-   */
-  @Input() visible: boolean = false;
-
-  /**
    * Error message to display
    */
   @Input({ required: true }) message: Observable<string> | string;
+
+  /**
+   * Is error visible or not
+   */
+  @Input() visible: boolean = false;
 
   /**
    * Name of control this error is related to.
@@ -125,10 +125,6 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
       changes.label?.currentValue !== changes.label?.previousValue ||
       changes.formId?.currentValue !== changes.formId?.previousValue
     ) {
-      /**
-       * Update string message and try to create a new error when changes happen
-       */
-
       const newMessage = changes.message?.currentValue;
       const newLabel = changes.label?.currentValue;
       const newFormId = changes.formId?.currentValue;
@@ -172,6 +168,9 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
     }
   }
 
+  /**
+   * Create new error to be sent to Error Summary
+   */
   private _createError(): void {
     if (this.formId && this.focusId && this._currentMessage.value) {
       const newError: FudisErrorSummaryNewError = {
@@ -187,6 +186,9 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
     }
   }
 
+  /**
+   * Remove existing error from Error Summary
+   */
   private _removeError(): void {
     if (this._errorSent && this.formId) {
       const errorToRemove: FudisErrorSummaryRemoveError = {

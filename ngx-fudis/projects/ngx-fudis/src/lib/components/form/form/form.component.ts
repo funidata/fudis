@@ -41,12 +41,6 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   }
 
   /**
-   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis
-   * will display its default helper title text
-   */
-  @Input() errorSummaryTitle: string;
-
-  /**
    * Form title
    */
   @Input({ required: true }) title: string;
@@ -73,7 +67,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Input() helpText: string;
 
   /**
-   * Add badge to the form title
+   * Additional badge to the form title
    */
   @Input() badge: FudisBadgeVariant | null;
 
@@ -89,17 +83,23 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Input() errorSummaryVisible: boolean = false;
 
   /**
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis
+   * will display its default helper title text
+   */
+  @Input() errorSummaryTitle: string;
+
+  /**
    * Each time Error Summary List is updated, this emitter will output the list
    */
   @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
-
-  private _injector = inject(Injector);
 
   /**
    * Angular Change Detection did not trigger when we tried to update only our internal
    * errorSummaryVisible input, hence we need this "helper signal"
    */
   protected _errorSummaryVisibleSignal = signal<boolean>(false);
+
+  private _injector = inject(Injector);
 
   ngOnInit(): void {
     this._setFormId();
