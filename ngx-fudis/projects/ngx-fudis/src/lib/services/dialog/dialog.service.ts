@@ -18,16 +18,11 @@ export class FudisDialogService {
    *   `component`.
    * @returns Reference to the dialog that was opened.
    */
-  public open<T, R = any>(
+  public open<T, R = any, D = any>(
     component: ComponentType<T> | TemplateRef<T>,
-    config?: MatDialogConfig<any>,
+    config?: MatDialogConfig<D>,
   ): MatDialogRef<T, R> {
-    const newDialog = this.ngMaterialDialog.open(
-      component,
-      FudisDialogService._createConfig(config),
-    );
-
-    return newDialog;
+    return this.ngMaterialDialog.open(component, FudisDialogService._createConfig<D>(config));
   }
 
   /**
@@ -35,7 +30,7 @@ export class FudisDialogService {
    *
    * @param dialogResult Data sent to Component which opened this dialog.
    */
-  public close(dialogResult?: any): void {
+  public close<R = any>(dialogResult?: R): void {
     const currentDialogs = this.ngMaterialDialog.openDialogs;
 
     if (currentDialogs.length > 0) {
@@ -74,7 +69,7 @@ export class FudisDialogService {
   /**
    * Merge consumer's config with ours.
    */
-  private static _createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
+  private static _createConfig<D = any>(userConfig: MatDialogConfig<D> = {}): MatDialogConfig<D> {
     const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
     const forcedOptions = {
       enterAnimationDuration: 0,
