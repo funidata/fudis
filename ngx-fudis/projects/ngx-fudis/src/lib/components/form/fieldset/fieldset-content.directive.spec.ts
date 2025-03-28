@@ -60,7 +60,7 @@ describe('FieldsetContentDirectives', () => {
         fixture.detectChanges();
 
         const element = getElement(fixture, 'fudis-fieldset-actions');
-        expect(element.outerHTML).toContain(
+        expect(element.getAttribute('class')).toEqual(
           `fudis-fieldset-actions fudis-fieldset-actions__align--${align}`,
         );
       });
