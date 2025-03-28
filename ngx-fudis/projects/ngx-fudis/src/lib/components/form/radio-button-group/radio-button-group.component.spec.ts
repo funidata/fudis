@@ -143,10 +143,11 @@ describe('Basic inputs of Radio Button Group', () => {
     expect(fieldsetElement.getAttribute('id')).toEqual('fudis-radio-button-group-1');
   });
 
-  it('should have correct aria-describedby value', () => {
-    expect(fieldsetElement.getAttribute('aria-describedby')).toEqual(
-      'fudis-radio-button-group-1_guidance',
-    );
+  it('should have correct aria-describedby value passed for guidance', () => {
+    const fieldsetAriaDescribedBy = fieldsetElement.getAttribute('aria-describedby');
+    const guidance = getElement(fixture, 'fudis-guidance');
+
+    expect(guidance.getAttribute('id')).toEqual(fieldsetAriaDescribedBy);
   });
 
   describe('Child Radio Buttons', () => {

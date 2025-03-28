@@ -17,9 +17,10 @@
     <ng-content select="fudis-radio-button" />
     <fudis-guidance
       *ngIf="control && !disableGuidance"
+      [id]="id + '_guidance'"
+      [for]="id + '-legend'"
       [inputLabel]="label"
       [helpText]="helpText"
-      [for]="id + '-legend'"
       [control]="control"
     >
       <ng-content select="fudis-error-message" />

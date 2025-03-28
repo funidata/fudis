@@ -17,9 +17,10 @@
     <ng-content select="fudis-checkbox" />
     <fudis-guidance
       *ngIf="formGroup && !disableGuidance"
+      [id]="id + '_guidance'"
+      [for]="id + '-legend'"
       [inputLabel]="label"
       [helpText]="helpText"
-      [for]="id + '-legend'"
       [groupBlurredOut]="groupBlurredOut"
       [formGroup]="formGroup"
     >
