@@ -10,6 +10,7 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { PopoverDirective } from '../../../directives/popover/popover.directive';
+import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -25,6 +26,7 @@ describe('TextInputComponent', () => {
         IconComponent,
         LabelComponent,
         TextInputComponent,
+        ValidatorErrorMessageComponent,
       ],
       imports: [ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
@@ -78,6 +80,21 @@ describe('TextInputComponent', () => {
     expect((component as any)._setComponentId).toHaveBeenCalledTimes(1);
   });
 
+  it('should destroy the component successfully', () => {
+    fixture.detectChanges();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._subscription.isStopped).toBeFalsy();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._baseSubscription.closed).toBeFalsy();
+
+    fixture.destroy();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._subscription.closed).toBeTruthy();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._baseSubscription.closed).toBeTruthy();
+  });
+
   describe('HTML attributes', () => {
     beforeEach(() => fixture.detectChanges());
 
@@ -125,16 +142,32 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if required text-input is touched and empty', () => {
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl('', FudisValidators.required('This field is required')),
+      );
       fixture.detectChanges();
-      component.control = new FormControl('', FudisValidators.required('This field is required'));
+
+      let inputElement = getElement(fixture, 'input');
 
       expect(component.control.value).toEqual('');
       expect(component.control.invalid).toBeTruthy();
+      expect(inputElement.getAttribute('aria-invalid')).toEqual(null);
+
+      component.control.markAsTouched();
+      fixture.detectChanges();
+
+      inputElement = getElement(fixture, 'input');
+      expect(inputElement.getAttribute('aria-invalid')).toEqual('true');
     });
 
     it('should set control as invalid if text is too short according to given minLength validator value', () => {
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl('', [FudisValidators.minLength(10, 'Too short')]),
+      );
       fixture.detectChanges();
-      component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short')]);
+
       component.control.patchValue('too short');
 
       expect(component.control.value).toEqual('too short');
@@ -142,8 +175,12 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if text is too long according to given maxLength validator value', () => {
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl('', [FudisValidators.maxLength(10, 'Too long text')]),
+      );
       fixture.detectChanges();
-      component.control = new FormControl('', [FudisValidators.maxLength(10, 'Too long text')]);
+
       component.control.patchValue('too longy long text');
 
       expect(component.control.value).toEqual('too longy long text');
@@ -151,8 +188,12 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if number is not respective to given min validator value', () => {
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl('', [FudisValidators.min(1, 'Too small')]),
+      );
       fixture.detectChanges();
-      component.control = new FormControl('', [FudisValidators.min(1, 'Too small')]);
+
       component.control.patchValue('-10');
 
       expect(component.control.value).toEqual('-10');
@@ -160,10 +201,12 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if number is not respective to given max validator value', () => {
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl('', [FudisValidators.max(99, 'The given number is too big')]),
+      );
       fixture.detectChanges();
-      component.control = new FormControl('', [
-        FudisValidators.max(99, 'The given number is too big'),
-      ]);
+
       component.control.patchValue('210');
 
       expect(component.control.value).toEqual('210');

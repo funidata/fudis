@@ -10,6 +10,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { PopoverDirective } from '../../../directives/popover/popover.directive';
+import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
 const textAreaControl: FormControl = new FormControl('');
 
@@ -25,6 +26,7 @@ describe('TextAreaComponent', () => {
         GuidanceComponent,
         IconComponent,
         LabelComponent,
+        ValidatorErrorMessageComponent,
       ],
       imports: [ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
@@ -68,6 +70,21 @@ describe('TextAreaComponent', () => {
     expect((component as any)._setComponentId).toHaveBeenCalledTimes(1);
   });
 
+  it('should destroy the component successfully', () => {
+    fixture.detectChanges();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._subscription.isStopped).toBeFalsy();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._baseSubscription.closed).toBeFalsy();
+
+    fixture.destroy();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._subscription.closed).toBeTruthy();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((component as any)._baseSubscription.closed).toBeTruthy();
+  });
+
   describe('HTML attributes', () => {
     beforeEach(() => fixture.detectChanges());
 
@@ -106,11 +123,22 @@ describe('TextAreaComponent', () => {
     });
 
     it('should set control as invalid if required textarea is touched and empty', () => {
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl('', FudisValidators.required('This is required')),
+      );
       fixture.detectChanges();
-      component.control = new FormControl('', FudisValidators.required('This is required'));
 
       expect(component.control.value).toEqual('');
-      expect(component.control.invalid).toBeTruthy();
+
+      let inputElement = getElement(fixture, 'textarea');
+      expect(inputElement.getAttribute('aria-invalid')).toEqual(null);
+
+      component.control.markAsTouched();
+      fixture.detectChanges();
+
+      inputElement = getElement(fixture, 'textarea');
+      expect(inputElement.getAttribute('aria-invalid')).toEqual('true');
     });
 
     it('should set control as invalid if text is too short according to given minLength validator value', () => {
