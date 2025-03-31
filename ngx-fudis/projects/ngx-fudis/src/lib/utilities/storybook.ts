@@ -278,6 +278,7 @@ export const formExclude: RegExp = excludeRegex([
   'classes',
   'columnGap',
   'columns',
+  'handleUpdatedErrorList',
   'rowGap',
   'width',
 ]);
