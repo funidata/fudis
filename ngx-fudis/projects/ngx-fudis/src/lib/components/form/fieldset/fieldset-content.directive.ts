@@ -26,8 +26,5 @@ export class FieldsetActionsDirective implements OnChanges {
   standalone: false,
 })
 export class FieldsetContentDirective {
-  /**
-   * Binding CSS class to content wrapper
-   */
   @HostBinding('class') private _hostClass = 'fudis-fieldset-content';
 }

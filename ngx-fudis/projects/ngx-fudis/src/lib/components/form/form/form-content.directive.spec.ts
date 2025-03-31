@@ -22,7 +22,7 @@ describe('Form Content Directives', () => {
     it('should have host class', () => {
       const directive = new FormActionsDirective();
 
-      expect(directive.hostClass).toBe('fudis-form-actions');
+      expect(directive['_hostClass']).toBe('fudis-form-actions');
     });
   });
 
@@ -36,7 +36,7 @@ describe('Form Content Directives', () => {
     it('should have host class', () => {
       const directive = new FormHeaderDirective();
 
-      expect(directive.hostClass).toBe('fudis-form-header');
+      expect(directive['_hostClass']).toBe('fudis-form-header');
     });
   });
 
@@ -49,7 +49,7 @@ describe('Form Content Directives', () => {
     it('should have host class', () => {
       const directive = new FormContentDirective();
 
-      expect(directive.hostClass).toBe('fudis-form-content');
+      expect(directive['_hostClass']).toBe('fudis-form-content');
     });
   });
 });

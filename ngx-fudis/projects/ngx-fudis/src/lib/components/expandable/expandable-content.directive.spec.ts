@@ -16,6 +16,6 @@ describe('ExpandableActionsDirective', () => {
   it('should have host class', () => {
     const directive = new ExpandableActionsDirective();
 
-    expect(directive['_classes']).toBe('fudis-expandable-actions');
+    expect(directive['_hostClass']).toBe('fudis-expandable-actions');
   });
 });
