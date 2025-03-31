@@ -83,7 +83,7 @@ describe('TextInputComponent', () => {
   it('should destroy the component successfully', () => {
     fixture.detectChanges();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect((component as any)._subscription.isStopped).toBeFalsy();
+    expect((component as any)._subscription.closed).toBeFalsy();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._baseSubscription.closed).toBeFalsy();
 
