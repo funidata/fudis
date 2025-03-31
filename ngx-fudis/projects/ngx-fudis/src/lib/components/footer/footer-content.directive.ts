@@ -1,8 +1,5 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-/**
- * Footer directives
- */
 @Directive({
   selector: '[fudisFooterContentLeft]',
   standalone: false,

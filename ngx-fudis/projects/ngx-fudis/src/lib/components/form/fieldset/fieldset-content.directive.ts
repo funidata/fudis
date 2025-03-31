@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisComponentChanges, fudisFieldsetActionsAlign } from '../../../types/miscellaneous';
 
 @Directive({
   selector: 'fudis-fieldset-actions',
@@ -12,7 +12,7 @@ export class FieldsetActionsDirective implements OnChanges {
   /**
    * Alignment of Fieldset Actions container
    */
-  @Input() align: 'below' | 'end' | 'start' = 'start';
+  @Input() align: fudisFieldsetActionsAlign = 'start';
 
   ngOnChanges(changes: FudisComponentChanges<FieldsetActionsDirective>): void {
     if (changes.align?.currentValue !== changes.align?.previousValue) {
@@ -26,8 +26,5 @@ export class FieldsetActionsDirective implements OnChanges {
   standalone: false,
 })
 export class FieldsetContentDirective {
-  /**
-   * Binding CSS class to content wrapper
-   */
   @HostBinding('class') private _hostClass = 'fudis-fieldset-content';
 }
