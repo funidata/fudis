@@ -133,15 +133,17 @@ describe('ValidatorErrorMessageComponent', () => {
     it('should remove error with string message when component is destroyed', () => {
       jest.spyOn(component.handleRemoveError, 'emit');
       component.message = 'Error to be removed';
+      component.controlName = 'test-control-name';
 
       component.ngOnChanges({
         message: new SimpleChange(null, component.message, true),
+        controlName: new SimpleChange(null, component.controlName, true),
       });
 
       const errorToRemove: FudisErrorSummaryRemoveError = {
         focusId: 'test-id',
         formId: 'test-form-id',
-        id: 'required',
+        id: 'required_test-control-name',
       };
 
       component.ngOnDestroy();
@@ -306,7 +308,7 @@ describe('ValidatorErrorMessageComponent', () => {
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
     });
 
-    it('should have repective CSS class according to variant', () => {
+    it('should have respective CSS class according to variant', () => {
       component.message = 'Message for testing';
       component.ngOnChanges({
         message: new SimpleChange(null, component.message, true),
