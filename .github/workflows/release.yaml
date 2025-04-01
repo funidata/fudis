@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
       # Recent Node.js is included in `ubuntu-latest` but `setup-node` is still required to setup NPM auth via token.
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           # Specifying `registry-url` triggers `setup-node` to setup NPM authentication.
