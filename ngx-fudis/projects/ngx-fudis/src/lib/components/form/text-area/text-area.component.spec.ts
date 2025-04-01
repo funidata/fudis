@@ -184,12 +184,10 @@ describe('TextAreaComponent', () => {
       fixture.componentRef.setInput('popoverText', 'This is popover text');
       fixture.detectChanges();
 
-      const tooltipTriggerElem = getElement(fixture, 'fudis-button');
+      const tooltipTriggerElem = getElement(fixture, 'button');
 
       expect(tooltipTriggerElem).toBeTruthy();
-      expect(tooltipTriggerElem.getAttribute('ng-reflect-aria-label')).toEqual(
-        'Additional information',
-      );
+      expect(tooltipTriggerElem.getAttribute('aria-label')).toEqual('Additional information');
       expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
         'This is popover text',
       );
