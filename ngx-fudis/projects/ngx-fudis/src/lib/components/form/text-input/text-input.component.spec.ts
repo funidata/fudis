@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './text-input.component';
@@ -63,35 +64,26 @@ describe('TextInputComponent', () => {
   }
 
   it('should init the component successfully', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _updateValueAndValidityTrigger } = component as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     jest.spyOn(component as any, '_setControlValueSubscription');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     jest.spyOn(component as any, '_setComponentId');
     jest.spyOn(_updateValueAndValidityTrigger, 'next');
 
     fixture.detectChanges();
 
     expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._setControlValueSubscription).toHaveBeenCalledTimes(1);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._setComponentId).toHaveBeenCalledTimes(1);
   });
 
   it('should destroy the component successfully', () => {
     fixture.detectChanges();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._subscription.closed).toBeFalsy();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._baseSubscription.closed).toBeFalsy();
 
     fixture.destroy();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._subscription.closed).toBeTruthy();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._baseSubscription.closed).toBeTruthy();
   });
 
@@ -128,17 +120,6 @@ describe('TextInputComponent', () => {
       component.control.valueChanges.subscribe(() => (didEmit = true));
       fixture.detectChanges();
       expect(didEmit).toBeFalsy();
-    });
-
-    it('should unsubscribe on destroy', () => {
-      fixture.detectChanges();
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      expect((component as any)._subscription.closed).toBeFalsy();
-
-      fixture.destroy();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      expect((component as any)._subscription.closed).toBeTruthy();
     });
 
     it('should set control as invalid if required text-input is touched and empty', () => {
