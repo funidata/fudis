@@ -16,6 +16,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { getElement } from '../../../utilities/tests/utilities';
 
 type TestForm = {
   apple: FormControl<boolean | null>;
@@ -204,10 +205,11 @@ describe('CheckboxGroupComponent', () => {
       expect(fieldsetElement.getAttribute('id')).toEqual('fudis-checkbox-group-1');
     });
 
-    it('should have correct aria-describedby value', () => {
-      expect(fieldsetElement.getAttribute('aria-describedby')).toEqual(
-        'fudis-checkbox-group-1_guidance',
-      );
+    it('should have correct aria-describedby value passed for guidance', () => {
+      const fieldsetAriaDescribedBy = fieldsetElement.getAttribute('aria-describedby');
+      const guidance = getElement(fixture, 'fudis-guidance');
+
+      expect(guidance.getAttribute('id')).toEqual(fieldsetAriaDescribedBy);
     });
   });
 
