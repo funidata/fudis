@@ -1,8 +1,8 @@
 <div class="fudis-text-input fudis-input-size__{{ size }}">
   <fudis-label
     [for]="id"
-    [text]="label"
     [id]="id + '-label'"
+    [text]="label"
     [required]="_required | async"
     [parentSize]="size"
     [popoverPosition]="popoverPosition"
@@ -12,33 +12,33 @@
   <input
     #inputRef
     class="fudis-form-input fudis-text-input__input"
-    [attr.aria-invalid]="(control.invalid && control.touched) || null"
-    [attr.aria-label]="ariaLabel"
+    [id]="id"
     [formControl]="control"
+    (blur)="handleBlur.emit($event)"
+    (keyup)="handleKeyUp.emit($event)"
+    (focus)="onFocus($event)"
+    [attr.autocomplete]="autocompleteFill"
     [attr.minlength]="_minLength | async"
     [attr.maxlength]="_maxLength | async"
     [attr.min]="_minNumber | async"
     [attr.max]="_maxNumber | async"
-    (blur)="handleBlur.emit($event)"
-    (keyup)="handleKeyUp.emit($event)"
-    (focus)="onFocus($event)"
-    [id]="id"
-    [attr.autocomplete]="autocompleteFill"
+    [attr.name]="name"
+    [attr.required]="(_required | async) || null"
     [attr.tabindex]="disabled ? -1 : null"
     [attr.type]="type"
-    [attr.name]="name"
     [attr.aria-describedby]="id + '_guidance'"
-    [attr.required]="(_required | async) || null"
     [attr.aria-disabled]="control.disabled || disabled || null"
+    [attr.aria-invalid]="(control.invalid && control.touched) || null"
+    [attr.aria-label]="ariaLabel"
     [readonly]="control.disabled || disabled || null"
   />
   <fudis-guidance
     *ngIf="!disableGuidance"
+    [control]="control"
+    [for]="id"
+    [helpText]="helpText"
     [inputLabel]="label"
     [maxLength]="_maxLength | async"
-    [helpText]="helpText"
-    [for]="id"
-    [control]="control"
   >
     <ng-content select="fudis-error-message" />
   </fudis-guidance>
