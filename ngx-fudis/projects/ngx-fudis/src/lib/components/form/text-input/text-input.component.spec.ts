@@ -99,6 +99,20 @@ describe('TextInputComponent', () => {
       textInputTypeCheck('tel');
     });
 
+    it('should have autocomplete and name attributes', () => {
+      const inputElement = getElement(fixture, 'input');
+
+      expect(inputElement.getAttribute('autocomplete')).toEqual('off');
+      expect(inputElement.getAttribute('name')).toBeFalsy();
+
+      fixture.componentRef.setInput('autocompleteFill', 'shipping street-address');
+      fixture.componentRef.setInput('name', 'address');
+      fixture.detectChanges();
+
+      expect(inputElement.getAttribute('autocomplete')).toEqual('shipping street-address');
+      expect(inputElement.getAttribute('name')).toEqual('address');
+    });
+
     it('should have generated id', () => {
       const inputElement = getElement(fixture, 'input');
 
