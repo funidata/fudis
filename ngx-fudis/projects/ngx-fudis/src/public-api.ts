@@ -93,6 +93,11 @@ export { SectionContentDirective } from './lib/components/section/section-conten
 export { SelectOptionsDirective } from './lib/components/form/select/common/select-options-directive/select-options.directive';
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
 export { PopoverDirective } from './lib/directives/popover/popover.directive';
+export {
+  TabNavigationComponent,
+  TabNavigationTabComponent,
+  TabNavigationPanelComponent,
+} from './lib/components/tab-navigation/tab-navigation.component';
 
 /**
  * SERVICES

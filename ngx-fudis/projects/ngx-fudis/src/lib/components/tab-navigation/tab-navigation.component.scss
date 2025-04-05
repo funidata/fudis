@@ -1,0 +1,144 @@
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/focus/mixins' as focus;
+@use '../../foundations/colors/mixins.scss' as colorMixin;
+@use '../../foundations/borders/mixins.scss' as border;
+@use '../../foundations/typography/mixins.scss' as typographyMixin;
+@use '../../foundations/typography/tokens.scss' as typography;
+
+.fudis-tab-navigation {
+  isolation: isolate;
+  position: relative;
+
+  &__button-container {
+    &--right::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        height: 39px;
+        width: spacing.$spacing-xxl;
+        top: spacing.$pixel-2;
+        background-color: colors.$color-white;
+        mask-image: linear-gradient(to left,white 5%,transparent 90%);
+    }
+
+    &--left::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 39px;
+        width: spacing.$spacing-xxl;
+        top: spacing.$pixel-2;
+        background-color: colors.$color-white;
+        mask-image: linear-gradient(to right,white 5%,transparent 90%);
+      }
+
+    &__button {
+      @include colorMixin.bg-color('white');
+      z-index: 2;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      border-radius: 50%;
+      border: spacing.$pixel-1 solid colors.$color-gray-dark;
+      width: spacing.$spacing-lg;
+      height: spacing.$spacing-lg;
+
+      &--right {
+        right: 0;
+      }
+
+      &--left {
+        left: 0;
+      }
+
+      &__icon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+    }
+  }
+
+  &__wrapper {
+    &--primary {
+      border-bottom: solid spacing.$pixel-1 colors.$color-gray-dark;
+    }
+
+    &--secondary {
+      border: none;
+    }
+
+    &__tab-container {
+      column-gap: spacing.$spacing-xs;
+      display: flex;
+      overflow-x: auto;
+
+      &--primary {
+        /** Because outline is 2px, it gets cut off from the top, if the container
+        holding the buttons is exactly the height of the button  */
+        padding-top: spacing.$pixel-2;
+
+        &:first-child {
+          padding-left: spacing.$spacing-sm;
+        }
+        &:last-child {
+          padding-right: spacing.$spacing-sm;
+        }
+      }
+
+      &--secondary {
+        /** Because outline is 2px, it gets cut off from the edges, if the container
+        holding the buttons is exactly the height of the button  */
+        padding: spacing.$pixel-2;
+      }
+    }
+  }
+}
+
+.fudis-tab-navigation-tab {
+  @include colorMixin.bg-color('white');
+  @include colorMixin.text-color('gray-dark');
+
+  font-weight: typography.$font-weight-medium;
+  font-size: typography.$body-text-md-font-size;
+  padding-left: spacing.$spacing-sm;
+  padding-right: spacing.$spacing-sm;
+  text-wrap: nowrap;
+
+  &:focus {
+    @include focus.focus-generic;
+  }
+
+  &--primary {
+    border: solid spacing.$pixel-1 colors.$color-gray-dark;
+    border-bottom: none;
+    border-top-left-radius: spacing.$pixel-2;
+    border-top-right-radius: spacing.$pixel-2;
+    height: 39px;
+
+    &--active {
+      @include colorMixin.bg-color('primary');
+      @include colorMixin.text-color('white');
+      border-color: colors.$color-primary;
+      text-decoration: underline solid;
+    }
+  }
+
+  &--secondary {
+    @include colorMixin.bg-color('gray-light');
+    @include colorMixin.text-color('gray-dark');
+
+    height: spacing.$spacing-lg;
+    border: spacing.$pixel-1 solid colors.$color-gray-light;
+    border-radius: spacing.$pixel-1;
+
+    &--active {
+      @include colorMixin.bg-color('gray-dark');
+      @include colorMixin.text-color('white');
+      text-decoration: underline solid;
+      border: spacing.$pixel-1 solid colors.$color-gray-dark;
+    }
+  }
+}
