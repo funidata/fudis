@@ -7,35 +7,35 @@
 @use '../../foundations/typography/tokens.scss' as typography;
 
 .fudis-tab-navigation {
-  isolation: isolate;
   position: relative;
 
   &__button-container {
     &--right::before {
-        content: '';
-        position: absolute;
-        right: 0;
-        height: 39px;
-        width: spacing.$spacing-xxl;
-        top: spacing.$pixel-2;
-        background-color: colors.$color-white;
-        mask-image: linear-gradient(to left,white 5%,transparent 90%);
+      @include colorMixin.bg-color('white');
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      height: 39px;
+      width: spacing.$spacing-xxl;
+      top: spacing.$pixel-2;
+      mask-image: linear-gradient(to left,white 5%,transparent 90%);
     }
 
     &--left::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        height: 39px;
-        width: spacing.$spacing-xxl;
-        top: spacing.$pixel-2;
-        background-color: colors.$color-white;
-        mask-image: linear-gradient(to right,white 5%,transparent 90%);
+      @include colorMixin.bg-color('white');
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      left: 0;
+      height: 39px;
+      width: spacing.$spacing-xxl;
+      top: spacing.$pixel-2;
+      mask-image: linear-gradient(to right,white 5%,transparent 90%);
       }
 
     &__button {
       @include colorMixin.bg-color('white');
-      z-index: 2;
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);

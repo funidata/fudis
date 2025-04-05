@@ -49,7 +49,7 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
     });
     this._resizeObserver.observe(this.tabNavigation.nativeElement);
     this._scrollSubscription = fromEvent(this.scrollContainer.nativeElement, 'scroll')
-      .pipe(auditTime(500))
+      .pipe(auditTime(300))
       .subscribe(() => this.assertScroll());
   }
 
@@ -68,11 +68,7 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   protected _scrollLeft(): void {
     const scrollContainer = this.scrollContainer.nativeElement;
     const targetScrollLeft = Math.max(0, scrollContainer.scrollLeft - this._scrollAmount);
-
-    scrollContainer.scrollTo({
-      left: targetScrollLeft,
-      behavior: 'smooth',
-    });
+    this._scrollTo(scrollContainer, targetScrollLeft);
   }
 
   protected _scrollRight(): void {
@@ -82,12 +78,15 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
       maxScrollLeft,
       scrollContainer.scrollLeft + this._scrollAmount,
     );
+    this._scrollTo(scrollContainer, targetScrollLeft);
+  }
 
-    scrollContainer.scrollTo({
-      left: targetScrollLeft,
+  private _scrollTo = (element: HTMLElement, scrollAmount: number): void => {
+    element.scrollTo({
+      left: scrollAmount,
       behavior: 'smooth',
     });
-  }
+  };
 
   ngOnDestroy() {
     this._resizeObserver.disconnect();
@@ -110,6 +109,7 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   host: {
     '[id]': 'id',
     role: 'tab',
+    '[attr.tabIndex]': '_isActive ? 0 : -1',
     '[attr.aria-selected]': 'active',
     '[class]': "'fudis-tab-navigation-tab fudis-tab-navigation-tab--' + _tabNavigation.variant",
     '[class.fudis-tab-navigation-tab--primary--active]':
