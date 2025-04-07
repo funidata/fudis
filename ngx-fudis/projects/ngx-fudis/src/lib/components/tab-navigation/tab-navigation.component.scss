@@ -43,6 +43,11 @@
       border: spacing.$pixel-1 solid colors.$color-gray-dark;
       width: spacing.$spacing-lg;
       height: spacing.$spacing-lg;
+      cursor: pointer;
+
+      &:focus {
+        @include focus.focus-generic;
+      }
 
       &--right {
         right: 0;
@@ -96,16 +101,23 @@
     }
   }
 }
-
 .fudis-tab-navigation-tab {
   @include colorMixin.bg-color('white');
   @include colorMixin.text-color('gray-dark');
 
+  font-family: typography.$font-family;
   font-weight: typography.$font-weight-medium;
   font-size: typography.$body-text-md-font-size;
   padding-left: spacing.$spacing-sm;
   padding-right: spacing.$spacing-sm;
   text-wrap: nowrap;
+
+  /** This is for the a-tags if they are used */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
 
   &:focus {
     @include focus.focus-generic;
@@ -116,7 +128,7 @@
     border-bottom: none;
     border-top-left-radius: spacing.$pixel-2;
     border-top-right-radius: spacing.$pixel-2;
-    height: 39px;
+    height: 40px;
 
     &--active {
       @include colorMixin.bg-color('primary');

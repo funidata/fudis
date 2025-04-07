@@ -24,6 +24,15 @@ import { Component, Input } from '@angular/core';
       >
         {{ tab.label }}
       </button>
+      <a
+        fudis-tab-navigation-tab
+        (click)="setLink('/some-link')"
+        [active]="activeLink === '/some-link'"
+        href="javascript:void(0);"
+        [id]="'fudis-tab-5'"
+      >
+        Link button
+      </a>
     </fudis-tab-navigation>
     <fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
       <div style="margin-top: 1rem">
