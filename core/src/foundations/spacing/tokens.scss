@@ -16,9 +16,9 @@ $pixel-3: 3px;
 
 // Used with borders, border-radius and letter-spacing mixins. Any value >=4px should be used from spacing values above.
 $pixel-tokens: (
-  "1px": $pixel-1,
-  "2px": $pixel-2,
-  "3px": $pixel-3,
+  '1px': $pixel-1,
+  '2px': $pixel-2,
+  '3px': $pixel-3,
 );
 
 // Form input width tokens

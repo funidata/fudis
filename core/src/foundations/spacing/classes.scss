@@ -1,29 +1,29 @@
 /* stylelint-disable max-nesting-depth */
-@use "./tokens.scss" as spacing;
-@use "./mixins.scss" as mixins;
-@use "../breakpoints/mixins.scss" as breakpoints;
-@include mixins.spacing-classes("fudis");
+@use './tokens.scss' as spacing;
+@use './mixins.scss' as mixins;
+@use '../breakpoints/mixins.scss' as breakpoints;
+@include mixins.spacing-classes('fudis');
 
-@include breakpoints.breakpoint("xs") {
-  @include mixins.spacing-classes("fudis-xs");
+@include breakpoints.breakpoint('xs') {
+  @include mixins.spacing-classes('fudis-xs');
 }
 
-@include breakpoints.breakpoint("sm") {
-  @include mixins.spacing-classes("fudis-sm");
+@include breakpoints.breakpoint('sm') {
+  @include mixins.spacing-classes('fudis-sm');
 }
 
-@include breakpoints.breakpoint("md") {
-  @include mixins.spacing-classes("fudis-md");
+@include breakpoints.breakpoint('md') {
+  @include mixins.spacing-classes('fudis-md');
 }
 
-@include breakpoints.breakpoint("lg") {
-  @include mixins.spacing-classes("fudis-lg");
+@include breakpoints.breakpoint('lg') {
+  @include mixins.spacing-classes('fudis-lg');
 }
 
-@include breakpoints.breakpoint("xl") {
-  @include mixins.spacing-classes("fudis-xl");
+@include breakpoints.breakpoint('xl') {
+  @include mixins.spacing-classes('fudis-xl');
 }
 
-@include breakpoints.breakpoint("xxl") {
-  @include mixins.spacing-classes("fudis-xxl");
+@include breakpoints.breakpoint('xxl') {
+  @include mixins.spacing-classes('fudis-xxl');
 }

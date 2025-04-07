@@ -1,10 +1,10 @@
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-@use "../spacing/tokens.scss" as spacing;
-@use "../colors/tokens.scss" as colors;
-@use "../typography/mixins.scss" as typography;
-@use "../borders/mixins.scss" as borders;
-@use "../focus/mixins.scss" as focus;
+@use '../spacing/tokens.scss' as spacing;
+@use '../colors/tokens.scss' as colors;
+@use '../typography/mixins.scss' as typography;
+@use '../borders/mixins.scss' as borders;
+@use '../focus/mixins.scss' as focus;
 
 @mixin visually-hidden() {
   position: absolute;
@@ -29,7 +29,7 @@
 
 @mixin text-input() {
   @include typography.text-field-input;
-  @include borders.border-radius("2px");
+  @include borders.border-radius('2px');
 
   box-sizing: border-box;
   padding: spacing.$spacing-xxs spacing.$spacing-sm;
