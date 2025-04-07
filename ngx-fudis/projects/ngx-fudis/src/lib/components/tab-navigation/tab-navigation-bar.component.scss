@@ -19,7 +19,7 @@
       height: 39px;
       width: spacing.$spacing-xxl;
       top: spacing.$pixel-2;
-      mask-image: linear-gradient(to left,white 5%,transparent 90%);
+      mask-image: linear-gradient(to left, white 5%, transparent 90%);
     }
 
     &--left::before {
@@ -31,7 +31,7 @@
       height: 39px;
       width: spacing.$spacing-xxl;
       top: spacing.$pixel-2;
-      mask-image: linear-gradient(to right,white 5%,transparent 90%);
+      mask-image: linear-gradient(to right, white 5%, transparent 90%);
     }
 
     &__button {
@@ -61,7 +61,7 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
       }
     }
   }

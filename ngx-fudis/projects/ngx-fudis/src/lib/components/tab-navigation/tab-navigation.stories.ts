@@ -46,7 +46,6 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 })
 class TabNavigationExampleComponent {
   @Input() variant: 'primary' | 'secondary';
-  @Input() compact: boolean = false;
 
   tabs: { id: string; label: string; link: string }[] = [
     { id: 'fudis-tab-1', label: 'Link 1', link: '/link-1' },

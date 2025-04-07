@@ -1,17 +1,50 @@
 <div #tabNavigation class="fudis-tab-navigation-bar">
-  <div *ngIf="_leftContentHidden()" class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--left">
-    <button (click)="_scrollLeft()" aria-hidden="true" tabindex="-1" [class]="'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--left'">
-      <fudis-icon class="fudis-tab-navigation-bar__button-container__button__icon" rotate="flip-180" icon="chevron"></fudis-icon>
+  <div
+    *ngIf="_leftContentHidden()"
+    class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--left"
+  >
+    <button
+      (click)="_scrollLeft()"
+      aria-hidden="true"
+      tabindex="-1"
+      [class]="
+        'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--left'
+      "
+    >
+      <fudis-icon
+        class="fudis-tab-navigation-bar__button-container__button__icon"
+        rotate="flip-180"
+        icon="chevron"
+      ></fudis-icon>
     </button>
   </div>
   <div [class]="'fudis-tab-navigation-bar__wrapper fudis-tab-navigation-bar__wrapper--' + variant">
-    <div #scrollContainer [class]="'fudis-tab-navigation-bar__wrapper__tab-container fudis-tab-navigation-bar__wrapper__tab-container--' + variant">
+    <div
+      #scrollContainer
+      [class]="
+        'fudis-tab-navigation-bar__wrapper__tab-container fudis-tab-navigation-bar__wrapper__tab-container--' +
+        variant
+      "
+    >
       <ng-content></ng-content>
     </div>
   </div>
-  <div *ngIf="_rightContentHidden()" class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--right">
-    <button (click)="_scrollRight()" aria-hidden="true" tabindex="-1" [class]="'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--right'">
-      <fudis-icon class="fudis-tab-navigation-bar__button-container__button__icon" icon="chevron"></fudis-icon>
+  <div
+    *ngIf="_rightContentHidden()"
+    class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--right"
+  >
+    <button
+      (click)="_scrollRight()"
+      aria-hidden="true"
+      tabindex="-1"
+      [class]="
+        'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--right'
+      "
+    >
+      <fudis-icon
+        class="fudis-tab-navigation-bar__button-container__button__icon"
+        icon="chevron"
+      ></fudis-icon>
     </button>
   </div>
 </div>
