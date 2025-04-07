@@ -108,7 +108,7 @@ jobs:
           path: coverage
       - name: Comment Coverage Summary on PR
         if: github.event_name == 'pull_request'
-        uses: MishaKav/jest-coverage-comment@main
+        uses: MishaKav/jest-coverage-comment@d74238813c33e6ea20530ff91b5ea37953d11c91
         with:
           coverage-summary-path: coverage/coverage-summary.json
           coverage-path: coverage/coverage.txt
