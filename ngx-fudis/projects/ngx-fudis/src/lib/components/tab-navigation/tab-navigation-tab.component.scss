@@ -1,0 +1,61 @@
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/focus/mixins' as focus;
+@use '../../foundations/colors/mixins.scss' as colorMixin;
+@use '../../foundations/borders/mixins.scss' as border;
+@use '../../foundations/typography/mixins.scss' as typographyMixin;
+@use '../../foundations/typography/tokens.scss' as typography;
+
+.fudis-tab-navigation-tab {
+  @include colorMixin.bg-color('white');
+  @include colorMixin.text-color('gray-dark');
+
+  font-family: typography.$font-family;
+  font-weight: typography.$font-weight-medium;
+  font-size: typography.$body-text-md-font-size;
+  padding-left: spacing.$spacing-sm;
+  padding-right: spacing.$spacing-sm;
+  text-wrap: nowrap;
+
+  /** This is for the a-tags if they are used */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:focus {
+    @include focus.focus-generic;
+  }
+
+  &--primary {
+    border: solid spacing.$pixel-1 colors.$color-gray-dark;
+    border-bottom: none;
+    border-top-left-radius: spacing.$pixel-2;
+    border-top-right-radius: spacing.$pixel-2;
+    height: 40px;
+
+    &--active {
+      @include colorMixin.bg-color('primary');
+      @include colorMixin.text-color('white');
+      border-color: colors.$color-primary;
+      text-decoration: underline solid;
+    }
+  }
+
+  &--secondary {
+    @include colorMixin.bg-color('gray-light');
+    @include colorMixin.text-color('gray-dark');
+
+    height: spacing.$spacing-lg;
+    border: spacing.$pixel-1 solid colors.$color-gray-light;
+    border-radius: spacing.$pixel-1;
+
+    &--active {
+      @include colorMixin.bg-color('gray-dark');
+      @include colorMixin.text-color('white');
+      text-decoration: underline solid;
+      border: spacing.$pixel-1 solid colors.$color-gray-dark;
+    }
+  }
+}

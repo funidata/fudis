@@ -1,16 +1,15 @@
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-import {
-  TabNavigationTabComponent,
-  TabNavigationComponent,
-  TabNavigationPanelComponent,
-} from './tab-navigation.component';
+
 import { Component, Input } from '@angular/core';
+import { TabNavigationTabComponent } from './tab-navigation-tab.component';
+import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
+import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 
 @Component({
   selector: 'tab-navigation-example',
   standalone: false,
   template: `
-    <fudis-tab-navigation
+    <fudis-tab-navigation-bar
       [id]="'fudis-tab-navigation-1'"
       [variant]="variant"
       [panel]="navigationTabPanel"
@@ -33,7 +32,7 @@ import { Component, Input } from '@angular/core';
       >
         Link button
       </a>
-    </fudis-tab-navigation>
+    </fudis-tab-navigation-bar>
     <fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
       <div style="margin-top: 1rem">
         <fudis-body-text
@@ -69,7 +68,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [TabNavigationExampleComponent],
-      imports: [TabNavigationTabComponent, TabNavigationComponent, TabNavigationPanelComponent],
+      imports: [TabNavigationTabComponent, TabNavigationBarComponent, TabNavigationPanelComponent],
     }),
   ],
   parameters: {
