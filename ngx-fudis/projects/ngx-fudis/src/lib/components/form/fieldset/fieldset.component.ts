@@ -135,6 +135,11 @@ export class FieldSetComponent
    */
   private _fieldsetSent: boolean = false;
 
+  /**
+   * Private reference to Guidance
+   */
+  private _fieldsetGuidance: HTMLElement;
+
   private _parentFormId: string | null;
 
   /**
@@ -157,6 +162,9 @@ export class FieldSetComponent
           this._addToErrorSummary(this.label);
         }
       });
+    this._fieldsetGuidance = this._element.nativeElement.querySelector(
+      'fudis-guidance',
+    ) as HTMLElement;
   }
 
   ngAfterViewInit(): void {
@@ -182,6 +190,7 @@ export class FieldSetComponent
 
       this._resizeObserver.observe(this._fieldsetLegend.nativeElement);
     }
+    this._hasSelectionGroupParent();
   }
 
   ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
@@ -218,6 +227,32 @@ export class FieldSetComponent
       if (elementHasLinkClass) {
         this._legendFocusVisible = true;
         this._fieldsetLegend.nativeElement.focus();
+      }
+    }
+  }
+
+  /**
+   * Determines if Fieldset has CheckboxGroup or RadioButtonGroup as a parent. If so, adds Guidance
+   * helptext as part of the Fieldset legend element and makes it accessible for screen readers.
+   */
+  private _hasSelectionGroupParent(): void {
+    const isParentGroup = ['fudis-radio-button-group', 'fudis-checkbox-group'].some((id) =>
+      this.id.includes(id),
+    );
+
+    if (isParentGroup) {
+      const groupHelpText = this._element.nativeElement.querySelector(
+        '.fudis-fieldset__legend__main__group-helptext',
+      ) as HTMLElement;
+      const guidanceHelpText = this._fieldsetGuidance.querySelector(
+        '.fudis-guidance__help-text',
+      )?.textContent;
+
+      if (guidanceHelpText) {
+        groupHelpText.setAttribute('aria-hidden', 'false');
+
+        const helptext = groupHelpText.appendChild(document.createElement('span'));
+        helptext.textContent = guidanceHelpText ?? '';
       }
     }
   }
