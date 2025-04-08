@@ -22,7 +22,7 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
     role: 'tab',
     '(keydown)': '_onKeyDown($event)',
     '[attr.tabIndex]': '_isActive ? 0 : -1',
-    '[attr.aria-selected]': 'active',
+    '[attr.aria-selected]': '_isActive',
     '[class]': "'fudis-tab-navigation-tab fudis-tab-navigation-tab--' + _tabNavigation.variant",
     '[class.fudis-tab-navigation-tab--primary--active]':
       "_tabNavigation.variant === 'primary' && _isActive",
