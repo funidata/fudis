@@ -10,8 +10,7 @@
   position: relative;
 
   &__button-container {
-    /* stylelint-disable-next-line unit-disallowed-list */
-    $button-container-height: calc(2.438rem / var(--fudis-rem-multiplier));
+    $button-container-height: spacing.$spacing-xl;
 
     &--right::before {
       @include colorMixin.bg-color('white');
