@@ -70,7 +70,7 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this._resizeObserver = new ResizeObserver((): void => {
-      this.assertScroll();
+      this._assertScroll();
     });
 
     if (this.tabNavigation) this._resizeObserver.observe(this.tabNavigation.nativeElement);
@@ -78,11 +78,11 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     if (this.scrollContainer) {
       this._scrollSubscription = fromEvent(this.scrollContainer.nativeElement, 'scroll')
         .pipe(auditTime(300))
-        .subscribe(() => this.assertScroll());
+        .subscribe(() => this._assertScroll());
     }
   }
 
-  private assertScroll() {
+  private _assertScroll() {
     const scrollContainer = this.scrollContainer?.nativeElement;
 
     if (scrollContainer) {
