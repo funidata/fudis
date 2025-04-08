@@ -1,0 +1,107 @@
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/focus/mixins' as focus;
+@use '../../foundations/colors/mixins.scss' as colorMixin;
+@use '../../foundations/borders/mixins.scss' as border;
+@use '../../foundations/typography/mixins.scss' as typographyMixin;
+@use '../../foundations/typography/tokens.scss' as typography;
+
+.fudis-tab-navigation-bar {
+  position: relative;
+
+  &__button-container {
+    &--right::before {
+      @include colorMixin.bg-color('white');
+
+      position: absolute;
+      top: spacing.$pixel-2;
+      right: 0;
+      width: spacing.$spacing-xxl;
+      height: spacing.$spacing-xl;
+      content: '';
+      mask-image: linear-gradient(to left, colors.$color-white 5%, transparent 90%);
+      pointer-events: none;
+    }
+
+    &--left::before {
+      @include colorMixin.bg-color('white');
+
+      position: absolute;
+      top: spacing.$pixel-2;
+      left: 0;
+      width: spacing.$spacing-xxl;
+      height: spacing.$spacing-xl;
+      content: '';
+      mask-image: linear-gradient(to right, colors.$color-white 5%, transparent 90%);
+      pointer-events: none;
+    }
+
+    &__button {
+      @include colorMixin.bg-color('white');
+      @include border.border('1px', 'solid', 'gray-dark');
+
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      border-radius: 50%;
+      cursor: pointer;
+      width: spacing.$spacing-lg;
+      height: spacing.$spacing-lg;
+
+      &:focus {
+        @include focus.focus-generic;
+      }
+
+      &--right {
+        right: 0;
+      }
+
+      &--left {
+        left: 0;
+      }
+
+      &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__wrapper {
+    &--primary {
+      border-bottom: solid spacing.$pixel-1 colors.$color-gray-dark;
+    }
+
+    &--secondary {
+      @include border.border-none;
+    }
+
+    &__tab-container {
+      display: flex;
+      column-gap: spacing.$spacing-xs;
+      overflow-x: auto;
+
+      &--primary {
+        /** Because outline is 2px, it gets cut off from the top, if the container
+        holding the buttons is exactly the height of the button  */
+        padding-top: spacing.$pixel-2;
+
+        &:first-child {
+          padding-left: spacing.$spacing-sm;
+        }
+
+        &:last-child {
+          padding-right: spacing.$spacing-sm;
+        }
+      }
+
+      &--secondary {
+        /** Because outline is 2px, it gets cut off from the edges, if the container
+        holding the buttons is exactly the height of the button  */
+        padding: spacing.$pixel-2;
+      }
+    }
+  }
+}

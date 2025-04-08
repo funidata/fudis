@@ -510,3 +510,19 @@ export const popoverExclude: RegExp = excludeRegex([
   'keydownSubscription',
   'scrollSubscription',
 ]);
+
+/**
+ * Tab Navigation Bar
+ */
+export const tabNavigationBarExclude: RegExp = excludeRegex([
+  'assertScroll',
+  'scrollContainer',
+  'tabNavigation',
+]);
+
+export const tabNavigationBarExampleExclude: RegExp = excludeRegex([
+  'id',
+  'activeLink',
+  'setLink',
+  'tabs',
+]);
