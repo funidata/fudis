@@ -4,6 +4,7 @@
     class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--left"
   >
     <button
+      [id]="id + '-scroll-button-left'"
       (click)="_scrollLeft()"
       aria-hidden="true"
       tabindex="-1"
@@ -34,6 +35,7 @@
     class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--right"
   >
     <button
+      [id]="id + '-scroll-button-right'"
       (click)="_scrollRight()"
       aria-hidden="true"
       tabindex="-1"
