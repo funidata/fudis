@@ -4,13 +4,15 @@ import { Component, Input } from '@angular/core';
 import { TabNavigationTabComponent } from './tab-navigation-tab.component';
 import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
 import { TabNavigationBarComponent } from './tab-navigation-bar.component';
+import readme from './tab-navigation.mdx';
+import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
 
 @Component({
   selector: 'tab-navigation-example',
   standalone: false,
   template: `
     <fudis-tab-navigation-bar
-      [id]="'fudis-tab-navigation-1'"
+      [id]="'fudis-tab-navigation-bar-1'"
       [variant]="variant"
       [panel]="navigationTabPanel"
     >
@@ -30,7 +32,7 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
         href="javascript:void(0);"
         [id]="'fudis-tab-5'"
       >
-        Link button
+        Link tab 5
       </a>
     </fudis-tab-navigation-bar>
     <fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
@@ -45,14 +47,14 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
   `,
 })
 class TabNavigationExampleComponent {
+  @Input() id: string;
   @Input() variant: 'primary' | 'secondary';
 
   tabs: { id: string; label: string; link: string }[] = [
-    { id: 'fudis-tab-1', label: 'Link 1', link: '/link-1' },
-    { id: 'fudis-tab-2', label: 'Link 2', link: '/link-2' },
-    { id: 'fudis-tab-3', label: 'Link 3', link: '/link-3' },
-    { id: 'fudis-tab-4', label: 'Lorem ipsum olen pitkä linkki', link: '/link-4' },
-    { id: 'fudis-tab-5', label: 'Link 4', link: '/link-5' },
+    { id: 'fudis-tab-1', label: 'Button tab 1', link: '/link-1' },
+    { id: 'fudis-tab-2', label: 'Button tab 2', link: '/link-2' },
+    { id: 'fudis-tab-3', label: 'Button tab 3', link: '/link-3' },
+    { id: 'fudis-tab-4', label: 'A veeery long button tab 4', link: '/link-4' },
   ];
   activeLink = '/link-1';
 
@@ -71,23 +73,30 @@ export default {
     }),
   ],
   parameters: {
-    docs: {},
-    controls: {},
+    docs: {
+      page: readme,
+    },
+    controls: {
+      exclude: tabNavigationBarExampleExclude,
+    },
   },
-  argTypes: {},
-  args: {},
+  argTypes: {
+    id: {
+      control: { type: 'text' },
+    },
+    variant: {
+      options: ['primary', 'secondary'],
+      controls: { type: 'select' },
+    },
+  },
+  args: {
+    variant: 'primary',
+    id: 'fudis-tab-navigation-1',
+  },
 } as Meta;
 
 const Template: StoryFn<TabNavigationExampleComponent> = (args) => ({
   props: args,
 });
 
-export const ExamplePrimary = Template.bind({});
-ExamplePrimary.args = {
-  variant: 'primary',
-};
-
-export const ExampleSecondary = Template.bind({});
-ExampleSecondary.args = {
-  variant: 'secondary',
-};
+export const Example = Template.bind({});
