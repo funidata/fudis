@@ -17,6 +17,7 @@ The Tab Navigation consists of three components, the `TabNavigationBarComponent`
 It has two variants, `primary` and `secondary`. Common property that is required by all three, is an unique identifier `id`.
 
 ### Tab Navigation Bar
+
 The `TabNavigationBarComponent` component takes in the mandatory `id`, `variant` and `panel` props. The `panel` will be a reference to the `TabNavigationPanelComponent` component, that is needed by the Tab Navigation Bar to implement accessibility functionalities.
 
 ```
@@ -29,9 +30,11 @@ The `TabNavigationBarComponent` component takes in the mandatory `id`, `variant`
 ```
 
 ### Tab Navigation Tab
+
 Nested inside the `TabNavigationBarComponent` you have to add content, that are the tabs. You can choose to use `button`- or `a`-tags, mixing them is also acceptable. These require a `fudis-tab-navigation-tab` attribute and two props, `id` and `active`. **You have to provide the event handlers or/and attributes you need to implement the routing logic yourself.**
 
 #### Button
+
 ```
 <button
   fudis-tab-navigation-tab
@@ -40,7 +43,9 @@ Nested inside the `TabNavigationBarComponent` you have to add content, that are 
   {{ I'm a button! }}
 </button>
 ```
+
 #### Link
+
 ```
 <a
   fudis-tab-navigation-tab
@@ -51,6 +56,7 @@ Nested inside the `TabNavigationBarComponent` you have to add content, that are 
 ```
 
 ### Tab Navigation Panel
+
 As a sibling you have to add the `TabNavigationPanelComponent` that is for viewing your content by using an router outlet of your choice, that you nest inside the component. You also have to add a reference to the component, as you will have to pass it to the `TabNavigationBarComponent` as a property.
 
 ```
@@ -83,16 +89,20 @@ This example is written using angular router as an reference. **However, you can
 ```
 
 ## Accessibility
+
 - The active tab is marked with `aria-selected` and the ones that are inactive, have a tabindex of -1, so the user can skip the tab listing with tab. Navigation between the tabs is done by left- and right arrow keyboard buttons.
 - Tab panel content is linked to the corresponding tab with `aria-labelledby`
 
 ## Properties
 
 ### Tab Navigation Bar Component
+
 <ArgTypes of={TabNavigationBarComponent} exclude={tabNavigationBarExclude} />
 
 ### Tab Navigation Tab Component
+
 <ArgTypes of={TabNavigationTabComponent} />
 
 ### Tab Navigation Panel Component
+
 <ArgTypes of={TabNavigationPanelComponent} />
