@@ -10,40 +10,46 @@
   position: relative;
 
   &__button-container {
+    /* stylelint-disable-next-line unit-disallowed-list */
+    $button-container-height: calc(2.438rem / var(--fudis-rem-multiplier));
+
     &--right::before {
       @include colorMixin.bg-color('white');
-      content: '';
-      pointer-events: none;
+
       position: absolute;
-      right: 0;
-      height: 39px;
-      width: spacing.$spacing-xxl;
       top: spacing.$pixel-2;
-      mask-image: linear-gradient(to left, white 5%, transparent 90%);
+      right: 0;
+      width: spacing.$spacing-xxl;
+      height: $button-container-height;
+      content: '';
+      mask-image: linear-gradient(to left, colors.$color-white 5%, transparent 90%);
+      pointer-events: none;
     }
 
     &--left::before {
       @include colorMixin.bg-color('white');
-      content: '';
-      pointer-events: none;
+
       position: absolute;
-      left: 0;
-      height: 39px;
-      width: spacing.$spacing-xxl;
       top: spacing.$pixel-2;
-      mask-image: linear-gradient(to right, white 5%, transparent 90%);
+      left: 0;
+      width: spacing.$spacing-xxl;
+      height: $button-container-height;
+      content: '';
+      mask-image: linear-gradient(to right, colors.$color-white 5%, transparent 90%);
+      pointer-events: none;
     }
 
     &__button {
       @include colorMixin.bg-color('white');
+      @include border.border('1px', 'solid', 'gray-dark');
+
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);
       border-radius: 50%;
-      border: spacing.$pixel-1 solid colors.$color-gray-dark;
+      cursor: pointer;
       width: spacing.$spacing-lg;
       height: spacing.$spacing-lg;
-      cursor: pointer;
 
       &:focus {
         @include focus.focus-generic;
@@ -59,8 +65,8 @@
 
       &__icon {
         position: absolute;
-        left: 50%;
         top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
       }
     }
@@ -72,12 +78,12 @@
     }
 
     &--secondary {
-      border: none;
+      @include border.border-none;
     }
 
     &__tab-container {
-      column-gap: spacing.$spacing-xs;
       display: flex;
+      column-gap: spacing.$spacing-xs;
       overflow-x: auto;
 
       &--primary {
@@ -88,6 +94,7 @@
         &:first-child {
           padding-left: spacing.$spacing-sm;
         }
+
         &:last-child {
           padding-right: spacing.$spacing-sm;
         }

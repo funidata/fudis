@@ -9,35 +9,32 @@
 .fudis-tab-navigation-tab {
   @include colorMixin.bg-color('white');
   @include colorMixin.text-color('gray-dark');
+  @include typographyMixin.tab-text;
 
-  font-family: typography.$font-family;
-  font-weight: typography.$font-weight-medium;
-  font-size: typography.$body-text-md-font-size;
-  padding-left: spacing.$spacing-sm;
-  padding-right: spacing.$spacing-sm;
-  text-wrap: nowrap;
-
-  /** This is for the a-tags if they are used */
-  text-decoration: none;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  box-sizing: border-box;
   cursor: pointer;
+  padding-right: spacing.$spacing-sm;
+  padding-left: spacing.$spacing-sm;
+  text-decoration: none;
 
   &:focus {
     @include focus.focus-generic;
   }
 
   &--primary {
-    border: solid spacing.$pixel-1 colors.$color-gray-dark;
-    border-bottom: none;
+    @include border.border('1px', 'solid', 'gray-dark');
+
+    border-bottom: unset;
     border-top-left-radius: spacing.$pixel-2;
     border-top-right-radius: spacing.$pixel-2;
-    height: 40px;
+    height: spacing.$spacing-xl;
 
     &--active {
       @include colorMixin.bg-color('primary');
       @include colorMixin.text-color('white');
+
       border-color: colors.$color-primary;
       text-decoration: underline solid;
     }
@@ -46,16 +43,17 @@
   &--secondary {
     @include colorMixin.bg-color('gray-light');
     @include colorMixin.text-color('gray-dark');
+    @include border.border('1px', 'solid', 'gray-light');
 
-    height: spacing.$spacing-lg;
-    border: spacing.$pixel-1 solid colors.$color-gray-light;
     border-radius: spacing.$pixel-1;
+    height: spacing.$spacing-lg;
 
     &--active {
       @include colorMixin.bg-color('gray-dark');
       @include colorMixin.text-color('white');
+      @include border.border('1px', 'solid', 'gray-dark');
+
       text-decoration: underline solid;
-      border: spacing.$pixel-1 solid colors.$color-gray-dark;
     }
   }
 }
