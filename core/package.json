@@ -4,8 +4,7 @@
   "description": "Core styles and foundations for Fudis Design System",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "stylelint": "stylelint '**/*.{css,scss}'",
-    "stylelint-fix": "stylelint '**/*.{css,scss}' --fix"
+    "stylelint": "stylelint '**/*.{css,scss}'"
   },
   "repository": {
     "type": "git",
