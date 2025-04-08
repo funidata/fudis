@@ -8,6 +8,9 @@ import {
 } from '@angular/core';
 import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 
+/**
+ * Button or a link inside a `fudis-tab-navigation-bar`.
+ */
 @Component({
   selector: '[fudis-tab-navigation-tab]',
   encapsulation: ViewEncapsulation.None,
@@ -31,7 +34,14 @@ export class TabNavigationTabComponent implements AfterViewInit {
   protected _tabNavigation = inject(TabNavigationBarComponent);
   protected _isActive: boolean = false;
 
+  /**
+   * Unique identifier for the component
+   */
   @Input() id: string;
+
+  /**
+   * Currently active tab
+   */
   @Input()
   get active(): boolean {
     return this._isActive;

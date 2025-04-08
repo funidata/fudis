@@ -15,6 +15,9 @@ import { IconComponent } from '../icon/icon.component';
 import { auditTime, fromEvent, Subscription } from 'rxjs';
 import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
 
+/**
+ * A Tab navigation bar component.
+ */
 @Component({
   selector: 'fudis-tab-navigation-bar',
   imports: [NgIf, NgxFudisModule],
@@ -29,9 +32,20 @@ import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
   },
 })
 export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
+  /**
+   * Unique identifier for the component
+   */
   @Input() id: string;
-  @Input() variant: 'primary' | 'secondary';
+
+  /**
+   * Reference to the TabNavigationPanelComponent
+   */
   @Input() panel: TabNavigationPanelComponent;
+
+  /**
+   * Variant option
+   */
+  @Input() variant?: 'primary' | 'secondary' = 'primary';
 
   @ViewChild('tabNavigation') tabNavigation: ElementRef;
   @ViewChild('scrollContainer') scrollContainer: ElementRef;
