@@ -40,7 +40,15 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
   /**
    * Reference to the TabNavigationPanelComponent
    */
-  @Input() panel: TabNavigationPanelComponent;
+  @Input()
+  get panel(): TabNavigationPanelComponent {
+    return this._tabPanel;
+  }
+
+  set panel(value: TabNavigationPanelComponent) {
+    this._tabPanel = value;
+    this._updatePanel();
+  }
 
   /**
    * Variant option
@@ -52,6 +60,9 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
 
   protected _leftContentHidden = signal<boolean>(false);
   protected _rightContentHidden = signal<boolean>(false);
+
+  private _tabPanel: TabNavigationPanelComponent;
+  private _currentActiveTabId: string;
 
   private _scrollSubscription: Subscription;
   private _resizeObserver: ResizeObserver;
@@ -102,14 +113,19 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     });
   };
 
+  private _updatePanel = () => {
+    if (this._tabPanel && this._currentActiveTabId) {
+      this._tabPanel._activeTabId = this._currentActiveTabId;
+    }
+  };
+
+  _updateActiveLink(id: string) {
+    this._currentActiveTabId = id;
+    this._updatePanel();
+  }
+
   ngOnDestroy() {
     this._resizeObserver.disconnect();
     this._scrollSubscription.unsubscribe();
-  }
-
-  _updateActiveLink(id: string) {
-    if (this.panel) {
-      this.panel._activeTabId = id;
-    }
   }
 }

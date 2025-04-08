@@ -50,9 +50,7 @@ export class TabNavigationTabComponent implements AfterViewInit {
   set active(value: boolean) {
     if (value !== this._isActive) {
       this._isActive = value;
-      if (this._isActive) {
-        this._tabNavigation._updateActiveLink(this.id);
-      }
+      if (this._isActive) this._tabNavigation._updateActiveLink(this.id);
     }
   }
 
