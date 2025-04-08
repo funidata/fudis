@@ -1,0 +1,98 @@
+import { ArgTypes, Meta } from "@storybook/blocks";
+import { TabNavigationBarComponent } from "./tab-navigation-bar.component";
+import { TabNavigationTabComponent } from "./tab-navigation-tab.component";
+import { TabNavigationPanelComponent } from "./tab-navigation-panel.component";
+import { tabNavigationBarExclude } from "../../utilities/storybook.ts";
+
+<Meta title="Components/Tabs with Navigation" />
+
+# Tab Navigation Component
+
+Tab Navigation is a component that provides an easy way to navigate between different sections of your app using routes.
+
+## Usage Guideline
+
+The Tab Navigation consists of three components, the `TabNavigationBarComponent`, `TabNavigationTabComponent` and `TabNavigationPanelComponent`. It is meant to be used with a router of your choice.
+
+It has two variants, `primary` and `secondary`. Common property that is required by all three, is an unique identifier `id`.
+
+### Tab Navigation Bar
+The `TabNavigationBarComponent` component takes in the mandatory `id`, `variant` and `panel` props. The `panel` will be a reference to the `TabNavigationPanelComponent` component, that is needed by the Tab Navigation Bar to implement accessibility functionalities.
+
+```
+<fudis-tab-navigation-bar
+  [id]="'fudis-tab-navigation-1'"
+  [variant]="'primary'"
+  [panel]="navigationTabPanel">
+  ...
+</fudis-tab-navigation-bar>
+```
+
+### Tab Navigation Tab
+Nested inside the `TabNavigationBarComponent` you have to add content, that are the tabs. You can choose to use `button`- or `a`-tags, mixing them is also acceptable. These require a `fudis-tab-navigation-tab` attribute and two props, `id` and `active`. **You have to provide the event handlers or/and attributes you need to implement the routing logic yourself.**
+
+#### Button
+```
+<button
+  fudis-tab-navigation-tab
+  [id]="'some-id-here'"
+  [active]="activeLink === '/your-path-here'"
+  {{ I'm a button! }}
+</button>
+```
+#### Link
+```
+<a
+  fudis-tab-navigation-tab
+  [id]="'some-id-here'"
+  [active]="activeLink === '/your-path-here'"
+  {{ I'm a link! }}
+</a>
+```
+
+### Tab Navigation Panel
+As a sibling you have to add the `TabNavigationPanelComponent` that is for viewing your content by using an router outlet of your choice, that you nest inside the component. You also have to add a reference to the component, as you will have to pass it to the `TabNavigationBarComponent` as a property.
+
+```
+<fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
+  ...
+</fudis-tab-navigation-panel>
+```
+
+## Example
+
+This example is written using angular router as an reference. **However, you can use a router of your choice.**
+
+```
+<fudis-tab-navigation-bar
+  [id]="'fudis-tab-navigation-1'"
+  [variant]="'primary'"
+  [panel]="navigationTabPanel">
+  <button
+    fudis-tab-navigation-tab
+    *ngFor="let route of routes"
+    (click)="change(route)"
+    [active]="activeLink === route.path"
+    [id]="route.id">
+    {{ route.label }}
+  </button>
+</fudis-tab-navigation-bar>
+<fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
+  <router-outlet />
+</fudis-tab-navigation-panel>
+```
+
+## Accessibility
+- The active tab is marked with `aria-selected` and the ones that are inactive, have a tabindex of -1, so the user can skip the tab listing with tab. Navigation between the tabs is done by left- and right arrow keyboard buttons.
+- Tab panel content is linked to the corresponding tab with `aria-labelledby`
+
+## Properties
+
+### Tab Navigation Bar Component
+<ArgTypes of={TabNavigationBarComponent} exclude={tabNavigationBarExclude} />
+
+### Tab Navigation Tab Component
+<ArgTypes of={TabNavigationTabComponent} />
+
+### Tab Navigation Panel Component
+<ArgTypes of={TabNavigationPanelComponent} />
