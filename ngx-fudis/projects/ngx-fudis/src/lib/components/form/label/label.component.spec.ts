@@ -48,14 +48,20 @@ describe('LabelComponent', () => {
       fixture.componentRef.setInput('popoverText', 'I am the info');
       fixture.componentRef.setInput('popoverTriggerLabel', 'This gives more info');
       fixture.detectChanges();
-      const tooltipTriggerElem = getElement(fixture, 'fudis-button');
+      const tooltipTriggerElem = getElement(fixture, 'button');
       expect(tooltipTriggerElem).toBeTruthy();
-      expect(tooltipTriggerElem.getAttribute('ng-reflect-aria-label')).toEqual(
-        'This gives more info',
-      );
+      expect(tooltipTriggerElem.getAttribute('aria-label')).toEqual('This gives more info');
       expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual('I am the info');
     });
 
-    // TODO: Should have written tests for id and for attributes.
+    it('should have required attributes', () => {
+      fixture.componentRef.setInput('id', 'cool-label-1');
+      fixture.componentRef.setInput('for', 'cool-component-3');
+      fixture.detectChanges();
+
+      const elem = fixture.debugElement.query(By.css('label'));
+      expect(elem.nativeElement.getAttribute('id')).toEqual('cool-label-1');
+      expect(elem.nativeElement.getAttribute('for')).toEqual('cool-component-3');
+    });
   });
 });

@@ -174,7 +174,6 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
       injector: this._injector,
     }).subscribe((errors) => {
       let errorsFound = !!errors?.[this.for];
-
       // With FormGroups errors are defined differently, so this checks if FormGroups control has errors
       if (this.formGroup && !errorsFound) {
         errorsFound = Object.keys(this.formGroup.controls).some((controlName) => {
@@ -237,6 +236,14 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
       }
 
       if (numberOfErrors === this._lazyLoadedErrors.length && !this._reloadGuard) {
+        /**
+         * TODO: This needs to be though again. Currently this function happens before
+         * _subscribeToErrors, so the on push components are not reacting to the changes to the
+         * controls when they are marked as touched. This is a quick fix to that, but a ticket shall
+         * be made.
+         */
+        if (this.formGroup) this.formGroup.markAllAsTouched();
+        if (this.control) this.control.markAsTouched();
         this._errorSummaryService.reloadFormErrors(this._parentFormId()!, false);
       }
     }

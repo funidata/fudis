@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TextAreaComponent } from './text-area.component';
@@ -10,6 +11,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { PopoverDirective } from '../../../directives/popover/popover.directive';
+import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
 const textAreaControl: FormControl = new FormControl('');
 
@@ -25,6 +27,7 @@ describe('TextAreaComponent', () => {
         GuidanceComponent,
         IconComponent,
         LabelComponent,
+        ValidatorErrorMessageComponent,
       ],
       imports: [ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
@@ -51,21 +54,27 @@ describe('TextAreaComponent', () => {
   }
 
   it('should init the component successfully', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _updateValueAndValidityTrigger } = component as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     jest.spyOn(component as any, '_setControlValueSubscription');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     jest.spyOn(component as any, '_setComponentId');
     jest.spyOn(_updateValueAndValidityTrigger, 'next');
 
     fixture.detectChanges();
 
     expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._setControlValueSubscription).toHaveBeenCalledTimes(1);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((component as any)._setComponentId).toHaveBeenCalledTimes(1);
+  });
+
+  it('should destroy the component successfully', () => {
+    fixture.detectChanges();
+    expect((component as any)._subscription.closed).toBeFalsy();
+    expect((component as any)._baseSubscription.closed).toBeFalsy();
+
+    fixture.destroy();
+
+    expect((component as any)._subscription.closed).toBeTruthy();
+    expect((component as any)._baseSubscription.closed).toBeTruthy();
   });
 
   describe('HTML attributes', () => {
@@ -94,23 +103,23 @@ describe('TextAreaComponent', () => {
       expect(didEmit).toBeFalsy();
     });
 
-    it('should unsubscribe on destroy', () => {
-      fixture.detectChanges();
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      expect((component as any)._subscription.closed).toBeFalsy();
-
-      fixture.destroy();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      expect((component as any)._subscription.closed).toBeTruthy();
-    });
-
     it('should set control as invalid if required textarea is touched and empty', () => {
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl('', FudisValidators.required('This is required')),
+      );
       fixture.detectChanges();
-      component.control = new FormControl('', FudisValidators.required('This is required'));
 
       expect(component.control.value).toEqual('');
-      expect(component.control.invalid).toBeTruthy();
+
+      let inputElement = getElement(fixture, 'textarea');
+      expect(inputElement.getAttribute('aria-invalid')).toEqual(null);
+
+      component.control.markAsTouched();
+      fixture.detectChanges();
+
+      inputElement = getElement(fixture, 'textarea');
+      expect(inputElement.getAttribute('aria-invalid')).toEqual('true');
     });
 
     it('should set control as invalid if text is too short according to given minLength validator value', () => {
@@ -175,12 +184,10 @@ describe('TextAreaComponent', () => {
       fixture.componentRef.setInput('popoverText', 'This is popover text');
       fixture.detectChanges();
 
-      const tooltipTriggerElem = getElement(fixture, 'fudis-button');
+      const tooltipTriggerElem = getElement(fixture, 'button');
 
       expect(tooltipTriggerElem).toBeTruthy();
-      expect(tooltipTriggerElem.getAttribute('ng-reflect-aria-label')).toEqual(
-        'Additional information',
-      );
+      expect(tooltipTriggerElem.getAttribute('aria-label')).toEqual('Additional information');
       expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
         'This is popover text',
       );

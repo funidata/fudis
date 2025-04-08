@@ -113,7 +113,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * Observable to store each Form's Error Summary's visibility status. Form component will listen
-   * to these changes, if visiblity changes elsewhere than the @Input() prop
+   * to these changes if visiblity changes elsewhere than the Input() prop
    */
   get errorSummaryVisibilityStatus(): { [formId: string]: WritableSignal<boolean> } {
     return this._errorSummaryVisibilityStatus;
