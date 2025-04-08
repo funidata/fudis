@@ -1,8 +1,7 @@
 {
-  "name": "fudis-core",
+  "name": "@funidata/fudis-core",
   "version": "1.0.0",
   "description": "Core styles and foundations for Fudis Design System",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "stylelint": "stylelint '**/*.{css,scss}'",
