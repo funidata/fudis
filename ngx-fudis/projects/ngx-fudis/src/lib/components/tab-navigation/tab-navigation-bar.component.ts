@@ -72,38 +72,50 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     this._resizeObserver = new ResizeObserver((): void => {
       this.assertScroll();
     });
-    this._resizeObserver.observe(this.tabNavigation.nativeElement);
-    this._scrollSubscription = fromEvent(this.scrollContainer.nativeElement, 'scroll')
-      .pipe(auditTime(300))
-      .subscribe(() => this.assertScroll());
+
+    if (this.tabNavigation) this._resizeObserver.observe(this.tabNavigation.nativeElement);
+
+    if (this.scrollContainer) {
+      this._scrollSubscription = fromEvent(this.scrollContainer.nativeElement, 'scroll')
+        .pipe(auditTime(300))
+        .subscribe(() => this.assertScroll());
+    }
   }
 
   private assertScroll() {
-    const scrollContainer = this.scrollContainer.nativeElement;
+    const scrollContainer = this.scrollContainer?.nativeElement;
 
-    const isLeftHidden = scrollContainer.scrollLeft > 0;
-    const isRightHidden =
-      Math.round(scrollContainer.scrollLeft + scrollContainer.clientWidth) <
-      scrollContainer.scrollWidth;
+    if (scrollContainer) {
+      const isLeftHidden = scrollContainer.scrollLeft > 0;
+      const isRightHidden =
+        Math.round(scrollContainer.scrollLeft + scrollContainer.clientWidth) <
+        scrollContainer.scrollWidth;
 
-    this._rightContentHidden.set(isRightHidden);
-    this._leftContentHidden.set(isLeftHidden);
+      this._rightContentHidden.set(isRightHidden);
+      this._leftContentHidden.set(isLeftHidden);
+    }
   }
 
   protected _scrollLeft(): void {
-    const scrollContainer = this.scrollContainer.nativeElement;
-    const targetScrollLeft = Math.max(0, scrollContainer.scrollLeft - this._scrollAmount);
-    this._scrollTo(scrollContainer, targetScrollLeft);
+    const scrollContainer = this.scrollContainer?.nativeElement;
+
+    if (scrollContainer) {
+      const targetScrollLeft = Math.max(0, scrollContainer.scrollLeft - this._scrollAmount);
+      this._scrollTo(scrollContainer, targetScrollLeft);
+    }
   }
 
   protected _scrollRight(): void {
     const scrollContainer = this.scrollContainer.nativeElement;
-    const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-    const targetScrollLeft = Math.min(
-      maxScrollLeft,
-      scrollContainer.scrollLeft + this._scrollAmount,
-    );
-    this._scrollTo(scrollContainer, targetScrollLeft);
+
+    if (scrollContainer) {
+      const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      const targetScrollLeft = Math.min(
+        maxScrollLeft,
+        scrollContainer.scrollLeft + this._scrollAmount,
+      );
+      this._scrollTo(scrollContainer, targetScrollLeft);
+    }
   }
 
   private _scrollTo = (element: HTMLElement, scrollAmount: number): void => {
@@ -125,7 +137,7 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._resizeObserver.disconnect();
-    this._scrollSubscription.unsubscribe();
+    this._resizeObserver?.disconnect();
+    this._scrollSubscription?.unsubscribe();
   }
 }
