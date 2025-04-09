@@ -138,7 +138,7 @@ export class FieldSetComponent
   /**
    * Private reference to Guidance
    */
-  private _fieldsetGuidance: HTMLElement;
+  private _fieldsetGuidance: HTMLElement | null;
 
   private _parentFormId: string | null;
 
@@ -164,7 +164,7 @@ export class FieldSetComponent
       });
     this._fieldsetGuidance = this._element.nativeElement.querySelector(
       'fudis-guidance',
-    ) as HTMLElement;
+    ) as HTMLElement | null;
   }
 
   ngAfterViewInit(): void {
@@ -190,7 +190,11 @@ export class FieldSetComponent
 
       this._resizeObserver.observe(this._fieldsetLegend.nativeElement);
     }
-    this._hasSelectionGroupParent();
+
+    if (['fudis-radio-button-group', 'fudis-checkbox-group'].some(id => this.id.includes(id))) {
+      this._hasSelectionGroupParent();
+    }
+
   }
 
   ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
@@ -236,25 +240,24 @@ export class FieldSetComponent
    * helptext as part of the Fieldset legend element and makes it accessible for screen readers.
    */
   private _hasSelectionGroupParent(): void {
-    const isParentGroup = ['fudis-radio-button-group', 'fudis-checkbox-group'].some((id) =>
-      this.id.includes(id),
-    );
+      const guidanceHelpText = this._fieldsetGuidance?.querySelector(
+        '.fudis-guidance__help-text',
+      )?.textContent?.trim();
 
-    if (isParentGroup) {
+      if (!guidanceHelpText)  return;
+
       const groupHelpText = this._element.nativeElement.querySelector(
         '.fudis-fieldset__legend__main__group-helptext',
-      ) as HTMLElement;
-      const guidanceHelpText = this._fieldsetGuidance.querySelector(
-        '.fudis-guidance__help-text',
-      )?.textContent;
+      ) as HTMLElement | null;
 
-      if (guidanceHelpText) {
-        groupHelpText.setAttribute('aria-hidden', 'false');
+      if (!groupHelpText)  return;
 
-        const helptext = groupHelpText.appendChild(document.createElement('span'));
-        helptext.textContent = guidanceHelpText ?? '';
-      }
-    }
+      groupHelpText.removeAttribute('aria-hidden');
+
+      const helptext = document.createElement('span');
+      helptext.textContent = guidanceHelpText;
+
+      groupHelpText.appendChild(helptext);
   }
 
   /**

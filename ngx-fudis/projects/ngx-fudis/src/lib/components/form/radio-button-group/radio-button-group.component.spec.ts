@@ -115,7 +115,7 @@ describe('Basic inputs of Radio Button Group', () => {
     expect(helpText.textContent).toContain('Some help text');
   });
 
-  it('should have correct helptext and aria hidden set to false in the legend', () => {
+  it('should have correct helptext and aria hidden removed in the legend', () => {
     const helpText = fixture.nativeElement.querySelector(
       '.fudis-guidance__help-text',
     ) as HTMLElement;
@@ -124,7 +124,7 @@ describe('Basic inputs of Radio Button Group', () => {
       '.fudis-fieldset__legend__main__group-helptext',
     ) as HTMLElement;
 
-    expect(groupHelpText.getAttribute('aria-hidden')).toEqual('false');
+    expect(groupHelpText.getAttribute('aria-hidden')).toBeNull();
     expect(groupHelpText.textContent).toEqual(helpText.textContent);
   });
 
