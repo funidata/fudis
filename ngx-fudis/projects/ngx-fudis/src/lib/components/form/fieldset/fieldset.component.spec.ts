@@ -128,6 +128,15 @@ describe('FieldSetComponent', () => {
       expect(fieldsetHelpText?.textContent).toEqual('Fieldset help text');
     });
 
+    it('should have aria hidden true as default for group help text', () => {
+      const requiredTextElement = getElement(
+        fixtureMock,
+        '.fudis-fieldset__legend__main__group-helptext',
+      );
+
+      expect(requiredTextElement.getAttribute('aria-hidden')).toEqual('true');
+    });
+
     it('should have required text if given', () => {
       componentMock.required = true;
       fixtureMock.detectChanges();
