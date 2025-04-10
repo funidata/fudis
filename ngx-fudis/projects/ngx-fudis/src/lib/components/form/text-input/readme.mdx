@@ -17,6 +17,17 @@ Text Input type options are `text` (default), `email`, `number`, `password`, `te
 
 Necessary properties for Text Input are `label` and `control`.
 
+### Autocomplete
+
+`autocomplete` will add native HTML autocomplete attribute to the input which will then provide automated assistance in filling out form field values.
+Accepted values are:
+
+- off
+- on
+- autofill detail tokens (list can be found from different accessibility resources outside of Fudis)
+
+NOTE: When using `autocomplete`, one must also provide HTML `name` attribute in order the filling assistance to work properly.
+
 ### Popover
 
 Popover can be added to the label with [Popover](/docs/directives-popover--documentation) properties. It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screenreaders. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information".
@@ -39,6 +50,7 @@ If a custom validation is needed, read [how to add Error message](/docs/componen
 
 - Label and guidance are linked to the text-input via id
 - Screen reader is informed when maximum character length has 5 characters left and when maximum character count is reached
+- Possibility to add HTML autocomplete attribute to help filling out form field values
 
 ## Related Directives
 

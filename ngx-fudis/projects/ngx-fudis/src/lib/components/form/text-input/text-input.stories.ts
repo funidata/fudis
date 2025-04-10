@@ -33,6 +33,8 @@ import { fudisInputSizeArray } from '../../../types/forms';
         [control]="mainFormGroup.controls['email']"
         [label]="'Email'"
         [type]="'email'"
+        [name]="'email'"
+        [autocomplete]="'email'"
         [helpText]="'This is an example email input with multiple validations.'"
       />
       <fudis-text-input
@@ -132,6 +134,7 @@ const commonArgs: Partial<TextInputComponent> = {
   size: 'lg',
   initialFocus: false,
   type: 'text',
+  autocomplete: 'off',
   popoverText: '',
   popoverPosition: 'left',
   popoverTriggerLabel: '',
@@ -150,6 +153,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [type]="type"
+      [autocomplete]="autocomplete"
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
