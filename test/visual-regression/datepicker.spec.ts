@@ -30,24 +30,32 @@ test("datepicker default change calendar language", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-date-datepicker--datepicker&viewMode=story",
   );
+
+  await expect(page.getByPlaceholder("dd.mm.yyyy")).toBeVisible(); // Note: getByPlaceholder searches for the input with respective placeholder. The placeholder value itself does not have to be visible.
   await page.getByTestId("fudis-datepicker-1").fill(date);
   await page.getByTestId("fudis-button-2").click();
+  await expect(page.getByPlaceholder("pp.kk.vvvv")).toBeVisible();
   await expect(page.getByText("Current language: fi")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await page.waitForSelector(".mdc-button__label");
   await expect(page).toHaveScreenshot("to-finnish.png", { fullPage: true });
   await page.keyboard.press("Escape");
   await expect(page.getByText("Choose your favourite date.")).toBeVisible();
-  await page.getByTestId("fudis-button-2").click();
-  await expect(page.getByText("Current language: sv")).toBeVisible();
-  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
 
+  await page.getByTestId("fudis-button-2").click();
+  await expect(page.getByPlaceholder("dd.mm.åååå")).toBeVisible();
+  await expect(page.getByText("Current language: sv")).toBeVisible();
+  await page.getByTestId("fudis-datepicker-1").fill(date);
+  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await page.waitForSelector(".mdc-button__label");
   await expect(page).toHaveScreenshot("to-swedish.png", { fullPage: true });
   await page.keyboard.press("Escape");
   await expect(page.getByText("Choose your favourite date.")).toBeVisible();
+
   await page.getByTestId("fudis-button-2").click();
+  await expect(page.getByPlaceholder("dd.mm.yyyy")).toBeVisible();
   await expect(page.getByText("Current language: en")).toBeVisible();
+  await page.getByTestId("fudis-datepicker-1").fill(date);
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await page.waitForSelector(".mdc-button__label");
   await expect(page).toHaveScreenshot("to-english.png", { fullPage: true });
