@@ -55,10 +55,10 @@ export class TextInputComponent
    * Browser's automated assistance in filling out form field values, describing what input is
    * expected from the user.
    */
-  @Input() autocompleteFill: string | string[] = 'off';
+  @Input() autocomplete: string | string[] = 'off';
 
   /**
-   * HTML name attribute (Note: in order to autocompleteFill to work properly, TextInput should have
+   * HTML name attribute (Note: in order to autocomplete to work properly, TextInput should have
    * specified name attribute as well)
    */
   @Input() name: string | null = null;

@@ -105,7 +105,7 @@ describe('TextInputComponent', () => {
       expect(inputElement.getAttribute('autocomplete')).toEqual('off');
       expect(inputElement.getAttribute('name')).toBeFalsy();
 
-      fixture.componentRef.setInput('autocompleteFill', 'shipping street-address');
+      fixture.componentRef.setInput('autocomplete', 'shipping street-address');
       fixture.componentRef.setInput('name', 'address');
       fixture.detectChanges();
 
