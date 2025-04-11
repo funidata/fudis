@@ -5,10 +5,10 @@
     "stylelint-config-concentric-order"
   ],
   "ignoreFiles": [
-    "dist/**/*",
+    "ngx-fudis/dist/**/*",
     "static/**/*",
-    "projects/ngx-fudis/style.scss",
-    "projects/ngx-fudis/coverage/**/*",
+    "ngx-fudis/projects/ngx-fudis/style.scss",
+    "ngx-fudis/projects/ngx-fudis/coverage/**/*",
     "coverage/**/*"
   ],
   "rules": {

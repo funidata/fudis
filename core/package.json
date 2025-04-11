@@ -29,11 +29,5 @@
   "bugs": {
     "url": "https://github.com/funidata/fudis/issues"
   },
-  "homepage": "https://github.com/funidata/fudis#readme",
-  "devDependencies": {
-    "stylelint": "^16.18.0",
-    "stylelint-config-concentric-order": "^5.2.1",
-    "stylelint-config-sass-guidelines": "^12.1.0",
-    "stylelint-config-standard-scss": "^14.0.0"
-  }
+  "homepage": "https://github.com/funidata/fudis#readme"
 }
