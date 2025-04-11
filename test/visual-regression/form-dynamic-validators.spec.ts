@@ -46,7 +46,7 @@ test("form dynamic inputs", async ({ page }) => {
   await page.getByTestId("fudis-button-9").click(); // remove required number validator
   await page.getByTestId("fudis-button-12").click(); // remove required date validator
   await page.getByTestId("fudis-button-15").click(); // remove required option validator
-  await page.getByTestId("fudis-checkbox-group-1-item-1").setChecked(true); // Check the first checkbox to remove error messages
+  await page.getByTestId("fudis-checkbox-group-1-item-1").click(); // Check the first checkbox to remove error messages
   await page.getByTestId("fudis-button-16").click(); // remove required validator from radio button group
 
   await page.getByTestId("fudis-button-17").click(); // remove at least one required validator from Localized Text Group
