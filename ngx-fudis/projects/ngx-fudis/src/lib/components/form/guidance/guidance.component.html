@@ -92,6 +92,7 @@
   </div>
   <ng-container *ngIf="maxLength && control">
     <small
+      aria-hidden="true"
       class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
         _maxLengthWidth
       }}"
@@ -104,6 +105,7 @@
     <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
       <small
         *ngIf="singleControl.key === selectedOption"
+        aria-hidden="true"
         class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
           _maxLengthWidth
         }}"
