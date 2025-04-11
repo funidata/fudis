@@ -1,0 +1,41 @@
+/* stylelint-disable unit-disallowed-list */
+
+$font-family: 'Fira Sans', sans-serif;
+
+// Body text font size
+$body-text-lg-font-size: calc(1rem / var(--fudis-rem-multiplier));
+$body-text-md-font-size: calc(0.875rem / var(--fudis-rem-multiplier));
+$body-text-sm-font-size: calc(0.75rem / var(--fudis-rem-multiplier));
+
+// Heading font size
+$heading-xxl-font-size: calc(2.25rem / var(--fudis-rem-multiplier));
+$heading-xl-font-size: calc(1.75rem / var(--fudis-rem-multiplier));
+$heading-lg-font-size: calc(1.5rem / var(--fudis-rem-multiplier));
+$heading-md-font-size: calc(1.25rem / var(--fudis-rem-multiplier));
+$heading-sm-font-size: calc(1.125rem / var(--fudis-rem-multiplier));
+$heading-xs-font-size: calc(1rem / var(--fudis-rem-multiplier));
+$heading-xxs-font-size: calc(0.875rem / var(--fudis-rem-multiplier));
+
+// Body text line height
+$body-text-lg-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+$body-text-md-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+$body-text-sm-line-height: calc(1rem / var(--fudis-rem-multiplier));
+
+// Heading line heights
+$heading-lg-line-height: calc(2.5rem / var(--fudis-rem-multiplier));
+$heading-md-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
+$heading-sm-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+
+// Other UI line heights
+$text-input-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+$form-label-line-height: calc(1.5rem / var(--fudis-rem-multiplier));
+$badge-line-height: calc(0.875rem / var(--fudis-rem-multiplier));
+
+// Font weight
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+
+// Font styles
+$font-style-italic: italic;

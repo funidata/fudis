@@ -1,0 +1,285 @@
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
+@use 'sass:map';
+@use './../breakpoints/mixins.scss' as breakpoints;
+@use './../spacing/tokens.scss' as spacing;
+@use './../colors/mixins.scss' as colors;
+@use './../focus/mixins.scss' as focus;
+@use './tokens.scss' as tokens;
+
+// Body Text
+
+@mixin body-text-lg-light {
+  text-transform: initial;
+  line-height: tokens.$body-text-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-lg-font-size;
+  font-weight: tokens.$font-weight-light;
+}
+
+@mixin body-text-lg-regular {
+  text-transform: initial;
+  line-height: tokens.$body-text-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-lg-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+@mixin body-text-md-light {
+  text-transform: initial;
+  line-height: tokens.$body-text-md-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-light;
+}
+
+@mixin body-text-md-regular {
+  text-transform: initial;
+  line-height: tokens.$body-text-md-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+@mixin body-text-sm-regular {
+  text-transform: initial;
+  line-height: tokens.$body-text-sm-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-sm-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+// Headings
+
+@mixin heading-xxl {
+  line-height: tokens.$heading-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xxl-font-size;
+  font-weight: tokens.$font-weight-medium;
+
+  @include breakpoints.breakpoint-max('sm') {
+    font-size: tokens.$heading-xl-font-size;
+  }
+}
+
+@mixin heading-xl {
+  line-height: tokens.$heading-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xl-font-size;
+  font-weight: tokens.$font-weight-medium;
+
+  @include breakpoints.breakpoint-max('sm') {
+    line-height: tokens.$heading-md-line-height;
+    font-size: tokens.$heading-lg-font-size;
+  }
+}
+
+@mixin heading-lg {
+  line-height: tokens.$heading-md-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-lg-font-size;
+  font-weight: tokens.$font-weight-medium;
+
+  @include breakpoints.breakpoint-max('sm') {
+    font-size: tokens.$heading-md-font-size;
+  }
+}
+
+@mixin heading-md {
+  line-height: tokens.$heading-md-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-md-font-size;
+  font-weight: tokens.$font-weight-medium;
+
+  @include breakpoints.breakpoint-max('sm') {
+    line-height: tokens.$heading-sm-line-height;
+    font-size: tokens.$heading-sm-font-size;
+  }
+}
+
+@mixin heading-sm {
+  line-height: tokens.$heading-sm-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-sm-font-size;
+  font-weight: tokens.$font-weight-medium;
+
+  @include breakpoints.breakpoint-max('sm') {
+    font-size: tokens.$heading-xs-font-size;
+    font-weight: tokens.$font-weight-bold;
+  }
+}
+
+@mixin heading-xs {
+  line-height: tokens.$heading-sm-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xs-font-size;
+  font-weight: tokens.$font-weight-bold;
+
+  @include breakpoints.breakpoint-max('sm') {
+    font-size: tokens.$heading-xxs-font-size;
+  }
+}
+
+@mixin heading-xxs {
+  line-height: tokens.$heading-sm-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xxs-font-size;
+  font-weight: tokens.$font-weight-bold;
+}
+
+// Table caption
+
+@mixin table-caption {
+  text-transform: uppercase;
+  line-height: tokens.$text-input-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+// Other UI styles
+
+// Text-input, text-area, dropdown, legend components
+
+@mixin text-field-label {
+  text-transform: uppercase;
+  line-height: tokens.$form-label-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+@mixin text-field-input {
+  line-height: tokens.$text-input-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-lg-font-size;
+  font-weight: tokens.$font-weight-light;
+}
+
+@mixin select-group-label {
+  line-height: tokens.$text-input-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-sm-font-size;
+  font-weight: tokens.$font-weight-light;
+}
+
+// Badge component
+
+@mixin badge-typography {
+  text-transform: uppercase;
+  line-height: tokens.$badge-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-sm-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+// Description-list component
+
+@mixin description-list-key-typography {
+  @include text-field-label;
+}
+
+@mixin description-list-value-typography {
+  line-height: tokens.$body-text-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-lg-font-size;
+  font-weight: tokens.$font-weight-light;
+}
+
+@mixin description-list-compact-key-typography {
+  text-transform: none;
+  line-height: tokens.$body-text-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-light;
+}
+
+@mixin description-list-compact-value-typography {
+  line-height: tokens.$body-text-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+// Button component
+
+@mixin button-typography {
+  @include letter-spacing('1px');
+
+  text-transform: uppercase;
+  line-height: tokens.$body-text-sm-line-height;
+  font-family: tokens.$font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-bold;
+}
+
+@mixin letter-spacing($width) {
+  @if map.has-key(spacing.$pixel-tokens, $width) {
+    letter-spacing: map.get(spacing.$pixel-tokens, $width);
+  } @else {
+    @error 'Unknown letter-spacing parameter. It can only be "1px", "2px" or "3px"';
+  }
+}
+
+// Expandable component
+
+@mixin expandable-regular-typography {
+  line-height: tokens.$body-text-lg-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-lg-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+@mixin expandable-sub-title-typography {
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-sm-font-size;
+  font-weight: tokens.$font-weight-light;
+}
+
+// Link component
+
+@mixin text-link {
+  @include colors.text-color('primary-dark');
+
+  display: inline-block;
+  position: relative;
+  text-decoration: underline solid;
+  font-family: tokens.$font-family;
+  overflow-wrap: anywhere;
+
+  &:focus {
+    @include focus.focus-generic;
+  }
+}
+
+@mixin link-md {
+  @include text-link;
+
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+@mixin link-lg {
+  @include text-link;
+
+  font-size: tokens.$body-text-lg-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
+@mixin link-inherit {
+  @include text-link;
+
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+// Empty state
+
+@mixin text-emptystate {
+  @include colors.text-color('gray-middle');
+
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-regular;
+  font-style: tokens.$font-style-italic;
+}
