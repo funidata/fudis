@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "Core styles and foundations for Fudis Design System",
   "files": [
-    "./_index.scss"
+    "src",
+    "./_index.scss",
+    "./_mixins.scss",
+    "./_tokens.scss",
+    "./_classes.scss",
+    "./_component-styles.scss"
   ],
-  "exports": {
-    ".": {
-      "sass": "./_index.scss"
-    }
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "stylelint": "stylelint '**/*.{css,scss}'"
