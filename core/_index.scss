@@ -1,7 +1,7 @@
 /*
 * Export all Core SCSS files here
 */
-@forward './src/components/component-styles';
-@forward './src/foundations/mixins';
-@forward './src/foundations/tokens';
-@forward './src/foundations/classes';
+@forward './component-styles';
+@forward './mixins';
+@forward './tokens';
+@forward './classes';
