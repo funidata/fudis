@@ -5,6 +5,7 @@
     "stylelint-config-concentric-order"
   ],
   "ignoreFiles": [
+    "dist/**/*",
     "ngx-fudis/dist/**/*",
     "static/**/*",
     "ngx-fudis/projects/ngx-fudis/style.scss",
