@@ -1,7 +1,7 @@
 @use './mixins.scss' as mixins;
-@use '../spacing/tokens.scss' as spacing;
-@use '../borders/mixins.scss' as border;
-@use '../colors/mixins.scss' as colors;
+@use './../spacing/tokens.scss' as spacing;
+@use './../borders/mixins.scss' as border;
+@use './../colors/mixins.scss' as colors;
 
 .fudis-visually-hidden {
   @include mixins.visually-hidden;

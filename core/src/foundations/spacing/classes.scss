@@ -1,7 +1,6 @@
-/* stylelint-disable max-nesting-depth */
 @use './tokens.scss' as spacing;
 @use './mixins.scss' as mixins;
-@use '../breakpoints/mixins.scss' as breakpoints;
+@use './../breakpoints/mixins.scss' as breakpoints;
 @include mixins.spacing-classes('fudis');
 
 @include breakpoints.breakpoint('xs') {
