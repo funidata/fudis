@@ -1,6 +1,6 @@
 {
   "name": "@funidata/fudis-core",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Core styles and foundations for Fudis Design System",
   "files": [
     "src",
