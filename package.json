@@ -17,9 +17,7 @@
     "test:ui": "find test/visual-regression -name \\*-darwin.png -type f -delete && cd test && npm start",
     "build": "docker build -t fudis:latest ./ngx-fudis && docker cp $(docker create fudis:latest):/usr/src/app/dist ./ngx-fudis/dist",
     "lint": "cd ngx-fudis && npm run lint",
-    "stylelint:ngx-fudis": "cd ngx-fudis && npm run stylelint",
-    "stylelint:core": "cd core && npm run stylelint",
-    "stylelint": "concurrently \"npm run stylelint:ngx-fudis\" \"npm run stylelint:core\"",
+    "stylelint": "stylelint '**/*.{css,scss}'",
     "version": "scripts/version_sub_projects.sh $npm_package_version",
     "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
     "fudis-release": "scripts/release.sh",
@@ -28,7 +26,6 @@
   "author": "Funidata Ltd",
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
-    "concurrently": "^9.1.2",
     "prettier": "^3.4.2",
     "stylelint": "^16.18.0",
     "stylelint-config-concentric-order": "^5.2.1",
