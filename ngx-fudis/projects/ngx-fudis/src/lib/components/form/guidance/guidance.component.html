@@ -83,36 +83,30 @@
 
     <p *ngIf="helpText || (control && maxLength)" class="fudis-guidance__help-text">
       <ng-container *ngIf="helpText">{{ helpText }}</ng-container>
-      <ng-container *ngIf="control && maxLength">
-        <span class="fudis-visually-hidden"
-          >&nbsp; {{ control.value?.length || 0 }}/{{ maxLength }}
-          {{ _maxLengthText | async }}</span
-        >
-      </ng-container>
     </p>
   </div>
   <ng-container *ngIf="maxLength && control">
     <small
-      aria-hidden="true"
       class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
         _maxLengthWidth
       }}"
       [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
     >
       {{ control.value?.length || 0 }}/{{ maxLength }}
+      <span class="fudis-visually-hidden">{{ _maxLengthText | async }}</span>
     </small>
   </ng-container>
   <ng-container *ngIf="formGroup?.controls && !control && maxLength">
     <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
       <small
         *ngIf="singleControl.key === selectedOption"
-        aria-hidden="true"
         class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{
           _maxLengthWidth
         }}"
         [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
       >
         {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
+        <span class="fudis-visually-hidden">{{ _maxLengthText | async }}</span>
       </small>
       <ng-container
         *ngIf="
@@ -124,7 +118,7 @@
           class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden"
           role="alert"
         >
-          &nbsp; {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
+          {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
           {{ _maxLengthText | async }}</p
         >
       </ng-container>
@@ -139,6 +133,6 @@
   "
 >
   <p class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden" role="alert"
-    >&nbsp; {{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText | async }}</p
+    >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText | async }}</p
   >
 </ng-container>
