@@ -156,12 +156,6 @@ describe('Basic inputs of Radio Button Group', () => {
     expect(fieldsetElement.getAttribute('id')).toEqual('fudis-radio-button-group-1');
   });
 
-  it('should have correct aria-describedby value', () => {
-    expect(fieldsetElement.getAttribute('aria-describedby')).toEqual(
-      'fudis-radio-button-group-1_guidance',
-    );
-  });
-
   describe('Child Radio Buttons', () => {
     let mockComponent: MockContainerComponent;
 

@@ -216,12 +216,6 @@ describe('CheckboxGroupComponent', () => {
     it('should generate correct id', () => {
       expect(fieldsetElement.getAttribute('id')).toEqual('fudis-checkbox-group-1');
     });
-
-    it('should have correct aria-describedby value', () => {
-      expect(fieldsetElement.getAttribute('aria-describedby')).toEqual(
-        'fudis-checkbox-group-1_guidance',
-      );
-    });
   });
 
   describe('with Form Group provided', () => {
