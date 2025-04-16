@@ -13,8 +13,7 @@
     "storybook": "ng run storybook:start",
     "build-storybook": "npm run docs:json && ng run storybook:build",
     "stylelint-scss-check": "stylelint-config-prettier-scss-check",
-    "lint": "eslint .",
-    "stylelint": "stylelint '**/*.{css,scss}'"
+    "lint": "eslint ."
   },
   "private": true,
   "license": "CC-BY-NC-SA-4.0",
@@ -64,10 +63,6 @@
     "ng-packagr": "^19.2.0",
     "semver-parser": "^4.1.8",
     "storybook": "^8.6.4",
-    "stylelint": "^16.15.0",
-    "stylelint-config-concentric-order": "^5.2.1",
-    "stylelint-config-sass-guidelines": "^12.1.0",
-    "stylelint-config-standard-scss": "^14.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   },

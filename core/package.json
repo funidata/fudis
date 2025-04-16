@@ -1,0 +1,32 @@
+{
+  "name": "@funidata/fudis-core",
+  "version": "0.0.1",
+  "description": "Core styles and foundations for Fudis Design System",
+  "files": [
+    "src",
+    "./_index.scss",
+    "./_mixins.scss",
+    "./_tokens.scss",
+    "./_classes.scss",
+    "./_component-styles.scss"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/funidata/fudis.git"
+  },
+  "keywords": [
+    "funidata",
+    "design-system",
+    "core-styles",
+    "foundations"
+  ],
+  "author": "Funidata Ltd",
+  "license": "CC-BY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/funidata/fudis/issues"
+  },
+  "homepage": "https://github.com/funidata/fudis#readme"
+}

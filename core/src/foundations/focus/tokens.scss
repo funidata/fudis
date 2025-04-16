@@ -1,0 +1,6 @@
+@use './../colors/tokens.scss' as colors;
+@use './../spacing/tokens.scss' as spacing;
+
+// Variables for Generic and Form field focus outlines
+$focus-generic-outline: spacing.$pixel-2 dashed colors.$color-gray-dark;
+$focus-form-field-outline: spacing.$pixel-2 solid colors.$color-focus-primary;
