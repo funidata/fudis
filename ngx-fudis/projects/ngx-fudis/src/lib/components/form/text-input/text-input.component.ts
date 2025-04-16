@@ -47,9 +47,21 @@ export class TextInputComponent
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
-   * Type of the input - defaults to 'text'
+   * HTML type attribute
    */
   @Input() type: FudisInputType = 'text';
+
+  /**
+   * Browser's automated assistance in filling out form field values, describing what input is
+   * expected from the user.
+   */
+  @Input() autocomplete: string | string[] = 'off';
+
+  /**
+   * HTML name attribute (Note: in order to autocomplete to work properly, TextInput should have
+   * specified name attribute as well)
+   */
+  @Input() name: string | null = null;
 
   /**
    * Max number for number input HTML attribute
