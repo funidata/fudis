@@ -10,43 +10,39 @@
   position: relative;
 
   &__button-container {
-    &--right::before {
-      @include colorMixin.bg-color('white');
+    @include colorMixin.bg-color('white');
 
+    &--right {
+      display: flex;
       position: absolute;
-      top: spacing.$pixel-2;
+      top: 0;
       right: 0;
-      width: spacing.$spacing-xxl;
-      height: spacing.$spacing-xl;
-      content: '';
-      mask-image: linear-gradient(to left, colors.$color-white 5%, transparent 90%);
-      pointer-events: none;
+      align-items: flex-start;
+      justify-content: flex-end;
+      width: spacing.$spacing-xl;
+      height: spacing.$tab-navigation-button-height;
     }
 
-    &--left::before {
-      @include colorMixin.bg-color('white');
-
+    &--left {
+      display: flex;
       position: absolute;
-      top: spacing.$pixel-2;
+      top: 0;
       left: 0;
-      width: spacing.$spacing-xxl;
-      height: spacing.$spacing-xl;
-      content: '';
-      mask-image: linear-gradient(to right, colors.$color-white 5%, transparent 90%);
-      pointer-events: none;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: spacing.$spacing-xl;
+      height: spacing.$tab-navigation-button-height;
     }
 
     &__button {
       @include colorMixin.bg-color('white');
-      @include border.border('1px', 'solid', 'gray-dark');
 
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);
-      border-radius: 50%;
+      border-style: none;
       cursor: pointer;
-      width: spacing.$spacing-lg;
-      height: spacing.$spacing-lg;
+      padding: 0;
 
       &:focus {
         @include focus.focus-generic;
@@ -59,13 +55,6 @@
       &--left {
         left: 0;
       }
-
-      &__icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
     }
   }
 
@@ -76,17 +65,18 @@
 
     &--secondary {
       @include border.border-none;
+
+      padding-top: spacing.$spacing-xxs;
     }
 
     &__tab-container {
       display: flex;
       column-gap: spacing.$spacing-xs;
       overflow-x: auto;
+      scrollbar-width: none;
 
       &--primary {
-        /** Because outline is 2px, it gets cut off from the top, if the container
-        holding the buttons is exactly the height of the button  */
-        padding-top: spacing.$pixel-2;
+        padding-top: spacing.$pixel-3;
 
         &:first-child {
           padding-left: spacing.$spacing-sm;
@@ -98,9 +88,7 @@
       }
 
       &--secondary {
-        /** Because outline is 2px, it gets cut off from the edges, if the container
-        holding the buttons is exactly the height of the button  */
-        padding: spacing.$pixel-2;
+        padding: spacing.$pixel-3;
       }
     }
   }

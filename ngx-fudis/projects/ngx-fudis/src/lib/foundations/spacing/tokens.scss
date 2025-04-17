@@ -29,3 +29,6 @@ $input-width-lg: calc(23rem / var(--fudis-rem-multiplier));
 
 // Fixed size for checkboxes' visual input box. Clickable input area should be 2rem high.
 $checkbox-size: calc(1.25rem / var(--fudis-rem-multiplier));
+
+// Fixed height for tab navigation scroll view buttons
+$tab-navigation-button-height: calc(3rem / var(--fudis-rem-multiplier));

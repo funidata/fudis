@@ -86,7 +86,7 @@ export default {
     },
     variant: {
       options: ['primary', 'secondary'],
-      controls: { type: 'select' },
+      controls: { type: 'radio' },
     },
   },
   args: {
