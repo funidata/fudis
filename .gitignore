@@ -42,3 +42,5 @@ documentation.json
 # System files
 .DS_Store
 Thumbs.db
+
+*storybook.log

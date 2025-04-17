@@ -4,6 +4,7 @@
   "description": "Core styles and foundations for Fudis Design System",
   "files": [
     "src",
+    "./style.scss",
     "./_index.scss",
     "./_mixins.scss",
     "./_tokens.scss",
@@ -11,7 +12,9 @@
     "./_component-styles.scss"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -28,5 +31,15 @@
   "bugs": {
     "url": "https://github.com/funidata/fudis/issues"
   },
-  "homepage": "https://github.com/funidata/fudis#readme"
+  "homepage": "https://github.com/funidata/fudis#readme",
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/html": "^8.6.12",
+    "@storybook/html-vite": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "sass-embedded": "^1.86.3",
+    "storybook": "^8.6.12"
+  }
 }
