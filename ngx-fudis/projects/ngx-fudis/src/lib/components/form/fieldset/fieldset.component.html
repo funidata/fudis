@@ -5,12 +5,7 @@
   [serviceDefaults]="false"
   [rowGap]="'none'"
 >
-  <fieldset
-    [attr.id]="id"
-    [tabIndex]="-1"
-    [ngClass]="_classes"
-    [attr.aria-describedby]="describedbyId ? describedbyId : null"
-  >
+  <fieldset [attr.id]="id" [tabIndex]="-1" [ngClass]="_classes">
     <legend class="fudis-fieldset__legend">
       <div
         #fieldsetLegend
@@ -27,6 +22,10 @@
           ><span *ngIf="required" class="fudis-fieldset__legend__main__required"
             >({{ _translationService.getTranslations()().REQUIRED }})</span
           >
+          <div
+            aria-hidden="true"
+            class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
+          ></div>
         </div>
         <fudis-button
           *ngIf="popoverText && popoverTriggerLabel"
@@ -41,7 +40,7 @@
         />
       </div>
     </legend>
-    <fudis-body-text class="fudis-fieldset__help-text" *ngIf="helpText" [variant]="'sm-regular'">{{
+    <fudis-body-text *ngIf="helpText" class="fudis-fieldset__help-text" [variant]="'sm-regular'">{{
       helpText
     }}</fudis-body-text>
     <ng-content select="fudis-fieldset-actions"></ng-content>
