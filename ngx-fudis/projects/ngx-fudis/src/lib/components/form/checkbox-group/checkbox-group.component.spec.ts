@@ -176,6 +176,19 @@ describe('CheckboxGroupComponent', () => {
       expect(helpText.textContent).toContain('Some help text');
     });
 
+    it('should have correct helptext and aria hidden removed in the legend', () => {
+      const helpText = fixture.nativeElement.querySelector(
+        '.fudis-guidance__help-text',
+      ) as HTMLElement;
+
+      const groupHelpText = fixture.nativeElement.querySelector(
+        '.fudis-fieldset__legend__main__group-helptext',
+      ) as HTMLElement;
+
+      expect(groupHelpText.getAttribute('aria-hidden')).toBeNull();
+      expect(groupHelpText.textContent).toEqual(helpText.textContent);
+    });
+
     it('should display required text', () => {
       const requiredText = fixture.nativeElement.querySelector(
         '.fudis-fieldset__legend__main__required',
@@ -202,12 +215,6 @@ describe('CheckboxGroupComponent', () => {
 
     it('should generate correct id', () => {
       expect(fieldsetElement.getAttribute('id')).toEqual('fudis-checkbox-group-1');
-    });
-
-    it('should have correct aria-describedby value', () => {
-      expect(fieldsetElement.getAttribute('aria-describedby')).toEqual(
-        'fudis-checkbox-group-1_guidance',
-      );
     });
   });
 
