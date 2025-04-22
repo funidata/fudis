@@ -89,9 +89,9 @@ export class TabNavigationTabComponent implements AfterViewInit {
       if (focusElement) {
         focusElement.focus();
         if (nextIndex === 0) {
-          this._tabNavigation._scrollLeft(true);
+          this._tabNavigation?._scrollLeft(true);
         } else if (nextIndex === tabElements.length - 1) {
-          this._tabNavigation._scrollRight(true);
+          this._tabNavigation?._scrollRight(true);
         } else {
           focusElement.scrollIntoView({
             behavior: 'smooth',
