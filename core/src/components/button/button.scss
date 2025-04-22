@@ -42,11 +42,6 @@
 
     &--visible {
       padding: 0 spacing.$spacing-xs;
-
-      /* stylelint-disable-next-line selector-class-pattern */
-      &:has(.fudis-button__icon) {
-        padding: 0 spacing.$spacing-xs 0 0;
-      }
     }
   }
 
@@ -72,26 +67,6 @@
 
     &__medium {
       min-height: spacing.$spacing-lg;
-    }
-
-    &__icon-only {
-      padding: 0;
-      width: spacing.$spacing-lg;
-      min-width: initial;
-      min-height: spacing.$spacing-lg;
-    }
-  }
-
-  &__icon {
-    position: relative;
-    width: spacing.$spacing-lg;
-    height: spacing.$spacing-sm;
-
-    &__component {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
   }
 }

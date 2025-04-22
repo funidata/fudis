@@ -4,8 +4,15 @@ export const stories = [
 ];
 
 export const addons = [
-  "@storybook/addon-essentials",
-  "@storybook/addon-interactions"
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+      controls: false,
+      actions: false
+    }
+  },
+  "@storybook/addon-storysource",
+  "@storybook/addon-a11y"
 ]
 
 export const framework = {
