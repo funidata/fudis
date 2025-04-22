@@ -86,7 +86,6 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     const scrollContainer = this.scrollContainer?.nativeElement;
 
     if (scrollContainer) {
-      console.log(scrollContainer.scrollLeft);
       const isLeftHidden = scrollContainer.scrollLeft > 0;
       const isRightHidden =
         Math.round(scrollContainer.scrollLeft + scrollContainer.clientWidth) <
