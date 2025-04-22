@@ -59,6 +59,14 @@ export class TabNavigationTabComponent implements AfterViewInit {
   }
 
   protected _onKeyDown = (event: KeyboardEvent) => {
+    if (event.key === ' ' && event?.target instanceof HTMLAnchorElement) {
+      const anchorElement = event.target;
+      anchorElement.click();
+    }
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') this._onArrowNavigation(event);
+  };
+
+  private _onArrowNavigation = (event: KeyboardEvent) => {
     const tabElements = this._getTabs() as HTMLElement[];
     const currentElement: HTMLElement =
       this._tabNavigation?.scrollContainer?.nativeElement?.querySelector(':focus');
@@ -76,8 +84,8 @@ export class TabNavigationTabComponent implements AfterViewInit {
       }
 
       if (focusElement) {
-        focusElement?.focus();
-        if (focusElement) focusElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        focusElement.focus();
+        focusElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   };
