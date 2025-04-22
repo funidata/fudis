@@ -193,12 +193,7 @@ export const AllVariants: StoryFn = (args) => ({
       <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
         >Icon only sized buttons with label hidden</fudis-heading
       >
-      <fudis-button
-        variant="primary"
-        icon="search"
-        label="Primary"
-        size="icon-only"
-      ></fudis-button>
+      <fudis-button variant="primary" icon="search" label="Primary" size="icon-only"></fudis-button>
       <fudis-button
         variant="secondary"
         icon="search"
