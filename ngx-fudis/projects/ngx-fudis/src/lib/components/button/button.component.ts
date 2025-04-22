@@ -261,7 +261,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
   private _getAriaLabel(): string {
     if (this.labelHidden || this.size === 'icon-only') {
-      return this.ariaLabel ? `${this.label} ${this.ariaLabel}` : this.label;
+      return this.ariaLabel ? `${this.label}, ${this.ariaLabel}` : this.label;
     }
     return this.ariaLabel;
   }
@@ -278,7 +278,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
       this._iconColor.next('primary');
     }
 
-    if (this.labelHidden) {
+    if (this.labelHidden || this.size === 'icon-only') {
       return [
         'fudis-button',
         `fudis-button__size__${this.size}`,
