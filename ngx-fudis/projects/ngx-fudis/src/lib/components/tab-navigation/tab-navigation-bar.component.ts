@@ -82,10 +82,11 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private _assertScroll() {
+  _assertScroll() {
     const scrollContainer = this.scrollContainer?.nativeElement;
 
     if (scrollContainer) {
+      console.log(scrollContainer.scrollLeft);
       const isLeftHidden = scrollContainer.scrollLeft > 0;
       const isRightHidden =
         Math.round(scrollContainer.scrollLeft + scrollContainer.clientWidth) <
@@ -96,32 +97,45 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  protected _scrollLeft(): void {
+  _scrollLeft(scrollToStart?: boolean): void {
     const scrollContainer = this.scrollContainer?.nativeElement;
 
     if (scrollContainer) {
-      const targetScrollLeft = Math.max(0, scrollContainer.scrollLeft - this._scrollAmount);
-      this._scrollTo(scrollContainer, targetScrollLeft);
+      if (scrollToStart) {
+        this._scrollTo(scrollContainer, 0, 'instant');
+      } else {
+        const targetScrollLeft = Math.max(0, scrollContainer.scrollLeft - this._scrollAmount);
+        this._scrollTo(scrollContainer, targetScrollLeft);
+      }
     }
   }
 
-  protected _scrollRight(): void {
+  _scrollRight(scrollToEnd?: boolean): void {
     const scrollContainer = this.scrollContainer.nativeElement;
 
     if (scrollContainer) {
       const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-      const targetScrollLeft = Math.min(
-        maxScrollLeft,
-        scrollContainer.scrollLeft + this._scrollAmount,
-      );
-      this._scrollTo(scrollContainer, targetScrollLeft);
+
+      if (scrollToEnd) {
+        this._scrollTo(scrollContainer, maxScrollLeft, 'instant');
+      } else {
+        const targetScrollLeft = Math.min(
+          maxScrollLeft,
+          scrollContainer.scrollLeft + this._scrollAmount,
+        );
+        this._scrollTo(scrollContainer, targetScrollLeft);
+      }
     }
   }
 
-  private _scrollTo = (element: HTMLElement, scrollAmount: number): void => {
+  private _scrollTo = (
+    element: HTMLElement,
+    scrollAmount: number,
+    behavior: 'smooth' | 'instant' = 'smooth',
+  ): void => {
     element.scrollTo({
       left: scrollAmount,
-      behavior: 'smooth',
+      behavior: behavior,
     });
   };
 

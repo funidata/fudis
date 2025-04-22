@@ -73,19 +73,31 @@ export class TabNavigationTabComponent implements AfterViewInit {
 
     if (currentElement && tabElements.length > 0) {
       const currentIndex = tabElements.indexOf(currentElement);
+      let nextIndex: number = currentIndex;
       let focusElement = currentElement;
 
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        focusElement = tabElements[currentIndex > 0 ? currentIndex - 1 : tabElements.length - 1];
+        nextIndex = currentIndex > 0 ? currentIndex - 1 : tabElements.length - 1;
+        focusElement = tabElements[nextIndex];
       } else if (event.key === 'ArrowRight') {
         event.preventDefault();
-        focusElement = tabElements[currentIndex < tabElements.length - 1 ? currentIndex + 1 : 0];
+        nextIndex = currentIndex < tabElements.length - 1 ? currentIndex + 1 : 0;
+        focusElement = tabElements[nextIndex];
       }
 
       if (focusElement) {
         focusElement.focus();
-        focusElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (nextIndex === 0) {
+          this._tabNavigation._scrollLeft(true);
+        } else if (nextIndex === tabElements.length - 1) {
+          this._tabNavigation._scrollRight(true);
+        } else {
+          focusElement.scrollIntoView({
+            behavior: 'smooth',
+            inline: 'center',
+          });
+        }
       }
     }
   };
