@@ -1,9 +1,7 @@
-<article
-  #articleElement
-  tabindex="-1"
-  class="fudis-notification fudis-notification__{{ variant }}"
-  [attr.aria-label]="_translateService.getTranslations()().ATTENTION"
->
+<article #articleElement tabindex="-1" class="fudis-notification fudis-notification__{{ variant }}">
+  <fudis-body-text class="fudis-visually-hidden">{{
+    _translateService.getTranslations()().ATTENTION
+  }}</fudis-body-text>
   <fudis-icon *ngIf="variant === 'warning'" [icon]="'exclamation-mark-circle'" />
   <fudis-icon *ngIf="variant === 'danger'" [icon]="'alert'" />
   <fudis-icon *ngIf="variant === 'success'" [icon]="'checkmark-circle'" />
