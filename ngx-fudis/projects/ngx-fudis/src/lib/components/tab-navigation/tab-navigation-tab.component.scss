@@ -19,8 +19,12 @@
   padding-left: spacing.$spacing-sm;
   text-decoration: none;
 
-  &:focus {
+  &:focus-visible {
     @include focus.focus-generic;
+  }
+
+  &:hover {
+    @include colorMixin.text-color('gray-dark');
   }
 
   &--primary {
@@ -37,6 +41,10 @@
 
       border-color: colors.$color-primary;
       text-decoration: underline solid;
+
+      &:hover {
+        @include colorMixin.text-color('white');
+      }
     }
   }
 
@@ -54,6 +62,10 @@
       @include border.border('1px', 'solid', 'gray-dark');
 
       text-decoration: underline solid;
+
+      &:hover {
+        @include colorMixin.text-color('white');
+      }
     }
   }
 }

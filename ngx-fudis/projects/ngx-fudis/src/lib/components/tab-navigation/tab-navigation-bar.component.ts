@@ -82,6 +82,10 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  _isScrollable = () => {
+    return this._leftContentHidden() || this._rightContentHidden();
+  };
+
   _assertScroll() {
     const scrollContainer = this.scrollContainer?.nativeElement;
 
