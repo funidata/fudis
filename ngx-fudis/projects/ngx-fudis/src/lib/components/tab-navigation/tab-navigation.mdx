@@ -39,7 +39,7 @@ Nested inside the `TabNavigationBarComponent` you have to add content, that are 
 <button
   fudis-tab-navigation-tab
   [id]="'some-id-here'"
-  [active]="activeLink === '/your-path-here'"
+  [active]="isActive"
   {{ I'm a button! }}
 </button>
 ```
@@ -50,7 +50,7 @@ Nested inside the `TabNavigationBarComponent` you have to add content, that are 
 <a
   fudis-tab-navigation-tab
   [id]="'some-id-here'"
-  [active]="activeLink === '/your-path-here'"
+  [active]="isActive"
   {{ I'm a link! }}
 </a>
 ```
