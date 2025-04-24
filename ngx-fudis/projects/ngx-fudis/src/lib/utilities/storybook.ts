@@ -97,6 +97,9 @@ const buttonCommonExclude: string[] = [
   'tooltipPosition',
   'tooltipToggle',
   'popoverTriggerLabel',
+  'popoverPosition',
+  'popoverText',
+  'id',
 ];
 
 export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);

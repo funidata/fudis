@@ -8,7 +8,6 @@ import {
 } from '../../types/miscellaneous';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisIconRotateArray } from '../../types/icons';
-import { PopoverDirective } from '../../directives/popover/popover.directive';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
@@ -17,7 +16,6 @@ describe('ButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ButtonComponent, IconComponent],
-      imports: [PopoverDirective],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);
@@ -43,11 +41,19 @@ describe('ButtonComponent', () => {
           fixture.componentRef.setInput('size', `${size}`);
           fixture.detectChanges();
 
-          expect(sortClasses(getButton().className)).toEqual(
-            sortClasses(
-              `fudis-button fudis-button__label--visible fudis-button__${variant} fudis-button__size__${size}`,
-            ),
-          );
+          if (component.size === 'icon-only') {
+            expect(sortClasses(getButton().className)).toEqual(
+              sortClasses(
+                `fudis-button fudis-button__label--hidden fudis-button__${variant} fudis-button__size__${size}`,
+              ),
+            );
+          } else {
+            expect(sortClasses(getButton().className)).toEqual(
+              sortClasses(
+                `fudis-button fudis-button__label--visible fudis-button__${variant} fudis-button__size__${size}`,
+              ),
+            );
+          }
         });
       });
     });
@@ -145,7 +151,7 @@ describe('ButtonComponent', () => {
       expect(getButton().getAttribute('aria-expanded')).toEqual('true');
 
       expect(getButton().getAttribute('aria-label')).toEqual(
-        'Open additional menu It has nice things to click',
+        'Open additional menu, It has nice things to click',
       );
 
       expect(getButton().getAttribute('type')).toEqual('button');

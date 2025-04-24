@@ -58,7 +58,7 @@ Example.args = {
   ariaLabel: undefined,
   size: 'medium',
   icon: undefined,
-  iconRotate: undefined,
+  iconRotate: 'none',
   disabled: false,
 };
 
@@ -69,7 +69,7 @@ WithIcon.args = {
   ariaLabel: undefined,
   size: 'medium',
   icon: 'search',
-  iconRotate: undefined,
+  iconRotate: 'none',
   disabled: false,
 };
 
@@ -77,10 +77,10 @@ export const IconOnly = Template.bind({});
 IconOnly.args = {
   variant: 'secondary',
   label: 'Search button',
-  ariaLabel: undefined,
+  ariaLabel: 'Additional aria-label',
   size: 'medium',
   icon: 'search',
-  iconRotate: undefined,
+  iconRotate: 'none',
   labelHidden: true,
   disabled: false,
 };
@@ -193,30 +193,21 @@ export const AllVariants: StoryFn = (args) => ({
       <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
         >Icon only sized buttons with label hidden</fudis-heading
       >
-      <fudis-button
-        variant="primary"
-        [labelHidden]="true"
-        icon="search"
-        label="Primary"
-        size="icon-only"
-      ></fudis-button>
+      <fudis-button variant="primary" icon="search" label="Primary" size="icon-only"></fudis-button>
       <fudis-button
         variant="secondary"
-        [labelHidden]="true"
         icon="search"
         label="Secondary"
         size="icon-only"
       ></fudis-button>
       <fudis-button
         variant="tertiary"
-        [labelHidden]="true"
         icon="search"
         label="Tertiary"
         size="icon-only"
       ></fudis-button>
       <fudis-button
         label="Disabled"
-        [labelHidden]="true"
         icon="search"
         [disabled]="true"
         size="icon-only"
