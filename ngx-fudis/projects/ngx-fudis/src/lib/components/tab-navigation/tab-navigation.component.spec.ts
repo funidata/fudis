@@ -55,14 +55,17 @@ describe('TabNavigationComponent', () => {
     expect(tabNavigationTab1.nativeElement.getAttribute('role')).toEqual('tab');
     expect(tabNavigationTab1.nativeElement.getAttribute('tabIndex')).toEqual('-1');
     expect(tabNavigationTab1.nativeElement.getAttribute('aria-selected')).toEqual('false');
+    expect(tabNavigationTab1.nativeElement.getAttribute('aria-controls')).toEqual('panel-1');
 
     expect(tabNavigationTab2.nativeElement.getAttribute('role')).toEqual('tab');
     expect(tabNavigationTab2.nativeElement.getAttribute('tabIndex')).toEqual('-1');
     expect(tabNavigationTab2.nativeElement.getAttribute('aria-selected')).toEqual('false');
+    expect(tabNavigationTab2.nativeElement.getAttribute('aria-controls')).toEqual('panel-1');
 
     expect(tabNavigationTab3.nativeElement.getAttribute('role')).toEqual('tab');
     expect(tabNavigationTab3.nativeElement.getAttribute('tabIndex')).toEqual('0');
     expect(tabNavigationTab3.nativeElement.getAttribute('aria-selected')).toEqual('true');
+    expect(tabNavigationTab3.nativeElement.getAttribute('aria-controls')).toEqual('panel-1');
   });
 
   it('should update the required aria-attributes', () => {
