@@ -51,6 +51,11 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
   }
 
   /**
+   * If panel is not defined you can define the element id where the tab content is projected
+   */
+  @Input() ariaControls?: string;
+
+  /**
    * Variant option
    */
   @Input() variant?: 'primary' | 'secondary' = 'primary';
@@ -60,6 +65,8 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
 
   protected _leftContentHidden = signal<boolean>(false);
   protected _rightContentHidden = signal<boolean>(false);
+
+  _ariaControls = signal<string | undefined>(undefined);
 
   private _tabPanel: TabNavigationPanelComponent;
   private _currentActiveTabId: string;
@@ -80,6 +87,7 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
         .pipe(auditTime(300))
         .subscribe(() => this._assertScroll());
     }
+    if (this.ariaControls && !this._ariaControls()) this._ariaControls.set(this.ariaControls);
   }
 
   _isScrollable = () => {
@@ -143,8 +151,9 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
   };
 
   private _updatePanel = () => {
-    if (this._tabPanel && this._currentActiveTabId) {
-      this._tabPanel._activeTabId = this._currentActiveTabId;
+    if (this._tabPanel) {
+      if (this._currentActiveTabId) this._tabPanel._activeTabId = this._currentActiveTabId;
+      if (!this._ariaControls()) this._ariaControls.set(this._tabPanel.id);
     }
   };
 

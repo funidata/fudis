@@ -12,13 +12,13 @@ Tab Navigation is a component that provides an easy way to navigate between diff
 
 ## Usage Guideline
 
-The Tab Navigation consists of three components, the `TabNavigationBarComponent`, `TabNavigationTabComponent` and `TabNavigationPanelComponent`. It is meant to be used with a router of your choice.
+The Tab Navigation consists of three components, the `TabNavigationBarComponent`, `TabNavigationTabComponent` and `TabNavigationPanelComponent`. It is meant to be used with a router of your choice. You can also use the `TabNavigationBarComponent` and `TabNavigationTabComponent` without the `TabNavigationPanelComponent` but then you have to implement some of the accessibility features yourself. More detailed information is in the Examples-section.
 
 It has two variants, `primary` and `secondary`. Common property that is required by all three, is an unique identifier `id`.
 
 ### Tab Navigation Bar
 
-The `TabNavigationBarComponent` component takes in the mandatory `id`, `variant` and `panel` props. The `panel` will be a reference to the `TabNavigationPanelComponent` component, that is needed by the Tab Navigation Bar to implement accessibility functionalities.
+The `TabNavigationBarComponent` component takes in the `id`, `variant`, `ariaControls` and `panel` props. The `panel` will be a reference to the `TabNavigationPanelComponent` component, that is needed by the Tab Navigation Bar to implement accessibility functionalities. If the `TabNavigationPanelComponent` is not used, `panel` prop is not needed, but then you need to declare the `ariaControls` prop, that is a reference to the element id where the tab panel content is presented.
 
 ```
 <fudis-tab-navigation-bar
@@ -67,7 +67,9 @@ As a sibling you have to add the `TabNavigationPanelComponent` that is for viewi
 
 ## Example
 
-This example is written using angular router as an reference. **However, you can use a router of your choice.**
+These examples are written using angular router as an reference. **However, you can use a router of your choice.**
+
+This example shows the usage with the `TabNavigationPanel`. Here `ariaControls`-prop is not needed, as the panel id is passed internally to the tabs to create the needed `aria-controls` attribute.
 
 ```
 <fudis-tab-navigation-bar
@@ -88,9 +90,40 @@ This example is written using angular router as an reference. **However, you can
 </fudis-tab-navigation-panel>
 ```
 
+If however, for some reason you can't use the `TabNavigationPanel` (for example the tab panel container is in a different component than the navigation-bar), you can implement the tab navigation panel yourself. The element needs to have the `role` of `tabpanel`, an `id` and a `aria-labelledby` that references to the current active tab `id`.
+
+First you create a `tab-navigation-bar` with the `aria-controls`-prop and add the `fudis-tab-navigation-tab`s inside it.
+
+```
+<fudis-tab-navigation-bar
+  [id]="'fudis-tab-navigation-1'"
+  [aria-controls]="'tab-panel-1'"
+  [variant]="'primary'"
+  <button
+    fudis-tab-navigation-tab
+    *ngFor="let route of routes"
+    (click)="change(route)"
+    [active]="activeLink === route.path"
+    [id]="route.id">
+    {{ route.label }}
+  </button>
+</fudis-tab-navigation-bar>
+```
+
+Then, in the same or separate component of your choice, you declare a container, where you project the content with your router. In this example we have an active tab with id of `active-tab-1`. The `aria-labelledby` attribute value has to be updated dynamically to correspond the tab `id` that is currently active.
+
+```
+<div id="tab-panel-1" role="tabpanel" aria-labelledby="'active-tab-1'">
+  <router-outlet />
+</div>
+```
+
+It is also important, that the navigation bar and the panel are located next to each other as siblings, even if they are in separate components.
+
 ## Accessibility
 
 - The active tab is marked with `aria-selected` and the ones that are inactive, have a tabindex of -1, so the user can skip the tab listing with tab. Navigation between the tabs is done by left- and right arrow keyboard buttons.
+- The tabs are referencing the tab panel with `aria-controls`
 - Tab panel content is linked to the corresponding tab with `aria-labelledby`
 
 ## Properties

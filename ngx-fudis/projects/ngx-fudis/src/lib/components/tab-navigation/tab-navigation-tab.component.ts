@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
   Input,
   ViewEncapsulation,
@@ -23,6 +24,7 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
     '(keydown)': '_onKeyDown($event)',
     '[attr.tabIndex]': '_isActive ? 0 : -1',
     '[attr.aria-selected]': '_isActive',
+    '[attr.aria-controls]': '_ariaControls',
     '[class]': "'fudis-tab-navigation-tab fudis-tab-navigation-tab--' + _tabNavigation.variant",
     '[class.fudis-tab-navigation-tab--primary--active]':
       "_tabNavigation.variant === 'primary' && _isActive",
@@ -33,6 +35,7 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 export class TabNavigationTabComponent implements AfterViewInit {
   protected _tabNavigation = inject(TabNavigationBarComponent);
   protected _isActive: boolean = false;
+  protected _ariaControls: string | undefined;
 
   /**
    * Unique identifier for the component
@@ -52,6 +55,12 @@ export class TabNavigationTabComponent implements AfterViewInit {
       this._isActive = value;
       if (this._isActive) this._tabNavigation?._updateActiveLink(this.id);
     }
+  }
+
+  constructor() {
+    effect(() => {
+      this._ariaControls = this._tabNavigation._ariaControls();
+    });
   }
 
   ngAfterViewInit() {

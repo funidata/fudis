@@ -19,5 +19,6 @@ export class TabNavigationPanelComponent {
    * Unique identifier for the component
    */
   @Input() id: string;
-  _activeTabId: string;
+
+  _activeTabId: string | undefined;
 }
