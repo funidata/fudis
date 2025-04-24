@@ -48,7 +48,9 @@
         [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
         [attr.placeholder]="placeholder"
         [attr.aria-controls]="id + '-dropdown'"
-        [attr.aria-activedescendant]="control.value ? id + '-option-' + control.value.value : null"
+        [attr.aria-activedescendant]="
+          control.value ? activeDescendant(id, control.value.label) : undefined
+        "
         [attr.tabindex]="!control.disabled && !disabled ? null : -1"
         [attr.aria-expanded]="dropdownOpen"
         [attr.aria-disabled]="control.disabled || disabled || null"
