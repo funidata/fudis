@@ -22,5 +22,5 @@
     ><span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
     ><ng-content
   /></span>
-  <span aria-hidden="true" [class]="(_mainCssClass | async) + '__comma'">&comma;</span>
+  <span *ngIf="(_mainCssClass | async) === 'fudis-dl-item-details__compact'" aria-hidden="true" class="fudis-dl-item-details__compact__comma">&comma;</span>
 </ng-template>
