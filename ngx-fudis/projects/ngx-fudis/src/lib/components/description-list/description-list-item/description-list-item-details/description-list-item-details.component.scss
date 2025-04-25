@@ -33,10 +33,6 @@
       margin-bottom: spacing.$spacing-xxs;
       font-weight: typographyTokens.$font-weight-regular;
     }
-
-    &__comma {
-      display: none;
-    }
   }
 
   &__compact {
@@ -60,7 +56,7 @@
     }
 
     &__comma {
-      display: none;
+      display: none; /* Korjaa yksittäinen Item With Multiple Dd ElMENT pilkku*/
     }
   }
 }

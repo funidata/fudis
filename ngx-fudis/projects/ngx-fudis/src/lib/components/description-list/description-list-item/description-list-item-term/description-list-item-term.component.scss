@@ -15,10 +15,6 @@
       @include colorMixins.text-color('gray-dark');
     }
 
-    &__colon {
-      display: none;
-    }
-
     /* By design, tooltip is only supported in regular variant */
     &__tooltip {
       display: inline-flex;
@@ -48,11 +44,6 @@
     &__text-content {
       @include typography.description-list-compact-key-typography;
       @include colorMixins.text-color('gray-dark');
-    }
-
-    &__colon {
-      display: inline-block;
-      font-weight: typographyTokens.$font-weight-light;
     }
   }
 }
