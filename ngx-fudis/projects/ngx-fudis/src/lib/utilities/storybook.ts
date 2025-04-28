@@ -343,7 +343,13 @@ export const linkExclude: RegExp = excludeRegex([
 /**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex(['link', 'linkTitle', 'externalLink']);
+export const notificationExclude: RegExp = excludeRegex([
+  'link',
+  'linkTitle',
+  'externalLink',
+  'focus',
+  'articleElement',
+]);
 
 /**
  * Radio Button Group
@@ -512,4 +518,20 @@ export const popoverExclude: RegExp = excludeRegex([
   'clickSubscription',
   'keydownSubscription',
   'scrollSubscription',
+]);
+
+/**
+ * Tab Navigation Bar
+ */
+export const tabNavigationBarExclude: RegExp = excludeRegex([
+  'assertScroll',
+  'scrollContainer',
+  'tabNavigation',
+]);
+
+export const tabNavigationBarExampleExclude: RegExp = excludeRegex([
+  'id',
+  'activeLink',
+  'setLink',
+  'tabs',
 ]);

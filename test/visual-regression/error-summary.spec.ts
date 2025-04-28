@@ -124,7 +124,7 @@ test("error summary language change and manually sent errors", async ({ page }) 
 
   await page.getByTestId("fudis-select-2").focus();
   await expect(
-    page.getByTestId("fudis-body-text-7").getByText("Näytetään 1 tulosta"),
+    page.getByTestId("fudis-body-text-8").getByText("Näytetään 1 tulosta"),
   ).toBeVisible();
   await expect(
     page.getByTestId("fudis-select-2-option-95nokf").getByText("R2-D2 (Astromekaanikkodroidi)"),
