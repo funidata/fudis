@@ -343,7 +343,13 @@ export const linkExclude: RegExp = excludeRegex([
 /**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex(['link', 'linkTitle', 'externalLink']);
+export const notificationExclude: RegExp = excludeRegex([
+  'link',
+  'linkTitle',
+  'externalLink',
+  'focus',
+  'articleElement',
+]);
 
 /**
  * Radio Button Group
