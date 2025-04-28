@@ -53,18 +53,18 @@ export class TabNavigationTabComponent implements AfterViewInit {
   set active(value: boolean) {
     if (value !== this._isActive) {
       this._isActive = value;
-      if (this._isActive) this._tabNavigation?._updateActiveLink(this.id);
+      if (this._isActive) this._tabNavigation?.updateActiveLink(this.id);
     }
   }
 
   constructor() {
     effect(() => {
-      this._ariaControls = this._tabNavigation._ariaControls();
+      this._ariaControls = this._tabNavigation.getAriaControls()();
     });
   }
 
   ngAfterViewInit() {
-    if (this._isActive) this._tabNavigation?._updateActiveLink(this.id);
+    if (this._isActive) this._tabNavigation?.updateActiveLink(this.id);
   }
 
   protected _onKeyDown = (event: KeyboardEvent) => {
@@ -101,11 +101,11 @@ export class TabNavigationTabComponent implements AfterViewInit {
 
       focusElement?.focus();
 
-      if (this._tabNavigation._isScrollable()) {
+      if (this._tabNavigation.isScrollable()) {
         if (nextIndex === 0) {
-          this._tabNavigation?._scrollLeft(true);
+          this._tabNavigation?.scrollLeft(true);
         } else if (nextIndex === tabElements.length - 1) {
-          this._tabNavigation?._scrollRight(true);
+          this._tabNavigation?.scrollRight(true);
         } else {
           focusElement.scrollIntoView({
             behavior: 'smooth',

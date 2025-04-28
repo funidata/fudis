@@ -66,7 +66,7 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
   protected _leftContentHidden = signal<boolean>(false);
   protected _rightContentHidden = signal<boolean>(false);
 
-  _ariaControls = signal<string | undefined>(undefined);
+  private _ariaControls = signal<string | undefined>(undefined);
 
   private _tabPanel: TabNavigationPanelComponent;
   private _currentActiveTabId: string;
@@ -77,7 +77,7 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this._resizeObserver = new ResizeObserver((): void => {
-      this._assertScroll();
+      this.assertScroll();
     });
 
     if (this.tabNavigation) this._resizeObserver.observe(this.tabNavigation.nativeElement);
@@ -85,16 +85,18 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     if (this.scrollContainer) {
       this._scrollSubscription = fromEvent(this.scrollContainer.nativeElement, 'scroll')
         .pipe(auditTime(300))
-        .subscribe(() => this._assertScroll());
+        .subscribe(() => this.assertScroll());
     }
     if (this.ariaControls && !this._ariaControls()) this._ariaControls.set(this.ariaControls);
   }
 
-  _isScrollable = () => {
+  getAriaControls = () => this._ariaControls;
+
+  isScrollable = () => {
     return this._leftContentHidden() || this._rightContentHidden();
   };
 
-  _assertScroll() {
+  assertScroll() {
     const scrollContainer = this.scrollContainer?.nativeElement;
 
     if (scrollContainer) {
@@ -108,7 +110,7 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  _scrollLeft(scrollToStart?: boolean): void {
+  scrollLeft(scrollToStart?: boolean): void {
     const scrollContainer = this.scrollContainer?.nativeElement;
 
     if (scrollContainer) {
@@ -121,7 +123,7 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  _scrollRight(scrollToEnd?: boolean): void {
+  scrollRight(scrollToEnd?: boolean): void {
     const scrollContainer = this.scrollContainer.nativeElement;
 
     if (scrollContainer) {
@@ -152,12 +154,12 @@ export class TabNavigationBarComponent implements AfterViewInit, OnDestroy {
 
   private _updatePanel = () => {
     if (this._tabPanel) {
-      if (this._currentActiveTabId) this._tabPanel._activeTabId = this._currentActiveTabId;
+      if (this._currentActiveTabId) this._tabPanel.setActiveTabId(this._currentActiveTabId);
       if (!this._ariaControls()) this._ariaControls.set(this._tabPanel.id);
     }
   };
 
-  _updateActiveLink(id: string) {
+  updateActiveLink(id: string) {
     this._currentActiveTabId = id;
     this._updatePanel();
   }

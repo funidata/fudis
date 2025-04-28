@@ -20,5 +20,7 @@ export class TabNavigationPanelComponent {
    */
   @Input() id: string;
 
-  _activeTabId: string | undefined;
+  protected _activeTabId: string | undefined;
+
+  setActiveTabId = (id: string) => (this._activeTabId = id);
 }
