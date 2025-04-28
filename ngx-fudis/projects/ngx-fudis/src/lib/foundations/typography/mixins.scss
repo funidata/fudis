@@ -273,6 +273,15 @@
   font-weight: inherit;
 }
 
+// Tab component
+
+@mixin tab-text {
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-md-font-size;
+  font-weight: tokens.$font-weight-medium;
+  text-wrap: nowrap;
+}
+
 // Empty state
 
 @mixin text-emptystate {

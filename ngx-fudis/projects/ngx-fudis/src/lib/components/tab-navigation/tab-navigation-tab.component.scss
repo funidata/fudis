@@ -1,0 +1,71 @@
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/focus/mixins' as focus;
+@use '../../foundations/colors/mixins.scss' as colorMixin;
+@use '../../foundations/borders/mixins.scss' as border;
+@use '../../foundations/typography/mixins.scss' as typographyMixin;
+@use '../../foundations/typography/tokens.scss' as typography;
+
+.fudis-tab-navigation-tab {
+  @include colorMixin.bg-color('white');
+  @include colorMixin.text-color('gray-dark');
+  @include typographyMixin.tab-text;
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-right: spacing.$spacing-sm;
+  padding-left: spacing.$spacing-sm;
+  text-decoration: none;
+
+  &:focus-visible {
+    @include focus.focus-generic;
+  }
+
+  &:hover {
+    @include colorMixin.text-color('gray-dark');
+  }
+
+  &--primary {
+    @include border.border('1px', 'solid', 'gray-dark');
+
+    border-bottom: unset;
+    border-top-left-radius: spacing.$pixel-2;
+    border-top-right-radius: spacing.$pixel-2;
+    height: spacing.$spacing-xl;
+
+    &--active {
+      @include colorMixin.bg-color('primary');
+      @include colorMixin.text-color('white');
+
+      border-color: colors.$color-primary;
+      text-decoration: underline solid;
+
+      &:hover {
+        @include colorMixin.text-color('white');
+      }
+    }
+  }
+
+  &--secondary {
+    @include colorMixin.bg-color('gray-light');
+    @include colorMixin.text-color('gray-dark');
+    @include border.border('1px', 'solid', 'gray-light');
+
+    border-radius: spacing.$pixel-1;
+    height: spacing.$spacing-lg;
+
+    &--active {
+      @include colorMixin.bg-color('gray-dark');
+      @include colorMixin.text-color('white');
+      @include border.border('1px', 'solid', 'gray-dark');
+
+      text-decoration: underline solid;
+
+      &:hover {
+        @include colorMixin.text-color('white');
+      }
+    }
+  }
+}
