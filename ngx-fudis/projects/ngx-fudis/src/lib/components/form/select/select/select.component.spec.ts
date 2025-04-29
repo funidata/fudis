@@ -17,6 +17,8 @@ import { SelectIconsComponent } from '../common/select-icons/select-icons.compon
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { SelectOptionComponent } from './select-option/select-option.component';
+import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
 
 @Component({
   standalone: false,
@@ -51,9 +53,11 @@ describe('SelectComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
+        SelectOptionsDirective,
         SelectComponent,
         SelectAutocompleteDirective,
         SelectControlValueAccessorDirective,
+        SelectOptionComponent,
         ButtonComponent,
         GuidanceComponent,
         IconComponent,
@@ -296,6 +300,22 @@ describe('SelectComponent', () => {
         ?.getAttribute('value');
 
       expect(value).toEqual(null);
+    });
+
+    it('should have aria-activedescendant value matching with active select option id', () => {
+      mockComponent.control = new FormControl(defaultOptions[2]);
+      mockFixture.detectChanges();
+
+      const selectElement = getElement(mockFixture, '.fudis-select');
+
+      const activeDescendant = selectElement
+        .querySelector('.fudis-select-autocomplete')
+        ?.getAttribute('aria-activedescendant');
+
+      const options = mockFixture.debugElement.queryAll(By.css('.fudis-select-option'));
+      const activeOptionId = options[2].attributes['id'];
+
+      expect(activeDescendant).toEqual(activeOptionId);
     });
   });
 });
