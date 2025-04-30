@@ -278,20 +278,15 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
       this._iconColor.next('primary');
     }
 
-    if (this.labelHidden) {
-      return [
-        'fudis-button',
-        `fudis-button__size__${this.size}`,
-        `fudis-button__${this.variant}`,
-        `fudis-button__label--hidden`,
-      ];
-    } else {
-      return [
-        'fudis-button',
-        `fudis-button__size__${this.size}`,
-        `fudis-button__${this.variant}`,
-        `fudis-button__label--visible`,
-      ];
+    const buttonClasses = [
+      'fudis-button',
+      `fudis-button__size__${this.size}`,
+      `fudis-button__${this.variant}`,
+    ];
+
+    if (!this.labelHidden) {
+      buttonClasses.push('fudis-button__label');
     }
+    return buttonClasses;
   }
 }

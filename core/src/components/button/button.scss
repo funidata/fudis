@@ -5,11 +5,6 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
-.fudis-button-host {
-  display: inline-block;
-  position: relative;
-}
-
 .fudis-button {
   @include utilities.box-reset;
   @include borders.border-radius('2px');
@@ -21,6 +16,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  padding: 0 spacing.$spacing-xs;
   min-width: spacing.$spacing-xxl;
   vertical-align: middle;
 
@@ -33,16 +29,6 @@
     @include colors.bg-color('gray-light');
     @include borders.border('2px', 'solid', 'transparent');
     @include borders.outline('1px', 'dashed', 'gray-middle');
-  }
-
-  &__label {
-    &--hidden {
-      padding: 0 spacing.$spacing-xs;
-    }
-
-    &--visible {
-      padding: 0 spacing.$spacing-xs;
-    }
   }
 
   &__primary {
