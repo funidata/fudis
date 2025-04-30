@@ -45,5 +45,14 @@ services:
       - ./test/playwright-report:/usr/src/app/playwright-report
       - ./test/test-results:/usr/src/app/test-results
 
-volumes:
-  lib:
+  core-storybook:
+    build:
+      context: ./core/
+    image: core
+    container_name: core-storybook
+    tty: true
+    ports:
+      - 6007:6007
+    volumes:
+      - ./core/src:/usr/src/app/src
+      - ./core/_index.scss:/usr/src/app/_index.scss

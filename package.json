@@ -7,7 +7,7 @@
     "start": "npm run start:storybook && npm run logs -- fudis-storybook",
     "start:all": "npm run start:storybook && npm run start:sandbox && npm run logs",
     "start:sandbox": "docker compose up --build -d fudis-lib fudis-sandbox",
-    "start:storybook": "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) docker compose up --build -d fudis-storybook",
+    "start:storybook": "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) docker compose up --build -d fudis-storybook core-storybook",
     "stop": "docker compose down",
     "logs": "docker compose logs -f",
     "test": "cd ngx-fudis && npm test",

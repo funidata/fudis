@@ -11,7 +11,9 @@
     "./_component-styles.scss"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "storybook dev -p 6007",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -28,5 +30,16 @@
   "bugs": {
     "url": "https://github.com/funidata/fudis/issues"
   },
-  "homepage": "https://github.com/funidata/fudis#readme"
+  "homepage": "https://github.com/funidata/fudis#readme",
+  "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.12",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-storysource": "^8.6.12",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/html": "^8.6.12",
+    "@storybook/html-vite": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "sass-embedded": "^1.86.3",
+    "storybook": "^8.6.12"
+  }
 }
