@@ -4,16 +4,13 @@
   "description": "Core styles and foundations for Fudis Design System",
   "files": [
     "src",
-    "./_index.scss",
-    "./_mixins.scss",
-    "./_tokens.scss",
-    "./_classes.scss",
-    "./_component-styles.scss"
+    "./_index.scss"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "storybook dev -p 6007",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build": "scripts/copy-files.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
