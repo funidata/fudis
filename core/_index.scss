@@ -2,7 +2,6 @@
 * Export all Core SCSS files here
 */
 @forward './src/assets/fonts/fonts';
-
 @forward './src/foundations/borders/tokens';
 @forward './src/foundations/breakpoints/tokens';
 @forward './src/foundations/colors/tokens';
@@ -11,7 +10,6 @@
 @forward './src/foundations/spacing/tokens';
 @forward './src/foundations/typography/tokens';
 @forward './src/foundations/z-index/tokens';
-
 @forward './src/foundations/borders/mixins';
 @forward './src/foundations/breakpoints/mixins';
 @forward './src/foundations/colors/mixins';
@@ -21,8 +19,6 @@
 @forward './src/foundations/typography/mixins';
 @forward './src/foundations/utilities/mixins';
 @forward './src/foundations/z-index/mixins';
-
 @forward './src/foundations/spacing/classes';
 @forward './src/foundations/utilities/classes';
-
 @forward './src/components/button/button';
