@@ -1,6 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { NotificationComponent } from "./notification.component";
 import * as NotificationStories from "./notification.stories.ts";
+import { notificationArgsTableExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Notification" />
 
@@ -47,4 +48,4 @@ Please see code examples for recommended usage patterns.
 
 ## Properties
 
-<ArgTypes of={NotificationComponent} />
+<ArgTypes of={NotificationComponent} exclude={notificationArgsTableExclude} />
