@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  forwardRef,
   Host,
   HostListener,
   Inject,
@@ -31,7 +32,9 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) private _document: Document,
-    @Host() private _parentButton: ButtonComponent,
+    // HOTFIX: ForwardRef does not resolve root cause of circular dependecy, but fixes issue in standalone project with Jest unit tests where this circularity was detected (Rane)
+    // TODO: Fix underlying circular dependency
+    @Host() @Inject(forwardRef(() => ButtonComponent)) private _parentButton: ButtonComponent,
   ) {
     super();
 
