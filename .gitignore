@@ -8,6 +8,7 @@
 **/.storybook/target
 /ngx-fudis/static
 
+/core/dist
 
 # Node
 node_modules

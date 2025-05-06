@@ -1,5 +1,3 @@
-import "./button.scss";
-
 export default {
   title: "Components/Button",
   decorators: [
