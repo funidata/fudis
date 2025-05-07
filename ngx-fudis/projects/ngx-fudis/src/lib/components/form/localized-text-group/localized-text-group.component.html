@@ -26,7 +26,7 @@
         [class.fudis-form-input--touched]="
           $any(formGroup).controls[control.key].touched || formGroup.touched
         "
-        [attr.aria-invalid]="formGroup.invalid || null"
+        [attr.aria-invalid]="(formGroup.invalid && formGroup.touched) || null"
         [attr.aria-label]="
           ariaLabel
             ? label + ', ' + _selectControl.value.label + ariaLabel
@@ -56,7 +56,7 @@
         [class.fudis-form-input--touched]="
           $any(formGroup).controls[control.key].touched || formGroup.touched
         "
-        [attr.aria-invalid]="formGroup.invalid || null"
+        [attr.aria-invalid]="(formGroup.invalid && formGroup.touched) || null"
         [attr.aria-label]="
           ariaLabel
             ? label + ', ' + _selectControl.value.label + ariaLabel

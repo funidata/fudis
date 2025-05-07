@@ -53,7 +53,7 @@
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.aria-invalid]="control.invalid || null"
+        [attr.aria-invalid]="(control.invalid && control.touched) || null"
       />
       <div class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
