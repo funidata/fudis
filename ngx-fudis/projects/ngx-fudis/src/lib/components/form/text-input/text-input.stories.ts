@@ -135,6 +135,7 @@ const commonArgs: Partial<TextInputComponent> = {
   initialFocus: false,
   type: 'text',
   autocomplete: 'off',
+  name: '',
   popoverText: '',
   popoverPosition: 'left',
   popoverTriggerLabel: '',
@@ -154,6 +155,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [initialFocus]="initialFocus"
       [type]="type"
       [autocomplete]="autocomplete"
+      [name]="name"
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"

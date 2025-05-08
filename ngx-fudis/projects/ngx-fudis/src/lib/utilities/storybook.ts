@@ -335,13 +335,7 @@ export const linkExclude: RegExp = excludeRegex([
 /**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex([
-  'articleElement',
-  'focus',
-  'link',
-  'linkTitle',
-  'externalLink',
-]);
+export const notificationExclude: RegExp = excludeRegex(['articleElement', 'focus']);
 
 export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
 
@@ -462,10 +456,7 @@ export const spacingExclude: RegExp = excludeRegex([
  */
 export const textInputExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
-export const textInputControlsExclude: RegExp = excludeRegex([
-  ...formCommonControlsExclude,
-  'name',
-]);
+export const textInputControlsExclude: RegExp = excludeRegex([...formCommonControlsExclude]);
 
 /**
  * Tooltip

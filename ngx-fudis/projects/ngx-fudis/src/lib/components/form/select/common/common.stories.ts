@@ -47,6 +47,9 @@ const commonArgs: Partial<SelectComponent> = {
   selectionClearButton: true,
   variant: 'autocompleteDropdown',
   autocompleteHelpText: 'Hello from autocompleteHelpText!',
+  popoverText: '',
+  popoverTriggerLabel: '',
+  popoverPosition: 'right',
 };
 
 const SelectAutocompleteTemplate: StoryFn = (args) => ({
@@ -67,6 +70,9 @@ const SelectAutocompleteTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
         <fudis-select-option
