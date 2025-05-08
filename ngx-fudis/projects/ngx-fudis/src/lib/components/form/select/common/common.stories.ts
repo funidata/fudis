@@ -108,6 +108,9 @@ const MultiselectAutocompleteTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
         <fudis-multiselect-option
@@ -142,6 +145,9 @@ const SelectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
         <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
@@ -178,6 +184,9 @@ const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
         <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
