@@ -28,9 +28,9 @@ interface MyFieldsetForm {
       [label]="'Example Fieldset Title'"
       [helpText]="'Helptext for the fieldset'"
       [align]="'center'"
-      [popoverText]="popoverText"
-      [popoverTriggerLabel]="popoverTriggerLabel"
-      [popoverPosition]="popoverPosition"
+      [popoverText]="'I contain additional information!'"
+      [popoverTriggerLabel]="'Additional information'"
+      [popoverPosition]="'below'"
     >
       <fudis-fieldset-actions [align]="alignActions">
         <fudis-button

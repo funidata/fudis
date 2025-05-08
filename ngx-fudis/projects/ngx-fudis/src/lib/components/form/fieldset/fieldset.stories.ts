@@ -32,16 +32,5 @@ const html = String.raw;
 
 export const Example: StoryFn = (args) => ({
   props: args,
-  template: html`
-    <example-fieldset
-      [popoverPosition]="popoverPosition"
-      [popoverTriggerLabel]="popoverTriggerLabel"
-      [popoverText]="popoverText"
-    />
-  `,
+  template: html` <example-fieldset /> `,
 });
-Example.args = {
-  popoverText: 'I contain additional information!',
-  popoverTriggerLabel: 'Additional information',
-  popoverPosition: 'below',
-};
