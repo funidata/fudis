@@ -50,7 +50,7 @@ export class FieldSetComponent
   @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef<HTMLDivElement>;
 
   /**
-   * Label for the form component.
+   * Label for the Fieldset component.
    */
   @Input({ required: true }) label: string;
 

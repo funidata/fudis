@@ -2,7 +2,7 @@ import { ArgTypes, Meta } from "@storybook/blocks";
 import { TabNavigationBarComponent } from "./tab-navigation-bar.component";
 import { TabNavigationTabComponent } from "./tab-navigation-tab.component";
 import { TabNavigationPanelComponent } from "./tab-navigation-panel.component";
-import { tabNavigationBarExclude } from "../../utilities/storybook.ts";
+import { tabNavigationBarExclude, tabNavigationPanelExclude } from "../../utilities/storybook.ts";
 
 <Meta title="Components/Tabs with Navigation" />
 
@@ -143,4 +143,4 @@ It is also important, that the navigation bar and the panel are located next to 
 
 ### Tab Navigation Panel Component
 
-<ArgTypes of={TabNavigationPanelComponent} />
+<ArgTypes of={TabNavigationPanelComponent} exclude={tabNavigationPanelExclude} />

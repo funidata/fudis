@@ -32,15 +32,6 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 export const excludeAllRegex: RegExp = /.*/;
 
 /**
- * Fieldset
- */
-export const fieldsetExclude: RegExp = excludeRegex([
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
-]);
-
-/**
  * Alert
  */
 export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisibleStatus']);
@@ -283,6 +274,7 @@ export const formExclude: RegExp = excludeRegex([
   'columns',
   'handleUpdatedErrorList',
   'rowGap',
+  'serviceDefaults',
   'width',
 ]);
 
@@ -296,7 +288,7 @@ export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefau
 /**
  * Heading
  */
-export const headingControlsExclude: RegExp = excludeRegex(['id']);
+export const headingControlsExclude: RegExp = excludeRegex(['id', 'headingRef']);
 
 /**
  * LocalizedTextGroup
@@ -343,13 +335,9 @@ export const linkExclude: RegExp = excludeRegex([
 /**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex([
-  'link',
-  'linkTitle',
-  'externalLink',
-  'focus',
-  'articleElement',
-]);
+export const notificationExclude: RegExp = excludeRegex(['articleElement', 'focus']);
+
+export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
 
 /**
  * Radio Button Group
@@ -382,6 +370,7 @@ export const sectionExclude: RegExp = excludeRegex([
  * Select and Multiselect
  */
 export const selectArgsTableExclude: RegExp = excludeRegex([
+  'activeDescendant',
   'componentFocused',
   'setFocusedOption',
   'autocompleteRef',
@@ -390,6 +379,7 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'getAutocompleteFilterText',
   'closeDropdown',
   'openDropdown',
+  'selectCVA',
   'setOptionVisibility',
   'focusToInput',
   'handleCheckedSort',
@@ -401,15 +391,22 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
 
 export const selectStoryControlExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
+  'activeDescendant',
+  'autocompleteFilter',
+  'autocompleteNoResultsText',
   'selectionUpdate',
   'filterTextUpdate',
   'focusSelector',
   'visibleOptionsUpdate',
   'handleSelectionChange',
+  'clearParentOptionVisibility',
   'closeDropdown',
   'componentFocused',
   'getAutocompleteFilterText',
   'openDropdown',
+  'selectCVA',
+  'selectedOptionsFromLangChange',
+  'setAutocompleteFilterText',
   'setFocusedOption',
   'setOptionVisibility',
   'autocompleteRef',
@@ -439,15 +436,19 @@ export const spacingExclude: RegExp = excludeRegex([
   'handleFocus',
   'icon',
   'iconRotate',
+  'id',
   'label',
   'labelHidden',
+  'popoverPosition',
+  'popoverText',
+  'popoverTriggerLabel',
   'size',
-  'type',
-  'variant',
   'toggleMenu',
   'tooltip',
   'tooltipPosition',
   'tooltipToggle',
+  'type',
+  'variant',
 ]);
 
 /**
@@ -525,13 +526,20 @@ export const popoverExclude: RegExp = excludeRegex([
  */
 export const tabNavigationBarExclude: RegExp = excludeRegex([
   'assertScroll',
+  'getAriaControls',
+  'isScrollable',
   'scrollContainer',
+  'scrollLeft',
+  'scrollRight',
   'tabNavigation',
+  'updateActiveLink',
 ]);
 
 export const tabNavigationBarExampleExclude: RegExp = excludeRegex([
-  'id',
   'activeLink',
+  'id',
   'setLink',
   'tabs',
 ]);
+
+export const tabNavigationPanelExclude: RegExp = excludeRegex(['setActiveTabId']);
