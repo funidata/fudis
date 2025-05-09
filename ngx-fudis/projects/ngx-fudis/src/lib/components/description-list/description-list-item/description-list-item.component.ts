@@ -111,6 +111,9 @@ export class DescriptionListItemComponent implements AfterViewInit {
         child.appendChild(detailComma);
       }
     });
+
+    const lastItem = children[children.length - 1];
+    lastItem?.querySelector('.fudis-dl-item-details__comma')?.remove();
   }
 
   /**
