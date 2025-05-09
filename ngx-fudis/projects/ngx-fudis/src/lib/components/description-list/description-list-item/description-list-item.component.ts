@@ -1,10 +1,13 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
   Host,
   Signal,
   effect,
+  inject,
   signal,
 } from '@angular/core';
 import {
@@ -23,7 +26,7 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class DescriptionListItemComponent {
+export class DescriptionListItemComponent implements AfterViewInit {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -34,12 +37,17 @@ export class DescriptionListItemComponent {
     /**
      * Listens to parent's changes and updates CSS classes.
      */
-
     effect(() => {
-      const variant = _parentDl.getVariant()();
+      this.variant = _parentDl.getVariant()();
       const disabled = _parentDl.getDisabledGridStatus()();
 
-      this._setClasses(disabled, variant);
+      this._setClasses(disabled, this.variant);
+
+      if (this.variant === 'regular') {
+        this._setNewVariant(this.variant);
+      } else {
+        this._setNewVariant(this.variant);
+      }
     });
   }
 
@@ -60,10 +68,17 @@ export class DescriptionListItemComponent {
    */
   public id: string;
 
+  private variant: FudisDescriptionListVariant;
+
+  protected _destroyRef = inject(DestroyRef);
   /**
    * Main CSS class
    */
   protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
+
+  ngAfterViewInit() {
+    this._setNewVariant(this.variant);
+  }
 
   /**
    * DL Item has combined styles for both regular and compact versions but some styles only apply to
@@ -74,6 +89,22 @@ export class DescriptionListItemComponent {
       this._mainCssClass.next('fudis-dl-item__disabled-grid');
     } else {
       this._mainCssClass.next('fudis-dl-item');
+    }
+  }
+
+  private _setNewVariant(parentVariant: FudisDescriptionListVariant): void {
+    const children = this._element.nativeElement.querySelectorAll('fudis-dd') as NodeList;
+    if (parentVariant === 'compact') {
+      children?.forEach(child => {
+        const dlItemComma = child.appendChild(document.createElement('span'));
+        dlItemComma.className = 'fudis-dl-item-details__compact__comma';
+        dlItemComma.ariaHidden = 'true';
+        dlItemComma.textContent = ','
+      });
+    } else {
+        children?.forEach(child => {
+          child.lastChild?.remove();
+        })
     }
   }
 
