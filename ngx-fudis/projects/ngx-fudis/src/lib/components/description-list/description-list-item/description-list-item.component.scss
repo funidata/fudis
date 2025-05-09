@@ -1,4 +1,6 @@
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dl-item {
@@ -15,5 +17,12 @@
     justify-content: flex-start;
     break-inside: avoid-column;
     margin-bottom: spacing.$spacing-md;
+  }
+}
+
+.fudis-dl-item-details-host {
+  & .fudis-dl-item-details__comma {
+    @include typography.description-list-compact-value-typography;
+    @include colorMixins.text-color('gray-dark');
   }
 }

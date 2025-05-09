@@ -54,9 +54,5 @@
     &__sub-heading {
       @include utilities.box-reset;
     }
-
-    &__comma {
-      display: none; /* Korjaa yksittäinen Item With Multiple Dd ElMENT pilkku*/
-    }
   }
 }
