@@ -2,12 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   ElementRef,
   Host,
   Signal,
   effect,
-  inject,
   signal,
 } from '@angular/core';
 import {
@@ -70,7 +68,6 @@ export class DescriptionListItemComponent implements AfterViewInit {
 
   private variant: FudisDescriptionListVariant;
 
-  protected _destroyRef = inject(DestroyRef);
   /**
    * Main CSS class
    */
@@ -93,19 +90,27 @@ export class DescriptionListItemComponent implements AfterViewInit {
   }
 
   private _setNewVariant(parentVariant: FudisDescriptionListVariant): void {
-    const children = this._element.nativeElement.querySelectorAll('fudis-dd') as NodeList;
-    if (parentVariant === 'compact') {
-      children?.forEach(child => {
-        const dlItemComma = child.appendChild(document.createElement('span'));
-        dlItemComma.className = 'fudis-dl-item-details__compact__comma';
-        dlItemComma.ariaHidden = 'true';
-        dlItemComma.textContent = ','
-      });
-    } else {
-        children?.forEach(child => {
-          child.lastChild?.remove();
-        })
-    }
+    const lang = this._selectedLanguage();
+
+    const detailElement = lang 
+    ? `.fudis-dl-item-details-host--${lang}` 
+    : 'fudis-dd';
+
+    const children = this._element.nativeElement.querySelectorAll(detailElement) as NodeListOf<HTMLElement>;
+
+    children?.forEach(child => {
+      const existingCommas = child.querySelectorAll('.fudis-dl-item-details__comma');
+      existingCommas.forEach(comma => comma.remove());
+    
+
+      if (parentVariant === 'compact') {
+        const detailComma = document.createElement('span');
+        detailComma.className = `fudis-dl-item-details__comma`;
+        detailComma.ariaHidden = 'true';
+        detailComma.textContent = ',';
+        child.appendChild(detailComma);
+      }
+    });
   }
 
   /**
