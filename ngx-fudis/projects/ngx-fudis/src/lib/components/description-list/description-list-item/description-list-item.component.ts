@@ -92,28 +92,41 @@ export class DescriptionListItemComponent implements AfterViewInit {
   private _setNewVariant(parentVariant: FudisDescriptionListVariant): void {
     const lang = this._selectedLanguage();
 
-    const detailElement = lang 
-    ? `.fudis-dl-item-details-host--${lang}` 
-    : 'fudis-dd';
+    const allChildren = this._element.nativeElement.querySelectorAll('fudis-dd') as NodeListOf<HTMLElement>;
 
-    const children = this._element.nativeElement.querySelectorAll(detailElement) as NodeListOf<HTMLElement>;
-
-    children?.forEach(child => {
+    allChildren?.forEach(child => {
       const existingCommas = child.querySelectorAll('.fudis-dl-item-details__comma');
       existingCommas.forEach(comma => comma.remove());
-    
+    });
 
-      if (parentVariant === 'compact') {
+    if (parentVariant === 'compact') {
+
+      const currentDetailList = this._getCurrentDetailList(allChildren, lang);
+
+      currentDetailList.forEach(child => {
         const detailComma = document.createElement('span');
         detailComma.className = `fudis-dl-item-details__comma`;
         detailComma.ariaHidden = 'true';
         detailComma.textContent = ',';
         child.appendChild(detailComma);
-      }
-    });
+      })
 
-    const lastItem = children[children.length - 1];
+    const lastItem = currentDetailList[currentDetailList.length - 1];
     lastItem?.querySelector('.fudis-dl-item-details__comma')?.remove();
+  }
+  }
+
+  private _getCurrentDetailList(
+    allChildren: NodeListOf<HTMLElement>,
+    lang: string | null
+  ): HTMLElement[] {
+    if (lang) {
+      return Array.from(allChildren).filter(child =>
+        child.classList.contains(`fudis-dl-item-details-host--${lang}`)
+      );
+    } else {
+      return Array.from(allChildren);
+    }
   }
 
   /**
@@ -159,6 +172,8 @@ export class DescriptionListItemComponent implements AfterViewInit {
   }
 
   public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
+    // this._setNewVariant(this.variant);
+    // console.log('I was called');
     this._selectedLanguage.set(lang);
   }
 
