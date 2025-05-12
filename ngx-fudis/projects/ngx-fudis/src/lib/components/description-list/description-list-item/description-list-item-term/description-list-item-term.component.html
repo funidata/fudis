@@ -20,7 +20,7 @@
 
 <ng-template #commonContent>
   <span [class]="(_mainCssClass | async) + '__text-content'">{{ contentText }}</span
-  ><span *ngIf="(_mainCssClass | async) === 'fudis-dl-item-term__compact'">&colon;</span>
+  ><span *ngIf="(_mainCssClass | async) === 'fudis-dl-item-term__compact'" aria-hidden="true">&colon;</span>
   <span *ngIf="popoverTriggerLabel && popoverText" [class]="(_mainCssClass | async) + '__tooltip'">
     <fudis-button
       [size]="'icon-only'"
