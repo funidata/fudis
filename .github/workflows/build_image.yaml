@@ -23,3 +23,4 @@ jobs:
         with:
           name: fudis-test
           path: /tmp/fudis-test.image.tar
+          retention-days: 1
