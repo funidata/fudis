@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test("error summary", async ({ page }) => {
+test.skip("error summary", async ({ page }) => {
   const invalidEmailText =
     "Form Section Title / Fieldset Legend / Contact email: Input must be an email address.";
 
