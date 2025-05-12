@@ -45,6 +45,21 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
         }
       });
 
+    toObservable(_parentDlItem.getLastChildId())
+    .pipe(takeUntilDestroyed())
+    .subscribe((lastId) => {
+      if(lastId === this._id){
+        console.log('on tosi', lastId, this._id);
+        // this._lastChild.next(false);
+        this._lastChild = true;
+        console.log(this._lastChild);
+      } else {
+        this._lastChild = false;
+        console.log(this._lastChild);
+        // this._lastChild.next(false);
+      }
+    })  
+
     toObservable(_parentDlItem.getSelectedLanguage())
       .pipe(takeUntilDestroyed())
       .subscribe((newLang) => {
@@ -91,6 +106,9 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    * If component has language and has sent info to parent
    */
   private _detailsSent: boolean;
+
+
+  protected _lastChild: boolean = false;
 
   /**
    * Main CSS class

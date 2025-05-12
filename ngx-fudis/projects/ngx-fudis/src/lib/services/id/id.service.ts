@@ -311,4 +311,14 @@ export class FudisIdService {
 
     return newId;
   }
+
+  public getDlGrandChildrensIds(
+    childType: 'term' | 'details',
+    parentDlId: string,
+    parentItemId: string,
+  ): string[] {
+    const testi = this._idData.grandParents['description-list']?.[parentDlId]?.items[parentItemId][childType];
+
+  return testi;
+  }
 }

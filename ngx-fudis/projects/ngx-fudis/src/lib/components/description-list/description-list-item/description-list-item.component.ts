@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -23,7 +24,7 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class DescriptionListItemComponent {
+export class DescriptionListItemComponent implements AfterViewInit {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -43,6 +44,8 @@ export class DescriptionListItemComponent {
     });
   }
 
+  private _lastChildId = signal<string>('');
+
   /**
    * Storing list of available languages in Details elements
    */
@@ -54,6 +57,46 @@ export class DescriptionListItemComponent {
    * Selected language to pass to child components
    */
   private _selectedLanguage = signal<FudisLanguageAbbr | null>(null);
+
+  private array: string[];
+
+  public getLastChildId(): Signal<string> {
+    return this._lastChildId.asReadonly();
+  }
+
+  private _getLastLanguageChildId(lang: FudisLanguageAbbr): string {
+    const data = this._detailsLanguageOptions();
+  
+    if (data && data[lang]) {
+      const keys = Object.keys(data[lang]);
+      return keys.length > 0 ? keys[keys.length - 1] : '';
+    }
+  
+    return '';
+  }
+
+  ngAfterViewInit(): void {
+    if (this._selectedLanguage()) {
+
+      const lang = this._selectedLanguage() as FudisLanguageAbbr;
+
+      const testi = this._getLastLanguageChildId(lang);
+      console.log('VIKA ID', testi);
+      this._lastChildId.set(testi)
+      
+    } else {
+
+      this.array = this._idService.getDlGrandChildrensIds(
+        'details',
+        this._parentDl.id,
+        this.id);
+      console.log('all children:', this.array);
+
+      const luku = this.array?.length ? this.array[this.array.length - 1] : '';
+
+      this._lastChildId.set(luku)
+    }
+  }
 
   /**
    * Id generated with Id Service

@@ -22,5 +22,5 @@
     ><span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
     ><ng-content
   /></span>
-  <span aria-hidden="true" [class]="(_mainCssClass | async) + '__comma'">&comma;</span>
+  <span *ngIf="_lastChild" aria-hidden="true" [class]="(_mainCssClass | async) + '__comma'">&comma;</span>
 </ng-template>
