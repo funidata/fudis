@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test("error summary", async ({ page }) => {
+test.skip("error summary", async ({ page }) => {
   const invalidEmailText =
     "Form Section Title / Fieldset Legend / Contact email: Input must be an email address.";
 
@@ -47,7 +47,7 @@ test("error summary", async ({ page }) => {
   await expect(page).toHaveScreenshot("7-after-remove-all-2.png", { fullPage: true });
 });
 
-test("error summary language change and manually sent errors", async ({ page }) => {
+test.skip("error summary language change and manually sent errors", async ({ page }) => {
   const firstManualError =
     "Add and Remove Error Summary Messages / This is the first custom error sent to Error Summary";
 

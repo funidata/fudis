@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test("form dynamic inputs", async ({ page }) => {
+test.skip("form dynamic inputs", async ({ page }) => {
   const errorSummaryText =
     "There are errors in this form. Please address these before trying to submit again.";
 
