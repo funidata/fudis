@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -16,6 +15,7 @@ import {
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 import { BehaviorSubject } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dl-item',
@@ -24,7 +24,7 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class DescriptionListItemComponent implements AfterViewInit {
+export class DescriptionListItemComponent {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -32,19 +32,33 @@ export class DescriptionListItemComponent implements AfterViewInit {
   ) {
     this.id = _idService.getNewGroupId('description-list', this._parentDl.id);
 
+    toObservable(_parentDl.getVariant())
+      .pipe(takeUntilDestroyed())
+      .subscribe((newVariant) => {
+        if (newVariant === 'regular') {
+          this._variant.next('regular');
+          this._updateChildren();
+        } else {
+          this._variant.next('compact');
+          this._updateChildren();
+        }
+      });
+
     /**
      * Listens to parent's changes and updates CSS classes.
      */
 
     effect(() => {
-      const variant = _parentDl.getVariant()();
       const disabled = _parentDl.getDisabledGridStatus()();
 
-      this._setClasses(disabled, variant);
+      this._setClasses(disabled, this._variant.value);
     });
   }
 
-  private _lastChildId = signal<string>('');
+  /**
+   * Main CSS class
+   */
+  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
 
   /**
    * Storing list of available languages in Details elements
@@ -58,55 +72,64 @@ export class DescriptionListItemComponent implements AfterViewInit {
    */
   private _selectedLanguage = signal<FudisLanguageAbbr | null>(null);
 
-  private array: string[];
+  /**
+   * Current parent variant
+   */
+  private _variant = new BehaviorSubject<FudisDescriptionListVariant>('regular');
 
-  public getLastChildId(): Signal<string> {
-    return this._lastChildId.asReadonly();
-  }
+  /**
+   * List of Description List Item Detail children ids
+   */
+  private _detailChildrenIds: string[];
 
-  private _getLastLanguageChildId(lang: FudisLanguageAbbr): string {
+  /**
+   * Last Description List Item Detail id passed to children
+   */
+  private _lastChildId = signal<string | null>(null);
+
+  /**
+   * Returns a last child id of selected language.
+   */
+  private _findLastLanguageChildId(lang: FudisLanguageAbbr): string {
     const data = this._detailsLanguageOptions();
-  
+
     if (data && data[lang]) {
       const keys = Object.keys(data[lang]);
       return keys.length > 0 ? keys[keys.length - 1] : '';
     }
-  
+
     return '';
   }
 
-  updateChildren() {
-    if (this._selectedLanguage()) {
+  /**
+   * Returns a compact list last child id for Description List Item Detail component.
+   */
+  private _updateChildren(): void {
+    if (this._variant.value !== 'compact') {
+      this._lastChildId.set(null);
+      return;
+    }
 
-      const lang = this._selectedLanguage() as FudisLanguageAbbr;
+    const selectedLang = this._selectedLanguage();
 
-      const lastChildId = this._getLastLanguageChildId(lang);
-      this._lastChildId.set(lastChildId)
-      
+    if (selectedLang) {
+      const lang = selectedLang as FudisLanguageAbbr;
+
+      const lastChildId = this._findLastLanguageChildId(lang);
+      this._lastChildId.set(lastChildId);
     } else {
-      this.array = this._idService.getDlGrandChildrensIds(
+      this._detailChildrenIds = this._idService.getDlGrandChildrensIds(
         'details',
         this._parentDl.id,
-        this.id);
+        this.id,
+      );
 
-      const lastChildId = this.array?.length ? this.array[this.array.length - 1] : '';
-      this._lastChildId.set(lastChildId)
+      const lastChildId = this._detailChildrenIds?.length
+        ? this._detailChildrenIds[this._detailChildrenIds.length - 1]
+        : '';
+      this._lastChildId.set(lastChildId);
     }
   }
-
-  ngAfterViewInit(): void {
-    this.updateChildren();
-  }
-
-  /**
-   * Id generated with Id Service
-   */
-  public id: string;
-
-  /**
-   * Main CSS class
-   */
-  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
 
   /**
    * DL Item has combined styles for both regular and compact versions but some styles only apply to
@@ -119,6 +142,11 @@ export class DescriptionListItemComponent implements AfterViewInit {
       this._mainCssClass.next('fudis-dl-item');
     }
   }
+
+  /**
+   * Id generated with Id Service
+   */
+  public id: string;
 
   /**
    * Called from child Details, if it has a language property
@@ -164,10 +192,15 @@ export class DescriptionListItemComponent implements AfterViewInit {
 
   public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
     this._selectedLanguage.set(lang);
-    this.updateChildren();
+
+    this._updateChildren();
   }
 
   public getSelectedLanguage(): Signal<FudisLanguageAbbr | null> {
     return this._selectedLanguage.asReadonly();
+  }
+
+  public getLastChildId(): Signal<string | null> {
+    return this._lastChildId.asReadonly();
   }
 }

@@ -39,23 +39,20 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       .pipe(takeUntilDestroyed())
       .subscribe((newVariant) => {
         if (newVariant === 'regular') {
-          this._compactVariant = false;
           this._mainCssClass.next('fudis-dl-item-details__regular');
         } else {
-          this._compactVariant = true;
           this._mainCssClass.next('fudis-dl-item-details__compact');
         }
       });
 
     toObservable(_parentDlItem.getLastChildId())
-    .pipe(takeUntilDestroyed())
-    .subscribe((lastId) => {
-      if(lastId === this._id && this._compactVariant){
-        this._lastChild.next(false);
-      } else if (this._compactVariant) {
-        this._lastChild.next(true);
-      }
-    })  
+      .pipe(takeUntilDestroyed())
+      .subscribe((lastCompactId) => {
+        if (this._mainCssClass.value !== 'fudis-dl-item-details__compact')
+          return this._lastChild.next(null);
+
+        this._lastChild.next(lastCompactId !== this._id);
+      });
 
     toObservable(_parentDlItem.getSelectedLanguage())
       .pipe(takeUntilDestroyed())
@@ -100,13 +97,9 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   protected _langSelected = new BehaviorSubject<boolean>(false);
 
   /**
-   * If component has language and has sent info to parent
+   * If current Detail element is a last child of it's parent
    */
-  private _detailsSent: boolean;
-
-  private _compactVariant: boolean;
-
-  protected _lastChild = new BehaviorSubject<boolean>(false);
+  protected _lastChild = new BehaviorSubject<boolean | null>(false);
 
   /**
    * Main CSS class
@@ -114,6 +107,11 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>(
     'fudis-dl-item-details__regular',
   );
+
+  /**
+   * If component has language and has sent info to parent
+   */
+  private _detailsSent: boolean;
 
   /**
    * Parse Details text content and set parent Description List Item languages

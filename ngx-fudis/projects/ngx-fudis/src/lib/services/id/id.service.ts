@@ -317,8 +317,9 @@ export class FudisIdService {
     parentDlId: string,
     parentItemId: string,
   ): string[] {
-    const testi = this._idData.grandParents['description-list']?.[parentDlId]?.items[parentItemId][childType];
+    const allGrandChildrensIds =
+      this._idData.grandParents['description-list']?.[parentDlId]?.items[parentItemId][childType];
 
-  return testi;
+    return allGrandChildrensIds;
   }
 }
