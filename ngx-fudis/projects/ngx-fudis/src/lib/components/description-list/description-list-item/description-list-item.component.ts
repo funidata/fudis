@@ -90,7 +90,7 @@ export class DescriptionListItemComponent {
   /**
    * Returns a last child id of selected language.
    */
-  private _findLastLanguageChildId(lang: FudisLanguageAbbr): string {
+  private _findLastLanguageChildId(lang: FudisLanguageAbbr): string | null {
     const data = this._detailsLanguageOptions();
 
     if (data && data[lang]) {
@@ -98,7 +98,7 @@ export class DescriptionListItemComponent {
       return keys.length > 0 ? keys[keys.length - 1] : '';
     }
 
-    return '';
+    return null;
   }
 
   /**
