@@ -39,8 +39,10 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       .pipe(takeUntilDestroyed())
       .subscribe((newVariant) => {
         if (newVariant === 'regular') {
+          this._compactVariant = false;
           this._mainCssClass.next('fudis-dl-item-details__regular');
         } else {
+          this._compactVariant = true;
           this._mainCssClass.next('fudis-dl-item-details__compact');
         }
       });
@@ -48,15 +50,10 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     toObservable(_parentDlItem.getLastChildId())
     .pipe(takeUntilDestroyed())
     .subscribe((lastId) => {
-      if(lastId === this._id){
-        console.log('on tosi', lastId, this._id);
-        // this._lastChild.next(false);
-        this._lastChild = true;
-        console.log(this._lastChild);
-      } else {
-        this._lastChild = false;
-        console.log(this._lastChild);
-        // this._lastChild.next(false);
+      if(lastId === this._id && this._compactVariant){
+        this._lastChild.next(false);
+      } else if (this._compactVariant) {
+        this._lastChild.next(true);
       }
     })  
 
@@ -107,8 +104,9 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    */
   private _detailsSent: boolean;
 
+  private _compactVariant: boolean;
 
-  protected _lastChild: boolean = false;
+  protected _lastChild = new BehaviorSubject<boolean>(false);
 
   /**
    * Main CSS class

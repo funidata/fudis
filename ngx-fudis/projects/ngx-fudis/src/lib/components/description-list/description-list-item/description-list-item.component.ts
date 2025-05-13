@@ -75,27 +75,27 @@ export class DescriptionListItemComponent implements AfterViewInit {
     return '';
   }
 
-  ngAfterViewInit(): void {
+  updateChildren() {
     if (this._selectedLanguage()) {
 
       const lang = this._selectedLanguage() as FudisLanguageAbbr;
 
-      const testi = this._getLastLanguageChildId(lang);
-      console.log('VIKA ID', testi);
-      this._lastChildId.set(testi)
+      const lastChildId = this._getLastLanguageChildId(lang);
+      this._lastChildId.set(lastChildId)
       
     } else {
-
       this.array = this._idService.getDlGrandChildrensIds(
         'details',
         this._parentDl.id,
         this.id);
-      console.log('all children:', this.array);
 
-      const luku = this.array?.length ? this.array[this.array.length - 1] : '';
-
-      this._lastChildId.set(luku)
+      const lastChildId = this.array?.length ? this.array[this.array.length - 1] : '';
+      this._lastChildId.set(lastChildId)
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.updateChildren();
   }
 
   /**
@@ -164,6 +164,7 @@ export class DescriptionListItemComponent implements AfterViewInit {
 
   public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
     this._selectedLanguage.set(lang);
+    this.updateChildren();
   }
 
   public getSelectedLanguage(): Signal<FudisLanguageAbbr | null> {
