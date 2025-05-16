@@ -71,15 +71,30 @@ export class RadioButtonGroupComponent
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
 
-    console.log(this._guidance['_id'])
+    /**
+     * For Screen reader users bind guidance text to first radio child input
+     */
+    const firstRadio = this._getFirstEnabledRadio();
+    const guidanceId = this._guidance?.['_id'];
 
-    const guidanceId = this._guidance['_id'];
-
-    const firstRadio = this._document.getElementById(`fudis-radio-button-group-1-item-1`) as HTMLInputElement;
-
-    if(!firstRadio.disabled) {
+    if (firstRadio && guidanceId) {
       firstRadio.setAttribute('aria-describedby', guidanceId);
     }
+}
+
+  /**
+   * Return first radio child input when it is not disabled
+   */
+  private _getFirstEnabledRadio(): HTMLInputElement | null {
+    const radioIds = this._idService.getAllChildrenIds('radio-button-group', this.id);
+    if (!radioIds?.length) return null;
+
+    const radio = this._document.getElementById(radioIds[0]);
+    if (!(radio instanceof HTMLInputElement) || radio.disabled) {
+      return null;
+    }
+
+    return radio;
   }
 
   public triggerEmit(id: string, label: string): void {
