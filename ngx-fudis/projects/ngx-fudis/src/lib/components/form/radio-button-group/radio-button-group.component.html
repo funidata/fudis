@@ -15,6 +15,7 @@
   <fudis-fieldset-content>
     <ng-content select="fudis-radio-button" />
     <fudis-guidance
+      #radioButtonGroupGuidance
       *ngIf="control && !disableGuidance"
       [inputLabel]="label"
       [helpText]="helpText"

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -7,6 +7,8 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { Subscription } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
   selector: 'fudis-radio-button-group',
@@ -16,9 +18,13 @@ import { Subscription } from 'rxjs';
 })
 export class RadioButtonGroupComponent
   extends ControlComponentBaseDirective
-  implements OnInit, OnChanges
+  implements OnInit, OnChanges, AfterViewInit
 {
-  constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    _focusService: FudisFocusService, 
+    _idService: FudisIdService
+  ) {
     super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -27,6 +33,8 @@ export class RadioButtonGroupComponent
       }
     });
   }
+
+  @ViewChild('radioButtonGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
    * Width of Radio Button Group
@@ -57,6 +65,20 @@ export class RadioButtonGroupComponent
       this._subscription = this.control.valueChanges
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe(() => this._updateValueAndValidityTrigger.next());
+    }
+  }
+
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+
+    console.log(this._guidance['_id'])
+
+    const guidanceId = this._guidance['_id'];
+
+    const firstRadio = this._document.getElementById(`fudis-radio-button-group-1-item-1`) as HTMLInputElement;
+
+    if(!firstRadio.disabled) {
+      firstRadio.setAttribute('aria-describedby', guidanceId);
     }
   }
 
