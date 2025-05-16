@@ -81,7 +81,11 @@
       </div>
     </div>
 
-    <p *ngIf="helpText || (control && maxLength)" class="fudis-guidance__help-text">
+    <p
+      *ngIf="helpText || (control && maxLength)"
+      [attr.aria-hidden]="groupHelpTextHidden"
+      class="fudis-guidance__help-text"
+    >
       <ng-container *ngIf="helpText">{{ helpText }}</ng-container>
     </p>
   </div>

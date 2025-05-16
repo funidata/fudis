@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FudisCheckboxGroupChangeEvent,
@@ -26,7 +35,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     _idService: FudisIdService,
-    _focusService: FudisFocusService
+    _focusService: FudisFocusService,
   ) {
     super(_idService, _focusService);
 
@@ -139,14 +148,14 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * Return first checkbox child input when it is not disabled
    */
   private _getFirstEnabledCheckbox(ids: string[]): HTMLInputElement | null {
-  for (const id of ids) {
-    const checkbox = this._document.getElementById(id);
-    if (checkbox instanceof HTMLInputElement && !checkbox.disabled) {
-      return checkbox;
+    for (const id of ids) {
+      const checkbox = this._document.getElementById(id);
+      if (checkbox instanceof HTMLInputElement && !checkbox.disabled) {
+        return checkbox;
+      }
     }
-  }
 
-  return null;
+    return null;
   }
 
   /**

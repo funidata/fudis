@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -22,8 +32,8 @@ export class RadioButtonGroupComponent
 {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
-    _focusService: FudisFocusService, 
-    _idService: FudisIdService
+    _focusService: FudisFocusService,
+    _idService: FudisIdService,
   ) {
     super(_idService, _focusService);
 
@@ -80,7 +90,7 @@ export class RadioButtonGroupComponent
     if (firstRadio && guidanceId) {
       firstRadio.setAttribute('aria-describedby', guidanceId);
     }
-}
+  }
 
   /**
    * Return first radio child input when it is not disabled
