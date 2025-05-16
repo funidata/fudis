@@ -15,6 +15,7 @@
   <fudis-fieldset-content>
     <ng-content select="fudis-checkbox" />
     <fudis-guidance
+      #checkboxGroupGuidance
       *ngIf="formGroup && !disableGuidance"
       [inputLabel]="label"
       [helpText]="helpText"
