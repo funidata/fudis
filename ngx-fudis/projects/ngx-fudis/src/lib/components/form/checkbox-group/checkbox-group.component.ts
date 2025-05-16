@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FudisCheckboxGroupChangeEvent,
@@ -10,6 +19,8 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { DOCUMENT } from '@angular/common';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -19,9 +30,13 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 })
 export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   extends GroupComponentBaseDirective
-  implements OnInit
+  implements OnInit, AfterViewInit
 {
-  constructor(_idService: FudisIdService, _focusService: FudisFocusService) {
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    _idService: FudisIdService,
+    _focusService: FudisFocusService,
+  ) {
     super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -30,6 +45,9 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
       }
     });
   }
+
+  @ViewChild('checkboxGroupGuidance') private _guidance: GuidanceComponent;
+
   /**
    * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox
    * children.
@@ -109,6 +127,35 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(() => this._updateValueAndValidityTrigger.next());
     this._applyGroupMarkAsTouched();
+  }
+
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+
+    /**
+     * For Screen reader users bind guidance text to first checkbox child input
+     */
+    const checkboxIds = this._idService.getAllChildrenIds('checkbox-group', this.id);
+    const firstCheckbox = this._getFirstEnabledCheckbox(checkboxIds);
+    const guidanceId = this._guidance?.['_id'];
+
+    if (firstCheckbox && guidanceId) {
+      firstCheckbox.setAttribute('aria-describedby', guidanceId);
+    }
+  }
+
+  /**
+   * Return first checkbox child input when it is not disabled
+   */
+  private _getFirstEnabledCheckbox(ids: string[]): HTMLInputElement | null {
+    for (const id of ids) {
+      const checkbox = this._document.getElementById(id);
+      if (checkbox instanceof HTMLInputElement && !checkbox.disabled) {
+        return checkbox;
+      }
+    }
+
+    return null;
   }
 
   /**

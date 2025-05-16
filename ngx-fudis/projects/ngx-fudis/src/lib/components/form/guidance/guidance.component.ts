@@ -92,6 +92,12 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   @Input() groupBlurredOut: boolean = true;
 
   /**
+   * Hide visible helptext from screen readers when group components E.g. Radio Button Group and
+   * Checkbox Group components are used.
+   */
+  @Input() groupHelpTextHidden: boolean = false;
+
+  /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where
    * "characters used" is "maxLengthText".
    */

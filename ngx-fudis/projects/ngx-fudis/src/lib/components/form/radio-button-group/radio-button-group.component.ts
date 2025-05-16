@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -7,6 +17,8 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { Subscription } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
   selector: 'fudis-radio-button-group',
@@ -16,9 +28,13 @@ import { Subscription } from 'rxjs';
 })
 export class RadioButtonGroupComponent
   extends ControlComponentBaseDirective
-  implements OnInit, OnChanges
+  implements OnInit, OnChanges, AfterViewInit
 {
-  constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    _focusService: FudisFocusService,
+    _idService: FudisIdService,
+  ) {
     super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -27,6 +43,8 @@ export class RadioButtonGroupComponent
       }
     });
   }
+
+  @ViewChild('radioButtonGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
    * Width of Radio Button Group
@@ -58,6 +76,35 @@ export class RadioButtonGroupComponent
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe(() => this._updateValueAndValidityTrigger.next());
     }
+  }
+
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+
+    /**
+     * For Screen reader users bind guidance text to first radio child input
+     */
+    const firstRadio = this._getFirstEnabledRadio();
+    const guidanceId = this._guidance?.['_id'];
+
+    if (firstRadio && guidanceId) {
+      firstRadio.setAttribute('aria-describedby', guidanceId);
+    }
+  }
+
+  /**
+   * Return first radio child input when it is not disabled
+   */
+  private _getFirstEnabledRadio(): HTMLInputElement | null {
+    const radioIds = this._idService.getAllChildrenIds('radio-button-group', this.id);
+    if (!radioIds?.length) return null;
+
+    const radio = this._document.getElementById(radioIds[0]);
+    if (!(radio instanceof HTMLInputElement) || radio.disabled) {
+      return null;
+    }
+
+    return radio;
   }
 
   public triggerEmit(id: string, label: string): void {
