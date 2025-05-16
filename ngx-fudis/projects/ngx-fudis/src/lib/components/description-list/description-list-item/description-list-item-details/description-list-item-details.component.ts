@@ -48,10 +48,11 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     toObservable(_parentDlItem.getLastChildId())
       .pipe(takeUntilDestroyed())
       .subscribe((lastCompactId) => {
-        if (this._mainCssClass.value !== 'fudis-dl-item-details__compact')
-          return this._lastChild.next(null);
-
-        this._lastChild.next(lastCompactId !== this._id);
+        if (this._mainCssClass.value !== 'fudis-dl-item-details__compact') {
+          this._lastChild.next(false);
+        } else {
+          this._lastChild.next(lastCompactId !== this._id);
+        }
       });
 
     toObservable(_parentDlItem.getSelectedLanguage())
@@ -99,7 +100,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   /**
    * If current Detail element is a last child of it's parent
    */
-  protected _lastChild = new BehaviorSubject<boolean | null>(false);
+  protected _lastChild = new BehaviorSubject<boolean>(false);
 
   /**
    * Main CSS class

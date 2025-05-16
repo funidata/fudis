@@ -95,7 +95,7 @@ export class DescriptionListItemComponent {
 
     if (data && data[lang]) {
       const keys = Object.keys(data[lang]);
-      return keys.length > 0 ? keys[keys.length - 1] : '';
+      return keys.length > 0 ? keys[keys.length - 1] : null;
     }
 
     return null;
@@ -126,7 +126,7 @@ export class DescriptionListItemComponent {
 
       const lastChildId = this._detailChildrenIds?.length
         ? this._detailChildrenIds[this._detailChildrenIds.length - 1]
-        : '';
+        : null;
       this._lastChildId.set(lastChildId);
     }
   }
