@@ -45,6 +45,16 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
         }
       });
 
+    toObservable(_parentDlItem.getLastChildId())
+      .pipe(takeUntilDestroyed())
+      .subscribe((lastCompactId) => {
+        if (this._mainCssClass.value !== 'fudis-dl-item-details__compact') {
+          this._lastChild.next(false);
+        } else {
+          this._lastChild.next(lastCompactId !== this._id);
+        }
+      });
+
     toObservable(_parentDlItem.getSelectedLanguage())
       .pipe(takeUntilDestroyed())
       .subscribe((newLang) => {
@@ -88,9 +98,9 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   protected _langSelected = new BehaviorSubject<boolean>(false);
 
   /**
-   * If component has language and has sent info to parent
+   * If current Detail element is a last child of it's parent
    */
-  private _detailsSent: boolean;
+  protected _lastChild = new BehaviorSubject<boolean>(false);
 
   /**
    * Main CSS class
@@ -98,6 +108,11 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>(
     'fudis-dl-item-details__regular',
   );
+
+  /**
+   * If component has language and has sent info to parent
+   */
+  private _detailsSent: boolean;
 
   /**
    * Parse Details text content and set parent Description List Item languages

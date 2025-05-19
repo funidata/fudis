@@ -1,6 +1,6 @@
-import test, { expect } from "@playwright/test";
+import test, { expect, Page } from "@playwright/test";
 
-test.skip("error summary", async ({ page }) => {
+test("error summary", async ({ page }) => {
   const invalidEmailText =
     "Form Section Title / Fieldset Legend / Contact email: Input must be an email address.";
 
@@ -47,7 +47,7 @@ test.skip("error summary", async ({ page }) => {
   await expect(page).toHaveScreenshot("7-after-remove-all-2.png", { fullPage: true });
 });
 
-test.skip("error summary language change and manually sent errors", async ({ page }) => {
+test("error summary language change and manually sent errors", async ({ page }) => {
   const firstManualError =
     "Add and Remove Error Summary Messages / This is the first custom error sent to Error Summary";
 
@@ -95,8 +95,13 @@ test.skip("error summary language change and manually sent errors", async ({ pag
   await expect(page).toHaveScreenshot("9-manual-errors-visible-fi.png", { fullPage: true });
 
   // Remove manual errors
-  await page.getByTestId("error-button-1").click();
-  await page.getByTestId("error-button-2").click();
+  await page.getByText("Piilota Ensimmäinen Virhe").click();
+  await page.getByText("Piilota Toinen Virhe").click();
+
+  // Let's wait until the hide action has happened by checking that the text changes in the buttons
+  await page.getByText("Näytä Ensimmäinen Virhe").waitFor();
+  await page.getByText("Näytä Toinen Virhe").waitFor();
+
   await expect(page.getByText(firstManualErrorFi)).not.toBeVisible();
   await expect(page.getByText(secondManualErrorFi)).not.toBeVisible();
   await expect(page).toHaveScreenshot("10-manual-errors-remove.png", { fullPage: true });
@@ -118,17 +123,13 @@ test.skip("error summary language change and manually sent errors", async ({ pag
     "Korkeampi maankamara, Kuolemantähden henkilöstöedut",
   );
   await page.getByTestId("fudis-select-1").click();
-  await expect(
-    page.getByTestId("fudis-select-1-option-b6n1bd").getByText("Jabba the Hutt (Rikollispomo)"),
-  ).toBeVisible();
+  await assertDropdownOption(page, "fudis-select-1-option-b6n1bd", "Jabba the Hutt (Rikollispomo)");
 
   await page.getByTestId("fudis-select-2").focus();
   await expect(
     page.getByTestId("fudis-body-text-8").getByText("Näytetään 1 tulosta"),
   ).toBeVisible();
-  await expect(
-    page.getByTestId("fudis-select-2-option-95nokf").getByText("R2-D2 (Astromekaanikkodroidi)"),
-  ).toBeVisible();
+  await assertDropdownOption(page, "fudis-select-2-option-95nokf", "R2-D2 (Astromekaanikkodroidi)");
 
   await expect(page.getByTestId("fudis-select-2-option-95nokf")).toHaveClass(
     "fudis-select-option fudis-select-option__focusable fudis-select-option--selected",
@@ -150,3 +151,9 @@ test.skip("error summary language change and manually sent errors", async ({ pag
     "The High Ground, Death Star Employee Benefits",
   );
 });
+
+const assertDropdownOption = async (page: Page, id: string, result: string) => {
+  const option = page.getByTestId(id);
+  await option.waitFor();
+  await expect(option.getByText(result)).toBeVisible();
+};

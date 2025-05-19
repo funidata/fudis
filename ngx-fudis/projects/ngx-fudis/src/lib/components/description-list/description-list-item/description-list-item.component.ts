@@ -15,6 +15,7 @@ import {
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 import { BehaviorSubject } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dl-item',
@@ -31,17 +32,33 @@ export class DescriptionListItemComponent {
   ) {
     this.id = _idService.getNewGroupId('description-list', this._parentDl.id);
 
+    toObservable(_parentDl.getVariant())
+      .pipe(takeUntilDestroyed())
+      .subscribe((newVariant) => {
+        if (newVariant === 'regular') {
+          this._variant.next('regular');
+          this._updateChildren();
+        } else {
+          this._variant.next('compact');
+          this._updateChildren();
+        }
+      });
+
     /**
      * Listens to parent's changes and updates CSS classes.
      */
 
     effect(() => {
-      const variant = _parentDl.getVariant()();
       const disabled = _parentDl.getDisabledGridStatus()();
 
-      this._setClasses(disabled, variant);
+      this._setClasses(disabled, this._variant.value);
     });
   }
+
+  /**
+   * Main CSS class
+   */
+  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
 
   /**
    * Storing list of available languages in Details elements
@@ -56,14 +73,63 @@ export class DescriptionListItemComponent {
   private _selectedLanguage = signal<FudisLanguageAbbr | null>(null);
 
   /**
-   * Id generated with Id Service
+   * Current parent variant
    */
-  public id: string;
+  private _variant = new BehaviorSubject<FudisDescriptionListVariant>('regular');
 
   /**
-   * Main CSS class
+   * List of Description List Item Detail children ids
    */
-  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
+  private _detailChildrenIds: string[];
+
+  /**
+   * Last Description List Item Detail id passed to children
+   */
+  private _lastChildId = signal<string | null>(null);
+
+  /**
+   * Returns a last child id of selected language.
+   */
+  private _findLastLanguageChildId(lang: FudisLanguageAbbr): string | null {
+    const data = this._detailsLanguageOptions();
+
+    if (data && data[lang]) {
+      const keys = Object.keys(data[lang]);
+      return keys.length > 0 ? keys[keys.length - 1] : null;
+    }
+
+    return null;
+  }
+
+  /**
+   * Returns a compact list last child id for Description List Item Detail component.
+   */
+  private _updateChildren(): void {
+    if (this._variant.value !== 'compact') {
+      this._lastChildId.set(null);
+      return;
+    }
+
+    const selectedLang = this._selectedLanguage();
+
+    if (selectedLang) {
+      const lang = selectedLang as FudisLanguageAbbr;
+
+      const lastChildId = this._findLastLanguageChildId(lang);
+      this._lastChildId.set(lastChildId);
+    } else {
+      this._detailChildrenIds = this._idService.getDlGrandChildrensIds(
+        'details',
+        this._parentDl.id,
+        this.id,
+      );
+
+      const lastChildId = this._detailChildrenIds?.length
+        ? this._detailChildrenIds[this._detailChildrenIds.length - 1]
+        : null;
+      this._lastChildId.set(lastChildId);
+    }
+  }
 
   /**
    * DL Item has combined styles for both regular and compact versions but some styles only apply to
@@ -76,6 +142,11 @@ export class DescriptionListItemComponent {
       this._mainCssClass.next('fudis-dl-item');
     }
   }
+
+  /**
+   * Id generated with Id Service
+   */
+  public id: string;
 
   /**
    * Called from child Details, if it has a language property
@@ -121,9 +192,15 @@ export class DescriptionListItemComponent {
 
   public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
     this._selectedLanguage.set(lang);
+
+    this._updateChildren();
   }
 
   public getSelectedLanguage(): Signal<FudisLanguageAbbr | null> {
     return this._selectedLanguage.asReadonly();
+  }
+
+  public getLastChildId(): Signal<string | null> {
+    return this._lastChildId.asReadonly();
   }
 }
