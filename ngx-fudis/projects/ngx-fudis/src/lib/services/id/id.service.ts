@@ -123,6 +123,10 @@ export class FudisIdService {
     return newId;
   }
 
+  public getAllChildrenIds(parentType: FudisIdParent, parentId: string): string[] {
+    return this._idData.parents[parentType]?.[parentId];
+  }
+
   /**
    * Add id to collection of parents children
    */

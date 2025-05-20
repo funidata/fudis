@@ -115,6 +115,14 @@ describe('Basic inputs of Radio Button Group', () => {
     expect(helpText.textContent).toContain('Some help text');
   });
 
+  it('should have visible helptext set to aria-hidden true', () => {
+    const helpText = fixture.nativeElement.querySelector(
+      '.fudis-guidance__help-text',
+    ) as HTMLElement;
+
+    expect(helpText.getAttribute('aria-hidden')).toEqual('true');
+  });
+
   it('should have correct helptext and aria hidden removed in the legend', () => {
     const helpText = fixture.nativeElement.querySelector(
       '.fudis-guidance__help-text',
@@ -190,6 +198,24 @@ describe('Basic inputs of Radio Button Group', () => {
           .nativeElement.getAttribute('ng-reflect-name');
         expect(radioName).toEqual(radioGroupId);
       });
+    });
+
+    it('first input should have matching aria-described-by id', () => {
+      const guidance = getElement(fixture, '.fudis-guidance') as HTMLElement;
+      const guidanceId = guidance.getAttribute('id');
+
+      const radioButtons = fixture.debugElement.queryAll(By.css('fudis-radio-button'));
+      const radioArray = [...radioButtons];
+
+      const ariaDescribedBy = radioArray[0]
+        .query(By.css('.fudis-radio-button__input'))
+        .nativeElement.getAttribute('aria-describedby');
+      const noneExistingAriaDescribedBy = radioArray[1]
+        .query(By.css('.fudis-radio-button__input'))
+        .nativeElement.getAttribute('aria-describedby');
+
+      expect(ariaDescribedBy).toEqual(guidanceId);
+      expect(noneExistingAriaDescribedBy).toBeNull();
     });
 
     it('should have invalid styles and states, when form control is touched and should display errors', () => {

@@ -16,6 +16,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { getElement } from '../../../utilities/tests/utilities';
 
 type TestForm = {
   apple: FormControl<boolean | null>;
@@ -176,6 +177,14 @@ describe('CheckboxGroupComponent', () => {
       expect(helpText.textContent).toContain('Some help text');
     });
 
+    it('should have visible helptext set to aria-hidden true', () => {
+      const helpText = fixture.nativeElement.querySelector(
+        '.fudis-guidance__help-text',
+      ) as HTMLElement;
+
+      expect(helpText.getAttribute('aria-hidden')).toEqual('true');
+    });
+
     it('should have correct helptext and aria hidden removed in the legend', () => {
       const helpText = fixture.nativeElement.querySelector(
         '.fudis-guidance__help-text',
@@ -240,6 +249,18 @@ describe('CheckboxGroupComponent', () => {
         );
 
         expect(element.length).toEqual(5);
+      });
+
+      it('first input should have matching aria-described-by id', () => {
+        const guidance = getElement(fixture, '#first-group .fudis-guidance') as HTMLElement;
+        const guidanceId = guidance.getAttribute('id');
+
+        const element: HTMLElement[] = fixture.nativeElement.querySelectorAll(
+          '#first-group fudis-checkbox .fudis-checkbox__input',
+        );
+
+        expect(element[0].getAttribute('aria-describedby')).toEqual(guidanceId);
+        expect(element[1].getAttribute('aria-describedby')).toBeNull();
       });
 
       it('should have invalid styled child elements with invalid state, when form group is touched and should display errors', () => {

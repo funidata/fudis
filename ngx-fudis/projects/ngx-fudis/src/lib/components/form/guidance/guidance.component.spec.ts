@@ -75,6 +75,11 @@ describe('GuidanceComponent', () => {
       expect(element.innerHTML).toContain('This is describing guidance text');
     });
 
+    it('should have groupHelpTextHidden set to false', () => {
+      const element = getElement(fixture, '.fudis-guidance__help-text');
+      expect(element.getAttribute('aria-hidden')).toEqual('false');
+    });
+
     it('should have ariaLive assertive', () => {
       const element = getElement(fixture, '.fudis-guidance__errors__list');
       expect(element.getAttribute('arialive')).toEqual('polite');
