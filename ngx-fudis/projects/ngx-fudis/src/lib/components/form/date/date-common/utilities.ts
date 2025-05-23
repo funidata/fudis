@@ -59,8 +59,8 @@ export const parseDate = (value: string | null | undefined): Date | null => {
         .map(Number)
     : null;
 
-  // If day, month and year are provided
-  if (numberArray?.length === 3) {
+  // If day, month and year are provided. Year must have 4 digits.
+  if (numberArray?.length === 3 && numberArray[2].toString().length === 4) {
     const newDate = new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
 
     const dayUnchanged = newDate.getDate() === numberArray[0];
