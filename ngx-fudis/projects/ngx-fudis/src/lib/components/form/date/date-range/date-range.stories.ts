@@ -86,18 +86,18 @@ DateRange.args = {
 const TemplateDateRangeMinMax: StoryFn = (args) => ({
   props: {
     ...args,
-    controlStart: new FormControl<Date | null>(null, [
+    controlStart: new FormControl<Date | null>(new Date(2025, 4, 15), [
       FudisValidators.required('Date is required.'),
       FudisValidators.datepickerMin({
-        value: new Date(2024, 4, 15),
-        message: 'Start date cannot be earlier than 15.5.2024',
+        value: new Date(2025, 4, 15),
+        message: 'Start date cannot be earlier than 15.5.2025',
       }),
     ]),
-    controlEnd: new FormControl<Date | null>(null, [
+    controlEnd: new FormControl<Date | null>(new Date(2025, 5, 20), [
       FudisValidators.required('Date is required.'),
       FudisValidators.datepickerMax({
-        value: new Date(2024, 5, 20),
-        message: 'End date cannot be later than 20.6.2024',
+        value: new Date(2025, 5, 20),
+        message: 'End date cannot be later than 20.6.2025',
       }),
     ]),
   },
@@ -105,14 +105,14 @@ const TemplateDateRangeMinMax: StoryFn = (args) => ({
     <fudis-datepicker
       fudisDateStart
       [label]="'Start date'"
-      [helpText]="'Choose start date'"
+      [helpText]="'Show error by entering date before 15.5.2025'"
       [control]="controlStart"
       [dateParse]="dateParse"
     />
     <fudis-datepicker
       fudisDateEnd
       [label]="'End date'"
-      [helpText]="'Choose end date'"
+      [helpText]="'Show error by entering date after 20.6.2025'"
       [control]="controlEnd"
       [dateParse]="dateParse"
     />
