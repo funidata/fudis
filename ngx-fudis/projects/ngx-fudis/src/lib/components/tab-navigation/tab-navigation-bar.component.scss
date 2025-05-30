@@ -3,7 +3,6 @@
 @use '../../foundations/focus/mixins' as focus;
 @use '../../foundations/colors/mixins.scss' as colorMixin;
 @use '../../foundations/borders/mixins.scss' as border;
-@use '../../foundations/typography/mixins.scss' as typographyMixin;
 @use '../../foundations/typography/tokens.scss' as typography;
 
 .fudis-tab-navigation-bar {
