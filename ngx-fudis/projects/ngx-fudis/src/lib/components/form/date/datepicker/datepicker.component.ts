@@ -76,6 +76,7 @@ export class DatepickerComponent
               datepickerEndDateInvalid: { message: this._endDateInvalidTranslation },
             });
           }
+          this.control?.markAllAsTouched();
         } else {
           if (currentErrors) {
             delete currentErrors['datepickerStartDateInvalid'];
@@ -217,6 +218,17 @@ export class DatepickerComponent
 
     if (!this._parseValidatorInstance && this.dateParse) {
       this._addParseValidator();
+    }
+  }
+
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+
+    const inputElValue = this._inputRef?.nativeElement?.value;
+    const isValidDate = inputElValue ? parseDate(inputElValue) : false;
+
+    if (isValidDate !== false) {
+      this._parentDateRange?.checkDateCrossings(isValidDate, this.dateRangeType!);
     }
   }
 
