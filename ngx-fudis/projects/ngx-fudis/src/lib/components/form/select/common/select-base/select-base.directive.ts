@@ -138,7 +138,7 @@ export class SelectBaseDirective
   /**
    * CSS selector for querying focus states
    */
-  public focusSelector: string = ".fudis-select-option__focusable:not([aria-disabled='true'])";
+  public focusSelector: string = ".fudis-select-option__focusable";
 
   /**
    * For setting dropdown open / closed
