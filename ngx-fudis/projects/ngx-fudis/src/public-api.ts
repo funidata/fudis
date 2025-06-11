@@ -1,6 +1,7 @@
 /*
  * Public API Surface of ngx-fudis
  * Include component/directive/service/validator to the list below, when you want to expose it outside.
+ * If you create new type files, export them from the types/types.ts file. The types file is already exported from here.
  */
 
 export * from './lib/ngx-fudis.module';
