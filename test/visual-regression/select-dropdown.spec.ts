@@ -14,6 +14,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
   await page.keyboard.press("ArrowDown");
   await expect(page.getByTestId("fudis-select-1-option-100zewl")).toBeFocused();
 
@@ -75,11 +76,6 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   /**
    * Disabled with selection
    */
-  await page.getByTestId("fudis-button-1").focus();
-  await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-
-  await page.getByTestId("fudis-button-1").click();
-  await page.getByTestId("fudis-button-1").click();
   await page.getByTestId("fudis-select-1").focus();
   await page.getByTestId("fudis-select-1-clear-button").focus();
   await page.keyboard.press("Enter");
@@ -92,6 +88,23 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
    */
   await page.getByTestId("fudis-button-1").click();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(0);
+
+  /**
+   * Disabled dropdown options should receive focus
+   */
+  await page.getByTestId("fudis-button-1").click();
+  await page.getByTestId("fudis-select-1").focus();
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
+  await expect(page.getByTestId("fudis-select-1-option-13slwtn")).toBeFocused();
+
+  await page.keyboard.press("Enter");
+  await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
+  await page.getByTestId("fudis-select-1").getByText("Platypus");
 });
 
 test("Select dropdown without clear button", async ({ page }) => {
