@@ -106,6 +106,11 @@ export { FudisDialogService } from './lib/services/dialog/dialog.service';
 export { FudisGridService } from './lib/services/grid/grid.service';
 
 /**
+ * TYPES
+ */
+export * from './lib/types/types';
+
+/**
  * VALIDATORS
  */
 export { FudisGroupValidators } from './lib/utilities/form/groupValidators';
