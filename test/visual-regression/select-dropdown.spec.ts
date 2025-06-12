@@ -102,9 +102,8 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
   await expect(page.getByTestId("fudis-select-1-option-13slwtn")).toBeFocused();
 
-  await page.keyboard.press("Enter");
-  await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await page.getByTestId("fudis-select-1").getByText("Platypus");
+  await page.keyboard.press("Enter"); /* Doesn't make selection on disabled option */
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
 });
 
 test("Select dropdown without clear button", async ({ page }) => {
