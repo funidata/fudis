@@ -106,7 +106,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    */
   protected _keyDown(event: KeyboardEvent) {
     event.preventDefault();
-    if (event.key === 'Enter' || event.key === ' ') {
+    if ((event.key === 'Enter' || event.key === ' ') && !this.data.disabled) {
       this._clickOption(event);
     } else if (event.key === 'Tab') {
       this._parent.focusToInput();

@@ -104,8 +104,6 @@ describe('SelectComponent', () => {
     fixture.detectChanges();
   }
 
-  // TODO: add test for disabled states
-
   describe('Control', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(SelectComponent);
