@@ -34,7 +34,7 @@ export class LabelComponent
 
     this._resizeObserver = new ResizeObserver(
       throttle(() => {
-        _labelHeightService.triggerLabelHeightSet(this.id);
+        //_labelHeightService.triggerLabelHeightSet(this.id);
       }, 25),
     );
   }
@@ -98,7 +98,7 @@ export class LabelComponent
         element: this._labelElementRef.nativeElement,
       };
 
-      this._labelHeightService.registerNewLabel(data);
+      //this._labelHeightService.registerNewLabel(data);
     }
   }
 
@@ -108,13 +108,13 @@ export class LabelComponent
       element: this._labelElementRef.nativeElement,
     };
 
-    this._labelHeightService.registerNewLabel(data);
+    //this._labelHeightService.registerNewLabel(data);
 
-    this._resizeObserver.observe(this._labelElementRef.nativeElement);
+    //this._resizeObserver.observe(this._labelElementRef.nativeElement);
   }
 
   ngOnDestroy(): void {
     this._resizeObserver.disconnect();
-    this._labelHeightService.deleteLabelData(this.id);
+    //this._labelHeightService.deleteLabelData(this.id);
   }
 }

@@ -7,19 +7,28 @@
   @include colorMixins.text-color('gray-dark');
   @include typography.text-field-label;
 
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  &__button {
-    align-self: flex-end;
-    margin-left: spacing.$spacing-xxs;
-  }
+  display: inline-block;
+  vertical-align: baseline;
+  position: relative;
+  width: 100%;
 
   &__content {
+    display: inline-block;
     margin: spacing.$spacing-xxs 0;
     min-height: spacing.$spacing-md;
     white-space: break-spaces;
+    width: 100%;
+
+    &--narrow {
+      max-width: calc(100% - #{spacing.$spacing-lg});
+    }
+
+    &__button {
+      margin-left: spacing.$spacing-xxs;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
 
     &__text {
       margin-right: spacing.$spacing-xs;
@@ -33,9 +42,8 @@
     &__required {
       @include typography.text-field-label;
       @include colorMixins.text-color('gray-middle');
-
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: baseline;
       text-transform: initial;
       /* stylelint-disable-next-line property-disallowed-list */
       font-size: typographyTokens.$body-text-sm-font-size;
