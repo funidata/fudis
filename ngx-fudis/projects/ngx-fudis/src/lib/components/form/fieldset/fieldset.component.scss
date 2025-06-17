@@ -19,46 +19,35 @@
   &__legend {
     @include utilities.box-reset;
     display: contents;
-    align-items: baseline;
 
     &__main {
-      display: block;
+      display: flex;
+      align-items: baseline;
+
       &:focus-visible {
         @include focus.focus-generic;
       }
 
       &__text-content {
-        width: fit-content;
-        position: relative;
-        display: inline-block;
         margin: spacing.$spacing-xxs 0;
         min-height: spacing.$spacing-md;
         white-space: break-spaces;
-
-        &__wrapper {
-          display: inline-block;
-          width: 100%;
-          &--compact {
-            max-width: calc(100% - #{spacing.$spacing-lg});
-          }
-        }
       }
 
       &__text {
-        @include colors.text-color('gray-dark');
         display: inline-block;
+        @include colors.text-color('gray-dark');
         margin-right: spacing.$spacing-xs;
       }
 
       &__space {
-        display: inline-block;
+        display: inline;
         width: 0;
       }
 
       &__required {
         @include typography.text-field-label;
         @include colors.text-color('gray-middle');
-
         display: inline-block;
         text-transform: initial;
         /* stylelint-disable-next-line property-disallowed-list */
@@ -66,11 +55,7 @@
       }
 
       &__tooltip-button {
-        margin-left: spacing.$spacing-xxs;
-        position: absolute !important;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
+        align-self: flex-start;
       }
     }
 
