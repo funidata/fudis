@@ -2,6 +2,7 @@
 
 .fudis-date-range {
   display: grid;
+  align-items: baseline;
   grid-template-columns: 1fr 1fr;
   column-gap: spacing.$spacing-sm;
   opacity: 1;
