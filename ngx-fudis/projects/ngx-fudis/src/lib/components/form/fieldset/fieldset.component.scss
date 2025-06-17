@@ -18,22 +18,30 @@
 
   &__legend {
     @include utilities.box-reset;
-
     display: contents;
+    align-items: baseline;
 
     &__main {
-      display: flex;
-      align-items: baseline;
-
+      display: block;
       &:focus-visible {
         @include focus.focus-generic;
       }
 
       &__text-content {
+        width: fit-content;
+        position: relative;
         display: inline-block;
         margin: spacing.$spacing-xxs 0;
         min-height: spacing.$spacing-md;
         white-space: break-spaces;
+
+        &__wrapper {
+          display: inline-block;
+          width: 100%;
+          &--compact {
+            max-width: calc(100% - #{spacing.$spacing-lg});
+          }
+        }
       }
 
       &__text {
@@ -52,14 +60,17 @@
         @include colors.text-color('gray-middle');
 
         display: inline-block;
-        vertical-align: bottom;
         text-transform: initial;
         /* stylelint-disable-next-line property-disallowed-list */
         font-size: typographyTokens.$body-text-sm-font-size;
       }
 
       &__tooltip-button {
-        margin-top: auto;
+        margin-left: spacing.$spacing-xxs;
+        position: absolute !important;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
       }
     }
 

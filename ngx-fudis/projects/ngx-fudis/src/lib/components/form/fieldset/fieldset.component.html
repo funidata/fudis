@@ -17,27 +17,29 @@
         (blur)="_handleLegendBlur()"
       >
         <div class="fudis-fieldset__legend__main__text-content">
-          <span class="fudis-fieldset__legend__main__text">{{ label }}</span
-          ><span *ngIf="required" class="fudis-fieldset__legend__main__space">{{ " " }}</span
-          ><span *ngIf="required" class="fudis-fieldset__legend__main__required"
-            >({{ _translationService.getTranslations()().REQUIRED }})</span
-          >
-          <div
-            aria-hidden="true"
-            class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
-          ></div>
+          <span class="fudis-fieldset__legend__main__text-content__wrapper"
+                [class.fudis-fieldset__legend__main__text-content__wrapper--compact]="popoverText && popoverTriggerLabel">
+            <span class="fudis-fieldset__legend__main__text">{{ label }}</span
+            ><span *ngIf="required" class="fudis-fieldset__legend__main__space">{{ " " }}</span
+            ><span *ngIf="required" class="fudis-fieldset__legend__main__required"
+              >({{ _translationService.getTranslations()().REQUIRED }})</span>
+            <div
+              aria-hidden="true"
+              class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
+            ></div>
+          </span>
+          <fudis-button
+            *ngIf="popoverText && popoverTriggerLabel"
+            class="fudis-fieldset__legend__main__tooltip-button"
+            [size]="'icon-only'"
+            [variant]="'tertiary'"
+            [icon]="'info-circle'"
+            [labelHidden]="true"
+            [popoverText]="popoverText"
+            [popoverPosition]="popoverPosition"
+            [label]="popoverTriggerLabel"
+          />
         </div>
-        <fudis-button
-          *ngIf="popoverText && popoverTriggerLabel"
-          class="fudis-fieldset__legend__main__tooltip-button"
-          [size]="'icon-only'"
-          [variant]="'tertiary'"
-          [icon]="'info-circle'"
-          [labelHidden]="true"
-          [popoverText]="popoverText"
-          [popoverPosition]="popoverPosition"
-          [label]="popoverTriggerLabel"
-        />
       </div>
     </legend>
     <fudis-body-text *ngIf="helpText" class="fudis-fieldset__help-text" [variant]="'sm-regular'">{{
