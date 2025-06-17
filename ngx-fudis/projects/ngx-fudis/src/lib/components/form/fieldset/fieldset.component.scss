@@ -12,8 +12,9 @@
   @include utilities.box-reset;
   @include borders.border-none;
 
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 
   &__legend {
     @include utilities.box-reset;
@@ -21,14 +22,19 @@
     display: contents;
 
     &__main {
-      display: flex;
-      align-items: flex-end;
+      display: inline-block;
+
+      &--compact {
+        display: grid;
+        grid-template-columns: 1fr auto;
+      }
 
       &:focus-visible {
         @include focus.focus-generic;
       }
 
       &__text-content {
+        display: inline-block;
         margin: spacing.$spacing-xxs 0;
         min-height: spacing.$spacing-md;
         white-space: break-spaces;
@@ -36,7 +42,7 @@
 
       &__text {
         @include colors.text-color('gray-dark');
-
+        display: inline-block;
         margin-right: spacing.$spacing-xs;
       }
 
@@ -66,7 +72,7 @@
     &:has(~ .fudis-fieldset-actions__align--end) {
       .fudis-fieldset__legend__main {
         @include breakpoints.breakpoint('sm') {
-          margin-right: calc(spacing.$spacing-xl / var(--fudis-rem-multiplier));
+          margin-right: calc(#{spacing.$spacing-xl} / var(--fudis-rem-multiplier));
         }
       }
     }

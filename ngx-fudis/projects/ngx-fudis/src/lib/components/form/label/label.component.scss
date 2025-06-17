@@ -19,7 +19,7 @@
     white-space: break-spaces;
     width: 100%;
 
-    &--narrow {
+    &--compact {
       max-width: calc(100% - #{spacing.$spacing-lg});
     }
 

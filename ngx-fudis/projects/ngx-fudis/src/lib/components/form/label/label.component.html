@@ -1,5 +1,5 @@
 <label #labelElementRef class="fudis-label" [attr.for]="for" [id]="id">
-  <span [class]="popoverText && popoverTriggerLabel ? 'fudis-label__content fudis-label__content--narrow' : 'fudis-label__content'"
+  <span [class]="popoverText && popoverTriggerLabel ? 'fudis-label__content fudis-label__content--compact' : 'fudis-label__content'"
     ><span class="fudis-label__content__text">{{ text }}</span
     ><span *ngIf="required" class="fudis-label__content__space">{{ " " }}</span
     ><span class="fudis-label__content__required" *ngIf="required"
