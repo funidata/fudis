@@ -10,7 +10,7 @@
 />
 
 <fudis-heading [level]="2">Text Inputs</fudis-heading>
-<fudis-grid [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
+<fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
   <fudis-text-input
     [size]="'sm'"
     [control]="myForm.controls.textInputRequired"
@@ -55,7 +55,7 @@
   />
 </fudis-grid>
 <fudis-heading class="fudis-mt-lg" [level]="2">Text Areas</fudis-heading>
-<fudis-grid [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
+<fudis-grid alignItemsY="baseline" [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
   <fudis-text-area
     [size]="'sm'"
     [control]="myForm.controls.textAreaRequired"
@@ -76,7 +76,7 @@
   />
 </fudis-grid>
 <fudis-heading class="fudis-mt-lg" [level]="2">Datepicker</fudis-heading>
-<fudis-grid [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
+<fudis-grid alignItemsY="baseline" [columns]="{ md: 2, lg: 'inputSm inputMd inputLg' }">
   <fudis-datepicker
     [size]="'sm'"
     [label]="inputProps.label"
@@ -97,7 +97,7 @@
   ></fudis-datepicker>
 </fudis-grid>
 <fudis-heading class="fudis-mt-lg" [level]="2">Date Range</fudis-heading>
-<fudis-grid>
+<fudis-grid alignItemsY="baseline">
   <fudis-date-range>
     <fudis-datepicker
       fudisDateStart
