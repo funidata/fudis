@@ -1,6 +1,7 @@
 <div
   class="fudis-multiselect-option"
   [attr.id]="_id"
+  tabindex="-1"
   [class.fudis-multiselect-option--visible]="_optionVisible"
   [class.fudis-multiselect-option--checked]="checked"
   [class.fudis-multiselect-option--focused]="_focused"
@@ -26,8 +27,8 @@
         [attr.aria-disabled]="data.disabled || null"
         (click)="!data.disabled && _clickOption($event)"
         [attr.aria-selected]="checked"
-        (focus)="!data.disabled && _focus()"
-        (keydown)="!data.disabled && _keyDown($event)"
+        (focus)="_focus()"
+        (keydown)="_keyDown($event)"
         (blur)="_blur($event)"
       />
       <fudis-icon
