@@ -18,12 +18,16 @@
       >
         <div class="fudis-fieldset__legend__main__text-content">
           <span class="fudis-fieldset__legend__main__text"
-            >{{ label }}
-            <span *ngIf="required" class="fudis-fieldset__legend__main__space">{{ " " }}</span>
+            >{{ label
+            }}<span *ngIf="required" class="fudis-fieldset__legend__main__space">{{ " " }}</span>
             <span *ngIf="required" class="fudis-fieldset__legend__main__required"
               >({{ _translationService.getTranslations()().REQUIRED }})</span
             >
           </span>
+          <div
+            aria-hidden="true"
+            class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
+          ></div>
         </div>
         <fudis-button
           *ngIf="popoverText && popoverTriggerLabel"
