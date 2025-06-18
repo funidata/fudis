@@ -41,8 +41,4 @@ export class LabelComponent extends TooltipApiDirective {
    * Size of Label's parent. Used to trigger Label height calculation if parent's size changes.
    */
   @Input() parentSize: FudisInputSize | 'xs';
-
-  /**
-   * To observe size changes of this Label and trigger height calculation as needed
-   */
 }
