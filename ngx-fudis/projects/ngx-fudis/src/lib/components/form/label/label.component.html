@@ -1,7 +1,7 @@
 <label #labelElementRef class="fudis-label" [attr.for]="for" [id]="id">
   <span class="fudis-label__content"
     ><span class="fudis-label__content__text"
-      >{{ text }} <span *ngIf="required" class="fudis-label__content__space">{{ " " }}</span
+      >{{ text }}<span *ngIf="required" class="fudis-label__content__space">{{ " " }}</span
       ><span class="fudis-label__content__required" *ngIf="required"
         >({{ _translationService.getTranslations()().REQUIRED }})</span
       ></span

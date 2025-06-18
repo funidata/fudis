@@ -133,13 +133,15 @@ describe('LocalizedTextGroupComponent', () => {
       });
 
       it(`should have correct label`, () => {
-        const labelText = getElement(fixture, '.fudis-label__content__text').textContent;
+        const labelText = getElement(fixture, '.fudis-label__content__text').firstChild
+          ?.textContent;
 
         expect(labelText).toEqual(values.label);
       });
 
       it(`should have correct group label`, () => {
-        const labelText = getElement(fixture, '.fudis-label__content__text').textContent;
+        const labelText = getElement(fixture, '.fudis-label__content__text').firstChild
+          ?.textContent;
         const groupLabelId = fixture.debugElement.query(By.css('.fudis-localized-text-group'))
           .attributes['aria-labelledby'];
         const groupLabelText = getElement(fixture, `#${groupLabelId}`).textContent;
