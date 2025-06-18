@@ -8,26 +8,26 @@
   @include typography.text-field-label;
 
   display: inline-block;
-  vertical-align: baseline;
   position: relative;
   width: 100%;
+  vertical-align: baseline;
 
   &__content {
     display: inline-block;
     margin: spacing.$spacing-xxs 0;
+    width: 100%;
     min-height: spacing.$spacing-md;
     white-space: break-spaces;
-    width: 100%;
 
     &--compact {
       max-width: calc(100% - #{spacing.$spacing-lg});
     }
 
     &__button {
-      margin-left: spacing.$spacing-xxs;
       position: absolute;
-      bottom: 0;
       right: 0;
+      bottom: 0;
+      margin-left: spacing.$spacing-xxs;
     }
 
     &__text {
@@ -42,6 +42,7 @@
     &__required {
       @include typography.text-field-label;
       @include colorMixins.text-color('gray-middle');
+      
       display: inline-block;
       vertical-align: baseline;
       text-transform: initial;

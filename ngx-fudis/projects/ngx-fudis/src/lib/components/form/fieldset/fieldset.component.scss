@@ -18,6 +18,7 @@
 
   &__legend {
     @include utilities.box-reset;
+
     display: contents;
 
     &__main {
@@ -35,8 +36,9 @@
       }
 
       &__text {
-        display: inline-block;
         @include colors.text-color('gray-dark');
+
+        display: inline-block;
       }
 
       &__space {
@@ -47,6 +49,7 @@
       &__required {
         @include typography.text-field-label;
         @include colors.text-color('gray-middle');
+
         display: inline-block;
         text-transform: initial;
         /* stylelint-disable-next-line property-disallowed-list */
