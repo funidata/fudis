@@ -37,7 +37,6 @@
       &__text {
         display: inline-block;
         @include colors.text-color('gray-dark');
-        margin-right: spacing.$spacing-xs;
       }
 
       &__space {
