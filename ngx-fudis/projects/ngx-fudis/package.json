@@ -29,7 +29,8 @@
     "@angular/cdk": "^19.2.1",
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0",
-    "@angular/material": "^19.2.3"
+    "@angular/material": "^19.2.3",
+    "@funidata/fudis-core": "^0.0.4"
   },
   "devDependencies": {
     "tslib": "^2.7.0",
