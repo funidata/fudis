@@ -33,7 +33,6 @@
         display: inline-block;
         margin: spacing.$spacing-xxs 0;
         min-height: spacing.$spacing-md;
-        white-space: break-spaces;
       }
 
       &__text {
@@ -41,6 +40,7 @@
 
         display: inline-block;
         margin-right: spacing.$spacing-xxs;
+        white-space: break-spaces;
       }
 
       &__space {
