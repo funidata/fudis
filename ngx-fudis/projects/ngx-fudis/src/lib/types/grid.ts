@@ -41,7 +41,7 @@ export type FudisGridAlign = 'start' | 'end' | 'center';
 /**
  * Alignment of Grid Items inside a Grid
  */
-export const fudisGridAlignItemsArray = ['start', 'center', 'end', 'stretch'] as const;
+export const fudisGridAlignItemsArray = ['start', 'center', 'end', 'stretch', 'baseline'] as const;
 export type FudisGridAlignItems = (typeof fudisGridAlignItemsArray)[number];
 
 /**

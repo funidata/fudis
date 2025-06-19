@@ -93,14 +93,6 @@ export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
 export type FudisPopoverPosition = 'left' | 'right' | 'above' | 'below';
 
-// For Label Component to send data to DOM Utility Service to match "same row" Label heights
-export interface FudisLabelData {
-  id: string;
-  element: HTMLLabelElement | HTMLDivElement;
-  height?: number;
-  yPosition?: number;
-}
-
 /**
  * Types for extending ngOnChanges SimpleChanges type
  *
