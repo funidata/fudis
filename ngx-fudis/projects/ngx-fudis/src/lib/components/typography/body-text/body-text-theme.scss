@@ -29,18 +29,3 @@ fudis-body-text {
     margin-bottom: spacing.$spacing-none;
   }
 }
-
-/**
- * Body Texts inside three Alert variants should be white instead of default dark-gray.
- * Body Text Component does not support other than dark-gray color, we need to use important! here
- */
-.fudis-alert {
-  &__info,
-  &__success,
-  &__danger {
-    fudis-body-text p {
-      /* stylelint-disable-next-line property-disallowed-list, declaration-no-important */
-      color: colors.$color-white !important;
-    }
-  }
-}
