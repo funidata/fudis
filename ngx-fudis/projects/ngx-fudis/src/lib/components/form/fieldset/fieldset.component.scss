@@ -30,6 +30,7 @@
       }
 
       &__text-content {
+        display: inline-block;
         margin: spacing.$spacing-xxs 0;
         min-height: spacing.$spacing-md;
         white-space: break-spaces;
@@ -39,11 +40,13 @@
         @include colors.text-color('gray-dark');
 
         display: inline-block;
+        margin-right: spacing.$spacing-xxs;
       }
 
       &__space {
-        display: inline;
-        width: 0;
+        &::before {
+          content: '  ';
+        }
       }
 
       &__required {
@@ -58,7 +61,6 @@
 
       &__tooltip-button {
         align-self: flex-end;
-        margin-left: spacing.$spacing-xxs;
       }
     }
 

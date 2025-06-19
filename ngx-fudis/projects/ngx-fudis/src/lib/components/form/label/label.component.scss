@@ -19,12 +19,12 @@
 
     &__text {
       display: inline-block;
-      margin-right: spacing.$spacing-xs;
     }
 
     &__space {
-      display: inline;
-      width: 0;
+      &::before {
+        content: '  ';
+      }
     }
 
     &__required {
@@ -32,7 +32,7 @@
       @include colorMixins.text-color('gray-middle');
 
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: baseline;
       text-transform: initial;
       /* stylelint-disable-next-line property-disallowed-list */
       font-size: typographyTokens.$body-text-sm-font-size;
