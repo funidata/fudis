@@ -44,6 +44,7 @@ myControl: new FormControl<null | FudisSelectOption<object>[]>(defaultOption)
 
 By default, Multiselect Component displays a list of selected options as chip buttons under the form field input. This feature is controlled by boolean `showSelectionChips`. Setting it to `false` hides the chip buttons.
 
+  > **Note!** There is accessibility concern when Selection Chips are hidden and MultiSelect is used with `autocompleteType` and `autocompleteDropdown` variants. Because input field is reserved for typing, user doesn't have indicator for selected options. With these variants, the use of Selection Chips is mandatory.
 ## Example
 
 <Canvas of={Stories.Example} />
