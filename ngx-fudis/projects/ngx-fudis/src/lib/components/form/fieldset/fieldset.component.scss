@@ -44,8 +44,8 @@
 
       &__space {
         display: inline-block;
-        width: 0;
         margin-left: spacing.$spacing-xs;
+        width: 0;
 
         &::before {
           content: ' ';
