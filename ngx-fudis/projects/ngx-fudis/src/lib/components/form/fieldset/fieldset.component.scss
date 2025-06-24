@@ -39,13 +39,16 @@
         @include colors.text-color('gray-dark');
 
         display: inline-block;
-        margin-right: spacing.$spacing-xxs;
         white-space: break-spaces;
       }
 
       &__space {
+        display: inline-block;
+        width: 0;
+        margin-left: spacing.$spacing-xs;
+
         &::before {
-          content: '  ';
+          content: ' ';
         }
       }
 
