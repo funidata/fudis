@@ -37,6 +37,13 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
+    showSelectionChips: {
+      control: 'boolean',
+    },
+    variant: {
+      control: { type: 'radio' },
+      if: { arg: 'showSelectionChips' },
+    },
     popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
