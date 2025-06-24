@@ -168,7 +168,7 @@ type MyForm = {
                 ></fudis-button>
               </fudis-grid>
               <fudis-hr />
-              <fudis-grid alignItemsY="baseline" [columns]="{ md: 3 }">
+              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 3 }">
                 <fudis-checkbox-group
                   [label]="'If you like summer'"
                   [formGroup]="formExample.controls.summer"

@@ -34,7 +34,7 @@
         <fudis-section-content>
           <fudis-fieldset [label]="t('fieldsetLegend')">
             <fudis-fieldset-content>
-              <fudis-grid alignItemsY="baseline" [columns]="{ xs: 1, sm: 2 }">
+              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ xs: 1, sm: 2 }">
                 <fudis-text-input
                   [id]="'unique-input-3'"
                   [control]="formExample.controls['teacher']"
@@ -48,7 +48,7 @@
                   [helpText]="t('form.teacherEmail.helpText')"
                 />
               </fudis-grid>
-              <fudis-grid alignItemsY="baseline" [columns]="{ xs: 1, sm: 2 }">
+              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ xs: 1, sm: 2 }">
                 <fudis-radio-button-group
                   [label]="t('form.courseType.label')"
                   [control]="formExample.controls['courseType']"
@@ -89,7 +89,7 @@
           </fudis-fieldset>
           <fudis-fieldset class="fudis-mt-xl" [label]="t('fieldsetSelectLegend')">
             <fudis-fieldset-content>
-              <fudis-grid alignItemsY="baseline" [columns]="{ xs: 1, sm: 2 }">
+              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ xs: 1, sm: 2 }">
                 <fudis-select
                   [variant]="'dropdown'"
                   [control]="formExample.controls.courseMainMaskot"
