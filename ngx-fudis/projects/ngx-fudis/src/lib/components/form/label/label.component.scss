@@ -17,7 +17,14 @@
     min-height: spacing.$spacing-md;
 
     &__button {
+      display: inline-block;
       margin-left: spacing.$spacing-xxs;
+
+      /** The button element inside the fudis-button exceeds the 32px because
+      button likely has different font metrics, that affects the baseline calculations. We set here
+      the container width to be the expected size of the button, so it does not affect the height of the container
+      when we use baseline */
+      height: spacing.$spacing-md;
     }
 
     &__text {
