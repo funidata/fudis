@@ -1,15 +1,15 @@
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable no-descending-specificity */
-@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 fudis-heading {
   .fudis-heading {
-    margin-bottom: spacing.$spacing-xs;
+    margin-bottom: core.$spacing-xs;
 
     &__variant {
       &__xl,
       &__xxl {
-        margin-bottom: spacing.$spacing-sm;
+        margin-bottom: core.$spacing-sm;
       }
     }
   }

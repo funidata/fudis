@@ -1,6 +1,4 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/colors/tokens.scss' as colors;
-@use '../../../foundations/typography/mixins.scss' as typography;
+@use '@funidata/fudis-core' as core;
 
 fudis-body-text {
   /**
@@ -8,7 +6,7 @@ fudis-body-text {
   * Body Text does not have bottom margin if it does not have other Body Text element underneath.
   */
   &:has(+ fudis-body-text) {
-    margin-bottom: spacing.$spacing-xs;
+    margin-bottom: core.$spacing-xs;
   }
 
   /**
@@ -16,7 +14,7 @@ fudis-body-text {
   * Instead link will inherit Body Text font-size.
   */
   .fudis-link {
-    @include typography.link-inherit;
+    @include core.link-inherit;
   }
 }
 
@@ -26,6 +24,6 @@ fudis-body-text {
  */
 .fudis-grid {
   > fudis-body-text:has(+ fudis-body-text) {
-    margin-bottom: spacing.$spacing-none;
+    margin-bottom: core.$spacing-none;
   }
 }
