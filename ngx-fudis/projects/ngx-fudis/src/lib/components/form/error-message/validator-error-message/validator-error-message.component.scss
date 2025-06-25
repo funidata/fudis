@@ -1,17 +1,15 @@
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '@funidata/fudis-core' as core;
 
 .fudis-error-message {
-  margin-top: spacing.$spacing-xs;
-  margin-bottom: spacing.$spacing-xs;
+  margin-top: core.$spacing-xs;
+  margin-bottom: core.$spacing-xs;
 
   &__body-text {
-    @include typography.body-text-md-regular;
+    @include core.body-text-md-regular;
   }
 
   &__form-error {
-    @include colorMixins.text-color('red');
-    @include typography.body-text-sm-regular;
+    @include core.text-color('red');
+    @include core.body-text-sm-regular;
   }
 }

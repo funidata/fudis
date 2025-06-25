@@ -1,8 +1,5 @@
 /* stylelint-disable order/order */
-
-@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../../foundations/grid/mixins.scss' as grid;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-grid {
   box-sizing: border-box;
@@ -10,7 +7,7 @@
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
 
-  @include breakpoints.breakpoint('sm') {
+  @include core.breakpoint('sm') {
     width: 100%;
   }
 
@@ -24,8 +21,8 @@
       margin-right: auto;
       margin-left: auto;
 
-      @include breakpoints.breakpoint-max('sm') {
-        @include grid.grid-xs-margins;
+      @include core.breakpoint-max('sm') {
+        @include core.grid-xs-margins;
       }
     }
 
@@ -42,92 +39,92 @@
 	*/
 
   &__xxl {
-    @include breakpoints.breakpoint('xs') {
-      @include grid.grid-max-width('xs');
+    @include core.breakpoint('xs') {
+      @include core.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint('sm') {
-      @include grid.grid-max-width('sm');
+    @include core.breakpoint('sm') {
+      @include core.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint('md') {
-      @include grid.grid-max-width('md');
+    @include core.breakpoint('md') {
+      @include core.grid-max-width('md');
     }
 
-    @include breakpoints.breakpoint('lg') {
-      @include grid.grid-max-width('lg');
+    @include core.breakpoint('lg') {
+      @include core.grid-max-width('lg');
     }
 
-    @include breakpoints.breakpoint('xl') {
-      @include grid.grid-max-width('xl');
+    @include core.breakpoint('xl') {
+      @include core.grid-max-width('xl');
     }
 
-    @include breakpoints.breakpoint('xxl') {
-      @include grid.grid-max-width('xxl');
+    @include core.breakpoint('xxl') {
+      @include core.grid-max-width('xxl');
     }
   }
 
   &__xl {
-    @include breakpoints.breakpoint('xs') {
-      @include grid.grid-max-width('xs');
+    @include core.breakpoint('xs') {
+      @include core.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint('sm') {
-      @include grid.grid-max-width('sm');
+    @include core.breakpoint('sm') {
+      @include core.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint('md') {
-      @include grid.grid-max-width('md');
+    @include core.breakpoint('md') {
+      @include core.grid-max-width('md');
     }
 
-    @include breakpoints.breakpoint('lg') {
-      @include grid.grid-max-width('lg');
+    @include core.breakpoint('lg') {
+      @include core.grid-max-width('lg');
     }
 
-    @include breakpoints.breakpoint('xl') {
-      @include grid.grid-max-width('xl');
+    @include core.breakpoint('xl') {
+      @include core.grid-max-width('xl');
     }
   }
 
   &__lg {
-    @include breakpoints.breakpoint('xs') {
-      @include grid.grid-max-width('xs');
+    @include core.breakpoint('xs') {
+      @include core.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint('sm') {
-      @include grid.grid-max-width('sm');
+    @include core.breakpoint('sm') {
+      @include core.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint('md') {
-      @include grid.grid-max-width('md');
+    @include core.breakpoint('md') {
+      @include core.grid-max-width('md');
     }
 
-    @include breakpoints.breakpoint('lg') {
-      @include grid.grid-max-width('lg');
+    @include core.breakpoint('lg') {
+      @include core.grid-max-width('lg');
     }
   }
 
   &__md {
-    @include breakpoints.breakpoint('xs') {
-      @include grid.grid-max-width('xs');
+    @include core.breakpoint('xs') {
+      @include core.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint('sm') {
-      @include grid.grid-max-width('sm');
+    @include core.breakpoint('sm') {
+      @include core.grid-max-width('sm');
     }
 
-    @include breakpoints.breakpoint('md') {
-      @include grid.grid-max-width('md');
+    @include core.breakpoint('md') {
+      @include core.grid-max-width('md');
     }
   }
 
   &__sm {
-    @include breakpoints.breakpoint('xs') {
-      @include grid.grid-max-width('xs');
+    @include core.breakpoint('xs') {
+      @include core.grid-max-width('xs');
     }
 
-    @include breakpoints.breakpoint('sm') {
-      @include grid.grid-max-width('sm');
+    @include core.breakpoint('sm') {
+      @include core.grid-max-width('sm');
     }
   }
 
@@ -136,74 +133,74 @@
   }
 
   &__xs {
-    @include grid.grid-max-width('xs');
+    @include core.grid-max-width('xs');
   }
 
   &__row-gap {
     &__none {
-      row-gap: spacing.$spacing-none;
+      row-gap: core.$spacing-none;
     }
 
     &__xxs {
-      row-gap: spacing.$spacing-xxs;
+      row-gap: core.$spacing-xxs;
     }
 
     &__xs {
-      row-gap: spacing.$spacing-xs;
+      row-gap: core.$spacing-xs;
     }
 
     &__sm {
-      row-gap: spacing.$spacing-sm;
+      row-gap: core.$spacing-sm;
     }
 
     &__md {
-      row-gap: spacing.$spacing-md;
+      row-gap: core.$spacing-md;
     }
 
     &__lg {
-      row-gap: spacing.$spacing-lg;
+      row-gap: core.$spacing-lg;
     }
 
     &__xl {
-      row-gap: spacing.$spacing-xl;
+      row-gap: core.$spacing-xl;
     }
 
     &__xxl {
-      row-gap: spacing.$spacing-xxl;
+      row-gap: core.$spacing-xxl;
     }
   }
 
   &__column-gap {
     &__none {
-      column-gap: spacing.$spacing-none;
+      column-gap: core.$spacing-none;
     }
 
     &__xxs {
-      column-gap: spacing.$spacing-xxs;
+      column-gap: core.$spacing-xxs;
     }
 
     &__xs {
-      column-gap: spacing.$spacing-xs;
+      column-gap: core.$spacing-xs;
     }
 
     &__sm {
-      column-gap: spacing.$spacing-sm;
+      column-gap: core.$spacing-sm;
     }
 
     &__md {
-      column-gap: spacing.$spacing-md;
+      column-gap: core.$spacing-md;
     }
 
     &__lg {
-      column-gap: spacing.$spacing-lg;
+      column-gap: core.$spacing-lg;
     }
 
     &__xl {
-      column-gap: spacing.$spacing-xl;
+      column-gap: core.$spacing-xl;
     }
 
     &__xxl {
-      column-gap: spacing.$spacing-xxl;
+      column-gap: core.$spacing-xxl;
     }
   }
 }
