@@ -8,26 +8,38 @@
   @include typography.text-field-label;
 
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   justify-content: space-between;
 
-  &__button {
-    align-self: flex-end;
-    margin-left: spacing.$spacing-xxs;
-  }
-
   &__content {
+    display: inline-block;
     margin: spacing.$spacing-xxs 0;
     min-height: spacing.$spacing-md;
-    white-space: break-spaces;
+
+    &__button {
+      display: inline-block;
+      margin-left: spacing.$spacing-xxs;
+
+      /** The button element inside the fudis-button exceeds the 32px because
+      button likely has different font metrics, that affects the baseline calculations. We set here
+      the container width to be the expected size of the button, so it does not affect the height of the container
+      when we use baseline */
+      height: spacing.$spacing-md;
+    }
 
     &__text {
-      margin-right: spacing.$spacing-xs;
+      display: inline-block;
+      white-space: break-spaces;
     }
 
     &__space {
       display: inline-block;
+      margin-left: spacing.$spacing-xs;
       width: 0;
+
+      &::before {
+        content: ' ';
+      }
     }
 
     &__required {
@@ -35,8 +47,10 @@
       @include colorMixins.text-color('gray-middle');
 
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: baseline;
       text-transform: initial;
+      /* stylelint-disable-next-line property-disallowed-list */
+      line-height: typographyTokens.$text-input-line-height;
       /* stylelint-disable-next-line property-disallowed-list */
       font-size: typographyTokens.$body-text-sm-font-size;
     }

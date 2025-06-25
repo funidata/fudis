@@ -224,7 +224,7 @@ Example.argTypes = {
     control: { type: 'select' },
   },
   alignItemsY: {
-    options: ['start', 'center', 'end', 'stretch'],
+    options: ['start', 'center', 'end', 'stretch', 'baseline'],
     control: { type: 'select' },
   },
   width: {
