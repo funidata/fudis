@@ -18,7 +18,6 @@ import { throttle } from '../../../utilities/resizeThrottle';
 @Component({
   selector: 'fudis-label',
   templateUrl: './label.component.html',
-  styleUrls: ['./label.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
