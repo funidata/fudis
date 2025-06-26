@@ -1,11 +1,12 @@
 <label #labelElementRef class="fudis-label" [attr.for]="for" [id]="id">
-  <span class="fudis-label__content"
-    ><span class="fudis-label__content__text">{{ text }}</span
-    ><span *ngIf="required" class="fudis-label__content__space">{{ " " }}</span
-    ><span class="fudis-label__content__required" *ngIf="required"
-      >({{ _translationService.getTranslations()().REQUIRED }})</span
-    ></span
-  >
+  <div class="fudis-label__content"
+    ><span class="fudis-label__content__text"
+      >{{ text }}<span *ngIf="required" class="fudis-label__content__space"></span
+      ><span class="fudis-label__content__required" *ngIf="required"
+        >({{ _translationService.getTranslations()().REQUIRED }})</span
+      ></span
+    >
+  </div>
   <fudis-button
     *ngIf="popoverText && popoverTriggerLabel"
     class="fudis-label__content__button"

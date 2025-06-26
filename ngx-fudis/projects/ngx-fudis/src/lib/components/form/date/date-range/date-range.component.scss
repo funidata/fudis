@@ -1,9 +1,9 @@
 @use '../../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-date-range {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: spacing.$spacing-sm;
+  display: flex;
+  gap: spacing.$spacing-sm;
+  align-items: baseline;
   opacity: 1;
   max-width: spacing.$input-width-lg;
 }

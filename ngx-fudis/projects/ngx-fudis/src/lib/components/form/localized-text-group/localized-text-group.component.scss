@@ -5,6 +5,7 @@
   @include utilities.box-reset;
 
   display: flex;
+  align-items: baseline;
 
   &__inputs {
     margin-right: spacing.$spacing-xxs;
