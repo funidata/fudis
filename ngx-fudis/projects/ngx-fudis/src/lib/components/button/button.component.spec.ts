@@ -50,7 +50,7 @@ describe('ButtonComponent', () => {
           } else {
             expect(sortClasses(getButton().className)).toEqual(
               sortClasses(
-                `fudis-button fudis-button__label--visible fudis-button__${variant} fudis-button__size__${size}`,
+                `fudis-button fudis-button__${variant} fudis-button__size__${size}`,
               ),
             );
           }
@@ -60,7 +60,7 @@ describe('ButtonComponent', () => {
 
     it('should have proper default CSS classes', () => {
       expect(getButton().className).toEqual(
-        'fudis-button fudis-button__label--visible fudis-button__primary fudis-button__size__medium',
+        'fudis-button fudis-button__primary fudis-button__size__medium',
       );
     });
 
