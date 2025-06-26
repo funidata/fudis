@@ -49,9 +49,7 @@ describe('ButtonComponent', () => {
             );
           } else {
             expect(sortClasses(getButton().className)).toEqual(
-              sortClasses(
-                `fudis-button fudis-button__${variant} fudis-button__size__${size}`,
-              ),
+              sortClasses(`fudis-button fudis-button__${variant} fudis-button__size__${size}`),
             );
           }
         });
