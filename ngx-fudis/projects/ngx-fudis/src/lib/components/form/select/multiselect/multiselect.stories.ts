@@ -39,7 +39,7 @@ export default {
     },
     showSelectionChips: {
       table: {
-        disable: true, 
+        disable: true,
       },
     },
     popoverPosition: {
