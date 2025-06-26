@@ -140,7 +140,6 @@ import { FudisErrorSummaryService } from './services/form/error-summary/error-su
 import { FudisGridService } from './services/grid/grid.service';
 import { FudisIdService } from './services/id/id.service';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
-import { FudisLabelHeightService } from './services/dom/label-height.service';
 import { FudisTranslationService } from './services/translation/translation.service';
 import { PopoverDirective } from './directives/popover/popover.directive';
 
@@ -340,7 +339,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     FudisFocusService,
     FudisGridService,
     FudisIdService,
-    FudisLabelHeightService,
     FudisTranslationService,
   ],
 })

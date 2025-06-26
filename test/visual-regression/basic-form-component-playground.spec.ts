@@ -11,7 +11,7 @@ test("basic form components playground", async ({ page }) => {
 
       await page.getByTestId("fudis-button-1").click();
 
-      await expect(page.getByText("This is required")).toHaveCount(11);
+      await expect(page.getByText("This is required")).toHaveCount(15);
       await expect(
         page.getByText("This is definitely required as this error has so many words"),
       ).toHaveCount(3);

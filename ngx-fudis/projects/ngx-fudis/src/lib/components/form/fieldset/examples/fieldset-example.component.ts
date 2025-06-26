@@ -47,7 +47,7 @@ interface MyFieldsetForm {
             >Currently Fieldset Actions are aligned: {{ alignActions }}</fudis-body-text
           ></fudis-notification
         >
-        <fudis-grid [columns]="{ md: 2 }">
+        <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 2 }">
           <fudis-text-input
             [control]="fieldsetExample.controls['teacher']"
             [label]="'Responsible teacher'"

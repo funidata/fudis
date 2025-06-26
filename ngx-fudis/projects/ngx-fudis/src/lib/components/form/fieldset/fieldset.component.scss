@@ -14,6 +14,7 @@
 
   display: grid;
   grid-template-columns: 1fr;
+  align-items: baseline;
 
   &__legend {
     @include utilities.box-reset;
@@ -22,27 +23,33 @@
 
     &__main {
       display: flex;
-      align-items: flex-end;
+      align-items: baseline;
 
       &:focus-visible {
         @include focus.focus-generic;
       }
 
       &__text-content {
+        display: inline-block;
         margin: spacing.$spacing-xxs 0;
         min-height: spacing.$spacing-md;
-        white-space: break-spaces;
       }
 
       &__text {
         @include colors.text-color('gray-dark');
 
-        margin-right: spacing.$spacing-xs;
+        display: inline-block;
+        white-space: break-spaces;
       }
 
       &__space {
         display: inline-block;
+        margin-left: spacing.$spacing-xs;
         width: 0;
+
+        &::before {
+          content: ' ';
+        }
       }
 
       &__required {
@@ -50,14 +57,13 @@
         @include colors.text-color('gray-middle');
 
         display: inline-block;
-        vertical-align: bottom;
         text-transform: initial;
         /* stylelint-disable-next-line property-disallowed-list */
         font-size: typographyTokens.$body-text-sm-font-size;
       }
 
-      &__tooltip-button {
-        margin-top: auto;
+      &__popover-button {
+        align-self: flex-end;
       }
     }
 
@@ -66,7 +72,7 @@
     &:has(~ .fudis-fieldset-actions__align--end) {
       .fudis-fieldset__legend__main {
         @include breakpoints.breakpoint('sm') {
-          margin-right: calc(spacing.$spacing-xl / var(--fudis-rem-multiplier));
+          margin-right: calc(#{spacing.$spacing-xl} / var(--fudis-rem-multiplier));
         }
       }
     }
@@ -102,6 +108,7 @@
     flex-wrap: wrap;
     gap: spacing.$spacing-xs spacing.$spacing-sm;
     align-items: center;
+    align-self: center;
     justify-content: flex-start;
 
     &__align {
