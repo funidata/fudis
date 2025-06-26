@@ -7,8 +7,8 @@
     &:has(~ .fudis-fieldset-actions__align--start),
     &:has(~ .fudis-fieldset-actions__align--end) {
       .fudis-fieldset__legend__main {
-        @include breakpoints.breakpoint('sm') {
-          margin-right: calc(#{spacing.$spacing-xl} / var(--fudis-rem-multiplier));
+        @include core.breakpoint('sm') {
+          margin-right: calc(#{core.$spacing-xl} / var(--fudis-rem-multiplier));
         }
       }
     }
