@@ -1,9 +1,9 @@
 @use '@funidata/fudis-core' as core;
 
 .fudis-date-range {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: core.$spacing-sm;
+  display: flex;
+  gap: core.$spacing-sm;
+  align-items: baseline;
   opacity: 1;
   max-width: core.$input-width-lg;
 }

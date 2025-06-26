@@ -4,6 +4,7 @@
   @include core.box-reset;
 
   display: flex;
+  align-items: baseline;
 
   &__inputs {
     margin-right: core.$spacing-xxs;
