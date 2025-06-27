@@ -1,44 +1,40 @@
-@use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../foundations/utilities/mixins.scss' as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-footer {
-  @include utilities.box-reset;
-  @include colorMixins.bg-color('gray-extra-light');
+  @include core.box-reset;
+  @include core.bg-color('gray-extra-light');
 
   position: relative;
   text-align: center;
 
   .fudis-link {
-    @include typography.link-md;
+    @include core.link-md;
 
     &:first-of-type {
-      margin-top: spacing.$spacing-sm;
+      margin-top: core.$spacing-sm;
     }
 
     &:not(:last-of-type) {
-      margin-bottom: spacing.$spacing-lg;
+      margin-bottom: core.$spacing-lg;
     }
 
-    @include breakpoints.breakpoint('lg') {
+    @include core.breakpoint('lg') {
       &:not(:last-of-type) {
-        margin-bottom: spacing.$spacing-none;
+        margin-bottom: core.$spacing-none;
       }
     }
 
-    @include breakpoints.breakpoint('sm') {
+    @include core.breakpoint('sm') {
       &:first-of-type {
-        margin-top: spacing.$spacing-none;
+        margin-top: core.$spacing-none;
       }
     }
   }
 
   &__content {
     bottom: 0;
-    padding-top: spacing.$spacing-md;
-    padding-bottom: spacing.$spacing-xl;
+    padding-top: core.$spacing-md;
+    padding-bottom: core.$spacing-xl;
   }
 
   &__item {
@@ -46,29 +42,29 @@
     flex-direction: column;
 
     &__logo {
-      margin-bottom: spacing.$spacing-sm;
+      margin-bottom: core.$spacing-sm;
       /* stylelint-disable-next-line property-disallowed-list, color-no-hex */
       color: #000000;
     }
 
-    @include breakpoints.breakpoint('lg') {
+    @include core.breakpoint('lg') {
       flex-direction: row;
       align-items: center;
 
       &__logo {
-        margin-right: spacing.$spacing-md;
-        margin-bottom: spacing.$spacing-none;
+        margin-right: core.$spacing-md;
+        margin-bottom: core.$spacing-none;
       }
 
       .fudis-link {
         &:not(:last-of-type) {
-          margin-right: spacing.$spacing-md;
+          margin-right: core.$spacing-md;
         }
       }
     }
   }
 
-  @include breakpoints.breakpoint('sm') {
+  @include core.breakpoint('sm') {
     text-align: initial;
   }
 }

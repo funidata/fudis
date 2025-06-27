@@ -1,8 +1,8 @@
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-language-badge-group {
   display: inline-flex;
   align-items: center;
-  margin-left: spacing.$spacing-xxs;
-  height: spacing.$spacing-md;
+  margin-left: core.$spacing-xxs;
+  height: core.$spacing-md;
 }

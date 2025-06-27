@@ -1,26 +1,20 @@
-@use '../../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../../foundations/typography/tokens.scss' as typographyTokens;
-@use '../../../../../foundations/utilities/mixins.scss' as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-select-option {
-  @include utilities.box-reset;
-  @include typography.body-text-md-regular;
-  @include colorMixins.bg-color('transparent');
-  @include colorMixins.text-color('gray-dark');
-  @include borders.border-none;
+  @include core.box-reset;
+  @include core.body-text-md-regular;
+  @include core.bg-color('transparent');
+  @include core.text-color('gray-dark');
+  @include core.border-none;
 
   display: flex;
   position: relative;
   align-items: flex-start;
   justify-content: space-between;
   cursor: pointer;
-  padding-left: spacing.$spacing-sm;
+  padding-left: core.$spacing-sm;
   width: 100%;
-  min-height: spacing.$spacing-lg;
+  min-height: core.$spacing-lg;
   overflow: hidden;
   text-align: left;
 
@@ -32,31 +26,31 @@
 
   &:not([aria-disabled='true']) {
     &:hover {
-      @include colorMixins.bg-color('primary-light');
+      @include core.bg-color('primary-light');
     }
 
     &:focus-visible,
     &:focus {
-      @include colorMixins.bg-color('primary-light');
-      @include focus.focus-dropdown;
+      @include core.bg-color('primary-light');
+      @include core.focus-dropdown;
     }
 
     &:active {
-      @include colorMixins.bg-color('primary');
-      @include colorMixins.text-color('white');
+      @include core.bg-color('primary');
+      @include core.text-color('white');
     }
   }
 
   &--disabled {
-    @include colorMixins.bg-color('gray-extra-light');
-    @include colorMixins.text-color('gray-middle');
+    @include core.bg-color('gray-extra-light');
+    @include core.text-color('gray-middle');
 
     cursor: default;
   }
 
   &__xs {
     align-items: center;
-    padding: spacing.$spacing-xxs;
+    padding: core.$spacing-xxs;
   }
 
   &__focusable,
@@ -66,23 +60,23 @@
   }
 
   &__disabled-text {
-    padding-right: spacing.$spacing-xs;
+    padding-right: core.$spacing-xs;
   }
 
   &__label {
-    margin: spacing.$spacing-xs 0;
+    margin: core.$spacing-xs 0;
     /* stylelint-disable-next-line property-disallowed-list */
-    line-height: spacing.$spacing-sm;
+    line-height: core.$spacing-sm;
 
     &__main {
       display: block;
     }
 
     &__sub {
-      @include typography.body-text-sm-regular;
+      @include core.body-text-sm-regular;
 
       display: block;
-      margin-top: spacing.$spacing-xxs;
+      margin-top: core.$spacing-xxs;
     }
   }
 }

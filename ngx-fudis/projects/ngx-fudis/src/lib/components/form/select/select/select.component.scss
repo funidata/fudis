@@ -1,9 +1,4 @@
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../../../foundations/focus/mixins.scss' as focus;
+@use '@funidata/fudis-core' as core;
 
 .fudis-select {
   position: relative;
@@ -15,32 +10,32 @@
     &__icons {
       position: absolute;
       top: 50%;
-      right: spacing.$spacing-xxs;
+      right: core.$spacing-xxs;
       transform: translateY(-50%);
     }
   }
 
   &__input {
-    @include typography.text-field-input;
-    @include borders.border-radius('2px');
+    @include core.text-field-input;
+    @include core.border-radius('2px');
 
     box-sizing: border-box;
-    padding: spacing.$spacing-xxs spacing.$spacing-lg spacing.$spacing-xxs spacing.$spacing-sm;
+    padding: core.$spacing-xxs core.$spacing-lg core.$spacing-xxs core.$spacing-sm;
     width: 100%;
-    height: spacing.$spacing-xl;
-    max-height: spacing.$spacing-xl;
+    height: core.$spacing-xl;
+    max-height: core.$spacing-xl;
     overflow: hidden;
     text-overflow: ellipsis;
     /* stylelint-disable-next-line property-disallowed-list */
-    line-height: spacing.$spacing-lg;
+    line-height: core.$spacing-lg;
 
     &::placeholder {
-      @include colorMixins.text-color('gray-middle');
+      @include core.text-color('gray-middle');
     }
 
     &:focus,
     &:focus-visible {
-      @include focus.focus-form-field;
+      @include core.focus-form-field;
     }
 
     &__label,
@@ -57,14 +52,14 @@
       }
 
       // Workaround to prevent long labels streching the container caused by "white-space: no-wrap". If that would be removed from the above, the three dots ... overflow would not work.
-      @include breakpoints.breakpoint-max('sm') {
+      @include core.breakpoint-max('sm') {
         /* stylelint-disable-next-line unit-disallowed-list */
         max-width: calc(100vw - calc(5.5rem / var(--fudis-rem-multiplier)));
       }
     }
 
     &__placeholder {
-      @include colorMixins.text-color('gray-middle');
+      @include core.text-color('gray-middle');
     }
 
     &__dropdown {
@@ -75,6 +70,6 @@
 
   /* stylelint-disable-next-line */
   &.fudis-input-size__xs .fudis-select__input {
-    padding-left: spacing.$spacing-xs;
+    padding-left: core.$spacing-xs;
   }
 }

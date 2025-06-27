@@ -16,7 +16,6 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
   selector: '[fudis-tab-navigation-tab]',
   encapsulation: ViewEncapsulation.None,
   template: '<ng-content></ng-content>',
-  styleUrl: './tab-navigation-tab.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[id]': 'id',

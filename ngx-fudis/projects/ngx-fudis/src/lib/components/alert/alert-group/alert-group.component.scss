@@ -1,7 +1,7 @@
-@use '../../../foundations/z-index/mixins.scss' as zIndex;
+@use '@funidata/fudis-core' as core;
 
 .fudis-alert-group {
-  @include zIndex.z-index('alert');
+  @include core.z-index('alert');
 
   top: 0;
   left: 0;

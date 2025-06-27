@@ -1,4 +1,4 @@
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-section {
   box-sizing: border-box;
@@ -10,11 +10,11 @@
       align-items: center;
 
       &__badge {
-        margin-left: spacing.$spacing-xs;
+        margin-left: core.$spacing-xs;
       }
 
       &__tooltip {
-        margin-left: spacing.$spacing-xs;
+        margin-left: core.$spacing-xs;
       }
     }
 
@@ -22,20 +22,20 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      margin-bottom: spacing.$spacing-xs;
+      margin-bottom: core.$spacing-xs;
     }
   }
 
   &-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: spacing.$spacing-xs spacing.$spacing-sm;
+    gap: core.$spacing-xs core.$spacing-sm;
     margin-left: auto;
   }
 
   &-content {
     fudis-notification {
-      margin-bottom: spacing.$spacing-xs;
+      margin-bottom: core.$spacing-xs;
     }
   }
 }
