@@ -1,9 +1,6 @@
 @use '@funidata/fudis-core' as core;
 
 .fudis-tab-navigation-bar {
-  /* stylelint-disable-next-line declaration-no-important */
-  display: block !important; // This is necessary since Core has inline-block and as for now there are no scroll buttons
-
   &__button-container {
     @include core.bg-color('white');
 
