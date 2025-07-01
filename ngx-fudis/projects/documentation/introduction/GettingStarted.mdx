@@ -6,7 +6,16 @@ import { Meta } from "@storybook/blocks";
 
 Fudis is available as [NPM package](https://www.npmjs.com/package/@funidata/ngx-fudis)
 
-## 1. Install Angular Material Peer Dependency:
+## 1. Compatibility
+
+The library is build and tested against:
+- Angular: **v19.2**
+- Angular Material: **v19.2**
+
+> We recommend using these versions in your project. Newer major versions may work, but are not yet tested or guaranteed to be compatible.
+
+
+## 2. Install Angular Material Peer Dependency:
 
 ```
 ng add @angular/material
@@ -23,14 +32,14 @@ Choose these options when prompted:
 ? Include the Angular animations module? Include and enable animations
 ```
 
-## 2. Install Fudis:
+## 3. Install Fudis:
 
 ```
 ng add @funidata/ngx-fudis
 
 ```
 
-## 3. Import Fudis in Applications's `app.module.ts`
+## 4. Import Fudis in Applications's `app.module.ts`
 
 Check your application's `app.module.ts` file that Fudis is imported correctly.
 
@@ -47,7 +56,7 @@ import { NgxFudisModule } from '@funidata/ngx-fudis';
 })
 ```
 
-## 4. Import Core Styles
+## 5. Import Core Styles
 
 The core styles of Fudis must be imported to your application's styles for components to work properly. As Fudis uses Angular Material as its dependency, it is already imported as part of Fudis' main CSS file.
 
@@ -57,7 +66,7 @@ The recommended way is to add following lines your project's root SCSS style fil
 @use '@funidata/ngx-fudis' as fudis;
 ```
 
-## 5. Define Application's Root Styles
+## 6. Define Application's Root Styles
 
 Fudis uses CSS variables to define "theming" of your application. Setting following variables define your Application's primary colors and `rem` base value, which Fudis then refers to in component styling.
 
