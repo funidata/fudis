@@ -17,7 +17,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Delete docs from S3 bucket
-        run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/branch/${{ github.event.ref }} --recursive
+        run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/branch/${{ github.event.ref }} --recursive
       - name: Deactivate deployment
         uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8
         with:
