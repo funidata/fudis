@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FudisValidators } from '../../lib/utilities/form/validators';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
+import { CheckboxComponent } from '../../lib/components/form/checkbox/checkbox.component';
 
 type MyForm = {
   textInputToBeLeftEmpty: FormControl<string | null>;
@@ -14,7 +15,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [CommonModule, NgxFudisModule],
+  imports: [CommonModule, NgxFudisModule, CheckboxComponent],
   selector: 'example-basic-form-components',
   templateUrl: './basic-form-components.component.html',
 })
@@ -36,18 +37,38 @@ export class StorybookExampleBasicFormComponentsComponent {
     });
   }
 
+  checked: boolean = false;
+
+  invalid: boolean = false;
+
+  disabled: boolean = false;
+
   toggleFormDisabled(): void {
     if (this.myForm.disabled) {
       this.myForm.enable();
+      this.disabled = false;
+      this.setInvalid();
     } else {
       this.myForm.disable();
+      this.disabled = true;
+      this.invalid = false;
+      this.setInvalid();
     }
   }
 
+  setInvalid() {
+    if (!this.myForm.disabled) this.invalid = !this.invalid;
+  }
+
   touchControls(): void {
+    this.setInvalid();
     Object.keys(this.myForm.controls).forEach((control) => {
       this.myForm.controls[control as keyof MyForm].markAsTouched();
     });
+  }
+
+  checkedChange(checked: boolean): void {
+    this.checked = !checked;
   }
 
   myForm: FormGroup<MyForm>;

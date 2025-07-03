@@ -7,6 +7,7 @@ test("basic form components playground", async ({ page }) => {
   await expect(page.getByTestId("fudis-datepicker-5"))
     .toBeVisible()
     .then(async () => {
+      await page.getByTestId("fudis-checkbox-1").click();
       await expect(page).toHaveScreenshot("1-basic-form-components-init.png", { fullPage: true });
 
       await page.getByTestId("fudis-button-1").click();
