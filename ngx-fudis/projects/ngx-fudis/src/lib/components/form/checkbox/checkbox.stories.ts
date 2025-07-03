@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { CheckboxComponent } from './checkbox.component';
-import { FudisValidators } from 'ngx-fudis';
+import { FudisValidators } from '../../../utilities/form/validators';
 import { CommonModule } from '@angular/common';
 import { checkboxControlsExclude } from '../../../utilities/storybook';
 import { action } from '@storybook/addon-actions';
