@@ -1,1 +1,66 @@
 <p>checkbox works!</p>
+<div class="fudis-checkbox">
+  <label
+    [attr.for]="id"
+    class="fudis-checkbox-wrapper"
+    [class.fudis-checkbox-wrapper--disabled]="control?.disabled || disabled"
+  >
+    <input
+      *ngIf="control; else standaloneCheckbox"
+      type="checkbox"
+      class="fudis-checkbox__input"
+      [id]="id"
+      [formControl]="control"
+      [disabled]="control.disabled"
+      [attr.aria-disabled]="control.disabled"
+      [attr.aria-labelledby]="ariaLabelledBy"
+      [attr.tabindex]="control.disabled ? -1 : null"
+      [attr.aria-disabled]="control.disabled"
+      [attr.aria-invalid]="control.touched && control.invalid"
+      (focus)="_onFocus()"
+      (blur)="_onBlur()"
+    />
+    <ng-template #standaloneCheckbox>
+      <input
+        type="checkbox"
+        class="fudis-checkbox__input"
+        [id]="id"
+        [attr.checked]="checked"
+        [disabled]="disabled"
+        [attr.aria-disabled]="disabled"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.tabindex]="disabled ? -1 : null"
+        [attr.aria-invalid]="invalid"
+        (change)="toggleCheckbox($event)"
+        (focus)="_onFocus()"
+        (blur)="_onBlur()"
+      />
+    </ng-template>
+    <div
+      class="fudis-checkbox__content"
+      [class.fudis-checkbox__content__disabled]="control?.disabled || disabled"
+    >
+      <div class="fudis-checkbox__content-wrapper">
+        <span
+          class="fudis-checkbox__content__box"
+          [class.fudis-checkbox__content__box--focused]="_focused"
+          [class.fudis-checkbox__content__box--invalid]="
+            (control?.touched && control?.invalid) || invalid
+          "
+          [class.fudis-checkbox__content__box--disabled]="control?.disabled || disabled"
+        >
+          <fudis-icon
+            *ngIf="checked || control?.value"
+            [icon]="'check'"
+            class="fudis-checkbox__content__box__icon"
+          />
+        </span>
+      </div>
+    </div>
+    <span *ngIf="label" class="fudis-checkbox__label">{{ label }}</span>
+  </label>
+  <ng-content></ng-content>
+  <span class="fudis-checkbox__required" *ngIf="required"
+    >({{ _translationService.getTranslations()().REQUIRED }})</span
+  >
+</div>

@@ -1,0 +1,99 @@
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../foundations/focus/mixins.scss' as focus;
+@use '../../../foundations/typography/mixins.scss' as typography;
+
+.fudis-checkbox {
+  @include typography.body-text-md-regular;
+  @include colorMixins.text-color('gray-dark');
+
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  width: auto;
+  min-height: spacing.$spacing-lg;
+
+  &-wrapper {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+
+    &--disabled {
+      pointer-events: none;
+    }
+  }
+
+  &__content {
+    display: inline-flex;
+    align-items: center;
+
+    &--disabled {
+      pointer-events: none;
+    }
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: spacing.$spacing-lg;
+      min-height: spacing.$spacing-lg;
+    }
+
+    &__box {
+      @include borders.border('1px', 'solid', 'gray-middle');
+
+      display: flex;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      width: spacing.$checkbox-size;
+      height: spacing.$checkbox-size;
+
+      &__icon .fudis-icon {
+        fill: colors.$color-gray-middle;
+      }
+
+      &--focused {
+        @include focus.focus-checkbox;
+      }
+
+      &--disabled {
+        @include borders.border('1px', 'dashed', 'gray-middle');
+        @include colorMixins.bg-color('gray-extra-light');
+
+        cursor: default;
+      }
+
+      &--invalid {
+        @include borders.border('1px', 'solid', 'red');
+
+        box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
+      }
+    }
+  }
+
+  &__label {
+    position: relative;
+    padding-right: spacing.$spacing-xs;
+    padding-left: spacing.$spacing-xs;
+  }
+
+  &__required {
+    margin-left: spacing.$spacing-xs;
+  }
+
+  &__input {
+    @include utilities.box-reset;
+
+    display: grid;
+    place-content: center;
+    opacity: 0;
+    width: spacing.$pixel-1;
+    height: spacing.$pixel-1;
+  }
+}
