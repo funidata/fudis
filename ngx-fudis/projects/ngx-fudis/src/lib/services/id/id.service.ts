@@ -16,6 +16,7 @@ export class FudisIdService {
       alert: [],
       autocomplete: [],
       'body-text': [],
+      checkbox: [],
       button: [],
       'autocomplete-multi-select': [],
       datepicker: [],
