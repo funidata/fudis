@@ -290,7 +290,9 @@ describe('CheckboxGroupComponent', () => {
 
         fixture.detectChanges();
 
-        const checkbox = fixture.nativeElement.querySelector('#first-group fudis-checkbox-group-option');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#first-group fudis-checkbox-group-option',
+        );
 
         checkbox.querySelector('input').click();
 
@@ -349,7 +351,9 @@ describe('CheckboxGroupComponent', () => {
 
       it('should emit correct object', () => {
         jest.spyOn(mockComponent, 'handleCheckboxClick');
-        const checkbox = fixture.nativeElement.querySelector('#first-group fudis-checkbox-group-option');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#first-group fudis-checkbox-group-option',
+        );
 
         checkbox.querySelector('input').click();
 
@@ -380,7 +384,9 @@ describe('CheckboxGroupComponent', () => {
 
       it('should emit correct object', () => {
         jest.spyOn(mockComponent, 'handleCheckboxClick');
-        const checkbox = fixture.nativeElement.querySelector('#second-group fudis-checkbox-group-option input');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#second-group fudis-checkbox-group-option input',
+        );
 
         checkbox.click();
         fixture.detectChanges();
@@ -400,7 +406,9 @@ describe('CheckboxGroupComponent', () => {
       });
 
       it('should have correct internal form group, if one option is destroyed', () => {
-        const checkbox = fixture.nativeElement.querySelector('#second-group fudis-checkbox-group-option input');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#second-group fudis-checkbox-group-option input',
+        );
 
         checkbox.click();
         fixture.detectChanges();

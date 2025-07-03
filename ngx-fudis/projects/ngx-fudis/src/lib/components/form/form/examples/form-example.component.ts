@@ -62,8 +62,14 @@ type MyForm = {
                 [label]="'Course books'"
                 [helpText]="'Select 1-2 coursebooks'"
               >
-                <fudis-checkbox-group-option [controlName]="'first'" [label]="'Heir to the Empire'" />
-                <fudis-checkbox-group-option [controlName]="'second'" [label]="'Dark Force Rising'" />
+                <fudis-checkbox-group-option
+                  [controlName]="'first'"
+                  [label]="'Heir to the Empire'"
+                />
+                <fudis-checkbox-group-option
+                  [controlName]="'second'"
+                  [label]="'Dark Force Rising'"
+                />
                 <fudis-checkbox-group-option [controlName]="'third'" [label]="'The Last Command'" />
               </fudis-checkbox-group>
               <fudis-datepicker
