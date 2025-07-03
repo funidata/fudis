@@ -12,7 +12,7 @@ import {
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
-import { CheckboxComponent } from './checkbox.component';
+import { CheckboxGroupOptionComponent } from './checkbox-group-option.component';
 import { FieldSetComponent } from '../../fieldset/fieldset.component';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.directive';
@@ -93,15 +93,15 @@ class MockContainerComponent {
   ];
 }
 
-describe('CheckboxComponent', () => {
-  let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<CheckboxComponent>;
+describe('CheckboxGroupOptionComponent', () => {
+  let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<CheckboxGroupOptionComponent>;
 
   let mockComponent: MockContainerComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        CheckboxComponent,
+        CheckboxGroupOptionComponent,
         ValidatorErrorMessageComponent,
         MockContainerComponent,
         CheckboxGroupComponent,
@@ -222,17 +222,17 @@ describe('CheckboxComponent', () => {
     });
 
     it('should have proper CSS classes before, during and after when input focused', () => {
-      const checkboxComponent = fixture.nativeElement.querySelector(
+      const CheckboxGroupOptionComponent = fixture.nativeElement.querySelector(
         '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"] .fudis-checkbox',
       );
 
-      const labelBox: HTMLSpanElement = checkboxComponent.querySelector(
+      const labelBox: HTMLSpanElement = CheckboxGroupOptionComponent.querySelector(
         '.fudis-checkbox__content__box',
       );
 
       expect(labelBox.className).toEqual('fudis-checkbox__content__box');
 
-      const input: HTMLInputElement = checkboxComponent.querySelector('input');
+      const input: HTMLInputElement = CheckboxGroupOptionComponent.querySelector('input');
 
       input.dispatchEvent(new Event('focus'));
       fixture.detectChanges();
@@ -250,8 +250,8 @@ describe('CheckboxComponent', () => {
 
   describe('Interaction and logic when clicking', () => {
     it('should display the check icon and emit handleChange() when clicking component', waitForAsync(() => {
-      const checkboxComponentToSpy = fixture.debugElement.query(
-        By.directive(CheckboxComponent),
+      const CheckboxGroupOptionComponentToSpy = fixture.debugElement.query(
+        By.directive(CheckboxGroupOptionComponent),
       ).componentInstance;
 
       const optionToMatch: FudisCheckboxOption<object> = {
@@ -262,7 +262,7 @@ describe('CheckboxComponent', () => {
         value: true,
       };
 
-      checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxChangeEvent) => {
+      CheckboxGroupOptionComponentToSpy.handleChange.subscribe((value: FudisCheckboxChangeEvent) => {
         if (value) {
           expect(value.checkbox).toEqual(optionToMatch);
 

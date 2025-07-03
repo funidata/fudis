@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
-import { CheckboxComponent } from './checkbox/checkbox.component';
+import { CheckboxGroupOptionComponent } from './checkbox-group-option/checkbox-group-option.component';
 import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -130,7 +130,7 @@ describe('CheckboxGroupComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         MockContainerComponent,
-        CheckboxComponent,
+        CheckboxGroupOptionComponent,
         CheckboxGroupComponent,
         FieldSetComponent,
         FieldsetContentDirective,
