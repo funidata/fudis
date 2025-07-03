@@ -40,7 +40,7 @@ type MyForm = {
                   [helpText]="'Berries are yummy'"
                   [formGroup]="testFormGroup.controls['checkboxFormGroup']"
                 >
-                  <fudis-checkbox
+                  <fudis-checkbox-group-option
                     *ngFor="let option of checkboxOptions"
                     [controlName]="option.controlName"
                     [label]="option.label"

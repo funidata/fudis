@@ -64,7 +64,7 @@ myOptions = [
   [formGroup]="myFormGroup"
   [label]="'Select Fruits'"
   (handleChange)="handleChange($event)">
-  <fudis-checkbox *ngFor="let option of myOptions"
+  <fudis-checkbox-group-option *ngFor="let option of myOptions"
     [controlName]="option.controlName
     [label]="option.label"
     (handleChange)="checkboxChange($event)" />
@@ -103,7 +103,7 @@ myOptionsWithControls = [
 
 <fudis-checkbox-group
   [label]="'Select Fruits'">
-  <fudis-checkbox *ngFor="let option of myOptionsWithControls"
+  <fudis-checkbox-group-option *ngFor="let option of myOptionsWithControls"
     [control]="option.control"
     [controlName]="option.controlName
     [label]="option.label" />
