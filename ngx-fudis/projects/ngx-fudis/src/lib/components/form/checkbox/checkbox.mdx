@@ -1,0 +1,72 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { CheckboxComponent } from "./checkbox.component";
+import * as CheckboxpStories from "./checkbox.stories";
+import { checkboxGroupExclude } from "../../../utilities/storybook";
+
+<Meta title="Components/Form/Checkbox" />
+
+# Checkbox
+
+The Single **Checkbox** is a standalone checkbox component designed for binary (yes/no) decisions. It is suitable when there is only **one option to select**. For scenarios requiring multiple selections, use the [CheckboxGroupComponent](/docs/components-form-checkbox-group--documentation) instead.
+
+This component can be used both **within a form** (via a `FormControl`) and **outside of a form** (as a standalone checkbox). Its `checked`, `disabled`, and `invalid` states can be controlled either through `@Input()` bindings or by passing a `FormControl`.
+
+Unlike `CheckboxGroupComponent`, the Single Checkbox allows custom content (such as links) and does not require a label. However, to ensure accessibility, you must provide an `ariaLabelledBy` attribute if a visible label is not used.
+
+> **Note!** The Single Checkbox does **not display error messages** automatically. It's the responsibility of the consumer to handle and display validation messages externally if needed.
+
+Additionally, the checkbox includes an optional `required` input that will render a visible “required” indicator next to the content. This is a visual indicator only and is not tied to form validation logic. If validation is required, it should be implemented separately via `FormControl` validators.
+
+## Checkbox used with `formGroup` property
+
+### Code Example
+
+```
+
+// In TypesScript
+
+  myFormGroup = new FormGroup(
+    {
+      required: new FormControl<boolean | null>(null, FudisValidators.required('This selection is required'))
+    }
+  );
+
+// HTML template
+
+  <form [formGroup]="myFormGroup">
+        <fudis-checkbox
+          [label]="'Yes, I accept terms.'"
+          [control]="myFormGroup.get('required')"
+          [required]="true">
+          <a fudisLink href="https://www.example.com" [title]="'Terms descriptions'" [external]="true"></a>
+        </fudis-checkbox>
+    </form>
+
+
+```
+
+## Standalone Checkbox outside of form
+
+### Code Example
+
+This Checkbox does not have a visible label, but instead it has passed id in `ariaLabelledBy` pointing to the 'Hidden label' text.
+
+```
+      <fudis-checkbox
+        [ariaLabelledBy]="'id-label'"
+        (checked)="true"
+        (checkedChange)="checkedChange($event)"
+          <p class="fudis-visually-hidden" id="id-label">Hidden label</p>
+      </fudis-checkbox>
+
+```
+
+## Accessibility
+
+- Checkbox has associated label
+- When label is not provided, aria-labelledby is provided for linking associated label to input
+- When selection is mandatory, provide 'Required' text using inputs
+
+## Properties of Checkbox Component
+
+<ArgTypes of={CheckboxComponent} />
