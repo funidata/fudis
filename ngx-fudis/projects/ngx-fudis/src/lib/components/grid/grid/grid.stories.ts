@@ -190,6 +190,82 @@ const ExampleTemplate: StoryFn = (args) => ({
     </fudis-grid>`,
 });
 
+const FlexboxTemplate: StoryFn = (args) => ({
+  props: { ...args },
+  template: html`
+    <fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
+      >This is Grid component styled with flex layout: <code>display:flex;</code></fudis-body-text
+    >
+    <fudis-grid
+      [columns]="3"
+      [columnGap]="'sm'"
+      [align]="'start'"
+      [classes]="'storybook__wrapper-border fudis-mb-md'"
+      style="display: flex;"
+    >
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+    </fudis-grid>
+
+    <fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
+      >This is Grid component styled with flex layout:
+      <code>display:flex; justify-content:flex-end</code></fudis-body-text
+    >
+    <fudis-grid
+      [columns]="3"
+      [columnGap]="'sm'"
+      [align]="'end'"
+      [classes]="'storybook__wrapper-border fudis-mb-md'"
+      style="display: flex; justify-content:flex-end"
+    >
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+    </fudis-grid>
+
+    <fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
+      >This is Grid component with multiple different child elements with and without
+      flex</fudis-body-text
+    >
+    <fudis-grid
+      [columns]="{sm: 3}"
+      [columnGap]="'sm'"
+      [align]="'center'"
+      [classes]="'storybook__wrapper-border'"
+    >
+      <div style="display:flex; gap:.5rem;">
+        <fudis-body-text class="storybook__item">Element inside flex container</fudis-body-text>
+        <fudis-body-text class="storybook__item">Element inside flex container</fudis-body-text>
+      </div>
+      <div style="display:flex; flex-wrap:wrap;">
+        <fudis-body-text class="storybook__item"
+          >Element inside flex container with wrap property</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item"
+          >Element inside flex container with wrap property</fudis-body-text
+        >
+      </div>
+      <div style="display:flex; gap:.5rem;">
+        <fudis-body-text class="storybook__item" style="align-self:center;"
+          >Element with align-self property</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item" style="align-self:stretch;"
+          >Element with align-self property</fudis-body-text
+        >
+      </div>
+      <div fudisGridItem [columns]="{sm: 2}">
+        <fudis-body-text class="storybook__item" style="display:flex;"
+          >Single element with flex property</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item" style="display:flex; justify-content:center;"
+          >Centered single element with flex property</fudis-body-text
+        >
+      </div>
+    </fudis-grid>
+  `,
+});
+
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   columns: 3,
@@ -359,6 +435,13 @@ const ExampleWithServiceTemplate: StoryFn = (args) => ({
 export const ExampleWithService = ExampleWithServiceTemplate.bind({});
 
 ExampleWithService.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
+
+export const WithFlexbox = FlexboxTemplate.bind({});
+WithFlexbox.parameters = {
   controls: {
     exclude: /.*/g,
   },
