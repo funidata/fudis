@@ -7,7 +7,6 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
   selector: 'fudis-loading-spinner',
   imports: [CommonModule, NgxFudisModule],
   templateUrl: './loading-spinner.component.html',
-  styleUrl: './loading-spinner.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadingSpinnerComponent {

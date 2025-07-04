@@ -1,25 +1,20 @@
-@use '../../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../../../foundations/z-index/mixins.scss' as zIndex;
+@use '@funidata/fudis-core' as core;
 
 .fudis-select-dropdown {
-  @include utilities.box-reset;
-  @include colorMixins.bg-color('white');
-  @include zIndex.z-index('dropdown-menu');
-  @include borders.border('1px', 'solid', 'gray-dark');
+  @include core.box-reset;
+  @include core.bg-color('white');
+  @include core.z-index('dropdown-menu');
+  @include core.border('1px', 'solid', 'gray-dark');
 
   display: none;
   position: absolute;
   flex-direction: column;
   width: 100%;
-  max-height: calc(spacing.$spacing-xxl * 4);
+  max-height: calc(core.$spacing-xxl * 4);
   overflow: auto;
 
   &:focus-visible {
-    @include focus.focus-generic;
+    @include core.focus-generic;
   }
 
   &__right {

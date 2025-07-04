@@ -1,5 +1,4 @@
-@use '../../foundations/colors/tokens.scss' as colors;
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-icon {
   box-sizing: border-box;
@@ -22,46 +21,46 @@
   }
 
   &__lg {
-    width: spacing.$spacing-lg;
-    height: spacing.$spacing-lg;
+    width: core.$spacing-lg;
+    height: core.$spacing-lg;
   }
 
   &__sm {
-    width: spacing.$spacing-sm;
-    height: spacing.$spacing-sm;
+    width: core.$spacing-sm;
+    height: core.$spacing-sm;
   }
 
   &__color {
     &__yellow {
-      fill: colors.$color-yellow;
+      fill: core.$color-yellow;
     }
 
     &__red {
-      fill: colors.$color-red;
+      fill: core.$color-red;
     }
 
     &__gray-dark {
-      fill: colors.$color-gray-dark;
+      fill: core.$color-gray-dark;
     }
 
     &__gray-light {
-      fill: colors.$color-gray-light;
+      fill: core.$color-gray-light;
     }
 
     &__primary {
-      fill: colors.$color-primary;
+      fill: core.$color-primary;
     }
 
     &__primary-dark {
-      fill: colors.$color-primary-dark;
+      fill: core.$color-primary-dark;
     }
 
     &__green {
-      fill: colors.$color-green;
+      fill: core.$color-green;
     }
 
     &__white {
-      fill: colors.$color-white;
+      fill: core.$color-white;
     }
   }
 }

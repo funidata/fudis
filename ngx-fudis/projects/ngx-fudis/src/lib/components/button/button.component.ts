@@ -286,12 +286,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
         `fudis-button__label--hidden`,
       ];
     } else {
-      return [
-        'fudis-button',
-        `fudis-button__size__${this.size}`,
-        `fudis-button__${this.variant}`,
-        `fudis-button__label--visible`,
-      ];
+      return ['fudis-button', `fudis-button__size__${this.size}`, `fudis-button__${this.variant}`];
     }
   }
 }
