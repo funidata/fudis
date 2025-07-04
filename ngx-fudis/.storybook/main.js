@@ -23,7 +23,7 @@ export const features = {
 export const staticDirs = [
   { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
   { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
-  { from: "./assets/i18n", to: "/assets"},
+  { from: "./assets/i18n", to: "/assets" },
   {
     from: "./../projects/ngx-fudis/src/lib/assets/images/fudis-logo-mini-black.svg",
     to: "/favicon.svg",
@@ -67,10 +67,11 @@ export function previewHead(head) {
         box-sizing: border-box;
         margin-bottom: 2rem;
         display: flex;
-
-        h1 {
-        margin: auto
-        }
+        
+          h1 {
+            margin: auto;
+            font-size: 40px;
+          }
 
       }
     </style>

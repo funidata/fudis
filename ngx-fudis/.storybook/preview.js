@@ -36,10 +36,7 @@ const preview = {
           "Documentation",
           [
             "Introduction",
-            [
-              "Welcome",
-              "How to Start Using Fudis",
-            ],
+            ["Welcome", "How to Start Using Fudis"],
             "Development",
             [
               "Getting Started",
