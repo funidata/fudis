@@ -1,9 +1,9 @@
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-date-range {
   display: flex;
-  gap: spacing.$spacing-sm;
+  gap: core.$spacing-sm;
   align-items: baseline;
   opacity: 1;
-  max-width: spacing.$input-width-lg;
+  max-width: core.$input-width-lg;
 }
