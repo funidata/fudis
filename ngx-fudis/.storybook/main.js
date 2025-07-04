@@ -21,9 +21,13 @@ export const features = {
   previewMdx2: true,
 };
 export const staticDirs = [
-  "./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
-  "./../projects/ngx-fudis/src/lib/assets/images",
-  "./assets/i18n",
+  { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
+  { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
+  { from: "./assets/i18n", to: "/assets" },
+  {
+    from: "./../projects/ngx-fudis/src/lib/assets/images/fudis-logo-mini-black.svg",
+    to: "/favicon.svg",
+  },
 ];
 export const docs = {
   defaultName: "Documentation",
@@ -32,7 +36,7 @@ export const docs = {
 export function managerHead(head) {
   return `
     ${head}
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.svg">
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
       .sidebar-item:has(#components-test-playground)  { display: none;}
@@ -49,6 +53,26 @@ export function previewHead(head) {
       }
       .sb-show-main.sb-main-padded:has(.fudis-footer){
           padding: 0;
+      }
+          
+      .sbdocs .full-width-bg {
+        margin-top: -4rem;
+        width: 100vw;
+        height: 20rem;
+        margin-left: calc(-50vw + 50%);
+        background-image: url('/images/fudis-bg.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        margin-bottom: 2rem;
+        display: flex;
+        
+          h1 {
+            margin: auto;
+            font-size: 40px;
+          }
+
       }
     </style>
   `;
