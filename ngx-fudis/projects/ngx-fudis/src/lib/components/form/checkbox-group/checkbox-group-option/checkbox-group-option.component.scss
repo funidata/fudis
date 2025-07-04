@@ -6,7 +6,7 @@
 @use '../../../../foundations/focus/mixins.scss' as focus;
 @use '../../../../foundations/typography/mixins.scss' as typography;
 
-.fudis-checkbox {
+.fudis-checkbox-group-option {
   @include typography.body-text-md-regular;
   @include colorMixins.text-color('gray-dark');
 

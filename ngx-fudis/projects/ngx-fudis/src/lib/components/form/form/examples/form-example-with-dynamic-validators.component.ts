@@ -173,7 +173,7 @@ type MyForm = {
                   [label]="'If you like summer'"
                   [formGroup]="formExample.controls.summer"
                 >
-                  <fudis-checkbox
+                  <fudis-checkbox-group-option
                     [controlName]="'summer'"
                     [label]="'Summer holidays'"
                     (handleChange)="
@@ -188,7 +188,7 @@ type MyForm = {
                   [label]="'If you like winter'"
                   [formGroup]="formExample.controls.winter"
                 >
-                  <fudis-checkbox
+                  <fudis-checkbox-group-option
                     [controlName]="'winter'"
                     [label]="'Winter holidays'"
                     (handleChange)="
@@ -203,7 +203,7 @@ type MyForm = {
                   [label]="'If you like working'"
                   [formGroup]="formExample.controls.working"
                 >
-                  <fudis-checkbox
+                  <fudis-checkbox-group-option
                     [controlName]="'working'"
                     [label]="'Working holidays'"
                     (handleChange)="

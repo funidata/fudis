@@ -94,7 +94,7 @@
 
         // Checkbox and radio-button elements need small padding if form is inside dialog
         // Otherwise focus and invalid styles won't show properly as dialog padding is overlapping them
-        fudis-checkbox,
+        fudis-checkbox-group-option,
         fudis-radio-button {
           padding-left: spacing.$spacing-xxs;
         }

@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxFudisModule, LoadingSpinnerComponent } from 'ngx-fudis';
+import { NgxFudisModule, LoadingSpinnerComponent, CheckboxComponent } from 'ngx-fudis';
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -27,11 +29,14 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     NgxFudisModule,
     ScrollingModule,
     TranslocoRootModule,
     LoadingSpinnerComponent,
+    CheckboxComponent,
     RouterModule.forRoot([]),
   ],
   providers: [

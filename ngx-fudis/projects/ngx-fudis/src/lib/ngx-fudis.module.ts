@@ -25,7 +25,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { BreadcrumbsItemComponent } from './components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
-import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
+import { CheckboxGroupOptionComponent } from './components/form/checkbox-group/checkbox-group-option/checkbox-group-option.component';
 import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
@@ -155,7 +155,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
     ButtonComponent,
-    CheckboxComponent,
+    CheckboxGroupOptionComponent,
     CheckboxGroupComponent,
     ControlComponentBaseDirective,
     DatepickerComponent,
@@ -270,7 +270,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
     ButtonComponent,
-    CheckboxComponent,
+    CheckboxGroupOptionComponent,
     CheckboxGroupComponent,
     DatepickerComponent,
     DateRangeComponent,

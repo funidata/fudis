@@ -114,6 +114,13 @@ export const buttonIconOnlyExclude: RegExp = excludeRegex([
   'handleDestroy',
 ]);
 
+export const checkboxControlsExclude: RegExp = excludeRegex([
+  'id',
+  'control',
+  'checkedChange',
+  'toggleCheckbox',
+]);
+
 /**
  * CheckboxGroup and Checkbox
  */

@@ -121,7 +121,7 @@ interface MyCheckboxGroup {
                 [label]="'Pick a fruit'"
                 [formGroup]="allForms.controls.formThree"
               >
-                <fudis-checkbox
+                <fudis-checkbox-group-option
                   *ngFor="let control of allForms.controls.formThree.controls | keyvalue"
                   [controlName]="control.key"
                   [label]="control.key"

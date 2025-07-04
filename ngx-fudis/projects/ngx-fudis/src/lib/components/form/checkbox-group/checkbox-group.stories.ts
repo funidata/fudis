@@ -100,12 +100,12 @@ const ExampleTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    <fudis-checkbox
+    <fudis-checkbox-group-option
       *ngFor="let option of options"
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
-    ></fudis-checkbox>
+    ></fudis-checkbox-group-option>
   </fudis-checkbox-group>`,
 });
 
@@ -150,7 +150,7 @@ const ExampleWithDisabledTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    <fudis-checkbox
+    <fudis-checkbox-group-option
       *ngFor="let option of options"
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
@@ -209,7 +209,7 @@ const ExampleWithMinMaxTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    <fudis-checkbox
+    <fudis-checkbox-group-option
       *ngFor="let option of options"
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
@@ -246,7 +246,7 @@ const ExampleWithoutFormGroupTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    <fudis-checkbox
+    <fudis-checkbox-group-option
       *ngFor="let option of options"
       (handleChange)="checkboxChange($event)"
       [control]="option.control"

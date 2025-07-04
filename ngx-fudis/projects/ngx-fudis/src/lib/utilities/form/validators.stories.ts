@@ -180,7 +180,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
           [label]="'One Required Group Validator'"
           [formGroup]="checkboxGroupOneRequired.formGroup"
         >
-          <fudis-checkbox
+          <fudis-checkbox-group-option
             *ngFor="let option of checkboxGroupOneRequired.options"
             [controlName]="option.controlName"
             [label]="option.label"
@@ -191,7 +191,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         [label]="'Min Group Validator'"
         [formGroup]="checkboxGroupMin.formGroup"
       >
-        <fudis-checkbox
+        <fudis-checkbox-group-option
           *ngFor="let option of checkboxGroupMin.options"
           [controlName]="option.controlName"
           [label]="option.label"
@@ -201,7 +201,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         [label]="'Max Group Validator'"
         [formGroup]="checkboxGroupMax.formGroup"
       >
-        <fudis-checkbox
+        <fudis-checkbox-group-option
           *ngFor="let option of checkboxGroupMax.options"
           [controlName]="option.controlName"
           [label]="option.label"
