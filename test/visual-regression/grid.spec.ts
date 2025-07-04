@@ -39,6 +39,8 @@ test("grid with service", async ({ page }) => {
 });
 
 test("grid with flexbox", async ({ page }) => {
-  await page.goto("/iframe.html?globals=&args=&id=components-grid-grid--with-flexbox&viewMode=story");
+  await page.goto(
+    "/iframe.html?globals=&args=&id=components-grid-grid--with-flexbox&viewMode=story",
+  );
   await expect(page).toHaveScreenshot("grid-with-flexbox.png", { fullPage: true });
 });
