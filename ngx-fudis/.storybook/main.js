@@ -21,7 +21,7 @@ export const features = {
   previewMdx2: true,
 };
 export const staticDirs = [
-  { from: "./../projects/ngx-fudis/src/lib/assets/fonts/", to: "/assets" },
+  { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
   { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
   { from: "./assets/i18n", to: "/assets"},
   {
