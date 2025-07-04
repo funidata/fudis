@@ -6,6 +6,17 @@ import { Meta } from "@storybook/blocks";
 
 Error Summary Service provides tools to load and display validation errors for [Form](/docs/components-form-form--documentation) and its [Error Summary Component](/docs/components-form-error-summary--documentation).
 
+**Table of Contents:**
+
+- [Features](#features)
+  - [Reload Form Errors](#reloadformerrors)
+  - [Reload All Errors](#reloadallerrors)
+  - [Add Error](#add-error)
+  - [Remove Error](#remove-error)
+  - [Update Strategy](#update-strategy)
+- [Related Components](#related-components)
+- [Related Directive](#related-directives)
+
 ## Features
 
 ### reloadFormErrors()
@@ -28,7 +39,7 @@ constructor(
 ) {}
 ```
 
-Call `reloadFormErrors` when user clicks form's submit button which also sets Error Summary as visible in Fudis Form.
+Call `reloadFormErrors()` with form id as parameter when user clicks form's submit button, which also sets Error Summary as visible in Fudis Form.
 
 ```
 protected _submitButtonClick():void {
@@ -47,7 +58,7 @@ protected _submitButtonClick():void {
 
 ### reloadAllErrors()
 
-If reloading single Form and its Error Summary one at the time, Service has function `reloadAllErrors()` which will then reload all Forms and their Error Summaries.
+If reloading single Form and its Error Summary one at the time is not enough, the Service has function `reloadAllErrors()` which will then reload all Forms and their Error Summaries.
 
 ### Add Error
 
