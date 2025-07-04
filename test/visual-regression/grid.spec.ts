@@ -37,3 +37,8 @@ test("grid with service", async ({ page }) => {
   await page.getByTestId("fudis-button-2").click();
   await expect(page).toHaveScreenshot("grid-with-service-3.png");
 });
+
+test("grid with flexbox", async ({ page }) => {
+  await page.goto("/iframe.html?globals=&args=&id=components-grid-grid--with-flexbox&viewMode=story");
+  await expect(page).toHaveScreenshot("grid-with-flexbox.png", { fullPage: true });
+});
