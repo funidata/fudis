@@ -36,6 +36,10 @@ const preview = {
           "Documentation",
           [
             "Introduction",
+            [
+              "Welcome",
+              "How to Start Using Fudis",
+            ],
             "Development",
             [
               "Getting Started",
@@ -56,6 +60,7 @@ const preview = {
                 "Testing Practises",
                 "Component Checklist",
               ],
+              "Information Security Management",
             ],
           ],
           "Foundations",

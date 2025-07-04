@@ -54,6 +54,25 @@ export function previewHead(head) {
       .sb-show-main.sb-main-padded:has(.fudis-footer){
           padding: 0;
       }
+          
+      .sbdocs .full-width-bg {
+        margin-top: -4rem;
+        width: 100vw;
+        height: 20rem;
+        margin-left: calc(-50vw + 50%);
+        background-image: url('/images/fudis-bg.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        margin-bottom: 2rem;
+        display: flex;
+
+        h1 {
+        margin: auto
+        }
+
+      }
     </style>
   `;
 }
