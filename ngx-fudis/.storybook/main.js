@@ -21,9 +21,13 @@ export const features = {
   previewMdx2: true,
 };
 export const staticDirs = [
-  "./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
-  "./../projects/ngx-fudis/src/lib/assets/images",
-  "./assets/i18n",
+  { from: "./../projects/ngx-fudis/src/lib/assets/fonts/", to: "/assets" },
+  { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
+  { from: "./assets/i18n", to: "/assets"},
+  {
+    from: "./../projects/ngx-fudis/src/lib/assets/images/fudis-logo-mini-black.svg",
+    to: "/favicon.svg",
+  },
 ];
 export const docs = {
   defaultName: "Documentation",
@@ -32,7 +36,7 @@ export const docs = {
 export function managerHead(head) {
   return `
     ${head}
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.svg">
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
       .sidebar-item:has(#components-test-playground)  { display: none;}
