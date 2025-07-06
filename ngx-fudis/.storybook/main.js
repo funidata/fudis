@@ -23,7 +23,7 @@ export const features = {
 export const staticDirs = [
   { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
   { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
-  { from: "./assets/i18n", to: "/assets" },
+  "./assets/i18n",
   {
     from: "./../projects/ngx-fudis/src/lib/assets/images/fudis-logo-mini-black.svg",
     to: "/favicon.svg",
