@@ -47,6 +47,9 @@ export function previewHead(head) {
   return `
     ${head}
     <style>
+      /*
+      * These styles are intended for Storybook use only
+      */
       .storybook-flex {
           display: flex;
           align-items: center;
@@ -77,9 +80,9 @@ export function previewHead(head) {
       
       .version-badges {
         .fudis-badge__primary {
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 5px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 5px;
 
         a.sbdocs {
             color: #484848;
