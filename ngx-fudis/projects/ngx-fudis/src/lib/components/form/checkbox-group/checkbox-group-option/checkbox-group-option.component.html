@@ -1,15 +1,10 @@
 <ng-container *ngIf="control">
-  <label
-    class="fudis-checkbox-group-option"
-    [attr.for]="id"
-    [id]="id + '-label'"
-    [class.fudis-checkbox-group-option--disabled]="_checkboxGroup.disabled"
-  >
+  <label class="fudis-checkbox fudis-checkbox__label" [attr.for]="id" [id]="id + '-label'">
     <input
       #inputRef
       (click)="_checkboxClick($event)"
       type="checkbox"
-      class="fudis-checkbox-group-option__input"
+      class="fudis-checkbox__input"
       [id]="id"
       [formControl]="control"
       [value]="control.value"
@@ -28,29 +23,32 @@
       (focus)="_onFocus($event)"
       (keyup)="_checkboxGroup.handleKeyUp.emit($event)"
     />
-    <div class="fudis-checkbox-group-option__content">
-      <div class="fudis-checkbox-group-option__content-wrapper">
+    <div
+      class="fudis-checkbox__content"
+      [class.fudis-checkbox__content--disabled]="control.disabled || _checkboxGroup.disabled"
+    >
+      <div class="fudis-checkbox__content-wrapper">
         <span
-          class="fudis-checkbox-group-option__content__box"
-          [class.fudis-checkbox-group-option__content__box--focused]="_focused"
-          [class.fudis-checkbox-group-option__content__box--invalid]="
+          class="fudis-checkbox__content__box"
+          [class.fudis-checkbox__content__box--focused]="_focused"
+          [class.fudis-checkbox__content__box--invalid]="
             _checkboxGroup.formGroup &&
             _checkboxGroup.formGroup.touched &&
             _checkboxGroup.formGroup.invalid &&
             _checkboxGroup.groupBlurredOut
           "
-          [class.fudis-checkbox-group-option__content__box--disabled]="
+          [class.fudis-checkbox__content__box--disabled]="
             control.disabled || _checkboxGroup.disabled
           "
         >
           <fudis-icon
             *ngIf="control.value"
             [icon]="'check'"
-            class="fudis-checkbox-group-option__content__box__icon"
+            class="fudis-checkbox__content__box__icon"
           />
         </span>
       </div>
-      <span class="fudis-checkbox-group-option__content__label">
+      <span class="fudis-checkbox__content__label">
         {{ label }}
       </span>
     </div>

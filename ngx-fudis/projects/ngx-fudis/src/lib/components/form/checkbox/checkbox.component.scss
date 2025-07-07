@@ -10,17 +10,19 @@
   @include typography.body-text-md-regular;
   @include colorMixins.text-color('gray-dark');
 
-  display: inline-flex;
-  position: relative;
-  align-items: center;
   width: auto;
   min-height: spacing.$spacing-lg;
 
-  &-wrapper {
+  &__label {
     display: inline-flex;
     position: relative;
     align-items: center;
-    cursor: pointer;
+
+    &__text {
+      position: relative;
+      padding-right: spacing.$spacing-xs;
+      padding-left: spacing.$spacing-xs;
+    }
 
     &--disabled {
       pointer-events: none;
@@ -30,9 +32,10 @@
   &__content {
     display: inline-flex;
     align-items: center;
+    cursor: pointer;
 
     &--disabled {
-      pointer-events: none;
+      cursor: default;
     }
 
     &-wrapper {
@@ -65,8 +68,6 @@
       &--disabled {
         @include borders.border('1px', 'dashed', 'gray-middle');
         @include colorMixins.bg-color('gray-extra-light');
-
-        cursor: default;
       }
 
       &--invalid {
@@ -75,12 +76,12 @@
         box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
       }
     }
-  }
 
-  &__label {
-    position: relative;
-    padding-right: spacing.$spacing-xs;
-    padding-left: spacing.$spacing-xs;
+    &__label {
+      position: relative;
+      padding-right: spacing.$spacing-xs;
+      padding-left: spacing.$spacing-xs;
+    }
   }
 
   &__required {
@@ -96,4 +97,8 @@
     width: spacing.$pixel-1;
     height: spacing.$pixel-1;
   }
+}
+/* stylelint-disable selector-class-pattern */
+.fudis-checkbox.fudis-checkbox__label {
+  cursor: pointer;
 }

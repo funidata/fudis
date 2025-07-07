@@ -256,7 +256,7 @@ describe('CheckboxGroupComponent', () => {
         const guidanceId = guidance.getAttribute('id');
 
         const element: HTMLElement[] = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option .fudis-checkbox-group-option__input',
+          '#first-group fudis-checkbox-group-option .fudis-checkbox__input',
         );
 
         expect(element[0].getAttribute('aria-describedby')).toEqual(guidanceId);
@@ -269,7 +269,7 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option .fudis-checkbox-group-option__content__box--invalid',
+          '#first-group fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
@@ -299,7 +299,7 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option-group-option .fudis-checkbox-group-option__content__box--invalid',
+          '#first-group fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
@@ -333,7 +333,7 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          'fudis-checkbox-group-option .fudis-checkbox-group-option__content__box--invalid',
+          'fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(

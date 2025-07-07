@@ -1,8 +1,8 @@
 <div class="fudis-checkbox">
   <label
     [attr.for]="id"
-    class="fudis-checkbox-wrapper"
-    [class.fudis-checkbox-wrapper--disabled]="control?.disabled || disabled"
+    class="fudis-checkbox__label"
+    [class.fudis-checkbox__label--disabled]="control?.disabled || disabled"
   >
     <input
       *ngIf="control; else standaloneCheckbox"
@@ -56,7 +56,7 @@
         </span>
       </div>
     </div>
-    <span *ngIf="label" class="fudis-checkbox__label">{{ label }}</span>
+    <span *ngIf="label" class="fudis-checkbox__label__text">{{ label }}</span>
   </label>
   <ng-content></ng-content>
   <span class="fudis-checkbox__required" *ngIf="required"
