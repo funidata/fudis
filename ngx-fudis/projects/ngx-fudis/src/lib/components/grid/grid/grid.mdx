@@ -6,7 +6,7 @@ import * as GridStories from "./grid.stories.ts";
 
 # Grid Component
 
-Grid Component is a wrapper element, which implements all the features spesified in [Grid Directive](/docs/directives-grid-grid--documentation)
+Grid Component is a wrapper element, which implements all the features spesified in [Grid Directive](/docs/directives-grid-grid--documentation).
 
 Essentially it is an HTML element which has CSS property `display` set to `grid`.
 
@@ -16,6 +16,7 @@ This page contains documentation on how to align and set **all** first level chi
 
 - [Basic Usage](#basic-usage)
 - [Defining Columns](#defining-columns)
+- [Usage with Flexbox](#usage-with-flexbox)
 - [Universal Configuration of All Grid Components](#universal-configuration-of-all-grid-components)
 - [Properties Table](#properties)
 
@@ -204,6 +205,15 @@ With `[columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}"` In following
   <div>Item n</div>
 </fudis-grid-item>
 ```
+
+## Usage with Flexbox
+
+For some cases you might want to overwrite grid with flexbox, which is ideal especially for aligning content either horizontally or vertically.
+Flexbox can also be used inside individual grid items to make them behave as a flex container, using `display: flex`.
+
+Consider also opting-out of Fudis Grid and using plain Flexbox if you don't need the columns to be equally sized, but rather want to give the content the freedom to take as much or little space it needs.
+
+<Canvas of={GridStories.WithFlexbox} />
 
 ## Universal Configuration of All Grid Components
 
