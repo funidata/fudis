@@ -6,6 +6,12 @@ import { Meta } from "@storybook/blocks";
 
 New versions are published to NPM using GitHub Releases. After tagging and creating a release on GitHub, an automatic workflow handles packaging and publishing Fudis to NPM.
 
+**Table of Contents**
+
+1. [Versioning](#versioning)
+2. [Release Notes](#release-notes)
+3. [Release Flow](#release-flow)
+
 ## Versioning
 
 Fudis uses [semantic versioning](https://semver.org/).
@@ -27,27 +33,44 @@ Major changes are backward incompatible and will have breaking changes.\
 
 ## Release Notes
 
-Find release notes for the latest [Fudis Version](https://github.com/funidata/fudis/releases).
+Release notes for each release can be found from [Github Fudis Releases](https://github.com/funidata/fudis/releases).
 
 ## Release Flow
 
 ### Create New Release
 
-- Depending on the changes included in the release, run the following command with the correct argument `npm run fudis-release -- <major|minor|patch>`. **Example:** `npm run fudis-release -- patch`
-  > This will run a release shell script which creates a new branch named `release` and automatically runs `npm version` command with given argument.\
-  > `npm version` will increment version number in `package.json` files, commits the changes, tags that commit as the new version, and pushes commits and tags to GitHub.
+- Create new release branch from main with respective naming `release-{major.minor.patch}`
+- Increment version by running `npm version <major.minor.patch>` in project root
+  > This will increment version number in `package.json` files and do automatic commit of the changed files
 - Create Pull Request
+- Add a label **exclude from release notes**, so this PR won't be listed in release notes.
 - Merge created Pull Request
 - Go to project's GitHub main page **Releases**
 - Select **Draft a new release**
-- Select **Choose a tag**. Choose the newest generated version tag from a list
+- Select **Choose a tag**. Create new tag in the format of `v{major.minor.patch}`
 - If necessary choose from **Previous tag** dropdown, the version you want to compare to. Otherwise use default 'Previous tag: auto'
 - Select **Generate release notes**
 - Replace **What's Changed** heading with a current date
 - Check from **Preview** that everything looks correct
-- Check that **Set as the latest release** checkbox is selected
+- Check correct release checkbox:
+
+  > Set as pre-release if it is e.g. release candidate for major release
+
+  > Set as latest if it is the newest stable release
+
 - Publish release
-- Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
+- Check that [Fudis NPM package](https://www.npmjs.com/package/@funidata/ngx-fudis) has updated the newly released version
+
+### Patch Previous Major
+
+- Checkout to the existing **tag** and create new branch with respective naming `release-{major.minor.patch}`
+- Create another branch from the release branch where the issue is fixed
+- Create pull requests for the fix/fixes and merge to the branch you created for the release (`release-{major.minor.patch}`)
+- We also recommend that version increment `npm version <major.minor.patch>` is done in its own branch. The target branch is also the release branch that is mentioned above.
+- Make the release from GitHub UI with the same steps as when creating new release but remember to choose correct comparison tags
+- Choose **Target** branch according to the release you are updating
+- Uncheck both release checkboxes since this is a fix for previously released version
+- Publish the release and check that the release is listen in [NPM](https://www.npmjs.com/package/@funidata/ngx-fudis)
 
 ### Problems After Releasing
 

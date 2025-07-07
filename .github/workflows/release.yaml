@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-22.04
     needs:
       - test
+    outputs:
+      set-as-latest: ${{ steps.check_latest.outputs.is-latest }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,9 +30,42 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Copy root README.md to library
         run: cp README.md ngx-fudis/projects/ngx-fudis/README.md
+      - name: Check for latest version
+        id: check_latest
+        run: |
+          LATEST_RELEASE=$(curl -L \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases/latest \
+            | jq -r '.tag_name')
+
+          CURRENT_VERSION=$(echo "${{ github.event.release.tag_name }}" | cut -c2-)
+
+          if [[ "${LATEST_RELEASE}" == "${{ github.event.release.tag_name }}" ]]; then
+            if [[ "$CURRENT_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "is-latest=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "::error::When publishing a latest release, the version has to respect the major.minor.patch-format."
+              exit 1
+            fi
+          else
+            echo "is-latest=false" >> "$GITHUB_OUTPUT"
+            if ${{ github.event.release.prerelease }}; then
+              echo "NPM_TAG=prerelease" >> $GITHUB_ENV
+            else
+              echo "NPM_TAG=patch" >> $GITHUB_ENV
+            fi
+          fi
       - name: Build ngx-fudis
         run: npm run build
-      - run: npm publish --access public
+      - name: Publish latest
+        if: steps.check_latest.outputs.is-latest == 'true'
+        run: npm publish --access public
+        working-directory: ngx-fudis/dist/ngx-fudis
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish patch or pre-release
+        if: steps.check_latest.outputs.is-latest == 'false'
+        run: npm publish --access public --tag ${{ env.NPM_TAG }}
         working-directory: ngx-fudis/dist/ngx-fudis
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -64,19 +99,17 @@ jobs:
       - name: Build docs
         run: npm run build -- storybook
       - name: Copy docs to S3 bucket
-        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/v/$VERSION
-      - name: Check semver
-        id: check-semver
-        run: |
-          if [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-              echo "set-as-latest=true" >> $GITHUB_OUTPUT
-          fi
+        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/$VERSION
+      - name: Check for Storybook redirect
+        id: check-storybook-redirect
+        if: needs.publish.outputs.set-as-latest == 'true'
+        run: echo "REDIRECT_STORYBOOK=true" >> $GITHUB_ENV
       - name: Update root redirect to this version
-        if: steps.check-semver.outputs.set-as-latest == 'true'
+        if: env.REDIRECT_STORYBOOK == 'true'
         run: |
           echo "<html>
           <head>
-          <meta http-equiv='refresh' content='0; url=https://fudis.funidata.fi/v/$VERSION/index.html' />
+          <meta http-equiv='refresh' content='0; url=https://fudis.funidata.fi/ngx/v/$VERSION/index.html' />
           </head>
           </html>" > /tmp/index.html
           aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }} --cache-control max-age=5
