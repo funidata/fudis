@@ -19,7 +19,7 @@
     "lint": "cd ngx-fudis && npm run lint",
     "stylelint": "cd ngx-fudis && npm run stylelint",
     "version": "scripts/version_sub_projects.sh $npm_package_version",
-    "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
+    "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\"",
     "format:check": "prettier --check ."
   },
   "author": "Funidata Ltd",
