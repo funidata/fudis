@@ -74,6 +74,33 @@ export function previewHead(head) {
           }
 
       }
+      
+      .version-badges {
+        .fudis-badge__primary {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+
+        a.sbdocs {
+            color: #484848;
+            font-family: 'Fira Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            padding: 1px 3px;
+            line-height: 14px;
+            text-transform: uppercase;
+            vertical-align: middle;
+            background-color: #daedff;
+
+            border: 1px solid #1076db;
+            border-radius: 2px;
+        }
+        
+        p {
+        margin: 0;
+        }
+      }
+    }
     </style>
   `;
 }
