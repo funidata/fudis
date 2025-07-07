@@ -44,8 +44,8 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
   @Input() controlName: string;
 
   /**
-   * Provide FormControl for each Checkbox Group Option, when you do not provide FormGroup for the parent
-   * Checkbox Group.
+   * Provide FormControl for each Checkbox Group Option, when you do not provide FormGroup for the
+   * parent Checkbox Group.
    */
   @Input() control: FormControl<boolean | null>;
 
@@ -70,8 +70,8 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
   protected _focused = false;
 
   /**
-   * Boolean for syncing, if this Checkbox Group Option had 'control' property provided and parent had no
-   * 'formGroup' provided.
+   * Boolean for syncing, if this Checkbox Group Option had 'control' property provided and parent
+   * had no 'formGroup' provided.
    */
   private _controlAddedToParent: boolean = false;
 
