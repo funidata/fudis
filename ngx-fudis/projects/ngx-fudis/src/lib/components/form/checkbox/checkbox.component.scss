@@ -10,6 +10,9 @@
   @include typography.body-text-md-regular;
   @include colorMixins.text-color('gray-dark');
 
+  display: inline-flex;
+  position: relative;
+  align-items: center;
   width: auto;
   min-height: spacing.$spacing-lg;
 
