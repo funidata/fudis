@@ -82,7 +82,7 @@ export class CheckboxComponent implements OnInit {
   }
 
   /**
-   * Manual toggle for Checkbox checked state
+   * Manual toggle for checkbox checked state
    */
   toggleCheckbox(event: Event) {
     if (this.disabled || this.control?.disabled) return;

@@ -7,15 +7,15 @@ import { checkboxGroupExclude } from "../../../utilities/storybook";
 
 # Checkbox
 
-The Single **Checkbox** is a standalone checkbox component designed for binary (yes/no) decisions. It is suitable when there is only **one option to select**. For scenarios requiring multiple selections, use the [CheckboxGroupComponent](/docs/components-form-checkbox-group--documentation) instead.
+**Checkbox** is a standalone component designed for binary (yes/no) decisions. It is suitable when there is only **one option to select**. For scenarios requiring multiple selections, use the [CheckboxGroupComponent](/docs/components-form-checkbox-group--documentation) instead.
 
 This component can be used both **within a form** (via a `FormControl`) and **outside of a form** (as a standalone checkbox). Its `checked`, `disabled`, and `invalid` states can be controlled either through `@Input()` bindings or by passing a `FormControl`.
 
-Unlike `CheckboxGroupComponent`, the Single Checkbox allows custom content (such as links) and does not require a label. However, to ensure accessibility, you must provide an `ariaLabelledBy` attribute if a visible label is not used.
+Unlike `CheckboxGroupComponent`, Checkbox component allows custom content (such as links) and does not require a label. However, to ensure accessibility, you must provide an `ariaLabelledBy` attribute if a visible label is not used.
 
-> **Note!** The Single Checkbox does **not display error messages** automatically. It's the responsibility of the consumer to handle and display validation messages externally if needed.
+> **Note!** Checkbox does **not display error messages** automatically. It's the responsibility of the consumer to handle and display validation messages externally if needed.
 
-Additionally, the checkbox includes an optional `required` input that will render a visible “required” indicator next to the content. This is a visual indicator only and is not tied to form validation logic. If validation is required, it should be implemented separately via `FormControl` validators.
+Additionally, the checkbox includes an optional `required` input that will render a visible "required" indicator next to the content. This is a visual indicator only and is not tied to form validation logic. If validation is required, it should be implemented separately via `FormControl` validators.
 
 ## Checkbox used with `formGroup` property
 

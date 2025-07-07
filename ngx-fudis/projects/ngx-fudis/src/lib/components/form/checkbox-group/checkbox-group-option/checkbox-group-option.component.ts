@@ -39,38 +39,38 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
 
   /**
    * Control name for this checkbox from FormGroup. Required if FormGroup is given to the parent.
-   * Used to link each Checkbox with their Checkbox Group parent's FormGroup.
+   * Used to link each Checkbox Group Option with their Checkbox Group parent's FormGroup.
    */
   @Input() controlName: string;
 
   /**
-   * Provide FormControl for each checkbox, when you do not provide FormGroup for the parent
+   * Provide FormControl for each Checkbox Group Option, when you do not provide FormGroup for the parent
    * Checkbox Group.
    */
   @Input() control: FormControl<boolean | null>;
 
   /**
-   * Visible label of checkbox
+   * Visible label of Checkbox Group Option
    */
   @Input({ required: true }) label: string;
 
   /**
-   * Id for single checkbox. By default generated.
+   * Id for single Checkbox Group Option. By default generated.
    */
   @Input() id: string;
 
   /**
-   * Emits changed Checkbox and its control.
+   * Emits changed Checkbox Group Option and its control.
    */
   @Output() handleChange = new EventEmitter<FudisCheckboxChangeEvent>();
 
   /**
-   * If checkbox has focus
+   * If Checkbox Group Option has focus
    */
   protected _focused = false;
 
   /**
-   * Boolean for syncing, if this Checkbox had 'control' property provided and parent had no
+   * Boolean for syncing, if this Checkbox Group Option had 'control' property provided and parent had no
    * 'formGroup' provided.
    */
   private _controlAddedToParent: boolean = false;
@@ -89,7 +89,7 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
 
     if (!this.control && this.controlName && parentControl) {
       /**
-       * Set Checkbox's control to match one in parent FormGroup.
+       * Set Checkbox Group Option's control to match one in parent FormGroup.
        */
       this.control = parentControl;
     } else if (this.control && this._checkboxGroup.internalFormGroup) {
@@ -139,7 +139,7 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
     };
 
     /**
-     * This Checkbox's emit
+     * This Checkbox Group Option's emit
      */
     this.handleChange.emit({ checkbox: optionToEmit, control: this.control });
 
@@ -168,7 +168,7 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * When Checkbox is focused
+   * When Checkbox Group Option is focused
    */
   protected _onFocus(event: FocusEvent): void {
     this._focused = true;
