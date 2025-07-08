@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/blocks";
+import { Meta, Unstyled } from "@storybook/blocks";
 import pkg from "../../../package.json";
 
 <Meta title="Documentation/Introduction/Welcome" />
@@ -9,6 +9,7 @@ import pkg from "../../../package.json";
 
 </div>
 
+<Unstyled>
 <div class="welcome-page-wrapper">
   <a class="welcome-page-link" href="https://www.npmjs.com/package/@funidata/ngx-fudis">
     NPM v{pkg.version}
@@ -20,6 +21,8 @@ import pkg from "../../../package.json";
     License
   </a>
 </div>
+</Unstyled>
+
 Fudis Design System provides guidelines, design assets and components that work as the foundation
 for all of Funidata's products. The purpose of this Angular-based system is to support a sustainable
 and consistent development and accessible customer experience for our services.

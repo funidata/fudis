@@ -81,19 +81,19 @@ export function previewHead(head) {
           display: flex;
           align-items: center;
       }
-
-      .css-qa4clq {
-          .welcome-page-link {
-          display: flex;
-          align-items: center;
-          width: fit-content;
-          font-family: 'Fira Sans', sans-serif;
-          font-size: 14px;
-          color: #1d65b8;
-          text-decoration: underline solid;
-          margin-right: 8px;
-        }
+      .welcome-page-link {
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 14px;
+        color: #1d65b8;
+        text-decoration: underline solid;
+        margin-right: 8px;
       }
+
+      .welcome-page-link:focus {
+          outline: 2px dashed #484848;
+          outline-offset: 1px;
+          box-shadow: #fff;
+        }
     </style>
   `;
 }
