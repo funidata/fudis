@@ -54,6 +54,11 @@ export class SelectBaseDirective
   }
 
   /**
+   * Label for the Select
+   */
+  @Input({ required: true }) override label: string;
+
+  /**
    * Reference to child DropdownComponent listing all options
    */
   @ViewChild('dropdownRef') protected _dropdownRef: SelectDropdownComponent;

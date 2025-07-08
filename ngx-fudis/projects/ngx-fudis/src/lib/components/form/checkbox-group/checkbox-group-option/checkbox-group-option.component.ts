@@ -15,7 +15,7 @@ import { CheckboxGroupComponent } from '../checkbox-group.component';
 import {
   FudisCheckboxChangeEvent,
   FudisCheckboxGroupFormGroup,
-  FudisCheckboxOption,
+  FudisCheckboxGroupOption,
 } from '../../../../types/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -127,7 +127,7 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
    * For toggling checkbox
    */
   protected _onChange(): void {
-    const optionToEmit: FudisCheckboxOption<object> = {
+    const optionToEmit: FudisCheckboxGroupOption<object> = {
       id: this.id,
       groupName: this._checkboxGroup.id,
       controlName: this.controlName,

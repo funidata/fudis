@@ -49,6 +49,11 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   @ViewChild('checkboxGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
+   * Label for the Checkbox group
+   */
+  @Input({ required: true }) override label: string;
+
+  /**
    * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox
    * children.
    */

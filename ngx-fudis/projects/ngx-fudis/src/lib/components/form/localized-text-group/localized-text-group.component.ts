@@ -60,6 +60,11 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   }
 
   /**
+   * Label for the Localized Text Group
+   */
+  @Input({ required: true }) override label: string;
+
+  /**
    * FormGroup including controls.
    */
   @Input({ required: true }) override formGroup: FormGroup<T>;

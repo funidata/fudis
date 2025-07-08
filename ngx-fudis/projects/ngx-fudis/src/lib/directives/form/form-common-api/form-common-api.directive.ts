@@ -36,7 +36,7 @@ export class FormCommonApiDirective extends TooltipApiDirective implements After
   /**
    * Label for the form component.
    */
-  @Input({ required: true }) label: string;
+  @Input() label?: string;
 
   /**
    * Provide additional information for screen reader users by extending text content of the label.

@@ -7,7 +7,7 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import {
   FudisCheckboxChangeEvent,
   FudisCheckboxGroupFormGroup,
-  FudisCheckboxOption,
+  FudisCheckboxGroupOption,
 } from '../../../../types/forms';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
@@ -254,7 +254,7 @@ describe('CheckboxGroupOptionComponent', () => {
         By.directive(CheckboxGroupOptionComponent),
       ).componentInstance;
 
-      const optionToMatch: FudisCheckboxOption<object> = {
+      const optionToMatch: FudisCheckboxGroupOption<object> = {
         id: 'fudis-checkbox-group-1-item-1',
         groupName: 'fudis-checkbox-group-1',
         controlName: 'apple',
