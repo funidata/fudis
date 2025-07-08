@@ -22,7 +22,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'fudis-checkbox-group-option',
   templateUrl: './checkbox-group-option.component.html',
-  styleUrls: ['./checkbox-group-option.component.scss'],
+  styleUrls: ['../../checkbox/checkbox.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: false,
 })

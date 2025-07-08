@@ -156,6 +156,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
     ButtonComponent,
+    CheckboxComponent,
     CheckboxGroupComponent,
     CheckboxGroupOptionComponent,
     ControlComponentBaseDirective,
@@ -242,7 +243,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
    * E.g. components from Angular Material or other Angular tools
    */
   imports: [
-    CheckboxComponent,
     CommonModule,
     FormsModule,
     LayoutModule,
