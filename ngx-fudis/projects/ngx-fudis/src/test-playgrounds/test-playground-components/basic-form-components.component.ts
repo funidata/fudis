@@ -11,6 +11,7 @@ type MyForm = {
   textAreaToBeLeftEmpty: FormControl<string | null>;
   datepickerRequired: FormControl<Date | null>;
   datepickerToBeLeftEmpty: FormControl<Date | null>;
+  checkboxRequired: FormControl<boolean | null>;
 };
 
 @Component({
@@ -33,6 +34,7 @@ export class StorybookExampleBasicFormComponentsComponent {
       ]),
       datepickerRequired: new FormControl(null, FudisValidators.required('This is required')),
       datepickerToBeLeftEmpty: new FormControl(null, FudisValidators.required('This is required')),
+      checkboxRequired: new FormControl(null, FudisValidators.required('This is required')),
     });
   }
 

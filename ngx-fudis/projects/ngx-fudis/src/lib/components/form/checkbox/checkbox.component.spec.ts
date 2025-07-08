@@ -15,20 +15,20 @@ import { FudisCheckboxChangeEvent } from 'projects/ngx-fudis/src/public-api';
   selector: 'fudis-mock-component',
   template: `
     <form [formGroup]="myFormGroup">
-      <fudis-checkbox 
-        [id]="id" 
-        [control]="myFormGroup.get('accept')" 
-        [label]="label" 
+      <fudis-checkbox
+        [id]="id"
+        [control]="myFormGroup.get('accept')"
+        [label]="label"
         [ariaLabelledBy]="ariaLabelledBy"
         (handleChange)="checkedChange($event)"
-        ></fudis-checkbox>
+      ></fudis-checkbox>
     </form>
   `,
 })
 class MockComponent {
-id: string;
-label: string = 'Test Label';
-ariaLabelledBy: string = 'test-id';
+  id: string;
+  label: string = 'Test Label';
+  ariaLabelledBy: string = 'test-id';
 
   public myFormGroup = new FormGroup({
     accept: new FormControl<boolean | null>(
@@ -40,13 +40,13 @@ ariaLabelledBy: string = 'test-id';
   eventReceived: FudisCheckboxChangeEvent;
 
   checkedChange(event: FudisCheckboxChangeEvent): void {
-        this.eventReceived = event;
+    this.eventReceived = event;
   }
 }
 
 describe('CheckboxComponent', () => {
-    let component: MockComponent;
-    let fixture: ComponentFixture<MockComponent>;
+  let component: MockComponent;
+  let fixture: ComponentFixture<MockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -62,47 +62,45 @@ describe('CheckboxComponent', () => {
     }).compileComponents();
   });
 
-    beforeEach(() => {
-      fixture = TestBed.createComponent(MockComponent);
-      component = fixture.componentInstance;
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MockComponent);
+    component = fixture.componentInstance;
 
-      fixture.detectChanges();
-    });
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    it('should bind FormControl value to checkbox', () => {
-      const input = fixture.nativeElement.querySelector('input[type="checkbox"]');
+  it('should bind FormControl value to checkbox', () => {
+    const input = fixture.nativeElement.querySelector('input[type="checkbox"]');
 
-      expect(input.checked).toBe(false);
+    expect(input.checked).toBe(false);
 
-      component.myFormGroup.get('accept')?.setValue(true);
-      fixture.detectChanges();
+    component.myFormGroup.get('accept')?.setValue(true);
+    fixture.detectChanges();
 
-      expect(input.checked).toBe(true);
-    });
+    expect(input.checked).toBe(true);
+  });
 
-    it('should update FormControl value on user click', () => {
-      const input: HTMLInputElement =
-        fixture.nativeElement.querySelector('input[type="checkbox"]');
+  it('should update FormControl value on user click', () => {
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
 
-      input.click();
-      fixture.detectChanges();
+    input.click();
+    fixture.detectChanges();
 
-      expect(component.myFormGroup.get('accept')?.value).toBe(true);
-    });
+    expect(component.myFormGroup.get('accept')?.value).toBe(true);
+  });
 
-    it('should show error when required checkbox is not checked', () => {
-      const control = component.myFormGroup.get('accept');
-      control?.markAsTouched();
-      control?.updateValueAndValidity();
-      fixture.detectChanges();
+  it('should show error when required checkbox is not checked', () => {
+    const control = component.myFormGroup.get('accept');
+    control?.markAsTouched();
+    control?.updateValueAndValidity();
+    fixture.detectChanges();
 
-      expect(control?.valid).toBe(false);
-    });
-
+    expect(control?.valid).toBe(false);
+  });
 
   describe('Basic inputs and styles', () => {
     it('should create with correct label', () => {
@@ -170,9 +168,8 @@ describe('CheckboxComponent', () => {
     });
 
     it('should have checked styles and attributes', () => {
-        const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
-          'fudis-checkbox input',
-        );
+      const input: HTMLInputElement =
+        fixture.debugElement.nativeElement.querySelector('fudis-checkbox input');
 
       input.dispatchEvent(new MouseEvent('click'));
       fixture.detectChanges();
@@ -215,7 +212,9 @@ describe('CheckboxComponent', () => {
       input.dispatchEvent(new Event('blur'));
       fixture.detectChanges();
 
-      expect(checkboxElement.className).toEqual('fudis-checkbox__content__box fudis-checkbox__content__box--invalid');
+      expect(checkboxElement.className).toEqual(
+        'fudis-checkbox__content__box fudis-checkbox__content__box--invalid',
+      );
     });
   });
 });

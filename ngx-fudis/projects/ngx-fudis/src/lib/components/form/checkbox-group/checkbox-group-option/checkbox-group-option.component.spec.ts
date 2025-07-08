@@ -94,7 +94,9 @@ class MockContainerComponent {
 }
 
 describe('CheckboxGroupOptionComponent', () => {
-  let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<CheckboxGroupOptionComponent>;
+  let fixture:
+    | ComponentFixture<MockContainerComponent>
+    | ComponentFixture<CheckboxGroupOptionComponent>;
 
   let mockComponent: MockContainerComponent;
 
@@ -216,7 +218,9 @@ describe('CheckboxGroupOptionComponent', () => {
         '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"]',
       );
 
-      const label = checkedCheckbox.querySelector('.fudis-checkbox-group-option__content__label') as HTMLElement;
+      const label = checkedCheckbox.querySelector(
+        '.fudis-checkbox-group-option__content__label',
+      ) as HTMLElement;
 
       expect(label.textContent).toContain('Fair trade banana');
     });
@@ -262,13 +266,15 @@ describe('CheckboxGroupOptionComponent', () => {
         value: true,
       };
 
-      CheckboxGroupOptionComponentToSpy.handleChange.subscribe((value: FudisCheckboxChangeEvent) => {
-        if (value) {
-          expect(value.checkbox).toEqual(optionToMatch);
+      CheckboxGroupOptionComponentToSpy.handleChange.subscribe(
+        (value: FudisCheckboxChangeEvent) => {
+          if (value) {
+            expect(value.checkbox).toEqual(optionToMatch);
 
-          expect(value.control.value).toEqual(true);
-        }
-      });
+            expect(value.control.value).toEqual(true);
+          }
+        },
+      );
 
       const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
         '#fudis-checkbox-group-1 input#fudis-checkbox-group-1-item-1',

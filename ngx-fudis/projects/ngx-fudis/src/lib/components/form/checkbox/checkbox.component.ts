@@ -3,7 +3,11 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
-import { FudisCheckboxChangeEvent, FudisCheckboxOption, FudisComponentChanges } from '../../../types/types';
+import {
+  FudisCheckboxChangeEvent,
+  FudisCheckboxOption,
+  FudisComponentChanges,
+} from '../../../types/types';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { Subscription } from 'rxjs';
@@ -15,10 +19,14 @@ import { Subscription } from 'rxjs';
   standalone: false,
 })
 export class CheckboxComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
-  constructor(_idService: FudisIdService, _focusService: FudisFocusService, protected _translationService: FudisTranslationService) {
+  constructor(
+    _idService: FudisIdService,
+    _focusService: FudisFocusService,
+    protected _translationService: FudisTranslationService,
+  ) {
     super(_idService, _focusService);
 
-      this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
         this._required.next(FudisValidatorUtilities.required(this.control));
       }
@@ -62,8 +70,7 @@ export class CheckboxComponent extends ControlComponentBaseDirective implements 
   /**
    * Manual toggle for checkbox checked state
    */
-protected _onChange(event: Event): void {
-
+  protected _onChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const newValue = input.checked ? true : null;
 
@@ -79,7 +86,7 @@ protected _onChange(event: Event): void {
 
     // Emit after control updates
     this.handleChange.emit({ checkbox: optionToEmit, control: this.control });
-}
+  }
 
   ngOnInit() {
     if (this.id) {
@@ -103,4 +110,3 @@ protected _onChange(event: Event): void {
     }
   }
 }
-

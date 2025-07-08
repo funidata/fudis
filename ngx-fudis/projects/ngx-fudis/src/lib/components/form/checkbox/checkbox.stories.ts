@@ -32,10 +32,7 @@ const ExampleTemplate: StoryFn = (args) => ({
   },
   template: html`
     <form [formGroup]="myFormGroup">
-      <fudis-checkbox
-        [label]="'Yes, I accept terms.'"
-        [control]="myFormGroup.get('required')"
-      >
+      <fudis-checkbox [label]="'Yes, I accept terms.'" [control]="myFormGroup.get('required')">
         <a
           fudisLink
           href="https://www.example.com"

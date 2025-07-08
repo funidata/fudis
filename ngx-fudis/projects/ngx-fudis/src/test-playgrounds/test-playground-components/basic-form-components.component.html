@@ -113,67 +113,74 @@
     ></fudis-datepicker>
   </fudis-date-range>
 </fudis-grid>
-<fudis-heading class="fudis-mt-lg" [level]="2"
-  >Fudis and Custom components aligned in fudis-grid</fudis-heading
->
-<fudis-grid [alignItemsY]="'baseline'" [columns]="{ sm: 2, lg: 'inputMd inputMd inputSm inputMd' }">
-  <fudis-text-input
-    [size]="'md'"
-    [control]="myForm.controls.textInputToBeLeftEmpty"
-    [label]="inputProps.label"
-    [helpText]="inputProps.helpText"
-    [popoverText]="inputProps.popoverText"
-    [popoverTriggerLabel]="inputProps.popoverLabel"
-  />
-  <div style="max-width: 224px">
-    <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
-      >I'm having a real real real long label that goes on and on and on and on and on and on and
-      on</label
-    >
-    <input style="display: block" id="custom-input-1" />
-  </div>
-  <fudis-datepicker
-    [size]="'sm'"
-    [label]="inputProps.label"
-    [control]="myForm.controls.datepickerToBeLeftEmpty"
-    [helpText]="inputProps.helpText"
-  ></fudis-datepicker>
-  <div style="max-width: 224px">
-    <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
-      >Really short label</label
-    >
-    <textarea style="display: block"></textarea>
+<fudis-grid [rowGap]="'sm'">
+  <fudis-heading [level]="2">Checkbox</fudis-heading>
+  <fudis-checkbox [label]="'Label'" [control]="myForm.controls.checkboxRequired"></fudis-checkbox>
+  <fudis-heading class="fudis-mt-lg" [level]="2"
+    >Fudis and Custom components aligned in fudis-grid</fudis-heading
+  >
+  <fudis-grid
+    [alignItemsY]="'baseline'"
+    [columns]="{ sm: 2, lg: 'inputMd inputMd inputSm inputMd' }"
+  >
+    <fudis-text-input
+      [size]="'md'"
+      [control]="myForm.controls.textInputToBeLeftEmpty"
+      [label]="inputProps.label"
+      [helpText]="inputProps.helpText"
+      [popoverText]="inputProps.popoverText"
+      [popoverTriggerLabel]="inputProps.popoverLabel"
+    />
+    <div style="max-width: 224px">
+      <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
+        >I'm having a real real real long label that goes on and on and on and on and on and on and
+        on</label
+      >
+      <input style="display: block" id="custom-input-1" />
+    </div>
+    <fudis-datepicker
+      [size]="'sm'"
+      [label]="inputProps.label"
+      [control]="myForm.controls.datepickerToBeLeftEmpty"
+      [helpText]="inputProps.helpText"
+    ></fudis-datepicker>
+    <div style="max-width: 224px">
+      <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
+        >Really short label</label
+      >
+      <textarea style="display: block"></textarea>
+    </div>
+  </fudis-grid>
+  <fudis-heading class="fudis-mt-lg" [level]="2"
+    >Fudis and Custom components aligned in flexbox</fudis-heading
+  >
+  <div style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; width: 100%">
+    <fudis-text-input
+      [size]="'md'"
+      [control]="myForm.controls.textInputToBeLeftEmpty"
+      [label]="inputProps.label"
+      [helpText]="inputProps.helpText"
+      [popoverText]="inputProps.popoverText"
+      [popoverTriggerLabel]="inputProps.popoverLabel"
+    />
+    <div style="max-width: 224px">
+      <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
+        >I'm having a real real real long label that goes on and on and on and on and on and on and
+        on</label
+      >
+      <input style="display: block" id="custom-input-1" />
+    </div>
+    <fudis-datepicker
+      [size]="'sm'"
+      [label]="inputProps.label"
+      [control]="myForm.controls.datepickerToBeLeftEmpty"
+      [helpText]="inputProps.helpText"
+    ></fudis-datepicker>
+    <div style="max-width: 224px">
+      <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
+        >Really short label</label
+      >
+      <textarea style="display: block"></textarea>
+    </div>
   </div>
 </fudis-grid>
-<fudis-heading class="fudis-mt-lg" [level]="2"
-  >Fudis and Custom components aligned in flexbox</fudis-heading
->
-<div style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; width: 100%">
-  <fudis-text-input
-    [size]="'md'"
-    [control]="myForm.controls.textInputToBeLeftEmpty"
-    [label]="inputProps.label"
-    [helpText]="inputProps.helpText"
-    [popoverText]="inputProps.popoverText"
-    [popoverTriggerLabel]="inputProps.popoverLabel"
-  />
-  <div style="max-width: 224px">
-    <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
-      >I'm having a real real real long label that goes on and on and on and on and on and on and
-      on</label
-    >
-    <input style="display: block" id="custom-input-1" />
-  </div>
-  <fudis-datepicker
-    [size]="'sm'"
-    [label]="inputProps.label"
-    [control]="myForm.controls.datepickerToBeLeftEmpty"
-    [helpText]="inputProps.helpText"
-  ></fudis-datepicker>
-  <div style="max-width: 224px">
-    <label class="fudis-mb-xs" style="display: inline-block" for="custom-input-1"
-      >Really short label</label
-    >
-    <textarea style="display: block"></textarea>
-  </div>
-</div>
