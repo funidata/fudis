@@ -1,7 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { CheckboxComponent } from "./checkbox.component";
 import * as CheckboxpStories from "./checkbox.stories";
-import { checkboxGroupExclude } from "../../../utilities/storybook";
+import { checkboxExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Checkbox" />
 
@@ -10,6 +10,8 @@ import { checkboxGroupExclude } from "../../../utilities/storybook";
 Single **Checkbox** is designed for binary (yes/no) decisions. It is suitable when there is only **one option to select**. For scenarios requiring multiple selections, use the [CheckboxGroupComponent](/docs/components-form-checkbox-group--documentation) instead.
 
 Unlike `CheckboxGroupComponent`, Checkbox component allows custom content (such as links) and does not require a label. However, to ensure accessibility, you must provide an `ariaLabelledBy` attribute if a visible label is not used.
+
+> **Note!** Checkbox does **not display error messages** automatically. It's the responsibility of the consumer to handle and display validation messages externally if needed.
 
 ## Checkbox used with `formGroup` property
 
@@ -58,4 +60,4 @@ This Checkbox does not have a visible label, but instead it has passed id in `ar
 
 ## Properties of Checkbox Component
 
-<ArgTypes of={CheckboxComponent} />
+<ArgTypes of={CheckboxComponent} exclude={checkboxExclude} />

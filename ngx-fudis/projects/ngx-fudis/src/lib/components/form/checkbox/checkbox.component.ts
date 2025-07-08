@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -26,17 +26,12 @@ export class CheckboxComponent extends ControlComponentBaseDirective implements 
   }
 
   /**
-   * Reference to native button element
-   */
-  @ViewChild('checkboxElement') public checkboxEl: ElementRef<HTMLInputElement>;
-
-  /**
    * AriaLabelledBy attribute to be used when visible label is not provided
    */
   @Input() ariaLabelledBy: string;
 
   /**
-   * Emits changed Checkbox Group Option and its control.
+   * Emits Checkbox change
    */
   @Output() handleChange = new EventEmitter<FudisCheckboxChangeEvent>();
 
@@ -49,8 +44,6 @@ export class CheckboxComponent extends ControlComponentBaseDirective implements 
    * If Checkbox has focus
    */
   protected _focused = false;
-
-  protected _blurredOut = false;
 
   /**
    * When Checkbox is focused
@@ -86,8 +79,6 @@ protected _onChange(event: Event): void {
 
     // Emit after control updates
     this.handleChange.emit({ checkbox: optionToEmit, control: this.control });
-
-    console.log('Checkbox changed:', optionToEmit);
 }
 
   ngOnInit() {
