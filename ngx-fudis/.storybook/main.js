@@ -21,9 +21,13 @@ export const features = {
   previewMdx2: true,
 };
 export const staticDirs = [
-  "./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
-  "./../projects/ngx-fudis/src/lib/assets/images",
+  { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
+  { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
   "./assets/i18n",
+  {
+    from: "./../projects/ngx-fudis/src/lib/assets/images/fudis-logo-mini-black.svg",
+    to: "/favicon.svg",
+  },
 ];
 export const docs = {
   defaultName: "Documentation",
@@ -32,7 +36,6 @@ export const docs = {
 export function managerHead(head) {
   return `
     ${head}
-    <link rel="shortcut icon" href="favicon.ico">
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
       .sidebar-item:has(#components-test-playground)  { display: none;}
@@ -44,6 +47,9 @@ export function previewHead(head) {
   return `
     ${head}
     <style>
+      /*
+      * These styles are intended for Storybook use only
+      */
       .storybook-flex {
           display: flex;
           align-items: center;
@@ -51,6 +57,43 @@ export function previewHead(head) {
       .sb-show-main.sb-main-padded:has(.fudis-footer){
           padding: 0;
       }
+          
+      .sbdocs .full-width-bg {
+        margin-top: -4rem;
+        width: 100vw;
+        height: 20rem;
+        margin-left: calc(-50vw + 50%);
+        background-image: url('./images/fudis-bg.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        margin-bottom: 2rem;
+        display: flex;
+        
+          h1 {
+            margin: auto;
+            font-size: 40px;
+          }
+
+      }
+      .welcome-page-wrapper {
+          display: flex;
+          align-items: center;
+      }
+      .welcome-page-link {
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 14px;
+        color: #1d65b8;
+        text-decoration: underline solid;
+        margin-right: 8px;
+      }
+
+      .welcome-page-link:focus {
+          outline: 2px dashed #484848;
+          outline-offset: 1px;
+          box-shadow: #fff;
+        }
     </style>
   `;
 }
