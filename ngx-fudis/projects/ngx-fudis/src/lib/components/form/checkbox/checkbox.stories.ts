@@ -2,7 +2,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { CheckboxComponent } from './checkbox.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Checkbox',
@@ -12,9 +11,6 @@ export default {
       imports: [ReactiveFormsModule, FormsModule],
     }),
   ],
-  parameters: {
-    controls: { exclude: checkboxGroupControlsExclude },
-  },
 } as Meta;
 
 const html = String.raw;
@@ -29,9 +25,14 @@ const ExampleTemplate: StoryFn = (args) => ({
       ),
     }),
   },
+  /* TODO: Change error-message styles to come from Core */
   template: html`
     <form [formGroup]="myFormGroup">
-      <fudis-checkbox [label]="'Yes, I accept terms.'" [control]="myFormGroup.get('required')">
+      <fudis-checkbox
+        [label]="'Yes, I accept terms.'"
+        [ariaDescribedBy]="'description-id'"
+        [control]="myFormGroup.get('required')"
+      >
         <a
           fudisLink
           href="https://www.example.com"
@@ -39,8 +40,23 @@ const ExampleTemplate: StoryFn = (args) => ({
           [external]="true"
         ></a>
       </fudis-checkbox>
+      <p
+        *ngIf="myFormGroup.get('required')?.invalid && myFormGroup.get('required')?.touched"
+        class="custom-error-message"
+        id="description-id"
+        >Custom error message: Field required!</p
+      >
     </form>
   `,
+  styles: [
+    `
+    .custom-error-message {
+      font-family: 'Fira Sans', sans-serif;
+      font-size: 12px;
+      color: #b83c2e;
+    }
+  `,
+  ],
 });
 
 export const Example = ExampleTemplate.bind({});

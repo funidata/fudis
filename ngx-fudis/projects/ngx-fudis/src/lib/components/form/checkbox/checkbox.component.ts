@@ -39,6 +39,11 @@ export class CheckboxComponent implements OnInit, OnChanges {
   }
 
   /**
+   * FormControl for the input
+   */
+  @Input({ required: true }) control: FormControl;
+
+  /**
    * Checkbox id. By default generated
    */
   @Input() id: string;
@@ -49,14 +54,14 @@ export class CheckboxComponent implements OnInit, OnChanges {
   @Input() ariaLabelledBy: string;
 
   /**
-   * Label for the Checkbox
+   * AriaDescribedBy attribute for linking custom error messages to Checkbox input
    */
-  @Input() label?: string;
+  @Input() ariaDescribedBy: string;
 
   /**
-   * FormControl for the input
+   * Label for the Checkbox
    */
-  @Input({ required: true }) control: FormControl;
+  @Input() label: string;
 
   /**
    * Emits Checkbox change

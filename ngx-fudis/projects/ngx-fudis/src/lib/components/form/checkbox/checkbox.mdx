@@ -11,7 +11,9 @@ Single **Checkbox** is designed for binary (yes/no) decisions. It is suitable wh
 
 Unlike `CheckboxGroupComponent`, Checkbox component allows custom content (such as links) and does not require a label. However, to ensure accessibility, you must provide an `ariaLabelledBy` attribute if a visible label is not used.
 
-> **Note!** Checkbox does **not display error messages** automatically. It's the responsibility of the consumer to handle and display validation messages externally if needed.
+> **Note!** Checkbox does **not display error messages** automatically. FudisValidators are used for validation purposes but it's end users responsibility to handle and display validation messages externally if needed. Therefore `FudisValidators.required(' ')` does not require any validation message.
+
+When creating a custom error message use `ariaDescribedBy` attribute for linking error message with a Checkbox input.
 
 ## Checkbox used with `formGroup` property
 
@@ -23,7 +25,7 @@ Unlike `CheckboxGroupComponent`, Checkbox component allows custom content (such 
 
   myFormGroup = new FormGroup(
     {
-      required: new FormControl<boolean | null>(null, FudisValidators.required('This selection is required'))
+      required: new FormControl<boolean | null>(null, FudisValidators.required('This error message will not show'))
     }
   );
 
@@ -32,9 +34,16 @@ Unlike `CheckboxGroupComponent`, Checkbox component allows custom content (such 
   <form [formGroup]="myFormGroup">
         <fudis-checkbox
           [label]="'Yes, I accept terms.'"
+          [ariaDescribedBy]="'description-id'"
           [control]="myFormGroup.get('required')">
           <a fudisLink href="https://www.example.com" [title]="'Terms descriptions'" [external]="true"></a>
         </fudis-checkbox>
+
+        <p *ngIf="myFormGroup.get('required')?.invalid && myFormGroup.get('required')?.touched"
+          id="description-id">
+          "This is a custom error message, linked with ariaDescribedBy attribute."
+        </p>
+
     </form>
 
 
@@ -57,7 +66,8 @@ This Checkbox does not have a visible label, but instead it has passed id in `ar
 
 - Checkbox has associated label
 - When label is not provided, aria-labelledby is provided for linking associated label to input
+- All displayed custom error messages are linked with aria-describedby to checkbox input
 
 ## Properties of Checkbox Component
 
-<ArgTypes of={CheckboxComponent} exclude={checkboxExclude} />
+<ArgTypes of={CheckboxComponent} />

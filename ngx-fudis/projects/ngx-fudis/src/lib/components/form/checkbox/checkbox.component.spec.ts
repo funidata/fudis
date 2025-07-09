@@ -16,6 +16,7 @@ import { FudisCheckboxChangeEvent } from 'projects/ngx-fudis/src/public-api';
         [control]="myFormGroup.get('accept')"
         [label]="label"
         [ariaLabelledBy]="ariaLabelledBy"
+        [ariaDescribedBy]="ariaDescribedBy"
         (handleChange)="checkedChange($event)"
       ></fudis-checkbox>
     </form>
@@ -25,6 +26,7 @@ class MockComponent {
   id: string;
   label: string = 'Test Label';
   ariaLabelledBy: string = 'test-id';
+  ariaDescribedBy: string = 'test-description-id';
 
   public myFormGroup = new FormGroup({
     accept: new FormControl<boolean | null>(
@@ -73,6 +75,13 @@ describe('CheckboxComponent', () => {
       const ariaLabelId = input.getAttribute('aria-labelledby');
 
       expect(ariaLabelId).toEqual('test-id');
+    });
+
+    it('should have correct aria-describedby id', () => {
+      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const ariaDescribedById = input.getAttribute('aria-describedby');
+
+      expect(ariaDescribedById).toEqual('test-description-id');
     });
 
     it('should have correct id', () => {
