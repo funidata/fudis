@@ -3,9 +3,7 @@ import { CheckboxComponent } from './checkbox.component';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { GuidanceComponent } from '../guidance/guidance.component';
 import { IconComponent } from '../../icon/icon.component';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisCheckboxChangeEvent } from 'projects/ngx-fudis/src/public-api';
@@ -50,13 +48,7 @@ describe('CheckboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MockComponent,
-        GuidanceComponent,
-        CheckboxComponent,
-        ValidatorErrorMessageComponent,
-        IconComponent,
-      ],
+      declarations: [MockComponent, CheckboxComponent, IconComponent],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();

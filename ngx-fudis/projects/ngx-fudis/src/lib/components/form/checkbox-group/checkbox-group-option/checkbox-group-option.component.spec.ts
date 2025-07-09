@@ -218,23 +218,21 @@ describe('CheckboxGroupOptionComponent', () => {
         '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"]',
       );
 
-      const label = checkedCheckbox.querySelector(
-        '.fudis-checkbox-group-option__content__label',
-      ) as HTMLElement;
+      const label = checkedCheckbox.querySelector('.fudis-checkbox__content__label') as HTMLElement;
 
       expect(label.textContent).toContain('Fair trade banana');
     });
 
     it('should have proper CSS classes before, during and after when input focused', () => {
       const CheckboxGroupOptionComponent = fixture.nativeElement.querySelector(
-        '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"] .fudis-checkbox-group-option',
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"] .fudis-checkbox',
       );
 
       const labelBox: HTMLSpanElement = CheckboxGroupOptionComponent.querySelector(
-        '.fudis-checkbox-group-option__content__box',
+        '.fudis-checkbox__content__box',
       );
 
-      expect(labelBox.className).toEqual('fudis-checkbox-group-option__content__box');
+      expect(labelBox.className).toEqual('fudis-checkbox__content__box');
 
       const input: HTMLInputElement = CheckboxGroupOptionComponent.querySelector('input');
 
@@ -242,13 +240,13 @@ describe('CheckboxGroupOptionComponent', () => {
       fixture.detectChanges();
 
       expect(labelBox.className).toEqual(
-        'fudis-checkbox-group-option__content__box fudis-checkbox-group-option__content__box--focused',
+        'fudis-checkbox__content__box fudis-checkbox__content__box--focused',
       );
 
       input.dispatchEvent(new Event('blur'));
       fixture.detectChanges();
 
-      expect(labelBox.className).toEqual('fudis-checkbox-group-option__content__box');
+      expect(labelBox.className).toEqual('fudis-checkbox__content__box');
     });
   });
 

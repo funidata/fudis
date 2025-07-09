@@ -1,8 +1,7 @@
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { CheckboxComponent } from './checkbox.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { CommonModule } from '@angular/common';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
 export default {
@@ -10,7 +9,7 @@ export default {
   component: CheckboxComponent,
   decorators: [
     moduleMetadata({
-      imports: [ReactiveFormsModule, CommonModule],
+      imports: [ReactiveFormsModule, FormsModule],
     }),
   ],
   parameters: {
