@@ -36,7 +36,6 @@ export const docs = {
 export function managerHead(head) {
   return `
     ${head}
-    <link rel="shortcut icon" href="favicon.svg">
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
       .sidebar-item:has(#components-test-playground)  { display: none;}
@@ -63,7 +62,7 @@ export function previewHead(head) {
         width: 100vw;
         height: 20rem;
         margin-left: calc(-50vw + 50%);
-        background-image: url('/images/fudis-bg.svg');
+        background-image: url('./images/fudis-bg.svg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

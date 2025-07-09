@@ -9,7 +9,7 @@ addons.setConfig({
     base: "light",
     brandTitle: "Components library for Fudis",
     brandUrl: "/index.html",
-    brandImage: "/images/fudis-logo-regular-black.svg",
+    brandImage: "./images/fudis-logo-regular-black.svg",
     brandTarget: "_self",
   }),
 });
