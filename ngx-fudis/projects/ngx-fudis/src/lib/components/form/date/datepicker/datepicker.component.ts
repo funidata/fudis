@@ -116,11 +116,6 @@ export class DatepickerComponent
   }
 
   /**
-   * Label for the Datepicker
-   */
-  @Input({ required: true }) override label: string;
-
-  /**
    * FormControl for the input
    */
   @Input({ required: true }) override control: FormControl<Date | null>;

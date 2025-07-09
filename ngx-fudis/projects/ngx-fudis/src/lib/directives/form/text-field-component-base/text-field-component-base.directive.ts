@@ -16,11 +16,6 @@ export class TextFieldComponentBaseDirective extends ControlComponentBaseDirecti
   }
 
   /**
-   * Label for the Text Field
-   */
-  @Input({ required: true }) override label: string;
-
-  /**
    * Width of the input field.
    */
   @Input() size: FudisInputSize = 'lg';

@@ -47,11 +47,6 @@ export class RadioButtonGroupComponent
   @ViewChild('radioButtonGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
-   * Label for the Radio Button Group
-   */
-  @Input({ required: true }) override label: string;
-
-  /**
    * Width of Radio Button Group
    */
   @Input() size: FudisInputSize = 'lg';

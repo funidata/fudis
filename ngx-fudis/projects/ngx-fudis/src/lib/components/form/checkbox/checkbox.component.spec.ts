@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { IconComponent } from '../../icon/icon.component';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisCheckboxChangeEvent } from 'projects/ngx-fudis/src/public-api';
 
 @Component({
@@ -49,7 +47,6 @@ describe('CheckboxComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MockComponent, CheckboxComponent, IconComponent],
-      providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });
@@ -63,35 +60,6 @@ describe('CheckboxComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should bind FormControl value to checkbox', () => {
-    const input = fixture.nativeElement.querySelector('input[type="checkbox"]');
-
-    expect(input.checked).toBe(false);
-
-    component.myFormGroup.get('accept')?.setValue(true);
-    fixture.detectChanges();
-
-    expect(input.checked).toBe(true);
-  });
-
-  it('should update FormControl value on user click', () => {
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
-
-    input.click();
-    fixture.detectChanges();
-
-    expect(component.myFormGroup.get('accept')?.value).toBe(true);
-  });
-
-  it('should show error when required checkbox is not checked', () => {
-    const control = component.myFormGroup.get('accept');
-    control?.markAsTouched();
-    control?.updateValueAndValidity();
-    fixture.detectChanges();
-
-    expect(control?.valid).toBe(false);
   });
 
   describe('Basic inputs and styles', () => {
@@ -174,6 +142,35 @@ describe('CheckboxComponent', () => {
   });
 
   describe('Checkbox interaction', () => {
+    it('should bind FormControl value to checkbox', () => {
+      const input = fixture.nativeElement.querySelector('input[type="checkbox"]');
+
+      expect(input.checked).toBe(false);
+
+      component.myFormGroup.get('accept')?.setValue(true);
+      fixture.detectChanges();
+
+      expect(input.checked).toBe(true);
+    });
+
+    it('should update FormControl value on user click', () => {
+      const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+
+      input.click();
+      fixture.detectChanges();
+
+      expect(component.myFormGroup.get('accept')?.value).toBe(true);
+    });
+
+    it('should not be valid when required checkbox is not checked', () => {
+      const control = component.myFormGroup.get('accept');
+      control?.markAsTouched();
+      control?.updateValueAndValidity();
+      fixture.detectChanges();
+
+      expect(control?.valid).toBe(false);
+    });
+
     it('should emit change event', () => {
       jest.spyOn(component, 'checkedChange');
 

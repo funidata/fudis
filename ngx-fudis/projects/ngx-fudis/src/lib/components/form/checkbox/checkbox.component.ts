@@ -1,8 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnChanges,
+  DestroyRef,
+  inject,
+} from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
-import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 import {
   FudisCheckboxChangeEvent,
   FudisCheckboxOption,
@@ -10,7 +17,8 @@ import {
 } from '../../../types/types';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'fudis-checkbox',
@@ -18,14 +26,11 @@ import { Subscription } from 'rxjs';
   styleUrl: './checkbox.component.scss',
   standalone: false,
 })
-export class CheckboxComponent extends ControlComponentBaseDirective implements OnInit, OnChanges {
+export class CheckboxComponent implements OnInit, OnChanges {
   constructor(
-    _idService: FudisIdService,
-    _focusService: FudisFocusService,
+    private _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
   ) {
-    super(_idService, _focusService);
-
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
         this._required.next(FudisValidatorUtilities.required(this.control));
@@ -34,9 +39,24 @@ export class CheckboxComponent extends ControlComponentBaseDirective implements 
   }
 
   /**
+   * Checkbox id. By default generated
+   */
+  @Input() id: string;
+
+  /**
    * AriaLabelledBy attribute to be used when visible label is not provided
    */
   @Input() ariaLabelledBy: string;
+
+  /**
+   * Label for the Checkbox
+   */
+  @Input() label?: string;
+
+  /**
+   * FormControl for the input
+   */
+  @Input({ required: true }) control: FormControl;
 
   /**
    * Emits Checkbox change
@@ -44,9 +64,21 @@ export class CheckboxComponent extends ControlComponentBaseDirective implements 
   @Output() handleChange = new EventEmitter<FudisCheckboxChangeEvent>();
 
   /**
+   * Trigger update when control validator is changed
+   */
+  protected _updateValueAndValidityTrigger = new Subject<void>();
+
+  /**
    * Subscription for handling the valueChanges observable
    */
   private _subscription: Subscription;
+
+  /**
+   * Set requiredText based on this boolean value
+   */
+  protected _required = new BehaviorSubject<boolean>(false);
+
+  protected _destroyRef = inject(DestroyRef);
 
   /**
    * If Checkbox has focus
