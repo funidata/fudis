@@ -36,6 +36,7 @@ export function managerHead(head) {
     <style>
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
       .sidebar-item:has(#components-test-playground)  { display: none;}
+      .sidebar-item:has(#components-form-checkbox--all-states)  { display: none;}
     </style>
   `;
 }
