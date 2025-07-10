@@ -30,6 +30,7 @@ export const fudisIconArray = [
   'edit',
   'editor',
   'exclamation-mark-circle',
+  'exclamation-mark-circle-small',
   'exclamation-mark-circle-fill',
   'exclamation-mark-small',
   'eye',
