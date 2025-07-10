@@ -40,6 +40,7 @@ export const fudisIconArray = [
   'increase-indent',
   'info',
   'info-circle',
+  'info-circle-small',
   'info-circle-fill',
   'info-small',
   'junction',
