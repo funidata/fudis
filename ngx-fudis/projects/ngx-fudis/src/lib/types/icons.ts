@@ -42,7 +42,6 @@ export const fudisIconArray = [
   'info-circle',
   'info-circle-small',
   'info-circle-fill',
-  'info-small',
   'junction',
   'link',
   'list-add',
