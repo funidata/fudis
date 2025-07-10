@@ -11,6 +11,7 @@
       [formControl]="control"
       [checked]="control.value"
       [attr.aria-disabled]="control.disabled"
+      [attr.aria-required]="_required | async"
       [attr.aria-describedby]="ariaDescribedBy"
       [attr.aria-labelledby]="ariaLabelledBy"
       [attr.tabindex]="control.disabled ? -1 : null"

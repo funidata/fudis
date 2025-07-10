@@ -49,6 +49,11 @@ export class CheckboxComponent implements OnInit, OnChanges {
   @Input() id: string;
 
   /**
+   * Label for the Checkbox
+   */
+  @Input() label: string;
+
+  /**
    * AriaLabelledBy attribute to be used when visible label is not provided
    */
   @Input() ariaLabelledBy: string;
@@ -57,11 +62,6 @@ export class CheckboxComponent implements OnInit, OnChanges {
    * AriaDescribedBy attribute for linking custom error messages to Checkbox input
    */
   @Input() ariaDescribedBy: string;
-
-  /**
-   * Label for the Checkbox
-   */
-  @Input() label: string;
 
   /**
    * Emits Checkbox change
@@ -74,16 +74,16 @@ export class CheckboxComponent implements OnInit, OnChanges {
   protected _updateValueAndValidityTrigger = new Subject<void>();
 
   /**
-   * Subscription for handling the valueChanges observable
-   */
-  private _subscription: Subscription;
-
-  /**
    * Set requiredText based on this boolean value
    */
   protected _required = new BehaviorSubject<boolean>(false);
 
   protected _destroyRef = inject(DestroyRef);
+
+  /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
 
   /**
    * If Checkbox has focus

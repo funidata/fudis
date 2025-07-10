@@ -65,6 +65,21 @@ describe('CheckboxComponent', () => {
   });
 
   describe('Basic inputs and styles', () => {
+    it('should have correct id', () => {
+      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const generatedId = input.getAttribute('id');
+
+      expect(generatedId).toEqual('fudis-checkbox-1');
+
+      component.id = 'custom-id';
+      fixture.detectChanges();
+
+      const inputElement: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const customId = inputElement.getAttribute('id');
+
+      expect(customId).toEqual('custom-id');
+    });
+
     it('should create with correct label', () => {
       const checkboxLabel = fixture.nativeElement.querySelector('.fudis-checkbox__label');
       expect(checkboxLabel.textContent).toEqual('Test Label');
@@ -84,24 +99,16 @@ describe('CheckboxComponent', () => {
       expect(ariaDescribedById).toEqual('test-description-id');
     });
 
-    it('should have correct id', () => {
-      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
-      const generatedId = input.getAttribute('id');
-
-      expect(generatedId).toEqual('fudis-checkbox-1');
-
-      component.id = 'custom-id';
-      fixture.detectChanges();
-
-      const inputElement: HTMLInputElement = fixture.nativeElement.querySelector('input');
-      const customId = inputElement.getAttribute('id');
-
-      expect(customId).toEqual('custom-id');
-    });
-
     it('should have required text indicator', () => {
       const requiredText = fixture.nativeElement.querySelector('.fudis-checkbox__required');
       expect(requiredText.textContent).toEqual('(Required)');
+    });
+
+    it('should have aria-required attribute', () => {
+      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const ariaRequired = input.getAttribute('aria-required');
+
+      expect(ariaRequired).toBeTruthy();
     });
 
     it('should have disabled styles and attributes', () => {
