@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
-import { CheckboxComponent } from './checkbox/checkbox.component';
+import { CheckboxGroupOptionComponent } from './checkbox-group-option/checkbox-group-option.component';
 import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -58,7 +58,7 @@ type TestFormGroup = {
       (handleChange)="handleCheckboxClick($event)"
     >
       <p class="do-not-find-me">This should not be shown</p>
-      <fudis-checkbox
+      <fudis-checkbox-group-option
         *ngFor="let option of options"
         [controlName]="option.controlName"
         [label]="option.label"
@@ -70,7 +70,7 @@ type TestFormGroup = {
       [label]="'Without FormGroup Choose fruits fruit'"
       (handleChange)="handleCheckboxClick($event)"
     >
-      <fudis-checkbox
+      <fudis-checkbox-group-option
         *ngFor="let option of optionsWithControls"
         [controlName]="option.controlName"
         [control]="option.control"
@@ -130,7 +130,7 @@ describe('CheckboxGroupComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         MockContainerComponent,
-        CheckboxComponent,
+        CheckboxGroupOptionComponent,
         CheckboxGroupComponent,
         FieldSetComponent,
         FieldsetContentDirective,
@@ -245,7 +245,7 @@ describe('CheckboxGroupComponent', () => {
 
       it('should have correct amount of child components', () => {
         const element: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox',
+          '#first-group fudis-checkbox-group-option',
         );
 
         expect(element.length).toEqual(5);
@@ -256,7 +256,7 @@ describe('CheckboxGroupComponent', () => {
         const guidanceId = guidance.getAttribute('id');
 
         const element: HTMLElement[] = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox .fudis-checkbox__input',
+          '#first-group fudis-checkbox-group-option .fudis-checkbox__input',
         );
 
         expect(element[0].getAttribute('aria-describedby')).toEqual(guidanceId);
@@ -269,11 +269,11 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox .fudis-checkbox__content__box--invalid',
+          '#first-group fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox input[aria-invalid="true"]',
+          '#first-group fudis-checkbox-group-option input[aria-invalid="true"]',
         );
 
         const errorMessage = fixture.nativeElement.querySelector(
@@ -290,18 +290,20 @@ describe('CheckboxGroupComponent', () => {
 
         fixture.detectChanges();
 
-        const checkbox = fixture.nativeElement.querySelector('#first-group fudis-checkbox');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#first-group fudis-checkbox-group-option',
+        );
 
         checkbox.querySelector('input').click();
 
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox .fudis-checkbox__content__box--invalid',
+          '#first-group fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox input[aria-invalid="true"]',
+          '#first-group fudis-checkbox-group-option input[aria-invalid="true"]',
         );
 
         const errorMessage = fixture.nativeElement.querySelector(
@@ -316,13 +318,13 @@ describe('CheckboxGroupComponent', () => {
       it('should display error, when too many selected', () => {
         mockComponent.testFromGroup.markAllAsTouched();
         const appleInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox[ng-reflect-control-name="apple"] input',
+          'fudis-checkbox-group-option[ng-reflect-control-name="apple"] input',
         );
         const bananaInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox[ng-reflect-control-name="fairTradeBanana"] input',
+          'fudis-checkbox-group-option[ng-reflect-control-name="fairTradeBanana"] input',
         );
         const orangeInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox[ng-reflect-control-name="orange"] input',
+          'fudis-checkbox-group-option[ng-reflect-control-name="orange"] input',
         );
 
         appleInput.click();
@@ -331,11 +333,11 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          'fudis-checkbox .fudis-checkbox__content__box--invalid',
+          'fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-          'fudis-checkbox input[aria-invalid="true"]',
+          'fudis-checkbox-group-option input[aria-invalid="true"]',
         );
 
         const errorMessage = fixture.nativeElement.querySelector(
@@ -349,7 +351,9 @@ describe('CheckboxGroupComponent', () => {
 
       it('should emit correct object', () => {
         jest.spyOn(mockComponent, 'handleCheckboxClick');
-        const checkbox = fixture.nativeElement.querySelector('#first-group fudis-checkbox');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#first-group fudis-checkbox-group-option',
+        );
 
         checkbox.querySelector('input').click();
 
@@ -372,7 +376,7 @@ describe('CheckboxGroupComponent', () => {
 
       it('should have correct amount of child components', () => {
         const element: NodeList = fixture.nativeElement.querySelectorAll(
-          '#second-group fudis-checkbox',
+          '#second-group fudis-checkbox-group-option',
         );
 
         expect(element.length).toEqual(5);
@@ -380,7 +384,9 @@ describe('CheckboxGroupComponent', () => {
 
       it('should emit correct object', () => {
         jest.spyOn(mockComponent, 'handleCheckboxClick');
-        const checkbox = fixture.nativeElement.querySelector('#second-group fudis-checkbox input');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#second-group fudis-checkbox-group-option input',
+        );
 
         checkbox.click();
         fixture.detectChanges();
@@ -400,7 +406,9 @@ describe('CheckboxGroupComponent', () => {
       });
 
       it('should have correct internal form group, if one option is destroyed', () => {
-        const checkbox = fixture.nativeElement.querySelector('#second-group fudis-checkbox input');
+        const checkbox = fixture.nativeElement.querySelector(
+          '#second-group fudis-checkbox-group-option input',
+        );
 
         checkbox.click();
         fixture.detectChanges();

@@ -1,0 +1,51 @@
+<div class="fudis-checkbox">
+  <label
+    [attr.for]="id"
+    class="fudis-checkbox__label"
+    [class.fudis-checkbox__label--disabled]="control.disabled"
+  >
+    <input
+      type="checkbox"
+      class="fudis-checkbox__input"
+      [id]="id"
+      [formControl]="control"
+      [checked]="control.value"
+      [attr.aria-disabled]="control.disabled"
+      [attr.aria-required]="_required | async"
+      [attr.aria-describedby]="ariaDescribedBy"
+      [attr.aria-labelledby]="ariaLabelledBy"
+      [attr.tabindex]="control.disabled ? -1 : null"
+      [attr.aria-disabled]="control.disabled"
+      [attr.aria-invalid]="(control.touched && control.invalid) || null"
+      (focus)="_onFocus()"
+      (blur)="_onBlur()"
+      (change)="_onChange($event)"
+    />
+    <div
+      class="fudis-checkbox__content"
+      [class.fudis-checkbox__content__disabled]="control.disabled"
+    >
+      <div class="fudis-checkbox__content-wrapper">
+        <span
+          class="fudis-checkbox__content__box"
+          [class.fudis-checkbox__content__box--focused]="_focused"
+          [class.fudis-checkbox__content__box--invalid]="
+            (control.touched && control.invalid) || null
+          "
+          [class.fudis-checkbox__content__box--disabled]="control.disabled"
+        >
+          <fudis-icon
+            *ngIf="control.value"
+            [icon]="'check'"
+            class="fudis-checkbox__content__box__icon"
+          />
+        </span>
+      </div>
+    </div>
+    <span *ngIf="label" class="fudis-checkbox__label__text">{{ label }}</span>
+  </label>
+  <ng-content></ng-content>
+  <span class="fudis-checkbox__required" *ngIf="this._required | async"
+    >({{ _translationService.getTranslations()().REQUIRED }})</span
+  >
+</div>
