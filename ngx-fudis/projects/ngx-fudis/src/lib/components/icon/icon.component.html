@@ -587,9 +587,9 @@
       /></svg
   ></ng-container>
 
-  <ng-container *ngIf="icon === 'exclamation-mark-small'"
+  <ng-container *ngIf="icon === 'exclamation-mark-circle-small'"
     ><svg
-      id="exclamation-mark-small"
+      id="exclamation-mark-circle-small"
       [class]="_classList | async"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
@@ -597,8 +597,9 @@
       height="16"
     >
       <path
-        d="M8 10.5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1ZM8 9c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1Z"
-      /></svg
+        d="M8 10.5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1M8 9c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1"
+      />
+      <path d="M15 8A7 7 0 1 0 1 8a7 7 0 0 0 14 0m1 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0" /></svg
   ></ng-container>
 
   <ng-container *ngIf="icon === 'eye'"
@@ -752,22 +753,17 @@
       <path fill="#1076DB" d="M17 20.5v-6h-3v1h1v5h-1v1h4v-1h-1Z" /></svg
   ></ng-container>
 
-  <ng-container *ngIf="icon === 'info-small'"
+  <ng-container *ngIf="icon === 'info-circle-small'"
     ><svg
-      id="info-small"
+      id="info-circle-small"
       [class]="_classList | async"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
     >
-      <g clip-path="url(#a)">
-        <circle cx="8" cy="3.5" r="1.5" />
-        <path d="M9 12.5v-6H6v1h1v5H6v1h4v-1H9Z" />
-      </g>
-      <defs>
-        <clipPath id="a"><path d="M0 0h16v16H0z" /></clipPath>
-      </defs></svg
+      <path d="M15 8A7 7 0 1 0 1 8a7 7 0 0 0 14 0m1 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0" />
+      <path d="M8 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M9 12V7H6v1h1v4H6v1h4v-1z" /></svg
   ></ng-container>
 
   <ng-container *ngIf="icon === 'junction'"
