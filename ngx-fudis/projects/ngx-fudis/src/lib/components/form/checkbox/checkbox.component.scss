@@ -110,6 +110,14 @@
     width: spacing.$pixel-1;
     height: spacing.$pixel-1;
   }
+
+  /*
+  * If CheckboxGroup is disabled through "disabled" Input, we need to set pointer-event to none for each checkbox.
+  * This is not necessary when disabling comes through formControl.
+  */
+  &--disabled {
+    pointer-events: none;
+  }
 }
 /* stylelint-disable selector-class-pattern */
 .fudis-checkbox.fudis-checkbox__label {

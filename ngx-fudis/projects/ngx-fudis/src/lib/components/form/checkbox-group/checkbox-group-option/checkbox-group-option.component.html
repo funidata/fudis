@@ -1,5 +1,10 @@
 <ng-container *ngIf="control">
-  <label class="fudis-checkbox fudis-checkbox__label" [attr.for]="id" [id]="id + '-label'">
+  <label
+    class="fudis-checkbox fudis-checkbox__label"
+    [attr.for]="id"
+    [id]="id + '-label'"
+    [class.fudis-checkbox--disabled]="control.disabled || _checkboxGroup.disabled"
+  >
     <input
       #inputRef
       (click)="_checkboxClick($event)"

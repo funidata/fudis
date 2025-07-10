@@ -19,10 +19,7 @@ const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     myFormGroup: new FormGroup({
-      required: new FormControl<boolean | null>(
-        null,
-        FudisValidators.required('This selection is required'),
-      ),
+      required: new FormControl<boolean | null>(null, FudisValidators.required('')),
     }),
   },
   /* TODO: Change error-message styles to come from Core */
