@@ -1,9 +1,9 @@
 <ng-container *ngIf="control">
   <label
-    class="fudis-checkbox"
+    class="fudis-checkbox fudis-checkbox__label"
     [attr.for]="id"
     [id]="id + '-label'"
-    [class.fudis-checkbox--disabled]="_checkboxGroup.disabled"
+    [class.fudis-checkbox--disabled]="control.disabled || _checkboxGroup.disabled"
   >
     <input
       #inputRef
@@ -28,7 +28,10 @@
       (focus)="_onFocus($event)"
       (keyup)="_checkboxGroup.handleKeyUp.emit($event)"
     />
-    <div class="fudis-checkbox__content">
+    <div
+      class="fudis-checkbox__content"
+      [class.fudis-checkbox__content--disabled]="control.disabled || _checkboxGroup.disabled"
+    >
       <div class="fudis-checkbox__content-wrapper">
         <span
           class="fudis-checkbox__content__box"

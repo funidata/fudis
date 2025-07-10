@@ -1,0 +1,73 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { CheckboxComponent } from "./checkbox.component";
+import * as CheckboxpStories from "./checkbox.stories";
+import { checkboxExclude } from "../../../utilities/storybook";
+
+<Meta title="Components/Form/Checkbox" />
+
+# Checkbox
+
+Single **Checkbox** is designed for binary (yes/no) decisions. It is suitable when there is only **one option to select**. For scenarios requiring multiple selections, use the [CheckboxGroupComponent](/docs/components-form-checkbox-group--documentation) instead.
+
+Unlike `CheckboxGroupComponent`, Checkbox component allows custom content (such as links) and does not require a label. However, to ensure accessibility, you must provide an `ariaLabelledBy` attribute if a visible label is not used.
+
+> **Note!** Checkbox does **not display error messages** automatically. FudisValidators are used for validation purposes but it's end users responsibility to handle and display validation messages externally if needed. Therefore `FudisValidators.required(' ')` does not require any validation message.
+
+When creating a custom error message use `ariaDescribedBy` attribute for linking error message with a Checkbox input.
+
+## Checkbox used with `formGroup` property
+
+### Code Example
+
+```
+
+// In TypesScript
+
+  myFormGroup = new FormGroup(
+    {
+      required: new FormControl<boolean | null>(null, FudisValidators.required('This error message will not show'))
+    }
+  );
+
+// HTML template
+
+  <form [formGroup]="myFormGroup">
+        <fudis-checkbox
+          [label]="'Yes, I accept terms.'"
+          [ariaDescribedBy]="'description-id'"
+          [control]="myFormGroup.get('required')">
+          <a fudisLink href="https://www.example.com" [title]="'Terms descriptions'" [external]="true"></a>
+        </fudis-checkbox>
+
+        <p *ngIf="myFormGroup.get('required')?.invalid && myFormGroup.get('required')?.touched"
+          id="description-id">
+          "This is a custom error message, linked with ariaDescribedBy attribute."
+        </p>
+
+    </form>
+
+
+```
+
+### Code Example without visible label
+
+This Checkbox does not have a visible label, but instead it has passed id in `ariaLabelledBy` pointing to the 'Hidden label' text.
+
+```
+      <fudis-checkbox
+        [control]="control"
+        [ariaLabelledBy]="'id-label'"
+          <p class="fudis-visually-hidden" id="id-label">Hidden label</p>
+      </fudis-checkbox>
+
+```
+
+## Accessibility
+
+- Checkbox has associated label
+- When label is not provided, aria-labelledby is provided for linking associated label to input
+- All displayed custom error messages are linked with aria-describedby to checkbox input
+
+## Properties of Checkbox Component
+
+<ArgTypes of={CheckboxComponent} />

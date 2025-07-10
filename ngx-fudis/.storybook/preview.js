@@ -87,6 +87,7 @@ const preview = {
             "Expandable",
             "Form",
             [
+              "Checkbox",
               "Checkbox Group",
               "Date",
               "Error Message",

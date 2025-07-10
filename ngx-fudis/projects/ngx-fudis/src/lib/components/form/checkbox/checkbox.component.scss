@@ -1,10 +1,11 @@
-@use '../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../foundations/colors/tokens.scss' as colors;
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../foundations/focus/mixins.scss' as focus;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/typography/tokens.scss' as typographyTokens;
 
 .fudis-checkbox {
   @include typography.body-text-md-regular;
@@ -13,13 +14,33 @@
   display: inline-flex;
   position: relative;
   align-items: center;
-  cursor: pointer;
   width: auto;
   min-height: spacing.$spacing-lg;
+
+  &__label {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+
+    &__text {
+      position: relative;
+      padding-right: spacing.$spacing-xs;
+      padding-left: spacing.$spacing-xs;
+    }
+
+    &--disabled {
+      pointer-events: none;
+    }
+  }
 
   &__content {
     display: inline-flex;
     align-items: center;
+    cursor: pointer;
+
+    &--disabled {
+      cursor: default;
+    }
 
     &-wrapper {
       display: flex;
@@ -51,8 +72,6 @@
       &--disabled {
         @include borders.border('1px', 'dashed', 'gray-middle');
         @include colorMixins.bg-color('gray-extra-light');
-
-        cursor: default;
       }
 
       &--invalid {
@@ -67,6 +86,19 @@
       padding-right: spacing.$spacing-xs;
       padding-left: spacing.$spacing-xs;
     }
+  }
+
+  &__required {
+    @include typography.text-field-label;
+    @include colorMixins.text-color('gray-middle');
+
+    display: inline-block;
+    vertical-align: baseline;
+    text-transform: initial;
+    /* stylelint-disable-next-line property-disallowed-list */
+    line-height: typographyTokens.$text-input-line-height;
+    /* stylelint-disable-next-line property-disallowed-list */
+    font-size: typographyTokens.$body-text-sm-font-size;
   }
 
   &__input {
@@ -86,4 +118,8 @@
   &--disabled {
     pointer-events: none;
   }
+}
+/* stylelint-disable selector-class-pattern */
+.fudis-checkbox.fudis-checkbox__label {
+  cursor: pointer;
 }
