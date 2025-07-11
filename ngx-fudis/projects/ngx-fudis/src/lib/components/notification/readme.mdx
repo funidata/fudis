@@ -26,6 +26,9 @@ however Notification Component can contain any kind of Fudis components, text or
 If using [Button Component](/docs/components-button--documentation) or button element they will be transformed to look like
 [Link Component](/docs/components-link--documentation). Otherwise Notification does not interfere with the content styling.
 
+There is also the possibility to add a more detailed description of the Notification for screen readers. When HTML element is described by another element, it must be linked using the other element's id.
+Add `ariaDescribedby` input, using the id of the linked content. See the example implementation in the Notification with Button code.
+
 Please see code examples for recommended usage patterns.
 
 <Canvas of={NotificationStories.ExampleWithMultipleChildComponents} />
@@ -38,6 +41,7 @@ Please see code examples for recommended usage patterns.
 - Notification content is accessible by screen readers
 - Notification component is native `article` element
 - External link is communicated to screen reader with assistive aria-label
+- Possibility to add additional aria-describedby attribute if necessary
 
 ### Related components
 

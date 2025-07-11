@@ -45,12 +45,15 @@ const ButtonAndLinkTemplate: StoryFn = (args) => ({
         ></a>
       </fudis-body-text>
     </fudis-notification>
-    <fudis-notification [variant]="variant">
+    <fudis-notification [variant]="variant" [ariaDescribedby]="'description-id'">
       <fudis-body-text
         >This is Notification with Button.
         <fudis-button [label]="'This is example button.'" />
       </fudis-body-text>
     </fudis-notification>
+    <p id="description-id" aria-hidden="true" class="fudis-visually-hidden"
+      >This is additional description for screen readers, if necessary</p
+    >
   </fudis-grid>`,
 });
 

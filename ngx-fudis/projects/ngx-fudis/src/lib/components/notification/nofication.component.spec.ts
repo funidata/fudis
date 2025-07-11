@@ -81,4 +81,17 @@ describe('NotificationComponent', () => {
       notificationIconCheck('info');
     });
   });
+
+  describe('Optional inputs', () => {
+    it('should have aria-describedby attribute', () => {
+      const notification = fixture.nativeElement.querySelector('.fudis-notification');
+
+      expect(notification.getAttribute('aria-describedby')).toBeFalsy();
+
+      fixture.componentRef.setInput('ariaDescribedby', 'description-id');
+      fixture.detectChanges();
+
+      expect(notification.getAttribute('aria-describedby')).toEqual('description-id');
+    });
+  });
 });
