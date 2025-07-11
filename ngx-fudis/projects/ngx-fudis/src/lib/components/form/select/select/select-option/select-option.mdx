@@ -43,6 +43,23 @@ interface FudisSelectOption {
 
 ```
 
+### Options With Identical Labels (not recommended)
+
+We do not recommend using indentical labels for the sake of accessibility, but if you must use same label in more than one option, make sure to use `labelKey` input.
+It will ensure that the same label options have unique generated ids and refrain from id collision and incorrect behaviour. `labelKey` can be e.g. stringified index or any other unique string value.
+
+```
+<fudis-multiselect>
+  <ng-template fudisSelectOptions>
+     <fudis-multiselect-option
+        *ngFor="let option of options; let i = index"
+        [data]="option"
+        [labelKey]="i.toString()"
+      ></fudis-multiselect-option>
+   </ng-template>
+ </fudis-multiselect>
+```
+
 ## Example Usage
 
 <Canvas of={Stories.Example} />
