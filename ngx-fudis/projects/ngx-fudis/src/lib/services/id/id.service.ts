@@ -264,8 +264,9 @@ export class FudisIdService {
     selectType: 'select' | 'multiselect',
     selectParentId: string,
     groupParentId?: string,
+    labelKey?: string,
   ): string {
-    const newId = FudisIdService.createSelectOptionId(selectParentId, label);
+    const newId = FudisIdService.createSelectOptionId(selectParentId, label, labelKey);
 
     if (groupParentId) {
       this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
@@ -275,8 +276,11 @@ export class FudisIdService {
     return newId;
   }
 
-  public static createSelectOptionId(id: string, label: string) {
-    return `${id}-option-${FudisIdService.hashLabel(label)}`;
+  public static createSelectOptionId(id: string, label: string, key?: string): string {
+    const hasKey = key !== undefined && key !== null;
+    const hashInput = hasKey ? `${label}-${key}` : label;
+
+    return `${id}-option-${FudisIdService.hashLabel(hashInput)}`;
   }
 
   /**
