@@ -35,6 +35,12 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   @Input({ required: true }) data: FudisSelectOption<object>;
 
   /**
+   * Id generation helper, e.g. when application has multiple select options with the same label
+   * (not recommended)
+   */
+  @Input() labelKey: string;
+
+  /**
    * State of option visibility
    */
   protected _optionVisible: boolean = true;
