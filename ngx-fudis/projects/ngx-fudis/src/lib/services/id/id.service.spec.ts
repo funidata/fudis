@@ -231,6 +231,16 @@ describe('FudisIdServiceService', () => {
       );
     });
 
+    it('should generate unique id for the same label with labelKey', () => {
+      const someLabel = 'I want to be unique!';
+      expect(FudisIdService.createSelectOptionId('multiselect', someLabel)).toEqual(
+        'multiselect-option-11ckkn3',
+      );
+      expect(FudisIdService.createSelectOptionId('multiselect', someLabel, 'unique-key')).toEqual(
+        'multiselect-option-1plsqr5',
+      );
+    });
+
     it('should generate a safe hash with special characters', () => {
       const id = FudisIdService.createSelectOptionId('select', "</i'm \n a weird _ label !! £$^*-");
       expect(id).toEqual('select-option-1cnnyrd');

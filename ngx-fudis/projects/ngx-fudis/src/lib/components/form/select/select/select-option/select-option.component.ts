@@ -50,6 +50,7 @@ export class SelectOptionComponent
         'select',
         this._parent.id,
         this._parentGroup?.id,
+        this.labelKey,
       );
 
       if (this._id && this._id !== newOptionId) this.clearParentOptionVisibility();
