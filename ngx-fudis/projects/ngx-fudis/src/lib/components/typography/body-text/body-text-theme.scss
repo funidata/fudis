@@ -4,14 +4,6 @@
 
 fudis-body-text {
   /**
-  * Add spacing between multiple following Body Text elements.
-  * Body Text does not have bottom margin if it does not have other Body Text element underneath.
-  */
-  &:has(+ fudis-body-text) {
-    margin-bottom: spacing.$spacing-xs;
-  }
-
-  /**
   * Link directive's size property will not have an effect when link is wrapped inside of Body Text component.
   * Instead link will inherit Body Text font-size.
   */
@@ -21,12 +13,13 @@ fudis-body-text {
 }
 
 /**
- * Remove spacing between multiple following Body Text elements directly under Grid element.
- * Grid already defines a gap between its children elements.
- */
-.fudis-grid {
+  * Add spacing between multiple following Body Text elements inside Notification content.
+  * Body Text will not have bottom margin if it does not have other Body Text element underneath.
+  */
+/* stylelint-disable-next-line selector-class-pattern */
+.fudis-notification__content {
   > fudis-body-text:has(+ fudis-body-text) {
-    margin-bottom: spacing.$spacing-none;
+    margin-bottom: spacing.$spacing-xs;
   }
 }
 
