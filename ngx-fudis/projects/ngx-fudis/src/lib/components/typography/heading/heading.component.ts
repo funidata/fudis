@@ -17,7 +17,6 @@ import { getHeadingVariant } from '../../../utilities/typography/typography-util
 @Component({
   selector: 'fudis-heading',
   templateUrl: './heading.component.html',
-  styleUrls: ['./heading.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })

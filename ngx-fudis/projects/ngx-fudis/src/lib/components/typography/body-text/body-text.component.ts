@@ -16,7 +16,6 @@ import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/bre
 @Component({
   selector: 'fudis-body-text',
   templateUrl: './body-text.component.html',
-  styleUrls: ['./body-text.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })

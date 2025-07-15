@@ -1,7 +1,7 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-breadcrumbs-item {
   display: flex;
   align-items: center;
-  min-height: spacing.$spacing-lg;
+  min-height: core.$spacing-lg;
 }

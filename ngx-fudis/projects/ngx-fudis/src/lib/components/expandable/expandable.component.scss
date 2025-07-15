@@ -1,12 +1,7 @@
-@use '../../foundations/colors/mixins.scss' as color;
-@use '../../foundations/borders/mixins.scss' as border;
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/focus/mixins.scss' as focus;
-@use '../../foundations/breakpoints/mixins.scss' as breakpoint;
+@use '@funidata/fudis-core' as core;
 
 .fudis-expandable {
-  margin-bottom: spacing.$spacing-sm;
+  margin-bottom: core.$spacing-sm;
   border-top: 0;
 
   &--closed {
@@ -14,15 +9,15 @@
   }
 
   &__regular {
-    @include border.border('2px', 'solid', 'gray-extra-light');
+    @include core.border('2px', 'solid', 'gray-extra-light');
   }
 
   &__header {
     display: block;
-    padding: spacing.$spacing-xs;
+    padding: core.$spacing-xs;
 
     &__regular {
-      @include color.bg-color('gray-extra-light');
+      @include core.bg-color('gray-extra-light');
     }
 
     &__heading {
@@ -30,9 +25,9 @@
       width: 100%;
 
       &__button {
-        @include border.border-none;
-        @include color.bg-color('transparent');
-        @include typography.expandable-regular-typography;
+        @include core.border-none;
+        @include core.bg-color('transparent');
+        @include core.expandable-regular-typography;
 
         display: flex;
         cursor: pointer;
@@ -40,11 +35,11 @@
         text-align: left;
 
         &:focus {
-          @include focus.focus-generic;
+          @include core.focus-generic;
         }
 
         &__icon__regular {
-          margin-right: spacing.$spacing-xs;
+          margin-right: core.$spacing-xs;
         }
 
         &__title {
@@ -52,59 +47,59 @@
 
           /* stylelint-disable-next-line max-nesting-depth */
           &__text {
-            margin-right: spacing.$spacing-xs;
+            margin-right: core.$spacing-xs;
           }
 
           /* stylelint-disable-next-line max-nesting-depth */
           &__sub-heading {
-            @include typography.expandable-sub-title-typography;
+            @include core.expandable-sub-title-typography;
 
             display: block;
           }
         }
 
         &__lite {
-          @include typography.link-md;
-          @include color.text-color('primary');
+          @include core.link-md;
+          @include core.text-color('primary');
 
           text-decoration: none;
         }
       }
     }
 
-    @include breakpoint.breakpoint('sm') {
+    @include core.breakpoint('sm') {
       display: flex;
     }
   }
 
   &__content {
     &__padding-default {
-      @include breakpoint.breakpoint('md') {
-        padding: spacing.$spacing-md;
-        padding-left: spacing.$spacing-xl;
+      @include core.breakpoint('md') {
+        padding: core.$spacing-md;
+        padding-left: core.$spacing-xl;
       }
 
-      @include breakpoint.breakpoint-max('md') {
-        padding: spacing.$spacing-sm;
-        padding-left: spacing.$spacing-md;
+      @include core.breakpoint-max('md') {
+        padding: core.$spacing-sm;
+        padding-left: core.$spacing-md;
       }
     }
 
     &__padding-small {
-      padding: spacing.$spacing-sm;
+      padding: core.$spacing-sm;
     }
   }
 
   &-actions {
     display: flex;
-    gap: spacing.$spacing-xs;
-    margin-top: spacing.$spacing-xs;
+    gap: core.$spacing-xs;
+    margin-top: core.$spacing-xs;
 
     fudis-button:first-of-type {
-      margin-left: spacing.$spacing-xs;
+      margin-left: core.$spacing-xs;
     }
 
-    @include breakpoint.breakpoint('sm') {
+    @include core.breakpoint('sm') {
       margin-top: 0;
       margin-left: 0;
     }

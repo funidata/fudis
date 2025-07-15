@@ -4,7 +4,6 @@ import { FudisBadgeVariant } from '../../types/miscellaneous';
 @Component({
   selector: 'fudis-badge',
   templateUrl: './badge.component.html',
-  styleUrls: ['./badge.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })

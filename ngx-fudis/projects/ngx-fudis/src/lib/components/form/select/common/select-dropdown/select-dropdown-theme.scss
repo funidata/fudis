@@ -1,11 +1,11 @@
-@use '../../../../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-select-dropdown {
   &__help-text {
     &.fudis-body-text-host {
       /** No need for margin bottom because both Body Text help text elements are not visible simultaneously **/
-      margin-bottom: spacing.$spacing-none;
-      padding: spacing.$spacing-xs;
+      margin-bottom: core.$spacing-none;
+      padding: core.$spacing-xs;
     }
 
     &--hidden.fudis-body-text-host {

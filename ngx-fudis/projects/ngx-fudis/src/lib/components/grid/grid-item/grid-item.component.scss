@@ -1,5 +1,5 @@
-@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-grid-item {
-  @include utilities.box-reset;
+  @include core.box-reset;
 }
