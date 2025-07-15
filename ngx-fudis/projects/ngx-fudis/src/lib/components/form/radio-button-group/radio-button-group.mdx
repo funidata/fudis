@@ -45,6 +45,7 @@ const fruitOptions: FudisRadioButtonOption<object>[] = [
 <fudis-radio-button-group
     [control]="control"
     [label]="'Pick a fruit'"
+    (handleChange)="handleChange($event)"
   >
     <fudis-radio-button
       *ngFor="let option of fruitOptions"

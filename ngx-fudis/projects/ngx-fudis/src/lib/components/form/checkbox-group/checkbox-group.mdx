@@ -1,6 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { CheckboxGroupComponent } from "./checkbox-group.component";
-import { CheckboxComponent } from "./checkbox/checkbox.component";
+import { CheckboxGroupOptionComponent } from "./checkbox-group-option/checkbox-group-option.component";
 import * as CheckboxGroupStories from "./checkbox-group.stories";
 import { checkboxGroupExclude } from "../../../utilities/storybook";
 
@@ -62,10 +62,12 @@ myOptions = [
 
 <fudis-checkbox-group
   [formGroup]="myFormGroup"
-  [label]="'Select Fruits'">
-  <fudis-checkbox *ngFor="let option of myOptions"
+  [label]="'Select Fruits'"
+  (handleChange)="handleChange($event)">
+  <fudis-checkbox-group-option *ngFor="let option of myOptions"
     [controlName]="option.controlName
-    [label]="option.label" />
+    [label]="option.label"
+    (handleChange)="checkboxChange($event)" />
 </fudis-checkbox-group>
 ```
 
@@ -101,7 +103,7 @@ myOptionsWithControls = [
 
 <fudis-checkbox-group
   [label]="'Select Fruits'">
-  <fudis-checkbox *ngFor="let option of myOptionsWithControls"
+  <fudis-checkbox-group-option *ngFor="let option of myOptionsWithControls"
     [control]="option.control"
     [controlName]="option.controlName
     [label]="option.label" />
@@ -173,7 +175,7 @@ When clicking any of the child Checkboxes, the parent's property `handleChange` 
 
 When clicking Checkbox, property `handleChange` will emit an object with properties:
 
-- checkbox: `FudisCheckboxOption` typed object consisting of various data
+- checkbox: `FudisCheckboxGroupOption` typed object consisting of various data
 - control: Current Form Control of the Checkbox
 
 ## Checkbox Group Inputs
@@ -197,4 +199,4 @@ Popover can be included in the checkbox group fieldset with properties from [Pop
 
 ## Properties of Checkbox Component
 
-<ArgTypes of={CheckboxComponent} />
+<ArgTypes of={CheckboxGroupOptionComponent} />

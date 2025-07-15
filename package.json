@@ -1,6 +1,6 @@
 {
   "name": "fudis",
-  "version": "5.1.2",
+  "version": "6.0.0",
   "description": "Funidata Design System",
   "scripts": {
     "postinstall": "cd ngx-fudis && npm ci",
@@ -19,8 +19,7 @@
     "lint": "cd ngx-fudis && npm run lint",
     "stylelint": "cd ngx-fudis && npm run stylelint",
     "version": "scripts/version_sub_projects.sh $npm_package_version",
-    "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
-    "fudis-release": "scripts/release.sh",
+    "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\"",
     "format:check": "prettier --check ."
   },
   "author": "Funidata Ltd",

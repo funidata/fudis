@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@jsverse/transloco';
 import {
-  FudisCheckboxOption,
+  FudisCheckboxGroupOption,
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxChangeEvent,
@@ -177,7 +177,7 @@ export class AppFormExampleComponent {
 
   radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 
-  checkboxOptions: FudisCheckboxOption<object>[] = [];
+  checkboxOptions: FudisCheckboxGroupOption<object>[] = [];
 
   selectSize: FudisInputSize = 'sm';
 

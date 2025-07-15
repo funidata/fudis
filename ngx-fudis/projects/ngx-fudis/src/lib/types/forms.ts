@@ -9,7 +9,26 @@ export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 
 
 export type FudisCheckboxOption<T extends object> = T & {
   /**
-   * Unique id for single checkbox option
+   * Unique id for single checkbox
+   */
+  id?: string;
+  /**
+   * Visible label that is shown in the UI
+   */
+  label?: string;
+  /**
+   * Is option selected
+   */
+  value?: boolean | null | undefined;
+  /**
+   * To store additional data
+   */
+  [key: string]: unknown;
+};
+
+export type FudisCheckboxGroupOption<T extends object> = T & {
+  /**
+   * Unique id for single checkbox group option
    */
   id?: string;
   /**
@@ -100,7 +119,7 @@ export type FudisCheckboxGroupFormGroup<T> = {
 };
 
 export type FudisCheckboxChangeEvent = {
-  checkbox: FudisCheckboxOption<object>;
+  checkbox: FudisCheckboxGroupOption<object> | FudisCheckboxOption<object>;
   control: FormControl<boolean | null>;
 };
 

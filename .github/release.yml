@@ -24,6 +24,9 @@ changelog:
     - title: "Dependencies"
       labels:
         - "dependencies"
+    - title: "Github Actions"
+      labels:
+        - "github actions"
     - title: "Other"
       labels:
         - "*"

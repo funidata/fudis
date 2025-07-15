@@ -9,7 +9,7 @@ import {
   FudisErrorSummaryService,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
-import { FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisCheckboxGroupOption } from 'dist/ngx-fudis/lib/types/forms';
 import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
   errorSummaryVisible = false;
   protected _message: string;
 
-  checkboxOptions: FudisCheckboxOption<object>[] = [
+  checkboxOptions: FudisCheckboxGroupOption<object>[] = [
     { controlName: 'blueberry', label: 'blueberry' },
     { controlName: 'cloudberry', label: 'cloudberry' },
     { controlName: 'raspberry', label: 'raspberry' },

@@ -37,6 +37,11 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
+    showSelectionChips: {
+      table: {
+        disable: true,
+      },
+    },
     popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
@@ -47,6 +52,9 @@ export default {
     popoverTriggerLabel: {
       control: { type: 'text' },
     },
+  },
+  args: {
+    showSelectionChips: true,
   },
 } as Meta;
 

@@ -7,12 +7,12 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import {
   FudisCheckboxChangeEvent,
   FudisCheckboxGroupFormGroup,
-  FudisCheckboxOption,
+  FudisCheckboxGroupOption,
 } from '../../../../types/forms';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
-import { CheckboxComponent } from './checkbox.component';
+import { CheckboxGroupOptionComponent } from './checkbox-group-option.component';
 import { FieldSetComponent } from '../../fieldset/fieldset.component';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.directive';
@@ -38,14 +38,14 @@ type TestForm = {
       [formGroup]="testFromGroup"
       [label]="'With Group. Choose minimum of one fruit'"
     >
-      <fudis-checkbox
+      <fudis-checkbox-group-option
         *ngFor="let option of _options"
         [controlName]="option.controlName"
         [label]="option.label"
       />
     </fudis-checkbox-group>
     <fudis-checkbox-group #secondGroup [label]="'Without Group. Choose minimum of one fruit'">
-      <fudis-checkbox
+      <fudis-checkbox-group-option
         *ngFor="let option of optionsWithControls"
         [id]="option.id"
         [controlName]="option.controlName"
@@ -93,15 +93,17 @@ class MockContainerComponent {
   ];
 }
 
-describe('CheckboxComponent', () => {
-  let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<CheckboxComponent>;
+describe('CheckboxGroupOptionComponent', () => {
+  let fixture:
+    | ComponentFixture<MockContainerComponent>
+    | ComponentFixture<CheckboxGroupOptionComponent>;
 
   let mockComponent: MockContainerComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        CheckboxComponent,
+        CheckboxGroupOptionComponent,
         ValidatorErrorMessageComponent,
         MockContainerComponent,
         CheckboxGroupComponent,
@@ -222,17 +224,17 @@ describe('CheckboxComponent', () => {
     });
 
     it('should have proper CSS classes before, during and after when input focused', () => {
-      const checkboxComponent = fixture.nativeElement.querySelector(
+      const CheckboxGroupOptionComponent = fixture.nativeElement.querySelector(
         '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"] .fudis-checkbox',
       );
 
-      const labelBox: HTMLSpanElement = checkboxComponent.querySelector(
+      const labelBox: HTMLSpanElement = CheckboxGroupOptionComponent.querySelector(
         '.fudis-checkbox__content__box',
       );
 
       expect(labelBox.className).toEqual('fudis-checkbox__content__box');
 
-      const input: HTMLInputElement = checkboxComponent.querySelector('input');
+      const input: HTMLInputElement = CheckboxGroupOptionComponent.querySelector('input');
 
       input.dispatchEvent(new Event('focus'));
       fixture.detectChanges();
@@ -250,11 +252,11 @@ describe('CheckboxComponent', () => {
 
   describe('Interaction and logic when clicking', () => {
     it('should display the check icon and emit handleChange() when clicking component', waitForAsync(() => {
-      const checkboxComponentToSpy = fixture.debugElement.query(
-        By.directive(CheckboxComponent),
+      const CheckboxGroupOptionComponentToSpy = fixture.debugElement.query(
+        By.directive(CheckboxGroupOptionComponent),
       ).componentInstance;
 
-      const optionToMatch: FudisCheckboxOption<object> = {
+      const optionToMatch: FudisCheckboxGroupOption<object> = {
         id: 'fudis-checkbox-group-1-item-1',
         groupName: 'fudis-checkbox-group-1',
         controlName: 'apple',
@@ -262,13 +264,15 @@ describe('CheckboxComponent', () => {
         value: true,
       };
 
-      checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxChangeEvent) => {
-        if (value) {
-          expect(value.checkbox).toEqual(optionToMatch);
+      CheckboxGroupOptionComponentToSpy.handleChange.subscribe(
+        (value: FudisCheckboxChangeEvent) => {
+          if (value) {
+            expect(value.checkbox).toEqual(optionToMatch);
 
-          expect(value.control.value).toEqual(true);
-        }
-      });
+            expect(value.control.value).toEqual(true);
+          }
+        },
+      );
 
       const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
         '#fudis-checkbox-group-1 input#fudis-checkbox-group-1-item-1',
