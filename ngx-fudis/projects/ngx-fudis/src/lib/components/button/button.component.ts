@@ -22,7 +22,7 @@ import {
   FudisComponentChanges,
 } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
-import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
+import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 
 @Component({
   selector: 'fudis-button',
@@ -33,7 +33,10 @@ import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component'
   standalone: false,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit, OnDestroy {
-  constructor(private _idService: FudisIdService) {
+  constructor(
+    private _idService: FudisIdService,
+    private _dropdownEventService: DropdownEventService,
+  ) {
     super();
   }
 
@@ -203,7 +206,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     const newState = !this.dropdownOpen.value;
     this.dropdownOpen.next(newState);
 
-    DropdownMenuComponent.fireMaxWidthCalcEvent.next(true);
+    this._dropdownEventService.triggerWidthCalculation();
   }
 
   /**
@@ -216,7 +219,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
       this.buttonEl.nativeElement.focus();
     }
 
-    DropdownMenuComponent.fireMaxWidthCalcEvent.next(true);
+    this._dropdownEventService.triggerWidthCalculation();
   }
 
   /**

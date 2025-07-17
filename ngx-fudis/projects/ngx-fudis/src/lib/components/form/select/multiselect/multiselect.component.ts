@@ -17,6 +17,7 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { DOCUMENT } from '@angular/common';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -24,7 +25,10 @@ import { MultiselectControlValueAccessorDirective } from '../common/select-contr
   styleUrls: ['../select/select.component.scss'],
   standalone: false,
 })
-export class MultiselectComponent extends SelectBaseDirective implements OnInit {
+export class MultiselectComponent
+  extends SelectBaseDirective
+  implements OnInit, BaseSelectableComponent
+{
   constructor(
     @Inject(DOCUMENT) _document: Document,
     protected _translationService: FudisTranslationService,
