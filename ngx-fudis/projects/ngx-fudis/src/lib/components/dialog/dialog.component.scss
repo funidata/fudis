@@ -1,5 +1,5 @@
 /* stylelint-disable unit-disallowed-list */
-@use '@funidata/fudis-core' as core;
+@use '@funidata/fudis-core/foundations' as core;
 
 $dialog-width-xs: calc(30rem / var(--fudis-rem-multiplier));
 $dialog-width-sm: calc(44rem / var(--fudis-rem-multiplier));
