@@ -1,6 +1,6 @@
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable no-descending-specificity */
-@use '@funidata/fudis-core' as core;
+@use '@funidata/fudis-core/foundations' as core;
 
 fudis-heading {
   .fudis-heading {

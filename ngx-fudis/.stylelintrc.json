@@ -7,7 +7,7 @@
   "ignoreFiles": [
     "dist/**/*",
     "static/**/*",
-    "projects/ngx-fudis/style.scss",
+    ".storybook/style.scss",
     "projects/ngx-fudis/coverage/**/*",
     "coverage/**/*"
   ],

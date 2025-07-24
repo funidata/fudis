@@ -1,5 +1,5 @@
 /* stylelint-disable unit-disallowed-list */
-@use '@funidata/fudis-core' as core;
+@use '@funidata/fudis-core/foundations' as core;
 
 .fudis-loading-spinner-demo {
   @include core.outline('3px', 'solid', 'primary');

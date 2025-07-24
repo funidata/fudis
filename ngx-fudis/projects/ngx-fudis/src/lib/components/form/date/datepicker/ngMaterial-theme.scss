@@ -7,7 +7,7 @@
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable selector-no-qualifying-type */
-@use '@funidata/fudis-core' as core;
+@use '@funidata/fudis-core/foundations' as core;
 
 // When navigating calendar pop-up with Tab key, close button appears at the very end. Button does not appear when using mouse.
 

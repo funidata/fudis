@@ -1,6 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable property-disallowed-list */
-@use '@funidata/fudis-core' as core;
+@use '@funidata/fudis-core/foundations' as core;
 
 mat-tooltip-component .mat-tooltip-handset {
   margin: core.$spacing-xs;

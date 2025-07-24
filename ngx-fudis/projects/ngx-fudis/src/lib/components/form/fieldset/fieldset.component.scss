@@ -1,5 +1,5 @@
 /* stylelint-disable selector-class-pattern */
-@use '@funidata/fudis-core' as core;
+@use '@funidata/fudis-core/foundations' as core;
 
 .fudis-fieldset {
   &__legend {

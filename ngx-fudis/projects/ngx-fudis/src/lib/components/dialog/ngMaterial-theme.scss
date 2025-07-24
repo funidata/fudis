@@ -4,7 +4,7 @@
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable declaration-no-important */
-@use '@funidata/fudis-core' as core;
+@use '@funidata/fudis-core/foundations' as core;
 
 .fudis-dialog {
   /* Body Text inside Dialog should be md-light by default but can be altered by the App */
