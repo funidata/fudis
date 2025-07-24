@@ -1,9 +1,17 @@
+/* stylelint-disable order/properties-order */
+/* stylelint-disable unit-disallowed-list */
+/* stylelint-disable rule-empty-line-before */
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable color-no-hex */
+
 /*
 * This file is for Storybook
 */
 
-@use '@funidata/fudis-core/index' as core;
-@use './index' as fudis;
+@use '@funidata/fudis-core' as core;
+@use '../projects/ngx-fudis/index' as fudis;
 
 :root {
   --fudis-rem-multiplier: 1;
@@ -23,10 +31,10 @@ a.sbdocs {
 
 tr td p {
   &.fudis-table-caption {
-    @include core.table-caption();
+    @include core.table-caption;
   }
   &.fudis-text-emptystate {
-    @include core.text-emptystate();
+    @include core.text-emptystate;
   }
 }
 
