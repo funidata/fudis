@@ -3,6 +3,7 @@
 /* stylelint-disable property-disallowed-list */
 
 @use '../../../dist/ngx-fudis/index' as fudis;
+@use '@funidata/fudis-core' as core;
 
 * {
   box-sizing: border-box;
