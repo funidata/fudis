@@ -24,7 +24,9 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByTestId("fudis-multiselect-1-option-100zewl-checkbox-input")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-100zewl-checkbox-input-6"),
+  ).toBeFocused();
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
@@ -34,7 +36,9 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
 
-  await expect(page.getByTestId("fudis-multiselect-1-option-nr48pp-checkbox-input")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-nr48pp-checkbox-input-55"),
+  ).toBeFocused();
   await page.getByTestId("fudis-multiselect-1-option-ibd9lw").hover();
   await expect(page).toHaveScreenshot("A-4-hover-alligator.png", {
     fullPage: true,
@@ -200,7 +204,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await expect(
-    page.getByTestId("fudis-multiselect-5-option-1fkgm3k-checkbox-input"),
+    page.getByTestId("fudis-multiselect-5-option-1fkgm3k-checkbox-input-40"),
   ).toBeInViewport();
   await page.keyboard.press("Space");
   await page.getByTestId("fudis-heading-1").hover();
@@ -232,4 +236,47 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("Backspace");
   await page.keyboard.press("Backspace");
   await expect(page.getByTestId("fudis-multiselect-6-dropdown")).not.toBeVisible();
+});
+
+test("Select values that have duplicate labels", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?globals=&args=&id=components-form-select-multiselect--example&viewMode=story",
+  );
+
+  await page.getByTestId("fudis-multiselect-1").click();
+  await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-7"),
+  ).toHaveAttribute("aria-selected", "false");
+
+  await page
+    .getByTestId("fudis-multiselect-1-dropdown")
+    .getByText("Sadly I am an unwanted duplicate")
+    .nth(1)
+    .click();
+
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-7"),
+  ).toHaveAttribute("aria-selected", "true");
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-5"),
+  ).toHaveAttribute("aria-selected", "false");
+
+  await page
+    .getByTestId("fudis-multiselect-1-dropdown")
+    .getByText("Sadly I am an unwanted duplicate")
+    .nth(1)
+    .click();
+  await page
+    .getByTestId("fudis-multiselect-1-dropdown")
+    .getByText("Sadly I am an unwanted duplicate")
+    .nth(0)
+    .click();
+
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-7"),
+  ).toHaveAttribute("aria-selected", "false");
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-5"),
+  ).toHaveAttribute("aria-selected", "true");
 });
