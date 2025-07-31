@@ -1,3 +1,4 @@
+import { FudisBreakpointKey } from './breakpoint-keys';
 import { FudisSpacing } from './spacing';
 
 type FudisBreakpointsMinWidths = {
@@ -58,11 +59,6 @@ export interface FudisBreakpointStyleResponsive {
 export type FudisBreakpointValueResponsive = {
   [key in FudisBreakpointKey]?: FudisSpacing | string | number;
 };
-
-/**
- * Breakpoint keys to watch
- */
-export type FudisBreakpointKey = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export type FudisBreakpointBoundary =
   | '(min-width: 100em)'

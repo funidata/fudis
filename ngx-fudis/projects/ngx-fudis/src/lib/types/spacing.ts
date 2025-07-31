@@ -1,4 +1,4 @@
-import { FudisBreakpointKey } from './breakpoints';
+import { FudisBreakpointKey } from './breakpoint-keys';
 
 export const fudisSpacingArray = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
 
