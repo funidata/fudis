@@ -1,4 +1,9 @@
-<article #articleElement tabindex="-1" class="fudis-notification fudis-notification__{{ variant }}">
+<article
+  #articleElement
+  tabindex="-1"
+  [attr.aria-describedby]="ariaDescribedby"
+  class="fudis-notification fudis-notification__{{ variant }}"
+>
   <fudis-body-text class="fudis-visually-hidden">{{
     _translateService.getTranslations()().ATTENTION
   }}</fudis-body-text>
