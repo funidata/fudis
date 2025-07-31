@@ -24,6 +24,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
   await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
   await expect(
     page.getByTestId("fudis-multiselect-1-option-100zewl-checkbox-input-6"),
   ).toBeFocused();
@@ -32,6 +33,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp"); /* Focus is on disabled option */
+  await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
@@ -131,7 +133,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-multiselect-2-dropdown")).not.toBeVisible();
 
   await page.keyboard.press("KeyI");
-  await expect(page.getByText("Showing 47 results")).toBeVisible();
+  await expect(page.getByText("Showing 48 results")).toBeVisible();
   await page.keyboard.press("KeyN");
   await expect(page.getByText("Showing 18 results")).toBeVisible();
 
@@ -192,10 +194,12 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.getByTestId("fudis-multiselect-5").focus();
   await page.getByTestId("fudis-multiselect-5").clear();
   await page.keyboard.type("cat");
-  await expect(page.getByText("Showing 4 results")).toBeVisible();
+  await expect(page.getByText("Showing 5 results")).toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
 
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Space");
@@ -204,7 +208,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await expect(
-    page.getByTestId("fudis-multiselect-5-option-1fkgm3k-checkbox-input-40"),
+    page.getByTestId("fudis-multiselect-5-option-1fkgm3k-checkbox-input-272"),
   ).toBeInViewport();
   await page.keyboard.press("Space");
   await page.getByTestId("fudis-heading-1").hover();
