@@ -19,6 +19,12 @@ export class NotificationComponent {
    */
   @Input() variant: FudisNotification = 'warning';
 
+  /**
+   * Additional description of the notification for screen readers. Internally used in ErrorSummary
+   * for accessibility reasons.
+   */
+  @Input() ariaDescribedby: string;
+
   public focus(): void {
     if (this.articleElement?.nativeElement) {
       this.articleElement.nativeElement.focus();
