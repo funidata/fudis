@@ -234,11 +234,11 @@ describe('MultiselectComponent', () => {
       fixture.detectChanges();
 
       await fixture.whenStable().then(() => {
-        component.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
+        component.multiselectEl.handleMultiSelectionChange(defaultOptions[7], 'add');
 
         const element = getElement(fixture, '.fudis-select__input');
 
-        expect(component.control.value).toEqual([defaultOptions[5]]);
+        expect(component.control.value).toEqual([defaultOptions[7]]);
         expect(element.getAttribute('value')).toEqual('Southern Titiwangsa Bent-Toed Gecko');
       });
     });
@@ -246,7 +246,7 @@ describe('MultiselectComponent', () => {
     it('should update component state when handleMultiSelectionChange is called with "add"', () => {
       initWithControlValue();
 
-      component.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
+      component.multiselectEl.handleMultiSelectionChange(defaultOptions[7], 'add');
       fixture.detectChanges();
 
       const value = getElement(fixture, '.fudis-select__input').getAttribute('value');
@@ -255,7 +255,7 @@ describe('MultiselectComponent', () => {
       expect(component.control.value).toEqual([
         defaultOptions[0],
         defaultOptions[2],
-        defaultOptions[5],
+        defaultOptions[7],
       ]);
     });
 

@@ -19,6 +19,9 @@ export class MultiselectOptionComponent
   extends SelectOptionBaseDirective
   implements OnDestroy, OnChanges
 {
+  private static instanceCounter = 0;
+  protected readonly componentInstanceId: string;
+
   constructor(
     @Inject(DOCUMENT) _document: Document,
     @Host() protected _parentMultiselect: MultiselectComponent,
@@ -27,6 +30,9 @@ export class MultiselectOptionComponent
     _translationService: FudisTranslationService,
   ) {
     super(_document, _parentGroup, _translationService, _idService);
+
+    MultiselectOptionComponent.instanceCounter++;
+    this.componentInstanceId = MultiselectOptionComponent.instanceCounter.toString();
 
     this._parent = this._parentMultiselect;
 

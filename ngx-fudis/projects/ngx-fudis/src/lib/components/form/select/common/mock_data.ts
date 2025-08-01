@@ -22,9 +22,19 @@ export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
   { value: 'value-3-platypys', label: 'Platypus', sound: 'Plat plat!' },
   { value: 'value-4-cat', label: 'Really dangerous cat', disabled: true, sound: 'PurrROAR!' },
   {
+    value: { name: 'value-duplicate-1', breed: 'Unwanted' },
+    label: 'Sadly I am an unwanted duplicate',
+    sound: 'Nooooo!',
+  },
+  {
     value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
     label: 'Screaming hairy armadillo (partly endangered)',
     sound: "Rollin' rollin' rollin'!",
+  },
+  {
+    value: { name: 'value-duplicate-2', breed: 'Unwanted' },
+    label: 'Sadly I am an unwanted duplicate',
+    sound: 'Nooooo!',
   },
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
 ];

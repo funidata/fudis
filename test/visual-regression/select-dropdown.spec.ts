@@ -16,6 +16,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
   await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
   await expect(page.getByTestId("fudis-select-1-option-100zewl")).toBeFocused();
 
   await page.keyboard.press("ArrowDown", { delay: 20 });

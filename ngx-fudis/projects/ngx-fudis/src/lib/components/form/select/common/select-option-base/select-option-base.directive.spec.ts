@@ -147,7 +147,7 @@ describe('SelectOptionBaseDirective', () => {
 
       expect(component.selectOption.visible).toEqual(true);
 
-      expect(focusableOptions().length).toEqual(7);
+      expect(focusableOptions().length).toEqual(9);
 
       component.selectElem.setAutocompleteFilterText('p');
 
@@ -158,7 +158,9 @@ describe('SelectOptionBaseDirective', () => {
       expect(focusableOptions()).toEqual([
         'Capybara',
         'Platypus',
+        'Sadly I am an unwanted duplicate',
         'Screaming hairy armadillo (partly endangered)',
+        'Sadly I am an unwanted duplicate',
       ]);
 
       component.selectElem.setAutocompleteFilterText('roa');

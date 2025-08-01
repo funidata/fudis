@@ -211,13 +211,13 @@ describe('SelectComponent', () => {
 
     it('should update component state when handleSelectionChange is called', () => {
       initWithControlNull();
-      component.handleSelectionChange(defaultOptions[5]);
+      component.handleSelectionChange(defaultOptions[7]);
       fixture.detectChanges();
 
       const value = (getElement(fixture, '.fudis-select__input') as HTMLInputElement).value;
 
       expect(value).toEqual('Southern Titiwangsa Bent-Toed Gecko');
-      expect(component.control.value).toEqual(defaultOptions[5]);
+      expect(component.control.value).toEqual(defaultOptions[7]);
     });
   });
 
