@@ -14,22 +14,19 @@ import {
   signal,
   AfterViewInit,
 } from '@angular/core';
-
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
-import { SelectComponent } from '../../select/select.component';
-import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 import { Subscription } from 'rxjs';
+import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -234,7 +231,7 @@ export class SelectBaseDirective
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
 
-  ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
+  ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._updateValueAndValidityTrigger.next();
 

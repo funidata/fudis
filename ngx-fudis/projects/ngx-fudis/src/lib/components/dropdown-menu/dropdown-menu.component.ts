@@ -2,11 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  forwardRef,
   Host,
   HostListener,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -17,8 +17,9 @@ import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropd
 import { ButtonComponent } from '../button/button.component';
 import { DOCUMENT } from '@angular/common';
 import { FudisInputSize } from '../../types/forms';
-import { Subject } from 'rxjs';
 import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
+import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -28,21 +29,19 @@ import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit {
+export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit, OnDestroy {
   constructor(
     private _idService: FudisIdService,
+    private _dropdownEventService: DropdownEventService,
     @Inject(DOCUMENT) private _document: Document,
-    // HOTFIX: ForwardRef does not resolve root cause of circular dependecy, but fixes issue in standalone project with Jest unit tests where this circularity was detected (Rane)
-    // TODO: Fix underlying circular dependency
-    @Host() @Inject(forwardRef(() => ButtonComponent)) private _parentButton: ButtonComponent,
+    @Host() private _parentButton: ButtonComponent,
   ) {
     super();
 
     /**
      * Fire maxWidth calculation through Observable call from parent Button
      */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    DropdownMenuComponent.fireMaxWidthCalcEvent.subscribe((res) => {
+    this._subscription = this._dropdownEventService.triggerCalculation.subscribe(() => {
       this._getMaxWidth();
     });
   }
@@ -63,11 +62,6 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   @Input() size: FudisInputSize = 'lg';
 
   /**
-   * Dropdown Menu's max width calculation observable
-   */
-  public static fireMaxWidthCalcEvent: Subject<boolean> = new Subject();
-
-  /**
    * Determine dropdown max-width
    */
   protected _maxWidth: string = 'initial';
@@ -76,6 +70,11 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
    * Currently focused option
    */
   private _focusedOption: string | null = null;
+
+  /**
+   * Subscription for dropdown width calculation event
+   */
+  private _subscription: Subscription;
 
   /**
    * Add or remove currently focused option. Called from DropdownMenuItem.
@@ -195,5 +194,9 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
   ngOnInit(): void {
     this.id = this._idService.getNewGrandParentId('dropdown-menu');
+  }
+
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
   }
 }
