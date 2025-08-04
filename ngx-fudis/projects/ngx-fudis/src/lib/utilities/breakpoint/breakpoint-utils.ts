@@ -1,6 +1,6 @@
 import { getGridCssValue } from '../../directives/grid/gridUtils';
+import { FudisBreakpointKey } from '../../types/breakpoint-keys';
 import {
-  FudisBreakpointKey,
   FudisBreakpointStyleResponsive,
   FudisBreakpointValueResponsive,
   fudisBreakpointsMinWidth,
