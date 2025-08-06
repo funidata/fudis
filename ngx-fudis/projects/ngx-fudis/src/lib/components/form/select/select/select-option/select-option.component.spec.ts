@@ -83,7 +83,7 @@ describe('SelectOptionComponent', () => {
   }
 
   function initializeFormControlWithValue() {
-    component.control = new FormControl(defaultOptions[4]);
+    component.control = new FormControl(defaultOptions[5]);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }

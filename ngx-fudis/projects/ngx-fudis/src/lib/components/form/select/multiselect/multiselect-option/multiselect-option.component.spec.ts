@@ -124,7 +124,7 @@ describe('MultiselectOptionComponent', () => {
 
       jest.spyOn(component.selectEl.selectionUpdate, 'emit');
 
-      component.control.patchValue([defaultOptions[4], defaultOptions[0]]);
+      component.control.patchValue([defaultOptions[5], defaultOptions[0]]);
 
       fixture.detectChanges();
 
@@ -171,7 +171,7 @@ describe('MultiselectOptionComponent', () => {
       // Select multiple options
       options[0].nativeElement.querySelector('input').click();
       options[1].nativeElement.querySelector('input').click();
-      options[4].nativeElement.querySelector('input').click();
+      options[5].nativeElement.querySelector('input').click();
       fixture.detectChanges();
 
       const controlValueArray = component.selectEl.control.value;
@@ -183,7 +183,7 @@ describe('MultiselectOptionComponent', () => {
       ]);
 
       // Remove one of the already selected options
-      options[4].nativeElement.querySelector('input').click();
+      options[5].nativeElement.querySelector('input').click();
       fixture.detectChanges();
 
       const updatedControlValueArray = component.selectEl.control.value;
