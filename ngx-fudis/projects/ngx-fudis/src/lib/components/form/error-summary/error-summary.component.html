@@ -3,9 +3,10 @@
     *ngIf="errors.length > 0"
     class="fudis-error-summary"
     [variant]="'danger'"
+    [ariaDescribedby]="'fudis-error-summary-title-id'"
     #focusTarget
   >
-    <h2 class="fudis-error-summary__title">{{
+    <h2 id="fudis-error-summary-title-id" class="fudis-error-summary__title" aria-hidden="true">{{
       title || _translationService.getTranslations()().ERROR_SUMMARY.TITLE
     }}</h2>
     <ul class="fudis-error-summary__error-list">

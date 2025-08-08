@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { IconComponent } from '../../icon/icon.component';
-import { FudisCheckboxChangeEvent } from 'projects/ngx-fudis/src/public-api';
+import { FudisCheckboxChangeEvent } from '../../../types/forms';
 
 @Component({
   standalone: false,

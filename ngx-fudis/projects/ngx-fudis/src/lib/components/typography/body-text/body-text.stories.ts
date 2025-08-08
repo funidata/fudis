@@ -54,19 +54,19 @@ Example.args = {
 export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
-    <fudis-body-text [variant]="'lg-regular'"
+    <fudis-body-text [variant]="'lg-regular'" class="fudis-mb-xs"
       >This paragraph has <strong>lg-regular</strong> variant. Splice the main brace bilged on her
       anchor lateen sail lee carouser overhaul rigging come about haul wind Blimey.
     </fudis-body-text>
-    <fudis-body-text [variant]="'lg-light'"
+    <fudis-body-text [variant]="'lg-light'" class="fudis-mb-xs"
       >This paragraph has <strong>lg-light</strong> variant. Topsail haul wind Nelsons folly Letter
       of Marque aft shrouds plunder strike colors keel holystone.
     </fudis-body-text>
-    <fudis-body-text [variant]="'md-regular'"
+    <fudis-body-text [variant]="'md-regular'" class="fudis-mb-xs"
       >This paragraph has <strong>md-regular</strong> variant.Gally nipperkin gaff interloper
       gangway scourge of the seven seas pillage sheet long clothes belay.</fudis-body-text
     >
-    <fudis-body-text [variant]="'md-light'"
+    <fudis-body-text [variant]="'md-light'" class="fudis-mb-xs"
       >This paragraph has <strong>md-light</strong> variant. Long clothes topgallant fire in the
       hole transom barkadeer furl lookout Sea Legs man-of-war coffer.
     </fudis-body-text>

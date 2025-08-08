@@ -17,6 +17,7 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { DOCUMENT } from '@angular/common';
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 
 @Component({
   selector: 'fudis-select',
@@ -25,7 +26,10 @@ import { SelectControlValueAccessorDirective } from '../common/select-control-va
   encapsulation: ViewEncapsulation.None,
   standalone: false,
 })
-export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class SelectComponent
+  extends SelectBaseDirective
+  implements OnInit, AfterViewInit, BaseSelectableComponent
+{
   constructor(
     @Inject(DOCUMENT) _document: Document,
     _idService: FudisIdService,

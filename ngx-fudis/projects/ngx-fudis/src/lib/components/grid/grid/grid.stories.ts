@@ -177,7 +177,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [rowGap]="rowGap"
     >
       <div class="storybook__item">
-        <fudis-body-text>First Grid child's first Body Text inside it</fudis-body-text>
+        <fudis-body-text class="fudis-mb-xs"
+          >First Grid child's first Body Text inside it</fudis-body-text
+        >
         <fudis-body-text>First Grid child's second Body Text inside it</fudis-body-text>
       </div>
       <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
@@ -234,11 +236,11 @@ const FlexboxTemplate: StoryFn = (args) => ({
       [align]="'center'"
       [classes]="'storybook__wrapper-border'"
     >
-      <div style="display:flex; gap:.5rem;">
+      <div style="display:flex; column-gap:.5rem;">
         <fudis-body-text class="storybook__item">Element inside flex container</fudis-body-text>
         <fudis-body-text class="storybook__item">Element inside flex container</fudis-body-text>
       </div>
-      <div style="display:flex; flex-wrap:wrap;">
+      <div style="display:flex; flex-wrap:wrap; row-gap:.5rem;">
         <fudis-body-text class="storybook__item"
           >Element inside flex container with wrap property</fudis-body-text
         >
@@ -246,7 +248,7 @@ const FlexboxTemplate: StoryFn = (args) => ({
           >Element inside flex container with wrap property</fudis-body-text
         >
       </div>
-      <div style="display:flex; gap:.5rem;">
+      <div style="display:flex; column-gap:.5rem;">
         <fudis-body-text class="storybook__item" style="align-self:center;"
           >Element with align-self property</fudis-body-text
         >
@@ -255,7 +257,7 @@ const FlexboxTemplate: StoryFn = (args) => ({
         >
       </div>
       <div fudisGridItem [columns]="{sm: 2}">
-        <fudis-body-text class="storybook__item" style="display:flex;"
+        <fudis-body-text class="storybook__item fudis-mb-xs" style="display:flex;"
           >Single element with flex property</fudis-body-text
         >
         <fudis-body-text class="storybook__item" style="display:flex; justify-content:center;"
