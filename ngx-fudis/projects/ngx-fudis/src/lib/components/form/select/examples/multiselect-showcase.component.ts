@@ -250,7 +250,7 @@ export class StorybookExampleMultiselectShowcaseComponent {
   groupedMockData = groupedMockData;
 
   control: FormControl = new FormControl<FudisSelectOption<object>[] | null>(
-    [defaultOptions[4], defaultOptions[1]],
+    [defaultOptions[5], defaultOptions[1]],
     [FudisValidators.minLength(2, 'Pick at least two pets', true)],
   );
 
