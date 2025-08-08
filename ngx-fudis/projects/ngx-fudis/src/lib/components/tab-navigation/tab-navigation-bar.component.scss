@@ -1,15 +1,8 @@
-@use '../../foundations/colors/tokens.scss' as colors;
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/focus/mixins' as focus;
-@use '../../foundations/colors/mixins.scss' as colorMixin;
-@use '../../foundations/borders/mixins.scss' as border;
-@use '../../foundations/typography/tokens.scss' as typography;
+@use '@funidata/fudis-core' as core;
 
 .fudis-tab-navigation-bar {
-  position: relative;
-
   &__button-container {
-    @include colorMixin.bg-color('white');
+    @include core.bg-color('white');
 
     &--right {
       display: flex;
@@ -18,8 +11,8 @@
       right: 0;
       align-items: flex-start;
       justify-content: flex-end;
-      width: spacing.$spacing-xl;
-      height: spacing.$tab-navigation-button-height;
+      width: core.$spacing-xl;
+      height: core.$tab-navigation-button-height;
     }
 
     &--left {
@@ -29,12 +22,12 @@
       left: 0;
       align-items: flex-start;
       justify-content: flex-start;
-      width: spacing.$spacing-xl;
-      height: spacing.$tab-navigation-button-height;
+      width: core.$spacing-xl;
+      height: core.$tab-navigation-button-height;
     }
 
     &__button {
-      @include colorMixin.bg-color('white');
+      @include core.bg-color('white');
 
       position: absolute;
       top: 50%;
@@ -44,7 +37,7 @@
       padding: 0;
 
       &:focus {
-        @include focus.focus-generic;
+        @include core.focus-generic;
       }
 
       &--right {
@@ -53,41 +46,6 @@
 
       &--left {
         left: 0;
-      }
-    }
-  }
-
-  &__wrapper {
-    &--primary {
-      border-bottom: solid spacing.$pixel-1 colors.$color-gray-dark;
-    }
-
-    &--secondary {
-      @include border.border-none;
-
-      padding-top: spacing.$spacing-xxs;
-    }
-
-    &__tab-container {
-      display: flex;
-      column-gap: spacing.$spacing-xs;
-      overflow-x: auto;
-      scrollbar-width: none;
-
-      &--primary {
-        padding-top: spacing.$pixel-3;
-
-        &:first-child {
-          padding-left: spacing.$spacing-sm;
-        }
-
-        &:last-child {
-          padding-right: spacing.$spacing-sm;
-        }
-      }
-
-      &--secondary {
-        padding: spacing.$pixel-3;
       }
     }
   }

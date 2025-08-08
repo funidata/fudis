@@ -40,18 +40,17 @@ Quite many of the formatting errors can be automatically fixed on save if you ha
 
 ### Using Foundation Tokens and Mixins in Component's SCSS-file
 
-To use foundations in component's scss file, import it with SCSS's `@use` feature and use it in similar fashion like in example below.
+To use foundations in component's scss file, import Core with SCSS's `@use` feature and use it in similar fashion like in example below.
 
 ```
-@use '../path/to/foundations/colors/tokens.scss' as colorTokens;
-@use '../path/to/foundations/colors/mixins.scss' as colorMixins;
+@use '@funidata/fudis-core' as core;
 
 .fudis-my-new-component{
-	@include colorMixins.color('white')
-	@include colorMixins.bg-color('primary')
+	@include core.color('white')
+	@include core.bg-color('primary')
 
 	&__inner-svg-icon{
-		fill: colorTokens.$fudis-color-primary-light;
+		fill: core.$fudis-color-primary-light;
 	}
 }
 

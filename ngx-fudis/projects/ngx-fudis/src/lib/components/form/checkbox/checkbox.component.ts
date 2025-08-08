@@ -23,7 +23,6 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'fudis-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrl: './checkbox.component.scss',
   standalone: false,
 })
 export class CheckboxComponent implements OnInit, OnChanges {

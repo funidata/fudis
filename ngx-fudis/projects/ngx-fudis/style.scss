@@ -2,6 +2,7 @@
 * This file is for Storybook
 */
 
+@use '@funidata/fudis-core/index' as core;
 @use './index' as fudis;
 
 :root {
@@ -22,10 +23,10 @@ a.sbdocs {
 
 tr td p {
   &.fudis-table-caption {
-    @include fudis.table-caption();
+    @include core.table-caption();
   }
   &.fudis-text-emptystate {
-    @include fudis.text-emptystate();
+    @include core.text-emptystate();
   }
 }
 

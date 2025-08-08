@@ -1,9 +1,8 @@
 /* stylelint-disable unit-disallowed-list */
-@use '../../../foundations/borders/mixins.scss' as borders;
-@use '../../../foundations/colors/mixins.scss' as colors;
+@use '@funidata/fudis-core' as core;
 
 .fudis-loading-spinner-demo {
-  @include borders.outline('3px', 'solid', 'primary');
+  @include core.outline('3px', 'solid', 'primary');
 
   display: flex;
   position: relative;
@@ -13,8 +12,8 @@
   min-height: 15rem;
 
   &__backdrop {
-    @include colors.bg-color('white');
-    @include borders.outline('3px', 'solid', 'green');
+    @include core.bg-color('white');
+    @include core.outline('3px', 'solid', 'green');
 
     display: flex;
     position: relative;

@@ -6,7 +6,6 @@ import { FudisInputSize } from '../../../types/forms';
 @Component({
   selector: 'fudis-label',
   templateUrl: './label.component.html',
-  styleUrls: ['./label.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })

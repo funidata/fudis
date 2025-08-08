@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'fudis-text-area',
   templateUrl: './text-area.component.html',
-  styleUrls: ['./text-area.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })

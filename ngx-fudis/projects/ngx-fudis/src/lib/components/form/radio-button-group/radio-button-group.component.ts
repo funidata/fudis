@@ -23,7 +23,6 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
-  styleUrls: ['./radio-button-group.component.scss'],
   standalone: false,
 })
 export class RadioButtonGroupComponent

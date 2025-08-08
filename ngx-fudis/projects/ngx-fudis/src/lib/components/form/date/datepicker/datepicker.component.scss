@@ -1,8 +1,4 @@
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../foundations/colors/mixins.scss' as colors;
-@use '../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../foundations/focus/mixins.scss' as focus;
+@use '@funidata/fudis-core' as core;
 
 .fudis-datepicker {
   width: 100%;
@@ -12,17 +8,17 @@
   }
 
   &__input {
-    @include borders.border('1px', 'solid', 'gray-dark');
-    @include borders.border-radius('2px');
-    @include typography.text-field-input;
+    @include core.border('1px', 'solid', 'gray-dark');
+    @include core.border-radius('2px');
+    @include core.text-field-input;
 
     box-sizing: border-box;
-    padding: 0 0 0 spacing.$spacing-xs;
+    padding: 0 0 0 core.$spacing-xs;
     width: 100%;
-    height: spacing.$spacing-xl;
+    height: core.$spacing-xl;
 
     &:focus {
-      @include focus.focus-form-field;
+      @include core.focus-form-field;
     }
   }
 
@@ -30,23 +26,23 @@
     display: flex;
     position: absolute;
     top: 50%;
-    right: spacing.$spacing-xxs;
+    right: core.$spacing-xxs;
     align-items: center;
     justify-content: center;
     transform: translateY(-50%);
   }
 
   &__datepicker {
-    @include colors.bg-color('white');
-    @include borders.border('1px', 'solid', 'gray-dark');
+    @include core.bg-color('white');
+    @include core.border('1px', 'solid', 'gray-dark');
   }
 
   &__guidance {
     &__help-text {
-      @include colors.text-color('gray-dark');
-      @include typography.body-text-sm-regular;
+      @include core.text-color('gray-dark');
+      @include core.body-text-sm-regular;
 
-      margin-top: spacing.$spacing-xs;
+      margin-top: core.$spacing-xs;
     }
   }
 }
