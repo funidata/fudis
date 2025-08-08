@@ -15,7 +15,7 @@ test("Select autocompletes", async ({ page }) => {
 
   await page.getByTestId("fudis-select-3").focus();
   await page.keyboard.press("KeyI");
-  await expect(page.getByTestId("fudis-body-text-6").getByText("Showing 47 results")).toBeVisible();
+  await expect(page.getByTestId("fudis-body-text-6").getByText("Showing 48 results")).toBeVisible();
   await page.keyboard.press("KeyN");
   await expect(page.getByTestId("fudis-body-text-6").getByText("Showing 18 results")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);

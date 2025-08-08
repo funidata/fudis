@@ -8,7 +8,7 @@
   [class.fudis-multiselect-option--disabled]="data.disabled"
 >
   <label
-    [attr.for]="_id + '-checkbox-input'"
+    [attr.for]="_id + '-checkbox-input-' + componentInstanceId"
     class="fudis-multiselect-option__label"
     [class.fudis-multiselect-option__label--focus]="_focused"
     [class.fudis-multiselect-option__label--checked]="checked"
@@ -23,7 +23,7 @@
         type="checkbox"
         class="fudis-multiselect-option__label__checkbox__input"
         role="option"
-        [attr.id]="_id + '-checkbox-input'"
+        [attr.id]="_id + '-checkbox-input-' + componentInstanceId"
         [attr.aria-disabled]="data.disabled || null"
         (click)="!data.disabled && _clickOption($event)"
         [attr.aria-selected]="checked"
