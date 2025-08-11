@@ -3,7 +3,14 @@ import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core'
 
 export const fudisInputSizeArray = ['sm', 'md', 'lg'] as const;
 
+export const fudisSelectionGroupInputSizeArray = ['sm', 'md', 'lg', 'full-width'] as const;
+
 export type FudisInputSize = (typeof fudisInputSizeArray)[number];
+
+/**
+ * Input size options used by CheckboxGroup and RadioButtonGroup
+ */
+export type FudisSelectionGroupInputSize = (typeof fudisSelectionGroupInputSizeArray)[number];
 
 export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 'url';
 

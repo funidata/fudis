@@ -120,7 +120,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'lg', 'full-width'],
       control: { type: 'radio' },
     },
     popoverPosition: {
