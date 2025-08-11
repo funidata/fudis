@@ -50,4 +50,8 @@
   &__lg {
     max-width: spacing.$input-width-lg;
   }
+
+  &__full-width {
+    max-width: 100%;
+  }
 }
