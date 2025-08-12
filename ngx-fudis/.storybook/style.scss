@@ -2,8 +2,9 @@
 * This file is for Storybook
 */
 
-@use '@funidata/fudis-core/index' as core;
-@use './index' as fudis;
+@use '../projects/ngx-fudis/index';
+@use '@funidata/fudis-core/styles';
+@use '@funidata/fudis-core' as core;
 
 :root {
   --fudis-rem-multiplier: 1;
@@ -23,10 +24,10 @@ a.sbdocs {
 
 tr td p {
   &.fudis-table-caption {
-    @include core.table-caption();
+    @include core.table-caption;
   }
   &.fudis-text-emptystate {
-    @include core.text-emptystate();
+    @include core.text-emptystate;
   }
 }
 
