@@ -14,7 +14,7 @@
             "enableProdMode": false,
             "outputDir": "./static",
             "tsConfig": ".storybook/tsconfig.json",
-            "styles": ["projects/ngx-fudis/style.scss"],
+            "styles": [".storybook/style.scss"],
             "compodoc": true,
             "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
           }
@@ -23,7 +23,7 @@
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "tsConfig": ".storybook/tsconfig.json",
-            "styles": ["projects/ngx-fudis/style.scss"],
+            "styles": [".storybook/style.scss"],
             "port": 6006,
             "host": "0.0.0.0",
             "open": false,

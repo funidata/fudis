@@ -12,6 +12,7 @@ The library is build and tested against:
 
 - Angular: **v19.2**
 - Angular Material: **v19.2**
+- Fudis Core: **v2.0**
 
 > We recommend using these versions in your project. Newer major versions may work, but are not yet tested or guaranteed to be compatible.
 
@@ -32,14 +33,25 @@ Choose these options when prompted:
 ? Include the Angular animations module? Include and enable animations
 ```
 
-## 3. Install Fudis:
+## 3. Install Fudis-Core Peer Dependency:
+
+Fudis has a peer dependency to our style library, that contains global styles, mixins and tokens.
+
+```
+ng add @funidata/fudis-core
+
+```
+
+After installing the dependency, follow the setup instructions from [Fudis Core Storybook](https://fudis.funidata.fi/core) which are located in the **Documentation -> Introduction -> How to start using Core**-section.
+
+## 4. Install Fudis:
 
 ```
 ng add @funidata/ngx-fudis
 
 ```
 
-## 4. Import Fudis in Applications's `app.module.ts`
+## 5. Import Fudis in Applications's `app.module.ts`
 
 Check your application's `app.module.ts` file that Fudis is imported correctly.
 
@@ -56,49 +68,12 @@ import { NgxFudisModule } from '@funidata/ngx-fudis';
 })
 ```
 
-## 5. Import Core Styles
+## 6. Import Core Styles
 
 The core styles of Fudis must be imported to your application's styles for components to work properly. As Fudis uses Angular Material as its dependency, it is already imported as part of Fudis' main CSS file.
 
 The recommended way is to add following lines your project's root SCSS style file, which is often named `styles.scss` or `index.scss` or similar:
 
 ```
-@use '@funidata/ngx-fudis' as fudis;
-```
-
-## 6. Define Application's Root Styles
-
-Fudis uses CSS variables to define "theming" of your application. Setting following variables define your Application's primary colors and `rem` base value, which Fudis then refers to in component styling.
-
-### Set Primary Colors
-
-```
-:root {
-	--fudis-color-primary-light: #hex;
-	--fudis-color-primary: #hex;
-	--fudis-color-primary-dark: #hex;
-	--fudis-color-primary-extra-dark: #hex;
-}
-```
-
-### Set Rem Base Value
-
-By default Fudis rem values follow 8px base values. When having default browser CSS font-size of 100%, 1 rem equals 2 \* 8px = 16px. To apply this to your application, add to the root CSS style file:
-
-```
-:root {
-	--fudis-rem-multiplier: 1;
-}
-```
-
-If application uses other rem base value by setting font-size to e. g. 62.5% . Adjust `--fudis-rem-multiplier` accordingly.
-
-```
-html {
- 	font-size: 62.5%; // this sets 1rem to equal 10px
-}
-
-:root {
- 	--fudis-rem-multiplier: 0.625;
-}
+@use '@funidata/ngx-fudis';
 ```

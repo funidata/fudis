@@ -1,53 +1,50 @@
-@use '../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../foundations/typography/tokens.scss' as typographyTokens;
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-dl-item-term {
   &__regular {
     display: flex;
     align-items: flex-start;
-    margin: spacing.$spacing-xxs 0;
-    min-height: spacing.$spacing-md;
+    margin: core.$spacing-xxs 0;
+    min-height: core.$spacing-md;
 
     &__text-content {
-      @include typography.description-list-key-typography;
-      @include colorMixins.text-color('gray-dark');
+      @include core.description-list-key-typography;
+      @include core.text-color('gray-dark');
     }
 
     /* By design, tooltip is only supported in regular variant */
     &__tooltip {
       display: inline-flex;
       align-items: center;
-      margin-left: spacing.$spacing-xxs;
-      height: spacing.$spacing-md;
+      margin-left: core.$spacing-xxs;
+      height: core.$spacing-md;
     }
   }
 
   &__compact {
     display: inline-block;
     position: relative;
-    padding-left: spacing.$spacing-xs;
+    padding-left: core.$spacing-xs;
 
     &::before {
-      @include colorMixins.bg-color('gray-middle');
+      @include core.bg-color('gray-middle');
 
       display: inline-block;
       position: absolute;
-      top: spacing.$pixel-2;
+      top: core.$pixel-2;
       left: 0;
-      width: spacing.$pixel-1;
+      width: core.$pixel-1;
       height: 80%;
       content: '';
     }
 
     &__text-content {
-      @include typography.description-list-compact-key-typography;
-      @include colorMixins.text-color('gray-dark');
+      @include core.description-list-compact-key-typography;
+      @include core.text-color('gray-dark');
     }
 
     &__colon {
-      font-weight: typographyTokens.$font-weight-light;
+      font-weight: core.$font-weight-light;
     }
   }
 }

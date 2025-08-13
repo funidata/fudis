@@ -7,26 +7,21 @@
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable selector-no-qualifying-type */
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../foundations/colors/tokens.scss' as colors;
-@use '../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../foundations/typography/tokens.scss' as typography;
+@use '@funidata/fudis-core' as core;
 
 // When navigating calendar pop-up with Tab key, close button appears at the very end. Button does not appear when using mouse.
 
 .mat-datepicker-close-button {
   text-transform: uppercase !important;
-  color: colors.$color-white !important;
-  font-size: typography.$body-text-md-font-size; // Necessary for overwriting font-size in customer app side
+  color: core.$color-white !important;
+  font-size: core.$body-text-md-font-size; // Necessary for overwriting font-size in customer app side
 
   &:focus {
-    @include focus.focus-generic;
+    @include core.focus-generic;
   }
 
   &.mat-mdc-raised-button:not(:disabled) {
-    background-color: colors.$color-primary;
+    background-color: core.$color-primary;
   }
 }
 
@@ -34,28 +29,28 @@
   &__toggle {
     // Target datepicker pop-up toggle button (i.e. calendar icon)
     & .mat-mdc-icon-button {
-      @include colorMixins.bg-color('transparent');
+      @include core.bg-color('transparent');
 
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 0;
-      width: spacing.$spacing-lg;
-      height: spacing.$spacing-lg;
-      font-size: typography.$body-text-md-font-size; // Needed for overwriting ngMaterial font-size which affects Firefox and Safari
+      width: core.$spacing-lg;
+      height: core.$spacing-lg;
+      font-size: core.$body-text-md-font-size; // Needed for overwriting ngMaterial font-size which affects Firefox and Safari
 
       &:focus {
-        @include focus.focus-generic;
+        @include core.focus-generic;
       }
 
       & svg {
-        width: spacing.$spacing-lg;
-        height: spacing.$spacing-lg;
+        width: core.$spacing-lg;
+        height: core.$spacing-lg;
       }
 
       & mat-icon {
-        width: spacing.$spacing-lg;
-        height: spacing.$spacing-lg;
+        width: core.$spacing-lg;
+        height: core.$spacing-lg;
       }
     }
   }
@@ -63,15 +58,15 @@
   &__datepicker {
     // Selected day when not focused
     & .mat-calendar-body-selected {
-      @include colorMixins.bg-color('primary');
-      @include colorMixins.text-color('white');
-      @include borders.border('2px', 'solid', 'primary');
+      @include core.bg-color('primary');
+      @include core.text-color('white');
+      @include core.border('2px', 'solid', 'primary');
 
       // Hover on selected day
       &:hover {
-        @include colorMixins.text-color('gray-dark');
-        @include colorMixins.bg-color('primary-light');
-        @include borders.border('2px', 'solid', 'primary');
+        @include core.text-color('gray-dark');
+        @include core.bg-color('primary-light');
+        @include core.border('2px', 'solid', 'primary');
       }
 
       // If selected day is today, remove unnecessary box-shadow
@@ -82,7 +77,7 @@
 
     // Make today's date circle darker
     & .mat-calendar-body-today:not(.mat-calendar-body-selected) {
-      border-color: colors.$color-gray-dark !important;
+      border-color: core.$color-gray-dark !important;
     }
 
     // Target controls on top of the calendar pop-up
@@ -91,15 +86,15 @@
       // Forward and backward icon buttons
       & .mat-mdc-button,
       & .mat-mdc-icon-button {
-        @include colorMixins.bg-color('transparent');
+        @include core.bg-color('transparent');
 
-        font-size: typography.$body-text-md-font-size; // Necessary for overwriting font-size in customer app side
+        font-size: core.$body-text-md-font-size; // Necessary for overwriting font-size in customer app side
 
         &.mat-calendar-next-button,
         &.mat-calendar-previous-button {
           position: relative;
-          width: spacing.$spacing-xl;
-          height: spacing.$spacing-xl;
+          width: core.$spacing-xl;
+          height: core.$spacing-xl;
 
           /* stylelint-disable-next-line max-nesting-depth */
           & svg {
@@ -107,8 +102,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: spacing.$spacing-md;
-            height: spacing.$spacing-md;
+            width: core.$spacing-md;
+            height: core.$spacing-md;
           }
         }
       }
@@ -125,18 +120,18 @@
     & .mat-calendar-table {
       // Weekday headers
       .mat-calendar-table-header th {
-        font-size: typography.$body-text-md-font-size;
+        font-size: core.$body-text-md-font-size;
       }
 
       & .mat-calendar-body {
         // Month abbreviation
         & .mat-calendar-body-label {
-          font-size: typography.$body-text-md-font-size;
+          font-size: core.$body-text-md-font-size;
         }
 
         // Calendar days
         & .mat-calendar-body-cell {
-          font-size: typography.$body-text-md-font-size;
+          font-size: core.$body-text-md-font-size;
         }
       }
     }
@@ -148,8 +143,8 @@
       > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
         .mat-calendar-body-comparison-identical
       ) {
-      @include colorMixins.text-color('gray-dark');
-      @include colorMixins.bg-color('primary-light');
+      @include core.text-color('gray-dark');
+      @include core.bg-color('primary-light');
     }
 
     &
@@ -157,22 +152,22 @@
       > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
         .mat-calendar-body-comparison-identical
       ) {
-      @include colorMixins.bg-color('primary-light');
+      @include core.bg-color('primary-light');
     }
 
     // If selected day is not inside allowed date range and is disabled in the calendar pop-up (user is able to insert invalid date through input)
     & .mat-calendar-body-cell.mat-calendar-body-disabled .mat-calendar-body-selected {
-      @include colorMixins.text-color('gray-dark');
-      @include colorMixins.bg-color('gray-light');
-      @include borders.border('1px', 'solid', 'gray-dark');
+      @include core.text-color('gray-dark');
+      @include core.bg-color('gray-light');
+      @include core.border('1px', 'solid', 'gray-dark');
     }
 
     // Target individual day buttons and make the focus border round
     & button:focus {
-      @include focus.focus-generic;
+      @include core.focus-generic;
 
       &.mat-calendar-body-cell {
-        border-radius: spacing.$spacing-xxl;
+        border-radius: core.$spacing-xxl;
       }
     }
   }

@@ -1,15 +1,14 @@
-@use '../../foundations/breakpoints/mixins.scss' as breakpoint;
-@use '../../foundations/utilities/mixins.scss' as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-dl {
-  @include utilities.box-reset;
+  @include core.box-reset;
 
   &__disabled-grid {
-    @include utilities.box-reset;
+    @include core.box-reset;
 
     columns: 1;
 
-    @include breakpoint.breakpoint('md') {
+    @include core.breakpoint('md') {
       columns: 2;
     }
   }
