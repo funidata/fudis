@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 @Component({
   selector: 'fudis-popover',
   templateUrl: './popover.component.html',
-  styleUrl: './popover.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

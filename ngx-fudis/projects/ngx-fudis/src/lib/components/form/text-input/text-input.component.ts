@@ -12,7 +12,6 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 @Component({
   selector: 'fudis-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })

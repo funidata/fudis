@@ -1,48 +1,43 @@
-@use '../../../foundations/colors/mixins.scss' as colors;
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/focus/mixins.scss' as focus;
-@use '../../../foundations/borders/mixins.scss' as border;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-language-badge {
-  @include colors.bg-color('transparent');
-  @include border.border-none;
-  @include utilities.box-reset;
+  @include core.bg-color('transparent');
+  @include core.border-none;
+  @include core.box-reset;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: spacing.$spacing-lg;
-  height: spacing.$spacing-lg;
+  width: core.$spacing-lg;
+  height: core.$spacing-lg;
 
   &:focus-within {
-    @include focus.focus-generic;
+    @include core.focus-generic;
   }
 
   &__content {
-    @include typography.body-text-sm-regular;
-    @include colors.bg-color('white');
-    @include border.border('1px', 'solid', 'gray-dark');
-    @include utilities.box-reset;
+    @include core.body-text-sm-regular;
+    @include core.bg-color('white');
+    @include core.border('1px', 'solid', 'gray-dark');
+    @include core.box-reset;
 
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    min-width: spacing.$spacing-md;
-    min-height: spacing.$spacing-md;
+    min-width: core.$spacing-md;
+    min-height: core.$spacing-md;
     text-align: center;
     /* stylelint-disable-next-line unit-disallowed-list */
     letter-spacing: calc(0.02rem / var(--fudis-rem-multiplier));
   }
 
   &__missing {
-    @include border.border('1px', dashed, 'gray-dark');
+    @include core.border('1px', dashed, 'gray-dark');
   }
 
   &--selected,
   &--selected:focus {
-    @include border.outline('2px', 'solid', 'primary');
+    @include core.outline('2px', 'solid', 'primary');
   }
 }

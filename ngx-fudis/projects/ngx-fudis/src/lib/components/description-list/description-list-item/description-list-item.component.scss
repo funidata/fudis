@@ -1,19 +1,18 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-dl-item {
-  @include utilities.box-reset;
+  @include core.box-reset;
 
   display: block;
-  min-height: spacing.$spacing-md;
+  min-height: core.$spacing-md;
 
   &__disabled-grid {
-    @include utilities.box-reset;
+    @include core.box-reset;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     break-inside: avoid-column;
-    margin-bottom: spacing.$spacing-md;
+    margin-bottom: core.$spacing-md;
   }
 }
