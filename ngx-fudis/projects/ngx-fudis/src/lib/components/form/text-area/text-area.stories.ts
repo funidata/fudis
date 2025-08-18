@@ -133,5 +133,4 @@ WithValidators.args = {
   ...commonArgs,
   label: 'Text Area with max and min character length',
   helpText: 'Maximum of 20 characters allowed',
-  tooltip: 'Additional info: 5 characters minimum',
 };

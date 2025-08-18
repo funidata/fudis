@@ -10,7 +10,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -128,7 +127,6 @@ import {
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 import { SelectOptionsDirective } from './components/form/select/common/select-options-directive/select-options.directive';
 import { TextFieldComponentBaseDirective } from './directives/form/text-field-component-base/text-field-component-base.directive';
-import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 
 /**
  * Fudis Services
@@ -235,7 +233,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     TextAreaComponent,
     TextFieldComponentBaseDirective,
     TextInputComponent,
-    TooltipDirective,
     ValidatorErrorMessageComponent,
   ],
   /*
@@ -252,7 +249,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
-    MatTooltipModule,
     ReactiveFormsModule,
     RouterModule,
     ScrollingModule,
@@ -331,7 +327,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     SelectGroupComponent,
     TextAreaComponent,
     TextInputComponent,
-    TooltipDirective,
   ],
   providers: [
     FudisAlertService,
