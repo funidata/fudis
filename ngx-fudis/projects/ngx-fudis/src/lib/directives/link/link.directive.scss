@@ -1,26 +1,11 @@
-@use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '@funidata/fudis-core' as core;
 
 .fudis-link {
-  &__size {
-    &__inherit {
-      @include typography.link-inherit;
-    }
-
-    &__md {
-      @include typography.link-md;
-    }
-
-    &__lg {
-      @include typography.link-lg;
-    }
-  }
-
   &__external {
     &__icon-wrapper {
       display: inline-block;
       position: relative;
-      padding-right: spacing.$spacing-lg;
+      padding-right: core.$spacing-lg;
       text-decoration: underline solid;
     }
 

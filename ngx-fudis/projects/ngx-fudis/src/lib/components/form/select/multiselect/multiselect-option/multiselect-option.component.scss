@@ -1,13 +1,7 @@
-@use '../../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../../foundations/typography/tokens.scss' as typographyTokens;
-@use '../../../../../foundations/utilities/mixins.scss' as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-multiselect-option {
-  @include colorMixins.text-color('gray-dark');
+  @include core.text-color('gray-dark');
 
   width: auto;
 
@@ -19,38 +13,38 @@
 
   /* stylelint-disable-next-line selector-class-pattern */
   &:hover:not(:has(.fudis-multiselect-option__label__checkbox__input[aria-disabled='true'])) {
-    @include colorMixins.bg-color('primary-light');
+    @include core.bg-color('primary-light');
   }
 
   &__disabled-text {
-    padding-right: spacing.$spacing-xs;
+    padding-right: core.$spacing-xs;
   }
 
   &__label {
-    @include typography.body-text-md-regular;
+    @include core.body-text-md-regular;
 
     display: flex;
     align-items: flex-start;
     margin-bottom: 0;
-    padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
+    padding: core.$spacing-xs core.$spacing-xs core.$spacing-xs 0;
 
     &__checkbox {
-      @include borders.border('1px', 'solid', 'gray-middle');
-      @include colorMixins.bg-color('white');
+      @include core.border('1px', 'solid', 'gray-middle');
+      @include core.bg-color('white');
 
       display: flex;
       position: absolute;
       align-items: center;
       justify-content: center;
-      margin-left: spacing.$spacing-xs;
+      margin-left: core.$spacing-xs;
       border-radius: 0;
       cursor: pointer;
-      width: spacing.$spacing-sm;
-      height: spacing.$spacing-sm;
+      width: core.$spacing-sm;
+      height: core.$spacing-sm;
 
       &--disabled {
-        @include borders.border('1px', 'dashed', 'gray-middle');
-        @include colorMixins.bg-color('gray-extra-light');
+        @include core.border('1px', 'dashed', 'gray-middle');
+        @include core.bg-color('gray-extra-light');
 
         cursor: default;
       }
@@ -60,7 +54,7 @@
       }
 
       &__input {
-        @include utilities.box-reset;
+        @include core.box-reset;
 
         appearance: none;
         display: grid;
@@ -68,25 +62,25 @@
         place-content: center;
 
         &:not([aria-disabled='true']):focus {
-          @include focus.focus-checkbox;
+          @include core.focus-checkbox;
         }
       }
     }
 
     &__text {
       position: relative;
-      margin-left: spacing.$spacing-lg;
+      margin-left: core.$spacing-lg;
 
       &__main {
         display: block;
       }
 
       &__sub {
-        @include typography.body-text-sm-regular;
+        @include core.body-text-sm-regular;
 
         display: block;
-        margin-top: spacing.$pixel-2;
-        margin-bottom: spacing.$pixel-2;
+        margin-top: core.$pixel-2;
+        margin-bottom: core.$pixel-2;
       }
 
       &__disabled {
@@ -96,23 +90,23 @@
   }
 
   &--checked {
-    @include colorMixins.text-color('white');
-    @include colorMixins.bg-color('primary');
+    @include core.text-color('white');
+    @include core.bg-color('primary');
 
     &:hover {
-      @include colorMixins.text-color('gray-dark');
+      @include core.text-color('gray-dark');
     }
   }
 
   &--disabled {
-    @include colorMixins.bg-color('gray-extra-light');
-    @include colorMixins.text-color('gray-middle');
+    @include core.bg-color('gray-extra-light');
+    @include core.text-color('gray-middle');
 
     cursor: default;
   }
 
   &--focused {
-    @include colorMixins.bg-color('primary-light');
-    @include colorMixins.text-color('gray-dark');
+    @include core.bg-color('primary-light');
+    @include core.text-color('gray-dark');
   }
 }
