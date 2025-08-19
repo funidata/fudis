@@ -35,7 +35,7 @@ updates:
         applies-to: version-updates
         patterns:
           - "@angular*"
-          
+
       storybook:
         applies-to: version-updates
         patterns:
@@ -118,7 +118,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-
 
   - package-ecosystem: github-actions
     directory: "/.github"
