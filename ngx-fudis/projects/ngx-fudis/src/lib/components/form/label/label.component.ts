@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisInputSize } from '../../../types/forms';
 
@@ -9,7 +9,7 @@ import { FudisInputSize } from '../../../types/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class LabelComponent extends TooltipApiDirective {
+export class LabelComponent extends PopoverApiDirective {
   constructor(protected _translationService: FudisTranslationService) {
     super();
   }

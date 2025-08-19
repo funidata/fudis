@@ -86,11 +86,6 @@ export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 export const fudisNotificationVariantArray = ['warning', 'danger', 'success', 'info'] as const;
 export type FudisNotification = (typeof fudisNotificationVariantArray)[number];
 
-/**
- * Tooltip
- */
-export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
-
 export type FudisPopoverPosition = 'left' | 'right' | 'above' | 'below';
 
 /**

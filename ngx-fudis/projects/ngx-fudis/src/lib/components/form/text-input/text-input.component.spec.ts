@@ -271,17 +271,17 @@ describe('TextInputComponent', () => {
   describe('Popover', () => {
     it('should be visible', () => {
       fixture.detectChanges();
-      let tooltipTriggerElem = getElement(fixture, 'fudis-button');
-      expect(tooltipTriggerElem).toBeFalsy();
+      let popoverTriggerElem = getElement(fixture, 'fudis-button');
+      expect(popoverTriggerElem).toBeFalsy();
 
       fixture.componentRef.setInput('popoverText', 'This is popover text');
       fixture.componentRef.setInput('popoverTriggerLabel', 'Additional information');
       fixture.detectChanges();
 
-      tooltipTriggerElem = getElement(fixture, 'fudis-button');
+      popoverTriggerElem = getElement(fixture, 'fudis-button');
 
-      expect(tooltipTriggerElem).toBeTruthy();
-      expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
+      expect(popoverTriggerElem).toBeTruthy();
+      expect(popoverTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
         'This is popover text',
       );
     });

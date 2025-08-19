@@ -40,9 +40,6 @@ export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisib
  * Common Form Component excludes
  */
 const formCommonControlsExclude: string[] = [
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
   'control',
   'group',
   'handleFocus',
@@ -65,13 +62,7 @@ const formCommonControlsExclude: string[] = [
 /**
  * Common Form Component excludes
  */
-const formCommonDocsExclude: string[] = [
-  'onFocus',
-  'focusToInput',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
-];
+const formCommonDocsExclude: string[] = ['onFocus', 'focusToInput'];
 
 /**
  * Button
@@ -84,9 +75,6 @@ const buttonCommonExclude: string[] = [
   'buttonClick',
   'closeMenu',
   'toggleMenu',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
   'popoverTriggerLabel',
   'popoverPosition',
   'popoverText',
@@ -138,18 +126,12 @@ export const checkboxGroupExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
   'triggerEmit',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
   'setGroupBlurredOut',
   'triggerEmit',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
 ]);
 
 /**
@@ -197,12 +179,6 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'getVariant',
   'getDisabledGridStatus',
   'serviceDefaults',
-]);
-
-export const descriptionListItemTermExclude: RegExp = excludeRegex([
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
 ]);
 
 export const nestedDescriptionListExclude: RegExp = excludeRegex([
@@ -320,9 +296,6 @@ export const LocalizedTextGroupDocsExclude: RegExp = excludeRegex([...formCommon
  * Language Badge Group
  */
 const languageBadgeGroupCommonExclude: string[] = [
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
   'popoverPosition',
   'popoverText',
   'popoverTriggerLabel',
@@ -365,22 +338,7 @@ export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
 
 export const radioButtonGroupExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
-/**
- * Section
- */
-export const sectionPropertiesExclude: RegExp = excludeRegex([
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
-]);
-export const sectionExclude: RegExp = excludeRegex([
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
-  'classes',
-  'errorSummaryBreadcrumb',
-  'id',
-]);
+export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBreadcrumb', 'id']);
 
 /**
  * Select and Multiselect
@@ -400,9 +358,6 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'focusToInput',
   'handleCheckedSort',
   'handleMultiSelectionChange',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
 ]);
 
 export const selectStoryControlExclude: RegExp = excludeRegex([
@@ -460,9 +415,6 @@ export const spacingExclude: RegExp = excludeRegex([
   'popoverTriggerLabel',
   'size',
   'toggleMenu',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
   'type',
   'variant',
 ]);
@@ -475,43 +427,11 @@ export const textInputExclude: RegExp = excludeRegex([...formCommonDocsExclude])
 export const textInputControlsExclude: RegExp = excludeRegex([...formCommonControlsExclude]);
 
 /**
- * Tooltip
- */
-export const tooltipExclude: RegExp = excludeRegex([
-  'handleClick',
-  'handleBlur',
-  'handleDestroy',
-  'handleFocus',
-  'buttonEl',
-  'label',
-  'labelHidden',
-  'ariaLabel',
-  'disabled',
-  'icon',
-  'iconRotate',
-  'size',
-  'type',
-  'variant',
-  'buttonClick',
-  'toggleMenu',
-  'closeMenu',
-  'dropdownOpen',
-  'dropdownMenuId',
-  'asMenuButton',
-  'popoverText',
-  'popoverPosition',
-  'popoverTriggerLabel',
-]);
-
-/**
  * Popover
  */
 export const popoverExclude: RegExp = excludeRegex([
   'id',
   'popoverTriggerLabel',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
   'handleClick',
   'handleBlur',
   'handleDestroy',

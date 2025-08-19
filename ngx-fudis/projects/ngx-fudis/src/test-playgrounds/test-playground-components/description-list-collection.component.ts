@@ -175,7 +175,6 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           [contentText]="'First name'"
           [popoverText]="'Second name unknown'"
           [popoverTriggerLabel]="'Additional information'"
-          [tooltipPosition]="'right'"
         ></fudis-dt>
         <fudis-dd [contentText]="'Rex'"></fudis-dd>
       </fudis-dl-item>

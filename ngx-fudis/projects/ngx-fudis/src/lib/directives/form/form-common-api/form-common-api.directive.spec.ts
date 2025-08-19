@@ -14,10 +14,7 @@ const defaultValues: Partial<FormCommonApiDirective> = {
   id: undefined,
   initialFocus: false,
   label: undefined,
-  tooltip: undefined,
-  tooltipPosition: 'below',
   popoverPosition: 'below',
-  tooltipToggle: false,
 };
 
 const nonTestedValues = ['handleBlur', 'handleKeyUp', 'handleViewInit', 'handleFocus'];
