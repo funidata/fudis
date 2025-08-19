@@ -16,7 +16,7 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
-import { FudisInputSize } from '../../../types/forms';
+import { FudisSelectionGroupInputSize } from '../../../types/forms';
 
 @Component({
   standalone: false,
@@ -42,7 +42,7 @@ class MockFieldSetComponent {
   required = false;
   initialFocus = false;
   labelSize = 'md';
-  inputSize: FudisInputSize;
+  inputSize: FudisSelectionGroupInputSize;
 }
 
 describe('FieldSetComponent', () => {
@@ -77,7 +77,7 @@ describe('FieldSetComponent', () => {
     fixtureMock.detectChanges();
   });
 
-  function fieldSetInputSizeCheck(size: FudisInputSize): void {
+  function fieldSetInputSizeCheck(size: FudisSelectionGroupInputSize): void {
     componentMock.inputSize = size;
     fixtureMock.detectChanges();
 
@@ -161,6 +161,7 @@ describe('FieldSetComponent', () => {
       fieldSetInputSizeCheck('sm');
       fieldSetInputSizeCheck('md');
       fieldSetInputSizeCheck('lg');
+      fieldSetInputSizeCheck('full-width');
     });
 
     it('should have label size with respective CSS class', () => {
