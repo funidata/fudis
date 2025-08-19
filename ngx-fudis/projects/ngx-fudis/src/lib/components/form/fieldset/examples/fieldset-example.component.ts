@@ -4,7 +4,7 @@ import { FudisRadioButtonOption } from '../../../../types/forms';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../../../directives/popover/popover-api.directive';
 
 interface MyRadioButton {
   value: string;
@@ -85,7 +85,7 @@ interface MyFieldsetForm {
     </fudis-fieldset>
   `,
 })
-export class FieldsetExampleComponent extends TooltipApiDirective {
+export class FieldsetExampleComponent extends PopoverApiDirective {
   alignActions: 'start' | 'end' | 'below' = 'start';
 
   changeAlign(): void {

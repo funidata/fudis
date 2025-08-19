@@ -199,11 +199,11 @@ describe('DescriptionListItemTermComponent', () => {
   describe('Popover', () => {
     it('should be visible if popover properties are given', () => {
       expect(
-        getDlItemTermFromArrayIndex(0).query(By.css('.fudis-dl-item-term__regular__tooltip')),
+        getDlItemTermFromArrayIndex(0).query(By.css('.fudis-dl-item-term__regular__popover')),
       ).toBeTruthy();
       expect(
         getDlItemTermFromArrayIndex(0)
-          .query(By.css('.fudis-dl-item-term__regular__tooltip button'))
+          .query(By.css('.fudis-dl-item-term__regular__popover button'))
           .nativeElement.getAttribute('aria-label'),
       ).toEqual('Additional information');
     });

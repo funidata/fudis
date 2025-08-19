@@ -3,10 +3,7 @@ import { linkTo } from "@storybook/addon-links";
 import { DescriptionListComponent } from "./description-list.component.ts";
 import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/blocks";
-import {
-  descriptionListArgsTypesExclude,
-  descriptionListItemTermExclude,
-} from "../../utilities/storybook.ts";
+import { descriptionListArgsTypesExclude } from "../../utilities/storybook.ts";
 import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
 import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
 
@@ -140,7 +137,7 @@ Description List components communicate with each other and automatically define
 
 ## Description List Item Term Properties
 
-<ArgTypes of={DescriptionListItemTermComponent} exclude={descriptionListItemTermExclude} />
+<ArgTypes of={DescriptionListItemTermComponent} />
 
 ## Description List Item Details Properties
 
