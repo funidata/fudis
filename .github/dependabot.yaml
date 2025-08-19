@@ -8,6 +8,7 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    target-branch: test-dependabot 
     groups:
       linting:
         applies-to: version-updates
@@ -21,6 +22,7 @@ updates:
     allow:
       - dependency-name: "@angular*"
     security-updates-only: true
+    target-branch: test-dependabot 
     groups:
       angular-security:
         patterns:
@@ -30,6 +32,7 @@ updates:
     directory: "/ngx-fudis"
     schedule:
       interval: weekly
+    target-branch: test-dependabot 
     groups:
       angular-version:
         applies-to: version-updates
@@ -84,6 +87,7 @@ updates:
     allow:
       - dependency-name: "@angular*"
     security-updates-only: true
+    target-branch: test-dependabot 
     groups:
       angular-security:
         patterns:
@@ -93,6 +97,7 @@ updates:
     directory: "/ngx-fudis/projects/ngx-fudis"
     schedule:
       interval: weekly
+    target-branch: test-dependabot 
     groups:
       angular-version:
         applies-to: version-updates
@@ -115,6 +120,7 @@ updates:
     directory: "/test"
     schedule:
       interval: weekly
+    target-branch: test-dependabot 
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -123,18 +129,22 @@ updates:
     directory: "/.github"
     schedule:
       interval: weekly
+    target-branch: test-dependabot 
 
   - package-ecosystem: docker
     directory: "/"
     schedule:
       interval: weekly
+    target-branch: test-dependabot       
 
   - package-ecosystem: docker
     directory: "/ngx-fudis"
     schedule:
       interval: weekly
+    target-branch: test-dependabot 
 
   - package-ecosystem: docker
     directory: "/test"
     schedule:
       interval: weekly
+    target-branch: test-dependabot 
