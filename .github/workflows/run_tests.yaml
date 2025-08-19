@@ -6,7 +6,7 @@ on:
   # Run after PR is merged to main.
   push:
     branches:
-      - main
+      - develop
   # Run for PR's. External PR's require approval before running checks.
   pull_request:
     types:

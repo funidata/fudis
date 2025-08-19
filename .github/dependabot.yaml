@@ -7,7 +7,7 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: weekly
+      interval: weekly 
     groups:
       linting:
         applies-to: version-updates
@@ -16,11 +16,12 @@ updates:
 
   - package-ecosystem: npm
     directory: "/ngx-fudis"
+    target-branch: develop-security
     schedule:
       interval: daily
     allow:
       - dependency-name: "@angular*"
-    security-updates-only: true
+    security-updates-only: true 
     groups:
       angular-security:
         patterns:
@@ -28,8 +29,9 @@ updates:
 
   - package-ecosystem: npm
     directory: "/ngx-fudis"
+    target-branch: develop
     schedule:
-      interval: weekly
+      interval: weekly 
     groups:
       angular-version:
         applies-to: version-updates
@@ -79,11 +81,12 @@ updates:
 
   - package-ecosystem: npm
     directory: "/ngx-fudis/projects/ngx-fudis"
+    target-branch: develop-security
     schedule:
       interval: daily
     allow:
       - dependency-name: "@angular*"
-    security-updates-only: true
+    security-updates-only: true 
     groups:
       angular-security:
         patterns:
@@ -91,8 +94,9 @@ updates:
 
   - package-ecosystem: npm
     directory: "/ngx-fudis/projects/ngx-fudis"
+    target-branch: develop
     schedule:
-      interval: weekly
+      interval: weekly 
     groups:
       angular-version:
         applies-to: version-updates
@@ -114,7 +118,7 @@ updates:
   - package-ecosystem: npm
     directory: "/test"
     schedule:
-      interval: weekly
+      interval: weekly 
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -122,19 +126,19 @@ updates:
   - package-ecosystem: github-actions
     directory: "/.github"
     schedule:
-      interval: weekly
+      interval: weekly 
 
   - package-ecosystem: docker
     directory: "/"
     schedule:
-      interval: weekly
+      interval: weekly       
 
   - package-ecosystem: docker
     directory: "/ngx-fudis"
     schedule:
-      interval: weekly
+      interval: weekly 
 
   - package-ecosystem: docker
     directory: "/test"
     schedule:
-      interval: weekly
+      interval: weekly 
