@@ -13,7 +13,7 @@
     }
 
     /* By design, tooltip is only supported in regular variant */
-    &__tooltip {
+    &__popover {
       display: inline-flex;
       align-items: center;
       margin-left: core.$spacing-xxs;
