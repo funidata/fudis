@@ -7,7 +7,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { PopoverApiDirective } from '../tooltip/popover-api.directive';
+import { PopoverApiDirective } from './popover-api.directive';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverComponent } from '../../components/popover/popover.component';

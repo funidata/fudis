@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { PopoverApiDirective } from '../../../directives/tooltip/popover-api.directive';
+import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisInputSize } from '../../../types/forms';
 

@@ -11,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { PopoverApiDirective } from '../../tooltip/popover-api.directive';
+import { PopoverApiDirective } from '../../popover/popover-api.directive';
 import { FudisIdComponent, FudisIdParent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';

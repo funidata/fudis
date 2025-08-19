@@ -18,7 +18,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { PopoverApiDirective } from '../../../directives/tooltip/popover-api.directive';
+import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
 
 @Component({
   selector: 'fudis-fieldset',

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { PopoverApiDirective } from '../../directives/tooltip/popover-api.directive';
+import { PopoverApiDirective } from '../../directives/popover/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
 import { BehaviorSubject } from 'rxjs';

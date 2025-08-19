@@ -11,7 +11,7 @@ import {
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
-import { PopoverApiDirective } from '../../directives/tooltip/popover-api.directive';
+import { PopoverApiDirective } from '../../directives/popover/popover-api.directive';
 import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { BehaviorSubject } from 'rxjs';

@@ -13,7 +13,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
-import { PopoverApiDirective } from '../../directives/tooltip/popover-api.directive';
+import { PopoverApiDirective } from '../../directives/popover/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import {
   FudisButtonSize,
