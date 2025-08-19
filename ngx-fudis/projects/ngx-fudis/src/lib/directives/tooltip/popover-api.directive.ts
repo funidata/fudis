@@ -2,7 +2,7 @@ import { Directive, Input } from '@angular/core';
 import { FudisPopoverPosition } from '../../types/miscellaneous';
 
 @Directive({
-  selector: '[fudisTooltipApi]',
+  selector: '[fudisPopoverApi]',
   standalone: false,
 })
 export class PopoverApiDirective {
