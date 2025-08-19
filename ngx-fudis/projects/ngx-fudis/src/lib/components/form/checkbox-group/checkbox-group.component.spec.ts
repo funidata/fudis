@@ -6,7 +6,10 @@ import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { CheckboxGroupOptionComponent } from './checkbox-group-option/checkbox-group-option.component';
-import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
+import {
+  FudisCheckboxGroupChangeEvent,
+  fudisSelectionGroupInputSizeArray,
+} from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridComponent } from '../../grid/grid/grid.component';
@@ -207,7 +210,7 @@ describe('CheckboxGroupComponent', () => {
     });
 
     it('should pass correct size values to the Fieldset', () => {
-      fudisInputSizeArray.forEach((size) => {
+      fudisSelectionGroupInputSizeArray.forEach((size) => {
         component.size = size;
         fixture.detectChanges();
 
