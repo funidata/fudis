@@ -48,10 +48,10 @@ describe('LabelComponent', () => {
       fixture.componentRef.setInput('popoverText', 'I am the info');
       fixture.componentRef.setInput('popoverTriggerLabel', 'This gives more info');
       fixture.detectChanges();
-      const tooltipTriggerElem = getElement(fixture, 'button');
-      expect(tooltipTriggerElem).toBeTruthy();
-      expect(tooltipTriggerElem.getAttribute('aria-label')).toEqual('This gives more info');
-      expect(tooltipTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual('I am the info');
+      const popoverTriggerElem = getElement(fixture, 'button');
+      expect(popoverTriggerElem).toBeTruthy();
+      expect(popoverTriggerElem.getAttribute('aria-label')).toEqual('This gives more info');
+      expect(popoverTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual('I am the info');
     });
 
     it('should have required attributes', () => {
