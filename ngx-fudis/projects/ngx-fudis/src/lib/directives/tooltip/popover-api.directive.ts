@@ -5,7 +5,7 @@ import { FudisPopoverPosition } from '../../types/miscellaneous';
   selector: '[fudisTooltipApi]',
   standalone: false,
 })
-export class TooltipApiDirective {
+export class PopoverApiDirective {
   /**
    * Text placed inside popover
    */

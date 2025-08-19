@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../directives/tooltip/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
 import { BehaviorSubject } from 'rxjs';
@@ -24,7 +24,7 @@ type LanguageLabelArray = LanguageLabel[];
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnChanges {
+export class LanguageBadgeGroupComponent extends PopoverApiDirective implements OnChanges {
   constructor(
     protected _translationService: FudisTranslationService,
     private _idService: FudisIdService,

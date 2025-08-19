@@ -7,7 +7,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { TooltipApiDirective } from '../tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../tooltip/popover-api.directive';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverComponent } from '../../components/popover/popover.component';
@@ -23,7 +23,7 @@ type PopoverPosition = {
 @Directive({
   selector: '[fudisPopover]',
 })
-export class PopoverDirective extends TooltipApiDirective implements OnInit, AfterViewInit {
+export class PopoverDirective extends PopoverApiDirective implements OnInit, AfterViewInit {
   constructor(
     private _fudisIdService: FudisIdService,
     private _boundElement: ElementRef<HTMLAnchorElement>,

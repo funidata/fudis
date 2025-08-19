@@ -18,7 +18,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../../directives/tooltip/popover-api.directive';
 
 @Component({
   selector: 'fudis-fieldset',
@@ -28,7 +28,7 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
   standalone: false,
 })
 export class FieldSetComponent
-  extends TooltipApiDirective
+  extends PopoverApiDirective
   implements AfterViewInit, OnInit, OnDestroy, OnChanges, AfterContentInit
 {
   constructor(

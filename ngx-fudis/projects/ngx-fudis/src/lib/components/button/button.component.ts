@@ -13,7 +13,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
-import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../directives/tooltip/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import {
   FudisButtonSize,
@@ -32,7 +32,7 @@ import { DropdownEventService } from '../../services/dropdown/dropdown-event.ser
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit, OnDestroy {
+export class ButtonComponent extends PopoverApiDirective implements OnChanges, OnInit, OnDestroy {
   constructor(
     private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,

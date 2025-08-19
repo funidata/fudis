@@ -11,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../tooltip/popover-api.directive';
 import { FudisIdComponent, FudisIdParent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -20,7 +20,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   selector: '[fudisFormCommonApi]',
   standalone: false,
 })
-export class FormCommonApiDirective extends TooltipApiDirective implements AfterViewInit {
+export class FormCommonApiDirective extends PopoverApiDirective implements AfterViewInit {
   constructor(
     protected _idService: FudisIdService,
     protected _focusService: FudisFocusService,

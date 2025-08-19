@@ -5,7 +5,7 @@ import { DescriptionListItemComponent } from '../description-list-item.component
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
-import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../../../directives/tooltip/popover-api.directive';
 
 @Component({
   selector: 'fudis-dt',
@@ -14,7 +14,7 @@ import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class DescriptionListItemTermComponent extends TooltipApiDirective {
+export class DescriptionListItemTermComponent extends PopoverApiDirective {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
