@@ -12,6 +12,9 @@ updates:
       linting:
         patterns:
           - "prettier"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: npm
     directory: "/ngx-fudis"
@@ -83,8 +86,14 @@ updates:
     directory: "/ngx-fudis"
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: docker
     directory: "/test"
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
