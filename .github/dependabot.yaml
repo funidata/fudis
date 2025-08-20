@@ -1,6 +1,95 @@
+# Following Fudis Ngx package ecosystems that are updated by Dependabot. Excluding all major package updates handled by a developer.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
 version: 2
 updates:
-  - package-ecosystem: github-actions
-    directory: /
+  - package-ecosystem: npm
+    directory: "/"
     schedule:
-      interval: monthly
+      interval: weekly
+    groups:
+      linting:
+        patterns:
+          - "prettier"
+
+  - package-ecosystem: npm
+    directory: "/ngx-fudis"
+    schedule:
+      interval: weekly
+    groups:
+      angular:
+        patterns:
+          - "@angular*"
+      storybook:
+        patterns:
+          - "@storybook*"
+      linting:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint*"
+          - "stylelint*"
+      testing:
+        patterns:
+          - "jest*"
+      babel:
+        patterns:
+          - "@babel*"
+          - "babel-loader"
+      typescript:
+        patterns:
+          - "typescript"
+          - "ts-node"
+      others:
+        patterns:
+          - "*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: npm
+    directory: "/ngx-fudis/projects/ngx-fudis"
+    schedule:
+      interval: weekly
+    groups:
+      angular:
+        patterns:
+          - "@angular*"
+      typescript:
+        patterns:
+          - "tslib"
+          - "typescript"
+      others:
+        patterns:
+          - "*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: npm
+    directory: "/test"
+    schedule:
+      interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: github-actions
+    directory: "/.github"
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: "/ngx-fudis"
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: "/test"
+    schedule:
+      interval: weekly
