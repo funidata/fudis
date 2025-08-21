@@ -55,9 +55,6 @@ updates:
     schedule:
       interval: weekly
     groups:
-      angular:
-        patterns:
-          - "@angular*"
       typescript:
         patterns:
           - "tslib"
