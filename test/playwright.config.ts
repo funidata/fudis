@@ -11,9 +11,9 @@ export default defineConfig({
   /* Retry on CI only */
   retries: ci ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: ci || process.env.CONTAINER ? 1 : undefined,
+  workers: process.env.CONTAINER ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["html", { host: "0.0.0.0" }]],
+  reporter: ci ? "blob" : [["html", { host: "0.0.0.0" }]],
   /* Threshold to wait action to complete */
   timeout: 15000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
