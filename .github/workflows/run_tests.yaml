@@ -121,6 +121,11 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -149,7 +154,8 @@ jobs:
             --network=host \
             --mount type=bind,source=./test/test-results,target=/usr/src/app/test-results \
             --mount type=bind,source=./test/playwright-report,target=/usr/src/app/playwright-report \
-            fudis-pw
+            fudis-pw \
+            npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
