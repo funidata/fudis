@@ -3,30 +3,20 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FooterComponent } from './footer.component';
 import { GridComponent } from '../grid/grid/grid.component';
-import {
-  FooterContentLeftDirective,
-  FooterContentRightDirective,
-} from './footer-content.directive';
 import { GridItemComponent } from '../grid/grid-item/grid-item.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { getElement } from '../../utilities/tests/utilities';
 
 @Component({
   standalone: false,
   selector: 'fudis-mock-footer',
   template: `<fudis-footer>
-    <ng-template fudisFooterContentRight>
       <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
       <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
       <a fudisLink href="example.com" [external]="true" [title]="'System information'"></a>
-    </ng-template>
-    <ng-template fudisFooterContentLeft>
       <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
-    </ng-template>
-    <p class="test-do-not-find">You should not find me</p>
   </fudis-footer>`,
 })
 class MockFooterComponent {
@@ -45,8 +35,6 @@ describe('FooterComponent', () => {
         GridItemComponent,
         LinkDirective,
         IconComponent,
-        FooterContentLeftDirective,
-        FooterContentRightDirective,
         MockFooterComponent,
       ],
       providers: [FudisBreakpointService],
@@ -81,25 +69,10 @@ describe('FooterComponent', () => {
     });
 
     it('should have fudis-grid-item elements present', () => {
-      expect(getFooterGridElem().nativeElement.children.length).toEqual(2);
-    });
-
-    it('should not find elements without proper content type', () => {
-      const incorrectElement = getElement(fixture, '.test-do-not-find');
-      expect(incorrectElement).toBeNull();
-    });
-
-    describe('Footer right side', () => {
-      it('should have three child elements', () => {
-        expect(getFooterGridElem().nativeElement.children[1].children.length).toEqual(3);
-      });
+      expect(getFooterGridElem().nativeElement.children.length).toEqual(5);
     });
 
     describe('Footer left side', () => {
-      it('should have two child elements', () => {
-        expect(getFooterGridElem().nativeElement.children[0].children.length).toEqual(2);
-      });
-
       it('should have Funidata logo visible with an alt text for screen readers', async () => {
         await fixture.whenStable().then(() => {
           const firstGridItemElem = getFooterGridElem().nativeElement.children[0];

@@ -1,7 +1,7 @@
-<footer class="fudis-footer">
+<footer  class="fudis-footer">
   <fudis-grid
     [serviceDefaults]="false"
-    [columns]="_columns"
+    [columns]="columns"
     [rowGap]="'md'"
     [classes]="'fudis-mt-xxl fudis-footer__content'"
     [align]="'center'"
@@ -29,15 +29,7 @@
           ></path>
         </svg>
       </a>
-      <ng-container *ngIf="_footerContentLeft">
-        <ng-container *ngTemplateOutlet="_footerContentLeft!.templateRef" />
-      </ng-container>
-    </fudis-grid-item>
-
-    <ng-container *ngIf="_footerContentRight">
-      <fudis-grid-item [alignSelfX]="{ xs: 'center', sm: 'end' }" class="fudis-footer__item">
-        <ng-container *ngTemplateOutlet="_footerContentRight!.templateRef" />
       </fudis-grid-item>
-    </ng-container>
+      <ng-content></ng-content>
   </fudis-grid>
 </footer>

@@ -71,10 +71,6 @@ import { ValidatorErrorMessageComponent } from './components/form/error-message/
 /**
  * Fudis Directives
  */
-import {
-  FooterContentLeftDirective,
-  FooterContentRightDirective,
-} from './components/footer/footer-content.directive';
 import { ControlComponentBaseDirective } from './directives/form/control-component-base/control-component-base.directive';
 import {
   DateEndDirective,
@@ -185,8 +181,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     FieldsetContentDirective,
     FieldSetComponent,
     FooterComponent,
-    FooterContentLeftDirective,
-    FooterContentRightDirective,
     FormCommonApiDirective,
     FormComponent,
     FormActionsDirective,
@@ -292,8 +286,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     ExpandableActionsDirective,
     ExpandableContentDirective,
     FooterComponent,
-    FooterContentLeftDirective,
-    FooterContentRightDirective,
     FieldsetActionsDirective,
     FieldsetContentDirective,
     FieldSetComponent,

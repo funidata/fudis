@@ -1,18 +1,13 @@
 import {
   Component,
-  ContentChild,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   Signal,
   effect,
+  Input,
 } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import {
-  FooterContentLeftDirective,
-  FooterContentRightDirective,
-} from './footer-content.directive';
-
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationConfig } from '../../services/translation/translationKeys';
 
@@ -33,30 +28,15 @@ export class FooterComponent {
       this._externalLinkHelpText.next(translations.LINK.EXTERNAL_LINK);
     });
   }
-
   /**
-   * Content projection directive fudisFooterContentLeft is used for binding correct Footer content
-   * on the left side of the component.
+   * Used to apply grid columns breakpoint values for the Footer
    */
-  @ContentChild(FooterContentLeftDirective)
-  protected _footerContentLeft: FooterContentLeftDirective;
-
-  /**
-   * Content projection directive fudisFooterContentRight is used for binding correct Footer content
-   * on the right side of the component.
-   */
-  @ContentChild(FooterContentRightDirective)
-  protected _footerContentRight: FooterContentRightDirective;
+  @Input() columns: FudisGridColumnsResponsive = { sm: 2 };
 
   /**
    * Fudis translations
    */
   protected _translations: Signal<FudisTranslationConfig>;
-
-  /**
-   * Used to apply grid columns breakpoint values for the Footer
-   */
-  protected _columns: FudisGridColumnsResponsive = { sm: 2 };
 
   /**
    * Alternative text for the Funidata logo
