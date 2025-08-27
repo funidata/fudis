@@ -113,3 +113,5 @@ jobs:
           </head>
           </html>" > /tmp/index.html
           aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx --cache-control max-age=5
+          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/index.html --cache-control max-age=5
+          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/index.html --cache-control max-age=5
