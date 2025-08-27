@@ -4,9 +4,7 @@ import {
   ChangeDetectionStrategy,
   Signal,
   effect,
-  Input,
 } from '@angular/core';
-import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationConfig } from '../../services/translation/translationKeys';
@@ -28,10 +26,6 @@ export class FooterComponent {
       this._externalLinkHelpText.next(translations.LINK.EXTERNAL_LINK);
     });
   }
-  /**
-   * Used to apply grid columns breakpoint values for the Footer
-   */
-  @Input() columns: FudisGridColumnsResponsive = { sm: 2 };
 
   /**
    * Fudis translations
