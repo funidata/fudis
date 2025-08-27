@@ -5,16 +5,11 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
-    schedule:
-      interval: weekly
-    groups:
-      linting:
-        patterns:
-          - "prettier"
-
-  - package-ecosystem: npm
-    directory: "/ngx-fudis"
+    directories:
+      - "/"
+      - "/ngx-fudis"
+      - "/ngx-fudis/projects/ngx-fudis"
+      - "/test"
     schedule:
       interval: weekly
     groups:
@@ -29,6 +24,7 @@ updates:
           - "eslint*"
           - "@typescript-eslint*"
           - "stylelint*"
+          - "prettier"
       testing:
         patterns:
           - "jest*"
@@ -38,38 +34,12 @@ updates:
           - "babel-loader"
       typescript:
         patterns:
+          - "tslib"
           - "typescript"
           - "ts-node"
       others:
         patterns:
           - "*"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-
-  - package-ecosystem: npm
-    directory: "/ngx-fudis/projects/ngx-fudis"
-    schedule:
-      interval: weekly
-    groups:
-      angular:
-        patterns:
-          - "@angular*"
-      typescript:
-        patterns:
-          - "tslib"
-          - "typescript"
-      others:
-        patterns:
-          - "*"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-
-  - package-ecosystem: npm
-    directory: "/test"
-    schedule:
-      interval: weekly
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -80,16 +50,11 @@ updates:
       interval: weekly
 
   - package-ecosystem: docker
-    directory: "/"
+    directories:
+      - "/ngx-fudis"
+      - "/test"
     schedule:
       interval: weekly
-
-  - package-ecosystem: docker
-    directory: "/ngx-fudis"
-    schedule:
-      interval: weekly
-
-  - package-ecosystem: docker
-    directory: "/test"
-    schedule:
-      interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
