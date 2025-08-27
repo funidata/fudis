@@ -13,10 +13,10 @@ import { FudisTranslationService } from '../../services/translation/translation.
   standalone: false,
   selector: 'fudis-mock-footer',
   template: `<fudis-footer>
-      <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'System information'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
+    <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
+    <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
+    <a fudisLink href="example.com" [external]="true" [title]="'System information'"></a>
+    <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
   </fudis-footer>`,
 })
 class MockFooterComponent {

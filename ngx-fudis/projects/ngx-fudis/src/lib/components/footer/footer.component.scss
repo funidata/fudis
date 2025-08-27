@@ -4,67 +4,44 @@
   @include core.box-reset;
   @include core.bg-color('gray-extra-light');
 
+  display: inline-flex;
   position: relative;
+  flex-direction: column;
+  align-items: center;
+  margin-top: core.$spacing-xxl;
+  padding: core.$spacing-md core.$spacing-sm core.$spacing-xl core.$spacing-sm;
+  width: 100%;
   text-align: center;
 
-  .fudis-link {
-    @include core.link-md;
-
+  &__item {
     &:first-of-type {
-      margin-top: core.$spacing-sm;
+      margin-bottom: core.$spacing-sm;
     }
 
-    &:not(:last-of-type) {
-      margin-bottom: core.$spacing-lg;
-    }
+    &__logo {
+      display: block;
+      /* stylelint-disable-next-line property-disallowed-list, color-no-hex */
+      color: #000000;
 
-    @include core.breakpoint('lg') {
-      &:not(:last-of-type) {
-        margin-bottom: core.$spacing-none;
+      &:focus {
+        @include core.focus-generic;
       }
     }
 
     @include core.breakpoint('sm') {
       &:first-of-type {
-        margin-top: core.$spacing-none;
-      }
-    }
-  }
-
-  &__content {
-    bottom: 0;
-    padding-top: core.$spacing-md;
-    padding-bottom: core.$spacing-xl;
-  }
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-
-    &__logo {
-      margin-bottom: core.$spacing-sm;
-      /* stylelint-disable-next-line property-disallowed-list, color-no-hex */
-      color: #000000;
-    }
-
-    @include core.breakpoint('lg') {
-      flex-direction: row;
-      align-items: center;
-
-      &__logo {
-        margin-right: core.$spacing-md;
-        margin-bottom: core.$spacing-none;
-      }
-
-      .fudis-link {
-        &:not(:last-of-type) {
-          margin-right: core.$spacing-md;
-        }
+        margin-right: core.$spacing-xl;
+        margin-bottom: 0;
       }
     }
   }
 
   @include core.breakpoint('sm') {
-    text-align: initial;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-right: core.$spacing-xxl;
+    padding-left: core.$spacing-xxl;
+    text-align: start;
   }
 }
