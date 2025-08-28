@@ -8,7 +8,7 @@ on:
     branches-ignore:
       - main
       - "release-**"
-      - "dependabot/*"
+      - "dependabot/**"
 
 jobs:
   publish:
