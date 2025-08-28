@@ -42,7 +42,7 @@ describe('FooterComponent', () => {
     return fixture.debugElement.query(By.css('.fudis-footer')).nativeElement;
   }
 
-  it('should create', async () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -63,7 +63,7 @@ describe('FooterComponent', () => {
     });
 
     describe('Footer left side', () => {
-      it('should have Funidata logo visible with an alt text for screen readers', async () => {
+      it('should have Funidata logo visible with an alt text for screen readers', () => {
         const firstItemElem = getFooter().children[0];
 
         const anchorElem = firstItemElem.querySelector('.fudis-footer__item__logo');
