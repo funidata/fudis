@@ -10,7 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -329,15 +329,23 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     TextInputComponent,
   ],
   providers: [
-    FudisAlertService,
-    FudisBreakpointService,
-    FudisDialogService,
-    FudisErrorSummaryService,
     FudisInternalErrorSummaryService,
-    FudisFocusService,
-    FudisGridService,
-    FudisIdService,
-    FudisTranslationService,
+    FudisDialogService,
+    FudisBreakpointService,
+    FudisAlertService,
   ],
 })
-export class NgxFudisModule {}
+export class NgxFudisModule {
+  static forRoot(): ModuleWithProviders<NgxFudisModule> {
+    return {
+      ngModule: NgxFudisModule,
+      providers: [
+        FudisErrorSummaryService,
+        FudisFocusService,
+        FudisGridService,
+        FudisIdService,
+        FudisTranslationService,
+      ],
+    };
+  }
+}
