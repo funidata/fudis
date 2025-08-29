@@ -28,7 +28,7 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgxFudisModule,
+    NgxFudisModule.forRoot(),
     ScrollingModule,
     TranslocoRootModule,
     LoadingSpinnerComponent,
