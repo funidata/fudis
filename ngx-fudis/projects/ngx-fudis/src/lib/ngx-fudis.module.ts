@@ -143,9 +143,6 @@ import { FudisTranslationService } from './services/translation/translation.serv
 import { PopoverDirective } from './directives/popover/popover.directive';
 
 @NgModule({
-  /*
-   * Include both internal and external Fudis components in 'declarations' array below.
-   */
   declarations: [
     AlertComponent,
     AlertGroupComponent,
@@ -235,10 +232,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     TextInputComponent,
     ValidatorErrorMessageComponent,
   ],
-  /*
-   * Include imports outside of Fudis components in 'imports' array below.
-   * E.g. components from Angular Material or other Angular tools
-   */
   imports: [
     CommonModule,
     FormsModule,
@@ -254,12 +247,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     ScrollingModule,
     PopoverDirective,
   ],
-
-  /*
-   * Include Fudis component in 'exports' array below
-   * and export in public-api.ts as well,
-   * when you want to expose it outside
-   */
   exports: [
     AlertComponent,
     AlertGroupComponent,
