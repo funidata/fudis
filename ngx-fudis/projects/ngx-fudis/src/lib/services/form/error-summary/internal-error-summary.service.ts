@@ -84,6 +84,11 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   private _reloadGuard: string[] = [];
 
+  /**
+   * Signal for counting submit attempts
+   */
+  private _submitAttempt = signal(0);
+
   // --------------------
   //
   // GETTERS & SETTERS FOR CLASS VARIABLES
@@ -109,6 +114,13 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
    */
   get errorsSignal(): FudisErrorSummaryAllErrorsSignal {
     return this._errorsSignal;
+  }
+
+  /**
+   * Used for firing focus to error summary when submitting
+   */
+  get submitAttempt() {
+    return this._submitAttempt;
   }
 
   /**
@@ -253,6 +265,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   public reloadFormErrors(formId: string, focus?: boolean): void {
     if (focus) {
       this._focusToFormOnReload = formId;
+      this._submitAttempt.update((submitCount) => submitCount + 1);
     } else {
       this._focusToFormOnReload = null;
     }

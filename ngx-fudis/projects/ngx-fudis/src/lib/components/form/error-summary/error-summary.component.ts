@@ -35,7 +35,13 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     protected _translationService: FudisTranslationService,
-  ) {}
+  ) {
+    toObservable(this._errorSummaryService.submitAttempt, { injector: this._injector }).subscribe(
+      () => {
+        this._focusToErrorSummary();
+      },
+    );
+  }
 
   @ViewChild('focusTarget') private _focusTarget: NotificationComponent;
 
