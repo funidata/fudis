@@ -62,11 +62,13 @@ import { NgxFudisModule } from '@funidata/ngx-fudis';
 	...
 	imports: [
 		...
-		NgxFudisModule
+		NgxFudisModule.forRoot()
 	],
 	...
 })
 ```
+
+If you need to import `NgxFudisModule` more than once in your application, use the `NgxFudisModule.forRoot()` import only once in your topmost module import and otherwise just import `NgxFudisModule`. The `forRoot`-function call brings in the singleton services along the other providers and declarations.
 
 ## 6. Import global styles
 
