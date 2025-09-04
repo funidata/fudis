@@ -20,13 +20,13 @@ import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
-import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 import { Subscription } from 'rxjs';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
+import { CdkConnectedOverlay, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -40,15 +40,15 @@ export class SelectBaseDirective
     @Inject(DOCUMENT) protected _document: Document,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
+    _overlay: Overlay,
   ) {
     super(_idService, _focusService);
-
-    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
-      if (this.control) {
-        this._required.next(FudisValidatorUtilities.required(this.control));
-      }
-    });
+    this.scrollStrategy = _overlay.scrollStrategies.close();
   }
+
+  scrollStrategy: ScrollStrategy;
+
+  @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
 
   /**
    * Reference to child DropdownComponent listing all options
@@ -227,6 +227,12 @@ export class SelectBaseDirective
   private _subscription: Subscription;
 
   /**
+   * Subscriptions for the menu overlay
+   */
+  private _overlayAttachSubscription: Subscription;
+  private _overlayDetachSubscription: Subscription;
+
+  /**
    * Used to pass info, that Clear Button was clicked
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
@@ -284,6 +290,7 @@ export class SelectBaseDirective
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.set(true);
+      this._subscribeToOverlay();
     }
   }
 
@@ -298,10 +305,45 @@ export class SelectBaseDirective
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
 
+    this._unsubscribeOverlay();
+
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
       this._focusToSelectInput();
     }
+  }
+
+  private _subscribeToOverlay() {
+    this._unsubscribeOverlay();
+    this._overlayAttachSubscription = this.connectedOverlay.attach.subscribe(() => {
+      this._disableMouseUpEventsFromOverlay();
+      if (this.connectedOverlay?.overlayRef) {
+        this._overlayDetachSubscription = this.connectedOverlay.overlayRef
+          .detachments()
+          .subscribe(() => {
+            this.closeDropdown();
+          });
+      }
+    });
+  }
+
+  private _unsubscribeOverlay() {
+    this._overlayAttachSubscription?.unsubscribe();
+    this._overlayDetachSubscription?.unsubscribe();
+  }
+
+  private _disableMouseUpEventsFromOverlay() {
+    const events = ['mouseup'];
+    events.forEach((event) => {
+      this.connectedOverlay?.overlayRef?.overlayElement?.addEventListener(
+        event,
+        (e: Event) => {
+          e.stopPropagation();
+          return false;
+        },
+        true,
+      );
+    });
   }
 
   /**

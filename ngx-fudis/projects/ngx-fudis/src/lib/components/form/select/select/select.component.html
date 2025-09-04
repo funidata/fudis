@@ -75,6 +75,14 @@
         />
       </div>
     </div>
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="inputRef"
+      [cdkConnectedOverlayOpen]="_dropdownOpen()"
+      [cdkConnectedOverlayHasBackdrop]="false"
+      [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+      cdkConnectedOverlayWidth="100%"
+    >
     <fudis-select-dropdown
       *ngIf="_optionsLoadedOnce && !control.disabled && !disabled"
       #dropdownRef
@@ -86,7 +94,6 @@
       [filterText]="autocompleteFilterText"
       [size]="size"
       [parentId]="id"
-      [size]="size"
       (handleBlur)="_dropdownBlur($event)"
       (handleFocus)="_dropdownFocus($event)"
     >
@@ -94,6 +101,7 @@
         <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
       </ng-container>
     </fudis-select-dropdown>
+    </ng-template>
   </div>
   <fudis-guidance
     *ngIf="!disableGuidance"
