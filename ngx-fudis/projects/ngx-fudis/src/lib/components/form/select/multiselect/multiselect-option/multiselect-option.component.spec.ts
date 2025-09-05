@@ -20,6 +20,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { MultiselectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { MultiselectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   standalone: false,
@@ -72,7 +73,7 @@ describe('MultiselectOptionComponent', () => {
         LabelComponent,
       ],
       providers: [FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, OverlayModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MultiselectMockComponent);
@@ -98,8 +99,11 @@ describe('MultiselectOptionComponent', () => {
 
       setMultiSelectDropdownOpen();
 
-      const selectedOption = getElement(fixture, '.fudis-multiselect-option--checked');
-      const selectedOptionLabel = selectedOption.querySelector(
+      const selectedOption = fixture.debugElement.query(
+        By.css('.fudis-multiselect-option--checked'),
+      );
+
+      const selectedOptionLabel = selectedOption.nativeElement.querySelector(
         '.fudis-multiselect-option__label__text__main',
       )?.textContent;
 
@@ -241,12 +245,13 @@ describe('MultiselectOptionComponent', () => {
     it('should have disabled CSS class if option is disabled', () => {
       setMultiSelectDropdownOpen();
 
-      const options = fixture.nativeElement.querySelectorAll('.fudis-multiselect-option');
+      const options = fixture.debugElement.queryAll(By.css('.fudis-multiselect-option'));
+
       const expectedDisabledOptionClasses =
         'fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--disabled';
       const disabledOption = options[3];
 
-      expect(disabledOption.className).toContain(expectedDisabledOptionClasses);
+      expect(disabledOption.nativeElement.className).toContain(expectedDisabledOptionClasses);
     });
   });
 });

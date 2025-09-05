@@ -23,6 +23,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 import { MultiselectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
 import { MultiselectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   standalone: false,
@@ -106,7 +107,7 @@ describe('SelectBaseDirective', () => {
         ButtonComponent,
       ],
       providers: [FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, OverlayModule],
     }).compileComponents();
   });
 
@@ -127,19 +128,17 @@ describe('SelectBaseDirective', () => {
   }
 
   function findMultiSelectDropdownElement(index: number) {
-    const multiSelectDropdown = getAllElements(
-      fixture,
-      '.fudis-select-dropdown__multiselect.fudis-select-dropdown--open',
+    const multiSelectDropdown = fixture.debugElement.queryAll(
+      By.css('.fudis-select-dropdown__multiselect.fudis-select-dropdown--open'),
     );
-    return multiSelectDropdown[index];
+    return multiSelectDropdown[index]?.nativeElement;
   }
 
   function findMultiSelectInputClass(index: number) {
-    const selectInputElement: NodeList = getAllElements(
-      fixture,
-      '.fudis-select__input.fudis-select__input__dropdown',
+    const selectInputElement = fixture.debugElement.queryAll(
+      By.css('.fudis-select__input.fudis-select__input__dropdown'),
     );
-    return selectInputElement[index];
+    return selectInputElement[index]?.nativeElement;
   }
 
   function patchControlValue() {
@@ -204,7 +203,8 @@ describe('SelectBaseDirective', () => {
 
       fixture.detectChanges();
 
-      const autocompleteInput = getElement(fixture, '#fudis-multiselect-2') as HTMLInputElement;
+      const autocompleteInput = fixture.debugElement.query(By.css('#fudis-multiselect-2'))
+        .nativeElement as HTMLInputElement;
       autocompleteInput.focus();
 
       fixture.detectChanges();
@@ -213,13 +213,16 @@ describe('SelectBaseDirective', () => {
 
       fixture.detectChanges();
 
-      const noResultsElement = getElement(fixture, '.fudis-select-dropdown__help-text__last');
+      const noResultsElement = fixture.debugElement.query(
+        By.css('.fudis-select-dropdown__help-text__last'),
+      ).nativeElement;
 
       expect(noResultsElement.textContent).toEqual(customText);
     });
 
     it('autocompleteFilter false should not filter results', () => {
-      const autocompleteInput = getElement(fixture, '#fudis-multiselect-2') as HTMLInputElement;
+      const autocompleteInput = fixture.debugElement.query(By.css('#fudis-multiselect-2'))
+        .nativeElement as HTMLInputElement;
       autocompleteInput.focus();
       fixture.detectChanges();
 
@@ -227,9 +230,8 @@ describe('SelectBaseDirective', () => {
 
       fixture.detectChanges();
 
-      const allOptionsBefore = getAllElements(
-        fixture,
-        '#fudis-multiselect-2-main-wrapper .fudis-multiselect-option--visible',
+      const allOptionsBefore = fixture.debugElement.queryAll(
+        By.css('.fudis-multiselect-option--visible'),
       );
 
       expect(allOptionsBefore.length).toEqual(1);
@@ -242,9 +244,8 @@ describe('SelectBaseDirective', () => {
 
       fixture.detectChanges();
 
-      const allOptionsAfter = getAllElements(
-        fixture,
-        '#fudis-multiselect-2-main-wrapper .fudis-multiselect-option--visible',
+      const allOptionsAfter = fixture.debugElement.queryAll(
+        By.css('.fudis-multiselect-option--visible'),
       );
 
       expect(allOptionsAfter.length).toEqual(9);
@@ -266,40 +267,36 @@ describe('SelectBaseDirective', () => {
 
       fixture.detectChanges();
 
-      const dropdownElementAttribute = getElement(
-        fixture,
-        '#fudis-multiselect-2-main-wrapper fudis-select-dropdown',
-      ).getAttribute('ng-reflect-autocomplete-help-text');
+      const dropdownElementAttribute = fixture.debugElement
+        .query(By.css('fudis-select-dropdown'))
+        .nativeElement.getAttribute('ng-reflect-autocomplete-help-text');
 
       expect(dropdownElementAttribute).toEqual('This is autocomplete help text');
     });
 
-    it('should show sorted selected options as form input value for both input sharing the same control', async () => {
+    it('should show sorted selected options as form input value', async () => {
       setMultiSelectDropdownOpen();
       patchControlValue();
 
       fixture.detectChanges();
 
-      const checkedOption = getAllElements(
-        fixture,
-        '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text__main',
+      const checkedOption = fixture.debugElement.queryAll(
+        By.css(
+          '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text__main',
+        ),
       );
 
       const selectedOptionLabelArray: (string | null)[] = [];
 
       checkedOption.forEach((item) => {
-        selectedOptionLabelArray.push(item.textContent);
+        selectedOptionLabelArray.push(item.nativeElement.textContent);
       });
 
-      expect(selectedOptionLabelArray).toEqual([
-        'Golden jackal',
-        'Falcon, prairie',
-        'Golden jackal',
-        'Falcon, prairie',
-      ]);
+      expect(selectedOptionLabelArray).toEqual(['Golden jackal', 'Falcon, prairie']);
 
       await fixture.whenStable().then(() => {
-        const inputText = getElement(fixture, '.fudis-select__input') as HTMLInputElement;
+        const inputText = fixture.debugElement.query(By.css('.fudis-select__input'))
+          .nativeElement as HTMLInputElement;
 
         expect(inputText.getAttribute('value')).toEqual("Golden jackal, 'Falcon, prairie'");
       });
@@ -322,10 +319,9 @@ describe('SelectBaseDirective', () => {
       component.multiSelect.openDropdown();
       fixture.detectChanges();
 
-      getElement(
-        fixture,
-        '#fudis-multiselect-1-main-wrapper .fudis-select-option__focusable',
-      ).click();
+      const option = fixture.debugElement.query(By.css('.fudis-select-option__focusable'))
+        .nativeElement as HTMLInputElement;
+      option.click();
 
       fixture.detectChanges();
 
@@ -337,10 +333,7 @@ describe('SelectBaseDirective', () => {
         },
       ]);
 
-      getElement(
-        fixture,
-        '#fudis-multiselect-1-main-wrapper .fudis-select-option__focusable',
-      ).click();
+      fixture.debugElement.query(By.css('.fudis-select-option__focusable')).nativeElement.click();
 
       expect(component.multiSelect.selectionUpdate.emit).toHaveBeenCalledWith(null);
     });

@@ -21,6 +21,7 @@ import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
 import { SelectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   standalone: false,
@@ -87,7 +88,7 @@ describe('SelectOptionBaseDirective', () => {
         BodyTextComponent,
       ],
       providers: [SelectBaseDirective, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, OverlayModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);
@@ -106,15 +107,14 @@ describe('SelectOptionBaseDirective', () => {
   }
 
   function focusableOptions(): (string | null)[] {
-    const focusableOptions = getAllElements(
-      fixture,
-      '.fudis-select-option__focusable .fudis-select-option__label__main',
+    const focusableOptions = fixture.debugElement.queryAll(
+      By.css('.fudis-select-option__focusable .fudis-select-option__label__main'),
     );
 
     const optionsArray: (string | null)[] = [];
 
     focusableOptions.forEach((item) => {
-      optionsArray.push(item.textContent);
+      optionsArray.push(item.nativeElement.textContent);
     });
 
     return optionsArray;
@@ -178,12 +178,10 @@ describe('SelectOptionBaseDirective', () => {
 
       jest.spyOn(component, 'handleOptionBlur');
 
-      const firstElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-ba3at',
-      ) as HTMLInputElement;
-      const secondElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-w2yoqs',
-      ) as HTMLInputElement;
+      const firstElement = fixture.debugElement.query(By.css('#fudis-select-1-option-ba3at'))
+        .nativeElement as HTMLInputElement;
+      const secondElement = fixture.debugElement.query(By.css('#fudis-select-1-option-w2yoqs'))
+        .nativeElement as HTMLInputElement;
 
       firstElement.focus();
       secondElement.focus();

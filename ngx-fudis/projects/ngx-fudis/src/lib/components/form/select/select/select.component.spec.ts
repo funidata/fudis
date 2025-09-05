@@ -19,6 +19,7 @@ import { SelectAutocompleteDirective } from '../common/autocomplete/autocomplete
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { SelectOptionComponent } from './select-option/select-option.component';
 import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   standalone: false,
@@ -68,7 +69,7 @@ describe('SelectComponent', () => {
         BodyTextComponent,
       ],
       providers: [FudisInternalErrorSummaryService, SelectBaseDirective],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, OverlayModule],
     }).compileComponents();
   });
 
