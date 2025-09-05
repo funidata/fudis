@@ -20,6 +20,7 @@ import { ButtonComponent } from '../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { MultiselectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   standalone: false,
@@ -76,7 +77,7 @@ describe('MultiselectComponent', () => {
         SelectOptionsDirective,
       ],
       providers: [FudisInternalErrorSummaryService, SelectBaseDirective],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, OverlayModule],
     }).compileComponents();
   });
 

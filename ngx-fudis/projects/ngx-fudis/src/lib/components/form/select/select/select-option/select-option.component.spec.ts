@@ -19,6 +19,7 @@ import { getElement } from '../../../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { SelectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   standalone: false,
@@ -68,7 +69,7 @@ describe('SelectOptionComponent', () => {
         BodyTextComponent,
       ],
       providers: [FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, OverlayModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockContainerComponent);
@@ -108,12 +109,12 @@ describe('SelectOptionComponent', () => {
     it('should not have selected default value if form control has no value on init', () => {
       setSelectDropdownOpen();
 
-      const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+      const iconNotToBeFound = fixture.debugElement.query(By.css('[ng-reflect-icon="check"]'));
       expect(iconNotToBeFound).toBeFalsy();
 
       updateControlValue();
 
-      const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+      const checkIcon = fixture.debugElement.query(By.css('[ng-reflect-icon="check"]'));
 
       expect(checkIcon).toBeTruthy();
     });
@@ -123,8 +124,8 @@ describe('SelectOptionComponent', () => {
 
       updateControlValue();
 
-      const checkIcon = fixture.nativeElement.querySelector(
-        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+      const checkIcon = fixture.debugElement.query(
+        By.css('.fudis-select-option--selected [ng-reflect-icon="check"]'),
       );
 
       const selectedValue = fixture.debugElement.query(
@@ -140,8 +141,8 @@ describe('SelectOptionComponent', () => {
       initializeFormControlWithValue();
       setSelectDropdownOpen();
 
-      const checkIcon = fixture.nativeElement.querySelector(
-        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+      const checkIcon = fixture.debugElement.query(
+        By.css('.fudis-select-option--selected [ng-reflect-icon="check"]'),
       );
 
       const selectedValue = fixture.debugElement.query(
@@ -199,14 +200,14 @@ describe('SelectOptionComponent', () => {
 
       fixture.detectChanges();
 
-      const disabledOption = getElement(fixture, '#fudis-select-1-option-13slwtn');
-      const enabledOption = getElement(fixture, '#fudis-select-1-option-100zewl');
+      const disabledOption = fixture.debugElement.query(By.css('#fudis-select-1-option-13slwtn'));
+      const enabledOption = fixture.debugElement.query(By.css('#fudis-select-1-option-100zewl'));
 
-      disabledOption.click();
+      disabledOption.nativeElement.click();
 
       expect(component.testSelect.selectionUpdate.emit).not.toHaveBeenCalled();
 
-      enabledOption.click();
+      enabledOption.nativeElement.click();
 
       expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
         label: 'Screaming hairy armadillo (partly endangered)',

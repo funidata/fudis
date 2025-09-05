@@ -141,6 +141,7 @@ import { FudisIdService } from './services/id/id.service';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
 import { FudisTranslationService } from './services/translation/translation.service';
 import { PopoverDirective } from './directives/popover/popover.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   /*
@@ -253,6 +254,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     RouterModule,
     ScrollingModule,
     PopoverDirective,
+    OverlayModule,
   ],
 
   /*

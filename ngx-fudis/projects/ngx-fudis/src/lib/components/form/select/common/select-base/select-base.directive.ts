@@ -20,13 +20,14 @@ import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
-import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
-import { Subscription } from 'rxjs';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -42,13 +43,40 @@ export class SelectBaseDirective
     _idService: FudisIdService,
   ) {
     super(_idService, _focusService);
-
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
         this._required.next(FudisValidatorUtilities.required(this.control));
       }
     });
+    /**
+     * This is for detecting the input field size changes so the dropdown width and height can be
+     * adjusted.
+     */
+    this._inputResizeObserver = new ResizeObserver((): void => {
+      this.connectedOverlay?.overlayRef?.updatePosition();
+      this._setOverlayWidth();
+      this._setDropdownMenuHeight();
+    });
+    /**
+     * This is for detecting if input is visible in viewport. If not, close the dropdown.
+     */
+    this._inputIntersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const isHidden = entry.intersectionRatio < 1;
+          if (isHidden) this.closeDropdown();
+        });
+      },
+      {
+        threshold: [0, 1],
+      },
+    );
   }
+
+  /**
+   * Dropdown overlay reference
+   */
+  @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
 
   /**
    * Reference to child DropdownComponent listing all options
@@ -227,6 +255,27 @@ export class SelectBaseDirective
   private _subscription: Subscription;
 
   /**
+   * Subscriptions for the menu overlay
+   */
+  private _overlayAttachSubscription: Subscription;
+  private _overlayDetachSubscription: Subscription;
+
+  /**
+   * Overlay width to match the input field width
+   */
+  protected _overlayWidth = signal<string | number>('');
+
+  /**
+   * Resize observer to observe input field size changes
+   */
+  private _inputResizeObserver: ResizeObserver;
+
+  /**
+   * Intersection observer to check if input field is visible in viewport
+   */
+  private _inputIntersectionObserver: IntersectionObserver;
+
+  /**
    * Used to pass info, that Clear Button was clicked
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
@@ -284,6 +333,7 @@ export class SelectBaseDirective
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.set(true);
+      this._subscribeToOverlay();
     }
   }
 
@@ -297,6 +347,8 @@ export class SelectBaseDirective
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
+
+    this._unsubscribeOverlaySubscriptionsAndInputObservers();
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
@@ -692,6 +744,92 @@ export class SelectBaseDirective
    * Function declaration overridden and implemented by Select and Multiselect
    */
   protected _updateComponentStateFromControlValue(): void {}
+
+  /**
+   * Private functions below are implemented to implement functionality needed by dropdown menu for
+   * it to be on top of other elements and not cut by overflow hidden / scroll elements
+   */
+  private _getDropdownElement() {
+    return document.querySelector('fudis-select-dropdown')?.firstChild as HTMLDivElement;
+  }
+
+  /**
+   * This function starts subscriptions to the overlay open and close events.
+   */
+  private _subscribeToOverlay() {
+    this._unsubscribeOverlaySubscriptionsAndInputObservers();
+    this._overlayAttachSubscription = this.connectedOverlay.attach.subscribe(() => {
+      this._disableMouseUpEventsFromOverlay();
+      this._inputResizeObserver.observe(this._inputRef?.nativeElement);
+      this._inputIntersectionObserver.observe(this._inputRef?.nativeElement);
+      if (this.connectedOverlay?.overlayRef) {
+        this._overlayDetachSubscription = this.connectedOverlay.overlayRef
+          .detachments()
+          .subscribe(() => {
+            this.closeDropdown();
+          });
+      }
+    });
+  }
+
+  /**
+   * Sets the overlay width to match the input field width. This is the area where the dropdown is
+   * displayed.
+   */
+  private _setOverlayWidth() {
+    const inputWidth = this._inputRef?.nativeElement?.getBoundingClientRect()?.width;
+    this._overlayWidth.set(inputWidth ? inputWidth : '100%');
+  }
+
+  /**
+   * This function calculates the available space below the dropdown input and sets the max-height
+   * accordingly so that the dropdown menu does not overflow the viewport.
+   */
+  private _setDropdownMenuHeight() {
+    const menuElement = this._getDropdownElement();
+
+    if (menuElement) {
+      const rect = menuElement.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const spaceBelow = viewportHeight - rect.top;
+
+      /**
+       * Leaves 10px padding to the bottom of the screen.
+       */
+      const maxHeight = spaceBelow - 10;
+
+      /**
+       * 256 px is the dropdown menu max height defined in styles. Pretty ugly to do it this way,
+       * but couldn't figure out a better way.
+       */
+      if (maxHeight < 256) {
+        menuElement.style.maxHeight = `${maxHeight}px`;
+      } else {
+        menuElement.style.maxHeight = '256px';
+      }
+    }
+  }
+
+  /**
+   * The overlay closes on mouseup events, which causes issues when user tries to interact with the
+   * dropdown. This function disables mouseup events from the overlay.
+   */
+  private _disableMouseUpEventsFromOverlay() {
+    const events = ['mouseup'];
+    events.forEach((event) => {
+      this.connectedOverlay?.overlayRef?.overlayElement?.addEventListener(event, (e: Event) => {
+        e.stopPropagation();
+        return false;
+      });
+    });
+  }
+
+  private _unsubscribeOverlaySubscriptionsAndInputObservers() {
+    this._inputResizeObserver?.unobserve(this._inputRef?.nativeElement);
+    this._inputIntersectionObserver?.unobserve(this._inputRef?.nativeElement);
+    this._overlayAttachSubscription?.unsubscribe();
+    this._overlayDetachSubscription?.unsubscribe();
+  }
 
   /**
    * When pressing keyboard Esc, focus to Select input and close dropdown
