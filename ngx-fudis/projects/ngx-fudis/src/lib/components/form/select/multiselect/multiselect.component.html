@@ -83,23 +83,23 @@
       [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
       [cdkConnectedOverlayWidth]="_overlayWidth()"
     >
-    <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce && !control.disabled && !disabled"
-      #dropdownRef
-      [open]="dropdownOpen"
-      [selectVariant]="variant"
-      [results]="_visibleOptions.length"
-      [autocompleteNoResultsText]="autocompleteNoResultsText"
-      [autocompleteHelpText]="autocompleteHelpText"
-      [filterText]="autocompleteFilterText"
-      [multiselect]="true"
-      [parentId]="id"
-      [size]="size"
-    >
-      <ng-container *ngIf="_selectOptionsDirective">
-        <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
-      </ng-container>
-    </fudis-select-dropdown>
+      <fudis-select-dropdown
+        *ngIf="_optionsLoadedOnce && !control.disabled && !disabled"
+        #dropdownRef
+        [open]="dropdownOpen"
+        [selectVariant]="variant"
+        [results]="_visibleOptions.length"
+        [autocompleteNoResultsText]="autocompleteNoResultsText"
+        [autocompleteHelpText]="autocompleteHelpText"
+        [filterText]="autocompleteFilterText"
+        [multiselect]="true"
+        [parentId]="id"
+        [size]="size"
+      >
+        <ng-container *ngIf="_selectOptionsDirective">
+          <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
+        </ng-container>
+      </fudis-select-dropdown>
     </ng-template>
   </div>
   <fudis-guidance

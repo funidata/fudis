@@ -44,7 +44,7 @@ export class SelectBaseDirective
     _overlay: Overlay,
   ) {
     super(_idService, _focusService);
-    this.scrollStrategy = _overlay.scrollStrategies.close();
+    this.scrollStrategy = _overlay.scrollStrategies.reposition();
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
         this._required.next(FudisValidatorUtilities.required(this.control));
