@@ -9,7 +9,6 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
