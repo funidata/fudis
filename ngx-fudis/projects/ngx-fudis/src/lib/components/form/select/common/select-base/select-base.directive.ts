@@ -44,15 +44,26 @@ export class SelectBaseDirective
     _overlay: Overlay,
   ) {
     super(_idService, _focusService);
-    this.scrollStrategy = _overlay.scrollStrategies.reposition();
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
         this._required.next(FudisValidatorUtilities.required(this.control));
       }
     });
+    this.scrollStrategy = _overlay.scrollStrategies.reposition();
     this._resizeObserver = new ResizeObserver((): void => {
       this._setOverlayWidth();
     });
+    this._intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const isHidden = entry.intersectionRatio < 1;
+          if (isHidden) this.closeDropdown();
+        });
+      },
+      {
+        threshold: [0, 1],
+      },
+    );
   }
 
   scrollStrategy: ScrollStrategy;
@@ -252,6 +263,11 @@ export class SelectBaseDirective
   private _resizeObserver: ResizeObserver;
 
   /**
+   * Intersection observer to check if input field is visible in viewport
+   */
+  private _intersectionObserver: IntersectionObserver;
+
+  /**
    * Used to pass info, that Clear Button was clicked
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
@@ -337,6 +353,7 @@ export class SelectBaseDirective
     this._overlayAttachSubscription = this.connectedOverlay.attach.subscribe(() => {
       this._disableMouseUpEventsFromOverlay();
       this._resizeObserver.observe(this._inputRef?.nativeElement);
+      this._intersectionObserver.observe(this._inputRef?.nativeElement);
       if (this.connectedOverlay?.overlayRef) {
         this._overlayDetachSubscription = this.connectedOverlay.overlayRef
           .detachments()
@@ -354,6 +371,7 @@ export class SelectBaseDirective
 
   private _unsubscribeOverlay() {
     this._resizeObserver?.unobserve(this._inputRef?.nativeElement);
+    this._intersectionObserver?.unobserve(this._inputRef?.nativeElement);
     this._overlayAttachSubscription?.unsubscribe();
     this._overlayDetachSubscription?.unsubscribe();
   }
