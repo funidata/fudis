@@ -25,7 +25,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
-import { CdkConnectedOverlay, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
 import { Subscription } from 'rxjs';
 
@@ -41,7 +41,6 @@ export class SelectBaseDirective
     @Inject(DOCUMENT) protected _document: Document,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
-    _overlay: Overlay,
   ) {
     super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -49,12 +48,12 @@ export class SelectBaseDirective
         this._required.next(FudisValidatorUtilities.required(this.control));
       }
     });
-    this.scrollStrategy = _overlay.scrollStrategies.reposition();
     /**
      * This is for detecting the input field size changes so the dropdown width and height can be
      * adjusted.
      */
     this._inputResizeObserver = new ResizeObserver((): void => {
+      this.connectedOverlay?.overlayRef?.updatePosition();
       this._setOverlayWidth();
       this._setDropdownMenuHeight();
     });
@@ -74,8 +73,9 @@ export class SelectBaseDirective
     );
   }
 
-  scrollStrategy: ScrollStrategy;
-
+  /**
+   * Dropdown overlay reference
+   */
   @ViewChild(CdkConnectedOverlay) connectedOverlay: CdkConnectedOverlay;
 
   /**

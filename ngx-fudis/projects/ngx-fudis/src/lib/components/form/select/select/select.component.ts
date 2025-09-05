@@ -19,7 +19,6 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { DOCUMENT } from '@angular/common';
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
-import { Overlay } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'fudis-select',
@@ -36,9 +35,8 @@ export class SelectComponent
     @Inject(DOCUMENT) _document: Document,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
-    _overlay: Overlay,
   ) {
-    super(_document, _focusService, _idService, _overlay);
+    super(_document, _focusService, _idService);
   }
 
   @ViewChild(SelectControlValueAccessorDirective)
