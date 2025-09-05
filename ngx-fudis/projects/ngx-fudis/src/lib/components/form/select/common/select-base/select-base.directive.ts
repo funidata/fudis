@@ -52,6 +52,7 @@ export class SelectBaseDirective
     this.scrollStrategy = _overlay.scrollStrategies.reposition();
     this._resizeObserver = new ResizeObserver((): void => {
       this._setOverlayWidth();
+      this._setDropdownMenuHeight();
     });
     this._intersectionObserver = new IntersectionObserver(
       (entries) => {
@@ -367,6 +368,37 @@ export class SelectBaseDirective
   private _setOverlayWidth() {
     const inputWidth = this._inputRef?.nativeElement?.getBoundingClientRect()?.width;
     this._overlayWidth.set(inputWidth ? inputWidth : '100%');
+  }
+
+  private _setDropdownMenuHeight() {
+    const menuElement = document.querySelector('fudis-select-dropdown')
+      ?.firstChild as HTMLDivElement;
+    if (menuElement) {
+      const rect = menuElement.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const spaceBelow = viewportHeight - rect.top;
+
+      // Check if we're at or near the bottom of the document
+      const documentHeight = document.documentElement.scrollHeight;
+      const currentScrollPosition = window.scrollY + viewportHeight;
+      const scrollBuffer = 50; // Buffer to detect "near bottom"
+
+      const isAtDocumentEnd = currentScrollPosition >= documentHeight - scrollBuffer;
+
+      // Adjust the height if we are at the document bottom
+      if (isAtDocumentEnd) {
+        const maxHeight = spaceBelow - 10; // Added 10px padding to the bottom
+
+        if (maxHeight > 0) {
+          menuElement.style.maxHeight = `${maxHeight}px`;
+          menuElement.style.overflowY = 'auto';
+        }
+      } else {
+        // Reset to original height when not at document end
+        menuElement.style.maxHeight = '';
+        menuElement.style.overflowY = '';
+      }
+    }
   }
 
   private _unsubscribeOverlay() {
