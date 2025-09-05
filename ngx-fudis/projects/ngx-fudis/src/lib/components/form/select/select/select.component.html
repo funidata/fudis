@@ -81,7 +81,7 @@
       [cdkConnectedOverlayOpen]="_dropdownOpen()"
       [cdkConnectedOverlayHasBackdrop]="false"
       [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-      cdkConnectedOverlayWidth="100%"
+      [cdkConnectedOverlayWidth]="_overlayWidth()"
     >
     <fudis-select-dropdown
       *ngIf="_optionsLoadedOnce && !control.disabled && !disabled"

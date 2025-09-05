@@ -24,9 +24,10 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
-import { Subscription } from 'rxjs';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
 import { CdkConnectedOverlay, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -44,6 +45,14 @@ export class SelectBaseDirective
   ) {
     super(_idService, _focusService);
     this.scrollStrategy = _overlay.scrollStrategies.close();
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required.next(FudisValidatorUtilities.required(this.control));
+      }
+    });
+    this._resizeObserver = new ResizeObserver((): void => {
+      this._setOverlayWidth();
+    });
   }
 
   scrollStrategy: ScrollStrategy;
@@ -233,6 +242,16 @@ export class SelectBaseDirective
   private _overlayDetachSubscription: Subscription;
 
   /**
+   * Overlay width to match the input field width
+   */
+  protected _overlayWidth = signal<string | number>('');
+
+  /**
+   * Resize observer to observe input field size changes
+   */
+  private _resizeObserver: ResizeObserver;
+
+  /**
    * Used to pass info, that Clear Button was clicked
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
@@ -317,6 +336,7 @@ export class SelectBaseDirective
     this._unsubscribeOverlay();
     this._overlayAttachSubscription = this.connectedOverlay.attach.subscribe(() => {
       this._disableMouseUpEventsFromOverlay();
+      this._resizeObserver.observe(this._inputRef?.nativeElement);
       if (this.connectedOverlay?.overlayRef) {
         this._overlayDetachSubscription = this.connectedOverlay.overlayRef
           .detachments()
@@ -327,7 +347,13 @@ export class SelectBaseDirective
     });
   }
 
+  private _setOverlayWidth() {
+    const inputWidth = this._inputRef?.nativeElement?.getBoundingClientRect()?.width;
+    this._overlayWidth.set(inputWidth ? inputWidth : '100%');
+  }
+
   private _unsubscribeOverlay() {
+    this._resizeObserver?.unobserve(this._inputRef?.nativeElement);
     this._overlayAttachSubscription?.unsubscribe();
     this._overlayDetachSubscription?.unsubscribe();
   }
