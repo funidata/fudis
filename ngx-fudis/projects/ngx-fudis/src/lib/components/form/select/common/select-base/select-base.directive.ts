@@ -50,11 +50,11 @@ export class SelectBaseDirective
       }
     });
     this.scrollStrategy = _overlay.scrollStrategies.reposition();
-    this._resizeObserver = new ResizeObserver((): void => {
+    this._inputResizeObserver = new ResizeObserver((): void => {
       this._setOverlayWidth();
       this._setDropdownMenuHeight();
     });
-    this._intersectionObserver = new IntersectionObserver(
+    this._inputIntersectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const isHidden = entry.intersectionRatio < 1;
@@ -259,14 +259,19 @@ export class SelectBaseDirective
   protected _overlayWidth = signal<string | number>('');
 
   /**
+   * Overlay width to match the input field width
+   */
+  protected _overlayHeight = signal<string | number>('');
+
+  /**
    * Resize observer to observe input field size changes
    */
-  private _resizeObserver: ResizeObserver;
+  private _inputResizeObserver: ResizeObserver;
 
   /**
    * Intersection observer to check if input field is visible in viewport
    */
-  private _intersectionObserver: IntersectionObserver;
+  private _inputIntersectionObserver: IntersectionObserver;
 
   /**
    * Used to pass info, that Clear Button was clicked
@@ -349,12 +354,16 @@ export class SelectBaseDirective
     }
   }
 
+  private _getDropdownElement() {
+    return document.querySelector('fudis-select-dropdown')?.firstChild as HTMLDivElement;
+  }
+
   private _subscribeToOverlay() {
     this._unsubscribeOverlay();
     this._overlayAttachSubscription = this.connectedOverlay.attach.subscribe(() => {
       this._disableMouseUpEventsFromOverlay();
-      this._resizeObserver.observe(this._inputRef?.nativeElement);
-      this._intersectionObserver.observe(this._inputRef?.nativeElement);
+      this._inputResizeObserver.observe(this._inputRef?.nativeElement);
+      this._inputIntersectionObserver.observe(this._inputRef?.nativeElement);
       if (this.connectedOverlay?.overlayRef) {
         this._overlayDetachSubscription = this.connectedOverlay.overlayRef
           .detachments()
@@ -371,39 +380,33 @@ export class SelectBaseDirective
   }
 
   private _setDropdownMenuHeight() {
-    const menuElement = document.querySelector('fudis-select-dropdown')
-      ?.firstChild as HTMLDivElement;
+    const menuElement = this._getDropdownElement();
+
     if (menuElement) {
       const rect = menuElement.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const spaceBelow = viewportHeight - rect.top;
 
-      // Check if we're at or near the bottom of the document
-      const documentHeight = document.documentElement.scrollHeight;
-      const currentScrollPosition = window.scrollY + viewportHeight;
-      const scrollBuffer = 50; // Buffer to detect "near bottom"
+      /**
+       * Leaves 10px padding to the bottom of the screen
+       */
+      const maxHeight = spaceBelow - 10;
 
-      const isAtDocumentEnd = currentScrollPosition >= documentHeight - scrollBuffer;
-
-      // Adjust the height if we are at the document bottom
-      if (isAtDocumentEnd) {
-        const maxHeight = spaceBelow - 10; // Added 10px padding to the bottom
-
-        if (maxHeight > 0) {
-          menuElement.style.maxHeight = `${maxHeight}px`;
-          menuElement.style.overflowY = 'auto';
-        }
+      /**
+       * 256 px is the dropdown menu max height defined in styles. Pretty ugly to do it this way,
+       * but couldn't figure out a better way.
+       */
+      if (maxHeight < 256) {
+        menuElement.style.maxHeight = `${maxHeight}px`;
       } else {
-        // Reset to original height when not at document end
-        menuElement.style.maxHeight = '';
-        menuElement.style.overflowY = '';
+        menuElement.style.maxHeight = '256px';
       }
     }
   }
 
   private _unsubscribeOverlay() {
-    this._resizeObserver?.unobserve(this._inputRef?.nativeElement);
-    this._intersectionObserver?.unobserve(this._inputRef?.nativeElement);
+    this._inputResizeObserver?.unobserve(this._inputRef?.nativeElement);
+    this._inputIntersectionObserver?.unobserve(this._inputRef?.nativeElement);
     this._overlayAttachSubscription?.unsubscribe();
     this._overlayDetachSubscription?.unsubscribe();
   }
