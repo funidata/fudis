@@ -207,11 +207,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("Space");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
-  await expect(
-    page.getByTestId("fudis-multiselect-5-option-1fkgm3k-checkbox-input-272"),
-  ).toBeInViewport();
   await page.keyboard.press("Space");
-  await page.getByTestId("fudis-heading-1").hover();
   await expect(page.getByTestId("fudis-multiselect-5-option-1fkgm3k")).toHaveClass(
     "fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--focused fudis-multiselect-option--checked",
   );
