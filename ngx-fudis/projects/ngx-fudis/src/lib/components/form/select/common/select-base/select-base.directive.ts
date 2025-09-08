@@ -53,8 +53,8 @@ export class SelectBaseDirective
      * This is for detecting the input field size changes so the dropdown width and height can be
      * adjusted.
      */
-    this._inputResizeObserver = new ResizeObserver((): void => {
-      this.calculateDropdownPosition();
+    this._resizeObserver = new ResizeObserver((): void => {
+      this._calculateDropdownPosition();
     });
   }
 
@@ -242,14 +242,14 @@ export class SelectBaseDirective
   /**
    * Resize observer to observe input field size changes
    */
-  private _inputResizeObserver: ResizeObserver;
+  private _resizeObserver: ResizeObserver;
 
   /**
-   * Intersection observer to check if input field is visible in viewport
+   * Scroll listener for adjusting dropdown position on scroll events
    */
-  private _inputIntersectionObserver: IntersectionObserver;
+  private _scrollListener?: () => void;
 
-  private calculateDropdownPosition() {
+  private _calculateDropdownPosition() {
     if (this._dropdownOpen()) {
       const inputElement = this._inputRef?.nativeElement;
       const inputRect = inputElement?.getBoundingClientRect();
@@ -266,9 +266,15 @@ export class SelectBaseDirective
     }
   }
 
-  @HostListener('window:scroll')
-  onWindowEvent() {
-    this.calculateDropdownPosition();
+  private _setupScrollListener() {
+    this._scrollListener = () => {
+      this._calculateDropdownPosition();
+    };
+    document.addEventListener('scroll', this._scrollListener, true);
+  }
+
+  private _removeScrollListener() {
+    if (this._scrollListener) document.removeEventListener('scroll', this._scrollListener, true);
   }
 
   ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
@@ -311,7 +317,8 @@ export class SelectBaseDirective
   }
 
   ngOnDestroy() {
-    this._inputResizeObserver?.unobserve(document?.body);
+    this._resizeObserver?.disconnect();
+    this._removeScrollListener();
   }
 
   /**
@@ -328,8 +335,8 @@ export class SelectBaseDirective
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.set(true);
-      this._inputResizeObserver.observe(document?.body);
-      this.calculateDropdownPosition();
+      this._resizeObserver.observe(document?.body);
+      this._setupScrollListener();
     }
   }
 
@@ -343,7 +350,8 @@ export class SelectBaseDirective
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
-    this._inputResizeObserver.unobserve(document?.body);
+    this._resizeObserver.disconnect();
+    this._removeScrollListener();
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
