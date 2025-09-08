@@ -1,34 +1,17 @@
 @use '@funidata/fudis-core' as core;
 
-.fudis-breadcrumbs {
-  @include core.body-text-md-regular;
-  @include core.box-reset;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: core.$spacing-md;
-  list-style: none;
-
-  /*
-	* Following CSS rules targets all child Breadcrumbs Item components and
-	* - From all but last one hide the body text element
-	* - From last one display body text element, and hide link and icon
-	*/
-
-  &-item-host {
-    &:last-of-type {
-      .fudis-breadcrumbs-item {
-        &__icon {
-          display: none;
-        }
+.fudis-breadcrumbs-item-host {
+  &:last-of-type {
+    .fudis-breadcrumbs-item {
+      &__icon {
+        display: none;
       }
     }
+  }
 
-    .fudis-breadcrumbs-item {
-      a {
-        @include core.link-inherit;
-      }
+  .fudis-breadcrumbs-item {
+    a {
+      @include core.link-inherit;
     }
   }
 }
