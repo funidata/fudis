@@ -56,6 +56,20 @@ export class SelectBaseDirective
     this._resizeObserver = new ResizeObserver((): void => {
       this._calculateDropdownPosition();
     });
+    /**
+     * This is for detecting if input is visible in viewport. If not, close the dropdown.
+     */
+    this._intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const isHidden = entry.intersectionRatio < 1;
+          if (isHidden) this.closeDropdown();
+        });
+      },
+      {
+        threshold: [0, 1],
+      },
+    );
   }
 
   /**
@@ -245,6 +259,11 @@ export class SelectBaseDirective
   private _resizeObserver: ResizeObserver;
 
   /**
+   * Intersection observer to check if input field is visible in viewport
+   */
+  private _intersectionObserver: IntersectionObserver;
+
+  /**
    * Scroll listener for adjusting dropdown position on scroll events
    */
   private _scrollListener?: () => void;
@@ -318,6 +337,7 @@ export class SelectBaseDirective
 
   ngOnDestroy() {
     this._resizeObserver?.disconnect();
+    this._intersectionObserver?.disconnect();
     this._removeScrollListener();
   }
 
@@ -335,6 +355,7 @@ export class SelectBaseDirective
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.set(true);
+      this._intersectionObserver.observe(this._inputRef?.nativeElement);
       this._resizeObserver.observe(document?.body);
       this._setupScrollListener();
     }
@@ -351,6 +372,7 @@ export class SelectBaseDirective
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
     this._resizeObserver.disconnect();
+    this._intersectionObserver.disconnect();
     this._removeScrollListener();
 
     this._preventDropdownReopen = preventDropdownReopen;
