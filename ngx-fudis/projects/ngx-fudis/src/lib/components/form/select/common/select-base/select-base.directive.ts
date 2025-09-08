@@ -13,6 +13,7 @@ import {
   WritableSignal,
   signal,
   AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
@@ -34,7 +35,7 @@ import { BaseSelectableComponent } from '../interfaces/base-selectable.interface
 })
 export class SelectBaseDirective
   extends ControlComponentBaseDirective
-  implements OnChanges, AfterViewInit
+  implements OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
@@ -47,6 +48,13 @@ export class SelectBaseDirective
       if (this.control) {
         this._required.next(FudisValidatorUtilities.required(this.control));
       }
+    });
+    /**
+     * This is for detecting the input field size changes so the dropdown width and height can be
+     * adjusted.
+     */
+    this._inputResizeObserver = new ResizeObserver((): void => {
+      this.calculateDropdownPosition();
     });
   }
 
@@ -231,6 +239,38 @@ export class SelectBaseDirective
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
 
+  /**
+   * Resize observer to observe input field size changes
+   */
+  private _inputResizeObserver: ResizeObserver;
+
+  /**
+   * Intersection observer to check if input field is visible in viewport
+   */
+  private _inputIntersectionObserver: IntersectionObserver;
+
+  private calculateDropdownPosition() {
+    if (this._dropdownOpen()) {
+      const inputElement = this._inputRef?.nativeElement;
+      const inputRect = inputElement?.getBoundingClientRect();
+
+      const dropDownElement = this._selectRef?.nativeElement?.querySelector(
+        '.fudis-select-dropdown',
+      ) as HTMLElement;
+
+      if (dropDownElement && inputRect) {
+        dropDownElement.style.top = `${inputRect.bottom}px`;
+        dropDownElement.style.left = `${inputRect.left}px`;
+        dropDownElement.style.maxWidth = `${inputRect.width}px`;
+      }
+    }
+  }
+
+  @HostListener('window:scroll')
+  onWindowEvent() {
+    this.calculateDropdownPosition();
+  }
+
   ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._updateValueAndValidityTrigger.next();
@@ -270,6 +310,10 @@ export class SelectBaseDirective
     }
   }
 
+  ngOnDestroy() {
+    this._inputResizeObserver?.unobserve(document?.body);
+  }
+
   /**
    * @returns Signal value of autocomplete filter text
    */
@@ -284,6 +328,8 @@ export class SelectBaseDirective
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.set(true);
+      this._inputResizeObserver.observe(document?.body);
+      this.calculateDropdownPosition();
     }
   }
 
@@ -297,6 +343,7 @@ export class SelectBaseDirective
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
+    this._inputResizeObserver.unobserve(document?.body);
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
