@@ -296,6 +296,12 @@ export class SelectBaseDirective
     if (this._scrollListener) document.removeEventListener('scroll', this._scrollListener, true);
   }
 
+  private _unsubscribeDropdownSubscribtions() {
+    this._resizeObserver.disconnect();
+    this._intersectionObserver.disconnect();
+    this._removeScrollListener();
+  }
+
   ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._updateValueAndValidityTrigger.next();
@@ -336,9 +342,7 @@ export class SelectBaseDirective
   }
 
   ngOnDestroy() {
-    this._resizeObserver?.disconnect();
-    this._intersectionObserver?.disconnect();
-    this._removeScrollListener();
+    this._unsubscribeDropdownSubscribtions();
   }
 
   /**
@@ -355,6 +359,8 @@ export class SelectBaseDirective
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.set(true);
+
+      this._unsubscribeDropdownSubscribtions();
       this._intersectionObserver.observe(this._inputRef?.nativeElement);
       this._resizeObserver.observe(document?.body);
       this._setupScrollListener();
@@ -371,9 +377,7 @@ export class SelectBaseDirective
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
-    this._resizeObserver.disconnect();
-    this._intersectionObserver.disconnect();
-    this._removeScrollListener();
+    this._unsubscribeDropdownSubscribtions();
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
