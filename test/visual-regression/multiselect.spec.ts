@@ -12,6 +12,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
    * Dropdown with clear button
    */
   await page.getByTestId("fudis-multiselect-1").focus();
+  await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowDown");
   await expect(page).toHaveScreenshot("A-2-focus-option.png", {
@@ -63,23 +64,28 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.getByTestId("fudis-heading-1").hover();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.getByTestId("fudis-heading-1").click();
+  await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
 
   await page.getByTestId("fudis-multiselect-1").focus();
+  await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Space");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("Escape");
+  await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
 
   /**
    * Disabled when multiselect has selected options
    */
   await page.keyboard.press("ArrowDown");
+  await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("Tab");
+  await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
 
   await page.getByTestId("fudis-button-1").click();
@@ -101,8 +107,6 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page.getByText("Pick at least two pets")).toHaveCount(0);
 });
 
-const webkitBrowsers = ["webkit", "Mobile Safari", "Mobile Safari Big Landscape"];
-
 test.describe("Dropdown and autocompletes", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(
@@ -120,8 +124,10 @@ test.describe("Dropdown and autocompletes", () => {
       page.getByTestId("fudis-multiselect-2-option-e05e75").getByText("Golden jackal"),
     ).toBeVisible();
     await page.getByTestId("fudis-multiselect-2").click();
+    await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).not.toBeVisible();
     await page.getByTestId("fudis-multiselect-2").click();
+    await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
     await page.getByTestId("fudis-multiselect-2-dropdown").getByText("Ostrich").click();
     await page.getByTestId("fudis-heading-1").hover();
