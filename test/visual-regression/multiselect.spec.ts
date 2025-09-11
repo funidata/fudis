@@ -172,9 +172,9 @@ test.describe("Dropdown and autocompletes", () => {
     await page.keyboard.press("Enter");
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
 
-    await page.getByTestId("fudis-multiselect-5-clear-button").click();
+    await page.getByTestId("fudis-multiselect-5-clear-button").focus();
+    await page.keyboard.press("Space");
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
-    await page.getByTestId("fudis-multiselect-5").focus();
 
     await page.keyboard.press("KeyM");
     await page.keyboard.press("KeyO");
