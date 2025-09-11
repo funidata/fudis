@@ -113,6 +113,7 @@ test.describe("Dropdown and autocompletes", () => {
   test("Dropdown without Clear button", async ({ page }) => {
     await page.getByTestId("fudis-multiselect-1-clear-button").click();
     await page.getByTestId("fudis-multiselect-2").focus();
+    await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
     await expect(
@@ -129,8 +130,9 @@ test.describe("Dropdown and autocompletes", () => {
   });
 
   test("Autocomplete dropdown with clear button", async ({ page }) => {
+    await page.getByTestId("fudis-multiselect-2").focus();
     await page.getByTestId("fudis-multiselect-3").focus();
-
+    await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-3-dropdown")).toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).not.toBeVisible();
 
@@ -144,6 +146,7 @@ test.describe("Dropdown and autocompletes", () => {
     await page.getByTestId("fudis-multiselect-3").focus();
 
     await page.getByTestId("fudis-multiselect-4").focus();
+    await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-3-dropdown")).not.toBeVisible();
     await page.getByTestId("fudis-multiselect-4").focus();
@@ -167,7 +170,9 @@ test.describe("Dropdown and autocompletes", () => {
   });
 
   test("Autocomplete type with clear button", async ({ page }) => {
+    await page.getByTestId("fudis-multiselect-4").focus();
     await page.getByTestId("fudis-multiselect-5").focus();
+    await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
     await page.keyboard.press("ArrowDown");
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
@@ -224,8 +229,8 @@ test.describe("Dropdown and autocompletes", () => {
 
   test("Autocomplete type without clear button", async ({ page }) => {
     await page.getByTestId("fudis-multiselect-5").focus();
-
     await page.getByTestId("fudis-multiselect-6").focus();
+    await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-6-dropdown")).not.toBeVisible();
 
