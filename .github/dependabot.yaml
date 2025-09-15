@@ -15,7 +15,9 @@ updates:
     groups:
       angular:
         patterns:
-          - "@angular*"
+          - "@angular/*"
+          - "@angular-devkit/*"
+          - "@angular-eslint/*"
       storybook:
         patterns:
           - "@storybook*"
