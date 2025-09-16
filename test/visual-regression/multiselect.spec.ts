@@ -15,13 +15,9 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowDown");
-  await expect(page).toHaveScreenshot("A-2-focus-option.png", {
-    fullPage: true,
-  });
+  await expect(page).toHaveScreenshot("A-2-focus-option.png");
   await page.keyboard.press("ArrowDown");
-  await expect(page).toHaveScreenshot("A-3-focus-selected.png", {
-    fullPage: true,
-  });
+  await expect(page).toHaveScreenshot("A-3-focus-selected.png");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
   await page.keyboard.press("ArrowDown");
@@ -43,21 +39,15 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
     page.getByTestId("fudis-multiselect-1-option-nr48pp-checkbox-input-55"),
   ).toBeFocused();
   await page.getByTestId("fudis-multiselect-1-option-ibd9lw").hover();
-  await expect(page).toHaveScreenshot("A-4-hover-alligator.png", {
-    fullPage: true,
-  });
+  await expect(page).toHaveScreenshot("A-4-hover-alligator.png");
   await page.getByTestId("fudis-heading-1").hover();
 
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-5-select-dolphin.png", {
-    fullPage: true,
-  });
+  await expect(page).toHaveScreenshot("A-5-select-dolphin.png");
   await page.keyboard.press("Space");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-6-deselect-dolphin.png", {
-    fullPage: true,
-  });
+  await expect(page).toHaveScreenshot("A-6-deselect-dolphin.png");
   await page.getByTestId("fudis-multiselect-1-option-1d30z6z").click();
   await page.getByTestId("fudis-multiselect-1-option-1szhdxn").click();
 
@@ -129,7 +119,9 @@ test.describe("Dropdown and autocompletes", () => {
     await page.getByTestId("fudis-multiselect-2").click();
     await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
-    await page.getByTestId("fudis-multiselect-2-dropdown").getByText("Ostrich").click();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Enter");
+
     await page.getByTestId("fudis-heading-1").hover();
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
     await expect(page.getByText("Pick at least two pets")).toHaveCount(6);
