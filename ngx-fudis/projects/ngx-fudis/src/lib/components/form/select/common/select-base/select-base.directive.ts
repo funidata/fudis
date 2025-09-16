@@ -12,7 +12,6 @@ import {
   ViewChild,
   WritableSignal,
   signal,
-  AfterViewInit,
   OnDestroy,
 } from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
@@ -35,7 +34,7 @@ import { BaseSelectableComponent } from '../interfaces/base-selectable.interface
 })
 export class SelectBaseDirective
   extends ControlComponentBaseDirective
-  implements OnChanges, AfterViewInit, OnDestroy
+  implements OnChanges, OnDestroy
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
@@ -265,6 +264,16 @@ export class SelectBaseDirective
         dropDownElement.style.top = `${inputRect.bottom}px`;
         dropDownElement.style.left = `${inputRect.left}px`;
         dropDownElement.style.maxWidth = `${inputRect.width}px`;
+
+        /**
+         * If window has less available space than the default height of the dropdown menu, snap the
+         * dropdown menu to the bottom of the window.
+         */
+        const cssDefaultMaxHeight = 256;
+        const availableSpace = window.innerHeight - inputRect.bottom - 6;
+        const finalMaxHeight = Math.min(cssDefaultMaxHeight, availableSpace);
+
+        dropDownElement.style.maxHeight = `${finalMaxHeight}px`;
       }
     }
   }
