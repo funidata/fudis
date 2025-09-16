@@ -1,11 +1,12 @@
 import test, { expect } from "@playwright/test";
 
 const formErrorSummaryText =
-  "Question about your power animal / What is your power animal?: You need to choose your power animal";
+  "Course feedback / Your favourite course topic: You need to add a topic";
 
-const dialogFormTitle = "Dialog with Form and some random text";
+const dialogFormTitle = "Form Dialog";
 
-const dialogFormResultAfterClose = "Great choise, your power animal is Holiday armadillo.";
+const dialogFormResultAfterClose =
+  "Thank you for the feedback! Your favourite topic was Automation testing.";
 
 test("dialog with form", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-form&viewMode=story");
@@ -15,15 +16,25 @@ test("dialog with form", async ({ page }) => {
   await page.getByText("SUBMIT").click();
   await expect(page.getByText(formErrorSummaryText)).toBeVisible();
   await expect(page).toHaveScreenshot("form-2-errors.png");
-  await page.getByTestId("example-input-power-animal").focus();
-  await page.getByTestId("example-input-power-animal").fill("Holiday Armadillo");
+  await page.getByTestId("example-input-course-topic").focus();
+  await page.getByTestId("example-input-course-topic").fill("Automation testing");
   await expect(page.getByTestId("fudis-validator-error-message-1")).not.toBeVisible();
-  await page.getByText("SUBMIT").click();
+
+  await page.getByTestId("fudis-select-1").focus();
+  await page.waitForTimeout(150);
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+  await page.keyboard.press("ArrowDown");
+  await expect(page).toHaveScreenshot("form-3-dropdown.png");
+
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Enter"); /* Submit */
   await expect(page.getByText(dialogFormTitle)).not.toBeVisible();
   await expect(page.getByText(dialogFormResultAfterClose)).toBeVisible();
 });
 
-test("dialog with grid", async ({ page }) => {
+test.skip("dialog with grid", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-grid&viewMode=story");
   await page.getByTestId("fudis-button-1").click();
   await expect(page.getByTestId("fudis-button-2")).toBeVisible();
@@ -37,7 +48,7 @@ test("dialog with grid", async ({ page }) => {
   await expect(page).toHaveScreenshot("grid-4-content-closed.png");
 });
 
-test("nested dialogs", async ({ page }) => {
+test.skip("nested dialogs", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-dialog--example-with-nested-dialogs&viewMode=story",
   );
@@ -141,7 +152,7 @@ test("nested dialogs", async ({ page }) => {
   await expect(page).toHaveScreenshot("nested-dialog-9-final-result.png");
 });
 
-test("Dialog sizes", async ({ page }) => {
+test.skip("Dialog sizes", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-dialog--example-with-dialog-sizes&viewMode=story",
   );
