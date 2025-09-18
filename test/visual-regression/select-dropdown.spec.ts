@@ -17,7 +17,9 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByTestId("fudis-select-1-option-100zewl")).toBeFocused();
+  await expect(
+    page.getByTestId("fudis-select-1-option-100zewl"),
+  ).toBeFocused(); /* Screaming hairy armadillo (partly endangered)*/
 
   await page.keyboard.press("ArrowDown", { delay: 20 });
   await page.keyboard.press("ArrowDown", { delay: 20 });
@@ -26,7 +28,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown", { delay: 20 });
   await page.keyboard.press("ArrowUp", { delay: 20 });
   await page.keyboard.press("ArrowUp", { delay: 20 });
-  await expect(page.getByTestId("fudis-select-1-option-ba3at")).toBeVisible();
+  await expect(page.getByTestId("fudis-select-1-option-ba3at")).toBeVisible(); /* Golden jackal */
 
   await page.getByTestId("fudis-select-1-option-qqdcwh").hover();
   await page.getByText("Select showcase").hover();

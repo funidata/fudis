@@ -25,7 +25,7 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
 
 @Directive({
@@ -56,8 +56,16 @@ export class SelectBaseDirective
       this._calculateDropdownPosition();
     });
     /**
-     * This is for detecting if input is visible in viewport. If not, close the dropdown.
+     * Observable for viewport height and orientation change, will cause dropdown to close.
      */
+    fromEvent(window, 'resize')
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        if (window.innerHeight !== this._viewportLastHeight && this._dropdownOpen()) {
+          this._viewportLastHeight = window.innerHeight;
+          this.closeDropdown(false, true);
+        }
+      });
   }
 
   /**
@@ -250,6 +258,11 @@ export class SelectBaseDirective
    * Scroll listener for adjusting dropdown position on scroll events
    */
   private _scrollListener?: () => void;
+
+  /**
+   * Last recorded height of the viewport. Change will trigger dropdown to close.
+   */
+  private _viewportLastHeight: number;
 
   private _calculateDropdownPosition() {
     if (this._dropdownOpen()) {
@@ -480,17 +493,18 @@ export class SelectBaseDirective
   protected _selectInputFocus(event: FocusEvent): void {
     this._inputFocused = true;
 
+    if (this._preventDropdownReopen) {
+      this._preventDropdownReopen = false;
+      this.onFocus(event);
+      return;
+    }
+
     const openDropdown =
       this.variant === 'dropdown' ||
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (
-      !this._preventDropdownReopen &&
-      openDropdown &&
-      !this._mouseDownInsideComponent &&
-      !this._dropdownOpen()
-    ) {
+    if (!this._dropdownOpen() && openDropdown && !this._mouseDownInsideComponent) {
       this.openDropdown();
     } else if (this._clickFromIcon) {
       if (this._dropdownOpen()) {
@@ -498,8 +512,8 @@ export class SelectBaseDirective
       } else {
         this.openDropdown();
       }
+      this._clickFromIcon = false;
     }
-    this._preventDropdownReopen = false;
 
     this.onFocus(event);
   }
@@ -525,17 +539,15 @@ export class SelectBaseDirective
    */
   protected _clickInput(): void {
     this._preventDropdownReopen = true;
-
     if (this._inputFocused || this._mouseUpOnInput) {
       if (this.variant === 'dropdown') {
         this._toggleDropdown();
       } else {
         this.openDropdown();
       }
+      this._focusToSelectInput();
     }
-    this._focusToSelectInput();
   }
-
   /**
    * Register pressed key inside input field. Used to check that both key down and key up originated
    * from same source.
