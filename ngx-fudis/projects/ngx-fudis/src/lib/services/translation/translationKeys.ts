@@ -55,6 +55,10 @@ export interface FudisTranslationConfig {
     // External link icon aria-label
     EXTERNAL_LINK: string;
   };
+  PAGINATION: {
+    // Prefix visible to screen reader
+    PREFIX: string;
+  };
   SELECT: {
     DISABLED: string;
     MULTISELECT: {
@@ -145,6 +149,9 @@ export const en: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(opens in a new tab)',
   },
+  PAGINATION: {
+    PREFIX: 'Pagination',
+  },
   SELECT: {
     DISABLED: 'Disabled',
     MULTISELECT: {
@@ -229,6 +236,9 @@ export const fi: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
   },
+  PAGINATION: {
+    PREFIX: 'Sivutus',
+  },
   SELECT: {
     DISABLED: 'Ei valittavissa',
     MULTISELECT: {
@@ -309,6 +319,9 @@ export const sv: FudisTranslationConfig = {
     LANGUAGE: 'Språk',
     MISSING: 'Saknas',
     MAX_LENGTH: 'tecken använt',
+  },
+  PAGINATION: {
+    PREFIX: 'Paginering',
   },
   SELECT: {
     DISABLED: 'Inaktiverad',
