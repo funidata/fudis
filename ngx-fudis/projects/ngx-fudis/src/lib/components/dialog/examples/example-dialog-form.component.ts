@@ -6,10 +6,24 @@ import { FudisDialogSize } from '../../../types/miscellaneous';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
+import { FudisSelectOption } from '../../../types/forms';
 
 type TestForm = {
-  powerAnimal: FormControl<string | null>;
+  topics: FormControl<string | null>;
 };
+
+export type Grade = {
+  value: string;
+  label: string;
+};
+
+export const gradeOptions: FudisSelectOption<Grade>[] = [
+  { value: '5', label: 'Excellent - 5' },
+  { value: '4', label: 'Good - 4' },
+  { value: '3', label: 'Neutral - 3' },
+  { value: '2', label: 'Not good - 2' },
+  { value: '1', label: 'Bad - 1' },
+];
 
 @Component({
   imports: [NgxFudisModule, CommonModule],
@@ -18,50 +32,39 @@ type TestForm = {
     <fudis-dialog [size]="_size">
       <fudis-dialog-content>
         <fudis-form
-          [title]="'Dialog with Form and some random text'"
+          [title]="'Form Dialog'"
           [level]="1"
           [titleVariant]="'xl'"
           [errorSummaryTitle]="'You need to fill up the information.'"
         >
           <fudis-form-content>
-            <fudis-fieldset
-              [label]="'Question about your power animal'"
-              [helpText]="_greetingFromOpeningComponent"
-            >
+            <fudis-fieldset [label]="'Course feedback'" [helpText]="_greetingFromOpeningComponent">
               <fudis-fieldset-content>
                 <fudis-text-input
-                  [id]="'example-input-power-animal'"
-                  [label]="'What is your power animal?'"
-                  [control]="exampleDialogFormGroup.controls['powerAnimal']"
-                  [helpText]="'Please add some values'"
+                  [id]="'example-input-course-topic'"
+                  [label]="'Your favourite course topic'"
+                  [control]="exampleDialogFormGroup.controls['topics']"
+                  [helpText]="'Please add some topic'"
                 />
               </fudis-fieldset-content>
             </fudis-fieldset>
-            <fudis-body-text>
-              Her companions instrument set estimating sex remarkably solicitude motionless.
-              Property men the why smallest graceful day insisted required. Inquiry justice country
-              old placing sitting any ten age. Looking venture justice in evident in totally he do
-              ability. Be is lose girl long of up give. Trifling wondered unpacked ye at he. In
-              household certainty an on tolerably smallness difficult. Many no each like up be is
-              next neat. Put not enjoyment behaviour her supposing. At he pulled object others.
-              Endeavor bachelor but add eat pleasure doubtful sociable. Age forming covered you
-              entered the examine. Blessing scarcely confined her contempt wondered shy. Dashwoods
-              contented sportsmen at up no convinced cordially affection. Am so continued resembled
-              frankness disposing engrossed dashwoods. Earnest greater on no observe fortune
-              norland. Hunted mrs ham wishes stairs. Continued he as so breakfast shameless. All men
-              drew its post knew. Of talking of calling however civilly wishing resolve. Mr do
-              raising article general norland my hastily. Its companions say uncommonly pianoforte
-              favourable. Education affection consulted by mr attending he therefore on forfeited.
-              High way more far feet kind evil play led. Sometimes furnished collected add for
-              resources attention. Norland an by minuter enquire it general on towards forming.
-              Adapted mrs totally company two yet conduct men. Months on ye at by esteem desire
-              warmth former. Sure that that way gave any fond now. His boy middleton sir nor
-              engrossed affection excellent. Dissimilar compliment cultivated preference eat
-              sufficient may. Well next door soon we mr he four. Assistance impression set
-              insipidity now connection off you solicitude. Under as seems we me stuff those style
-              at. Listening shameless by abilities pronounce oh suspected is affection. Next it draw
-              in draw much bred.
-            </fudis-body-text>
+            <fudis-select
+              [className]="'fudis-mt-sm'"
+              [size]="'lg'"
+              [control]="testControl"
+              [label]="'Course grade 1 - 5'"
+              [helpText]="'How relevant do you find the course content?'"
+              [initialFocus]="false"
+              [selectionClearButton]="true"
+              [variant]="'dropdown'"
+            >
+              <ng-template fudisSelectOptions>
+                <fudis-select-option
+                  *ngFor="let option of gradeOptions"
+                  [data]="option"
+                ></fudis-select-option>
+              </ng-template>
+            </fudis-select>
           </fudis-form-content>
           <fudis-form-actions>
             <fudis-button
@@ -90,21 +93,22 @@ export class ExampleDialogFormComponent {
     this._size = this.data.size;
   }
 
+  gradeOptions = gradeOptions;
+
   protected _size: FudisDialogSize;
 
   protected _greetingFromOpeningComponent: string;
 
+  testControl = new FormControl(null);
+
   exampleDialogFormGroup = new FormGroup<TestForm>({
-    powerAnimal: new FormControl(
-      null,
-      FudisValidators.required('You need to choose your power animal'),
-    ),
+    topics: new FormControl(null, FudisValidators.required('You need to add a topic')),
   });
 
   closeDialogWithForm() {
     if (this.exampleDialogFormGroup.valid) {
       const dataToComponentWhichOpenedThisDialog =
-        this.exampleDialogFormGroup.controls.powerAnimal.value;
+        this.exampleDialogFormGroup.controls.topics.value;
 
       this._dialogService.close(dataToComponentWhichOpenedThisDialog);
     }

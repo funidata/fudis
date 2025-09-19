@@ -12,7 +12,7 @@ import {
   ViewChild,
   WritableSignal,
   signal,
-  AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
@@ -25,7 +25,7 @@ import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
 
 @Directive({
@@ -34,7 +34,7 @@ import { BaseSelectableComponent } from '../interfaces/base-selectable.interface
 })
 export class SelectBaseDirective
   extends ControlComponentBaseDirective
-  implements OnChanges, AfterViewInit
+  implements OnChanges, OnDestroy
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
@@ -48,6 +48,24 @@ export class SelectBaseDirective
         this._required.next(FudisValidatorUtilities.required(this.control));
       }
     });
+    /**
+     * This is for detecting the input field size changes so the dropdown width and height can be
+     * adjusted.
+     */
+    this._resizeObserver = new ResizeObserver((): void => {
+      this._calculateDropdownPosition();
+    });
+    /**
+     * Observable for viewport height and orientation change, will cause dropdown to close.
+     */
+    fromEvent(window, 'resize')
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        if (window.innerHeight !== this._viewportLastHeight && this._dropdownOpen()) {
+          this._viewportLastHeight = window.innerHeight;
+          this.closeDropdown(false, true);
+        }
+      });
   }
 
   /**
@@ -231,6 +249,64 @@ export class SelectBaseDirective
    */
   protected _clearButtonClickTrigger = signal<boolean>(false);
 
+  /**
+   * Resize observer to observe input field size changes
+   */
+  private _resizeObserver: ResizeObserver;
+
+  /**
+   * Scroll listener for adjusting dropdown position on scroll events
+   */
+  private _scrollListener?: () => void;
+
+  /**
+   * Last recorded height of the viewport. Change will trigger dropdown to close.
+   */
+  private _viewportLastHeight: number;
+
+  private _calculateDropdownPosition() {
+    if (this._dropdownOpen()) {
+      const inputElement = this._inputRef?.nativeElement;
+      const inputRect = inputElement?.getBoundingClientRect();
+
+      const dropDownElement = this._selectRef?.nativeElement?.querySelector(
+        '.fudis-select-dropdown',
+      ) as HTMLElement;
+
+      if (dropDownElement && inputRect) {
+        dropDownElement.style.top = `${inputRect.bottom}px`;
+        dropDownElement.style.left = `${inputRect.left}px`;
+        dropDownElement.style.maxWidth = `${inputRect.width}px`;
+
+        /**
+         * If window has less available space than the default height of the dropdown menu, snap the
+         * dropdown menu to the bottom of the window.
+         */
+        const cssDefaultMaxHeight = 256;
+        const availableSpace = window.innerHeight - inputRect.bottom - 6;
+        const finalMaxHeight = Math.min(cssDefaultMaxHeight, availableSpace);
+
+        dropDownElement.style.maxHeight = `${finalMaxHeight}px`;
+      }
+    }
+  }
+
+  private _setupScrollListener() {
+    this._scrollListener = () => {
+      this._calculateDropdownPosition();
+    };
+    document.addEventListener('scroll', this._scrollListener, true);
+  }
+
+  private _removeScrollListener() {
+    if (this._scrollListener) document.removeEventListener('scroll', this._scrollListener, true);
+  }
+
+  private _unsubscribeDropdownSubscribtions() {
+    this._resizeObserver.disconnect();
+    this._removeScrollListener();
+  }
+
   ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._updateValueAndValidityTrigger.next();
@@ -270,6 +346,10 @@ export class SelectBaseDirective
     }
   }
 
+  ngOnDestroy() {
+    this._unsubscribeDropdownSubscribtions();
+  }
+
   /**
    * @returns Signal value of autocomplete filter text
    */
@@ -284,6 +364,10 @@ export class SelectBaseDirective
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen.set(true);
+
+      this._unsubscribeDropdownSubscribtions();
+      this._resizeObserver.observe(document?.body);
+      this._setupScrollListener();
     }
   }
 
@@ -297,6 +381,7 @@ export class SelectBaseDirective
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen.set(false);
+    this._unsubscribeDropdownSubscribtions();
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
@@ -408,17 +493,18 @@ export class SelectBaseDirective
   protected _selectInputFocus(event: FocusEvent): void {
     this._inputFocused = true;
 
+    if (this._preventDropdownReopen) {
+      this._preventDropdownReopen = false;
+      this.onFocus(event);
+      return;
+    }
+
     const openDropdown =
       this.variant === 'dropdown' ||
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (
-      !this._preventDropdownReopen &&
-      openDropdown &&
-      !this._mouseDownInsideComponent &&
-      !this._dropdownOpen()
-    ) {
+    if (!this._dropdownOpen() && openDropdown && !this._mouseDownInsideComponent) {
       this.openDropdown();
     } else if (this._clickFromIcon) {
       if (this._dropdownOpen()) {
@@ -427,7 +513,6 @@ export class SelectBaseDirective
         this.openDropdown();
       }
     }
-    this._preventDropdownReopen = false;
 
     this.onFocus(event);
   }
@@ -453,7 +538,6 @@ export class SelectBaseDirective
    */
   protected _clickInput(): void {
     this._preventDropdownReopen = true;
-
     if (this._inputFocused || this._mouseUpOnInput) {
       if (this.variant === 'dropdown') {
         this._toggleDropdown();
@@ -463,7 +547,6 @@ export class SelectBaseDirective
     }
     this._focusToSelectInput();
   }
-
   /**
    * Register pressed key inside input field. Used to check that both key down and key up originated
    * from same source.
