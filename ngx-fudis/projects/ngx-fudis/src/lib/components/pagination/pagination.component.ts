@@ -2,12 +2,15 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisIdService } from '../../services/id/id.service';
-import { NgxFudisModule } from '../../ngx-fudis.module';
 import { PaginationItemComponent } from './pagination-item/pagination-item.component';
+import { CommonModule } from '@angular/common';
+import { IconComponent } from '../icon/icon.component';
+import { NgxFudisModule } from '../../ngx-fudis.module';
 
 @Component({
   selector: 'fudis-pagination',
-  imports: [NgxFudisModule, PaginationItemComponent],
+  imports: [CommonModule, NgxFudisModule, PaginationItemComponent],
+  providers: [IconComponent],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
   encapsulation: ViewEncapsulation.None,

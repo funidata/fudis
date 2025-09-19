@@ -1,2 +1,43 @@
+@use '@funidata/fudis-core' as core;
+
+.fudis-pagination {
+  list-style: none;
+  display: inline;
+
+  &-controls {
+    display: inline-block;
+
+    a {
+      @include core.text-link;
+
+      padding: 0 core.$spacing-xs 0 core.$spacing-xs;
+      text-transform: uppercase;
+    }
+
+    &:first-child {
+      margin-right: core.$spacing-xs;
+    }
+
+    &:last-child {
+      margin-left: core.$spacing-xs;
+    }
+  }
+}
+
 .fudis-pagination-item {
+  display: inline-block;
+
+  a {
+    @include core.text-link;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: core.$body-text-md-font-size;
+    font-weight: core.$font-weight-medium;
+    border-radius: 50%;
+    height: core.$spacing-lg;
+    width: core.$spacing-lg;
+    margin-right: core.$spacing-xxs;
+  }
 }

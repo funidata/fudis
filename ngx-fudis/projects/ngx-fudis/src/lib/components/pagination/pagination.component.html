@@ -1,7 +1,17 @@
-<nav [attr.aria-label]="_paginationPrefix + ': ' + label">
+<nav [attr.aria-label]="(_paginationPrefix | async) + ': ' + label">
   <ul class="fudis-pagination">
-    <li class="fudis-pagination-item">Previous</li>
+    <li class="fudis-pagination-controls">
+      <a href="/">
+        <fudis-icon [icon]="'chevron'" [color]="'primary'" [rotate]="'flip-180'"></fudis-icon>
+        <span class="fudis-pagination-item">Previous</span>
+      </a>
+    </li>
     <ng-content select="li[fudis-pagination-item]" />
-    <li class="fudis-pagination-item">Next</li>
+    <li class="fudis-pagination-controls">
+      <a href="/">
+        <span class="fudis-pagination-item">Next</span>
+        <fudis-icon [icon]="'chevron'" [color]="'primary'"></fudis-icon>
+      </a>
+    </li>
   </ul>
 </nav>

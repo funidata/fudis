@@ -18,7 +18,8 @@ export class PaginationItemComponent {
 
   /**
    * Binding host CSS class to component wrapper
-   */ @HostBinding('class.fudis-pagination-item') readonly _classes = true;
+   */
+  @HostBinding('class') private _classes = 'fudis-pagination-item';
 
   /**
    * Id from Id Service
