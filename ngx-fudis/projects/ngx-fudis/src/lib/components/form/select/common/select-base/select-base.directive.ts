@@ -512,7 +512,6 @@ export class SelectBaseDirective
       } else {
         this.openDropdown();
       }
-      this._clickFromIcon = false;
     }
 
     this.onFocus(event);
@@ -545,8 +544,8 @@ export class SelectBaseDirective
       } else {
         this.openDropdown();
       }
-      this._focusToSelectInput();
     }
+    this._focusToSelectInput();
   }
   /**
    * Register pressed key inside input field. Used to check that both key down and key up originated
