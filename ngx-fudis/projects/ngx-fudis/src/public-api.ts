@@ -46,6 +46,8 @@ export { LocalizedTextGroupComponent } from './lib/components/form/localized-tex
 export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
 export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
 export { NotificationComponent } from './lib/components/notification/notification.component';
+export { PaginationComponent } from './lib/components/pagination/pagination.component';
+export { PaginationItemComponent } from './lib/components/pagination/pagination-item/pagination-item.component';
 export { RadioButtonComponent } from './lib/components/form/radio-button-group/radio-button/radio-button.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SectionComponent } from './lib/components/section/section.component';
