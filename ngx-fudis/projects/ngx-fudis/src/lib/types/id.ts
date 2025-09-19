@@ -32,6 +32,7 @@ export const fudisIdParents = [
   'checkbox-group',
   'language-badge-group',
   'radio-button-group',
+  'pagination',
 ] as const;
 
 export const fudisIdGrandParents = [

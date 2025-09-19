@@ -1,5 +1,7 @@
 <nav [attr.aria-label]="_paginationPrefix + ': ' + label">
   <ul class="fudis-pagination">
-    <ng-content select="fudis-pagination-item" />
+    <li class="fudis-pagination-item">Previous</li>
+    <ng-content select="li[fudis-pagination-item]" />
+    <li class="fudis-pagination-item">Next</li>
   </ul>
 </nav>

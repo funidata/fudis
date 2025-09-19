@@ -1,9 +1,15 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { PaginationComponent } from './pagination.component';
+import { PaginationItemComponent } from './pagination-item/pagination-item.component';
 
 export default {
   title: 'Components/Pagination',
   component: PaginationComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [PaginationComponent, PaginationItemComponent],
+    }),
+  ],
 } as Meta;
 
 const html = String.raw;
@@ -22,14 +28,14 @@ const Template: StoryFn = (args) => ({
   },
   template: html`
     <fudis-pagination [label]="label">
-      <fudis-pagination-item *ngFor="let link of links; let index = index">
+      <li fudis-pagination-item *ngFor="let link of links; let index = index">
         <a [href]="link.url">{{link.label}}</a>
-      </fudis-pagination-item>
+      </li>
     </fudis-pagination>
   `,
 });
 
 export const Example = Template.bind({});
 Example.args = {
-  label: 'Jotain muuta',
+  label: 'Pagination Example',
 };
