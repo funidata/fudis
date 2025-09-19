@@ -34,7 +34,7 @@ test("dialog with form", async ({ page }) => {
   await expect(page.getByText(dialogFormResultAfterClose)).toBeVisible();
 });
 
-test.skip("dialog with grid", async ({ page }) => {
+test("dialog with grid", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-grid&viewMode=story");
   await page.getByTestId("fudis-button-1").click();
   await expect(page.getByTestId("fudis-button-2")).toBeVisible();
@@ -48,7 +48,7 @@ test.skip("dialog with grid", async ({ page }) => {
   await expect(page).toHaveScreenshot("grid-4-content-closed.png");
 });
 
-test.skip("nested dialogs", async ({ page }) => {
+test("nested dialogs", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-dialog--example-with-nested-dialogs&viewMode=story",
   );
@@ -152,7 +152,7 @@ test.skip("nested dialogs", async ({ page }) => {
   await expect(page).toHaveScreenshot("nested-dialog-9-final-result.png");
 });
 
-test.skip("Dialog sizes", async ({ page }) => {
+test("Dialog sizes", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-dialog--example-with-dialog-sizes&viewMode=story",
   );
