@@ -74,13 +74,13 @@ test("error summary language change and manually sent errors", async ({ page }) 
   await page.getByTestId("fudis-multiselect-1").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowDown");
-    await expect(
+  await expect(
     page.getByTestId("fudis-multiselect-1-option-odo5ti-checkbox-input-1"),
   ).toBeFocused();
   await page.keyboard.press("Enter"); /* Selecting The High Ground */
-    await page.keyboard.press("ArrowDown");
-    await page.keyboard.press("ArrowDown");
-    await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
   await expect(
     page.getByTestId("fudis-multiselect-1-option-152akng-checkbox-input-4"),
   ).toBeFocused();
