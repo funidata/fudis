@@ -70,12 +70,21 @@ test("error summary language change and manually sent errors", async ({ page }) 
 
   // Set Select components
   await page.getByTestId("fudis-select-1").click();
-  await page.waitForTimeout(150);
   await page.getByTestId("fudis-select-1-option-4fs6ok").click();
   await page.getByTestId("fudis-multiselect-1").click();
-  await page.waitForTimeout(150);
-  await page.getByTestId("fudis-multiselect-1-option-odo5ti").click();
-  await page.getByTestId("fudis-multiselect-1-option-152akng").click();
+  await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
+  await page.keyboard.press("ArrowDown");
+    await expect(
+    page.getByTestId("fudis-multiselect-1-option-odo5ti-checkbox-input-1"),
+  ).toBeFocused();
+  await page.keyboard.press("Enter"); /* Selecting The High Ground */
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+  await expect(
+    page.getByTestId("fudis-multiselect-1-option-152akng-checkbox-input-4"),
+  ).toBeFocused();
+  await page.keyboard.press("Enter"); /* Selecting Death Star Employee Benefits */
 
   // Change update strategy
   await page.getByTestId("change-strategy-button").dblclick();
@@ -125,11 +134,9 @@ test("error summary language change and manually sent errors", async ({ page }) 
     "Korkeampi maankamara, Kuolemantähden henkilöstöedut",
   );
   await page.getByTestId("fudis-select-1").click();
-  await page.waitForTimeout(150);
   await assertDropdownOption(page, "fudis-select-1-option-b6n1bd", "Jabba the Hutt (Rikollispomo)");
 
   await page.getByTestId("fudis-select-2").focus();
-  await page.waitForTimeout(150);
   await expect(
     page.getByTestId("fudis-body-text-8").getByText("Näytetään 1 tulosta"),
   ).toBeVisible();
@@ -144,7 +151,6 @@ test("error summary language change and manually sent errors", async ({ page }) 
   );
 
   await page.getByTestId("fudis-multiselect-1").click();
-  await page.waitForTimeout(150);
   await expect(
     page.getByTestId("fudis-multiselect-1-dropdown").getByText("Rajaton voima"),
   ).toBeVisible();
