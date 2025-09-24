@@ -27,6 +27,11 @@
 .fudis-pagination-item {
   display: inline-block;
 
+  &.hidden {
+    background-color: red;
+    display: none;
+  }
+
   a {
     @include core.text-link;
 

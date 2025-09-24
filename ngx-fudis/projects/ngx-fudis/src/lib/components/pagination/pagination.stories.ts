@@ -19,6 +19,12 @@ const links = [
   { label: '2', url: '/' },
   { label: '3', url: '/' },
   { label: '4', url: '/' },
+  { label: '5', url: '/' },
+  { label: '6', url: '/' },
+  { label: '7', url: '/' },
+  { label: '8', url: '/' },
+  { label: '9', url: '/' },
+  { label: '10', url: '/' },
 ];
 
 const Template: StoryFn = (args) => ({
@@ -28,9 +34,9 @@ const Template: StoryFn = (args) => ({
   },
   template: html`
     <fudis-pagination [label]="label">
-      <li fudis-pagination-item *ngFor="let link of links; let index = index">
+      <fudis-pagination-item *ngFor="let link of links; let index = index">
         <a [href]="link.url">{{link.label}}</a>
-      </li>
+      </fudis-pagination-item>
     </fudis-pagination>
   `,
 });

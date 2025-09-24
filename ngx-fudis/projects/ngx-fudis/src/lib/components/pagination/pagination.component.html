@@ -6,7 +6,12 @@
         <span class="fudis-pagination-item">Previous</span>
       </a>
     </li>
-    <ng-content select="li[fudis-pagination-item]" />
+    <ng-container  *ngFor="let id of visibleItems">
+      <li *ngIf="id === 'ellipsis-left'" class="fudis-pagination-ellipsis">…</li>
+        <ng-content></ng-content>
+      <li *ngIf="id === 'ellipsis-right'" class="fudis-pagination-ellipsis">…</li>
+    </ng-container>
+
     <li class="fudis-pagination-controls">
       <a href="/">
         <span class="fudis-pagination-item">Next</span>

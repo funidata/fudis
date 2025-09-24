@@ -5,8 +5,9 @@ import { PaginationComponent } from '../pagination.component';
 
 @Component({
   standalone: true,
-  selector: 'li[fudis-pagination-item]',
+  selector: 'fudis-pagination-item',
   templateUrl: './pagination-item.component.html',
+  styleUrl: './pagination-item.component.scss',
 })
 export class PaginationItemComponent {
   constructor(
@@ -19,7 +20,11 @@ export class PaginationItemComponent {
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-pagination-item';
+@HostBinding('class') _classes = 'fudis-pagination-item';
+  @HostBinding('class.hidden')
+  get hidden(): boolean {
+  return !this._pagination.visibleItems.includes(this._id);
+  }
 
   /**
    * Id from Id Service
