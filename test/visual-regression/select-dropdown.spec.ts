@@ -126,7 +126,14 @@ test("Select dropdown without clear button", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
   await page.getByTestId("fudis-select-2").click();
   await expect(page.getByTestId("fudis-select-2-dropdown")).toBeVisible();
-  await page.getByTestId("fudis-select-2-dropdown").getByText("Ostrich").click();
+  await page
+    .getByTestId("fudis-select-2-dropdown")
+    .getByText("Ostrich")
+    .scrollIntoViewIfNeeded()
+    .then(() => {
+      page.getByTestId("fudis-select-2-dropdown").getByText("Ostrich").click();
+    });
+  await page.waitForTimeout(150);
   expect(page.getByText("You must choose a pet!")).not.toBeVisible();
   await page.getByText("Select showcase").hover();
   await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
