@@ -10,6 +10,10 @@ test("radio button group with required", async ({ page }) => {
   await expect(page).toHaveScreenshot("validation-2-focus-1.png");
 
   await page.keyboard.press("Tab");
+  // Firefox does not fire the blur event correctly (seems to be Playwright regression), which means error-message not being visible (even after timeout).
+  // Hence added focus to move to the info icon button (shift+tab fires wanted event)
+  await page.keyboard.press("Shift+Tab");
+  await page.keyboard.press("Shift+Tab");
   await page.waitForSelector(".fudis-error-message");
   await expect(page.getByText("You must choose a fruit")).toBeVisible();
   await expect(page).toHaveScreenshot("validation-3-errors.png");
