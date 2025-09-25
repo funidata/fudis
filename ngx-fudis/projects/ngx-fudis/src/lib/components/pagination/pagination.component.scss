@@ -22,6 +22,15 @@
       margin-left: core.$spacing-xs;
     }
   }
+
+    &-ellipsis {
+
+
+      &__right {
+        display: inline-block;
+        background-color: red;
+      }
+    }
 }
 
 .fudis-pagination-item {

@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, ViewEncapsulation, OnChanges, SimpleChanges, AfterContentInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, AfterContentInit, ChangeDetectorRef } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisIdService } from '../../services/id/id.service';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 import { NgxFudisModule } from '../../ngx-fudis.module';
-import { PaginationItemComponent } from './pagination-item/pagination-item.component';
 
 @Component({
   selector: 'fudis-pagination',
@@ -26,27 +25,17 @@ export class PaginationComponent implements AfterContentInit, OnChanges {
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
   }
 
-  @ContentChildren(PaginationItemComponent) allItems!: QueryList<PaginationItemComponent>;
-
   @Input({ required: true }) label: string;
 
-  totalPages = 0;
+  @Input() pageCount: number;
 
-  visibleItems: (number | string)[] = [];
+  @Input() pageIndex = 0;
+
+  totalPages = 0;
 
   private _paginationChildrenIds: string[] = [];
 
   private _currentPage = 1;
-
-  @Input()
-  set currentPage(val: number) {
-    this._currentPage = val;
-    this.updateVisibleIds();
-    this.cdr.detectChanges();
-  }
-  get currentPage(): number {
-    return this._currentPage;
-  }
 
   /**
    * Prefix for aria-label from Fudis translation keys
@@ -95,32 +84,12 @@ export class PaginationComponent implements AfterContentInit, OnChanges {
     console.log('current Page', this._currentPage);
 
     this.visibleItems = [...this._paginationChildrenIds];
+
     this.visibleItems.splice(totalPages - 2, 1, 'ellipsis-right');
+    this.lastItem = this.visibleItems.length - 1;
+    console.log('last',this.lastItem);
   }
-  
-
-  // More than 10: compute window around current page
-  // const items: (string | 'ellipsis-left' | 'ellipsis-right')[] = [
-  //   this._paginationChildrenIds[0] // always show first
-  // ];
-
-  // const currentIndex = Math.min(this.currentPage - 1, totalPages - 1);
-  // const start = Math.max(1, currentIndex - 2);
-  // const end = Math.min(totalPages - 2, currentIndex + 2);
-
-  
-
-  // if (start > 1) items.push('ellipsis-left'); // left ellipsis
-  // items.push(...this._paginationChildrenIds.slice(start, end + 1)); // pages around current
-  // if (end < totalPages - 2) items.push('ellipsis-right'); // right ellipsis
-
-  // items.push(this._paginationChildrenIds[totalPages - 1]); // always show last
-  // this.visibleItems = items;
 
   console.log(this.visibleItems);
-  }
-
-  isEllipsis(id: unknown): boolean {
-    return typeof id === 'string' && id.startsWith('ellipsis');
   }
 }

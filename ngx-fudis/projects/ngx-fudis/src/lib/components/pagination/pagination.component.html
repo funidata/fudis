@@ -6,10 +6,13 @@
         <span class="fudis-pagination-item">Previous</span>
       </a>
     </li>
-    <ng-container  *ngFor="let id of visibleItems">
-      <li *ngIf="id === 'ellipsis-left'" class="fudis-pagination-ellipsis">…</li>
-        <ng-content></ng-content>
-      <li *ngIf="id === 'ellipsis-right'" class="fudis-pagination-ellipsis">…</li>
+    <ng-container>
+    @for (id of visibleItems; track id; let i = $index ){
+    <li *ngIf="id !== 'ellipsis-right'">
+      <ng-content select="fudis-pagination-item [id={{id}}]"></ng-content>
+    </li>
+        <li *ngIf="id === 'ellipsis-right'" class="fudis-pagination-ellipsis__right">…</li>
+    }
     </ng-container>
 
     <li class="fudis-pagination-controls">
