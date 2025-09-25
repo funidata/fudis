@@ -8,7 +8,7 @@ import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 
 type TestForm = {
-  powerAnimal: FormControl<string | null>;
+  courseTopic: FormControl<string | null>;
 };
 
 @Component({
@@ -19,9 +19,10 @@ type TestForm = {
       [label]="'Open dialog with form'"
     ></fudis-button>
 
-    <ng-container *ngIf="this._chosenPowerAnimal">
+    <ng-container *ngIf="this._chosenTopic">
       <fudis-body-text
-        >Great choise, your power animal is {{ this._chosenPowerAnimal }}.</fudis-body-text
+        >Thank you for the feedback! Your favourite topic was
+        {{ this._chosenTopic }}.</fudis-body-text
       >
     </ng-container>`,
 })
@@ -30,13 +31,10 @@ export class ExampleDialogLaucherComponent {
 
   @Input() size: FudisDialogSize = 'md';
 
-  protected _chosenPowerAnimal: string | null;
+  protected _chosenTopic: string | null;
 
   exampleDialogFormGroup = new FormGroup<TestForm>({
-    powerAnimal: new FormControl(
-      null,
-      FudisValidators.required('You need to choose your power animal'),
-    ),
+    courseTopic: new FormControl(null, FudisValidators.required('You need to add a topic')),
   });
 
   openDialogComponent() {
@@ -50,7 +48,7 @@ export class ExampleDialogLaucherComponent {
       .afterClosed()
       .subscribe((result: string) => {
         if (result) {
-          this._chosenPowerAnimal = result;
+          this._chosenTopic = result;
         }
       });
   }
