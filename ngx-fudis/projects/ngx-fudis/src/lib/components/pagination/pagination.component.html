@@ -1,25 +1,41 @@
-<nav [attr.aria-label]="(_paginationPrefix | async) + ': ' + label">
-  <ul class="fudis-pagination">
-    <li class="fudis-pagination-controls">
-      <a href="/">
-        <fudis-icon [icon]="'chevron'" [color]="'primary'" [rotate]="'flip-180'"></fudis-icon>
-        <span class="fudis-pagination-item">Previous</span>
-      </a>
-    </li>
+<nav class="fudis-pagination" [attr.aria-label]="(_paginationPrefix | async) + ': ' + label">
+  <fudis-button
+    [label]="'Previous'"
+    [variant]="'tertiary'"
+    [icon]="'chevron'"
+    [iconRotate]="'flip-180'"
+    (click)="goToPage(pageIndex - 1, $event)"
+  ></fudis-button>
+  <ul class="fudis-pagination-list">
     <ng-container>
-    @for (id of visibleItems; track id; let i = $index ){
-    <li *ngIf="id !== 'ellipsis-right'">
-      <ng-content select="fudis-pagination-item [id={{id}}]"></ng-content>
-    </li>
-        <li *ngIf="id === 'ellipsis-right'" class="fudis-pagination-ellipsis__right">…</li>
-    }
+      @for (item of itemList; track item) {
+        <li *ngIf="item === 'start-ellipsis' || item === 'end-ellipsis'">
+          <span class="fudis-pagination-ellipsis">...</span>
+        </li>
+        <li *ngIf="item !== 'start-ellipsis' && item !== 'end-ellipsis'">
+          <ng-container *ngIf="pageIndex + 1 === item; else link">
+            <span
+              class="fudis-pagination-item fudis-pagination-item-active"
+              aria-current="page"
+              tabindex="-1"
+            >
+              {{ item }}
+            </span>
+          </ng-container>
+          <ng-template #link>
+            <a class="fudis-pagination-item fudis-pagination-item-link" [href]="pageHref(item)">
+              {{ item }}
+            </a>
+          </ng-template>
+        </li>
+      }
     </ng-container>
-
-    <li class="fudis-pagination-controls">
-      <a href="/">
-        <span class="fudis-pagination-item">Next</span>
-        <fudis-icon [icon]="'chevron'" [color]="'primary'"></fudis-icon>
-      </a>
-    </li>
   </ul>
+  <button
+    (click)="goToPage(pageIndex + 1, $event)"
+    class="fudis-button fudis-button__tertiary fudis-button__size__medium"
+  >
+    Next
+    <span class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron"></span>
+  </button>
 </nav>

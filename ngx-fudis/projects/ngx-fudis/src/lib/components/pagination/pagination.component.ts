@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, AfterContentInit, ChangeDetectorRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewEncapsulation,
+  ChangeDetectorRef,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisIdService } from '../../services/id/id.service';
@@ -6,6 +14,10 @@ import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 import { NgxFudisModule } from '../../ngx-fudis.module';
 
+enum Ellipsis {
+  start = 'start-ellipsis',
+  end = 'end-ellipsis',
+}
 @Component({
   selector: 'fudis-pagination',
   imports: [CommonModule, NgxFudisModule],
@@ -15,11 +27,11 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationComponent implements AfterContentInit, OnChanges {
+export class PaginationComponent {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     this._id = this._idService.getNewParentId('pagination');
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
@@ -31,11 +43,16 @@ export class PaginationComponent implements AfterContentInit, OnChanges {
 
   @Input() pageIndex = 0;
 
+  @Input() siblingCount = 1;
+
+  /**
+   * A function for generating the href of pages
+   */
+  @Input() pageHref: (index: number) => string = (i) => `#${i + 1}`;
+
+  @Output() pageChange = new EventEmitter<number>();
+
   totalPages = 0;
-
-  private _paginationChildrenIds: string[] = [];
-
-  private _currentPage = 1;
 
   /**
    * Prefix for aria-label from Fudis translation keys
@@ -56,40 +73,50 @@ export class PaginationComponent implements AfterContentInit, OnChanges {
     return this._id;
   }
 
-  ngAfterContentInit() {
-    this._paginationChildrenIds = this._idService.getAllChildrenIds('pagination', this._id);
-    this.updateVisibleIds();
-      this.cdr.detectChanges();
+  protected range = (start: number, end: number): number[] => {
+    const length = end - start + 1;
+    return Array.from({ length }, (_, i) => start + i);
+  };
+
+  get itemList(): (Ellipsis | number)[] {
+    return this.createPaginationItemList(this.pageCount, this.pageIndex, this.siblingCount);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['currentPage']) {
-      this.updateVisibleIds();
+  private createPaginationItemList(
+    pageCount: number,
+    pageIndex: number,
+    siblingCount: number,
+  ): (Ellipsis | number)[] {
+    const startPages = this.range(1, Math.min(1, pageCount));
+    const endPages = this.range(Math.max(pageCount, 2), pageCount);
+
+    const siblingsStart = Math.max(
+      Math.min(pageIndex + 1 - siblingCount, pageCount - 1 - siblingCount * 2 - 1),
+      3,
+    );
+    const siblingsEnd = Math.min(
+      Math.max(pageIndex + 1 + siblingCount, 1 + siblingCount * 2 + 2),
+      endPages.length > 0 ? endPages[0] - 2 : pageCount - 1,
+    );
+
+    console.log('alkuSivut', startPages);
+    console.log('loppuSivut', endPages);
+    console.log('silbingAlku', siblingsStart);
+    console.log('silbingLoppu', siblingsEnd);
+
+    return [
+      ...startPages,
+      ...(siblingsStart > 3 ? [Ellipsis.start] : pageCount - 1 > 2 ? [2] : []),
+      ...this.range(siblingsStart, siblingsEnd),
+      ...(siblingsEnd < pageCount - 2 ? [Ellipsis.end] : pageCount - 1 > 1 ? [pageCount - 1] : []),
+      ...endPages,
+    ];
+  }
+
+  goToPage(index: number, event?: Event) {
+    event?.preventDefault();
+    if (index >= 0 && index < this.pageCount) {
+      this.pageChange.emit(index);
     }
-  }
-
-  private updateVisibleIds() {
-    const totalPages = this._paginationChildrenIds.length;
-
-    console.log('total', totalPages);
-
-  if (totalPages <= 9) {
-    this.visibleItems = [...this._paginationChildrenIds];
-    console.log('mitä tapahtuu', this.visibleItems);
-    return;
-  }
-
-  if (this._currentPage < 3 && totalPages >= 10) {
-    console.log('olen täällä');
-    console.log('current Page', this._currentPage);
-
-    this.visibleItems = [...this._paginationChildrenIds];
-
-    this.visibleItems.splice(totalPages - 2, 1, 'ellipsis-right');
-    this.lastItem = this.visibleItems.length - 1;
-    console.log('last',this.lastItem);
-  }
-
-  console.log(this.visibleItems);
   }
 }
