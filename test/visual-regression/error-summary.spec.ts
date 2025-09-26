@@ -70,7 +70,9 @@ test("error summary language change and manually sent errors", async ({ page }) 
 
   // Set Select components
   await page.getByTestId("fudis-select-1").click();
-  await page.getByTestId("fudis-select-1-option-4fs6ok").click();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Enter"); /* Selecting R2-D2 */
   await page.getByTestId("fudis-multiselect-1").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowDown");
