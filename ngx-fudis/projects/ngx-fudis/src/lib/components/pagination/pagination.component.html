@@ -1,5 +1,6 @@
 <nav class="fudis-pagination" [attr.aria-label]="(_paginationPrefix | async) + ': ' + paginationAriaLabel">
-  <span [attr.aria-atomic]="true" aria-live="polite">
+  <span aria-atomic="true" aria-live="polite" class="fudis-visually-hidden">
+    {{ liveAnnouncement }}
   </span>
   <fudis-button
     *ngIf="pageIndex > 0"
@@ -13,9 +14,7 @@
   <ul class="fudis-pagination-list">
     <ng-container>
       @for (item of itemList; track item) {
-        <li *ngIf="item === 'start-ellipsis' || item === 'end-ellipsis'">
-          <span class="fudis-pagination-ellipsis">...</span>
-        </li>
+        <span *ngIf="item === 'start-ellipsis' || item === 'end-ellipsis'" aria-hidden="true" class="fudis-pagination-ellipsis">...</span>
         <li *ngIf="item !== 'start-ellipsis' && item !== 'end-ellipsis'">
           <ng-container *ngIf="pageIndex + 1 === item; else link">
             <span

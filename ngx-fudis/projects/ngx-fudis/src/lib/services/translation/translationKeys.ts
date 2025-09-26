@@ -58,6 +58,8 @@ export interface FudisTranslationConfig {
   PAGINATION: {
     // Prefix visible to screen reader
     PREFIX: string;
+    // Aria-live announcement
+    OPENED_PAGE: string;
   };
   SELECT: {
     DISABLED: string;
@@ -151,6 +153,7 @@ export const en: FudisTranslationConfig = {
   },
   PAGINATION: {
     PREFIX: 'Pagination',
+    OPENED_PAGE: 'Opened page',
   },
   SELECT: {
     DISABLED: 'Disabled',
@@ -238,6 +241,7 @@ export const fi: FudisTranslationConfig = {
   },
   PAGINATION: {
     PREFIX: 'Sivutus',
+    OPENED_PAGE: 'Avattu sivu',
   },
   SELECT: {
     DISABLED: 'Ei valittavissa',
@@ -322,6 +326,7 @@ export const sv: FudisTranslationConfig = {
   },
   PAGINATION: {
     PREFIX: 'Paginering',
+    OPENED_PAGE: 'Öppnad sida',
   },
   SELECT: {
     DISABLED: 'Inaktiverad',

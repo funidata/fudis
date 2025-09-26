@@ -41,14 +41,15 @@ export class PaginationComponent {
    */
   @Input({ required: true }) paginationAriaLabel: string;
 
+  /**
+   * Total amount of pages.
+   */
   @Input() pageCount: number;
 
-  @Input() pageIndex = 1;
-
   /**
-   * The number of pages shown in each side of the current page
+   * Current page index.
    */
-  @Input() siblingCount = 2;
+  @Input() pageIndex = 1;
 
   /**
    * A function for generating the href of pages
@@ -58,6 +59,11 @@ export class PaginationComponent {
   @Output() pageChange = new EventEmitter<number>();
 
   /**
+   * The number of pages shown in each side of the current page
+   */
+  protected siblingCount = 2;
+
+  /**
    * Prefix for aria-label from Fudis translation keys
    */
   protected _paginationPrefix = new BehaviorSubject<string>(
@@ -65,6 +71,11 @@ export class PaginationComponent {
   );
 
   protected hideButton: boolean = true;
+
+  protected range = (start: number, end: number): number[] => {
+    const length = end - start + 1;
+    return Array.from({ length }, (_, i) => start + i);
+  };
 
   /**
    * HTML id
@@ -78,13 +89,13 @@ export class PaginationComponent {
     return this._id;
   }
 
-  protected range = (start: number, end: number): number[] => {
-    const length = end - start + 1;
-    return Array.from({ length }, (_, i) => start + i);
-  };
-
   get itemList(): (Ellipsis | number)[] {
     return this.createPaginationItemList(this.pageCount, this.pageIndex, this.siblingCount);
+  }
+
+  get liveAnnouncement(): string {
+    if (this.pageCount === 0) return '';
+    return this._translationService.getTranslations()().PAGINATION.OPENED_PAGE + ` ${this.pageIndex + 1}`;
   }
 
   private createPaginationItemList(
@@ -114,7 +125,6 @@ export class PaginationComponent {
   }
 
   goToPage(index: number, event?: Event) {
-    console.log('minua painettiin', index);
     event?.preventDefault();
     if (index >= 0 && index < this.pageCount) {
       this.pageChange.emit(index);

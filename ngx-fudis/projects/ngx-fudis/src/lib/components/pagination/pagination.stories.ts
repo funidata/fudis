@@ -1,34 +1,28 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, StoryFn } from '@storybook/angular';
 import { PaginationComponent } from './pagination.component';
+
+const html = String.raw;
 
 export default {
   title: 'Components/Pagination',
   component: PaginationComponent,
-  decorators: [],
-  argTypes: {
-    pageChange: { action: 'pageChange' },
-  },
+  decorators: [
+    componentWrapperDecorator(
+      (story) => html`<div style="display:flex; justify-content: center">${story}</div>`,
+    ),
+  ],
 } as Meta;
 
-export const Example: StoryObj<PaginationComponent> = {
-  render: (args) => ({
-    props: {
-      ...args,
-      pageIndex: args.pageIndex ?? 0,
-      handlePageChange: (index: number) => {
-        args.pageIndex = index;
-        args.pageChange?.(index);
-      },
-      pageHref: (i: number) => `/pagination-example?page=${i + 1}`,
-    },
-  }),
-  args: {
-    pageCount: 20,
-    pageIndex: 0,
-    siblingCount: 1,
-    label: 'Some label'
-  },
-  
-};
+const Template: StoryFn<PaginationComponent> = (args) => ({
+  props: args,
+  template: `
+    <fudis-pagination
+      [pageCount]="20"
+      [pageIndex]="0"
+      [paginationAriaLabel]="'Example'"
+      (pageChange)="pageIndex = $event"
+    ></fudis-pagination>
+  `,
+});
 
-
+export const Example = Template.bind({});
