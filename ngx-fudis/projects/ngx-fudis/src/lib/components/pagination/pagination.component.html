@@ -23,7 +23,7 @@
             </span>
           </ng-container>
           <ng-template #link>
-            <a class="fudis-pagination-item fudis-pagination-item-link" [href]="pageHref(item)">
+            <a class="fudis-pagination-item fudis-pagination-item-link" [href]="pageHref(item - 1)" (click)="goToPage(item - 1, $event)">
               {{ item }}
             </a>
           </ng-template>

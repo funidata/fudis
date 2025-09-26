@@ -3,7 +3,6 @@ import {
   Component,
   Input,
   ViewEncapsulation,
-  ChangeDetectorRef,
   Output,
   EventEmitter,
 } from '@angular/core';
@@ -13,6 +12,7 @@ import { FudisIdService } from '../../services/id/id.service';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 import { NgxFudisModule } from '../../ngx-fudis.module';
+import { ButtonComponent } from '../button/button.component';
 
 enum Ellipsis {
   start = 'start-ellipsis',
@@ -21,7 +21,7 @@ enum Ellipsis {
 @Component({
   selector: 'fudis-pagination',
   imports: [CommonModule, NgxFudisModule],
-  providers: [IconComponent],
+  providers: [IconComponent, ButtonComponent],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -30,8 +30,7 @@ enum Ellipsis {
 export class PaginationComponent {
   constructor(
     private _translationService: FudisTranslationService,
-    private _idService: FudisIdService,
-    private cdr: ChangeDetectorRef,
+    private _idService: FudisIdService
   ) {
     this._id = this._idService.getNewParentId('pagination');
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
@@ -43,7 +42,10 @@ export class PaginationComponent {
 
   @Input() pageIndex = 0;
 
-  @Input() siblingCount = 1;
+  /**
+   * The number of pages shown in each side of the current page
+   */
+  @Input() siblingCount = 2;
 
   /**
    * A function for generating the href of pages
@@ -51,8 +53,6 @@ export class PaginationComponent {
   @Input() pageHref: (index: number) => string = (i) => `#${i + 1}`;
 
   @Output() pageChange = new EventEmitter<number>();
-
-  totalPages = 0;
 
   /**
    * Prefix for aria-label from Fudis translation keys
@@ -99,11 +99,6 @@ export class PaginationComponent {
       endPages.length > 0 ? endPages[0] - 2 : pageCount - 1,
     );
 
-    console.log('alkuSivut', startPages);
-    console.log('loppuSivut', endPages);
-    console.log('silbingAlku', siblingsStart);
-    console.log('silbingLoppu', siblingsEnd);
-
     return [
       ...startPages,
       ...(siblingsStart > 3 ? [Ellipsis.start] : pageCount - 1 > 2 ? [2] : []),
@@ -114,6 +109,7 @@ export class PaginationComponent {
   }
 
   goToPage(index: number, event?: Event) {
+    console.log('minua painettiin', index);
     event?.preventDefault();
     if (index >= 0 && index < this.pageCount) {
       this.pageChange.emit(index);
