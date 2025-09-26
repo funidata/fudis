@@ -4,6 +4,15 @@
   display: flex;
   align-items: baseline;
 
+  &-button {
+    &__previous {
+      margin-right: core.$spacing-sm;
+    }
+    &__next {
+      margin-left: core.$spacing-sm;
+    }
+  }
+
   &-list {
     list-style: none;
     padding-left: 0;

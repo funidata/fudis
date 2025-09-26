@@ -36,11 +36,14 @@ export class PaginationComponent {
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
   }
 
-  @Input({ required: true }) label: string;
+  /**
+   * Aria-Label has always prefix `Pagination:`. Give aria-label that best describes the pagination in use.
+   */
+  @Input({ required: true }) paginationAriaLabel: string;
 
   @Input() pageCount: number;
 
-  @Input() pageIndex = 0;
+  @Input() pageIndex = 1;
 
   /**
    * The number of pages shown in each side of the current page
@@ -60,6 +63,8 @@ export class PaginationComponent {
   protected _paginationPrefix = new BehaviorSubject<string>(
     this._translationService.getTranslations()().PAGINATION.PREFIX,
   );
+
+  protected hideButton: boolean = true;
 
   /**
    * HTML id
@@ -113,6 +118,7 @@ export class PaginationComponent {
     event?.preventDefault();
     if (index >= 0 && index < this.pageCount) {
       this.pageChange.emit(index);
+      this.pageIndex = index;
     }
   }
 }
