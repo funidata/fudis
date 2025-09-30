@@ -1,16 +1,9 @@
-import { componentWrapperDecorator, Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 import { PaginationComponent } from './pagination.component';
-
-const html = String.raw;
 
 export default {
   title: 'Components/Pagination',
   component: PaginationComponent,
-  decorators: [
-    componentWrapperDecorator(
-      (story) => html`<div style="display:flex; justify-content: center">${story}</div>`,
-    ),
-  ],
 } as Meta;
 
 const Template: StoryFn<PaginationComponent> = (args) => ({

@@ -71,14 +71,12 @@ const buttonCommonExclude: string[] = [
   'dropdownMenuId',
   'dropdownOpen',
   'buttonEl',
-  'handleBlur',
   'buttonClick',
   'closeMenu',
   'toggleMenu',
   'popoverTriggerLabel',
   'popoverPosition',
   'popoverText',
-  'id',
 ];
 
 export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);

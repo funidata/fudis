@@ -1,20 +1,29 @@
-<nav class="fudis-pagination" [attr.aria-label]="(_paginationPrefix | async) + ': ' + paginationAriaLabel">
+<nav
+  class="fudis-pagination"
+  [attr.aria-label]="(_paginationPrefix | async) + ': ' + paginationAriaLabel"
+>
   <span aria-atomic="true" aria-live="polite" class="fudis-visually-hidden">
     {{ liveAnnouncement }}
   </span>
-  <fudis-button
+  <button
     *ngIf="pageIndex > 0"
-    [class]="'fudis-pagination-button__previous'"
-    [label]="'Previous'"
-    [variant]="'tertiary'"
-    [icon]="'chevron'"
-    [iconRotate]="'flip-180'"
+    class="fudis-button fudis-button__tertiary fudis-button__size__medium fudis-pagination-button__previous"
     (click)="goToPage(pageIndex - 1, $event)"
-  ></fudis-button>
+  >
+    <span
+      class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron fudis-icon__rotate__flip-180"
+    ></span>
+    {{ _paginationPreviousButton | async }}</button
+  >
   <ul class="fudis-pagination-list">
     <ng-container>
       @for (item of itemList; track item) {
-        <span *ngIf="item === 'start-ellipsis' || item === 'end-ellipsis'" aria-hidden="true" class="fudis-pagination-ellipsis">...</span>
+        <span
+          *ngIf="item === 'start-ellipsis' || item === 'end-ellipsis'"
+          aria-hidden="true"
+          class="fudis-pagination-ellipsis"
+          >...</span
+        >
         <li *ngIf="item !== 'start-ellipsis' && item !== 'end-ellipsis'">
           <ng-container *ngIf="pageIndex + 1 === item; else link">
             <span
@@ -26,7 +35,11 @@
             </span>
           </ng-container>
           <ng-template #link>
-            <a class="fudis-pagination-item fudis-pagination-item-link" [href]="pageHref(item - 1)" (click)="goToPage(item - 1, $event)">
+            <a
+              class="fudis-pagination-item fudis-pagination-item-link"
+              [href]="pageHref(item - 1)"
+              (click)="goToPage(item - 1, $event)"
+            >
               {{ item }}
             </a>
           </ng-template>
@@ -39,7 +52,7 @@
     (click)="goToPage(pageIndex + 1, $event)"
     class="fudis-button fudis-button__tertiary fudis-button__size__medium fudis-pagination-button__next"
   >
-    Next
+    {{ _paginationNextButton | async }}
     <span class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron"></span>
   </button>
 </nav>

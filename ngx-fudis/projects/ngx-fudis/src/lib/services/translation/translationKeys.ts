@@ -56,6 +56,10 @@ export interface FudisTranslationConfig {
     EXTERNAL_LINK: string;
   };
   PAGINATION: {
+    // Pagination next button label
+    BUTTON_NEXT: string;
+    // Pagination previous button label
+    BUTTON_PREVIOUS: string;
     // Prefix visible to screen reader
     PREFIX: string;
     // Aria-live announcement
@@ -152,6 +156,8 @@ export const en: FudisTranslationConfig = {
     EXTERNAL_LINK: '(opens in a new tab)',
   },
   PAGINATION: {
+    BUTTON_NEXT: 'Next',
+    BUTTON_PREVIOUS: 'Previous',
     PREFIX: 'Pagination',
     OPENED_PAGE: 'Opened page',
   },
@@ -240,6 +246,8 @@ export const fi: FudisTranslationConfig = {
     EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
   },
   PAGINATION: {
+    BUTTON_NEXT: 'Seuraava',
+    BUTTON_PREVIOUS: 'Edellinen',
     PREFIX: 'Sivutus',
     OPENED_PAGE: 'Avattu sivu',
   },
@@ -325,6 +333,8 @@ export const sv: FudisTranslationConfig = {
     MAX_LENGTH: 'tecken använt',
   },
   PAGINATION: {
+    BUTTON_NEXT: 'Nästa',
+    BUTTON_PREVIOUS: 'Tidigare',
     PREFIX: 'Paginering',
     OPENED_PAGE: 'Öppnad sida',
   },

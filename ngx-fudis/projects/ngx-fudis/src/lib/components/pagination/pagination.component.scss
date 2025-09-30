@@ -1,20 +1,20 @@
 @use '@funidata/fudis-core' as core;
 
 .fudis-pagination {
+  padding-top: core.$spacing-lg;
   display: flex;
-  align-items: baseline;
-  width: 536px;
 
   &-button {
     &__previous {
-      margin-right: core.$spacing-sm;
+      margin-right: core.$spacing-xs;
     }
     &__next {
-      margin-left: core.$spacing-sm;
+      margin-left: core.$spacing-xs;
     }
   }
 
   &-list {
+    margin: 0;
     list-style: none;
     padding-left: 0;
     display: flex;

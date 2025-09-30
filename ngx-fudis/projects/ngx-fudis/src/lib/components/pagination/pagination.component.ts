@@ -30,24 +30,31 @@ enum Ellipsis {
 export class PaginationComponent {
   constructor(
     private _translationService: FudisTranslationService,
-    private _idService: FudisIdService
+    private _idService: FudisIdService,
   ) {
     this._id = this._idService.getNewParentId('pagination');
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
+    this._paginationPreviousButton.next(
+      this._translationService.getTranslations()().PAGINATION.BUTTON_PREVIOUS,
+    );
+    this._paginationNextButton.next(
+      this._translationService.getTranslations()().PAGINATION.BUTTON_NEXT,
+    );
   }
 
   /**
-   * Aria-Label has always prefix `Pagination:`. Give aria-label that best describes the pagination in use.
+   * Aria-Label has always prefix `Pagination:`. Give aria-label that best describes the pagination
+   * in use
    */
   @Input({ required: true }) paginationAriaLabel: string;
 
   /**
-   * Total amount of pages.
+   * Total amount of pages
    */
   @Input() pageCount: number;
 
   /**
-   * Current page index.
+   * Current page index
    */
   @Input() pageIndex = 1;
 
@@ -56,6 +63,9 @@ export class PaginationComponent {
    */
   @Input() pageHref: (index: number) => string = (i) => `#${i + 1}`;
 
+  /**
+   * PageChange Emitter
+   */
   @Output() pageChange = new EventEmitter<number>();
 
   /**
@@ -70,8 +80,19 @@ export class PaginationComponent {
     this._translationService.getTranslations()().PAGINATION.PREFIX,
   );
 
-  protected hideButton: boolean = true;
+  /**
+   * Previous button label from Fudis translation keys
+   */
+  protected _paginationPreviousButton = new BehaviorSubject<string>('');
 
+  /**
+   * Next button label from Fudis translation keys
+   */
+  protected _paginationNextButton = new BehaviorSubject<string>('');
+
+  /**
+   * Returns an array of numbers from given starting to ending number
+   */
   protected range = (start: number, end: number): number[] => {
     const length = end - start + 1;
     return Array.from({ length }, (_, i) => start + i);
@@ -89,15 +110,26 @@ export class PaginationComponent {
     return this._id;
   }
 
+  /**
+   * Create total amount of pagination items
+   */
   get itemList(): (Ellipsis | number)[] {
     return this.createPaginationItemList(this.pageCount, this.pageIndex, this.siblingCount);
   }
 
+  /**
+   * Get translation for aria-live page openend announcement
+   */
   get liveAnnouncement(): string {
     if (this.pageCount === 0) return '';
-    return this._translationService.getTranslations()().PAGINATION.OPENED_PAGE + ` ${this.pageIndex + 1}`;
+    return (
+      this._translationService.getTranslations()().PAGINATION.OPENED_PAGE + ` ${this.pageIndex + 1}`
+    );
   }
 
+  /**
+   * Create function that determines when to show ellipsis on start or end of the pagination list
+   */
   private createPaginationItemList(
     pageCount: number,
     pageIndex: number,
@@ -124,6 +156,9 @@ export class PaginationComponent {
     ];
   }
 
+  /**
+   * Emit pageChange event on pagination item click
+   */
   goToPage(index: number, event?: Event) {
     event?.preventDefault();
     if (index >= 0 && index < this.pageCount) {
