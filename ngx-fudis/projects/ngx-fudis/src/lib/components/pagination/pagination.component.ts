@@ -5,6 +5,11 @@ import {
   ViewEncapsulation,
   Output,
   EventEmitter,
+  OnInit,
+  signal,
+  OnDestroy,
+  computed,
+  ElementRef,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
@@ -27,10 +32,11 @@ enum Ellipsis {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit, OnDestroy {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
+    private _elementRef: ElementRef<HTMLElement>,
   ) {
     this._id = this._idService.getNewParentId('pagination');
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
@@ -48,15 +54,23 @@ export class PaginationComponent {
    */
   @Input({ required: true }) paginationAriaLabel: string;
 
-  /**
-   * Total amount of pages
-   */
-  @Input() pageCount: number;
+  protected _pageCount = signal(0);
+
+  protected _pageIndex = signal(0);
 
   /**
-   * Current page index
+   * Set current page index
    */
-  @Input() pageIndex = 1;
+  @Input() set pageCount(value: number) {
+    this._pageCount.set(value);
+  }
+
+  /**
+   * Set total amount of pages
+   */
+  @Input() set pageIndex(value: number) {
+    this._pageIndex.set(value);
+  }
 
   /**
    * A function for generating the href of pages
@@ -64,14 +78,18 @@ export class PaginationComponent {
   @Input() pageHref: (index: number) => string = (i) => `#${i + 1}`;
 
   /**
+   * Internal input for the number of pages shown in each side of the current page
+   */
+  @Input() set siblingCount(value: number) {
+    this._siblingCount.set(value);
+  }
+
+  /**
    * PageChange Emitter
    */
   @Output() pageChange = new EventEmitter<number>();
 
-  /**
-   * The number of pages shown in each side of the current page
-   */
-  protected siblingCount = 2;
+  private _siblingCount = signal(2);
 
   /**
    * Prefix for aria-label from Fudis translation keys
@@ -103,6 +121,10 @@ export class PaginationComponent {
    */
   protected _id: string;
 
+  itemList = computed(() =>
+    this.createPaginationItemList(this._pageCount(), this._pageIndex(), this._siblingCount()),
+  );
+
   /**
    * Getter for id
    */
@@ -111,19 +133,13 @@ export class PaginationComponent {
   }
 
   /**
-   * Create total amount of pagination items
-   */
-  get itemList(): (Ellipsis | number)[] {
-    return this.createPaginationItemList(this.pageCount, this.pageIndex, this.siblingCount);
-  }
-
-  /**
    * Get translation for aria-live page openend announcement
    */
   get liveAnnouncement(): string {
-    if (this.pageCount === 0) return '';
+    if (this._pageCount() === 0) return '';
     return (
-      this._translationService.getTranslations()().PAGINATION.OPENED_PAGE + ` ${this.pageIndex + 1}`
+      this._translationService.getTranslations()().PAGINATION.OPENED_PAGE +
+      ` ${this._pageIndex() + 1}`
     );
   }
 
@@ -156,14 +172,37 @@ export class PaginationComponent {
     ];
   }
 
+  private observer?: ResizeObserver;
+
+  ngOnInit() {
+    this.observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentRect.width;
+
+        // update sibling count based on width
+        if (width < 465) {
+          this._siblingCount.set(1);
+        } else {
+          this._siblingCount.set(2);
+        }
+      }
+    });
+
+    this.observer.observe(this._elementRef.nativeElement);
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+  }
+
   /**
    * Emit pageChange event on pagination item click
    */
   goToPage(index: number, event?: Event) {
     event?.preventDefault();
-    if (index >= 0 && index < this.pageCount) {
+    if (index >= 0 && index < this._pageCount()) {
       this.pageChange.emit(index);
-      this.pageIndex = index;
+      this._pageIndex.set(index);
     }
   }
 }

@@ -7,9 +7,27 @@
   &-button {
     &__previous {
       margin-right: core.$spacing-xs;
+
+      &__text-content {
+        @include core.breakpoint('xs') {
+          display: none;
+        }
+        @include core.breakpoint('sm') {
+          display: block;
+        }
+      }
     }
     &__next {
       margin-left: core.$spacing-xs;
+
+      &__text-content {
+        @include core.breakpoint('xs') {
+          display: none;
+        }
+        @include core.breakpoint('sm') {
+          display: block;
+        }
+      }
     }
   }
 
