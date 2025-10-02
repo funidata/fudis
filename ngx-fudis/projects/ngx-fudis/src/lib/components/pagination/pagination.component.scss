@@ -1,93 +1,87 @@
 @use '@funidata/fudis-core' as core;
 
 .fudis-pagination {
-  padding-top: core.$spacing-lg;
   display: flex;
+  padding-top: core.$spacing-lg;
 
   &-button {
     &__previous {
       margin-right: core.$spacing-xs;
-
-      &__text-content {
-        @include core.breakpoint('xs') {
-          display: none;
-        }
-        @include core.breakpoint('sm') {
-          display: block;
-        }
-      }
     }
+
     &__next {
       margin-left: core.$spacing-xs;
+    }
 
-      &__text-content {
-        @include core.breakpoint('xs') {
-          display: none;
-        }
-        @include core.breakpoint('sm') {
-          display: block;
-        }
+    &__previous__text-content,
+    &__next__text-content {
+      @include core.breakpoint('xs') {
+        display: none;
+      }
+
+      @include core.breakpoint('sm') {
+        display: block;
       }
     }
   }
 
   &-list {
-    margin: 0;
-    list-style: none;
-    padding-left: 0;
     display: flex;
     align-items: baseline;
-  }
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
 
-  &-ellipsis {
-    margin-right: core.$spacing-xxs;
-    height: core.$spacing-lg;
-    width: core.$spacing-lg;
-    display: block;
-    text-align: center;
-  }
-}
+    &-item {
+      display: inline-block;
+      margin-right: core.$spacing-xxs;
+      border-radius: 50%;
+      width: core.$spacing-lg;
+      height: core.$spacing-lg;
+      /* stylelint-disable property-disallowed-list */
+      font-size: core.$body-text-md-font-size;
+      font-weight: core.$font-weight-medium;
 
-.fudis-pagination-item {
-  display: inline-block;
-  margin-right: core.$spacing-xxs;
-  height: core.$spacing-lg;
-  width: core.$spacing-lg;
-  font-size: core.$body-text-md-font-size;
-  font-weight: core.$font-weight-medium;
-  border-radius: 50%;
+      &-ellipsis {
+        display: block;
+        margin-right: core.$spacing-xxs;
+        width: core.$spacing-lg;
+        height: core.$spacing-lg;
+        text-align: center;
+      }
 
-  &-active {
-    @include core.text-color('primary');
-    @include core.border('2px', 'solid', 'primary');
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+      &-link {
+        @include core.text-color('primary');
 
-    position: relative;
-    font-family: core.$font-family;
-    overflow-wrap: anywhere;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        text-decoration: underline solid;
+        font-family: core.$font-family;
+        overflow-wrap: anywhere;
 
-    &:focus {
-      @include core.focus-generic;
-    }
-  }
+        &:focus {
+          @include core.focus-generic;
+        }
+      }
 
-  &-link {
-    @include core.text-color('primary');
+      &--active {
+        @include core.text-color('primary');
+        @include core.border('2px', 'solid', 'primary');
 
-    display: inline-block;
-    position: relative;
-    text-decoration: underline solid;
-    font-family: core.$font-family;
-    overflow-wrap: anywhere;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-family: core.$font-family;
+        overflow-wrap: anywhere;
 
-    &:focus {
-      @include core.focus-generic;
+        &:focus {
+          @include core.focus-generic;
+        }
+      }
     }
   }
 }

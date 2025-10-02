@@ -10,6 +10,9 @@ import {
   OnDestroy,
   computed,
   ElementRef,
+  ViewChild,
+  AfterViewChecked,
+  effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
@@ -19,6 +22,10 @@ import { IconComponent } from '../icon/icon.component';
 import { NgxFudisModule } from '../../ngx-fudis.module';
 import { ButtonComponent } from '../button/button.component';
 
+/**
+ * Enum representing pagination ellipsis markers\
+ * Used to indicate hidden page ranges.
+ */
 enum Ellipsis {
   start = 'start-ellipsis',
   end = 'end-ellipsis',
@@ -32,7 +39,7 @@ enum Ellipsis {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationComponent implements OnInit, OnDestroy {
+export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
@@ -46,7 +53,27 @@ export class PaginationComponent implements OnInit, OnDestroy {
     this._paginationNextButton.next(
       this._translationService.getTranslations()().PAGINATION.BUTTON_NEXT,
     );
+
+    /**
+     * Effect that tracks page index changes. Marks `hasUserChangedPage` as true when the current
+     * page differs from the previous one (ignoring the initial load).
+     */
+    effect(() => {
+      const curr = this._pageIndex();
+
+      if (
+        this.prevPageIndex !== undefined &&
+        this.prevPageIndex !== curr &&
+        !this.hasUserChangedPage
+      ) {
+        this.hasUserChangedPage = true;
+      }
+
+      this.prevPageIndex = curr;
+    });
   }
+
+  @ViewChild('activeItem') activeItemRef?: ElementRef<HTMLElement>;
 
   /**
    * Aria-Label has always prefix `Pagination:`. Give aria-label that best describes the pagination
@@ -54,19 +81,15 @@ export class PaginationComponent implements OnInit, OnDestroy {
    */
   @Input({ required: true }) paginationAriaLabel: string;
 
-  protected _pageCount = signal(0);
-
-  protected _pageIndex = signal(0);
-
   /**
-   * Set current page index
+   * Set total amount of pages
    */
   @Input() set pageCount(value: number) {
     this._pageCount.set(value);
   }
 
   /**
-   * Set total amount of pages
+   * Set current page index
    */
   @Input() set pageIndex(value: number) {
     this._pageIndex.set(value);
@@ -89,7 +112,20 @@ export class PaginationComponent implements OnInit, OnDestroy {
    */
   @Output() pageChange = new EventEmitter<number>();
 
-  private _siblingCount = signal(2);
+  /**
+   * Page index has been changed
+   */
+  protected hasUserChangedPage = false;
+
+  /**
+   * Protected signal for the total amount of pages
+   */
+  protected _pageCount = signal(0);
+
+  /**
+   * Protected signal for the current page index
+   */
+  protected _pageIndex = signal(0);
 
   /**
    * Prefix for aria-label from Fudis translation keys
@@ -121,6 +157,30 @@ export class PaginationComponent implements OnInit, OnDestroy {
    */
   protected _id: string;
 
+  /**
+   * Private signal for counting Pagination item visible siblings
+   */
+  private _siblingCount = signal(2);
+
+  /**
+   * After DOM is updated, restore focus to the new active element
+   */
+  private userSelectedIndex = -1;
+
+  /**
+   * Stores the previous page index for change detection
+   */
+  private prevPageIndex: number | undefined;
+
+  /**
+   * To observe container size changes and adjust Pagination sibling count based on viewport changes
+   */
+  private observer?: ResizeObserver;
+
+  /**
+   * Computed list of pagination items (page numbers + ellipses)\
+   * Recalculated whenever page count, current page, or sibling count changes.
+   */
   itemList = computed(() =>
     this.createPaginationItemList(this._pageCount(), this._pageIndex(), this._siblingCount()),
   );
@@ -154,10 +214,16 @@ export class PaginationComponent implements OnInit, OnDestroy {
     const startPages = this.range(1, Math.min(1, pageCount));
     const endPages = this.range(Math.max(pageCount, 2), pageCount);
 
+    /**
+     * Calculate the first sibling page number to display around the current page
+     */
     const siblingsStart = Math.max(
       Math.min(pageIndex + 1 - siblingCount, pageCount - 1 - siblingCount * 2 - 1),
       3,
     );
+    /**
+     * Calculate the last sibling page number to display around the current page
+     */
     const siblingsEnd = Math.min(
       Math.max(pageIndex + 1 + siblingCount, 1 + siblingCount * 2 + 2),
       endPages.length > 0 ? endPages[0] - 2 : pageCount - 1,
@@ -171,8 +237,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
       ...endPages,
     ];
   }
-
-  private observer?: ResizeObserver;
 
   ngOnInit() {
     this.observer = new ResizeObserver((entries) => {
@@ -191,6 +255,17 @@ export class PaginationComponent implements OnInit, OnDestroy {
     this.observer.observe(this._elementRef.nativeElement);
   }
 
+  /**
+   * After view updates, restore focus to the active page item if user selected one
+   */
+  ngAfterViewChecked(): void {
+    if (this.userSelectedIndex > -1 && this.activeItemRef) {
+      this.activeItemRef.nativeElement.focus();
+
+      this.userSelectedIndex = -1;
+    }
+  }
+
   ngOnDestroy(): void {
     this.observer?.disconnect();
   }
@@ -198,8 +273,10 @@ export class PaginationComponent implements OnInit, OnDestroy {
   /**
    * Emit pageChange event on pagination item click
    */
-  goToPage(index: number, event?: Event) {
+  goToPage(index: number, event?: Event, wasButtonClick = false) {
     event?.preventDefault();
+    this.userSelectedIndex = wasButtonClick ? -1 : index;
+
     if (index >= 0 && index < this._pageCount()) {
       this.pageChange.emit(index);
       this._pageIndex.set(index);
