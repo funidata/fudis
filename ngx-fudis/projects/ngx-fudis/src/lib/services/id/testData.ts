@@ -23,6 +23,7 @@ export const testDataBefore: FudisIdData = {
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    pagination: [],
     popover: [],
   },
   parents: {
@@ -30,7 +31,6 @@ export const testDataBefore: FudisIdData = {
     'checkbox-group': {},
     'language-badge-group': {},
     'radio-button-group': {},
-    pagination: {},
   },
   grandParents: {
     'description-list': {},
@@ -79,6 +79,7 @@ export const testComponentDataAfter: FudisIdData = {
       'custom-id-for-validator-error-message',
       'fudis-validator-error-message-3',
     ],
+    pagination: ['fudis-pagination-1', 'custom-id-for-pagination', 'fudis-pagination-3'],
     popover: ['fudis-popover-1', 'custom-id-for-popover', 'fudis-popover-3'],
   },
   parents: {
@@ -86,7 +87,6 @@ export const testComponentDataAfter: FudisIdData = {
     'checkbox-group': {},
     'language-badge-group': {},
     'radio-button-group': {},
-    pagination: {},
   },
   grandParents: {
     'description-list': {},
@@ -119,6 +119,7 @@ export const testParentDataAfter: FudisIdData = {
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    pagination: [],
     popover: [],
   },
   parents: {
@@ -190,23 +191,6 @@ export const testParentDataAfter: FudisIdData = {
         'fudis-radio-button-group-3-item-3',
       ],
     },
-    pagination: {
-      'fudis-pagination-1': [
-        'fudis-pagination-1-item-1',
-        'pagination-1-custom-child-id',
-        'fudis-pagination-1-item-3',
-      ],
-      'pagination-some-custom-id': [
-        'pagination-some-custom-id-item-1',
-        'pagination-2-custom-child-id',
-        'pagination-some-custom-id-item-3',
-      ],
-      'fudis-pagination-3': [
-        'fudis-pagination-3-item-1',
-        'pagination-3-custom-child-id',
-        'fudis-pagination-3-item-3',
-      ],
-    },
   },
   grandParents: {
     'description-list': {},
@@ -239,6 +223,7 @@ export const testGrandParentDataAfter: FudisIdData = {
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    pagination: [],
     popover: [],
   },
   parents: {
@@ -246,7 +231,6 @@ export const testGrandParentDataAfter: FudisIdData = {
     'checkbox-group': {},
     'language-badge-group': {},
     'radio-button-group': {},
-    pagination: {},
   },
   grandParents: {
     'description-list': {

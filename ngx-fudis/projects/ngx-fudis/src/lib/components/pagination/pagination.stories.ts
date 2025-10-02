@@ -10,8 +10,9 @@ const Template: StoryFn<PaginationComponent> = (args) => ({
   props: args,
   template: `
     <fudis-pagination
-      [pageCount]="20"
-      [pageIndex]="0"
+      [pageCount]="pageCount"
+      [pageIndex]="pageIndex"
+      [pageHref]="pageHref"
       [paginationAriaLabel]="'Example'"
       (pageChange)="pageIndex = $event"
     ></fudis-pagination>
@@ -19,3 +20,9 @@ const Template: StoryFn<PaginationComponent> = (args) => ({
 });
 
 export const Example = Template.bind({});
+
+Example.args = {
+  pageCount: 20,
+  pageIndex: 0,
+  pageHref: (i: number) => `/products?page=${i + 1}`,
+}

@@ -30,6 +30,7 @@ export class FudisIdService {
       heading: [],
       'localized-text-group': [],
       link: [],
+      pagination: [],
       popover: [],
       section: [],
       'text-area': [],
@@ -41,7 +42,6 @@ export class FudisIdService {
       'checkbox-group': {},
       'language-badge-group': {},
       'radio-button-group': {},
-      pagination: {},
     },
     grandParents: {
       'description-list': {},

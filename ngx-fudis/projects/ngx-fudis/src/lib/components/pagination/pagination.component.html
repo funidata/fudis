@@ -1,4 +1,5 @@
 <nav
+  [id]="id"
   class="fudis-pagination"
   [attr.aria-label]="(_paginationPrefix | async) + ': ' + paginationAriaLabel"
 >
@@ -7,6 +8,7 @@
   </span>
   <button
     *ngIf="_pageIndex() > 0"
+    [id]="id + '-button-prev'"
     class="fudis-button fudis-button__tertiary fudis-button__size__medium fudis-pagination-button__previous"
     (click)="goToPage(_pageIndex() - 1, $event, true)"
   >
@@ -52,6 +54,7 @@
   </ul>
   <button
     *ngIf="_pageIndex() < _pageCount() - 1"
+    [id]="id + '-button-next'"
     (click)="goToPage(_pageIndex() + 1, $event, true)"
     class="fudis-button fudis-button__tertiary fudis-button__size__medium fudis-pagination-button__next"
   >

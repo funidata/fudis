@@ -24,6 +24,7 @@ export const fudisIdComponents = [
   'text-area',
   'text-input',
   'validator-error-message',
+  'pagination',
   'popover',
 ] as const;
 
@@ -32,7 +33,6 @@ export const fudisIdParents = [
   'checkbox-group',
   'language-badge-group',
   'radio-button-group',
-  'pagination',
 ] as const;
 
 export const fudisIdGrandParents = [

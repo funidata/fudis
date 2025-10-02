@@ -18,9 +18,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { BehaviorSubject } from 'rxjs';
 import { FudisIdService } from '../../services/id/id.service';
 import { CommonModule } from '@angular/common';
-import { IconComponent } from '../icon/icon.component';
 import { NgxFudisModule } from '../../ngx-fudis.module';
-import { ButtonComponent } from '../button/button.component';
 
 /**
  * Enum representing pagination ellipsis markers\
@@ -33,7 +31,6 @@ enum Ellipsis {
 @Component({
   selector: 'fudis-pagination',
   imports: [CommonModule, NgxFudisModule],
-  providers: [IconComponent, ButtonComponent],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -45,7 +42,6 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
     private _idService: FudisIdService,
     private _elementRef: ElementRef<HTMLElement>,
   ) {
-    this._id = this._idService.getNewParentId('pagination');
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
     this._paginationPreviousButton.next(
       this._translationService.getTranslations()().PAGINATION.BUTTON_PREVIOUS,
@@ -73,7 +69,15 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
     });
   }
 
+  /**
+   * Template reference for the active item element
+   */
   @ViewChild('activeItem') activeItemRef?: ElementRef<HTMLElement>;
+
+  /**
+   * Id for Pagination. By default generated.
+   */
+  @Input() id: string;
 
   /**
    * Aria-Label has always prefix `Pagination:`. Give aria-label that best describes the pagination
@@ -96,12 +100,13 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   }
 
   /**
-   * A function for generating the href of pages
+   * A function that receives the **0-based page index** and returns the URL for that page.
+   * Example: `(i) => '/products?page=' + (i + 1)`
    */
   @Input() pageHref: (index: number) => string = (i) => `#${i + 1}`;
 
   /**
-   * Internal input for the number of pages shown in each side of the current page
+   * Internal input for setting the number of pages shown in each side of the current page
    */
   @Input() set siblingCount(value: number) {
     this._siblingCount.set(value);
@@ -186,13 +191,6 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   );
 
   /**
-   * Getter for id
-   */
-  get id(): string {
-    return this._id;
-  }
-
-  /**
    * Get translation for aria-live page openend announcement
    */
   get liveAnnouncement(): string {
@@ -239,6 +237,12 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   }
 
   ngOnInit() {
+    if (this.id) {
+      this._idService.addNewId('pagination', this.id);
+    } else {
+      this.id = this._idService.getNewId('pagination');
+    }
+
     this.observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const width = entry.contentRect.width;
