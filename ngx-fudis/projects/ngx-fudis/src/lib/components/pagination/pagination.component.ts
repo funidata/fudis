@@ -98,7 +98,7 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   /**
    * Set total amount of pages
    */
-  @Input() set pageCount(value: number) {
+  @Input({ required: true }) set pageCount(value: number) {
     this._pageCount.set(value);
   }
 
