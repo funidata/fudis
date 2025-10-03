@@ -9,7 +9,7 @@ test("pagination default", async ({ page }) => {
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
-  await page.keyboard.press("Enter"); // Select 7 item
+  await page.keyboard.press("Enter"); // Select 5 item
 
   await expect(page).toHaveScreenshot("pagination-2-active-item.png");
 });

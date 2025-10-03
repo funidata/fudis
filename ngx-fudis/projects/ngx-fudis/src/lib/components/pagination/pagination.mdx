@@ -7,7 +7,7 @@ import { paginationExclude } from "../../utilities/storybook";
 
 # Pagination
 
-Pagination is a navigation element that can be used on pages or elements. It provides controls for switching content across multiple pages. 
+Pagination is a navigation element that can be used on pages or elements. It provides controls for switching content across multiple pages.
 Use Pagination only for content which structure does not change between pages eg. tables and lists.
 
 ## Example
@@ -16,7 +16,7 @@ Use Pagination only for content which structure does not change between pages eg
 
 ## Usage Guidelines
 
-````
+```
 <fudis-pagination
   [pageCount]="20"
   [pageIndex]="0"
@@ -25,11 +25,11 @@ Use Pagination only for content which structure does not change between pages eg
   (pageChange)="onPageChange($event)">
 </fudis-pagination>
 
-````
+```
 
 ### Properties
 
-Pagination requires `pageCount` in order to generate total amount of pages. Additionally current `pageIndex` can be provided, the first page starts with index 0. Pagination has also a mandatory 
+Pagination requires `pageCount` in order to generate total amount of pages. Additionally current `pageIndex` can be provided, the first page starts with index 0. Pagination has also a mandatory
 `paginationAriaLabel` for differentiating it from other site navigational elements. `pageHref` input takes in a function that receives the zero-based page index and returns the URL string for the page link.
 
 ### Accessibility

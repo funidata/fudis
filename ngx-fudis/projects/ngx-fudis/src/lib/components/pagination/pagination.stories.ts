@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/angular';
 import { PaginationComponent } from './pagination.component';
 import readme from './pagination.mdx';
-import { paginationExclude} from '../../utilities/storybook';
+import { paginationExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Pagination',
