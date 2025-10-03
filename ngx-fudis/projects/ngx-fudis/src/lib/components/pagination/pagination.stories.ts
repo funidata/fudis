@@ -1,9 +1,15 @@
 import { Meta, StoryFn } from '@storybook/angular';
 import { PaginationComponent } from './pagination.component';
+import readme from './pagination.mdx';
 
 export default {
   title: 'Components/Pagination',
   component: PaginationComponent,
+  parameters: {
+    docs: {
+      page: readme,
+    },
+  },
 } as Meta;
 
 const Template: StoryFn<PaginationComponent> = (args) => ({

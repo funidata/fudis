@@ -8,27 +8,32 @@
     &__previous {
       margin-right: core.$spacing-xs;
 
-      @include core.breakpoint('xs') {
+      &__text-content {
+        display: block;
+      }
+
+      &--collapsed {
         min-width: core.$spacing-xl;
+
+        &__text-content {
+          display: none;
+        }
       }
     }
 
     &__next {
       margin-left: core.$spacing-xs;
 
-      @include core.breakpoint('xs') {
-        min-width: core.$spacing-xl;
-      }
-    }
-
-    &__previous__text-content,
-    &__next__text-content {
-      @include core.breakpoint('xs') {
-        display: none;
-      }
-
-      @include core.breakpoint('sm') {
+      &__text-content {
         display: block;
+      }
+
+      &--collapsed {
+        min-width: core.$spacing-xl;
+
+        &__text-content {
+          display: none;
+        }
       }
     }
   }

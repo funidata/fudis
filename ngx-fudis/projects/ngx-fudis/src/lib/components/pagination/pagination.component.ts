@@ -178,6 +178,16 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   protected _paginationNextButtonAria = new BehaviorSubject<string>('');
 
   /**
+   * Main CSS classes for buttons
+   */
+  protected _mainCssPrevClass: BehaviorSubject<string> = new BehaviorSubject<string>(
+    'fudis-pagination-button__previous',
+  );
+  protected _mainCssNextClass: BehaviorSubject<string> = new BehaviorSubject<string>(
+    'fudis-pagination-button__next',
+  );
+
+  /**
    * Returns an array of numbers from given starting to ending number
    */
   protected range = (start: number, end: number): number[] => {
@@ -230,6 +240,19 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   }
 
   /**
+   * Set button collapsed styles if Pagination container is smaller than < 465px
+   */
+  private _setClasses(collapsed: boolean): void {
+    if (collapsed) {
+      this._mainCssPrevClass.next('fudis-pagination-button__previous--collapsed');
+      this._mainCssNextClass.next('fudis-pagination-button__next--collapsed');
+    } else {
+      this._mainCssPrevClass.next('fudis-pagination-button__previous');
+      this._mainCssNextClass.next('fudis-pagination-button__next');
+    }
+  }
+
+  /**
    * Create function that determines when to show ellipsis on start or end of the pagination list
    */
   private createPaginationItemList(
@@ -278,8 +301,10 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
         // update sibling count based on width
         if (width < 465) {
           this._siblingCount.set(1);
+          this._setClasses(true);
         } else {
           this._siblingCount.set(2);
+          this._setClasses(false);
         }
       }
     });

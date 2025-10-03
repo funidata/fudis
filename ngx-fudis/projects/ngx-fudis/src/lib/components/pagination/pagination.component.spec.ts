@@ -19,7 +19,7 @@ describe('PaginationComponent', () => {
     component.pageCount = 5;
     component.pageIndex = 0;
     component.pageHref = (i) => '/products?page=' + (i + 1);
-    component.paginationAriaLabel = 'Test pagination navigation'
+    component.paginationAriaLabel = 'Test pagination navigation';
     fixture.detectChanges();
   });
 

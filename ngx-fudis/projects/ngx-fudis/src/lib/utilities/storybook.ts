@@ -326,6 +326,18 @@ export const notificationExclude: RegExp = excludeRegex(['articleElement', 'focu
 
 export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
 
+export const paginationExclude: RegExp = excludeRegex([
+  'itemList',
+  'hasUserChangedPage',
+  'observer',
+  'prevPageIndex',
+  'range',
+  'userSelectedIndex',
+  'siblingCount',
+  'createPaginationItemList',
+  'activeItemRef',
+]);
+
 /**
  * Radio Button Group
  */
