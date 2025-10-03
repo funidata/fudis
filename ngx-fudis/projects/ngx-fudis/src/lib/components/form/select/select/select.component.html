@@ -47,7 +47,7 @@
         [attr.readonly]="variant === 'dropdown' ? true : null"
         [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
         [attr.placeholder]="placeholder"
-        [attr.aria-controls]="id + '-dropdown'"
+        [attr.aria-controls]="_optionsLoadedOnce ? id + '-dropdown' : null"
         [attr.aria-activedescendant]="
           control.value ? activeDescendant(id, control.value.label) : undefined
         "
