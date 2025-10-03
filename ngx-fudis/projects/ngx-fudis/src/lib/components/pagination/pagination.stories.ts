@@ -25,4 +25,4 @@ Example.args = {
   pageCount: 20,
   pageIndex: 0,
   pageHref: (i: number) => `/products?page=${i + 1}`,
-}
+};

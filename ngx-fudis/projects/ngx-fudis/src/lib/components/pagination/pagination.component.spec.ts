@@ -49,6 +49,7 @@ describe('PaginationComponent', () => {
 
     const activeItem = getElement(fixture, '.fudis-pagination-list-item--active');
     expect(activeItem.getAttribute('aria-current')).toEqual('page');
+    expect(activeItem.getAttribute('aria-label')).toEqual('3, current page');
     expect(activeItem.textContent).toEqual(' 3 ');
   });
 
@@ -59,7 +60,7 @@ describe('PaginationComponent', () => {
       const newIndex = index + 2;
       expect(item.attributes['href']).toEqual(`/products?page=${newIndex}`);
     });
-  })
+  });
 
   it('should emit pageChange when a page is clicked', () => {
     jest.spyOn(component.pageChange, 'emit');
@@ -75,12 +76,20 @@ describe('PaginationComponent', () => {
     expect(component.pageChange.emit).not.toHaveBeenCalled();
   });
 
-  it('should have the correct aria-live announcement after page changed', () => {
+  it('should have the correct aria-labels and aria-live announcement after page changed', () => {
     const thirdPage = fixture.debugElement.queryAll(By.css('.fudis-pagination-list-item'))[2];
     thirdPage.nativeElement.click();
     fixture.detectChanges();
 
     const ariaLive = getElement(fixture, '.fudis-visually-hidden');
     expect(ariaLive.textContent).toEqual(' Opened page 3 ');
+
+    const prevButton = getElement(fixture, '#fudis-pagination-1-button-prev');
+    const nextButton = getElement(fixture, '#fudis-pagination-1-button-next');
+    const currentPage = getElement(fixture, '.fudis-pagination-list-item--active');
+
+    expect(prevButton.getAttribute('aria-label')).toEqual('Previous, page 2');
+    expect(nextButton.getAttribute('aria-label')).toEqual('Next, page 4');
+    expect(currentPage.getAttribute('aria-label')).toEqual('3, current page');
   });
 });

@@ -7,10 +7,18 @@
   &-button {
     &__previous {
       margin-right: core.$spacing-xs;
+
+      @include core.breakpoint('xs') {
+        min-width: core.$spacing-xl;
+      }
     }
 
     &__next {
       margin-left: core.$spacing-xs;
+
+      @include core.breakpoint('xs') {
+        min-width: core.$spacing-xl;
+      }
     }
 
     &__previous__text-content,

@@ -9,6 +9,7 @@
   <button
     *ngIf="_pageIndex() > 0"
     [id]="id + '-button-prev'"
+    [attr.aria-label]="((_paginationPreviousButtonAria | async) || '') + ' ' + _pageIndex()"
     class="fudis-button fudis-button__tertiary fudis-button__size__medium fudis-pagination-button__previous"
     (click)="goToPage(_pageIndex() - 1, $event, true)"
   >
@@ -34,6 +35,7 @@
               #activeItem
               class="fudis-pagination-list-item fudis-pagination-list-item--active"
               aria-current="page"
+              [attr.aria-label]="item + ', ' + (_paginationCurrent | async)"
               tabindex="-1"
             >
               {{ item }}
@@ -43,6 +45,9 @@
             <a
               class="fudis-pagination-list-item fudis-pagination-list-item-link"
               [href]="pageHref(item - 1)"
+              [attr.aria-label]="
+                item === _pageCount() ? item + ', ' + (_paginationLast | async) : item
+              "
               (click)="goToPage(item - 1, $event)"
             >
               {{ item }}
@@ -56,6 +61,7 @@
     *ngIf="_pageIndex() < _pageCount() - 1"
     [id]="id + '-button-next'"
     (click)="goToPage(_pageIndex() + 1, $event, true)"
+    [attr.aria-label]="((_paginationNextButtonAria | async) || '') + ' ' + (_pageIndex() + 2)"
     class="fudis-button fudis-button__tertiary fudis-button__size__medium fudis-pagination-button__next"
   >
     <span class="fudis-pagination-button__next__text-content">{{

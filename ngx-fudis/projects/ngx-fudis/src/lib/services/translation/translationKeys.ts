@@ -56,14 +56,22 @@ export interface FudisTranslationConfig {
     EXTERNAL_LINK: string;
   };
   PAGINATION: {
-    // Pagination next button label
-    BUTTON_NEXT: string;
-    // Pagination previous button label
-    BUTTON_PREVIOUS: string;
+    BUTTON: {
+      NEXT: {
+        LABEL: string;
+        ARIA_LABEL: string;
+      };
+      PREVIOUS: {
+        LABEL: string;
+        ARIA_LABEL: string;
+      };
+    };
     // Prefix visible to screen reader
     PREFIX: string;
     // Aria-live announcement
     OPENED_PAGE: string;
+    CURRENT_PAGE: string;
+    LAST_PAGE: string;
   };
   SELECT: {
     DISABLED: string;
@@ -156,10 +164,20 @@ export const en: FudisTranslationConfig = {
     EXTERNAL_LINK: '(opens in a new tab)',
   },
   PAGINATION: {
-    BUTTON_NEXT: 'Next',
-    BUTTON_PREVIOUS: 'Previous',
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Next',
+        ARIA_LABEL: 'Next, page',
+      },
+      PREVIOUS: {
+        LABEL: 'Previous',
+        ARIA_LABEL: 'Previous, page',
+      },
+    },
     PREFIX: 'Pagination',
     OPENED_PAGE: 'Opened page',
+    CURRENT_PAGE: 'current page',
+    LAST_PAGE: 'last page',
   },
   SELECT: {
     DISABLED: 'Disabled',
@@ -246,10 +264,20 @@ export const fi: FudisTranslationConfig = {
     EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
   },
   PAGINATION: {
-    BUTTON_NEXT: 'Seuraava',
-    BUTTON_PREVIOUS: 'Edellinen',
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Seuraava',
+        ARIA_LABEL: 'Seuraava, sivu',
+      },
+      PREVIOUS: {
+        LABEL: 'Edellinen',
+        ARIA_LABEL: 'Edellinen, sivu',
+      },
+    },
     PREFIX: 'Sivutus',
     OPENED_PAGE: 'Avattu sivu',
+    CURRENT_PAGE: 'nykyinen sivu',
+    LAST_PAGE: 'viimeinen sivu',
   },
   SELECT: {
     DISABLED: 'Ei valittavissa',
@@ -333,10 +361,20 @@ export const sv: FudisTranslationConfig = {
     MAX_LENGTH: 'tecken använt',
   },
   PAGINATION: {
-    BUTTON_NEXT: 'Nästa',
-    BUTTON_PREVIOUS: 'Tidigare',
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Nästa',
+        ARIA_LABEL: 'Nästa, sida',
+      },
+      PREVIOUS: {
+        LABEL: 'Tidigare',
+        ARIA_LABEL: 'Tidigare, sida',
+      },
+    },
     PREFIX: 'Paginering',
     OPENED_PAGE: 'Öppnad sida',
+    CURRENT_PAGE: 'aktuell sida',
+    LAST_PAGE: 'sista sida',
   },
   SELECT: {
     DISABLED: 'Inaktiverad',

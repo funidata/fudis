@@ -43,11 +43,21 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
     private _elementRef: ElementRef<HTMLElement>,
   ) {
     this._paginationPrefix.next(this._translationService.getTranslations()().PAGINATION.PREFIX);
+    this._paginationCurrent.next(
+      this._translationService.getTranslations()().PAGINATION.CURRENT_PAGE,
+    );
+    this._paginationLast.next(this._translationService.getTranslations()().PAGINATION.LAST_PAGE);
     this._paginationPreviousButton.next(
-      this._translationService.getTranslations()().PAGINATION.BUTTON_PREVIOUS,
+      this._translationService.getTranslations()().PAGINATION.BUTTON.PREVIOUS.LABEL,
     );
     this._paginationNextButton.next(
-      this._translationService.getTranslations()().PAGINATION.BUTTON_NEXT,
+      this._translationService.getTranslations()().PAGINATION.BUTTON.NEXT.LABEL,
+    );
+    this._paginationPreviousButtonAria.next(
+      this._translationService.getTranslations()().PAGINATION.BUTTON.PREVIOUS.ARIA_LABEL,
+    );
+    this._paginationNextButtonAria.next(
+      this._translationService.getTranslations()().PAGINATION.BUTTON.NEXT.ARIA_LABEL,
     );
 
     /**
@@ -100,8 +110,8 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   }
 
   /**
-   * A function that receives the **0-based page index** and returns the URL for that page.
-   * Example: `(i) => '/products?page=' + (i + 1)`
+   * A function that receives the **0-based page index** and returns the URL for that page. Example:
+   * `(i) => '/products?page=' + (i + 1)`
    */
   @Input() pageHref: (index: number) => string = (i) => `#${i + 1}`;
 
@@ -135,9 +145,17 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   /**
    * Prefix for aria-label from Fudis translation keys
    */
-  protected _paginationPrefix = new BehaviorSubject<string>(
-    this._translationService.getTranslations()().PAGINATION.PREFIX,
-  );
+  protected _paginationPrefix = new BehaviorSubject<string>('');
+
+  /**
+   * Current page aria-label from Fudis translation keys
+   */
+  protected _paginationCurrent = new BehaviorSubject<string>('');
+
+  /**
+   * Last page aria-label from Fudis translation keys
+   */
+  protected _paginationLast = new BehaviorSubject<string>('');
 
   /**
    * Previous button label from Fudis translation keys
@@ -148,6 +166,16 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
    * Next button label from Fudis translation keys
    */
   protected _paginationNextButton = new BehaviorSubject<string>('');
+
+  /**
+   * Previous button aria-label from Fudis translation keys
+   */
+  protected _paginationPreviousButtonAria = new BehaviorSubject<string>('');
+
+  /**
+   * Next button aria-label from Fudis translation keys
+   */
+  protected _paginationNextButtonAria = new BehaviorSubject<string>('');
 
   /**
    * Returns an array of numbers from given starting to ending number
