@@ -105,7 +105,7 @@ jobs:
             --mount type=bind,source=./coverage,target=/usr/src/app/projects/ngx-fudis/coverage \
             fudis-test npm test
       - name: Upload Coverage Report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: coverage
           path: coverage
@@ -161,7 +161,7 @@ jobs:
             fudis-pw \
             npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
       - name: Upload blob report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: blob-report-${{ matrix.shardIndex }}
@@ -195,7 +195,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
         working-directory: test
       - name: Upload HTML report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: e2e-test-report--attempt-${{ github.run_attempt }}
           path: test/playwright-report
