@@ -33,7 +33,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
@@ -53,7 +53,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
@@ -90,7 +90,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
@@ -105,7 +105,7 @@ jobs:
             --mount type=bind,source=./coverage,target=/usr/src/app/projects/ngx-fudis/coverage \
             fudis-test npm test
       - name: Upload Coverage Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coverage
           path: coverage
@@ -135,7 +135,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
@@ -161,7 +161,7 @@ jobs:
             fudis-pw \
             npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
       - name: Upload blob report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:
           name: blob-report-${{ matrix.shardIndex }}
@@ -186,7 +186,7 @@ jobs:
         run: npm ci
         working-directory: test
       - name: Download blob reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: test/all-blob-reports
           pattern: blob-report-*
@@ -195,7 +195,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
         working-directory: test
       - name: Upload HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: e2e-test-report--attempt-${{ github.run_attempt }}
           path: test/playwright-report
