@@ -141,12 +141,14 @@ jobs:
           path: /tmp
       - name: Load image
         run: docker load --input /tmp/fudis-test.image.tar
+      - name: Set container name
+        run: echo "CONTAINER_NAME=fudis-vr-test-${{ github.run_id }}" >> $GITHUB_ENV
       - name: Start Storybook
-        run: docker run -d -p 6006:6006 fudis-test npm run storybook
+        run: docker run --name $CONTAINER_NAME -d -p 6006:6006 fudis-test npm run storybook
       - name: Build Playwright image
         run: docker build -t fudis-pw test/
       - name: Wait for Storybook server to be up
-        run: curl --head -X GET --retry 10 --retry-connrefused --retry-delay 5 http://localhost:6006
+        run: curl --head -X GET --retry 10 --retry-all-errors --retry-delay 5 http://localhost:6006
       - name: Create test output directories for mounts
         run: mkdir test/test-results test/playwright-report test/blob-report
       - name: Run visual regression tests
@@ -167,6 +169,11 @@ jobs:
           name: blob-report-${{ matrix.shardIndex }}
           path: test/blob-report/
           retention-days: 1
+      - name: Print debug output
+        if: failure()
+        run: |
+          docker ps
+          docker logs $CONTAINER_NAME
 
   # Combine blob reports from matrix shards into a single Playwright report.
   playwright-report:
