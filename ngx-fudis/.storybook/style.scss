@@ -46,3 +46,11 @@ tr td p {
     background-color: #fdefb4;
   }
 }
+
+/* Disables transform on Docs Canvas (usually used to display component examples).
+ * Storybook's transform style was first detected to break Select's dropdown positioning but is now targeted to all stories.
+ * If this is found to cause issues later on, we should target the override to only stories which includes Selects/Multiselects.
+ */
+.docs-story div[scale] {
+  transform: none !important;
+}

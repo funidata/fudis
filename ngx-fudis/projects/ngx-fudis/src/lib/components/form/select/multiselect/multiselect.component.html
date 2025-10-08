@@ -50,7 +50,7 @@
         [attr.readonly]="variant === 'dropdown' ? true : null"
         [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
         [attr.placeholder]="placeholder"
-        [attr.aria-controls]="id + '-dropdown'"
+        [attr.aria-controls]="_optionsLoadedOnce ? id + '-dropdown' : null"
         [attr.tabindex]="!control.disabled && !disabled ? null : -1"
         [attr.aria-expanded]="dropdownOpen"
         [attr.aria-disabled]="control.disabled || disabled"
