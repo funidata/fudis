@@ -141,10 +141,8 @@ jobs:
           path: /tmp
       - name: Load image
         run: docker load --input /tmp/fudis-test.image.tar
-      - name: Set container name
-        run: echo "CONTAINER_NAME=fudis-vr-test-${{ github.run_id }}" >> $GITHUB_ENV
       - name: Start Storybook
-        run: docker run --name $CONTAINER_NAME -d -p 6006:6006 fudis-test npm run storybook
+        run: docker run --name fudis-vr-test -d -p 6006:6006 fudis-test npm run storybook
       - name: Build Playwright image
         run: docker build -t fudis-pw test/
       - name: Wait for Storybook server to be up
@@ -173,7 +171,7 @@ jobs:
         if: failure()
         run: |
           docker ps
-          docker logs $CONTAINER_NAME
+          docker logs fudis-vr-test
 
   # Combine blob reports from matrix shards into a single Playwright report.
   playwright-report:
