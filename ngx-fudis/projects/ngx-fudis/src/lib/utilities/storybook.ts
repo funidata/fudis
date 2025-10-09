@@ -83,6 +83,8 @@ export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
 
 export const buttonControlsExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'id',
+  'handleBlur',
   'handleClick',
   'labelHidden',
   'asMenuButton',
@@ -93,6 +95,8 @@ export const buttonControlsExclude: RegExp = excludeRegex([
 
 export const buttonIconOnlyExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'id',
+  'handleBlur',
   'handleClick',
   'asMenuButton',
   'type',
@@ -326,7 +330,7 @@ export const notificationExclude: RegExp = excludeRegex(['articleElement', 'focu
 
 export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
 
-export const paginationExclude: RegExp = excludeRegex([
+export const paginationCommonExclude: string[] = [
   'itemList',
   'hasUserChangedPage',
   'observer',
@@ -336,6 +340,15 @@ export const paginationExclude: RegExp = excludeRegex([
   'siblingCount',
   'createPaginationItemList',
   'activeItemRef',
+];
+export const paginationArgsTableExclude: RegExp = excludeRegex([...paginationCommonExclude]);
+
+export const paginationControlsExclude: RegExp = excludeRegex([
+  ...paginationCommonExclude,
+  'id',
+  'pageHref',
+  'pageChange',
+  'goToPage',
 ]);
 
 /**

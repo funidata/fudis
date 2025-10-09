@@ -56,6 +56,7 @@ describe('PaginationComponent', () => {
   it('should generate correct href id for list item links', () => {
     const pageItems = fixture.debugElement.queryAll(By.css('.fudis-pagination-list-item-link'));
 
+    // The first link item starts with href 2, since current active page href is set to 1
     pageItems.forEach((item, index) => {
       const newIndex = index + 2;
       expect(item.attributes['href']).toEqual(`/products?page=${newIndex}`);

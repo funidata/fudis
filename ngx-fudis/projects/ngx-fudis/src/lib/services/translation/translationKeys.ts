@@ -367,13 +367,13 @@ export const sv: FudisTranslationConfig = {
         ARIA_LABEL: 'Nästa, sida',
       },
       PREVIOUS: {
-        LABEL: 'Tidigare',
-        ARIA_LABEL: 'Tidigare, sida',
+        LABEL: 'Föregående',
+        ARIA_LABEL: 'Föregående, sida',
       },
     },
     PREFIX: 'Paginering',
     OPENED_PAGE: 'Öppnad sida',
-    CURRENT_PAGE: 'aktuell sida',
+    CURRENT_PAGE: 'nuvarande sida',
     LAST_PAGE: 'sista sida',
   },
   SELECT: {

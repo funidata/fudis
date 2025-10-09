@@ -65,17 +65,17 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
      * page differs from the previous one (ignoring the initial load).
      */
     effect(() => {
-      const curr = this._pageIndex();
+      const current = this._pageIndex();
 
       if (
         this.prevPageIndex !== undefined &&
-        this.prevPageIndex !== curr &&
+        this.prevPageIndex !== current &&
         !this.hasUserChangedPage
       ) {
         this.hasUserChangedPage = true;
       }
 
-      this.prevPageIndex = curr;
+      this.prevPageIndex = current;
     });
   }
 
@@ -188,6 +188,14 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   );
 
   /**
+   * Computed list of pagination items (page numbers + ellipses)\
+   * Recalculated whenever page count, current page, or sibling count changes.
+   */
+  protected itemList = computed(() =>
+    this.createPaginationItemList(this._pageCount(), this._pageIndex(), this._siblingCount()),
+  );
+
+  /**
    * Returns an array of numbers from given starting to ending number
    */
   protected range = (start: number, end: number): number[] => {
@@ -219,14 +227,6 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
    * To observe container size changes and adjust Pagination sibling count based on viewport changes
    */
   private observer?: ResizeObserver;
-
-  /**
-   * Computed list of pagination items (page numbers + ellipses)\
-   * Recalculated whenever page count, current page, or sibling count changes.
-   */
-  itemList = computed(() =>
-    this.createPaginationItemList(this._pageCount(), this._pageIndex(), this._siblingCount()),
-  );
 
   /**
    * Get translation for aria-live page openend announcement
@@ -267,14 +267,14 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
      * Calculate the first sibling page number to display around the current page
      */
     const siblingsStart = Math.max(
-      Math.min(pageIndex + 1 - siblingCount, pageCount - 1 - siblingCount * 2 - 1),
+      Math.min((pageIndex + 1) - siblingCount, ((pageCount - 1) - (siblingCount * 2)) - 1),
       3,
     );
     /**
      * Calculate the last sibling page number to display around the current page
      */
     const siblingsEnd = Math.min(
-      Math.max(pageIndex + 1 + siblingCount, 1 + siblingCount * 2 + 2),
+      Math.max((pageIndex + 1) + siblingCount, (1 + (siblingCount * 2)) + 2),
       endPages.length > 0 ? endPages[0] - 2 : pageCount - 1,
     );
 

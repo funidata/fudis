@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
 import { PaginationComponent } from "./pagination.component";
 import * as PaginationStories from "./pagination.stories";
-import { paginationExclude } from "../../utilities/storybook";
+import { paginationArgsTableExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Pagination" />
 
@@ -29,18 +29,21 @@ Use Pagination only for content which structure does not change between pages eg
 
 ### Properties
 
-Pagination requires `pageCount` in order to generate total amount of pages. Additionally current `pageIndex` can be provided, the first page starts with index 0. Pagination has also a mandatory
-`paginationAriaLabel` for differentiating it from other site navigational elements. `pageHref` input takes in a function that receives the zero-based page index and returns the URL string for the page link.
+Pagination requires `pageCount` in order to generate total amount of pages. Mandatory
+`paginationAriaLabel` input is used for differentiating pagination from other site navigational elements.
+
+`pageIndex` input defines the currently active page, starting from 0 for the first page. This value controls which page number is visually highlighted and determines the current focus and navigation state.
+`pageHref` input takes in a function that receives the zero-based page index and returns the URL string for the page link.
 
 ### Accessibility
 
-- Pagination has `aria-live:"polite"` announcement for informing when page have been changed.
+- Pagination has `aria-live: polite` announcement for informing when page have been changed.
 - Aria-labels are used for describing current, previous and next page number.
 - Keyboard navigation:
-  - `Tab`/ `Shift` move focus between pagination links.
-  - `Enter` is usaed for selecting key.
+  - `Tab`/ `Shift + Tab` move focus between pagination links.
+  - `Enter` is used for selecting key.
   - Focus is preserved on the active element after a page change.
 
 ## Properties
 
-<ArgTypes of={PaginationComponent} exclude={paginationExclude} />
+<ArgTypes of={PaginationComponent} exclude={paginationArgsTableExclude} />
