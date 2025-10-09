@@ -33,6 +33,7 @@ Pagination requires `pageCount` in order to generate total amount of pages. Mand
 `paginationAriaLabel` input is used for differentiating pagination from other site navigational elements.
 
 `pageIndex` input defines the currently active page, starting from 0 for the first page. This value controls which page number is visually highlighted and determines the current focus and navigation state.
+If given pageIndex is outside of given pageCount scope, pageIndex will be reset to either first or last item index.
 `pageHref` input takes in a function that receives the zero-based page index and returns the URL string for the page link.
 
 ### Accessibility

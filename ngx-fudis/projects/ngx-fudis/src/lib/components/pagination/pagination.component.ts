@@ -106,7 +106,15 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
    * Set current page index
    */
   @Input() set pageIndex(value: number) {
-    this._pageIndex.set(value);
+    /**
+     * Prevent values that are outside of pageCount scope
+     */
+    const safeValue =
+      this._pageCount() && value >= 0 && value < this._pageCount()
+        ? value
+        : Math.min(Math.max(value, 0), this._pageCount() - 1);
+
+    this._pageIndex.set(safeValue);
   }
 
   /**
@@ -267,14 +275,14 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
      * Calculate the first sibling page number to display around the current page
      */
     const siblingsStart = Math.max(
-      Math.min((pageIndex + 1) - siblingCount, ((pageCount - 1) - (siblingCount * 2)) - 1),
+      Math.min(pageIndex + 1 - siblingCount, pageCount - 1 - siblingCount * 2 - 1),
       3,
     );
     /**
      * Calculate the last sibling page number to display around the current page
      */
     const siblingsEnd = Math.min(
-      Math.max((pageIndex + 1) + siblingCount, (1 + (siblingCount * 2)) + 2),
+      Math.max(pageIndex + 1 + siblingCount, 1 + siblingCount * 2 + 2),
       endPages.length > 0 ? endPages[0] - 2 : pageCount - 1,
     );
 

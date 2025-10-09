@@ -53,6 +53,21 @@ describe('PaginationComponent', () => {
     expect(activeItem.textContent).toEqual(' 3 ');
   });
 
+  it('should set pageIndex as first or last item if given pageIndex is out of pageCount scope', () => {
+    component.pageIndex = -1;
+    fixture.detectChanges();
+
+    const activeFirstItem = getElement(fixture, '.fudis-pagination-list-item--active');
+    expect(activeFirstItem.textContent).toEqual(' 1 ');
+
+    // Fifth item should have pageIndex 4
+    component.pageIndex = 5;
+    fixture.detectChanges();
+
+    const activeLastItem = getElement(fixture, '.fudis-pagination-list-item--active');
+    expect(activeLastItem.textContent).toEqual(' 5 ');
+  });
+
   it('should generate correct href id for list item links', () => {
     const pageItems = fixture.debugElement.queryAll(By.css('.fudis-pagination-list-item-link'));
 
