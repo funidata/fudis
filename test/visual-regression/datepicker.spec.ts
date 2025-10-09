@@ -56,7 +56,7 @@ test("datepicker default change calendar language", async ({ page }) => {
   await expect(page).toHaveScreenshot("to-swedish.png", { fullPage: true });
   await page.keyboard.press("Escape");
   await page.waitForTimeout(150);
-  
+
   await expect(page.getByText("Choose your favourite date.")).toBeVisible();
   await page.getByTestId("fudis-button-2").click();
   await expect(page.getByPlaceholder("dd.mm.yyyy")).toBeVisible();
