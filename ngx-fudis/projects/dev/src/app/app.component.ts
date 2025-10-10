@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, computed, Inject, OnInit, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import {
   FudisAlertService,
@@ -15,6 +15,7 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
+import { dummyData } from './mock_data';
 
 @Component({
   selector: 'app-root',
@@ -46,6 +47,23 @@ export class AppComponent implements OnInit {
   newRemBase: string;
   errorSummaryVisible = false;
   protected _message: string;
+  currentPage = signal(0);
+
+  allCourses = dummyData;
+
+  // The amount of course items shown per page
+  pageSize = 5;
+  totalPages = Math.ceil(this.allCourses.length / this.pageSize);
+
+  // Generate href for accessibility (even though we prevent navigation)
+  pageHref = (i: number) => `/courses?page=${i + 1}`;
+
+  // Returns the amount of pages set in pageSize from all courses array
+  visibleCourses = computed(() => {
+    const start = this.currentPage() * this.pageSize;
+    const end = start + this.pageSize;
+    return this.allCourses.slice(start, end);
+  });
 
   checkboxOptions: FudisCheckboxGroupOption<object>[] = [
     { controlName: 'blueberry', label: 'blueberry' },
@@ -133,6 +151,10 @@ export class AppComponent implements OnInit {
 
   openDialogFromComponent(): void {
     this._dialogService.open(DialogTestContentComponent);
+  }
+
+  onPageChange(index: number): void {
+    this.currentPage.set(index);
   }
 
   updateGridAlignValue(): void {
