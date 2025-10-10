@@ -7,10 +7,10 @@
   @include core.border('1px', 'solid', 'gray-dark');
 
   display: none;
-  position: absolute;
+  position: fixed;
   flex-direction: column;
   width: 100%;
-  max-height: calc(core.$spacing-xxl * 4);
+  max-height: calc(#{core.$spacing-xxl} * 4);
   overflow: auto;
 
   &:focus-visible {
