@@ -333,6 +333,7 @@ export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElemen
 export const paginationCommonExclude: string[] = [
   'itemList',
   'hasUserChangedPage',
+  'goToPage',
   'observer',
   'prevPageIndex',
   'range',
@@ -348,7 +349,6 @@ export const paginationControlsExclude: RegExp = excludeRegex([
   ...paginationCommonExclude,
   'id',
   'pageChange',
-  'goToPage',
 ]);
 
 /**
