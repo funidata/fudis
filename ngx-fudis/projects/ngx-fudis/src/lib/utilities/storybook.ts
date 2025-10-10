@@ -71,20 +71,20 @@ const buttonCommonExclude: string[] = [
   'dropdownMenuId',
   'dropdownOpen',
   'buttonEl',
-  'handleBlur',
   'buttonClick',
   'closeMenu',
   'toggleMenu',
   'popoverTriggerLabel',
   'popoverPosition',
   'popoverText',
-  'id',
 ];
 
 export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
 
 export const buttonControlsExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'id',
+  'handleBlur',
   'handleClick',
   'labelHidden',
   'asMenuButton',
@@ -95,6 +95,8 @@ export const buttonControlsExclude: RegExp = excludeRegex([
 
 export const buttonIconOnlyExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'id',
+  'handleBlur',
   'handleClick',
   'asMenuButton',
   'type',
@@ -327,6 +329,27 @@ export const linkExclude: RegExp = excludeRegex([
 export const notificationExclude: RegExp = excludeRegex(['articleElement', 'focus']);
 
 export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
+
+export const paginationCommonExclude: string[] = [
+  'itemList',
+  'hasUserChangedPage',
+  'goToPage',
+  'observer',
+  'prevPageIndex',
+  'range',
+  'userSelectedIndex',
+  'pageHref',
+  'siblingCount',
+  'createPaginationItemList',
+  'activeItemRef',
+];
+export const paginationArgsTableExclude: RegExp = excludeRegex([...paginationCommonExclude]);
+
+export const paginationControlsExclude: RegExp = excludeRegex([
+  ...paginationCommonExclude,
+  'id',
+  'pageChange',
+]);
 
 /**
  * Radio Button Group

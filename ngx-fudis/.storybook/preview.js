@@ -97,6 +97,7 @@ const preview = {
             "Link",
             "Loading Spinner",
             "Notification",
+            "Pagination",
             "Section",
             "Typography",
           ],
