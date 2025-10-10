@@ -111,9 +111,9 @@
           <fudis-heading [level]="3">List of courses</fudis-heading>
           <ul>
             <li *ngFor="let courses of visibleCourses()">
-              <fudis-dl class="fudis-mt-sm" [columns]="'1fr 1fr'">
+              <fudis-dl class="fudis-mt-sm">
                 <fudis-dl-item>
-                  <fudis-dt [contentText]="courses.course"></fudis-dt>
+                  <fudis-dt [contentText]="courses.id + '. ' + courses.course"></fudis-dt>
                   <fudis-dd>
                     <fudis-dl [variant]="'compact'">
                       <fudis-dl-item>
@@ -140,7 +140,7 @@
           </ul>
           <fudis-pagination
             [paginationAriaLabel]="'page pagination'"
-            [pageCount]="10"
+            [pageCount]="totalPages"
             (pageChange)="onPageChange($event)"
           ></fudis-pagination>
         </ng-template>

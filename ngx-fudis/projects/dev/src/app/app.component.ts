@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
   totalPages = Math.ceil(this.allCourses.length / this.pageSize);
 
   // Generate href for accessibility (even though we prevent navigation)
-  pageHref = (i: number) => `/courses?page=${i + 1}`;
+  pageHref = (i: number) => `#${i + 1}`;
 
   // Returns the amount of pages set in pageSize from all courses array
   visibleCourses = computed(() => {
