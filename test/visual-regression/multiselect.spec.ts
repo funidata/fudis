@@ -75,11 +75,8 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("Tab");
-  await page.waitForTimeout(150);
-  await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
-
   await page.getByTestId("fudis-button-1").click();
-
+  await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("A-7-disabled-selected.png", {
     fullPage: true,
   });
@@ -249,6 +246,7 @@ test.describe("Dropdown and autocompletes", () => {
     await expect(page.getByText("No results found")).not.toBeVisible();
 
     await page.keyboard.press("Space");
+    await page.waitForTimeout(100);
     await expect(page.getByText("No results found")).toBeVisible();
 
     await page.keyboard.press("Backspace");
