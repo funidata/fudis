@@ -24,6 +24,7 @@ export const fudisIdComponents = [
   'text-area',
   'text-input',
   'validator-error-message',
+  'pagination',
   'popover',
 ] as const;
 
