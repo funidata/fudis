@@ -337,6 +337,7 @@ export const paginationCommonExclude: string[] = [
   'prevPageIndex',
   'range',
   'userSelectedIndex',
+  'pageHref',
   'siblingCount',
   'createPaginationItemList',
   'activeItemRef',
@@ -346,7 +347,6 @@ export const paginationArgsTableExclude: RegExp = excludeRegex([...paginationCom
 export const paginationControlsExclude: RegExp = excludeRegex([
   ...paginationCommonExclude,
   'id',
-  'pageHref',
   'pageChange',
   'goToPage',
 ]);

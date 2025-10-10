@@ -118,10 +118,10 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   }
 
   /**
-   * A function that receives the **0-based page index** and returns the URL for that page. Example:
-   * `(i) => '/products?page=' + (i + 1)`
+   * A function that increments **0-based page index** and returns the URL for that page. Example:
+   * `href=#2`
    */
-  @Input() pageHref: (index: number) => string = (i) => `#${i + 1}`;
+  protected pageHref: (index: number) => string = (i) => `#${i + 1}`;
 
   /**
    * Internal input for setting the number of pages shown in each side of the current page

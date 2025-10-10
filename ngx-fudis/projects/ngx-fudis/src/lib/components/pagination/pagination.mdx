@@ -20,7 +20,6 @@ Use Pagination only for content which structure does not change between pages eg
 <fudis-pagination
   [pageCount]="20"
   [pageIndex]="0"
-  [pageHref]="(i) => '/products?page=' + (i + 1)"
   [paginationAriaLabel]="'Example navigation'"
   (pageChange)="onPageChange($event)">
 </fudis-pagination>
@@ -34,7 +33,6 @@ Pagination requires `pageCount` in order to generate total amount of pages. Mand
 
 `pageIndex` input defines the currently active page, starting from 0 for the first page. This value controls which page number is visually highlighted and determines the current focus and navigation state.
 If given pageIndex is outside of given pageCount scope, pageIndex will be reset to either first or last item index.
-`pageHref` input takes in a function that receives the zero-based page index and returns the URL string for the page link.
 
 ### Accessibility
 

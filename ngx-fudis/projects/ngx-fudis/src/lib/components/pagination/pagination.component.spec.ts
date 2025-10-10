@@ -18,7 +18,6 @@ describe('PaginationComponent', () => {
     component = fixture.componentInstance;
     component.pageCount = 5;
     component.pageIndex = 0;
-    component.pageHref = (i) => '/products?page=' + (i + 1);
     component.paginationAriaLabel = 'Test pagination navigation';
     fixture.detectChanges();
   });
@@ -74,7 +73,7 @@ describe('PaginationComponent', () => {
     // The first link item starts with href 2, since current active page href is set to 1
     pageItems.forEach((item, index) => {
       const newIndex = index + 2;
-      expect(item.attributes['href']).toEqual(`/products?page=${newIndex}`);
+      expect(item.attributes['href']).toEqual(`#${newIndex}`);
     });
   });
 
