@@ -79,10 +79,6 @@ export {
   FieldsetActionsDirective,
 } from './lib/components/form/fieldset/fieldset-content.directive';
 export {
-  FooterContentLeftDirective,
-  FooterContentRightDirective,
-} from './lib/components/footer/footer-content.directive';
-export {
   FormActionsDirective,
   FormContentDirective,
   FormHeaderDirective,
