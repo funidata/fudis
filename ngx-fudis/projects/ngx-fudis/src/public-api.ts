@@ -39,6 +39,7 @@ export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
 export { HorizontalRuleComponent } from './lib/components/horizontal-rule/horizontal-rule.component';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
+export { IconButtonComponent } from './lib/components/icon-button/icon-button.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LanguageBadgeGroupComponent } from './lib/components/language-badge-group/language-badge-group.component';
 export { LoadingSpinnerComponent } from './lib/components/loading-spinner/loading-spinner.component';

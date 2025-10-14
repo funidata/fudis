@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   HostBinding,
   ViewEncapsulation,
   ViewChild,
@@ -12,17 +10,14 @@ import {
   ChangeDetectionStrategy,
   OnDestroy,
 } from '@angular/core';
-import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
-import { PopoverApiDirective } from '../../directives/popover/popover-api.directive';
-import { FudisIdService } from '../../services/id/id.service';
 import {
-  FudisButtonSize,
   FudisButtonType,
-  FudisButtonVariant,
   FudisComponentChanges,
 } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
+import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
+import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
   selector: 'fudis-button',
@@ -32,12 +27,12 @@ import { DropdownEventService } from '../../services/dropdown/dropdown-event.ser
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class ButtonComponent extends PopoverApiDirective implements OnChanges, OnInit, OnDestroy {
+export class ButtonComponent extends ButtonBaseDirective implements OnChanges, OnInit, OnDestroy {
   constructor(
-    private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
+    _idService: FudisIdService,
   ) {
-    super();
+    super(_idService);
   }
 
   /**
@@ -56,16 +51,6 @@ export class ButtonComponent extends PopoverApiDirective implements OnChanges, O
   @Input({ required: true }) label: string;
 
   /**
-   * Button variant options
-   */
-  @Input() variant: FudisButtonVariant = 'primary';
-
-  /**
-   * Button size options
-   */
-  @Input() size: FudisButtonSize = 'medium';
-
-  /**
    * Button type options
    */
   @Input() type: FudisButtonType = 'button';
@@ -81,49 +66,9 @@ export class ButtonComponent extends PopoverApiDirective implements OnChanges, O
   @Input() ariaLabel: string;
 
   /**
-   * Disables the button, keeping it focusable
-   */
-  @Input() disabled = false;
-
-  /**
-   * Icon for button if needed
-   */
-  @Input() icon: FudisIcon | undefined = undefined;
-
-  /**
-   * Icon rotation option
-   */
-  @Input() iconRotate: FudisIconRotate = 'none';
-
-  /**
-   * Id for HTML button element. By default generated.
-   */
-  @Input() id: string;
-
-  /**
    * Assign button as menu button with dropdown
    */
   @Input() asMenuButton: boolean = false;
-
-  /**
-   * Click handler
-   */
-  @Output() handleClick = new EventEmitter<Event>();
-
-  /**
-   * Focus handler
-   */
-  @Output() handleFocus = new EventEmitter<FocusEvent>();
-
-  /**
-   * Blur handler
-   */
-  @Output() handleBlur = new EventEmitter<FocusEvent>();
-
-  /**
-   * OnDestroy handler emit
-   */
-  @Output() handleDestroy = new EventEmitter<void>();
 
   /**
    * Toggle dropdown menu button
@@ -136,11 +81,6 @@ export class ButtonComponent extends PopoverApiDirective implements OnChanges, O
   public dropdownMenuId: string;
 
   /**
-   * Automatically sets icon color based on button variant
-   */
-  protected _iconColor = new BehaviorSubject<FudisIconColor>('white');
-
-  /**
    * Button CSS class list
    */
   protected _classList = new BehaviorSubject<string[]>([]);
@@ -150,18 +90,7 @@ export class ButtonComponent extends PopoverApiDirective implements OnChanges, O
    */
   protected _ariaLabel = new BehaviorSubject<string>('');
 
-  /**
-   * Is button focused or not
-   */
-  private _focused: boolean = false;
-
-  ngOnInit() {
-    if (this.id) {
-      this._idService.addNewId('button', this.id);
-    } else {
-      this.id = this._idService.getNewId('button');
-    }
-
+  override ngOnInit() {
     if (this._classList.value.length === 0) {
       this._classList.next(this._getClasses());
     }
@@ -184,14 +113,10 @@ export class ButtonComponent extends PopoverApiDirective implements OnChanges, O
     }
   }
 
-  ngOnDestroy(): void {
-    this.handleDestroy.emit();
-  }
-
   /**
    * Button click event
    */
-  public buttonClick(event: Event): void {
+  public override buttonClick(event: Event): void {
     if (this.asMenuButton) {
       this.toggleMenu();
     }
@@ -236,7 +161,7 @@ export class ButtonComponent extends PopoverApiDirective implements OnChanges, O
   /**
    * Handler for blurring out and closing Menu Button's dropdown
    */
-  protected _handleButtonBlur(event: FocusEvent): void {
+  protected override _handleButtonBlur(event: FocusEvent): void {
     this._focused = false;
 
     const targetIsDropdownMenuOption = (event.relatedTarget as HTMLElement)?.classList?.contains(
@@ -248,15 +173,6 @@ export class ButtonComponent extends PopoverApiDirective implements OnChanges, O
     }
 
     this.handleBlur.emit(event);
-  }
-
-  /**
-   * Handle button focus
-   */
-  protected _handleButtonFocus(event: FocusEvent): void {
-    this._focused = true;
-
-    this.handleFocus.emit(event);
   }
 
   /**
