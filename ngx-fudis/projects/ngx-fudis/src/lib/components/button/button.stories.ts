@@ -73,22 +73,6 @@ WithIcon.args = {
   disabled: false,
 };
 
-// export const IconOnly = Template.bind({});
-// IconOnly.args = {
-//   variant: 'secondary',
-//   label: 'Search button',
-//   size: 'medium',
-//   icon: 'search',
-//   iconRotate: 'none',
-//   disabled: false,
-// };
-
-// IconOnly.parameters = {
-//   controls: {
-//     exclude: buttonIconOnlyExclude,
-//   },
-// };
-
 export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
@@ -121,72 +105,40 @@ export const AllVariants: StoryFn = (args) => ({
       <fudis-button label="Disabled" [disabled]="true" size="small"></fudis-button>
 
       <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
+        >Medium sized buttons with icons</fudis-heading
+      >
+      <fudis-button
+        variant="primary"
+        [labelHidden]="true"
+        icon="search"
+        label="Primary"
+      ></fudis-button>
+      <fudis-button
+        variant="secondary"
+        [labelHidden]="true"
+        icon="search"
+        label="Secondary"
+      ></fudis-button>
+      <fudis-button
+        variant="tertiary"
+        [labelHidden]="true"
+        icon="search"
+        label="Tertiary"
+      ></fudis-button>
+      <fudis-button
+        label="Disabled"
+        [labelHidden]="true"
+        icon="search"
+        [disabled]="true"
+      ></fudis-button>
+
+      <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
         >Small size buttons with icons</fudis-heading
       >
       <fudis-button variant="primary" icon="search" label="Primary" size="small"></fudis-button>
       <fudis-button variant="secondary" icon="search" label="Secondary" size="small"></fudis-button>
       <fudis-button variant="tertiary" icon="search" label="Tertiary" size="small"></fudis-button>
       <fudis-button label="Disabled" icon="search" [disabled]="true" size="small"></fudis-button>
-
-      <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-        >Medium sized buttons with label hidden</fudis-heading
-      >
-      <fudis-button
-        variant="primary"
-        [labelHidden]="true"
-        icon="search"
-        label="Primary"
-      ></fudis-button>
-      <fudis-button
-        variant="secondary"
-        [labelHidden]="true"
-        icon="search"
-        label="Secondary"
-      ></fudis-button>
-      <fudis-button
-        variant="tertiary"
-        [labelHidden]="true"
-        icon="search"
-        label="Tertiary"
-      ></fudis-button>
-      <fudis-button
-        label="Disabled"
-        [labelHidden]="true"
-        icon="search"
-        [disabled]="true"
-      ></fudis-button>
-
-      <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-        >Small sized buttons with label hidden</fudis-heading
-      >
-      <fudis-button
-        variant="primary"
-        [labelHidden]="true"
-        icon="search"
-        label="Primary"
-        size="small"
-      ></fudis-button>
-      <fudis-button
-        variant="secondary"
-        [labelHidden]="true"
-        icon="search"
-        label="Secondary"
-        size="small"
-      ></fudis-button>
-      <fudis-button
-        variant="tertiary"
-        [labelHidden]="true"
-        icon="search"
-        label="Tertiary"
-        size="small"
-      ></fudis-button>
-      <fudis-button
-        label="Disabled"
-        [labelHidden]="true"
-        icon="search"
-        [disabled]="true"
-        size="small"
-      ></fudis-button>
     </fudis-grid>
   `,
 });
@@ -196,26 +148,3 @@ AllVariants.parameters = {
     exclude: /.*/g,
   },
 };
-
-      // <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-      //   >Icon only sized buttons with label hidden</fudis-heading
-      // >
-      // <fudis-button variant="primary" icon="search" label="Primary" size="icon-only"></fudis-button>
-      // <fudis-button
-      //   variant="secondary"
-      //   icon="search"
-      //   label="Secondary"
-      //   size="icon-only"
-      // ></fudis-button>
-      // <fudis-button
-      //   variant="tertiary"
-      //   icon="search"
-      //   label="Tertiary"
-      //   size="icon-only"
-      // ></fudis-button>
-      // <fudis-button
-      //   label="Disabled"
-      //   icon="search"
-      //   [disabled]="true"
-      //   size="icon-only"
-      // ></fudis-button>

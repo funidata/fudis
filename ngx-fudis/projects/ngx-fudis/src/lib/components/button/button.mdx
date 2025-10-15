@@ -41,15 +41,6 @@ Icon can be configured with `icon` and `iconRotate` properties.
 
 <Canvas of={ButtonStories.WithIcon} />
 
-### Button with Label Hidden
-
-Button can be without a visible label but use this variation sparingly. To hide visible label, provide `labelHidden` property for the button component. When label is hidden, `label` property will be reflected to HTML `aria-label` attribute. This will communicate screen reader users about the button functionality.
-
-If button has no visible label and both `label` and `ariaLabel` are provided, those values are combined and reflected to `aria-label` HTML attribute.
-
-Note! Label is also hidden automatically when size `icon-only` is used.
-
-<Canvas of={ButtonStories.IconOnly} />
 
 ### Accessibility
 
