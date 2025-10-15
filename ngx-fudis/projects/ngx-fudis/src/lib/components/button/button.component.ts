@@ -51,6 +51,11 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   @Input({ required: true }) label: string;
 
   /**
+   * Button size options
+   */
+  @Input() size: 'medium' | 'small';
+
+  /**
    * Button type options
    */
   @Input() type: FudisButtonType = 'button';
@@ -81,38 +86,20 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   public dropdownMenuId: string;
 
   /**
-   * Button CSS class list
-   */
-  protected _classList = new BehaviorSubject<string[]>([]);
-
-  /**
    * Aria-label for icon-only buttons
    */
   protected _ariaLabel = new BehaviorSubject<string>('');
 
-  override ngOnInit() {
-    if (this._classList.value.length === 0) {
-      this._classList.next(this._getClasses());
-    }
+  override ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
+      const size = changes.size?.currentValue !== changes.size?.previousValue;
+  
+      if ( size ) {
+        this._size = this.size;
+      }
+
+      super.ngOnChanges(changes);
   }
-
-  ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
-    const variant = changes.variant?.currentValue !== changes.variant?.previousValue;
-    const disabled = changes.disabled?.currentValue !== changes.disabled?.previousValue;
-    const size = changes.size?.currentValue !== changes.size?.previousValue;
-    const label = changes.label?.currentValue !== changes.label?.previousValue;
-    const labelHidden = changes.labelHidden?.currentValue !== changes.labelHidden?.previousValue;
-    const ariaLabel = changes.ariaLabel?.currentValue !== changes.ariaLabel?.previousValue;
-
-    if (variant || disabled || size || labelHidden) {
-      this._classList.next(this._getClasses());
-    }
-
-    if (size || labelHidden || label || ariaLabel) {
-      this._ariaLabel.next(this._getAriaLabel());
-    }
-  }
-
+  
   /**
    * Button click event
    */
@@ -173,39 +160,5 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
     }
 
     this.handleBlur.emit(event);
-  }
-
-  /**
-   * Add aria-label for buttons without visible label
-   */
-  private _getAriaLabel(): string {
-    if (this.labelHidden || this.size === 'icon-only') {
-      return this.ariaLabel ? `${this.label}, ${this.ariaLabel}` : this.label;
-    }
-    return this.ariaLabel;
-  }
-
-  /**
-   * Determine icon color based on button variant. Return CSS classes with size and variant
-   */
-  private _getClasses(): string[] {
-    if (this.disabled) {
-      this._iconColor.next('gray-dark');
-    } else if (this.variant === 'primary') {
-      this._iconColor.next('white');
-    } else if (this.variant === 'secondary' || this.variant === 'tertiary') {
-      this._iconColor.next('primary');
-    }
-
-    if (this.labelHidden || this.size === 'icon-only') {
-      return [
-        'fudis-button',
-        `fudis-button__size__${this.size}`,
-        `fudis-button__${this.variant}`,
-        `fudis-button__label--hidden`,
-      ];
-    } else {
-      return ['fudis-button', `fudis-button__size__${this.size}`, `fudis-button__${this.variant}`];
-    }
   }
 }

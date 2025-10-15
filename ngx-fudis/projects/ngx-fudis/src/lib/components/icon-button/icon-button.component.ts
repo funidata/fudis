@@ -14,4 +14,13 @@ export class IconButtonComponent extends ButtonBaseDirective {
    * Aria-label for describing context
    */
   @Input({required: true}) ariaLabel: string;
+
+  /**
+   * Button size options
+   */
+  @Input() size: 'medium' | 'small' | 'icon-only' = 'medium';
+
+  override ngOnInit(): void {
+      this._size = this.size;
+  }
 }

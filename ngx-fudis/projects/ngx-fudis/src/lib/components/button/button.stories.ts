@@ -1,7 +1,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 import docs from './button.mdx';
-import { buttonControlsExclude, buttonIconOnlyExclude } from '../../utilities/storybook';
+import { buttonControlsExclude } from '../../utilities/storybook';
 import { fudisIconArray } from '../../types/icons';
 
 export default {
@@ -17,7 +17,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['medium', 'small', 'icon-only'],
+      options: ['medium', 'small'],
       control: { type: 'radio' },
     },
     variant: {
@@ -67,29 +67,27 @@ WithIcon.args = {
   variant: 'secondary',
   label: 'Icon Button',
   ariaLabel: undefined,
-  size: 'medium',
+  size: 'small',
   icon: 'search',
   iconRotate: 'none',
   disabled: false,
 };
 
-export const IconOnly = Template.bind({});
-IconOnly.args = {
-  variant: 'secondary',
-  label: 'Search button',
-  ariaLabel: 'Additional aria-label',
-  size: 'medium',
-  icon: 'search',
-  iconRotate: 'none',
-  labelHidden: true,
-  disabled: false,
-};
+// export const IconOnly = Template.bind({});
+// IconOnly.args = {
+//   variant: 'secondary',
+//   label: 'Search button',
+//   size: 'medium',
+//   icon: 'search',
+//   iconRotate: 'none',
+//   disabled: false,
+// };
 
-IconOnly.parameters = {
-  controls: {
-    exclude: buttonIconOnlyExclude,
-  },
-};
+// IconOnly.parameters = {
+//   controls: {
+//     exclude: buttonIconOnlyExclude,
+//   },
+// };
 
 export const AllVariants: StoryFn = (args) => ({
   props: args,
@@ -189,29 +187,6 @@ export const AllVariants: StoryFn = (args) => ({
         [disabled]="true"
         size="small"
       ></fudis-button>
-
-      <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-        >Icon only sized buttons with label hidden</fudis-heading
-      >
-      <fudis-button variant="primary" icon="search" label="Primary" size="icon-only"></fudis-button>
-      <fudis-button
-        variant="secondary"
-        icon="search"
-        label="Secondary"
-        size="icon-only"
-      ></fudis-button>
-      <fudis-button
-        variant="tertiary"
-        icon="search"
-        label="Tertiary"
-        size="icon-only"
-      ></fudis-button>
-      <fudis-button
-        label="Disabled"
-        icon="search"
-        [disabled]="true"
-        size="icon-only"
-      ></fudis-button>
     </fudis-grid>
   `,
 });
@@ -221,3 +196,26 @@ AllVariants.parameters = {
     exclude: /.*/g,
   },
 };
+
+      // <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
+      //   >Icon only sized buttons with label hidden</fudis-heading
+      // >
+      // <fudis-button variant="primary" icon="search" label="Primary" size="icon-only"></fudis-button>
+      // <fudis-button
+      //   variant="secondary"
+      //   icon="search"
+      //   label="Secondary"
+      //   size="icon-only"
+      // ></fudis-button>
+      // <fudis-button
+      //   variant="tertiary"
+      //   icon="search"
+      //   label="Tertiary"
+      //   size="icon-only"
+      // ></fudis-button>
+      // <fudis-button
+      //   label="Disabled"
+      //   icon="search"
+      //   [disabled]="true"
+      //   size="icon-only"
+      // ></fudis-button>
