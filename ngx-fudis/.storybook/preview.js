@@ -99,6 +99,7 @@ const preview = {
             "Notification",
             "Pagination",
             "Section",
+            "Tab Navigation",
             "Typography",
           ],
           "Directives",
