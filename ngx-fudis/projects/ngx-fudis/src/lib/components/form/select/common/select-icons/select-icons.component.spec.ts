@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectIconsComponent } from './select-icons.component';
-import { ButtonComponent } from '../../../../button/button.component';
+import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../../icon/icon.component';
 import { FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
 import { FormControl } from '@angular/forms';
@@ -12,7 +12,7 @@ describe('SelectIconsComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [SelectIconsComponent, ButtonComponent, IconComponent],
+      declarations: [SelectIconsComponent, IconButtonComponent, IconComponent],
     });
     fixture = TestBed.createComponent(SelectIconsComponent);
     component = fixture.componentInstance;
@@ -31,7 +31,7 @@ describe('SelectIconsComponent', () => {
       const searchIcon = getElement(fixture, '.fudis-icon__search');
       const clearIcon = getElement(
         fixture,
-        'fudis-button:not(.fudis-select-icons__icon--hidden) .fudis-icon__close',
+        'fudis-icon-button:not(.fudis-select-icons__icon--hidden) .fudis-icon__close',
       );
 
       if (icon === 'chevron') {

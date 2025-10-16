@@ -7,6 +7,7 @@ import { AlertGroupComponent } from '../alert/alert-group/alert-group.component'
 import { getElement } from '../../utilities/tests/utilities';
 import { fudisDialogSizeArray } from '../../types/miscellaneous';
 import { FudisAlertService } from '../../services/alert/alert.service';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { IconComponent } from '../icon/icon.component';
 
 describe('DialogComponent', () => {
@@ -16,7 +17,7 @@ describe('DialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogComponent, AlertGroupComponent, ButtonComponent, IconComponent],
+      declarations: [DialogComponent, AlertGroupComponent, ButtonComponent, IconButtonComponent, IconComponent],
       imports: [MatDialogModule],
       providers: [
         FudisDialogService,
@@ -67,10 +68,9 @@ describe('DialogComponent', () => {
 
       fixture.detectChanges();
 
-      const closeButtonEl = getElement(fixture, '.fudis-dialog fudis-button.fudis-dialog__close');
-
+      const closeButtonEl = getElement(fixture, '.fudis-dialog fudis-icon-button.fudis-dialog__close');
       expect(closeButtonEl.className).toEqual(
-        'fudis-dialog__close fudis-button-host fudis-dialog__close__absolute',
+        'fudis-dialog__close fudis-icon-button-host fudis-dialog__close__absolute',
       );
     });
   });

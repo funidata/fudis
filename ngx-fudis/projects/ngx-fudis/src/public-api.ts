@@ -84,7 +84,6 @@ export {
   FormContentDirective,
   FormHeaderDirective,
 } from './lib/components/form/form/form-content.directive';
-export { FudisTranslationService } from './lib/services/translation/translation.service';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
 export { LinkDirective } from './lib/directives/link/link.directive';
@@ -103,6 +102,7 @@ export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
 export { FudisDialogService } from './lib/services/dialog/dialog.service';
 export { FudisGridService } from './lib/services/grid/grid.service';
+export { FudisTranslationService } from './lib/services/translation/translation.service';
 
 /**
  * TYPES
