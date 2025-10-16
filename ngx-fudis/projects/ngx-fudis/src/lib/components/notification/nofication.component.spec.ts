@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { IconComponent } from '../icon/icon.component';
 import { NotificationComponent } from './notification.component';
 import { FudisNotification } from '../../types/miscellaneous';
@@ -11,7 +12,7 @@ describe('NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotificationComponent, IconComponent, LinkDirective],
+      declarations: [BodyTextComponent, NotificationComponent, IconComponent, LinkDirective],
       imports: [RouterModule.forRoot([])],
     }).compileComponents();
   });

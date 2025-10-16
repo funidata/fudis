@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { FudisIcon } from '../../types/icons';
-import { FudisComponentChanges } from '../../types/miscellaneous';
+import { FudisButtonSize, FudisComponentChanges } from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-icon-button',
@@ -36,7 +36,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   /**
    * Button size options
    */
-  @Input() size: 'medium' | 'small' | 'icon-only' = 'medium';
+  @Input() size: FudisButtonSize = 'medium';
 
   override ngOnChanges(changes: FudisComponentChanges<IconButtonComponent>): void {
     const size = changes.size?.currentValue !== changes.size?.previousValue;

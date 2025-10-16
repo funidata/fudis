@@ -37,9 +37,6 @@ export type FudisBadgeVariant = (typeof fudisBadgeVariantArray)[number];
 export const fudisButtonVariantArray = ['primary', 'secondary', 'tertiary'] as const;
 export type FudisButtonVariant = (typeof fudisButtonVariantArray)[number];
 
-/**
- * TODO: Remove
- */
 export const fudisButtonSizeArray = ['icon-only', 'small', 'medium'] as const;
 export type FudisButtonSize = (typeof fudisButtonSizeArray)[number];
 

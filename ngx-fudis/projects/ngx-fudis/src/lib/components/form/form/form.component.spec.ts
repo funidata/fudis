@@ -14,6 +14,7 @@ import {
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
@@ -31,7 +32,6 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { DialogContentDirective, DialogTitleDirective } from '../../dialog/dialog-directives';
 import { AlertGroupComponent } from '../../alert/alert-group/alert-group.component';
 import { FudisAlertService } from '../../../services/alert/alert.service';
-import { ButtonComponent } from '../../button/button.component';
 import { FormSubmitDirective } from '../../../directives/form/form-actions/form-actions.directive';
 
 /**
@@ -131,7 +131,6 @@ describe('FormComponent', () => {
         AlertGroupComponent,
         BadgeComponent,
         BodyTextComponent,
-        ButtonComponent,
         DialogComponent,
         DialogContentDirective,
         DialogTitleDirective,
@@ -145,6 +144,7 @@ describe('FormComponent', () => {
         GridDirective,
         GuidanceComponent,
         HeadingComponent,
+        IconButtonComponent,
         IconComponent,
         LabelComponent,
         LinkDirective,

@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy,
   OnDestroy,
 } from '@angular/core';
-import { FudisButtonType, FudisComponentChanges } from '../../types/miscellaneous';
+import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../types/miscellaneous';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { FudisIdService } from '../../services/id/id.service';
@@ -39,7 +39,7 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   /**
    * Button size options
    */
-  @Input() size: 'medium' | 'small';
+  @Input() size: Exclude<FudisButtonSize, 'icon-only'> = 'medium';
 
   /**
    * Button type options

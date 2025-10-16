@@ -13,7 +13,7 @@ import { getElement } from '../../../utilities/tests/utilities';
   selector: 'fudis-mock-dropdown-menu',
   template: ` <fudis-icon-button
     #testButton
-    [label]="'Random items menu'"
+    [ariaLabel]="'Random items menu'"
     [size]="'small'"
     [variant]="'secondary'"
     [icon]="'three-dots'"
