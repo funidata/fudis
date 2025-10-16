@@ -326,10 +326,17 @@ export const linkExclude: RegExp = excludeRegex([
 /**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex(['articleElement', 'focus']);
+export const notificationExclude: RegExp = excludeRegex([
+  'articleElement',
+  'focus',
+  'ariaDescribedby',
+]);
 
 export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
 
+/**
+ * Pagination
+ */
 export const paginationCommonExclude: string[] = [
   'itemList',
   'hasUserChangedPage',
