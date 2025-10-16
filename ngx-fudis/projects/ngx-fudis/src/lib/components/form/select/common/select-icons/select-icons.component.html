@@ -22,7 +22,7 @@
 
 <ng-container *ngIf="clearButton">
   <ng-container *ngIf="_translationClearFilterText | async as clearText">
-    <fudis-button
+    <fudis-icon-button
       [class.fudis-select-icons__icon--disabled]="disabled"
       [class.fudis-select-icons__icon--hidden]="
         !(
@@ -39,8 +39,7 @@
       [size]="'icon-only'"
       [variant]="'tertiary'"
       [icon]="'close'"
-      [label]="clearText"
-      [labelHidden]="true"
+      [ariaLabel]="clearText"
       [disabled]="disabled"
     />
   </ng-container>

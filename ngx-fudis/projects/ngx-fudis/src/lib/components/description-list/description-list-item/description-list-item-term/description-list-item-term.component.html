@@ -26,12 +26,11 @@
     >&colon;</span
   >
   <span *ngIf="popoverTriggerLabel && popoverText" [class]="(_mainCssClass | async) + '__popover'">
-    <fudis-button
+    <fudis-icon-button
       [size]="'icon-only'"
       [variant]="'tertiary'"
       [icon]="'info-circle'"
-      [labelHidden]="true"
-      [label]="popoverTriggerLabel"
+      [ariaLabel]="popoverTriggerLabel"
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
     />

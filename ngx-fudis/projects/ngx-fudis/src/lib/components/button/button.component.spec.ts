@@ -41,17 +41,9 @@ describe('ButtonComponent', () => {
           fixture.componentRef.setInput('size', `${size}`);
           fixture.detectChanges();
 
-          if (component.size === 'icon-only') {
-            expect(sortClasses(getButton().className)).toEqual(
-              sortClasses(
-                `fudis-button fudis-button__label--hidden fudis-button__${variant} fudis-button__size__${size}`,
-              ),
-            );
-          } else {
-            expect(sortClasses(getButton().className)).toEqual(
-              sortClasses(`fudis-button fudis-button__${variant} fudis-button__size__${size}`),
-            );
-          }
+          expect(sortClasses(getButton().className)).toEqual(
+            sortClasses(`fudis-button fudis-button__${variant} fudis-button__size__${size}`),
+          );
         });
       });
     });
@@ -128,13 +120,15 @@ describe('ButtonComponent', () => {
     });
   });
 
+  /**
+   * TODO: Move this test to icon button
+   */
   describe('Button as MenuButton', () => {
     it('should toggle dropdown menu', () => {
       jest.spyOn(component, 'toggleMenu');
 
       fixture.componentRef.setInput('icon', 'three-dots');
       fixture.componentRef.setInput('label', 'Open additional menu');
-      fixture.componentRef.setInput('labelHidden', true);
       fixture.componentRef.setInput('ariaLabel', 'It has nice things to click');
       fixture.componentRef.setInput('asMenuButton', true);
       fixture.detectChanges();
@@ -148,13 +142,9 @@ describe('ButtonComponent', () => {
 
       expect(getButton().getAttribute('aria-expanded')).toEqual('true');
 
-      expect(getButton().getAttribute('aria-label')).toEqual(
-        'Open additional menu, It has nice things to click',
-      );
+      expect(getButton().getAttribute('aria-label')).toEqual('It has nice things to click');
 
       expect(getButton().getAttribute('type')).toEqual('button');
-
-      expect(getButton().textContent).toEqual('');
     });
   });
 });

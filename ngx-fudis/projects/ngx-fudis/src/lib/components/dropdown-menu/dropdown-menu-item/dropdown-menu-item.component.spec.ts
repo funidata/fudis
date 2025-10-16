@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DropdownMenuItemComponent } from './dropdown-menu-item.component';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
-import { ButtonComponent } from '../../button/button.component';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { defaultMenuItems } from '../mock_data';
 import { getElement } from '../../../utilities/tests/utilities';
@@ -11,10 +11,9 @@ import { getElement } from '../../../utilities/tests/utilities';
 @Component({
   standalone: false,
   selector: 'fudis-mock-dropdown-menu',
-  template: ` <fudis-button
+  template: ` <fudis-icon-button
     #testButton
     [label]="'Random items menu'"
-    [labelHidden]="true"
     [size]="'small'"
     [variant]="'secondary'"
     [icon]="'three-dots'"
@@ -29,12 +28,12 @@ import { getElement } from '../../../utilities/tests/utilities';
       >
       </fudis-dropdown-menu-item>
     </fudis-dropdown-menu>
-  </fudis-button>`,
+  </fudis-icon-button>`,
 })
 class MockDropdownMenuComponent {
   testItems = defaultMenuItems;
 
-  @ViewChild('testButton') testButton: ButtonComponent;
+  @ViewChild('testButton') testButton: IconButtonComponent;
   @ViewChild('testMenuItem') testMenuItem: DropdownMenuItemComponent;
 }
 
@@ -45,7 +44,7 @@ describe('DropdownMenuItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ButtonComponent,
+        IconButtonComponent,
         DropdownMenuItemComponent,
         DropdownMenuComponent,
         IconComponent,

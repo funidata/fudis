@@ -14,6 +14,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 import { ButtonComponent } from '../../../button/button.component';
+import { IconButtonComponent } from '../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { PopoverDirective } from '../../../../directives/popover/popover.directive';
 
@@ -77,6 +78,7 @@ describe('DescriptionListItemTermComponent', () => {
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
         IconComponent,
+        IconButtonComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
         MockDlComponent,

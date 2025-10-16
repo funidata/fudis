@@ -7,7 +7,7 @@
     (click)="!disabled && buttonClick($event)"
     (blur)="!disabled && _handleButtonBlur($event)"
     (focus)="!disabled && _handleButtonFocus($event)"
-    (keydown)="!disabled"
+    (keydown)="!disabled && _handleMenuButtonKeyDown($event)"
     [attr.tabIndex]="disabled ? -1 : null"
     [attr.aria-disabled]="disabled || null"
     [attr.aria-label]="ariaLabel"
@@ -24,8 +24,8 @@
           [icon]="icon"
           [rotate]="iconRotate"
         ></fudis-icon>
-      </div> </ng-container
-    >
+      </div>
+    </ng-container>
   </button>
 </ng-container>
 
@@ -37,11 +37,14 @@
     (click)="!disabled && buttonClick($event)"
     (blur)="!disabled && _handleButtonBlur($event)"
     (focus)="!disabled && _handleButtonFocus($event)"
-    (keydown)="!disabled"
+    (keydown)="!disabled && _handleMenuButtonKeyDown($event)"
     [attr.tabIndex]="disabled ? -1 : null"
     [attr.aria-disabled]="disabled || null"
     [attr.aria-label]="ariaLabel"
     [attr.id]="id"
+    [attr.aria-expanded]="!asMenuButton ? null : (dropdownOpen | async)"
+    [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
+    [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
   >
     <ng-container *ngIf="icon">
       <div class="fudis-button__icon">
@@ -53,6 +56,9 @@
           [rotate]="iconRotate"
         ></fudis-icon>
       </div> </ng-container
-    ></button
-  >
+  ></button>
+</ng-container>
+
+<ng-container *ngIf="asMenuButton && (dropdownOpen | async)">
+  <ng-content></ng-content>
 </ng-container>
