@@ -324,6 +324,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     FudisInternalErrorSummaryService,
     FudisDialogService,
     FudisBreakpointService,
+    FudisErrorSummaryService,
     FudisAlertService,
   ],
 })
@@ -332,7 +333,6 @@ export class NgxFudisModule {
     return {
       ngModule: NgxFudisModule,
       providers: [
-        FudisErrorSummaryService,
         FudisFocusService,
         FudisGridService,
         FudisIdService,
