@@ -8,7 +8,6 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Optional,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -20,7 +19,10 @@ import { FudisInputSize } from '../../types/forms';
 import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { Subscription } from 'rxjs';
-import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
+import {
+  BUTTON_TOKEN,
+  ButtonBaseDirective,
+} from '../../directives/button-base/button-base.directive';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -35,7 +37,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
     private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
     @Inject(DOCUMENT) private _document: Document,
-    @Host() @Optional() private _parentButton: ButtonBaseDirective,
+    @Host() @Inject(BUTTON_TOKEN) private _parentButton: ButtonBaseDirective,
   ) {
     super();
 

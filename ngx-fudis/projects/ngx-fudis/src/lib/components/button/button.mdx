@@ -13,7 +13,7 @@ Interactive Button Component can be used whenever there is need for user to perf
 
 ### Label (mandatory)
 
-Text label is the only required input attribute Button requires. Depending on other input attributes, the label is rendered either as a visually visible text or as visually hidden aria-label attribute.
+Button has a visible label that is the only required input attribute.
 
 ### Variant
 
@@ -34,6 +34,7 @@ For HTML semantics, if Button is a form submit button, `submit` attribute value 
 ### Button with Icon
 
 Button has option for displaying Icon component alongside the label. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>. Icon color is automatically set according to which button variant is in use.
+For situations where only visible icon is preferred, use [IconButton](/docs/components-iconbutton--documentation) instead.
 
 Icon is only a visual indicator and is always hidden from screen readers.
 
@@ -48,11 +49,12 @@ Icon can be configured with `icon` and `iconRotate` properties.
 - Button has visible focus state
 - Disabled button can be focused. State is communicated for screen reader
 - Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
-- Label is a required property. If needed, button can be given additional `ariaLabel` property as well.
+- Label is a required property. If needed, button can be given additional `ariaLabel` property that will override the visible label text for screen reader users.
 
 ### Related components
 
-[Icon](/docs/components-icon--documentation)
+- [Icon](/docs/components-icon--documentation)
+- [IconButton](/docs/components-iconbutton--documentation)
 
 ## Properties
 

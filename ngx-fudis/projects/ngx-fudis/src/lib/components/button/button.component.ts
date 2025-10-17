@@ -7,16 +7,21 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   OnDestroy,
+  forwardRef,
 } from '@angular/core';
 import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../types/miscellaneous';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
-import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
+import {
+  BUTTON_TOKEN,
+  ButtonBaseDirective,
+} from '../../directives/button-base/button-base.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  providers: [{ provide: BUTTON_TOKEN, useExisting: forwardRef(() => ButtonComponent) }],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
@@ -37,9 +42,9 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   @Input({ required: true }) label: string;
 
   /**
-   * Button size options
+   * Button size options ignoring extra-small
    */
-  @Input() size: Exclude<FudisButtonSize, 'icon-only'> = 'medium';
+  @Input() override size: Exclude<FudisButtonSize, 'icon-only'> = 'medium';
 
   /**
    * Button type options

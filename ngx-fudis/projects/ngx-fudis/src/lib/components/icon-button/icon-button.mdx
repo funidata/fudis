@@ -1,13 +1,14 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { IconButtonComponent } from "./icon-button.component";
 import * as IconButtonStories from "./icon-button.stories.ts";
+import { buttonExclude } from "../../utilities/storybook";
 
 <Meta title="Components/IconButton" />
 
 # Icon Button
 
-In addition to regular Button, Icon Button is designed to be used with icon and without visible label.
-Note that it's encouraged to use Icon Button **only in situation where the action is evident and commonly recognized**. These include using icons 'search', 'delete', 'close' and 'zoom' for these related actions.
+In addition to regular [Button](/docs/components-button--documentation), Icon Button is designed to be used with icon and without visible label.
+Note that it's encouraged to use Icon Button **only in situation where the action is evident and commonly recognized**. These include using icons `search`, `delete`, `close` and `zoom` for these related actions.
 
 ## Commonly used Properties
 
@@ -25,6 +26,28 @@ Icon Button has three different sizes 'medium', 'small' and 'icon-only'.
 
 ### Variant
 
-Buttons are categorized based on their importance and functionality. It is **important** to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user.
+Icon Buttons are categorized based on their importance and functionality. It is **important** to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user.
 
-Button has three variants: `primary` (default), `secondary` and `tertiary`.
+Icon Button has three variants: `primary` (default), `secondary` and `tertiary`.
+
+## Examples
+
+<Canvas of={IconButtonStories.AllVariants} />
+
+### Accessibility
+
+- Button uses primary-color variable (`--fudis-color-primary`) which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.
+  - Disabled button has static colors `#484848` and `#D4D4D4` with contrast ratio 6.2:1
+- Button has visible focus state
+- Disabled button can be focused. State is communicated for screen reader
+- Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
+- Aria-label is a required property.
+
+### Related components
+
+- [Button](/docs/components-button--documentation)
+- [Icon](/docs/components-icon--documentation)
+
+## Properties
+
+<ArgTypes of={IconButtonComponent} exclude={buttonExclude} />

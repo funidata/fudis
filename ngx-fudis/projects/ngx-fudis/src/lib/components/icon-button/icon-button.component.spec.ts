@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconButtonComponent } from './icon-button.component';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { IconComponent } from '../icon/icon.component';
-import { fudisButtonSizeArray, fudisButtonVariantArray } from '../../types/miscellaneous';
+import { fudisButtonSizeArray } from '../../types/miscellaneous';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
 describe('IconButtonComponent', () => {
@@ -33,20 +33,26 @@ describe('IconButtonComponent', () => {
       expect(component['_classes']).toEqual('fudis-icon-button-host');
     });
 
-    it('should update CSS classes according to given size and variant Inputs', () => {
-      fudisButtonVariantArray.forEach((variant) => {
-        fixture.componentRef.setInput('variant', `${variant}`);
+    it('should have given ariaLabel Input', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Button ariaLabel');
+      fixture.detectChanges();
+
+      expect(getButton().getAttribute('aria-label')).toEqual('Button ariaLabel');
+    });
+
+    it('should update CSS classes according to given size Inputs', () => {
+      fudisButtonSizeArray.forEach((size) => {
+        fixture.componentRef.setInput('size', `${size}`);
         fixture.detectChanges();
 
-        fudisButtonSizeArray.forEach((size) => {
-          fixture.componentRef.setInput('size', `${size}`);
-          fixture.detectChanges();
-
-          expect(sortClasses(getButton().className)).toEqual(
-            sortClasses(`fudis-button fudis-button__${variant} fudis-button__size__${size}`),
-          );
-        });
+        expect(sortClasses(getButton().className)).toEqual(
+          sortClasses(`fudis-button fudis-button__primary fudis-button__size__${size}`),
+        );
       });
+    });
+
+    it('should have default button type', () => {
+      expect(getButton().getAttribute('type')).toEqual('button');
     });
   });
 });

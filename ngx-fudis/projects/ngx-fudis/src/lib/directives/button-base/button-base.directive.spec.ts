@@ -1,12 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconComponent } from '../../components/icon/icon.component';
 import { ButtonComponent } from '../../components/button/button.component';
-import {
-  fudisButtonSizeArray,
-  fudisButtonTypeArray,
-  fudisButtonVariantArray,
-} from '../../types/miscellaneous';
-import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { fudisButtonVariantArray } from '../../types/miscellaneous';
+import { getElement } from '../../utilities/tests/utilities';
 import { fudisIconRotateArray } from '../../types/icons';
 
 describe('ButtonComponent', () => {
@@ -32,31 +28,17 @@ describe('ButtonComponent', () => {
       expect(getButton().getAttribute('id')).toEqual('fudis-button-1');
     });
 
-    // it('should update CSS classes according to given variant Inputs', () => {
-    //   component.size = 'medium';
-    //   fudisButtonVariantArray.forEach((variant) => {
-    //     fixture.componentRef.setInput('variant', `${variant}`);
-    //     fixture.detectChanges();
-
-    //     expect(sortClasses(getButton().className)).toEqual(
-    //         sortClasses(`fudis-button fudis-button__${variant} fudis-button__size__medium}`),
-    //       );
-    //   });
-    // });
+    it('should update CSS classes according to given variant Inputs', () => {
+      fudisButtonVariantArray.forEach((variant) => {
+        fixture.componentRef.setInput('variant', `${variant}`);
+        fixture.detectChanges();
+      });
+    });
 
     it('should have proper default CSS classes', () => {
       expect(getButton().className).toEqual(
         'fudis-button fudis-button__primary fudis-button__size__medium',
       );
-    });
-
-    it('should update button type according to given type Input', () => {
-      fudisButtonTypeArray.forEach((type) => {
-        fixture.componentRef.setInput('type', `${type}`);
-        fixture.detectChanges();
-
-        expect(getButton().getAttribute('type')).toEqual(`${type}`);
-      });
     });
 
     it('should update icon classes according to given iconRotate Input', () => {

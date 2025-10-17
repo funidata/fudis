@@ -8,9 +8,14 @@ import {
   OnChanges,
   ViewChild,
   ElementRef,
+  InjectionToken,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
-import { FudisButtonVariant, FudisComponentChanges } from '../../types/miscellaneous';
+import {
+  FudisButtonSize,
+  FudisButtonVariant,
+  FudisComponentChanges,
+} from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 import { PopoverApiDirective } from '../popover/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
@@ -65,6 +70,11 @@ export class ButtonBaseDirective
    * Disables the button, keeping it focusable
    */
   @Input() disabled = false;
+
+  /**
+   * Button size
+   */
+  @Input() size: FudisButtonSize = 'medium';
 
   /**
    * Assign button as menu button with dropdown
@@ -233,3 +243,5 @@ export class ButtonBaseDirective
     return ['fudis-button', `fudis-button__size__${this._size}`, `fudis-button__${this.variant}`];
   }
 }
+
+export const BUTTON_TOKEN = new InjectionToken<ButtonBaseDirective>('BUTTON_TOKEN');

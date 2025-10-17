@@ -7,6 +7,7 @@ import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { defaultMenuItems } from '../mock_data';
 import { getElement } from '../../../utilities/tests/utilities';
+import { ButtonBaseDirective } from '../../../directives/button-base/button-base.directive';
 
 @Component({
   standalone: false,
@@ -45,6 +46,7 @@ describe('DropdownMenuItemComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         IconButtonComponent,
+        ButtonBaseDirective,
         DropdownMenuItemComponent,
         DropdownMenuComponent,
         IconComponent,

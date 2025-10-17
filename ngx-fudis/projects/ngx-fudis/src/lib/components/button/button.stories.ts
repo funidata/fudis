@@ -65,7 +65,7 @@ Example.args = {
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   variant: 'secondary',
-  label: 'Icon Button',
+  label: 'Button with Icon',
   ariaLabel: undefined,
   size: 'small',
   icon: 'search',

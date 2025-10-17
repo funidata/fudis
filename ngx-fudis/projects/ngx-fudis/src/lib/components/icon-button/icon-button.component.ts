@@ -1,18 +1,22 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  forwardRef,
   HostBinding,
   Input,
   ViewEncapsulation,
 } from '@angular/core';
-import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
+import {
+  BUTTON_TOKEN,
+  ButtonBaseDirective,
+} from '../../directives/button-base/button-base.directive';
 import { FudisIcon } from '../../types/icons';
-import { FudisButtonSize, FudisComponentChanges } from '../../types/miscellaneous';
+import { FudisComponentChanges } from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-icon-button',
   templateUrl: './icon-button.component.html',
-  styleUrl: './icon-button.component.scss',
+  providers: [{ provide: BUTTON_TOKEN, useExisting: forwardRef(() => IconButtonComponent) }],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
@@ -32,11 +36,6 @@ export class IconButtonComponent extends ButtonBaseDirective {
    * Icon for button
    */
   @Input({ required: true }) override icon: FudisIcon | undefined = undefined;
-
-  /**
-   * Button size options
-   */
-  @Input() size: FudisButtonSize = 'medium';
 
   override ngOnChanges(changes: FudisComponentChanges<IconButtonComponent>): void {
     const size = changes.size?.currentValue !== changes.size?.previousValue;
