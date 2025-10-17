@@ -138,7 +138,7 @@ export const AllVariants: StoryFn = (args) => ({
       ></fudis-icon-button>
 
       <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-        >Icon only sized icon buttons</fudis-heading
+        >Extra small sized icon buttons</fudis-heading
       >
       <fudis-icon-button
         [variant]="'primary'"
