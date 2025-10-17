@@ -12,6 +12,7 @@ import {
 } from '../../directives/button-base/button-base.directive';
 import { FudisIcon } from '../../types/icons';
 import { FudisComponentChanges } from '../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-icon-button',
@@ -37,11 +38,24 @@ export class IconButtonComponent extends ButtonBaseDirective {
    */
   @Input({ required: true }) override icon: FudisIcon | undefined = undefined;
 
+  /**
+   * Left icon margin for small and medium sizes
+   */
+  protected _iconMargin = new BehaviorSubject<string>('fudis-button__icon');
+
+  override ngOnInit(): void {
+    const margin = ['medium', 'small'].includes(this.size) ? ' fudis-ml-xs' : '';
+    this._iconMargin.next(`fudis-button__icon${margin}`);
+    super.ngOnInit();
+  }
+
   override ngOnChanges(changes: FudisComponentChanges<IconButtonComponent>): void {
     const size = changes.size?.currentValue !== changes.size?.previousValue;
 
     if (size) {
       this._size = this.size;
+      const margin = ['medium', 'small'].includes(this.size) ? ' fudis-ml-xs' : '';
+      this._iconMargin.next(`fudis-button__icon${margin}`);
     }
 
     super.ngOnChanges(changes);

@@ -44,7 +44,7 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   /**
    * Button size options ignoring extra-small
    */
-  @Input() override size: Exclude<FudisButtonSize, 'icon-only'> = 'medium';
+  @Input() override size: Exclude<FudisButtonSize, 'extra-small'> = 'medium';
 
   /**
    * Button type options

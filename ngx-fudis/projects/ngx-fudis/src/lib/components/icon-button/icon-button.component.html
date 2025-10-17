@@ -16,7 +16,7 @@
     [popoverText]="popoverText"
   >
     <ng-container *ngIf="icon">
-      <div class="fudis-button__icon">
+      <div [class]="_iconMargin | async">
         <fudis-icon
           *ngIf="_iconColor | async as iconColor"
           class="fudis-button__icon__component"
@@ -47,7 +47,7 @@
     [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
   >
     <ng-container *ngIf="icon">
-      <div class="fudis-button__icon">
+      <div [class]="_iconMargin | async">
         <fudis-icon
           *ngIf="_iconColor | async as iconColor"
           class="fudis-button__icon__component"

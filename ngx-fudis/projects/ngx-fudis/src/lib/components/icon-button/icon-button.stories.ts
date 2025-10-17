@@ -17,7 +17,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['medium', 'small', 'icon-only'],
+      options: ['medium', 'small', 'extra-small'],
       control: { type: 'radio' },
     },
     variant: {
@@ -68,7 +68,7 @@ export const Example = Template.bind({});
 Example.args = {
   icon: 'search',
   iconRotate: 'cw-90',
-  size: 'icon-only',
+  size: 'extra-small',
   variant: 'primary',
   ariaLabel: 'Search',
   disabled: false,
@@ -144,25 +144,25 @@ export const AllVariants: StoryFn = (args) => ({
         [variant]="'primary'"
         [icon]="'search'"
         [ariaLabel]="'Primary'"
-        [size]="'icon-only'"
+        [size]="'extra-small'"
       ></fudis-icon-button>
       <fudis-icon-button
         [variant]="'secondary'"
         [icon]="'search'"
         [ariaLabel]="'Secondary'"
-        [size]="'icon-only'"
+        [size]="'extra-small'"
       ></fudis-icon-button>
       <fudis-icon-button
         [variant]="'tertiary'"
         [icon]="'search'"
         [ariaLabel]="'Tertiary'"
-        [size]="'icon-only'"
+        [size]="'extra-small'"
       ></fudis-icon-button>
       <fudis-icon-button
         [ariaLabel]="'Disabled'"
         [icon]="'search'"
         [disabled]="true"
-        [size]="'icon-only'"
+        [size]="'extra-small'"
       ></fudis-icon-button>
     </fudis-grid>
   `,
