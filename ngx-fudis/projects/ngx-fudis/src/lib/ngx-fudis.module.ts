@@ -332,12 +332,7 @@ export class NgxFudisModule {
   static forRoot(): ModuleWithProviders<NgxFudisModule> {
     return {
       ngModule: NgxFudisModule,
-      providers: [
-        FudisFocusService,
-        FudisGridService,
-        FudisIdService,
-        FudisTranslationService,
-      ],
+      providers: [FudisFocusService, FudisGridService, FudisIdService, FudisTranslationService],
     };
   }
 }
