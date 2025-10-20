@@ -12,7 +12,6 @@ export default {
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
       imports: [ReactiveFormsModule, FormsModule],
     }),
   ],
@@ -225,43 +224,6 @@ ExampleWithMinMax.args = {
   size: 'lg',
   initialFocus: false,
   popoverText: 'Fruit sugar is great in small doses!',
-  popoverTriggerLabel: 'Additional information',
-  popoverPosition: 'right',
-};
-
-const ExampleWithoutFormGroupTemplate: StoryFn = (args) => ({
-  props: {
-    ...args,
-    checkboxChange: action('checkboxChange'),
-    groupChange: action('groupChange'),
-    options,
-  },
-  template: html`<fudis-checkbox-group
-    [size]="size"
-    [label]="label"
-    [helpText]="helpText"
-    [popoverText]="popoverText"
-    [popoverPosition]="popoverPosition"
-    [popoverTriggerLabel]="popoverTriggerLabel"
-    [initialFocus]="initialFocus"
-    (handleChange)="groupChange($event)"
-  >
-    <fudis-checkbox-group-option
-      *ngFor="let option of options"
-      (handleChange)="checkboxChange($event)"
-      [control]="option.control"
-      [label]="option.label"
-    />
-  </fudis-checkbox-group>`,
-});
-
-export const ExampleWithoutFormGroup = ExampleWithoutFormGroupTemplate.bind({});
-ExampleWithoutFormGroup.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'This Checkbox Group has no App provided FormGroup.',
-  size: 'lg',
-  initialFocus: false,
-  popoverText: 'Choose your preferred fruits',
   popoverTriggerLabel: 'Additional information',
   popoverPosition: 'right',
 };
