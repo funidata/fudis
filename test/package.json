@@ -10,7 +10,7 @@
   "author": "Funidata Ltd",
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
-    "@playwright/test": "^1.55.1",
-    "@types/node": "^20.17.9"
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^20.19.22"
   }
 }
