@@ -115,7 +115,7 @@ const preview = {
   tags: ["autodocs"],
   decorators: [
     moduleMetadata({
-      imports: [NgxFudisModule, TranslocoRootModule],
+      imports: [NgxFudisModule.forRoot(), TranslocoRootModule],
       providers: [HttpClient, TranslocoService],
     }),
   ],
