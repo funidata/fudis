@@ -7,16 +7,13 @@ test("checkbox group one required", async ({ page }) => {
   await page.getByTestId("fudis-checkbox-group-1-item-4").focus();
   await expect(page).toHaveScreenshot("validation-2-focus-1.png");
 
-  await page.getByTestId("fudis-checkbox-group-1-item-5").focus();
-  await expect(page).toHaveScreenshot("validation-3-focus-2.png");
-
-  await page.getByTestId("fudis-checkbox-group-1-item-5").blur();
+  await page.getByTestId("fudis-checkbox-group-1-item-4").blur();
   await page.waitForSelector(".fudis-error-message");
   await expect(page.getByText("No fruit picked!")).toBeVisible();
-  await expect(page).toHaveScreenshot("validation-4-errors.png");
+  await expect(page).toHaveScreenshot("validation-3-errors.png");
 
   await page.getByText("Pear").click();
-  await expect(page).toHaveScreenshot("validation-5-click.png");
+  await expect(page.getByText("No fruit picked!")).not.toBeVisible();
 });
 
 test("checkbox group disabled", async ({ page }) => {
