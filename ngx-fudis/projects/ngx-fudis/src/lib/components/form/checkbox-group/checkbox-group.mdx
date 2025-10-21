@@ -31,30 +31,30 @@ Child checkbox's **required properties** are `controlName` and `label`. Checkbox
 // In TypeScript file
 
 interface MyCheckboxGroup {
-  apple: FormControl<boolean | null>;
-  fairTradeBanana: FormControl<boolean | null>;
-  pear: FormControl<boolean | null>;
+  email: FormControl<boolean | null>;
+  sms: FormControl<boolean | null>;
+  phoneCall: FormControl<boolean | null>;
 }
 
 myFormGroup = new FormGroup<MyCheckboxGroup>(
   {
-    apple: new FormControl<boolean | null>(null),
-    fairTradeBanana: new FormControl<boolean | null>(null),
-    pear: new FormControl<boolean | null>(null),
+    email: new FormControl<boolean | null>(null),
+    sms: new FormControl<boolean | null>(null),
+    phoneCall: new FormControl<boolean | null>(null),
   }
 );
 
 myOptions = [
-  {label: 'Apple', controlName: 'apple'},
-  {label: 'Fair Trade Banana', controlName: 'fairTradeBanana'},
-  {label: 'Pear', controlName: 'pear'},
+  {label: 'Email', controlName: 'email'},
+  {label: 'SMS', controlName: 'sms'},
+  {label: 'Phone call', controlName: 'phoneCall'},
 ]
 
 // HTML template
 
 <fudis-checkbox-group
   [formGroup]="myFormGroup"
-  [label]="'Select Fruits'"
+  [label]="'Select contact method'"
   (handleChange)="handleChange($event)">
   <fudis-checkbox-group-option *ngFor="let option of myOptions"
     [controlName]="option.controlName
