@@ -1,4 +1,5 @@
 import test, { expect } from "@playwright/test";
+import { clickButtonByTestId } from "./playwright-helpers";
 
 test("form dynamic inputs", async ({ page }) => {
   const errorSummaryText =
@@ -66,18 +67,21 @@ test("form dynamic inputs", async ({ page }) => {
   });
 
   /**
-   * Remove validators which are visible at the moment
+   * Remove validators which are visible at the moment: min length from text input, email pattern,
+   * min length from email input, max number, min date
    */
-  await page.getByTestId("fudis-button-5").focus();
-  await page.keyboard.press("Enter"); // remove minlength validator from text input
-  await page.getByTestId("fudis-button-6").focus();
-  await page.keyboard.press("Enter"); // remove email pattern validator
-  await page.getByTestId("fudis-button-8").focus();
-  await page.keyboard.press("Enter"); // remove min length validator from email input
-  await page.getByTestId("fudis-button-10").focus();
-  await page.keyboard.press("Enter"); // remove max number validator
-  await page.getByTestId("fudis-button-14").focus();
-  await page.keyboard.press("Enter"); // remove min date validator
+  const buttonIds = [
+    "fudis-button-5",
+    "fudis-button-6",
+    "fudis-button-8",
+    "fudis-button-10",
+    "fudis-button-14",
+  ];
+
+  for (const id of buttonIds) {
+    await clickButtonByTestId(page, id);
+  }
+
   await page.getByTestId("fudis-checkbox-group-2-item-1").focus(); // Focus on the second checkbox
   await page.getByText("Winter holidays").click(); // Check the second checkbox
 
