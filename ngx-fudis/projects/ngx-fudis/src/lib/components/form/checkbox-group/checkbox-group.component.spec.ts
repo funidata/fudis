@@ -54,18 +54,18 @@ type TestFormGroup = {
   standalone: false,
   selector: 'fudis-mock-component',
   template: ` <fudis-checkbox-group
-      [id]="'first-group'"
-      [formGroup]="testFromGroup"
-      [label]="'With Form Group. Choose minimum of one fruit'"
-      (handleChange)="handleCheckboxClick($event)"
-    >
-      <p class="do-not-find-me">This should not be shown</p>
-      <fudis-checkbox-group-option
-        *ngFor="let option of options"
-        [controlName]="option.controlName"
-        [label]="option.label"
-      />
-    </fudis-checkbox-group>`,
+    [id]="'first-group'"
+    [formGroup]="testFromGroup"
+    [label]="'With Form Group. Choose minimum of one fruit'"
+    (handleChange)="handleCheckboxClick($event)"
+  >
+    <p class="do-not-find-me">This should not be shown</p>
+    <fudis-checkbox-group-option
+      *ngFor="let option of options"
+      [controlName]="option.controlName"
+      [label]="option.label"
+    />
+  </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
   public testFromGroup = new FormGroup<TestFormGroup>(

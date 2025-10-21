@@ -77,7 +77,11 @@ const basicFormGroup = new FormGroup(
     universityAppNotification: new FormControl<boolean | null>(null),
     paperMail: new FormControl<boolean | null>(null),
   },
-  [FudisGroupValidators.oneRequired(new BehaviorSubject('You need to choose at least one contact method.'))],
+  [
+    FudisGroupValidators.oneRequired(
+      new BehaviorSubject('You need to choose at least one contact method.'),
+    ),
+  ],
 );
 
 const ExampleTemplate: StoryFn = (args) => ({
@@ -127,7 +131,11 @@ const withDisabledFormGroupOptions = new FormGroup(
     universityAppNotification: new FormControl<boolean | null | null>(null),
     paperMail: new FormControl<boolean | null | null>({ value: null, disabled: true }),
   },
-  [FudisGroupValidators.oneRequired(new BehaviorSubject('You need to choose at least one contact method.'))],
+  [
+    FudisGroupValidators.oneRequired(
+      new BehaviorSubject('You need to choose at least one contact method.'),
+    ),
+  ],
 );
 
 const ExampleWithDisabledTemplate: StoryFn = (args) => ({
