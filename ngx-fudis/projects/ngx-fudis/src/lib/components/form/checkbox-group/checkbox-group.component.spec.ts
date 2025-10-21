@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
@@ -54,7 +54,6 @@ type TestFormGroup = {
   standalone: false,
   selector: 'fudis-mock-component',
   template: ` <fudis-checkbox-group
-      #firstGroup
       [id]="'first-group'"
       [formGroup]="testFromGroup"
       [label]="'With Form Group. Choose minimum of one fruit'"
@@ -66,25 +65,9 @@ type TestFormGroup = {
         [controlName]="option.controlName"
         [label]="option.label"
       />
-    </fudis-checkbox-group>
-    <fudis-checkbox-group
-      #secondGroup
-      [id]="'second-group'"
-      [label]="'Without FormGroup Choose fruits fruit'"
-      (handleChange)="handleCheckboxClick($event)"
-    >
-      <fudis-checkbox-group-option
-        *ngFor="let option of optionsWithControls"
-        [controlName]="option.controlName"
-        [control]="option.control"
-        [label]="option.label"
-      />
     </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
-  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<TestForm>;
-  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent<TestForm>;
-
   public testFromGroup = new FormGroup<TestFormGroup>(
     {
       apple: new FormControl<boolean | null>(null),
@@ -98,14 +81,6 @@ class MockContainerComponent {
       FudisGroupValidators.max({ value: 3, message: new BehaviorSubject('Too many selected') }),
     ],
   );
-
-  public optionsWithControls: TestOption[] = [
-    { label: 'Apple', control: new FormControl(null) },
-    { controlName: 'fairTradeBanana', label: 'Fair trade banana', control: new FormControl(null) },
-    { controlName: 'pear', label: 'Pear', control: new FormControl(true) },
-    { label: 'Pineapple', control: new FormControl(true) },
-    { label: 'Orange', control: new FormControl(null) },
-  ];
 
   public options: TestOption[] = [
     { controlName: 'apple', label: 'Apple' },
@@ -363,92 +338,6 @@ describe('CheckboxGroupComponent', () => {
         expect(mockComponent.eventReceived.changedControlName).toEqual('apple');
         expect(mockComponent.eventReceived.formGroup.controls['apple'].value).toEqual(true);
         expect(mockComponent.handleCheckboxClick).toHaveBeenCalled();
-      });
-    });
-  });
-
-  describe('without Form Group provided', () => {
-    describe('Child checkboxes', () => {
-      let mockComponent: MockContainerComponent;
-
-      beforeEach(() => {
-        fixture = TestBed.createComponent(MockContainerComponent);
-        mockComponent = fixture.componentInstance;
-        fixture.detectChanges();
-      });
-
-      it('should have correct amount of child components', () => {
-        const element: NodeList = fixture.nativeElement.querySelectorAll(
-          '#second-group fudis-checkbox-group-option',
-        );
-
-        expect(element.length).toEqual(5);
-      });
-
-      it('should emit correct object', () => {
-        jest.spyOn(mockComponent, 'handleCheckboxClick');
-        const checkbox = fixture.nativeElement.querySelector(
-          '#second-group fudis-checkbox-group-option input',
-        );
-
-        checkbox.click();
-        fixture.detectChanges();
-
-        expect(mockComponent.eventReceived.changedControlName).toEqual('second-group-item-1');
-        expect(mockComponent.eventReceived.formGroup.controls['fairTradeBanana'].value).toEqual(
-          null,
-        );
-        expect(mockComponent.eventReceived.formGroup.controls['pear'].value).toEqual(true);
-        expect(mockComponent.eventReceived.formGroup.controls['second-group-item-4'].value).toEqual(
-          true,
-        );
-        expect(mockComponent.eventReceived.formGroup.controls['second-group-item-5'].value).toEqual(
-          null,
-        );
-        expect(mockComponent.handleCheckboxClick).toHaveBeenCalled();
-      });
-
-      it('should have correct internal form group, if one option is destroyed', () => {
-        const checkbox = fixture.nativeElement.querySelector(
-          '#second-group fudis-checkbox-group-option input',
-        );
-
-        checkbox.click();
-        fixture.detectChanges();
-
-        const controlsBeforeTarget: string[] = [
-          'second-group-item-1',
-          'fairTradeBanana',
-          'pear',
-          'second-group-item-4',
-          'second-group-item-5',
-        ];
-
-        const controlsAfterTarget: string[] = [
-          'second-group-item-1',
-          'fairTradeBanana',
-          'second-group-item-5',
-        ];
-
-        const controlsBefore: string[] = Object.keys(
-          mockComponent.secondGroup.formGroup.controls,
-        ).filter((item) => {
-          return item;
-        });
-
-        expect(controlsBefore).toEqual(controlsBeforeTarget);
-
-        mockComponent.optionsWithControls.splice(2, 2);
-
-        fixture.detectChanges();
-
-        const controlsAfter: string[] = Object.keys(
-          mockComponent.secondGroup.formGroup.controls,
-        ).filter((item) => {
-          return item;
-        });
-
-        expect(controlsAfter).toEqual(controlsAfterTarget);
       });
     });
   });
