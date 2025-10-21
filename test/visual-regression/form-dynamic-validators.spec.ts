@@ -82,8 +82,7 @@ test("form dynamic inputs", async ({ page }) => {
     await clickButtonByTestId(page, id);
   }
 
-  await page.getByTestId("fudis-checkbox-group-2-item-1").focus(); // Focus on the second checkbox
-  await page.getByText("Winter holidays").click(); // Check the second checkbox
+  await page.getByLabel("Winter holidays").check(); // Check the second checkbox
 
   await page.getByTestId("fudis-button-2").focus();
   await page.keyboard.press("Enter"); // submit form without errors
