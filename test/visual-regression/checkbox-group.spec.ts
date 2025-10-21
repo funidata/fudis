@@ -9,11 +9,11 @@ test("checkbox group one required", async ({ page }) => {
 
   await page.getByTestId("fudis-checkbox-group-1-item-4").blur();
   await page.waitForSelector(".fudis-error-message");
-  await expect(page.getByText("No fruit picked!")).toBeVisible();
+  await expect(page.getByText("You need to choose at least one contact method.")).toBeVisible();
   await expect(page).toHaveScreenshot("validation-3-errors.png");
 
-  await page.getByText("Pear").click();
-  await expect(page.getByText("No fruit picked!")).not.toBeVisible();
+  await page.getByText("SMS").click();
+  await expect(page.getByText("You need to choose at least one contact method.")).not.toBeVisible();
 });
 
 test("checkbox group disabled", async ({ page }) => {
