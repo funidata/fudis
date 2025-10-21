@@ -82,22 +82,14 @@ export const AllVariants: StoryFn = (args) => ({
       [align]="'start'"
       [rowGap]="'xs'"
     >
-      <fudis-heading [level]="4" [variant]="'sm'">Medium size buttons</fudis-heading>
+      <fudis-heading [level]="4" [variant]="'sm'">Medium sized buttons</fudis-heading>
       <fudis-button variant="primary" label="Primary"></fudis-button>
       <fudis-button variant="secondary" label="Secondary"></fudis-button>
       <fudis-button variant="tertiary" label="Tertiary"></fudis-button>
       <fudis-button label="Disabled" [disabled]="true"></fudis-button>
 
       <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-        >Medium size buttons with icon</fudis-heading
-      >
-      <fudis-button variant="primary" icon="search" label="Primary"></fudis-button>
-      <fudis-button variant="secondary" icon="search" label="Secondary"></fudis-button>
-      <fudis-button variant="tertiary" icon="search" label="Tertiary"></fudis-button>
-      <fudis-button label="Disabled" icon="search" [disabled]="true"></fudis-button>
-
-      <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-        >Small size buttons</fudis-heading
+        >Small sized buttons</fudis-heading
       >
       <fudis-button variant="primary" label="Primary" size="small"></fudis-button>
       <fudis-button variant="secondary" label="Secondary" size="small"></fudis-button>
@@ -107,33 +99,13 @@ export const AllVariants: StoryFn = (args) => ({
       <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
         >Medium sized buttons with icons</fudis-heading
       >
-      <fudis-button
-        variant="primary"
-        [labelHidden]="true"
-        icon="search"
-        label="Primary"
-      ></fudis-button>
-      <fudis-button
-        variant="secondary"
-        [labelHidden]="true"
-        icon="search"
-        label="Secondary"
-      ></fudis-button>
-      <fudis-button
-        variant="tertiary"
-        [labelHidden]="true"
-        icon="search"
-        label="Tertiary"
-      ></fudis-button>
-      <fudis-button
-        label="Disabled"
-        [labelHidden]="true"
-        icon="search"
-        [disabled]="true"
-      ></fudis-button>
+      <fudis-button variant="primary" icon="search" label="Primary"></fudis-button>
+      <fudis-button variant="secondary" icon="search" label="Secondary"></fudis-button>
+      <fudis-button variant="tertiary" icon="search" label="Tertiary"></fudis-button>
+      <fudis-button label="Disabled" icon="search" [disabled]="true"></fudis-button>
 
       <fudis-heading class="fudis-mt-lg" [level]="4" [variant]="'sm'"
-        >Small size buttons with icons</fudis-heading
+        >Small sized buttons with icons</fudis-heading
       >
       <fudis-button variant="primary" icon="search" label="Primary" size="small"></fudis-button>
       <fudis-button variant="secondary" icon="search" label="Secondary" size="small"></fudis-button>

@@ -15,7 +15,7 @@ Dropdown Menu is used to offer various functions related to the current view.
 
 ## Usage Guidelines
 
-Dropdown Menu is assembled with [Button](/docs/components-button--documentation), DropdownMenu and DropdownMenuItem components and it has certain guidelines and pattern to follow in order to work as designed.
+Dropdown Menu is assembled with [IconButton](/docs/components-iconbutton--documentation), DropdownMenu and DropdownMenuItem components and it has certain guidelines and pattern to follow in order to work as designed.
 
 Dropdown opening alignment can be altered with `align` property. Default value is `center` where the dropdown tries to find the optimal place for opening.
 Fixed opening positions can be assigned to `left` or `right`.
@@ -38,9 +38,8 @@ To group items, wrap them using `DropdownMenuGroupComponent` with `fudis-dropdow
 
 <Source
   code={`
-<fudis-button
- [label]="'Basic menu'"
- [labelHidden]="true"
+<fudis-icon-button
+ [ariaLabel]="'Basic menu'"
  [size]="'small'"
  [variant]="'secondary'"
  [icon]="'three-dots'"
@@ -53,16 +52,15 @@ To group items, wrap them using `DropdownMenuGroupComponent` with `fudis-dropdow
    (handleClick)="clickOption($event)">
   </fudis-dropdown-menu-item>
  </fudis-dropdown-menu>
-</fudis-button>`}
+</fudis-icon-button>`}
 />
 
 ### Code Example For Grouped Items Dropdown Menu
 
 <Source
   code={`
-<fudis-button
- [label]="'Grouped items menu'"
- [labelHidden]="true"
+<fudis-icon-button
+ [ariaLabel]="'Grouped items menu'"
  [size]="'small'"
  [variant]="'secondary'"
  [icon]="'three-dots'"
@@ -79,7 +77,7 @@ To group items, wrap them using `DropdownMenuGroupComponent` with `fudis-dropdow
    </fudis-dropdown-menu-item>
   </fudis-dropdown-menu-group>
  </fudis-dropdown-menu>
-</fudis-button>`}
+</fudis-icon-button>`}
 />
 
 ### Accessibility
@@ -91,7 +89,7 @@ To group items, wrap them using `DropdownMenuGroupComponent` with `fudis-dropdow
 
 ### Related components
 
-- [Button](/docs/components-button--documentation)
+- [IconButton](/docs/components-iconbutton--documentation)
 - [Icon](/docs/components-icon--documentation)
 
 ## Dropdown Menu Properties
