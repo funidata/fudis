@@ -179,8 +179,11 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
         // If focus is on the menu button, only then listen keydown and focus on the first child
         if (
-          firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') ===
-          document.activeElement
+          ['fudis-button', 'fudis-icon-button'].some(
+            (selector) =>
+              firstChildElement.closest(selector)?.querySelector('.fudis-button') ===
+              document.activeElement,
+          )
         ) {
           const firstChildButtonElement = firstChildElement.querySelector('button');
           firstChildButtonElement?.focus();
