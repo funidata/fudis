@@ -50,11 +50,6 @@ export class ButtonBaseDirective
   @Input() variant: FudisButtonVariant = 'primary';
 
   /**
-   * Aria-label for describing context, will override visible label for assistive technology
-   */
-  @Input() ariaLabel: string;
-
-  /**
    * Disables the button, keeping it focusable
    */
   @Input() disabled = false;

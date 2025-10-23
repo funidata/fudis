@@ -10,7 +10,6 @@
     (keydown)="(!disabled)"
     [attr.tabIndex]="disabled ? -1 : null"
     [attr.aria-disabled]="disabled || null"
-    [attr.aria-label]="ariaLabel"
     [attr.id]="id"
     [popoverPosition]="popoverPosition"
     [popoverText]="popoverText"
@@ -40,7 +39,6 @@
     (keydown)="(!disabled)"
     [attr.tabIndex]="disabled ? -1 : null"
     [attr.aria-disabled]="disabled || null"
-    [attr.aria-label]="ariaLabel"
     [attr.id]="id"
   >
     <ng-container *ngIf="icon">

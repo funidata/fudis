@@ -68,7 +68,6 @@ const formCommonDocsExclude: string[] = ['onFocus', 'focusToInput'];
  * Button
  */
 const buttonCommonExclude: string[] = [
-  'dropdownMenuId',
   'dropdownOpen',
   'buttonEl',
   'buttonClick',
@@ -421,7 +420,6 @@ export const spacingExclude: RegExp = excludeRegex([
   'buttonEl',
   'closeMenu',
   'disabled',
-  'dropdownMenuId',
   'dropdownOpen',
   'handleClick',
   'handleBlur',
@@ -470,7 +468,6 @@ export const popoverExclude: RegExp = excludeRegex([
   'toggleMenu',
   'closeMenu',
   'dropdownOpen',
-  'dropdownMenuId',
   'asMenuButton',
   'clickSubscription',
   'keydownSubscription',

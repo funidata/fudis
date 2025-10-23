@@ -41,7 +41,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   /**
    * Required aria-label for describing context
    */
-  @Input({ required: true }) override ariaLabel: string;
+  @Input({ required: true }) ariaLabel: string;
 
   /**
    * Icon for button
@@ -62,11 +62,6 @@ export class IconButtonComponent extends ButtonBaseDirective {
    * Toggle dropdown menu button
    */
   public dropdownOpen = new BehaviorSubject<boolean>(false);
-
-  /**
-   * Id of child Dropdown Menu. Passed from child to parent Button.
-   */
-  public dropdownMenuId: string;
 
   override ngOnInit(): void {
     const margin = ['medium', 'small'].includes(this.size) ? ' fudis-ml-xs' : '';
