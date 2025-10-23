@@ -84,8 +84,7 @@ test("form dynamic inputs", async ({ page }) => {
 
   await page.getByLabel("Winter holidays").check(); // Check the second checkbox
 
-  await page.getByTestId("fudis-button-2").focus();
-  await page.keyboard.press("Enter"); // submit form without errors
+  await clickButtonByTestId(page, "fudis-button-2"); // submit form without errors
   await expect(page).toHaveScreenshot("dynamic-3-submit-after-removed-validators.png", {
     fullPage: true,
   });

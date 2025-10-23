@@ -54,7 +54,7 @@ type TestFormGroup = {
   standalone: false,
   selector: 'fudis-mock-component',
   template: ` <fudis-checkbox-group
-    [id]="'first-group'"
+    [id]="'group-id'"
     [formGroup]="testFromGroup"
     [label]="'With Form Group. Choose minimum of one fruit'"
     (handleChange)="handleCheckboxClick($event)"
@@ -216,25 +216,25 @@ describe('CheckboxGroupComponent', () => {
       });
 
       it('should not render p-tag', () => {
-        const element = fixture.nativeElement.querySelector('#first-group .do-not-find-me');
+        const element = fixture.nativeElement.querySelector('#group-id .do-not-find-me');
 
         expect(element).toBeNull();
       });
 
       it('should have correct amount of child components', () => {
         const element: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option',
+          '#group-id fudis-checkbox-group-option',
         );
 
         expect(element.length).toEqual(5);
       });
 
       it('first input should have matching aria-described-by id', () => {
-        const guidance = getElement(fixture, '#first-group .fudis-guidance') as HTMLElement;
+        const guidance = getElement(fixture, '#group-id .fudis-guidance') as HTMLElement;
         const guidanceId = guidance.getAttribute('id');
 
         const element: HTMLElement[] = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option .fudis-checkbox__input',
+          '#group-id fudis-checkbox-group-option .fudis-checkbox__input',
         );
 
         expect(element[0].getAttribute('aria-describedby')).toEqual(guidanceId);
@@ -247,15 +247,15 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
+          '#group-id fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option input[aria-invalid="true"]',
+          '#group-id fudis-checkbox-group-option input[aria-invalid="true"]',
         );
 
         const errorMessage = fixture.nativeElement.querySelector(
-          '#first-group fudis-guidance .fudis-error-message',
+          '#group-id fudis-guidance .fudis-error-message',
         ) as HTMLElement;
 
         expect(invalidInputs.length).toEqual(5);
@@ -269,7 +269,7 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const checkbox = fixture.nativeElement.querySelector(
-          '#first-group fudis-checkbox-group-option',
+          '#group-id fudis-checkbox-group-option',
         );
 
         checkbox.querySelector('input').click();
@@ -277,15 +277,15 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
 
         const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
+          '#group-id fudis-checkbox-group-option .fudis-checkbox__content__box--invalid',
         );
 
         const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-          '#first-group fudis-checkbox-group-option input[aria-invalid="true"]',
+          '#group-id fudis-checkbox-group-option input[aria-invalid="true"]',
         );
 
         const errorMessage = fixture.nativeElement.querySelector(
-          '#first-group fudis-guidance .fudis-error-message',
+          '#group-id fudis-guidance .fudis-error-message',
         );
 
         expect(invalidInputs.length).toEqual(0);
@@ -330,7 +330,7 @@ describe('CheckboxGroupComponent', () => {
       it('should emit correct object', () => {
         jest.spyOn(mockComponent, 'handleCheckboxClick');
         const checkbox = fixture.nativeElement.querySelector(
-          '#first-group fudis-checkbox-group-option',
+          '#group-id fudis-checkbox-group-option',
         );
 
         checkbox.querySelector('input').click();
