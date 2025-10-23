@@ -6,9 +6,6 @@ import {
   Output,
   OnDestroy,
   OnChanges,
-  ViewChild,
-  ElementRef,
-  InjectionToken,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import {
@@ -21,7 +18,6 @@ import { PopoverApiDirective } from '../popover/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import { IconButtonComponent } from '../../components/icon-button/icon-button.component';
 import { ButtonComponent } from '../../components/button/button.component';
-import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 @Directive({
   selector: '[fudisButtonBase]',
   standalone: false,
@@ -30,17 +26,9 @@ export class ButtonBaseDirective
   extends PopoverApiDirective
   implements OnInit, OnDestroy, OnChanges
 {
-  constructor(
-    protected _idService: FudisIdService,
-    private _dropdownEventService: DropdownEventService,
-  ) {
+  constructor(protected _idService: FudisIdService) {
     super();
   }
-  /**
-   * Reference to native button element
-   */
-  @ViewChild('buttonElement') public buttonEl: ElementRef<HTMLButtonElement>;
-
   /**
    * Id for HTML button element. By default generated.
    */
@@ -75,11 +63,6 @@ export class ButtonBaseDirective
    * Button size
    */
   @Input() size: FudisButtonSize = 'medium';
-
-  /**
-   * Assign button as menu button with dropdown
-   */
-  @Input() asMenuButton: boolean = false;
 
   /**
    * Click handler
@@ -121,16 +104,6 @@ export class ButtonBaseDirective
    */
   protected _classList = new BehaviorSubject<string[]>([]);
 
-  /**
-   * Toggle dropdown menu button
-   */
-  public dropdownOpen = new BehaviorSubject<boolean>(false);
-
-  /**
-   * Id of child Dropdown Menu. Passed from child to parent Button.
-   */
-  public dropdownMenuId: string;
-
   ngOnInit() {
     if (this.id) {
       this._idService.addNewId('button', this.id);
@@ -158,68 +131,6 @@ export class ButtonBaseDirective
   }
 
   /**
-   * Button click event
-   */
-  public buttonClick(event: Event): void {
-    if (this.asMenuButton) {
-      this.toggleMenu();
-    }
-
-    this.handleClick.emit(event);
-  }
-
-  /**
-   * Toggling when Button is used as Menu Button
-   */
-  public toggleMenu(): void {
-    const newState = !this.dropdownOpen.value;
-    this.dropdownOpen.next(newState);
-
-    this._dropdownEventService.triggerWidthCalculation();
-  }
-
-  /**
-   * Close dropdown when Button is used as Menu Button
-   */
-  public closeMenu(focusToButton: boolean = true): void {
-    this.dropdownOpen.next(false);
-
-    if (!this._focused && focusToButton) {
-      this.buttonEl.nativeElement.focus();
-    }
-
-    this._dropdownEventService.triggerWidthCalculation();
-  }
-
-  /**
-   * Handle Escape key down for Menu Button
-   */
-  protected _handleMenuButtonKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-      this.closeMenu();
-    }
-  }
-
-  /**
-   * Handler for blurring out and closing Menu Button's dropdown
-   */
-  protected _handleButtonBlur(event: FocusEvent): void {
-    this._focused = false;
-
-    const targetIsDropdownMenuOption = (event.relatedTarget as HTMLElement)?.classList?.contains(
-      'fudis-dropdown-menu-item',
-    );
-
-    if (this.asMenuButton && !targetIsDropdownMenuOption) {
-      this.dropdownOpen.next(false);
-    }
-
-    this.handleBlur.emit(event);
-  }
-
-  /**
    * Handle button focus
    */
   protected _handleButtonFocus(event: FocusEvent): void {
@@ -243,5 +154,3 @@ export class ButtonBaseDirective
     return ['fudis-button', `fudis-button__size__${this._size}`, `fudis-button__${this.variant}`];
   }
 }
-
-export const BUTTON_TOKEN = new InjectionToken<ButtonBaseDirective>('BUTTON_TOKEN');

@@ -5,10 +5,7 @@ import { IconComponent } from '../icon/icon.component';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
-import {
-  BUTTON_TOKEN,
-  ButtonBaseDirective,
-} from '../../directives/button-base/button-base.directive';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 
 describe('DropdownMenuComponent', () => {
   let component: DropdownMenuComponent;
@@ -18,7 +15,7 @@ describe('DropdownMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ButtonBaseDirective,
+        IconButtonComponent,
         DropdownMenuItemComponent,
         DropdownMenuComponent,
         IconComponent,
@@ -26,7 +23,7 @@ describe('DropdownMenuComponent', () => {
     })
       .overrideComponent(DropdownMenuComponent, {
         add: {
-          providers: [{ provide: BUTTON_TOKEN, useValue: { id: 'fudis-button-1' } }],
+          providers: [{ provide: IconButtonComponent, useValue: { id: 'fudis-button-1' } }],
         },
       })
       .compileComponents();

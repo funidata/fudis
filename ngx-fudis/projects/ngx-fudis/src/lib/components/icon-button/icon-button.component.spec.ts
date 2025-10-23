@@ -55,4 +55,28 @@ describe('IconButtonComponent', () => {
       expect(getButton().getAttribute('type')).toEqual('button');
     });
   });
+
+  describe('Button as MenuButton', () => {
+    it('should toggle dropdown menu', () => {
+      jest.spyOn(component, 'toggleMenu');
+
+      fixture.componentRef.setInput('icon', 'three-dots');
+      fixture.componentRef.setInput('ariaLabel', 'Additional menu');
+      fixture.componentRef.setInput('asMenuButton', true);
+      fixture.detectChanges();
+
+      expect(getButton().getAttribute('aria-expanded')).toEqual('false');
+
+      getButton().click();
+      fixture.detectChanges();
+
+      expect(component.toggleMenu).toHaveBeenCalled();
+
+      expect(getButton().getAttribute('aria-expanded')).toEqual('true');
+
+      expect(getButton().getAttribute('aria-label')).toEqual('Additional menu');
+
+      expect(getButton().getAttribute('type')).toEqual('button');
+    });
+  });
 });

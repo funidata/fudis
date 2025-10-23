@@ -19,10 +19,7 @@ import { FudisInputSize } from '../../types/forms';
 import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { Subscription } from 'rxjs';
-import {
-  BUTTON_TOKEN,
-  ButtonBaseDirective,
-} from '../../directives/button-base/button-base.directive';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -37,7 +34,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
     private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
     @Inject(DOCUMENT) private _document: Document,
-    @Host() @Inject(BUTTON_TOKEN) private _parentButton: ButtonBaseDirective,
+    @Host() private _parentButton: IconButtonComponent,
   ) {
     super();
 
@@ -179,11 +176,8 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
         // If focus is on the menu button, only then listen keydown and focus on the first child
         if (
-          ['fudis-button', 'fudis-icon-button'].some(
-            (selector) =>
-              firstChildElement.closest(selector)?.querySelector('.fudis-button') ===
-              document.activeElement,
-          )
+          firstChildElement.closest('fudis-icon-button')?.querySelector('.fudis-button') ===
+          document.activeElement
         ) {
           const firstChildButtonElement = firstChildElement.querySelector('button');
           firstChildButtonElement?.focus();

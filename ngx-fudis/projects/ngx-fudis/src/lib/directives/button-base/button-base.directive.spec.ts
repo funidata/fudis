@@ -92,31 +92,4 @@ describe('ButtonComponent', () => {
       expect(component.handleClick.emit).not.toHaveBeenCalled();
     });
   });
-
-  describe('Button as MenuButton', () => {
-    it('should toggle dropdown menu', () => {
-      jest.spyOn(component, 'toggleMenu');
-
-      fixture.componentRef.setInput('icon', 'three-dots');
-      fixture.componentRef.setInput('label', 'Open additional menu');
-      fixture.componentRef.setInput('ariaLabel', 'It has nice things to click');
-      fixture.componentRef.setInput('asMenuButton', true);
-      fixture.detectChanges();
-
-      expect(getButton().getAttribute('aria-expanded')).toEqual('false');
-
-      getButton().click();
-      fixture.detectChanges();
-
-      expect(component.toggleMenu).toHaveBeenCalled();
-
-      expect(getButton().getAttribute('aria-expanded')).toEqual('true');
-
-      expect(getButton().textContent).toEqual('Open additional menu');
-
-      expect(getButton().getAttribute('aria-label')).toEqual('It has nice things to click');
-
-      expect(getButton().getAttribute('type')).toEqual('button');
-    });
-  });
 });

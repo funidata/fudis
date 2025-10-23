@@ -7,29 +7,29 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   OnDestroy,
-  forwardRef,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../types/miscellaneous';
-import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
-import {
-  BUTTON_TOKEN,
-  ButtonBaseDirective,
-} from '../../directives/button-base/button-base.directive';
+import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
-  providers: [{ provide: BUTTON_TOKEN, useExisting: forwardRef(() => ButtonComponent) }],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
 export class ButtonComponent extends ButtonBaseDirective implements OnChanges, OnInit, OnDestroy {
-  constructor(_idService: FudisIdService, _dropdownEventService: DropdownEventService) {
-    super(_idService, _dropdownEventService);
+  constructor(_idService: FudisIdService) {
+    super(_idService);
   }
+  /**
+   * Reference to native button element
+   */
+  @ViewChild('buttonElement') public buttonEl: ElementRef<HTMLButtonElement>;
 
   /**
    * Binding host CSS class to component wrapper
@@ -59,5 +59,21 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
     }
 
     super.ngOnChanges(changes);
+  }
+
+  /**
+   * Button click event
+   */
+  public buttonClick(event: Event): void {
+    this.handleClick.emit(event);
+  }
+
+  /**
+   * Handler blurring out
+   */
+  protected _handleButtonBlur(event: FocusEvent): void {
+    this._focused = false;
+
+    this.handleBlur.emit(event);
   }
 }
