@@ -6,9 +6,6 @@ import {
   Host,
   OnInit,
   ViewEncapsulation,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
 } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
@@ -17,7 +14,7 @@ import {
   FudisCheckboxGroupFormGroup,
   FudisCheckboxGroupOption,
 } from '../../../../types/forms';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'fudis-checkbox-group-option',
@@ -25,28 +22,17 @@ import { FormControl, FormGroup } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
   standalone: false,
 })
-export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
+export class CheckboxGroupOptionComponent implements OnInit {
   constructor(
     private _idService: FudisIdService,
     @Host() protected _checkboxGroup: CheckboxGroupComponent<object>,
   ) {}
 
   /**
-   * HTML input element of checkbox
+   * Control name for this checkbox from FormGroup. Used to link each Checkbox with their Checkbox
+   * Group parent's FormGroup.
    */
-  @ViewChild('inputRef') private _inputRef: ElementRef<HTMLInputElement>;
-
-  /**
-   * Control name for this checkbox from FormGroup. Required if FormGroup is given to the parent.
-   * Used to link each Checkbox with their Checkbox Group parent's FormGroup.
-   */
-  @Input() controlName: string;
-
-  /**
-   * Provide FormControl for each checkbox, when you do not provide FormGroup for the parent
-   * Checkbox Group.
-   */
-  @Input() control: FormControl<boolean | null>;
+  @Input({ required: true }) controlName: string;
 
   /**
    * Visible label of checkbox
@@ -64,15 +50,14 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
   @Output() handleChange = new EventEmitter<FudisCheckboxChangeEvent>();
 
   /**
+   * FormControl for each Checkbox provided by parent FormGroup
+   */
+  protected _control: FormControl<boolean | null>;
+
+  /**
    * If checkbox has focus
    */
   protected _focused = false;
-
-  /**
-   * Boolean for syncing, if this Checkbox had 'control' property provided and parent had no
-   * 'formGroup' provided.
-   */
-  private _controlAddedToParent: boolean = false;
 
   ngOnInit(): void {
     if (this.id) {
@@ -86,39 +71,11 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
         this.controlName as keyof FudisCheckboxGroupFormGroup<object>
       ];
 
-    if (!this.control && this.controlName && parentControl) {
+    if (this.controlName && parentControl) {
       /**
        * Set Checkbox's control to match one in parent FormGroup.
        */
-      this.control = parentControl;
-    } else if (this.control && this._checkboxGroup.internalFormGroup) {
-      /**
-       * If no name was provided, use id instead.
-       */
-      if (!this.controlName) {
-        this.controlName = this.id;
-      }
-
-      /**
-       * If parent has no FormGroup provided, add this control to internally created FormGroup.
-       */
-      (this._checkboxGroup.formGroup as FormGroup).addControl(this.controlName, this.control);
-      this._controlAddedToParent = true;
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this._controlAddedToParent && this.controlName) {
-      const parentControl =
-        this._checkboxGroup?.formGroup?.controls?.[
-          this.controlName as keyof FudisCheckboxGroupFormGroup<object>
-        ];
-
-      if (parentControl) {
-        this._checkboxGroup.formGroup.removeControl(
-          this.controlName as keyof FudisCheckboxGroupFormGroup<object>,
-        );
-      }
+      this._control = parentControl;
     }
   }
 
@@ -140,7 +97,7 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
     /**
      * This Checkbox's emit
      */
-    this.handleChange.emit({ checkbox: optionToEmit, control: this.control });
+    this.handleChange.emit({ checkbox: optionToEmit, control: this._control });
 
     /**
      * Call parent's function, which triggers Checkbox Group's emit
@@ -179,7 +136,7 @@ export class CheckboxGroupOptionComponent implements OnInit, OnDestroy {
    * If control is disabled, prevent toggling it.
    */
   _checkboxClick(event: Event) {
-    if (this.control.disabled) {
+    if (this._control.disabled) {
       event.preventDefault();
     }
   }
