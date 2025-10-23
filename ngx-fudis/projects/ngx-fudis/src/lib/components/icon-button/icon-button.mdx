@@ -18,11 +18,11 @@ Since Icon Button does not have a visible label, it is mandatory to provide aria
 
 ### Icon (mandatory)
 
-Icon input accepts any FudisIcon. For icons that are not self-evident, always remember to provide a separate button action description.
+Icon input accepts any [Icon](/docs/components-icon--documentation).
 
 ### Size
 
-Icon Button has three different sizes 'medium', 'small' and 'extra-small'.
+Icon Button has three different sizes `medium` (default), `small` and `extra-small`.
 
 ### Variant
 
@@ -39,7 +39,7 @@ Icon Button has three variants: `primary` (default), `secondary` and `tertiary`.
 - Button uses primary-color variable (`--fudis-color-primary`) which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.
   - Disabled button has static colors `#484848` and `#D4D4D4` with contrast ratio 6.2:1
 - Button has visible focus state
-- Disabled button can be focused. State is communicated for screen reader
+- Disabled buttons do not receive keyboard focus, but their state is communicated for assistive technology.
 - Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
 - Aria-label is a required property.
 

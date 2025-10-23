@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
@@ -17,13 +16,7 @@ describe('DialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DialogComponent,
-        AlertGroupComponent,
-        ButtonComponent,
-        IconButtonComponent,
-        IconComponent,
-      ],
+      declarations: [DialogComponent, AlertGroupComponent, IconButtonComponent, IconComponent],
       imports: [MatDialogModule],
       providers: [
         FudisDialogService,

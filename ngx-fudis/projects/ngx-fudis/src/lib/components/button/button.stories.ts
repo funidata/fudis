@@ -32,13 +32,6 @@ export default {
       options: ['flip-180', 'cw-90', 'ccw-90', 'none'],
       control: { type: 'select' },
     },
-    popoverText: {
-      control: { type: 'text' },
-    },
-    popoverPosition: {
-      options: ['left', 'right', 'above', 'below'],
-      control: { type: 'select' },
-    },
     ariaLabel: {
       control: { type: 'text' },
     },

@@ -33,7 +33,7 @@ For HTML semantics, if Button is a form submit button, `submit` attribute value 
 
 ### Button with Icon
 
-Button has option for displaying Icon component alongside the label. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>. Icon color is automatically set according to which button variant is in use.
+Button has option for displaying Icon component alongside the label. Icon color is automatically set according to which button variant is in use.
 For situations where only visible icon is preferred, use [IconButton](/docs/components-iconbutton--documentation) instead.
 
 Icon is only a visual indicator and is always hidden from screen readers.
@@ -47,7 +47,7 @@ Icon can be configured with `icon` and `iconRotate` properties.
 - Button uses primary-color variable (`--fudis-color-primary`) which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.
   - Disabled button has static colors `#484848` and `#D4D4D4` with contrast ratio 6.2:1
 - Button has visible focus state
-- Disabled button can be focused. State is communicated for screen reader
+- Disabled buttons do not receive keyboard focus, but their state is communicated for assistive technology.
 - Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
 - Label is a required property. If needed, button can be given additional `ariaLabel` property that will override the visible label text for screen reader users.
 
