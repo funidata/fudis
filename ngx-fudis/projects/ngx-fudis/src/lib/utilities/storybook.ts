@@ -68,6 +68,7 @@ const formCommonDocsExclude: string[] = ['onFocus', 'focusToInput'];
  * Button
  */
 const buttonCommonExclude: string[] = [
+  'dropdownMenuId',
   'dropdownOpen',
   'buttonEl',
   'buttonClick',
