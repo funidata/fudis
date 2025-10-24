@@ -49,10 +49,9 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   @ViewChild('checkboxGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
-   * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox
-   * children.
+   * FormGroup for Checkbox Group. Provide also `controlName` for each Checkbox child.
    */
-  @Input() override formGroup: FormGroup<T>;
+  @Input({ required: true }) override formGroup: FormGroup<T>;
 
   /**
    * Width size of the group.
@@ -69,12 +68,6 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * not show before that.
    */
   private _groupBlurredOut = false;
-
-  /**
-   * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created
-   * FormGroup or one provided from the App.
-   */
-  protected _internalFormGroup: boolean = false;
 
   private _applyGroupMarkAsTouched(): void {
     if (this.formGroup.touched) {
@@ -99,29 +92,9 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
     return this._groupBlurredOut;
   }
 
-  /**
-   * Getter for _internalFormGroup boolean
-   */
-  get internalFormGroup(): boolean {
-    return this._internalFormGroup;
-  }
-
-  public ngOnInit() {
+  ngOnInit(): void {
     this._setParentComponentId('checkbox-group');
-
-    /**
-     * If there's no FormGroup provided when component is initialised, create one internally.
-     */
-    if (!this.formGroup) {
-      this._internalFormGroup = true;
-
-      this.formGroup = new FormGroup({}) as FormGroup;
-    } else {
-      /**
-       * Validation check can be currently be done only for App provided formGroup
-       */
-      this._required.next(FudisValidatorUtilities.oneRequiredOrMin(this.formGroup));
-    }
+    this._required.next(FudisValidatorUtilities.oneRequiredOrMin(this.formGroup));
 
     this.formGroup.valueChanges
       .pipe(takeUntilDestroyed(this._destroyRef))

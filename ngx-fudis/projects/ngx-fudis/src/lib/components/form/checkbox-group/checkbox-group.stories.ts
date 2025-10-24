@@ -12,7 +12,6 @@ export default {
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
       imports: [ReactiveFormsModule, FormsModule],
     }),
   ],
@@ -44,41 +43,45 @@ const html = String.raw;
 
 const options = [
   {
-    controlName: 'apple',
-    label: 'Apple',
+    controlName: 'email',
+    label: 'Email',
     control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'fairTradeBanana',
-    label: 'Fair trade banana',
+    controlName: 'sms',
+    label: 'SMS',
     control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'pear',
-    label: 'Pear',
+    controlName: 'phoneCall',
+    label: 'Phone call',
     control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'pineapple',
-    label: 'Pineapple',
+    controlName: 'universityAppNotification',
+    label: 'University app notification',
     control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'orange',
-    label: 'Orange',
+    controlName: 'paperMail',
+    label: 'Paper mail',
     control: new FormControl<boolean | null>(null),
   },
 ];
 
 const basicFormGroup = new FormGroup(
   {
-    apple: new FormControl<boolean | null>(null),
-    fairTradeBanana: new FormControl<boolean | null>(null),
-    pear: new FormControl<boolean | null>(null),
-    pineapple: new FormControl<boolean | null>(null),
-    orange: new FormControl<boolean | null>(null),
+    email: new FormControl<boolean | null>(null),
+    sms: new FormControl<boolean | null>(null),
+    phoneCall: new FormControl<boolean | null>(null),
+    universityAppNotification: new FormControl<boolean | null>(null),
+    paperMail: new FormControl<boolean | null>(null),
   },
-  [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
+  [
+    FudisGroupValidators.oneRequired(
+      new BehaviorSubject('You need to choose at least one contact method.'),
+    ),
+  ],
 );
 
 const ExampleTemplate: StoryFn = (args) => ({
@@ -111,24 +114,28 @@ const ExampleTemplate: StoryFn = (args) => ({
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'Pick at least one fruit.',
+  label: 'Preferred contact method',
+  helpText: 'Pick at least one contact method.',
   size: 'lg',
   initialFocus: false,
-  popoverText: 'Fruit sugar is great in small doses!',
+  popoverText: 'We do not recommend paper mail due to its environmental strain.',
   popoverTriggerLabel: 'Additional information',
   popoverPosition: 'right',
 };
 
 const withDisabledFormGroupOptions = new FormGroup(
   {
-    apple: new FormControl<boolean | null>({ value: true, disabled: true }),
-    fairTradeBanana: new FormControl<boolean | null | null>(null),
-    pear: new FormControl<boolean | null | null>({ value: false, disabled: true }),
-    pineapple: new FormControl<boolean | null | null>(null),
-    orange: new FormControl<boolean | null | null>({ value: null, disabled: true }),
+    email: new FormControl<boolean | null>({ value: true, disabled: true }),
+    sms: new FormControl<boolean | null | null>(null),
+    phoneCall: new FormControl<boolean | null | null>({ value: false, disabled: true }),
+    universityAppNotification: new FormControl<boolean | null | null>(null),
+    paperMail: new FormControl<boolean | null | null>({ value: null, disabled: true }),
   },
-  [FudisGroupValidators.oneRequired(new BehaviorSubject('Please pick one! :('))],
+  [
+    FudisGroupValidators.oneRequired(
+      new BehaviorSubject('You need to choose at least one contact method.'),
+    ),
+  ],
 );
 
 const ExampleWithDisabledTemplate: StoryFn = (args) => ({
@@ -161,31 +168,31 @@ const ExampleWithDisabledTemplate: StoryFn = (args) => ({
 
 export const ExampleWithDisabledOption = ExampleWithDisabledTemplate.bind({});
 ExampleWithDisabledOption.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'Some options are disabled and cannot be toggled.',
+  label: 'Preferred contact method',
+  helpText: 'Obligatory contact method is email.',
   size: 'lg',
   initialFocus: false,
-  popoverText: 'Fruit sugar is great in small doses!',
+  popoverText: 'Some options are disabled due to university policies.',
   popoverTriggerLabel: 'Additional information',
   popoverPosition: 'right',
 };
 
 const withMinMaxFormGroupOptions = new FormGroup(
   {
-    apple: new FormControl<boolean | null>(null),
-    fairTradeBanana: new FormControl<boolean | null | null>(null),
-    pear: new FormControl<boolean | null | null>(null),
-    pineapple: new FormControl<boolean | null | null>(null),
-    orange: new FormControl<boolean | null | null>(null),
+    email: new FormControl<boolean | null>(null),
+    sms: new FormControl<boolean | null | null>(null),
+    phoneCall: new FormControl<boolean | null | null>(null),
+    universityAppNotification: new FormControl<boolean | null | null>(null),
+    paperMail: new FormControl<boolean | null | null>(null),
   },
   [
     FudisGroupValidators.min({
       value: 2,
-      message: new BehaviorSubject('Not enough fruits picked'),
+      message: new BehaviorSubject('Not enough methods chosen.'),
     }),
     FudisGroupValidators.max({
       value: 3,
-      message: new BehaviorSubject('Too many fruits selected!'),
+      message: new BehaviorSubject('Too many methods chosen.'),
     }),
   ],
 );
@@ -220,48 +227,11 @@ const ExampleWithMinMaxTemplate: StoryFn = (args) => ({
 
 export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
 ExampleWithMinMax.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'Pick two to three fruits.',
+  label: 'Preferred contact method',
+  helpText: 'Pick two to three contact methods.',
   size: 'lg',
   initialFocus: false,
-  popoverText: 'Fruit sugar is great in small doses!',
-  popoverTriggerLabel: 'Additional information',
-  popoverPosition: 'right',
-};
-
-const ExampleWithoutFormGroupTemplate: StoryFn = (args) => ({
-  props: {
-    ...args,
-    checkboxChange: action('checkboxChange'),
-    groupChange: action('groupChange'),
-    options,
-  },
-  template: html`<fudis-checkbox-group
-    [size]="size"
-    [label]="label"
-    [helpText]="helpText"
-    [popoverText]="popoverText"
-    [popoverPosition]="popoverPosition"
-    [popoverTriggerLabel]="popoverTriggerLabel"
-    [initialFocus]="initialFocus"
-    (handleChange)="groupChange($event)"
-  >
-    <fudis-checkbox-group-option
-      *ngFor="let option of options"
-      (handleChange)="checkboxChange($event)"
-      [control]="option.control"
-      [label]="option.label"
-    />
-  </fudis-checkbox-group>`,
-});
-
-export const ExampleWithoutFormGroup = ExampleWithoutFormGroupTemplate.bind({});
-ExampleWithoutFormGroup.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'This Checkbox Group has no App provided FormGroup.',
-  size: 'lg',
-  initialFocus: false,
-  popoverText: 'Choose your preferred fruits',
+  popoverText: 'You should have at least two contact methods in case one fails.',
   popoverTriggerLabel: 'Additional information',
   popoverPosition: 'right',
 };

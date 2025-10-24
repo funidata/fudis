@@ -1,14 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
-import {
-  FudisCheckboxChangeEvent,
-  FudisCheckboxGroupFormGroup,
-  FudisCheckboxGroupOption,
-} from '../../../../types/forms';
+import { FudisCheckboxChangeEvent, FudisCheckboxGroupOption } from '../../../../types/forms';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
@@ -34,34 +30,17 @@ type TestForm = {
   standalone: false,
   selector: 'fudis-mock-container',
   template: `<fudis-checkbox-group
-      #firstGroup
-      [formGroup]="testFromGroup"
-      [label]="'With Group. Choose minimum of one fruit'"
-    >
-      <fudis-checkbox-group-option
-        *ngFor="let option of _options"
-        [controlName]="option.controlName"
-        [label]="option.label"
-      />
-    </fudis-checkbox-group>
-    <fudis-checkbox-group #secondGroup [label]="'Without Group. Choose minimum of one fruit'">
-      <fudis-checkbox-group-option
-        *ngFor="let option of optionsWithControls"
-        [id]="option.id"
-        [controlName]="option.controlName"
-        [control]="option.control"
-        [label]="option.label"
-      />
-    </fudis-checkbox-group> `,
+    [formGroup]="testFromGroup"
+    [label]="'Choose minimum of one fruit'"
+  >
+    <fudis-checkbox-group-option
+      *ngFor="let option of _options"
+      [controlName]="option.controlName"
+      [label]="option.label"
+    />
+  </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
-  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent<
-    FudisCheckboxGroupFormGroup<TestForm>
-  >;
-  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent<
-    FudisCheckboxGroupFormGroup<TestForm>
-  >;
-
   public testFromGroup = new FormGroup<TestForm>(
     {
       apple: new FormControl<boolean | null>(null),
@@ -83,22 +62,12 @@ class MockContainerComponent {
     { controlName: 'pineapple', label: 'Pineapple' },
     { controlName: 'orange', label: 'Orange' },
   ];
-
-  public optionsWithControls = [
-    { label: 'Apple', control: new FormControl(null) },
-    { controlName: 'fairTradeBanana', label: 'Fair trade banana', control: new FormControl(null) },
-    { controlName: 'pear', label: 'Pear', control: new FormControl(true) },
-    { label: 'Pineapple', control: new FormControl(true) },
-    { label: 'Orange', control: new FormControl(null), id: 'checkbox-with-orange-id' },
-  ];
 }
 
 describe('CheckboxGroupOptionComponent', () => {
   let fixture:
     | ComponentFixture<MockContainerComponent>
     | ComponentFixture<CheckboxGroupOptionComponent>;
-
-  let mockComponent: MockContainerComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -122,8 +91,6 @@ describe('CheckboxGroupOptionComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MockContainerComponent);
-    mockComponent = fixture.componentInstance;
-
     fixture.detectChanges();
   });
 
@@ -289,27 +256,5 @@ describe('CheckboxGroupOptionComponent', () => {
       expect(inputValue).toEqual('true');
       expect(icon).not.toBeNull();
     }));
-  });
-
-  describe('With FormControl provided', () => {
-    it('should have updated FormGroup in the parent correctly', () => {
-      const mockComponentFormGroupControls = mockComponent.secondGroup.formGroup.controls;
-
-      const expectedKeys = [
-        'fudis-checkbox-group-2-item-1',
-        'fairTradeBanana',
-        'pear',
-        'fudis-checkbox-group-2-item-4',
-        'checkbox-with-orange-id',
-      ];
-
-      const receivedKeys: string[] = [];
-
-      Object.keys(mockComponentFormGroupControls).forEach((key) => {
-        receivedKeys.push(key);
-      });
-
-      expect(expectedKeys).toEqual(receivedKeys);
-    });
   });
 });
