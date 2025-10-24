@@ -93,6 +93,7 @@ const preview = {
             ["Grid", "Grid Item"],
             "Horizontal Rule",
             "Icon",
+            "IconButton",
             "Language Badge Group",
             "Link",
             "Loading Spinner",

@@ -39,6 +39,7 @@ export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
 export { HorizontalRuleComponent } from './lib/components/horizontal-rule/horizontal-rule.component';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
+export { IconButtonComponent } from './lib/components/icon-button/icon-button.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LanguageBadgeGroupComponent } from './lib/components/language-badge-group/language-badge-group.component';
 export { LoadingSpinnerComponent } from './lib/components/loading-spinner/loading-spinner.component';
@@ -83,7 +84,6 @@ export {
   FormContentDirective,
   FormHeaderDirective,
 } from './lib/components/form/form/form-content.directive';
-export { FudisTranslationService } from './lib/services/translation/translation.service';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
 export { LinkDirective } from './lib/directives/link/link.directive';
@@ -102,6 +102,7 @@ export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
 export { FudisDialogService } from './lib/services/dialog/dialog.service';
 export { FudisGridService } from './lib/services/grid/grid.service';
+export { FudisTranslationService } from './lib/services/translation/translation.service';
 
 /**
  * TYPES

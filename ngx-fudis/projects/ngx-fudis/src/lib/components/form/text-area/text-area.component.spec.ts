@@ -6,7 +6,7 @@ import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { ButtonComponent } from '../../button/button.component';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -23,8 +23,8 @@ describe('TextAreaComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         TextAreaComponent,
-        ButtonComponent,
         GuidanceComponent,
+        IconButtonComponent,
         IconComponent,
         LabelComponent,
         ValidatorErrorMessageComponent,

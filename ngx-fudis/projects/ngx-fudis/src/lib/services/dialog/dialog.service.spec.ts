@@ -12,6 +12,7 @@ import {
   DialogContentDirective,
 } from '../../components/dialog/dialog-directives';
 import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
+import { IconButtonComponent } from '../../components/icon-button/icon-button.component';
 import { IconComponent } from '../../components/icon/icon.component';
 import { FudisAlertService } from '../alert/alert.service';
 
@@ -88,6 +89,7 @@ describe('DialogService', () => {
         HeadingComponent,
         BodyTextComponent,
         AlertGroupComponent,
+        IconButtonComponent,
         IconComponent,
         ButtonComponent,
         DialogComponent,

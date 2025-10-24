@@ -28,16 +28,15 @@
             class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
           ></div>
         </div>
-        <fudis-button
+        <fudis-icon-button
           *ngIf="popoverText && popoverTriggerLabel"
           class="fudis-fieldset__legend__main__popover-button"
-          [size]="'icon-only'"
+          [size]="'extra-small'"
           [variant]="'tertiary'"
           [icon]="'info-circle'"
-          [labelHidden]="true"
           [popoverText]="popoverText"
           [popoverPosition]="popoverPosition"
-          [label]="popoverTriggerLabel"
+          [ariaLabel]="popoverTriggerLabel"
         />
       </div>
     </legend>

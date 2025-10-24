@@ -12,7 +12,7 @@ import { TextInputComponent } from '../text-input/text-input.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { LabelComponent } from '../label/label.component';
-import { ButtonComponent } from '../../button/button.component';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
@@ -54,7 +54,6 @@ describe('FieldSetComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         BodyTextComponent,
-        ButtonComponent,
         FieldsetActionsDirective,
         FieldsetContentDirective,
         FieldSetComponent,
@@ -62,6 +61,7 @@ describe('FieldSetComponent', () => {
         GridApiDirective,
         GridDirective,
         GuidanceComponent,
+        IconButtonComponent,
         IconComponent,
         LabelComponent,
         MockFieldSetComponent,

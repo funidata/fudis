@@ -13,7 +13,7 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
-import { ButtonComponent } from '../../../button/button.component';
+import { IconButtonComponent } from '../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { PopoverDirective } from '../../../../directives/popover/popover.directive';
 
@@ -69,7 +69,6 @@ describe('DescriptionListItemTermComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ButtonComponent,
         GridDirective,
         GridComponent,
         DescriptionListComponent,
@@ -77,6 +76,7 @@ describe('DescriptionListItemTermComponent', () => {
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
         IconComponent,
+        IconButtonComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
         MockDlComponent,
