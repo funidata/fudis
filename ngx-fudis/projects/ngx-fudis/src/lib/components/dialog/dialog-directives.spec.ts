@@ -17,6 +17,7 @@ import { getElement } from '../../utilities/tests/utilities';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { FudisAlertService } from '../../services/alert/alert.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 
 @Component({
   standalone: false,
@@ -68,6 +69,7 @@ describe('DialogDirectives', () => {
         BodyTextComponent,
         ButtonComponent,
         HeadingComponent,
+        IconButtonComponent,
         IconComponent,
         DialogComponent,
         DialogTitleDirective,

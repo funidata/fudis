@@ -14,12 +14,12 @@ import {
 
 import { FudisIdService } from '../../services/id/id.service';
 import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropdown-base.directive';
-import { ButtonComponent } from '../button/button.component';
 import { DOCUMENT } from '@angular/common';
 import { FudisInputSize } from '../../types/forms';
 import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { Subscription } from 'rxjs';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -34,7 +34,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
     private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
     @Inject(DOCUMENT) private _document: Document,
-    @Host() private _parentButton: ButtonComponent,
+    @Host() private _parentButton: IconButtonComponent,
   ) {
     super();
 
@@ -176,7 +176,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
         // If focus is on the menu button, only then listen keydown and focus on the first child
         if (
-          firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') ===
+          firstChildElement.closest('fudis-icon-button')?.querySelector('.fudis-button') ===
           document.activeElement
         ) {
           const firstChildButtonElement = firstChildElement.querySelector('button');
@@ -194,6 +194,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
   ngOnInit(): void {
     this.id = this._idService.getNewGrandParentId('dropdown-menu');
+    if (this._parentButton) this._parentButton.dropdownMenuId = this.id;
   }
 
   ngOnDestroy() {

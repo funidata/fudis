@@ -8,6 +8,7 @@ import { MultiselectChipListComponent } from '../multiselect-chip-list/multisele
 import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
+import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../../icon/icon.component';
 import { LabelComponent } from '../../../label/label.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
@@ -15,7 +16,6 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { defaultOptions, defaultOptionsSecondaryLang } from '../../common/mock_data';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
-import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { MultiselectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
@@ -64,8 +64,8 @@ describe('MultiselectOptionComponent', () => {
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
+        IconButtonComponent,
         IconComponent,
-        ButtonComponent,
         SelectOptionsDirective,
         GuidanceComponent,
         IconComponent,

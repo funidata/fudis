@@ -22,16 +22,15 @@
   <span [class]="(_mainCssClass | async) + '__text-content'">{{ contentText }}</span
   ><span
     *ngIf="_mainCssClass.value === 'fudis-dl-item-term__compact'"
-    class="'fudis-dl-item-term__compact__colon'"
+    class="fudis-dl-item-term__compact__colon"
     >&colon;</span
   >
   <span *ngIf="popoverTriggerLabel && popoverText" [class]="(_mainCssClass | async) + '__popover'">
-    <fudis-button
-      [size]="'icon-only'"
+    <fudis-icon-button
+      [size]="'extra-small'"
       [variant]="'tertiary'"
       [icon]="'info-circle'"
-      [labelHidden]="true"
-      [label]="popoverTriggerLabel"
+      [ariaLabel]="popoverTriggerLabel"
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
     />

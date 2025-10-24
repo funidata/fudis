@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectComponent } from './select.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GuidanceComponent } from '../../guidance/guidance.component';
+import { IconButtonComponent } from '../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { LabelComponent } from '../../label/label.component';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
@@ -11,7 +12,6 @@ import { BodyTextComponent } from '../../../typography/body-text/body-text.compo
 import { By } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../types/forms';
-import { ButtonComponent } from '../../../button/button.component';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -58,8 +58,8 @@ describe('SelectComponent', () => {
         SelectAutocompleteDirective,
         SelectControlValueAccessorDirective,
         SelectOptionComponent,
-        ButtonComponent,
         GuidanceComponent,
+        IconButtonComponent,
         IconComponent,
         LabelComponent,
         MockAutocompleteComponent,

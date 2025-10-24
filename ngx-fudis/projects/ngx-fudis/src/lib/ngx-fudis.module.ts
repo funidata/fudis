@@ -48,6 +48,7 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { IconComponent } from './components/icon/icon.component';
+import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { LocalizedTextGroupComponent } from './components/form/localized-text-group/localized-text-group.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
@@ -197,6 +198,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,
+    IconButtonComponent,
     LocalizedTextGroupComponent,
     LabelComponent,
     LanguageBadgeComponent,
@@ -301,6 +303,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,
+    IconButtonComponent,
     LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,
     LinkDirective,

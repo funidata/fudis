@@ -288,13 +288,13 @@ const NestedSubComponentsTemplate: StoryFn = (args) => ({
           [contentText]="classified ? '&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' : 'Dangerwest'"
           [ariaLabel]="classified ? 'Hidden classified content' : null"
         >
-          <fudis-button
+          <fudis-icon-button
             [variant]="'tertiary'"
-            [size]="'small'"
+            [size]="'extra-small'"
             [icon]="classified ? 'eye' : 'eye-blind'"
-            [label]="classified ? 'Show details' : 'Hide details'"
+            [ariaLabel]="classified ? 'Show details' : 'Hide details'"
             (handleClick)="classified = !classified"
-          ></fudis-button>
+          ></fudis-icon-button>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>

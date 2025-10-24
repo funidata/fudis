@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './text-input.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { ButtonComponent } from '../../button/button.component';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -22,8 +22,8 @@ describe('TextInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ButtonComponent,
         GuidanceComponent,
+        IconButtonComponent,
         IconComponent,
         LabelComponent,
         TextInputComponent,
@@ -271,14 +271,14 @@ describe('TextInputComponent', () => {
   describe('Popover', () => {
     it('should be visible', () => {
       fixture.detectChanges();
-      let popoverTriggerElem = getElement(fixture, 'fudis-button');
+      let popoverTriggerElem = getElement(fixture, 'fudis-icon-button');
       expect(popoverTriggerElem).toBeFalsy();
 
       fixture.componentRef.setInput('popoverText', 'This is popover text');
       fixture.componentRef.setInput('popoverTriggerLabel', 'Additional information');
       fixture.detectChanges();
 
-      popoverTriggerElem = getElement(fixture, 'fudis-button');
+      popoverTriggerElem = getElement(fixture, 'fudis-icon-button');
 
       expect(popoverTriggerElem).toBeTruthy();
       expect(popoverTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(

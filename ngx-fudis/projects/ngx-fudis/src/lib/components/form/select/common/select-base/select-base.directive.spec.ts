@@ -4,6 +4,7 @@ import { SelectGroupComponent } from '../select-group/select-group.component';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '../../select/select.component';
+import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../../icon/icon.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { LabelComponent } from '../../../label/label.component';
@@ -12,7 +13,6 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisInputSize, FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
-import { ButtonComponent } from '../../../../button/button.component';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { getAllElements, getElement } from '../../../../../utilities/tests/utilities';
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
@@ -94,6 +94,7 @@ describe('SelectBaseDirective', () => {
         SelectOptionComponent,
         SelectIconsComponent,
         SelectOptionsDirective,
+        IconButtonComponent,
         IconComponent,
         GuidanceComponent,
         IconComponent,
@@ -103,7 +104,6 @@ describe('SelectBaseDirective', () => {
         MultiselectOptionComponent,
         MultiselectChipListComponent,
         BodyTextComponent,
-        ButtonComponent,
       ],
       providers: [FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
@@ -251,13 +251,13 @@ describe('SelectBaseDirective', () => {
     });
 
     it('selectionClearButton', () => {
-      const clearButtonsExist = getAllElements(fixture, 'fudis-button .fudis-icon__close');
+      const clearButtonsExist = getAllElements(fixture, 'fudis-icon-button .fudis-icon__close');
       expect(clearButtonsExist.length).toEqual(2);
 
       component.clearButton = false;
       fixture.detectChanges();
 
-      const clearButtonsHidden = getAllElements(fixture, 'fudis-button .fudis-icon__close');
+      const clearButtonsHidden = getAllElements(fixture, 'fudis-icon-button .fudis-icon__close');
       expect(clearButtonsHidden.length).toEqual(0);
     });
 

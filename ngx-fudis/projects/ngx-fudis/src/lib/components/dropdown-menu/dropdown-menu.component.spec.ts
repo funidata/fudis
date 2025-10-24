@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DropdownMenuComponent } from './dropdown-menu.component';
-import { ButtonComponent } from '../button/button.component';
 import { DropdownMenuItemComponent } from './dropdown-menu-item/dropdown-menu-item.component';
 import { IconComponent } from '../icon/icon.component';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 
 describe('DropdownMenuComponent', () => {
   let component: DropdownMenuComponent;
@@ -15,7 +15,7 @@ describe('DropdownMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ButtonComponent,
+        IconButtonComponent,
         DropdownMenuItemComponent,
         DropdownMenuComponent,
         IconComponent,
@@ -23,7 +23,7 @@ describe('DropdownMenuComponent', () => {
     })
       .overrideComponent(DropdownMenuComponent, {
         add: {
-          providers: [{ provide: ButtonComponent, useValue: { id: 'fudis-button-1' } }],
+          providers: [{ provide: IconButtonComponent, useValue: { id: 'fudis-button-1' } }],
         },
       })
       .compileComponents();
