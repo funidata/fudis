@@ -1,11 +1,6 @@
 @use '@funidata/fudis-core' as core;
 
 .fudis-dl-item {
-  @include core.box-reset;
-
-  display: block;
-  min-height: core.$spacing-md;
-
   &__disabled-grid {
     @include core.box-reset;
 

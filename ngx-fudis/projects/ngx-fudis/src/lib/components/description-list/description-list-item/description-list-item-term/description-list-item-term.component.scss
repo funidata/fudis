@@ -2,48 +2,11 @@
 
 .fudis-dl-item-term {
   &__regular {
-    display: flex;
-    align-items: flex-start;
-    margin: core.$spacing-xxs 0;
-    min-height: core.$spacing-md;
-
-    &__text-content {
-      @include core.description-list-key-typography;
-      @include core.text-color('gray-dark');
-    }
-
     &__popover {
       display: inline-flex;
       align-items: center;
       margin-left: core.$spacing-xxs;
       height: core.$spacing-md;
-    }
-  }
-
-  &__compact {
-    display: inline-block;
-    position: relative;
-    padding-left: core.$spacing-xs;
-
-    &::before {
-      @include core.bg-color('gray-middle');
-
-      display: inline-block;
-      position: absolute;
-      top: core.$pixel-2;
-      left: 0;
-      width: core.$pixel-1;
-      height: 80%;
-      content: '';
-    }
-
-    &__text-content {
-      @include core.description-list-compact-key-typography;
-      @include core.text-color('gray-dark');
-    }
-
-    &__colon {
-      font-weight: core.$font-weight-light;
     }
   }
 }
