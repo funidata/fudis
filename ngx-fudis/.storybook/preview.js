@@ -100,6 +100,7 @@ const preview = {
             "Notification",
             "Pagination",
             "Section",
+            "Tab Navigation",
             "Typography",
           ],
           "Directives",
@@ -116,7 +117,7 @@ const preview = {
   tags: ["autodocs"],
   decorators: [
     moduleMetadata({
-      imports: [NgxFudisModule.forRoot(), TranslocoRootModule],
+      imports: [NgxFudisModule, TranslocoRootModule],
       providers: [HttpClient, TranslocoService],
     }),
   ],
