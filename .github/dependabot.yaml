@@ -12,6 +12,9 @@ updates:
       - "/test"
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       angular:
         patterns:
@@ -42,9 +45,6 @@ updates:
       others:
         patterns:
           - "*"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/.github"
