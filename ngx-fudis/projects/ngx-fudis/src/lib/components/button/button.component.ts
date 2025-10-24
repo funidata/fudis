@@ -7,8 +7,6 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   OnDestroy,
-  ViewChild,
-  ElementRef,
 } from '@angular/core';
 import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../types/miscellaneous';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
@@ -26,11 +24,6 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   constructor(_idService: FudisIdService) {
     super(_idService);
   }
-  /**
-   * Reference to native button element
-   */
-  @ViewChild('buttonElement') public buttonEl: ElementRef<HTMLButtonElement>;
-
   /**
    * Binding host CSS class to component wrapper
    */

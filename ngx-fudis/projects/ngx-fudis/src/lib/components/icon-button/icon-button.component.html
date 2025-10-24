@@ -43,6 +43,9 @@
     [attr.aria-label]="ariaLabel"
     [attr.id]="id"
     [attr.aria-expanded]="!asMenuButton ? null : (dropdownOpen | async)"
+    [attr.aria-controls]="
+      asMenuButton && dropdownMenuId && (dropdownOpen | async) ? dropdownMenuId : null
+    "
     [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
   >
     <ng-container *ngIf="icon">

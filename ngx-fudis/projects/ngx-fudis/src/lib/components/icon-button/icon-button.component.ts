@@ -1,10 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   HostBinding,
   Input,
-  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
@@ -29,11 +27,6 @@ export class IconButtonComponent extends ButtonBaseDirective {
     super(_idService);
   }
   /**
-   * Reference to native button element
-   */
-  @ViewChild('buttonElement') public buttonEl: ElementRef<HTMLButtonElement>;
-
-  /**
    * Binding host CSS class to component wrapper
    */
   @HostBinding('class') private _classes = 'fudis-icon-button-host';
@@ -52,6 +45,11 @@ export class IconButtonComponent extends ButtonBaseDirective {
    * Assign button as menu button with dropdown
    */
   @Input() asMenuButton: boolean = false;
+
+  /**
+   * Id of child Dropdown Menu. Passed from child to parent Icon Button.
+   */
+  public dropdownMenuId: string;
 
   /**
    * Left icon margin for small and medium sizes
@@ -82,7 +80,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   }
 
   /**
-   * Button click event
+   * Icon Button click event
    */
   public buttonClick(event: Event): void {
     if (this.asMenuButton) {
@@ -93,7 +91,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   }
 
   /**
-   * Toggling when Button is used as Menu Button
+   * Toggling when Icon Button is used as menu button
    */
   public toggleMenu(): void {
     const newState = !this.dropdownOpen.value;
@@ -103,7 +101,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   }
 
   /**
-   * Close dropdown when Button is used as Menu Button
+   * Close dropdown when Icon Button is used as menu button
    */
   public closeMenu(focusToButton: boolean = true): void {
     this.dropdownOpen.next(false);
@@ -116,7 +114,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   }
 
   /**
-   * Handle Escape key down for Menu Button
+   * Handle Escape key down for menu button
    */
   protected _handleMenuButtonKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
@@ -127,7 +125,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   }
 
   /**
-   * Handler for blurring out and closing Menu Button's dropdown
+   * Handler for blurring out and closing menu button's dropdown
    */
   protected _handleButtonBlur(event: FocusEvent): void {
     this._focused = false;

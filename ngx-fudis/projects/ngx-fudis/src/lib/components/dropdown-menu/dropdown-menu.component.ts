@@ -194,6 +194,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
   ngOnInit(): void {
     this.id = this._idService.getNewGrandParentId('dropdown-menu');
+    if (this._parentButton) this._parentButton.dropdownMenuId = this.id;
   }
 
   ngOnDestroy() {

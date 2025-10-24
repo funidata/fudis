@@ -6,6 +6,8 @@ import {
   Output,
   OnDestroy,
   OnChanges,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import {
@@ -29,6 +31,11 @@ export class ButtonBaseDirective
   constructor(protected _idService: FudisIdService) {
     super();
   }
+  /**
+   * Reference to native button element
+   */
+  @ViewChild('buttonElement') public buttonEl: ElementRef<HTMLButtonElement>;
+
   /**
    * Id for HTML button element. By default generated.
    */

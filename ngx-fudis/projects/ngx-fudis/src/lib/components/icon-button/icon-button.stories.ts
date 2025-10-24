@@ -50,8 +50,6 @@ const Template: StoryFn = (args) => ({
       [size]="size"
       [variant]="variant"
       [disabled]="disabled"
-      [popoverPosition]="popoverPosition"
-      [popoverText]="popoverText"
     ></fudis-icon-button>
   `,
 });
@@ -65,8 +63,6 @@ Example.args = {
   variant: 'primary',
   ariaLabel: 'Search',
   disabled: false,
-  popoverPosition: 'below',
-  popoverText: 'popover',
 };
 
 export const AllVariants: StoryFn = (args) => ({
