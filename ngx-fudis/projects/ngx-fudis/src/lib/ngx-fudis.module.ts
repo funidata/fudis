@@ -10,7 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -48,6 +48,7 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { IconComponent } from './components/icon/icon.component';
+import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { LocalizedTextGroupComponent } from './components/form/localized-text-group/localized-text-group.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
@@ -71,10 +72,6 @@ import { ValidatorErrorMessageComponent } from './components/form/error-message/
 /**
  * Fudis Directives
  */
-import {
-  FooterContentLeftDirective,
-  FooterContentRightDirective,
-} from './components/footer/footer-content.directive';
 import { ControlComponentBaseDirective } from './directives/form/control-component-base/control-component-base.directive';
 import {
   DateEndDirective,
@@ -185,8 +182,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     FieldsetContentDirective,
     FieldSetComponent,
     FooterComponent,
-    FooterContentLeftDirective,
-    FooterContentRightDirective,
     FormCommonApiDirective,
     FormComponent,
     FormActionsDirective,
@@ -203,6 +198,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,
+    IconButtonComponent,
     LocalizedTextGroupComponent,
     LabelComponent,
     LanguageBadgeComponent,
@@ -292,8 +288,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     ExpandableActionsDirective,
     ExpandableContentDirective,
     FooterComponent,
-    FooterContentLeftDirective,
-    FooterContentRightDirective,
     FieldsetActionsDirective,
     FieldsetContentDirective,
     FieldSetComponent,
@@ -309,6 +303,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     HeadingComponent,
     HorizontalRuleComponent,
     IconComponent,
+    IconButtonComponent,
     LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,
     LinkDirective,
@@ -329,15 +324,18 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     TextInputComponent,
   ],
   providers: [
-    FudisAlertService,
-    FudisBreakpointService,
-    FudisDialogService,
-    FudisErrorSummaryService,
     FudisInternalErrorSummaryService,
-    FudisFocusService,
-    FudisGridService,
-    FudisIdService,
-    FudisTranslationService,
+    FudisDialogService,
+    FudisBreakpointService,
+    FudisErrorSummaryService,
+    FudisAlertService,
   ],
 })
-export class NgxFudisModule {}
+export class NgxFudisModule {
+  static forRoot(): ModuleWithProviders<NgxFudisModule> {
+    return {
+      ngModule: NgxFudisModule,
+      providers: [FudisFocusService, FudisGridService, FudisIdService, FudisTranslationService],
+    };
+  }
+}

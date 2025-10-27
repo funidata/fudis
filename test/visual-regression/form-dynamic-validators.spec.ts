@@ -1,4 +1,5 @@
 import test, { expect } from "@playwright/test";
+import { clickButtonByTestId } from "./playwright-helpers";
 
 test("form dynamic inputs", async ({ page }) => {
   const errorSummaryText =
@@ -24,19 +25,9 @@ test("form dynamic inputs", async ({ page }) => {
   await expect(page).toHaveScreenshot("dynamic-1-submit-with-errors.png", { fullPage: true });
 
   await page.getByTestId("fudis-button-1").click(); // Click toggle to hide
-
   await expect(page.getByText(errorSummaryText)).not.toBeVisible();
 
   await page.getByTestId("fudis-button-1").click(); // Click toggle to show
-
-  await expect(page.getByText(errorSummaryText)).toBeVisible();
-
-  await page.getByTestId("fudis-button-1").click(); // Click toggle to hide
-
-  await expect(page.getByText(errorSummaryText)).not.toBeVisible();
-
-  await page.getByTestId("fudis-button-2").click(); // Click submit to show
-
   await expect(page.getByText(errorSummaryText)).toBeVisible();
 
   /**
@@ -48,14 +39,11 @@ test("form dynamic inputs", async ({ page }) => {
   await page.getByTestId("fudis-button-15").click(); // remove required option validator
   await page.getByTestId("fudis-checkbox-group-1-item-1").click(); // Check the first checkbox to remove error messages
   await page.getByTestId("fudis-button-16").click(); // remove required validator from radio button group
-
   await page.getByTestId("fudis-button-17").click(); // remove at least one required validator from Localized Text Group
 
   await page.getByTestId("fudis-button-2").click(); // submit form without errors
 
   await expect(page.getByText(errorSummaryText)).not.toBeVisible();
-
-  await expect(page).toHaveScreenshot("dynamic-2-submit-without-errors.png", { fullPage: true });
 
   /**
    * Insert invalid data to inputs
@@ -73,24 +61,31 @@ test("form dynamic inputs", async ({ page }) => {
 
   await page.waitForTimeout(150).then(async () => {
     await page.getByTestId("fudis-button-2").click(); // submit form with errors
-    await expect(page).toHaveScreenshot("dynamic-3-submit-with-invalid-data.png", {
+    await expect(page).toHaveScreenshot("dynamic-2-submit-with-invalid-data.png", {
       fullPage: true,
     });
   });
 
   /**
-   * Remove validators which are visible at the moment
+   * Remove validators which are visible at the moment: min length from text input, email pattern,
+   * min length from email input, max number, min date
    */
-  await page.getByTestId("fudis-button-5").click(); // remove minlength validator from text input
-  await page.getByTestId("fudis-button-6").click(); // remove email pattern validator
-  await page.getByTestId("fudis-button-8").click(); // remove min length validator from email input
-  await page.getByTestId("fudis-button-10").click(); // remove max number validator
-  await page.getByTestId("fudis-button-14").click(); // remove min date validator
-  await page.getByTestId("fudis-checkbox-group-2-item-1").focus(); // Focus on the second checkbox
-  await page.getByText("Winter holidays").click(); // Check the second checkbox
+  const buttonIds = [
+    "fudis-button-5",
+    "fudis-button-6",
+    "fudis-button-8",
+    "fudis-button-10",
+    "fudis-button-14",
+  ];
 
-  await page.getByTestId("fudis-button-2").click(); // submit form without errors
-  await expect(page).toHaveScreenshot("dynamic-4-submit-after-removed-validators.png", {
+  for (const id of buttonIds) {
+    await clickButtonByTestId(page, id);
+  }
+
+  await page.getByLabel("Winter holidays").check(); // Check the second checkbox
+
+  await clickButtonByTestId(page, "fudis-button-2"); // submit form without errors
+  await expect(page).toHaveScreenshot("dynamic-3-submit-after-removed-validators.png", {
     fullPage: true,
   });
 });

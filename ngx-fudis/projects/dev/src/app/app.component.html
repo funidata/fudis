@@ -105,17 +105,53 @@
           <fudis-body-text>Expandable lite without large content padding.</fudis-body-text>
         </ng-template>
       </fudis-expandable>
+
+      <fudis-expandable [title]="'Pagination example'" [level]="2">
+        <ng-template fudisExpandableContent>
+          <fudis-heading [level]="3">List of courses</fudis-heading>
+          <ul>
+            <li *ngFor="let courses of visibleCourses()">
+              <fudis-dl class="fudis-mt-sm">
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="courses.id + '. ' + courses.course"></fudis-dt>
+                  <fudis-dd>
+                    <fudis-dl [variant]="'compact'">
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="'Study Field'"></fudis-dt>
+                        <fudis-dd [contentText]="courses.studyfield"></fudis-dd>
+                      </fudis-dl-item>
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="'Department'"></fudis-dt>
+                        <fudis-dd [contentText]="courses.department"></fudis-dd>
+                      </fudis-dl-item>
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="'Study points'"></fudis-dt>
+                        <fudis-dd [contentText]="courses.study_points"></fudis-dd>
+                      </fudis-dl-item>
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="'Duration'"></fudis-dt>
+                        <fudis-dd [contentText]="courses.duration"></fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+                  </fudis-dd>
+                </fudis-dl-item>
+              </fudis-dl>
+            </li>
+          </ul>
+          <fudis-pagination
+            [paginationAriaLabel]="'Course list navigation'"
+            [pageCount]="totalPages"
+            (pageChange)="onPageChange($event)"
+          ></fudis-pagination>
+        </ng-template>
+      </fudis-expandable>
     </fudis-grid>
 
     <fudis-footer>
-      <ng-template fudisFooterContentRight>
-        <a fudisLink href="example.com" [external]="true" [title]="'Tietosuojaseloste'"></a>
-        <a fudisLink href="example.com" [external]="true" [title]="'Saavutettavuusseloste'"></a>
-        <a fudisLink href="example.com" [external]="true" [title]="'Järjestelmätiedot'"></a>
-      </ng-template>
-      <ng-template fudisFooterContentLeft>
-        <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
-      </ng-template>
+      <a fudisLink href="example.com" [external]="true" [title]="'Tietosuojaseloste'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Saavutettavuusseloste'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Järjestelmätiedot'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
     </fudis-footer>
     <fudis-alert-group />
   </div>

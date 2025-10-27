@@ -21,14 +21,13 @@
             [variant]="badge"
             [content]="badgeText"
         /></fudis-heading>
-        <fudis-button
+        <fudis-icon-button
           *ngIf="popoverTriggerLabel && popoverText"
           class="fudis-section__header__heading__popover"
-          [size]="'icon-only'"
+          [size]="'extra-small'"
           [variant]="'tertiary'"
           [icon]="'info-circle'"
-          [labelHidden]="true"
-          [label]="popoverTriggerLabel"
+          [ariaLabel]="popoverTriggerLabel"
           [popoverPosition]="popoverPosition"
           [popoverText]="popoverText"
         />

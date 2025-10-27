@@ -6,6 +6,7 @@ import { SectionActionsDirective, SectionContentDirective } from './section-cont
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { IconComponent } from '../icon/icon.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
@@ -58,6 +59,7 @@ describe('SectionComponent', () => {
         ButtonComponent,
         GridDirective,
         HeadingComponent,
+        IconButtonComponent,
         IconComponent,
         MockFudisSectionComponent,
         SectionComponent,

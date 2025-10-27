@@ -7,14 +7,13 @@
       ></span
     >
   </div>
-  <fudis-button
+  <fudis-icon-button
     *ngIf="popoverText && popoverTriggerLabel"
     class="fudis-label__content__button"
-    [size]="'icon-only'"
+    [size]="'extra-small'"
     [variant]="'tertiary'"
     [icon]="'info-circle'"
-    [labelHidden]="true"
-    [label]="popoverTriggerLabel"
+    [ariaLabel]="popoverTriggerLabel"
     [popoverText]="popoverText"
     [popoverPosition]="popoverPosition"
   />

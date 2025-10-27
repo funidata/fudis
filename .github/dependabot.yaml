@@ -12,10 +12,15 @@ updates:
       - "/test"
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       angular:
         patterns:
-          - "@angular*"
+          - "@angular/*"
+          - "@angular-devkit/*"
+          - "@angular-eslint/*"
       storybook:
         patterns:
           - "@storybook*"
@@ -40,9 +45,6 @@ updates:
       others:
         patterns:
           - "*"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/.github"
@@ -57,4 +59,4 @@ updates:
       interval: weekly
     ignore:
       - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+        update-types: ["version-update:semver-major", "version-update:semver-patch"]

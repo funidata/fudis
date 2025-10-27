@@ -55,6 +55,24 @@ export interface FudisTranslationConfig {
     // External link icon aria-label
     EXTERNAL_LINK: string;
   };
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: string;
+        ARIA_LABEL: string;
+      };
+      PREVIOUS: {
+        LABEL: string;
+        ARIA_LABEL: string;
+      };
+    };
+    // Prefix visible to screen reader
+    PREFIX: string;
+    // Aria-live announcement
+    OPENED_PAGE: string;
+    CURRENT_PAGE: string;
+    LAST_PAGE: string;
+  };
   SELECT: {
     DISABLED: string;
     MULTISELECT: {
@@ -145,6 +163,22 @@ export const en: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(opens in a new tab)',
   },
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Next',
+        ARIA_LABEL: 'Next, page',
+      },
+      PREVIOUS: {
+        LABEL: 'Previous',
+        ARIA_LABEL: 'Previous, page',
+      },
+    },
+    PREFIX: 'Pagination',
+    OPENED_PAGE: 'Opened page',
+    CURRENT_PAGE: 'current page',
+    LAST_PAGE: 'last page',
+  },
   SELECT: {
     DISABLED: 'Disabled',
     MULTISELECT: {
@@ -229,6 +263,22 @@ export const fi: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
   },
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Seuraava',
+        ARIA_LABEL: 'Seuraava, sivu',
+      },
+      PREVIOUS: {
+        LABEL: 'Edellinen',
+        ARIA_LABEL: 'Edellinen, sivu',
+      },
+    },
+    PREFIX: 'Sivutus',
+    OPENED_PAGE: 'Avattu sivu',
+    CURRENT_PAGE: 'nykyinen sivu',
+    LAST_PAGE: 'viimeinen sivu',
+  },
   SELECT: {
     DISABLED: 'Ei valittavissa',
     MULTISELECT: {
@@ -309,6 +359,22 @@ export const sv: FudisTranslationConfig = {
     LANGUAGE: 'Språk',
     MISSING: 'Saknas',
     MAX_LENGTH: 'tecken använt',
+  },
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Nästa',
+        ARIA_LABEL: 'Nästa, sida',
+      },
+      PREVIOUS: {
+        LABEL: 'Föregående',
+        ARIA_LABEL: 'Föregående, sida',
+      },
+    },
+    PREFIX: 'Paginering',
+    OPENED_PAGE: 'Öppnad sida',
+    CURRENT_PAGE: 'nuvarande sida',
+    LAST_PAGE: 'sista sida',
   },
   SELECT: {
     DISABLED: 'Inaktiverad',

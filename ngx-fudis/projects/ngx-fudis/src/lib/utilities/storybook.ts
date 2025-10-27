@@ -71,22 +71,21 @@ const buttonCommonExclude: string[] = [
   'dropdownMenuId',
   'dropdownOpen',
   'buttonEl',
-  'handleBlur',
   'buttonClick',
   'closeMenu',
   'toggleMenu',
   'popoverTriggerLabel',
   'popoverPosition',
   'popoverText',
-  'id',
 ];
 
 export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
 
 export const buttonControlsExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'id',
+  'handleBlur',
   'handleClick',
-  'labelHidden',
   'asMenuButton',
   'type',
   'handleFocus',
@@ -95,6 +94,8 @@ export const buttonControlsExclude: RegExp = excludeRegex([
 
 export const buttonIconOnlyExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'id',
+  'handleBlur',
   'handleClick',
   'asMenuButton',
   'type',
@@ -324,9 +325,37 @@ export const linkExclude: RegExp = excludeRegex([
 /**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex(['articleElement', 'focus']);
+export const notificationExclude: RegExp = excludeRegex([
+  'articleElement',
+  'focus',
+  'ariaDescribedby',
+]);
 
 export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
+
+/**
+ * Pagination
+ */
+export const paginationCommonExclude: string[] = [
+  'itemList',
+  'hasUserChangedPage',
+  'goToPage',
+  'observer',
+  'prevPageIndex',
+  'range',
+  'userSelectedIndex',
+  'pageHref',
+  'siblingCount',
+  'createPaginationItemList',
+  'activeItemRef',
+];
+export const paginationArgsTableExclude: RegExp = excludeRegex([...paginationCommonExclude]);
+
+export const paginationControlsExclude: RegExp = excludeRegex([
+  ...paginationCommonExclude,
+  'id',
+  'pageChange',
+]);
 
 /**
  * Radio Button Group
@@ -399,7 +428,6 @@ export const spacingExclude: RegExp = excludeRegex([
   'buttonEl',
   'closeMenu',
   'disabled',
-  'dropdownMenuId',
   'dropdownOpen',
   'handleClick',
   'handleBlur',
@@ -409,7 +437,6 @@ export const spacingExclude: RegExp = excludeRegex([
   'iconRotate',
   'id',
   'label',
-  'labelHidden',
   'popoverPosition',
   'popoverText',
   'popoverTriggerLabel',
@@ -438,7 +465,6 @@ export const popoverExclude: RegExp = excludeRegex([
   'handleFocus',
   'buttonEl',
   'label',
-  'labelHidden',
   'ariaLabel',
   'disabled',
   'icon',
@@ -450,8 +476,6 @@ export const popoverExclude: RegExp = excludeRegex([
   'toggleMenu',
   'closeMenu',
   'dropdownOpen',
-  'dropdownMenuId',
-  'asMenuButton',
   'clickSubscription',
   'keydownSubscription',
   'scrollSubscription',

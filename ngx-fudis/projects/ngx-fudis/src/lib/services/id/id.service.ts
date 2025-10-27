@@ -30,6 +30,7 @@ export class FudisIdService {
       heading: [],
       'localized-text-group': [],
       link: [],
+      pagination: [],
       popover: [],
       section: [],
       'text-area': [],

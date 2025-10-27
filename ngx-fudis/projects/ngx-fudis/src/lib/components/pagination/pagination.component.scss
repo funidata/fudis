@@ -1,0 +1,100 @@
+@use '@funidata/fudis-core' as core;
+
+.fudis-pagination {
+  display: flex;
+  padding-top: core.$spacing-lg;
+
+  &-button {
+    &__previous {
+      margin-right: core.$spacing-xs;
+
+      &__text-content {
+        display: block;
+      }
+
+      &--collapsed {
+        min-width: core.$spacing-xl;
+
+        &__text-content {
+          display: none;
+        }
+      }
+    }
+
+    &__next {
+      margin-left: core.$spacing-xs;
+
+      &__text-content {
+        display: block;
+      }
+
+      &--collapsed {
+        min-width: core.$spacing-xl;
+
+        &__text-content {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &-list {
+    display: flex;
+    align-items: baseline;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+
+    &-item {
+      display: inline-block;
+      margin-right: core.$spacing-xxs;
+      border-radius: 50%;
+      width: core.$spacing-lg;
+      height: core.$spacing-lg;
+      /* stylelint-disable property-disallowed-list */
+      font-size: core.$body-text-md-font-size;
+      font-weight: core.$font-weight-medium;
+
+      &-ellipsis {
+        display: block;
+        margin-right: core.$spacing-xxs;
+        width: core.$spacing-lg;
+        height: core.$spacing-lg;
+        text-align: center;
+      }
+
+      &-link {
+        @include core.text-color('primary');
+
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        text-decoration: underline solid;
+        font-family: core.$font-family;
+        overflow-wrap: anywhere;
+
+        &:focus {
+          @include core.focus-generic;
+        }
+      }
+
+      &--active {
+        @include core.text-color('primary');
+        @include core.border('2px', 'solid', 'primary');
+
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-family: core.$font-family;
+        overflow-wrap: anywhere;
+
+        &:focus {
+          @include core.focus-generic;
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxFudisModule, LoadingSpinnerComponent } from 'ngx-fudis';
+import { NgxFudisModule, LoadingSpinnerComponent, PaginationComponent } from 'ngx-fudis';
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -28,9 +28,10 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgxFudisModule,
+    NgxFudisModule.forRoot(),
     ScrollingModule,
     TranslocoRootModule,
+    PaginationComponent,
     LoadingSpinnerComponent,
     RouterModule.forRoot([]),
   ],

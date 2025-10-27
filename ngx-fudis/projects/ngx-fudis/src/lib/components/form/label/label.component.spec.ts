@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LabelComponent } from './label.component';
-import { ButtonComponent } from '../../button/button.component';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { PopoverDirective } from '../../../directives/popover/popover.directive';
 import { getElement } from '../../../utilities/tests/utilities';
@@ -12,7 +12,7 @@ describe('LabelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LabelComponent, ButtonComponent, IconComponent],
+      declarations: [LabelComponent, IconButtonComponent, IconComponent],
       imports: [PopoverDirective],
     }).compileComponents();
 
