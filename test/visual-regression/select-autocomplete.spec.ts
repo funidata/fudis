@@ -48,15 +48,15 @@ test("Select autocompletes", async ({ page }) => {
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-4-dropdown")).not.toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(0);
-  await page.keyboard.press("Tab");
 
   /**
    * Autocomplete type with clear button
    */
+  await page.getByTestId("fudis-select-5").focus();
   await expect(page.getByTestId("fudis-select-5-dropdown")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(0);
 
-  await page.keyboard.press("Tab");
+  await page.getByTestId("fudis-select-5-clear-button").focus();
   await page.keyboard.press("Space");
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);

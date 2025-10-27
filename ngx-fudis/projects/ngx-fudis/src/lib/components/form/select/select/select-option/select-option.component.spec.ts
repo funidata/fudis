@@ -6,6 +6,7 @@ import { defaultOptions, defaultOptionsSecondaryLang } from '../../common/mock_d
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
+import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../../icon/icon.component';
 import { LabelComponent } from '../../../label/label.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
@@ -14,7 +15,6 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
-import { ButtonComponent } from '../../../../button/button.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
@@ -62,7 +62,7 @@ describe('SelectOptionComponent', () => {
         MockContainerComponent,
         GuidanceComponent,
         SelectIconsComponent,
-        ButtonComponent,
+        IconButtonComponent,
         IconComponent,
         LabelComponent,
         BodyTextComponent,

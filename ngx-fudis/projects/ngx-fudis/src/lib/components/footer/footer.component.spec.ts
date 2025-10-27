@@ -2,31 +2,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FooterComponent } from './footer.component';
-import { GridComponent } from '../grid/grid/grid.component';
-import {
-  FooterContentLeftDirective,
-  FooterContentRightDirective,
-} from './footer-content.directive';
-import { GridItemComponent } from '../grid/grid-item/grid-item.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { getElement } from '../../utilities/tests/utilities';
 
 @Component({
   standalone: false,
   selector: 'fudis-mock-footer',
   template: `<fudis-footer>
-    <ng-template fudisFooterContentRight>
-      <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'System information'"></a>
-    </ng-template>
-    <ng-template fudisFooterContentLeft>
-      <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
-    </ng-template>
-    <p class="test-do-not-find">You should not find me</p>
+    <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
+    <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
+    <a fudisLink href="example.com" [external]="true" [title]="'System information'"></a>
+    <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
   </fudis-footer>`,
 })
 class MockFooterComponent {
@@ -39,16 +27,7 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        FooterComponent,
-        GridComponent,
-        GridItemComponent,
-        LinkDirective,
-        IconComponent,
-        FooterContentLeftDirective,
-        FooterContentRightDirective,
-        MockFooterComponent,
-      ],
+      declarations: [FooterComponent, LinkDirective, IconComponent, MockFooterComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });
@@ -59,62 +38,45 @@ describe('FooterComponent', () => {
     fixture.detectChanges();
   });
 
-  function getFooterGridElem() {
-    return fixture.debugElement.query(By.directive(GridComponent));
+  function getFooter() {
+    return fixture.debugElement.query(By.css('.fudis-footer')).nativeElement;
   }
 
-  it('should create', async () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   describe('CSS classes', () => {
     it('should have fudis-footer class', () => {
-      const elem = fixture.debugElement.query(By.css('.fudis-footer'));
-
-      expect(elem.nativeElement.className).toEqual('fudis-footer');
+      expect(getFooter().className).toEqual('fudis-footer');
     });
   });
 
   describe('Contents', () => {
-    it('should have fudis-grid element present', () => {
-      expect(getFooterGridElem()).toBeTruthy();
+    it('should have footer item elements present', () => {
+      expect(getFooter().children.length).toEqual(2);
     });
 
-    it('should have fudis-grid-item elements present', () => {
-      expect(getFooterGridElem().nativeElement.children.length).toEqual(2);
-    });
-
-    it('should not find elements without proper content type', () => {
-      const incorrectElement = getElement(fixture, '.test-do-not-find');
-      expect(incorrectElement).toBeNull();
-    });
-
-    describe('Footer right side', () => {
-      it('should have three child elements', () => {
-        expect(getFooterGridElem().nativeElement.children[1].children.length).toEqual(3);
-      });
+    it('second footer item element should have 4 children', () => {
+      const elem = fixture.debugElement.queryAll(By.css('.fudis-footer__item'));
+      expect(elem[1].nativeElement.children.length).toEqual(4);
     });
 
     describe('Footer left side', () => {
-      it('should have two child elements', () => {
-        expect(getFooterGridElem().nativeElement.children[0].children.length).toEqual(2);
-      });
+      it('should have Funidata logo visible with an alt text for screen readers', () => {
+        const firstItemElem = getFooter().children[0];
 
-      it('should have Funidata logo visible with an alt text for screen readers', async () => {
-        await fixture.whenStable().then(() => {
-          const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
-          const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
+        const anchorElem = firstItemElem.querySelector('.fudis-footer__item__logo');
 
-          const svgElementTitle = firstGridItemElem.querySelector(
-            '.fudis-footer__item__logo svg title',
-          ) as HTMLTitleElement;
+        const svgElementTitle = firstItemElem.querySelector(
+          '.fudis-footer__item__logo svg title',
+        ) as HTMLTitleElement;
 
-          expect(svgElementTitle.innerHTML).toEqual('Funidata logo');
-          expect(anchorElem.children.length).toEqual(1);
-          expect(anchorElem.getAttribute('aria-label')).toEqual(
-            'Funidata homepage (opens in a new tab)',
-          );
-        });
+        expect(svgElementTitle.innerHTML).toEqual('Funidata logo');
+        expect(anchorElem.children.length).toEqual(1);
+        expect(anchorElem.getAttribute('aria-label')).toEqual(
+          'Funidata homepage (opens in a new tab)',
+        );
       });
     });
     describe('Footer after lang update', () => {
@@ -122,8 +84,8 @@ describe('FooterComponent', () => {
         component.translationService.setLanguage('fi');
         fixture.detectChanges();
 
-        const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
-        const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
+        const firstItemElem = getFooter().children[0];
+        const anchorElem = firstItemElem.querySelector('.fudis-footer__item__logo');
 
         expect(anchorElem.getAttribute('aria-label')).toEqual(
           'Funidatan kotisivut (aukeaa uuteen välilehteen)',

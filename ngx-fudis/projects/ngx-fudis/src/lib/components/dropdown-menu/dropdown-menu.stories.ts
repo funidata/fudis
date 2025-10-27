@@ -14,9 +14,8 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
   template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
     <fudis-grid-item>
       <fudis-heading [level]="4">Random items menu</fudis-heading>
-      <fudis-button
-        [label]="'Random items menu'"
-        [labelHidden]="true"
+      <fudis-icon-button
+        [ariaLabel]="'Random items menu'"
         [size]="'small'"
         [variant]="'secondary'"
         [icon]="'three-dots'"
@@ -31,13 +30,12 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
           >
           </fudis-dropdown-menu-item>
         </fudis-dropdown-menu>
-      </fudis-button>
+      </fudis-icon-button>
     </fudis-grid-item>
     <fudis-grid-item>
       <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
-      <fudis-button
-        [label]="'Grouped animals menu'"
-        [labelHidden]="true"
+      <fudis-icon-button
+        [ariaLabel]="'Grouped animals menu'"
         [size]="'small'"
         [variant]="'secondary'"
         [icon]="'three-dots'"
@@ -57,7 +55,7 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
             </fudis-dropdown-menu-item>
           </fudis-dropdown-menu-group>
         </fudis-dropdown-menu>
-      </fudis-button>
+      </fudis-icon-button>
     </fudis-grid-item>
     <fudis-grid-item [columns]="'1/-1'">
       <fudis-body-text *ngIf="_latestClickItem"

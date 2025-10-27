@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MultiselectComponent } from './multiselect.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
+import { IconButtonComponent } from '../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { LabelComponent } from '../../label/label.component';
 import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
@@ -16,7 +17,6 @@ import { getAllElements, getElement } from '../../../../utilities/tests/utilitie
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
-import { ButtonComponent } from '../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { MultiselectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
@@ -68,9 +68,9 @@ describe('MultiselectComponent', () => {
         SelectDropdownComponent,
         SelectGroupComponent,
         SelectIconsComponent,
-        ButtonComponent,
         BodyTextComponent,
         GuidanceComponent,
+        IconButtonComponent,
         IconComponent,
         LabelComponent,
         SelectOptionsDirective,

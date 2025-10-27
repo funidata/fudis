@@ -1,8 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FieldsetActionsDirective, FieldsetContentDirective } from './fieldset-content.directive';
 import { fudisFieldsetActionsAlignArray } from '../../../types/miscellaneous';
+import { FieldSetComponent } from './fieldset.component';
 import { Component } from '@angular/core';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
+import { GridComponent } from '../../grid/grid/grid.component';
+import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
+import { GridDirective } from '../../../directives/grid/grid/grid.directive';
+import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 @Component({
   standalone: false,
@@ -33,7 +40,17 @@ describe('FieldsetContentDirectives', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FieldsetActionsDirective, FieldsetContentDirective, MockFieldSetComponent],
+      declarations: [
+        BodyTextComponent,
+        FieldsetActionsDirective,
+        FieldsetContentDirective,
+        FieldSetComponent,
+        GridComponent,
+        GridApiDirective,
+        GridDirective,
+        MockFieldSetComponent,
+      ],
+      providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockFieldSetComponent);

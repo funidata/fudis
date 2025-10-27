@@ -1,0 +1,48 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+import { PaginationComponent } from "./pagination.component";
+import * as PaginationStories from "./pagination.stories";
+import { paginationArgsTableExclude } from "../../utilities/storybook";
+
+<Meta title="Components/Pagination" />
+
+# Pagination
+
+Pagination is a navigation element that can be used on pages or elements. It provides controls for switching content across multiple pages.
+Use Pagination only for content which structure does not change between pages eg. tables and lists.
+
+## Example
+
+<Canvas of={PaginationStories.Example} />
+
+## Usage Guidelines
+
+```
+<fudis-pagination
+  [pageCount]="20"
+  [pageIndex]="0"
+  [paginationAriaLabel]="'Example navigation'"
+  (pageChange)="onPageChange($event)">
+</fudis-pagination>
+
+```
+
+### Properties
+
+Pagination requires `pageCount` in order to generate total amount of pages. Mandatory
+`paginationAriaLabel` input is used for differentiating pagination from other site navigational elements.
+
+`pageIndex` input defines the currently active page, starting from 0 for the first page. This value controls which page number is visually highlighted and determines the current focus and navigation state.
+If given pageIndex is outside of given pageCount scope, pageIndex will be reset to either first or last item index.
+
+### Accessibility
+
+- Pagination has `aria-live: polite` announcement for informing when page have been changed.
+- Aria-labels are used for describing current, previous and next page number.
+- Keyboard navigation:
+  - `Tab`/ `Shift + Tab` move focus between pagination links.
+  - `Enter` is used for selecting key.
+  - Focus is preserved on the active element after a page change.
+
+## Properties
+
+<ArgTypes of={PaginationComponent} exclude={paginationArgsTableExclude} />
