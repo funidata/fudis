@@ -11,7 +11,7 @@ updates:
       - "/ngx-fudis/projects/ngx-fudis"
       - "/test"
     schedule:
-      interval: weekly
+      interval: monthly
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -49,14 +49,14 @@ updates:
   - package-ecosystem: github-actions
     directory: "/.github"
     schedule:
-      interval: weekly
+      interval: monthly
 
   - package-ecosystem: docker
     directories:
       - "/ngx-fudis"
       - "/test"
     schedule:
-      interval: weekly
+      interval: monthly
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-patch"]
