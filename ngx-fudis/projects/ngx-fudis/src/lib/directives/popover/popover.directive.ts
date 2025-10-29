@@ -6,6 +6,7 @@ import {
   ElementRef,
   inject,
   OnInit,
+  ViewContainerRef,
 } from '@angular/core';
 import { PopoverApiDirective } from './popover-api.directive';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -28,6 +29,7 @@ export class PopoverDirective extends PopoverApiDirective implements OnInit, Aft
     private _fudisIdService: FudisIdService,
     private _boundElement: ElementRef<HTMLAnchorElement>,
     private _overlay: Overlay,
+    private _viewContainerRef: ViewContainerRef,
   ) {
     super();
   }
@@ -121,7 +123,7 @@ export class PopoverDirective extends PopoverApiDirective implements OnInit, Aft
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(() => this._scrollHandler());
 
-    const popoverPortal = new ComponentPortal(PopoverComponent);
+    const popoverPortal = new ComponentPortal(PopoverComponent, this._viewContainerRef);
 
     const componentRef: ComponentRef<PopoverComponent> = this._overlayRef.attach(popoverPortal);
     componentRef.instance.popoverText = this.popoverText;
