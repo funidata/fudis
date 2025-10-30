@@ -23,6 +23,7 @@ test("dialog with form", async ({ page }) => {
   await page.getByTestId("fudis-select-1").focus();
   await page.waitForTimeout(150);
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+  await page.getByTestId("fudis-select-1-dropdown").scrollIntoViewIfNeeded();
   await page.keyboard.press("ArrowDown");
   await expect(page).toHaveScreenshot("form-3-dropdown.png");
 
