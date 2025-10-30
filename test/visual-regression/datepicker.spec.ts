@@ -2,14 +2,11 @@ import test, { expect, Page } from "@playwright/test";
 
 let date = "20.1.2024";
 
-async function closeCalendarOverlay(page: Page) {
-  await page.evaluate(() => {
-    const el = document.activeElement as HTMLElement | null;
-    el?.blur();
-  });
+async function closeCalendarOverlay(page: Page, count: number) {
   await page.keyboard.press("Escape");
-  await page.mouse.click(5, 5); // In case blur fails
-  await expect(page.locator("#cdk-overlay-0")).toBeHidden({ timeout: 2000 });
+  await page.locator("body").click(); // Some browsers won't trigger key press on headless mode (webkit)
+
+  await expect(page.getByTestId(`cdk-overlay-${count}`)).not.toBeVisible();
 }
 
 test("datepicker default init, focus, fill, open, select", async ({ page }) => {
@@ -35,15 +32,15 @@ test("datepicker default change calendar language", async ({ page }) => {
     "/iframe.html?args=&id=components-form-date-datepicker--datepicker&viewMode=story",
   );
 
-  await expect(page.getByPlaceholder("dd.mm.yyyy")).toBeVisible(); // Note: getByPlaceholder searches for the input with respective placeholder. The placeholder value itself does not have to be visible.
+  await expect(page.getByPlaceholder("dd.mm.yyyy")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1").fill(date);
   await page.getByTestId("fudis-button-2").click();
-  await expect(page.getByPlaceholder("pp.kk.vvvv")).toBeVisible();
+  await expect(page.getByPlaceholder("pp.kk.vvvv")).toBeVisible(); // Note: getByPlaceholder searches for the input with respective placeholder. The placeholder value itself does not have to be visible.
   await expect(page.getByText("Current language: fi")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await page.waitForSelector(".mdc-button__label");
   await expect(page).toHaveScreenshot("to-finnish.png", { fullPage: true });
-  await closeCalendarOverlay(page);
+  await closeCalendarOverlay(page, 0);
 
   await expect(page.getByText("Choose your favourite date.")).toBeVisible();
   await page.waitForSelector(".fudis-guidance__help-text");
@@ -73,7 +70,7 @@ test("datepicker min and max", async ({ page }) => {
   );
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await expect(page).toHaveScreenshot("min-max-1-init-open.png", { fullPage: true });
-  await closeCalendarOverlay(page);
+  await closeCalendarOverlay(page, 0);
   await expect(page.getByText("Choose a date between the allowed range.")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1").fill("1.2.2024");
   await page.waitForTimeout(150);
@@ -81,7 +78,7 @@ test("datepicker min and max", async ({ page }) => {
   await expect(page.getByText("Date cannot be before 4.2.2024")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await expect(page).toHaveScreenshot("min-max-2-min-error-open.png", { fullPage: true });
-  await closeCalendarOverlay(page);
+  await closeCalendarOverlay(page, 1);
   await expect(page.getByText("Choose a date between the allowed range.")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1").fill("22.2.2024");
   await expect(page.getByText("Date cannot be after 20.2.2024")).toBeVisible();
