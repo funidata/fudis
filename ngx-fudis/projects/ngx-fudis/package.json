@@ -1,6 +1,6 @@
 {
   "name": "@funidata/ngx-fudis",
-  "version": "7.0.0",
+  "version": "8.0.0-rc.0",
   "license": "CC-BY-NC-SA-4.0",
   "exports": {
     ".": {
@@ -30,7 +30,7 @@
     "@angular/common": ">=19.0.0",
     "@angular/core": ">=19.0.0",
     "@angular/material": ">=19.0.0",
-    "@funidata/fudis-core": "^2.2.0-rc.1"
+    "@funidata/fudis-core": "^2.2.0-rc.2"
   },
   "devDependencies": {
     "tslib": "^2.7.0",

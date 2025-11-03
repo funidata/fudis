@@ -1,8 +1,6 @@
 @use '@funidata/fudis-core' as core;
 
 .fudis-dl {
-  @include core.box-reset;
-
   &__disabled-grid {
     @include core.box-reset;
 
