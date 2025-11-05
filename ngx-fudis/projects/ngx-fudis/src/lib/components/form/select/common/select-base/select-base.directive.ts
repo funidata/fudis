@@ -558,6 +558,11 @@ export class SelectBaseDirective
     if (event.key === 'ArrowDown') {
       event.preventDefault();
     }
+
+    // Prevent keydown event if Enter is pressed inside multiselect input
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
   }
 
   /**
@@ -579,13 +584,11 @@ export class SelectBaseDirective
           break;
         case 'Enter':
           event.preventDefault();
-
           if (this._visibleOptions.length === 1) {
             this._focusToFirstOption(true);
           } else {
             this._toggleDropdown();
           }
-
           break;
         case 'ArrowDown':
           event.preventDefault();
