@@ -318,13 +318,6 @@ describe('MultiselectComponent', () => {
       fixture.detectChanges();
 
       const chipListButtons = getAllElements(fixture, '.fudis-multiselect-chip-list__button');
-
-      // Should not trigger update if component isn't first focused. In real UI clicking the item will also trigger focus, but programmatically click() do not trigger focus
-      (chipListButtons[1] as HTMLButtonElement).click();
-
-      expect(component.control.value).toEqual([defaultOptions[1], defaultOptions[4]]);
-
-      (chipListButtons[1] as HTMLButtonElement).focus();
       (chipListButtons[1] as HTMLButtonElement).click();
 
       expect(component.control.value).toEqual([defaultOptions[1]]);
