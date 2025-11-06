@@ -15,7 +15,6 @@ import { FudisIdService } from '../../services/id/id.service';
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
