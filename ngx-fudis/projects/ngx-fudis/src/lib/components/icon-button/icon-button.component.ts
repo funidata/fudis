@@ -30,7 +30,7 @@ export class IconButtonComponent extends ButtonBaseDirective {
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-icon-button-host';
+  @HostBinding('class') protected _classes = 'fudis-icon-button-host';
 
   /**
    * Required aria-label for describing context
