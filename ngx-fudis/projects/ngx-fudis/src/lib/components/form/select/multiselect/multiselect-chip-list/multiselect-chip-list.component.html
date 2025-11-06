@@ -5,7 +5,7 @@
     [attr.aria-describedby]="parentId + '-remove-items'"
     (focus)="_setFocus(true)"
     (blur)="_setFocus(false)"
-    (click)="_focused && _clickChip(item, index)"
+    (click)="_clickChip(item, index)"
   >
     <fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
     {{ item.label }}
