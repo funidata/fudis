@@ -15,7 +15,6 @@ import { FudisIdService } from '../../services/id/id.service';
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
@@ -27,7 +26,7 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-button-host';
+  @HostBinding('class') protected _classes = 'fudis-button-host';
 
   /**
    * Text content of the button
