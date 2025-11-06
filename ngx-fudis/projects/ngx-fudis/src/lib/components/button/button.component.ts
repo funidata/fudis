@@ -27,7 +27,7 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-button-host';
+  @HostBinding('class') protected _classes = 'fudis-button-host';
 
   /**
    * Text content of the button

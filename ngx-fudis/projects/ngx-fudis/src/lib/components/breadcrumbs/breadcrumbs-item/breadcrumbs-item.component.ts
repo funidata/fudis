@@ -26,7 +26,7 @@ export class BreadcrumbsItemComponent {
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-breadcrumbs-item-host';
+  @HostBinding('class') protected _classes = 'fudis-breadcrumbs-item-host';
 
   /**
    * Id from Id Service

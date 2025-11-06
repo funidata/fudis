@@ -29,7 +29,7 @@ export class IconComponent implements OnChanges {
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-icon-host';
+  @HostBinding('class') protected _classes = 'fudis-icon-host';
 
   /**
    * Displayed SVG icon
