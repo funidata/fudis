@@ -30,7 +30,7 @@ export class BodyTextComponent implements OnChanges {
   /**
    * Class for the parent wrapper element
    */
-  @HostBinding('class') private _classes = 'fudis-body-text-host';
+  @HostBinding('class') protected _classes = 'fudis-body-text-host';
 
   /**
    * Variant for the paragraph

@@ -87,7 +87,7 @@ export class SelectAutocompleteBaseDirective {
   protected _focused: boolean = false;
 
   @HostListener('focus', ['$event'])
-  private _handleFocus(event: FocusEvent) {
+  protected _handleFocus(event: FocusEvent) {
     this._focused = true;
 
     if ((event.relatedTarget as HTMLElement)?.getAttribute('id') === `${this.id}-clear-button`) {
@@ -97,20 +97,20 @@ export class SelectAutocompleteBaseDirective {
   }
 
   @HostListener('blur', ['$event'])
-  private _handleBlur(event: FocusEvent) {
+  protected _handleBlur(event: FocusEvent) {
     this._focused = false;
     this.handleBlur.emit(event);
   }
 
   @HostListener('keydown', ['$event'])
-  private _handleKeyDown(event: KeyboardEvent) {
+  protected _handleKeyDown(event: KeyboardEvent) {
     if (event.target) {
       this._keyDown = event.key;
     }
   }
 
   @HostListener('keyup', ['$event'])
-  private _handleKeyUp(event: KeyboardEvent) {
+  protected _handleKeyUp(event: KeyboardEvent) {
     if (this.enableAutocomplete) {
       if (this._keyDown) {
         const newValue = (event.target as HTMLInputElement).value;

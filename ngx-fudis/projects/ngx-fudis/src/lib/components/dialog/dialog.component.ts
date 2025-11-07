@@ -145,10 +145,12 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
     }
   }
 
-  @HostListener('window:keyup.escape', ['$event'])
-  private _handleEscapePress() {
-    if (this._dialogService.dialogsOpen().length === this._orderNumber) {
-      this._dialogService.close();
+  @HostListener('window:keyup', ['$event'])
+  protected _handleEscapePress(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      if (this._dialogService.dialogsOpen().length === this._orderNumber) {
+        this._dialogService.close();
+      }
     }
   }
 }

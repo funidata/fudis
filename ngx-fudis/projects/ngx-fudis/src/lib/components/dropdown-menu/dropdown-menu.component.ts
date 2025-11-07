@@ -138,8 +138,8 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   /**
    * Host Listener for dropdown's width, it needs to be wider than its Button parent
    */
-  @HostListener('window:click', ['$event'])
-  private _getMaxWidth(): void {
+  @HostListener('window:click')
+  protected _getMaxWidth(): void {
     const fontSize = Number(
       window.getComputedStyle(this._document.body).getPropertyValue('font-size').replace('px', ''),
     );
@@ -167,7 +167,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
    * Host Listener for keydown events, especially Arrow Down and Escape from Dropdown Menu
    */
   @HostListener('window:keydown', ['$event'])
-  private _handleDropdownMenuKeyDown(event: KeyboardEvent) {
+  protected _handleDropdownMenuKeyDown(event: KeyboardEvent) {
     if (this._parentButton.dropdownOpen.value) {
       if (event.key === 'ArrowDown') {
         event.preventDefault();

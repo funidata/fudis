@@ -784,11 +784,10 @@ export class SelectBaseDirective
    *
    * @param event
    */
-  @HostListener('window:keydown.escape', ['$event'])
-  private _handleEscapePress(event: KeyboardEvent) {
-    if (this._dropdownOpen()) {
+  @HostListener('window:keydown', ['$event'])
+  protected _handleEscapePress(event: KeyboardEvent) {
+    if (event.key === 'Escape' && this._dropdownOpen()) {
       event.preventDefault();
-
       this.closeDropdown(true, true);
     }
   }
@@ -798,21 +797,32 @@ export class SelectBaseDirective
    *
    * @param targetElement
    */
-  @HostListener('document:mouseup', ['$event.target'])
-  private _handleWindowClick(targetElement: HTMLElement) {
+  @HostListener('document:mouseup', ['$event'])
+  protected _handleWindowClick(event: MouseEvent) {
     this._mouseDownInsideComponent = false;
-    if (this._dropdownOpen() && !this._selectRef.nativeElement.contains(targetElement)) {
-      this.closeDropdown(false);
+
+    const targetElement = event.target;
+
+    // Type guard
+    if (targetElement instanceof HTMLElement) {
+      if (this._dropdownOpen() && !this._selectRef.nativeElement.contains(targetElement)) {
+        this.closeDropdown(false);
+      }
     }
   }
 
-  @HostListener('mousedown', ['$event.target'])
-  private _handleMouseDown() {
+  @HostListener('mousedown')
+  protected _handleMouseDown() {
     this._mouseDownInsideComponent = true;
   }
 
-  @HostListener('mouseup', ['$event.target'])
-  private _handleMouseUp(targetElement: HTMLElement) {
+  @HostListener('mouseup', ['$event'])
+  protected _handleMouseUp(event: MouseEvent) {
+    const targetElement = event.target;
+
+    // Type guard
+    if (!(targetElement instanceof HTMLElement)) return;
+
     this._clickFromIcon =
       this._selectRef.nativeElement.contains(targetElement) &&
       !!targetElement.closest('.fudis-select-icons__container');
