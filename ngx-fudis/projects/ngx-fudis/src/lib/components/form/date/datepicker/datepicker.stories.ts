@@ -95,6 +95,11 @@ const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl(null, FudisValidators.required('Date is required.')),
+    myFilter: (d: Date | null): boolean => {
+      const day = (d || new Date()).getDay();
+      // Prevent Saturday and Sunday from being selected.
+      return day !== 0 && day !== 6;
+    },
   },
   template: html`
     <fudis-datepicker
@@ -108,6 +113,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
+      [dateFilter]="myFilter"
     ></fudis-datepicker>
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text

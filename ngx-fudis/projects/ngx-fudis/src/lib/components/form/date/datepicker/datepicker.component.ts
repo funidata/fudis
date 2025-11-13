@@ -130,6 +130,8 @@ export class DatepickerComponent
    */
   @Input() dateParse: boolean = true;
 
+  @Input() dateFilter: (d: Date | null | undefined) => boolean;
+
   /**
    * Type of the Datepicker in Date Range
    */
