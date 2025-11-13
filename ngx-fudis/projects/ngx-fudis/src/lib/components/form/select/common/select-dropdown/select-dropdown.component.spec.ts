@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectDropdownComponent } from './select-dropdown.component';
-
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { FudisSelectVariant } from '../../../../../types/forms';
@@ -154,58 +153,44 @@ describe('SelectDropdownComponent', () => {
       });
     });
 
-    it('should have help text status for screen readers if filter text updates', (done) => {
+    it('should have help text status for screen readers if filter text updates', async () => {
       fixture.componentRef.setInput('results', 42);
       fixture.componentRef.setInput('open', true);
       fixture.componentRef.setInput('filterText', 'hello');
       fixture.componentRef.setInput('autocompleteHelpText', 'Hello from help text');
-      autocompleteVariants.forEach((variant, index) => {
-        fixture.componentRef.setInput('selectVariant', variant);
 
+      for (const variant of autocompleteVariants) {
+        fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
+        await fixture.whenStable(); // Wait for async pipe _displayStatus | async
 
         const helpText = getElement(fixture, '.fudis-visually-hidden');
 
-        expect(helpText).toBeNull();
-
-        setTimeout(() => {
-          fixture.detectChanges();
-
-          const helpTextAfterDelay = getElement(fixture, '.fudis-visually-hidden');
-
-          expect(helpTextAfterDelay.getAttribute('role')).toEqual('alert');
-
-          expect(helpTextAfterDelay.textContent).toEqual('Hello from help text');
-          if (index === autocompleteVariants.length - 1) {
-            done();
-          }
-        }, 500);
-      });
+        expect(helpText).not.toBeNull(); // Aria live region is always in the DOM
+        expect(helpText.getAttribute('role')).toEqual('status');
+        fixture.detectChanges(); // This second call is necessary beacuse of ngTemplateOutlet which relies on autocompleteHelpText Input
+        expect(helpText.textContent).toEqual('Hello from help text');
+      }
     });
 
-    it('should have no results status for screen readers if filter text updates', () => {
-      component.results = 0;
-      component.open = true;
-      component.filterText = 'hello';
-      component.autocompleteHelpText = 'Hello from help text';
-      autocompleteVariants.forEach((variant) => {
-        component.selectVariant = variant;
+    it('should have no results status for screen readers if filter text updates', async () => {
+      fixture.componentRef.setInput('results', 0);
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+      fixture.componentRef.setInput('autocompleteHelpText', 'Hello from help text');
+
+      for (const variant of autocompleteVariants) {
+        fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
+        await fixture.whenStable(); // Wait for async pipe _translationNoResultsFound | async
 
         const helpText = getElement(fixture, '.fudis-visually-hidden');
 
-        expect(helpText).toBeNull();
-
-        setTimeout(() => {
-          fixture.detectChanges();
-
-          const helpTextAfterDelay = getElement(fixture, '.fudis-visually-hidden');
-
-          expect(helpTextAfterDelay.getAttribute('role')).toEqual('alert');
-
-          expect(helpTextAfterDelay.textContent).toEqual('No results found');
-        }, 500);
-      });
+        expect(helpText).not.toBeNull(); // Aria live region is always in the DOM
+        expect(helpText.getAttribute('role')).toEqual('status');
+        fixture.detectChanges(); // Ensure the template is updated with the emitted value
+        expect(helpText.textContent).toEqual('No results found');
+      }
     });
   });
 });
