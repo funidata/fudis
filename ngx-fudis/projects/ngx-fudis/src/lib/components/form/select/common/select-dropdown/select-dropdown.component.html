@@ -25,15 +25,16 @@
       [variant]="'md-light'"
       ><ng-container *ngTemplateOutlet="noResults" />
     </fudis-body-text>
-    <span
-      *ngIf="autocompleteHelpText !== false && (_displayStatus | async) && results && filterText"
-      class="fudis-visually-hidden"
-      role="alert"
-      ><ng-container *ngTemplateOutlet="helpText"
-    /></span>
-    <span *ngIf="!results && (_displayStatus | async)" class="fudis-visually-hidden" role="alert"
-      ><ng-container *ngTemplateOutlet="noResults"
-    /></span>
+    <span class="fudis-visually-hidden" role="status">
+      <ng-container *ngIf="(_displayStatus | async) && filterText">
+        <ng-container *ngIf="results && autocompleteHelpText !== false; else noResultsLive">
+          <ng-container *ngTemplateOutlet="helpText"></ng-container>
+        </ng-container>
+        <ng-template #noResultsLive>
+          <ng-container *ngTemplateOutlet="noResults"></ng-container>
+        </ng-template>
+      </ng-container>
+    </span>
   </ng-container>
   <ng-content></ng-content>
 </div>
