@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FudisValidationErrors } from '../../../../utilities/form/validators';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
+import { FudisIdService } from '../../../../services/id/id.service';
 
 /**
  * Custom validator that checks if the date falls on a disallowed day (0 = Sunday, 6 = Saturday)
@@ -30,7 +31,7 @@ export function disallowedWeekendValidator(): ValidatorFn {
   template: `
     <fudis-datepicker
       [label]="'Select a date'"
-      [id]="'example-date-picker'"
+      [id]="id"
       [size]="'md'"
       [helpText]="'Type in a Saturday or a Sunday'"
       [control]="control"
@@ -50,11 +51,14 @@ export function disallowedWeekendValidator(): ValidatorFn {
   `,
 })
 export class DateFilterWithErrorMessageComponent {
-  constructor() {
+  constructor(private _idService: FudisIdService) {
     this.control = new FormControl(null, disallowedWeekendValidator());
+    this.id = this._idService.getNewId('datepicker');
   }
 
   control: FormControl<Date | null>;
+
+  id: string;
 
   @Output() handleAddError = new EventEmitter<FudisValidationErrors>();
 
