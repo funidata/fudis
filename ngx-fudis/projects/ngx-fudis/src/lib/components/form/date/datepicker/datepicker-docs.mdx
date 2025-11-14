@@ -49,9 +49,12 @@ In addition Datepicker has internal **date format validator** which prompts erro
 **Datepicker with Date filter**
 
 DateFilter takes in a function for controlling selectable dates in the calendar.
-DateFilter works the same way as Angular Material’s `matDatepickerFilter`.
+DateFilter works the same way as Angular Material's `matDatepickerFilter`.
 
-The function receives a date and must return: - `true` → the date is allowed and remains enabled in the calendar - `false` → the date is not allowed and will be disabled in the calendar
+The function receives a date and must return:
+
+- `true` → the date is allowed and remains enabled in the calendar
+- `false` → the date is not allowed and will be disabled in the calendar
 
 DateFilter allows you to implement custom validation logic such as disabling weekends, holidays, or any dates that don't meet application-specific rules.
 Custom validations always requires the use of a custom error messages. Read [how to add Error message](/docs/components-form-error-message--documentation).

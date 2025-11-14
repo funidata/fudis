@@ -88,8 +88,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
-    >
-    </fudis-datepicker>
+    />
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
     >
