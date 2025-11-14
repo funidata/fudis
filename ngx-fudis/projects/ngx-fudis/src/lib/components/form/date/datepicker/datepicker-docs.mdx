@@ -46,6 +46,37 @@ If a custom validation is used, read [how to add Error message](/docs/components
 
 In addition Datepicker has internal **date format validator** which prompts error message if Fudis is not satisfied with given date's format. This validator can be turned off by setting `dateParse` to `false`.
 
+**Datepicker with Date filter**
+
+DateFilter takes in a function for controlling selectable dates in the calendar.
+DateFilter works the same way as Angular Material’s `matDatepickerFilter`.
+
+The function receives a date and must return: - `true` → the date is allowed and remains enabled in the calendar - `false` → the date is not allowed and will be disabled in the calendar
+
+DateFilter allows you to implement custom validation logic such as disabling weekends, holidays, or any dates that don't meet application-specific rules.
+Custom validations always requires the use of a custom error messages. Read [how to add Error message](/docs/components-form-error-message--documentation).
+
+Unlike using simple `datepickerMin` or `datepickerMax` restrictions, using a filter function does _not_ stop users from navigating the calendar past filtered-out dates.
+It only controls which dates can be selected, not which months or years can be viewed.
+
+```
+// In TypeScript file
+
+weekendFilter: (d: Date | null): boolean => {
+	const day = (d || new Date()).getDay();
+	// Prevent Saturday and Sunday from being selected.
+	return day !== 0 && day !== 6;
+	},
+
+// HTML template
+
+<fudis-datepicker
+	[label]="'Select a date'"
+	[control]="control"
+	[dateFilter]="weekendFilter" />
+
+```
+
 ## Localization
 
 Currently datepicker parses the display date to Finnish format of <code>DD.MM.YYYY</code> and calendar's first day of the week is Monday by default.

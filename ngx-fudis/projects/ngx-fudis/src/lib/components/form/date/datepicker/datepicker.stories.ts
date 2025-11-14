@@ -75,12 +75,6 @@ const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl(null, FudisValidators.required('Date is required.')),
-    myFilter: (d: Date | null): boolean => {
-      const day = (d || new Date()).getDay();
-      // Prevent Saturday and Sunday from being selected.
-      return day !== 0 && day !== 6;
-    },
-    addError: action('addError'),
   },
   template: html`
     <fudis-datepicker
@@ -94,13 +88,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
-      [dateFilter]="myFilter"
     >
-      <fudis-error-message
-        *ngIf="control.invalid && control.value"
-        (handleAddError)="addError($event)"
-        [message]="message"
-      />
     </fudis-datepicker>
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
@@ -212,7 +200,7 @@ WithMinMaxValidator.args = {
   helpText: 'Choose a date between the allowed range.',
 };
 
-export const DateFilterExample: StoryFn = (args) => ({
+export const WithDateFilter: StoryFn = (args) => ({
   props: {
     ...args,
     addError: action('addError'),
@@ -220,13 +208,12 @@ export const DateFilterExample: StoryFn = (args) => ({
   },
   template: `
   <example-date-filter-with-error-message
-    (handleAddError)="addError($event)"
-    (handleRemoveError)="removeError($event)"></example-date-filter-with-error-message>
+    (handleAddError)="addError($event)"></example-date-filter-with-error-message>
   `,
 });
 
-DateFilterExample.parameters = {
+WithDateFilter.parameters = {
   controls: {
-    exclude: { datepickerControlsExclude },
+    exclude: /.*/g,
   },
 };

@@ -130,6 +130,11 @@ export class DatepickerComponent
    */
   @Input() dateParse: boolean = true;
 
+  /**
+   * Function that determines which dates are selectable in the calendar. Used the same way as
+   * Angular Material's `matDatepickerFilter`. Return `true` to allow the date, or `false` to
+   * disable it.
+   */
   @Input() dateFilter: (d: Date | null | undefined) => boolean;
 
   /**

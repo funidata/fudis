@@ -142,6 +142,7 @@ const datepickerCommonExcludes: string[] = [
   ...formCommonControlsExclude,
   'endDateError',
   'startDateError',
+  'dateFilter',
 ];
 
 export const datepickerControlsExclude: RegExp = excludeRegex([
