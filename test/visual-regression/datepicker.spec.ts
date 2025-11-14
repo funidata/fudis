@@ -87,3 +87,15 @@ test("datepicker min and max", async ({ page }) => {
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await expect(page).toHaveScreenshot("min-max-3-valid-open.png", { fullPage: true });
 });
+
+test("datepicker with date filter", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=&id=components-form-date-datepicker--with-date-filter&viewMode=story",
+  );
+
+  await page.getByTestId("fudis-datepicker-1").focus();
+  await page.getByTestId("fudis-datepicker-1").fill(date);
+  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
+  await expect(page.getByTestId("cdk-overlay-0")).toBeVisible();
+  await expect(page).toHaveScreenshot("filter-date.png", { fullPage: true });
+});
