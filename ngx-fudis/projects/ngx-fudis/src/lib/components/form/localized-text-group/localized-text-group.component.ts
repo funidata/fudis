@@ -81,6 +81,15 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   @Input() size: FudisInputSize = 'lg';
 
   /**
+   * If user clears the input field, set FormControl value to null instead of empty string.
+   */
+  @Input() nullControlOnEmptyString: boolean = true;
+  /**
+   * Subscription(s) for listening to each controls' value changes
+   */
+  private _controlsSubscription: Subscription;
+
+  /**
    * Form element to display. Defaults to text-input
    */
   @Input() variant: 'text-input' | 'text-area' = 'text-input';
@@ -155,6 +164,24 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
    * On init and when Select option changes, check if now visible input should be marked as
    * required.
    */
+  protected _setControlsValueSubscription(): void {
+    if (this.nullControlOnEmptyString) {
+      this._controlsSubscription?.unsubscribe();
+      this._controlsSubscription = new Subscription();
+
+      Object.keys(this.formGroup.controls).forEach((key) => {
+        const control = this.formGroup.controls[key as keyof T] as FormControl<string | null>;
+        this._controlsSubscription.add(
+          control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+            if (typeof value === 'string' && value.trim() === '') {
+              control.setValue(null);
+            }
+          }),
+        );
+      });
+    }
+  }
+
   private _isInputRequired(control: FormControl<string | null>): boolean {
     const groupRequiredError = this.formGroup?.errors?.['oneRequired'];
 
@@ -195,6 +222,7 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe(() => this._updateValueAndValidityTrigger.next());
       this._updateSelectOptions();
+      this._setControlsValueSubscription();
       this._selectControl.patchValue(this._selectOptions[0]);
       this._checkHtmlAttributes(this._selectOptions[0].value);
     }
