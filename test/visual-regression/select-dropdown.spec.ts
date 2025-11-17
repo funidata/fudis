@@ -126,7 +126,7 @@ test("Select dropdown without clear button", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
   await page.getByTestId("fudis-select-2").click();
   await expect(page.getByTestId("fudis-select-2-dropdown")).toBeVisible();
-  const ostrichOption = page.getByTestId("fudis-select-2-dropdown").getByText("Ostrich");
+  const ostrichOption = page.getByTestId("fudis-select-2-option-8ah70s").getByText("Ostrich");
   await ostrichOption.scrollIntoViewIfNeeded();
   await ostrichOption.click();
   await page.waitForTimeout(150);
