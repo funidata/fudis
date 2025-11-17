@@ -99,7 +99,6 @@ const ExampleTemplate: StoryFn = (args) => ({
 export const Datepicker = ExampleTemplate.bind({});
 Datepicker.args = {
   ...commonArgs,
-  message: 'This is custom string error message that is placed with content projection',
 };
 
 const PreselectedTemplate: StoryFn = (args) => ({
@@ -203,11 +202,11 @@ export const WithDateFilter: StoryFn = (args) => ({
   props: {
     ...args,
     addError: action('addError'),
-    removeError: action('removeError'),
   },
-  template: `
-  <example-date-filter-with-error-message
-    (handleAddError)="addError($event)"></example-date-filter-with-error-message>
+  template: html`
+    <example-date-filter-with-error-message
+      (handleAddError)="addError($event)"
+    ></example-date-filter-with-error-message>
   `,
 });
 

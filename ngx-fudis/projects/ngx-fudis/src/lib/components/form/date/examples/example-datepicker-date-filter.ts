@@ -14,7 +14,6 @@ export function disallowedWeekendValidator(): ValidatorFn {
     if (!value) return null;
 
     const date = value instanceof Date ? value : new Date(value);
-    if (isNaN(date.getTime())) return { invalidDate: true };
 
     const day = date.getDay();
     if (day === 0 || day === 6) {
