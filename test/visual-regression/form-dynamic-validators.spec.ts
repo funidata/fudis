@@ -82,7 +82,7 @@ test("form dynamic inputs", async ({ page }) => {
     await clickButtonByTestId(page, id);
   }
 
-  await page.getByLabel("Winter holidays").check(); // Check the second checkbox
+  await page.getByTestId("fudis-checkbox-group-2-item-1").click(); // Check the second checkbox
 
   await clickButtonByTestId(page, "fudis-button-2"); // submit form without errors
   await expect(page).toHaveScreenshot("dynamic-3-submit-after-removed-validators.png", {
