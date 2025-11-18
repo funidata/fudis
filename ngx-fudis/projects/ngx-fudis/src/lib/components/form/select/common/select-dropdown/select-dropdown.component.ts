@@ -1,9 +1,15 @@
-import { Component, Input, effect, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  effect,
+  OnChanges,
+  signal,
+  WritableSignal,
+  computed,
+} from '@angular/core';
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
-import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
-import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-select-dropdown',
@@ -17,9 +23,9 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
     effect(() => {
       const translations = _translationService.getTranslations()().SELECT.AUTOCOMPLETE;
 
-      this._translationNoResultsFound.next(translations.NO_RESULTS);
-      this._translationResults.next(translations.RESULTS);
-      this._translationShowing.next(translations.SHOWING);
+      this._translationNoResultsFound.set(translations.NO_RESULTS);
+      this._translationResults.set(translations.RESULTS);
+      this._translationShowing.set(translations.SHOWING);
     });
   }
 
@@ -71,41 +77,100 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   @Input() open: boolean | null = false;
 
   /**
-   * Boolean which toggles status updates for screen readers about changed option results
-   */
-  protected _displayStatus = new BehaviorSubject<boolean>(false);
-
-  /**
    * Internal translated label for situations where no results with current filters were found
    */
-  protected _translationNoResultsFound = new BehaviorSubject<string>('');
+  protected _translationNoResultsFound: WritableSignal<string> = signal('');
 
   /**
-   * Internal translated label for number of visible results
+   * Internal translated label for visible results
    */
-  protected _translationResults = new BehaviorSubject<string>('');
+  protected _translationResults: WritableSignal<string> = signal<string>('');
 
   /**
-   * Internal translated label for number of visible results
+   * Internal translated label for visible results
    */
-  protected _translationShowing = new BehaviorSubject<string>('');
+  protected _translationShowing: WritableSignal<string> = signal<string>('');
 
-  ngOnChanges(changes: FudisComponentChanges<SelectDropdownComponent>): void {
-    const newFilterText = changes.filterText?.currentValue;
+  /**
+   * Internal helper for temporary clearing screen reader message
+   */
+  private _lastAnnouncedMessage = '';
 
-    const newResults = changes.results?.currentValue;
+  /**
+   * Internal signal mirroring results Input
+   */
+  private _resultsSignal: WritableSignal<number> = signal(0);
 
-    if (
-      newFilterText !== changes.filterText?.previousValue ||
-      newResults !== changes.results?.previousValue
-    ) {
-      this._displayStatus.next(false);
+  /**
+   * Internal signal mirroring filterText Input
+   */
+  private _filterTextSignal: WritableSignal<string> = signal('');
 
-      setTimeout(() => {
-        if (newFilterText === this.filterText || newResults === 0) {
-          this._displayStatus.next(true);
-        }
-      }, 500);
+  /**
+   * Internal signal to handle fast typing and to avoid screen reader performace fails
+   */
+  private _debounceFilterText: WritableSignal<string> = signal('');
+
+  /**
+   * Internal timeout for securing screen reader performance
+   */
+  private _debounceTimeout: number;
+
+  /**
+   * Computed signal for building and updating screen reader message
+   */
+  protected _liveMessage = computed(() => {
+    const filterText = this._debounceFilterText();
+    const results = this._resultsSignal();
+
+    // Only announce while dropdown is open
+    if (!this.open) {
+      this._lastAnnouncedMessage = '';
+      return '';
     }
+
+    // Reset announcement when input is cleared
+    if (!filterText) {
+      this._lastAnnouncedMessage = '';
+      return '';
+    }
+
+    const helpText =
+      typeof this.autocompleteHelpText === 'string' ? this.autocompleteHelpText : null;
+
+    // Construct the aria-live message
+    const message = helpText
+      ? helpText
+      : results > 0
+        ? `${this._translationShowing()} ${results} ${this._translationResults()}`
+        : (this.autocompleteNoResultsText ?? this._translationNoResultsFound());
+
+    // If message is the same as last time, force screen reader to re-announce it
+    if (message === this._lastAnnouncedMessage) {
+      setTimeout(() => {
+        this._lastAnnouncedMessage = message;
+      }, 50);
+
+      return '';
+    }
+
+    // New message, announce normally
+    this._lastAnnouncedMessage = message;
+    return message;
+  });
+
+  ngOnChanges(): void {
+    // Mirror Inputs to internal signals
+    this._resultsSignal.set(this.results ?? 0);
+    this._filterTextSignal.set(this.filterText ?? '');
+
+    if (this._debounceTimeout !== undefined) {
+      clearTimeout(this._debounceTimeout);
+    }
+
+    // Debounced for screen reader performace purposes
+    this._debounceTimeout = window.setTimeout(() => {
+      this._debounceFilterText.set(this.filterText ?? '');
+    }, 200);
   }
 }
