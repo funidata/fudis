@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
@@ -36,7 +36,7 @@ type MyForm = {
 
 @Component({
   imports: [NgxFudisModule, CommonModule],
-  selector: 'example-dynamic-validator',
+  selector: 'example-e2e',
   template: `
     <fudis-form
       class="fudis-mt-xl"
@@ -60,6 +60,30 @@ type MyForm = {
       <fudis-form-content>
         <fudis-fieldset [label]="'Add and remove validators dynamically'">
           <fudis-fieldset-content>
+            <fudis-button 
+              [label]="'toggle required validators'"
+              [variant]="'secondary'"
+              (handleClick)="toggleAllRequired(
+                [
+                  { control: formExample.controls['text'] },
+                  { control: formExample.controls['number'] },
+                  { control: formExample.controls['date']},
+                  { control: formExample.controls['animal'] },
+                ]
+              )"
+              ></fudis-button>
+              <fudis-button
+                [label]="'toggle other validators'"
+                [variant]="'secondary'"
+                (handleClick)="toggleOtherValidators(
+                  [
+                  { control: formExample.controls['text'], target: 'textMinLength' },
+                  { control: formExample.controls['email'], target: 'emailPattern' },
+                  { control: formExample.controls['email'], target: 'emailMinLength' },
+                  { control: formExample.controls['number'], target: 'numberMax' },
+                  { control: formExample.controls['date'], target: 'dateMin' },
+                ]
+                )"></fudis-button>
             <fudis-grid [rowGap]="'xs'" [width]="'md'">
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
@@ -68,18 +92,18 @@ type MyForm = {
                   [helpText]="'Please add some content.'"
                 />
                 <fudis-grid [rowGap]="'md'">
-                  <fudis-button
+                  <!-- <fudis-button
                     [label]="_textRequired + ' text required validator'"
                     (handleClick)="toggleRequired(formExample.controls['text'], 'textRequired')"
-                  ></fudis-button>
-                  <fudis-button
+                  ></fudis-button> -->
+                  <!-- <fudis-button
                     [label]="_textMaxLength + ' text maxLength validator'"
                     (handleClick)="toggleMaxLength(formExample.controls['text'], 'textMaxLength')"
-                  ></fudis-button>
-                  <fudis-button
+                  ></fudis-button> -->
+                  <!-- <fudis-button
                     [label]="_textMinLength + ' text minLength validator'"
                     (handleClick)="toggleMinLength(formExample.controls['text'], 'textMinLength')"
-                  ></fudis-button>
+                  ></fudis-button> -->
                 </fudis-grid>
               </fudis-grid>
               <fudis-hr />
@@ -90,18 +114,18 @@ type MyForm = {
                   [helpText]="'This is an example email input with multiple validations.'"
                 />
                 <fudis-grid [rowGap]="'md'">
-                  <fudis-button
+                  <!-- <fudis-button
                     [label]="_emailPattern + ' email pattern validator'"
                     (handleClick)="toggleEmail(formExample.controls['email'], 'emailPattern')"
-                  ></fudis-button>
-                  <fudis-button
+                  ></fudis-button> -->
+                  <!-- <fudis-button
                     [label]="_emailMaxLength + ' email maxLength validator'"
                     (handleClick)="toggleMaxLength(formExample.controls['email'], 'emailMaxLength')"
-                  ></fudis-button>
-                  <fudis-button
+                  ></fudis-button> -->
+                  <!-- <fudis-button
                     [label]="_emailMinLength + ' email minLength validator'"
                     (handleClick)="toggleMinLength(formExample.controls['email'], 'emailMinLength')"
-                  ></fudis-button>
+                  ></fudis-button> -->
                 </fudis-grid>
               </fudis-grid>
               <fudis-hr />
@@ -113,18 +137,18 @@ type MyForm = {
                   [size]="'md'"
                 />
                 <fudis-grid [rowGap]="'md'">
-                  <fudis-button
+                  <!-- <fudis-button
                     [label]="_numberRequired + ' number required validator'"
                     (handleClick)="toggleRequired(formExample.controls['number'], 'numberRequired')"
-                  ></fudis-button>
-                  <fudis-button
+                  ></fudis-button> -->
+                  <!-- <fudis-button
                     [label]="_numberMax + ' maxNumber validator'"
                     (handleClick)="toggleMaxNumber(formExample.controls['number'], 'numberMax')"
-                  ></fudis-button>
-                  <fudis-button
+                  ></fudis-button> -->
+                  <!-- <fudis-button
                     [label]="_numberMin + ' minNumber validator'"
                     (handleClick)="toggleMinNumber(formExample.controls['number'], 'numberMin')"
-                  ></fudis-button>
+                  ></fudis-button> -->
                 </fudis-grid>
               </fudis-grid>
               <fudis-hr />
@@ -134,14 +158,14 @@ type MyForm = {
                   [control]="formExample.controls.date"
                 ></fudis-datepicker>
                 <fudis-grid [rowGap]="'md'">
-                  <fudis-button
+                  <!-- <fudis-button
                     [label]="_dateRequired + ' date required validator'"
                     (handleClick)="toggleRequired(formExample.controls['date'], 'dateRequired')"
-                  ></fudis-button>
-                  <fudis-button
+                  ></fudis-button> -->
+                  <!-- <fudis-button
                     [label]="_dateMax + ' maxDate validator'"
                     (handleClick)="toggleMaxDate(formExample.controls['date'], 'dateMax')"
-                  ></fudis-button>
+                  ></fudis-button> -->
                   <fudis-button
                     [label]="_dateMin + ' minDate validator'"
                     (handleClick)="toggleMinDate(formExample.controls['date'], 'dateMin')"
@@ -162,10 +186,10 @@ type MyForm = {
                   </ng-template>
                 </fudis-select>
 
-                <fudis-button
+                <!-- <fudis-button
                   [label]="_optionRequired + ' option required validator'"
                   (handleClick)="toggleRequired(formExample.controls['animal'], 'optionRequired')"
-                ></fudis-button>
+                ></fudis-button> -->
               </fudis-grid>
               <fudis-hr />
               <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 3 }">
@@ -215,7 +239,7 @@ type MyForm = {
                   />
                 </fudis-checkbox-group>
               </fudis-grid>
-              <fudis-hr />
+              <!-- <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-radio-button-group
                   [label]="'Select your favorite sport'"
@@ -251,7 +275,7 @@ type MyForm = {
                     (handleClick)="toggleLocalizedTextGroupDisable()"
                   ></fudis-button>
                 </fudis-grid>
-              </fudis-grid>
+              </fudis-grid> -->
             </fudis-grid>
           </fudis-fieldset-content>
         </fudis-fieldset>
@@ -259,7 +283,7 @@ type MyForm = {
     </fudis-form>
   `,
 })
-export class StorybookExampleDynamicValidatorsComponent {
+export class StorybookExampleE2EComponent {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {
     this.formExample = new FormGroup({
       text: new FormControl<string | null>(null, [
@@ -410,6 +434,10 @@ export class StorybookExampleDynamicValidatorsComponent {
     this._errorSummaryService.setErrorSummaryVisibility('fudis-form-1', !this._errorSummaryVisible);
   }
 
+  changeNewText(target: string): string {
+    return target === 'Add' ? 'Remove' : 'Add';
+  }
+
   changeText(target: string): void {
     switch (target) {
       case 'textRequired':
@@ -501,6 +529,48 @@ export class StorybookExampleDynamicValidatorsComponent {
 
     group.updateValueAndValidity();
   }
+
+toggleAllRequired(
+  items: { control: FormControl }[]
+): void {
+  for (const { control } of items) {
+    const hasRequired = control.hasValidator(this._requiredValidatorInstance);
+
+    if (hasRequired) {
+      control.removeValidators(this._requiredValidatorInstance);
+    } else {
+      control.addValidators(this._requiredValidatorInstance);
+    }
+
+    control.updateValueAndValidity();
+  }
+}
+
+toggleOtherValidators(
+  items: { control: FormControl; target: string }[]
+): void {
+  const validatorMap: Record<string, ValidatorFn> = {
+    textMinLength: this._minLengthValidatorInstance,
+    emailPattern: this._emailValidatorInstance,
+    emailMinLength: this._minLengthValidatorInstance,
+    hasMaxNumber: this._maxNumberValidatorInstance,
+    hasMinDate: this._minDateValidatorInstance
+  };
+
+  for (const { control, target } of items) {
+    const validator = validatorMap[target];
+
+    const hasValidator = control.hasValidator(validator);
+
+    if (hasValidator) {
+      control.removeValidators(validator);
+    } else {
+      control.addValidators(validator);
+    }
+
+    control.updateValueAndValidity();
+  }
+}
 
   toggleRequired(control: FormControl, target: string): void {
     const required = control.hasValidator(this._requiredValidatorInstance);

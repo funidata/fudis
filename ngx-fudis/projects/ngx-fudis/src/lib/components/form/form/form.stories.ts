@@ -14,6 +14,7 @@ import { StorybookExampleDynamicValidatorsComponent } from './examples/form-exam
 import { BehaviorSubject } from 'rxjs';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisValidators } from '../../../utilities/form/validators';
+import { StorybookExampleE2EComponent } from './examples/form-example-e2e.component';
 
 export default {
   title: 'Components/Form/Form',
@@ -23,6 +24,7 @@ export default {
       declarations: [],
       imports: [
         StorybookExampleDynamicValidatorsComponent,
+        StorybookExampleE2EComponent,
         StorybookExampleFormComponent,
         StorybookExampleWithMultipleFormsComponent,
         ReactiveFormsModule,
@@ -228,6 +230,39 @@ ExampleWithDynamicValidators.args = {
 };
 
 ExampleWithDynamicValidators.parameters = {
+  controls: {
+    exclude: formExclude,
+  },
+};
+
+export const ExampleE2E: StoryFn = (args) => ({
+  props: args,
+  template: html` <example-e2e
+    [title]="title"
+    [helpText]="helpText"
+    [titleVariant]="titleVariant"
+    [level]="level"
+    [errorSummaryTitle]="errorSummaryTitle"
+    [errorSummaryVisible]="errorSummaryVisible"
+    [badge]="badge"
+    [badgeText]="badgeText"
+  />`,
+});
+
+ExampleE2E.args = {
+  title: 'Example With Dynamic Validators',
+  helpText:
+    "This example page is used to test, that when validators are added or removed from the FormControls, components' HTML attributes such as 'required' and max/min length are updated correctly.",
+  titleVariant: 'xl',
+  level: 1,
+  errorSummaryTitle:
+    'There are errors in this form. Please address these before trying to submit again.',
+  errorSummaryVisible: false,
+  badge: null,
+  badgeText: '',
+};
+
+ExampleE2E.parameters = {
   controls: {
     exclude: formExclude,
   },
