@@ -66,6 +66,8 @@ test("form dynamic inputs", async ({ page }) => {
     });
   });
 
+  await page.getByText("Winter holidays").click(); // Check the second checkbox
+
   /**
    * Remove validators which are visible at the moment: min length from text input, email pattern,
    * min length from email input, max number, min date
@@ -81,8 +83,6 @@ test("form dynamic inputs", async ({ page }) => {
   for (const id of buttonIds) {
     await clickButtonByTestId(page, id);
   }
-
-  await page.getByTestId("fudis-checkbox-group-2-item-1").click(); // Check the second checkbox
 
   await clickButtonByTestId(page, "fudis-button-2"); // submit form without errors
   await expect(page).toHaveScreenshot("dynamic-3-submit-after-removed-validators.png", {
