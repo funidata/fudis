@@ -152,12 +152,13 @@ describe('SelectDropdownComponent', () => {
         expect(helpText).toEqual('Hello from help text');
       });
     });
+  });
 
-    it('should have help text status for screen readers if filter text updates', async () => {
+  describe('Screen reader properties', () => {
+    it('should have results status for screen readers if filter text updates', async () => {
       fixture.componentRef.setInput('results', 42);
       fixture.componentRef.setInput('open', true);
       fixture.componentRef.setInput('filterText', 'hello');
-      fixture.componentRef.setInput('autocompleteHelpText', 'Hello from help text');
 
       for (const variant of autocompleteVariants) {
         fixture.componentRef.setInput('selectVariant', variant);
@@ -169,7 +170,7 @@ describe('SelectDropdownComponent', () => {
         expect(helpText).not.toBeNull(); // Aria live region is always in the DOM
         expect(helpText.getAttribute('role')).toEqual('status');
         fixture.detectChanges(); // This second call is necessary beacuse of ngTemplateOutlet which relies on autocompleteHelpText Input
-        expect(helpText.textContent).toEqual('Hello from help text');
+        expect(helpText.textContent).toEqual('Showing 42 results');
       }
     });
 
@@ -177,7 +178,6 @@ describe('SelectDropdownComponent', () => {
       fixture.componentRef.setInput('results', 0);
       fixture.componentRef.setInput('open', true);
       fixture.componentRef.setInput('filterText', 'hello');
-      fixture.componentRef.setInput('autocompleteHelpText', 'Hello from help text');
 
       for (const variant of autocompleteVariants) {
         fixture.componentRef.setInput('selectVariant', variant);
@@ -190,6 +190,25 @@ describe('SelectDropdownComponent', () => {
         expect(helpText.getAttribute('role')).toEqual('status');
         fixture.detectChanges(); // Ensure the template is updated with the emitted value
         expect(helpText.textContent).toEqual('No results found');
+      }
+    });
+
+    it('should not announce results to screen reader if dropdown is closed', async () => {
+      fixture.componentRef.setInput('results', 42);
+      fixture.componentRef.setInput('open', false);
+      fixture.componentRef.setInput('filterText', 'hello');
+
+      for (const variant of autocompleteVariants) {
+        fixture.componentRef.setInput('selectVariant', variant);
+        fixture.detectChanges();
+        await fixture.whenStable(); // Wait for async pipe
+
+        const helpText = getElement(fixture, '.fudis-visually-hidden');
+
+        expect(helpText).not.toBeNull(); // Aria live region is always in the DOM
+        expect(helpText.getAttribute('role')).toEqual('status');
+        fixture.detectChanges(); // Ensure the template is updated with the emitted value
+        expect(helpText.textContent).toEqual(''); // Empty string with no announcement to screen reader
       }
     });
   });
