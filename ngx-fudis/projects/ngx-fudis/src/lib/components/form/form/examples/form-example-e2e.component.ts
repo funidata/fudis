@@ -68,10 +68,12 @@ type MyForm = {
                 class="fudis-mb-sm fudis-mr-sm"
                 (handleClick)="toggleAllRequired(
                   [
-                    { control: formExample.controls['text'] },
-                    { control: formExample.controls['number'] },
-                    { control: formExample.controls['date']},
-                    { control: formExample.controls['animal'] },
+                    { control: formExample.controls.text },
+                    { control: formExample.controls.number },
+                    { control: formExample.controls.date },
+                    { control: formExample.controls.animal },
+                    { control: formExample.controls.sport },
+                    { control: formExample.controls.dj, isGroup: true },
                   ], 'textRequired'
                 )"
                 ></fudis-button>
@@ -80,11 +82,11 @@ type MyForm = {
                   [variant]="_otherVariant"
                   (handleClick)="toggleOtherValidators(
                     [
-                    { control: formExample.controls['text'], target: 'textMinLength' },
-                    { control: formExample.controls['email'], target: 'emailPattern' },
-                    { control: formExample.controls['email'], target: 'emailMinLength' },
-                    { control: formExample.controls['number'], target: 'numberMax' },
-                    { control: formExample.controls['date'], target: 'dateMin' },
+                    { control: formExample.controls.text, target: 'textMinLength' },
+                    { control: formExample.controls.email, target: 'emailPattern' },
+                    { control: formExample.controls.email, target: 'emailMinLength' },
+                    { control: formExample.controls.number, target: 'numberMax' },
+                    { control: formExample.controls.date, target: 'dateMin' },
                   ], 'otherValidator'
                   )"></fudis-button>
               </fudis-grid-item>
@@ -92,7 +94,7 @@ type MyForm = {
             <fudis-grid [rowGap]="'xs'" [width]="'md'">
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
-                  [control]="formExample.controls['text']"
+                  [control]="formExample.controls.text"
                   [label]="'Text input'"
                   [helpText]="'Please add some content.'"
                 />
@@ -100,7 +102,7 @@ type MyForm = {
               <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
-                  [control]="formExample.controls['email']"
+                  [control]="formExample.controls.email"
                   [label]="'Email'"
                   [helpText]="'This is an example email input with multiple validations.'"
                 />
@@ -108,7 +110,7 @@ type MyForm = {
               <fudis-hr />
               <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
-                  [control]="formExample.controls['number']"
+                  [control]="formExample.controls.number"
                   [label]="'Number input'"
                   [type]="'number'"
                   [size]="'md'"
@@ -185,6 +187,27 @@ type MyForm = {
                   />
                 </fudis-checkbox-group>
               </fudis-grid>
+              <fudis-hr />
+              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+                <fudis-radio-button-group
+                  [label]="'Select your favorite sport'"
+                  [control]="formExample.controls.sport"
+                >
+                  <fudis-radio-button
+                    *ngFor="let sport of sportOptions"
+                    [label]="sport.label"
+                    [value]="sport.value"
+                  >
+                  </fudis-radio-button>
+                </fudis-radio-button-group>
+              </fudis-grid>
+            </fudis-grid>
+            <fudis-hr />
+            <fudis-grid [columns]="{ md: 'inputLg auto' }">
+              <fudis-localized-text-group
+                [label]="'At least one required'"
+                [formGroup]="formExample.controls.dj"
+              ></fudis-localized-text-group>
             </fudis-grid>
           </fudis-fieldset-content>
         </fudis-fieldset>
@@ -262,29 +285,12 @@ export class StorybookExampleE2EComponent {
 
   minLength = 5;
   maxLength = 20;
-  minNumber = 2;
   maxNumber = 5;
 
   _textRequired = 'Remove';
   _otherValidator = 'Remove';
   _requiredVariant: FudisButtonVariant = 'secondary';
   _otherVariant: FudisButtonVariant = 'secondary';
-
-  _textMaxLength = 'Remove';
-  _textMinLength = 'Remove';
-  _emailPattern = 'Remove';
-  _emailMaxLength = 'Remove';
-  _emailMinLength = 'Remove';
-  _numberMin = 'Remove';
-  _numberMax = 'Remove';
-  _numberRequired = 'Remove';
-  _dateRequired = 'Remove';
-  _optionRequired = 'Remove';
-  _oneRequired = 'Remove';
-  _dateMax = 'Remove';
-  _dateMin = 'Remove';
-  _radioOptionRequired = 'Remove';
-  _localizedDisabled = 'Disable';
 
   sportOptions: FudisRadioButtonOption<object>[] = [
     { value: 'cycling', label: 'Cycling' },
@@ -301,10 +307,6 @@ export class StorybookExampleE2EComponent {
    */
   protected _requiredValidatorInstance: FudisValidatorFn =
     FudisValidators.required('This is required input.');
-  private _maxLengthValidatorInstance: FudisValidatorFn = FudisValidators.maxLength(
-    this.maxLength,
-    `Input length should not be more than ${this.maxLength} characters.`,
-  );
   private _minLengthValidatorInstance: FudisValidatorFn = FudisValidators.minLength(
     this.minLength,
     `Too short input. Minimum length is ${this.minLength}.`,
@@ -312,18 +314,10 @@ export class StorybookExampleE2EComponent {
   private _emailValidatorInstance: FudisValidatorFn = FudisValidators.email(
     'Input must be an email address.',
   );
-  private _minNumberValidatorInstance: FudisValidatorFn = FudisValidators.min(
-    this.minNumber,
-    'Number is too small',
-  );
   private _maxNumberValidatorInstance: FudisValidatorFn = FudisValidators.max(
     this.maxNumber,
     `Given number is higher than allowed ${this.maxNumber}.`,
   );
-  private _maxDateValidatorInstance: FudisValidatorFn = FudisValidators.datepickerMax({
-    value: new Date(),
-    message: 'Date cannot be after todays date',
-  });
   private _minDateValidatorInstance: FudisValidatorFn = FudisValidators.datepickerMin({
     value: new Date(new Date().setDate(new Date().getDate() - 1)),
     message: 'Date cannot be before yesterdays date',
@@ -357,69 +351,6 @@ export class StorybookExampleE2EComponent {
     return validatorType;
   }
 
-  changeText(target: string): void {
-    switch (target) {
-      case 'textRequired':
-        this._textRequired = this._textRequired === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'textMaxLength':
-        this._textMaxLength = this._textMaxLength === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'textMinLength':
-        this._textMinLength = this._textMinLength === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'emailPattern':
-        this._emailPattern = this._emailPattern === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'emailMaxLength':
-        this._emailMaxLength = this._emailMaxLength === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'emailMinLength':
-        this._emailMinLength = this._emailMinLength === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'numberRequired':
-        this._numberRequired = this._numberRequired === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'dateRequired':
-        this._dateRequired = this._dateRequired === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'optionRequired':
-        this._optionRequired = this._optionRequired === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'radioOptionRequired':
-        this._radioOptionRequired = this._radioOptionRequired === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'dateMin':
-        this._dateMin = this._dateMin === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'dateMax':
-        this._dateMax = this._dateMax === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'numberMin':
-        this._numberMin = this._numberMin === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'numberMax':
-        this._numberMax = this._numberMax === 'Add' ? 'Remove' : 'Add';
-        return;
-      case 'oneRequired':
-        this._oneRequired = this._oneRequired === 'Add' ? 'Remove' : 'Add';
-        return;
-      default:
-        console.error('Wrong input provided. No case for text: ' + target);
-        return;
-    }
-  }
-
-  toggleLocalizedTextGroupDisable(): void {
-    if (this.formExample.controls['dj'].disabled) {
-      this.formExample.controls['dj'].enable();
-      this._localizedDisabled = 'Disable';
-    } else {
-      this.formExample.controls['dj'].disable();
-      this._localizedDisabled = 'Enable';
-    }
-  }
-
   toggleRequiredFromOthers(removeControls: FormGroup[]): void {
     removeControls.forEach((control) => {
       const required = control.hasValidator(this._oneRequiredValidatorInstance);
@@ -436,59 +367,29 @@ export class StorybookExampleE2EComponent {
     });
   }
 
-  toggleOneRequired(group: FormGroup, target: string): void {
-    const required = group.hasValidator(this._oneRequiredValidatorInstance);
-
-    if (required) {
-      group.removeValidators(this._oneRequiredValidatorInstance);
-    } else {
-      group.addValidators(this._oneRequiredValidatorInstance);
-    }
-    this.changeText(target);
-
-    group.updateValueAndValidity();
-  }
-
 toggleAllRequired(
-  items: { control: FormControl }[],
+  items: { control: FormControl | FormGroup; isGroup?: boolean }[],
   validatorType: string
 ): void {
-  for (const { control } of items) {
+  for (const { control, isGroup } of items) {
+    const validator = isGroup
+    ? this._oneRequiredValidatorInstance
+    : this._requiredValidatorInstance;
 
-    const hasRequired = control.hasValidator(this._requiredValidatorInstance);
+    const hasRequired = control.hasValidator(validator);
 
     if (hasRequired) {
-      control.removeValidators(this._requiredValidatorInstance);
+      control.removeValidators(validator);
+      // if (isGroup) control.disable();
     } else {
-      control.addValidators(this._requiredValidatorInstance);
+      control.addValidators(validator);
+      // if (isGroup) control.enable();
     }
 
     control.updateValueAndValidity();
   }
-    this.changeNewText(validatorType);
+  this.changeNewText(validatorType);
 }
-
-// toggleAllRequired(
-//   items: { control: FormControl | FormGroup; isGroup?: boolean, isToggle?: boolean }[]
-// ): void {
-//   for (const { control, isGroup, isToggle } of items) {
-//     const validator = isGroup
-//     ? this._oneRequiredValidatorInstance
-//     : this._requiredValidatorInstance;
-
-//     const hasRequired = control.hasValidator(validator);
-
-//     if (hasRequired) {
-//       control.removeValidators(validator);
-//       if (isGroup && isToggle) control.disable();
-//     } else {
-//       control.addValidators(validator);
-//       if (isGroup && isToggle) control.enable();
-//     }
-
-//     control.updateValueAndValidity();
-//   }
-// }
 
 toggleOtherValidators(
   items: { control: FormControl; target: string }[],
@@ -518,110 +419,4 @@ toggleOtherValidators(
 
   this.changeNewText(validatorType);
 }
-
-  toggleRequired(control: FormControl, target: string): void {
-    const required = control.hasValidator(this._requiredValidatorInstance);
-
-    if (required) {
-      control.removeValidators(this._requiredValidatorInstance);
-    } else {
-      control.addValidators(this._requiredValidatorInstance);
-    }
-
-    this.changeText(target);
-
-    control.updateValueAndValidity();
-  }
-
-  toggleMaxLength(control: FormControl, target: string): void {
-    const hasMaxLength = control.hasValidator(this._maxLengthValidatorInstance);
-
-    if (hasMaxLength) {
-      control.removeValidators(this._maxLengthValidatorInstance);
-    } else {
-      control.addValidators(this._maxLengthValidatorInstance);
-    }
-
-    this.changeText(target);
-
-    control.updateValueAndValidity();
-  }
-
-  toggleMinLength(control: FormControl, target: string): void {
-    const hasMinLength = control.hasValidator(this._minLengthValidatorInstance);
-
-    if (hasMinLength) {
-      control.removeValidators(this._minLengthValidatorInstance);
-    } else {
-      control.addValidators(this._minLengthValidatorInstance);
-    }
-
-    this.changeText(target);
-
-    control.updateValueAndValidity();
-  }
-
-  toggleEmail(control: FormControl, target: string): void {
-    const hasEmail = control.hasValidator(this._emailValidatorInstance);
-
-    if (hasEmail) {
-      control.removeValidators(this._emailValidatorInstance);
-    } else {
-      control.addValidators(this._emailValidatorInstance);
-    }
-
-    this.changeText(target);
-
-    this.formExample.controls['email'].updateValueAndValidity();
-  }
-
-  toggleMinNumber(control: FormControl, target: string): void {
-    const hasMinNumber = control.hasValidator(this._minNumberValidatorInstance);
-
-    if (hasMinNumber) {
-      control.removeValidators(this._minNumberValidatorInstance);
-    } else {
-      control.addValidators(this._minNumberValidatorInstance);
-    }
-
-    this.changeText(target);
-
-    control.updateValueAndValidity();
-  }
-
-  toggleMaxNumber(control: FormControl, target: string): void {
-    const hasMaxNumber = control.hasValidator(this._maxNumberValidatorInstance);
-
-    if (hasMaxNumber) {
-      control.removeValidators(this._maxNumberValidatorInstance);
-    } else {
-      control.addValidators(this._maxNumberValidatorInstance);
-    }
-    this.changeText(target);
-    control.updateValueAndValidity();
-  }
-
-  toggleMaxDate(control: FormControl, target: string): void {
-    const hasMaxDate = control.hasValidator(this._maxDateValidatorInstance);
-
-    if (hasMaxDate) {
-      control.removeValidators(this._maxDateValidatorInstance);
-    } else {
-      control.addValidators(this._maxDateValidatorInstance);
-    }
-    this.changeText(target);
-    control.updateValueAndValidity();
-  }
-
-  toggleMinDate(control: FormControl, target: string): void {
-    const hasMinDate = control.hasValidator(this._minDateValidatorInstance);
-
-    if (hasMinDate) {
-      control.removeValidators(this._minDateValidatorInstance);
-    } else {
-      control.addValidators(this._minDateValidatorInstance);
-    }
-    this.changeText(target);
-    control.updateValueAndValidity();
-  }
 }
