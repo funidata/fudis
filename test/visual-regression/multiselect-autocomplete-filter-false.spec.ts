@@ -22,7 +22,7 @@ test("Multiselect Autocomplete with filtering false", async ({ page }) => {
 
     await expect(page.getByText(`Number of options loaded to DOM: ${domLoaded}`)).toBeVisible();
 
-    await expect(page.getByText(`Showing ${domLoaded} results`)).toBeVisible();
+    await expect (page.locator('.fudis-body-text').getByText(`Showing ${domLoaded} results`)).toBeVisible();
   };
 
   await page.goto(
