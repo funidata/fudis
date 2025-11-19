@@ -163,7 +163,7 @@ describe('SelectDropdownComponent', () => {
       for (const variant of autocompleteVariants) {
         fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
-        await fixture.whenStable(); // Wait for async pipe _displayStatus | async
+        await fixture.whenStable(); // Wait for async pipe
 
         const helpText = getElement(fixture, '.fudis-visually-hidden');
 
@@ -182,7 +182,7 @@ describe('SelectDropdownComponent', () => {
       for (const variant of autocompleteVariants) {
         fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
-        await fixture.whenStable(); // Wait for async pipe _translationNoResultsFound | async
+        await fixture.whenStable(); // Wait for async pipe
 
         const helpText = getElement(fixture, '.fudis-visually-hidden');
 
