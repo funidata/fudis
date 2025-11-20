@@ -19,7 +19,7 @@ test("e2e dynamic form error summary", async ({ page }) => {
 
   await page.getByTestId("fudis-button-2").click(); // submit form with errors
   await expect(page.getByText(errorSummaryText)).toBeVisible();
-  await expect(page).toHaveScreenshot("e2e-form-errors.png", { fullPage: true });
+  await expect(page).toHaveScreenshot("dynamic-1-submit-with-errors.png", { fullPage: true });
 
   await page.getByTestId("fudis-button-1").click(); // Click toggle to hide
   await expect(page.getByText(errorSummaryText)).not.toBeVisible();
@@ -53,7 +53,7 @@ test("e2e dynamic form error summary", async ({ page }) => {
   await expect(page.getByText("At least one option must be selected")).toHaveCount(3);
 
   await page.getByTestId("fudis-button-2").click(); // submit form with errors
-  await expect(page).toHaveScreenshot("e2e-invalid-data.png", {
+  await expect(page).toHaveScreenshot("dynamic-2-submit-with-invalid-data.png", {
     fullPage: true,
   });
 
@@ -61,7 +61,7 @@ test("e2e dynamic form error summary", async ({ page }) => {
   await page.getByTestId("fudis-button-4").click(); // Toggle Remove Other Validators
 
   await page.getByTestId("fudis-button-2").click() // submit form without errors
-  await expect(page).toHaveScreenshot("e2e-submit-after-removed-validators.png", {
+  await expect(page).toHaveScreenshot("dynamic-3-submit-after-removed-validators.png", {
     fullPage: true,
   });
 });
