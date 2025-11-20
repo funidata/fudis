@@ -43,7 +43,9 @@ type MyForm = {
       [level]="1"
       [title]="'Example With Dynamic Validators'"
       [titleVariant]="'xl'"
-      [errorSummaryTitle]=" 'There are errors in this form. Please address these before trying to submit again.'"
+      [errorSummaryTitle]="
+        'There are errors in this form. Please address these before trying to submit again.'
+      "
       [errorSummaryVisible]="false"
     >
       <fudis-form-actions>
@@ -57,85 +59,92 @@ type MyForm = {
       <fudis-form-content>
         <fudis-fieldset [label]="'Add and remove validators dynamically'">
           <fudis-fieldset-content>
-            <fudis-grid [columns]="{ 'sm': 2 }" [width]="'xxl'">
-              <fudis-grid-item [alignSelfX]="'end'" [columns]="{ 'sm': 2 }">
-                <fudis-button 
-                  [label]="_textRequired +' required validators'"
+            <fudis-grid [columns]="{ sm: 2 }" [width]="'xxl'">
+              <fudis-grid-item [alignSelfX]="'end'" [columns]="{ sm: 2 }">
+                <fudis-button
+                  [label]="_textRequired + ' required validators'"
                   [variant]="_requiredVariant"
                   class="fudis-mb-sm fudis-mr-sm"
-                  (handleClick)="toggleAllRequired(
-                    [
-                      { control: formExample.controls.text },
-                      { control: formExample.controls.number },
-                      { control: formExample.controls.date },
-                      { control: formExample.controls.animal },
-                      { control: formExample.controls.sport },
-                      { control: formExample.controls.dj, isGroup: true },
-                    ], 'textRequired'
-                  )"
-                  ></fudis-button>
-                  <fudis-button
-                    [label]="_otherValidator +' other validators'"
-                    [variant]="_otherVariant"
-                    (handleClick)="toggleOtherValidators(
+                  (handleClick)="
+                    toggleAllRequired(
                       [
-                      { control: formExample.controls.text, target: 'textMinLength' },
-                      { control: formExample.controls.email, target: 'emailPattern' },
-                      { control: formExample.controls.email, target: 'emailMinLength' },
-                      { control: formExample.controls.number, target: 'numberMax' },
-                      { control: formExample.controls.date, target: 'dateMin' },
-                    ], 'otherValidator'
-                    )"></fudis-button>
+                        { control: formExample.controls.text },
+                        { control: formExample.controls.number },
+                        { control: formExample.controls.date },
+                        { control: formExample.controls.animal },
+                        { control: formExample.controls.sport },
+                        { control: formExample.controls.dj, isGroup: true },
+                      ],
+                      'textRequired'
+                    )
+                  "
+                ></fudis-button>
+                <fudis-button
+                  [label]="_otherValidator + ' other validators'"
+                  [variant]="_otherVariant"
+                  (handleClick)="
+                    toggleOtherValidators(
+                      [
+                        { control: formExample.controls.text, target: 'textMinLength' },
+                        { control: formExample.controls.email, target: 'emailPattern' },
+                        { control: formExample.controls.email, target: 'emailMinLength' },
+                        { control: formExample.controls.number, target: 'numberMax' },
+                        { control: formExample.controls.date, target: 'dateMin' },
+                      ],
+                      'otherValidator'
+                    )
+                  "
+                ></fudis-button>
               </fudis-grid-item>
-                <fudis-text-input
-                  [control]="formExample.controls.text"
-                  [label]="'Text input'"
-                  [helpText]="'Please add some content.'"
-                />
-              
-                <fudis-text-input
-                  [control]="formExample.controls.email"
-                  [label]="'Email'"
-                  [helpText]="'This is an example email input with multiple validations.'"
-                />
-              
-                <fudis-text-input
-                  [control]="formExample.controls.number"
-                  [label]="'Number input'"
-                  [type]="'number'"
-                  [size]="'md'"
-                />
-              
-                <fudis-datepicker
+              <fudis-text-input
+                [control]="formExample.controls.text"
+                [label]="'Text input'"
+                [helpText]="'Please add some content.'"
+              />
+
+              <fudis-text-input
+                [control]="formExample.controls.email"
+                [label]="'Email'"
+                [helpText]="'This is an example email input with multiple validations.'"
+              />
+
+              <fudis-text-input
+                [control]="formExample.controls.number"
+                [label]="'Number input'"
+                [type]="'number'"
+                [size]="'md'"
+              />
+
+              <fudis-datepicker
                 [size]="'lg'"
-                  [label]="'Choose your favorite date'"
-                  [control]="formExample.controls.date"
-                ></fudis-datepicker>
-              
-                <fudis-select
-                  [label]="'Select your favorite animal'"
-                  [size]="'md'"
-                  [control]="formExample.controls.animal"
+                [label]="'Choose your favorite date'"
+                [control]="formExample.controls.date"
+              ></fudis-datepicker>
+
+              <fudis-select
+                [label]="'Select your favorite animal'"
+                [size]="'md'"
+                [control]="formExample.controls.animal"
+              >
+                <ng-template fudisSelectOptions>
+                  <fudis-select-option [data]="{ value: 'option-1', label: 'Otter' }" />
+                  <fudis-select-option [data]="{ value: 'option-2', label: 'Rattle snake' }" />
+                  <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
+                </ng-template>
+              </fudis-select>
+
+              <fudis-radio-button-group
+                [label]="'Select your favorite sport'"
+                [control]="formExample.controls.sport"
+              >
+                <fudis-radio-button
+                  *ngFor="let sport of sportOptions"
+                  [label]="sport.label"
+                  [value]="sport.value"
                 >
-                  <ng-template fudisSelectOptions>
-                    <fudis-select-option [data]="{ value: 'option-1', label: 'Otter' }" />
-                    <fudis-select-option [data]="{ value: 'option-2', label: 'Rattle snake' }" />
-                    <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
-                  </ng-template>
-                </fudis-select>
-              
-                <fudis-radio-button-group
-                  [label]="'Select your favorite sport'"
-                  [control]="formExample.controls.sport"
-                >
-                  <fudis-radio-button
-                    *ngFor="let sport of sportOptions"
-                    [label]="sport.label"
-                    [value]="sport.value"
-                  >
-                  </fudis-radio-button>
-                </fudis-radio-button-group>
-              
+                </fudis-radio-button>
+              </fudis-radio-button-group>
+
               <fudis-localized-text-group
                 [label]="'At least one required'"
                 [formGroup]="formExample.controls.dj"
@@ -147,52 +156,52 @@ type MyForm = {
         <fudis-fieldset [label]="'Dynamic FormGroup validators'" [class]="'fudis-mt-lg'">
           <fudis-fieldset-content>
             <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 3 }">
-                <fudis-checkbox-group
-                  [label]="'If you like summer'"
-                  [formGroup]="formExample.controls.summer"
-                >
-                  <fudis-checkbox-group-option
-                    [controlName]="'summer'"
-                    [label]="'Summer holidays'"
-                    (handleChange)="
-                      toggleRequiredFromOthers([
-                        formExample.controls.winter,
-                        formExample.controls.working,
-                      ])
-                    "
-                  />
-                </fudis-checkbox-group>
-                <fudis-checkbox-group
-                  [label]="'If you like winter'"
-                  [formGroup]="formExample.controls.winter"
-                >
-                  <fudis-checkbox-group-option
-                    [controlName]="'winter'"
-                    [label]="'Winter holidays'"
-                    (handleChange)="
-                      toggleRequiredFromOthers([
-                        formExample.controls.summer,
-                        formExample.controls.working,
-                      ])
-                    "
-                  />
-                </fudis-checkbox-group>
-                <fudis-checkbox-group
-                  [label]="'If you like working'"
-                  [formGroup]="formExample.controls.working"
-                >
-                  <fudis-checkbox-group-option
-                    [controlName]="'working'"
-                    [label]="'Working holidays'"
-                    (handleChange)="
-                      toggleRequiredFromOthers([
-                        formExample.controls.summer,
-                        formExample.controls.winter,
-                      ])
-                    "
-                  />
-                </fudis-checkbox-group>
-              </fudis-grid>
+              <fudis-checkbox-group
+                [label]="'If you like summer'"
+                [formGroup]="formExample.controls.summer"
+              >
+                <fudis-checkbox-group-option
+                  [controlName]="'summer'"
+                  [label]="'Summer holidays'"
+                  (handleChange)="
+                    toggleRequiredFromOthers([
+                      formExample.controls.winter,
+                      formExample.controls.working,
+                    ])
+                  "
+                />
+              </fudis-checkbox-group>
+              <fudis-checkbox-group
+                [label]="'If you like winter'"
+                [formGroup]="formExample.controls.winter"
+              >
+                <fudis-checkbox-group-option
+                  [controlName]="'winter'"
+                  [label]="'Winter holidays'"
+                  (handleChange)="
+                    toggleRequiredFromOthers([
+                      formExample.controls.summer,
+                      formExample.controls.working,
+                    ])
+                  "
+                />
+              </fudis-checkbox-group>
+              <fudis-checkbox-group
+                [label]="'If you like working'"
+                [formGroup]="formExample.controls.working"
+              >
+                <fudis-checkbox-group-option
+                  [controlName]="'working'"
+                  [label]="'Working holidays'"
+                  (handleChange)="
+                    toggleRequiredFromOthers([
+                      formExample.controls.summer,
+                      formExample.controls.winter,
+                    ])
+                  "
+                />
+              </fudis-checkbox-group>
+            </fudis-grid>
           </fudis-fieldset-content>
         </fudis-fieldset>
       </fudis-form-content>
@@ -325,7 +334,7 @@ export class StorybookExampleFormDynamicComponentsComponent {
     if (validatorType === 'textRequired') {
       this._textRequired = this._textRequired === 'Add' ? 'Remove' : 'Add';
       this._requiredVariant = this._requiredVariant === 'primary' ? 'secondary' : 'primary';
-    } 
+    }
 
     if (validatorType === 'otherValidator') {
       this._otherValidator = this._otherValidator === 'Add' ? 'Remove' : 'Add';
@@ -351,54 +360,54 @@ export class StorybookExampleFormDynamicComponentsComponent {
     });
   }
 
-toggleAllRequired(
-  items: { control: FormControl | FormGroup; isGroup?: boolean }[],
-  validatorType: string
-): void {
-  for (const { control, isGroup } of items) {
-    const validator = isGroup
-    ? this._oneRequiredValidatorInstance
-    : this._requiredValidatorInstance;
+  toggleAllRequired(
+    items: { control: FormControl | FormGroup; isGroup?: boolean }[],
+    validatorType: string,
+  ): void {
+    for (const { control, isGroup } of items) {
+      const validator = isGroup
+        ? this._oneRequiredValidatorInstance
+        : this._requiredValidatorInstance;
 
-    const hasRequired = control.hasValidator(validator);
+      const hasRequired = control.hasValidator(validator);
 
-    if (hasRequired) {
-      control.removeValidators(validator);
-    } else {
-      control.addValidators(validator);
+      if (hasRequired) {
+        control.removeValidators(validator);
+      } else {
+        control.addValidators(validator);
+      }
+
+      control.updateValueAndValidity();
     }
-
-    control.updateValueAndValidity();
-  }
-  this.changeNewText(validatorType);
-}
-
-toggleOtherValidators(
-  items: { control: FormControl; target: string }[],
-  validatorType: string
-): void {
-  const validatorMap: Record<string, ValidatorFn> = {
-    textMinLength: this._minLengthValidatorInstance,
-    emailPattern: this._emailValidatorInstance,
-    emailMinLength: this._minLengthValidatorInstance,
-    numberMax: this._maxNumberValidatorInstance,
-    dateMin: this._minDateValidatorInstance
-  };
-
-  for (const { control, target } of items) {
-    const validator = validatorMap[target];
-
-    const hasValidator = control.hasValidator(validator);
-
-    if (hasValidator) {
-      control.removeValidators(validator);
-    } else {
-      control.addValidators(validator);
-    }
-
-    control.updateValueAndValidity();
+    this.changeNewText(validatorType);
   }
 
-  this.changeNewText(validatorType);
-}
+  toggleOtherValidators(
+    items: { control: FormControl; target: string }[],
+    validatorType: string,
+  ): void {
+    const validatorMap: Record<string, ValidatorFn> = {
+      textMinLength: this._minLengthValidatorInstance,
+      emailPattern: this._emailValidatorInstance,
+      emailMinLength: this._minLengthValidatorInstance,
+      numberMax: this._maxNumberValidatorInstance,
+      dateMin: this._minDateValidatorInstance,
+    };
+
+    for (const { control, target } of items) {
+      const validator = validatorMap[target];
+
+      const hasValidator = control.hasValidator(validator);
+
+      if (hasValidator) {
+        control.removeValidators(validator);
+      } else {
+        control.addValidators(validator);
+      }
+
+      control.updateValueAndValidity();
+    }
+
+    this.changeNewText(validatorType);
+  }
 }

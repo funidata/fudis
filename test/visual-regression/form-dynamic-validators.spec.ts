@@ -1,18 +1,18 @@
 import test, { expect } from "@playwright/test";
 
-test("e2e dynamic form error summary", async ({ page }) => {
+test("form dynamic validators", async ({ page }) => {
   const errorSummaryText =
     "There are errors in this form. Please address these before trying to submit again.";
 
-  await page.goto(
-    "/iframe.html?args=&id=components-form-form--pw-form-dynamic-example",
-  );
+  await page.goto("/iframe.html?args=&id=components-form-form--pw-form-dynamic-example");
 
   await expect(page.getByTestId("fudis-text-input-1")).toBeVisible();
   await expect(page.getByTestId("fudis-text-input-2")).toBeVisible();
   await expect(page.getByTestId("fudis-text-input-3")).toBeVisible();
   await expect(page.getByTestId("fudis-datepicker-1")).toBeVisible();
   await expect(page.getByTestId("fudis-select-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-radio-button-group-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-localized-text-group-1")).toBeVisible();
   await expect(page.getByTestId("fudis-checkbox-group-1")).toBeVisible();
   await expect(page.getByTestId("fudis-checkbox-group-2")).toBeVisible();
   await expect(page.getByTestId("fudis-checkbox-group-3")).toBeVisible();
@@ -45,7 +45,7 @@ test("e2e dynamic form error summary", async ({ page }) => {
   await page.getByTestId("fudis-text-input-2").fill("mail"); // Insert invalid email pattern and minlength to email text-input
   await page.getByTestId("fudis-text-input-3").fill("123456"); // Insert invalid maxnumber to number text-input
   await page
-    .getByTestId("fudis-datepicker-1")  
+    .getByTestId("fudis-datepicker-1")
     .fill(new Date(2021, 3, 12).toLocaleDateString("fi-FI")); // Insert invalid mindate to datepicker
   await page.getByTestId("fudis-checkbox-group-1-item-1").focus(); // Focus on the first checkbox
   await page.getByText("Summer holidays").click(); // Uncheck the first checkbox
@@ -60,7 +60,7 @@ test("e2e dynamic form error summary", async ({ page }) => {
   await page.getByText("Winter holidays").click(); // Check the second checkbox
   await page.getByTestId("fudis-button-4").click(); // Toggle Remove Other Validators
 
-  await page.getByTestId("fudis-button-2").click() // submit form without errors
+  await page.getByTestId("fudis-button-2").click(); // submit form without errors
   await expect(page).toHaveScreenshot("dynamic-3-submit-after-removed-validators.png", {
     fullPage: true,
   });
