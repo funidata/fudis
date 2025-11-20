@@ -5,7 +5,7 @@ test("e2e dynamic form error summary", async ({ page }) => {
     "There are errors in this form. Please address these before trying to submit again.";
 
   await page.goto(
-    "/iframe.html?args=&id=components-form-form--example-e-2-e&viewMode=story",
+    "/iframe.html?args=&id=components-form-form--pw-form-dynamic-example",
   );
 
   await expect(page.getByTestId("fudis-text-input-1")).toBeVisible();
