@@ -36,18 +36,15 @@ type MyForm = {
 
 @Component({
   imports: [NgxFudisModule, CommonModule],
-  selector: 'example-e2e',
+  selector: 'example-form-dynamic-components',
   template: `
     <fudis-form
       class="fudis-mt-xl"
-      [badge]="badge"
-      [badgeText]="badgeText"
-      [level]="level"
-      [title]="title"
-      [titleVariant]="titleVariant"
-      [helpText]="helpText"
-      [errorSummaryTitle]="errorSummaryTitle"
-      [errorSummaryVisible]="errorSummaryVisible"
+      [level]="1"
+      [title]="'Example With Dynamic Validators'"
+      [titleVariant]="'xl'"
+      [errorSummaryTitle]=" 'There are errors in this form. Please address these before trying to submit again.'"
+      [errorSummaryVisible]="false"
     >
       <fudis-form-actions>
         <fudis-button
@@ -60,73 +57,61 @@ type MyForm = {
       <fudis-form-content>
         <fudis-fieldset [label]="'Add and remove validators dynamically'">
           <fudis-fieldset-content>
-            <fudis-grid [columns]="1" [width]="'sm'" [align]="'end'" [alignItemsX]="'end'" [columnGap]="'xxs'">
-              <fudis-grid-item [alignSelfX]="'end'">
-              <fudis-button 
-                [label]="_textRequired +' required validators'"
-                [variant]="_requiredVariant"
-                class="fudis-mb-sm fudis-mr-sm"
-                (handleClick)="toggleAllRequired(
-                  [
-                    { control: formExample.controls.text },
-                    { control: formExample.controls.number },
-                    { control: formExample.controls.date },
-                    { control: formExample.controls.animal },
-                    { control: formExample.controls.sport },
-                    { control: formExample.controls.dj, isGroup: true },
-                  ], 'textRequired'
-                )"
-                ></fudis-button>
-                <fudis-button
-                  [label]="_otherValidator +' other validators'"
-                  [variant]="_otherVariant"
-                  (handleClick)="toggleOtherValidators(
+            <fudis-grid [columns]="{ 'sm': 2 }" [width]="'xxl'">
+              <fudis-grid-item [alignSelfX]="'end'" [columns]="{ 'sm': 2 }">
+                <fudis-button 
+                  [label]="_textRequired +' required validators'"
+                  [variant]="_requiredVariant"
+                  class="fudis-mb-sm fudis-mr-sm"
+                  (handleClick)="toggleAllRequired(
                     [
-                    { control: formExample.controls.text, target: 'textMinLength' },
-                    { control: formExample.controls.email, target: 'emailPattern' },
-                    { control: formExample.controls.email, target: 'emailMinLength' },
-                    { control: formExample.controls.number, target: 'numberMax' },
-                    { control: formExample.controls.date, target: 'dateMin' },
-                  ], 'otherValidator'
-                  )"></fudis-button>
+                      { control: formExample.controls.text },
+                      { control: formExample.controls.number },
+                      { control: formExample.controls.date },
+                      { control: formExample.controls.animal },
+                      { control: formExample.controls.sport },
+                      { control: formExample.controls.dj, isGroup: true },
+                    ], 'textRequired'
+                  )"
+                  ></fudis-button>
+                  <fudis-button
+                    [label]="_otherValidator +' other validators'"
+                    [variant]="_otherVariant"
+                    (handleClick)="toggleOtherValidators(
+                      [
+                      { control: formExample.controls.text, target: 'textMinLength' },
+                      { control: formExample.controls.email, target: 'emailPattern' },
+                      { control: formExample.controls.email, target: 'emailMinLength' },
+                      { control: formExample.controls.number, target: 'numberMax' },
+                      { control: formExample.controls.date, target: 'dateMin' },
+                    ], 'otherValidator'
+                    )"></fudis-button>
               </fudis-grid-item>
-            </fudis-grid>
-            <fudis-grid [rowGap]="'xs'" [width]="'md'">
-              <fudis-grid [columns]="{ md: 'inputLg auto' }">
                 <fudis-text-input
                   [control]="formExample.controls.text"
                   [label]="'Text input'"
                   [helpText]="'Please add some content.'"
                 />
-              </fudis-grid>
-              <fudis-hr />
-              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+              
                 <fudis-text-input
                   [control]="formExample.controls.email"
                   [label]="'Email'"
                   [helpText]="'This is an example email input with multiple validations.'"
                 />
-              </fudis-grid>
-              <fudis-hr />
-              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+              
                 <fudis-text-input
                   [control]="formExample.controls.number"
                   [label]="'Number input'"
                   [type]="'number'"
                   [size]="'md'"
                 />
-              </fudis-grid>
-              <fudis-hr />
-              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+              
                 <fudis-datepicker
+                [size]="'lg'"
                   [label]="'Choose your favorite date'"
                   [control]="formExample.controls.date"
                 ></fudis-datepicker>
-                <fudis-grid [rowGap]="'md'">
-                </fudis-grid>
-              </fudis-grid>
-              <fudis-hr />
-              <fudis-grid [columns]="{ md: 'inputLg auto' }">
+              
                 <fudis-select
                   [label]="'Select your favorite animal'"
                   [size]="'md'"
@@ -138,9 +123,30 @@ type MyForm = {
                     <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
                   </ng-template>
                 </fudis-select>
-              </fudis-grid>
-              <fudis-hr />
-              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 3 }">
+              
+                <fudis-radio-button-group
+                  [label]="'Select your favorite sport'"
+                  [control]="formExample.controls.sport"
+                >
+                  <fudis-radio-button
+                    *ngFor="let sport of sportOptions"
+                    [label]="sport.label"
+                    [value]="sport.value"
+                  >
+                  </fudis-radio-button>
+                </fudis-radio-button-group>
+              
+              <fudis-localized-text-group
+                [label]="'At least one required'"
+                [formGroup]="formExample.controls.dj"
+              ></fudis-localized-text-group>
+            </fudis-grid>
+          </fudis-fieldset-content>
+        </fudis-fieldset>
+        <fudis-hr fudisGridItem [columns]="2" [class]="'fudis-mt-lg'" />
+        <fudis-fieldset [label]="'Dynamic FormGroup validators'" [class]="'fudis-mt-lg'">
+          <fudis-fieldset-content>
+            <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 3 }">
                 <fudis-checkbox-group
                   [label]="'If you like summer'"
                   [formGroup]="formExample.controls.summer"
@@ -187,35 +193,13 @@ type MyForm = {
                   />
                 </fudis-checkbox-group>
               </fudis-grid>
-              <fudis-hr />
-              <fudis-grid [columns]="{ md: 'inputLg auto' }">
-                <fudis-radio-button-group
-                  [label]="'Select your favorite sport'"
-                  [control]="formExample.controls.sport"
-                >
-                  <fudis-radio-button
-                    *ngFor="let sport of sportOptions"
-                    [label]="sport.label"
-                    [value]="sport.value"
-                  >
-                  </fudis-radio-button>
-                </fudis-radio-button-group>
-              </fudis-grid>
-            </fudis-grid>
-            <fudis-hr />
-            <fudis-grid [columns]="{ md: 'inputLg auto' }">
-              <fudis-localized-text-group
-                [label]="'At least one required'"
-                [formGroup]="formExample.controls.dj"
-              ></fudis-localized-text-group>
-            </fudis-grid>
           </fudis-fieldset-content>
         </fudis-fieldset>
       </fudis-form-content>
     </fudis-form>
   `,
 })
-export class StorybookExampleE2EComponent {
+export class StorybookExampleFormDynamicComponentsComponent {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {
     this.formExample = new FormGroup({
       text: new FormControl<string | null>(null, [
@@ -380,10 +364,8 @@ toggleAllRequired(
 
     if (hasRequired) {
       control.removeValidators(validator);
-      // if (isGroup) control.disable();
     } else {
       control.addValidators(validator);
-      // if (isGroup) control.enable();
     }
 
     control.updateValueAndValidity();
