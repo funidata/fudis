@@ -83,7 +83,7 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   /**
    * If user clears the input field, set FormControl value to null instead of empty string.
    */
-  @Input() nullControlOnEmptyString: boolean = true;
+  private _nullControlOnEmptyString: boolean = true;
   /**
    * Subscription(s) for listening to each controls' value changes
    */
@@ -161,11 +161,11 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   }
 
   /**
-   * On init and when Select option changes, check if now visible input should be marked as
-   * required.
+   * Set subscriptions for each control to set value to null if empty string is entered.
    */
+
   protected _setControlsValueSubscription(): void {
-    if (this.nullControlOnEmptyString) {
+    if (this._nullControlOnEmptyString) {
       this._controlsSubscription?.unsubscribe();
       this._controlsSubscription = new Subscription();
 
@@ -181,6 +181,11 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
       });
     }
   }
+
+  /**
+   * On init and when Select option changes, check if now visible input should be marked as
+   * required.
+   */
 
   private _isInputRequired(control: FormControl<string | null>): boolean {
     const groupRequiredError = this.formGroup?.errors?.['oneRequired'];
