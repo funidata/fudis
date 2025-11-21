@@ -56,7 +56,6 @@ describe('GuidanceComponent', () => {
     component.for = 'related-input-id';
     component.helpText = 'This is describing guidance text';
     component.maxLength = testMaxLength;
-    component.ariaLive = 'polite';
     fixture.detectChanges();
   });
 
@@ -78,11 +77,6 @@ describe('GuidanceComponent', () => {
     it('should have groupHelpTextHidden set to false', () => {
       const element = getElement(fixture, '.fudis-guidance__help-text');
       expect(element.getAttribute('aria-hidden')).toEqual('false');
-    });
-
-    it('should have ariaLive assertive', () => {
-      const element = getElement(fixture, '.fudis-guidance__errors__list');
-      expect(element.getAttribute('arialive')).toEqual('polite');
     });
   });
 

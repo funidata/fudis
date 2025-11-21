@@ -68,13 +68,6 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   @Input() helpText: string | undefined;
 
   /**
-   * If there is no Fudis FieldSet and Error Summary associated with this input and its Guidance,
-   * 'polite' can be considered so that screen reader will get notified if there are new errors
-   * related to the input.
-   */
-  @Input() ariaLive: 'off' | 'polite' | 'assertive' = 'off';
-
-  /**
    * When set displays also a character count indicator.
    */
   @Input() maxLength: number | null = null;
