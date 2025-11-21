@@ -804,7 +804,7 @@ export class SelectBaseDirective
     const targetElement = event.target;
 
     // Type guard
-    if (targetElement instanceof HTMLElement) {
+    if (targetElement instanceof Element) {
       if (this._dropdownOpen() && !this._selectRef.nativeElement.contains(targetElement)) {
         this.closeDropdown(false);
       }
@@ -819,9 +819,8 @@ export class SelectBaseDirective
   @HostListener('mouseup', ['$event'])
   protected _handleMouseUp(event: MouseEvent) {
     const targetElement = event.target;
-
     // Type guard
-    if (!(targetElement instanceof HTMLElement)) return;
+    if (!(targetElement instanceof Element)) return;
 
     this._clickFromIcon =
       this._selectRef.nativeElement.contains(targetElement) &&
