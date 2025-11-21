@@ -83,7 +83,7 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   /**
    * If user clears the input field, set FormControl value to null instead of empty string.
    */
-  private _nullControlOnEmptyString: boolean = true;
+  @Input() nullControlOnEmptyString: boolean = true;
   /**
    * Subscription(s) for listening to each controls' value changes
    */
@@ -165,7 +165,7 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
    */
 
   protected _setControlsValueSubscription(): void {
-    if (this._nullControlOnEmptyString) {
+    if (this.nullControlOnEmptyString) {
       this._controlsSubscription?.unsubscribe();
       this._controlsSubscription = new Subscription();
 
