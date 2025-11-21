@@ -804,7 +804,7 @@ export class SelectBaseDirective
     const targetElement = event.target;
 
     // Type guard
-    if (targetElement instanceof HTMLElement) {
+    if (targetElement instanceof Element) {
       if (this._dropdownOpen() && !this._selectRef.nativeElement.contains(targetElement)) {
         this.closeDropdown(false);
       }
