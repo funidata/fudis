@@ -10,6 +10,7 @@ import {
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
+import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-select-dropdown',
@@ -107,20 +108,10 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   private _filterTextSignal: WritableSignal<string> = signal('');
 
   /**
-   * Internal signal to handle fast typing and to avoid screen reader performace fails
-   */
-  private _debounceFilterText: WritableSignal<string> = signal('');
-
-  /**
-   * Internal timeout for securing screen reader performance
-   */
-  private _debounceTimeout: number;
-
-  /**
    * Computed signal for building and updating screen reader message
    */
   protected _liveMessage = computed(() => {
-    const filterText = this._debounceFilterText();
+    const filterText = this._filterTextSignal();
     const results = this._resultsSignal();
 
     // Only announce while dropdown is open
@@ -159,18 +150,21 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
     return message;
   });
 
-  ngOnChanges(): void {
-    // Mirror Inputs to internal signals
-    this._resultsSignal.set(this.results ?? 0);
-    this._filterTextSignal.set(this.filterText ?? '');
+  ngOnChanges(changes: FudisComponentChanges<SelectDropdownComponent>): void {
+    const newResults = changes.results?.currentValue;
+    const newFilterText = changes.filterText?.currentValue;
 
-    if (this._debounceTimeout !== undefined) {
-      clearTimeout(this._debounceTimeout);
+    if (
+      (changes.filterText &&
+        newFilterText !== undefined &&
+        newFilterText !== changes.filterText?.previousValue) ||
+      (changes.results && newResults !== undefined && newResults !== changes.results?.previousValue)
+    ) {
+      // Update signals after Angular updates the inputs, ensuring filterText and results are set together for _liveMessage.
+      Promise.resolve().then(() => {
+        this._filterTextSignal.set(this.filterText ?? '');
+        this._resultsSignal.set(this.results ?? 0);
+      });
     }
-
-    // Debounced for screen reader performace purposes
-    this._debounceTimeout = window.setTimeout(() => {
-      this._debounceFilterText.set(this.filterText ?? '');
-    }, 200);
   }
 }
