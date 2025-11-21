@@ -816,12 +816,10 @@ export class SelectBaseDirective
     this._mouseDownInsideComponent = true;
   }
 
-  @HostListener('mouseup', ['$event'])
-  protected _handleMouseUp(event: MouseEvent) {
-    const targetElement = event.target;
-
+  @HostListener('mouseup', ['$event.target'])
+  protected _handleMouseUp(targetElement: EventTarget | null) {
     // Type guard
-    if (!(targetElement instanceof HTMLElement)) return;
+    if (!(targetElement instanceof Element)) return;
 
     this._clickFromIcon =
       this._selectRef.nativeElement.contains(targetElement) &&
