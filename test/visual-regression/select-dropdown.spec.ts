@@ -126,10 +126,18 @@ test("Select dropdown without clear button", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
   await page.getByTestId("fudis-select-2").click();
   await expect(page.getByTestId("fudis-select-2-dropdown")).toBeVisible();
-  const ostrichOption = page.getByTestId("fudis-select-2-dropdown").getByText("Ostrich");
+});
+
+test("Select dropdown option", async ({ page }) => {
+  await page.goto("/iframe.html?args=&id=components-form-select--select-showcase&viewMode=story");
+
+  await page.getByTestId("fudis-select-1").focus();
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+  const ostrichOption = page.getByTestId("fudis-select-1-dropdown").getByText("Ostrich");
+
   await ostrichOption.scrollIntoViewIfNeeded();
   await ostrichOption.click();
   await page.waitForTimeout(150);
   await expect(page.getByText("You must choose a pet!").locator("visible=false")).toHaveCount(0);
-  await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
+  await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
 });
