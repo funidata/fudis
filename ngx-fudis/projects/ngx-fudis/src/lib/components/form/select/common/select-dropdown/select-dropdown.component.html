@@ -1,3 +1,4 @@
+<span class="fudis-visually-hidden" role="status">{{ _liveMessage() }}</span>
 <div
   #dropdownElement
   [class.fudis-select-dropdown--hidden]="selectVariant === 'autocompleteType' && !filterText"
@@ -25,15 +26,6 @@
       [variant]="'md-light'"
       ><ng-container *ngTemplateOutlet="noResults" />
     </fudis-body-text>
-    <span
-      *ngIf="autocompleteHelpText !== false && (_displayStatus | async) && results && filterText"
-      class="fudis-visually-hidden"
-      role="alert"
-      ><ng-container *ngTemplateOutlet="helpText"
-    /></span>
-    <span *ngIf="!results && (_displayStatus | async)" class="fudis-visually-hidden" role="alert"
-      ><ng-container *ngTemplateOutlet="noResults"
-    /></span>
   </ng-container>
   <ng-content></ng-content>
 </div>
@@ -41,13 +33,11 @@
 <ng-template #helpText>
   <ng-container *ngIf="autocompleteHelpText">{{ autocompleteHelpText }}</ng-container
   ><ng-container *ngIf="!autocompleteHelpText"
-    >{{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}</ng-container
+    >{{ _translationShowing() }} {{ results }} {{ _translationResults() }}</ng-container
   >
 </ng-template>
 
 <ng-template #noResults>
   <ng-container *ngIf="autocompleteNoResultsText">{{ autocompleteNoResultsText }}</ng-container>
-  <ng-container *ngIf="!autocompleteNoResultsText">{{
-    _translationNoResultsFound | async
-  }}</ng-container>
+  <ng-container *ngIf="!autocompleteNoResultsText">{{ _translationNoResultsFound() }}</ng-container>
 </ng-template>
