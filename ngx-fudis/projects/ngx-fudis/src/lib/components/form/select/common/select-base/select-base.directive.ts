@@ -816,8 +816,9 @@ export class SelectBaseDirective
     this._mouseDownInsideComponent = true;
   }
 
-  @HostListener('mouseup', ['$event.target'])
-  protected _handleMouseUp(targetElement: EventTarget | null) {
+  @HostListener('mouseup', ['$event'])
+  protected _handleMouseUp(event: MouseEvent) {
+    const targetElement = event.target;
     // Type guard
     if (!(targetElement instanceof Element)) return;
 
