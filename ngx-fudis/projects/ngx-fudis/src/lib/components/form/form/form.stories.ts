@@ -14,6 +14,7 @@ import { StorybookExampleDynamicValidatorsComponent } from './examples/form-exam
 import { BehaviorSubject } from 'rxjs';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisValidators } from '../../../utilities/form/validators';
+import { StorybookExampleFormDynamicComponentsComponent } from './examples/form-dynamic-components.component';
 
 export default {
   title: 'Components/Form/Form',
@@ -23,6 +24,7 @@ export default {
       declarations: [],
       imports: [
         StorybookExampleDynamicValidatorsComponent,
+        StorybookExampleFormDynamicComponentsComponent,
         StorybookExampleFormComponent,
         StorybookExampleWithMultipleFormsComponent,
         ReactiveFormsModule,
@@ -232,3 +234,8 @@ ExampleWithDynamicValidators.parameters = {
     exclude: formExclude,
   },
 };
+
+export const pwFormDynamicExample: StoryFn = (args) => ({
+  props: args,
+  template: html` <example-form-dynamic-components></example-form-dynamic-components>`,
+});
