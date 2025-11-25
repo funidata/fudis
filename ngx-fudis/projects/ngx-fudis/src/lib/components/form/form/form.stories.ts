@@ -239,9 +239,3 @@ export const pwFormDynamicExample: StoryFn = (args) => ({
   props: args,
   template: html` <example-form-dynamic-components></example-form-dynamic-components>`,
 });
-
-pwFormDynamicExample.parameters = {
-  controls: {
-    exclude: /.*/g,
-  },
-};
