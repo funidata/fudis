@@ -1,38 +1,14 @@
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Component, importProvidersFrom } from '@angular/core';
+import { importProvidersFrom } from '@angular/core';
+import { FudisValidators } from '../../../../utilities/form/validators';
 import { DatepickerComponent } from './datepicker.component';
 import docs from './datepicker-docs.mdx';
-import { FudisValidators } from '../../../../utilities/form/validators';
 import { datepickerControlsExclude } from '../../../../utilities/storybook';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
-
-@Component({
-  selector: 'example-language-change-component',
-  template: ` <fudis-grid [classes]="'fudis-mt-sm'" [rowGap]="'xs'">
-    <fudis-button [label]="_label" (handleClick)="changeLanguage()" />
-    <fudis-body-text>Current language: {{ _translationService.getLanguage() }}</fudis-body-text>
-  </fudis-grid>`,
-  standalone: false,
-})
-class LanguageChangeComponent {
-  constructor(private _translationService: FudisTranslationService) {
-    this._translationService.setLanguage('en');
-  }
-
-  protected _label = 'Change calendar language';
-
-  changeLanguage(): void {
-    if (this._translationService.getLanguage() === 'en') {
-      this._translationService.setLanguage('fi');
-    } else if (this._translationService.getLanguage() === 'fi') {
-      this._translationService.setLanguage('sv');
-    } else {
-      this._translationService.setLanguage('en');
-    }
-  }
-}
+import { action } from '@storybook/addon-actions';
+import { LanguageChangeComponent } from '../examples/example-datepicker-language-change';
+import { DateFilterWithErrorMessageComponent } from '../examples/example-datepicker-date-filter';
 
 const html = String.raw;
 
@@ -49,8 +25,12 @@ export default {
   },
   decorators: [
     moduleMetadata({
-      declarations: [LanguageChangeComponent],
-      imports: [ReactiveFormsModule, FormsModule],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        DateFilterWithErrorMessageComponent,
+        LanguageChangeComponent,
+      ],
     }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
@@ -108,7 +88,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
-    ></fudis-datepicker>
+    />
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
     >
@@ -216,4 +196,22 @@ export const WithMinMaxValidator = MinMaxTemplate.bind({});
 WithMinMaxValidator.args = {
   ...commonArgs,
   helpText: 'Choose a date between the allowed range.',
+};
+
+export const WithDateFilter: StoryFn = (args) => ({
+  props: {
+    ...args,
+    addError: action('addError'),
+  },
+  template: html`
+    <example-date-filter-with-error-message
+      (handleAddError)="addError($event)"
+    ></example-date-filter-with-error-message>
+  `,
+});
+
+WithDateFilter.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
 };

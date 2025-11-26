@@ -163,7 +163,7 @@
     }
 
     // Target individual day buttons and make the focus border round
-    & button:focus {
+    & button:not(.mat-calendar-body-disabled):focus {
       @include core.focus-generic;
 
       &.mat-calendar-body-cell {
