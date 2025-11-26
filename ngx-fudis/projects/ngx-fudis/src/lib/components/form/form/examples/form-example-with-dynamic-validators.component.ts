@@ -597,9 +597,9 @@ export class StorybookExampleDynamicValidatorsComponent {
   }
 
   toggleMinDate(control: FormControl, target: string): void {
-    const hasMaxDate = control.hasValidator(this._minDateValidatorInstance);
+    const hasMinDate = control.hasValidator(this._minDateValidatorInstance);
 
-    if (hasMaxDate) {
+    if (hasMinDate) {
       control.removeValidators(this._minDateValidatorInstance);
     } else {
       control.addValidators(this._minDateValidatorInstance);
