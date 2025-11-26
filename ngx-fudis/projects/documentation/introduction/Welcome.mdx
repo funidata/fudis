@@ -11,14 +11,44 @@ import pkg from "../../../package.json";
 
 <Unstyled>
   <div class="welcome-page-wrapper">
-    <a class="welcome-page-link" href="https://www.npmjs.com/package/@funidata/ngx-fudis">
+    <a
+      class="fudis-link__external fudis-link__size__md"
+      href="https://www.npmjs.com/package/@funidata/ngx-fudis"
+      target="_blank"
+      aria-labelledby="npm-link"
+    >
       NPM v{pkg.version}
+      <span
+        class="fudis-link__external__icon fudis-icon fudis-icon__lg fudis-icon__color__primary-dark fudis-icon__new-tab"
+        aria-hidden="true"
+      ></span>
+      <span class="fudis-visually-hidden" id="npm-link">
+        NPM v{pkg.version}, (opens in a new tab)
+      </span>
     </a>
-    <a class="welcome-page-link" href="https://github.com/funidata/fudis">
+    <a
+      class="fudis-link__external fudis-link__size__md"
+      href="https://github.com/funidata/fudis"
+      target="_blank"
+      aria-label="Fudis Github, (opens in a new tab)"
+    >
       Fudis Github
+      <span
+        class="fudis-link__external__icon fudis-icon fudis-icon__lg fudis-icon__color__primary-dark fudis-icon__new-tab"
+        aria-hidden="true"
+      ></span>
     </a>
-    <a class="welcome-page-link" href="https://github.com/funidata/fudis/blob/main/LICENSE">
+    <a
+      class="fudis-link__external fudis-link__size__md"
+      href="https://github.com/funidata/fudis/blob/main/LICENSE"
+      target="_blank"
+      aria-label="License, (opens in a new tab)"
+    >
       License
+      <span
+        class="fudis-link__external__icon fudis-icon fudis-icon__lg fudis-icon__color__primary-dark fudis-icon__new-tab"
+        aria-hidden="true"
+      ></span>
     </a>
   </div>
 </Unstyled>
