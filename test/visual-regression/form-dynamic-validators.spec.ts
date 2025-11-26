@@ -1,12 +1,11 @@
 import test, { expect } from "@playwright/test";
-import { clickButtonByTestId } from "./playwright-helpers";
 
-test("form dynamic inputs", async ({ page }) => {
+test("form dynamic validators", async ({ page }) => {
   const errorSummaryText =
     "There are errors in this form. Please address these before trying to submit again.";
 
   await page.goto(
-    "/iframe.html?args=&id=components-form-form--example-with-dynamic-validators&viewMode=story",
+    "/iframe.html?args=&id=components-form-form--pw-form-dynamic-example&viewMode=story",
   );
 
   await expect(page.getByTestId("fudis-text-input-1")).toBeVisible();
@@ -14,11 +13,11 @@ test("form dynamic inputs", async ({ page }) => {
   await expect(page.getByTestId("fudis-text-input-3")).toBeVisible();
   await expect(page.getByTestId("fudis-datepicker-1")).toBeVisible();
   await expect(page.getByTestId("fudis-select-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-radio-button-group-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-localized-text-group-1")).toBeVisible();
   await expect(page.getByTestId("fudis-checkbox-group-1")).toBeVisible();
   await expect(page.getByTestId("fudis-checkbox-group-2")).toBeVisible();
   await expect(page.getByTestId("fudis-checkbox-group-3")).toBeVisible();
-  await expect(page.getByTestId("fudis-radio-button-group-1")).toBeVisible();
-  await expect(page.getByTestId("fudis-localized-text-group-1")).toBeVisible();
 
   await page.getByTestId("fudis-button-2").click(); // submit form with errors
   await expect(page.getByText(errorSummaryText)).toBeVisible();
@@ -33,13 +32,9 @@ test("form dynamic inputs", async ({ page }) => {
   /**
    * Remove validators which are visible at the moment
    */
-  await page.getByTestId("fudis-button-3").click(); // remove required validator from text input
-  await page.getByTestId("fudis-button-9").click(); // remove required number validator
-  await page.getByTestId("fudis-button-12").click(); // remove required date validator
-  await page.getByTestId("fudis-button-15").click(); // remove required option validator
+
+  await page.getByTestId("fudis-button-3").click(); // Toggle Remove Required Validators
   await page.getByTestId("fudis-checkbox-group-1-item-1").click(); // Check the first checkbox to remove error messages
-  await page.getByTestId("fudis-button-16").click(); // remove required validator from radio button group
-  await page.getByTestId("fudis-button-17").click(); // remove at least one required validator from Localized Text Group
 
   await page.getByTestId("fudis-button-2").click(); // submit form without errors
 
@@ -59,32 +54,15 @@ test("form dynamic inputs", async ({ page }) => {
 
   await expect(page.getByText("At least one option must be selected")).toHaveCount(3);
 
-  await page.waitForTimeout(150).then(async () => {
-    await page.getByTestId("fudis-button-2").click(); // submit form with errors
-    await expect(page).toHaveScreenshot("dynamic-2-submit-with-invalid-data.png", {
-      fullPage: true,
-    });
+  await page.getByTestId("fudis-button-2").click(); // submit form with errors
+  await expect(page).toHaveScreenshot("dynamic-2-submit-with-invalid-data.png", {
+    fullPage: true,
   });
 
-  /**
-   * Remove validators which are visible at the moment: min length from text input, email pattern,
-   * min length from email input, max number, min date
-   */
-  const buttonIds = [
-    "fudis-button-5",
-    "fudis-button-6",
-    "fudis-button-8",
-    "fudis-button-10",
-    "fudis-button-14",
-  ];
+  await page.getByText("Winter holidays").click(); // Check the second checkbox
+  await page.getByTestId("fudis-button-4").click(); // Toggle Remove Other Validators
 
-  for (const id of buttonIds) {
-    await clickButtonByTestId(page, id);
-  }
-
-  await page.getByLabel("Winter holidays").check(); // Check the second checkbox
-
-  await clickButtonByTestId(page, "fudis-button-2"); // submit form without errors
+  await page.getByTestId("fudis-button-2").click(); // submit form without errors
   await expect(page).toHaveScreenshot("dynamic-3-submit-after-removed-validators.png", {
     fullPage: true,
   });

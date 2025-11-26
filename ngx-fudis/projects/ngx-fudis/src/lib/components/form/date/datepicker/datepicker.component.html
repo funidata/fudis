@@ -15,6 +15,7 @@
       class="fudis-form-input fudis-datepicker__input"
       [id]="id"
       [matDatepicker]="picker"
+      [matDatepickerFilter]="dateFilter"
       [formControl]="control"
       (focus)="onFocus($event)"
       (blur)="handleBlur.emit($event)"

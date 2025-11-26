@@ -40,6 +40,10 @@ export function managerHead(head) {
       .sidebar-item:has(#components-description-list--description-list-compact)  { display: none;}
       .sidebar-item:has(#components-test-playground)  { display: none;}
       .sidebar-item:has(#components-form-checkbox--all-states)  { display: none;}
+      /* Hide test stories from sidebar */
+      [data-item-id*="pw"] {
+        display: none !important;
+      }
     </style>
   `;
 }
