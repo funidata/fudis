@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../../types/forms';
+import { FudisTranslationService } from 'projects/ngx-fudis/src/lib/services/translation/translation.service';
 
 @Component({
   selector: 'fudis-multiselect-chip-list',
@@ -8,6 +9,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
   standalone: false,
 })
 export class MultiselectChipListComponent {
+  constructor(protected _translationService: FudisTranslationService) {}
   /**
    * Reference for the chip list ul element
    */

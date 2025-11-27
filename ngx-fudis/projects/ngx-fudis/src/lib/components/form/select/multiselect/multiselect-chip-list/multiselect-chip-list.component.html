@@ -1,13 +1,18 @@
 <ul #chipListRef class="fudis-multiselect-chip-list" [attr.id]="parentId + '-selected-items'">
-  <button
-    *ngFor="let item of selectedItems; let index = index"
-    class="fudis-multiselect-chip-list__button"
-    [attr.aria-describedby]="parentId + '-remove-items'"
-    (focus)="_setFocus(true)"
-    (blur)="_setFocus(false)"
-    (click)="_clickChip(item, index)"
-  >
-    <fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
-    {{ item.label }}
-  </button>
+  <ng-container *ngFor="let item of selectedItems; let index = index">
+    <button
+      class="fudis-multiselect-chip-list__button"
+      [attr.aria-describedby]="parentId + '-remove-item-' + index"
+      (focus)="_setFocus(true)"
+      (blur)="_setFocus(false)"
+      (click)="_clickChip(item, index)"
+    >
+      <fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
+      {{ item.label }}
+    </button>
+
+    <span class="fudis-visually-hidden" [id]="parentId + '-remove-item-' + index">
+      {{ _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM }}
+    </span>
+  </ng-container>
 </ul>
