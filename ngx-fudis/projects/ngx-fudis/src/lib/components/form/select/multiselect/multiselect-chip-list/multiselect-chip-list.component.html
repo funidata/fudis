@@ -3,18 +3,16 @@
     <li class="fudis-multiselect-chip-list__item">
       <button
         class="fudis-multiselect-chip-list__button"
-        [attr.aria-describedby]="parentId + '-remove-item-' + index"
         (focus)="_setFocus(true)"
         (blur)="_setFocus(false)"
         (click)="_clickChip(item, index)"
       >
         <fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
-        {{ item.label }}
+        {{ item.label }},
+        <span class="fudis-visually-hidden">
+          {{ _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM }}
+        </span>
       </button>
-
-      <span class="fudis-visually-hidden" [id]="parentId + '-remove-item-' + index">
-        {{ _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM }}
-      </span>
     </li>
   </ng-container>
 </ul>
