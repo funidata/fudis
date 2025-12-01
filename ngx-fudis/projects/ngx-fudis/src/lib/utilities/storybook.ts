@@ -374,7 +374,6 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
  * Select and Multiselect
  */
 export const selectArgsTableExclude: RegExp = excludeRegex([
-  'activeDescendant',
   'componentFocused',
   'setFocusedOption',
   'autocompleteRef',
@@ -392,7 +391,6 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
 
 export const selectStoryControlExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
-  'activeDescendant',
   'autocompleteFilter',
   'autocompleteNoResultsText',
   'selectionUpdate',
