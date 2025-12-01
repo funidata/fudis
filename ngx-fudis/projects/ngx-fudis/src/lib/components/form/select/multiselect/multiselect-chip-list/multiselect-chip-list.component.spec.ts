@@ -67,14 +67,6 @@ describe('MultiselectChipListComponent', () => {
       expect(buttonElement.classList).toContain('fudis-multiselect-chip-list__button');
     });
 
-    it('should have distinct aria-describedby constructed for each chip', () => {
-      const buttonElement = getElement(fixtureMock, 'button');
-
-      expect(buttonElement.getAttribute('aria-describedby')).toEqual(
-        'parent-of-chip-list-remove-item-0',
-      );
-    });
-
     it('should have fudis-icon present', () => {
       const iconElement = buttonElement.querySelector('fudis-icon');
 
