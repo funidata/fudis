@@ -77,6 +77,7 @@ export interface FudisTranslationConfig {
     DISABLED: string;
     MULTISELECT: {
       REMOVE_ITEM: string;
+      REMOVE_ITEMS: string;
     };
     AUTOCOMPLETE: {
       // Clear filter button label for screen readers
@@ -182,7 +183,8 @@ export const en: FudisTranslationConfig = {
   SELECT: {
     DISABLED: 'Disabled',
     MULTISELECT: {
-      REMOVE_ITEM: 'Remove selections',
+      REMOVE_ITEM: 'Remove selection',
+      REMOVE_ITEMS: 'Remove selections',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Clear selection',
@@ -282,7 +284,8 @@ export const fi: FudisTranslationConfig = {
   SELECT: {
     DISABLED: 'Ei valittavissa',
     MULTISELECT: {
-      REMOVE_ITEM: 'Poista valintoja',
+      REMOVE_ITEM: 'Poista valinta',
+      REMOVE_ITEMS: 'Poista valintoja',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Tyhjennä valinta',
@@ -380,6 +383,7 @@ export const sv: FudisTranslationConfig = {
     DISABLED: 'Inaktiverad',
     MULTISELECT: {
       REMOVE_ITEM: 'Ta bort val',
+      REMOVE_ITEMS: 'Ta bort valen',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Radera val',
