@@ -7,8 +7,9 @@
   flex-wrap: wrap;
   gap: core.$spacing-xxs;
   padding-top: core.$spacing-xxs;
+  list-style: none;
 
-  &__button {
+  &__item__button {
     @include core.bg-color('gray-dark');
     @include core.text-color('white');
     @include core.body-text-md-regular;
