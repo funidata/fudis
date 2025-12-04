@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../../types/forms';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-multiselect-chip-list',
@@ -8,6 +9,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
   standalone: false,
 })
 export class MultiselectChipListComponent {
+  constructor(protected _translationService: FudisTranslationService) {}
   /**
    * Reference for the chip list ul element
    */
@@ -47,12 +49,12 @@ export class MultiselectChipListComponent {
    */
   protected _clickChip(clickedOption: FudisSelectOption<object>, index: number) {
     this.handleClick.emit(clickedOption);
-
     setTimeout(() => {
-      if (index === 0 && this._chipListRef.nativeElement.children[0]) {
-        (this._chipListRef.nativeElement.children[0] as HTMLButtonElement).focus();
-      } else if (this._chipListRef.nativeElement.children[index - 1]) {
-        (this._chipListRef.nativeElement.children[index - 1] as HTMLButtonElement).focus();
+      const buttons = this._chipListRef.nativeElement.querySelectorAll('button');
+      if (index === 0 && buttons[0]) {
+        buttons[0].focus();
+      } else if (buttons[index - 1]) {
+        buttons[index - 1].focus();
       }
     }, 50);
   }
