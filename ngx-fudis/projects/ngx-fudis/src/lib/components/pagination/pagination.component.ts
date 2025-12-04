@@ -324,7 +324,7 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
    * After view updates, restore focus to the active page item if user selected one
    */
   ngAfterViewChecked(): void {
-    if (this.userSelectedIndex > -1 && this.activeItemRef) {
+    if (this.userSelectedIndex >= 0 && this.activeItemRef) {
       this.activeItemRef.nativeElement.focus();
 
       this.userSelectedIndex = -1;
@@ -340,11 +340,27 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
    */
   goToPage(index: number, event?: Event, wasButtonClick = false) {
     event?.preventDefault();
-    this.userSelectedIndex = wasButtonClick ? -1 : index;
+    if (index < 0 || index >= this._pageCount()) return;
 
-    if (index >= 0 && index < this._pageCount()) {
-      this.pageChange.emit(index);
-      this._pageIndex.set(index);
+    const lastPage = this._pageCount() - 1;
+
+    if (wasButtonClick) {
+      if (index === 0) {
+        // Move focus to first page item
+        this.userSelectedIndex = 0;
+      } else if (index === lastPage) {
+        // Move focus to last page item
+        this.userSelectedIndex = lastPage;
+      } else {
+        // Do not move focus on button click to middle pages
+        this.userSelectedIndex = -1;
+      }
+    } else {
+      // Set focus on clicking page numbers
+      this.userSelectedIndex = index;
     }
+
+    this.pageChange.emit(index);
+    this._pageIndex.set(index);
   }
 }
