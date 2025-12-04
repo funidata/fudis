@@ -306,7 +306,7 @@ describe('MultiselectComponent', () => {
       component.control.patchValue([defaultOptions[2], defaultOptions[4], defaultOptions[0]]);
       fixture.detectChanges();
 
-      const chipListButtons = getAllElements(fixture, '.fudis-multiselect-chip-list__button');
+      const chipListButtons = getAllElements(fixture, '.fudis-multiselect-chip-list__item__button');
 
       expect(chipListButtons).toHaveLength(3);
     });
@@ -317,7 +317,7 @@ describe('MultiselectComponent', () => {
       component.control.patchValue([defaultOptions[1], defaultOptions[4]]);
       fixture.detectChanges();
 
-      const chipListButtons = getAllElements(fixture, '.fudis-multiselect-chip-list__button');
+      const chipListButtons = getAllElements(fixture, '.fudis-multiselect-chip-list__item__button');
       (chipListButtons[1] as HTMLButtonElement).click();
 
       expect(component.control.value).toEqual([defaultOptions[1]]);

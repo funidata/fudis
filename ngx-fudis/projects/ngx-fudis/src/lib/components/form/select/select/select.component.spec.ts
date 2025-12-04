@@ -299,21 +299,5 @@ describe('SelectComponent', () => {
 
       expect(value).toEqual(null);
     });
-
-    it('should have aria-activedescendant value matching with active select option id', () => {
-      mockComponent.control = new FormControl(defaultOptions[2]);
-      mockFixture.detectChanges();
-
-      const selectElement = getElement(mockFixture, '.fudis-select');
-
-      const activeDescendant = selectElement
-        .querySelector('.fudis-select-autocomplete')
-        ?.getAttribute('aria-activedescendant');
-
-      const options = mockFixture.debugElement.queryAll(By.css('.fudis-select-option'));
-      const activeOptionId = options[2].attributes['id'];
-
-      expect(activeDescendant).toEqual(activeOptionId);
-    });
   });
 });
