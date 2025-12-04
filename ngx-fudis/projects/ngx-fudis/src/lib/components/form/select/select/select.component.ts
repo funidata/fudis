@@ -73,11 +73,6 @@ export class SelectComponent
   }
 
   /**
-   * Create hashed option id for Select active descendant
-   */
-  protected activeDescendant = FudisIdService.createSelectOptionId;
-
-  /**
    * Checks if currently typed filter text is not same as control label value
    *
    * @param text Filter text value emitted from autocomplete

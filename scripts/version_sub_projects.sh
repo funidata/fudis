@@ -8,7 +8,6 @@
 # List projects to update here by their folder name.
 projects=(
   "ngx-fudis"
-  "ngx-fudis/projects/ngx-fudis"
   "test"
 )
 
@@ -31,3 +30,16 @@ function update_sub_project_version {
 for project in ${projects[@]}; do
   update_sub_project_version $project
 done
+
+# Bump version number in projects folder. This function does not include package-lock.json file
+function update_project_ngx_fudis_version {
+  dir="${repo_root}/ngx-fudis/projects/ngx-fudis"
+
+  cd $dir
+  echo -n "ngx-fudis/projects/ngx-fudis: "
+
+  npm version --git-tag-version false $new_version
+  git add "${dir}/package.json"
+}
+
+update_project_ngx_fudis_version
