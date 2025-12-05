@@ -33,11 +33,13 @@
 <ng-template #helpText>
   <ng-container *ngIf="autocompleteHelpText">{{ autocompleteHelpText }}</ng-container
   ><ng-container *ngIf="!autocompleteHelpText"
-    >{{ _translationShowing() }} {{ results }} {{ _translationResults() }}</ng-container
+    >{{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}</ng-container
   >
 </ng-template>
 
 <ng-template #noResults>
   <ng-container *ngIf="autocompleteNoResultsText">{{ autocompleteNoResultsText }}</ng-container>
-  <ng-container *ngIf="!autocompleteNoResultsText">{{ _translationNoResultsFound() }}</ng-container>
-</ng-template>
+  <ng-container *ngIf="!autocompleteNoResultsText">{{
+    _translationNoResultsFound | async
+  }}</ng-container></ng-template
+>
