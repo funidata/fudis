@@ -363,7 +363,7 @@ export class SelectBaseDirective
   public openDropdown(): void {
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
-      this._dropdownOpen.set(true);
+      this._dropdownOpen.set(true); // TODO FIXME: When using autocompleteType variant, this should be called only if filter text is applied
 
       this._unsubscribeDropdownSubscribtions();
       this._resizeObserver.observe(document?.body);
