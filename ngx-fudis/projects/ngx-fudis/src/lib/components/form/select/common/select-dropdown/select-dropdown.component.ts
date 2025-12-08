@@ -11,7 +11,7 @@ import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-b
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
-import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'fudis-select-dropdown',
@@ -94,11 +94,6 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   protected _translationShowing = new BehaviorSubject<string>('');
 
   /**
-   * Internal helper for temporary clearing screen reader message
-   */
-  private _lastAnnouncedMessage = new BehaviorSubject<string>('');
-
-  /**
    * Internal signal mirroring results Input
    */
   private _resultsSignal: WritableSignal<number> = signal(0);
@@ -114,59 +109,41 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   protected _liveMessage = computed(() => {
     const filterText = this._filterTextSignal();
     const results = this._resultsSignal();
+    console.log('results in liveMessage: ', results);
 
     // Only announce while dropdown is open
     if (!this.open) {
-      this._lastAnnouncedMessage.next('');
       return '';
     }
 
     // Reset announcement when input is cleared
     if (!filterText) {
-      this._lastAnnouncedMessage.next('');
       return '';
     }
 
     const helpText =
       typeof this.autocompleteHelpText === 'string' ? this.autocompleteHelpText : null;
 
-    let message: Observable<string>;
+    let message: string;
 
     if (helpText) {
-      // Wrap helpText in an Observable if it exists
-      message = of(helpText);
+      message = helpText;
     } else {
       // Handle the message based on results
-      message = this._translationShowing.pipe(
-        switchMap((showingText) => {
-          if (results > 0) {
-            return this._translationResults.pipe(
-              map((resultsText) => `${showingText} ${results} ${resultsText}`),
-            );
-          } else {
-            return this._translationNoResultsFound.pipe(map((noResultsText) => noResultsText));
-          }
-        }),
-      );
+      const showingText = this._translationShowing.value;
+      const resultsText = this._translationResults.value;
+      const noResultsText = this._translationNoResultsFound.value;
+
+      if (results > 0) {
+        message = `${showingText} ${results} ${resultsText}`;
+      } else {
+        message = `${noResultsText}`;
+      }
     }
 
-    const currentMessage$ = message.pipe(
-      map((msg) => {
-        if (msg !== this._lastAnnouncedMessage.value) {
-          this._lastAnnouncedMessage.next(msg);
-        }
-        return msg;
-      }),
-    );
+    console.log('last announced message: ', message);
 
-    currentMessage$.subscribe((msg) => {
-      this._lastAnnouncedMessage.next(msg);
-    });
-
-    console.log('last announced message: ', this._lastAnnouncedMessage.value);
-
-    // Return the latest message for the live region
-    return this._lastAnnouncedMessage.value;
+    return message;
   });
 
   ngOnChanges(changes: FudisComponentChanges<SelectDropdownComponent>): void {
@@ -179,13 +156,11 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
         newFilterText !== changes.filterText?.previousValue) ||
       (changes.results && newResults !== undefined && newResults !== changes.results?.previousValue)
     ) {
-      console.log('Updating filterText:', this.filterText);
-      console.log('Updating results:', this.results);
+      console.log('OnChanges filterText:', this.filterText);
+      console.log('OnChanges results:', this.results);
 
       this._filterTextSignal.set(this.filterText ?? '');
       this._resultsSignal.set(this.results ?? 0);
-
-      this._lastAnnouncedMessage.next(''); // Clear previous message immediately
     }
   }
 }
