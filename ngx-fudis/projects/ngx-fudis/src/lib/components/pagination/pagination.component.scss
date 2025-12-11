@@ -1,5 +1,10 @@
 @use '@funidata/fudis-core' as core;
 
+fudis-pagination {
+  display: flex;
+  justify-content: center;
+}
+
 .fudis-pagination {
   display: flex;
   padding-top: core.$spacing-lg;
