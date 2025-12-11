@@ -6,6 +6,11 @@ on:
       - released
       - prereleased
 
+permissions:
+  # Permission to generate OIDC token
+  id-token: write
+  contents: read
+
 jobs:
   test:
     name: Run tests
@@ -61,14 +66,10 @@ jobs:
         if: steps.check_latest.outputs.is-latest == 'true'
         run: npm publish --access public
         working-directory: ngx-fudis/dist/ngx-fudis
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish patch or pre-release
         if: steps.check_latest.outputs.is-latest == 'false'
         run: npm publish --access public --tag ${{ env.NPM_TAG }}
         working-directory: ngx-fudis/dist/ngx-fudis
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-docs:
     name: Publish docs to AWS
