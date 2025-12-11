@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { NotificationComponent } from './notification.component';
-import readme from './readme.mdx';
+import docs from './notification.mdx';
 import { notificationExclude } from '../../utilities/storybook';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: NotificationComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: notificationExclude,

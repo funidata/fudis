@@ -1,13 +1,13 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { BodyTextComponent } from './body-text.component';
-import readme from './readme.mdx';
+import docs from './body-text.mdx';
 
 export default {
   title: 'Components/Typography/Body Text',
   component: BodyTextComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {

@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/angular';
 import { FooterComponent } from './footer.component';
-import readme from './readme.mdx';
+import docs from './footer.mdx';
 
 const html = String.raw;
 
@@ -9,7 +9,7 @@ export default {
   component: FooterComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
 } as Meta;

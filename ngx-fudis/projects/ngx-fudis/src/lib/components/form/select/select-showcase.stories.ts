@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from './select/select.component';
-import readme from './select-index.mdx';
+import docs from './select-index.mdx';
 import { excludeAllRegex, selectStoryControlExclude } from '../../../utilities/storybook';
 import { StorybookExampleSelectShowcaseComponent } from './examples/select-showcase.component';
 import { StorybookExampleMultiselectShowcaseComponent } from './examples/multiselect-showcase.component';
@@ -25,7 +25,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: selectStoryControlExclude,

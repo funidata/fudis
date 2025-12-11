@@ -4,7 +4,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisValidators } from './validators';
 import { FudisGroupValidators } from './groupValidators';
-import readme from './readme.mdx';
+import docs from './validators.mdx';
 
 export default {
   title: 'Utilities/Validators',
@@ -15,7 +15,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
 } as Meta;

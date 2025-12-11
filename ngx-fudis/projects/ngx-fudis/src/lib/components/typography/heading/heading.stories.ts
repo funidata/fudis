@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { HeadingComponent } from './heading.component';
-import readme from './readme.mdx';
+import docs from './heading.mdx';
 import { headingControlsExclude } from '../../../utilities/storybook';
 import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../../types/typography';
 
@@ -11,7 +11,7 @@ export default {
   component: HeadingComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {

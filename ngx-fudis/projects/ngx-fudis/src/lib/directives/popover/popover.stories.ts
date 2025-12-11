@@ -1,5 +1,5 @@
 import { ButtonComponent } from '../../components/button/button.component';
-import readme from '../popover/popover.mdx';
+import docs from '../popover/popover.mdx';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { PopoverDirective } from './popover.directive';
 import { popoverExclude } from '../../utilities/storybook';
@@ -14,7 +14,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: popoverExclude,
