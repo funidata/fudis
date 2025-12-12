@@ -61,7 +61,6 @@ const commonArgs: Partial<SelectComponent> = {
   size: 'lg',
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
-  autocompleteHelpText: 'Hello from Dropdown Help Text!',
   selectionClearButton: true,
   variant: 'dropdown',
   initialFocus: false,
