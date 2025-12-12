@@ -1,13 +1,13 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { BadgeComponent } from './badge.component';
-import readme from './readme.mdx';
+import docs from './badge.mdx';
 
 export default {
   title: 'Components/Badge',
   component: BadgeComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {

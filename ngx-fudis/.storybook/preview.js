@@ -40,6 +40,7 @@ const preview = {
             "Development",
             [
               "Getting Started",
+              "How to Contribute",
               "Tooling",
               [
                 "Setup VS Code",

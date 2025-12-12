@@ -2,7 +2,7 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 import { fudisIconArray } from '../../types/icons';
 import { excludeEverythingExceptRegex } from '../../utilities/storybook';
-import readme from './readme.mdx';
+import docs from './icon.mdx';
 
 const html = String.raw;
 
@@ -11,7 +11,7 @@ export default {
   component: IconComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {

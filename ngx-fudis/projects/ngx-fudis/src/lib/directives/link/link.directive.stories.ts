@@ -1,11 +1,11 @@
 import { StoryFn, Meta } from '@storybook/angular';
-import readme from './link-directive.mdx';
+import docs from './link-directive.mdx';
 
 export default {
   title: 'Directives/Link',
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {
