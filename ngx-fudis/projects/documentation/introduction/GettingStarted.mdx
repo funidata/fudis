@@ -1,4 +1,5 @@
 import { Meta } from "@storybook/blocks";
+import pkg from "../../../package.json";
 
 <Meta title="Documentation/Introduction/How to Start Using Fudis" />
 
@@ -10,9 +11,9 @@ Fudis is available as [NPM package](https://www.npmjs.com/package/@funidata/ngx-
 
 The library is build and tested against:
 
-- Angular: **v19.2**
-- Angular Material: **v19.2**
-- Fudis Core: **v2.0**
+- Angular: **{ pkg.dependencies['@angular/core'].replace(/^(\^)?(\d+\.\d+)\.\d+$/, '$2') }**
+- Angular Material: **{ pkg.dependencies['@angular/material'].replace(/^(\^)?(\d+\.\d+)\.\d+$/, '$2') }**
+- Fudis Core: **{ pkg.dependencies['@funidata/fudis-core'].replace(/^(\^)?/, '') }**
 
 > We recommend using these versions in your project. Newer major versions may work, but are not yet tested or guaranteed to be compatible.
 
