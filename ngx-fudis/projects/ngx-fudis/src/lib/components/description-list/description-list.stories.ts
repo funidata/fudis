@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
-import docs from './description-list-docs.mdx';
+import docs from './description-list.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { descriptionListExclude, nestedDescriptionListExclude } from '../../utilities/storybook';
 import { FudisTranslationService } from '../../services/translation/translation.service';

@@ -2,7 +2,7 @@ import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionComponent } from './section.component';
-import docs from './section-docs.mdx';
+import docs from './section.mdx';
 import { excludeAllRegex, sectionExclude } from '../../utilities/storybook';
 import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../types/typography';
 

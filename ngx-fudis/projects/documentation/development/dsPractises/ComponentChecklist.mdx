@@ -55,14 +55,14 @@ Check [Naming Conventions](/docs/documentation-development-ds-practises-naming-c
 - Component variants such as primary, secondary etc. should be documented. These variants should be accessed and controllable through Storybook Controls.
 - If needed, create own story for clearly "other/different version" of the component, e.g. Button vs. Button with Icon
 - Component all variants, can be documented as story by using Storybook template prop.
-  > _Note! This prevents component control through Controls. Template prop should be used mainly for a story spesific readme.mdx documentation._
+  > _Note! This prevents component control through Controls. Template prop should be used mainly for a story spesific .mdx documentation files._
 - Component has ArgTypes.
 - Component has its @Inputs and @Outputs listed with description and accepted values.
 - Components with event handlers have working actions.
 - Disabled and invalid states should be able to switch on from Storybook Controls.
 - Form components have functioning formControls for Storybook testing and demo purposes.
 
-## 6. Component Has Readme File
+## 6. Component Has Documentation File
 
 - All component variants and states are documented
 - Related accessibility requirements are listed
@@ -76,5 +76,5 @@ Check [Naming Conventions](/docs/documentation-development-ds-practises-naming-c
   - Component has proper role and aria-attributes if necessary
 - Contrast is checked with Storybook accessibility addon or with some other relevant checking tool
 - Component has visible focus style
-  > _Note! Disabled form elements receive focus_
+  > _Note! Disabled form elements receive ONLY screen reader focus_
 - Component supports keyboard controls

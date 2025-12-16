@@ -20,6 +20,7 @@
     "stylelint": "cd ngx-fudis && npm run stylelint",
     "version": "scripts/version_sub_projects.sh $npm_package_version",
     "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\"",
+    "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "author": "Funidata Ltd",

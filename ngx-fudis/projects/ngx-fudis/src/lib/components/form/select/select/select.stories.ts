@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from './select.component';
-import readme from './select.mdx';
+import docs from './select.mdx';
 import {
   groupedMockData,
   defaultOptions,
@@ -27,7 +27,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: selectStoryControlExclude,

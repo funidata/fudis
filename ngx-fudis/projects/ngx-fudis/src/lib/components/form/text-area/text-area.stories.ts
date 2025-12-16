@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TextAreaComponent } from './text-area.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import readme from './readme.mdx';
+import docs from './text-area.mdx';
 import { textInputControlsExclude } from '../../../utilities/storybook';
 import { fudisInputSizeArray } from '../../../types/forms';
 
@@ -18,7 +18,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: textInputControlsExclude,

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
-import readme from './multiselect.mdx';
+import docs from './multiselect.mdx';
 import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component';
@@ -23,7 +23,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: selectStoryControlExclude,

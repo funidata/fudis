@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
 import { TabNavigationTabComponent } from './tab-navigation-tab.component';
 import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
 import { TabNavigationBarComponent } from './tab-navigation-bar.component';
-import readme from './tab-navigation.mdx';
+import docs from './tab-navigation.mdx';
 import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
 
 @Component({
@@ -74,7 +74,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: tabNavigationBarExampleExclude,

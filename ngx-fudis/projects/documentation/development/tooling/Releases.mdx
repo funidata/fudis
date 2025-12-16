@@ -80,28 +80,8 @@ For extreme cases, there exists an option to unpublish a package from NPM. This 
 
 If something goes wrong in the release pipeline before the package has been published to NPM, you should anyhow increment the version and create a new release. This provides clarity and consistency to other Fudis developers as well as users of the library. Please also refrain from removing releases from GitHub and rather edit the release notes to make clear what has wrong and that the package should not be used. The bad code will anyway be forever available in the public repository so it is better to have the problems documented in release notes and thus provide an "audit trail" to users rather than undue surprises.
 
-### Refreshing NPM Tokens
+### Publishing with OIDC
 
-The GitHub Actions workflow resposible for publishing new Fudis releases to the NPM registry uses a token to authenticate against NPM. This token has a maximum lifetime of one year and will need to be re-created once it has expired. The current token will expire on December 13, 2025.
-
-To create a new publishing token,
-
-1. make sure you are a member of the `@funidata` organisation on NPM,
-2. go to you account page on NPM (click your avatar and then _Account_),
-3. go to the _Access Tokens_ view,
-4. click _Generate New Token_ and select _Granular Access Token_,
-5. give the new token a descriptive name,
-6. select an expiration date (by selecting _Custom_ you can, at most, select a date one year from now),
-7. under _Packages and scopes_ and _Permissions_, select _Read and write_ from the drop-down menu,
-8. select _Only select packages and scopes_, and then from the drop-down, select `@funidata/ngx-fudis`,
-9. click _Generate token_ and copy the provided token.
-
-To update the token used in GitHub Actions,
-
-1. go to [github.com/funidata/fudis/settings/secrets/actions](https://github.com/funidata/fudis/settings/secrets/actions),
-2. under _Repository secrets_, find `NPM_TOKEN` and click the edit icon,
-3. paste in the copied token and click _Update secret_.
-
-Note that you should only copy the token from NPM to your clipboard and never save it anywhere even temporarily. The token grants full write privileges to `@funidata/ngx-fudis` and has to be treated accordingly.
-
-Also note that the token's permissions on NPM should include read and write permissions only to the `@funidata/ngx-fudis` package and nothing else. There should be no organization-level permissions chosen.
+The GitHub Actions workflow resposible for publishing new Fudis releases to the NPM registry uses an OIDC (OpenID Connect) token for authentication. This token is generated dynamically by GitHub Actions during the workflow execution and is used to authenticate against the NPM registry.
+The specific workflow is registered as trusted publisher in the NPM settings, meaning that only this workflow is authorized to publish to the package.
+There is no need for manual token rotation. The token is valid only for the duration of the workflow and is destroyed after workflow completes.

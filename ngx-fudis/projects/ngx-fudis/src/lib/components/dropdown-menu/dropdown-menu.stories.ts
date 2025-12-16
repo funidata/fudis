@@ -2,7 +2,7 @@ import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/ang
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, EventEmitter, Input, Output, importProvidersFrom } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
-import docs from './dropdown-menu-docs.mdx';
+import docs from './dropdown-menu.mdx';
 import { dropdownMenuExclude } from '../../utilities/storybook';
 import { defaultMenuItems, smallDropdownMenuGroupedMockData } from './mock_data';
 import { action } from '@storybook/addon-actions';
