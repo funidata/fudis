@@ -1,0 +1,42 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Documentation/Development/Tooling/Testing Local Changes in Application" />
+
+# Testing Local Changes in Application
+
+Sometimes you need to test your local changes straight away in the application. The Fudis package dependency may be either a symlinked workspace or a packaged tarball.
+Instructions cover both NPM and Yarn package managers.
+
+## Testing with Symlink
+
+### NPM
+
+1. Navigate to **ngx-fudis** directory.
+2. Build the library: `npm run build:ngx-fudis`.
+   - Note! That new changes require rebuilding library again.
+3. Go to the **ngx-fudis/dist** directory and run `npm link` that creates a local symlink to the Fudis package.
+4. Then navigate to your project where you want to link the Fudis package. The directory that contains the node_modules folder containing the project dependencies is the correct place to execute linking. In this project directory run `npm link @funidata/ngx-fudis`
+5. When you want to unlink the package from your project, run the command `npm unlink @funidata/ngx-fudis`. This is done in the same directory in your consuming project, where you linked the package.
+
+### Yarn
+
+These instructions are for Yarn v4. If you are using any other version, please check the corresponding documentation to see how symlinking is done.
+
+1. Navigate to **ngx-fudis** directory.
+2. Build the library: `npm run build:ngx-fudis`.
+   - Note! That new changes require rebuilding library again.
+3. Navigate to your project where you want to use the Fudis package. The directory that contains the node_modules folder containing the project dependencies is the correct place to execute linking.
+4. In this project directory run `yarn add @funidata/ngx-fudis@link: ./{your-path-to-fudis-directory}/fudis/ngx-fudis/dist`
+
+## Testing with Tarball
+
+1. Navigate to **ngx-fudis** directory.
+2. Build the library: `npm run build:ngx-fudis`.
+   - Note! That new changes require rebuilding library again.
+3. Go to the **dist/ngx-fudis** directory and run `npm pack`. This will create a tarball file `funidata-ngx-fudis-{version-number}.tgz` in that current directory.
+4. Navigate to your project where you want to use the Fudis package.
+5. In your application **root**, run the following:
+   - **with NPM** `npm install ./{path-to-your-local-tarball-file}`.
+   - **with Yarn** `yarn add ./{path-to-your-local-tarball-file}`.
+
+Note! You can optionally move the tarball file from Fudis directory under your project folder.

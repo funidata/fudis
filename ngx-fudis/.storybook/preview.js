@@ -45,7 +45,7 @@ const preview = {
               [
                 "Setup VS Code",
                 "Command Reference",
-                "Testing Local Changes with Symlink",
+                "Testing Local Changes in Application",
                 "Git and GitHub Conventions",
                 "Releases",
               ],
