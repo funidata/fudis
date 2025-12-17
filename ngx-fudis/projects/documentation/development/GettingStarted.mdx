@@ -22,26 +22,41 @@ Setting up your local development environment according to these instructions is
 
 Clone the upstream repository to your machine (requires write access).
 
-```bash
+```
 git clone https://github.com/funidata/fudis.git
 ```
 
 If you do not have write access and are not working for Funidata, you need to first fork our repository to your own account and use that for development.
 
-## Install NPM Packages
+## Install Dependencies
 
-```bash
+To install project dependencies, in the **root** directory run:
+
+```
 npm ci
 ```
 
-## Run Development Environment
+## Development
 
-Make sure Docker daemon is running. First startup takes a while as Docker fetches and builds necessary images. Once complete, Storybook is accessible at [http://localhost:6006](http://localhost:6006).
+The development is done in the Storybook environment.  Fudis uses webpack middleware for bundling JavaScript. You can read more about Storybook from the [official Storybook site](https://storybook.js.org/).
 
-```bash
+### With Containers
+
+Make sure Docker daemon is running, then in the **root** directory run:
+
+```
 npm start
 ```
+First startup takes a while as Docker fetches and builds necessary images. Once complete, Storybook is accessible at [http://localhost:6006](http://localhost:6006).
 
 Once you are done, shutdown the development environment with `npm stop`. You can use `docker ps` to verify all containers are down (and to check their status if something is not working).
+
+### Without Containers
+
+To start Storybook, navigate to **ngx-fudis** directory and run:
+
+```
+npm run storybook
+```
 
 See [Command Reference Documentation](/docs/documentation-development-tooling-command-reference--documentation) for more information and complete command reference.
