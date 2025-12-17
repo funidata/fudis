@@ -38,7 +38,7 @@ npm ci
 
 ## Development
 
-The development is done in the Storybook environment.  Fudis uses webpack middleware for bundling JavaScript. You can read more about Storybook from the [official Storybook site](https://storybook.js.org/).
+The development is done in the Storybook environment. Fudis uses webpack middleware for bundling JavaScript. You can read more about Storybook from the [official Storybook site](https://storybook.js.org/).
 
 ### With Containers
 
@@ -47,6 +47,7 @@ Make sure Docker daemon is running, then in the **root** directory run:
 ```
 npm start
 ```
+
 First startup takes a while as Docker fetches and builds necessary images. Once complete, Storybook is accessible at [http://localhost:6006](http://localhost:6006).
 
 Once you are done, shutdown the development environment with `npm stop`. You can use `docker ps` to verify all containers are down (and to check their status if something is not working).
