@@ -6,6 +6,7 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { FudisDialogService } from '../../services/dialog/dialog.service';
 
 describe('DropdownMenuComponent', () => {
   let component: DropdownMenuComponent;
@@ -20,6 +21,7 @@ describe('DropdownMenuComponent', () => {
         DropdownMenuComponent,
         IconComponent,
       ],
+      providers: [FudisDialogService],
     })
       .overrideComponent(DropdownMenuComponent, {
         add: {
