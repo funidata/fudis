@@ -150,4 +150,19 @@ describe('DialogService', () => {
     dialogContentComponent.closeAllOpenDialogs();
     expect(closeDialogSpy).toHaveBeenCalled();
   });
+
+  describe('dropdownClosedWithEscape', () => {
+    it('should set dropdown closed with escape flag', () => {
+      expect(service['_justClosedDropdownWithEscape'].value).toBe(false);
+      service.dropdownClosedWithEscape();
+      expect(service['_justClosedDropdownWithEscape'].value).toBe(true);
+    });
+
+    it('should return true once from hasJustClosedDropdownWithEscape and reset flag', () => {
+      service['_justClosedDropdownWithEscape'].next(true);
+      expect(service.hasJustClosedDropdownWithEscape()).toBe(true);
+      expect(service['_justClosedDropdownWithEscape'].value).toBe(false);
+      expect(service.hasJustClosedDropdownWithEscape()).toBe(false);
+    });
+  });
 });

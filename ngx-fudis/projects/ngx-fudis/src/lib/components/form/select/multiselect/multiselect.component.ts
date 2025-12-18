@@ -18,6 +18,7 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { DOCUMENT } from '@angular/common';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -32,10 +33,11 @@ export class MultiselectComponent
   constructor(
     @Inject(DOCUMENT) _document: Document,
     protected _translationService: FudisTranslationService,
+    _dialogService: FudisDialogService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
   ) {
-    super(_document, _focusService, _idService);
+    super(_document, _dialogService, _focusService, _idService);
   }
 
   @ViewChild(MultiselectControlValueAccessorDirective)

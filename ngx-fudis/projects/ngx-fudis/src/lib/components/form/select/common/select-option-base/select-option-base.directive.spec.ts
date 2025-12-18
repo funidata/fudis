@@ -21,6 +21,7 @@ import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
 import { SelectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
+import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Component({
   standalone: false,
@@ -86,7 +87,7 @@ describe('SelectOptionBaseDirective', () => {
         LabelComponent,
         BodyTextComponent,
       ],
-      providers: [SelectBaseDirective, FudisInternalErrorSummaryService],
+      providers: [FudisDialogService, SelectBaseDirective, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 

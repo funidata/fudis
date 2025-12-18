@@ -8,6 +8,18 @@ import { Component } from '@angular/core';
         >Dialog with fudis-grid and scrollable content</fudis-heading
       >
       <fudis-dialog-content>
+        <fudis-icon-button
+          [id]="'menu-example-button'"
+          [ariaLabel]="'Menu'"
+          [size]="'small'"
+          [variant]="'secondary'"
+          [icon]="'three-dots'"
+          [asMenuButton]="true"
+        >
+          <fudis-dropdown-menu>
+            <fudis-dropdown-menu-item *ngFor="let option of menuOptions" [label]="option" />
+          </fudis-dropdown-menu>
+        </fudis-icon-button>
         <fudis-grid [classes]="'fudis-mt-md fudis-mb-md'">
           <fudis-heading [level]="3" [variant]="'sm'">
             I am fudis-heading inside the grid taking the whole width
@@ -93,4 +105,6 @@ import { Component } from '@angular/core';
   styles: [],
   standalone: false,
 })
-export class DialogTestContentComponent {}
+export class DialogTestContentComponent {
+  menuOptions = ['Menu option 1', 'Menu option 2', 'Menu option 3'];
+}

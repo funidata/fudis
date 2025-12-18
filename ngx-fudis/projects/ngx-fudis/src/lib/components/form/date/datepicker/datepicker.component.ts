@@ -2,17 +2,19 @@ import {
   AfterViewInit,
   Component,
   Host,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Optional,
+  ViewChild,
   ViewEncapsulation,
   effect,
 } from '@angular/core';
 import { FormControl, AbstractControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepickerIntl } from '@angular/material/datepicker';
+import { MatDatepicker, MatDatepickerIntl } from '@angular/material/datepicker';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -26,6 +28,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateRangeComponent } from '../date-range/date-range.component';
 import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -52,6 +55,7 @@ export class DatepickerComponent
     private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
     private _translationService: FudisTranslationService,
+    private _dialogService: FudisDialogService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
   ) {
@@ -114,6 +118,11 @@ export class DatepickerComponent
       this._placeholderString.next(translations.DATEPICKER.PLACEHOLDER);
     });
   }
+
+  /**
+   * Template reference for MatDatepicker component
+   */
+  @ViewChild('picker') protected _picker: MatDatepicker<Date>;
 
   /**
    * FormControl for the input
@@ -213,6 +222,10 @@ export class DatepickerComponent
     }
   }
 
+  private _isCalendarOpen(): boolean {
+    return this._picker?.opened || false;
+  }
+
   /**
    * Handle calendar close
    */
@@ -276,5 +289,21 @@ export class DatepickerComponent
 
   ngOnDestroy(): void {
     this._removeParseValidator();
+  }
+
+  /**
+   * When pressing keyboard Esc, close datepicker and set flag to indicate it was just closed with
+   * Escape key
+   *
+   * @param event
+   */
+  @HostListener('window:keydown', ['$event'])
+  protected _handleEscapePress(event: KeyboardEvent) {
+    if (event.key === 'Escape' && this._isCalendarOpen()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this._dialogService.dropdownClosedWithEscape();
+      this._picker.close();
+    }
   }
 }

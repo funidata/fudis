@@ -9,7 +9,7 @@ import {
   FudisTranslationService,
   FudisValidators,
 } from 'ngx-fudis';
-import { FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
+import { FudisRadioButtonOption, FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 type MyCheckboxType = {
   controlName: string;
@@ -20,6 +20,8 @@ type MyForm = {
   textInput: FormControl<string | null | number>;
   checkboxFormGroup: FormGroup;
   truth: FormControl<boolean | null>;
+  animals: FormControl<FudisSelectOption<object>[] | null>;
+  date: FormControl<Date | null>;
 };
 
 @Component({
@@ -61,6 +63,20 @@ type MyForm = {
                     [value]="option.value"
                   />
                 </fudis-radio-button-group>
+                <fudis-multiselect
+                  [label]="'Choose multiple animals'"
+                  [variant]="'autocompleteDropdown'"
+                  [placeholder]="'Search animals'"
+                  [control]="testFormGroup.controls['animals']"
+                >
+                  <ng-template fudisSelectOptions>
+                    <fudis-multiselect-option *ngFor="let option of multiOptions" [data]="option" />
+                  </ng-template>
+                </fudis-multiselect>
+                <fudis-datepicker
+                  [label]="'Choose date'"
+                  [control]="testFormGroup.controls['date']"
+                />
               </fudis-fieldset-content>
             </fudis-fieldset>
           </fudis-form-content>
@@ -105,6 +121,13 @@ export class DialogTestFormComponent {
     { value: false, label: 'False' },
   ];
 
+  multiOptions: FudisSelectOption<object>[] = [
+    { value: 'artic-fox', label: 'Artic fox' },
+    { value: 'bear', label: 'Bear' },
+    { value: 'wolverine', label: 'Wolverine' },
+    { value: 'wolf', label: 'Wolf' },
+  ];
+
   testFormGroup = new FormGroup<MyForm>({
     textInput: new FormControl<string | null | number>(null, [
       FudisValidators.required('This is required'),
@@ -133,6 +156,8 @@ export class DialogTestFormComponent {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
+    animals: new FormControl<FudisSelectOption<object>[] | null>(null),
+    date: new FormControl<Date | null>(null),
   });
 
   submitDialogForm(): void {
