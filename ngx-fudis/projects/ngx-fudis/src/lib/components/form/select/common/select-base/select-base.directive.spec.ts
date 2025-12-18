@@ -356,6 +356,13 @@ describe('SelectBaseDirective', () => {
   });
 
   describe('keyboard interaction', () => {
+    let dialogService: FudisDialogService;
+
+    beforeEach(() => {
+      dialogService = TestBed.inject(FudisDialogService);
+      jest.spyOn(dialogService, 'dropdownClosedWithEscape').mockImplementation();
+    });
+
     it('on key press `down` should focus on first element in table', () => {
       const dropdownInput = findMultiSelectInputClass(0) as HTMLInputElement;
       dropdownInput.focus();
@@ -376,7 +383,7 @@ describe('SelectBaseDirective', () => {
       expect(options[0]).toEqual(focusedOption[0]);
     });
 
-    it("on 'Escape' keypress should close dropdown", () => {
+    it("on 'Escape' keypress should close dropdown and call dropdownClosedWithEscape()", () => {
       setMultiSelectDropdownOpen();
 
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
@@ -386,6 +393,20 @@ describe('SelectBaseDirective', () => {
       const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
 
       expect(openDropdownEl).toBeNull();
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(1);
+    });
+
+    it("on 'Escape' keypress should do nothing if dropdown is closed", () => {
+      setMultiSelectDropdownClosed();
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+      fixture.detectChanges();
+
+      const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
+
+      expect(openDropdownEl).toBeNull();
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(0);
     });
   });
 });

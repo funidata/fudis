@@ -7,6 +7,7 @@ import { fudisInputSizeArray } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
+import { BehaviorSubject } from 'rxjs';
 
 describe('DropdownMenuComponent', () => {
   let component: DropdownMenuComponent;
@@ -71,6 +72,54 @@ describe('DropdownMenuComponent', () => {
           );
         });
       });
+    });
+  });
+
+  describe('Escape key behavior', () => {
+    let dialogService: FudisDialogService;
+
+    beforeEach(() => {
+      dialogService = TestBed.inject(FudisDialogService);
+      jest.spyOn(dialogService, 'dropdownClosedWithEscape').mockImplementation();
+    });
+
+    it('should call dropdownClosedWithEscape() when Escape is pressed and dropdown is open', () => {
+      // Arrange
+      component['_parentButton'].dropdownOpen = new BehaviorSubject(true);
+      component['_parentButton'].closeMenu = jest.fn();
+
+      // Act
+      const event = new KeyboardEvent('keydown', { key: 'Escape' });
+      component['_handleDropdownMenuKeyDown'](event);
+
+      // Assert
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not call dropdownClosedWithEscape() when Escape is pressed and dropdown is closed', () => {
+      // Arrange
+      component['_parentButton'].dropdownOpen = new BehaviorSubject(false);
+      component['_parentButton'].closeMenu = jest.fn();
+
+      // Act
+      const event = new KeyboardEvent('keydown', { key: 'Escape' });
+      component['_handleDropdownMenuKeyDown'](event);
+
+      // Assert
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(0);
+    });
+
+    it('should not call dropdownClosedWithEscape() when A key is pressed and dropdown is open', () => {
+      // Arrange
+      component['_parentButton'].dropdownOpen = new BehaviorSubject(true);
+      component['_parentButton'].closeMenu = jest.fn();
+
+      // Act
+      const event = new KeyboardEvent('keydown', { key: 'a' });
+      component['_handleDropdownMenuKeyDown'](event);
+
+      // Assert
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(0);
     });
   });
 });
