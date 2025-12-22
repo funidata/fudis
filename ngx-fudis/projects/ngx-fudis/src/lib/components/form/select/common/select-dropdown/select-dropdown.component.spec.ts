@@ -155,7 +155,7 @@ describe('SelectDropdownComponent', () => {
   });
 
   describe('Screen reader properties', () => {
-    it('should have results status for screen readers if filter text updates', async () => {
+    it('should have results status for screen readers if filter text updates', () => {
       fixture.componentRef.setInput('results', 42);
       fixture.componentRef.setInput('open', true);
       fixture.componentRef.setInput('filterText', 'hello');
@@ -172,7 +172,7 @@ describe('SelectDropdownComponent', () => {
       }
     });
 
-    it('should have no results status for screen readers if filter text updates', async () => {
+    it('should have no results status for screen readers if filter text updates', () => {
       fixture.componentRef.setInput('results', 0);
       fixture.componentRef.setInput('open', true);
       fixture.componentRef.setInput('filterText', 'hello');
@@ -189,7 +189,7 @@ describe('SelectDropdownComponent', () => {
       }
     });
 
-    it('should not announce results to screen reader if dropdown is closed', async () => {
+    it('should not announce results to screen reader if dropdown is closed', () => {
       fixture.componentRef.setInput('results', 42);
       fixture.componentRef.setInput('open', false);
       fixture.componentRef.setInput('filterText', 'hello');
