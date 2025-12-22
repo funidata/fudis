@@ -11,6 +11,6 @@
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^20.19.24"
+    "@types/node": "^25.0.3"
   }
 }
