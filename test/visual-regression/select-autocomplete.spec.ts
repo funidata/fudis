@@ -39,11 +39,11 @@ test("Select autocompletes", async ({ page }) => {
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
 
   await page.keyboard.press("Space");
-  await expect(page.getByText("Showing 2 results")).toBeVisible();
+  await expect(page.locator(".fudis-body-text").getByText("Showing 2 results")).toBeVisible();
   await page.keyboard.press("KeyE");
-  await expect(page.getByText("Showing 1 results")).toBeVisible();
+  await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
   await page.keyboard.press("KeyA");
-  await expect(page.getByText("Showing 1 results")).toBeVisible();
+  await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
   await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-4-dropdown")).not.toBeVisible();
@@ -67,7 +67,7 @@ test("Select autocompletes", async ({ page }) => {
 
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
   await page.keyboard.press("KeyU");
-  await expect(page.getByText("Showing 2 results")).toBeVisible();
+  await expect(page.locator(".fudis-body-text").getByText("Showing 2 results")).toBeVisible();
   await expect(page.getByTestId("fudis-select-5-dropdown")).toBeVisible();
   await page.keyboard.press("Backspace");
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
