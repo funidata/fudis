@@ -166,7 +166,8 @@ export class SelectBaseDirective
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
   /**
-   * Visible results length to be passed on SelectDropdown. This value determines the results shown in autocomplete variants helptext.
+   * Visible results length to be passed on SelectDropdown. This value determines the results shown
+   * in autocomplete variants helptext.
    */
   protected _resultsLength = signal<number>(0);
 

@@ -11,7 +11,7 @@ import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-b
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
-import { BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-select-dropdown',
