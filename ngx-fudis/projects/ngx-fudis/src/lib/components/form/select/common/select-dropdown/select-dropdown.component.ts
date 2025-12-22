@@ -109,7 +109,6 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   protected _liveMessage = computed(() => {
     const filterText = this._filterTextSignal();
     const results = this._resultsSignal();
-    console.log('results in liveMessage: ', results);
 
     // Only announce while dropdown is open
     if (!this.open) {
@@ -141,8 +140,6 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
       }
     }
 
-    console.log('last announced message: ', message);
-
     return message;
   });
 
@@ -156,9 +153,6 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
         newFilterText !== changes.filterText?.previousValue) ||
       (changes.results && newResults !== undefined && newResults !== changes.results?.previousValue)
     ) {
-      console.log('OnChanges filterText:', this.filterText);
-      console.log('OnChanges results:', this.results);
-
       this._filterTextSignal.set(this.filterText ?? '');
       this._resultsSignal.set(this.results ?? 0);
     }
