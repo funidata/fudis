@@ -20,6 +20,7 @@ import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { Subscription } from 'rxjs';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { FudisDialogService } from '../../services/dialog/dialog.service';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -33,6 +34,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   constructor(
     private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
+    private _dialogService: FudisDialogService,
     @Inject(DOCUMENT) private _document: Document,
     @Host() private _parentButton: IconButtonComponent,
   ) {
@@ -187,6 +189,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
       if (event.key === 'Escape') {
         event.preventDefault();
         event.stopPropagation();
+        this._dialogService.dropdownClosedWithEscape();
         this._parentButton.closeMenu();
       }
     }
