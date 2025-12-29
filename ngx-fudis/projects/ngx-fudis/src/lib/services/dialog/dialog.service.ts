@@ -96,7 +96,12 @@ export class FudisDialogService {
    * Merge consumer's config with ours.
    */
   private static _createConfig<D = any>(userConfig: MatDialogConfig<D> = {}): MatDialogConfig<D> {
-    const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
+    const overridableOptions = {
+      hasBackdrop: true,
+      disableClose: true,
+      autoFocus: false,
+      ariaModal: true,
+    };
     const forcedOptions = {
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,
