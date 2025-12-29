@@ -6,6 +6,17 @@ import { Meta } from "@storybook/blocks";
 
 Setting up your local development environment according to these instructions is highly recommended for a smooth and uniform development experience accross the team (and 3rd parties, too).
 
+**Table of Contents**
+
+1. [Requirements](#requirements)
+2. [Set Up Local Repository](#set-up-local-repository)
+3. [Install Dependencies](#install-dependencies)
+4. [Development](#development)
+5. [Testing](#testing)
+6. [Sandbox Application](#sandbox-application)
+7. [Format and Lint](#format-and-lint)
+8. [Additional Command Reference](#additional-command-reference)
+
 ## Requirements
 
 - MacOS or Linux
@@ -22,26 +33,145 @@ Setting up your local development environment according to these instructions is
 
 Clone the upstream repository to your machine (requires write access).
 
-```bash
-git clone https://github.com/funidata/fudis.git
+```
+git clone git@github.com:funidata/fudis.git
 ```
 
-If you do not have write access and are not working for Funidata, you need to first fork our repository to your own account and use that for development.
+If you do not have write access and you are not working for Funidata, you need to first fork our repository to your own account and use that for development.
 
-## Install NPM Packages
+## Install Dependencies
 
-```bash
+To install project dependencies, in the **root** directory run:
+
+```
 npm ci
 ```
+**Note!** This does not install Playwright locally. If your OS is supported by Playwright and want to run Playwright with their UI tool run:
 
-## Run Development Environment
+```
+cd test && npm ci && cd ..
+```
+
+## Development
+
+The development is done in Storybook environment. You can read more about Storybook from the [official Storybook site](https://storybook.js.org/).
 
 Make sure Docker daemon is running. First startup takes a while as Docker fetches and builds necessary images. Once complete, Storybook is accessible at [http://localhost:6006](http://localhost:6006).
 
-```bash
+In the **root** directory run:
+
+```
 npm start
 ```
+After starting, the terminal is attached to log output. You can detach (CTRL+C) from the logs and the application will keep running in the background.
 
-Once you are done, shutdown the development environment with `npm stop`. You can use `docker ps` to verify all containers are down (and to check their status if something is not working).
+Once you are done, shutdown the development environment:
 
-See [Command Reference Documentation](/docs/documentation-development-tooling-command-reference--documentation) for more information and complete command reference.
+```
+npm stop
+```
+
+You can use `docker ps` to verify all containers are down (and to check their status if something is not working).
+
+### View Logs
+
+Attaches terminal to Docker's interactive log output. Use this to see the logs again after detaching.
+
+```
+npm run logs
+```
+
+
+## Testing
+
+Run these commands in the **root** directory.
+
+### Component Tests
+
+```
+npm test
+```
+
+Filenames (full or partial) can be appended to this command with NPM's "`--`" syntax to run tests for matching files only, e.g. `npm test -- badge`.
+
+
+### Visual Regression Tests
+
+```
+npm run test:vr
+```
+
+Filenames (full or partial) can be appended to this command as well, e.g. `npm run test:vr -- badge`.
+
+### Launch Playwright UI
+
+Opens in a new Chromium instance.
+
+```
+npm run test:ui
+```
+
+## Sandbox Application
+
+Start the sandbox application with hot-reload by running the following command in the **root** directory. Access at [http://localhost:4200](http://localhost:4200).
+
+```
+npm run start:sandbox
+```
+
+
+## Format and Lint
+
+Run these commands in the **root** directory.
+
+### ESLint
+
+Lints `.js`, `.ts` and `.html` files
+
+```
+npm run lint
+```
+
+### Lint
+
+Lint styles
+
+```
+npm run stylelint
+```
+
+### Format
+
+Format code
+
+```
+npm run format
+```
+
+Check formatting
+
+```
+npm run format:check
+```
+
+## Additional Command Reference
+
+### Build Fudis
+
+To build the distributable package, in **ngx-fudis** folder run:
+
+```
+npm run build:ngx-fudis
+```
+
+This creates a **dist** folder under the **ngx-fudis** directory.
+
+### Start Storybook Without Container
+
+In **ngx-fudis** folder run:
+
+```
+npm run storybook
+```
+
+
