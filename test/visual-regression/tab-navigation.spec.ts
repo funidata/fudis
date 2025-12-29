@@ -6,7 +6,7 @@ const scrollButtonLeft = tabNavigationBarId + "-scroll-button-left";
 const tabNavigationTabPrefix = "fudis-tab-";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/iframe.html?id=components-tabs-with-navigation--example&viewMode=story");
+  await page.goto("/iframe.html?id=components-tab-navigation--example&viewMode=story");
 });
 
 test("should navigate tabs with arrow keys", async ({ page }) => {
@@ -51,7 +51,7 @@ test("tab navigation should match the snapshot", async ({ page }) => {
   await expect(page).toHaveScreenshot("tab-navigation-primary.png");
 
   await page.goto(
-    "/iframe.html?args=variant:secondary;&id=components-tabs-with-navigation--example&viewMode=story",
+    "/iframe.html?args=variant:secondary;&id=components-tab-navigation--example&viewMode=story",
   );
   await expect(page).toHaveScreenshot("tab-navigation-secondary.png");
 });
