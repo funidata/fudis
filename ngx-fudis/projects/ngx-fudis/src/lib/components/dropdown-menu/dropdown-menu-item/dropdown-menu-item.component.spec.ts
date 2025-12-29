@@ -7,6 +7,7 @@ import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { defaultMenuItems } from '../mock_data';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
 @Component({
   standalone: false,
@@ -50,6 +51,7 @@ describe('DropdownMenuItemComponent', () => {
         IconComponent,
         MockDropdownMenuComponent,
       ],
+      providers: [FudisDialogService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockDropdownMenuComponent);

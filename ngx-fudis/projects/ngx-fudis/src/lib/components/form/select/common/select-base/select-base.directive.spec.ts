@@ -23,6 +23,7 @@ import { FudisInternalErrorSummaryService } from '../../../../../services/form/e
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 import { MultiselectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
 import { MultiselectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
+import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Component({
   standalone: false,
@@ -105,7 +106,7 @@ describe('SelectBaseDirective', () => {
         MultiselectChipListComponent,
         BodyTextComponent,
       ],
-      providers: [FudisInternalErrorSummaryService],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });
@@ -355,6 +356,13 @@ describe('SelectBaseDirective', () => {
   });
 
   describe('keyboard interaction', () => {
+    let dialogService: FudisDialogService;
+
+    beforeEach(() => {
+      dialogService = TestBed.inject(FudisDialogService);
+      jest.spyOn(dialogService, 'dropdownClosedWithEscape').mockImplementation();
+    });
+
     it('on key press `down` should focus on first element in table', () => {
       const dropdownInput = findMultiSelectInputClass(0) as HTMLInputElement;
       dropdownInput.focus();
@@ -375,7 +383,7 @@ describe('SelectBaseDirective', () => {
       expect(options[0]).toEqual(focusedOption[0]);
     });
 
-    it("on 'Escape' keypress should close dropdown", () => {
+    it("on 'Escape' keypress should close dropdown and call dropdownClosedWithEscape()", () => {
       setMultiSelectDropdownOpen();
 
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
@@ -385,6 +393,20 @@ describe('SelectBaseDirective', () => {
       const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
 
       expect(openDropdownEl).toBeNull();
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(1);
+    });
+
+    it("on 'Escape' keypress should do nothing if dropdown is closed", () => {
+      setMultiSelectDropdownClosed();
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+      fixture.detectChanges();
+
+      const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
+
+      expect(openDropdownEl).toBeNull();
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(0);
     });
   });
 });

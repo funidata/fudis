@@ -90,4 +90,40 @@ describe('DialogComponent', () => {
 
     expect(dialogSpy).toHaveBeenCalledWith(false);
   });
+
+  describe('_handleEscapePress', () => {
+    it('should not close dialog if hasJustClosedDropdownWithEscape returns true', () => {
+      // Arrange
+      const hasJustClosedSpy = jest
+        .spyOn(dialogService, 'hasJustClosedDropdownWithEscape')
+        .mockReturnValue(true);
+      const closeSpy = jest.spyOn(dialogService, 'close');
+      component['_orderNumber'] = dialogService.dialogsOpen().length;
+
+      // Act
+      const escapeEvent = new KeyboardEvent('keyup', { key: 'Escape' });
+      component['_handleEscapePress'](escapeEvent);
+
+      // Assert
+      expect(hasJustClosedSpy).toHaveBeenCalledTimes(1);
+      expect(closeSpy).toHaveBeenCalledTimes(0);
+    });
+
+    it('should close dialog if hasJustClosedDropdownWithEscape returns false', () => {
+      //Arrange
+      const hasJustClosedSpy = jest
+        .spyOn(dialogService, 'hasJustClosedDropdownWithEscape')
+        .mockReturnValue(false);
+      const closeSpy = jest.spyOn(dialogService, 'close');
+      component['_orderNumber'] = dialogService.dialogsOpen().length;
+
+      // Act
+      const escapeEvent = new KeyboardEvent('keyup', { key: 'Escape' });
+      component['_handleEscapePress'](escapeEvent);
+
+      // Assert
+      expect(hasJustClosedSpy).toHaveBeenCalledTimes(1);
+      expect(closeSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 });

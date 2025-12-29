@@ -13,6 +13,7 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
   standalone: false,
@@ -60,7 +61,7 @@ describe('DateRangeComponent', () => {
         MockDateRangeComponent,
         IconComponent,
       ],
-      providers: [FudisInternalErrorSummaryService],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
       imports: [
         ReactiveFormsModule,
         MatDatepickerModule,

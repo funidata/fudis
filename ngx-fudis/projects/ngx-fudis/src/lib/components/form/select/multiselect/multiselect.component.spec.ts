@@ -20,6 +20,7 @@ import { SelectIconsComponent } from '../common/select-icons/select-icons.compon
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { MultiselectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
   standalone: false,
@@ -75,7 +76,7 @@ describe('MultiselectComponent', () => {
         LabelComponent,
         SelectOptionsDirective,
       ],
-      providers: [FudisInternalErrorSummaryService, SelectBaseDirective],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService, SelectBaseDirective],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });
