@@ -23,6 +23,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { SelectControlValueAccessorDirective } from '../select/common/select-control-value-accessor/select-control-value-accessor.directive';
 import { SelectAutocompleteDirective } from '../select/common/autocomplete/autocomplete.directive';
 import { SelectDropdownComponent } from '../select/common/select-dropdown/select-dropdown.component';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
 const values = {
   label: 'Label for testing purposes',
@@ -62,7 +63,7 @@ describe('LocalizedTextGroupComponent', () => {
         SelectIconsComponent,
         IconComponent,
       ],
-      providers: [FudisInternalErrorSummaryService],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 
