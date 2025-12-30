@@ -100,6 +100,22 @@ jobs:
         run: npm run build -- storybook
       - name: Copy docs to S3 bucket
         run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/$VERSION
+
+      - name: Update versions index
+        run: |
+          # List all version directories in S3 bucket
+          VERSIONS=$(aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/ \
+            | grep 'PRE' \
+            | awk '{print $2}' \
+            | sed 's|/||g' \
+            | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          # Create JSON object with latest version added
+          echo "{\"versions\": $VERSIONS, \"latest\": \"$VERSION\"}" > /tmp/versions.json
+
+          # Upload updated list to S3 bucket
+          aws s3 cp /tmp/versions.json s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json --cache-control max-age=60
+
       - name: Check for Storybook redirect
         id: check-storybook-redirect
         if: needs.publish.outputs.set-as-latest == 'true'
