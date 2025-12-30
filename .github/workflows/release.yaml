@@ -66,7 +66,7 @@ jobs:
       - name: Build ngx-fudis
         run: npm run build
       - name: Remove npmrc
-        run: -rm -f ~/.npmrc
+        run: rm -f ~/.npmrc
       - name: Publish latest
         # if: steps.check_latest.outputs.is-latest == 'true'
         run: npm publish --loglevel verbose  --access public --tag beta
