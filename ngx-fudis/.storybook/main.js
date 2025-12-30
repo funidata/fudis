@@ -3,6 +3,7 @@ export const stories = [
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.mdx",
   "../projects/documentation/**/*.mdx",
+  "../projects/ngx-fudis/src/lib/components/version-selector/version-selector.stories",
 ];
 export const addons = [
   "@storybook/addon-links",
@@ -24,6 +25,7 @@ export const staticDirs = [
   { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
   { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
   "./assets/i18n",
+  "./static",
   {
     from: "./../projects/ngx-fudis/src/lib/assets/images/fudis-logo-mini-black.svg",
     to: "/favicon.svg",
@@ -44,6 +46,8 @@ export function managerHead(head) {
       [data-item-id*="pw"] {
         display: none !important;
       }
+      [data-item-id="docs"],
+      .sidebar-item:has([data-item-id="docs"]) { display: none !important; }
     </style>
   `;
 }

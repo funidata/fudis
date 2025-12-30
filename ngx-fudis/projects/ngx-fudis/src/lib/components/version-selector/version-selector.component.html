@@ -1,0 +1,15 @@
+<div class="fudis-version-selector">
+  <ng-container *ngIf="error">
+    <span class="fudis-version-unavailable">Version selector unavailable, </span>
+  </ng-container>
+  <ng-container *ngIf="!error">
+    <fudis-select size="xs" [control]="control" [label]="'Version'" [variant]="'dropdown'">
+      <ng-template fudisSelectOptions>
+        <fudis-select-option
+          *ngFor="let v of versions"
+          [data]="{ value: v, label: v }"
+        ></fudis-select-option>
+      </ng-template>
+    </fudis-select>
+  </ng-container>
+</div>
