@@ -1,10 +1,13 @@
 name: Release new version
 
 on:
-  release:
-    types:
-      - released
-      - prereleased
+  push:
+    branches:
+      - "release-pipeline-fix"
+    # release:
+    #   types:
+    #     - released
+    #     - prereleased
 
 permissions:
   # Permission to generate OIDC token
