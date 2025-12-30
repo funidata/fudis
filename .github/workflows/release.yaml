@@ -36,7 +36,6 @@ jobs:
           node-version-file: .nvmrc
           # Specifying `registry-url` triggers `setup-node` to setup NPM authentication.
           registry-url: https://registry.npmjs.org/
-          scope: "funidata"
       - name: Copy root README.md to library
         run: cp README.md ngx-fudis/projects/ngx-fudis/README.md
       # - name: Check for latest version
@@ -66,6 +65,8 @@ jobs:
       #     fi
       - name: Build ngx-fudis
         run: npm run build
+      - name: Remove npmrc
+        run: -rm -f ~/.npmrc
       - name: Publish latest
         # if: steps.check_latest.outputs.is-latest == 'true'
         run: npm publish --loglevel verbose  --access public --tag beta
