@@ -65,13 +65,9 @@ jobs:
       #     fi
       - name: Build ngx-fudis
         run: npm run build
-      - name: Remove npmrc
-        run: rm -f ~/.npmrc
-      - name: Check npm auth env
-        run: env | grep -E "NPM|NODE_AUTH" || echo "No npm env"
       - name: Publish latest
         # if: steps.check_latest.outputs.is-latest == 'true'
-        run: NODE_AUTH_TOKEN="" npm publish --loglevel verbose  --access public --tag beta
+        run: npm publish --loglevel verbose  --access public --tag beta
         working-directory: ngx-fudis/dist/ngx-fudis
       # - name: Publish patch or pre-release
       #   if: steps.check_latest.outputs.is-latest == 'false'
