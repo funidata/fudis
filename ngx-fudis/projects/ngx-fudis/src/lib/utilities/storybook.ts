@@ -83,6 +83,7 @@ export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
 
 export const buttonControlsExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'ariaLabel',
   'id',
   'handleBlur',
   'handleClick',
@@ -94,6 +95,7 @@ export const buttonControlsExclude: RegExp = excludeRegex([
 
 export const buttonIconOnlyExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'ariaLabel',
   'id',
   'handleBlur',
   'handleClick',
