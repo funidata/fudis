@@ -12,7 +12,7 @@ on:
 permissions:
   # Permission to generate OIDC token
   id-token: write
-  contents: write
+  contents: read
 
 jobs:
   # test:
@@ -67,7 +67,7 @@ jobs:
         run: npm run build
       - name: Publish latest
         # if: steps.check_latest.outputs.is-latest == 'true'
-        run: npm publish --loglevel verbose --provenance --access public --tag beta
+        run: npm publish --loglevel verbose --access public --tag beta
         working-directory: ngx-fudis/dist/ngx-fudis
       # - name: Publish patch or pre-release
       #   if: steps.check_latest.outputs.is-latest == 'false'
