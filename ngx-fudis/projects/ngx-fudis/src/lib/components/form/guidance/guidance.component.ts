@@ -236,13 +236,12 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
 
       if (numberOfErrors === this._lazyLoadedErrors.length && !this._reloadGuard) {
         /**
-         * TODO: This needs to be though again. Currently this function happens before
-         * _subscribeToErrors, so the on push components are not reacting to the changes to the
-         * controls when they are marked as touched. This is a quick fix to that, but a ticket shall
-         * be made.
+         * NOTE: This function currently runs before _subscribeToErrors which is not how it ideally
+         * should be working (or was initially intended). The triggering happens because
+         * handleCreateError Output is emitted from child component during the current change
+         * detection. It is now deferred by using queueMicrotask, which runs after the current
+         * change detection cycle, to ensure that OnPush components can detect changes.
          */
-        if (this.formGroup) this.formGroup.markAllAsTouched();
-        if (this.control) this.control.markAsTouched();
         this._errorSummaryService.reloadFormErrors(this._parentFormId()!, false);
       }
     }
