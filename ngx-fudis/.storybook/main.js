@@ -46,6 +46,11 @@ export function managerHead(head) {
       [data-item-id*="pw"] {
         display: none !important;
       }
+      /* Hide Docs/Version Selector story from sidebar */
+      [data-item-id^="docs-version-selector"],
+      .sidebar-item:has([data-item-id^="docs-version-selector"]) {
+        display: none !important;
+      }
       [data-item-id="docs"],
       .sidebar-item:has([data-item-id="docs"]) { display: none !important; }
     </style>
