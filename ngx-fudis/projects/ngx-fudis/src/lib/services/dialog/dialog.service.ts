@@ -10,6 +10,8 @@ export class FudisDialogService {
 
   private _dialogOpen = new BehaviorSubject<boolean>(false);
 
+  private _justClosedDropdownWithEscape = new BehaviorSubject<boolean>(false);
+
   /**
    * Open new dialog.
    *
@@ -60,6 +62,30 @@ export class FudisDialogService {
   }
 
   /**
+   * Set flag to indicate that a dropdown was just closed with Escape key, so that dialog does not
+   * also close with the same key press.
+   */
+  public dropdownClosedWithEscape(): void {
+    this._justClosedDropdownWithEscape.next(true); // set the flag
+
+    // Reset the flag after a short delay (backup)
+    setTimeout(() => {
+      this._justClosedDropdownWithEscape.next(false);
+    }, 1000);
+  }
+
+  /**
+   * Check if a dropdown was just closed with Escape key. Resets the flag after checking.
+   */
+  public hasJustClosedDropdownWithEscape(): boolean {
+    const hasJustClosed = this._justClosedDropdownWithEscape.value;
+    if (hasJustClosed) {
+      this._justClosedDropdownWithEscape.next(false); // Reset the flag
+    }
+    return hasJustClosed;
+  }
+
+  /**
    * @returns Currently open Dialogs
    */
   public dialogsOpen(): MatDialogRef<any, any>[] {
@@ -70,7 +96,12 @@ export class FudisDialogService {
    * Merge consumer's config with ours.
    */
   private static _createConfig<D = any>(userConfig: MatDialogConfig<D> = {}): MatDialogConfig<D> {
-    const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
+    const overridableOptions = {
+      hasBackdrop: true,
+      disableClose: true,
+      autoFocus: false,
+      ariaModal: true,
+    };
     const forcedOptions = {
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,

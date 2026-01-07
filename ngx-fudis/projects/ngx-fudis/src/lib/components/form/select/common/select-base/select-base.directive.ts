@@ -27,6 +27,7 @@ import { ControlComponentBaseDirective } from '../../../../../directives/form/co
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 import { fromEvent, Subscription } from 'rxjs';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
+import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -38,6 +39,7 @@ export class SelectBaseDirective
 {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
+    protected _dialogService: FudisDialogService,
     _focusService: FudisFocusService,
     _idService: FudisIdService,
   ) {
@@ -787,7 +789,8 @@ export class SelectBaseDirective
   protected _updateComponentStateFromControlValue(): void {}
 
   /**
-   * When pressing keyboard Esc, focus to Select input and close dropdown
+   * When pressing keyboard Esc, focus to Select input, set flag that dropdown was closed with
+   * Escape key and close dropdown
    *
    * @param event
    */
@@ -795,6 +798,7 @@ export class SelectBaseDirective
   protected _handleEscapePress(event: KeyboardEvent) {
     if (event.key === 'Escape' && this._dropdownOpen()) {
       event.preventDefault();
+      this._dialogService.dropdownClosedWithEscape();
       this.closeDropdown(true, true);
     }
   }

@@ -79,7 +79,7 @@ export class SelectAutocompleteBaseDirective {
   /**
    * Currently typed input text
    */
-  private _inputText: string | null = null;
+  private _inputText: string = '';
 
   /**
    * If input is focused or not

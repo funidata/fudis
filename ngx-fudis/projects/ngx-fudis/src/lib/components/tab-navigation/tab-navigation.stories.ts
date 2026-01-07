@@ -64,7 +64,7 @@ class TabNavigationExampleComponent {
 }
 
 export default {
-  title: 'Components/Tabs with navigation',
+  title: 'Components/Tab Navigation',
   component: TabNavigationExampleComponent,
   decorators: [
     moduleMetadata({
