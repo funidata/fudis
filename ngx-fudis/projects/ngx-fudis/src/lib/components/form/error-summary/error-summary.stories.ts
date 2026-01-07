@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorSummaryComponent } from './error-summary.component';
-import docs from './error-summary-component.mdx';
+import docs from './error-summary.mdx';
 import { excludeAllRegex } from '../../../utilities/storybook';
 import { ErrorSummaryExampleComponent } from './example/error-summary-example.component';
 

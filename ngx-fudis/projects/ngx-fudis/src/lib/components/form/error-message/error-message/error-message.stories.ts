@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule, FormsModule, FormControlOptions } fro
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ErrorMessageDirective } from './error-message.directive';
-import readme from './readme.mdx';
+import docs from './error-message.mdx';
 import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
 import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/storybook';
 
@@ -103,7 +103,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: errorMessageExclude,

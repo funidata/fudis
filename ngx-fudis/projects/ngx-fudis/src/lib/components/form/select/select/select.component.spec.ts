@@ -19,6 +19,7 @@ import { SelectAutocompleteDirective } from '../common/autocomplete/autocomplete
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { SelectOptionComponent } from './select-option/select-option.component';
 import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
   standalone: false,
@@ -67,7 +68,7 @@ describe('SelectComponent', () => {
         SelectIconsComponent,
         BodyTextComponent,
       ],
-      providers: [FudisInternalErrorSummaryService, SelectBaseDirective],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService, SelectBaseDirective],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

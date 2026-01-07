@@ -1,13 +1,13 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
-import readme from './readme.mdx';
+import docs from './breadcrumbs.mdx';
 
 export default {
   title: 'Components/Breadcrumbs',
   component: BreadcrumbsComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
 } as Meta;

@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { Component } from '@angular/core';
 import { LanguageBadgeGroupComponent } from './language-badge-group.component';
-import docs from './language-badge-group-docs.mdx';
+import docs from './language-badge-group.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';

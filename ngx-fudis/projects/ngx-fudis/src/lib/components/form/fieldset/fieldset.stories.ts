@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FieldSetComponent } from './fieldset.component';
-import readme from './readme.mdx';
+import docs from './fieldset.mdx';
 import { excludeAllRegex } from '../../../utilities/storybook';
 import { FieldsetExampleComponent } from './examples/fieldset-example.component';
 
@@ -20,7 +20,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: excludeAllRegex,

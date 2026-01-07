@@ -43,10 +43,10 @@ const preview = {
             "Development",
             [
               "Getting Started",
+              "How to Contribute",
               "Tooling",
               [
                 "Setup VS Code",
-                "Command Reference",
                 "Testing Local Changes with Symlink",
                 "Git and GitHub Conventions",
                 "Releases",

@@ -9,7 +9,7 @@ import {
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import readme from './readme.mdx';
+import docs from './text-input.mdx';
 import { textInputControlsExclude } from '../../../utilities/storybook';
 import { fudisInputSizeArray } from '../../../types/forms';
 
@@ -105,7 +105,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: { exclude: textInputControlsExclude },
   },

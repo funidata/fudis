@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import docs from './date-range-docs.mdx';
+import docs from './date-range.mdx';
 import { dateRangeExclude } from '../../../../utilities/storybook';
 
 @Component({

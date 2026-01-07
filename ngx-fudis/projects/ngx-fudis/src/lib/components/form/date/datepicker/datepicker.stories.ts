@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { DatepickerComponent } from './datepicker.component';
-import docs from './datepicker-docs.mdx';
+import docs from './datepicker.mdx';
 import { datepickerControlsExclude } from '../../../../utilities/storybook';
 import { action } from '@storybook/addon-actions';
 import { LanguageChangeComponent } from '../examples/example-datepicker-language-change';

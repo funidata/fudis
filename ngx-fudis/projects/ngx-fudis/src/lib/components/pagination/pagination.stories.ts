@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/angular';
 import { PaginationComponent } from './pagination.component';
-import readme from './pagination.mdx';
+import docs from './pagination.mdx';
 import { paginationControlsExclude } from '../../utilities/storybook';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: PaginationComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: paginationControlsExclude,
