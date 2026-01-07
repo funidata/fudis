@@ -48,7 +48,7 @@ Generating commitable screenshots should be done by running `npm run test:vr` wh
 
 Playwright will fail any test that does not have a matching screenshot and generate a baseline screenshot for that test at the same time. After this expected failure, you can run the test again to verify that everything works. It is probably a good idea to take a quick look at the generated images, too. When all looks good, the images should be committed into version control along with the test file itself.
 
-If there are test failures, the container will not exit but rather serve the resulting test report at [http://localhost:9323](http://localhost:9323). You can also run `npm test:vr-report` to see the latest report.
+If there are test failures, the container will not exit but rather serve the resulting test report at [http://localhost:9323](http://localhost:9323). You can also run `npm run test:vr-report` to see the latest report.
 
 ### Tests in CI/CD
 
