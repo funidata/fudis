@@ -39,7 +39,15 @@ jobs:
           echo "VERSIONS=$VERSIONS"
           echo "LATEST=$LATEST"
 
-#
-#          aws   s3 cp /tmp/versions.json \
-#            s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
-#            --cache-control max-age=60
+           aws   s3 cp /tmp/versions.json \
+              s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
+              --cache-control max-age=60
+
+      - name: Verify uploaded versions.json
+        run: |
+          set -e
+
+          echo "versions from S3 bucket:"
+          aws s3 cp \
+            s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
+            -
