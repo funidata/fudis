@@ -25,7 +25,7 @@
   <fudis-icon
     *ngIf="!data.disabled && _parentSelect.control.value?.value === data.value"
     [icon]="_parent.size === 'xs' ? 'check-small' : 'check'"
-    [color]="'primary'"
+    [color]="'gray-dark'"
   />
   <span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text">
     ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
