@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     branches:
-      - DS-309-version-selector-for-docs
+      - "DS-309-version-selector-for-docs"
   workflow_dispatch:
 
 jobs:
