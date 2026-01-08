@@ -47,7 +47,7 @@ jobs:
         run: |
           set -e
 
-          echo "versions from S3 bucket:"
+          echo "versions from S3 bucket: "
           aws s3 cp \
             s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
             -
