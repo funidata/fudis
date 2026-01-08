@@ -148,7 +148,7 @@ export class SelectBaseDirective
   @Output() visibleOptionsUpdate: EventEmitter<number> = new EventEmitter<number>();
 
   /**
-   * Output for number of visible options after filtering results
+   * Output for filter text after filtering results
    */
   @Output() filterTextUpdate: EventEmitter<string | null> = new EventEmitter<string | null>();
 
@@ -166,6 +166,12 @@ export class SelectBaseDirective
    * Signal to Select & MultiselectOption for listening autocomplete filter text changes
    */
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
+
+  /**
+   * Visible results length to be passed on SelectDropdown. This value determines the results shown
+   * in autocomplete variants helptext.
+   */
+  protected _resultsLength = signal<number>(0);
 
   /**
    * Lazy loading check for expanding content, unless component control gets values from
@@ -365,7 +371,7 @@ export class SelectBaseDirective
   public openDropdown(): void {
     if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
-      this._dropdownOpen.set(true);
+      this._dropdownOpen.set(true); // TODO FIXME: When using autocompleteType variant, this should be called only if filter text is applied
 
       this._unsubscribeDropdownSubscribtions();
       this._resizeObserver.observe(document?.body);
@@ -406,6 +412,7 @@ export class SelectBaseDirective
       this._optionsLoadDelay().then((resolve) => {
         if (resolve) {
           this._visibleOptions = this._visibleOptionsTemp;
+          this._resultsLength.set(this._visibleOptions.length);
           this.visibleOptionsUpdate.emit(this._visibleOptions.length);
         }
       });
