@@ -182,7 +182,13 @@ export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, Aft
 
       this._errorSummaryService.addError(newError);
       this._errorSent = true;
-      this.handleCreateError.emit(newError);
+
+      // Emit in a microtask only after the current change detection cycle.
+      // This ensures that the OnPush components using Guidance detects the updated state.
+      // Emitting synchronously from ngOnChanges would otherwise break change detection, and in some cases cause NG0100 errors.
+      queueMicrotask(() => {
+        this.handleCreateError.emit(newError);
+      });
     }
   }
 

@@ -148,6 +148,9 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
   @HostListener('window:keyup', ['$event'])
   protected _handleEscapePress(event: KeyboardEvent) {
     if (event.key === 'Escape') {
+      if (this._dialogService.hasJustClosedDropdownWithEscape()) {
+        return; // Do not close the dialog with the same Escape key press
+      }
       if (this._dialogService.dialogsOpen().length === this._orderNumber) {
         this._dialogService.close();
       }

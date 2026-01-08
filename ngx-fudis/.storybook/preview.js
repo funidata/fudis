@@ -44,7 +44,6 @@ const preview = {
               "Tooling",
               [
                 "Setup VS Code",
-                "Command Reference",
                 "Testing Local Changes in Application",
                 "Git and GitHub Conventions",
                 "Releases",
