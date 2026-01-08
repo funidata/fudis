@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { FudisSelectOption } from '../../types/forms';
+import { environment } from 'projects/dev/src/environments/environment';
+interface VersionsResponse {
+  versions: string[];
+  latest: string;
+}
 
 @Component({
   selector: 'fudis-version-selector',
@@ -17,9 +22,25 @@ export class VersionSelectorComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<string[]>('/ngx/versions.json').subscribe({
-      next: (v) => {
-        this.versions = v ?? [];
+    const isProd = environment.production;
+
+    const versionsUrl = isProd
+      ? 'https://fudis.funidata.fi/ngx/v/versions.json'
+      : 'ngx/v/versions.json';
+
+    this.http.get<VersionsResponse>(versionsUrl).subscribe({
+      next: (res) => {
+        this.versions = res?.versions ?? [];
+
+        if (res?.latest) {
+          this.control.setValue(
+            {
+              label: res.latest,
+              value: res.latest,
+            },
+            { emitEvent: false },
+          );
+        }
       },
       error: () => {
         this.error = true;

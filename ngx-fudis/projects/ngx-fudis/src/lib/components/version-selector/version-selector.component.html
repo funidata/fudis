@@ -1,6 +1,8 @@
 <div class="fudis-version-selector">
   <ng-container *ngIf="error">
-    <span class="fudis-version-unavailable">Version selector unavailable, </span>
+    <fudis-body-text class="fudis-version-selectorunavailable">
+      Version selector unavailable
+    </fudis-body-text>
   </ng-container>
   <ng-container *ngIf="!error">
     <fudis-select size="xs" [control]="control" [label]="'Version'" [variant]="'dropdown'">
