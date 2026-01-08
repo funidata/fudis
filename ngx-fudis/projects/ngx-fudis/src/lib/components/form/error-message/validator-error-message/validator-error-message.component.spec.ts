@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -107,7 +107,7 @@ describe('ValidatorErrorMessageComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should create error with string message when component is initialized', () => {
+    it('should create error with string message when component is initialized', fakeAsync(() => {
       jest.spyOn(component.handleCreateError, 'emit');
 
       component.message = 'Message for testing';
@@ -116,6 +116,9 @@ describe('ValidatorErrorMessageComponent', () => {
       });
 
       fixture.detectChanges();
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
 
       const testError: FudisErrorSummaryNewError = {
         focusId: 'test-id',
@@ -128,7 +131,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       expect(errorElementText.innerHTML).toEqual('Message for testing');
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
-    });
+    }));
 
     it('should remove error with string message when component is destroyed', () => {
       jest.spyOn(component.handleRemoveError, 'emit');
@@ -150,7 +153,7 @@ describe('ValidatorErrorMessageComponent', () => {
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
 
-    it('should create error with observable message when component is initialized and update it when observable updates', async () => {
+    it('should create error with observable message when component is initialized and update it when observable updates', fakeAsync(() => {
       jest.spyOn(component.handleCreateError, 'emit');
 
       const messageAsObservable: Subject<string> = new BehaviorSubject<string>(
@@ -163,6 +166,9 @@ describe('ValidatorErrorMessageComponent', () => {
       });
 
       fixture.detectChanges();
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
 
       const testError: FudisErrorSummaryNewError = {
         focusId: 'test-id',
@@ -180,6 +186,9 @@ describe('ValidatorErrorMessageComponent', () => {
 
       fixture.detectChanges();
 
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
       const updatedError: FudisErrorSummaryNewError = {
         ...testError,
         message: 'Test label: Second message after update',
@@ -189,7 +198,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       expect(errorElementTextSecond.innerHTML).toEqual('Second message after update');
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
-    });
+    }));
 
     it('should remove error with observable message when component is destroyed', () => {
       jest.spyOn(component.handleRemoveError, 'emit');
@@ -221,7 +230,7 @@ describe('ValidatorErrorMessageComponent', () => {
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
 
-    it('should update error message when label updates', () => {
+    it('should update error message when label updates', fakeAsync(() => {
       jest.spyOn(component.handleCreateError, 'emit');
 
       const messageAsObservable: Subject<string> = new BehaviorSubject<string>(
@@ -229,6 +238,9 @@ describe('ValidatorErrorMessageComponent', () => {
       );
       fixture.componentRef.setInput('message', messageAsObservable);
       fixture.detectChanges();
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
 
       const testError: FudisErrorSummaryNewError = {
         focusId: 'test-id',
@@ -242,21 +254,27 @@ describe('ValidatorErrorMessageComponent', () => {
       fixture.componentRef.setInput('label', 'Better label');
       fixture.detectChanges();
 
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
       const updatedError: FudisErrorSummaryNewError = {
         ...testError,
         message: 'Better label: First message from observable',
       };
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
-    });
+    }));
 
-    it('should update error message when formId updates', () => {
+    it('should update error message when formId updates', fakeAsync(() => {
       jest.spyOn(component.handleCreateError, 'emit');
 
       component.message = 'Message for testing';
       component.ngOnChanges({
         message: new SimpleChange(null, component.message, true),
       });
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
 
       const testError: FudisErrorSummaryNewError = {
         focusId: 'test-id',
@@ -274,6 +292,9 @@ describe('ValidatorErrorMessageComponent', () => {
         focusId: new SimpleChange(null, component.focusId, true),
       });
 
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
       const updatedError: FudisErrorSummaryNewError = {
         focusId: 'test-id',
         message: 'Test label: Message for testing',
@@ -282,9 +303,9 @@ describe('ValidatorErrorMessageComponent', () => {
       };
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
-    });
+    }));
 
-    it('should not show error message if visibility conditions are not met', () => {
+    it('should not show error message if visibility conditions are not met', fakeAsync(() => {
       jest.spyOn(component.handleCreateError, 'emit');
 
       component.message = 'Message for testing';
@@ -294,6 +315,9 @@ describe('ValidatorErrorMessageComponent', () => {
       });
 
       fixture.detectChanges();
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
 
       const testError: FudisErrorSummaryNewError = {
         focusId: 'test-id',
@@ -306,7 +330,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       expect(errorElementText).toBeFalsy();
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
-    });
+    }));
 
     it('should have respective CSS class according to variant', () => {
       component.message = 'Message for testing';
