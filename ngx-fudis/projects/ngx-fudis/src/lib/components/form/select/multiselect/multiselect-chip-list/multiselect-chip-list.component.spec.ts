@@ -65,6 +65,9 @@ describe('MultiselectChipListComponent', () => {
   describe('Chip element', () => {
     it('should have CSS class', () => {
       expect(buttonElement.classList).toContain('fudis-multiselect-chip-list__item__button');
+      expect(buttonElement.querySelector('span')!.classList).toContain(
+        'fudis-multiselect-chip-list__item__button__label',
+      );
     });
 
     it('should have fudis-icon present', () => {
