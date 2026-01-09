@@ -6,8 +6,9 @@ import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
 
 // TODO: Write tests
 /**
- * A marker directive to set any element, mostly Button Component to work as submit button, which
- * will trigger Error Summary on click
+ * Marks an element as the primary form submission trigger.
+ *
+ * Use this directive on submit button which will trigger error summary on click.
  */
 @Directive({
   selector: '[fudisFormSubmit]',

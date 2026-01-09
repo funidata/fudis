@@ -3,6 +3,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { NgxFudisModule } from '../../ngx-fudis.module';
 
+/**
+ * Indicates a loading or processing state.
+ *
+ * Use this component to inform users of ongoing activity or process.
+ */
 @Component({
   selector: 'fudis-loading-spinner',
   imports: [CommonModule, NgxFudisModule],

@@ -1,6 +1,11 @@
 import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 import { FudisComponentChanges, fudisFieldsetActionsAlign } from '../../../types/miscellaneous';
 
+/**
+ * Identifies the actions associated with a fieldset.
+ *
+ * Use this directive to add buttons that affect the fieldset as a whole.
+ */
 @Directive({
   selector: 'fudis-fieldset-actions',
   standalone: false,
@@ -21,6 +26,11 @@ export class FieldsetActionsDirective implements OnChanges {
   }
 }
 
+/**
+ * Identifies the main content area of a fieldset.
+ *
+ * Use this directive to group related form controls within a fieldset.
+ */
 @Directive({
   selector: 'fudis-fieldset-content',
   standalone: false,

@@ -12,6 +12,9 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
 
+/**
+ * Single radio button option for RadioButtonGroupComponent
+ */
 @Component({
   selector: 'fudis-radio-button',
   templateUrl: './radio-button.component.html',

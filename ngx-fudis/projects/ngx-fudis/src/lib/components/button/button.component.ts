@@ -12,6 +12,12 @@ import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../t
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
+/**
+ * Triggers an action or event.
+ *
+ * Use this component for primary user actions such as submitting forms, confirming choices, or
+ * navigating workflows.
+ */
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',

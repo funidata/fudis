@@ -7,6 +7,9 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { PopoverApiDirective } from '../../../../directives/popover/popover-api.directive';
 
+/**
+ * Displays the term (key) in a DescriptionListItemComponent.
+ */
 @Component({
   selector: 'fudis-dt',
   templateUrl: './description-list-item-term.component.html',

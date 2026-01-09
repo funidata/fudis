@@ -23,6 +23,11 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { toObservable } from '@angular/core/rxjs-interop';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
+/**
+ * Provides layout and structure for form content.
+ *
+ * Use this component to consistently arrange form fileds, actions, and validation elements.
+ */
 @Component({
   selector: 'fudis-form',
   templateUrl: './form.component.html',

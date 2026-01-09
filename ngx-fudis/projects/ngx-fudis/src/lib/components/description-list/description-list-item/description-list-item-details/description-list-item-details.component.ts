@@ -15,6 +15,9 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
+/**
+ * Displays the details (value) of a term (key) in a DescriptionListItemComponent.
+ */
 @Component({
   selector: 'fudis-dd',
   templateUrl: './description-list-item-details.component.html',

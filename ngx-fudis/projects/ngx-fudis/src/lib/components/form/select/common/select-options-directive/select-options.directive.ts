@@ -1,9 +1,11 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-// TODO: Write tests for all Content Directives in this file
+// TODO: Write tests
 /**
- * A marker directive used to tag the template that will be rendered inside the Select options
- * components
+ * Marks the container for select options.
+ *
+ * Use this directive to tag the template which wraps (multi)select options and enables lazy laoding
+ * of the options.
  */
 @Directive({
   selector: '[fudisSelectOptions]',

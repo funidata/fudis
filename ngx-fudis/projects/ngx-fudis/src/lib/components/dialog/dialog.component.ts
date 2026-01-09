@@ -19,6 +19,12 @@ import { throttle } from '../../utilities/resizeThrottle';
 import { debounceTime, fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+/**
+ * Displays content in a modal overlay.
+ *
+ * Use this component for focused interactions that require user attention or confirmation before
+ * continuing.
+ */
 @Component({
   selector: 'fudis-dialog',
   templateUrl: './dialog.component.html',

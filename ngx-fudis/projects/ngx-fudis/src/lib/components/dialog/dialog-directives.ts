@@ -18,6 +18,11 @@ import {
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { isButtonDisabled } from '../../utilities/dialog/dialog-utils';
 
+/**
+ * Identifies the title of a dialog.
+ *
+ * Use this directive to provide automatically focused heading when opening a dialog.
+ */
 @Directive({
   selector: '[fudisDialogTitle]',
   providers: [
@@ -49,6 +54,9 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
   }
 }
 
+/**
+ * Identifies the main content area of a dialog.
+ */
 @Directive({
   selector: 'fudis-dialog-content',
   standalone: false,
@@ -87,6 +95,11 @@ export class DialogContentDirective extends MatDialogContent implements OnChange
   }
 }
 
+/**
+ * Identifies the actions region of a dialog.
+ *
+ * Use this directive to set action buttons in a fixed position at the bottom of a dialog.
+ */
 @Directive({
   selector: 'fudis-dialog-actions',
   standalone: false,
@@ -95,6 +108,11 @@ export class DialogActionsDirective extends MatDialogActions {
   override align: 'start' | 'center' | 'end' = 'end';
 }
 
+/**
+ * Marks and element that closes a dialog.
+ *
+ * Use this directive to provide a button which solely dismisses a dialog.
+ */
 @Directive({
   selector: '[fudisDialogClose]',
   standalone: false,
