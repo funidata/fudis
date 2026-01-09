@@ -11,6 +11,11 @@ import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 
+/**
+ * Displays a decorative or semantic icon.
+ *
+ * Use this component to enhance recognition, meaning, or visual hierarchy.
+ */
 @Component({
   selector: 'fudis-icon',
   templateUrl: './icon.component.html',

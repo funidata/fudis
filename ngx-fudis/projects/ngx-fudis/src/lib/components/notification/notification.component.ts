@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from
 import { FudisNotification } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
+/**
+ * Displays an information message.
+ *
+ * Use this component to inform users about events, updates, or system feedback.
+ */
 @Component({
   selector: 'fudis-notification',
   templateUrl: './notification.component.html',

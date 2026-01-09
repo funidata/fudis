@@ -3,6 +3,12 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { FudisIdService } from '../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 
+/**
+ * Displays the hierarchial navigation path to the current page.
+ *
+ * Use this component to help users understand their location and navigate back through parent
+ * levels.
+ */
 @Component({
   selector: 'fudis-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',

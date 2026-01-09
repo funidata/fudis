@@ -1,6 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 
+/**
+ * Provides a responsive grid layout.
+ *
+ * Use this component to structure page or section layouts visually using columns.
+ */
 @Component({
   selector: 'fudis-grid',
   templateUrl: './grid.component.html',

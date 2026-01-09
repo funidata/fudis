@@ -11,6 +11,11 @@ import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.
 import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
 import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
 
+/**
+ * Applies grid item behavior within a grid container.
+ *
+ * Use this directive to control placement and span of child elements inside a grid container.
+ */
 @Directive({
   selector: '[fudisGridItem]',
   standalone: false,

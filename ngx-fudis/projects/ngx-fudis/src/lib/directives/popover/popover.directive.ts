@@ -20,6 +20,12 @@ type PopoverPosition = {
   [key in FudisPopoverPosition]: ConnectedPosition;
 };
 
+/**
+ * Displays additional content in an overlay container.
+ *
+ * Use this directive to provide contextual information or tips without navigating away from the
+ * current view. Keep popover content concise.
+ */
 @Directive({
   selector: '[fudisPopover]',
 })

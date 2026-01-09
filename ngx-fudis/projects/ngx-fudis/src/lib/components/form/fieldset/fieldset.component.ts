@@ -20,6 +20,11 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
 
+/**
+ * Groups related form controls under a common context.
+ *
+ * Use this component to improve form structure, clarity, and accessibility.
+ */
 @Component({
   selector: 'fudis-fieldset',
   templateUrl: './fieldset.component.html',

@@ -30,11 +30,9 @@ export { DropdownMenuGroupComponent } from './lib/components/dropdown-menu/dropd
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
-export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
-export { FormSubmitDirective } from './lib/directives/form/form-actions/form-actions.directive';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
 export { HorizontalRuleComponent } from './lib/components/horizontal-rule/horizontal-rule.component';
@@ -54,6 +52,9 @@ export { SectionComponent } from './lib/components/section/section.component';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
+export { TabNavigationBarComponent } from './lib/components/tab-navigation/tab-navigation-bar.component';
+export { TabNavigationPanelComponent } from './lib/components/tab-navigation/tab-navigation-panel.component';
+export { TabNavigationTabComponent } from './lib/components/tab-navigation/tab-navigation-tab.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 
@@ -84,6 +85,7 @@ export {
   FormContentDirective,
   FormHeaderDirective,
 } from './lib/components/form/form/form-content.directive';
+export { FormSubmitDirective } from './lib/directives/form/form-actions/form-actions.directive';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
 export { LinkDirective } from './lib/directives/link/link.directive';
@@ -91,9 +93,6 @@ export { SectionActionsDirective } from './lib/components/section/section-conten
 export { SectionContentDirective } from './lib/components/section/section-content.directive';
 export { SelectOptionsDirective } from './lib/components/form/select/common/select-options-directive/select-options.directive';
 export { PopoverDirective } from './lib/directives/popover/popover.directive';
-export { TabNavigationTabComponent } from './lib/components/tab-navigation/tab-navigation-tab.component';
-export { TabNavigationBarComponent } from './lib/components/tab-navigation/tab-navigation-bar.component';
-export { TabNavigationPanelComponent } from './lib/components/tab-navigation/tab-navigation-panel.component';
 
 /**
  * SERVICES
@@ -101,6 +100,7 @@ export { TabNavigationPanelComponent } from './lib/components/tab-navigation/tab
 export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
 export { FudisDialogService } from './lib/services/dialog/dialog.service';
+export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { FudisGridService } from './lib/services/grid/grid.service';
 export { FudisTranslationService } from './lib/services/translation/translation.service';
 

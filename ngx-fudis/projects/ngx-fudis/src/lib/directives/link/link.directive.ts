@@ -19,6 +19,11 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { IconComponent } from '../../components/icon/icon.component';
 import { DOCUMENT } from '@angular/common';
 
+/**
+ * Adds link behavior to an element.
+ *
+ * Use this directive with anchor element and consider whether link is internal/external.
+ */
 @Directive({
   selector: '[fudisLink]',
   standalone: false,

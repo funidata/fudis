@@ -17,6 +17,11 @@ import { FudisInternalErrorSummaryService } from '../../services/form/error-summ
 import { BehaviorSubject } from 'rxjs';
 import { getHeadingVariant } from '../../utilities/typography/typography-utils';
 
+/**
+ * Defines a logical content section.
+ *
+ * Use this component to group related content and improve page structure.
+ */
 @Component({
   selector: 'fudis-section',
   templateUrl: './section.component.html',

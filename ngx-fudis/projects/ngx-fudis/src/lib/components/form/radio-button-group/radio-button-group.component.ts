@@ -20,6 +20,11 @@ import { Subscription } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
+/**
+ * Groups mutually exclusive options.
+ *
+ * Use this component when user must select exactly one option from a set.
+ */
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',

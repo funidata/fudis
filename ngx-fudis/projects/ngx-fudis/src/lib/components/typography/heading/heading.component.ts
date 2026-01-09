@@ -14,6 +14,12 @@ import { FudisTextAlign } from '../../../types/typography';
 import { BehaviorSubject } from 'rxjs';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
+/**
+ * Displays a heading at a specified semantic level (h1-h6).
+ *
+ * Use this component to structure content hierarchially and provide semantic information for all
+ * users.
+ */
 @Component({
   selector: 'fudis-heading',
   templateUrl: './heading.component.html',

@@ -1,6 +1,12 @@
 import { Directive, Host } from '@angular/core';
 import { DatepickerComponent } from '../../../components/form/date/datepicker/datepicker.component';
 
+/**
+ * Marks an input as the start date of a date range.
+ *
+ * Use this directive to associate the control with a date range and enable correct validation
+ * behavior.
+ */
 @Directive({
   selector: '[fudisDateStart]',
   standalone: false,
@@ -11,6 +17,12 @@ export class DateStartDirective {
   }
 }
 
+/**
+ * Marks an input as the end date of a date range.
+ *
+ * Use this directive to associate the control with a date range and enable correct validation
+ * behavior.
+ */
 @Directive({
   selector: '[fudisDateEnd]',
   standalone: false,

@@ -11,12 +11,16 @@ import { FudisComponentChanges, FudisLanguageAbbr } from '../../types/miscellane
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { PopoverApiDirective } from '../../directives/popover/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
-
 import { BehaviorSubject } from 'rxjs';
 
 type LanguageLabel = { key: FudisLanguageAbbr; variant: 'standard' | 'missing' };
-
 type LanguageLabelArray = LanguageLabel[];
+
+/**
+ * Displays a group of language indicators.
+ *
+ * Use this component to present available or active languages for content.
+ */
 @Component({
   selector: 'fudis-language-badge-group',
   templateUrl: './language-badge-group.component.html',

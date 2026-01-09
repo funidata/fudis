@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisBadgeVariant } from '../../types/miscellaneous';
 
+/**
+ * Displays a small status or category label.
+ *
+ * Use this component to convey concise information, like state or classification that supplements
+ * surrounding content.
+ */
 @Component({
   selector: 'fudis-badge',
   templateUrl: './badge.component.html',

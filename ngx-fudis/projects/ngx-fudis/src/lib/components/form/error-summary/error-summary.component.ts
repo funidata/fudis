@@ -24,6 +24,11 @@ type ErrorSummaryDOMListItem = {
   element: HTMLElement | null;
 };
 
+/**
+ * Displays a summary of validation errors.
+ *
+ * Use this component to present form errors in a single, accessible location.
+ */
 @Component({
   selector: 'fudis-error-summary',
   templateUrl: './error-summary.component.html',

@@ -22,6 +22,11 @@ import { FudisInternalErrorSummaryService } from '../../services/form/error-summ
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ExpandableContentDirective } from './expandable-content.directive';
 
+/**
+ * Toggles the visibility of additional content.
+ *
+ * Use this component to progressively disclose information without overwhelming the user.
+ */
 @Component({
   selector: 'fudis-expandable',
   templateUrl: './expandable.component.html',

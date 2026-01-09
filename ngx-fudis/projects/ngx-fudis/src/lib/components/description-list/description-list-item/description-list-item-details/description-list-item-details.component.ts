@@ -15,6 +15,9 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
+/**
+ * Displays the details (value) of a term (key) in a DescriptionListItemComponent.
+ */
 @Component({
   selector: 'fudis-dd',
   templateUrl: './description-list-item-details.component.html',
@@ -64,7 +67,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _hostClass = 'fudis-dl-item-details-host';
+  @HostBinding('class') public hostClass = 'fudis-dl-item-details-host';
 
   /**
    * Details element language, possible values 'fi', 'sv' and 'en'.
@@ -125,7 +128,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
 
       this._detailsSent = true;
 
-      this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
+      this.hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
     }
   }
 
@@ -133,7 +136,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     if (this._detailsSent) {
       this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
       this._detailsSent = false;
-      this._hostClass = `fudis-dl-item-details-host`;
+      this.hostClass = `fudis-dl-item-details-host`;
     }
   }
 

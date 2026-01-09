@@ -8,6 +8,11 @@ import {
 import { FudisIdService } from '../../../services/id/id.service';
 import { BreadcrumbsComponent } from '../breadcrumbs.component';
 
+/**
+ * Represents a single link within BreadcrumbsComponent.
+ *
+ * Use this component with descriptive link text to ensure understandability.
+ */
 @Component({
   selector: 'fudis-breadcrumbs-item',
   templateUrl: './breadcrumbs-item.component.html',

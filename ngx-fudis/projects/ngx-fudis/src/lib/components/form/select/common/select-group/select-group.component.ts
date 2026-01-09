@@ -4,6 +4,11 @@ import { SelectComponent } from '../../select/select.component';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 
+/**
+ * Groups select options under a common category.
+ *
+ * Use this component to organize related options to improve readability.
+ */
 @Component({
   selector: 'fudis-select-group, fudis-multiselect-group',
   templateUrl: './select-group.component.html',

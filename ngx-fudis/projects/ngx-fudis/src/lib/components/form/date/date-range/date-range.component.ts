@@ -3,6 +3,11 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
+/**
+ * Allows selection of a start and end date.
+ *
+ * Use this component when user need to define a time interval.
+ */
 @Component({
   selector: 'fudis-date-range',
   templateUrl: './date-range.component.html',

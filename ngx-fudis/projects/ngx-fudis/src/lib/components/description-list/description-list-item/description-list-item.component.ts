@@ -17,6 +17,11 @@ import { DescriptionListComponent } from '../description-list.component';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
+/**
+ * Represents a single term-detail pair.
+ *
+ * Use this component to group related description list terms and details together.
+ */
 @Component({
   selector: 'fudis-dl-item',
   styleUrls: ['./description-list-item.component.scss'],

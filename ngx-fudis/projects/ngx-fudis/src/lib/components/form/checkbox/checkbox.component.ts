@@ -20,6 +20,11 @@ import { FudisValidatorUtilities } from '../../../utilities/form/validator-utili
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
+/**
+ * Represents a single boolean form control.
+ *
+ * Use this component when user need to toggle an option on or off.
+ */
 @Component({
   selector: 'fudis-checkbox',
   templateUrl: './checkbox.component.html',
