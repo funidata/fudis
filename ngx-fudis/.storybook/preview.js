@@ -44,7 +44,7 @@ const preview = {
               "Tooling",
               [
                 "Setup VS Code",
-                "Testing Local Changes with Symlink",
+                "Testing Local Changes in Application",
                 "Git and GitHub Conventions",
                 "Releases",
               ],
