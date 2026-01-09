@@ -16,12 +16,16 @@
     @include core.border-none;
     @include core.box-reset;
 
-    display: block;
+    display: flex;
     cursor: pointer;
-    padding: 0 core.$spacing-xs 0 0;
+    text-align: start;
 
     &:focus {
       @include core.focus-generic;
+    }
+
+    &__label {
+      padding: core.$spacing-xs core.$spacing-xs core.$spacing-xs 0;
     }
   }
 }
