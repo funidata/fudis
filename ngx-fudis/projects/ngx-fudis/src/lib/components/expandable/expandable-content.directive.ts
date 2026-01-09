@@ -10,7 +10,7 @@ import { Directive, HostBinding, TemplateRef } from '@angular/core';
   standalone: false,
 })
 export class ExpandableActionsDirective {
-  @HostBinding('class') private _hostClass = 'fudis-expandable-actions';
+  @HostBinding('class') readonly _hostClass = 'fudis-expandable-actions';
 }
 
 /**

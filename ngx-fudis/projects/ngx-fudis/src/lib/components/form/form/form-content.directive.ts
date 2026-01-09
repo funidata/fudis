@@ -10,7 +10,7 @@ import { Directive, HostBinding } from '@angular/core';
   standalone: false,
 })
 export class FormActionsDirective {
-  @HostBinding('class') private _hostClass = 'fudis-form-actions';
+  @HostBinding('class') readonly _hostClass = 'fudis-form-actions';
 }
 
 /**
@@ -24,7 +24,7 @@ export class FormActionsDirective {
   standalone: false,
 })
 export class FormHeaderDirective {
-  @HostBinding('class') private _hostClass = 'fudis-form-header';
+  @HostBinding('class') readonly _hostClass = 'fudis-form-header';
 }
 
 /**
@@ -37,5 +37,5 @@ export class FormHeaderDirective {
   standalone: false,
 })
 export class FormContentDirective {
-  @HostBinding('class') private _hostClass = 'fudis-form-content';
+  @HostBinding('class') readonly _hostClass = 'fudis-form-content';
 }

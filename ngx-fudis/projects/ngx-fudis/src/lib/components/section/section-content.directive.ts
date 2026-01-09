@@ -10,7 +10,7 @@ import { Directive, HostBinding } from '@angular/core';
   standalone: false,
 })
 export class SectionActionsDirective {
-  @HostBinding('class') private _hostClass = 'fudis-section-actions';
+  @HostBinding('class') readonly _hostClass = 'fudis-section-actions';
 }
 
 /**
@@ -23,5 +23,5 @@ export class SectionActionsDirective {
   standalone: false,
 })
 export class SectionContentDirective {
-  @HostBinding('class') private _hostClass = 'fudis-section-content';
+  @HostBinding('class') readonly _hostClass = 'fudis-section-content';
 }

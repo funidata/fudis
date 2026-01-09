@@ -36,5 +36,5 @@ export class FieldsetActionsDirective implements OnChanges {
   standalone: false,
 })
 export class FieldsetContentDirective {
-  @HostBinding('class') private _hostClass = 'fudis-fieldset-content';
+  @HostBinding('class') readonly _hostClass = 'fudis-fieldset-content';
 }
