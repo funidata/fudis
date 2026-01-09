@@ -66,7 +66,7 @@ describe('FieldsetContentDirectives', () => {
 
     it('should have host class and default alignment', () => {
       const directive = new FieldsetActionsDirective();
-      expect(directive['_hostClass']).toBe(
+      expect(directive['hostClass']).toBe(
         'fudis-fieldset-actions fudis-fieldset-actions__align--start',
       );
     });
