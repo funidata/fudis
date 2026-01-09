@@ -11,7 +11,7 @@ import { FudisComponentChanges, fudisFieldsetActionsAlign } from '../../../types
   standalone: false,
 })
 export class FieldsetActionsDirective implements OnChanges {
-  @HostBinding('class') private _hostClass =
+  @HostBinding('class') public hostClass =
     'fudis-fieldset-actions fudis-fieldset-actions__align--start';
 
   /**
@@ -21,7 +21,7 @@ export class FieldsetActionsDirective implements OnChanges {
 
   ngOnChanges(changes: FudisComponentChanges<FieldsetActionsDirective>): void {
     if (changes.align?.currentValue !== changes.align?.previousValue) {
-      this._hostClass = `fudis-fieldset-actions fudis-fieldset-actions__align--${changes.align?.currentValue}`;
+      this.hostClass = `fudis-fieldset-actions fudis-fieldset-actions__align--${changes.align?.currentValue}`;
     }
   }
 }
