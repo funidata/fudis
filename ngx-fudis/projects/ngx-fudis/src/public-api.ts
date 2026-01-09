@@ -56,6 +56,7 @@ export { SelectGroupComponent } from './lib/components/form/select/common/select
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
+export { VersionSelectorComponent } from './lib/components/version-selector/version-selector.component';
 
 /**
  * DIRECTIVES
