@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { FudisSelectOption } from '../../types/forms';
-import { environment } from 'projects/dev/src/environments/environment';
 interface VersionsResponse {
   versions: string[];
   latest: string;
@@ -22,7 +21,7 @@ export class VersionSelectorComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    const isProd = environment.production;
+    const isProd = window.location.hostname === 'fudis.funidata.fi';
 
     const versionsUrl = isProd
       ? 'https://fudis.funidata.fi/ngx/v/versions.json'
