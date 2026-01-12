@@ -1,15 +1,16 @@
+/* stylelint-disable unit-disallowed-list */
+
 .fudis-version-selector,
 .fudis-version-selector-loading,
 .fudis-version-unavailable {
   display: block;
-  border: 0;
   padding: 0;
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 
 .fudis-version-selector {
-  width: fit-content;
+  margin-left: auto;
   padding: 0;
   padding-bottom: 2rem;
-  margin-left: auto;
+  width: fit-content;
 }
