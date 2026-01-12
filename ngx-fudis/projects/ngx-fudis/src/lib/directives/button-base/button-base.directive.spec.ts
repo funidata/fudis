@@ -5,7 +5,7 @@ import { fudisButtonVariantArray } from '../../types/miscellaneous';
 import { getElement } from '../../utilities/tests/utilities';
 import { fudisIconRotateArray } from '../../types/icons';
 
-describe('ButtonComponent', () => {
+describe('ButtonBaseDirective', () => {
   let component: ButtonComponent;
   let fixture: ComponentFixture<ButtonComponent>;
 
