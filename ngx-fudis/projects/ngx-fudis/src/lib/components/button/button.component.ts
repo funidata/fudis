@@ -49,14 +49,19 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
    */
   @Input() type: FudisButtonType = 'button';
 
-  override ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
+  ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
+    const variant = changes.variant?.currentValue !== changes.variant?.previousValue;
+    const disabled = changes.disabled?.currentValue !== changes.disabled?.previousValue;
     const size = changes.size?.currentValue !== changes.size?.previousValue;
+
+    if (variant || disabled) {
+      this._classList.next(this._getClasses());
+    }
 
     if (size) {
       this._size = this.size;
+      this._classList.next(this._getClasses());
     }
-
-    super.ngOnChanges(changes);
   }
 
   /**

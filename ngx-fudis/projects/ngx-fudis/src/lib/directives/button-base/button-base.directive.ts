@@ -5,29 +5,20 @@ import {
   OnInit,
   Output,
   OnDestroy,
-  OnChanges,
   ViewChild,
   ElementRef,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
-import {
-  FudisButtonSize,
-  FudisButtonVariant,
-  FudisComponentChanges,
-} from '../../types/miscellaneous';
+import { FudisButtonSize, FudisButtonVariant } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 import { PopoverApiDirective } from '../popover/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
-import { IconButtonComponent } from '../../components/icon-button/icon-button.component';
-import { ButtonComponent } from '../../components/button/button.component';
+
 @Directive({
   selector: '[fudisButtonBase]',
   standalone: false,
 })
-export class ButtonBaseDirective
-  extends PopoverApiDirective
-  implements OnInit, OnDestroy, OnChanges
-{
+export class ButtonBaseDirective extends PopoverApiDirective implements OnInit, OnDestroy {
   constructor(protected _idService: FudisIdService) {
     super();
   }
@@ -57,7 +48,7 @@ export class ButtonBaseDirective
   @Input() variant: FudisButtonVariant = 'primary';
 
   /**
-   * Disables the button, keeping it focusable
+   * Disables the button, keeping it focusable for screen readers
    */
   @Input() disabled = false;
 
@@ -114,16 +105,6 @@ export class ButtonBaseDirective
     }
 
     if (this._classList.value.length === 0) {
-      this._classList.next(this._getClasses());
-    }
-  }
-
-  ngOnChanges(changes: FudisComponentChanges<ButtonComponent | IconButtonComponent>): void {
-    const variant = changes.variant?.currentValue !== changes.variant?.previousValue;
-    const disabled = changes.disabled?.currentValue !== changes.disabled?.previousValue;
-    const size = changes.size?.currentValue !== changes.size?.previousValue;
-
-    if (variant || disabled || size) {
       this._classList.next(this._getClasses());
     }
   }
