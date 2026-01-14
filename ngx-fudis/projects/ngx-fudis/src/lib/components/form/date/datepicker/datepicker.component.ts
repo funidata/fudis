@@ -30,6 +30,11 @@ import { DateRangeComponent } from '../date-range/date-range.component';
 import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
+/**
+ * Allows selection of a single date.
+ *
+ * Use this component for date input with calendar assistance and validation.
+ */
 @Component({
   selector: 'fudis-datepicker',
   templateUrl: './datepicker.component.html',

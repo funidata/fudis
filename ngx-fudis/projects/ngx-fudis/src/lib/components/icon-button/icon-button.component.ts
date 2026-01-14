@@ -13,6 +13,12 @@ import { BehaviorSubject } from 'rxjs';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { FudisIdService } from '../../services/id/id.service';
 
+/**
+ * Button represented primarily by an icon.
+ *
+ * Use this component for compact actions where icon and its aria-label clearly communicate the
+ * intent.
+ */
 @Component({
   selector: 'fudis-icon-button',
   templateUrl: './icon-button.component.html',

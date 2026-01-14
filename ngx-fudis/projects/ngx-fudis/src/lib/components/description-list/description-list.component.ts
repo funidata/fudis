@@ -13,6 +13,11 @@ import { FudisIdService } from '../../services/id/id.service';
 import { FudisGridGap } from '../../types/grid';
 import { BehaviorSubject } from 'rxjs';
 
+/**
+ * Displays a collection of term-details pairs of related information.
+ *
+ * Use this component to present structured information with proper semantic relationships.
+ */
 @Component({
   selector: 'fudis-dl',
   templateUrl: './description-list.component.html',

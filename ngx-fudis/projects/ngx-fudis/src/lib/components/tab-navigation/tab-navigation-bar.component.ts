@@ -16,7 +16,9 @@ import { auditTime, fromEvent, Subscription } from 'rxjs';
 import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
 
 /**
- * A Tab navigation bar component.
+ * Organizes content into selectable tabs.
+ *
+ * Use this component to switch between related views within the same context.
  */
 @Component({
   selector: 'fudis-tab-navigation-bar',

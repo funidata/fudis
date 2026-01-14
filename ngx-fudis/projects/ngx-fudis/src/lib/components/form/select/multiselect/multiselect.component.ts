@@ -20,6 +20,12 @@ import { MultiselectControlValueAccessorDirective } from '../common/select-contr
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
+/**
+ * Allows selection of multiple options from a dropdown list.
+ *
+ * Use this component when there are multiple predefined options and user can choose more than one
+ * value.
+ */
 @Component({
   selector: 'fudis-multiselect',
   templateUrl: './multiselect.component.html',

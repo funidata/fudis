@@ -21,6 +21,11 @@ import {
 import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 
+/**
+ * Applies grid layout behavior to a container element.
+ *
+ * Use this directive to define responsive columns.
+ */
 @Directive({
   selector: '[fudisGrid]',
   standalone: false,

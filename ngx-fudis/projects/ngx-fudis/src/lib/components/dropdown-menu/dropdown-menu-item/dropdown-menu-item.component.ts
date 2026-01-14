@@ -17,6 +17,9 @@ import { BehaviorSubject } from 'rxjs';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { DropdownMenuGroupComponent } from '../dropdown-menu-group/dropdown-menu-group.component';
 
+/**
+ * Single menu item for DropdownMenuComponent.
+ */
 @Component({
   selector: 'fudis-dropdown-menu-item',
   templateUrl: './dropdown-menu-item.component.html',
