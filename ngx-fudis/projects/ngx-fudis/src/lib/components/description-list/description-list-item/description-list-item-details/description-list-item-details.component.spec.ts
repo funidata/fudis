@@ -52,6 +52,21 @@ import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
         <fudis-dd [contentText]="''" [lang]="'sv'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
+
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Empty state 1'"></fudis-dt>
+        <fudis-dd [contentText]="'This should not be visible'" [emptyState]="true"></fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Empty state 2'"></fudis-dt>
+        <fudis-dd
+          [contentText]="'This should not be visible'"
+          [emptyState]="true"
+          [emptyStateContentText]="'This is custom text'"
+        ></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
   `,
 })
 class MockDlComponent {
@@ -259,6 +274,28 @@ describe('DescriptionListItemDetailsComponent', () => {
       );
 
       expect(buttonComponent).toBeTruthy();
+    });
+  });
+
+  describe('Empty state', () => {
+    it('should show default empty state text', () => {
+      const emptyState = mockFixture.debugElement.query(
+        By.css('.fudis-dl-item-details__regular .fudis-text-emptystate'),
+      );
+
+      const text = emptyState.nativeElement.textContent.trim();
+
+      expect(text).toEqual('Information is not available');
+    });
+
+    it('should show custom text', () => {
+      const emptyStateElements = mockFixture.debugElement.queryAll(
+        By.css('.fudis-dl-item-details__regular .fudis-text-emptystate'),
+      );
+
+      const text = emptyStateElements[1].nativeElement.textContent.trim();
+
+      expect(text).toEqual('This is custom text');
     });
   });
 });
