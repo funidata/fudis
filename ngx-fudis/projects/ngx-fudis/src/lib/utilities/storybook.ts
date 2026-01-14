@@ -189,6 +189,11 @@ export const nestedDescriptionListExclude: RegExp = excludeRegex([
   'variant',
 ]);
 
+export const descriptionListEmptyState: RegExp = excludeRegex([
+  ...descriptionListCommonExclude,
+  'disableGrid',
+]);
+
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
 
 /**
