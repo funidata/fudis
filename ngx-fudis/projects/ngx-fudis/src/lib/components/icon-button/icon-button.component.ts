@@ -16,7 +16,8 @@ import { FudisIdService } from '../../services/id/id.service';
 /**
  * Button represented primarily by an icon.
  *
- * Use this component for compact actions where icon and its aria-label clearly communicate the intent.
+ * Use this component for compact actions where icon and its aria-label clearly communicate the
+ * intent.
  */
 @Component({
   selector: 'fudis-icon-button',
