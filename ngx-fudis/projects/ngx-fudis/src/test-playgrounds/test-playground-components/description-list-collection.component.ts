@@ -28,7 +28,6 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-heading [level]="3" [variant]="'md'"
           >Nested {{ variant.title }} Description Lists with Indiana Jones Movies</fudis-heading
         >
-
         <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value">
           @for (movie of indianaJonesData; track movie) {
             <fudis-dl-item>
@@ -79,7 +78,12 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-heading [level]="2" [variant]="'md'"
           >{{ variant.title }} Description List With Sub Components</fudis-heading
         >
-        <fudis-dl class="fudis-mt-sm" [disableGrid]="gridConfig.value" [variant]="variant.value">
+        <fudis-dl
+          class="fudis-mt-sm"
+          [columns]="2"
+          [disableGrid]="gridConfig.value"
+          [variant]="variant.value"
+        >
           <fudis-dl-item>
             <fudis-dt [contentText]="'First name'"></fudis-dt>
             <fudis-dd [contentText]="'Rex'"></fudis-dd>
@@ -127,7 +131,6 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         >
         <fudis-dl
           class="fudis-mt-sm"
-          [variant]="'regular'"
           [columns]="'1fr 1fr'"
           [disableGrid]="gridConfig.value"
           [variant]="variant.value"
@@ -140,7 +143,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         </fudis-dl>
         <fudis-hr class="fudis-my-lg" />
         <fudis-heading [level]="2" [variant]="'md'"
-          >Description List Item With Multiple Details</fudis-heading
+          >{{ variant.title }} Description List Item With Multiple Details</fudis-heading
         >
         <fudis-dl
           class="fudis-mt-sm"
@@ -159,6 +162,29 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           <fudis-dl-item>
             <fudis-dt [contentText]="'Non-Jedi Master Members'"></fudis-dt>
             <fudis-dd [contentText]="'Anakin Skywalker'"></fudis-dd>
+          </fudis-dl-item>
+        </fudis-dl>
+        <fudis-hr class="fudis-my-lg" />
+        <fudis-heading [level]="2" [variant]="'md'"
+          >{{ variant.title }} Description List Details With Empty State</fudis-heading
+        >
+        <fudis-dl
+          class="fudis-mt-sm"
+          [columns]="'1fr 1fr'"
+          [disableGrid]="gridConfig.value"
+          [variant]="variant.value"
+        >
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Education type'" />
+            <fudis-dd [contentText]="'Open university studies'" [emptyState]="true" />
+          </fudis-dl-item>
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Location'" />
+            <fudis-dd
+              [contentText]="'Helsinki'"
+              [emptyState]="true"
+              [emptyStateContentText]="'Custom message'"
+            />
           </fudis-dl-item>
         </fudis-dl>
         <fudis-hr class="fudis-my-lg" />
@@ -257,7 +283,7 @@ export class StorybookExampleDescriptionListCollectionComponent {
   };
 
   gridConfigs = [
-    { title: 'Enabled', value: true },
-    { title: 'Disabled', value: false },
+    { title: 'Enabled', value: false },
+    { title: 'Disabled', value: true },
   ];
 }
