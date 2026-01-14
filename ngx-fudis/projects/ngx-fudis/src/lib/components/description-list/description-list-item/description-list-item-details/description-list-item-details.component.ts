@@ -14,6 +14,7 @@ import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-dd',
@@ -25,6 +26,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
+    protected _translationService: FudisTranslationService,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -85,6 +87,17 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    * Aria-label for classified/hidden Details content
    */
   @Input() ariaLabel: string | null | undefined;
+
+  /**
+   * Show empty state content
+   */
+  @Input() emptyState: boolean = false;
+
+  /**
+   * Text displayed in Details element where emptyState boolean is true. If not provided, Fudis will
+   * display its default empty state text
+   */
+  @Input() emptyStateContentText: string;
 
   /**
    * Id generated with Id Service

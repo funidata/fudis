@@ -7,7 +7,9 @@
 
   <ng-container *ngIf="_parentDl.tag === 'dl'">
     <dd [id]="_id" [attr.lang]="lang" [class]="_mainCssClass | async">
-      <ng-container *ngTemplateOutlet="ddContent"></ng-container>
+      <ng-container *ngIf="!emptyState; else emptyStateTpl">
+        <ng-container *ngTemplateOutlet="ddContent"></ng-container>
+      </ng-container>
     </dd>
   </ng-container>
 </ng-container>
@@ -28,4 +30,11 @@
     aria-hidden="true"
     >&comma;</span
   >
+</ng-template>
+
+<ng-template #emptyStateTpl>
+  <span class="fudis-text-emptystate">{{
+    emptyStateContentText ||
+      _translationService.getTranslations()().DESCRIPTION_LIST_ITEM_DETAILS.EMPTY_STATE
+  }}</span>
 </ng-template>
