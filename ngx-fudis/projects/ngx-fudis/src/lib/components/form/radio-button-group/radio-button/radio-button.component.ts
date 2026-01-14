@@ -13,7 +13,7 @@ import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../..
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
 
 /**
- * Single radio button option for RadioButtonGroupComponent
+ * Single radio button option for RadioButtonGroupComponent.
  */
 @Component({
   selector: 'fudis-radio-button',

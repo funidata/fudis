@@ -4,7 +4,7 @@ import { Directive, TemplateRef } from '@angular/core';
 /**
  * Marks the container for select options.
  *
- * Use this directive to tag the template which wraps (multi)select options and enables lazy laoding
+ * Use this directive to tag the template which wraps (multi)select options and enables lazy loading
  * of the options.
  */
 @Directive({

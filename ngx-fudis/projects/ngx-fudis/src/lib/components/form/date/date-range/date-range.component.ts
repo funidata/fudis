@@ -6,7 +6,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
 /**
  * Allows selection of a start and end date.
  *
- * Use this component when user need to define a time interval.
+ * Use this component when user needs to define a time interval.
  */
 @Component({
   selector: 'fudis-date-range',

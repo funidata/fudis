@@ -17,7 +17,7 @@ import {
 import { FormControl } from '@angular/forms';
 
 /**
- * Single checkbox option for CheckboxGroupComponent
+ * Single checkbox option for CheckboxGroupComponent.
  */
 @Component({
   selector: 'fudis-checkbox-group-option',

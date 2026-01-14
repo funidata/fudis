@@ -26,7 +26,7 @@ import { getHeadingVariant } from '../../../utilities/typography/typography-util
 /**
  * Provides layout and structure for form content.
  *
- * Use this component to consistently arrange form fileds, actions, and validation elements.
+ * Use this component to consistently arrange form fields, actions, and validation elements.
  */
 @Component({
   selector: 'fudis-form',
