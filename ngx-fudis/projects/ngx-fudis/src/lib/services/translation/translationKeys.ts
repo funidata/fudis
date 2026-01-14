@@ -35,6 +35,9 @@ export interface FudisTranslationConfig {
     // Label for close button
     CLOSE: string;
   };
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: string;
+  };
   DROPDOWNMENU: {
     ITEM: {
       DISABLED: string;
@@ -148,6 +151,9 @@ export const en: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Close' },
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: 'Information is not available',
+  },
   DROPDOWNMENU: {
     ITEM: {
       DISABLED: 'Disabled',
@@ -249,6 +255,9 @@ export const fi: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Sulje' },
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: 'Tietoa ei ole saatavilla',
+  },
   DROPDOWNMENU: {
     ITEM: {
       DISABLED: 'Ei valittavissa',
@@ -350,6 +359,9 @@ export const sv: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Stäng' },
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: 'Ingen information tillgänglig',
+  },
   DROPDOWNMENU: {
     ITEM: {
       DISABLED: 'Inaktiverad',
