@@ -14,6 +14,11 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
+/**
+ * Displays a dismissible alert message.
+ *
+ * Use this component to show contextual feedback messages such as success, warning, or error state.
+ */
 @Component({
   selector: 'fudis-alert',
   templateUrl: './alert.component.html',

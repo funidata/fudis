@@ -22,6 +22,11 @@ import { Subscription } from 'rxjs';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 
+/**
+ * Displays a list of actions in a collapsible menu.
+ *
+ * Use this component to group secondary or contextual actions.
+ */
 @Component({
   selector: 'fudis-dropdown-menu',
   templateUrl: './dropdown-menu.component.html',

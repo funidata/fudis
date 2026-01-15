@@ -28,6 +28,12 @@ enum Ellipsis {
   start = 'start-ellipsis',
   end = 'end-ellipsis',
 }
+
+/**
+ * Controls navigation through paged data sets.
+ *
+ * Use this component to split large collections into manageable pages.
+ */
 @Component({
   selector: 'fudis-pagination',
   imports: [CommonModule, NgxFudisModule],

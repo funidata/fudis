@@ -10,6 +10,9 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisSelectOption } from '../../../../../types/forms';
 
+/**
+ * Represents a selectable option within SelectComponent.
+ */
 @Component({
   selector: 'fudis-select-option',
   templateUrl: './select-option.component.html',
