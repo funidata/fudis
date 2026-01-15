@@ -107,6 +107,33 @@ export function previewHead(head) {
           outline-offset: 1px;
           box-shadow: #fff;
         }
+
+      /* 
+      * Remove styling from version selector canvases so that only the selector is shown 
+      */
+
+      .unstyled-canvas.sbdocs-preview,
+      .unstyled-canvas .docs-story {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .unstyled-canvas {
+        box-shadow: none !important;
+        border: none !important;
+      }
+
+      .unstyled-canvas .docs-story > div {
+        padding: 0;
+        margin: 0;
+        border: 0;
+      }
+
+      .unstyled-canvas .docs-story [class*="css-"] .innerZoomElementWrapper > * {
+        border: none !important;
+      }
     </style>
+
   `;
 }
