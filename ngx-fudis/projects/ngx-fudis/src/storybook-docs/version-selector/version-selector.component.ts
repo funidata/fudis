@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { FudisSelectOption } from '../../types/forms';
+import { FudisSelectOption } from '../../lib/types/forms';
 interface VersionsResponse {
   versions: string[];
   latest: string;

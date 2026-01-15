@@ -1,5 +1,5 @@
 import { Canvas } from "@storybook/blocks";
-import * as VersionSelectorStories from "../../projects/ngx-fudis/src/lib/components/version-selector/version-selector.stories";
+import * as VersionSelectorStories from "../../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories";
 import React from "react";
 
 // The reason this file and CustomDocsContainer are both react files is that

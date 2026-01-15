@@ -68,7 +68,7 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
-import { VersionSelectorComponent } from './components/version-selector/version-selector.component';
+import { VersionSelectorComponent } from '../storybook-docs/version-selector/version-selector.component';
 
 /**
  * Fudis Directives

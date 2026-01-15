@@ -3,7 +3,7 @@ export const stories = [
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.mdx",
   "../projects/documentation/**/*.mdx",
-  "../projects/ngx-fudis/src/lib/components/version-selector/version-selector.stories",
+  "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts",
 ];
 export const addons = [
   "@storybook/addon-links",
