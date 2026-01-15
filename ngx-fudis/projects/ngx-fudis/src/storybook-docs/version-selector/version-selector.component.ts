@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { FudisSelectOption } from '../../lib/types/forms';
+import { NgxFudisModule } from '../../lib/ngx-fudis.module';
+
 interface VersionsResponse {
   versions: string[];
   latest: string;
@@ -11,12 +14,25 @@ interface VersionsResponse {
   selector: 'fudis-version-selector',
   templateUrl: './version-selector.component.html',
   styleUrls: ['./version-selector.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, NgxFudisModule],
 })
 export class VersionSelectorComponent implements OnInit {
-  versions: string[] = [];
-  control = new FormControl<FudisSelectOption<object> | null>(null);
-  error = false;
+  private _versions: string[] = [];
+  private _control = new FormControl<FudisSelectOption<object> | null>(null);
+  private _error = false;
+
+  get versions(): string[] {
+    return this._versions;
+  }
+
+  get control() {
+    return this._control;
+  }
+
+  get error(): boolean {
+    return this._error;
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -29,10 +45,10 @@ export class VersionSelectorComponent implements OnInit {
 
     this.http.get<VersionsResponse>(versionsUrl).subscribe({
       next: (res) => {
-        this.versions = res?.versions ?? [];
+        this._versions = res?.versions ?? [];
 
         if (res?.latest) {
-          this.control.setValue(
+          this._control.setValue(
             {
               label: res.latest,
               value: res.latest,
@@ -42,11 +58,11 @@ export class VersionSelectorComponent implements OnInit {
         }
       },
       error: () => {
-        this.error = true;
+        this._error = true;
       },
     });
 
-    this.control.valueChanges.subscribe((v) => {
+    this._control.valueChanges.subscribe((v) => {
       if (!v) return;
       const selected = v as FudisSelectOption<object> | null;
       const val = selected?.value ?? null;

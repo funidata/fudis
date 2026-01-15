@@ -68,7 +68,6 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
-import { VersionSelectorComponent } from '../storybook-docs/version-selector/version-selector.component';
 
 /**
  * Fudis Directives
@@ -231,7 +230,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     TextFieldComponentBaseDirective,
     TextInputComponent,
     ValidatorErrorMessageComponent,
-    VersionSelectorComponent,
   ],
   /*
    * Include imports outside of Fudis components in 'imports' array below.
@@ -324,7 +322,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     SelectGroupComponent,
     TextAreaComponent,
     TextInputComponent,
-    VersionSelectorComponent,
   ],
   providers: [
     FudisInternalErrorSummaryService,
