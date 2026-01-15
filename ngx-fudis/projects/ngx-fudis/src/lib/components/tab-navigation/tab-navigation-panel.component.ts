@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
- * Navigation tab panel associated with the Tab Navigation Bar component.
+ * Navigation tab panel associated with the TabNavigationBarComponent.
  */
 @Component({
   selector: 'fudis-tab-navigation-panel',

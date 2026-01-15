@@ -22,6 +22,11 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 import { DOCUMENT } from '@angular/common';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
+/**
+ * Groups multiple related checkbox options.
+ *
+ * Use this component when user can select value(s) from a set.
+ */
 @Component({
   selector: 'fudis-checkbox-group',
   templateUrl: './checkbox-group.component.html',

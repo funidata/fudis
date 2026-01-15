@@ -10,6 +10,11 @@ import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+/**
+ * Groups and manages multiple alert messages.
+ *
+ * Use this component to display stacked alerts in a single, consistent location.
+ */
 @Component({
   selector: 'fudis-alert-group',
   templateUrl: './alert-group.component.html',

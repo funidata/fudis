@@ -36,6 +36,12 @@ import {
   FudisLocalizedTextGroupFormGroup,
 } from '../../../../types/forms';
 
+/**
+ * Displays a custom error message for a form field.
+ *
+ * Use this directive to link custom validation error to an input where existing validators are not
+ * possible to use.
+ */
 @Directive({
   selector: 'fudis-error-message',
   standalone: false,
