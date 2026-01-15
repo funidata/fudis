@@ -7,7 +7,7 @@ import { TranslocoRootModule } from ".storybook/transloco.module";
 import { HttpClient } from "@angular/common/http";
 import { TranslocoService } from "@jsverse/transloco";
 import docJson from "../documentation.json";
-import { CustomDocsContainer } from "./CustomDocsContainer.tsx";
+import { CustomDocsContainer } from "./docs/CustomDocsContainer.tsx";
 import "../projects/ngx-fudis/src/lib/components/version-selector/version-selector.stories.ts";
 import "zone.js";
 

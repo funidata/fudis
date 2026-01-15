@@ -21,6 +21,7 @@
     "../projects/**/*",
     "../stories/**/*",
     "transloco.module.ts",
-    "./**/CustomDocsContainer.tsx"
+    "docs/CustomDocsContainer.tsx",
+    "docs/VersionSelectorDocsWrapper.tsx"
   ]
 }

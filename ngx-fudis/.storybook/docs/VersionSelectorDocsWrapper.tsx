@@ -1,6 +1,9 @@
 import { Canvas } from "@storybook/blocks";
-import * as VersionSelectorStories from "./version-selector.stories";
+import * as VersionSelectorStories from "../../projects/ngx-fudis/src/lib/components/version-selector/version-selector.stories";
 import React from "react";
+
+// The reason this file and CustomDocsContainer are both react files is that
+// customizing Storybook's DocsContainer requires React and does not support Angular components.
 
 export function VersionSelectorDocsWrapper() {
   // Hide the version selector from the welcome docs page
