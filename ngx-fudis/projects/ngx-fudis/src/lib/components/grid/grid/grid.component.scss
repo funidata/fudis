@@ -6,6 +6,7 @@
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
+  overflow: hidden;
 
   @include core.breakpoint('sm') {
     width: 100%;
