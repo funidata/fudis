@@ -1,16 +1,8 @@
-/* stylelint-disable unit-disallowed-list */
-
-.fudis-version-selector,
-.fudis-version-selector-loading,
-.fudis-version-unavailable {
-  display: block;
-  padding: 0;
-  padding-bottom: 2rem;
-}
+@use '@funidata/fudis-core' as core;
 
 .fudis-version-selector {
-  margin-left: auto;
-  padding: 0;
-  padding-bottom: 2rem;
-  width: fit-content;
+  display: block;
+  float: right;
+  margin-right: core.$spacing-sm;
+  padding-bottom: core.$spacing-sm;
 }

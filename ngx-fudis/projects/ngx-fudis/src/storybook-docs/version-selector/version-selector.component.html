@@ -1,11 +1,16 @@
 <div class="fudis-version-selector">
   <ng-container *ngIf="error">
-    <fudis-body-text class="fudis-version-selectorunavailable">
+    <fudis-body-text class="fudis-version-selector--unavailable fudis-text-emptystate">
       Version selector unavailable
     </fudis-body-text>
   </ng-container>
   <ng-container *ngIf="!error">
-    <fudis-select size="xs" [control]="control" [label]="'Version'" [variant]="'dropdown'">
+    <fudis-select
+      [size]="'xs'"
+      [control]="control"
+      [label]="'Version'"
+      [selectionClearButton]="false"
+    >
       <ng-template fudisSelectOptions>
         <fudis-select-option
           *ngFor="let v of versions"
