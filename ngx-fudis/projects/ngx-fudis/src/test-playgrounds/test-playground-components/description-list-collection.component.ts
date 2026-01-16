@@ -185,7 +185,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         >Nested Compact Description Lists with Grid {{ gridConfig.title }} (no regular
         support)</fudis-heading
       >
-      <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value">
+      <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value" [columns]="2">
         @for (movie of indianaJonesData; track movie) {
           <fudis-dl-item>
             <fudis-dt [contentText]="movie.title" />
