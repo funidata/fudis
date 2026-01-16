@@ -25,34 +25,6 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           }
         </fudis-dl>
         <fudis-hr class="fudis-my-lg" />
-        <fudis-heading [level]="3" [variant]="'md'"
-          >Nested {{ variant.title }} Description Lists with Indiana Jones Movies</fudis-heading
-        >
-
-        <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value">
-          @for (movie of indianaJonesData; track movie) {
-            <fudis-dl-item>
-              <fudis-dt [contentText]="movie.title" />
-              <fudis-dd>
-                <fudis-dl [variant]="variant.value">
-                  <fudis-dl-item>
-                    <fudis-dt [contentText]="indianaJonesTitles.releaseYear"></fudis-dt>
-                    <fudis-dd [contentText]="movie.year"></fudis-dd>
-                  </fudis-dl-item>
-                  <fudis-dl-item>
-                    <fudis-dt [contentText]="indianaJonesTitles.rating"></fudis-dt>
-                    <fudis-dd [contentText]="movie.rating"></fudis-dd>
-                  </fudis-dl-item>
-                  <fudis-dl-item>
-                    <fudis-dt [contentText]="indianaJonesTitles.quote"></fudis-dt>
-                    <fudis-dd [contentText]="movie.quote"></fudis-dd>
-                  </fudis-dl-item>
-                </fudis-dl>
-              </fudis-dd>
-            </fudis-dl-item>
-          }
-        </fudis-dl>
-        <fudis-hr class="fudis-my-lg" />
         <fudis-grid [columns]="{ sm: 1, md: 2 }" [rowGap]="'xs'">
           <fudis-heading [level]="3" [variant]="'md'"
             >{{ variant.title }} Description List as Grid's Child Component</fudis-heading
@@ -79,7 +51,12 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-heading [level]="2" [variant]="'md'"
           >{{ variant.title }} Description List With Sub Components</fudis-heading
         >
-        <fudis-dl class="fudis-mt-sm" [disableGrid]="gridConfig.value" [variant]="variant.value">
+        <fudis-dl
+          class="fudis-mt-sm"
+          [columns]="2"
+          [disableGrid]="gridConfig.value"
+          [variant]="variant.value"
+        >
           <fudis-dl-item>
             <fudis-dt [contentText]="'First name'"></fudis-dt>
             <fudis-dd [contentText]="'Rex'"></fudis-dd>
@@ -127,7 +104,6 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         >
         <fudis-dl
           class="fudis-mt-sm"
-          [variant]="'regular'"
           [columns]="'1fr 1fr'"
           [disableGrid]="gridConfig.value"
           [variant]="variant.value"
@@ -140,7 +116,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         </fudis-dl>
         <fudis-hr class="fudis-my-lg" />
         <fudis-heading [level]="2" [variant]="'md'"
-          >Description List Item With Multiple Details</fudis-heading
+          >{{ variant.title }} Description List Item With Multiple Details</fudis-heading
         >
         <fudis-dl
           class="fudis-mt-sm"
@@ -162,6 +138,29 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           </fudis-dl-item>
         </fudis-dl>
         <fudis-hr class="fudis-my-lg" />
+        <fudis-heading [level]="2" [variant]="'md'"
+          >{{ variant.title }} Description List Details With Empty State</fudis-heading
+        >
+        <fudis-dl
+          class="fudis-mt-sm"
+          [columns]="'1fr 1fr'"
+          [disableGrid]="gridConfig.value"
+          [variant]="variant.value"
+        >
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Education type'" />
+            <fudis-dd [contentText]="'Open university studies'" [emptyState]="true" />
+          </fudis-dl-item>
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Location'" />
+            <fudis-dd
+              [contentText]="'Helsinki'"
+              [emptyState]="true"
+              [emptyStateContentText]="'Custom message'"
+            />
+          </fudis-dl-item>
+        </fudis-dl>
+        <fudis-hr class="fudis-my-lg" />
       }
     }
     <fudis-heading [level]="2" [variant]="'xl'">Test cases for others</fudis-heading>
@@ -179,6 +178,37 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-dd [contentText]="'Rex'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
+
+    @for (gridConfig of gridConfigs; track gridConfig) {
+      <fudis-hr class="fudis-my-lg" />
+      <fudis-heading [level]="3" [variant]="'md'"
+        >Nested Compact Description Lists with Grid {{ gridConfig.title }} (no regular
+        support)</fudis-heading
+      >
+      <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value" [columns]="2">
+        @for (movie of indianaJonesData; track movie) {
+          <fudis-dl-item>
+            <fudis-dt [contentText]="movie.title" />
+            <fudis-dd>
+              <fudis-dl [variant]="'compact'">
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="indianaJonesTitles.releaseYear"></fudis-dt>
+                  <fudis-dd [contentText]="movie.year"></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="indianaJonesTitles.rating"></fudis-dt>
+                  <fudis-dd [contentText]="movie.rating"></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="indianaJonesTitles.quote"></fudis-dt>
+                  <fudis-dd [contentText]="movie.quote"></fudis-dd>
+                </fudis-dl-item>
+              </fudis-dl>
+            </fudis-dd>
+          </fudis-dl-item>
+        }
+      </fudis-dl>
+    }
     <fudis-hr class="fudis-my-lg" />
   `,
 })
@@ -257,7 +287,7 @@ export class StorybookExampleDescriptionListCollectionComponent {
   };
 
   gridConfigs = [
-    { title: 'Enabled', value: true },
-    { title: 'Disabled', value: false },
+    { title: 'Enabled', value: false },
+    { title: 'Disabled', value: true },
   ];
 }

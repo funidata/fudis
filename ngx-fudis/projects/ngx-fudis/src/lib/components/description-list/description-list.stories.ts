@@ -4,7 +4,11 @@ import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import docs from './description-list.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
-import { descriptionListExclude, nestedDescriptionListExclude } from '../../utilities/storybook';
+import {
+  descriptionListEmptyState,
+  descriptionListExclude,
+  nestedDescriptionListExclude,
+} from '../../utilities/storybook';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
@@ -65,7 +69,8 @@ export default {
 
 const DescriptionListTemplate: StoryFn = (args) => ({
   props: args,
-  template: html` <fudis-heading [level]="2" [variant]="'md'"
+  template: html`
+    <fudis-heading [level]="2" [variant]="'md'"
       >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
     >
     <fudis-dl
@@ -94,7 +99,8 @@ const DescriptionListTemplate: StoryFn = (args) => ({
         <fudis-dt [contentText]="'Enemy'"></fudis-dt>
         <fudis-dd [contentText]="'Emmet Brickowski'" [subHeading]="'Archenemy'"></fudis-dd>
       </fudis-dl-item>
-    </fudis-dl>`,
+    </fudis-dl>
+  `,
 });
 
 export const DescriptionList = DescriptionListTemplate.bind({});
@@ -444,4 +450,38 @@ export const SingleListItem = SingleListItemTemplate.bind({});
 SingleListItem.args = {
   variant: 'regular',
   disableGrid: false,
+};
+
+const EmptyStateTemplate: StoryFn = (args) => ({
+  props: args,
+  template: html`
+    <fudis-heading [level]="2" [variant]="'md'">Details With Empty States</fudis-heading>
+    <fudis-dl [classes]="'fudis-mt-sm'" [variant]="variant" [columns]="2">
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Education type'" />
+        <fudis-dd [contentText]="'Open university studies'" [emptyState]="emptyState" />
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Location'" />
+        <fudis-dd
+          [contentText]="'Helsinki'"
+          [emptyState]="emptyState"
+          [emptyStateContentText]="emptyStateContentText"
+        />
+      </fudis-dl-item>
+    </fudis-dl>
+  `,
+});
+
+export const EmptyState = EmptyStateTemplate.bind({});
+EmptyState.args = {
+  variant: 'regular',
+  emptyState: true,
+  emptyStateContentText: 'Custom message',
+};
+
+EmptyState.parameters = {
+  controls: {
+    exclude: descriptionListEmptyState,
+  },
 };
