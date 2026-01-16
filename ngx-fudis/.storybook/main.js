@@ -3,6 +3,7 @@ export const stories = [
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.mdx",
   "../projects/documentation/**/*.mdx",
+  "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts",
 ];
 export const addons = [
   "@storybook/addon-links",
@@ -24,6 +25,7 @@ export const staticDirs = [
   { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
   { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
   "./assets/i18n",
+  "./static",
   {
     from: "./../projects/ngx-fudis/src/lib/assets/images/fudis-logo-mini-black.svg",
     to: "/favicon.svg",
@@ -44,6 +46,13 @@ export function managerHead(head) {
       [data-item-id*="pw"] {
         display: none !important;
       }
+      /* Hide Docs/Version Selector story from sidebar */
+      [data-item-id^="docs-version-selector"],
+      .sidebar-item:has([data-item-id^="docs-version-selector"]) {
+        display: none !important;
+      }
+      [data-item-id="docs"],
+      .sidebar-item:has([data-item-id="docs"]) { display: none !important; }
     </style>
   `;
 }
@@ -98,6 +107,33 @@ export function previewHead(head) {
           outline-offset: 1px;
           box-shadow: #fff;
         }
+
+      /* 
+      * Remove styling from version selector canvases so that only the selector is shown 
+      */
+
+      .unstyled-canvas.sbdocs-preview,
+      .unstyled-canvas .docs-story {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .unstyled-canvas {
+        box-shadow: none !important;
+        border: none !important;
+      }
+
+      .unstyled-canvas .docs-story > div {
+        padding: 0;
+        margin: 0;
+        border: 0;
+      }
+
+      .unstyled-canvas .docs-story [class*="css-"] .innerZoomElementWrapper > * {
+        border: none !important;
+      }
     </style>
+
   `;
 }
