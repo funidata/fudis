@@ -58,13 +58,12 @@ describe('SectionComponent', () => {
         BodyTextComponent,
         GridDirective,
         HeadingComponent,
-        IconButtonComponent,
         MockFudisSectionComponent,
         SectionComponent,
         SectionActionsDirective,
         SectionContentDirective,
       ],
-      imports: [ButtonComponent, IconComponent, PopoverDirective],
+      imports: [ButtonComponent, IconButtonComponent, IconComponent, PopoverDirective],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     });
 

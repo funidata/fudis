@@ -61,13 +61,12 @@ describe('FieldSetComponent', () => {
         GridApiDirective,
         GridDirective,
         GuidanceComponent,
-        IconButtonComponent,
         LabelComponent,
         MockFieldSetComponent,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     }).compileComponents();
 

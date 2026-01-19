@@ -44,13 +44,8 @@ describe('DropdownMenuItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        IconButtonComponent,
-        DropdownMenuItemComponent,
-        DropdownMenuComponent,
-        MockDropdownMenuComponent,
-      ],
-      imports: [IconComponent],
+      declarations: [DropdownMenuItemComponent, DropdownMenuComponent, MockDropdownMenuComponent],
+      imports: [IconButtonComponent, IconComponent],
       providers: [FudisDialogService],
     }).compileComponents();
 

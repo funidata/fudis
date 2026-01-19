@@ -95,7 +95,6 @@ describe('SelectBaseDirective', () => {
         SelectOptionComponent,
         SelectIconsComponent,
         SelectOptionsDirective,
-        IconButtonComponent,
         GuidanceComponent,
         LabelComponent,
         MockSelectComponent,
@@ -104,7 +103,7 @@ describe('SelectBaseDirective', () => {
         MultiselectChipListComponent,
         BodyTextComponent,
       ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });

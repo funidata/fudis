@@ -12,8 +12,8 @@ describe('LabelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LabelComponent, IconButtonComponent],
-      imports: [IconComponent, PopoverDirective],
+      declarations: [LabelComponent],
+      imports: [IconButtonComponent, IconComponent, PopoverDirective],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LabelComponent);

@@ -60,7 +60,6 @@ describe('SelectComponent', () => {
         SelectControlValueAccessorDirective,
         SelectOptionComponent,
         GuidanceComponent,
-        IconButtonComponent,
         LabelComponent,
         MockAutocompleteComponent,
         SelectDropdownComponent,
@@ -68,7 +67,7 @@ describe('SelectComponent', () => {
         BodyTextComponent,
       ],
       providers: [FudisDialogService, FudisInternalErrorSummaryService, SelectBaseDirective],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
     }).compileComponents();
   });
 

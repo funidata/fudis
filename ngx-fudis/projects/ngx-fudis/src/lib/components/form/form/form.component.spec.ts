@@ -144,7 +144,6 @@ describe('FormComponent', () => {
         GridDirective,
         GuidanceComponent,
         HeadingComponent,
-        IconButtonComponent,
         LabelComponent,
         LinkDirective,
         MockFormComponent,
@@ -152,7 +151,7 @@ describe('FormComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [
         FudisAlertService,
         FudisBreakpointService,

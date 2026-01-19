@@ -12,8 +12,8 @@ describe('SelectIconsComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [SelectIconsComponent, IconButtonComponent],
-      imports: [IconComponent],
+      declarations: [SelectIconsComponent],
+      imports: [IconButtonComponent, IconComponent],
     });
     fixture = TestBed.createComponent(SelectIconsComponent);
     component = fixture.componentInstance;

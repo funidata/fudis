@@ -68,7 +68,6 @@ describe('DialogDirectives', () => {
         AlertGroupComponent,
         BodyTextComponent,
         HeadingComponent,
-        IconButtonComponent,
         DialogComponent,
         DialogTitleDirective,
         DialogContentDirective,
@@ -76,7 +75,7 @@ describe('DialogDirectives', () => {
         DialogCloseDirective,
         HostComponent,
       ],
-      imports: [ButtonComponent, IconComponent, MatDialogModule],
+      imports: [ButtonComponent, IconButtonComponent, IconComponent, MatDialogModule],
       providers: [
         FudisDialogService,
         FudisAlertService,

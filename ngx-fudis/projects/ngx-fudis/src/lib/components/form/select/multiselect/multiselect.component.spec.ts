@@ -71,11 +71,10 @@ describe('MultiselectComponent', () => {
         SelectIconsComponent,
         BodyTextComponent,
         GuidanceComponent,
-        IconButtonComponent,
         LabelComponent,
         SelectOptionsDirective,
       ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService, SelectBaseDirective],
     }).compileComponents();
   });

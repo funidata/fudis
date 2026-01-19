@@ -63,11 +63,10 @@ describe('SelectOptionComponent', () => {
         MockContainerComponent,
         GuidanceComponent,
         SelectIconsComponent,
-        IconButtonComponent,
         LabelComponent,
         BodyTextComponent,
       ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 

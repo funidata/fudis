@@ -24,11 +24,10 @@ describe('TextAreaComponent', () => {
       declarations: [
         TextAreaComponent,
         GuidanceComponent,
-        IconButtonComponent,
         LabelComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [IconComponent, ReactiveFormsModule, PopoverDirective],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
