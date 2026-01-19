@@ -3,6 +3,7 @@ import {
   Component,
   HostBinding,
   Input,
+  OnChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
@@ -12,6 +13,12 @@ import { BehaviorSubject } from 'rxjs';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { FudisIdService } from '../../services/id/id.service';
 
+/**
+ * Button represented primarily by an icon.
+ *
+ * Use this component for compact actions where icon and its aria-label clearly communicate the
+ * intent.
+ */
 @Component({
   selector: 'fudis-icon-button',
   templateUrl: './icon-button.component.html',
@@ -20,7 +27,7 @@ import { FudisIdService } from '../../services/id/id.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class IconButtonComponent extends ButtonBaseDirective {
+export class IconButtonComponent extends ButtonBaseDirective implements OnChanges {
   constructor(
     _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
@@ -68,16 +75,21 @@ export class IconButtonComponent extends ButtonBaseDirective {
     super.ngOnInit();
   }
 
-  override ngOnChanges(changes: FudisComponentChanges<IconButtonComponent>): void {
+  ngOnChanges(changes: FudisComponentChanges<IconButtonComponent>): void {
+    const variant = changes.variant?.currentValue !== changes.variant?.previousValue;
+    const disabled = changes.disabled?.currentValue !== changes.disabled?.previousValue;
     const size = changes.size?.currentValue !== changes.size?.previousValue;
+
+    if (variant || disabled) {
+      this._classList.next(this._getClasses());
+    }
 
     if (size) {
       this._size = this.size;
       const margin = ['medium', 'small'].includes(this.size) ? ' fudis-ml-xs' : '';
       this._iconMargin.next(`fudis-button__icon${margin}`);
+      this._classList.next(this._getClasses());
     }
-
-    super.ngOnChanges(changes);
   }
 
   /**

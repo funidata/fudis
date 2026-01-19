@@ -13,6 +13,12 @@ import { FudisComponentChanges, FudisLanguageAbbr } from '../../../types/miscell
 import { BehaviorSubject } from 'rxjs';
 import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 
+/**
+ * Displays standard body text content.
+ *
+ * Use this component to render paragraphs or informational text with consistent typography and
+ * spacing. Use clear, simple, and inclusive language.
+ */
 @Component({
   selector: 'fudis-body-text',
   templateUrl: './body-text.component.html',

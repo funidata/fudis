@@ -83,6 +83,7 @@ export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
 
 export const buttonControlsExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'ariaLabel',
   'id',
   'handleBlur',
   'handleClick',
@@ -186,6 +187,11 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
 export const nestedDescriptionListExclude: RegExp = excludeRegex([
   ...descriptionListCommonExclude,
   'variant',
+]);
+
+export const descriptionListEmptyState: RegExp = excludeRegex([
+  ...descriptionListCommonExclude,
+  'disableGrid',
 ]);
 
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);

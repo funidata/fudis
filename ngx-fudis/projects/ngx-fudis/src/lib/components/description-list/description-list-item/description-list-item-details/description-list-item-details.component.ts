@@ -14,7 +14,11 @@ import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
+/**
+ * Displays the details (value) of a term (key) in a DescriptionListItemComponent.
+ */
 @Component({
   selector: 'fudis-dd',
   templateUrl: './description-list-item-details.component.html',
@@ -25,6 +29,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
+    protected _translationService: FudisTranslationService,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -64,7 +69,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _hostClass = 'fudis-dl-item-details-host';
+  @HostBinding('class') public hostClass = 'fudis-dl-item-details-host';
 
   /**
    * Details element language, possible values 'fi', 'sv' and 'en'.
@@ -85,6 +90,17 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    * Aria-label for classified/hidden Details content
    */
   @Input() ariaLabel: string | null | undefined;
+
+  /**
+   * Show empty state content
+   */
+  @Input() emptyState: boolean = false;
+
+  /**
+   * Text displayed in Details element where emptyState boolean is true. If not provided, Fudis will
+   * display its default empty state text
+   */
+  @Input() emptyStateContentText: string;
 
   /**
    * Id generated with Id Service
@@ -125,7 +141,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
 
       this._detailsSent = true;
 
-      this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
+      this.hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
     }
   }
 
@@ -133,7 +149,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     if (this._detailsSent) {
       this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
       this._detailsSent = false;
-      this._hostClass = `fudis-dl-item-details-host`;
+      this.hostClass = `fudis-dl-item-details-host`;
     }
   }
 

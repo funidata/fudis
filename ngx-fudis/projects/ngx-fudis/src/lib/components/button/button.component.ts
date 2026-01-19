@@ -12,6 +12,12 @@ import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../t
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
+/**
+ * Triggers an action or event.
+ *
+ * Use this component for primary user actions such as submitting forms, confirming choices, or
+ * navigating workflows.
+ */
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',
@@ -43,14 +49,19 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
    */
   @Input() type: FudisButtonType = 'button';
 
-  override ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
+  ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
+    const variant = changes.variant?.currentValue !== changes.variant?.previousValue;
+    const disabled = changes.disabled?.currentValue !== changes.disabled?.previousValue;
     const size = changes.size?.currentValue !== changes.size?.previousValue;
+
+    if (variant || disabled) {
+      this._classList.next(this._getClasses());
+    }
 
     if (size) {
       this._size = this.size;
+      this._classList.next(this._getClasses());
     }
-
-    super.ngOnChanges(changes);
   }
 
   /**

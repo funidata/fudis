@@ -9,6 +9,11 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationConfig } from '../../services/translation/translationKeys';
 
+/**
+ * Displays footer content for a page.
+ *
+ * Use this component with supplementary information such as links, legal content, or metadata.
+ */
 @Component({
   selector: 'fudis-footer',
   templateUrl: './footer.component.html',

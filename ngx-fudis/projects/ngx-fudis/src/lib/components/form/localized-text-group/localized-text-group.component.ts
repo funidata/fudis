@@ -24,6 +24,11 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
+/**
+ * Manages localized text inputs across multiple languages.
+ *
+ * Use this component to edit equivalent content for different language options.
+ */
 @Component({
   selector: 'fudis-localized-text-group',
   templateUrl: './localized-text-group.component.html',

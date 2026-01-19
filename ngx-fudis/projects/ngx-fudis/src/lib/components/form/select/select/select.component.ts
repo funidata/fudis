@@ -20,6 +20,11 @@ import { SelectControlValueAccessorDirective } from '../common/select-control-va
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
+/**
+ * Allows selection of a single option from a dropdown list.
+ *
+ * Use this component when there are multiple predefined options and user can choose only one value.
+ */
 @Component({
   selector: 'fudis-select',
   templateUrl: './select.component.html',

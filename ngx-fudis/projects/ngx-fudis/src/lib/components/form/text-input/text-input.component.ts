@@ -9,6 +9,11 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
+/**
+ * Allows entry of single-line text.
+ *
+ * Use this component for short textual input such as names or identifiers.
+ */
 @Component({
   selector: 'fudis-text-input',
   templateUrl: './text-input.component.html',

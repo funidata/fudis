@@ -6,6 +6,7 @@ import { Source } from "@storybook/blocks";
 import { descriptionListArgsTypesExclude } from "../../utilities/storybook.ts";
 import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
 import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
+import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
 
 <Meta title="Components/Description List" />
 
@@ -25,7 +26,7 @@ Term and Details content is passed through `contentText` Input property.
 <fudis-dd [contentText]="'Here is the Details element text'" />`}
 />
 
-**Note!** Although with Details element it also works, that content is just passed between `<fudis-dd>` tags, it is primarily used for nesting additional content e. g. another list or a button.
+**Note!** Although with Details element it also works, that content is just passed between `<fudis-dd>` tags, it is primarily used for nesting additional content e.g. another list or a button.
 
 ### Details Subheading
 
@@ -76,6 +77,12 @@ Add margins and paddings to the dl element by adding `classes` with desired Core
 ### Compact Variant
 
 <Canvas of={DescriptionListStories.DescriptionListCompact} />
+
+### Empty State
+
+When Details has no relevant data, set `emptyState` to `true` in order to display visually different content with default text. The text can be altered via `emptyStateContentText` if needed.
+
+<Canvas of={DescriptionListStories.EmptyState} />
 
 ### Nesting Lists and Sub-Components
 

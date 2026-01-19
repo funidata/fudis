@@ -1,12 +1,15 @@
 import { setCompodocJson } from "@storybook/addon-docs/angular";
 import { moduleMetadata } from "@storybook/angular";
 import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
+import { VersionSelectorComponent } from "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.component";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
 
 import { TranslocoRootModule } from ".storybook/transloco.module";
 import { HttpClient } from "@angular/common/http";
 import { TranslocoService } from "@jsverse/transloco";
 import docJson from "../documentation.json";
+import { CustomDocsContainer } from "./docs/CustomDocsContainer.tsx";
+import "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts";
 import "zone.js";
 
 setCompodocJson(docJson);
@@ -29,6 +32,7 @@ const preview = {
         exclude: excludeRegex(),
       },
       story: { inline: true },
+      container: CustomDocsContainer,
     },
     options: {
       storySort: {
@@ -117,7 +121,7 @@ const preview = {
   tags: ["autodocs"],
   decorators: [
     moduleMetadata({
-      imports: [NgxFudisModule, TranslocoRootModule],
+      imports: [NgxFudisModule, TranslocoRootModule, VersionSelectorComponent],
       providers: [HttpClient, TranslocoService],
     }),
   ],

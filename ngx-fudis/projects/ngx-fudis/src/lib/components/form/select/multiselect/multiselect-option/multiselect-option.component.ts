@@ -9,6 +9,9 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
+/**
+ * Represents a selectable option within MultiselectComponent.
+ */
 @Component({
   selector: 'fudis-multiselect-option',
   templateUrl: './multiselect-option.component.html',

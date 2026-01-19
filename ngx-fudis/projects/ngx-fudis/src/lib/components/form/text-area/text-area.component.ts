@@ -8,6 +8,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
 import { Subscription } from 'rxjs';
 
+/**
+ * Allows entry of multi-line text.
+ *
+ * Use this component for longer or free-form user input.
+ */
 @Component({
   selector: 'fudis-text-area',
   templateUrl: './text-area.component.html',
