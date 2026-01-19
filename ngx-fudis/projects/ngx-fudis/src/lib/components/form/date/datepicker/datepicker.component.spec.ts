@@ -26,15 +26,15 @@ describe('DatepickerComponent', () => {
       declarations: [
         DatepickerComponent,
         LabelComponent,
-        IconComponent,
         GuidanceComponent,
         ValidatorErrorMessageComponent,
       ],
       imports: [
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
         BrowserAnimationsModule,
+        IconComponent,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
       ],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();

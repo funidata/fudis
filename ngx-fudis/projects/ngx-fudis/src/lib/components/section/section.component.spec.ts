@@ -56,18 +56,16 @@ describe('SectionComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         BodyTextComponent,
-        ButtonComponent,
         GridDirective,
         HeadingComponent,
         IconButtonComponent,
-        IconComponent,
         MockFudisSectionComponent,
         SectionComponent,
         SectionActionsDirective,
         SectionContentDirective,
       ],
+      imports: [ButtonComponent, IconComponent, PopoverDirective],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
-      imports: [PopoverDirective],
     });
 
     mockFixture = TestBed.createComponent(MockFudisSectionComponent);

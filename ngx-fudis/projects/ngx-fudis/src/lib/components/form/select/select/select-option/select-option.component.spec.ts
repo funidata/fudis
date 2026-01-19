@@ -64,12 +64,11 @@ describe('SelectOptionComponent', () => {
         GuidanceComponent,
         SelectIconsComponent,
         IconButtonComponent,
-        IconComponent,
         LabelComponent,
         BodyTextComponent,
       ],
+      imports: [IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockContainerComponent);

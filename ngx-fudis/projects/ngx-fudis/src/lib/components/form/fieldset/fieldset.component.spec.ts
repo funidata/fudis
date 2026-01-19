@@ -62,14 +62,13 @@ describe('FieldSetComponent', () => {
         GridDirective,
         GuidanceComponent,
         IconButtonComponent,
-        IconComponent,
         LabelComponent,
         MockFieldSetComponent,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
+      imports: [IconComponent, ReactiveFormsModule],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
 
     fixtureMock = TestBed.createComponent(MockFieldSetComponent);

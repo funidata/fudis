@@ -67,10 +67,8 @@ describe('DialogDirectives', () => {
       declarations: [
         AlertGroupComponent,
         BodyTextComponent,
-        ButtonComponent,
         HeadingComponent,
         IconButtonComponent,
-        IconComponent,
         DialogComponent,
         DialogTitleDirective,
         DialogContentDirective,
@@ -78,12 +76,12 @@ describe('DialogDirectives', () => {
         DialogCloseDirective,
         HostComponent,
       ],
+      imports: [ButtonComponent, IconComponent, MatDialogModule],
       providers: [
         FudisDialogService,
         FudisAlertService,
         { provide: MatDialogRef, useValue: { close: jest.fn() } },
       ],
-      imports: [MatDialogModule],
     }).compileComponents();
   });
 

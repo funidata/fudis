@@ -48,9 +48,9 @@ describe('DropdownMenuItemComponent', () => {
         IconButtonComponent,
         DropdownMenuItemComponent,
         DropdownMenuComponent,
-        IconComponent,
         MockDropdownMenuComponent,
       ],
+      imports: [IconComponent],
       providers: [FudisDialogService],
     }).compileComponents();
 

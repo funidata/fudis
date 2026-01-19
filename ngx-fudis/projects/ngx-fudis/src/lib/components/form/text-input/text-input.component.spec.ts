@@ -24,12 +24,11 @@ describe('TextInputComponent', () => {
       declarations: [
         GuidanceComponent,
         IconButtonComponent,
-        IconComponent,
         LabelComponent,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [ReactiveFormsModule, PopoverDirective],
+      imports: [IconComponent, ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });

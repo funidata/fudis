@@ -116,11 +116,10 @@ describe('CheckboxGroupComponent', () => {
         GridApiDirective,
         GridDirective,
         GuidanceComponent,
-        IconComponent,
         ValidatorErrorMessageComponent,
       ],
+      imports: [IconComponent, ReactiveFormsModule],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
   });
 

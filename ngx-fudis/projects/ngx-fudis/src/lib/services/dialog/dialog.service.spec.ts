@@ -84,14 +84,12 @@ describe('DialogService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatDialogModule],
+      imports: [MatDialogModule, ButtonComponent, IconComponent],
       declarations: [
         HeadingComponent,
         BodyTextComponent,
         AlertGroupComponent,
         IconButtonComponent,
-        IconComponent,
-        ButtonComponent,
         DialogComponent,
         DialogContentDirective,
         DialogCloseDirective,
