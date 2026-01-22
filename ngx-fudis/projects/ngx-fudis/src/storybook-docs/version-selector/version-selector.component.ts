@@ -80,7 +80,7 @@ export class VersionSelectorComponent implements OnInit {
           `$1${encodeURIComponent(String(val))}`,
         );
         target = cur.toString();
-        window.parent.location.replace(target);
+        window.location.href = target;
       } else {
         // Otherwise, build production URL that points to the selected version (this happens in the developement environment)
         target = `https://fudis.funidata.fi/ngx/v/${encodeURIComponent(String(val))}/index.html${cur.search}${cur.hash || ''}`;
