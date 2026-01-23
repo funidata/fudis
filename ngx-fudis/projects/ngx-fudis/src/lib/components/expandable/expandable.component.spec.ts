@@ -141,7 +141,6 @@ describe('ExpandableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        BadgeComponent,
         BodyTextComponent,
         ButtonComponent,
         ErrorSummaryComponent,
@@ -175,7 +174,7 @@ describe('ExpandableComponent', () => {
         FudisErrorSummaryService,
         FudisInternalErrorSummaryService,
       ],
-      imports: [ReactiveFormsModule, RouterModule.forRoot([])],
+      imports: [ReactiveFormsModule, BadgeComponent, RouterModule.forRoot([])],
     }).compileComponents();
   });
 

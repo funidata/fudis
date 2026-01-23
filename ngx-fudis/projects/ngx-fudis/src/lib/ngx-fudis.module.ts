@@ -146,7 +146,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   declarations: [
     AlertComponent,
     AlertGroupComponent,
-    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
@@ -249,6 +248,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     RouterModule,
     ScrollingModule,
     PopoverDirective,
+    BadgeComponent,
   ],
 
   /*
@@ -259,7 +259,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   exports: [
     AlertComponent,
     AlertGroupComponent,
-    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
