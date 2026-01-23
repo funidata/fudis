@@ -23,7 +23,6 @@ import { PopoverDirective } from '../../directives/popover/popover.directive';
  */
 @Component({
   selector: 'fudis-button',
-  standalone: true,
   templateUrl: './button.component.html',
   imports: [CommonModule, AsyncPipe, PopoverDirective, IconComponent],
   encapsulation: ViewEncapsulation.None,

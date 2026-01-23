@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
  */
 @Component({
   selector: 'fudis-icon',
-  standalone: true,
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
   imports: [CommonModule],
