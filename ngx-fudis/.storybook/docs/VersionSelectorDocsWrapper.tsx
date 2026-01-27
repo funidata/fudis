@@ -12,14 +12,7 @@ export function VersionSelectorDocsWrapper() {
     const params = new URLSearchParams(search);
     const idParam = params.get("id") || "";
 
-    const excludedIds = new Set([
-      "documentation-introduction-welcome--documentation",
-      "components-language-badge-group--documentation",
-      "components-form-error-message--documentation",
-      "components-dropdown-menu--documentation",
-    ]);
-
-    if (excludedIds.has(idParam)) {
+    if (idParam === "documentation-introduction-welcome--documentation") {
       return null;
     }
   }
@@ -28,6 +21,7 @@ export function VersionSelectorDocsWrapper() {
     <Canvas
       of={VersionSelectorStories.VersionSelectorStory}
       meta={VersionSelectorStories}
+      story={{ inline: false }}
       withToolbar={false}
       sourceState="none"
       className="unstyled-canvas"
