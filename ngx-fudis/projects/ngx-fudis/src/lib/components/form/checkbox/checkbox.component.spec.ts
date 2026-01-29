@@ -48,8 +48,8 @@ describe('CheckboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MockComponent, CheckboxComponent, IconComponent],
-      imports: [ReactiveFormsModule],
+      declarations: [MockComponent, CheckboxComponent],
+      imports: [IconComponent, ReactiveFormsModule],
     }).compileComponents();
   });
 

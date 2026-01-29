@@ -60,12 +60,10 @@ describe('AlertComponent', () => {
         AlertComponent,
         AlertGroupComponent,
         BodyTextComponent,
-        ButtonComponent,
         LinkDirective,
         MockAlertComponent,
-        IconComponent,
       ],
-      imports: [MatDialogModule, RouterModule.forRoot([])],
+      imports: [ButtonComponent, IconComponent, MatDialogModule, RouterModule.forRoot([])],
       providers: [
         FudisDialogService,
         FudisAlertService,

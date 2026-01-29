@@ -12,7 +12,8 @@ describe('IconButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IconButtonComponent, ButtonBaseDirective, IconComponent],
+      declarations: [ButtonBaseDirective],
+      imports: [IconButtonComponent, IconComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(IconButtonComponent);

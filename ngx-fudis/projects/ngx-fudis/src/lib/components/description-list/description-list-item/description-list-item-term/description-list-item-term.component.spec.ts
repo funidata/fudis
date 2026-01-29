@@ -75,14 +75,12 @@ describe('DescriptionListItemTermComponent', () => {
         DescriptionListItemComponent,
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
-        IconComponent,
-        IconButtonComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
         MockDlComponent,
       ],
+      imports: [IconButtonComponent, IconComponent, PopoverDirective],
       providers: [FudisBreakpointService],
-      imports: [PopoverDirective],
     }).compileComponents();
   });
 

@@ -10,6 +10,7 @@ import {
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 /**
  * Displays a decorative or semantic icon.
@@ -20,8 +21,8 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'fudis-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class IconComponent implements OnChanges {
   constructor(public elementRef: ElementRef) {

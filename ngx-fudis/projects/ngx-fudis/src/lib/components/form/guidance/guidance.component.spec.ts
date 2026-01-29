@@ -44,7 +44,8 @@ describe('GuidanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GuidanceComponent, ValidatorErrorMessageComponent, IconComponent],
+      declarations: [GuidanceComponent, ValidatorErrorMessageComponent],
+      imports: [IconComponent],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });

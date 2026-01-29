@@ -49,10 +49,9 @@ describe('ValidatorErrorMessageComponent', () => {
         TextInputWithValidatorErrorMessageComponent,
         TextInputComponent,
         GuidanceComponent,
-        IconComponent,
         LabelComponent,
       ],
-      imports: [ReactiveFormsModule],
+      imports: [IconComponent, ReactiveFormsModule],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });

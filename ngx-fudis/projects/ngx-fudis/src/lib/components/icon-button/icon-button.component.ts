@@ -12,6 +12,9 @@ import { FudisComponentChanges } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
 import { FudisIdService } from '../../services/id/id.service';
+import { IconComponent } from '../icon/icon.component';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { PopoverDirective } from '../../directives/popover/popover.directive';
 
 /**
  * Button represented primarily by an icon.
@@ -24,8 +27,8 @@ import { FudisIdService } from '../../services/id/id.service';
   templateUrl: './icon-button.component.html',
   styleUrls: ['./icon-button.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  imports: [AsyncPipe, CommonModule, IconComponent, PopoverDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class IconButtonComponent extends ButtonBaseDirective implements OnChanges {
   constructor(

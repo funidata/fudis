@@ -74,11 +74,10 @@ describe('Basic inputs of Radio Button Group', () => {
         FieldsetContentDirective,
         GridDirective,
         GuidanceComponent,
-        IconComponent,
         ValidatorErrorMessageComponent,
       ],
+      imports: [IconComponent, ReactiveFormsModule],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
   });
 

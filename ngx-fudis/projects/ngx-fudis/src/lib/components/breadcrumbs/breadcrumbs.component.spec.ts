@@ -35,11 +35,10 @@ describe('BreadcrumbsComponent', () => {
       declarations: [
         BreadcrumbsComponent,
         BreadcrumbsItemComponent,
-        IconComponent,
         BodyTextComponent,
         MockComponent,
       ],
-      imports: [RouterModule.forRoot([])],
+      imports: [IconComponent, RouterModule.forRoot([])],
     });
 
     fixture = TestBed.createComponent(MockComponent);

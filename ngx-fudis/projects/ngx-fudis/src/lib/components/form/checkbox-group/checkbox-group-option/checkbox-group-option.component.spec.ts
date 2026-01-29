@@ -82,10 +82,9 @@ describe('CheckboxGroupOptionComponent', () => {
         GridApiDirective,
         GridDirective,
         GuidanceComponent,
-        IconComponent,
       ],
+      imports: [IconComponent, ReactiveFormsModule],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
   });
 

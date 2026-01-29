@@ -47,7 +47,8 @@ describe('LinkDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockComponent, LinkDirective, IconComponent],
+      declarations: [MockComponent, LinkDirective],
+      imports: [IconComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);
