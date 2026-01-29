@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
   selector: 'fudis-badge',
   templateUrl: './badge.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CommonModule],
 })
 export class BadgeComponent {
