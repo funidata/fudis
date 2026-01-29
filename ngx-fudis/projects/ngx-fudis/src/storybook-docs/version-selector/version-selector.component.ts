@@ -67,7 +67,7 @@ export class VersionSelectorComponent implements OnInit {
       const selected = v as FudisSelectOption<object> | null;
       const val = selected?.value ?? null;
       if (!val) return;
-      const cur = new URL(window.location.href);
+      const cur = new URL(window.top!.location.href);
       cur.protocol = 'https:';
       cur.hostname = 'fudis.funidata.fi';
 
@@ -80,11 +80,11 @@ export class VersionSelectorComponent implements OnInit {
           `$1${encodeURIComponent(String(val))}`,
         );
         target = cur.toString();
-        window.location.href = target;
+        window.top!.location.href = target;
       } else {
         // Otherwise, build production URL that points to the selected version (this happens in the developement environment)
         target = `https://fudis.funidata.fi/ngx/v/${encodeURIComponent(String(val))}/index.html${cur.search}${cur.hash || ''}`;
-        window.open(target, '_blank');
+        window.top!.location.href = target;
       }
     });
   }
