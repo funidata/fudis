@@ -21,6 +21,7 @@ export function VersionSelectorDocsWrapper() {
     <Canvas
       of={VersionSelectorStories.VersionSelectorStory}
       meta={VersionSelectorStories}
+      story={{ inline: false }}
       withToolbar={false}
       sourceState="none"
       className="unstyled-canvas"
