@@ -174,7 +174,7 @@ describe('ExpandableComponent', () => {
         FudisErrorSummaryService,
         FudisInternalErrorSummaryService,
       ],
-      imports: [ReactiveFormsModule, BadgeComponent, RouterModule.forRoot([])],
+      imports: [BadgeComponent, ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
   });
 

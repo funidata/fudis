@@ -159,7 +159,7 @@ describe('FormComponent', () => {
         FudisInternalErrorSummaryService,
         FudisErrorSummaryService,
       ],
-      imports: [ReactiveFormsModule, BadgeComponent],
+      imports: [BadgeComponent, ReactiveFormsModule],
     });
     TestBed.runInInjectionContext(() => {
       fixtureMock = TestBed.createComponent(MockFormComponent);

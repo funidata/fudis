@@ -235,6 +235,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
    * E.g. components from Angular Material or other Angular tools
    */
   imports: [
+    BadgeComponent,
     CommonModule,
     FormsModule,
     LayoutModule,
@@ -248,7 +249,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     RouterModule,
     ScrollingModule,
     PopoverDirective,
-    BadgeComponent,
   ],
 
   /*
