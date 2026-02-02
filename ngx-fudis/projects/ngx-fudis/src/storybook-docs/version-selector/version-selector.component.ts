@@ -47,15 +47,46 @@ export class VersionSelectorComponent implements OnInit {
       next: (res) => {
         this._versions = res?.versions ?? [];
 
-        if (res?.latest) {
-          this._control.setValue(
-            {
-              label: res.latest,
-              value: res.latest,
-            },
-            { emitEvent: false },
-          );
+        // reverse so that latest versions are first
+        this._versions = this._versions.reverse();
+
+        // filter the version list so that only the latest three major versions are shown
+        const majorVersions = new Array<string>();
+        this._versions = this._versions.filter((v) => {
+          const major = v.split('.')[0];
+          if (majorVersions.includes(major)) {
+            return true;
+          } else if (majorVersions.length < 3) {
+            majorVersions.push(major);
+            return true;
+          }
+          return false;
+        });
+
+        // filter to exclude rc versions and remove problematic versions, currently:
+        //  8.0.0, 8.3.0, 8.3.1 and 8.3.2
+
+        this._versions = this._versions.filter(
+          (v) => !['8.0.0', '8.3.0', '8.3.1', '8.3.2'].includes(v) && !v.includes('rc'),
+        );
+
+        // after redirection, if the current selected version can be found in the url, set it as the selected value, else select latest
+        const pathParts = window.top!.location.href.split('/');
+        let currentVersion: string = res.latest;
+        const vIndex = pathParts.indexOf('v');
+        if (vIndex !== -1 && vIndex + 1 < pathParts.length) {
+          const possibleVersion = decodeURIComponent(pathParts[vIndex + 1]);
+          if (this._versions.includes(possibleVersion)) {
+            currentVersion = possibleVersion;
+          }
         }
+        this._control.setValue(
+          {
+            label: currentVersion,
+            value: currentVersion,
+          },
+          { emitEvent: false },
+        );
       },
       error: () => {
         this._error = true;
