@@ -129,7 +129,6 @@ describe('FormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AlertGroupComponent,
-        BadgeComponent,
         BodyTextComponent,
         DialogComponent,
         DialogContentDirective,
@@ -160,7 +159,7 @@ describe('FormComponent', () => {
         FudisInternalErrorSummaryService,
         FudisErrorSummaryService,
       ],
-      imports: [ReactiveFormsModule],
+      imports: [BadgeComponent, ReactiveFormsModule],
     });
     TestBed.runInInjectionContext(() => {
       fixtureMock = TestBed.createComponent(MockFormComponent);
