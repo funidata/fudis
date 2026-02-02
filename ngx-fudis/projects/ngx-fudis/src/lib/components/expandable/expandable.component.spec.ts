@@ -167,7 +167,13 @@ describe('ExpandableComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [BadgeComponent, ButtonComponent, IconComponent, ReactiveFormsModule, RouterModule.forRoot([])],
+      imports: [
+        BadgeComponent,
+        ButtonComponent,
+        IconComponent,
+        ReactiveFormsModule,
+        RouterModule.forRoot([]),
+      ],
       providers: [
         FudisBreakpointService,
         FudisErrorSummaryService,
