@@ -110,13 +110,25 @@ export function previewHead(head) {
 
       /* 
       * Remove styling from version selector canvases so that only the selector is shown 
-      */
+        and style the containing iframe correctly to hide scollbars
+        */
 
       .unstyled-canvas.sbdocs-preview,
       .unstyled-canvas .docs-story {
         margin: 0;
         padding: 0;
         border: 0;
+      }
+      .unstyled-canvas.sbdocs-preview iframe {
+        display: block;
+        border: 0;
+        overflow: hidden;
+      }
+      #story--docs-version-selector--version-selector-story {
+        overflow: hidden !important;
+      }
+      #story--docs-version-selector--version-selector-story > div {
+        height: 220px !important;
       }
 
       .unstyled-canvas {
