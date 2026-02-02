@@ -146,7 +146,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   declarations: [
     AlertComponent,
     AlertGroupComponent,
-    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
@@ -236,6 +235,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
    * E.g. components from Angular Material or other Angular tools
    */
   imports: [
+    BadgeComponent,
     CommonModule,
     FormsModule,
     LayoutModule,
@@ -259,7 +259,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   exports: [
     AlertComponent,
     AlertGroupComponent,
-    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
