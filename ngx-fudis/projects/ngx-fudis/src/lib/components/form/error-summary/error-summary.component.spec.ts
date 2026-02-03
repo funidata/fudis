@@ -144,7 +144,6 @@ describe('ErrorSummaryComponent', () => {
         GuidanceComponent,
         FormContentDirective,
         HeadingComponent,
-        IconComponent,
         LabelComponent,
         LinkDirective,
         MockFormComponent,
@@ -154,12 +153,12 @@ describe('ErrorSummaryComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
+      imports: [IconComponent, ReactiveFormsModule, RouterModule.forRoot([])],
       providers: [
         FudisInternalErrorSummaryService,
         FudisBreakpointService,
         FudisErrorSummaryService,
       ],
-      imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
 
     TestBed.runInInjectionContext(async () => {
