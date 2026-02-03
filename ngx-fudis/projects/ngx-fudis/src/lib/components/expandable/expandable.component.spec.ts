@@ -142,7 +142,6 @@ describe('ExpandableComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         BodyTextComponent,
-        ButtonComponent,
         ErrorSummaryComponent,
         ExpandableActionsDirective,
         ExpandableComponent,
@@ -157,7 +156,6 @@ describe('ExpandableComponent', () => {
         GridDirective,
         GuidanceComponent,
         HeadingComponent,
-        IconComponent,
         LabelComponent,
         LinkDirective,
         MockContainerComponent,
@@ -169,12 +167,18 @@ describe('ExpandableComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
+      imports: [
+        BadgeComponent,
+        ButtonComponent,
+        IconComponent,
+        ReactiveFormsModule,
+        RouterModule.forRoot([]),
+      ],
       providers: [
         FudisBreakpointService,
         FudisErrorSummaryService,
         FudisInternalErrorSummaryService,
       ],
-      imports: [BadgeComponent, ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
   });
 

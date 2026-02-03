@@ -143,8 +143,6 @@ describe('FormComponent', () => {
         GridDirective,
         GuidanceComponent,
         HeadingComponent,
-        IconButtonComponent,
-        IconComponent,
         LabelComponent,
         LinkDirective,
         MockFormComponent,
@@ -152,6 +150,7 @@ describe('FormComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
+      imports: [BadgeComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [
         FudisAlertService,
         FudisBreakpointService,
@@ -159,7 +158,6 @@ describe('FormComponent', () => {
         FudisInternalErrorSummaryService,
         FudisErrorSummaryService,
       ],
-      imports: [BadgeComponent, ReactiveFormsModule],
     });
     TestBed.runInInjectionContext(() => {
       fixtureMock = TestBed.createComponent(MockFormComponent);

@@ -23,13 +23,11 @@ describe('TextInputComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         GuidanceComponent,
-        IconButtonComponent,
-        IconComponent,
         LabelComponent,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [ReactiveFormsModule, PopoverDirective],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule, PopoverDirective],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
