@@ -81,15 +81,14 @@ describe('DescriptionListItemDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ButtonComponent, IconComponent],
       declarations: [
-        ButtonComponent,
         GridDirective,
         GridComponent,
         DescriptionListComponent,
         DescriptionListItemComponent,
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
-        IconComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
         MockDlComponent,

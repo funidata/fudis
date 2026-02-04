@@ -65,15 +65,12 @@ describe('MultiselectOptionComponent', () => {
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
-        IconButtonComponent,
-        IconComponent,
         SelectOptionsDirective,
         GuidanceComponent,
-        IconComponent,
         LabelComponent,
       ],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MultiselectMockComponent);

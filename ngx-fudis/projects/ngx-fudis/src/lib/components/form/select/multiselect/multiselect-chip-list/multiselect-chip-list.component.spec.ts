@@ -30,7 +30,8 @@ describe('MultiselectChipListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MultiselectChipListComponent, MockWithParentComponent, IconComponent],
+      declarations: [MultiselectChipListComponent, MockWithParentComponent],
+      imports: [IconComponent],
     });
     fixture = TestBed.createComponent(MultiselectChipListComponent<string>);
     component = fixture.componentInstance;
