@@ -6,7 +6,7 @@ import { SelectOptionComponent } from '../../select/select-option/select-option.
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { defaultOptions } from '../../common/mock_data';
+import { defaultOptions, TestAnimalValue } from '../../common/mock_data';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { IconComponent } from '../../../../icon/icon.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
@@ -46,13 +46,13 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
   </fudis-select>`,
 })
 class MockComponent {
-  testOptions: FudisSelectOption<object>[] = defaultOptions;
-  optionWithSubLabel: FudisSelectOption<object> = {
+  testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
+  optionWithSubLabel: FudisSelectOption<string> = {
     value: 'test-1-abc',
     label: 'Dragon',
     subLabel: 'Roaaar!',
   };
-  control: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
+  control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
 
   @ViewChild('selectElem') selectElem: SelectComponent;
   @ViewChild('selectOption') selectOption: SelectOptionComponent;
@@ -101,7 +101,7 @@ describe('SelectOptionBaseDirective', () => {
     fixture.detectChanges();
   }
 
-  function updateControlValue(option: FudisSelectOption<object>) {
+  function updateControlValue(option: FudisSelectOption<TestAnimalValue>) {
     component.control.patchValue(option);
     fixture.detectChanges();
   }

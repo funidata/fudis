@@ -17,22 +17,22 @@ import { getElement } from '../../../../../utilities/tests/utilities';
   </div>`,
 })
 class MockWithParentComponent {
-  items: FudisSelectOption<object>[] = multiselectChipListMockData;
+  items: FudisSelectOption<string>[] = multiselectChipListMockData;
   id = 'parent-of-chip-list';
 }
 
 describe('MultiselectChipListComponent', () => {
-  let component: MultiselectChipListComponent;
-  let fixture: ComponentFixture<MultiselectChipListComponent>;
+  let component: MultiselectChipListComponent<string>;
+  let fixture: ComponentFixture<MultiselectChipListComponent<string>>;
   let fixtureMock: ComponentFixture<MockWithParentComponent>;
-  let chipList: NodeList;
+  let chipList: NodeListOf<HTMLElement>;
   let buttonElement: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MultiselectChipListComponent, MockWithParentComponent, IconComponent],
     });
-    fixture = TestBed.createComponent(MultiselectChipListComponent);
+    fixture = TestBed.createComponent(MultiselectChipListComponent<string>);
     component = fixture.componentInstance;
     component.selectedItems = multiselectChipListMockData;
     fixture.detectChanges();

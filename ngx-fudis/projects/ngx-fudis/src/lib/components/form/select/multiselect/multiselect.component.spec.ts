@@ -14,7 +14,7 @@ import { SelectGroupComponent } from '../common/select-group/select-group.compon
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
-import { TestAnimalSound, defaultOptions } from '../common/mock_data';
+import { TestAnimalSound, defaultOptions, TestAnimalValue } from '../common/mock_data';
 import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -41,21 +41,21 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
     </ng-template>
   </fudis-multiselect>`,
 })
-class MultiselectMockComponent {
-  @ViewChild('multiselectEl') multiselectEl: MultiselectComponent;
+class MultiselectMockComponent<T = string> {
+  @ViewChild('multiselectEl') multiselectEl: MultiselectComponent<T>;
 
-  options: FudisSelectOption<object>[] = defaultOptions;
-  control: FormControl<FudisSelectOption<TestAnimalSound>[] | null>;
+  options: TestAnimalSound[] = defaultOptions;
+  control: FormControl<FudisSelectOption<TestAnimalValue>[] | null> = new FormControl(null);
 }
 
 // TODO: add test for disabled states
 
 describe('MultiselectComponent', () => {
-  let component: MultiselectMockComponent;
-  let fixture: ComponentFixture<MultiselectMockComponent>;
+  let component: MultiselectMockComponent<TestAnimalValue>;
+  let fixture: ComponentFixture<MultiselectMockComponent<TestAnimalValue>>;
 
-  let multiselectComponent: MultiselectComponent;
-  let multiselectComponentFixture: ComponentFixture<MultiselectComponent>;
+  let multiselectComponent: MultiselectComponent<TestAnimalValue>;
+  let multiselectComponentFixture: ComponentFixture<MultiselectComponent<TestAnimalValue>>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -82,7 +82,7 @@ describe('MultiselectComponent', () => {
   });
 
   function initWithControlValue() {
-    const control = new FormControl<FudisSelectOption<TestAnimalSound>[]>([
+    const control = new FormControl<FudisSelectOption<TestAnimalValue>[]>([
       defaultOptions[0],
       defaultOptions[2],
     ]);
@@ -93,7 +93,7 @@ describe('MultiselectComponent', () => {
   }
 
   function initWithControlNull() {
-    const control = new FormControl<FudisSelectOption<TestAnimalSound>[] | null>(null);
+    const control = new FormControl<FudisSelectOption<TestAnimalValue>[] | null>(null);
     component.control = control;
 
     fixture.detectChanges();
@@ -101,11 +101,11 @@ describe('MultiselectComponent', () => {
 
   describe('Control', () => {
     beforeEach(() => {
-      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent);
+      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent<TestAnimalValue>);
       multiselectComponent = multiselectComponentFixture.componentInstance;
       multiselectComponentFixture.componentRef.setInput(
         'control',
-        new FormControl<FudisSelectOption<TestAnimalSound>[]>([
+        new FormControl<FudisSelectOption<TestAnimalValue>[]>([
           defaultOptions[0],
           defaultOptions[2],
         ]),
@@ -177,7 +177,7 @@ describe('MultiselectComponent', () => {
 
   describe('Input', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(MultiselectMockComponent);
+      fixture = TestBed.createComponent(MultiselectMockComponent<TestAnimalValue>);
       component = fixture.componentInstance;
     });
 
@@ -224,7 +224,7 @@ describe('MultiselectComponent', () => {
 
   describe('Multiselection change', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(MultiselectMockComponent);
+      fixture = TestBed.createComponent(MultiselectMockComponent<TestAnimalValue>);
       component = fixture.componentInstance;
     });
 
@@ -274,7 +274,7 @@ describe('MultiselectComponent', () => {
 
   describe('Chip list', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(MultiselectMockComponent);
+      fixture = TestBed.createComponent(MultiselectMockComponent<TestAnimalValue>);
       component = fixture.componentInstance;
     });
 
