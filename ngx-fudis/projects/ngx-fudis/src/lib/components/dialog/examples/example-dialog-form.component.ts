@@ -12,12 +12,7 @@ type TestForm = {
   topics: FormControl<string | null>;
 };
 
-export type Grade = {
-  value: string;
-  label: string;
-};
-
-export const gradeOptions: FudisSelectOption<Grade>[] = [
+export const gradeOptions: FudisSelectOption[] = [
   { value: '5', label: 'Excellent - 5' },
   { value: '4', label: 'Good - 4' },
   { value: '3', label: 'Neutral - 3' },

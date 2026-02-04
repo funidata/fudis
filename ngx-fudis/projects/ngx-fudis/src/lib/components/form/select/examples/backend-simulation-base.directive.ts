@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 @Directive({
   selector: 'example-select-backend-simulation-directive',
 })
-export class StorybookExampleBackendSimulationBaseDirective {
+export class StorybookExampleBackendSimulationBaseDirective<T = string> {
   constructor() {
     this.searchTextUpdateSubject.pipe(takeUntilDestroyed()).subscribe((value) => {
       this.databaseCounter = 0;
@@ -28,14 +28,14 @@ export class StorybookExampleBackendSimulationBaseDirective {
 
             const counterLimit = 10;
 
-            const results: FudisSelectOption<object>[] = [];
+            const results: FudisSelectOption<T>[] = [];
 
-            for (const option of selectMovieMockData) {
+            for (const option of selectMovieMockData as FudisSelectOption<T>[]) {
               if (counter >= counterLimit) {
                 break;
               }
 
-              if (this.control.value && option === this.control.value?.label) {
+              if (this.control.value && option.label === this.control.value?.label) {
                 results.push(option);
                 counter = counterLimit;
               } else if (
@@ -67,7 +67,7 @@ export class StorybookExampleBackendSimulationBaseDirective {
 
   protected databaseCounter = 0;
 
-  protected searchResults = new BehaviorSubject<FudisSelectOption<object>[]>([]);
+  protected searchResults = new BehaviorSubject<FudisSelectOption<T>[]>([]);
 
   protected autocompleteNoResultsText: null | string = null;
 
@@ -78,5 +78,5 @@ export class StorybookExampleBackendSimulationBaseDirective {
 
   protected placeholder = 'Select a movie';
 
-  protected control: FormControl;
+  protected control: FormControl<FudisSelectOption<T> | null>;
 }

@@ -26,7 +26,7 @@ type MyForm = {
   email: FormControl<string | null>;
   number: FormControl<number | null>;
   date: FormControl<Date | null>;
-  animal: FormControl<FudisSelectOption<object> | null>;
+  animal: FormControl<FudisSelectOption<string> | null>;
   summer: FormGroup<SummerCheckbox>;
   winter: FormGroup<WinterCheckbox>;
   working: FormGroup<WorkingCheckbox>;
@@ -227,7 +227,7 @@ export class StorybookExampleFormDynamicComponentsComponent {
         this._requiredValidatorInstance,
         this._minDateValidatorInstance,
       ]),
-      animal: new FormControl<FudisSelectOption<object> | null>(
+      animal: new FormControl<FudisSelectOption<string> | null>(
         null,
         this._requiredValidatorInstance,
       ),

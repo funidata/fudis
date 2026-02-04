@@ -5,12 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from './select.component';
 import docs from './select.mdx';
-import {
-  groupedMockData,
-  defaultOptions,
-  TestAnimalSound,
-  TestAnimalScience,
-} from '../common/mock_data';
+import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleSelectBackendSimulationComponent } from '../examples/select-backend-simulation.component';
 
@@ -74,7 +69,7 @@ const ExampleTemplate: StoryFn = (args) => ({
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(null),
+    control: new FormControl<string | object | null>(null),
     groupedMockData,
   },
   template: html`

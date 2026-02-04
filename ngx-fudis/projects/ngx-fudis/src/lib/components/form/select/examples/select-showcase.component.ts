@@ -221,15 +221,16 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
   `,
 })
 export class StorybookExampleSelectShowcaseComponent {
-  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object> | null>();
+  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<string | object> | null>();
 
   defaultOptions = defaultOptions;
 
   groupedMockData = groupedMockData;
 
-  control: FormControl = new FormControl<FudisSelectOption<object> | null>(defaultOptions[2], [
-    FudisValidators.required('You must choose a pet!'),
-  ]);
+  control: FormControl = new FormControl<FudisSelectOption<string | object> | null>(
+    defaultOptions[2],
+    [FudisValidators.required('You must choose a pet!')],
+  );
 
   onClick() {
     if (!this.control.disabled) {

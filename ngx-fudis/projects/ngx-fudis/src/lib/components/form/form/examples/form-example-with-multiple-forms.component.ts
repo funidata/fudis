@@ -6,11 +6,10 @@ import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import {
   FudisLocalizedTextGroupDefaultFormGroup,
   FudisRadioButtonOption,
-  FudisSelectOption,
 } from '../../../../types/forms';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
-import { defaultOptions } from '../../select/common/mock_data';
+import { defaultOptions, TestAnimalSound } from '../../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
 
 interface MyCheckboxGroup {
@@ -315,11 +314,11 @@ export class StorybookExampleWithMultipleFormsComponent {
       [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
     ),
     formFour: new FormGroup({
-      select: new FormControl<FudisSelectOption<object> | null>(
+      select: new FormControl<TestAnimalSound | null>(
         null,
         FudisValidators.required('You must pick one'),
       ),
-      multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
+      multiselect: new FormControl<TestAnimalSound[] | null>(null, [
         FudisValidators.required('Selection is missing'),
         FudisValidators.minLength(2, 'Choose at least 2'),
       ]),
