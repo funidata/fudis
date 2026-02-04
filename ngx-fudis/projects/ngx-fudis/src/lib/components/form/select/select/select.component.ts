@@ -48,7 +48,7 @@ export class SelectComponent<T = string>
   @ViewChild(SelectControlValueAccessorDirective)
   public selectCVA: SelectControlValueAccessorDirective<T>;
 
-  /*
+  /**
    * FormControl for single select
    */
   @Input({ required: true }) override control: FormControl<FudisSelectOption<T> | null>;
