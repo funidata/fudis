@@ -82,7 +82,7 @@ class SelectBaseControlValueAccessorDirective implements ControlValueAccessor, V
   ],
   standalone: false,
 })
-export class SelectControlValueAccessorDirective
+export class SelectControlValueAccessorDirective<T = string>
   extends SelectBaseControlValueAccessorDirective
   implements OnChanges
 {
@@ -95,13 +95,13 @@ export class SelectControlValueAccessorDirective
 
   @Input() filterText: string | null;
 
-  ngOnChanges(changes: FudisComponentChanges<SelectControlValueAccessorDirective>): void {
+  ngOnChanges(changes: FudisComponentChanges<SelectControlValueAccessorDirective<T>>): void {
     if (changes.filterText?.currentValue !== changes.filterText?.previousValue) {
       this.writeValue();
     }
   }
 
-  override writeValue(value?: FudisSelectOption<object> | null): void {
+  override writeValue(value?: FudisSelectOption<T> | null): void {
     const valueToSet = value?.label || null;
 
     if (valueToSet) {
@@ -136,7 +136,7 @@ export class SelectControlValueAccessorDirective
   ],
   standalone: false,
 })
-export class MultiselectControlValueAccessorDirective
+export class MultiselectControlValueAccessorDirective<T = string>
   extends SelectBaseControlValueAccessorDirective
   implements AfterViewInit
 {
@@ -151,7 +151,7 @@ export class MultiselectControlValueAccessorDirective
   @Input() id: string;
   @Input() enableAutocomplete: boolean = false;
 
-  @Output() handleSortedSelectedOptions = new EventEmitter<FudisSelectOption<object>[] | null>();
+  @Output() handleSortedSelectedOptions = new EventEmitter<FudisSelectOption<T>[] | null>();
 
   ngAfterViewInit(): void {
     this.writeValue(this._selectedOptions);
@@ -161,15 +161,15 @@ export class MultiselectControlValueAccessorDirective
    * When selecting / deselecting options, variable for storing them in the order of their id's
    * (usually the DOM order)
    */
-  protected _selectedOptions: FudisSelectOption<object>[] | null = null;
+  protected _selectedOptions: FudisSelectOption<T>[] | null = null;
 
-  override writeValue(value: FudisSelectOption<object>[] | null): void {
+  override writeValue(value: FudisSelectOption<T>[] | null): void {
     this._selectedOptions = value;
 
     this._setVisibleLabel(value);
   }
 
-  private _setVisibleLabel(value: FudisSelectOption<object>[] | null): void {
+  private _setVisibleLabel(value: FudisSelectOption<T>[] | null): void {
     const dropdown = this._document.getElementById(`${this.id}-dropdown`);
 
     if (value) {
@@ -194,7 +194,7 @@ export class MultiselectControlValueAccessorDirective
    * Sort selected options the same order they appear in the DOM
    */
   private _sortSelectedOptionsDOMOrder(dropdown: HTMLElement | null, id: string) {
-    return function (a: FudisSelectOption<object>, b: FudisSelectOption<object>): 0 | -1 | 1 {
+    return function (a: FudisSelectOption<T>, b: FudisSelectOption<T>): 0 | -1 | 1 {
       const aElementId = FudisIdService.createSelectOptionId(id, a.label);
       const bElementId = FudisIdService.createSelectOptionId(id, b.label);
 

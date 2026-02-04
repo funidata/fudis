@@ -12,7 +12,7 @@ import { FudisIdService } from '../../../../../services/id/id.service';
   selector: '[fudisSelectOptionBase]',
   standalone: false,
 })
-export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
+export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirective {
   constructor(
     @Inject(DOCUMENT) _document: Document,
     @Host() @Optional() protected _parentGroup: SelectGroupComponent,
@@ -32,7 +32,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Select option data
    */
-  @Input({ required: true }) data: FudisSelectOption<object>;
+  @Input({ required: true }) data: FudisSelectOption<T>;
 
   /**
    * State of option visibility
@@ -47,7 +47,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Common parent and its properties for both Select and Multiselect
    */
-  protected _parent: SelectComponent | MultiselectComponent;
+  protected _parent: SelectComponent<T> | MultiselectComponent<T>;
 
   /**
    * Get visibility status of this option

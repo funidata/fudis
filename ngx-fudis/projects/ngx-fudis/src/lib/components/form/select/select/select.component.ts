@@ -32,7 +32,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
   encapsulation: ViewEncapsulation.None,
   standalone: false,
 })
-export class SelectComponent
+export class SelectComponent<T = string>
   extends SelectBaseDirective
   implements OnInit, AfterViewInit, BaseSelectableComponent
 {
@@ -46,18 +46,18 @@ export class SelectComponent
   }
 
   @ViewChild(SelectControlValueAccessorDirective)
-  public selectCVA: SelectControlValueAccessorDirective;
+  public selectCVA: SelectControlValueAccessorDirective<T>;
 
   /*
    * FormControl for single select
    */
-  @Input({ required: true }) override control: FormControl<FudisSelectOption<object> | null>;
+  @Input({ required: true }) override control: FormControl<FudisSelectOption<T> | null>;
 
   /**
    * Value output event on selection change
    */
-  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
-    new EventEmitter<FudisSelectOption<object> | null>();
+  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<T> | null> =
+    new EventEmitter<FudisSelectOption<T> | null>();
 
   ngOnInit(): void {
     this._setParentId('select');
@@ -69,7 +69,7 @@ export class SelectComponent
    * @param value Option to be selected
    * @param disableSignalEmit Disable signal update to reduce unneeded state updates
    */
-  public handleSelectionChange(value: FudisSelectOption<object> | null): void {
+  public handleSelectionChange(value: FudisSelectOption<T> | null): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 

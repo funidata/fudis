@@ -18,8 +18,8 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
   styleUrls: ['./multiselect-option.component.scss'],
   standalone: false,
 })
-export class MultiselectOptionComponent
-  extends SelectOptionBaseDirective
+export class MultiselectOptionComponent<T = string>
+  extends SelectOptionBaseDirective<T>
   implements OnDestroy, OnChanges
 {
   private static instanceCounter = 0;
@@ -27,7 +27,7 @@ export class MultiselectOptionComponent
 
   constructor(
     @Inject(DOCUMENT) _document: Document,
-    @Host() protected _parentMultiselect: MultiselectComponent,
+    @Host() protected _parentMultiselect: MultiselectComponent<T>,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
@@ -53,9 +53,9 @@ export class MultiselectOptionComponent
   /**
    * Common parent and its properties
    */
-  protected override _parent: MultiselectComponent;
+  protected override _parent: MultiselectComponent<T>;
 
-  ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent>) {
+  ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent<T>>) {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
       const newOptionId = this._idService.getNewSelectOptionId(
         this.data.label,
@@ -124,7 +124,7 @@ export class MultiselectOptionComponent
    *
    * @param options Currently selected options
    */
-  private _isOptionChecked(options: FudisSelectOption<object>[] | null): void {
+  private _isOptionChecked(options: FudisSelectOption<T>[] | null): void {
     if (this.data) {
       const result = options?.find((option) => option.value === this.data.value);
 
@@ -136,7 +136,7 @@ export class MultiselectOptionComponent
    * When option is changed, it will not change Form Control's value, which is intended, but visible
    * label should be updated
    */
-  protected _checkIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+  protected _checkIfLabelRequiresUpdate(newData: FudisSelectOption<T>): void {
     const controlValue = this._parent?.control.value;
     const foundMatch = controlValue?.find((selectedOption) => {
       return selectedOption.value === newData.value;
