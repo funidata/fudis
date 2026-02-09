@@ -11,7 +11,6 @@ import { FormControl } from '@angular/forms';
 export class StorybookExampleBackendSimulationBaseDirective<T = string> {
   constructor() {
     this.searchTextUpdateSubject.pipe(takeUntilDestroyed()).subscribe((value) => {
-      this.databaseCounter = 0;
       if (value?.trim()) {
         this.filterStatus = 'In progress...';
         this.autocompleteNoResultsText = 'Fetching results...';
@@ -22,6 +21,7 @@ export class StorybookExampleBackendSimulationBaseDirective<T = string> {
     this.searchTextUpdateSubject
       .pipe(debounceTime(300), takeUntilDestroyed())
       .subscribe((value) => {
+        this.databaseCounter = 0;
         if (value?.trim()) {
           setTimeout(() => {
             let counter = 0;
