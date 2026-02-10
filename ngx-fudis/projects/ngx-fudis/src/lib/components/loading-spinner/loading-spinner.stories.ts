@@ -9,7 +9,11 @@ export default {
   component: LoadingSpinnerComponent,
   decorators: [
     moduleMetadata({
-      imports: [LoadingSpinnerComponent, StorybookExampleLoadingSpinnerComponent, HorizontalRuleComponent],
+      imports: [
+        LoadingSpinnerComponent,
+        StorybookExampleLoadingSpinnerComponent,
+        HorizontalRuleComponent,
+      ],
     }),
   ],
   parameters: {
