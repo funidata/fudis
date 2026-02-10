@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { NgxFudisModule } from '../../../../ngx-fudis.module';
+import { HorizontalRuleComponent } from '../../../horizontal-rule/horizontal-rule.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
 import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
-
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { NgxFudisModule } from '../../../../ngx-fudis.module';
 
 type SummerCheckbox = {
   summer: FormControl<boolean | null>;
@@ -35,7 +35,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule, CommonModule, HorizontalRuleComponent],
   selector: 'example-dynamic-validator',
   template: `
     <fudis-form

@@ -1,5 +1,6 @@
-import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormGroup } from '@angular/forms';
+import { HorizontalRuleComponent } from '../../components/horizontal-rule/horizontal-rule.component';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisValidators } from './validators';
@@ -11,6 +12,9 @@ export default {
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
+    }),
+    moduleMetadata({
+      imports: [HorizontalRuleComponent],
     }),
   ],
   parameters: {
