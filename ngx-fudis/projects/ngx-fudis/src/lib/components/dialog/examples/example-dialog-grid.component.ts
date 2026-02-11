@@ -26,6 +26,7 @@ import { CommonModule } from '@angular/common';
             </fudis-heading>
             <fudis-icon-button
               #menuTrigger
+              [id]="'fudis-menu-button-1'"
               [ariaLabel]="'Additional menu'"
               [size]="'small'"
               [variant]="'secondary'"
