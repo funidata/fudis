@@ -146,11 +146,9 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   declarations: [
     AlertComponent,
     AlertGroupComponent,
-    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
-    ButtonComponent,
     CheckboxComponent,
     CheckboxGroupComponent,
     CheckboxGroupOptionComponent,
@@ -197,8 +195,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     GuidanceComponent,
     HeadingComponent,
     HorizontalRuleComponent,
-    IconComponent,
-    IconButtonComponent,
     LocalizedTextGroupComponent,
     LabelComponent,
     LanguageBadgeComponent,
@@ -236,8 +232,12 @@ import { PopoverDirective } from './directives/popover/popover.directive';
    * E.g. components from Angular Material or other Angular tools
    */
   imports: [
+    BadgeComponent,
+    ButtonComponent,
     CommonModule,
     FormsModule,
+    IconButtonComponent,
+    IconComponent,
     LayoutModule,
     MatDatepickerModule,
     MatDialogModule,
@@ -259,7 +259,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   exports: [
     AlertComponent,
     AlertGroupComponent,
-    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
