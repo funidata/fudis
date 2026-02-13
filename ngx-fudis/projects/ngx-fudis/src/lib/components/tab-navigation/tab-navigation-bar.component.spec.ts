@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { IconComponent } from '../icon/icon.component';
 import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -8,7 +9,7 @@ describe('TabNavigationBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TabNavigationBarComponent],
+      imports: [TabNavigationBarComponent, IconComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabNavigationBarComponent);

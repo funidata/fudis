@@ -2,13 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BadgeComponent } from './badge.component';
 import { FudisBadgeVariant } from '../../types/miscellaneous';
+import { CommonModule } from '@angular/common';
 
 describe('BadgeComponent', () => {
   let fixture: ComponentFixture<BadgeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BadgeComponent],
+      imports: [BadgeComponent, CommonModule],
     }).compileComponents();
   });
 
