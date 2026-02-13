@@ -9,15 +9,23 @@ import * as VersionSelectorStories from "../../../storybook-docs/version-selecto
 
 # Dialog
 
-Fudis Dialog is based on Angular Material Dialog. Dialog opens on top of any content with a backdrop.
+Fudis Dialog is based on Angular Material Dialog. Dialog opens on top of any content with a backdrop. It consists of three parts: Service, Component and Directives.
 
-Fudis Dialog consists of three parts: Service, Component and Directives.
+The first heading of the dialog should be either level 1 or 2. Dialog heading levels should be used consistently throughout the application.
+It is recommended to have only one dialog open at a time.
+Also, pay attention to accessibility when using dialog with read-only content.
 
-It is recommended to have only one Dialog open at a time.
+**Table of Contents**
 
-The first heading of the dialog should be either level 1 or 2. The Dialog heading levels should be used consistently throughout the application.
-
-Pay attention to accessibility when using dialog with read-only content.
+1. [Service](#service)
+2. [Component](#component)
+3. [Content Directives](#content-directives)
+4. [Form inside Dialog](#form-inside-dialog)
+5. [Focus Management](#focus-management)
+6. [Examples](#examples)
+7. [Accessibility](#accessibility)
+8. [Related components](#related-components)
+9. [Properties](#properties)
 
 ## Service
 
@@ -224,6 +232,53 @@ class FormDialogComponent {
 }
 ```
 
+## Focus Management
+
+Focus is mainly handled on the library level, but pay attention to the following when opening dialogs on top of each other.
+If another dialog is opened through [DropdownMenu](/docs/components-dropdown-menu--documentation), focus needs to be manually restored to the menu button after closing the top dialog, because the element no longer exists in the DOM which triggered the dialog opening.
+For these cases, add handling with `afterClosed()` observable as advised in the example below and in [Angular Material documentation](https://material.angular.dev/components/dialog/overview#focus-restoration).
+
+```
+  // HTML template
+    <ng-template #dialog>
+      <fudis-dialog>
+        <fudis-dialog-content>
+          <fudis-icon-button
+            #menuTrigger
+            [ariaLabel]="'Additional menu'"
+            [size]="'small'"
+            [variant]="'secondary'"
+            [icon]="'three-dots'"
+            [asMenuButton]="true"
+          >
+            <fudis-dropdown-menu>
+              <fudis-dropdown-menu-item
+                [label]="'Open new dialog'"
+                (handleClick)="openDialogFromMenu(dialogFromMenu)"
+              ></fudis-dropdown-menu-item>
+            </fudis-dropdown-menu>
+          </fudis-icon-button>
+        </fudis-dialog-content>
+      </fudis-dialog>
+    </ng-template>
+
+    <ng-template #dialogFromMenu>
+      <fudis-dialog> ... </fudis-dialog>
+    </ng-template>
+
+// Typescript
+
+  @ViewChild('menuTrigger', { static: false, read: ElementRef }) menuTrigger?: ElementRef<HTMLButtonElement>;
+
+  openDialogFromMenu<T = any>(dialogFromMenu: TemplateRef<T>) {
+    const dialogRef = this._dialogService.open(dialogFromMenu, { restoreFocus: false });
+    const buttonElement = this.menuTrigger?.nativeElement.querySelector('button');
+    dialogRef.afterClosed().subscribe(() => {
+      buttonElement?.focus();
+    });
+  }
+```
+
 ## Examples
 
 <Canvas of={DialogStory.ExampleWithForm} />
@@ -236,7 +291,8 @@ class FormDialogComponent {
 
 - Focus is trapped inside the dialog
 - Initial focus is set to heading defined with `fudisDialogTitle` directive, when using keyboard
-- Focus returns to Dialog launcher when it is closed
+- Focus returns to dialog launcher when it is closed
+  - See exception in [Focus Management](#focus-management) section
 - Dialog can't be closed with outside click
 - Dialog can be closed with keyboard Escape
 - Dialog content is scrollable with keyboard and mouse

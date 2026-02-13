@@ -7,7 +7,6 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -35,7 +34,7 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit, OnDestroy {
+export class DropdownMenuComponent extends DropdownBaseDirective implements OnDestroy {
   constructor(
     private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
@@ -44,6 +43,13 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
     @Host() private _parentButton: IconButtonComponent,
   ) {
     super();
+
+    /**
+     * Generate id in constructor for it to be accessible to child elements, and set it to parent
+     * button's dropdownMenuId property for aria-controls
+     */
+    this.id = this._idService.getNewGrandParentId('dropdown-menu');
+    if (this._parentButton) this._parentButton.dropdownMenuId = this.id;
 
     /**
      * Fire maxWidth calculation through Observable call from parent Button
@@ -198,11 +204,6 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
         this._parentButton.closeMenu();
       }
     }
-  }
-
-  ngOnInit(): void {
-    this.id = this._idService.getNewGrandParentId('dropdown-menu');
-    if (this._parentButton) this._parentButton.dropdownMenuId = this.id;
   }
 
   ngOnDestroy() {
