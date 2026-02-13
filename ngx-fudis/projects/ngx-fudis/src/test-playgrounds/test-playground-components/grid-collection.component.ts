@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HorizontalRuleComponent } from '../../lib/components/horizontal-rule/horizontal-rule.component';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 
 @Component({
-  imports: [CommonModule, NgxFudisModule, HorizontalRuleComponent],
+  imports: [CommonModule, NgxFudisModule],
   selector: 'example-grid-collection',
   template: `
     <fudis-heading [level]="2">Grid align start</fudis-heading>

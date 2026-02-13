@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { HorizontalRuleComponent } from '../../../horizontal-rule/horizontal-rule.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
@@ -35,7 +34,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule, HorizontalRuleComponent],
+  imports: [NgxFudisModule, CommonModule],
   selector: 'example-dynamic-validator',
   template: `
     <fudis-form

@@ -2,12 +2,11 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisDialogSize } from '../../../types/miscellaneous';
-import { HorizontalRuleComponent } from '../../horizontal-rule/horizontal-rule.component';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [NgxFudisModule, CommonModule, HorizontalRuleComponent],
+  imports: [NgxFudisModule, CommonModule],
   selector: 'example-dialog-with-grid',
   template: `
     <fudis-button

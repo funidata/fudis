@@ -7,7 +7,6 @@ import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typogr
 import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { HorizontalRuleComponent } from '../../../horizontal-rule/horizontal-rule.component';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 
 type SummerCheckbox = {
@@ -35,7 +34,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule, HorizontalRuleComponent],
+  imports: [NgxFudisModule, CommonModule],
   selector: 'example-form-dynamic-components',
   template: `
     <fudis-form

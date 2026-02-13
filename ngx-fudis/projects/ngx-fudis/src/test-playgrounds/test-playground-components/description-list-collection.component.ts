@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
-import { HorizontalRuleComponent } from '../../lib/components/horizontal-rule/horizontal-rule.component';
 import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
 
 @Component({
-  imports: [CommonModule, NgxFudisModule, HorizontalRuleComponent],
+  imports: [CommonModule, NgxFudisModule],
   selector: 'example-description-list-collection',
   template: `
     @for (gridConfig of gridConfigs; track gridConfig) {

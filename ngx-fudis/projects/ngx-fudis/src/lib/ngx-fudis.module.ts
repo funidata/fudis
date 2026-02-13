@@ -259,6 +259,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   exports: [
     AlertComponent,
     AlertGroupComponent,
+    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
@@ -300,6 +301,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     GridItemComponent,
     GridItemDirective,
     HeadingComponent,
+    HorizontalRuleComponent,
     IconComponent,
     IconButtonComponent,
     LocalizedTextGroupComponent,

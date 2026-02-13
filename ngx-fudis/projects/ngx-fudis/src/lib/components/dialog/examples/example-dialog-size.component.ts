@@ -1,13 +1,12 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { CommonModule } from '@angular/common';
-import { HorizontalRuleComponent } from '../../horizontal-rule/horizontal-rule.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisDialogSize } from '../../../types/miscellaneous';
 import { ExampleDialogFormComponent } from './example-dialog-form.component';
 
 @Component({
-  imports: [NgxFudisModule, CommonModule, HorizontalRuleComponent],
+  imports: [NgxFudisModule, CommonModule],
   selector: 'example-dialog-size',
   template: `
     <fudis-heading [level]="1">Dialog size examples</fudis-heading>
