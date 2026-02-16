@@ -38,13 +38,17 @@ test("dialog with form", async ({ page }) => {
 test("dialog with grid", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-grid&viewMode=story");
   await page.getByTestId("fudis-button-1").click();
-  await expect(page.getByTestId("fudis-button-2")).toBeVisible();
+  await expect(page.getByTestId("fudis-menu-button-1")).toBeVisible();
+  await expect(page.getByTestId("fudis-button-3")).toBeVisible();
   await expect(page.getByText("Dialog with fudis-grid and scrollable content")).toBeVisible();
   await expect(page).toHaveScreenshot("grid-1-init.png");
   await page.keyboard.press("Tab");
   await expect(page).toHaveScreenshot("grid-2-content-focus.png");
   await page.getByText(" I am last item of the grid ").scrollIntoViewIfNeeded();
   await expect(page).toHaveScreenshot("grid-3-content-scrolled.png");
+  await page.keyboard.press("Tab"); // Focus to menu button
+  await page.keyboard.press("Enter"); // Open dropdown menu
+  await expect(page.getByTestId("fudis-dropdown-menu-1-option-1")).toBeVisible();
   await page.getByLabel("Close").click();
   await expect(page).toHaveScreenshot("grid-4-content-closed.png");
 });
