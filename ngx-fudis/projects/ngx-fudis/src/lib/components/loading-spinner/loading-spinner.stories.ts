@@ -1,6 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import docs from './loading-spinner.mdx';
-import { HorizontalRuleComponent } from '../horizontal-rule/horizontal-rule.component';
 import { LoadingSpinnerComponent } from './loading-spinner.component';
 import { StorybookExampleLoadingSpinnerComponent } from './examples/loading-spinner-example.component';
 
@@ -9,11 +8,7 @@ export default {
   component: LoadingSpinnerComponent,
   decorators: [
     moduleMetadata({
-      imports: [
-        LoadingSpinnerComponent,
-        StorybookExampleLoadingSpinnerComponent,
-        HorizontalRuleComponent,
-      ],
+      imports: [LoadingSpinnerComponent, StorybookExampleLoadingSpinnerComponent],
     }),
   ],
   parameters: {

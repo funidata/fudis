@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisBadgeVariant } from '../../types/miscellaneous';
-import { CommonModule } from '@angular/common';
 
 /**
  * Displays a small status or category label.
@@ -12,7 +11,6 @@ import { CommonModule } from '@angular/common';
   selector: 'fudis-badge',
   templateUrl: './badge.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
 })
 export class BadgeComponent {
   /**
