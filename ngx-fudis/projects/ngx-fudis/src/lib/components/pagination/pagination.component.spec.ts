@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination.component';
-import { CommonModule } from '@angular/common';
-import { NgxFudisModule } from '../../ngx-fudis.module';
 import { By } from '@angular/platform-browser';
 import { getElement } from '../../utilities/tests/utilities';
 
@@ -11,7 +9,7 @@ describe('PaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommonModule, NgxFudisModule, PaginationComponent],
+      imports: [PaginationComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PaginationComponent);
