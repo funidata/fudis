@@ -64,10 +64,9 @@ describe('SelectComponent', () => {
         MockAutocompleteComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
-        BodyTextComponent,
       ],
       providers: [FudisDialogService, FudisInternalErrorSummaryService, SelectBaseDirective],
-      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
     }).compileComponents();
   });
 

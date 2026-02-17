@@ -149,7 +149,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   declarations: [
     AlertComponent,
     AlertGroupComponent,
-    BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
     CheckboxComponent,
@@ -235,6 +234,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
    */
   imports: [
     BadgeComponent,
+    BodyTextComponent,
     ButtonComponent,
     CommonModule,
     FormsModule,

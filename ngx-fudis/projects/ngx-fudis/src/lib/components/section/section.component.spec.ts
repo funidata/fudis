@@ -55,7 +55,6 @@ describe('SectionComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
-        BodyTextComponent,
         GridDirective,
         HeadingComponent,
         MockFudisSectionComponent,
@@ -63,7 +62,13 @@ describe('SectionComponent', () => {
         SectionActionsDirective,
         SectionContentDirective,
       ],
-      imports: [ButtonComponent, IconButtonComponent, IconComponent, PopoverDirective],
+      imports: [
+        BodyTextComponent,
+        ButtonComponent,
+        IconButtonComponent,
+        IconComponent,
+        PopoverDirective,
+      ],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     });
 
