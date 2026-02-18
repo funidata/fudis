@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoadingSpinnerComponent } from './loading-spinner.component';
 import { getElement } from '../../utilities/tests/utilities';
-import { NgxFudisModule } from '../../ngx-fudis.module';
 
 describe('LoadingSpinnerComponent', () => {
   let component: LoadingSpinnerComponent;
@@ -9,7 +8,7 @@ describe('LoadingSpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoadingSpinnerComponent, NgxFudisModule],
+      imports: [LoadingSpinnerComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoadingSpinnerComponent);
