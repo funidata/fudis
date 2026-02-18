@@ -10,6 +10,7 @@ import {
   ViewContainerRef,
   Inject,
   ComponentRef,
+  DOCUMENT
 } from '@angular/core';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
@@ -17,7 +18,7 @@ import { FudisIdService } from '../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { IconComponent } from '../../components/icon/icon.component';
-import { DOCUMENT } from '@angular/common';
+
 
 /**
  * Adds link behavior to an element.

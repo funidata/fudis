@@ -11,12 +11,13 @@
   (focus)="_handleMenuItemFocus()"
   (click)="_clickOption($event)"
   tabindex="-1"
->
+  >
   {{ label }}
-  <span
-    *ngIf="disabled || null"
-    class="fudis-dropdown-menu-item__label fudis-dropdown-menu-item__label__disabled-text"
-  >
-    ({{ _translationItemDisabledText | async }})</span
-  >
-</button>
+  @if (disabled || null) {
+    <span
+      class="fudis-dropdown-menu-item__label fudis-dropdown-menu-item__label__disabled-text"
+      >
+      ({{ _translationItemDisabledText | async }})</span
+      >
+    }
+  </button>

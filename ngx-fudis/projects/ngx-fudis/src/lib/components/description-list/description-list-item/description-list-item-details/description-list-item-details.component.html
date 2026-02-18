@@ -1,40 +1,45 @@
-<ng-container *ngIf="!lang || (_langSelected | async)">
-  <ng-container *ngIf="_parentDl.tag === 'p'">
+@if (!lang || (_langSelected | async)) {
+  @if (_parentDl.tag === 'p') {
     <span [id]="_id" [attr.lang]="lang" [class]="_mainCssClass | async">
       <ng-container *ngTemplateOutlet="ddContent"></ng-container>
     </span>
-  </ng-container>
-
-  <ng-container *ngIf="_parentDl.tag === 'dl'">
+  }
+  @if (_parentDl.tag === 'dl') {
     <dd [id]="_id" [attr.lang]="lang" [class]="_mainCssClass | async">
-      <ng-container *ngIf="!emptyState; else emptyStateTpl">
+      @if (!emptyState) {
         <ng-container *ngTemplateOutlet="ddContent"></ng-container>
-      </ng-container>
+      } @else {
+        <span class="fudis-text-emptystate">{{
+          emptyStateContentText ||
+          _translationService.getTranslations()().DESCRIPTION_LIST_ITEM_DETAILS.EMPTY_STATE
+        }}</span>
+      }
     </dd>
-  </ng-container>
-</ng-container>
+  }
+}
 
 <ng-template #ddContent>
-  <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__sub-heading'">{{
-    subHeading
-  }}</span
-  ><span [class]="(_mainCssClass | async) + '__content'" [attr.aria-label]="ariaLabel">
-    <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'"> &#40;</span
-    ><span [attr.aria-hidden]="ariaLabel ? true : null">{{ contentText }}</span
-    ><span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
-    ><ng-content
-  /></span>
-  <span
-    *ngIf="contentText && (_lastChild | async)"
-    [class]="(_mainCssClass | async) + '__comma'"
-    aria-hidden="true"
-    >&comma;</span
-  >
-</ng-template>
+  @if (subHeading) {
+    <span [class]="(_mainCssClass | async) + '__sub-heading'">{{
+      subHeading
+      }}</span
+      >
+      }<span [class]="(_mainCssClass | async) + '__content'" [attr.aria-label]="ariaLabel">
+      @if (subHeading) {
+        <span [class]="(_mainCssClass | async) + '__parenthesis'"> &#40;</span
+          >
+          }<span [attr.aria-hidden]="ariaLabel ? true : null">{{ contentText }}</span
+          >@if (subHeading) {
+          <span [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
+            >
+            }<ng-content
+          /></span>
+          @if (contentText && (_lastChild | async)) {
+            <span
+              [class]="(_mainCssClass | async) + '__comma'"
+              aria-hidden="true"
+              >&comma;</span
+              >
+            }
+          </ng-template>
 
-<ng-template #emptyStateTpl>
-  <span class="fudis-text-emptystate">{{
-    emptyStateContentText ||
-      _translationService.getTranslations()().DESCRIPTION_LIST_ITEM_DETAILS.EMPTY_STATE
-  }}</span>
-</ng-template>

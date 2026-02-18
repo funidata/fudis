@@ -1,4 +1,4 @@
-import { Component, computed, Inject, OnInit, signal } from '@angular/core';
+import { Component, computed, Inject, OnInit, signal, DOCUMENT } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import {
   FudisAlertService,
@@ -8,7 +8,7 @@ import {
   FudisBreakpointService,
   FudisErrorSummaryService,
 } from 'ngx-fudis';
-import { DOCUMENT } from '@angular/common';
+
 import { FudisCheckboxGroupOption } from 'dist/ngx-fudis/lib/types/forms';
 import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';

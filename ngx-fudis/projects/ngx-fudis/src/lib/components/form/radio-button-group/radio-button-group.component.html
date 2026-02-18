@@ -11,19 +11,20 @@
   [popoverTriggerLabel]="popoverTriggerLabel"
   [initialFocus]="initialFocus"
   [syncLegendHeight]="true"
->
+  >
   <fudis-fieldset-content>
     <ng-content select="fudis-radio-button" />
-    <fudis-guidance
-      #radioButtonGroupGuidance
-      *ngIf="control && !disableGuidance"
-      [inputLabel]="label"
-      [helpText]="helpText"
-      [for]="id + '-legend'"
-      [control]="control"
-      [groupHelpTextHidden]="true"
-    >
-      <ng-content select="fudis-error-message" />
-    </fudis-guidance>
+    @if (control && !disableGuidance) {
+      <fudis-guidance
+        #radioButtonGroupGuidance
+        [inputLabel]="label"
+        [helpText]="helpText"
+        [for]="id + '-legend'"
+        [control]="control"
+        [groupHelpTextHidden]="true"
+        >
+        <ng-content select="fudis-error-message" />
+      </fudis-guidance>
+    }
   </fudis-fieldset-content>
 </fudis-fieldset>

@@ -17,32 +17,34 @@ import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/stor
         [columns]="'stretch'"
         [control]="control"
         [label]="'Focus to input'"
-      >
-        <fudis-error-message
-          *ngIf="_errorExists"
-          (handleAddError)="handleAddError.emit($event)"
-          (handleRemoveError)="handleRemoveError.emit($event)"
-          [message]="observableMessage"
-        />
-        <fudis-error-message
-          *ngIf="_errorExists"
-          (handleAddError)="handleAddError.emit($event)"
-          (handleRemoveError)="handleRemoveError.emit($event)"
-          [message]="stringMessage"
-        />
+        >
+        @if (_errorExists) {
+          <fudis-error-message
+            (handleAddError)="handleAddError.emit($event)"
+            (handleRemoveError)="handleRemoveError.emit($event)"
+            [message]="observableMessage"
+            />
+        }
+        @if (_errorExists) {
+          <fudis-error-message
+            (handleAddError)="handleAddError.emit($event)"
+            (handleRemoveError)="handleRemoveError.emit($event)"
+            [message]="stringMessage"
+            />
+        }
       </fudis-text-input>
       <fudis-button
         (click)="toggleCustomError()"
         [label]="'Toggle custom errors'"
         [variant]="'secondary'"
-      />
+        />
       <fudis-button
         (click)="switchErrorMessage()"
         [label]="'Switch message content'"
         [variant]="'secondary'"
-      />
+        />
     </fudis-grid>
-  `,
+    `,
   standalone: false,
 })
 class TextInputWithErrorMessageComponent {

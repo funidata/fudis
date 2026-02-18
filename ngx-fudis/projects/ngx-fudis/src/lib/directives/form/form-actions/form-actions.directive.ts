@@ -1,7 +1,7 @@
-import { Directive, Host, HostListener, Inject, Input, OnInit } from '@angular/core';
+import { Directive, Host, HostListener, Inject, Input, OnInit, DOCUMENT } from '@angular/core';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { DOCUMENT } from '@angular/common';
+
 import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
 
 // TODO: Write tests

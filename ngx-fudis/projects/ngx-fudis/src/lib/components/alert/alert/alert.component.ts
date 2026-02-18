@@ -5,8 +5,9 @@ import {
   Inject,
   Input,
   Output,
+  DOCUMENT
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { Observable } from 'rxjs';
 import { FudisNotification } from '../../../types/miscellaneous';
 import { FudisFocusService } from '../../../services/focus/focus.service';

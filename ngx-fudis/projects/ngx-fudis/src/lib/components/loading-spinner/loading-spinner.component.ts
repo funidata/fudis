@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { NgxFudisModule } from '../../ngx-fudis.module';
@@ -10,7 +10,7 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
  */
 @Component({
   selector: 'fudis-loading-spinner',
-  imports: [CommonModule, NgxFudisModule],
+  imports: [NgxFudisModule],
   templateUrl: './loading-spinner.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

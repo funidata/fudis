@@ -70,14 +70,15 @@ Example.args = {
       [helpText]="'We all should have a pet.'"
       [control]="control"
       (handleChange)="handleChange($event)"
-    >
-      <fudis-radio-button
-        *ngFor="let option of petOptions"
-        [label]="option.label"
-        [value]="option.value"
-      ></fudis-radio-button>
+      >
+      @for (option of petOptions; track option) {
+        <fudis-radio-button
+          [label]="option.label"
+          [value]="option.value"
+        ></fudis-radio-button>
+      }
     </fudis-radio-button-group>
-  `,
+    `,
   standalone: false,
 })
 class DisabledRadioGroupExampleComponent {

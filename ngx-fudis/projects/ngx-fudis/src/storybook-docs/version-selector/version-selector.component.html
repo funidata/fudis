@@ -1,22 +1,23 @@
 <div class="fudis-version-selector">
-  <ng-container *ngIf="error">
+  @if (error) {
     <fudis-body-text class="fudis-version-selector--unavailable fudis-text-emptystate">
       Version selector unavailable
     </fudis-body-text>
-  </ng-container>
-  <ng-container *ngIf="!error">
+  }
+  @if (!error) {
     <fudis-select
       [size]="'xs'"
       [control]="control"
       [label]="'Version'"
       [selectionClearButton]="false"
-    >
+      >
       <ng-template fudisSelectOptions>
-        <fudis-select-option
-          *ngFor="let v of versions"
-          [data]="{ value: v, label: v }"
-        ></fudis-select-option>
+        @for (v of versions; track v) {
+          <fudis-select-option
+            [data]="{ value: v, label: v }"
+          ></fudis-select-option>
+        }
       </ng-template>
     </fudis-select>
-  </ng-container>
+  }
 </div>

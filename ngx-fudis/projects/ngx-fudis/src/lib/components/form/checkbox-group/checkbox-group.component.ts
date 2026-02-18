@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  DOCUMENT
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
@@ -19,7 +20,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { DOCUMENT } from '@angular/common';
+
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 /**

@@ -20,39 +20,42 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
   imports: [NgxFudisModule, CommonModule],
   template: `
     <fudis-dialog [size]="size">
-      <fudis-dialog-content *ngIf="id">
-        <fudis-form
-          [title]="title"
-          [level]="2"
-          [titleVariant]="'xl'"
-          [errorSummaryTitle]="'You need to fill up the information.'"
-        >
-          <fudis-form-content>
-            <ng-container *ngTemplateOutlet="favoriteVeggies" />
-            <fudis-text-input
-              class="fudis-mb-md"
-              [id]="'example-input-' + id"
-              [label]="'What is your favorite ' + id"
-              [control]="exampleDialogFormGroup.controls['favoriteVeggie']"
-            />
-          </fudis-form-content>
-          <fudis-form-actions>
-            <fudis-button
-              fudisFormSubmit
-              (handleClick)="closeDialog()"
-              [label]="'Save and close dialog'"
-              [variant]="'secondary'"
-            />
-            <fudis-button
-              *ngIf="nextDialogToOpen"
-              fudisFormSubmit
-              (handleClick)="openDialogTemplate(nextDialogToOpen)"
-              [label]="'Save and open next Dialog'"
-            />
-          </fudis-form-actions>
-        </fudis-form>
-      </fudis-dialog-content>
-      <ng-container *ngIf="!id">
+      @if (id) {
+        <fudis-dialog-content>
+          <fudis-form
+            [title]="title"
+            [level]="2"
+            [titleVariant]="'xl'"
+            [errorSummaryTitle]="'You need to fill up the information.'"
+            >
+            <fudis-form-content>
+              <ng-container *ngTemplateOutlet="favoriteVeggies" />
+              <fudis-text-input
+                class="fudis-mb-md"
+                [id]="'example-input-' + id"
+                [label]="'What is your favorite ' + id"
+                [control]="exampleDialogFormGroup.controls['favoriteVeggie']"
+                />
+            </fudis-form-content>
+            <fudis-form-actions>
+              <fudis-button
+                fudisFormSubmit
+                (handleClick)="closeDialog()"
+                [label]="'Save and close dialog'"
+                [variant]="'secondary'"
+                />
+              @if (nextDialogToOpen) {
+                <fudis-button
+                  fudisFormSubmit
+                  (handleClick)="openDialogTemplate(nextDialogToOpen)"
+                  [label]="'Save and open next Dialog'"
+                  />
+              }
+            </fudis-form-actions>
+          </fudis-form>
+        </fudis-dialog-content>
+      }
+      @if (!id) {
         <fudis-heading fudisDialogTitle [level]="2" [variant]="'xl'">{{ title }}</fudis-heading>
         <fudis-dialog-content>
           <ng-container *ngTemplateOutlet="favoriteVeggies" />
@@ -61,19 +64,23 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
           <fudis-button fudisDialogClose [label]="'Close this dialog'" [variant]="'secondary'" />
           <fudis-button (handleClick)="closeAll()" [label]="'Close all Dialogs'" />
         </fudis-dialog-actions>
-      </ng-container>
+      }
     </fudis-dialog>
-
+    
     <ng-template #favoriteVeggies>
-      <fudis-body-text class="fudis-mb-sm" *ngIf="(_favoriteVeggies | keyvalue)?.length === 0">
-        You don't have any favorite veggies!
-      </fudis-body-text>
-      <fudis-body-text class="fudis-mb-sm" *ngFor="let veggie of _favoriteVeggies | keyvalue">
-        Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
-        >.
-      </fudis-body-text>
+      @if ((_favoriteVeggies | keyvalue)?.length === 0) {
+        <fudis-body-text class="fudis-mb-sm">
+          You don't have any favorite veggies!
+        </fudis-body-text>
+      }
+      @for (veggie of _favoriteVeggies | keyvalue; track veggie) {
+        <fudis-body-text class="fudis-mb-sm">
+          Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
+          >.
+        </fudis-body-text>
+      }
     </ng-template>
-  `,
+    `,
 })
 export class ExampleNestedDialogComponent {
   constructor(
@@ -138,46 +145,48 @@ export class ExampleNestedDialogComponent {
     <fudis-button
       (handleClick)="openDialogTemplate(firstDialog)"
       [label]="'Open dialog with nested dialogs'"
-    />
-
-    <ng-container *ngIf="_favourites">
-      <fudis-body-text class="fudis-mt-sm" *ngFor="let veggie of _favourites | keyvalue">
-        Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
-        >.
-      </fudis-body-text>
-    </ng-container>
-
+      />
+    
+    @if (_favourites) {
+      @for (veggie of _favourites | keyvalue; track veggie) {
+        <fudis-body-text class="fudis-mt-sm">
+          Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
+          >.
+        </fudis-body-text>
+      }
+    }
+    
     <ng-template #firstDialog>
       <example-nested-dialog
         [id]="'fruit'"
         [title]="'First opened Dialog'"
         [size]="size"
         [nextDialogToOpen]="secondDialog"
-      />
+        />
     </ng-template>
-
+    
     <ng-template #secondDialog>
       <example-nested-dialog
         [id]="'berry'"
         [title]="'Second opened Dialog'"
         [size]="size"
         [nextDialogToOpen]="thirdDialog"
-      />
+        />
     </ng-template>
-
+    
     <ng-template #thirdDialog>
       <example-nested-dialog
         [id]="'vegetable'"
         [title]="'Third opened Dialog'"
         [size]="size"
         [nextDialogToOpen]="fourthDialog"
-      />
+        />
     </ng-template>
-
+    
     <ng-template #fourthDialog>
       <example-nested-dialog [title]="'Fourth and last opened Dialog'" [size]="size" />
     </ng-template>
-  `,
+    `,
 })
 export class ExampleNestedDialogsComponent {
   constructor(private _dialogService: FudisDialogService) {}

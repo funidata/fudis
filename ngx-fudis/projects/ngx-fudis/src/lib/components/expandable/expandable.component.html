@@ -3,14 +3,14 @@
   [attr.aria-labelledby]="_headingId"
   class="fudis-expandable fudis-expandable__{{ variant }}"
   [class.fudis-expandable--closed]="_closed"
->
+  >
   <div class="fudis-expandable__header fudis-expandable__header__{{ variant }}">
     <div
       role="heading"
       [attr.aria-level]="level"
       [id]="_headingId"
       class="fudis-expandable__header__heading"
-    >
+      >
       <button
         type="button"
         [id]="_id + '-header-button'"
@@ -20,7 +20,7 @@
         [attr.aria-expanded]="!_closed"
         [attr.aria-controls]="!closed ? _id + '__content' : null"
         (click)="_setClosedStatus(!_closed)"
-      >
+        >
         <fudis-icon
           class="fudis-expandable__header__heading__button__icon fudis-expandable__header__heading__button__icon__{{
             variant
@@ -28,33 +28,36 @@
           [icon]="variant === 'lite' ? 'chevron' : 'chevron-ring-fill'"
           [color]="variant === 'lite' ? 'primary' : 'gray-dark'"
           [rotate]="_closed ? 'none' : 'cw-90'"
-        ></fudis-icon
-        ><span class="fudis-expandable__header__heading__button__title"
+          ></fudis-icon
+          ><span class="fudis-expandable__header__heading__button__title"
           ><span class="fudis-expandable__header__heading__button__title__text">{{ title }}</span>
-          <fudis-badge
-            *ngIf="badge && badgeText"
-            class="fudis-expandable__header__heading__button__title__badge"
-            [variant]="badge"
-            [content]="badgeText"
-          /><span
-            *ngIf="variant !== 'lite' && subTitle"
-            class="fudis-expandable__header__heading__button__title__sub-heading"
-            >{{ subTitle }}</span
-          ></span
-        >
-      </button>
-    </div>
-    <ng-content select="fudis-expandable-actions" />
-  </div>
-  <div
-    class="fudis-expandable__content fudis-expandable__content__padding-{{ padding }}"
-    *ngIf="_openedOnce"
-    [id]="_id + '__content'"
-    [attr.aria-hidden]="_closed"
-    [hidden]="_closed"
-  >
-    <ng-container *ngIf="_content">
-      <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
-    </ng-container>
-  </div>
-</section>
+          @if (badge && badgeText) {
+            <fudis-badge
+              class="fudis-expandable__header__heading__button__title__badge"
+              [variant]="badge"
+              [content]="badgeText"
+              />
+            }@if (variant !== 'lite' && subTitle) {
+            <span
+              class="fudis-expandable__header__heading__button__title__sub-heading"
+              >{{ subTitle }}</span
+              >
+              }</span
+              >
+            </button>
+          </div>
+          <ng-content select="fudis-expandable-actions" />
+        </div>
+        @if (_openedOnce) {
+          <div
+            class="fudis-expandable__content fudis-expandable__content__padding-{{ padding }}"
+            [id]="_id + '__content'"
+            [attr.aria-hidden]="_closed"
+            [hidden]="_closed"
+            >
+            @if (_content) {
+              <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
+            }
+          </div>
+        }
+      </section>

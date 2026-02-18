@@ -8,6 +8,7 @@ import {
   Output,
   ViewChild,
   AfterViewInit,
+  DOCUMENT
 } from '@angular/core';
 import { FudisSelectionGroupInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
@@ -17,7 +18,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { Subscription } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 /**

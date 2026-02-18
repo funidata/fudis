@@ -1,12 +1,12 @@
 import { Component, signal, ViewChild } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+
 import { LoadingSpinnerComponent } from '../loading-spinner.component';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { HeadingComponent } from '../../typography/heading/heading.component';
 
 @Component({
-  imports: [CommonModule, LoadingSpinnerComponent, NgxFudisModule],
+  imports: [LoadingSpinnerComponent, NgxFudisModule],
   selector: 'example-loading-spinner-demo',
   styleUrl: './loading-spinner-example.component.scss',
   templateUrl: './loading-spinner-example.component.html',

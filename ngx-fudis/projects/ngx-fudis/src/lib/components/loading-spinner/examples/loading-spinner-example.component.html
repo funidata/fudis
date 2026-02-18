@@ -4,22 +4,24 @@
     class="fudis-loading-spinner-demo__backdrop"
     [class.fudis-loading-spinner-demo__backdrop--visible]="loading"
     [class.fudis-loading-spinner-demo__backdrop--hidden]="!loading"
-  >
+    >
     <fudis-loading-spinner [variant]="'lg'" [visible]="loading"
-  /></div>
-  <fudis-grid [alignItemsX]="'center'" *ngIf="!loading">
-    <fudis-heading #headingRef tabindex="-1" [align]="'center'" [level]="1"
-      >Welcome to Loading Spinner Demo Page</fudis-heading
-    >
-    <fudis-body-text
-      >Click Button below to turn loading state on for 3 seconds. This will trigger also status
-      message for screen readers.</fudis-body-text
-    >
-    <fudis-body-text
-      >After 3s, focus handled by this demo component, will move shortly to Heading component. There
-      is small delay in focus, so that screen readers have some time to read out Loading Spinner's
-      changed status message.
-    </fudis-body-text>
-    <fudis-button [label]="'Set loading on!'" (handleClick)="toggleLoading()" />
-  </fudis-grid>
-</div>
+    /></div>
+    @if (!loading) {
+      <fudis-grid [alignItemsX]="'center'">
+        <fudis-heading #headingRef tabindex="-1" [align]="'center'" [level]="1"
+          >Welcome to Loading Spinner Demo Page</fudis-heading
+          >
+          <fudis-body-text
+            >Click Button below to turn loading state on for 3 seconds. This will trigger also status
+            message for screen readers.</fudis-body-text
+            >
+            <fudis-body-text
+              >After 3s, focus handled by this demo component, will move shortly to Heading component. There
+              is small delay in focus, so that screen readers have some time to read out Loading Spinner's
+              changed status message.
+            </fudis-body-text>
+            <fudis-button [label]="'Set loading on!'" (handleClick)="toggleLoading()" />
+          </fudis-grid>
+        }
+      </div>

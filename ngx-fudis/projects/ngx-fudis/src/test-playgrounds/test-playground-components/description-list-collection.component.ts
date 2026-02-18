@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
 
 @Component({
-  imports: [CommonModule, NgxFudisModule],
+  imports: [NgxFudisModule],
   selector: 'example-description-list-collection',
   template: `
     @for (gridConfig of gridConfigs; track gridConfig) {
@@ -15,202 +15,203 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
         <fudis-hr class="fudis-my-lg" />
         <fudis-heading [level]="3" [variant]="'md'"
           >{{ variant.title }} Description List</fudis-heading
-        >
-        <fudis-dl [variant]="variant.value" [columns]="2" [disableGrid]="gridConfig.value">
-          @for (data of basicData; track data) {
-            <fudis-dl-item>
-              <fudis-dt [contentText]="data.dt"></fudis-dt>
-              <fudis-dd [contentText]="data.dd" [subHeading]="data.subHeading"></fudis-dd>
-            </fudis-dl-item>
-          }
-        </fudis-dl>
-        <fudis-hr class="fudis-my-lg" />
-        <fudis-grid [columns]="{ sm: 1, md: 2 }" [rowGap]="'xs'">
-          <fudis-heading [level]="3" [variant]="'md'"
-            >{{ variant.title }} Description List as Grid's Child Component</fudis-heading
           >
-          <fudis-dl [disableGrid]="gridConfig.value" [variant]="variant.value">
-            <fudis-dl-item>
-              <fudis-dt [contentText]="'Teacher email'"></fudis-dt>
-              <fudis-dd
-                [contentText]="'snape@hogwarts.wiz'"
-                [subHeading]="'Severus Snape'"
-              ></fudis-dd>
-            </fudis-dl-item>
-            <fudis-dl-item>
-              <fudis-dt [contentText]="'Course name'"></fudis-dt>
-              <fudis-dd [contentText]="'Defense Against the Dark Arts'"></fudis-dd>
-            </fudis-dl-item>
+          <fudis-dl [variant]="variant.value" [columns]="2" [disableGrid]="gridConfig.value">
+            @for (data of basicData; track data) {
+              <fudis-dl-item>
+                <fudis-dt [contentText]="data.dt"></fudis-dt>
+                <fudis-dd [contentText]="data.dd" [subHeading]="data.subHeading"></fudis-dd>
+              </fudis-dl-item>
+            }
           </fudis-dl>
-          <fudis-body-text
-            >This is Body Text. Both this and the DL next to it are Grid Items inside
-            Grid.</fudis-body-text
-          >
-        </fudis-grid>
-        <fudis-hr class="fudis-my-lg" />
-        <fudis-heading [level]="2" [variant]="'md'"
-          >{{ variant.title }} Description List With Sub Components</fudis-heading
-        >
-        <fudis-dl
-          class="fudis-mt-sm"
-          [columns]="2"
-          [disableGrid]="gridConfig.value"
-          [variant]="variant.value"
-        >
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'First name'"></fudis-dt>
-            <fudis-dd [contentText]="'Rex'"></fudis-dd>
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Last name'"></fudis-dt>
-            <fudis-dd
+          <fudis-hr class="fudis-my-lg" />
+          <fudis-grid [columns]="{ sm: 1, md: 2 }" [rowGap]="'xs'">
+            <fudis-heading [level]="3" [variant]="'md'"
+              >{{ variant.title }} Description List as Grid's Child Component</fudis-heading
+              >
+              <fudis-dl [disableGrid]="gridConfig.value" [variant]="variant.value">
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Teacher email'"></fudis-dt>
+                  <fudis-dd
+                    [contentText]="'snape@hogwarts.wiz'"
+                    [subHeading]="'Severus Snape'"
+                  ></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Course name'"></fudis-dt>
+                  <fudis-dd [contentText]="'Defense Against the Dark Arts'"></fudis-dd>
+                </fudis-dl-item>
+              </fudis-dl>
+              <fudis-body-text
+                >This is Body Text. Both this and the DL next to it are Grid Items inside
+                Grid.</fudis-body-text
+                >
+              </fudis-grid>
+              <fudis-hr class="fudis-my-lg" />
+              <fudis-heading [level]="2" [variant]="'md'"
+                >{{ variant.title }} Description List With Sub Components</fudis-heading
+                >
+                <fudis-dl
+                  class="fudis-mt-sm"
+                  [columns]="2"
+                  [disableGrid]="gridConfig.value"
+                  [variant]="variant.value"
+                  >
+                  <fudis-dl-item>
+                    <fudis-dt [contentText]="'First name'"></fudis-dt>
+                    <fudis-dd [contentText]="'Rex'"></fudis-dd>
+                  </fudis-dl-item>
+                  <fudis-dl-item>
+                    <fudis-dt [contentText]="'Last name'"></fudis-dt>
+                    <fudis-dd
               [contentText]="
                 classified
                   ? '&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;'
                   : 'Dangerwest'
               "
-              [ariaLabel]="classified ? 'Hidden classified content' : null"
-            >
-              <fudis-button
-                [variant]="'tertiary'"
-                [size]="'small'"
-                [icon]="classified ? 'eye' : 'eye-blind'"
-                [label]="classified ? 'Show details' : 'Hide details'"
-                (handleClick)="classified = !classified"
-              ></fudis-button>
-            </fudis-dd>
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Alias'"></fudis-dt>
-            <fudis-dd [contentText]="'Radical Emmet Xtreme'">
-              <fudis-button
-                [label]="'Edit'"
-                [variant]="'tertiary'"
-                [size]="'small'"
-                [icon]="'edit'"
-              />
-            </fudis-dd>
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Enemy'">Enemy</fudis-dt>
-            <fudis-dd [contentText]="'Emmet Brickowski'" [subHeading]="'Archenemy'">
-              <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
-            </fudis-dd>
-          </fudis-dl-item>
-        </fudis-dl>
-        <fudis-hr class="fudis-my-lg" />
-        <fudis-heading [level]="2" [variant]="'md'"
-          >{{ variant.title }} Description List with Single Item</fudis-heading
-        >
-        <fudis-dl
-          class="fudis-mt-sm"
-          [columns]="'1fr 1fr'"
-          [disableGrid]="gridConfig.value"
-          [variant]="variant.value"
-          [tag]="'p'"
-        >
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Address'"></fudis-dt>
-            <fudis-dd [contentText]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
-          </fudis-dl-item>
-        </fudis-dl>
-        <fudis-hr class="fudis-my-lg" />
-        <fudis-heading [level]="2" [variant]="'md'"
-          >{{ variant.title }} Description List Item With Multiple Details</fudis-heading
-        >
-        <fudis-dl
-          class="fudis-mt-sm"
-          [columns]="'1fr 1fr'"
-          [disableGrid]="gridConfig.value"
-          [variant]="variant.value"
-        >
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
-            <fudis-dd
-              [contentText]="item.value"
-              [subHeading]="item.subHeading"
-              *ngFor="let item of multipleDDData"
-            ></fudis-dd>
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Non-Jedi Master Members'"></fudis-dt>
-            <fudis-dd [contentText]="'Anakin Skywalker'"></fudis-dd>
-          </fudis-dl-item>
-        </fudis-dl>
-        <fudis-hr class="fudis-my-lg" />
-        <fudis-heading [level]="2" [variant]="'md'"
-          >{{ variant.title }} Description List Details With Empty State</fudis-heading
-        >
-        <fudis-dl
-          class="fudis-mt-sm"
-          [columns]="'1fr 1fr'"
-          [disableGrid]="gridConfig.value"
-          [variant]="variant.value"
-        >
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Education type'" />
-            <fudis-dd [contentText]="'Open university studies'" [emptyState]="true" />
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Location'" />
-            <fudis-dd
-              [contentText]="'Helsinki'"
-              [emptyState]="true"
-              [emptyStateContentText]="'Custom message'"
-            />
-          </fudis-dl-item>
-        </fudis-dl>
-        <fudis-hr class="fudis-my-lg" />
-      }
-    }
-    <fudis-heading [level]="2" [variant]="'xl'">Test cases for others</fudis-heading>
-    <fudis-hr class="fudis-my-lg" />
-    <fudis-heading [level]="2" [variant]="'md'"
-      >Regular Description List With Popover (no compact support)</fudis-heading
-    >
-    <fudis-dl class="fudis-mt-sm" [variant]="'regular'" [tag]="'p'">
-      <fudis-dl-item>
-        <fudis-dt
-          [contentText]="'First name'"
-          [popoverText]="'Second name unknown'"
-          [popoverTriggerLabel]="'Additional information'"
-        ></fudis-dt>
-        <fudis-dd [contentText]="'Rex'"></fudis-dd>
-      </fudis-dl-item>
-    </fudis-dl>
-
-    @for (gridConfig of gridConfigs; track gridConfig) {
-      <fudis-hr class="fudis-my-lg" />
-      <fudis-heading [level]="3" [variant]="'md'"
-        >Nested Compact Description Lists with Grid {{ gridConfig.title }} (no regular
-        support)</fudis-heading
-      >
-      <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value" [columns]="2">
-        @for (movie of indianaJonesData; track movie) {
-          <fudis-dl-item>
-            <fudis-dt [contentText]="movie.title" />
-            <fudis-dd>
-              <fudis-dl [variant]="'compact'">
-                <fudis-dl-item>
-                  <fudis-dt [contentText]="indianaJonesTitles.releaseYear"></fudis-dt>
-                  <fudis-dd [contentText]="movie.year"></fudis-dd>
-                </fudis-dl-item>
-                <fudis-dl-item>
-                  <fudis-dt [contentText]="indianaJonesTitles.rating"></fudis-dt>
-                  <fudis-dd [contentText]="movie.rating"></fudis-dd>
-                </fudis-dl-item>
-                <fudis-dl-item>
-                  <fudis-dt [contentText]="indianaJonesTitles.quote"></fudis-dt>
-                  <fudis-dd [contentText]="movie.quote"></fudis-dd>
-                </fudis-dl-item>
-              </fudis-dl>
-            </fudis-dd>
-          </fudis-dl-item>
-        }
-      </fudis-dl>
-    }
-    <fudis-hr class="fudis-my-lg" />
-  `,
+                      [ariaLabel]="classified ? 'Hidden classified content' : null"
+                      >
+                      <fudis-button
+                        [variant]="'tertiary'"
+                        [size]="'small'"
+                        [icon]="classified ? 'eye' : 'eye-blind'"
+                        [label]="classified ? 'Show details' : 'Hide details'"
+                        (handleClick)="classified = !classified"
+                      ></fudis-button>
+                    </fudis-dd>
+                  </fudis-dl-item>
+                  <fudis-dl-item>
+                    <fudis-dt [contentText]="'Alias'"></fudis-dt>
+                    <fudis-dd [contentText]="'Radical Emmet Xtreme'">
+                      <fudis-button
+                        [label]="'Edit'"
+                        [variant]="'tertiary'"
+                        [size]="'small'"
+                        [icon]="'edit'"
+                        />
+                    </fudis-dd>
+                  </fudis-dl-item>
+                  <fudis-dl-item>
+                    <fudis-dt [contentText]="'Enemy'">Enemy</fudis-dt>
+                    <fudis-dd [contentText]="'Emmet Brickowski'" [subHeading]="'Archenemy'">
+                      <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
+                    </fudis-dd>
+                  </fudis-dl-item>
+                </fudis-dl>
+                <fudis-hr class="fudis-my-lg" />
+                <fudis-heading [level]="2" [variant]="'md'"
+                  >{{ variant.title }} Description List with Single Item</fudis-heading
+                  >
+                  <fudis-dl
+                    class="fudis-mt-sm"
+                    [columns]="'1fr 1fr'"
+                    [disableGrid]="gridConfig.value"
+                    [variant]="variant.value"
+                    [tag]="'p'"
+                    >
+                    <fudis-dl-item>
+                      <fudis-dt [contentText]="'Address'"></fudis-dt>
+                      <fudis-dd [contentText]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
+                    </fudis-dl-item>
+                  </fudis-dl>
+                  <fudis-hr class="fudis-my-lg" />
+                  <fudis-heading [level]="2" [variant]="'md'"
+                    >{{ variant.title }} Description List Item With Multiple Details</fudis-heading
+                    >
+                    <fudis-dl
+                      class="fudis-mt-sm"
+                      [columns]="'1fr 1fr'"
+                      [disableGrid]="gridConfig.value"
+                      [variant]="variant.value"
+                      >
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
+                        @for (item of multipleDDData; track item) {
+                          <fudis-dd
+                            [contentText]="item.value"
+                            [subHeading]="item.subHeading"
+                          ></fudis-dd>
+                        }
+                      </fudis-dl-item>
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="'Non-Jedi Master Members'"></fudis-dt>
+                        <fudis-dd [contentText]="'Anakin Skywalker'"></fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+                    <fudis-hr class="fudis-my-lg" />
+                    <fudis-heading [level]="2" [variant]="'md'"
+                      >{{ variant.title }} Description List Details With Empty State</fudis-heading
+                      >
+                      <fudis-dl
+                        class="fudis-mt-sm"
+                        [columns]="'1fr 1fr'"
+                        [disableGrid]="gridConfig.value"
+                        [variant]="variant.value"
+                        >
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="'Education type'" />
+                          <fudis-dd [contentText]="'Open university studies'" [emptyState]="true" />
+                        </fudis-dl-item>
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="'Location'" />
+                          <fudis-dd
+                            [contentText]="'Helsinki'"
+                            [emptyState]="true"
+                            [emptyStateContentText]="'Custom message'"
+                            />
+                        </fudis-dl-item>
+                      </fudis-dl>
+                      <fudis-hr class="fudis-my-lg" />
+                    }
+                  }
+                  <fudis-heading [level]="2" [variant]="'xl'">Test cases for others</fudis-heading>
+                  <fudis-hr class="fudis-my-lg" />
+                  <fudis-heading [level]="2" [variant]="'md'"
+                    >Regular Description List With Popover (no compact support)</fudis-heading
+                    >
+                    <fudis-dl class="fudis-mt-sm" [variant]="'regular'" [tag]="'p'">
+                      <fudis-dl-item>
+                        <fudis-dt
+                          [contentText]="'First name'"
+                          [popoverText]="'Second name unknown'"
+                          [popoverTriggerLabel]="'Additional information'"
+                        ></fudis-dt>
+                        <fudis-dd [contentText]="'Rex'"></fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+    
+                    @for (gridConfig of gridConfigs; track gridConfig) {
+                      <fudis-hr class="fudis-my-lg" />
+                      <fudis-heading [level]="3" [variant]="'md'"
+                        >Nested Compact Description Lists with Grid {{ gridConfig.title }} (no regular
+                        support)</fudis-heading
+                        >
+                        <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value" [columns]="2">
+                          @for (movie of indianaJonesData; track movie) {
+                            <fudis-dl-item>
+                              <fudis-dt [contentText]="movie.title" />
+                              <fudis-dd>
+                                <fudis-dl [variant]="'compact'">
+                                  <fudis-dl-item>
+                                    <fudis-dt [contentText]="indianaJonesTitles.releaseYear"></fudis-dt>
+                                    <fudis-dd [contentText]="movie.year"></fudis-dd>
+                                  </fudis-dl-item>
+                                  <fudis-dl-item>
+                                    <fudis-dt [contentText]="indianaJonesTitles.rating"></fudis-dt>
+                                    <fudis-dd [contentText]="movie.rating"></fudis-dd>
+                                  </fudis-dl-item>
+                                  <fudis-dl-item>
+                                    <fudis-dt [contentText]="indianaJonesTitles.quote"></fudis-dt>
+                                    <fudis-dd [contentText]="movie.quote"></fudis-dd>
+                                  </fudis-dl-item>
+                                </fudis-dl>
+                              </fudis-dd>
+                            </fudis-dl-item>
+                          }
+                        </fudis-dl>
+                      }
+                      <fudis-hr class="fudis-my-lg" />
+    `,
 })
 export class StorybookExampleDescriptionListCollectionComponent {
   classified = true;

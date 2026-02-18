@@ -1,110 +1,118 @@
-<p *ngIf="_selectControl.value" [attr.id]="id + '-group-label'" class="fudis-visually-hidden">{{
-  label
-}}</p>
-<div
-  *ngIf="_selectControl.value"
-  role="group"
-  [attr.aria-labelledby]="id + '-group-label'"
-  class="fudis-localized-text-group fudis-input-size__{{ size }}"
->
-  <div class="fudis-localized-text-group__inputs">
-    <fudis-label
-      [for]="id"
-      [text]="label"
-      [id]="id + '-label'"
-      [required]="_required | async"
-      [parentSize]="size"
-      [popoverText]="popoverText"
-      [popoverPosition]="popoverPosition"
-      [popoverTriggerLabel]="popoverTriggerLabel"
-    />
-    <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
-      <input
-        *ngIf="variant === 'text-input' && control.key === _selectControl.value.value"
-        #inputRef
-        class="fudis-form-input fudis-localized-text-group__inputs__text"
+@if (_selectControl.value) {
+  <p [attr.id]="id + '-group-label'" class="fudis-visually-hidden">{{
+    label
+  }}</p>
+}
+@if (_selectControl.value) {
+  <div
+    role="group"
+    [attr.aria-labelledby]="id + '-group-label'"
+    class="fudis-localized-text-group fudis-input-size__{{ size }}"
+    >
+    <div class="fudis-localized-text-group__inputs">
+      <fudis-label
+        [for]="id"
+        [text]="label"
+        [id]="id + '-label'"
+        [required]="_required | async"
+        [parentSize]="size"
+        [popoverText]="popoverText"
+        [popoverPosition]="popoverPosition"
+        [popoverTriggerLabel]="popoverTriggerLabel"
+        />
+      @for (control of formGroup.controls | keyvalue; track control; let index = $index) {
+        @if (variant === 'text-input' && control.key === _selectControl.value.value) {
+          <input
+            #inputRef
+            class="fudis-form-input fudis-localized-text-group__inputs__text"
         [class.fudis-form-input--touched]="
           $any(formGroup).controls[control.key].touched || formGroup.touched
         "
-        [attr.aria-invalid]="(formGroup.invalid && formGroup.touched) || null"
+            [attr.aria-invalid]="(formGroup.invalid && formGroup.touched) || null"
         [attr.aria-label]="
           ariaLabel
             ? label + ', ' + _selectControl.value.label + ariaLabel
             : label + ', ' + _selectControl.value.label
         "
-        [attr.minlength]="_minLength | async"
-        [attr.maxlength]="_maxLength | async"
-        [formControl]="$any(formGroup).controls[control.key]"
-        (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
-        (blur)="handleBlur.emit($event)"
-        (focus)="onFocus($event)"
-        [id]="id"
-        [attr.tabindex]="disabled ? -1 : null"
-        [attr.aria-describedby]="id + '_guidance'"
-        [attr.required]="(_required | async) || null"
+            [attr.minlength]="_minLength | async"
+            [attr.maxlength]="_maxLength | async"
+            [formControl]="$any(formGroup).controls[control.key]"
+            (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
+            (blur)="handleBlur.emit($event)"
+            (focus)="onFocus($event)"
+            [id]="id"
+            [attr.tabindex]="disabled ? -1 : null"
+            [attr.aria-describedby]="id + '_guidance'"
+            [attr.required]="(_required | async) || null"
         [attr.aria-disabled]="
           formGroup.disabled || $any(formGroup).controls[control.key].disabled || disabled || null
         "
         [readonly]="
           formGroup.disabled || $any(formGroup).controls[control.key].disabled || disabled || null
         "
-      />
-      <textarea
-        #inputRef
-        *ngIf="variant === 'text-area' && control.key === _selectControl.value.value"
-        class="fudis-form-input fudis-localized-text-group__inputs__area"
+            />
+        }
+        @if (variant === 'text-area' && control.key === _selectControl.value.value) {
+          <textarea
+            #inputRef
+            class="fudis-form-input fudis-localized-text-group__inputs__area"
         [class.fudis-form-input--touched]="
           $any(formGroup).controls[control.key].touched || formGroup.touched
         "
-        [attr.aria-invalid]="(formGroup.invalid && formGroup.touched) || null"
+            [attr.aria-invalid]="(formGroup.invalid && formGroup.touched) || null"
         [attr.aria-label]="
           ariaLabel
             ? label + ', ' + _selectControl.value.label + ariaLabel
             : label + ', ' + _selectControl.value.label
         "
-        [attr.minlength]="_minLength | async"
-        [attr.maxlength]="_maxLength | async"
-        [formControl]="$any(formGroup).controls[control.key]"
-        (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
-        (blur)="handleBlur.emit($event)"
-        (focus)="onFocus($event)"
-        [id]="id"
-        [attr.tabindex]="disabled ? -1 : null"
-        [attr.aria-describedby]="id + '_guidance'"
-        [attr.required]="(_required | async) || null"
-        [attr.aria-disabled]="$any(formGroup).controls[control.key].disabled || disabled || null"
-        [readonly]="$any(formGroup).controls[control.key].disabled || disabled || null"
-      >
-      </textarea>
-    </ng-container>
-    <fudis-guidance
-      *ngIf="!disableGuidance"
-      [inputLabel]="label"
-      [maxLength]="_maxLength | async"
-      [helpText]="helpText"
-      [formGroup]="formGroup"
-      [for]="id"
-      [selectedOption]="_selectControl.value.value"
-    >
-      <ng-content select="fudis-error-message"
-    /></fudis-guidance>
-  </div>
-  <fudis-select
-    *ngIf="_languageLabel | async as label"
-    class="fudis-localized-text-group__select"
-    [disabled]="this.formGroup.disabled || disabled"
-    [label]="label"
-    [selectionClearButton]="false"
-    (selectionUpdate)="_checkHtmlAttributes($event?.value)"
-    [control]="_selectControl"
-    [size]="'xs'"
-    [id]="id + '_language-select'"
-  >
-    <ng-template fudisSelectOptions>
-      <fudis-select-option
-        *ngFor="let option of _selectOptions"
-        [data]="{ value: option.value, label: option.label, disabled: option.disabled }"
-      />
-    </ng-template>
-  </fudis-select>
-</div>
+            [attr.minlength]="_minLength | async"
+            [attr.maxlength]="_maxLength | async"
+            [formControl]="$any(formGroup).controls[control.key]"
+            (keyup)="_updateSelectOptions(); handleKeyUp.emit($event)"
+            (blur)="handleBlur.emit($event)"
+            (focus)="onFocus($event)"
+            [id]="id"
+            [attr.tabindex]="disabled ? -1 : null"
+            [attr.aria-describedby]="id + '_guidance'"
+            [attr.required]="(_required | async) || null"
+            [attr.aria-disabled]="$any(formGroup).controls[control.key].disabled || disabled || null"
+            [readonly]="$any(formGroup).controls[control.key].disabled || disabled || null"
+            >
+          </textarea>
+        }
+      }
+      @if (!disableGuidance) {
+        <fudis-guidance
+          [inputLabel]="label"
+          [maxLength]="_maxLength | async"
+          [helpText]="helpText"
+          [formGroup]="formGroup"
+          [for]="id"
+          [selectedOption]="_selectControl.value.value"
+          >
+          <ng-content select="fudis-error-message"
+          /></fudis-guidance>
+        }
+      </div>
+      @if (_languageLabel | async; as label) {
+        <fudis-select
+          class="fudis-localized-text-group__select"
+          [disabled]="this.formGroup.disabled || disabled"
+          [label]="label"
+          [selectionClearButton]="false"
+          (selectionUpdate)="_checkHtmlAttributes($event?.value)"
+          [control]="_selectControl"
+          [size]="'xs'"
+          [id]="id + '_language-select'"
+          >
+          <ng-template fudisSelectOptions>
+            @for (option of _selectOptions; track option) {
+              <fudis-select-option
+                [data]="{ value: option.value, label: option.label, disabled: option.disabled }"
+                />
+            }
+          </ng-template>
+        </fudis-select>
+      }
+    </div>
+  }

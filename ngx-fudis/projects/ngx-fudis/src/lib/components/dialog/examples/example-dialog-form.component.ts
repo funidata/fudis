@@ -5,7 +5,7 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisDialogSize } from '../../../types/miscellaneous';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisSelectOption } from '../../../types/forms';
 
 type TestForm = {
@@ -21,7 +21,7 @@ export const gradeOptions: FudisSelectOption[] = [
 ];
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-dialog-with-form',
   template: `
     <fudis-dialog [size]="_size">
@@ -31,7 +31,7 @@ export const gradeOptions: FudisSelectOption[] = [
           [level]="1"
           [titleVariant]="'xl'"
           [errorSummaryTitle]="'You need to fill up the information.'"
-        >
+          >
           <fudis-form-content>
             <fudis-fieldset [label]="'Course feedback'" [helpText]="_greetingFromOpeningComponent">
               <fudis-fieldset-content>
@@ -40,7 +40,7 @@ export const gradeOptions: FudisSelectOption[] = [
                   [label]="'Your favourite course topic'"
                   [control]="exampleDialogFormGroup.controls['topics']"
                   [helpText]="'Please add some topic'"
-                />
+                  />
               </fudis-fieldset-content>
             </fudis-fieldset>
             <fudis-select
@@ -52,12 +52,13 @@ export const gradeOptions: FudisSelectOption[] = [
               [initialFocus]="false"
               [selectionClearButton]="true"
               [variant]="'dropdown'"
-            >
+              >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of gradeOptions"
-                  [data]="option"
-                ></fudis-select-option>
+                @for (option of gradeOptions; track option) {
+                  <fudis-select-option
+                    [data]="option"
+                  ></fudis-select-option>
+                }
               </ng-template>
             </fudis-select>
           </fudis-form-content>
@@ -77,7 +78,7 @@ export const gradeOptions: FudisSelectOption[] = [
         </fudis-form>
       </fudis-dialog-content>
     </fudis-dialog>
-  `,
+    `,
 })
 export class ExampleDialogFormComponent {
   constructor(

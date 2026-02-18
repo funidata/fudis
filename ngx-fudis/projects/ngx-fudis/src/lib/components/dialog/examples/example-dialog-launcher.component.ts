@@ -5,26 +5,26 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisDialogSize } from '../../../types/miscellaneous';
 import { ExampleDialogFormComponent } from './example-dialog-form.component';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 
 type TestForm = {
   courseTopic: FormControl<string | null>;
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-dialog-laucher',
   template: ` <fudis-button
-      (handleClick)="openDialogComponent()"
-      [label]="'Open dialog with form'"
-    ></fudis-button>
-
-    <ng-container *ngIf="this._chosenTopic">
-      <fudis-body-text
-        >Thank you for the feedback! Your favourite topic was
-        {{ this._chosenTopic }}.</fudis-body-text
-      >
-    </ng-container>`,
+        (handleClick)="openDialogComponent()"
+        [label]="'Open dialog with form'"
+      ></fudis-button>
+      
+      @if (this._chosenTopic) {
+        <fudis-body-text
+          >Thank you for the feedback! Your favourite topic was
+          {{ this._chosenTopic }}.</fudis-body-text
+          >
+        }`,
 })
 export class ExampleDialogLaucherComponent {
   constructor(private _dialogService: FudisDialogService) {}

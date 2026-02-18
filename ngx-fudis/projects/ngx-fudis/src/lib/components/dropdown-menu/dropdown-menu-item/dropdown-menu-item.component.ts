@@ -8,8 +8,9 @@ import {
   ChangeDetectionStrategy,
   effect,
   Input,
+  DOCUMENT
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';

@@ -9,6 +9,7 @@ import {
   Inject,
   AfterViewInit,
   OnChanges,
+  DOCUMENT
 } from '@angular/core';
 import {
   AbstractControl,
@@ -20,7 +21,7 @@ import {
 } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { joinInputValues } from '../utilities/selectUtilities';
-import { DOCUMENT } from '@angular/common';
+
 import { FudisComponentChanges } from '../../../../../../lib/types/miscellaneous';
 import { FudisIdService } from '../../../../../services/id/id.service';
 

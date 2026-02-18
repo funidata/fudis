@@ -4,7 +4,7 @@
   [width]="inputSize ? 'initial' : width"
   [serviceDefaults]="false"
   [rowGap]="'none'"
->
+  >
   <fieldset [attr.id]="id" [tabIndex]="-1" [ngClass]="_classes">
     <legend class="fudis-fieldset__legend">
       <div
@@ -15,35 +15,42 @@
         [tabIndex]="-1"
         (focus)="_handleFocus($event)"
         (blur)="_handleLegendBlur()"
-      >
+        >
         <div class="fudis-fieldset__legend__main__text-content">
           <span class="fudis-fieldset__legend__main__text"
-            >{{ label }}<span *ngIf="required" class="fudis-fieldset__legend__main__space"></span
-            ><span *ngIf="required" class="fudis-fieldset__legend__main__required"
-              >({{ _translationService.getTranslations()().REQUIRED }})</span
-            >
-          </span>
-          <div
-            aria-hidden="true"
-            class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
-          ></div>
+            >{{ label }}@if (required) {
+            <span class="fudis-fieldset__legend__main__space"></span
+              >
+              }@if (required) {
+              <span class="fudis-fieldset__legend__main__required"
+                >({{ _translationService.getTranslations()().REQUIRED }})</span
+                >
+              }
+            </span>
+            <div
+              aria-hidden="true"
+              class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
+            ></div>
+          </div>
+          @if (popoverText && popoverTriggerLabel) {
+            <fudis-icon-button
+              class="fudis-fieldset__legend__main__popover-button"
+              [size]="'extra-small'"
+              [variant]="'tertiary'"
+              [icon]="'info-circle'"
+              [popoverText]="popoverText"
+              [popoverPosition]="popoverPosition"
+              [ariaLabel]="popoverTriggerLabel"
+              />
+          }
         </div>
-        <fudis-icon-button
-          *ngIf="popoverText && popoverTriggerLabel"
-          class="fudis-fieldset__legend__main__popover-button"
-          [size]="'extra-small'"
-          [variant]="'tertiary'"
-          [icon]="'info-circle'"
-          [popoverText]="popoverText"
-          [popoverPosition]="popoverPosition"
-          [ariaLabel]="popoverTriggerLabel"
-        />
-      </div>
-    </legend>
-    <fudis-body-text *ngIf="helpText" class="fudis-fieldset__help-text" [variant]="'sm-regular'">{{
-      helpText
-    }}</fudis-body-text>
-    <ng-content select="fudis-fieldset-actions"></ng-content>
-    <ng-content select="fudis-fieldset-content"></ng-content>
-  </fieldset>
-</div>
+      </legend>
+      @if (helpText) {
+        <fudis-body-text class="fudis-fieldset__help-text" [variant]="'sm-regular'">{{
+          helpText
+        }}</fudis-body-text>
+      }
+      <ng-content select="fudis-fieldset-actions"></ng-content>
+      <ng-content select="fudis-fieldset-content"></ng-content>
+    </fieldset>
+  </div>

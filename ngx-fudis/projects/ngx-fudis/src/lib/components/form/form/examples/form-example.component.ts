@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisRadioButtonOption } from '../../../../types/forms';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 interface MyCheckboxGroup {
@@ -24,7 +24,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-form-content',
   template: `
     <fudis-section
@@ -32,111 +32,113 @@ type MyForm = {
       [level]="2"
       [titleVariant]="'lg'"
       [errorSummaryBreadcrumb]="true"
-    >
+      >
       <fudis-section-content>
         <fudis-notification
           ><fudis-body-text
-            >This is notification for the section</fudis-body-text
+          >This is notification for the section</fudis-body-text
           ></fudis-notification
-        >
-        <fudis-expandable
-          (closedChange)="handleClosedOutput($event)"
-          [title]="'Expandable section 1'"
-          [level]="3"
-          [closed]="_closed"
-        >
-          <ng-template fudisExpandableContent>
-            <fudis-grid>
-              <fudis-radio-button-group
-                [label]="'Course type'"
-                [control]="formGroup.controls['courseType']"
-              >
-                <fudis-radio-button
-                  *ngFor="let option of courseTypeOptions"
-                  [label]="option.label"
-                  [value]="option.value"
-                />
-              </fudis-radio-button-group>
-              <fudis-checkbox-group
-                [formGroup]="formGroup.controls.courseBooks"
-                [label]="'Course books'"
-                [helpText]="'Select 1-2 coursebooks'"
-              >
-                <fudis-checkbox-group-option
-                  [controlName]="'first'"
-                  [label]="'Heir to the Empire'"
-                />
-                <fudis-checkbox-group-option
-                  [controlName]="'second'"
-                  [label]="'Dark Force Rising'"
-                />
-                <fudis-checkbox-group-option [controlName]="'third'" [label]="'The Last Command'" />
-              </fudis-checkbox-group>
-              <fudis-datepicker
-                [label]="'Important date'"
-                [helpText]="'You have to start from somewhere'"
-                [control]="formGroup.controls['importantDate']"
-              >
-                <fudis-error-message
-                  *ngIf="formGroup.controls['importantDate'].value?.getTime() !== releaseDate"
-                  [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                />
-              </fudis-datepicker>
-              <fudis-fieldset
-                [label]="'Tearcher info'"
-                [popoverText]="'Quite many fields are required.'"
-                [popoverTriggerLabel]="'Additional information'"
-              >
-                <fudis-fieldset-content>
-                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
-                    <fudis-text-input
-                      [initialFocus]="true"
-                      [id]="'unique-input-3'"
-                      [control]="formGroup.controls['teacher']"
-                      [label]="'Responsible teacher'"
-                      [helpText]="'Someone has to be responsible for this.'"
-                    >
-                    </fudis-text-input>
-                    <fudis-text-input
-                      [id]="'unique-input-4'"
-                      [control]="formGroup.controls['email']"
-                      [label]="'Contact email'"
-                      [helpText]="'So that students can ask for more time on their homework.'"
+          >
+          <fudis-expandable
+            (closedChange)="handleClosedOutput($event)"
+            [title]="'Expandable section 1'"
+            [level]="3"
+            [closed]="_closed"
+            >
+            <ng-template fudisExpandableContent>
+              <fudis-grid>
+                <fudis-radio-button-group
+                  [label]="'Course type'"
+                  [control]="formGroup.controls['courseType']"
+                  >
+                  @for (option of courseTypeOptions; track option) {
+                    <fudis-radio-button
+                      [label]="option.label"
+                      [value]="option.value"
+                      />
+                  }
+                </fudis-radio-button-group>
+                <fudis-checkbox-group
+                  [formGroup]="formGroup.controls.courseBooks"
+                  [label]="'Course books'"
+                  [helpText]="'Select 1-2 coursebooks'"
+                  >
+                  <fudis-checkbox-group-option
+                    [controlName]="'first'"
+                    [label]="'Heir to the Empire'"
                     />
-                  </fudis-grid>
+                  <fudis-checkbox-group-option
+                    [controlName]="'second'"
+                    [label]="'Dark Force Rising'"
+                    />
+                  <fudis-checkbox-group-option [controlName]="'third'" [label]="'The Last Command'" />
+                </fudis-checkbox-group>
+                <fudis-datepicker
+                  [label]="'Important date'"
+                  [helpText]="'You have to start from somewhere'"
+                  [control]="formGroup.controls['importantDate']"
+                  >
+                  @if (formGroup.controls['importantDate'].value?.getTime() !== releaseDate) {
+                    <fudis-error-message
+                      [message]="'Wrong date chosen. 1.5.1991 would be great!'"
+                      />
+                  }
+                </fudis-datepicker>
+                <fudis-fieldset
+                  [label]="'Tearcher info'"
+                  [popoverText]="'Quite many fields are required.'"
+                  [popoverTriggerLabel]="'Additional information'"
+                  >
+                  <fudis-fieldset-content>
+                    <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+                      <fudis-text-input
+                        [initialFocus]="true"
+                        [id]="'unique-input-3'"
+                        [control]="formGroup.controls['teacher']"
+                        [label]="'Responsible teacher'"
+                        [helpText]="'Someone has to be responsible for this.'"
+                        >
+                      </fudis-text-input>
+                      <fudis-text-input
+                        [id]="'unique-input-4'"
+                        [control]="formGroup.controls['email']"
+                        [label]="'Contact email'"
+                        [helpText]="'So that students can ask for more time on their homework.'"
+                        />
+                    </fudis-grid>
+                  </fudis-fieldset-content>
+                </fudis-fieldset>
+              </fudis-grid>
+            </ng-template>
+          </fudis-expandable>
+          <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [level]="3">
+            <ng-template fudisExpandableContent>
+              <fudis-fieldset [label]="'More important fields'">
+                <fudis-fieldset-content>
+                  <fudis-date-range>
+                    <fudis-datepicker
+                      fudisDateStart
+                      [label]="'Start date'"
+                      [control]="formGroup.controls.startDate"
+                      />
+                    <fudis-datepicker
+                      fudisDateEnd
+                      [label]="'End date'"
+                      [control]="formGroup.controls.endDate"
+                      />
+                  </fudis-date-range>
+                  <fudis-localized-text-group
+                    [formGroup]="formGroup.controls.description"
+                    [label]="'Description'"
+                    [helpText]="'Description in all languages is required'"
+                    />
                 </fudis-fieldset-content>
               </fudis-fieldset>
-            </fudis-grid>
-          </ng-template>
-        </fudis-expandable>
-        <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [level]="3">
-          <ng-template fudisExpandableContent>
-            <fudis-fieldset [label]="'More important fields'">
-              <fudis-fieldset-content>
-                <fudis-date-range>
-                  <fudis-datepicker
-                    fudisDateStart
-                    [label]="'Start date'"
-                    [control]="formGroup.controls.startDate"
-                  />
-                  <fudis-datepicker
-                    fudisDateEnd
-                    [label]="'End date'"
-                    [control]="formGroup.controls.endDate"
-                  />
-                </fudis-date-range>
-                <fudis-localized-text-group
-                  [formGroup]="formGroup.controls.description"
-                  [label]="'Description'"
-                  [helpText]="'Description in all languages is required'"
-                />
-              </fudis-fieldset-content>
-            </fudis-fieldset>
-          </ng-template>
-        </fudis-expandable>
-      </fudis-section-content>
-    </fudis-section>
-  `,
+            </ng-template>
+          </fudis-expandable>
+        </fudis-section-content>
+      </fudis-section>
+    `,
 })
 export class StorybookExampleFormComponent implements OnInit {
   constructor(

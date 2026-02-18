@@ -12,16 +12,22 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngx-fudis": ["dist/ngx-fudis/ngx-fudis", "dist/ngx-fudis"]
+      "ngx-fudis": [
+        "dist/ngx-fudis/ngx-fudis",
+        "dist/ngx-fudis"
+      ]
     },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": ["ES2021", "dom"],
+    "lib": [
+      "ES2021",
+      "dom"
+    ],
     "strictPropertyInitialization": false,
     "useDefineForClassFields": false,
     "esModuleInterop": true,

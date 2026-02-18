@@ -17,142 +17,146 @@
           <fudis-grid [classes]="'fudis-mt-md'">
             <fudis-notification [variant]="'danger'"
               ><fudis-body-text
-                >Whoops! Here is danger notification
-                <a
-                  fudisLink
-                  [title]="t('notificationExternalLink')"
-                  [external]="true"
-                ></a></fudis-body-text
+              >Whoops! Here is danger notification
+              <a
+                fudisLink
+                [title]="t('notificationExternalLink')"
+                [external]="true"
+              ></a></fudis-body-text
             ></fudis-notification>
             <fudis-heading [level]="3" fudisGridItem [columns]="'auto'">
               <a fudisLink [href]="'#'" [title]="'Link inside a heading'"></a>
             </fudis-heading>
             <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" />
             <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
-            <fudis-body-text *ngIf="_message"
-              >This value comes from the closed dialog input:
-              <strong>{{ _message }}</strong></fudis-body-text
-            >
-            <fudis-button
-              [label]="'Open dialog from component'"
-              (handleClick)="openDialogFromComponent()"
-            />
-            <fudis-button [label]="'Change language'" (handleClick)="changeLanguage()" />
-          </fudis-grid>
-        </ng-template>
-      </fudis-expandable>
-
-      <app-form-examples fudisGridItem [columns]="'stretch'" />
-
-      <fudis-expandable [title]="'Grid stuff'" [level]="2">
-        <ng-template fudisExpandableContent>
-          <fudis-grid [columns]="1" [rowGap]="'xxl'">
-            <fudis-grid [columns]="2">
-              <fudis-heading [level]="3" [variant]="'xl'">Grid stuff!</fudis-heading>
+            @if (_message) {
+              <fudis-body-text
+                >This value comes from the closed dialog input:
+                <strong>{{ _message }}</strong></fudis-body-text
+                >
+              }
               <fudis-button
-                [label]="'Update Grid Service defaults'"
-                (handleClick)="updateGridServiceDefaults()"
-              />
-              <fudis-button
-                [label]="'Update Grid [alignItemsX] value'"
-                (handleClick)="updateGridAlignValue()"
-              />
+                [label]="'Open dialog from component'"
+                (handleClick)="openDialogFromComponent()"
+                />
+              <fudis-button [label]="'Change language'" (handleClick)="changeLanguage()" />
             </fudis-grid>
+          </ng-template>
+        </fudis-expandable>
 
-            <fudis-grid [alignItemsX]="_gridAlignValue" [rowGap]="'sm'">
-              <fudis-heading [level]="3">Listen to Columns but not AlignItemsX</fudis-heading>
-              <fudis-body-text
-                >This Grid has [alignItemsX]="'{{ _gridAlignValue }}'"</fudis-body-text
-              >
-              <fudis-body-text
-                >Even if Service values are updated, this should not affect
-                alignment</fudis-body-text
-              >
-              <fudis-body-text
-                >But this Grid columns layout should change as well from 2 to 3 cols in lg
-                screen!</fudis-body-text
-              >
-            </fudis-grid>
-            <fudis-grid [columns]="2">
-              <fudis-heading [level]="3">Listen to AlignItemsX but not Columns</fudis-heading>
-              <fudis-body-text>This Grid has no set alignItemsX value</fudis-body-text>
-              <fudis-body-text>It should listen to Service updates on alignItemsX</fudis-body-text>
-              <fudis-body-text
-                >But it has columns="2" and it should not listen to Service's
-                columns</fudis-body-text
-              >
-            </fudis-grid>
+        <app-form-examples fudisGridItem [columns]="'stretch'" />
 
-            <fudis-grid [serviceDefaults]="false">
-              <fudis-heading [level]="3">Service Defaults are turned of</fudis-heading>
-              <fudis-body-text
-                >This Grid has no set alignItemsX value, but it is ignoring defaults from
-                Service!</fudis-body-text
-              >
-              <fudis-body-text>It should NOT listen to Service updates!</fudis-body-text>
-            </fudis-grid>
-          </fudis-grid>
-        </ng-template>
-      </fudis-expandable>
+        <fudis-expandable [title]="'Grid stuff'" [level]="2">
+          <ng-template fudisExpandableContent>
+            <fudis-grid [columns]="1" [rowGap]="'xxl'">
+              <fudis-grid [columns]="2">
+                <fudis-heading [level]="3" [variant]="'xl'">Grid stuff!</fudis-heading>
+                <fudis-button
+                  [label]="'Update Grid Service defaults'"
+                  (handleClick)="updateGridServiceDefaults()"
+                  />
+                <fudis-button
+                  [label]="'Update Grid [alignItemsX] value'"
+                  (handleClick)="updateGridAlignValue()"
+                  />
+              </fudis-grid>
 
-      <fudis-expandable
-        [title]="'Expandable lite'"
-        [level]="2"
-        [variant]="'lite'"
-        [padding]="'small'"
-      >
-        <ng-template fudisExpandableContent>
-          <fudis-body-text>Expandable lite without large content padding.</fudis-body-text>
-        </ng-template>
-      </fudis-expandable>
+              <fudis-grid [alignItemsX]="_gridAlignValue" [rowGap]="'sm'">
+                <fudis-heading [level]="3">Listen to Columns but not AlignItemsX</fudis-heading>
+                <fudis-body-text
+                  >This Grid has [alignItemsX]="'{{ _gridAlignValue }}'"</fudis-body-text
+                  >
+                  <fudis-body-text
+                    >Even if Service values are updated, this should not affect
+                    alignment</fudis-body-text
+                    >
+                    <fudis-body-text
+                      >But this Grid columns layout should change as well from 2 to 3 cols in lg
+                      screen!</fudis-body-text
+                      >
+                    </fudis-grid>
+                    <fudis-grid [columns]="2">
+                      <fudis-heading [level]="3">Listen to AlignItemsX but not Columns</fudis-heading>
+                      <fudis-body-text>This Grid has no set alignItemsX value</fudis-body-text>
+                      <fudis-body-text>It should listen to Service updates on alignItemsX</fudis-body-text>
+                      <fudis-body-text
+                        >But it has columns="2" and it should not listen to Service's
+                        columns</fudis-body-text
+                        >
+                      </fudis-grid>
 
-      <fudis-expandable [title]="'Pagination example'" [level]="2">
-        <ng-template fudisExpandableContent>
-          <fudis-heading [level]="3">List of courses</fudis-heading>
-          <ul>
-            <li *ngFor="let courses of visibleCourses()">
-              <fudis-dl class="fudis-mt-sm">
-                <fudis-dl-item>
-                  <fudis-dt [contentText]="courses.id + '. ' + courses.course"></fudis-dt>
-                  <fudis-dd>
-                    <fudis-dl [variant]="'compact'">
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Study Field'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.studyfield"></fudis-dd>
-                      </fudis-dl-item>
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Department'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.department"></fudis-dd>
-                      </fudis-dl-item>
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Study points'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.study_points"></fudis-dd>
-                      </fudis-dl-item>
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Duration'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.duration"></fudis-dd>
-                      </fudis-dl-item>
-                    </fudis-dl>
-                  </fudis-dd>
-                </fudis-dl-item>
-              </fudis-dl>
-            </li>
-          </ul>
-          <fudis-pagination
-            [paginationAriaLabel]="'Course list navigation'"
-            [pageCount]="totalPages"
-            (pageChange)="onPageChange($event)"
-          ></fudis-pagination>
-        </ng-template>
-      </fudis-expandable>
-    </fudis-grid>
+                      <fudis-grid [serviceDefaults]="false">
+                        <fudis-heading [level]="3">Service Defaults are turned of</fudis-heading>
+                        <fudis-body-text
+                          >This Grid has no set alignItemsX value, but it is ignoring defaults from
+                          Service!</fudis-body-text
+                          >
+                          <fudis-body-text>It should NOT listen to Service updates!</fudis-body-text>
+                        </fudis-grid>
+                      </fudis-grid>
+                    </ng-template>
+                  </fudis-expandable>
 
-    <fudis-footer>
-      <a fudisLink href="example.com" [external]="true" [title]="'Tietosuojaseloste'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'Saavutettavuusseloste'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'Järjestelmätiedot'"></a>
-      <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
-    </fudis-footer>
-    <fudis-alert-group />
-  </div>
-</ng-container>
+                  <fudis-expandable
+                    [title]="'Expandable lite'"
+                    [level]="2"
+                    [variant]="'lite'"
+                    [padding]="'small'"
+                    >
+                    <ng-template fudisExpandableContent>
+                      <fudis-body-text>Expandable lite without large content padding.</fudis-body-text>
+                    </ng-template>
+                  </fudis-expandable>
+
+                  <fudis-expandable [title]="'Pagination example'" [level]="2">
+                    <ng-template fudisExpandableContent>
+                      <fudis-heading [level]="3">List of courses</fudis-heading>
+                      <ul>
+                        @for (courses of visibleCourses(); track courses) {
+                          <li>
+                            <fudis-dl class="fudis-mt-sm">
+                              <fudis-dl-item>
+                                <fudis-dt [contentText]="courses.id + '. ' + courses.course"></fudis-dt>
+                                <fudis-dd>
+                                  <fudis-dl [variant]="'compact'">
+                                    <fudis-dl-item>
+                                      <fudis-dt [contentText]="'Study Field'"></fudis-dt>
+                                      <fudis-dd [contentText]="courses.studyfield"></fudis-dd>
+                                    </fudis-dl-item>
+                                    <fudis-dl-item>
+                                      <fudis-dt [contentText]="'Department'"></fudis-dt>
+                                      <fudis-dd [contentText]="courses.department"></fudis-dd>
+                                    </fudis-dl-item>
+                                    <fudis-dl-item>
+                                      <fudis-dt [contentText]="'Study points'"></fudis-dt>
+                                      <fudis-dd [contentText]="courses.study_points"></fudis-dd>
+                                    </fudis-dl-item>
+                                    <fudis-dl-item>
+                                      <fudis-dt [contentText]="'Duration'"></fudis-dt>
+                                      <fudis-dd [contentText]="courses.duration"></fudis-dd>
+                                    </fudis-dl-item>
+                                  </fudis-dl>
+                                </fudis-dd>
+                              </fudis-dl-item>
+                            </fudis-dl>
+                          </li>
+                        }
+                      </ul>
+                      <fudis-pagination
+                        [paginationAriaLabel]="'Course list navigation'"
+                        [pageCount]="totalPages"
+                        (pageChange)="onPageChange($event)"
+                      ></fudis-pagination>
+                    </ng-template>
+                  </fudis-expandable>
+                </fudis-grid>
+
+                <fudis-footer>
+                  <a fudisLink href="example.com" [external]="true" [title]="'Tietosuojaseloste'"></a>
+                  <a fudisLink href="example.com" [external]="true" [title]="'Saavutettavuusseloste'"></a>
+                  <a fudisLink href="example.com" [external]="true" [title]="'Järjestelmätiedot'"></a>
+                  <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
+                </fudis-footer>
+                <fudis-alert-group />
+              </div>
+            </ng-container>

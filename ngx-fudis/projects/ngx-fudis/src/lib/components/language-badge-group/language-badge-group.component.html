@@ -2,14 +2,14 @@
   [attr.id]="_id"
   [attr.aria-label]="_groupAriaLabel | async"
   class="fudis-language-badge-group"
->
-  <ng-container *ngFor="let _language of _languageLabels | async; let index = index">
+  >
+  @for (_language of _languageLabels | async; track _language; let index = $index) {
     <fudis-language-badge
       [parentId]="_id"
       (handleClick)="_updateLanguage($event)"
       [selected]="_selectedLanguage === _language.key"
       [language]="_language.key"
       [variant]="_language.variant"
-    />
-  </ng-container>
+      />
+  }
 </section>

@@ -1,38 +1,40 @@
 @let translations = _translationService.getTranslations()();
 
 <div class="fudis-loading-spinner">
-  <p
-    *ngIf="variant === 'lg'"
-    class="fudis-loading-spinner__status fudis-visually-hidden"
-    role="status"
-    >{{
+  @if (variant === 'lg') {
+    <p
+      class="fudis-loading-spinner__status fudis-visually-hidden"
+      role="status"
+      >{{
       statusMessage ||
-        (visible
-          ? translations.LOADING_SPINNER.PAGE_LOADING
-          : translations.LOADING_SPINNER.PAGE_LOAD_FINISHED)
-    }}</p
-  >
-  <div *ngIf="visible" class="fudis-loading-spinner__ui-content">
-    <svg
-      class="fudis-loading-spinner__svg fudis-loading-spinner__variant__{{ variant }}"
-      aria-hidden="true"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M15.2256 0.441641C12.7017 -0.262704 10.0165 -0.121557 7.58041 0.843527C5.14424 1.80861 3.09092 3.54458 1.73407 5.78628C0.377218 8.02798 -0.208579 10.6522 0.066151 13.2581C0.34088 15.864 1.46103 18.3084 3.25553 20.2179C5.05002 22.1274 7.4202 23.397 10.004 23.8328C12.5879 24.2687 15.2434 23.8468 17.565 22.6316L16.1133 19.8581C14.3974 20.7563 12.4346 21.0681 10.5247 20.746C8.61493 20.4239 6.86307 19.4855 5.5367 18.0741C4.21034 16.6628 3.3824 14.856 3.17934 12.9299C2.97627 11.0038 3.40925 9.06416 4.41214 7.40725C5.41504 5.75033 6.93271 4.46723 8.73335 3.75391C10.534 3.04059 12.5186 2.93626 14.3841 3.45686C16.2497 3.97747 17.8935 5.09438 19.0645 6.63702C20.2356 8.17965 20.8696 10.0632 20.8696 12H24C24 9.37963 23.1424 6.83129 21.5579 4.7442C19.9735 2.65711 17.7496 1.14599 15.2256 0.441641Z"
-      />
-    </svg>
-
-    <fudis-body-text
-      [align]="'center'"
-      [variant]="variant === 'sm' ? 'md-regular' : 'lg-regular'"
-      >{{ label || translations.LOADING_SPINNER.VISIBLE_LABEL }}</fudis-body-text
-    >
-  </div>
-</div>
+      (visible
+      ? translations.LOADING_SPINNER.PAGE_LOADING
+      : translations.LOADING_SPINNER.PAGE_LOAD_FINISHED)
+      }}</p
+      >
+    }
+    @if (visible) {
+      <div class="fudis-loading-spinner__ui-content">
+        <svg
+          class="fudis-loading-spinner__svg fudis-loading-spinner__variant__{{ variant }}"
+          aria-hidden="true"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M15.2256 0.441641C12.7017 -0.262704 10.0165 -0.121557 7.58041 0.843527C5.14424 1.80861 3.09092 3.54458 1.73407 5.78628C0.377218 8.02798 -0.208579 10.6522 0.066151 13.2581C0.34088 15.864 1.46103 18.3084 3.25553 20.2179C5.05002 22.1274 7.4202 23.397 10.004 23.8328C12.5879 24.2687 15.2434 23.8468 17.565 22.6316L16.1133 19.8581C14.3974 20.7563 12.4346 21.0681 10.5247 20.746C8.61493 20.4239 6.86307 19.4855 5.5367 18.0741C4.21034 16.6628 3.3824 14.856 3.17934 12.9299C2.97627 11.0038 3.40925 9.06416 4.41214 7.40725C5.41504 5.75033 6.93271 4.46723 8.73335 3.75391C10.534 3.04059 12.5186 2.93626 14.3841 3.45686C16.2497 3.97747 17.8935 5.09438 19.0645 6.63702C20.2356 8.17965 20.8696 10.0632 20.8696 12H24C24 9.37963 23.1424 6.83129 21.5579 4.7442C19.9735 2.65711 17.7496 1.14599 15.2256 0.441641Z"
+            />
+        </svg>
+        <fudis-body-text
+          [align]="'center'"
+          [variant]="variant === 'sm' ? 'md-regular' : 'lg-regular'"
+          >{{ label || translations.LOADING_SPINNER.VISIBLE_LABEL }}</fudis-body-text
+          >
+        </div>
+      }
+    </div>

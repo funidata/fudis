@@ -1,5 +1,5 @@
 <!--
-	Singleselect option
+Singleselect option
 -->
 <div
   #optionInputRef
@@ -17,17 +17,22 @@
   (keydown)="_keyDown($event)"
   (blur)="_blur($event)"
   (click)="!data.disabled && _clickOption($event)"
->
+  >
   <div class="fudis-select-option__label">
     <span class="fudis-select-option__label__main">{{ data.label }}</span>
-    <span *ngIf="data.subLabel" class="fudis-select-option__label__sub">{{ data.subLabel }}</span>
+    @if (data.subLabel) {
+      <span class="fudis-select-option__label__sub">{{ data.subLabel }}</span>
+    }
   </div>
-  <fudis-icon
-    *ngIf="!data.disabled && _parentSelect.control.value?.value === data.value"
-    [icon]="_parent.size === 'xs' ? 'check-small' : 'check'"
-    [color]="'gray-dark'"
-  />
-  <span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text">
-    ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
-  >
-</div>
+  @if (!data.disabled && _parentSelect.control.value?.value === data.value) {
+    <fudis-icon
+      [icon]="_parent.size === 'xs' ? 'check-small' : 'check'"
+      [color]="'gray-dark'"
+      />
+  }
+  @if (data.disabled) {
+    <span class="fudis-select-option__label fudis-select-option__disabled-text">
+      ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
+      >
+    }
+  </div>

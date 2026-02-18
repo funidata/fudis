@@ -1,4 +1,4 @@
-<ng-container *ngIf="popoverText">
+@if (popoverText) {
   <button
     fudisPopover
     #buttonElement
@@ -13,44 +13,46 @@
     [attr.id]="id"
     [popoverPosition]="popoverPosition"
     [popoverText]="popoverText"
-  >
-    <ng-container *ngIf="icon">
+    >
+    @if (icon) {
       <div class="fudis-button__icon">
-        <fudis-icon
-          *ngIf="_iconColor | async as iconColor"
-          class="fudis-button__icon__component"
-          [color]="iconColor"
-          [icon]="icon"
-          [rotate]="iconRotate"
-        ></fudis-icon>
-      </div> </ng-container
-    >{{ label }}
-  </button>
-</ng-container>
+        @if (_iconColor | async; as iconColor) {
+          <fudis-icon
+            class="fudis-button__icon__component"
+            [color]="iconColor"
+            [icon]="icon"
+            [rotate]="iconRotate"
+          ></fudis-icon>
+        }
+      </div>
+      }{{ label }}
+    </button>
+  }
 
-<ng-container *ngIf="!popoverText">
-  <button
-    #buttonElement
-    [class]="_classList | async"
-    [type]="type"
-    (click)="!disabled && buttonClick($event)"
-    (blur)="!disabled && _handleButtonBlur($event)"
-    (focus)="!disabled && _handleButtonFocus($event)"
-    (keydown)="(!disabled)"
-    [attr.tabIndex]="disabled ? -1 : null"
-    [attr.aria-disabled]="disabled || null"
-    [attr.id]="id"
-  >
-    <ng-container *ngIf="icon">
-      <div class="fudis-button__icon">
-        <fudis-icon
-          *ngIf="_iconColor | async as iconColor"
-          class="fudis-button__icon__component"
-          [color]="iconColor"
-          [icon]="icon"
-          [rotate]="iconRotate"
-        ></fudis-icon>
-      </div> </ng-container
-    >{{ label }}</button
-  >
-</ng-container>
+  @if (!popoverText) {
+    <button
+      #buttonElement
+      [class]="_classList | async"
+      [type]="type"
+      (click)="!disabled && buttonClick($event)"
+      (blur)="!disabled && _handleButtonBlur($event)"
+      (focus)="!disabled && _handleButtonFocus($event)"
+      (keydown)="(!disabled)"
+      [attr.tabIndex]="disabled ? -1 : null"
+      [attr.aria-disabled]="disabled || null"
+      [attr.id]="id"
+      >
+      @if (icon) {
+        <div class="fudis-button__icon">
+          @if (_iconColor | async; as iconColor) {
+            <fudis-icon
+              class="fudis-button__icon__component"
+              [color]="iconColor"
+              [icon]="icon"
+              [rotate]="iconRotate"
+            ></fudis-icon>
+          }
+        </div>
+        }{{ label }}</button
+        >
+      }

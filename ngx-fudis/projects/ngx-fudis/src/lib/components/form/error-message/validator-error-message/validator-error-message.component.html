@@ -1,6 +1,7 @@
-<p
-  [id]="_id"
-  class="fudis-error-message fudis-error-message__{{ variant }}"
-  *ngIf="visible && (_currentMessage | async) as message"
-  >{{ message }}</p
->
+@if (visible && (_currentMessage | async); as message) {
+  <p
+    [id]="_id"
+    class="fudis-error-message fudis-error-message__{{ variant }}"
+    >{{ message }}</p
+    >
+  }

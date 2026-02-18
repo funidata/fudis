@@ -15,23 +15,24 @@ import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
       [id]="'fudis-tab-navigation-bar-1'"
       [variant]="variant"
       [panel]="navigationTabPanel"
-    >
-      <button
-        *ngFor="let tab of tabs"
-        fudis-tab-navigation-tab
-        (click)="setLink(tab.link)"
-        [active]="activeLink === tab.link"
-        [id]="tab.id"
       >
-        {{ tab.label }}
-      </button>
+      @for (tab of tabs; track tab) {
+        <button
+          fudis-tab-navigation-tab
+          (click)="setLink(tab.link)"
+          [active]="activeLink === tab.link"
+          [id]="tab.id"
+          >
+          {{ tab.label }}
+        </button>
+      }
       <a
         fudis-tab-navigation-tab
         (click)="setLink('/some-link')"
         [active]="activeLink === '/some-link'"
         href="javascript:void(0);"
         [id]="'fudis-tab-5'"
-      >
+        >
         Link tab 5
       </a>
     </fudis-tab-navigation-bar>
@@ -41,10 +42,10 @@ import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
           >In this example the content does not change when tabs are toggled. In a real life
           scenario a router of any kind is used to project content. See documentation for more
           detailed information.</fudis-body-text
-        >
-      </div>
-    </fudis-tab-navigation-panel>
-  `,
+          >
+        </div>
+      </fudis-tab-navigation-panel>
+    `,
 })
 class TabNavigationExampleComponent {
   @Input() id: string;

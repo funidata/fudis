@@ -1,19 +1,20 @@
 <ul #chipListRef class="fudis-multiselect-chip-list" [attr.id]="parentId + '-selected-items'">
-  <li
-    class="fudis-multiselect-chip-list__item"
-    *ngFor="let item of selectedItems; let index = index"
-  >
-    <button
-      class="fudis-multiselect-chip-list__item__button"
-      (focus)="_setFocus(true)"
-      (blur)="_setFocus(false)"
-      (click)="_clickChip(item, index)"
-    >
-      <fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
-      <span class="fudis-multiselect-chip-list__item__button__label">{{ item.label }}</span>
-      <span class="fudis-visually-hidden">
-        {{ _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM }}
-      </span>
-    </button>
-  </li>
+  @for (item of selectedItems; track item; let index = $index) {
+    <li
+      class="fudis-multiselect-chip-list__item"
+      >
+      <button
+        class="fudis-multiselect-chip-list__item__button"
+        (focus)="_setFocus(true)"
+        (blur)="_setFocus(false)"
+        (click)="_clickChip(item, index)"
+        >
+        <fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
+        <span class="fudis-multiselect-chip-list__item__button__label">{{ item.label }}</span>
+        <span class="fudis-visually-hidden">
+          {{ _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM }}
+        </span>
+      </button>
+    </li>
+  }
 </ul>
