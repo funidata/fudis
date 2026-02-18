@@ -1,6 +1,6 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import docs from './checkbox-group.mdx';

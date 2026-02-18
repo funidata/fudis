@@ -5,7 +5,7 @@ import { DropdownMenuComponent } from './dropdown-menu.component';
 import docs from './dropdown-menu.mdx';
 import { dropdownMenuExclude } from '../../utilities/storybook';
 import { defaultMenuItems, smallDropdownMenuGroupedMockData } from './mock_data';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { FudisInputSize } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
 

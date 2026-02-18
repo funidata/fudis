@@ -6,7 +6,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { DatepickerComponent } from './datepicker.component';
 import docs from './datepicker.mdx';
 import { datepickerControlsExclude } from '../../../../utilities/storybook';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { LanguageChangeComponent } from '../examples/example-datepicker-language-change';
 import { DateFilterWithErrorMessageComponent } from '../examples/example-datepicker-date-filter';
 

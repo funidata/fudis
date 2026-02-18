@@ -5,7 +5,7 @@ import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import docs from './radio-button-group.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { radioButtonGroupControlsExclude } from '../../../utilities/storybook';
 
 const html = String.raw;

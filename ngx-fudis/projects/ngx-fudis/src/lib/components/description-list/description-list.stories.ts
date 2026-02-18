@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import docs from './description-list.mdx';
