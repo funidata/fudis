@@ -69,7 +69,7 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
 })
 class MockSelectComponent {
   groupedData = groupedTestData;
-  control: FormControl = new FormControl<FudisSelectOption<object>[] | null>(null);
+  control: FormControl<FudisSelectOption<string>[] | null> = new FormControl(null);
   clearButton: boolean = true;
   size = 'md';
   variant: FudisSelectVariant = 'dropdown';

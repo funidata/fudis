@@ -6,7 +6,7 @@ import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
 import docs from './multiselect.mdx';
-import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
+import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component';
 
@@ -81,7 +81,7 @@ const ExampleTemplate: StoryFn = (args) => ({
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound[] | null>(
+    control: new FormControl<string | object[] | null>(
       null,
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),

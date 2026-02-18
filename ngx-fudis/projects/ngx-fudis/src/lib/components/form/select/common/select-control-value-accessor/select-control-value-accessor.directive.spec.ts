@@ -21,7 +21,7 @@ import { joinInputValues } from '../utilities/selectUtilities';
 })
 class MockSelectCVAComponent {
   filterText: null | string;
-  control = new FormControl<FudisSelectOption<object> | null>(null);
+  control: FormControl<FudisSelectOption<string> | null> = new FormControl(null);
 }
 
 describe('SelectAutocompleteDirective', () => {
@@ -82,7 +82,7 @@ describe('SelectAutocompleteDirective', () => {
   template: `<input fudisMultiselectControlValueAccessor [formControl]="control" />`,
 })
 class MockMultiselectCVAComponent {
-  control = new FormControl<FudisSelectOption<object>[] | null>(null);
+  control = new FormControl<FudisSelectOption<string>[] | null>(null);
 }
 
 describe('MultiselectAutocompleteDirective', () => {
