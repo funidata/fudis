@@ -19,7 +19,7 @@ interface VersionsResponse {
 })
 export class VersionSelectorComponent implements OnInit {
   private _versions: string[] = [];
-  private _control = new FormControl<FudisSelectOption<object> | null>(null);
+  private _control = new FormControl<FudisSelectOption<string> | null>(null);
   private _error = false;
 
   get versions(): string[] {
@@ -95,7 +95,7 @@ export class VersionSelectorComponent implements OnInit {
 
     this._control.valueChanges.subscribe((v) => {
       if (!v) return;
-      const selected = v as FudisSelectOption<object> | null;
+      const selected = v as FudisSelectOption<string> | null;
       const val = selected?.value ?? null;
       if (!val) return;
       const cur = new URL(window.top!.location.href);

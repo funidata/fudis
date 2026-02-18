@@ -398,6 +398,7 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
 export const selectStoryControlExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
   'autocompleteFilter',
+  'autocompleteHelpText',
   'autocompleteNoResultsText',
   'selectionUpdate',
   'filterTextUpdate',
@@ -409,6 +410,9 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'componentFocused',
   'getAutocompleteFilterText',
   'openDropdown',
+  'popoverText',
+  'popoverPosition',
+  'popoverTriggerLabel',
   'selectCVA',
   'selectedOptionsFromLangChange',
   'setAutocompleteFilterText',

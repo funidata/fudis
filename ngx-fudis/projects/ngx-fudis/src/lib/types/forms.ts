@@ -81,12 +81,11 @@ export type FudisRadioButtonOption<T extends object> = T & {
 
 export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';
 
-export type FudisSelectOption<T extends object> = T & {
+export type FudisSelectOption<T = string> = {
   /**
    * Underlying value of the option
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any;
+  value: T;
   /**
    * Value that is shown in the UI
    */
@@ -99,10 +98,6 @@ export type FudisSelectOption<T extends object> = T & {
    * Is option disabled in the dropdown
    */
   disabled?: boolean;
-  /**
-   * To store additional data
-   */
-  [key: string]: unknown;
 };
 
 export type FudisLocalizedTextGroupFormGroupOptions =
