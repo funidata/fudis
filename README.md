@@ -16,4 +16,8 @@ If you work for Funidata and the CLA check does not pass for your PR, make sure 
 
 ## License
 
-Fudis is licensed under CC-BY-NC-SA. See [LICENSE](./LICENSE).
+The software and logic are licensed under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+All documentation and other assets are licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+
+See [LICENSE](./LICENSE) and [LICENSE-ASSETS](./LICENSE-ASSETS).
