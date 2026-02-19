@@ -1,5 +1,5 @@
-import { addons } from "@storybook/manager-api";
-import { create } from "@storybook/theming";
+import { addons } from "storybook/manager-api";
+import { create } from "storybook/theming";
 
 /**
  * Replace Storybook logo with brand image on the sidebar
