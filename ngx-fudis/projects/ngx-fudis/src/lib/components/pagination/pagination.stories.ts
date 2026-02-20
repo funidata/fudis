@@ -3,6 +3,8 @@ import { PaginationComponent } from './pagination.component';
 import docs from './pagination.mdx';
 import { paginationControlsExclude } from '../../utilities/storybook';
 
+const html = String.raw;
+
 export default {
   title: 'Components/Pagination',
   component: PaginationComponent,
@@ -18,7 +20,7 @@ export default {
 
 const Template: StoryFn<PaginationComponent> = (args) => ({
   props: args,
-  template: `
+  template: html`
     <fudis-pagination
       [pageCount]="pageCount"
       [pageIndex]="pageIndex"

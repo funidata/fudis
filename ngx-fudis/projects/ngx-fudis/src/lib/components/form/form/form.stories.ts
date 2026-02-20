@@ -21,7 +21,6 @@ export default {
   component: FormComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
       imports: [
         StorybookExampleDynamicValidatorsComponent,
         StorybookExampleFormDynamicComponentsComponent,

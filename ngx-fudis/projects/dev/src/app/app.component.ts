@@ -1,16 +1,15 @@
 import { Component, computed, Inject, OnInit, signal, DOCUMENT } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import {
+  FudisAlert,
   FudisAlertService,
+  FudisCheckboxGroupOption,
   FudisDialogService,
   FudisGridService,
   FudisTranslationService,
   FudisBreakpointService,
   FudisErrorSummaryService,
 } from 'ngx-fudis';
-
-import { FudisCheckboxGroupOption } from 'dist/ngx-fudis/lib/types/forms';
-import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';

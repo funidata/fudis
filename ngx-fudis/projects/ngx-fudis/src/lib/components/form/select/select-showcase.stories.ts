@@ -13,7 +13,6 @@ export default {
   component: SelectComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
       imports: [
         StorybookExampleSelectShowcaseComponent,
         StorybookExampleMultiselectShowcaseComponent,

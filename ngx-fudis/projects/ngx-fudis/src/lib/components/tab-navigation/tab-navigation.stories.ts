@@ -1,9 +1,5 @@
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-
 import { Component, Input } from '@angular/core';
-import { TabNavigationTabComponent } from './tab-navigation-tab.component';
-import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
-import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 import docs from './tab-navigation.mdx';
 import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
 
@@ -70,7 +66,6 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [TabNavigationExampleComponent],
-      imports: [TabNavigationTabComponent, TabNavigationBarComponent, TabNavigationPanelComponent],
     }),
   ],
   parameters: {

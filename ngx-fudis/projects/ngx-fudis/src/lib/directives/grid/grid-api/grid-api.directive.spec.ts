@@ -5,10 +5,7 @@ import { GridApiDirective } from './grid-api.directive';
 
 describe('GridApiDirective', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [],
-      providers: [],
-    });
+    TestBed.configureTestingModule({});
   });
 
   it('should create an instance', () => {
