@@ -1,5 +1,3 @@
-//import { TestBed } from '@angular/core/testing';
-
 // TODO: add test for disabled states
 
 import { joinInputValues, setVisibleOptionsList } from './selectUtilities';

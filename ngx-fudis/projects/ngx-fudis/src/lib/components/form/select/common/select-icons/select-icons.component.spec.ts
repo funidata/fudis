@@ -12,7 +12,8 @@ describe('SelectIconsComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [SelectIconsComponent, IconButtonComponent, IconComponent],
+      declarations: [SelectIconsComponent],
+      imports: [IconButtonComponent, IconComponent],
     });
     fixture = TestBed.createComponent(SelectIconsComponent);
     component = fixture.componentInstance;
@@ -53,7 +54,7 @@ describe('SelectIconsComponent', () => {
   describe('With Dropdown parent variant', () => {
     beforeEach(async () => {
       component.parentVariant = 'dropdown';
-      component.parentControl = new FormControl<FudisSelectOption<object> | null>(null);
+      component.parentControl = new FormControl<FudisSelectOption<string> | null>(null);
 
       component.filterText = false;
       component.disabled = false;

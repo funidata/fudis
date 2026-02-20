@@ -21,28 +21,32 @@ Most notable common API feature is grouping options and choosing if component is
 
 ### Label (Mandatory)
 
-Label string describing selection to be made from the select dropdown options.
+Input label, describing selection to be made from the select dropdown options.
 
 ### Help Text
 
-Additional help text string to provide additional description or instructions what user is expected to choose from the select's options.
+Additional help text to provide description or instructions what user is expected to choose from the select's options.
 
 ### Size
 
-Width of the component. Value can be string `lg`, `md` or `sm`. By default size is `lg`.
+Width of the component. Accepted values are `lg`, `md` or `sm`. By default the size is `lg`.
 
 ### Placeholder
 
-Placeholder string text shown in the component, when it has no chosen value.
+Placeholder text shown in the component, when it has no chosen value.
+
+### Popover
+
+Popover can be included with properties from [Popover Directive](/docs/directives-popover--documentation). It also requires an additional `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains only an icon, so it is required to inform the user what it is for, for example _"Additional information"_.
 
 ### Selection Update
 
-Select and Multiselect Component provides `@Output` event emitter `selectionUpdate` for cases if application needs to do something special if the form control value changes. Output of the event emitter in Select is either `null` or `FudisSelectOption` and for Multiselect `null` or an array `FudisSelectOption<object>[]`.
+Select and Multiselect Components provide `@Output` event emitter `selectionUpdate` for cases if application needs to do something special if the form control value changes. Output of the event emitter in Select is either `null` or `FudisSelectOption<T>` and for Multiselect `null` or an array `FudisSelectOption<T>[]`.
 
 ```
 // TypeScript
 
-mySelectionUpdate(option: null | FudisSelectOption):void {
+mySelectionUpdate(option: FudisSelectOption<T> | null):void {
   console.log(option)
 }
 
@@ -56,7 +60,7 @@ mySelectionUpdate(option: null | FudisSelectOption):void {
 
 ### Usage Example
 
-Example using Select component, but same input attributes work as well with Multiselect Component using `<fudis-multiselect>` selector.
+Example using Select component. Same input attributes work as well with Multiselect Component using `<fudis-multiselect>` selector.
 
 ```
 <fudis-select
@@ -84,7 +88,7 @@ Both Select and Multiselect have three variants:
   - Opens on focus
   - Chevron icon is visible
 - autocompleteDropdown:
-  - The input field of the component changes to a text input, where user can type to filter selectable results by their visible label
+  - The input field of the component changes into a text input, where user can type to filter selectable results by their visible label
   - Opens on focus
   - Chevron icon is visible
 - autocompleteType
@@ -107,7 +111,7 @@ Example Stories for manual autocomplete filtering:
 
 ### Selection Clear Button Boolean
 
-By default `selectionClearButton` is set to boolean `true`. Whenever user has made a valid selection from the options, the Clear button can be clicked to clear the selection. This will set the component's `FormControl` to `null`.
+By default `selectionClearButton` is set to boolean `true`. Whenever user has made a valid selection from the options, the clear button can be clicked to clear the selection. This will set the component's `FormControl` to `null`.
 
 When `selectionClearButton` is set to `false`, the clear button is not visible.
 

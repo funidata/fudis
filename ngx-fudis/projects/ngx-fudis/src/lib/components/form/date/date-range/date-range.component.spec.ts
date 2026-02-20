@@ -59,15 +59,15 @@ describe('DateRangeComponent', () => {
         GuidanceComponent,
         ValidatorErrorMessageComponent,
         MockDateRangeComponent,
-        IconComponent,
       ],
-      providers: [FudisDialogService, FudisInternalErrorSummaryService],
       imports: [
+        IconComponent,
         ReactiveFormsModule,
         MatDatepickerModule,
         MatNativeDateModule,
         BrowserAnimationsModule,
       ],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 

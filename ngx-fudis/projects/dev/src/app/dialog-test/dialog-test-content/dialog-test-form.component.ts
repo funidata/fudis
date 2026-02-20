@@ -20,7 +20,7 @@ type MyForm = {
   textInput: FormControl<string | null | number>;
   checkboxFormGroup: FormGroup;
   truth: FormControl<boolean | null>;
-  animals: FormControl<FudisSelectOption<object>[] | null>;
+  animals: FormControl<FudisSelectOption<string>[] | null>;
   date: FormControl<Date | null>;
 };
 
@@ -121,7 +121,7 @@ export class DialogTestFormComponent {
     { value: false, label: 'False' },
   ];
 
-  multiOptions: FudisSelectOption<object>[] = [
+  multiOptions: FudisSelectOption<string>[] = [
     { value: 'artic-fox', label: 'Artic fox' },
     { value: 'bear', label: 'Bear' },
     { value: 'wolverine', label: 'Wolverine' },
@@ -156,7 +156,7 @@ export class DialogTestFormComponent {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    animals: new FormControl<FudisSelectOption<object>[] | null>(null),
+    animals: new FormControl<FudisSelectOption<string>[] | null>(null),
     date: new FormControl<Date | null>(null),
   });
 
