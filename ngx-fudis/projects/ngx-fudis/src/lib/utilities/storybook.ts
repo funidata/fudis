@@ -32,11 +32,6 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 export const excludeAllRegex: RegExp = /.*/;
 
 /**
- * Alert
- */
-export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisibleStatus']);
-
-/**
  * Common Form Component excludes
  */
 const formCommonControlsExclude: string[] = [
@@ -63,6 +58,11 @@ const formCommonControlsExclude: string[] = [
  * Common Form Component excludes
  */
 const formCommonDocsExclude: string[] = ['onFocus', 'focusToInput'];
+
+/**
+ * Alert
+ */
+export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisibleStatus']);
 
 /**
  * Button
@@ -184,6 +184,8 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'serviceDefaults',
 ]);
 
+export const descriptionListItemArgTypesExclude: RegExp = excludeRegex(['hostClass']);
+
 export const nestedDescriptionListExclude: RegExp = excludeRegex([
   ...descriptionListCommonExclude,
   'variant',
@@ -200,6 +202,8 @@ export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCo
  * Dialog
  */
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
+
+export const dialogContentExclude: RegExp = excludeRegex(['hostClass']);
 
 /**
  * Dropdown Menu and Dropdown Menu Item
@@ -226,9 +230,14 @@ export const dropdownMenuItemExclude: RegExp = excludeRegex([
 ]);
 
 /**
- * Error Message and Error Summary
+ * Error Message
  */
 export const errorMessageExclude: RegExp = excludeRegex(['handleAddError', 'handleRemoveError']);
+
+/**
+ * Error Summary
+ */
+export const errorSummaryExclude: RegExp = excludeRegex(['handleErrorClick']);
 
 /**
  * Expandable
@@ -262,6 +271,11 @@ export const expandableLiteExclude: RegExp = excludeRegex([
 ]);
 
 /**
+ * Fieldset
+ */
+export const fieldsetExclude: RegExp = excludeRegex(['hostClass']);
+
+/**
  * Form
  */
 export const formExclude: RegExp = excludeRegex([
@@ -291,14 +305,9 @@ export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefau
 export const headingControlsExclude: RegExp = excludeRegex(['id', 'headingRef']);
 
 /**
- * LocalizedTextGroup
+ * Icon
  */
-export const LocalizedTextGroupStoryExclude: RegExp = excludeRegex([
-  ...formCommonControlsExclude,
-  'options',
-]);
-
-export const LocalizedTextGroupDocsExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
+export const iconExclude: RegExp = excludeRegex(['elementRef']);
 
 /**
  * Language Badge Group
@@ -330,6 +339,16 @@ export const linkExclude: RegExp = excludeRegex([
 ]);
 
 /**
+ * LocalizedTextGroup
+ */
+export const LocalizedTextGroupStoryExclude: RegExp = excludeRegex([
+  ...formCommonControlsExclude,
+  'options',
+]);
+
+export const LocalizedTextGroupDocsExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
+
+/**
  * Notification
  */
 export const notificationExclude: RegExp = excludeRegex([
@@ -338,7 +357,7 @@ export const notificationExclude: RegExp = excludeRegex([
   'ariaDescribedby',
 ]);
 
-export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement']);
+export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement', 'focus']);
 
 /**
  * Pagination
@@ -365,6 +384,34 @@ export const paginationControlsExclude: RegExp = excludeRegex([
 ]);
 
 /**
+ * Popover
+ */
+export const popoverExclude: RegExp = excludeRegex([
+  'id',
+  'popoverTriggerLabel',
+  'handleClick',
+  'handleBlur',
+  'handleDestroy',
+  'handleFocus',
+  'buttonEl',
+  'label',
+  'ariaLabel',
+  'disabled',
+  'icon',
+  'iconRotate',
+  'size',
+  'type',
+  'variant',
+  'buttonClick',
+  'toggleMenu',
+  'closeMenu',
+  'dropdownOpen',
+  'clickSubscription',
+  'keydownSubscription',
+  'scrollSubscription',
+]);
+
+/**
  * Radio Button Group
  */
 export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
@@ -372,8 +419,14 @@ export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
   'triggerEmit',
 ]);
 
-export const radioButtonGroupExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
+export const radioButtonGroupExclude: RegExp = excludeRegex([
+  ...formCommonDocsExclude,
+  'triggerEmit',
+]);
 
+/**
+ * Section
+ */
 export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBreadcrumb', 'id']);
 
 /**
@@ -456,41 +509,6 @@ export const spacingExclude: RegExp = excludeRegex([
 ]);
 
 /**
- * Text Input
- */
-export const textInputExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
-
-export const textInputControlsExclude: RegExp = excludeRegex([...formCommonControlsExclude]);
-
-/**
- * Popover
- */
-export const popoverExclude: RegExp = excludeRegex([
-  'id',
-  'popoverTriggerLabel',
-  'handleClick',
-  'handleBlur',
-  'handleDestroy',
-  'handleFocus',
-  'buttonEl',
-  'label',
-  'ariaLabel',
-  'disabled',
-  'icon',
-  'iconRotate',
-  'size',
-  'type',
-  'variant',
-  'buttonClick',
-  'toggleMenu',
-  'closeMenu',
-  'dropdownOpen',
-  'clickSubscription',
-  'keydownSubscription',
-  'scrollSubscription',
-]);
-
-/**
  * Tab Navigation Bar
  */
 export const tabNavigationBarExclude: RegExp = excludeRegex([
@@ -512,3 +530,10 @@ export const tabNavigationBarExampleExclude: RegExp = excludeRegex([
 ]);
 
 export const tabNavigationPanelExclude: RegExp = excludeRegex(['setActiveTabId']);
+
+/**
+ * Text Input
+ */
+export const textInputExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
+
+export const textInputControlsExclude: RegExp = excludeRegex([...formCommonControlsExclude, 'autocomplete', 'name']);
