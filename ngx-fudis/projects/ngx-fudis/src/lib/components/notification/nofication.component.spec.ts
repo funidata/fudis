@@ -12,8 +12,8 @@ describe('NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BodyTextComponent, NotificationComponent, IconComponent, LinkDirective],
-      imports: [RouterModule.forRoot([])],
+      declarations: [BodyTextComponent, NotificationComponent, LinkDirective],
+      imports: [IconComponent, RouterModule.forRoot([])],
     }).compileComponents();
   });
 

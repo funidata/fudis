@@ -10,10 +10,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { NgxFudisModule } from '../../ngx-fudis.module';
-import { IconComponent } from '../icon/icon.component';
 import { auditTime, fromEvent, Subscription } from 'rxjs';
 import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
+import { IconComponent } from '../icon/icon.component';
 
 /**
  * Organizes content into selectable tabs.
@@ -22,8 +21,7 @@ import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
  */
 @Component({
   selector: 'fudis-tab-navigation-bar',
-  imports: [NgIf, NgxFudisModule],
-  providers: [IconComponent],
+  imports: [NgIf, IconComponent],
   encapsulation: ViewEncapsulation.None,
   templateUrl: './tab-navigation-bar.component.html',
   styleUrl: './tab-navigation-bar.component.scss',

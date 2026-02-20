@@ -57,6 +57,7 @@ import { MultiselectChipListComponent } from './components/form/select/multisele
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SectionComponent } from './components/section/section.component';
@@ -65,6 +66,9 @@ import { SelectOptionComponent } from './components/form/select/select/select-op
 import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
 import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
 import { SelectIconsComponent } from './components/form/select/common/select-icons/select-icons.component';
+import { TabNavigationBarComponent } from './components/tab-navigation/tab-navigation-bar.component';
+import { TabNavigationPanelComponent } from './components/tab-navigation/tab-navigation-panel.component';
+import { TabNavigationTabComponent } from './components/tab-navigation/tab-navigation-tab.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
@@ -105,7 +109,6 @@ import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive'
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
-
 import { LinkDirective } from './directives/link/link.directive';
 import {
   SectionActionsDirective,
@@ -146,11 +149,9 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   declarations: [
     AlertComponent,
     AlertGroupComponent,
-    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
-    ButtonComponent,
     CheckboxComponent,
     CheckboxGroupComponent,
     CheckboxGroupOptionComponent,
@@ -196,9 +197,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     GroupComponentBaseDirective,
     GuidanceComponent,
     HeadingComponent,
-    HorizontalRuleComponent,
-    IconComponent,
-    IconButtonComponent,
     LocalizedTextGroupComponent,
     LabelComponent,
     LanguageBadgeComponent,
@@ -233,11 +231,16 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   ],
   /*
    * Include imports outside of Fudis components in 'imports' array below.
-   * E.g. components from Angular Material or other Angular tools
+   * E.g. Standalone components, Angular Material components and other Angular tools
    */
   imports: [
+    BadgeComponent,
+    ButtonComponent,
     CommonModule,
     FormsModule,
+    HorizontalRuleComponent,
+    IconButtonComponent,
+    IconComponent,
     LayoutModule,
     MatDatepickerModule,
     MatDialogModule,
@@ -245,16 +248,19 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
+    PaginationComponent,
     ReactiveFormsModule,
     RouterModule,
     ScrollingModule,
+    TabNavigationBarComponent,
+    TabNavigationPanelComponent,
+    TabNavigationTabComponent,
     PopoverDirective,
   ],
 
   /*
-   * Include Fudis component in 'exports' array below
-   * and export in public-api.ts as well,
-   * when you want to expose it outside
+   * Add Fudis component, including all standalone components, in 'exports' array below
+   * and export in public-api.ts as well, when you want to expose it outside
    */
   exports: [
     AlertComponent,
@@ -310,6 +316,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,
+    PaginationComponent,
     PopoverDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
@@ -320,6 +327,9 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     SelectOptionComponent,
     SelectOptionsDirective,
     SelectGroupComponent,
+    TabNavigationBarComponent,
+    TabNavigationPanelComponent,
+    TabNavigationTabComponent,
     TextAreaComponent,
     TextInputComponent,
   ],

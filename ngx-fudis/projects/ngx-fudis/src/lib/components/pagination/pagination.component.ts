@@ -18,7 +18,6 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { BehaviorSubject } from 'rxjs';
 import { FudisIdService } from '../../services/id/id.service';
 import { CommonModule } from '@angular/common';
-import { NgxFudisModule } from '../../ngx-fudis.module';
 
 /**
  * Enum representing pagination ellipsis markers\
@@ -36,7 +35,7 @@ enum Ellipsis {
  */
 @Component({
   selector: 'fudis-pagination',
-  imports: [CommonModule, NgxFudisModule],
+  imports: [CommonModule],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
   encapsulation: ViewEncapsulation.None,

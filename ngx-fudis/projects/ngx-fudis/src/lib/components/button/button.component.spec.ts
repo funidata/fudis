@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ButtonComponent } from './button.component';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
-import { IconComponent } from '../icon/icon.component';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisButtonTypeArray } from '../../types/miscellaneous';
 
@@ -12,7 +11,8 @@ describe('ButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ButtonComponent, ButtonBaseDirective, IconComponent],
+      declarations: [ButtonBaseDirective],
+      imports: [ButtonComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);

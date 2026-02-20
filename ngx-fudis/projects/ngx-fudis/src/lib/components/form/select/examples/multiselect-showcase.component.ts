@@ -243,13 +243,13 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
   `,
 })
 export class StorybookExampleMultiselectShowcaseComponent {
-  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object>[] | null>();
+  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<string | object>[] | null>();
 
   defaultOptions = defaultOptions;
 
   groupedMockData = groupedMockData;
 
-  control: FormControl = new FormControl<FudisSelectOption<object>[] | null>(
+  control: FormControl = new FormControl<FudisSelectOption<string | object>[] | null>(
     [defaultOptions[5], defaultOptions[1]],
     [FudisValidators.minLength(2, 'Pick at least two pets', true)],
   );
