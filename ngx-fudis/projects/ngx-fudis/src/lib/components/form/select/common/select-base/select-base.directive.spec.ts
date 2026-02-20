@@ -69,7 +69,7 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
 })
 class MockSelectComponent {
   groupedData = groupedTestData;
-  control: FormControl = new FormControl<FudisSelectOption<object>[] | null>(null);
+  control: FormControl<FudisSelectOption<string>[] | null> = new FormControl(null);
   clearButton: boolean = true;
   size = 'md';
   variant: FudisSelectVariant = 'dropdown';
@@ -95,10 +95,7 @@ describe('SelectBaseDirective', () => {
         SelectOptionComponent,
         SelectIconsComponent,
         SelectOptionsDirective,
-        IconButtonComponent,
-        IconComponent,
         GuidanceComponent,
-        IconComponent,
         LabelComponent,
         MockSelectComponent,
         MultiselectComponent,
@@ -106,8 +103,8 @@ describe('SelectBaseDirective', () => {
         MultiselectChipListComponent,
         BodyTextComponent,
       ],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
   });
 

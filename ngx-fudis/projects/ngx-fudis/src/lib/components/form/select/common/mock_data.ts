@@ -6,17 +6,16 @@ import { FudisSelectOption } from '../../../../types/forms';
 
 interface MockSelectOptionGroupData {
   country: string;
-  options: FudisSelectOption<TestAnimalScience>[];
+  options: FudisSelectOption<string | AnimalId>[];
 }
 
-export type TestAnimalSound = {
-  value: string | object;
-  label: string;
-  sound: string;
-  disabled?: boolean;
-};
+type AnimalId = { mainId: string; secondaryId: string };
+type AnimalObject = { name: string; breed: string };
 
-export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
+export type TestAnimalValue = string | AnimalObject;
+export type TestAnimalSound = FudisSelectOption<TestAnimalValue> & { sound: string };
+
+export const defaultOptions: TestAnimalSound[] = [
   { value: { name: 'Max The Great', breed: 'Staffy' }, label: 'Dog', sound: 'Wuf!' },
   { value: 'value-2-capybara', label: 'Capybara', sound: 'Squek!' },
   { value: 'value-3-platypys', label: 'Platypus', sound: 'Plat plat!' },
@@ -39,7 +38,7 @@ export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
 ];
 
-export const defaultOptionsSecondaryLang: FudisSelectOption<TestAnimalSound>[] = [
+export const defaultOptionsSecondaryLang: TestAnimalSound[] = [
   { value: { name: 'Max The Great', breed: 'Staffy' }, label: 'Koira', sound: 'Hau!' },
   { value: 'value-2-capybara', label: 'Kapybara', sound: 'Sviik!' },
   { value: 'value-3-platypys', label: 'Vesinokkaeläin', sound: 'Läisk!' },
@@ -52,23 +51,16 @@ export const defaultOptionsSecondaryLang: FudisSelectOption<TestAnimalSound>[] =
   { value: 'value-6-gecko', label: 'Gekko', sound: 'Kukkuu!' },
 ];
 
-export const multiselectChipListMockData: FudisSelectOption<object>[] = [
+export const multiselectChipListMockData: FudisSelectOption<string>[] = [
   { value: 'hereford', label: 'Hereford' },
   { value: 'texas-longhorn', label: 'Texas Longhorn' },
   { value: 'ayrshire', label: 'Ayrshire' },
   { value: 'wagyu', label: 'Wagyu' },
 ];
 
-export type TestAnimalScience = {
-  value: string | object;
-  label: string;
-  subLabel: string;
-  disabled?: boolean;
-};
-
 type CountryData = {
   country: string;
-  options: TestAnimalScience[];
+  options: FudisSelectOption<string>[];
 };
 
 type CountryDataArray = CountryData[];
@@ -137,7 +129,7 @@ export const groupedTestData: CountryDataArray = [
   },
 ];
 
-export const selectMovieMockData: FudisSelectOption<object>[] = [
+export const selectMovieMockData: FudisSelectOption<string>[] = [
   {
     value: '70c15d93-e846-425b-bae0-2313a5c91d90',
     label: "101 Dalmatians II: Patch's London Adventure",
@@ -5145,7 +5137,7 @@ export const selectMovieMockData: FudisSelectOption<object>[] = [
   },
 ];
 
-export const selectMockData: FudisSelectOption<TestAnimalScience>[] = [
+export const selectMockData: FudisSelectOption<string>[] = [
   {
     value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
     label: 'Golden jackal',

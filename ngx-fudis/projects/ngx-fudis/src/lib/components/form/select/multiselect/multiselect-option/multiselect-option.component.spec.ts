@@ -41,8 +41,8 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
   </fudis-multiselect>`,
 })
 class MultiselectMockComponent {
-  multiOptions: FudisSelectOption<object>[] = defaultOptions;
-  control = new FormControl<FudisSelectOption<object>[] | null>(null);
+  multiOptions: FudisSelectOption<string | object>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<string | object>[] | null> = new FormControl(null);
 
   @ViewChild('multiOption') multiOption: MultiselectOptionComponent;
   @ViewChild('selectEl') selectEl: MultiselectComponent;
@@ -65,15 +65,12 @@ describe('MultiselectOptionComponent', () => {
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
-        IconButtonComponent,
-        IconComponent,
         SelectOptionsDirective,
         GuidanceComponent,
-        IconComponent,
         LabelComponent,
       ],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MultiselectMockComponent);

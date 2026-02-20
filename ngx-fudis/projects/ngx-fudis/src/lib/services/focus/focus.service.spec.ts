@@ -43,7 +43,8 @@ describe('FudisFocusService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockFocusComponent, ButtonComponent, IconComponent, LinkDirective],
+      declarations: [MockFocusComponent, LinkDirective],
+      imports: [ButtonComponent, IconComponent],
     });
 
     fixture = TestBed.createComponent(MockFocusComponent);

@@ -27,7 +27,8 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FooterComponent, LinkDirective, IconComponent, MockFooterComponent],
+      declarations: [FooterComponent, LinkDirective, MockFooterComponent],
+      imports: [IconComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

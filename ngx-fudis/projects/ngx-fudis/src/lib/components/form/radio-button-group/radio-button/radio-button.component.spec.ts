@@ -62,11 +62,10 @@ describe('RadioButtonComponent', () => {
         GridApiDirective,
         GridDirective,
         GuidanceComponent,
-        IconComponent,
         ValidatorErrorMessageComponent,
       ],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
+      imports: [IconComponent, ReactiveFormsModule],
     }).compileComponents();
   });
 
