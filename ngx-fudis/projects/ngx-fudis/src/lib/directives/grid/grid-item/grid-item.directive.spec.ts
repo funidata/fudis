@@ -46,8 +46,8 @@ describe('GridItemDirective', () => {
         GridComponent,
         HeadingComponent,
         BodyTextComponent,
-        ButtonComponent,
       ],
+      imports: [ButtonComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

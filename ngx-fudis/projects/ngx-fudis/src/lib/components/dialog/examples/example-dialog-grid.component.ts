@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisDialogSize } from '../../../types/miscellaneous';
@@ -24,6 +24,22 @@ import { CommonModule } from '@angular/common';
             <fudis-heading [level]="3" [variant]="'sm'">
               I am fudis-heading inside the grid taking the whole width
             </fudis-heading>
+            <fudis-icon-button
+              #menuTrigger
+              [id]="'fudis-menu-button-1'"
+              [ariaLabel]="'Additional menu'"
+              [size]="'small'"
+              [variant]="'secondary'"
+              [icon]="'three-dots'"
+              [asMenuButton]="true"
+            >
+              <fudis-dropdown-menu [size]="'md'">
+                <fudis-dropdown-menu-item
+                  [label]="'Open new dialog'"
+                  (handleClick)="openExtraDialogTemplate(extraDialog)"
+                ></fudis-dropdown-menu-item>
+              </fudis-dropdown-menu>
+            </fudis-icon-button>
             <fudis-body-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
               vehicula ut massa non facilisis. Aliquam vehicula risus vitae ex condimentum, sed
@@ -90,6 +106,18 @@ import { CommonModule } from '@angular/common';
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>
+
+    <ng-template #extraDialog>
+      <fudis-dialog [size]="'sm'">
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'md'">Extra dialog</fudis-heading>
+        <fudis-dialog-content>
+          <fudis-body-text> I am an extra dialog opened on top of the first one. </fudis-body-text>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Close'"></fudis-button>
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
   `,
 })
 export class ExampleDialogWithGridComponent {
@@ -97,8 +125,20 @@ export class ExampleDialogWithGridComponent {
 
   @Input() size: FudisDialogSize = 'md';
 
+  @ViewChild('menuTrigger', { static: false, read: ElementRef })
+  menuTrigger?: ElementRef<HTMLButtonElement>;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   openDialogTemplate<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
     this._dialogService.open(dialogToOpen);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  openExtraDialogTemplate<T = any>(extraDialog: TemplateRef<T>) {
+    const dialogRef = this._dialogService.open(extraDialog, { restoreFocus: false });
+    const buttonElement = this.menuTrigger?.nativeElement.querySelector('button');
+    dialogRef.afterClosed().subscribe(() => {
+      buttonElement?.focus();
+    });
   }
 }

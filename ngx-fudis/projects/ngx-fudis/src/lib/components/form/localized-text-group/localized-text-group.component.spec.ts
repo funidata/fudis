@@ -61,10 +61,9 @@ describe('LocalizedTextGroupComponent', () => {
         GuidanceComponent,
         ValidatorErrorMessageComponent,
         SelectIconsComponent,
-        IconComponent,
       ],
+      imports: [IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
-      imports: [ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LocalizedTextGroupComponent);

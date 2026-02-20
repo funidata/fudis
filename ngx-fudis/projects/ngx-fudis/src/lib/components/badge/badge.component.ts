@@ -11,7 +11,6 @@ import { FudisBadgeVariant } from '../../types/miscellaneous';
   selector: 'fudis-badge',
   templateUrl: './badge.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class BadgeComponent {
   /**

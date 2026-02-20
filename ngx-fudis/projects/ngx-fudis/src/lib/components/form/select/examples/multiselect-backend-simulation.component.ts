@@ -49,9 +49,9 @@ import { FudisValidators } from '../../../../utilities/form/validators';
   `,
 })
 export class StorybookExampleMultiselectBackendSimulationComponent extends StorybookExampleBackendSimulationBaseDirective {
-  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object>[] | null>();
+  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<string>[] | null>();
 
-  override control: FormControl = new FormControl<FudisSelectOption<object>[] | null>(null, [
+  override control: FormControl = new FormControl<FudisSelectOption<string>[] | null>(null, [
     FudisValidators.required('You must choose a movie!'),
   ]);
 }

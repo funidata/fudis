@@ -112,12 +112,13 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   /**
    * Control for language option Select
    */
-  protected _selectControl: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
+  protected _selectControl: FormControl<FudisSelectOption<string> | null> = new FormControl(null);
 
   /**
-   * Updated options list after changes
+   * Updated options list after changes. Option values (i.e. controlName) are always strings in this
+   * component so we can type them as such.
    */
-  protected _selectOptions: FudisSelectOption<object>[] = [];
+  protected _selectOptions: FudisSelectOption<string>[] = [];
 
   /**
    * Fudis translation
@@ -140,10 +141,10 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
    * When Form Control value changes, update Select Options accordingly with or without Missing text
    */
   protected _updateSelectOptions(): void {
-    const newOptions: FudisSelectOption<object>[] = [];
+    const newOptions: FudisSelectOption<string>[] = [];
 
     this.options.forEach((option) => {
-      let newOption: FudisSelectOption<object> | null = null;
+      let newOption: FudisSelectOption<string> | null = null;
 
       if (
         this.formGroup.controls[option.controlName as keyof T].invalid ||
@@ -213,12 +214,14 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
     return false;
   }
 
-  protected _checkHtmlAttributes(controlName: string): void {
-    const control = this.formGroup.controls[controlName as keyof T] as FormControl<string | null>;
+  protected _checkHtmlAttributes(controlName: string | undefined): void {
+    if (controlName) {
+      const control = this.formGroup.controls[controlName as keyof T] as FormControl<string | null>;
 
-    this._minLength.next(FudisValidatorUtilities.minLength(control));
-    this._maxLength.next(FudisValidatorUtilities.maxLength(control));
-    this._required.next(this._isInputRequired(control));
+      this._minLength.next(FudisValidatorUtilities.minLength(control));
+      this._maxLength.next(FudisValidatorUtilities.maxLength(control));
+      this._required.next(this._isInputRequired(control));
+    }
   }
 
   ngOnInit(): void {

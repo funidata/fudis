@@ -11,6 +11,9 @@ import {
 import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../types/miscellaneous';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { FudisIdService } from '../../services/id/id.service';
+import { CommonModule } from '@angular/common';
+import { IconComponent } from '../icon/icon.component';
+import { PopoverDirective } from '../../directives/popover/popover.directive';
 
 /**
  * Triggers an action or event.
@@ -21,9 +24,9 @@ import { FudisIdService } from '../../services/id/id.service';
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',
+  imports: [CommonModule, PopoverDirective, IconComponent],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class ButtonComponent extends ButtonBaseDirective implements OnChanges, OnInit, OnDestroy {
   constructor(_idService: FudisIdService) {
