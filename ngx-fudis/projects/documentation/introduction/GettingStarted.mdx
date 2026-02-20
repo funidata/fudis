@@ -20,20 +20,14 @@ The library is build and tested against:
 
 ## 2. Install Angular Material Peer Dependency:
 
+Run the following command to install Angular Material as a peer dependency to your project. Note that this will also include Angular CDK, which is mandatory for Angular Material to work properly.
+
 ```
-ng add @angular/material
+ng add @angular/material --theme=custom
 
 ```
 
-> This command will also include Angular CDK, which is mandatory for Angular Material to work properly.
-
-Choose these options when prompted:
-
-```
-? Choose a prebuilt theme name, or "custom" for a custom theme: Custom
-? Set up global Angular Material typography styles? No
-? Include the Angular animations module? Include and enable animations
-```
+> This command will set the default Angular Material theme for your project. If you are using the Fudis compatible version of Angular Material, it is safe to remove all external font stylesheets and theming that Angular Material applies to your `index.html ` and root `style.scss` files.
 
 ## 3. Install Fudis-Core Peer Dependency:
 
@@ -43,8 +37,6 @@ Fudis has a peer dependency to our style library, that contains global styles, m
 ng add @funidata/fudis-core
 
 ```
-
-After installing the dependency, follow the setup instructions from [Fudis Core Storybook](https://fudis.funidata.fi/core) which are located in the **Documentation -> Introduction -> How to start using Core**-section.
 
 ## 4. Install Fudis:
 
@@ -74,7 +66,13 @@ If you need to import `NgxFudisModule` more than once in your application, use t
 
 ## 6. Import global styles
 
-The global styles of Fudis must be imported to your application's styles for components to work properly. As Fudis uses Angular Material as its dependency, it is already imported as part of Fudis' main CSS file.
+### Core styles
+
+After installing the Fudis Core package, to enable the foundational design tokens and utilities of the Fudis Design system in your project, follow the style import instructions provided in the [Fudis Core Style Library](https://fudis.funidata.fi/core) under **Documentation -> Introduction -> How to Start Using Fudis Core in Your Application**.
+
+### Component styles
+
+The Angular specific component styles must be imported to your application's styles for components to work properly. As Fudis uses Angular Material as its dependency, it is already imported as part of Fudis' main CSS file.
 
 The recommended way is to add following lines your project's root SCSS style file, which is often named `styles.scss` or `index.scss` or similar:
 
