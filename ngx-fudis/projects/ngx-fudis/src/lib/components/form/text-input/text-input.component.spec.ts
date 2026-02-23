@@ -124,6 +124,34 @@ describe('TextInputComponent', () => {
 
       expect(inputElement.getAttribute('id')).toEqual('my-custom-id');
     });
+
+    it('should set step attribute only for number type', () => {
+      const inputElement = getElement(fixture, 'input');
+
+      fixture.componentRef.setInput('type', 'text');
+      fixture.componentRef.setInput('step', 0.1);
+      fixture.detectChanges();
+      expect(inputElement.getAttribute('step')).toEqual(null);
+
+      fixture.componentRef.setInput('type', 'number');
+      fixture.componentRef.setInput('step', 0.1);
+      fixture.detectChanges();
+      expect(inputElement.getAttribute('step')).toEqual('0.1');
+    });
+
+    it('should increment according to step attribute', () => {
+      fixture.componentRef.setInput('type', 'number');
+      fixture.componentRef.setInput('step', 0.01);
+      fixture.componentRef.setInput('control', new FormControl(1 as any));
+      fixture.detectChanges();
+
+      const inputElement = getElement(fixture, 'input') as HTMLInputElement;
+      expect(inputElement.getAttribute('step')).toEqual('0.01');
+      expect(Number.parseFloat(inputElement.value)).toEqual(1);
+
+      inputElement.stepUp();
+      expect(Number.parseFloat(inputElement.value)).toEqual(1.01);
+    });
   });
 
   describe('Control', () => {
