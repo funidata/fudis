@@ -38,9 +38,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [placeholder]="'Choose a pet'"
               [control]="control"
               [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -69,9 +67,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [placeholder]="'Choose a pet'"
               [control]="control"
               [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -101,9 +97,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [placeholder]="'Choose a pet'"
               [control]="control"
               [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -133,9 +127,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [placeholder]="'Choose a pet'"
               [control]="control"
               [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -164,9 +156,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [placeholder]="'Choose a pet'"
               [control]="control"
               [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -196,9 +186,7 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               [placeholder]="'Choose a pet'"
               [control]="control"
               [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
