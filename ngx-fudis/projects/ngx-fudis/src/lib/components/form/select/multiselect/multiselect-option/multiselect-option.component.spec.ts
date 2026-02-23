@@ -32,11 +32,9 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
     [control]="control"
   >
     <ng-template fudisSelectOptions>
-      <fudis-multiselect-option
-        *ngFor="let option of multiOptions"
-        #multiOption
-        [data]="option"
-      ></fudis-multiselect-option>
+      @for (option of multiOptions; track option) {
+        <fudis-multiselect-option #multiOption [data]="option"></fudis-multiselect-option>
+      }
     </ng-template>
   </fudis-multiselect>`,
 })

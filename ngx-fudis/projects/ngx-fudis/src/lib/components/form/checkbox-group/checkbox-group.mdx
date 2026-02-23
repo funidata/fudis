@@ -56,10 +56,12 @@ myOptions = [
   [formGroup]="myFormGroup"
   [label]="'Select contact method'"
   (handleChange)="handleChange($event)">
-  <fudis-checkbox-group-option *ngFor="let option of myOptions"
-    [controlName]="option.controlName
-    [label]="option.label"
-    (handleChange)="checkboxChange($event)" />
+  @for (option of myOptions; track option) {
+    <fudis-checkbox-group-option
+      [controlName]="option.controlName"
+      [label]="option.label"
+      (handleChange)="checkboxChange($event)" />
+    }
 </fudis-checkbox-group>
 ```
 

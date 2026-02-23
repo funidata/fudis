@@ -26,11 +26,9 @@ import { FieldsetContentDirective } from '../../fieldset/fieldset-content.direct
     [label]="'Choose a pet'"
     [control]="testControl"
   >
-    <fudis-radio-button
-      *ngFor="let option of _options"
-      [label]="option.label"
-      [value]="option.value"
-    />
+    @for (option of _options; track option) {
+      <fudis-radio-button [label]="option.label" [value]="option.value" />
+    }
   </fudis-radio-button-group>`,
 })
 class MockComponent {

@@ -36,11 +36,9 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
     [size]="'md'"
   >
     <ng-template fudisSelectOptions>
-      <fudis-select-option
-        *ngFor="let option of testOptions"
-        [data]="option"
-        (handleBlur)="handleOptionBlur($event)"
-      />
+      @for (option of testOptions; track option) {
+        <fudis-select-option [data]="option" (handleBlur)="handleOptionBlur($event)"></fudis-select-option>
+      }
       <fudis-select-option #selectOption [data]="optionWithSubLabel" />
     </ng-template>
   </fudis-select>`,

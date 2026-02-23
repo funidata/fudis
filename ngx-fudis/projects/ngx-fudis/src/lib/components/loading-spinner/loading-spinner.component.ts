@@ -35,7 +35,7 @@ export class LoadingSpinnerComponent {
   @Input() statusMessage: string | null;
 
   /**
-   * For variant 'lg' and better screen reader experience, instead of using *ngIf for displaying
+   * For variant 'lg' and better screen reader experience, instead of using `@if` for displaying
    * component, set this property true when loading is in progress and false, when loading is not in
    * progress. This will trigger screen reader `statusMessage` properties accordingly.
    */

@@ -105,16 +105,15 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        <fudis-multiselect-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-multiselect-option>
-        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-multiselect-option>
+        @for (option of defaultOptions; track option) {
+        <fudis-multiselect-option [data]="option"></fudis-multiselect-option>
+        } @for (group of groupedMockData; track group) {
+        <fudis-multiselect-group [label]="group.country">
+          @for (groupedOption of group.options; track groupedOption) {
+          <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
+          }
         </fudis-multiselect-group>
+        }
       </ng-template>
     </fudis-multiselect>
   `,

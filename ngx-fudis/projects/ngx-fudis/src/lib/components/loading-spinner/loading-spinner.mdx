@@ -32,7 +32,7 @@ Application should determine case by case, if use of Loading Spinner would make 
 
 ### Full Page
 
-- **IMPORTANT**: Instead of using `<fudis-loading-spinner *ngIf="appLoading"/>` use `<fudis-loading-spinner [visible]="appLoading"/>`. This will help screen reader users, as component exists in DOM although it is not visually visible.
+- **IMPORTANT**: Instead of using `@if (appLoading) { <fudis-loading-spinner /> }` use `<fudis-loading-spinner [visible]="appLoading"/>`. This will help screen reader users, as component exists in DOM although it is not visually visible.
 - Use larger `variant` of `lg`
 - Component communicates its loading status for screen reader. With variant `lg` component automatically communicates status messages '_Page is loading_' and '_Page load finished_'. This can be overriden by app using `statusMessage` property.
 - After loading is finished, user focus should be where initially intended after page load, e. g. in the `h1` title element. If focus is manually changed by the Application, there should be small delay before focus, so that screen reader has time to announce '_Page load finished_' status.

@@ -38,12 +38,13 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
       [size]="size"
     >
       <ng-template fudisSelectOptions>
-        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          />
-        </fudis-multiselect-group>
+        @for (group of groupedData; track group) {
+          <fudis-multiselect-group [label]="group.country">
+            @for (groupedOption of group.options; track groupedOption) {
+              <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
+            }
+          </fudis-multiselect-group>
+        }
       </ng-template>
     </fudis-multiselect>
     <fudis-multiselect
@@ -58,12 +59,13 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
       [selectionClearButton]="clearButton"
     >
       <ng-template fudisSelectOptions>
-        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          />
-        </fudis-multiselect-group>
+        @for (group of groupedData; track group) {
+          <fudis-multiselect-group [label]="group.country">
+            @for (groupedOption of group.options; track groupedOption) {
+              <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
+            }
+          </fudis-multiselect-group>
+        }
       </ng-template>
     </fudis-multiselect>`,
 })

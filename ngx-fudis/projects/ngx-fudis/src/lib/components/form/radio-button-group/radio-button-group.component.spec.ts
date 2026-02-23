@@ -31,11 +31,9 @@ import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive
     (handleChange)="handleRadioButtonClick($event)"
   >
     <p class="do-not-find-me">This should not be shown</p>
-    <fudis-radio-button
-      *ngFor="let option of options"
-      [label]="option.label"
-      [value]="option.value"
-    />
+    @for (option of options; track option) {
+      <fudis-radio-button [label]="option.label" [value]="option.value" />
+    }
   </fudis-radio-button-group>`,
 })
 class MockContainerComponent {

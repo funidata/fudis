@@ -89,9 +89,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     />
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
     <example-language-change-component />
   `,
 });
@@ -119,9 +119,9 @@ const PreselectedTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 
@@ -148,9 +148,9 @@ const DisabledTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 
@@ -186,9 +186,9 @@ const MinMaxTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 

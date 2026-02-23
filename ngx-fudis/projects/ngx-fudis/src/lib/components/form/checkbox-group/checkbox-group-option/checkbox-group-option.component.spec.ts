@@ -33,11 +33,9 @@ type TestForm = {
     [formGroup]="testFromGroup"
     [label]="'Choose minimum of one fruit'"
   >
-    <fudis-checkbox-group-option
-      *ngFor="let option of _options"
-      [controlName]="option.controlName"
-      [label]="option.label"
-    />
+    @for (option of _options; track option) {
+      <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
+    }
   </fudis-checkbox-group>`,
 })
 class MockContainerComponent {

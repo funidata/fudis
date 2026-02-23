@@ -42,11 +42,9 @@ const ExampleTestTemplate: StoryFn = (args) => ({
     [popoverTriggerLabel]="popoverTriggerLabel"
     (handleChange)="handleChange($event)"
   >
-    <fudis-radio-button
-      *ngFor="let option of fruitOptions"
-      [label]="option.label"
-      [value]="option.value"
-    >
+    @for (option of fruitOptions; track option) {
+      <fudis-radio-button [label]="option.label" [value]="option.value" />
+    }
     </fudis-radio-button>
   </fudis-radio-button-group>`,
 });

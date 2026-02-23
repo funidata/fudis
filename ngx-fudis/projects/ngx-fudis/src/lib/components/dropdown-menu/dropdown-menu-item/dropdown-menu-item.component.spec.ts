@@ -21,13 +21,10 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
     [asMenuButton]="true"
   >
     <fudis-dropdown-menu>
-      <fudis-dropdown-menu-item
-        *ngFor="let item of testItems"
-        #testMenuItem
-        [label]="item.label"
-        [disabled]="item.disabled"
-      >
-      </fudis-dropdown-menu-item>
+      @for (item of testItems; track item) {
+        <fudis-dropdown-menu-item #testMenuItem [label]="item.label" [disabled]="item.disabled">
+        </fudis-dropdown-menu-item>
+      }
     </fudis-dropdown-menu>
   </fudis-icon-button>`,
 })
