@@ -19,12 +19,12 @@
 .fudis-dialog--scrollable {
   .fudis-dialog-content:has(.fudis-form) {
     .fudis-form__content-wrapper {
-      padding-right: core.$spacing-sm !important;
+      padding: core.$spacing-xxs core.$spacing-sm core.$spacing-xxs core.$spacing-xxs !important;
     }
   }
 
   .fudis-dialog-content:not(:has(.fudis-form)) {
-    padding-right: core.$spacing-sm !important;
+    padding: core.$spacing-xxs core.$spacing-sm core.$spacing-xxs core.$spacing-xxs !important;
   }
 }
 
@@ -71,7 +71,6 @@
 
       .mat-mdc-dialog-content {
         @include core.box-reset;
-
         /* stylelint-disable-next-line property-disallowed-list */
         line-height: core.$body-text-md-line-height;
         letter-spacing: normal;
@@ -104,6 +103,11 @@
         }
       }
 
+      /* Necessary padding for content, otherwise it's visible focus is cropped */
+      .mat-mdc-dialog-content:not(:has(.fudis-form)) {
+        padding: core.$spacing-xxs;
+      }
+
       /* Styles and overrides for Form inside Dialog */
       .mat-mdc-dialog-content:has(.fudis-form) {
         /* Originally overflow auto is set in dialog-content wrapper but since the HTML structure is different in Form, we have to override it and set it correctly in fudis-form__content-wrapper below */
@@ -117,8 +121,9 @@
 
         /* Make Form content scrollable when inside Dialog */
         .fudis-form__content-wrapper {
-          /* Necessary padding for content if ErrorSummary appears, otherwise its visible focus is cropped from the top */
-          padding: core.$spacing-xxs core.$spacing-xxs 0 core.$spacing-xxs;
+          /* Necessary padding for form content */
+          /* Note! Form dialog content focus will be cropped for all content that is used outside of fudis-form */
+          padding: core.$spacing-xxs;
 
           /* These styles can be found in MatDialogContent directive which enables scrollable content */
           max-height: 65vh;
