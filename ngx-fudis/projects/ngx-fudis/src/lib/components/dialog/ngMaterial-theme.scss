@@ -121,8 +121,7 @@
 
         /* Make Form content scrollable when inside Dialog */
         .fudis-form__content-wrapper {
-          /* Necessary padding for form content */
-          /* Note! Form dialog content focus will be cropped for all content that is used outside of fudis-form */
+          /* Necessary padding for form content Note! Form dialog content focus will be cropped for all content that is used outside of fudis-form */
           padding: core.$spacing-xxs;
 
           /* These styles can be found in MatDialogContent directive which enables scrollable content */
