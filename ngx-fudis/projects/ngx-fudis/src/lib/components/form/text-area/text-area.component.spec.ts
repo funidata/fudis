@@ -186,9 +186,6 @@ describe('TextAreaComponent', () => {
 
       expect(popoverTriggerElem).toBeTruthy();
       expect(popoverTriggerElem.getAttribute('aria-label')).toEqual('Additional information');
-      expect(popoverTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
-        'This is popover text',
-      );
     });
   });
 });

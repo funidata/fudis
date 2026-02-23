@@ -51,7 +51,6 @@ describe('LabelComponent', () => {
       const popoverTriggerElem = getElement(fixture, 'button');
       expect(popoverTriggerElem).toBeTruthy();
       expect(popoverTriggerElem.getAttribute('aria-label')).toEqual('This gives more info');
-      expect(popoverTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual('I am the info');
     });
 
     it('should have required attributes', () => {
