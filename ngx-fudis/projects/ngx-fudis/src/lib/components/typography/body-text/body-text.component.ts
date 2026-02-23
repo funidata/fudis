@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   Input,
@@ -19,12 +20,11 @@ import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/bre
  * Use this component to render paragraphs or informational text with consistent typography and
  * spacing. Use clear, simple, and inclusive language.
  */
-// TODO: When this component has been converted to standalone, LoadingSpinnerComponent can be added to NgxFudisModule.
 @Component({
   selector: 'fudis-body-text',
+  imports: [CommonModule],
   templateUrl: './body-text.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class BodyTextComponent implements OnChanges {
   constructor(

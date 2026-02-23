@@ -53,7 +53,6 @@ describe('FieldSetComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BodyTextComponent,
         FieldsetActionsDirective,
         FieldsetContentDirective,
         FieldSetComponent,
@@ -66,7 +65,7 @@ describe('FieldSetComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     }).compileComponents();
 

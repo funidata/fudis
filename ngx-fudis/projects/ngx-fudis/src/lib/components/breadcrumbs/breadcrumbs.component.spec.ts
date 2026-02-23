@@ -32,13 +32,8 @@ describe('BreadcrumbsComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [
-        BreadcrumbsComponent,
-        BreadcrumbsItemComponent,
-        BodyTextComponent,
-        MockComponent,
-      ],
-      imports: [IconComponent, RouterModule.forRoot([])],
+      declarations: [BreadcrumbsComponent, BreadcrumbsItemComponent, MockComponent],
+      imports: [BodyTextComponent, IconComponent, RouterModule.forRoot([])],
     });
 
     fixture = TestBed.createComponent(MockComponent);

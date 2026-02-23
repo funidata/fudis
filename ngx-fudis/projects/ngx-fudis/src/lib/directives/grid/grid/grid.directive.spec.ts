@@ -27,13 +27,8 @@ describe('GridDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        HostComponent,
-        GridApiDirective,
-        GridDirective,
-        HeadingComponent,
-        BodyTextComponent,
-      ],
+      declarations: [HostComponent, GridApiDirective, GridDirective, HeadingComponent],
+      imports: [BodyTextComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { NgxFudisModule } from '../../ngx-fudis.module';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 
 /**
  * Indicates a loading or processing state.
@@ -10,7 +10,7 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
  */
 @Component({
   selector: 'fudis-loading-spinner',
-  imports: [CommonModule, NgxFudisModule],
+  imports: [CommonModule, BodyTextComponent],
   templateUrl: './loading-spinner.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

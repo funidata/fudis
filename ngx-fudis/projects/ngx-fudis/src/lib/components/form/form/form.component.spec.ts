@@ -129,7 +129,6 @@ describe('FormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AlertGroupComponent,
-        BodyTextComponent,
         DialogComponent,
         DialogContentDirective,
         DialogTitleDirective,
@@ -150,7 +149,13 @@ describe('FormComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [BadgeComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [
+        BadgeComponent,
+        BodyTextComponent,
+        IconButtonComponent,
+        IconComponent,
+        ReactiveFormsModule,
+      ],
       providers: [
         FudisAlertService,
         FudisBreakpointService,
