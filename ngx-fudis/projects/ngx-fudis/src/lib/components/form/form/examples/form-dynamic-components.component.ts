@@ -42,9 +42,7 @@ type MyForm = {
       [level]="1"
       [title]="'Example With Dynamic Validators'"
       [titleVariant]="'xl'"
-      [errorSummaryTitle]="
-        'There are errors in this form. Please address these before trying to submit again.'
-      "
+      [errorSummaryTitle]="'There are errors in this form. Please address these before trying to submit again.'"
       [errorSummaryVisible]="false"
     >
       <fudis-form-actions>
