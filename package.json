@@ -26,7 +26,7 @@
   "author": "Funidata Ltd",
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
-    "prettier": "^3.7.4"
+    "prettier": "^3.8.1"
   },
   "dependencies": {
     "prettier-plugin-jsdoc": "^1.8.0"
