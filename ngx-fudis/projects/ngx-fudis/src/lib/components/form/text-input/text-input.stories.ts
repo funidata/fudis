@@ -45,9 +45,7 @@ import { fudisInputSizeArray } from '../../../types/forms';
       <fudis-text-input
         [control]="mainFormGroup.controls['number']"
         [label]="'Number input'"
-        [helpText]="
-          'Be mindful that allowed numbers are between 10 and 99. The step value is set to 0.01.'
-        "
+        [helpText]="'Be mindful that allowed numbers are between 10 and 99. The step value is set to 0.01.'"
         [type]="'number'"
         [step]="0.01"
         [size]="'sm'"
