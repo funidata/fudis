@@ -1,11 +1,10 @@
+<!-- prettier-ignore -->
 <label #labelElementRef class="fudis-label" [attr.for]="for" [id]="id">
   <div class="fudis-label__content"
     ><span class="fudis-label__content__text"
-      >{{ text }}
-      @if (required) {
+      >{{ text }}@if (required) {
         <span class="fudis-label__content__space"></span>
-      }
-      @if (required) {
+      }@if (required) {
         <span class="fudis-label__content__required"
           >({{ _translationService.getTranslations()().REQUIRED }})</span
         >

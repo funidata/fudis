@@ -84,7 +84,7 @@ describe('ValidatorErrorMessageComponent', () => {
       const labelText = textInputLabel.nativeElement.textContent;
 
       expect(inputId).toEqual('test-id');
-      expect(labelText).toEqual('Test Label (Required)');
+      expect(labelText).toEqual('Test Label(Required)');
     });
 
     it('should pass Fudis Validator message to Validator Error Message', () => {
