@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-
 import { fudisIconArray } from '../../lib/types/icons';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
+import { LoadingSpinnerComponent } from '../../lib/components/loading-spinner/loading-spinner.component';
 
 @Component({
   imports: [LoadingSpinnerComponent, NgxFudisModule],

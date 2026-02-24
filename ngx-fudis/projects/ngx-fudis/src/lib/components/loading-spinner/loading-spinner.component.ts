@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { BodyTextComponent } from '../typography/body-text/body-text.component';
+import { NgxFudisModule } from '../../ngx-fudis.module';
 
 /**
  * Indicates a loading or processing state.
