@@ -130,7 +130,7 @@ describe('Basic inputs of Radio Button Group', () => {
     ) as HTMLElement;
 
     expect(groupHelpText.getAttribute('aria-hidden')).toBeNull();
-    expect(groupHelpText.textContent).toEqual(helpText.textContent);
+    expect(groupHelpText.textContent.trim()).toEqual(helpText.textContent.trim());
   });
 
   it('should display required text', () => {
@@ -192,7 +192,7 @@ describe('Basic inputs of Radio Button Group', () => {
       radioArray.forEach((radio) => {
         const radioName = radio
           .query(By.css('.fudis-radio-button__input'))
-          .nativeElement.getAttribute('ng-reflect-name');
+          .nativeElement.getAttribute('name');
         expect(radioName).toEqual(radioGroupId);
       });
     });

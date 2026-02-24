@@ -152,7 +152,7 @@ describe('LocalizedTextGroupComponent', () => {
       it(`should have correct help text`, () => {
         const helpText = getElement(fixture, '.fudis-guidance__help-text').textContent;
 
-        expect(helpText).toEqual(values.helpText);
+        expect(helpText.trim()).toEqual(values.helpText);
       });
 
       it(`should have correct id`, () => {

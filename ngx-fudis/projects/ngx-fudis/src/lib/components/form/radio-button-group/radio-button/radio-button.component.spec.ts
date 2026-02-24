@@ -77,9 +77,8 @@ describe('RadioButtonComponent', () => {
 
   describe('Basic inputs and styles', () => {
     it('should have correct label', () => {
-      const radioButton = fixture.nativeElement.querySelector(
-        '#radio-button-test-group [ng-reflect-value="capybara"]',
-      );
+      const groupOptions = fixture.nativeElement.querySelectorAll('fudis-radio-button');
+      const radioButton = groupOptions[2]; // capybara
 
       const label = radioButton.querySelector('.fudis-radio-button__label') as HTMLElement;
 

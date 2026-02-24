@@ -170,7 +170,7 @@ describe('CheckboxGroupComponent', () => {
       ) as HTMLElement;
 
       expect(groupHelpText.getAttribute('aria-hidden')).toBeNull();
-      expect(groupHelpText.textContent).toEqual(helpText.textContent);
+      expect(groupHelpText.textContent.trim()).toEqual(helpText.textContent.trim());
     });
 
     it('should display required text', () => {
@@ -292,15 +292,9 @@ describe('CheckboxGroupComponent', () => {
 
       it('should display error, when too many selected', () => {
         mockComponent.testFromGroup.markAllAsTouched();
-        const appleInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox-group-option[ng-reflect-control-name="apple"] input',
-        );
-        const bananaInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox-group-option[ng-reflect-control-name="fairTradeBanana"] input',
-        );
-        const orangeInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox-group-option[ng-reflect-control-name="orange"] input',
-        );
+        const appleInput = fixture.nativeElement.querySelector('#group-id-item-1');
+        const bananaInput = fixture.nativeElement.querySelector('#group-id-item-2');
+        const orangeInput = fixture.nativeElement.querySelector('#group-id-item-5');
 
         appleInput.click();
         bananaInput.click();

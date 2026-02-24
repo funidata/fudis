@@ -215,7 +215,7 @@ describe('SelectBaseDirective', () => {
 
       const noResultsElement = getElement(fixture, '.fudis-select-dropdown__help-text__last');
 
-      expect(noResultsElement.textContent).toEqual(customText);
+      expect(noResultsElement.textContent.trim()).toEqual(customText);
     });
 
     it('autocompleteFilter false should not filter results', () => {
@@ -263,15 +263,17 @@ describe('SelectBaseDirective', () => {
 
     it('autocompleteHelpText', () => {
       component.multiSelectAuto.openDropdown();
-
       fixture.detectChanges();
 
-      const dropdownElementAttribute = getElement(
-        fixture,
-        '#fudis-multiselect-2-main-wrapper fudis-select-dropdown',
-      ).getAttribute('ng-reflect-autocomplete-help-text');
+      component.multiSelectAuto.setAutocompleteFilterText('a');
+      fixture.detectChanges();
 
-      expect(dropdownElementAttribute).toEqual('This is autocomplete help text');
+      const dropdownElementHelpText = getElement(
+        fixture,
+        '#fudis-multiselect-2-main-wrapper fudis-select-dropdown fudis-body-text p',
+      );
+
+      expect(dropdownElementHelpText.textContent.trim()).toEqual('This is autocomplete help text');
     });
 
     it('should show sorted selected options as form input value for both input sharing the same control', async () => {
