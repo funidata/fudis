@@ -1,5 +1,5 @@
 <ul #chipListRef class="fudis-multiselect-chip-list" [attr.id]="parentId + '-selected-items'">
-  @for (item of selectedItems; track item; let index = $index) {
+  @for (item of selectedItems; track item.value; let index = $index) {
     <li
       class="fudis-multiselect-chip-list__item"
       >

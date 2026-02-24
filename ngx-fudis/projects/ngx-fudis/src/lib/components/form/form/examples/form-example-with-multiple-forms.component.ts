@@ -120,7 +120,7 @@ interface MyCheckboxGroup {
                   [label]="'Pick a fruit'"
                   [formGroup]="allForms.controls.formThree"
                   >
-                  @for (control of allForms.controls.formThree.controls | keyvalue; track control) {
+                  @for (control of allForms.controls.formThree.controls | keyvalue; track control.key) {
                     <fudis-checkbox-group-option
                       [controlName]="control.key"
                       [label]="control.key"
@@ -156,7 +156,7 @@ interface MyCheckboxGroup {
                   [label]="'Pick a fruit'"
                   [control]="allForms.controls.formFive"
                   >
-                  @for (option of radioOptions; track option) {
+                  @for (option of radioOptions; track option.value) {
                     <fudis-radio-button
                       [label]="option.label"
                       [value]="option.value"
@@ -195,7 +195,7 @@ interface MyCheckboxGroup {
                       [control]="allForms.controls.formFour.controls.select"
                       >
                       <ng-template fudisSelectOptions>
-                        @for (option of selectOptions; track option) {
+                        @for (option of selectOptions; track option.value) {
                           <fudis-select-option [data]="option" />
                         }
                       </ng-template>
@@ -205,7 +205,7 @@ interface MyCheckboxGroup {
                       [control]="allForms.controls.formFour.controls.multiselect"
                       >
                       <ng-template fudisSelectOptions>
-                        @for (option of selectOptions; track option) {
+                        @for (option of selectOptions; track option.value) {
                           <fudis-multiselect-option
                             [data]="option"
                             />

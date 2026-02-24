@@ -13,7 +13,7 @@ import { getElement } from '../../utilities/tests/utilities';
   selector: 'fudis-mock-component',
   template: `<fudis-breadcrumbs [label]="'Test breadcrumbs navigation'">
     <p class="do-not-find-me">This should not be shown</p>
-    @for (link of links; track link; let index = $index) {
+    @for (link of links; track link.url; let index = $index) {
       <fudis-breadcrumbs-item>
         @if (index + 1 !== links.length) {
           <a [href]="link.url">{{ link.label }}</a>

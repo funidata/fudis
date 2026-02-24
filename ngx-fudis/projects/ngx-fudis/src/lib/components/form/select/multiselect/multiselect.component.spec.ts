@@ -34,7 +34,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
     [helpText]="'Multiselect help text'"
   >
     <ng-template fudisSelectOptions>
-      @for (option of options; track option) {
+      @for (option of options; track option.value) {
         <fudis-multiselect-option [data]="option"></fudis-multiselect-option>
       }
     </ng-template>

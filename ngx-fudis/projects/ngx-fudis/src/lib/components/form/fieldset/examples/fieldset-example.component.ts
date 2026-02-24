@@ -62,7 +62,7 @@ interface MyFieldsetForm {
               [label]="'Course type'"
               [control]="fieldsetExample.controls['courseType']"
               >
-              @for (option of courseTypeOptions; track option) {
+              @for (option of courseTypeOptions; track option.value) {
                 <fudis-radio-button
                   [label]="option.label"
                   [value]="option.value"

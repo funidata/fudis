@@ -38,9 +38,9 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
       [size]="size"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedData; track group) {
+        @for (group of groupedData; track group.country) {
           <fudis-multiselect-group [label]="group.country">
-            @for (groupedOption of group.options; track groupedOption) {
+            @for (groupedOption of group.options; track groupedOption.value) {
               <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
             }
           </fudis-multiselect-group>
@@ -59,9 +59,9 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
       [selectionClearButton]="clearButton"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedData; track group) {
+        @for (group of groupedData; track group.country) {
           <fudis-multiselect-group [label]="group.country">
-            @for (groupedOption of group.options; track groupedOption) {
+            @for (groupedOption of group.options; track groupedOption.value) {
               <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
             }
           </fudis-multiselect-group>

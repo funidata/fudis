@@ -180,7 +180,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
           [label]="'One Required Group Validator'"
           [formGroup]="checkboxGroupOneRequired.formGroup"
         >
-          @for (option of checkboxGroupOneRequired.options; track option) {
+          @for (option of checkboxGroupOneRequired.options; track option.controlName) {
           <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
           }
         </fudis-checkbox-group>
@@ -189,7 +189,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         [label]="'Min Group Validator'"
         [formGroup]="checkboxGroupMin.formGroup"
       >
-        @for (option of checkboxGroupMin.options; track option) {
+        @for (option of checkboxGroupMin.options; track option.controlName) {
         <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
         }
       </fudis-checkbox-group>
@@ -197,7 +197,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         [label]="'Max Group Validator'"
         [formGroup]="checkboxGroupMax.formGroup"
       >
-        @for (option of checkboxGroupMax.options; track option) {
+        @for (option of checkboxGroupMax.options; track option.controlName) {
         <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
         }
       </fudis-checkbox-group>

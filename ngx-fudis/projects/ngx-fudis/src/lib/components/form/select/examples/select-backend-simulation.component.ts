@@ -43,7 +43,7 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
               >
               <ng-template fudisSelectOptions>
                 @if (searchResults | async; as options) {
-                  @for (option of options; track option) {
+                  @for (option of options; track option.value) {
                     <fudis-select-option [data]="option"></fudis-select-option>
                   }
                   }</ng-template

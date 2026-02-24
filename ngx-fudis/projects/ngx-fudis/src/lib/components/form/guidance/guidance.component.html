@@ -22,9 +22,9 @@
         Check errors for each control FormGroup e. g. english, finnish, swedish
         -->
         @if (formGroup?.controls && !control && !formGroup?.errors) {
-          @for (singleControl of formGroup?.controls | keyvalue; track singleControl) {
+          @for (singleControl of formGroup?.controls | keyvalue; track singleControl.key) {
             @if (singleControl.value.errors) {
-              @for (error of singleControl.value.errors | keyvalue; track error) {
+              @for (error of singleControl.value.errors | keyvalue; track error.key) {
                 @if (error.value.message) {
                   <fudis-validator-error-message
                     (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
@@ -48,7 +48,7 @@
         Check parent level errors of FormGroup e. g. oneRequired
         -->
         @if (formGroup?.errors && formGroup?.invalid) {
-          @for (error of formGroup?.errors | keyvalue; track error) {
+          @for (error of formGroup?.errors | keyvalue; track error.key) {
             @if (error.value?.message) {
               <fudis-validator-error-message
                 (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
@@ -67,7 +67,7 @@
         Check errors for single FormControl e. g. single text-input with maxlength error
         -->
         @if (control?.errors && !formGroup) {
-          @for (error of control.errors | keyvalue; track error) {
+          @for (error of control.errors | keyvalue; track error.key) {
             @if (error.value?.message) {
               <fudis-validator-error-message
                 (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
@@ -108,7 +108,7 @@
     </small>
   }
   @if (formGroup?.controls && !control && maxLength) {
-    @for (singleControl of formGroup?.controls | keyvalue; track singleControl) {
+    @for (singleControl of formGroup?.controls | keyvalue; track singleControl.key) {
       @if (singleControl.key === selectedOption) {
         <small
         class="fudis-guidance__character-limit-indicator fudis-guidance__character-limit-indicator__{{

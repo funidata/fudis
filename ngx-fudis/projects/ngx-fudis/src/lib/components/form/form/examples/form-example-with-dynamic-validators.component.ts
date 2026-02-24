@@ -220,7 +220,7 @@ type MyForm = {
                   [label]="'Select your favorite sport'"
                   [control]="formExample.controls.sport"
                   >
-                  @for (sport of sportOptions; track sport) {
+                  @for (sport of sportOptions; track sport.value) {
                     <fudis-radio-button
                       [label]="sport.label"
                       [value]="sport.value"

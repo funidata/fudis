@@ -33,7 +33,7 @@ type TestForm = {
     [formGroup]="testFromGroup"
     [label]="'Choose minimum of one fruit'"
   >
-    @for (option of _options; track option) {
+    @for (option of _options; track option.controlName) {
       <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
     }
   </fudis-checkbox-group>`,

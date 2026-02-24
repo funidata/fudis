@@ -3,7 +3,7 @@
     class="fudis-alert-group fudis-alert-group__{{ position }}"
     [attr.aria-label]="alerts.length > 0 ? (_alertGroupLabel | async) + ': ' + alerts.length : null"
     >
-    @for (alert of alerts; track alert) {
+    @for (alert of alerts; track alert.id) {
       <fudis-alert
         [variant]="alert.type"
         [message]="alert.message"

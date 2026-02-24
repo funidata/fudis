@@ -54,7 +54,7 @@ export const gradeOptions: FudisSelectOption[] = [
               [variant]="'dropdown'"
               >
               <ng-template fudisSelectOptions>
-                @for (option of gradeOptions; track option) {
+                @for (option of gradeOptions; track option.value) {
                   <fudis-select-option
                     [data]="option"
                   ></fudis-select-option>

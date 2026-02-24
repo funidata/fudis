@@ -103,7 +103,7 @@ const ExampleTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    @for (option of options; track option) {
+    @for (option of options; track option.controlName) {
     <fudis-checkbox-group-option
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
@@ -158,7 +158,7 @@ const ExampleWithDisabledTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    @for (option of options; track option) {
+    @for (option of options; track option.controlName) {
     <fudis-checkbox-group-option
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
@@ -218,7 +218,7 @@ const ExampleWithMinMaxTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    @for (option of options; track option) {
+    @for (option of options; track option.controlName) {
     <fudis-checkbox-group-option
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"

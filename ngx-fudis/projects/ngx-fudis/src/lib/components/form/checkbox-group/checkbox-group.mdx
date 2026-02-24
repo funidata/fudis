@@ -56,7 +56,7 @@ myOptions = [
   [formGroup]="myFormGroup"
   [label]="'Select contact method'"
   (handleChange)="handleChange($event)">
-  @for (option of myOptions; track option) {
+  @for (option of myOptions; track option.controlName) {
     <fudis-checkbox-group-option
       [controlName]="option.controlName"
       [label]="option.label"

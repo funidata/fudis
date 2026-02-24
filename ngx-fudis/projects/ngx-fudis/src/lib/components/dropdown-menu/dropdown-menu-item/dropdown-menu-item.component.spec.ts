@@ -21,7 +21,7 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
     [asMenuButton]="true"
   >
     <fudis-dropdown-menu>
-      @for (item of testItems; track item) {
+      @for (item of testItems; track item.label) {
         <fudis-dropdown-menu-item #testMenuItem [label]="item.label" [disabled]="item.disabled">
         </fudis-dropdown-menu-item>
       }

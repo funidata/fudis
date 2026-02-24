@@ -73,7 +73,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
           You don't have any favorite veggies!
         </fudis-body-text>
       }
-      @for (veggie of _favoriteVeggies | keyvalue; track veggie) {
+      @for (veggie of _favoriteVeggies | keyvalue; track veggie.key) {
         <fudis-body-text class="fudis-mb-sm">
           Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
           >.
@@ -148,7 +148,7 @@ export class ExampleNestedDialogComponent {
       />
     
     @if (_favourites) {
-      @for (veggie of _favourites | keyvalue; track veggie) {
+      @for (veggie of _favourites | keyvalue; track veggie.key) {
         <fudis-body-text class="fudis-mt-sm">
           Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
           >.

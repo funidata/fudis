@@ -42,7 +42,7 @@ type MyForm = {
                   [helpText]="'Berries are yummy'"
                   [formGroup]="testFormGroup.controls['checkboxFormGroup']"
                   >
-                  @for (option of checkboxOptions; track option) {
+                  @for (option of checkboxOptions; track option.controlName) {
                     <fudis-checkbox-group-option
                       [controlName]="option.controlName"
                       [label]="option.label"
@@ -58,7 +58,7 @@ type MyForm = {
                   [label]="'Choose the truth'"
                   [control]="testFormGroup.controls['truth']"
                   >
-                  @for (option of radioButtonOptions; track option) {
+                  @for (option of radioButtonOptions; track option.value) {
                     <fudis-radio-button
                       [label]="option.label"
                       [value]="option.value"
@@ -72,7 +72,7 @@ type MyForm = {
                   [control]="testFormGroup.controls['animals']"
                   >
                   <ng-template fudisSelectOptions>
-                    @for (option of multiOptions; track option) {
+                    @for (option of multiOptions; track option.value) {
                       <fudis-multiselect-option [data]="option" />
                     }
                   </ng-template>

@@ -28,7 +28,7 @@
                 [popoverTriggerLabel]="t('popoverAria')"
                 [formGroup]="testFormGroup.controls.checkboxFormGroup"
                 >
-                @for (option of checkboxOptions; track option) {
+                @for (option of checkboxOptions; track option.controlName) {
                   <fudis-checkbox-group-option
                     (handleChange)="handleChange($event)"
                     [controlName]="option.controlName!"
@@ -61,7 +61,7 @@
                 [helpText]="t('chooseTruthHelp')"
                 [control]="testFormGroup.controls.truth"
                 >
-                @for (option of radioButtonOptions; track option) {
+                @for (option of radioButtonOptions; track option.value) {
                   <fudis-radio-button
                     [label]="option.label"
                     [value]="option.value"
@@ -102,7 +102,7 @@
             [control]="selectForm.controls.translatedSelect"
             >
             <ng-template fudisSelectOptions>
-              @for (option of translatedSelectOptions; track option) {
+              @for (option of translatedSelectOptions; track option.value) {
                 <fudis-select-option [data]="option" />
               }
             </ng-template>
@@ -113,7 +113,7 @@
             [control]="selectForm.controls.translatedSelect"
             >
             <ng-template fudisSelectOptions>
-              @for (option of translatedSelectOptions; track option) {
+              @for (option of translatedSelectOptions; track option.value) {
                 <fudis-select-option [data]="option" />
               }
             </ng-template>
@@ -124,7 +124,7 @@
             [control]="selectForm.controls.translatedMultiselect"
             >
             <ng-template fudisSelectOptions>
-              @for (option of translatedSelectOptions; track option) {
+              @for (option of translatedSelectOptions; track option.value) {
                 <fudis-multiselect-option
                   [data]="option"
                   />
@@ -138,7 +138,7 @@
             [control]="selectForm.controls.autocompleteSearch"
             >
             <ng-template fudisSelectOptions>
-              @for (option of selectOptions; track option) {
+              @for (option of selectOptions; track option.value) {
                 <fudis-multiselect-option [data]="option" />
               }
             </ng-template>

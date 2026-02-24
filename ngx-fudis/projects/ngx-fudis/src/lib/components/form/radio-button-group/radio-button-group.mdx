@@ -48,7 +48,7 @@ const fruitOptions: FudisRadioButtonOption<object>[] = [
     [label]="'Pick a fruit'"
     (handleChange)="handleChange($event)"
   >
-    @if (option of fruitOptions; track option) {
+    @if (option of fruitOptions; track option.value) {
       <fudis-radio-button [label]="option.label" [value]="option.value" />
     }
   </fudis-radio-button-group>

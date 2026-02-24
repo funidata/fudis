@@ -12,7 +12,7 @@ import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
       [variant]="variant"
       [panel]="navigationTabPanel"
       >
-      @for (tab of tabs; track tab) {
+      @for (tab of tabs; track tab.id) {
         <button
           fudis-tab-navigation-tab
           (click)="setLink(tab.link)"

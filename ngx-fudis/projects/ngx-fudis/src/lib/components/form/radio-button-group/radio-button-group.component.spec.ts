@@ -31,7 +31,7 @@ import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive
     (handleChange)="handleRadioButtonClick($event)"
   >
     <p class="do-not-find-me">This should not be shown</p>
-    @for (option of options; track option) {
+    @for (option of options; track option.value) {
       <fudis-radio-button [label]="option.label" [value]="option.value" />
     }
   </fudis-radio-button-group>`,

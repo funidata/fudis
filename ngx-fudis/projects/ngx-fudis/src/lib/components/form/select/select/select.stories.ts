@@ -88,11 +88,11 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        @for (option of defaultOptions; track option) {
+        @for (option of defaultOptions; track option.value) {
         <fudis-select-option [data]="option"></fudis-select-option>
-        } @for (group of groupedMockData; track group) {
+        } @for (group of groupedMockData; track group.country) {
         <fudis-select-group [label]="group.country">
-          @for (groupedOption of group.options; track groupedOption) {
+          @for (groupedOption of group.options; track groupedOption.value) {
           <fudis-select-option [data]="groupedOption"></fudis-select-option>
           }
         </fudis-select-group>

@@ -22,7 +22,7 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
           [asMenuButton]="true"
           >
           <fudis-dropdown-menu [align]="align" [size]="size">
-            @for (item of defaultMenuItems; track item) {
+            @for (item of defaultMenuItems; track item.label) {
               <fudis-dropdown-menu-item
                 [label]="item.label"
                 [disabled]="item.disabled"
@@ -43,11 +43,11 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
           [asMenuButton]="true"
           >
           <fudis-dropdown-menu [align]="align" [size]="size">
-            @for (group of smallDropdownMenuGroupedMockData; track group) {
+            @for (group of smallDropdownMenuGroupedMockData; track group.country) {
               <fudis-dropdown-menu-group
                 [label]="group.country"
                 >
-                @for (groupedItem of group.items; track groupedItem) {
+                @for (groupedItem of group.items; track groupedItem.label) {
                   <fudis-dropdown-menu-item
                     [label]="groupedItem.label"
                     [disabled]="groupedItem.disabled"

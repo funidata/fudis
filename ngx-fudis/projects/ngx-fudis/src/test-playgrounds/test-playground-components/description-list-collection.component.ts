@@ -7,7 +7,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
   imports: [NgxFudisModule],
   selector: 'example-description-list-collection',
   template: `
-    @for (gridConfig of gridConfigs; track gridConfig) {
+    @for (gridConfig of gridConfigs; track gridConfig.value) {
       @for (variant of variants; track variant.value) {
         <fudis-heading [level]="2" [variant]="'xl'"
           >Test cases for variant: {{ variant.title }} with Grid {{ gridConfig.title }}
@@ -17,7 +17,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
           >{{ variant.title }} Description List</fudis-heading
           >
           <fudis-dl [variant]="variant.value" [columns]="2" [disableGrid]="gridConfig.value">
-            @for (data of basicData; track data) {
+            @for (data of basicData; track data.dt) {
               <fudis-dl-item>
                 <fudis-dt [contentText]="data.dt"></fudis-dt>
                 <fudis-dd [contentText]="data.dd" [subHeading]="data.subHeading"></fudis-dd>
@@ -126,7 +126,7 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
                       >
                       <fudis-dl-item>
                         <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
-                        @for (item of multipleDDData; track item) {
+                        @for (item of multipleDDData; track item.value) {
                           <fudis-dd
                             [contentText]="item.value"
                             [subHeading]="item.subHeading"
@@ -180,14 +180,14 @@ import { FudisDescriptionListVariant } from '../../lib/types/miscellaneous';
                       </fudis-dl-item>
                     </fudis-dl>
     
-                    @for (gridConfig of gridConfigs; track gridConfig) {
+                    @for (gridConfig of gridConfigs; track gridConfig.value) {
                       <fudis-hr class="fudis-my-lg" />
                       <fudis-heading [level]="3" [variant]="'md'"
                         >Nested Compact Description Lists with Grid {{ gridConfig.title }} (no regular
                         support)</fudis-heading
                         >
                         <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="gridConfig.value" [columns]="2">
-                          @for (movie of indianaJonesData; track movie) {
+                          @for (movie of indianaJonesData; track movie.title) {
                             <fudis-dl-item>
                               <fudis-dt [contentText]="movie.title" />
                               <fudis-dd>

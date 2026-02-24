@@ -33,7 +33,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
     [size]="'md'"
   >
     <ng-template fudisSelectOptions>
-      @for (option of testOptions; track option) {
+      @for (option of testOptions; track option.value) {
         <fudis-select-option [data]="option"></fudis-select-option>
       }
     </ng-template>

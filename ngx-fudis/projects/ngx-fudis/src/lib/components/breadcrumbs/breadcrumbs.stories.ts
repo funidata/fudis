@@ -28,7 +28,7 @@ const Template: StoryFn = (args) => ({
   },
   template: html`
     <fudis-breadcrumbs [label]="label">
-    @for (link of links; track link; let index = $index) {
+    @for (link of links; track link.url; let index = $index) {
       <fudis-breadcrumbs-item>
         @if (index + 1 !== links.length) {
           <a [href]="link.url">{{ link.label }}</a>

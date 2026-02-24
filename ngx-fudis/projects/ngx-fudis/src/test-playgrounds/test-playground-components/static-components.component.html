@@ -90,7 +90,7 @@
     <fudis-hr class="fudis-my-md" />
     <fudis-heading [level]="2">Breadcrumbs</fudis-heading>
     <fudis-breadcrumbs [label]="'Breadcrumbs'">
-      @for (link of breadcrumbLinks; track link; let index = $index) {
+      @for (link of breadcrumbLinks; track link.url; let index = $index) {
         <fudis-breadcrumbs-item>
           @if (index + 1 !== breadcrumbLinks.length) {
             <a [href]="link.url">{{ link.label }}</a>

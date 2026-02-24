@@ -79,7 +79,7 @@ This example shows the usage with the `TabNavigationPanel`. Here `ariaControls`-
   [id]="'fudis-tab-navigation-1'"
   [variant]="'primary'"
   [panel]="navigationTabPanel">
-  @for (route of routes; track route) {
+  @for (route of routes; track route.id) {
   <button
     fudis-tab-navigation-tab
     (click)="change(route)"
@@ -105,7 +105,7 @@ First you create a `tab-navigation-bar` with the `aria-controls`-prop and add th
   [id]="'fudis-tab-navigation-1'"
   [aria-controls]="'tab-panel-1'"
   [variant]="'primary'"
-  @for (route of routes; track route) {
+  @for (route of routes; track route.id) {
   <button
     fudis-tab-navigation-tab
     (click)="change(route)"

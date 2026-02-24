@@ -42,10 +42,9 @@ const ExampleTestTemplate: StoryFn = (args) => ({
     [popoverTriggerLabel]="popoverTriggerLabel"
     (handleChange)="handleChange($event)"
   >
-    @for (option of fruitOptions; track option) {
+    @for (option of fruitOptions; track option.value) {
       <fudis-radio-button [label]="option.label" [value]="option.value" />
     }
-    </fudis-radio-button>
   </fudis-radio-button-group>`,
 });
 
@@ -69,7 +68,7 @@ Example.args = {
       [control]="control"
       (handleChange)="handleChange($event)"
       >
-      @for (option of petOptions; track option) {
+      @for (option of petOptions; track option.value) {
         <fudis-radio-button
           [label]="option.label"
           [value]="option.value"

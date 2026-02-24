@@ -60,7 +60,7 @@ type TestFormGroup = {
     (handleChange)="handleCheckboxClick($event)"
   >
     <p class="do-not-find-me">This should not be shown</p>
-    @for (option of options; track option) {
+    @for (option of options; track option.controlName) {
       <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
     }
   </fudis-checkbox-group>`,

@@ -26,7 +26,7 @@ import { FieldsetContentDirective } from '../../fieldset/fieldset-content.direct
     [label]="'Choose a pet'"
     [control]="testControl"
   >
-    @for (option of _options; track option) {
+    @for (option of _options; track option.value) {
       <fudis-radio-button [label]="option.label" [value]="option.value" />
     }
   </fudis-radio-button-group>`,
