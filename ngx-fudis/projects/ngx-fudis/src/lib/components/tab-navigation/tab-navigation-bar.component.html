@@ -2,16 +2,14 @@
   @if (_leftContentHidden()) {
     <div
       class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--left"
-      >
+    >
       <button
         [id]="id + '-scroll-button-left'"
         (click)="scrollLeft()"
         aria-hidden="true"
         tabindex="-1"
-      [class]="
-        'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--left'
-      "
-        >
+        [class]="'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--left'"
+      >
         <fudis-icon
           class="fudis-tab-navigation-bar__button-container__button__icon"
           rotate="flip-180"
@@ -27,23 +25,21 @@
         'fudis-tab-navigation-bar__wrapper__tab-container fudis-tab-navigation-bar__wrapper__tab-container--' +
         variant
       "
-      >
+    >
       <ng-content></ng-content>
     </div>
   </div>
   @if (_rightContentHidden()) {
     <div
       class="fudis-tab-navigation-bar__button-container fudis-tab-navigation-bar__button-container--right"
-      >
+    >
       <button
         [id]="id + '-scroll-button-right'"
         (click)="scrollRight()"
         aria-hidden="true"
         tabindex="-1"
-      [class]="
-        'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--right'
-      "
-        >
+        [class]="'fudis-tab-navigation-bar__button-container__button fudis-tab-navigation-bar__button-container__button--right'"
+      >
         <fudis-icon
           class="fudis-tab-navigation-bar__button-container__button__icon"
           icon="chevron-ring-fill"

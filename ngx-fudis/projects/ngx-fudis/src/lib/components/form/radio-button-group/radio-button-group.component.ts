@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
   AfterViewInit,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { FudisSelectionGroupInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';

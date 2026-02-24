@@ -3,7 +3,7 @@
     [title]="'Form with some transloco'"
     [level]="2"
     [closed]="formExpandableClosed"
-    >
+  >
     <fudis-expandable-actions>
       <fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
       <fudis-button
@@ -17,7 +17,7 @@
         [title]="'Form title here hello'"
         [errorSummaryTitle]="'There were some errors'"
         [level]="2"
-        >
+      >
         <fudis-form-content>
           <fudis-fieldset [label]="t('fieldsetTitle')">
             <fudis-fieldset-content>
@@ -27,60 +27,53 @@
                 [popoverText]="t('chooseBerryPopover')"
                 [popoverTriggerLabel]="t('popoverAria')"
                 [formGroup]="testFormGroup.controls.checkboxFormGroup"
-                >
+              >
                 @for (option of checkboxOptions; track option.controlName) {
                   <fudis-checkbox-group-option
                     (handleChange)="handleChange($event)"
                     [controlName]="option.controlName!"
                     [label]="option.label"
-                    />
+                  />
                 }
               </fudis-checkbox-group>
               <fudis-text-input
                 [label]="t('label')"
                 [helpText]="t('helpText')"
                 [control]="testFormGroup.controls.textInput"
-                [popoverText]="
-                  'This text-input has multiple validators: required, minlength and maxlength'
-                "
+                [popoverText]="'This text-input has multiple validators: required, minlength and maxlength'"
                 [popoverTriggerLabel]="t('popoverAria')"
-                >
+              >
                 @if (customError) {
-                  <fudis-error-message
-                    [message]="t('form_errors.customErrorMessage')"
-                    />
+                  <fudis-error-message [message]="t('form_errors.customErrorMessage')" />
                 }
                 @if (customError) {
                   <fudis-error-message
                     [message]="'Backend threw an error, it is not totally fault of this component'"
-                    />
+                  />
                 }
               </fudis-text-input>
               <fudis-radio-button-group
                 [label]="t('chooseTruth')"
                 [helpText]="t('chooseTruthHelp')"
                 [control]="testFormGroup.controls.truth"
-                >
+              >
                 @for (option of radioButtonOptions; track option.value) {
-                  <fudis-radio-button
-                    [label]="option.label"
-                    [value]="option.value"
-                    />
+                  <fudis-radio-button [label]="option.label" [value]="option.value" />
                 }
               </fudis-radio-button-group>
 
               <fudis-datepicker
                 [label]="'Select some date'"
                 [control]="testFormGroup.controls.date"
-                />
+              />
               <fudis-text-area
                 [label]="'Basic required text-area'"
                 [control]="testFormGroup.controls.textArea"
-                />
+              />
               <fudis-localized-text-group
                 [label]="'At least one required'"
                 [formGroup]="testFormGroup.controls.withLanguages"
-                />
+              />
             </fudis-fieldset-content>
           </fudis-fieldset>
         </fudis-form-content>
@@ -96,55 +89,53 @@
       <fudis-grid [columns]="'inputLg'">
         <fudis-heading [level]="3" [variant]="'md'"
           >Autocomplete multiselect dropdown</fudis-heading
-          >
-          <fudis-select
-            [label]="'Translated Select Dropdown'"
-            [control]="selectForm.controls.translatedSelect"
-            >
-            <ng-template fudisSelectOptions>
-              @for (option of translatedSelectOptions; track option.value) {
-                <fudis-select-option [data]="option" />
-              }
-            </ng-template>
-          </fudis-select>
-          <fudis-select
-            [label]="'Translated Select Autocomplete Dropdown'"
-            [variant]="'autocompleteDropdown'"
-            [control]="selectForm.controls.translatedSelect"
-            >
-            <ng-template fudisSelectOptions>
-              @for (option of translatedSelectOptions; track option.value) {
-                <fudis-select-option [data]="option" />
-              }
-            </ng-template>
-          </fudis-select>
+        >
+        <fudis-select
+          [label]="'Translated Select Dropdown'"
+          [control]="selectForm.controls.translatedSelect"
+        >
+          <ng-template fudisSelectOptions>
+            @for (option of translatedSelectOptions; track option.value) {
+              <fudis-select-option [data]="option" />
+            }
+          </ng-template>
+        </fudis-select>
+        <fudis-select
+          [label]="'Translated Select Autocomplete Dropdown'"
+          [variant]="'autocompleteDropdown'"
+          [control]="selectForm.controls.translatedSelect"
+        >
+          <ng-template fudisSelectOptions>
+            @for (option of translatedSelectOptions; track option.value) {
+              <fudis-select-option [data]="option" />
+            }
+          </ng-template>
+        </fudis-select>
 
-          <fudis-multiselect
-            [label]="'Translated Multiselect Dropdown'"
-            [control]="selectForm.controls.translatedMultiselect"
-            >
-            <ng-template fudisSelectOptions>
-              @for (option of translatedSelectOptions; track option.value) {
-                <fudis-multiselect-option
-                  [data]="option"
-                  />
-              }
-            </ng-template>
-          </fudis-multiselect>
-          <fudis-multiselect
-            [size]="selectSize"
-            [variant]="'autocompleteDropdown'"
-            [label]="'Pick a pet Autocomplete Dropdown Multiselect'"
-            [control]="selectForm.controls.autocompleteSearch"
-            >
-            <ng-template fudisSelectOptions>
-              @for (option of selectOptions; track option.value) {
-                <fudis-multiselect-option [data]="option" />
-              }
-            </ng-template>
-          </fudis-multiselect>
-          <fudis-button [label]="'Change Select size'" (handleClick)="changeSelectSize()" />
-        </fudis-grid>
-      </ng-template>
-    </fudis-expandable>
-  </ng-container>
+        <fudis-multiselect
+          [label]="'Translated Multiselect Dropdown'"
+          [control]="selectForm.controls.translatedMultiselect"
+        >
+          <ng-template fudisSelectOptions>
+            @for (option of translatedSelectOptions; track option.value) {
+              <fudis-multiselect-option [data]="option" />
+            }
+          </ng-template>
+        </fudis-multiselect>
+        <fudis-multiselect
+          [size]="selectSize"
+          [variant]="'autocompleteDropdown'"
+          [label]="'Pick a pet Autocomplete Dropdown Multiselect'"
+          [control]="selectForm.controls.autocompleteSearch"
+        >
+          <ng-template fudisSelectOptions>
+            @for (option of selectOptions; track option.value) {
+              <fudis-multiselect-option [data]="option" />
+            }
+          </ng-template>
+        </fudis-multiselect>
+        <fudis-button [label]="'Change Select size'" (handleClick)="changeSelectSize()" />
+      </fudis-grid>
+    </ng-template>
+  </fudis-expandable>
+</ng-container>

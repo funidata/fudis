@@ -11,8 +11,8 @@
   (focus)="_dropdownFocus($event)"
   (blur)="_dropdownBlur($event)"
   role="listbox"
-  >
-  @if (selectVariant !== 'dropdown' && open && filterText) {
+>
+  @if (selectVariant !== "dropdown" && open && filterText) {
     @if (autocompleteHelpText !== false) {
       <fudis-body-text
         [class.fudis-select-dropdown__help-text--hidden]="!results"
@@ -34,7 +34,8 @@
 <ng-template #helpText>
   @if (autocompleteHelpText) {
     {{ autocompleteHelpText }}
-    }@if (!autocompleteHelpText) {
+  }
+  @if (!autocompleteHelpText) {
     {{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}
   }
 </ng-template>
@@ -44,8 +45,6 @@
     {{ autocompleteNoResultsText }}
   }
   @if (!autocompleteNoResultsText) {
-    {{
-    _translationNoResultsFound | async
-    }}
-    }</ng-template
-    >
+    {{ _translationNoResultsFound | async }}
+  }
+</ng-template>

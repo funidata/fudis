@@ -28,16 +28,15 @@ const Template: StoryFn = (args) => ({
   },
   template: html`
     <fudis-breadcrumbs [label]="label">
-    @for (link of links; track link.url; let index = $index) {
+      @for (link of links; track link.url; let index = $index) {
       <fudis-breadcrumbs-item>
         @if (index + 1 !== links.length) {
-          <a [href]="link.url">{{ link.label }}</a>
-        }
-        @if (index + 1 === links.length) {
-          <fudis-body-text>{{ link.label }}</fudis-body-text>
+        <a [href]="link.url">{{ link.label }}</a>
+        } @if (index + 1 === links.length) {
+        <fudis-body-text>{{ link.label }}</fudis-body-text>
         }
       </fudis-breadcrumbs-item>
-    }
+      }
     </fudis-breadcrumbs>
   `,
 });

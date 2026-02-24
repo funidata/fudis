@@ -31,7 +31,7 @@ interface MyFieldsetForm {
       [popoverText]="'I contain additional information!'"
       [popoverTriggerLabel]="'Additional information'"
       [popoverPosition]="'below'"
-      >
+    >
       <fudis-fieldset-actions [align]="alignActions">
         <fudis-button
           (handleClick)="changeAlign()"
@@ -39,52 +39,49 @@ interface MyFieldsetForm {
           [variant]="'tertiary'"
           [icon]="'switch'"
           [label]="'Change Actions Align'"
-          />
+        />
       </fudis-fieldset-actions>
       <fudis-fieldset-content>
         <fudis-notification
           ><fudis-body-text
-          >Currently Fieldset Actions are aligned: {{ alignActions }}</fudis-body-text
+            >Currently Fieldset Actions are aligned: {{ alignActions }}</fudis-body-text
           ></fudis-notification
+        >
+        <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 2 }">
+          <fudis-text-input
+            [control]="fieldsetExample.controls['teacher']"
+            [label]="'Responsible teacher'"
+            [helpText]="'Someone has to be responsible for this.'"
+          />
+          <fudis-text-input
+            [control]="fieldsetExample.controls['email']"
+            [label]="'Contact email'"
+            [helpText]="'So that students can ask for more time on their homework.'"
+          />
+          <fudis-radio-button-group
+            [label]="'Course type'"
+            [control]="fieldsetExample.controls['courseType']"
           >
-          <fudis-grid [alignItemsY]="'baseline'" [columns]="{ md: 2 }">
-            <fudis-text-input
-              [control]="fieldsetExample.controls['teacher']"
-              [label]="'Responsible teacher'"
-              [helpText]="'Someone has to be responsible for this.'"
-              />
-            <fudis-text-input
-              [control]="fieldsetExample.controls['email']"
-              [label]="'Contact email'"
-              [helpText]="'So that students can ask for more time on their homework.'"
-              />
-            <fudis-radio-button-group
-              [label]="'Course type'"
-              [control]="fieldsetExample.controls['courseType']"
-              >
-              @for (option of courseTypeOptions; track option.value) {
-                <fudis-radio-button
-                  [label]="option.label"
-                  [value]="option.value"
-                  />
-              }
-            </fudis-radio-button-group>
-            <fudis-date-range>
-              <fudis-datepicker
-                fudisDateStart
-                [label]="'Start date'"
-                [control]="fieldsetExample.controls.startDate"
-                />
-              <fudis-datepicker
-                fudisDateEnd
-                [label]="'End date'"
-                [control]="fieldsetExample.controls.endDate"
-                />
-            </fudis-date-range>
-          </fudis-grid>
-        </fudis-fieldset-content>
-      </fudis-fieldset>
-    `,
+            @for (option of courseTypeOptions; track option.value) {
+              <fudis-radio-button [label]="option.label" [value]="option.value" />
+            }
+          </fudis-radio-button-group>
+          <fudis-date-range>
+            <fudis-datepicker
+              fudisDateStart
+              [label]="'Start date'"
+              [control]="fieldsetExample.controls.startDate"
+            />
+            <fudis-datepicker
+              fudisDateEnd
+              [label]="'End date'"
+              [control]="fieldsetExample.controls.endDate"
+            />
+          </fudis-date-range>
+        </fudis-grid>
+      </fudis-fieldset-content>
+    </fudis-fieldset>
+  `,
 })
 export class FieldsetExampleComponent extends PopoverApiDirective {
   alignActions: 'start' | 'end' | 'below' = 'start';

@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { NgxFudisModule } from '../../ngx-fudis.module';

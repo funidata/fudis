@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy,
   effect,
   Input,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 
 import { DropdownMenuComponent } from '../dropdown-menu.component';

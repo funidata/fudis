@@ -536,4 +536,8 @@ export const tabNavigationPanelExclude: RegExp = excludeRegex(['setActiveTabId']
  */
 export const textInputExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
-export const textInputControlsExclude: RegExp = excludeRegex([...formCommonControlsExclude, 'autocomplete', 'name']);
+export const textInputControlsExclude: RegExp = excludeRegex([
+  ...formCommonControlsExclude,
+  'autocomplete',
+  'name',
+]);

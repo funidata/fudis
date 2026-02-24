@@ -6,17 +6,17 @@
   [class.fudis-multiselect-option--checked]="checked"
   [class.fudis-multiselect-option--focused]="_focused"
   [class.fudis-multiselect-option--disabled]="data.disabled"
-  >
+>
   <label
     [attr.for]="_id + '-checkbox-input-' + componentInstanceId"
     class="fudis-multiselect-option__label"
     [class.fudis-multiselect-option__label--focus]="_focused"
     [class.fudis-multiselect-option__label--checked]="checked"
-    >
+  >
     <div
       class="fudis-multiselect-option__label__checkbox"
       [class.fudis-multiselect-option__label__checkbox--disabled]="data.disabled"
-      >
+    >
       <input
         #optionInputRef
         [class.fudis-select-option__focusable]="_optionVisible"
@@ -30,27 +30,22 @@
         (focus)="_focus()"
         (keydown)="_keyDown($event)"
         (blur)="_blur($event)"
-        />
+      />
       @if (checked) {
-        <fudis-icon
-          class="fudis-multiselect-option__label__checkbox__icon"
-          [icon]="'check'"
-          />
+        <fudis-icon class="fudis-multiselect-option__label__checkbox__icon" [icon]="'check'" />
       }
     </div>
     <div class="fudis-multiselect-option__label__text">
       <span class="fudis-multiselect-option__label__text__main">{{ data.label }}</span>
       @if (data.subLabel) {
-        <span class="fudis-multiselect-option__label__text__sub">{{
-          data.subLabel
-        }}</span>
+        <span class="fudis-multiselect-option__label__text__sub">{{ data.subLabel }}</span>
       }
 
       @if (data.disabled) {
         <span class="fudis-multiselect-option__label__text__disabled">
           ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
-          >
-        }
-      </div>
-    </label>
-  </div>
+        >
+      }
+    </div>
+  </label>
+</div>

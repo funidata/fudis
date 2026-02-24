@@ -207,20 +207,14 @@ describe('GuidanceComponent', () => {
       });
 
       it('should show errors when single form control is touched', () => {
-        const errorListBefore = getAllElements(
-          fixture,
-          'fudis-validator-error-message p',
-        );
+        const errorListBefore = getAllElements(fixture, 'fudis-validator-error-message p');
 
         expect(errorListBefore.length).toBe(0);
 
         component.formGroup!.controls['finnish'].markAsTouched();
         fixture.detectChanges();
 
-        const errorList = getAllElements(
-          fixture,
-          'fudis-validator-error-message p',
-        );
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
         expect(errorList.length).toBe(2);
       });
 
@@ -228,10 +222,7 @@ describe('GuidanceComponent', () => {
         component.groupBlurredOut = false;
         fixture.detectChanges();
 
-        const errorList = getAllElements(
-          fixture,
-          'fudis-validator-error-message p',
-        );
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
         expect(errorList.length).toBe(0);
       });
 

@@ -1,5 +1,12 @@
-
-import { Directive, ElementRef, EventEmitter, Inject, Input, Output, DOCUMENT } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  Output,
+  DOCUMENT,
+} from '@angular/core';
 
 @Directive({
   selector: '[fudisDropdownItemBase]',

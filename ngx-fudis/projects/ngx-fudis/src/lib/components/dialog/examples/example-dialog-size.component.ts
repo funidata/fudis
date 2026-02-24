@@ -16,7 +16,7 @@ import { ExampleDialogFormComponent } from './example-dialog-form.component';
         <fudis-button
           [label]="'Open regular ' + size + ' dialog'"
           (handleClick)="openDialog(size)"
-          />
+        />
       }
     </fudis-grid>
     <fudis-hr class="fudis-my-xl" />
@@ -26,28 +26,28 @@ import { ExampleDialogFormComponent } from './example-dialog-form.component';
         <fudis-button
           [label]="'Open form ' + size + ' dialog'"
           (handleClick)="openDialogWithForm(size)"
-          />
+        />
       }
     </fudis-grid>
-    
+
     <ng-template #exampleDialogTemplate>
       <fudis-dialog [size]="_size">
         <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
           >This dialog size is {{ _size }}</fudis-heading
-          >
-          <fudis-dialog-content>
-            <fudis-body-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
-              vehicula ut massa non facilisis. Aliquam vehicula risus vitae ex condimentum, sed
-              efficitur neque scelerisque.
-            </fudis-body-text>
-          </fudis-dialog-content>
-          <fudis-dialog-actions>
-            <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
-          </fudis-dialog-actions>
-        </fudis-dialog>
-      </ng-template>
-    `,
+        >
+        <fudis-dialog-content>
+          <fudis-body-text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
+            vehicula ut massa non facilisis. Aliquam vehicula risus vitae ex condimentum, sed
+            efficitur neque scelerisque.
+          </fudis-body-text>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
+  `,
 })
 export class ExampleDialogSizeComponent {
   constructor(private _dialogService: FudisDialogService) {}

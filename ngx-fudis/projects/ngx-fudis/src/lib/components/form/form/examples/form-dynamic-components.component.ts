@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
@@ -42,17 +41,15 @@ type MyForm = {
       [level]="1"
       [title]="'Example With Dynamic Validators'"
       [titleVariant]="'xl'"
-      [errorSummaryTitle]="
-        'There are errors in this form. Please address these before trying to submit again.'
-      "
+      [errorSummaryTitle]="'There are errors in this form. Please address these before trying to submit again.'"
       [errorSummaryVisible]="false"
-      >
+    >
       <fudis-form-actions>
         <fudis-button
           (handleClick)="toggleErrorSummary()"
           [variant]="'secondary'"
           [label]="'Toggle Error Summary'"
-          />
+        />
         <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
       </fudis-form-actions>
       <fudis-form-content>
@@ -99,52 +96,49 @@ type MyForm = {
                 [control]="formExample.controls.text"
                 [label]="'Text input'"
                 [helpText]="'Please add some content.'"
-                />
-    
+              />
+
               <fudis-text-input
                 [control]="formExample.controls.email"
                 [label]="'Email'"
                 [helpText]="'This is an example email input with multiple validations.'"
-                />
-    
+              />
+
               <fudis-text-input
                 [control]="formExample.controls.number"
                 [label]="'Number input'"
                 [type]="'number'"
                 [size]="'md'"
-                />
-    
+              />
+
               <fudis-datepicker
                 [size]="'lg'"
                 [label]="'Choose your favorite date'"
                 [control]="formExample.controls.date"
               ></fudis-datepicker>
-    
+
               <fudis-select
                 [label]="'Select your favorite animal'"
                 [size]="'md'"
                 [control]="formExample.controls.animal"
-                >
+              >
                 <ng-template fudisSelectOptions>
                   <fudis-select-option [data]="{ value: 'option-1', label: 'Otter' }" />
                   <fudis-select-option [data]="{ value: 'option-2', label: 'Rattle snake' }" />
                   <fudis-select-option [data]="{ value: 'option-3', label: 'Zeebra' }" />
                 </ng-template>
               </fudis-select>
-    
+
               <fudis-radio-button-group
                 [label]="'Select your favorite sport'"
                 [control]="formExample.controls.sport"
-                >
+              >
                 @for (sport of sportOptions; track sport.value) {
-                  <fudis-radio-button
-                    [label]="sport.label"
-                    [value]="sport.value"
-                    >
+                  <fudis-radio-button [label]="sport.label" [value]="sport.value">
                   </fudis-radio-button>
                 }
               </fudis-radio-button-group>
-    
+
               <fudis-localized-text-group
                 [label]="'At least one required'"
                 [formGroup]="formExample.controls.dj"
@@ -159,7 +153,7 @@ type MyForm = {
               <fudis-checkbox-group
                 [label]="'If you like summer'"
                 [formGroup]="formExample.controls.summer"
-                >
+              >
                 <fudis-checkbox-group-option
                   [controlName]="'summer'"
                   [label]="'Summer holidays'"
@@ -169,12 +163,12 @@ type MyForm = {
                       formExample.controls.working,
                     ])
                   "
-                  />
+                />
               </fudis-checkbox-group>
               <fudis-checkbox-group
                 [label]="'If you like winter'"
                 [formGroup]="formExample.controls.winter"
-                >
+              >
                 <fudis-checkbox-group-option
                   [controlName]="'winter'"
                   [label]="'Winter holidays'"
@@ -184,12 +178,12 @@ type MyForm = {
                       formExample.controls.working,
                     ])
                   "
-                  />
+                />
               </fudis-checkbox-group>
               <fudis-checkbox-group
                 [label]="'If you like working'"
                 [formGroup]="formExample.controls.working"
-                >
+              >
                 <fudis-checkbox-group-option
                   [controlName]="'working'"
                   [label]="'Working holidays'"
@@ -199,14 +193,14 @@ type MyForm = {
                       formExample.controls.winter,
                     ])
                   "
-                  />
+                />
               </fudis-checkbox-group>
             </fudis-grid>
           </fudis-fieldset-content>
         </fudis-fieldset>
       </fudis-form-content>
     </fudis-form>
-    `,
+  `,
 })
 export class StorybookExampleFormDynamicComponentsComponent {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {

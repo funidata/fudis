@@ -31,7 +31,7 @@ export const gradeOptions: FudisSelectOption[] = [
           [level]="1"
           [titleVariant]="'xl'"
           [errorSummaryTitle]="'You need to fill up the information.'"
-          >
+        >
           <fudis-form-content>
             <fudis-fieldset [label]="'Course feedback'" [helpText]="_greetingFromOpeningComponent">
               <fudis-fieldset-content>
@@ -40,7 +40,7 @@ export const gradeOptions: FudisSelectOption[] = [
                   [label]="'Your favourite course topic'"
                   [control]="exampleDialogFormGroup.controls['topics']"
                   [helpText]="'Please add some topic'"
-                  />
+                />
               </fudis-fieldset-content>
             </fudis-fieldset>
             <fudis-select
@@ -52,12 +52,10 @@ export const gradeOptions: FudisSelectOption[] = [
               [initialFocus]="false"
               [selectionClearButton]="true"
               [variant]="'dropdown'"
-              >
+            >
               <ng-template fudisSelectOptions>
                 @for (option of gradeOptions; track option.value) {
-                  <fudis-select-option
-                    [data]="option"
-                  ></fudis-select-option>
+                  <fudis-select-option [data]="option"></fudis-select-option>
                 }
               </ng-template>
             </fudis-select>
@@ -78,7 +76,7 @@ export const gradeOptions: FudisSelectOption[] = [
         </fudis-form>
       </fudis-dialog-content>
     </fudis-dialog>
-    `,
+  `,
 })
 export class ExampleDialogFormComponent {
   constructor(

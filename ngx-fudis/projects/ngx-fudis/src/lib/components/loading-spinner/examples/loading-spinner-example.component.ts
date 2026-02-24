@@ -1,6 +1,5 @@
 import { Component, signal, ViewChild } from '@angular/core';
 
-
 import { LoadingSpinnerComponent } from '../loading-spinner.component';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
 import { HeadingComponent } from '../../typography/heading/heading.component';

@@ -40,15 +40,15 @@ export function disallowedWeekendValidator(): ValidatorFn {
       [popoverPosition]="'left'"
       [popoverTriggerLabel]="'Additional information'"
       [dateFilter]="weekendFilter"
-      >
+    >
       @if (control.hasError('disallowedDay')) {
         <fudis-error-message
           (handleAddError)="handleAddError.emit($event)"
           [message]="'This error message is sent from a custom validator'"
-          />
+        />
       }
     </fudis-datepicker>
-    `,
+  `,
 })
 export class DateFilterWithErrorMessageComponent {
   constructor(private _idService: FudisIdService) {

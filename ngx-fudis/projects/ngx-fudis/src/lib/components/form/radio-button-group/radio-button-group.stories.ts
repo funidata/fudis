@@ -43,7 +43,7 @@ const ExampleTestTemplate: StoryFn = (args) => ({
     (handleChange)="handleChange($event)"
   >
     @for (option of fruitOptions; track option.value) {
-      <fudis-radio-button [label]="option.label" [value]="option.value" />
+    <fudis-radio-button [label]="option.label" [value]="option.value" />
     }
   </fudis-radio-button-group>`,
 });
@@ -67,15 +67,12 @@ Example.args = {
       [helpText]="'We all should have a pet.'"
       [control]="control"
       (handleChange)="handleChange($event)"
-      >
+    >
       @for (option of petOptions; track option.value) {
-        <fudis-radio-button
-          [label]="option.label"
-          [value]="option.value"
-        ></fudis-radio-button>
+        <fudis-radio-button [label]="option.label" [value]="option.value"></fudis-radio-button>
       }
     </fudis-radio-button-group>
-    `,
+  `,
   standalone: false,
 })
 class DisabledRadioGroupExampleComponent {

@@ -231,7 +231,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   ],
   /*
    * Include imports outside of Fudis components in 'imports' array below, e.g. Angular Material components and other Angular tools.
-   * Also import Fudis standalone components here. 
+   * Also import Fudis standalone components here.
    */
   imports: [
     BadgeComponent,

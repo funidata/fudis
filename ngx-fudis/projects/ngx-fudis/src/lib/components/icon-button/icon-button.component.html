@@ -14,7 +14,7 @@
     [attr.id]="id"
     [popoverPosition]="popoverPosition"
     [popoverText]="popoverText"
-    >
+  >
     @if (icon) {
       <div [class]="_iconMargin | async">
         @if (_iconColor | async; as iconColor) {
@@ -48,7 +48,7 @@
       asMenuButton && dropdownMenuId && (dropdownOpen | async) ? dropdownMenuId : null
     "
     [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
-    >
+  >
     @if (icon) {
       <div [class]="_iconMargin | async">
         @if (_iconColor | async; as iconColor) {
@@ -60,9 +60,10 @@
           ></fudis-icon>
         }
       </div>
-    }</button>
-  }
+    }
+  </button>
+}
 
-  @if (asMenuButton && (dropdownOpen | async)) {
-    <ng-content></ng-content>
-  }
+@if (asMenuButton && (dropdownOpen | async)) {
+  <ng-content></ng-content>
+}

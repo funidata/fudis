@@ -1,8 +1,8 @@
-@if (_parentDl.tag === 'dl') {
+@if (_parentDl.tag === "dl") {
   <ng-container *ngTemplateOutlet="multipleItems" />
 }
 
-@if (_parentDl.tag === 'p') {
+@if (_parentDl.tag === "p") {
   <ng-container *ngTemplateOutlet="singleItem" />
 }
 
@@ -19,30 +19,27 @@
 </ng-template>
 
 <ng-template #commonContent>
-  <span [class]="(_mainCssClass | async) + '__text-content'">{{ contentText }}</span
-    >@if (_mainCssClass.value === 'fudis-dl-item-term__compact') {
-    <span
-      class="fudis-dl-item-term__compact__colon"
-      >&colon;</span
-      >
-    }
-    @if (popoverTriggerLabel && popoverText) {
-      <span [class]="(_mainCssClass | async) + '__popover'">
-        <fudis-icon-button
-          [size]="'extra-small'"
-          [variant]="'tertiary'"
-          [icon]="'info-circle'"
-          [ariaLabel]="popoverTriggerLabel"
-          [popoverText]="popoverText"
-          [popoverPosition]="popoverPosition"
-          />
-      </span>
-    }
+  <span [class]="(_mainCssClass | async) + '__text-content'">{{ contentText }}</span>
+  @if (_mainCssClass.value === "fudis-dl-item-term__compact") {
+    <span class="fudis-dl-item-term__compact__colon">&colon;</span>
+  }
+  @if (popoverTriggerLabel && popoverText) {
+    <span [class]="(_mainCssClass | async) + '__popover'">
+      <fudis-icon-button
+        [size]="'extra-small'"
+        [variant]="'tertiary'"
+        [icon]="'info-circle'"
+        [ariaLabel]="popoverTriggerLabel"
+        [popoverText]="popoverText"
+        [popoverPosition]="popoverPosition"
+      />
+    </span>
+  }
 
-    @if (languages && _parentLanguageTranslations().length > 0) {
-      <fudis-language-badge-group
-        [translatedLanguages]="_parentLanguageTranslations()"
-        (handleClick)="_setSelectedLanguage($event)"
-        />
-    }
-  </ng-template>
+  @if (languages && _parentLanguageTranslations().length > 0) {
+    <fudis-language-badge-group
+      [translatedLanguages]="_parentLanguageTranslations()"
+      (handleClick)="_setSelectedLanguage($event)"
+    />
+  }
+</ng-template>

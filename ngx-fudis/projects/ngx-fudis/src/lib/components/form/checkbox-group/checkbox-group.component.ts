@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {

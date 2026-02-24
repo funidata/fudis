@@ -9,7 +9,7 @@ import {
   OnDestroy,
   ViewChild,
   ViewEncapsulation,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 
 import { FudisIdService } from '../../services/id/id.service';

@@ -8,7 +8,7 @@ import {
   ViewChild,
   WritableSignal,
   signal,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';

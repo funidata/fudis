@@ -11,7 +11,7 @@
   [popoverTriggerLabel]="popoverTriggerLabel"
   [initialFocus]="initialFocus"
   [syncLegendHeight]="true"
-  >
+>
   <fudis-fieldset-content>
     <ng-content select="fudis-radio-button" />
     @if (control && !disableGuidance) {
@@ -22,7 +22,7 @@
         [for]="id + '-legend'"
         [control]="control"
         [groupHelpTextHidden]="true"
-        >
+      >
         <ng-content select="fudis-error-message" />
       </fudis-guidance>
     }

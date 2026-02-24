@@ -1,6 +1,5 @@
 import { Component, Host, Inject, OnChanges, OnDestroy, Optional, DOCUMENT } from '@angular/core';
 
-
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';

@@ -1,25 +1,26 @@
 <label #labelElementRef class="fudis-label" [attr.for]="for" [id]="id">
   <div class="fudis-label__content"
     ><span class="fudis-label__content__text"
-    >{{ text }}@if (required) {
-    <span class="fudis-label__content__space"></span
-      >
-      }@if (required) {
-      <span class="fudis-label__content__required"
-        >({{ _translationService.getTranslations()().REQUIRED }})</span
-        >
-        }</span
-        >
-      </div>
-      @if (popoverText && popoverTriggerLabel) {
-        <fudis-icon-button
-          class="fudis-label__content__button"
-          [size]="'extra-small'"
-          [variant]="'tertiary'"
-          [icon]="'info-circle'"
-          [ariaLabel]="popoverTriggerLabel"
-          [popoverText]="popoverText"
-          [popoverPosition]="popoverPosition"
-          />
+      >{{ text }}
+      @if (required) {
+        <span class="fudis-label__content__space"></span>
       }
-    </label>
+      @if (required) {
+        <span class="fudis-label__content__required"
+          >({{ _translationService.getTranslations()().REQUIRED }})</span
+        >
+      }
+    </span>
+  </div>
+  @if (popoverText && popoverTriggerLabel) {
+    <fudis-icon-button
+      class="fudis-label__content__button"
+      [size]="'extra-small'"
+      [variant]="'tertiary'"
+      [icon]="'info-circle'"
+      [ariaLabel]="popoverTriggerLabel"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+    />
+  }
+</label>

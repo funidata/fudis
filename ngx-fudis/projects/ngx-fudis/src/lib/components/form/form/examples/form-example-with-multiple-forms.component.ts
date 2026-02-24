@@ -27,234 +27,229 @@ interface MyCheckboxGroup {
           >This page is for testing purposes to demo and test, that form components, their
           validation errors and forms' Error Summaries load correctly whether the Expandable was
           opened or not before clicking Submit.</fudis-body-text
-          >
-        </div>
-    
-        <fudis-button
-          fudisGridItem
-          [columns]="'stretch'"
-          (handleClick)="submitAllForms()"
-          [label]="'Submit all forms!'"
+        >
+      </div>
+
+      <fudis-button
+        fudisGridItem
+        [columns]="'stretch'"
+        (handleClick)="submitAllForms()"
+        [label]="'Submit all forms!'"
+      />
+
+      <fudis-form
+        [level]="2"
+        [titleVariant]="'lg'"
+        [title]="'Form 1 with Text Input'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryTitle]="errorSummaryTitle"
+      >
+        <fudis-form-actions>
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formOne.valid"
+            [label]="'Submit Form 1'"
           />
-    
-        <fudis-form
-          [level]="2"
-          [titleVariant]="'lg'"
-          [title]="'Form 1 with Text Input'"
-          [errorSummaryVisible]="errorSummaryVisible"
-          [errorSummaryTitle]="errorSummaryTitle"
+        </fudis-form-actions>
+        <fudis-form-content>
+          <fudis-expandable
+            [title]="'Expandable with Text Input'"
+            [errorSummaryBreadcrumb]="true"
+            [level]="3"
           >
-          <fudis-form-actions>
-            <fudis-button
-              fudisFormSubmit
-              [formValid]="allForms.controls.formOne.valid"
-              [label]="'Submit Form 1'"
+            <ng-template fudisExpandableContent>
+              <fudis-text-input
+                [label]="'Name'"
+                [control]="allForms.controls.formOne.controls.name"
               />
-          </fudis-form-actions>
-          <fudis-form-content>
-            <fudis-expandable
-              [title]="'Expandable with Text Input'"
-              [errorSummaryBreadcrumb]="true"
-              [level]="3"
-              >
-              <ng-template fudisExpandableContent>
-                <fudis-text-input
-                  [label]="'Name'"
-                  [control]="allForms.controls.formOne.controls.name"
-                  />
-              </ng-template>
-            </fudis-expandable>
-          </fudis-form-content>
-        </fudis-form>
-        <fudis-form
-          [level]="2"
-          [titleVariant]="'lg'"
-          [title]="'Form 2 with Text Area'"
-          [errorSummaryVisible]="errorSummaryVisible"
-          [errorSummaryTitle]="errorSummaryTitle"
+            </ng-template>
+          </fudis-expandable>
+        </fudis-form-content>
+      </fudis-form>
+      <fudis-form
+        [level]="2"
+        [titleVariant]="'lg'"
+        [title]="'Form 2 with Text Area'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryTitle]="errorSummaryTitle"
+      >
+        <fudis-form-actions>
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formTwo.valid"
+            [label]="'Submit Form 2'"
+          />
+        </fudis-form-actions>
+        <fudis-form-content>
+          <fudis-expandable
+            [title]="'Expandable with Text Area'"
+            [errorSummaryBreadcrumb]="true"
+            [level]="3"
           >
-          <fudis-form-actions>
-            <fudis-button
-              fudisFormSubmit
-              [formValid]="allForms.controls.formTwo.valid"
-              [label]="'Submit Form 2'"
+            <ng-template fudisExpandableContent>
+              <fudis-text-area
+                [label]="'Description'"
+                [control]="allForms.controls.formTwo.controls.description"
               />
-          </fudis-form-actions>
-          <fudis-form-content>
-            <fudis-expandable
-              [title]="'Expandable with Text Area'"
-              [errorSummaryBreadcrumb]="true"
-              [level]="3"
-              >
-              <ng-template fudisExpandableContent>
-                <fudis-text-area
-                  [label]="'Description'"
-                  [control]="allForms.controls.formTwo.controls.description"
-                  />
-              </ng-template>
-            </fudis-expandable>
-          </fudis-form-content>
-        </fudis-form>
-        <fudis-form
-          [level]="2"
-          [titleVariant]="'lg'"
-          [title]="'Form 3 with Checkbox Group'"
-          [errorSummaryVisible]="errorSummaryVisible"
-          [errorSummaryTitle]="errorSummaryTitle"
+            </ng-template>
+          </fudis-expandable>
+        </fudis-form-content>
+      </fudis-form>
+      <fudis-form
+        [level]="2"
+        [titleVariant]="'lg'"
+        [title]="'Form 3 with Checkbox Group'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryTitle]="errorSummaryTitle"
+      >
+        <fudis-form-actions>
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formThree.valid"
+            [label]="'Submit Form 3'"
+          />
+        </fudis-form-actions>
+        <fudis-form-content>
+          <fudis-expandable
+            [title]="'Expandable with Checkbox Group'"
+            [level]="3"
+            [errorSummaryBreadcrumb]="true"
           >
-          <fudis-form-actions>
-            <fudis-button
-              fudisFormSubmit
-              [formValid]="allForms.controls.formThree.valid"
-              [label]="'Submit Form 3'"
-              />
-          </fudis-form-actions>
-          <fudis-form-content>
-            <fudis-expandable
-              [title]="'Expandable with Checkbox Group'"
-              [level]="3"
-              [errorSummaryBreadcrumb]="true"
+            <ng-template fudisExpandableContent>
+              <fudis-checkbox-group
+                [label]="'Pick a fruit'"
+                [formGroup]="allForms.controls.formThree"
               >
-              <ng-template fudisExpandableContent>
-                <fudis-checkbox-group
-                  [label]="'Pick a fruit'"
-                  [formGroup]="allForms.controls.formThree"
+                @for (
+                  control of allForms.controls.formThree.controls | keyvalue;
+                  track control.key
+                ) {
+                  <fudis-checkbox-group-option [controlName]="control.key" [label]="control.key" />
+                }
+              </fudis-checkbox-group>
+            </ng-template>
+          </fudis-expandable>
+        </fudis-form-content>
+      </fudis-form>
+      <fudis-form
+        [level]="2"
+        [titleVariant]="'lg'"
+        [title]="'Form 4 with Radio Button Group'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryTitle]="errorSummaryTitle"
+      >
+        <fudis-form-actions>
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formFive.valid"
+            [label]="'Submit Form 4'"
+          />
+        </fudis-form-actions>
+        <fudis-form-content>
+          <fudis-expandable
+            [title]="'Expandable with Radio Button Group'"
+            [level]="3"
+            [errorSummaryBreadcrumb]="true"
+          >
+            <ng-template fudisExpandableContent>
+              <fudis-radio-button-group
+                [label]="'Pick a fruit'"
+                [control]="allForms.controls.formFive"
+              >
+                @for (option of radioOptions; track option.value) {
+                  <fudis-radio-button [label]="option.label" [value]="option.value" />
+                }
+              </fudis-radio-button-group>
+            </ng-template>
+          </fudis-expandable>
+        </fudis-form-content>
+      </fudis-form>
+      <fudis-form
+        [level]="2"
+        [titleVariant]="'lg'"
+        [title]="'Form 5 with Select and Multiselect'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryTitle]="errorSummaryTitle"
+      >
+        <fudis-form-actions>
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formFour.valid"
+            [label]="'Submit Form 5'"
+          />
+        </fudis-form-actions>
+        <fudis-form-content>
+          <fudis-expandable
+            [title]="'Expandable with Select and Multiselect'"
+            [level]="3"
+            [errorSummaryBreadcrumb]="true"
+          >
+            <ng-template fudisExpandableContent>
+              <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
+                <fudis-fieldset-content>
+                  <fudis-select
+                    [label]="'Pick a pet'"
+                    [control]="allForms.controls.formFour.controls.select"
                   >
-                  @for (control of allForms.controls.formThree.controls | keyvalue; track control.key) {
-                    <fudis-checkbox-group-option
-                      [controlName]="control.key"
-                      [label]="control.key"
-                      />
-                  }
-                </fudis-checkbox-group>
-              </ng-template>
-            </fudis-expandable>
-          </fudis-form-content>
-        </fudis-form>
-        <fudis-form
-          [level]="2"
-          [titleVariant]="'lg'"
-          [title]="'Form 4 with Radio Button Group'"
-          [errorSummaryVisible]="errorSummaryVisible"
-          [errorSummaryTitle]="errorSummaryTitle"
-          >
-          <fudis-form-actions>
-            <fudis-button
-              fudisFormSubmit
-              [formValid]="allForms.controls.formFive.valid"
-              [label]="'Submit Form 4'"
-              />
-          </fudis-form-actions>
-          <fudis-form-content>
-            <fudis-expandable
-              [title]="'Expandable with Radio Button Group'"
-              [level]="3"
-              [errorSummaryBreadcrumb]="true"
-              >
-              <ng-template fudisExpandableContent>
-                <fudis-radio-button-group
-                  [label]="'Pick a fruit'"
-                  [control]="allForms.controls.formFive"
+                    <ng-template fudisSelectOptions>
+                      @for (option of selectOptions; track option.value) {
+                        <fudis-select-option [data]="option" />
+                      }
+                    </ng-template>
+                  </fudis-select>
+                  <fudis-multiselect
+                    [label]="'Pick multiple pets'"
+                    [control]="allForms.controls.formFour.controls.multiselect"
                   >
-                  @for (option of radioOptions; track option.value) {
-                    <fudis-radio-button
-                      [label]="option.label"
-                      [value]="option.value"
-                      />
-                  }
-                </fudis-radio-button-group>
-              </ng-template>
-            </fudis-expandable>
-          </fudis-form-content>
-        </fudis-form>
-        <fudis-form
-          [level]="2"
-          [titleVariant]="'lg'"
-          [title]="'Form 5 with Select and Multiselect'"
-          [errorSummaryVisible]="errorSummaryVisible"
-          [errorSummaryTitle]="errorSummaryTitle"
+                    <ng-template fudisSelectOptions>
+                      @for (option of selectOptions; track option.value) {
+                        <fudis-multiselect-option [data]="option" />
+                      }
+                    </ng-template>
+                  </fudis-multiselect>
+                </fudis-fieldset-content>
+              </fudis-fieldset>
+            </ng-template>
+          </fudis-expandable>
+        </fudis-form-content>
+      </fudis-form>
+      <fudis-form
+        [level]="2"
+        [titleVariant]="'lg'"
+        [title]="'Form 6 with Localized Text Group'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [errorSummaryTitle]="errorSummaryTitle"
+      >
+        <fudis-form-actions>
+          <fudis-button
+            fudisFormSubmit
+            [formValid]="allForms.controls.formSix.valid"
+            [label]="'Submit Form 6'"
+          />
+        </fudis-form-actions>
+        <fudis-form-content>
+          <fudis-expandable
+            [title]="'Expandable with Localized Text Group'"
+            [level]="3"
+            [errorSummaryBreadcrumb]="true"
           >
-          <fudis-form-actions>
-            <fudis-button
-              fudisFormSubmit
-              [formValid]="allForms.controls.formFour.valid"
-              [label]="'Submit Form 5'"
+            <ng-template fudisExpandableContent>
+              <fudis-localized-text-group
+                [label]="'At least one required'"
+                [formGroup]="allForms.controls.formSix.controls.oneRequired"
               />
-          </fudis-form-actions>
-          <fudis-form-content>
-            <fudis-expandable
-              [title]="'Expandable with Select and Multiselect'"
-              [level]="3"
-              [errorSummaryBreadcrumb]="true"
-              >
-              <ng-template fudisExpandableContent>
-                <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
-                  <fudis-fieldset-content>
-                    <fudis-select
-                      [label]="'Pick a pet'"
-                      [control]="allForms.controls.formFour.controls.select"
-                      >
-                      <ng-template fudisSelectOptions>
-                        @for (option of selectOptions; track option.value) {
-                          <fudis-select-option [data]="option" />
-                        }
-                      </ng-template>
-                    </fudis-select>
-                    <fudis-multiselect
-                      [label]="'Pick multiple pets'"
-                      [control]="allForms.controls.formFour.controls.multiselect"
-                      >
-                      <ng-template fudisSelectOptions>
-                        @for (option of selectOptions; track option.value) {
-                          <fudis-multiselect-option
-                            [data]="option"
-                            />
-                        }
-                      </ng-template>
-                    </fudis-multiselect>
-                  </fudis-fieldset-content>
-                </fudis-fieldset>
-              </ng-template>
-            </fudis-expandable>
-          </fudis-form-content>
-        </fudis-form>
-        <fudis-form
-          [level]="2"
-          [titleVariant]="'lg'"
-          [title]="'Form 6 with Localized Text Group'"
-          [errorSummaryVisible]="errorSummaryVisible"
-          [errorSummaryTitle]="errorSummaryTitle"
-          >
-          <fudis-form-actions>
-            <fudis-button
-              fudisFormSubmit
-              [formValid]="allForms.controls.formSix.valid"
-              [label]="'Submit Form 6'"
+              <fudis-localized-text-group
+                [label]="'All required'"
+                [variant]="'text-area'"
+                [formGroup]="allForms.controls.formSix.controls.allRequired"
               />
-          </fudis-form-actions>
-          <fudis-form-content>
-            <fudis-expandable
-              [title]="'Expandable with Localized Text Group'"
-              [level]="3"
-              [errorSummaryBreadcrumb]="true"
-              >
-              <ng-template fudisExpandableContent>
-                <fudis-localized-text-group
-                  [label]="'At least one required'"
-                  [formGroup]="allForms.controls.formSix.controls.oneRequired"
-                  />
-                <fudis-localized-text-group
-                  [label]="'All required'"
-                  [variant]="'text-area'"
-                  [formGroup]="allForms.controls.formSix.controls.allRequired"
-                  />
-                <fudis-button [label]="'Patch value'" (handleClick)="patchValue()"></fudis-button>
-              </ng-template>
-            </fudis-expandable>
-          </fudis-form-content>
-        </fudis-form>
-      </fudis-grid>
-    `,
+              <fudis-button [label]="'Patch value'" (handleClick)="patchValue()"></fudis-button>
+            </ng-template>
+          </fudis-expandable>
+        </fudis-form-content>
+      </fudis-form>
+    </fudis-grid>
+  `,
 })
 export class StorybookExampleWithMultipleFormsComponent {
   constructor(private _errorSummaryService: FudisErrorSummaryService) {}

@@ -11,7 +11,7 @@
   [popoverPosition]="popoverPosition"
   [popoverTriggerLabel]="popoverTriggerLabel"
   [syncLegendHeight]="true"
-  >
+>
   <fudis-fieldset-content>
     <ng-content select="fudis-checkbox-group-option" />
     @if (formGroup && !disableGuidance) {
@@ -23,7 +23,7 @@
         [groupBlurredOut]="groupBlurredOut"
         [formGroup]="formGroup"
         [groupHelpTextHidden]="true"
-        >
+      >
         <ng-content select="fudis-error-message" />
       </fudis-guidance>
     }

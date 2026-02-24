@@ -1,4 +1,3 @@
-
 import { Component, Inject, DOCUMENT } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -33,7 +32,7 @@ type MyForm = {
           [title]="'Dialog with fudis-form'"
           [errorSummaryTitle]="'You did not fill all the required information'"
           [level]="2"
-          >
+        >
           <fudis-form-content>
             <fudis-fieldset [label]="'We need some information'" [helpText]="_greetingFromOpener">
               <fudis-fieldset-content>
@@ -41,28 +40,25 @@ type MyForm = {
                   [label]="'Choose berry'"
                   [helpText]="'Berries are yummy'"
                   [formGroup]="testFormGroup.controls['checkboxFormGroup']"
-                  >
+                >
                   @for (option of checkboxOptions; track option.controlName) {
                     <fudis-checkbox-group-option
                       [controlName]="option.controlName"
                       [label]="option.label"
-                      />
+                    />
                   }
                 </fudis-checkbox-group>
                 <fudis-text-input
                   [label]="'Is something wrong?'"
                   [helpText]="'I hope everything is OK'"
                   [control]="testFormGroup.controls['textInput']"
-                  />
+                />
                 <fudis-radio-button-group
                   [label]="'Choose the truth'"
                   [control]="testFormGroup.controls['truth']"
-                  >
+                >
                   @for (option of radioButtonOptions; track option.value) {
-                    <fudis-radio-button
-                      [label]="option.label"
-                      [value]="option.value"
-                      />
+                    <fudis-radio-button [label]="option.label" [value]="option.value" />
                   }
                 </fudis-radio-button-group>
                 <fudis-multiselect
@@ -70,7 +66,7 @@ type MyForm = {
                   [variant]="'autocompleteDropdown'"
                   [placeholder]="'Search animals'"
                   [control]="testFormGroup.controls['animals']"
-                  >
+                >
                   <ng-template fudisSelectOptions>
                     @for (option of multiOptions; track option.value) {
                       <fudis-multiselect-option [data]="option" />
@@ -80,7 +76,7 @@ type MyForm = {
                 <fudis-datepicker
                   [label]="'Choose date'"
                   [control]="testFormGroup.controls['date']"
-                  />
+                />
               </fudis-fieldset-content>
             </fudis-fieldset>
           </fudis-form-content>
@@ -96,7 +92,7 @@ type MyForm = {
         </fudis-form>
       </fudis-dialog-content>
     </fudis-dialog>
-    `,
+  `,
   styles: [],
   standalone: false,
 })

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 
-
 @Component({
   imports: [NgxFudisModule],
   selector: 'example-language-change-component',

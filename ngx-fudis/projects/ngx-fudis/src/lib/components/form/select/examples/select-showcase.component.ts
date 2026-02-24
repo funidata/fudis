@@ -17,234 +17,196 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
       [level]="1"
       [titleVariant]="'xl'"
       [width]="'md'"
-      >
+    >
       <fudis-form-header>
         <fudis-body-text
           >Following Select components share all same Form Control. When you change value in one,
           all of them are updated.</fudis-body-text
-          >
-        </fudis-form-header>
-        <fudis-form-actions>
-          <fudis-button (handleClick)="onClick()" [label]="'Toggle Disabled State'"></fudis-button>
-        </fudis-form-actions>
-        <fudis-form-content>
-          <fudis-grid [columns]="{ lg: 2 }" [classes]="'fudis-mt-sm'">
-            <fudis-grid-item>
-              <fudis-heading [level]="2" [variant]="'md'"
-                >Single-select Dropdown with Clear Button</fudis-heading
-                >
-                <fudis-select
-                  [size]="'lg'"
-                  [variant]="'dropdown'"
-                  [placeholder]="'Choose a pet'"
-                  [control]="control"
-                  [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
-                  [selectionClearButton]="true"
-                  (selectionUpdate)="selectionUpdate.emit($event)"
-                  >
-                  <ng-template fudisSelectOptions>
-                    @for (option of defaultOptions; track option.value) {
-                      <fudis-select-option
-                        [data]="option"
-                      ></fudis-select-option>
+        >
+      </fudis-form-header>
+      <fudis-form-actions>
+        <fudis-button (handleClick)="onClick()" [label]="'Toggle Disabled State'"></fudis-button>
+      </fudis-form-actions>
+      <fudis-form-content>
+        <fudis-grid [columns]="{ lg: 2 }" [classes]="'fudis-mt-sm'">
+          <fudis-grid-item>
+            <fudis-heading [level]="2" [variant]="'md'"
+              >Single-select Dropdown with Clear Button</fudis-heading
+            >
+            <fudis-select
+              [size]="'lg'"
+              [variant]="'dropdown'"
+              [placeholder]="'Choose a pet'"
+              [control]="control"
+              [label]="'Select a pet'"
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [selectionClearButton]="true"
+              (selectionUpdate)="selectionUpdate.emit($event)"
+            >
+              <ng-template fudisSelectOptions>
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
                     }
-                    @for (group of groupedMockData; track group.country) {
-                      <fudis-select-group [label]="group.country">
-                        @for (groupedOption of group.options; track groupedOption.value) {
-                          <fudis-select-option
-                            [data]="groupedOption"
-                          ></fudis-select-option>
-                        }
-                      </fudis-select-group>
-                    } </ng-template></fudis-select
-                  ></fudis-grid-item>
-                  <fudis-grid-item
-                    ><fudis-heading [level]="2" [variant]="'md'"
-                    >Single-select Dropdown without Clear button</fudis-heading
-                    >
-                    <fudis-select
-                      [size]="'lg'"
-                      [variant]="'dropdown'"
-                      [placeholder]="'Choose a pet'"
-                      [control]="control"
-                      [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
-                      [selectionClearButton]="false"
-                      (selectionUpdate)="selectionUpdate.emit($event)"
-                      >
-                      <ng-template fudisSelectOptions>
-                        @for (option of defaultOptions; track option.value) {
-                          <fudis-select-option
-                            [data]="option"
-                          ></fudis-select-option>
-                        }
-                        @for (group of groupedMockData; track group.country) {
-                          <fudis-select-group [label]="group.country">
-                            @for (groupedOption of group.options; track groupedOption.value) {
-                              <fudis-select-option
-                                [data]="groupedOption"
-                              ></fudis-select-option>
-                            }
-                          </fudis-select-group>
-                        } </ng-template></fudis-select
-                      ></fudis-grid-item>
-                      <fudis-grid-item
-                        ><fudis-heading [level]="2" [variant]="'md'"
-                        >Single-select Autocomplete Dropdown with Clear button</fudis-heading
-                        >
-                        <fudis-select
-                          [size]="'lg'"
-                          [variant]="'autocompleteDropdown'"
-                          [placeholder]="'Choose a pet'"
-                          [control]="control"
-                          [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
-                          [selectionClearButton]="true"
-                          (selectionUpdate)="selectionUpdate.emit($event)"
-                          >
-                          <ng-template fudisSelectOptions>
-                            @for (option of defaultOptions; track option.value) {
-                              <fudis-select-option
-                                [data]="option"
-                              ></fudis-select-option>
-                            }
-                            @for (group of groupedMockData; track group.country) {
-                              <fudis-select-group [label]="group.country">
-                                @for (groupedOption of group.options; track groupedOption.value) {
-                                  <fudis-select-option
-                                    [data]="groupedOption"
-                                  ></fudis-select-option>
-                                }
-                              </fudis-select-group>
-                            } </ng-template></fudis-select
-                          ></fudis-grid-item>
-    
-                          <fudis-grid-item
-                            ><fudis-heading [level]="2" [variant]="'md'"
-                            >Single-select Autocomplete Dropdown without Clear button</fudis-heading
-                            >
-                            <fudis-select
-                              [size]="'lg'"
-                              [variant]="'autocompleteDropdown'"
-                              [placeholder]="'Choose a pet'"
-                              [control]="control"
-                              [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
-                              [selectionClearButton]="false"
-                              (selectionUpdate)="selectionUpdate.emit($event)"
-                              >
-                              <ng-template fudisSelectOptions>
-                                @for (option of defaultOptions; track option.value) {
-                                  <fudis-select-option
-                                    [data]="option"
-                                  ></fudis-select-option>
-                                }
-                                @for (group of groupedMockData; track group.country) {
-                                  <fudis-select-group [label]="group.country">
-                                    @for (groupedOption of group.options; track groupedOption.value) {
-                                      <fudis-select-option
-                                        [data]="groupedOption"
-                                      ></fudis-select-option>
-                                    }
-                                  </fudis-select-group>
-                                } </ng-template></fudis-select
-                              ></fudis-grid-item>
-                              <fudis-grid-item
-                                ><fudis-heading [level]="2" [variant]="'md'"
-                                >Single-select Autocomplete Type with Clear button</fudis-heading
-                                >
-                                <fudis-select
-                                  [size]="'lg'"
-                                  [variant]="'autocompleteType'"
-                                  [placeholder]="'Choose a pet'"
-                                  [control]="control"
-                                  [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
-                                  [selectionClearButton]="true"
-                                  (selectionUpdate)="selectionUpdate.emit($event)"
-                                  >
-                                  <ng-template fudisSelectOptions>
-                                    @for (option of defaultOptions; track option.value) {
-                                      <fudis-select-option
-                                        [data]="option"
-                                      ></fudis-select-option>
-                                    }
-                                    @for (group of groupedMockData; track group.country) {
-                                      <fudis-select-group [label]="group.country">
-                                        @for (groupedOption of group.options; track groupedOption.value) {
-                                          <fudis-select-option
-                                            [data]="groupedOption"
-                                          ></fudis-select-option>
-                                        }
-                                      </fudis-select-group>
-                                    } </ng-template></fudis-select
-                                  ></fudis-grid-item>
-    
-                                  <fudis-grid-item
-                                    ><fudis-heading [level]="2" [variant]="'md'"
-                                    >Single-select Autocomplete Type without Clear button</fudis-heading
-                                    >
-                                    <fudis-select
-                                      [size]="'lg'"
-                                      [variant]="'autocompleteType'"
-                                      [placeholder]="'Choose a pet'"
-                                      [control]="control"
-                                      [label]="'Select a pet'"
-              [helpText]="
-                'All pets are equally important, but for sake of this example please pick one.'
-              "
-                                      [selectionClearButton]="false"
-                                      (selectionUpdate)="selectionUpdate.emit($event)"
-                                      >
-                                      <ng-template fudisSelectOptions>
-                                        @for (option of defaultOptions; track option.value) {
-                                          <fudis-select-option
-                                            [data]="option"
-                                          ></fudis-select-option>
-                                        }
-                                        @for (group of groupedMockData; track group.country) {
-                                          <fudis-select-group [label]="group.country">
-                                            @for (groupedOption of group.options; track groupedOption.value) {
-                                              <fudis-select-option
-                                                [data]="groupedOption"
-                                              ></fudis-select-option>
-                                            }
-                                          </fudis-select-group>
-                                        } </ng-template></fudis-select
-                                      ></fudis-grid-item>
-                                      <fudis-grid-item [columns]="'stretch'">
-                                        <fudis-heading [level]="3" [variant]="'md'">Current control value</fudis-heading>
-                                        @if (!control.value) {
-                                          <fudis-body-text [variant]="'lg-regular'"
-                                            >Control value: null.</fudis-body-text
-                                            >
-                                          }
-                                          @if (control.value) {
-                                            <fudis-dl [variant]="'compact'">
-                                              <fudis-dl-item>
-                                                <fudis-dt [contentText]="'Value'"></fudis-dt>
-                                                <fudis-dd [contentText]="control.value.value"></fudis-dd>
-                                              </fudis-dl-item>
-                                              <fudis-dl-item>
-                                                <fudis-dt [contentText]="'Label'"></fudis-dt>
-                                                <fudis-dd [contentText]="control.value.label"></fudis-dd>
-                                              </fudis-dl-item>
-                                            </fudis-dl>
-                                          } </fudis-grid-item></fudis-grid
-                                        ></fudis-form-content>
-                                      </fudis-form>
-    `,
+                  </fudis-select-group>
+                }</ng-template></fudis-select
+          ></fudis-grid-item>
+          <fudis-grid-item
+            ><fudis-heading [level]="2" [variant]="'md'"
+              >Single-select Dropdown without Clear button</fudis-heading
+            >
+            <fudis-select
+              [size]="'lg'"
+              [variant]="'dropdown'"
+              [placeholder]="'Choose a pet'"
+              [control]="control"
+              [label]="'Select a pet'"
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [selectionClearButton]="false"
+              (selectionUpdate)="selectionUpdate.emit($event)"
+            >
+              <ng-template fudisSelectOptions>
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
+          ></fudis-grid-item>
+          <fudis-grid-item
+            ><fudis-heading [level]="2" [variant]="'md'"
+              >Single-select Autocomplete Dropdown with Clear button</fudis-heading
+            >
+            <fudis-select
+              [size]="'lg'"
+              [variant]="'autocompleteDropdown'"
+              [placeholder]="'Choose a pet'"
+              [control]="control"
+              [label]="'Select a pet'"
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [selectionClearButton]="true"
+              (selectionUpdate)="selectionUpdate.emit($event)"
+            >
+              <ng-template fudisSelectOptions>
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
+          ></fudis-grid-item>
+
+          <fudis-grid-item
+            ><fudis-heading [level]="2" [variant]="'md'"
+              >Single-select Autocomplete Dropdown without Clear button</fudis-heading
+            >
+            <fudis-select
+              [size]="'lg'"
+              [variant]="'autocompleteDropdown'"
+              [placeholder]="'Choose a pet'"
+              [control]="control"
+              [label]="'Select a pet'"
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [selectionClearButton]="false"
+              (selectionUpdate)="selectionUpdate.emit($event)"
+            >
+              <ng-template fudisSelectOptions>
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
+          ></fudis-grid-item>
+          <fudis-grid-item
+            ><fudis-heading [level]="2" [variant]="'md'"
+              >Single-select Autocomplete Type with Clear button</fudis-heading
+            >
+            <fudis-select
+              [size]="'lg'"
+              [variant]="'autocompleteType'"
+              [placeholder]="'Choose a pet'"
+              [control]="control"
+              [label]="'Select a pet'"
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [selectionClearButton]="true"
+              (selectionUpdate)="selectionUpdate.emit($event)"
+            >
+              <ng-template fudisSelectOptions>
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
+          ></fudis-grid-item>
+
+          <fudis-grid-item
+            ><fudis-heading [level]="2" [variant]="'md'"
+              >Single-select Autocomplete Type without Clear button</fudis-heading
+            >
+            <fudis-select
+              [size]="'lg'"
+              [variant]="'autocompleteType'"
+              [placeholder]="'Choose a pet'"
+              [control]="control"
+              [label]="'Select a pet'"
+              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [selectionClearButton]="false"
+              (selectionUpdate)="selectionUpdate.emit($event)"
+            >
+              <ng-template fudisSelectOptions>
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
+          ></fudis-grid-item>
+          <fudis-grid-item [columns]="'stretch'">
+            <fudis-heading [level]="3" [variant]="'md'">Current control value</fudis-heading>
+            @if (!control.value) {
+              <fudis-body-text [variant]="'lg-regular'">Control value: null.</fudis-body-text>
+            }
+            @if (control.value) {
+              <fudis-dl [variant]="'compact'">
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Value'"></fudis-dt>
+                  <fudis-dd [contentText]="control.value.value"></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Label'"></fudis-dt>
+                  <fudis-dd [contentText]="control.value.label"></fudis-dd>
+                </fudis-dl-item>
+              </fudis-dl>
+            }</fudis-grid-item></fudis-grid
+      ></fudis-form-content>
+    </fudis-form>
+  `,
 })
 export class StorybookExampleSelectShowcaseComponent {
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<string | object> | null>();

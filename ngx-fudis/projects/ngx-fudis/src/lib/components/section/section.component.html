@@ -9,19 +9,20 @@
     [classes]="classes"
     [rowGap]="'none'"
     [serviceDefaults]="false"
-    >
+  >
     <div class="fudis-section__header" [id]="_headingId">
       <div class="fudis-section__header__container">
         <div class="fudis-section__header__heading">
           <fudis-heading class="fudis-mb-none" [level]="level" [variant]="titleVariant"
-            >{{ title
-            }}@if (badge && badgeText) {
-            <fudis-badge
-              class="fudis-section__header__heading__badge"
-              [variant]="badge"
-              [content]="badgeText"
+            >{{ title }}
+            @if (badge && badgeText) {
+              <fudis-badge
+                class="fudis-section__header__heading__badge"
+                [variant]="badge"
+                [content]="badgeText"
               />
-          }</fudis-heading>
+            }
+          </fudis-heading>
           @if (popoverTriggerLabel && popoverText) {
             <fudis-icon-button
               class="fudis-section__header__heading__popover"
@@ -31,7 +32,7 @@
               [ariaLabel]="popoverTriggerLabel"
               [popoverPosition]="popoverPosition"
               [popoverText]="popoverText"
-              />
+            />
           }
         </div>
         <ng-content select="fudis-section-actions"></ng-content>

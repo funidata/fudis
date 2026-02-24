@@ -4,7 +4,7 @@
     [attr.for]="id"
     [id]="id + '-label'"
     [class.fudis-checkbox--disabled]="_control.disabled || _checkboxGroup.disabled"
-    >
+  >
     <input
       (click)="_checkboxClick($event)"
       type="checkbox"
@@ -26,11 +26,11 @@
       (blur)="_onBlur($event)"
       (focus)="_onFocus($event)"
       (keyup)="_checkboxGroup.handleKeyUp.emit($event)"
-      />
+    />
     <div
       class="fudis-checkbox__content"
       [class.fudis-checkbox__content--disabled]="_control.disabled || _checkboxGroup.disabled"
-      >
+    >
       <div class="fudis-checkbox__content-wrapper">
         <span
           class="fudis-checkbox__content__box"
@@ -44,12 +44,9 @@
           [class.fudis-checkbox__content__box--disabled]="
             _control.disabled || _checkboxGroup.disabled
           "
-          >
+        >
           @if (_control.value) {
-            <fudis-icon
-              [icon]="'check'"
-              class="fudis-checkbox__content__box__icon"
-              />
+            <fudis-icon [icon]="'check'" class="fudis-checkbox__content__box__icon" />
           }
         </span>
       </div>

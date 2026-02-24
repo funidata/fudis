@@ -4,7 +4,6 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisDialogSize } from '../../../types/miscellaneous';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
 
-
 @Component({
   imports: [NgxFudisModule],
   selector: 'example-dialog-with-grid',

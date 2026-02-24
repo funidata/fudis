@@ -3,20 +3,20 @@
   tabindex="-1"
   [attr.aria-describedby]="ariaDescribedby"
   class="fudis-notification fudis-notification__{{ variant }}"
-  >
+>
   <fudis-body-text class="fudis-visually-hidden">{{
     _translateService.getTranslations()().ATTENTION
   }}</fudis-body-text>
-  @if (variant === 'warning') {
+  @if (variant === "warning") {
     <fudis-icon [icon]="'exclamation-mark-circle'" />
   }
-  @if (variant === 'danger') {
+  @if (variant === "danger") {
     <fudis-icon [icon]="'alert'" />
   }
-  @if (variant === 'success') {
+  @if (variant === "success") {
     <fudis-icon [icon]="'checkmark-circle'" />
   }
-  @if (variant === 'info') {
+  @if (variant === "info") {
     <fudis-icon [icon]="'info-circle'" />
   }
   <div class="fudis-notification__content">

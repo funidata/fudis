@@ -2,7 +2,7 @@
   <section
     class="fudis-alert-group fudis-alert-group__{{ position }}"
     [attr.aria-label]="alerts.length > 0 ? (_alertGroupLabel | async) + ': ' + alerts.length : null"
-    >
+  >
     @for (alert of alerts; track alert.id) {
       <fudis-alert
         [variant]="alert.type"
@@ -10,7 +10,7 @@
         [id]="alert.id"
         [htmlId]="alert.htmlId"
         [buttonId]="alert.buttonId"
-        />
+      />
     }
   </section>
 }

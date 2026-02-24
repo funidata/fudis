@@ -10,7 +10,7 @@
   [classes]="_dialogParent ? 'fudis-form fudis-form__dialog' : 'fudis-form fudis-form__default'"
   [columnGap]="columnGap"
   [rowGap]="'none'"
-  >
+>
   <div [id]="id + '-header'" class="fudis-form__header">
     <div class="fudis-form__header__main">
       <div class="fudis-form__header__title">
@@ -20,28 +20,27 @@
             fudisDialogTitle
             [variant]="titleVariant"
             [level]="level"
-            >{{ title
-            }}@if (badge && badgeText) {
-            <fudis-badge
-              class="fudis-form__header__title__badge"
-              [variant]="badge"
-              [content]="badgeText"
+            >{{ title }}
+            @if (badge && badgeText) {
+              <fudis-badge
+                class="fudis-form__header__title__badge"
+                [variant]="badge"
+                [content]="badgeText"
               />
-          }</fudis-heading>
+            }
+          </fudis-heading>
         }
         @if (!_dialogParent) {
-          <fudis-heading
-            class="fudis-mb-xs"
-            [variant]="titleVariant"
-            [level]="level"
-            >{{ title
-            }}@if (badge && badgeText) {
-            <fudis-badge
-              class="fudis-form__header__title__badge"
-              [variant]="badge"
-              [content]="badgeText"
+          <fudis-heading class="fudis-mb-xs" [variant]="titleVariant" [level]="level"
+            >{{ title }}
+            @if (badge && badgeText) {
+              <fudis-badge
+                class="fudis-form__header__title__badge"
+                [variant]="badge"
+                [content]="badgeText"
               />
-          }</fudis-heading>
+            }
+          </fudis-heading>
         }
         @if (helpText) {
           <fudis-body-text class="fudis-mb-xs">{{ helpText }}</fudis-body-text>
@@ -74,7 +73,7 @@
       (handleUpdatedErrorList)="handleUpdatedErrorList.emit($event)"
       [parentComponent]="_elementRef.nativeElement"
       [title]="errorSummaryTitle"
-      />
+    />
   }
 </ng-template>
 

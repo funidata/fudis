@@ -17,7 +17,7 @@ Singleselect option
   (keydown)="_keyDown($event)"
   (blur)="_blur($event)"
   (click)="!data.disabled && _clickOption($event)"
-  >
+>
   <div class="fudis-select-option__label">
     <span class="fudis-select-option__label__main">{{ data.label }}</span>
     @if (data.subLabel) {
@@ -25,14 +25,11 @@ Singleselect option
     }
   </div>
   @if (!data.disabled && _parentSelect.control.value?.value === data.value) {
-    <fudis-icon
-      [icon]="_parent.size === 'xs' ? 'check-small' : 'check'"
-      [color]="'gray-dark'"
-      />
+    <fudis-icon [icon]="_parent.size === 'xs' ? 'check-small' : 'check'" [color]="'gray-dark'" />
   }
   @if (data.disabled) {
     <span class="fudis-select-option__label fudis-select-option__disabled-text">
       ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
-      >
-    }
-  </div>
+    >
+  }
+</div>

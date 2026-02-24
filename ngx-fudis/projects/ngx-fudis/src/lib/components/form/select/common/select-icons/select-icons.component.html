@@ -1,24 +1,24 @@
 <div class="fudis-select-icons__container">
   @if (
-    parentVariant !== 'autocompleteType' &&
+    parentVariant !== "autocompleteType" &&
     (!clearButton || ((_controlValue | async) === false && !filterText))
-    ) {
+  ) {
     <fudis-icon
       class="fudis-select-icons__icon"
       [class.fudis-select-icons__icon--disabled]="disabled"
       [icon]="'chevron'"
       [rotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
-      />
+    />
   }
   @if (
-    (parentVariant === 'autocompleteType' && !filterText && (_controlValue | async) === false) ||
-    (parentVariant === 'autocompleteType' && !clearButton)
-    ) {
+    (parentVariant === "autocompleteType" && !filterText && (_controlValue | async) === false) ||
+    (parentVariant === "autocompleteType" && !clearButton)
+  ) {
     <fudis-icon
       class="fudis-select-icons__icon"
       [class.fudis-select-icons__icon--disabled]="disabled"
       [icon]="'search'"
-      />
+    />
   }
 </div>
 
@@ -43,6 +43,6 @@
       [icon]="'close'"
       [ariaLabel]="clearText"
       [disabled]="disabled"
-      />
+    />
   }
 }

@@ -3,7 +3,7 @@
     class="fudis-radio-button"
     [attr.for]="_id"
     [class.fudis-radio-button--disabled]="_parentGroup.disabled"
-    >
+  >
     <input
       type="radio"
       class="fudis-radio-button__input"
@@ -22,7 +22,7 @@
       (keyup)="_parentGroup.handleKeyUp.emit($event)"
       (blur)="_parentGroup.handleBlur.emit($event)"
       (change)="_onChange()"
-      />
+    />
     <div class="fudis-radio-button__content">
       <div class="fudis-radio-button__content-wrapper">
         <div
@@ -33,11 +33,9 @@
           [class.fudis-radio-button__content__control--disabled]="
             _parentGroup.control.disabled || _parentGroup.disabled
           "
-          >
+        >
           @if (_parentGroup.control.value === value) {
-            <span
-              class="fudis-radio-button__content__control__indicator"
-            ></span>
+            <span class="fudis-radio-button__content__control__indicator"></span>
           }
         </div>
       </div>

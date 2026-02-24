@@ -6,7 +6,7 @@
   role="application"
   class="fudis-select fudis-input-size__{{ size }}"
   [id]="id + '-main-wrapper'"
-  >
+>
   <fudis-label
     [text]="label"
     [id]="id + '-label'"
@@ -16,7 +16,7 @@
     [popoverText]="popoverText"
     [popoverPosition]="popoverPosition"
     [popoverTriggerLabel]="popoverTriggerLabel"
-    >
+  >
   </fudis-label>
   <div #selectRef>
     <div class="fudis-select__input-wrapper">
@@ -58,9 +58,9 @@
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
         [attr.aria-invalid]="(control.invalid && control.touched) || null"
-        />
+      />
       <div class="fudis-select__input-wrapper__icons">
-        @if (size !== 'xs') {
+        @if (size !== "xs") {
           <fudis-select-icons
             [filterText]="!!autocompleteFilterText"
             [parentControl]="control"
@@ -72,7 +72,7 @@
             (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
             [clearButton]="selectionClearButton"
             [disabled]="control.disabled || disabled"
-            />
+          />
         }
       </div>
     </div>
@@ -88,7 +88,7 @@
         [multiselect]="true"
         [parentId]="id"
         [size]="size"
-        >
+      >
         @if (_selectOptionsDirective) {
           <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
         }
@@ -96,24 +96,19 @@
     }
   </div>
   @if (!disableGuidance) {
-    <fudis-guidance
-      [inputLabel]="label"
-      [helpText]="helpText"
-      [for]="id"
-      [control]="control"
-      >
+    <fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [control]="control">
       <ng-content select="fudis-error-message"
-      /></fudis-guidance>
-    }
+    /></fudis-guidance>
+  }
 
-    @if (showSelectionChips && sortedSelectedOptions && control.enabled && !disabled) {
-      <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
-        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEMS
-      }}</span>
-      <fudis-multiselect-chip-list
-        [selectedItems]="sortedSelectedOptions"
-        [parentId]="id"
-        (handleClick)="_handleRemoveChip($event)"
-        />
-    }
-  </div>
+  @if (showSelectionChips && sortedSelectedOptions && control.enabled && !disabled) {
+    <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
+      _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEMS
+    }}</span>
+    <fudis-multiselect-chip-list
+      [selectedItems]="sortedSelectedOptions"
+      [parentId]="id"
+      (handleClick)="_handleRemoveChip($event)"
+    />
+  }
+</div>

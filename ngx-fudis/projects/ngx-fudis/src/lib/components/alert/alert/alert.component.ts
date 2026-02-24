@@ -5,7 +5,7 @@ import {
   Inject,
   Input,
   Output,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 
 import { Observable } from 'rxjs';

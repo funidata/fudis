@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
   ViewEncapsulation,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';

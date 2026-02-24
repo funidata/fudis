@@ -13,7 +13,7 @@ import {
   WritableSignal,
   signal,
   OnDestroy,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';

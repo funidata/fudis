@@ -406,10 +406,7 @@ const ItemWithMultipleDdElementsTemplate: StoryFn = (args) => ({
       <fudis-dl-item>
         <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
         @for (item of data; track item.value) {
-          <fudis-dd
-            [contentText]="item.value"
-            [subHeading]="item.subHeading"
-          ></fudis-dd>
+        <fudis-dd [contentText]="item.value" [subHeading]="item.subHeading"></fudis-dd>
         }
       </fudis-dl-item>
       <fudis-dl-item>

@@ -9,7 +9,7 @@ import {
   Inject,
   AfterViewInit,
   OnChanges,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import {
   AbstractControl,

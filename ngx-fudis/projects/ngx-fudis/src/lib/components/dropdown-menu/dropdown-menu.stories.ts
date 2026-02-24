@@ -12,62 +12,58 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
 @Component({
   selector: 'example-dropdown-menu',
   template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
-      <fudis-grid-item>
-        <fudis-heading [level]="4">Random items menu</fudis-heading>
-        <fudis-icon-button
-          [ariaLabel]="'Random items menu'"
-          [size]="'small'"
-          [variant]="'secondary'"
-          [icon]="'three-dots'"
-          [asMenuButton]="true"
-          >
-          <fudis-dropdown-menu [align]="align" [size]="size">
-            @for (item of defaultMenuItems; track item.label) {
-              <fudis-dropdown-menu-item
-                [label]="item.label"
-                [disabled]="item.disabled"
-                (handleClick)="_clickOption(item.label, $event)"
-                >
-              </fudis-dropdown-menu-item>
-            }
-          </fudis-dropdown-menu>
-        </fudis-icon-button>
-      </fudis-grid-item>
-      <fudis-grid-item>
-        <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
-        <fudis-icon-button
-          [ariaLabel]="'Grouped animals menu'"
-          [size]="'small'"
-          [variant]="'secondary'"
-          [icon]="'three-dots'"
-          [asMenuButton]="true"
-          >
-          <fudis-dropdown-menu [align]="align" [size]="size">
-            @for (group of smallDropdownMenuGroupedMockData; track group.country) {
-              <fudis-dropdown-menu-group
-                [label]="group.country"
-                >
-                @for (groupedItem of group.items; track groupedItem.label) {
-                  <fudis-dropdown-menu-item
-                    [label]="groupedItem.label"
-                    [disabled]="groupedItem.disabled"
-                    (handleClick)="_clickOption(groupedItem.label, $event)"
-                    >
-                  </fudis-dropdown-menu-item>
-                }
-              </fudis-dropdown-menu-group>
-            }
-          </fudis-dropdown-menu>
-        </fudis-icon-button>
-      </fudis-grid-item>
-      <fudis-grid-item [columns]="'1/-1'">
-        @if (_latestClickItem) {
-          <fudis-body-text
-            >Latest clicked item was: {{ _latestClickItem }}</fudis-body-text
+    <fudis-grid-item>
+      <fudis-heading [level]="4">Random items menu</fudis-heading>
+      <fudis-icon-button
+        [ariaLabel]="'Random items menu'"
+        [size]="'small'"
+        [variant]="'secondary'"
+        [icon]="'three-dots'"
+        [asMenuButton]="true"
+      >
+        <fudis-dropdown-menu [align]="align" [size]="size">
+          @for (item of defaultMenuItems; track item.label) {
+            <fudis-dropdown-menu-item
+              [label]="item.label"
+              [disabled]="item.disabled"
+              (handleClick)="_clickOption(item.label, $event)"
             >
+            </fudis-dropdown-menu-item>
           }
-        </fudis-grid-item>
-      </fudis-grid>`,
+        </fudis-dropdown-menu>
+      </fudis-icon-button>
+    </fudis-grid-item>
+    <fudis-grid-item>
+      <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
+      <fudis-icon-button
+        [ariaLabel]="'Grouped animals menu'"
+        [size]="'small'"
+        [variant]="'secondary'"
+        [icon]="'three-dots'"
+        [asMenuButton]="true"
+      >
+        <fudis-dropdown-menu [align]="align" [size]="size">
+          @for (group of smallDropdownMenuGroupedMockData; track group.country) {
+            <fudis-dropdown-menu-group [label]="group.country">
+              @for (groupedItem of group.items; track groupedItem.label) {
+                <fudis-dropdown-menu-item
+                  [label]="groupedItem.label"
+                  [disabled]="groupedItem.disabled"
+                  (handleClick)="_clickOption(groupedItem.label, $event)"
+                >
+                </fudis-dropdown-menu-item>
+              }
+            </fudis-dropdown-menu-group>
+          }
+        </fudis-dropdown-menu>
+      </fudis-icon-button>
+    </fudis-grid-item>
+    <fudis-grid-item [columns]="'1/-1'">
+      @if (_latestClickItem) {
+        <fudis-body-text>Latest clicked item was: {{ _latestClickItem }}</fudis-body-text>
+      }
+    </fudis-grid-item>
+  </fudis-grid>`,
   standalone: false,
 })
 class DropdownMenuExampleComponent {

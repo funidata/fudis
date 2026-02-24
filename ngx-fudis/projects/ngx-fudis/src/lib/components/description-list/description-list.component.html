@@ -1,12 +1,12 @@
-@if (tag === 'p') {
+@if (tag === "p") {
   <ng-container *ngTemplateOutlet="singleItem" />
 }
 
-@if (tag === 'dl' && !disableGrid) {
+@if (tag === "dl" && !disableGrid) {
   <ng-container *ngTemplateOutlet="multipleItems" />
 }
 
-@if (tag === 'dl' && disableGrid) {
+@if (tag === "dl" && disableGrid) {
   <ng-container *ngTemplateOutlet="disabledGrid" />
 }
 
@@ -37,7 +37,7 @@
       [rowGap]="variant === 'compact' ? 'none' : rowGap"
       [columns]="columns ? columns : 2"
       role="list"
-      >
+    >
       <ng-container *ngTemplateOutlet="dlContent"></ng-container>
     </dl>
   }

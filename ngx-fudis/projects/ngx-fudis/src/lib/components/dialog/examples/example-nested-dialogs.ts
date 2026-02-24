@@ -27,7 +27,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
             [level]="2"
             [titleVariant]="'xl'"
             [errorSummaryTitle]="'You need to fill up the information.'"
-            >
+          >
             <fudis-form-content>
               <ng-container *ngTemplateOutlet="favoriteVeggies" />
               <fudis-text-input
@@ -35,7 +35,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
                 [id]="'example-input-' + id"
                 [label]="'What is your favorite ' + id"
                 [control]="exampleDialogFormGroup.controls['favoriteVeggie']"
-                />
+              />
             </fudis-form-content>
             <fudis-form-actions>
               <fudis-button
@@ -43,13 +43,13 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
                 (handleClick)="closeDialog()"
                 [label]="'Save and close dialog'"
                 [variant]="'secondary'"
-                />
+              />
               @if (nextDialogToOpen) {
                 <fudis-button
                   fudisFormSubmit
                   (handleClick)="openDialogTemplate(nextDialogToOpen)"
                   [label]="'Save and open next Dialog'"
-                  />
+                />
               }
             </fudis-form-actions>
           </fudis-form>
@@ -66,7 +66,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
         </fudis-dialog-actions>
       }
     </fudis-dialog>
-    
+
     <ng-template #favoriteVeggies>
       @if ((_favoriteVeggies | keyvalue)?.length === 0) {
         <fudis-body-text class="fudis-mb-sm">
@@ -80,7 +80,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
         </fudis-body-text>
       }
     </ng-template>
-    `,
+  `,
 })
 export class ExampleNestedDialogComponent {
   constructor(
@@ -145,8 +145,8 @@ export class ExampleNestedDialogComponent {
     <fudis-button
       (handleClick)="openDialogTemplate(firstDialog)"
       [label]="'Open dialog with nested dialogs'"
-      />
-    
+    />
+
     @if (_favourites) {
       @for (veggie of _favourites | keyvalue; track veggie.key) {
         <fudis-body-text class="fudis-mt-sm">
@@ -155,38 +155,38 @@ export class ExampleNestedDialogComponent {
         </fudis-body-text>
       }
     }
-    
+
     <ng-template #firstDialog>
       <example-nested-dialog
         [id]="'fruit'"
         [title]="'First opened Dialog'"
         [size]="size"
         [nextDialogToOpen]="secondDialog"
-        />
+      />
     </ng-template>
-    
+
     <ng-template #secondDialog>
       <example-nested-dialog
         [id]="'berry'"
         [title]="'Second opened Dialog'"
         [size]="size"
         [nextDialogToOpen]="thirdDialog"
-        />
+      />
     </ng-template>
-    
+
     <ng-template #thirdDialog>
       <example-nested-dialog
         [id]="'vegetable'"
         [title]="'Third opened Dialog'"
         [size]="size"
         [nextDialogToOpen]="fourthDialog"
-        />
+      />
     </ng-template>
-    
+
     <ng-template #fourthDialog>
       <example-nested-dialog [title]="'Fourth and last opened Dialog'" [size]="size" />
     </ng-template>
-    `,
+  `,
 })
 export class ExampleNestedDialogsComponent {
   constructor(private _dialogService: FudisDialogService) {}
