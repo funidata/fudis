@@ -10,8 +10,8 @@
     "test": "jest --coverage true",
     "test:watch": "jest --coverage false --watch",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "storybook": "ng run storybook:start",
-    "build-storybook": "npm run docs:json && ng run storybook:build",
+    "storybook": "ng run ngx-fudis:storybook",
+    "build-storybook": "npm run docs:json && ng run ngx-fudis:build-storybook",
     "stylelint-scss-check": "stylelint-config-prettier-scss-check",
     "lint": "eslint .",
     "stylelint": "stylelint '**/*.{css,scss}'"
