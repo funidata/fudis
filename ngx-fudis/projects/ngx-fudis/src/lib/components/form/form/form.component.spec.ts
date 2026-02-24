@@ -218,7 +218,7 @@ describe('FormComponent', () => {
 
       expect(headingElement).toBeTruthy();
       expect(headingContent).toBeTruthy();
-      expect(headingContent?.textContent).toEqual('Example Form');
+      expect(headingContent?.textContent.trim()).toEqual('Example Form');
       expect(headingContent?.className).toContain('fudis-heading__variant__md');
     });
 

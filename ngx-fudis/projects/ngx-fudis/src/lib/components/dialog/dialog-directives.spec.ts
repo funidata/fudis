@@ -163,7 +163,7 @@ describe('DialogDirectives', () => {
         'fudis-dialog-actions [fudisDialogClose]',
       )!;
 
-      expect(button.textContent).toEqual('Close this dialog');
+      expect(button.textContent.trim()).toEqual('Close this dialog');
 
       expect(button.ariaDisabled).toEqual(undefined);
       button.click();

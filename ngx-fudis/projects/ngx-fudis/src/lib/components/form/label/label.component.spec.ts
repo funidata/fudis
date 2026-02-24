@@ -31,7 +31,7 @@ describe('LabelComponent', () => {
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-label__content__text'));
 
-      expect(elem.nativeElement.firstChild?.textContent).toEqual(component.text);
+      expect(elem.nativeElement.firstChild?.textContent.trim()).toEqual(component.text);
     });
 
     it('should have required text visible if it is given', () => {
