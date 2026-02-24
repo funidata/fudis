@@ -17,14 +17,22 @@ export default {
 } as Meta;
 
 const Template: StoryFn<PaginationComponent> = (args) => ({
-  props: args,
+  props: {
+    ...args,
+    handlePageChange: (event: number) => {
+      args.pageIndex = event;
+      document.getElementById('fudis-body-text-1')?.focus();
+    },
+  },
   template: `
     <fudis-pagination
       [pageCount]="pageCount"
       [pageIndex]="pageIndex"
       [paginationAriaLabel]="paginationAriaLabel"
-      (pageChange)="pageIndex = $event"
+      [autoFocusOnPageChange]="autoFocusOnPageChange"
+      (pageChange)="handlePageChange($event)"
     ></fudis-pagination>
+      <fudis-body-text *ngIf="!autoFocusOnPageChange" [id]="'fudis-body-text-1'" [align]="'center'" [attr.tabindex]="-1" class="fudis-mt-lg storybook-example-focus">Move focus here on pageChange</fudis-body-text>
   `,
 });
 
@@ -34,4 +42,5 @@ Example.args = {
   pageCount: 20,
   pageIndex: 0,
   paginationAriaLabel: 'Example navigation',
+  autoFocusOnPageChange: true,
 };
