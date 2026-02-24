@@ -49,6 +49,7 @@ import { HeadingComponent } from './components/typography/heading/heading.compon
 import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { IconComponent } from './components/icon/icon.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { LocalizedTextGroupComponent } from './components/form/localized-text-group/localized-text-group.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
@@ -149,7 +150,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   declarations: [
     AlertComponent,
     AlertGroupComponent,
-    BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
     CheckboxComponent,
@@ -235,6 +235,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
    */
   imports: [
     BadgeComponent,
+    BodyTextComponent,
     ButtonComponent,
     CommonModule,
     FormsModule,
@@ -242,6 +243,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     IconButtonComponent,
     IconComponent,
     LayoutModule,
+    LoadingSpinnerComponent,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -313,6 +315,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,
     LinkDirective,
+    LoadingSpinnerComponent,
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,

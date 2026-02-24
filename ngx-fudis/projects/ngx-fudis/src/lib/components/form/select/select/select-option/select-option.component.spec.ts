@@ -70,9 +70,8 @@ describe('SelectOptionComponent', () => {
         GuidanceComponent,
         SelectIconsComponent,
         LabelComponent,
-        BodyTextComponent,
       ],
-      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 

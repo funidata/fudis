@@ -81,10 +81,9 @@ describe('SelectOptionBaseDirective', () => {
         MockComponent,
         GuidanceComponent,
         LabelComponent,
-        BodyTextComponent,
       ],
       providers: [FudisDialogService, SelectBaseDirective, FudisInternalErrorSummaryService],
-      imports: [ButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [BodyTextComponent, ButtonComponent, IconComponent, ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);

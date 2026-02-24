@@ -132,7 +132,6 @@ describe('ErrorSummaryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        BodyTextComponent,
         ExpandableComponent,
         ExpandableContentDirective,
         ErrorSummaryComponent,
@@ -153,7 +152,7 @@ describe('ErrorSummaryComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [IconComponent, ReactiveFormsModule, RouterModule.forRoot([])],
+      imports: [BodyTextComponent, IconComponent, ReactiveFormsModule, RouterModule.forRoot([])],
       providers: [
         FudisInternalErrorSummaryService,
         FudisBreakpointService,
