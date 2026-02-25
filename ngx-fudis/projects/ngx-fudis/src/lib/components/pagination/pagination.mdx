@@ -35,6 +35,14 @@ Pagination requires `pageCount` in order to generate total amount of pages. Mand
 `pageIndex` input defines the currently active page, starting from 0 for the first page. This value controls which page number is visually highlighted and determines the current focus and navigation state.
 If given pageIndex is outside of given pageCount scope, pageIndex will be reset to either first or last item index.
 
+### Focus management
+
+By default focus is preserved on pagination active page item after page change. This can be turned off by setting `autoFocusOnPageChange` input to false.
+By doing this, the application takes the full responsibility of moving focus somewhere else where it best supports accessibility and consistent user experience.
+The recommended place is to move focus on a new page heading or in a beginning of freshly loaded content.
+
+> Note! Moving the focus to the desired location may require timing adjustments so that pagination page change aria-live accouncements do not prevent assistive technology users from being notified of the focus shift.
+
 ### Accessibility
 
 - Pagination has `aria-live: polite` announcement for informing when page have been changed.
@@ -42,7 +50,7 @@ If given pageIndex is outside of given pageCount scope, pageIndex will be reset 
 - Keyboard navigation:
   - `Tab`/ `Shift + Tab` move focus between pagination links.
   - `Enter` is used for selecting key.
-  - Focus is preserved on the active element after a page change.
+  - Focus is preserved on the active element after a page change by default.
 
 ## Properties
 
