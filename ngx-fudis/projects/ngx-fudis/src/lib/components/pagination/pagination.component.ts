@@ -137,7 +137,8 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   }
 
   /**
-   * On default behavior, focus will stay on pagination component. When set to false, application takes responsibility on focus handling on pageChange.
+   * On default behavior, focus will stay on pagination component. When set to false, application
+   * takes responsibility on focus handling on pageChange.
    */
   @Input() autoFocusOnPageChange: boolean = true;
 
@@ -247,10 +248,12 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
    */
   private observer?: ResizeObserver;
 
-  /** 
-   * Signal to track if a pagination button was clicked, and which one, to manage focus in ngAfterViewChecked
+  /**
+   * Signal to track if a pagination button was clicked, and which one, to manage focus in
+   * ngAfterViewChecked
    */
-  private _buttonClickState: WritableSignal<{ clicked: boolean; type: 'prev' | 'next' | null }> = signal({ clicked: false, type: null });
+  private _buttonClickState: WritableSignal<{ clicked: boolean; type: 'prev' | 'next' | null }> =
+    signal({ clicked: false, type: null });
 
   /**
    * Get translation for aria-live page openend announcement
@@ -346,7 +349,7 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
       this.userSelectedIndex = -1;
     }
     // Keep focus on clicked button
-    if(this._buttonClickState().clicked && this.autoFocusOnPageChange){
+    if (this._buttonClickState().clicked && this.autoFocusOnPageChange) {
       const buttonType = this._buttonClickState().type;
       if (buttonType) {
         document.getElementById(`${this.id}-button-${buttonType}`)?.focus();
@@ -361,37 +364,41 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   /**
    * Emit pageChange event on pagination item click
    */
-  goToPage(index: number, event?: Event, wasButtonClick?: boolean, buttonType?: 'prev' | 'next'): void {
+  goToPage(
+    index: number,
+    event?: Event,
+    wasButtonClick?: boolean,
+    buttonType?: 'prev' | 'next',
+  ): void {
     event?.preventDefault();
     if (index < 0 || index >= this._pageCount()) return;
 
     const lastPage = this._pageCount() - 1;
 
     /**
-     * When autoFocusOnPageChange is true (default), move focus to the new active page item on page change. 
-     * If autoFocusOnPageChange is false, let the application handle focus.
+     * When autoFocusOnPageChange is true (default), move focus to the new active page item on page
+     * change. If autoFocusOnPageChange is false, let the application handle focus.
      */
     if (this.autoFocusOnPageChange) {
-
-        if (wasButtonClick) {
-          // Set signal to track that a button was clicked and which one, so that focus can be moved to the correct button in ngAfterViewChecked
-          this._buttonClickState.set({ clicked: true, type: buttonType || null });
-          if (index === 0) {
-            // Move focus to first page item
-            this.userSelectedIndex = 0;
-          } else if (index === lastPage) {
-            // Move focus to last page item
-            this.userSelectedIndex = lastPage;
-          } else {
-            // Do not move focus on button click to middle pages
-            this.userSelectedIndex = -1;
-          }
+      if (wasButtonClick) {
+        // Set signal to track that a button was clicked and which one, so that focus can be moved to the correct button in ngAfterViewChecked
+        this._buttonClickState.set({ clicked: true, type: buttonType || null });
+        if (index === 0) {
+          // Move focus to first page item
+          this.userSelectedIndex = 0;
+        } else if (index === lastPage) {
+          // Move focus to last page item
+          this.userSelectedIndex = lastPage;
         } else {
-          this._buttonClickState.set({ clicked: false, type: null });
-          // Set focus on clicking page numbers
-          this.userSelectedIndex = index;
+          // Do not move focus on button click to middle pages
+          this.userSelectedIndex = -1;
         }
-  }
+      } else {
+        this._buttonClickState.set({ clicked: false, type: null });
+        // Set focus on clicking page numbers
+        this.userSelectedIndex = index;
+      }
+    }
     this.pageChange.emit(index);
     this._pageIndex.set(index);
   }
