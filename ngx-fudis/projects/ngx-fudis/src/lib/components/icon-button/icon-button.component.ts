@@ -130,17 +130,6 @@ export class IconButtonComponent extends ButtonBaseDirective implements OnChange
   }
 
   /**
-   * Handle Escape key down for menu button
-   */
-  protected _handleMenuButtonKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-      this.closeMenu();
-    }
-  }
-
-  /**
    * Handler for blurring out and closing menu button's dropdown
    */
   protected _handleButtonBlur(event: FocusEvent): void {
