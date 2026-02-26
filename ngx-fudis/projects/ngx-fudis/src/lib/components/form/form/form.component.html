@@ -1,3 +1,4 @@
+<!-- prettier-ignore -->
 <form
   fudisGrid
   [id]="id"
@@ -20,8 +21,7 @@
             fudisDialogTitle
             [variant]="titleVariant"
             [level]="level"
-            >{{ title }}
-            @if (badge && badgeText) {
+            >{{ title }}@if (badge && badgeText) {
               <fudis-badge
                 class="fudis-form__header__title__badge"
                 [variant]="badge"
@@ -32,8 +32,7 @@
         }
         @if (!_dialogParent) {
           <fudis-heading class="fudis-mb-xs" [variant]="titleVariant" [level]="level"
-            >{{ title }}
-            @if (badge && badgeText) {
+            >{{ title }}@if (badge && badgeText) {
               <fudis-badge
                 class="fudis-form__header__title__badge"
                 [variant]="badge"

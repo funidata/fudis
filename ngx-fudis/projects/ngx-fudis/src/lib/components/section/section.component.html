@@ -1,3 +1,4 @@
+<!-- prettier-ignore -->
 @if (_classList | async; as classes) {
   <section
     fudisGrid
@@ -14,8 +15,7 @@
       <div class="fudis-section__header__container">
         <div class="fudis-section__header__heading">
           <fudis-heading class="fudis-mb-none" [level]="level" [variant]="titleVariant"
-            >{{ title }}
-            @if (badge && badgeText) {
+            >{{ title }}@if (badge && badgeText) {
               <fudis-badge
                 class="fudis-section__header__heading__badge"
                 [variant]="badge"
