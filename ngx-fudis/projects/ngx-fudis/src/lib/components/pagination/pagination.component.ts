@@ -13,6 +13,7 @@ import {
   ViewChild,
   AfterViewChecked,
   effect,
+  WritableSignal,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
@@ -136,6 +137,12 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   }
 
   /**
+   * On default behavior, focus will stay on pagination component. When set to false, application
+   * takes responsibility on focus handling on pageChange.
+   */
+  @Input() autoFocusOnPageChange: boolean = true;
+
+  /**
    * PageChange Emitter
    */
   @Output() pageChange = new EventEmitter<number>();
@@ -242,6 +249,13 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   private observer?: ResizeObserver;
 
   /**
+   * Signal to track if a pagination button was clicked, and which one, to manage focus in
+   * ngAfterViewChecked
+   */
+  private _buttonClickState: WritableSignal<{ clicked: boolean; type: 'prev' | 'next' | null }> =
+    signal({ clicked: false, type: null });
+
+  /**
    * Get translation for aria-live page openend announcement
    */
   get liveAnnouncement(): string {
@@ -334,6 +348,13 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
 
       this.userSelectedIndex = -1;
     }
+    // Keep focus on clicked button
+    if (this._buttonClickState().clicked && this.autoFocusOnPageChange) {
+      const buttonType = this._buttonClickState().type;
+      if (buttonType) {
+        document.getElementById(`${this.id}-button-${buttonType}`)?.focus();
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -343,28 +364,41 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   /**
    * Emit pageChange event on pagination item click
    */
-  goToPage(index: number, event?: Event, wasButtonClick = false) {
+  goToPage(
+    index: number,
+    event?: Event,
+    wasButtonClick?: boolean,
+    buttonType?: 'prev' | 'next',
+  ): void {
     event?.preventDefault();
     if (index < 0 || index >= this._pageCount()) return;
 
     const lastPage = this._pageCount() - 1;
 
-    if (wasButtonClick) {
-      if (index === 0) {
-        // Move focus to first page item
-        this.userSelectedIndex = 0;
-      } else if (index === lastPage) {
-        // Move focus to last page item
-        this.userSelectedIndex = lastPage;
+    /**
+     * When autoFocusOnPageChange is true (default), move focus to the new active page item on page
+     * change. If autoFocusOnPageChange is false, let the application handle focus.
+     */
+    if (this.autoFocusOnPageChange) {
+      if (wasButtonClick) {
+        // Set signal to track that a button was clicked and which one, so that focus can be moved to the correct button in ngAfterViewChecked
+        this._buttonClickState.set({ clicked: true, type: buttonType || null });
+        if (index === 0) {
+          // Move focus to first page item
+          this.userSelectedIndex = 0;
+        } else if (index === lastPage) {
+          // Move focus to last page item
+          this.userSelectedIndex = lastPage;
+        } else {
+          // Do not move focus on button click to middle pages
+          this.userSelectedIndex = -1;
+        }
       } else {
-        // Do not move focus on button click to middle pages
-        this.userSelectedIndex = -1;
+        this._buttonClickState.set({ clicked: false, type: null });
+        // Set focus on clicking page numbers
+        this.userSelectedIndex = index;
       }
-    } else {
-      // Set focus on clicking page numbers
-      this.userSelectedIndex = index;
     }
-
     this.pageChange.emit(index);
     this._pageIndex.set(index);
   }

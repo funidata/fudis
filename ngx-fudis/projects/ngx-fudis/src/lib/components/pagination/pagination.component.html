@@ -13,7 +13,7 @@
     class="fudis-button fudis-button__tertiary fudis-button__size__medium {{
       _mainCssPrevClass | async
     }}"
-    (click)="goToPage(_pageIndex() - 1, $event, true)"
+    (click)="goToPage(_pageIndex() - 1, $event, true, 'prev')"
   >
     <span
       class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron fudis-icon__rotate__flip-180"
@@ -62,7 +62,7 @@
   <button
     *ngIf="_pageIndex() < _pageCount() - 1"
     [id]="id + '-button-next'"
-    (click)="goToPage(_pageIndex() + 1, $event, true)"
+    (click)="goToPage(_pageIndex() + 1, $event, true, 'next')"
     [attr.aria-label]="((_paginationNextButtonAria | async) || '') + ' ' + (_pageIndex() + 2)"
     class="fudis-button fudis-button__tertiary fudis-button__size__medium {{
       _mainCssNextClass | async
