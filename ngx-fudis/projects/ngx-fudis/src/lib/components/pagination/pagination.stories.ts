@@ -36,8 +36,15 @@ const Template: StoryFn<PaginationComponent> = (args) => ({
       [autoFocusOnPageChange]="autoFocusOnPageChange"
       (pageChange)="handlePageChange($event)"
     ></fudis-pagination>
-      <p *ngIf="!autoFocusOnPageChange" id="fudis-body-text-1" tabindex="-1" class="fudis-body-text fudis-body-text__md-regular fudis-body-text__center storybook-example-focus fudis-mt-lg ">Move focus here on pageChange</p>
-      `,
+    @if (!autoFocusOnPageChange) {
+    <p
+      id="fudis-body-text-1"
+      tabindex="-1"
+      class="fudis-body-text fudis-body-text__md-regular fudis-body-text__center storybook-example-focus fudis-mt-lg"
+      >Move focus here on pageChange</p
+    >
+    }
+  `,
 });
 
 export const Example = Template.bind({});
