@@ -10,7 +10,7 @@
         title || _translationService.getTranslations()().ERROR_SUMMARY.TITLE
       }}</h2>
       <ul class="fudis-error-summary__error-list">
-        @for (error of errors; track error.id) {
+        @for (error of errors; track error.message) {
           <li class="fudis-error-summary__error-list__item">
             <a
               fudisLink

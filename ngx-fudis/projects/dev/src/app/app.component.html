@@ -112,7 +112,7 @@
         <ng-template fudisExpandableContent>
           <fudis-heading [level]="3">List of courses</fudis-heading>
           <ul>
-            @for (courses of visibleCourses(); track courses) {
+            @for (courses of visibleCourses(); track courses.id) {
               <li>
                 <fudis-dl class="fudis-mt-sm">
                   <fudis-dl-item>
