@@ -32,4 +32,9 @@
       opacity: 0;
     }
   }
+
+  // For some reason the button in LoadingSpinnerDemo needs to have position relative in order to register the click event.
+  .fudis-button-host {
+    position: relative;
+  }
 }
