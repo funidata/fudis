@@ -1,5 +1,6 @@
 <ng-container *transloco="let t">
   <div class="root-style">
+    <fudis-alert-group />
     <fudis-grid [columns]="4" [classes]="'fudis-mt-lg'">
       <fudis-grid-item [columns]="'3 / 4'" [alignSelfX]="'end'" [alignSelfY]="'end'">
         <fudis-body-text>1 rem = {{ visibleRemValue }}px</fudis-body-text>
@@ -153,6 +154,5 @@
       <a fudisLink href="example.com" [external]="true" [title]="'Järjestelmätiedot'"></a>
       <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
     </fudis-footer>
-    <fudis-alert-group />
   </div>
 </ng-container>
