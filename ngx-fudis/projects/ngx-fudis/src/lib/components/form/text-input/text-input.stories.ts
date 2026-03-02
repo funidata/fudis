@@ -45,8 +45,9 @@ import { fudisInputSizeArray } from '../../../types/forms';
       <fudis-text-input
         [control]="mainFormGroup.controls['number']"
         [label]="'Number input'"
-        [helpText]="'Be mindful that allowed numbers are between 10 and 99'"
+        [helpText]="'Be mindful that allowed numbers are between 10 and 99. The step value is set to 0.01.'"
         [type]="'number'"
+        [step]="0.01"
         [size]="'sm'"
       />
     </form>
@@ -125,6 +126,9 @@ export default {
     popoverTriggerLabel: {
       control: { type: 'text' },
     },
+    step: {
+      control: { type: 'number' },
+    },
   },
 } as Meta;
 
@@ -134,6 +138,7 @@ const commonArgs: Partial<TextInputComponent> = {
   size: 'lg',
   initialFocus: false,
   type: 'text',
+  step: null,
   autocomplete: 'off',
   name: '',
   popoverText: '',
@@ -154,6 +159,7 @@ const ExampleTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [type]="type"
+      [step]="step"
       [autocomplete]="autocomplete"
       [name]="name"
       [popoverText]="popoverText"
@@ -182,6 +188,7 @@ const DisabledTemplate: StoryFn = (args) => ({
       [helpText]="helpText"
       [initialFocus]="initialFocus"
       [type]="type"
+      [step]="step"
       [popoverText]="popoverText"
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
