@@ -26,14 +26,14 @@
   "author": "Funidata Ltd",
   "homepage": "https://fudis.funidata.fi/",
   "peerDependencies": {
-    "@angular/cdk": ">=19.0.0",
-    "@angular/common": ">=19.0.0",
-    "@angular/core": ">=19.0.0",
-    "@angular/material": ">=19.0.0",
+    "@angular/cdk": ">=20.0.0",
+    "@angular/common": ">=20.0.0",
+    "@angular/core": ">=20.0.0",
+    "@angular/material": ">=20.0.0",
     "@funidata/fudis-core": "^2.2.0"
   },
   "devDependencies": {
     "tslib": "^2.7.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.9.3"
   }
 }

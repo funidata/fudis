@@ -31,7 +31,7 @@ describe('LabelComponent', () => {
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-label__content__text'));
 
-      expect(elem.nativeElement.firstChild?.textContent).toEqual(component.text);
+      expect(elem.nativeElement.firstChild?.textContent.trim()).toEqual(component.text);
     });
 
     it('should have required text visible if it is given', () => {
@@ -51,7 +51,6 @@ describe('LabelComponent', () => {
       const popoverTriggerElem = getElement(fixture, 'button');
       expect(popoverTriggerElem).toBeTruthy();
       expect(popoverTriggerElem.getAttribute('aria-label')).toEqual('This gives more info');
-      expect(popoverTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual('I am the info');
     });
 
     it('should have required attributes', () => {

@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisSelectOption } from '../../../../types/forms';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { defaultOptions, groupedMockData } from '../common/mock_data';
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-select-showcase',
   template: `
     <fudis-form
@@ -44,16 +44,16 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of defaultOptions"
-                  [data]="option"
-                ></fudis-select-option>
-                <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-                  <fudis-select-option
-                    *ngFor="let groupedOption of group.options"
-                    [data]="groupedOption"
-                  ></fudis-select-option>
-                </fudis-select-group> </ng-template></fudis-select
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
           ></fudis-grid-item>
           <fudis-grid-item
             ><fudis-heading [level]="2" [variant]="'md'"
@@ -70,16 +70,16 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of defaultOptions"
-                  [data]="option"
-                ></fudis-select-option>
-                <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-                  <fudis-select-option
-                    *ngFor="let groupedOption of group.options"
-                    [data]="groupedOption"
-                  ></fudis-select-option>
-                </fudis-select-group> </ng-template></fudis-select
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
           ></fudis-grid-item>
           <fudis-grid-item
             ><fudis-heading [level]="2" [variant]="'md'"
@@ -96,16 +96,16 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of defaultOptions"
-                  [data]="option"
-                ></fudis-select-option>
-                <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-                  <fudis-select-option
-                    *ngFor="let groupedOption of group.options"
-                    [data]="groupedOption"
-                  ></fudis-select-option>
-                </fudis-select-group> </ng-template></fudis-select
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
           ></fudis-grid-item>
 
           <fudis-grid-item
@@ -123,16 +123,16 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of defaultOptions"
-                  [data]="option"
-                ></fudis-select-option>
-                <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-                  <fudis-select-option
-                    *ngFor="let groupedOption of group.options"
-                    [data]="groupedOption"
-                  ></fudis-select-option>
-                </fudis-select-group> </ng-template></fudis-select
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
           ></fudis-grid-item>
           <fudis-grid-item
             ><fudis-heading [level]="2" [variant]="'md'"
@@ -149,16 +149,16 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of defaultOptions"
-                  [data]="option"
-                ></fudis-select-option>
-                <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-                  <fudis-select-option
-                    *ngFor="let groupedOption of group.options"
-                    [data]="groupedOption"
-                  ></fudis-select-option>
-                </fudis-select-group> </ng-template></fudis-select
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
           ></fudis-grid-item>
 
           <fudis-grid-item
@@ -176,34 +176,34 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of defaultOptions"
-                  [data]="option"
-                ></fudis-select-option>
-                <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-                  <fudis-select-option
-                    *ngFor="let groupedOption of group.options"
-                    [data]="groupedOption"
-                  ></fudis-select-option>
-                </fudis-select-group> </ng-template></fudis-select
+                @for (option of defaultOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
+                @for (group of groupedMockData; track group.country) {
+                  <fudis-select-group [label]="group.country">
+                    @for (groupedOption of group.options; track groupedOption.value) {
+                      <fudis-select-option [data]="groupedOption"></fudis-select-option>
+                    }
+                  </fudis-select-group>
+                }</ng-template></fudis-select
           ></fudis-grid-item>
           <fudis-grid-item [columns]="'stretch'">
             <fudis-heading [level]="3" [variant]="'md'">Current control value</fudis-heading>
-            <ng-container *ngIf="!control.value">
-              <fudis-body-text [variant]="'lg-regular'"
-                >Control value: null.</fudis-body-text
-              ></ng-container
-            >
-            <fudis-dl *ngIf="control.value" [variant]="'compact'">
-              <fudis-dl-item>
-                <fudis-dt [contentText]="'Value'"></fudis-dt>
-                <fudis-dd [contentText]="control.value.value"></fudis-dd>
-              </fudis-dl-item>
-              <fudis-dl-item>
-                <fudis-dt [contentText]="'Label'"></fudis-dt>
-                <fudis-dd [contentText]="control.value.label"></fudis-dd>
-              </fudis-dl-item>
-            </fudis-dl> </fudis-grid-item></fudis-grid
+            @if (!control.value) {
+              <fudis-body-text [variant]="'lg-regular'">Control value: null.</fudis-body-text>
+            }
+            @if (control.value) {
+              <fudis-dl [variant]="'compact'">
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Value'"></fudis-dt>
+                  <fudis-dd [contentText]="control.value.value"></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Label'"></fudis-dt>
+                  <fudis-dd [contentText]="control.value.label"></fudis-dd>
+                </fudis-dl-item>
+              </fudis-dl>
+            }</fudis-grid-item></fudis-grid
       ></fudis-form-content>
     </fudis-form>
   `,

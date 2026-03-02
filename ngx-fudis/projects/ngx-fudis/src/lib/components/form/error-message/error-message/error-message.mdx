@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
 import * as ErrorMessageStories from "./error-message.stories";
 import { ErrorMessageDirective } from "./error-message.directive";
 import * as VersionSelectorStories from "../../../../../storybook-docs/version-selector/version-selector.stories";
@@ -22,9 +22,9 @@ This requires the use of selector `fudis-error-message`. Both Error Message and 
 
 ### Mandatory Properties
 
-The mandatory property for Error Message is `message`. Visibility of the error is handled by Angular `*ngIf` directive.
+The mandatory property for Error Message is `message`. Visibility of the error is handled by Angular `@if (condition)` control flow.
 
-When `*ngIf` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `*ngIf` is set to false again, this will remove the added validator and also remove error from Error Summary.
+When `@if` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `*@if` is set to false again, this will remove the added validator and also remove error from Error Summary.
 
 Message parameter can be passed either as a string or as an observable string.
 
@@ -32,10 +32,11 @@ Message parameter can be passed either as a string or as an observable string.
 <fudis-text-input
 	[control]="control"
 	[label]="'Required text input'">
-	<fudis-error-message
-		*ngIf="errorExistsCondition"
-		[message]="'This is a custom error message which has been added with content projection'"
-		 />
+  @if (errorExistsCondition) {
+    <fudis-error-message
+      [message]="'This is a custom error message which has been added with content projection'"
+    />
+  }
 </fudis-text-input>
 ```
 

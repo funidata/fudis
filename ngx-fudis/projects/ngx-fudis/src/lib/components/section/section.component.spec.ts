@@ -140,7 +140,7 @@ describe('SectionComponent', () => {
 
       expect(headingWrapper).toBeTruthy();
       expect(headingComponent).toBeTruthy();
-      expect(headingElement?.textContent).toEqual('This is section title');
+      expect(headingElement?.textContent.trim()).toEqual('This is section title');
     });
 
     it('should return correct title variant', () => {

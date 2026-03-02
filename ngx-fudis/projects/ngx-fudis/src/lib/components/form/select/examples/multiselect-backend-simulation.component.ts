@@ -40,10 +40,9 @@ import { FudisValidators } from '../../../../utilities/form/validators';
     >
       <ng-template fudisSelectOptions>
         @if (searchResults | async; as options) {
-          <fudis-multiselect-option
-            *ngFor="let option of options"
-            [data]="option"
-          ></fudis-multiselect-option>
+          @for (option of options; track option.value) {
+            <fudis-multiselect-option [data]="option"></fudis-multiselect-option>
+          }
         }</ng-template
     ></fudis-multiselect>
   `,

@@ -1,5 +1,6 @@
-import { ArgTypes, Meta } from "@storybook/blocks";
+import { ArgTypes, Meta } from "@storybook/addon-docs/blocks";
 import { ErrorSummaryComponent } from "./error-summary.component";
+import { errorSummaryExclude } from "../../../utilities/storybook";
 import * as VersionSelectorStories from "../../../../storybook-docs/version-selector/version-selector.stories";
 
 <Meta title="Components/Form/Error Summary" />
@@ -31,4 +32,4 @@ Configuration and triggering Error Summary reload are managed with [Error Summar
 - [Form](/docs/components-form-form--documentation)
 - [Link](/docs/directives-link--documentation)
 
-<ArgTypes of={ErrorSummaryComponent} />
+<ArgTypes of={ErrorSummaryComponent} exclude={errorSummaryExclude} />

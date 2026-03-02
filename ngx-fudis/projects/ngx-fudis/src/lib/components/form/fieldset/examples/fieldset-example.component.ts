@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisRadioButtonOption } from '../../../../types/forms';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { PopoverApiDirective } from '../../../../directives/popover/popover-api.directive';
 
@@ -20,7 +20,7 @@ interface MyFieldsetForm {
 }
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-fieldset',
   template: `
     <fudis-fieldset
@@ -62,11 +62,9 @@ interface MyFieldsetForm {
             [label]="'Course type'"
             [control]="fieldsetExample.controls['courseType']"
           >
-            <fudis-radio-button
-              *ngFor="let option of courseTypeOptions"
-              [label]="option.label"
-              [value]="option.value"
-            />
+            @for (option of courseTypeOptions; track option.value) {
+              <fudis-radio-button [label]="option.label" [value]="option.value" />
+            }
           </fudis-radio-button-group>
           <fudis-date-range>
             <fudis-datepicker

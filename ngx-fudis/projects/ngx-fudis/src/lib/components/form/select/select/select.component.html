@@ -72,32 +72,29 @@
         />
       </div>
     </div>
-    <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce && !control.disabled && !disabled"
-      #dropdownRef
-      [open]="dropdownOpen"
-      [selectVariant]="variant"
-      [results]="_resultsLength()"
-      [autocompleteHelpText]="autocompleteHelpText"
-      [autocompleteNoResultsText]="autocompleteNoResultsText"
-      [filterText]="autocompleteFilterText"
-      [size]="size"
-      [parentId]="id"
-      (handleBlur)="_dropdownBlur($event)"
-      (handleFocus)="_dropdownFocus($event)"
-    >
-      <ng-container *ngIf="_selectOptionsDirective">
-        <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
-      </ng-container>
-    </fudis-select-dropdown>
+    @if (_optionsLoadedOnce && !control.disabled && !disabled) {
+      <fudis-select-dropdown
+        #dropdownRef
+        [open]="dropdownOpen"
+        [selectVariant]="variant"
+        [results]="_resultsLength()"
+        [autocompleteHelpText]="autocompleteHelpText"
+        [autocompleteNoResultsText]="autocompleteNoResultsText"
+        [filterText]="autocompleteFilterText"
+        [size]="size"
+        [parentId]="id"
+        (handleBlur)="_dropdownBlur($event)"
+        (handleFocus)="_dropdownFocus($event)"
+      >
+        @if (_selectOptionsDirective) {
+          <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
+        }
+      </fudis-select-dropdown>
+    }
   </div>
-  <fudis-guidance
-    *ngIf="!disableGuidance"
-    [inputLabel]="label"
-    [helpText]="helpText"
-    [for]="id"
-    [control]="control"
-  >
-    <ng-content select="fudis-error-message" />
-  </fudis-guidance>
+  @if (!disableGuidance) {
+    <fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [control]="control">
+      <ng-content select="fudis-error-message" />
+    </fudis-guidance>
+  }
 </div>

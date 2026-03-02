@@ -23,8 +23,6 @@ export default {
         ExampleNestedDialogsComponent,
         ExampleDialogSizeComponent,
       ],
-      providers: [],
-      declarations: [],
     }),
   ],
   parameters: {

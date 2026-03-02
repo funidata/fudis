@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Component } from '@angular/core';
 import { LanguageBadgeGroupComponent } from './language-badge-group.component';
 import docs from './language-badge-group.mdx';

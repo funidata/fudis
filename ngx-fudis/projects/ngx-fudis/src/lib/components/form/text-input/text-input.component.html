@@ -33,14 +33,15 @@
     [attr.aria-label]="ariaLabel"
     [readonly]="control.disabled || disabled || null"
   />
-  <fudis-guidance
-    *ngIf="!disableGuidance"
-    [control]="control"
-    [for]="id"
-    [helpText]="helpText"
-    [inputLabel]="label"
-    [maxLength]="_maxLength | async"
-  >
-    <ng-content select="fudis-error-message" />
-  </fudis-guidance>
+  @if (!disableGuidance) {
+    <fudis-guidance
+      [control]="control"
+      [for]="id"
+      [helpText]="helpText"
+      [inputLabel]="label"
+      [maxLength]="_maxLength | async"
+    >
+      <ng-content select="fudis-error-message" />
+    </fudis-guidance>
+  }
 </div>

@@ -1,4 +1,4 @@
-<ng-container *ngIf="popoverText">
+@if (popoverText) {
   <button
     fudisPopover
     #buttonElement
@@ -15,21 +15,22 @@
     [popoverPosition]="popoverPosition"
     [popoverText]="popoverText"
   >
-    <ng-container *ngIf="icon">
+    @if (icon) {
       <div [class]="_iconMargin | async">
-        <fudis-icon
-          *ngIf="_iconColor | async as iconColor"
-          class="fudis-button__icon__component"
-          [color]="iconColor"
-          [icon]="icon"
-          [rotate]="iconRotate"
-        ></fudis-icon>
+        @if (_iconColor | async; as iconColor) {
+          <fudis-icon
+            class="fudis-button__icon__component"
+            [color]="iconColor"
+            [icon]="icon"
+            [rotate]="iconRotate"
+          ></fudis-icon>
+        }
       </div>
-    </ng-container>
+    }
   </button>
-</ng-container>
+}
 
-<ng-container *ngIf="!popoverText">
+@if (!popoverText) {
   <button
     #buttonElement
     [class]="_classList | async"
@@ -48,19 +49,21 @@
     "
     [attr.aria-haspopup]="!asMenuButton ? null : 'menu'"
   >
-    <ng-container *ngIf="icon">
+    @if (icon) {
       <div [class]="_iconMargin | async">
-        <fudis-icon
-          *ngIf="_iconColor | async as iconColor"
-          class="fudis-button__icon__component"
-          [color]="iconColor"
-          [icon]="icon"
-          [rotate]="iconRotate"
-        ></fudis-icon>
-      </div> </ng-container
-  ></button>
-</ng-container>
+        @if (_iconColor | async; as iconColor) {
+          <fudis-icon
+            class="fudis-button__icon__component"
+            [color]="iconColor"
+            [icon]="icon"
+            [rotate]="iconRotate"
+          ></fudis-icon>
+        }
+      </div>
+    }
+  </button>
+}
 
-<ng-container *ngIf="asMenuButton && (dropdownOpen | async)">
+@if (asMenuButton && (dropdownOpen | async)) {
   <ng-content></ng-content>
-</ng-container>
+}

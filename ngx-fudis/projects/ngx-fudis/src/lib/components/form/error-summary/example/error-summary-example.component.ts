@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisFormErrorSummaryUpdateStrategy } from '../../../../types/errorSummary';
@@ -25,7 +24,7 @@ interface CourseBooksFormGroup {
 }
 
 @Component({
-  imports: [NgxFudisModule, CommonModule, TranslocoDirective],
+  imports: [NgxFudisModule, TranslocoDirective],
   selector: 'example-error-summary',
   templateUrl: './error-summary-example.component.html',
 })

@@ -5,7 +5,7 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisDialogSize } from '../../../types/miscellaneous';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisSelectOption } from '../../../types/forms';
 
 type TestForm = {
@@ -21,7 +21,7 @@ export const gradeOptions: FudisSelectOption[] = [
 ];
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-dialog-with-form',
   template: `
     <fudis-dialog [size]="_size">
@@ -54,10 +54,9 @@ export const gradeOptions: FudisSelectOption[] = [
               [variant]="'dropdown'"
             >
               <ng-template fudisSelectOptions>
-                <fudis-select-option
-                  *ngFor="let option of gradeOptions"
-                  [data]="option"
-                ></fudis-select-option>
+                @for (option of gradeOptions; track option.value) {
+                  <fudis-select-option [data]="option"></fudis-select-option>
+                }
               </ng-template>
             </fudis-select>
           </fudis-form-content>

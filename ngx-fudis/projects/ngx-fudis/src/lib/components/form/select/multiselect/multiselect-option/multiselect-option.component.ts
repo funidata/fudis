@@ -1,5 +1,5 @@
-import { Component, Host, Inject, Optional, OnDestroy, OnChanges } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, Host, Inject, Optional, OnDestroy, OnChanges, DOCUMENT } from '@angular/core';
+
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';

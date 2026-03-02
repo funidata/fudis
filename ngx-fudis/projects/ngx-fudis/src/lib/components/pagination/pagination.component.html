@@ -6,71 +6,71 @@
   <span aria-atomic="true" aria-live="polite" class="fudis-visually-hidden">
     {{ hasUserChangedPage ? liveAnnouncement : "" }}
   </span>
-  <button
-    *ngIf="_pageIndex() > 0"
-    [id]="id + '-button-prev'"
-    [attr.aria-label]="((_paginationPreviousButtonAria | async) || '') + ' ' + _pageIndex()"
-    class="fudis-button fudis-button__tertiary fudis-button__size__medium {{
-      _mainCssPrevClass | async
-    }}"
-    (click)="goToPage(_pageIndex() - 1, $event, true, 'prev')"
-  >
-    <span
-      class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron fudis-icon__rotate__flip-180"
-    ></span>
-    <span class="{{ _mainCssPrevClass | async }}__text-content">{{
-      _paginationPreviousButton | async
-    }}</span></button
-  >
+  @if (_pageIndex() > 0) {
+    <button
+      [id]="id + '-button-prev'"
+      [attr.aria-label]="((_paginationPreviousButtonAria | async) || '') + ' ' + _pageIndex()"
+      class="fudis-button fudis-button__tertiary fudis-button__size__medium {{
+        _mainCssPrevClass | async
+      }}"
+      (click)="goToPage(_pageIndex() - 1, $event, true, 'prev')"
+    >
+      <span
+        class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron fudis-icon__rotate__flip-180"
+      ></span>
+      <span class="{{ _mainCssPrevClass | async }}__text-content">{{
+        _paginationPreviousButton | async
+      }}</span></button
+    >
+  }
   <ul class="fudis-pagination-list">
     <ng-container>
       @for (item of itemList(); track item) {
-        <span
-          *ngIf="item === 'start-ellipsis' || item === 'end-ellipsis'"
-          aria-hidden="true"
-          class="fudis-pagination-list-item-ellipsis"
-          >...</span
-        >
-        <li *ngIf="item !== 'start-ellipsis' && item !== 'end-ellipsis'">
-          <ng-container *ngIf="_pageIndex() + 1 === item; else link">
-            <span
-              #activeItem
-              class="fudis-pagination-list-item fudis-pagination-list-item--active"
-              aria-current="page"
-              [attr.aria-label]="item + ', ' + (_paginationCurrent | async)"
-              tabindex="-1"
-            >
-              {{ item }}
-            </span>
-          </ng-container>
-          <ng-template #link>
-            <a
-              class="fudis-pagination-list-item fudis-pagination-list-item-link"
-              [href]="pageHref(item - 1)"
-              [attr.aria-label]="
-                item === _pageCount() ? item + ', ' + (_paginationLast | async) : item
-              "
-              (click)="goToPage(item - 1, $event)"
-            >
-              {{ item }}
-            </a>
-          </ng-template>
-        </li>
+        @if (item === "start-ellipsis" || item === "end-ellipsis") {
+          <span aria-hidden="true" class="fudis-pagination-list-item-ellipsis">...</span>
+        }
+        @if (item !== "start-ellipsis" && item !== "end-ellipsis") {
+          <li>
+            @if (_pageIndex() + 1 === item) {
+              <span
+                #activeItem
+                class="fudis-pagination-list-item fudis-pagination-list-item--active"
+                aria-current="page"
+                [attr.aria-label]="item + ', ' + (_paginationCurrent | async)"
+                tabindex="-1"
+              >
+                {{ item }}
+              </span>
+            } @else {
+              <a
+                class="fudis-pagination-list-item fudis-pagination-list-item-link"
+                [href]="pageHref(item - 1)"
+                [attr.aria-label]="
+                  item === _pageCount() ? item + ', ' + (_paginationLast | async) : item
+                "
+                (click)="goToPage(item - 1, $event)"
+              >
+                {{ item }}
+              </a>
+            }
+          </li>
+        }
       }
     </ng-container>
   </ul>
-  <button
-    *ngIf="_pageIndex() < _pageCount() - 1"
-    [id]="id + '-button-next'"
-    (click)="goToPage(_pageIndex() + 1, $event, true, 'next')"
-    [attr.aria-label]="((_paginationNextButtonAria | async) || '') + ' ' + (_pageIndex() + 2)"
-    class="fudis-button fudis-button__tertiary fudis-button__size__medium {{
-      _mainCssNextClass | async
-    }}"
-  >
-    <span class="{{ _mainCssNextClass | async }}__text-content">{{
-      _paginationNextButton | async
-    }}</span>
-    <span class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron"></span>
-  </button>
+  @if (_pageIndex() < _pageCount() - 1) {
+    <button
+      [id]="id + '-button-next'"
+      (click)="goToPage(_pageIndex() + 1, $event, true, 'next')"
+      [attr.aria-label]="((_paginationNextButtonAria | async) || '') + ' ' + (_pageIndex() + 2)"
+      class="fudis-button fudis-button__tertiary fudis-button__size__medium {{
+        _mainCssNextClass | async
+      }}"
+    >
+      <span class="{{ _mainCssNextClass | async }}__text-content">{{
+        _paginationNextButton | async
+      }}</span>
+      <span class="fudis-icon fudis-icon__lg fudis-icon__color__primary fudis-icon__chevron"></span>
+    </button>
+  }
 </nav>

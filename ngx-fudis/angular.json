@@ -3,36 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "storybook": {
-      "projectType": "application",
-      "root": ".storybook",
-      "sourceRoot": ".storybook",
-      "architect": {
-        "build": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "enableProdMode": false,
-            "outputDir": "./static",
-            "tsConfig": ".storybook/tsconfig.json",
-            "styles": [".storybook/style.scss"],
-            "compodoc": true,
-            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
-          }
-        },
-        "start": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "tsConfig": ".storybook/tsconfig.json",
-            "styles": [".storybook/style.scss"],
-            "port": 6006,
-            "host": "0.0.0.0",
-            "open": false,
-            "compodoc": true,
-            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
-          }
-        }
-      }
-    },
     "ngx-fudis": {
       "projectType": "library",
       "root": "projects/ngx-fudis",
@@ -63,6 +33,33 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["projects/ngx-fudis/**/*.ts", "projects/ngx-fudis/**/*.html"]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "tsConfig": ".storybook/tsconfig.json",
+            "styles": [".storybook/style.scss"],
+            "port": 6006,
+            "browserTarget": "ngx-fudis:build",
+            "host": "0.0.0.0",
+            "open": false,
+            "compodoc": true,
+            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "enableProdMode": false,
+            "configDir": ".storybook",
+            "outputDir": "./static",
+            "tsConfig": ".storybook/tsconfig.json",
+            "styles": [".storybook/style.scss"],
+            "browserTarget": "ngx-fudis:build",
+            "compodoc": true,
+            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
           }
         }
       }
@@ -201,6 +198,30 @@
     },
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
+    },
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

@@ -98,7 +98,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build docs
-        run: npm run build -- storybook
+        run: npm run build-storybook
       - name: Copy docs to S3 bucket
         run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/$VERSION
 

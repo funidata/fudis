@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas, Source } from "@storybook/addon-docs/blocks";
 import { LoadingSpinnerComponent } from "./loading-spinner.component.ts";
 import * as LoadingSpinnerStories from "./loading-spinner.stories.ts";
 import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
@@ -32,7 +32,7 @@ Application should determine case by case, if use of Loading Spinner would make 
 
 ### Full Page
 
-- **IMPORTANT**: Instead of using `<fudis-loading-spinner *ngIf="appLoading"/>` use `<fudis-loading-spinner [visible]="appLoading"/>`. This will help screen reader users, as component exists in DOM although it is not visually visible.
+- **IMPORTANT**: Instead of using `@if (appLoading) { <fudis-loading-spinner /> }` use `<fudis-loading-spinner [visible]="appLoading"/>`. This will help screen reader users, as component exists in DOM although it is not visually visible.
 - Use larger `variant` of `lg`
 - Component communicates its loading status for screen reader. With variant `lg` component automatically communicates status messages '_Page is loading_' and '_Page load finished_'. This can be overriden by app using `statusMessage` property.
 - After loading is finished, user focus should be where initially intended after page load, e. g. in the `h1` title element. If focus is manually changed by the Application, there should be small delay before focus, so that screen reader has time to announce '_Page load finished_' status.
@@ -55,25 +55,5 @@ Application should determine case by case, if use of Loading Spinner would make 
   [visible]="true" // Set this false, when loading is finished
 />`}
 />
-
-## Design Guidelines
-
-### Common
-
-- SVG fill color: primary (e.g. Sisu #1076DB)
-- Component max width: 256px
-
-### Variant `sm`
-
-- Icon size: 24px \* 24px
-- Label text: Body Text regular md
-- Margin top: 24px
-- Horizontally centered
-
-### Variant `lg`
-
-- Icon size: 48px \* 48px
-- Label text: Body Text regular lg
-- Horizontally and vertically centered
 
 <ArgTypes of={LoadingSpinnerComponent} />

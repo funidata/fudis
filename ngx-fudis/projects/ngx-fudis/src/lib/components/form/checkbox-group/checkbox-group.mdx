@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
 import { CheckboxGroupComponent } from "./checkbox-group.component";
 import { CheckboxGroupOptionComponent } from "./checkbox-group-option/checkbox-group-option.component";
 import * as CheckboxGroupStories from "./checkbox-group.stories";
@@ -56,10 +56,12 @@ myOptions = [
   [formGroup]="myFormGroup"
   [label]="'Select contact method'"
   (handleChange)="handleChange($event)">
-  <fudis-checkbox-group-option *ngFor="let option of myOptions"
-    [controlName]="option.controlName
-    [label]="option.label"
-    (handleChange)="checkboxChange($event)" />
+  @for (option of myOptions; track option.controlName) {
+    <fudis-checkbox-group-option
+      [controlName]="option.controlName"
+      [label]="option.label"
+      (handleChange)="checkboxChange($event)" />
+    }
 </fudis-checkbox-group>
 ```
 

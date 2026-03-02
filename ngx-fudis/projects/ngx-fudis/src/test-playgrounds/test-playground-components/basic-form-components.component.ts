@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { FudisValidators } from '../../lib/utilities/form/validators';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 
@@ -14,7 +14,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [CommonModule, NgxFudisModule],
+  imports: [NgxFudisModule],
   selector: 'example-basic-form-components',
   templateUrl: './basic-form-components.component.html',
 })

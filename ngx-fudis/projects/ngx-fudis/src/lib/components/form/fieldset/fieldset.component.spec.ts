@@ -116,7 +116,7 @@ describe('FieldSetComponent', () => {
     it('should have Fieldset label as given', () => {
       const fieldsetLabel = getElement(fixtureMock, '.fudis-fieldset__legend__main__text');
 
-      expect(fieldsetLabel.textContent).toEqual('Fieldset label');
+      expect(fieldsetLabel.textContent.trim()).toEqual('Fieldset label');
     });
 
     it('should have fieldset helpText as given', () => {

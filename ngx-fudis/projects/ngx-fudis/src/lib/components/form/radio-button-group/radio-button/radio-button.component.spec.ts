@@ -26,11 +26,9 @@ import { FieldsetContentDirective } from '../../fieldset/fieldset-content.direct
     [label]="'Choose a pet'"
     [control]="testControl"
   >
-    <fudis-radio-button
-      *ngFor="let option of _options"
-      [label]="option.label"
-      [value]="option.value"
-    />
+    @for (option of _options; track option.value) {
+      <fudis-radio-button [label]="option.label" [value]="option.value" />
+    }
   </fudis-radio-button-group>`,
 })
 class MockComponent {
@@ -79,9 +77,8 @@ describe('RadioButtonComponent', () => {
 
   describe('Basic inputs and styles', () => {
     it('should have correct label', () => {
-      const radioButton = fixture.nativeElement.querySelector(
-        '#radio-button-test-group [ng-reflect-value="capybara"]',
-      );
+      const groupOptions = fixture.nativeElement.querySelectorAll('fudis-radio-button');
+      const radioButton = groupOptions[2]; // capybara
 
       const label = radioButton.querySelector('.fudis-radio-button__label') as HTMLElement;
 

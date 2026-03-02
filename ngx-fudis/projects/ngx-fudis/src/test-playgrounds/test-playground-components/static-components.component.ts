@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { fudisIconArray } from '../../lib/types/icons';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
+import { LoadingSpinnerComponent } from '../../lib/components/loading-spinner/loading-spinner.component';
 
 @Component({
-  imports: [CommonModule, NgxFudisModule],
+  imports: [LoadingSpinnerComponent, NgxFudisModule],
   selector: 'example-static-components',
   templateUrl: './static-components.component.html',
 })

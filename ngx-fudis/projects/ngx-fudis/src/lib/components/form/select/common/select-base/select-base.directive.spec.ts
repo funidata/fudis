@@ -38,12 +38,13 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
       [size]="size"
     >
       <ng-template fudisSelectOptions>
-        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          />
-        </fudis-multiselect-group>
+        @for (group of groupedData; track group.country) {
+          <fudis-multiselect-group [label]="group.country">
+            @for (groupedOption of group.options; track groupedOption.value) {
+              <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
+            }
+          </fudis-multiselect-group>
+        }
       </ng-template>
     </fudis-multiselect>
     <fudis-multiselect
@@ -58,12 +59,13 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
       [selectionClearButton]="clearButton"
     >
       <ng-template fudisSelectOptions>
-        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          />
-        </fudis-multiselect-group>
+        @for (group of groupedData; track group.country) {
+          <fudis-multiselect-group [label]="group.country">
+            @for (groupedOption of group.options; track groupedOption.value) {
+              <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
+            }
+          </fudis-multiselect-group>
+        }
       </ng-template>
     </fudis-multiselect>`,
 })
@@ -212,7 +214,7 @@ describe('SelectBaseDirective', () => {
 
       const noResultsElement = getElement(fixture, '.fudis-select-dropdown__help-text__last');
 
-      expect(noResultsElement.textContent).toEqual(customText);
+      expect(noResultsElement.textContent.trim()).toEqual(customText);
     });
 
     it('autocompleteFilter false should not filter results', () => {
@@ -260,15 +262,17 @@ describe('SelectBaseDirective', () => {
 
     it('autocompleteHelpText', () => {
       component.multiSelectAuto.openDropdown();
-
       fixture.detectChanges();
 
-      const dropdownElementAttribute = getElement(
-        fixture,
-        '#fudis-multiselect-2-main-wrapper fudis-select-dropdown',
-      ).getAttribute('ng-reflect-autocomplete-help-text');
+      component.multiSelectAuto.setAutocompleteFilterText('a');
+      fixture.detectChanges();
 
-      expect(dropdownElementAttribute).toEqual('This is autocomplete help text');
+      const dropdownElementHelpText = getElement(
+        fixture,
+        '#fudis-multiselect-2-main-wrapper fudis-select-dropdown fudis-body-text p',
+      );
+
+      expect(dropdownElementHelpText.textContent.trim()).toEqual('This is autocomplete help text');
     });
 
     it('should show sorted selected options as form input value for both input sharing the same control', async () => {

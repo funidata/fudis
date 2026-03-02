@@ -6,7 +6,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { DatepickerComponent } from './datepicker.component';
 import docs from './datepicker.mdx';
 import { datepickerControlsExclude } from '../../../../utilities/storybook';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { LanguageChangeComponent } from '../examples/example-datepicker-language-change';
 import { DateFilterWithErrorMessageComponent } from '../examples/example-datepicker-date-filter';
 
@@ -89,9 +89,9 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     />
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
     <example-language-change-component />
   `,
 });
@@ -119,9 +119,9 @@ const PreselectedTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 
@@ -148,9 +148,9 @@ const DisabledTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 
@@ -186,9 +186,9 @@ const MinMaxTemplate: StoryFn = (args) => ({
       [popoverPosition]="popoverPosition"
       [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 

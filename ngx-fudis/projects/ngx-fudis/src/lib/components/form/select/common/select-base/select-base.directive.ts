@@ -13,6 +13,7 @@ import {
   WritableSignal,
   signal,
   OnDestroy,
+  DOCUMENT,
 } from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
@@ -21,7 +22,7 @@ import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
-import { DOCUMENT } from '@angular/common';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';

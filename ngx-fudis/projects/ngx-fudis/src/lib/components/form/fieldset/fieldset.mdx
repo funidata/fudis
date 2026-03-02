@@ -1,6 +1,7 @@
-import { Meta, ArgTypes } from "@storybook/blocks";
+import { Meta, ArgTypes } from "@storybook/addon-docs/blocks";
 import { FieldSetComponent } from "./fieldset.component";
 import { FieldsetActionsDirective } from "./fieldset-content.directive";
+import { fieldsetExclude } from "../../../utilities/storybook";
 import * as VersionSelectorStories from "../../../../storybook-docs/version-selector/version-selector.stories";
 
 <Meta title="Components/Form/Fieldset" />
@@ -93,4 +94,4 @@ HTML Template
 
 <ArgTypes of={FieldSetComponent} />
 
-<ArgTypes of={FieldsetActionsDirective} />
+<ArgTypes of={FieldsetActionsDirective} exclude={fieldsetExclude} />

@@ -136,7 +136,7 @@ describe('LocalizedTextGroupComponent', () => {
         const labelText = getElement(fixture, '.fudis-label__content__text').firstChild
           ?.textContent;
 
-        expect(labelText).toEqual(values.label);
+        expect(labelText?.trim()).toEqual(values.label);
       });
 
       it(`should have correct group label`, () => {
@@ -146,13 +146,13 @@ describe('LocalizedTextGroupComponent', () => {
           .attributes['aria-labelledby'];
         const groupLabelText = getElement(fixture, `#${groupLabelId}`).textContent;
 
-        expect(groupLabelText).toEqual(labelText);
+        expect(groupLabelText.trim()).toEqual(labelText?.trim());
       });
 
       it(`should have correct help text`, () => {
         const helpText = getElement(fixture, '.fudis-guidance__help-text').textContent;
 
-        expect(helpText).toEqual(values.helpText);
+        expect(helpText.trim()).toEqual(values.helpText);
       });
 
       it(`should have correct id`, () => {

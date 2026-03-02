@@ -3,10 +3,9 @@ import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisDialogSize } from '../../../types/miscellaneous';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-dialog-with-grid',
   template: `
     <fudis-button

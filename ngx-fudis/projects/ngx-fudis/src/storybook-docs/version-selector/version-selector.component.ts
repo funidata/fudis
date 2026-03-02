@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+
 import { FudisSelectOption } from '../../lib/types/forms';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 
@@ -15,7 +15,7 @@ interface VersionsResponse {
   templateUrl: './version-selector.component.html',
   styleUrls: ['./version-selector.component.scss'],
   standalone: true,
-  imports: [CommonModule, NgxFudisModule],
+  imports: [NgxFudisModule],
 })
 export class VersionSelectorComponent implements OnInit {
   private _versions: string[] = [];

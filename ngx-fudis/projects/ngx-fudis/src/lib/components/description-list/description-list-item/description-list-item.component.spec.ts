@@ -38,9 +38,15 @@ import { LanguageBadgeComponent } from '../../language-badge-group/language-badg
     <fudis-dl>
       <fudis-dl-item #langDlItem>
         <fudis-dt [contentText]="'Single DT'"></fudis-dt>
-        <fudis-dd *ngIf="firstLang" [lang]="'en'" [contentText]="'First English DD'"></fudis-dd>
-        <fudis-dd *ngIf="secondLang" [lang]="'en'" [contentText]="'Another English DD'"></fudis-dd>
-        <fudis-dd *ngIf="thirdLang" [lang]="'fi'" [contentText]="'Finnish DD'"></fudis-dd>
+        @if (firstLang) {
+          <fudis-dd [lang]="'en'" [contentText]="'First English DD'"></fudis-dd>
+        }
+        @if (secondLang) {
+          <fudis-dd [lang]="'en'" [contentText]="'Another English DD'"></fudis-dd>
+        }
+        @if (thirdLang) {
+          <fudis-dd [lang]="'fi'" [contentText]="'Finnish DD'"></fudis-dd>
+        }
       </fudis-dl-item>
     </fudis-dl>
   `,
