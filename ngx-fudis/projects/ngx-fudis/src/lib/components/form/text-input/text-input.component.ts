@@ -68,6 +68,12 @@ export class TextInputComponent
   @Input() name: string | null = null;
 
   /**
+   * Step for number input: controls the minimum increment for number values. Use 'any' to allow any
+   * decimal value.
+   */
+  @Input() step: number | 'any' | null = null;
+
+  /**
    * Max number for number input HTML attribute
    */
   protected _maxNumber = new BehaviorSubject<number | null>(null);
