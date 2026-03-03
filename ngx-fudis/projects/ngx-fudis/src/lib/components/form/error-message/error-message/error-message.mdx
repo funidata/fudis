@@ -24,7 +24,7 @@ This requires the use of selector `fudis-error-message`. Both Error Message and 
 
 The mandatory property for Error Message is `message`. Visibility of the error is handled by Angular `@if (condition)` control flow.
 
-When `@if` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `*@if` is set to false again, this will remove the added validator and also remove error from Error Summary.
+When `@if` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `@if` is set to false again, this will remove the added validator and also remove error from Error Summary.
 
 Message parameter can be passed either as a string or as an observable string.
 
