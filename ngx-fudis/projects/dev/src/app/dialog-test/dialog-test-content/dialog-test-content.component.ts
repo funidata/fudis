@@ -17,7 +17,9 @@ import { Component } from '@angular/core';
           [asMenuButton]="true"
         >
           <fudis-dropdown-menu>
-            <fudis-dropdown-menu-item *ngFor="let option of menuOptions" [label]="option" />
+            @for (option of menuOptions; track option) {
+              <fudis-dropdown-menu-item [label]="option" />
+            }
           </fudis-dropdown-menu>
         </fudis-icon-button>
         <fudis-grid [classes]="'fudis-mt-md fudis-mb-md'">
@@ -56,7 +58,7 @@ import { Component } from '@angular/core';
               value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987'
             }
           ]"
-        ></fudis-dl> -->
+      ></fudis-dl> -->
         <hr />
         <fudis-grid [columns]="3" [classes]="'fudis-mt-sm fudis-mb-sm'">
           <div style="border: 2px solid lightblue">

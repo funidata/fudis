@@ -60,14 +60,12 @@ export const AllIcons: StoryFn = (args) => ({
   },
   template: html`
     <fudis-grid [columns]="{xs:2, md: 3, lg: 4}" [width]="'sm'">
-      <div
-        class="storybook-flex fudis-my-xxs fudis-mx-xxs"
-        style="justify-content: space-between;"
-        *ngFor="let icon of fudisIconArray;"
-      >
+      @for (icon of fudisIconArray; track icon) {
+      <div class="storybook-flex fudis-my-xxs fudis-mx-xxs" style="justify-content: space-between;">
         <fudis-body-text>{{icon}}</fudis-body-text>
         <fudis-icon [color]="color" [rotate]="rotate" [icon]="icon"></fudis-icon>
       </div>
+      }
     </fudis-grid>
   `,
 });

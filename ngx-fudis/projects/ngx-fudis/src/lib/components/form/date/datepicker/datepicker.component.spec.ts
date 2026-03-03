@@ -92,7 +92,7 @@ describe('DatepickerComponent', () => {
         '.fudis-guidance__help-text',
       ) as HTMLParagraphElement;
 
-      expect(guidanceHelpText.textContent).toEqual('Select your favourite date');
+      expect(guidanceHelpText.textContent.trim()).toEqual('Select your favourite date');
     });
   });
 

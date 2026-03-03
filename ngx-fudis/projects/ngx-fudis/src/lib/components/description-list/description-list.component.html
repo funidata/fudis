@@ -1,14 +1,14 @@
-<ng-container *ngIf="tag === 'p'">
+@if (tag === "p") {
   <ng-container *ngTemplateOutlet="singleItem" />
-</ng-container>
+}
 
-<ng-container *ngIf="tag === 'dl' && !disableGrid">
+@if (tag === "dl" && !disableGrid) {
   <ng-container *ngTemplateOutlet="multipleItems" />
-</ng-container>
+}
 
-<ng-container *ngIf="tag === 'dl' && disableGrid">
+@if (tag === "dl" && disableGrid) {
   <ng-container *ngTemplateOutlet="disabledGrid" />
-</ng-container>
+}
 
 <ng-template #disabledGrid>
   <dl [id]="id" [class]="_classList | async" role="list">
@@ -23,23 +23,24 @@
 </ng-template>
 
 <ng-template #multipleItems>
-  <dl
-    *ngIf="_classList | async as classes"
-    fudisGrid
-    [id]="id"
-    [width]="width"
-    [align]="align"
-    [alignItemsX]="alignItemsX"
-    [alignItemsY]="alignItemsY"
-    [classes]="classes"
-    [serviceDefaults]="false"
-    [columnGap]="columnGap"
-    [rowGap]="variant === 'compact' ? 'none' : rowGap"
-    [columns]="columns ? columns : 2"
-    role="list"
-  >
-    <ng-container *ngTemplateOutlet="dlContent"></ng-container>
-  </dl>
+  @if (_classList | async; as classes) {
+    <dl
+      fudisGrid
+      [id]="id"
+      [width]="width"
+      [align]="align"
+      [alignItemsX]="alignItemsX"
+      [alignItemsY]="alignItemsY"
+      [classes]="classes"
+      [serviceDefaults]="false"
+      [columnGap]="columnGap"
+      [rowGap]="variant === 'compact' ? 'none' : rowGap"
+      [columns]="columns ? columns : 2"
+      role="list"
+    >
+      <ng-container *ngTemplateOutlet="dlContent"></ng-container>
+    </dl>
+  }
 </ng-template>
 
 <ng-template #dlContent>

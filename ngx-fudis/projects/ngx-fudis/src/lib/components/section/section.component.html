@@ -1,39 +1,43 @@
-<section
-  *ngIf="_classList | async as classes"
-  fudisGrid
-  [id]="id"
-  [tabIndex]="-1"
-  [attr.aria-labelledby]="_headingId"
-  [align]="align"
-  [width]="width"
-  [classes]="classes"
-  [rowGap]="'none'"
-  [serviceDefaults]="false"
->
-  <div class="fudis-section__header" [id]="_headingId">
-    <div class="fudis-section__header__container">
-      <div class="fudis-section__header__heading">
-        <fudis-heading class="fudis-mb-none" [level]="level" [variant]="titleVariant"
-          >{{ title
-          }}<fudis-badge
-            *ngIf="badge && badgeText"
-            class="fudis-section__header__heading__badge"
-            [variant]="badge"
-            [content]="badgeText"
-        /></fudis-heading>
-        <fudis-icon-button
-          *ngIf="popoverTriggerLabel && popoverText"
-          class="fudis-section__header__heading__popover"
-          [size]="'extra-small'"
-          [variant]="'tertiary'"
-          [icon]="'info-circle'"
-          [ariaLabel]="popoverTriggerLabel"
-          [popoverPosition]="popoverPosition"
-          [popoverText]="popoverText"
-        />
+<!-- prettier-ignore -->
+@if (_classList | async; as classes) {
+  <section
+    fudisGrid
+    [id]="id"
+    [tabIndex]="-1"
+    [attr.aria-labelledby]="_headingId"
+    [align]="align"
+    [width]="width"
+    [classes]="classes"
+    [rowGap]="'none'"
+    [serviceDefaults]="false"
+  >
+    <div class="fudis-section__header" [id]="_headingId">
+      <div class="fudis-section__header__container">
+        <div class="fudis-section__header__heading">
+          <fudis-heading class="fudis-mb-none" [level]="level" [variant]="titleVariant"
+            >{{ title }}@if (badge && badgeText) {
+              <fudis-badge
+                class="fudis-section__header__heading__badge"
+                [variant]="badge"
+                [content]="badgeText"
+              />
+            }
+          </fudis-heading>
+          @if (popoverTriggerLabel && popoverText) {
+            <fudis-icon-button
+              class="fudis-section__header__heading__popover"
+              [size]="'extra-small'"
+              [variant]="'tertiary'"
+              [icon]="'info-circle'"
+              [ariaLabel]="popoverTriggerLabel"
+              [popoverPosition]="popoverPosition"
+              [popoverText]="popoverText"
+            />
+          }
+        </div>
+        <ng-content select="fudis-section-actions"></ng-content>
       </div>
-      <ng-content select="fudis-section-actions"></ng-content>
     </div>
-  </div>
-  <ng-content select="fudis-section-content"></ng-content>
-</section>
+    <ng-content select="fudis-section-content"></ng-content>
+  </section>
+}

@@ -90,10 +90,16 @@
 <fudis-hr class="fudis-my-md" />
 <fudis-heading [level]="2">Breadcrumbs</fudis-heading>
 <fudis-breadcrumbs [label]="'Breadcrumbs'">
-  <fudis-breadcrumbs-item *ngFor="let link of breadcrumbLinks; let index = index">
-    <a *ngIf="index + 1 !== breadcrumbLinks.length" [href]="link.url">{{ link.label }}</a>
-    <fudis-body-text *ngIf="index + 1 === breadcrumbLinks.length">{{ link.label }}</fudis-body-text>
-  </fudis-breadcrumbs-item>
+  @for (link of breadcrumbLinks; track link.url; let index = $index) {
+    <fudis-breadcrumbs-item>
+      @if (index + 1 !== breadcrumbLinks.length) {
+        <a [href]="link.url">{{ link.label }}</a>
+      }
+      @if (index + 1 === breadcrumbLinks.length) {
+        <fudis-body-text>{{ link.label }}</fudis-body-text>
+      }
+    </fudis-breadcrumbs-item>
+  }
 </fudis-breadcrumbs>
 <fudis-hr class="fudis-my-md" />
 <fudis-heading [level]="2">Links</fudis-heading>
@@ -181,14 +187,12 @@
 <fudis-hr class="fudis-my-md" />
 <fudis-heading [level]="2">Icons</fudis-heading>
 <fudis-grid [columns]="{ xs: 2, md: 3, lg: 4 }" [width]="'sm'">
-  <div
-    class="storybook-flex fudis-my-xxs fudis-mx-xxs"
-    style="justify-content: space-between"
-    *ngFor="let icon of iconArray"
-  >
-    <fudis-body-text>{{ icon }}</fudis-body-text>
-    <fudis-icon [icon]="icon" />
-  </div>
+  @for (icon of iconArray; track icon) {
+    <div class="storybook-flex fudis-my-xxs fudis-mx-xxs" style="justify-content: space-between">
+      <fudis-body-text>{{ icon }}</fudis-body-text>
+      <fudis-icon [icon]="icon" />
+    </div>
+  }
 </fudis-grid>
 <fudis-hr class="fudis-my-md" />
 <fudis-heading [level]="2">Footer</fudis-heading>

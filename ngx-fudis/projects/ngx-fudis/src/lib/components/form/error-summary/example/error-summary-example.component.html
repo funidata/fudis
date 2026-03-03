@@ -53,11 +53,12 @@
                   [label]="t('form.courseType.label')"
                   [control]="formExample.controls['courseType']"
                 >
-                  <fudis-radio-button
-                    *ngFor="let option of courseTypeOptions"
-                    [label]="t('form.courseType.options.' + option)"
-                    [value]="option"
-                  />
+                  @for (option of courseTypeOptions; track option) {
+                    <fudis-radio-button
+                      [label]="t('form.courseType.options.' + option)"
+                      [value]="option"
+                    />
+                  }
                 </fudis-radio-button-group>
                 <fudis-checkbox-group
                   [formGroup]="formExample.controls.courseBooks"
@@ -96,10 +97,11 @@
                   [label]="t('form.maskot.label') + ' (Dropdown)'"
                 >
                   <ng-template fudisSelectOptions>
-                    <fudis-select-option
-                      *ngFor="let option of mainMaskotOptions"
-                      [data]="{ value: option.value, label: t(option.label) }"
-                    />
+                    @for (option of mainMaskotOptions; track option.value) {
+                      <fudis-select-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
                   </ng-template>
                 </fudis-select>
                 <fudis-select
@@ -108,10 +110,11 @@
                   [label]="t('form.maskot.label') + ' (Autocomplete)'"
                 >
                   <ng-template fudisSelectOptions>
-                    <fudis-select-option
-                      *ngFor="let option of mainMaskotOptions"
-                      [data]="{ value: option.value, label: t(option.label) }"
-                    />
+                    @for (option of mainMaskotOptions; track option.value) {
+                      <fudis-select-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
                   </ng-template>
                 </fudis-select>
                 <fudis-multiselect
@@ -120,10 +123,11 @@
                   [label]="t('form.courseTopics.label') + ' (Dropdown)'"
                 >
                   <ng-template fudisSelectOptions>
-                    <fudis-multiselect-option
-                      *ngFor="let option of topicOptions"
-                      [data]="{ value: option.value, label: t(option.label) }"
-                    />
+                    @for (option of topicOptions; track option.value) {
+                      <fudis-multiselect-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
                   </ng-template>
                 </fudis-multiselect>
                 <fudis-multiselect
@@ -132,10 +136,11 @@
                   [label]="t('form.courseTopics.label') + ' (Autocomplete)'"
                 >
                   <ng-template fudisSelectOptions>
-                    <fudis-multiselect-option
-                      *ngFor="let option of topicOptions"
-                      [data]="{ value: option.value, label: t(option.label) }"
-                    />
+                    @for (option of topicOptions; track option.value) {
+                      <fudis-multiselect-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
                   </ng-template>
                 </fudis-multiselect>
                 <div>
@@ -163,26 +168,27 @@
                   }}</fudis-heading>
                   @if (formExample.controls.courseTopics.value) {
                     <fudis-dl>
-                      <fudis-dl-item
-                        *ngFor="
-                          let option of formExample.controls.courseTopics.value;
-                          let index = index
-                        "
-                      >
-                        <fudis-dt [contentText]="t('selectOption') + ' ' + (index + 1)" />
-                        <fudis-dd>
-                          <fudis-dl [variant]="'compact'">
-                            <fudis-dl-item>
-                              <fudis-dt [contentText]="t('value')" />
-                              <fudis-dd>{{ option.value }}</fudis-dd>
-                            </fudis-dl-item>
-                            <fudis-dl-item>
-                              <fudis-dt [contentText]="t('label')" />
-                              <fudis-dd>{{ option.label }}</fudis-dd>
-                            </fudis-dl-item>
-                          </fudis-dl>
-                        </fudis-dd>
-                      </fudis-dl-item>
+                      @for (
+                        option of formExample.controls.courseTopics.value;
+                        track option.value;
+                        let index = $index
+                      ) {
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="t('selectOption') + ' ' + (index + 1)" />
+                          <fudis-dd>
+                            <fudis-dl [variant]="'compact'">
+                              <fudis-dl-item>
+                                <fudis-dt [contentText]="t('value')" />
+                                <fudis-dd>{{ option.value }}</fudis-dd>
+                              </fudis-dl-item>
+                              <fudis-dl-item>
+                                <fudis-dt [contentText]="t('label')" />
+                                <fudis-dd>{{ option.label }}</fudis-dd>
+                              </fudis-dl-item>
+                            </fudis-dl>
+                          </fudis-dd>
+                        </fudis-dl-item>
+                      }
                     </fudis-dl>
                   } @else {
                     <fudis-body-text>{{ t("selectedNullOption") }}</fudis-body-text>

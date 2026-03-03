@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
 import { CheckboxComponent } from "./checkbox.component";
 import * as CheckboxpStories from "./checkbox.stories";
 import { checkboxExclude } from "../../../utilities/storybook";
@@ -33,19 +33,19 @@ When creating a custom error message use `ariaDescribedBy` attribute for linking
 // HTML template
 
   <form [formGroup]="myFormGroup">
-        <fudis-checkbox
-          [label]="'Yes, I accept terms.'"
-          [ariaDescribedBy]="'description-id'"
-          [control]="myFormGroup.get('required')">
-          <a fudisLink href="https://www.example.com" [title]="'Terms descriptions'" [external]="true"></a>
-        </fudis-checkbox>
+    <fudis-checkbox
+      [label]="'Yes, I accept terms.'"
+      [ariaDescribedBy]="'description-id'"
+      [control]="myFormGroup.get('required')">
+      <a fudisLink href="https://www.example.com" [title]="'Terms descriptions'" [external]="true"></a>
+    </fudis-checkbox>
 
-        <p *ngIf="myFormGroup.get('required')?.invalid && myFormGroup.get('required')?.touched"
-          id="description-id">
-          "This is a custom error message, linked with ariaDescribedBy attribute."
-        </p>
-
-    </form>
+    @if (myFormGroup.get('required')?.invalid && myFormGroup.get('required')?.touched) {
+      <p id="description-id">
+        "This is a custom error message, linked with ariaDescribedBy attribute."
+      </p>
+    }
+  </form>
 
 
 ```

@@ -139,11 +139,6 @@ export class FieldSetComponent
 
   private _parentFormId: string | null;
 
-  /**
-   * To observe size changes of this Label and trigger height calculation as needed
-   */
-  private _resizeObserver: ResizeObserver;
-
   ngOnInit(): void {
     this._setFieldsetId();
     this._addToErrorSummary(this.label);

@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { FormControl, ReactiveFormsModule, FormsModule, FormControlOptions } from '@angular/forms';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -18,18 +18,20 @@ import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/stor
         [control]="control"
         [label]="'Focus to input'"
       >
-        <fudis-error-message
-          *ngIf="_errorExists"
-          (handleAddError)="handleAddError.emit($event)"
-          (handleRemoveError)="handleRemoveError.emit($event)"
-          [message]="observableMessage"
-        />
-        <fudis-error-message
-          *ngIf="_errorExists"
-          (handleAddError)="handleAddError.emit($event)"
-          (handleRemoveError)="handleRemoveError.emit($event)"
-          [message]="stringMessage"
-        />
+        @if (_errorExists) {
+          <fudis-error-message
+            (handleAddError)="handleAddError.emit($event)"
+            (handleRemoveError)="handleRemoveError.emit($event)"
+            [message]="observableMessage"
+          />
+        }
+        @if (_errorExists) {
+          <fudis-error-message
+            (handleAddError)="handleAddError.emit($event)"
+            (handleRemoveError)="handleRemoveError.emit($event)"
+            [message]="stringMessage"
+          />
+        }
       </fudis-text-input>
       <fudis-button
         (click)="toggleCustomError()"

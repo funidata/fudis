@@ -9,7 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { NgIf } from '@angular/common';
+
 import { auditTime, fromEvent, Subscription } from 'rxjs';
 import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
 import { IconComponent } from '../icon/icon.component';
@@ -21,7 +21,7 @@ import { IconComponent } from '../icon/icon.component';
  */
 @Component({
   selector: 'fudis-tab-navigation-bar',
-  imports: [NgIf, IconComponent],
+  imports: [IconComponent],
   encapsulation: ViewEncapsulation.None,
   templateUrl: './tab-navigation-bar.component.html',
   styleUrl: './tab-navigation-bar.component.scss',

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-language-change-component',
   template: ` <fudis-grid [classes]="'fudis-mt-sm'" [rowGap]="'xs'">
     <fudis-button [label]="_label" (handleClick)="changeLanguage()" />

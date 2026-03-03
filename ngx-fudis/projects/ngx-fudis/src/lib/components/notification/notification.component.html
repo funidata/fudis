@@ -7,10 +7,18 @@
   <fudis-body-text class="fudis-visually-hidden">{{
     _translateService.getTranslations()().ATTENTION
   }}</fudis-body-text>
-  <fudis-icon *ngIf="variant === 'warning'" [icon]="'exclamation-mark-circle'" />
-  <fudis-icon *ngIf="variant === 'danger'" [icon]="'alert'" />
-  <fudis-icon *ngIf="variant === 'success'" [icon]="'checkmark-circle'" />
-  <fudis-icon *ngIf="variant === 'info'" [icon]="'info-circle'" />
+  @if (variant === "warning") {
+    <fudis-icon [icon]="'exclamation-mark-circle'" />
+  }
+  @if (variant === "danger") {
+    <fudis-icon [icon]="'alert'" />
+  }
+  @if (variant === "success") {
+    <fudis-icon [icon]="'checkmark-circle'" />
+  }
+  @if (variant === "info") {
+    <fudis-icon [icon]="'info-circle'" />
+  }
   <div class="fudis-notification__content">
     <ng-content />
   </div>

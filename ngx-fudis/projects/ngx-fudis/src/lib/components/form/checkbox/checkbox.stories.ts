@@ -37,12 +37,9 @@ const ExampleTemplate: StoryFn = (args) => ({
           [external]="true"
         ></a>
       </fudis-checkbox>
-      <p
-        *ngIf="myFormGroup.get('required')?.invalid && myFormGroup.get('required')?.touched"
-        class="custom-error-message"
-        id="description-id"
-        >Custom error message: Field required!</p
-      >
+      @if (myFormGroup.get('required')?.invalid && myFormGroup.get('required')?.touched) {
+      <p class="custom-error-message" id="description-id">Custom error message: Field required!</p>
+      }
     </form>
   `,
   styles: [

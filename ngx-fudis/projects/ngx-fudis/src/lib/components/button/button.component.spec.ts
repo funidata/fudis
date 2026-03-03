@@ -37,7 +37,7 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('label', 'Button label');
       fixture.detectChanges();
 
-      expect(getButton().textContent).toEqual('Button label');
+      expect(getButton().textContent.trim()).toEqual('Button label');
     });
 
     it('should update CSS classes according to given size Inputs', () => {

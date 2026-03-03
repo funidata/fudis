@@ -34,18 +34,20 @@
           "
           [class.fudis-checkbox__content__box--disabled]="control.disabled"
         >
-          <fudis-icon
-            *ngIf="control.value"
-            [icon]="'check'"
-            class="fudis-checkbox__content__box__icon"
-          />
+          @if (control.value) {
+            <fudis-icon [icon]="'check'" class="fudis-checkbox__content__box__icon" />
+          }
         </span>
       </div>
     </div>
-    <span *ngIf="label" class="fudis-checkbox__label__text">{{ label }}</span>
+    @if (label) {
+      <span class="fudis-checkbox__label__text">{{ label }}</span>
+    }
   </label>
   <ng-content></ng-content>
-  <span class="fudis-checkbox__required" *ngIf="this._required | async"
-    >({{ _translationService.getTranslations()().REQUIRED }})</span
-  >
+  @if (this._required | async) {
+    <span class="fudis-checkbox__required"
+      >({{ _translationService.getTranslations()().REQUIRED }})</span
+    >
+  }
 </div>

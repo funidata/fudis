@@ -3,6 +3,8 @@ import { PaginationComponent } from './pagination.component';
 import docs from './pagination.mdx';
 import { paginationControlsExclude } from '../../utilities/storybook';
 
+const html = String.raw;
+
 export default {
   title: 'Components/Pagination',
   component: PaginationComponent,
@@ -26,7 +28,7 @@ const Template: StoryFn<PaginationComponent> = (args) => ({
       }, 350);
     },
   },
-  template: `
+  template: html`
     <fudis-pagination
       [pageCount]="pageCount"
       [pageIndex]="pageIndex"
@@ -34,8 +36,15 @@ const Template: StoryFn<PaginationComponent> = (args) => ({
       [autoFocusOnPageChange]="autoFocusOnPageChange"
       (pageChange)="handlePageChange($event)"
     ></fudis-pagination>
-      <p *ngIf="!autoFocusOnPageChange" id="fudis-body-text-1" tabindex="-1" class="fudis-body-text fudis-body-text__md-regular fudis-body-text__center storybook-example-focus fudis-mt-lg ">Move focus here on pageChange</p>
-      `,
+    @if (!autoFocusOnPageChange) {
+    <p
+      id="fudis-body-text-1"
+      tabindex="-1"
+      class="fudis-body-text fudis-body-text__md-regular fudis-body-text__center storybook-example-focus fudis-mt-lg"
+      >Move focus here on pageChange</p
+    >
+    }
+  `,
 });
 
 export const Example = Template.bind({});

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 
 @Component({
-  imports: [CommonModule, NgxFudisModule],
+  imports: [NgxFudisModule],
   selector: 'example-grid-collection',
   template: `
     <fudis-heading [level]="2">Grid align start</fudis-heading>

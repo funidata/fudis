@@ -84,7 +84,7 @@ describe('SelectDropdownComponent', () => {
         const noResults = getElement(fixture, '.fudis-select-dropdown__help-text__last');
 
         expect(noResults.classList).toContain('fudis-select-dropdown__help-text--hidden');
-        expect(filterText).toEqual('Showing 42 results');
+        expect(filterText.trim()).toEqual('Showing 42 results');
       });
     });
 
@@ -105,7 +105,7 @@ describe('SelectDropdownComponent', () => {
         const filterText = getElement(fixture, '.fudis-select-dropdown__help-text__first');
 
         expect(filterText.classList).toContain('fudis-select-dropdown__help-text--hidden');
-        expect(noResults).toEqual('No results found');
+        expect(noResults.trim()).toEqual('No results found');
       });
     });
   });
@@ -150,7 +150,7 @@ describe('SelectDropdownComponent', () => {
         const noResults = getElement(fixture, '.fudis-select-dropdown__help-text__last');
 
         expect(noResults.classList).toContain('fudis-select-dropdown__help-text--hidden');
-        expect(helpText).toEqual('Hello from help text');
+        expect(helpText.trim()).toEqual('Hello from help text');
       });
     });
   });
