@@ -8,7 +8,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { fudisInputSizeArray, FudisLocalizedTextGroupDefaultFormGroup } from '../../../types/forms';
 import { LocalizedTextGroupStoryExclude } from '../../../utilities/storybook';
 import docs from './localized-text-group.mdx';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/Form/Localized Text Group',

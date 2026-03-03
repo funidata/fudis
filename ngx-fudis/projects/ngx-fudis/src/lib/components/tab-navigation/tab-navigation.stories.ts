@@ -1,9 +1,5 @@
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-
 import { Component, Input } from '@angular/core';
-import { TabNavigationTabComponent } from './tab-navigation-tab.component';
-import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
-import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 import docs from './tab-navigation.mdx';
 import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
 
@@ -16,15 +12,16 @@ import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
       [variant]="variant"
       [panel]="navigationTabPanel"
     >
-      <button
-        *ngFor="let tab of tabs"
-        fudis-tab-navigation-tab
-        (click)="setLink(tab.link)"
-        [active]="activeLink === tab.link"
-        [id]="tab.id"
-      >
-        {{ tab.label }}
-      </button>
+      @for (tab of tabs; track tab.id) {
+        <button
+          fudis-tab-navigation-tab
+          (click)="setLink(tab.link)"
+          [active]="activeLink === tab.link"
+          [id]="tab.id"
+        >
+          {{ tab.label }}
+        </button>
+      }
       <a
         fudis-tab-navigation-tab
         (click)="setLink('/some-link')"
@@ -69,7 +66,6 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [TabNavigationExampleComponent],
-      imports: [TabNavigationTabComponent, TabNavigationBarComponent, TabNavigationPanelComponent],
     }),
   ],
   parameters: {

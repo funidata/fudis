@@ -8,6 +8,7 @@ import {
   ViewChild,
   WritableSignal,
   signal,
+  DOCUMENT,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -15,7 +16,7 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { DOCUMENT } from '@angular/common';
+
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';

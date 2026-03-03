@@ -16,14 +16,15 @@ import { LinkDirective } from '../../directives/link/link.directive';
       [initialFocus]="true"
       [href]="'/'"
     ></a>
-    <a
-      fudisLink
-      *ngIf="secondLinkVisible"
-      (focus)="handleFocus('fudis-link-2')"
-      [initialFocus]="true"
-      [title]="'Second link'"
-      [href]="'/'"
-    ></a>
+    @if (secondLinkVisible) {
+      <a
+        fudisLink
+        (focus)="handleFocus('fudis-link-2')"
+        [initialFocus]="true"
+        [title]="'Second link'"
+        [href]="'/'"
+      ></a>
+    }
   </div>`,
 })
 class MockFocusComponent {

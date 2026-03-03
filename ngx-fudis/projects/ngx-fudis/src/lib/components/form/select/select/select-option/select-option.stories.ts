@@ -2,7 +2,7 @@ import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import docs from './select-option.mdx';
 import { SelectOptionComponent } from './select-option.component';
 import { selectStoryControlExclude } from '../../../../../utilities/storybook';

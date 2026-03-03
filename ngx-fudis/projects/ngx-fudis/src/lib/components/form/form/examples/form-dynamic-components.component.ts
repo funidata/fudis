@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
@@ -34,7 +33,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-form-dynamic-components',
   template: `
     <fudis-form
@@ -134,12 +133,10 @@ type MyForm = {
                 [label]="'Select your favorite sport'"
                 [control]="formExample.controls.sport"
               >
-                <fudis-radio-button
-                  *ngFor="let sport of sportOptions"
-                  [label]="sport.label"
-                  [value]="sport.value"
-                >
-                </fudis-radio-button>
+                @for (sport of sportOptions; track sport.value) {
+                  <fudis-radio-button [label]="sport.label" [value]="sport.value">
+                  </fudis-radio-button>
+                }
               </fudis-radio-button-group>
 
               <fudis-localized-text-group

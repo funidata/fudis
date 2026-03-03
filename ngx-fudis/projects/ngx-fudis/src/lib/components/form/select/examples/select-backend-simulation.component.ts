@@ -43,7 +43,9 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
     >
       <ng-template fudisSelectOptions>
         @if (searchResults | async; as options) {
-          <fudis-select-option *ngFor="let option of options" [data]="option"></fudis-select-option>
+          @for (option of options; track option.value) {
+            <fudis-select-option [data]="option"></fudis-select-option>
+          }
         }</ng-template
     ></fudis-select>
   `,

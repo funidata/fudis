@@ -90,9 +90,9 @@ describe('GuidanceComponent', () => {
 
     it('should not have errors when control is untouched', () => {
       const element = getElement(fixture, '.fudis-guidance__errors');
-      const error = getElement(fixture, 'fudis-validator-error-message');
+      const error = getElement(fixture, 'fudis-validator-error-message p');
 
-      expect(error.getAttribute('ng-reflect-visible')).toEqual('false');
+      expect(error).toBeFalsy();
       expect(element).toBeNull();
     });
 
@@ -100,19 +100,10 @@ describe('GuidanceComponent', () => {
       component.control.markAsTouched();
       fixture.detectChanges();
       const element = getElement(fixture, '.fudis-guidance__errors');
-      const error = getElement(fixture, 'fudis-validator-error-message');
+      const error = getElement(fixture, 'fudis-validator-error-message p');
 
-      expect(error.getAttribute('ng-reflect-visible')).toEqual('true');
+      expect(error).toBeTruthy();
       expect(element).toBeTruthy();
-    });
-
-    it('should have related input label text passed to Validator Error Message', () => {
-      component.control.markAsTouched();
-      fixture.detectChanges();
-
-      const element = getElement(fixture, 'fudis-validator-error-message');
-      expect(element.getAttribute('ng-reflect-label')).toEqual('Test Label');
-      expect(element.getAttribute('ng-reflect-visible')).toEqual('true');
     });
 
     it('should show maxLength indicator', () => {
@@ -216,20 +207,14 @@ describe('GuidanceComponent', () => {
       });
 
       it('should show errors when single form control is touched', () => {
-        const errorListBefore = getAllElements(
-          fixture,
-          'fudis-validator-error-message[ng-reflect-visible="true"]',
-        );
+        const errorListBefore = getAllElements(fixture, 'fudis-validator-error-message p');
 
         expect(errorListBefore.length).toBe(0);
 
         component.formGroup!.controls['finnish'].markAsTouched();
         fixture.detectChanges();
 
-        const errorList = getAllElements(
-          fixture,
-          'fudis-validator-error-message[ng-reflect-visible="true"]',
-        );
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
         expect(errorList.length).toBe(2);
       });
 
@@ -237,10 +222,7 @@ describe('GuidanceComponent', () => {
         component.groupBlurredOut = false;
         fixture.detectChanges();
 
-        const errorList = getAllElements(
-          fixture,
-          'fudis-validator-error-message[ng-reflect-visible="true"]',
-        );
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
         expect(errorList.length).toBe(0);
       });
 

@@ -29,10 +29,12 @@
             </fudis-heading>
             <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" />
             <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
-            <fudis-body-text *ngIf="_message"
-              >This value comes from the closed dialog input:
-              <strong>{{ _message }}</strong></fudis-body-text
-            >
+            @if (_message) {
+              <fudis-body-text
+                >This value comes from the closed dialog input:
+                <strong>{{ _message }}</strong></fudis-body-text
+              >
+            }
             <fudis-button
               [label]="'Open dialog from component'"
               (handleClick)="openDialogFromComponent()"
@@ -110,33 +112,35 @@
         <ng-template fudisExpandableContent>
           <fudis-heading [level]="3">List of courses</fudis-heading>
           <ul>
-            <li *ngFor="let courses of visibleCourses()">
-              <fudis-dl class="fudis-mt-sm">
-                <fudis-dl-item>
-                  <fudis-dt [contentText]="courses.id + '. ' + courses.course"></fudis-dt>
-                  <fudis-dd>
-                    <fudis-dl [variant]="'compact'">
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Study Field'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.studyfield"></fudis-dd>
-                      </fudis-dl-item>
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Department'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.department"></fudis-dd>
-                      </fudis-dl-item>
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Study points'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.study_points"></fudis-dd>
-                      </fudis-dl-item>
-                      <fudis-dl-item>
-                        <fudis-dt [contentText]="'Duration'"></fudis-dt>
-                        <fudis-dd [contentText]="courses.duration"></fudis-dd>
-                      </fudis-dl-item>
-                    </fudis-dl>
-                  </fudis-dd>
-                </fudis-dl-item>
-              </fudis-dl>
-            </li>
+            @for (courses of visibleCourses(); track courses.id) {
+              <li>
+                <fudis-dl class="fudis-mt-sm">
+                  <fudis-dl-item>
+                    <fudis-dt [contentText]="courses.id + '. ' + courses.course"></fudis-dt>
+                    <fudis-dd>
+                      <fudis-dl [variant]="'compact'">
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="'Study Field'"></fudis-dt>
+                          <fudis-dd [contentText]="courses.studyfield"></fudis-dd>
+                        </fudis-dl-item>
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="'Department'"></fudis-dt>
+                          <fudis-dd [contentText]="courses.department"></fudis-dd>
+                        </fudis-dl-item>
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="'Study points'"></fudis-dt>
+                          <fudis-dd [contentText]="courses.study_points"></fudis-dd>
+                        </fudis-dl-item>
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="'Duration'"></fudis-dt>
+                          <fudis-dd [contentText]="courses.duration"></fudis-dd>
+                        </fudis-dl-item>
+                      </fudis-dl>
+                    </fudis-dd>
+                  </fudis-dl-item>
+                </fudis-dl>
+              </li>
+            }
           </ul>
           <fudis-pagination
             [paginationAriaLabel]="'Course list navigation'"

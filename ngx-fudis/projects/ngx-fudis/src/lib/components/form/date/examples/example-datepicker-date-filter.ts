@@ -2,7 +2,7 @@ import { FormControl, AbstractControl, ValidationErrors, ValidatorFn } from '@an
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FudisValidationErrors } from '../../../../utilities/form/validators';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisIdService } from '../../../../services/id/id.service';
 
 /**
@@ -25,7 +25,7 @@ export function disallowedWeekendValidator(): ValidatorFn {
 }
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-date-filter-with-error-message',
   template: `
     <fudis-datepicker
@@ -41,11 +41,12 @@ export function disallowedWeekendValidator(): ValidatorFn {
       [popoverTriggerLabel]="'Additional information'"
       [dateFilter]="weekendFilter"
     >
-      <fudis-error-message
-        *ngIf="control.hasError('disallowedDay')"
-        (handleAddError)="handleAddError.emit($event)"
-        [message]="'This error message is sent from a custom validator'"
-      />
+      @if (control.hasError('disallowedDay')) {
+        <fudis-error-message
+          (handleAddError)="handleAddError.emit($event)"
+          [message]="'This error message is sent from a custom validator'"
+        />
+      }
     </fudis-datepicker>
   `,
 })

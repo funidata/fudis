@@ -7,24 +7,26 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 @Component({
   standalone: false,
   selector: 'fudis-mock-link-directive',
-  template: `<a
-      *ngIf="!linkWithInitialFocus"
-      fudisLink
-      #linkRefOne
-      href=""
-      class="test-link-element"
-      (focus)="handleFocus()"
-      [title]="title"
-    ></a>
-    <a
-      *ngIf="linkWithInitialFocus"
-      fudisLink
-      class="test-link-element"
-      href=""
-      (focus)="handleFocus()"
-      [initialFocus]="true"
-      [title]="title"
-    ></a>`,
+  template: ` @if (!linkWithInitialFocus) {
+      <a
+        fudisLink
+        #linkRefOne
+        href=""
+        class="test-link-element"
+        (focus)="handleFocus()"
+        [title]="title"
+      ></a>
+    }
+    @if (linkWithInitialFocus) {
+      <a
+        fudisLink
+        class="test-link-element"
+        href=""
+        (focus)="handleFocus()"
+        [initialFocus]="true"
+        [title]="title"
+      ></a>
+    }`,
 })
 class MockComponent {
   @ViewChild('linkRefOne') public linkRefOne: ElementRef<HTMLAnchorElement>;

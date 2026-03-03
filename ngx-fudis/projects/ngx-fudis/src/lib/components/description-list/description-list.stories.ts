@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import docs from './description-list.mdx';
@@ -405,11 +405,9 @@ const ItemWithMultipleDdElementsTemplate: StoryFn = (args) => ({
     >
       <fudis-dl-item>
         <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
-        <fudis-dd
-          [contentText]="item.value"
-          [subHeading]="item.subHeading"
-          *ngFor="let item of data"
-        ></fudis-dd>
+        @for (item of data; track item.value) {
+        <fudis-dd [contentText]="item.value" [subHeading]="item.subHeading"></fudis-dd>
+        }
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Non-Jedi Master Members'"></fudis-dt>

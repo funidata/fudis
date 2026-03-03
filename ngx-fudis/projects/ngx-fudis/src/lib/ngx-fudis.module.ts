@@ -145,7 +145,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
 
 @NgModule({
   /*
-   * Include both internal and external Fudis components in 'declarations' array below.
+   * Include both internal and external non-standalone Fudis components in 'declarations' array below.
    */
   declarations: [
     AlertComponent,
@@ -230,8 +230,8 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     ValidatorErrorMessageComponent,
   ],
   /*
-   * Include imports outside of Fudis components in 'imports' array below.
-   * E.g. Standalone components, Angular Material components and other Angular tools
+   * Include imports outside of Fudis components in 'imports' array below, e.g. Angular Material components and other Angular tools.
+   * Also import Fudis standalone components here.
    */
   imports: [
     BadgeComponent,
@@ -261,8 +261,8 @@ import { PopoverDirective } from './directives/popover/popover.directive';
   ],
 
   /*
-   * Add Fudis component, including all standalone components, in 'exports' array below
-   * and export in public-api.ts as well, when you want to expose it outside
+   * Add Fudis components, including all standalone components, in 'exports' array below.
+   * Export them in public-api.ts as well, when you want to expose them outside of the library.
    */
   exports: [
     AlertComponent,

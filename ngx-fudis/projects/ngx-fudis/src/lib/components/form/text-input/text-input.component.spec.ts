@@ -307,9 +307,6 @@ describe('TextInputComponent', () => {
       popoverTriggerElem = getElement(fixture, 'fudis-icon-button');
 
       expect(popoverTriggerElem).toBeTruthy();
-      expect(popoverTriggerElem.getAttribute('ng-reflect-popover-text')).toEqual(
-        'This is popover text',
-      );
     });
   });
 });
