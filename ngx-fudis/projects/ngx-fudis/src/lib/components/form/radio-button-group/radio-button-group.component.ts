@@ -10,7 +10,7 @@ import {
   AfterViewInit,
   DOCUMENT,
 } from '@angular/core';
-import { FudisSelectionGroupInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
+import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -54,7 +54,7 @@ export class RadioButtonGroupComponent
   /**
    * Width of Radio Button Group
    */
-  @Input() size: FudisSelectionGroupInputSize = 'lg';
+  @Input() size: FudisInputSize = 'lg';
 
   /**
    * Emit form control and changed option when one option is clicked

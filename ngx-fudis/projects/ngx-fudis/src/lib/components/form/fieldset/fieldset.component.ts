@@ -15,7 +15,7 @@ import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisSelectionGroupInputSize } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
@@ -72,7 +72,7 @@ export class FieldSetComponent
    * Overrides 'width' input. Used to set Checkbox Group and Radio Button Group as wide as other
    * basic form components.
    */
-  @Input() inputSize: FudisSelectionGroupInputSize;
+  @Input() inputSize: FudisInputSize;
 
   /**
    * Alignment of Grid component inside its parent
