@@ -12,7 +12,7 @@ import { MultiselectChipListComponent } from './multiselect-chip-list/multiselec
 import { MultiselectOptionComponent } from './multiselect-option/multiselect-option.component';
 import { SelectGroupComponent } from '../common/select-group/select-group.component';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
-import { FudisSelectOption } from '../../../../types/forms';
+import { FudisInputSize, FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions, TestAnimalValue } from '../common/mock_data';
 import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
@@ -95,6 +95,19 @@ describe('MultiselectComponent', () => {
     fixture.detectChanges();
   }
 
+  function assertMultiselectHasClasses(classes: string): void {
+    const childSpan = multiselectComponentFixture.nativeElement.childNodes;
+    const componentClasses = childSpan[0].className.split(' ').sort();
+
+    expect(componentClasses).toEqual(classes.split(' ').sort());
+  }
+
+  function multiselectSizeCheck(size: FudisInputSize): void {
+    multiselectComponentFixture.componentRef.setInput('size', size);
+    multiselectComponentFixture.detectChanges();
+    assertMultiselectHasClasses(`fudis-select fudis-input-size__${size}`);
+  }
+
   describe('Control', () => {
     beforeEach(() => {
       multiselectComponentFixture = TestBed.createComponent(MultiselectComponent<TestAnimalValue>);
@@ -168,6 +181,28 @@ describe('MultiselectComponent', () => {
       multiselectComponentFixture.destroy();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect((multiselectComponent as any)._subscription.closed).toBeTruthy();
+    });
+  });
+
+  describe('CSS classes', () => {
+    beforeEach(() => {
+      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent<TestAnimalValue>);
+      multiselectComponent = multiselectComponentFixture.componentInstance;
+      multiselectComponentFixture.componentRef.setInput(
+        'control',
+        new FormControl<FudisSelectOption<TestAnimalValue>[]>([
+          defaultOptions[0],
+          defaultOptions[2],
+        ]),
+      );
+    });
+
+    it('should have respective classes according to given size Input', () => {
+      multiselectComponentFixture.detectChanges();
+      multiselectSizeCheck('sm');
+      multiselectSizeCheck('md');
+      multiselectSizeCheck('lg');
+      multiselectSizeCheck('full-width');
     });
   });
 
