@@ -8,6 +8,7 @@ import docs from './select.mdx';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleSelectBackendSimulationComponent } from '../examples/select-backend-simulation.component';
+import { fudisInputSizeArray } from '../../../../types/forms';
 
 export default {
   title: 'Components/Form/Select/Select',
@@ -30,8 +31,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     helpText: {
       control: { type: 'text' },

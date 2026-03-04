@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FudisRadioButtonOption } from '../../../types/forms';
+import { fudisInputSizeArray, FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import docs from './radio-button-group.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -115,8 +115,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg', 'full-width'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     popoverPosition: {
       options: ['left', 'right', 'above', 'below'],

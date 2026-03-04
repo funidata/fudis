@@ -6,6 +6,7 @@ import { CheckboxGroupComponent } from './checkbox-group.component';
 import docs from './checkbox-group.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
+import { fudisInputSizeArray } from '../../../types/types';
 
 export default {
   title: 'Components/Form/Checkbox Group',
@@ -23,8 +24,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg', 'full-width'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     popoverPosition: {
       options: ['left', 'right', 'above', 'below'],

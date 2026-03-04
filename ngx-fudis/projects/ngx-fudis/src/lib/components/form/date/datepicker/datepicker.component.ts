@@ -135,7 +135,7 @@ export class DatepickerComponent
   @Input({ required: true }) override control: FormControl<Date | null>;
 
   /**
-   * Available sizes for the Datepicker
+   * Datepicker size
    */
   @Input() size: FudisInputSize = 'md';
 
