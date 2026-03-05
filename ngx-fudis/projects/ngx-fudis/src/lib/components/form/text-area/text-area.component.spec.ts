@@ -172,6 +172,7 @@ describe('TextAreaComponent', () => {
       textAreaSizeCheck('sm');
       textAreaSizeCheck('md');
       textAreaSizeCheck('lg');
+      textAreaSizeCheck('full-width');
     });
   });
 

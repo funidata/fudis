@@ -11,7 +11,7 @@ import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdo
 import { BodyTextComponent } from '../../../typography/body-text/body-text.component';
 import { By } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
-import { FudisSelectOption } from '../../../../types/forms';
+import { FudisInputSize, FudisSelectOption } from '../../../../types/forms';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -105,6 +105,19 @@ describe('SelectComponent', () => {
     fixture.detectChanges();
   }
 
+  function assertSelectHasClasses(classes: string): void {
+    const childSpan = fixture.nativeElement.childNodes;
+    const componentClasses = childSpan[0].className.split(' ').sort();
+
+    expect(componentClasses).toEqual(classes.split(' ').sort());
+  }
+
+  function selectSizeCheck(size: FudisInputSize): void {
+    fixture.componentRef.setInput('size', size);
+    fixture.detectChanges();
+    assertSelectHasClasses(`fudis-select fudis-input-size__${size}`);
+  }
+
   describe('Control', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(SelectComponent<TestAnimalValue>);
@@ -173,6 +186,22 @@ describe('SelectComponent', () => {
       fixture.destroy();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect((component as any)._subscription.closed).toBeTruthy();
+    });
+  });
+
+  describe('CSS classes', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(SelectComponent<TestAnimalValue>);
+      component = fixture.componentInstance;
+      initWithControlValue();
+    });
+
+    it('should have respective classes according to given size Input', () => {
+      fixture.detectChanges();
+      selectSizeCheck('sm');
+      selectSizeCheck('md');
+      selectSizeCheck('lg');
+      selectSizeCheck('full-width');
     });
   });
 

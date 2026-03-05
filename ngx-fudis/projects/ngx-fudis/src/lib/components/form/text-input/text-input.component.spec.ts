@@ -291,6 +291,7 @@ describe('TextInputComponent', () => {
       textInputSizeCheck('sm');
       textInputSizeCheck('md');
       textInputSizeCheck('lg');
+      textInputSizeCheck('full-width');
     });
   });
 

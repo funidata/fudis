@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisInputSize } from '../../../types/forms';
 
 @Component({
   selector: 'fudis-label',
@@ -35,9 +34,4 @@ export class LabelComponent extends PopoverApiDirective {
    * Show text indicating if form element associated with the label is required or not
    */
   @Input() required: boolean | null;
-
-  /**
-   * Size of Label's parent. Used to trigger Label height calculation if parent's size changes.
-   */
-  @Input() parentSize: FudisInputSize | 'xs';
 }

@@ -5,7 +5,7 @@ import { RadioButtonGroupComponent } from './radio-button-group.component';
 import {
   FudisRadioButtonChangeEvent,
   FudisRadioButtonOption,
-  fudisSelectionGroupInputSizeArray,
+  fudisInputSizeArray,
 } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
@@ -142,7 +142,7 @@ describe('Basic inputs of Radio Button Group', () => {
   });
 
   it('should pass correct size values to the Fieldset', () => {
-    fudisSelectionGroupInputSizeArray.forEach((size) => {
+    fudisInputSizeArray.forEach((size) => {
       component.size = size;
       fixture.detectChanges();
 

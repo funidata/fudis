@@ -13,7 +13,7 @@ import { FormGroup } from '@angular/forms';
 import {
   FudisCheckboxGroupChangeEvent,
   FudisCheckboxGroupFormGroup,
-  FudisSelectionGroupInputSize,
+  FudisInputSize,
 } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -60,9 +60,9 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   @Input({ required: true }) override formGroup: FormGroup<T>;
 
   /**
-   * Width size of the group.
+   * Width of Checkbox Group
    */
-  @Input() size: FudisSelectionGroupInputSize = 'lg';
+  @Input() size: FudisInputSize = 'lg';
 
   /**
    * Emit changed control's name and whole FormGroup when one Checkbox is clicked.
