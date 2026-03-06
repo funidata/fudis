@@ -13,17 +13,17 @@ import {
 })
 export class GridApiDirective {
   /**
-   * Alignment of Grid component inside its parent. Defines margins for the Grid element
+   * Alignment of Grid component inside its parent: 'start' | 'end' | 'center'
    */
   @Input() align: FudisGridAlign = 'start';
 
   /**
-   * Horizontal alignment of Grid Items in a row.
+   * Horizontal alignment of Grid Items in a row: 'start' | 'center' | 'end' | 'stretch' | 'baseline'
    */
   @Input() alignItemsX: FudisGridAlignItems = 'stretch';
 
   /**
-   * Vertical alignment of Grid Items in a row.
+   * Vertical alignment of Grid Items in a row: 'start' | 'center' | 'end' | 'stretch' | 'baseline'
    */
   @Input() alignItemsY: FudisGridAlignItems = 'stretch';
 
@@ -33,8 +33,7 @@ export class GridApiDirective {
   @Input() classes: string;
 
   /**
-   * Gutter gap between columns. Using Fudis spacing token values of xxs to xxl, none and
-   * responsive.
+   * Gutter gap between columns: 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'responsive'
    */
   @Input() columnGap: FudisGridGap = 'responsive';
 
@@ -50,12 +49,13 @@ export class GridApiDirective {
   @Input() serviceDefaults: boolean = true;
 
   /**
-   * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
+   * Grid row gap: 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'responsive'
    */
   @Input() rowGap: FudisGridGap = 'none';
 
   /**
-   * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
+   * Maximum width of Grid: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial'.
+   * When viewport gets narrower, grid automatically adjusts to lower sizes.
    */
   @Input() width: FudisGridWidth = 'xxl';
 }

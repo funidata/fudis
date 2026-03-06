@@ -14,7 +14,7 @@ import { FudisBadgeVariant } from '../../types/miscellaneous';
 })
 export class BadgeComponent {
   /**
-   * Badge variant
+   * Badge variant: 'accent' | 'danger' | 'primary' | 'secondary' | 'success'
    */
   @Input() variant: FudisBadgeVariant = 'primary';
 

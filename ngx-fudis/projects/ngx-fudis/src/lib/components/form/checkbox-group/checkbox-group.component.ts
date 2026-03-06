@@ -27,6 +27,16 @@ import { GuidanceComponent } from '../guidance/guidance.component';
  * Groups multiple related checkbox options.
  *
  * Use this component when user can select value(s) from a set.
+ * Each `fudis-checkbox-group-option` child must have a `[controlName]` matching a key in the FormGroup.
+ * Use `FudisGroupValidators` for group-level validation (e.g., `oneRequired`, `min`, `max`).
+ *
+ * @example
+ * ```html
+ * <fudis-checkbox-group [label]="'Colors'" [formGroup]="colorsGroup">
+ *   <fudis-checkbox-group-option [controlName]="'red'" [label]="'Red'"></fudis-checkbox-group-option>
+ *   <fudis-checkbox-group-option [controlName]="'blue'" [label]="'Blue'"></fudis-checkbox-group-option>
+ * </fudis-checkbox-group>
+ * ```
  */
 @Component({
   selector: 'fudis-checkbox-group',

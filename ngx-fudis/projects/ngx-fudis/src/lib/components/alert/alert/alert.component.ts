@@ -51,7 +51,7 @@ export class AlertComponent {
   @Input({ required: true }) buttonId: string;
 
   /**
-   * Variant of Alert. Same names and colors as in Notification Component.
+   * Variant of Alert: 'warning' | 'danger' | 'success' | 'info'. Same names and colors as in Notification Component.
    */
   @Input() variant: FudisNotification = 'info';
 
