@@ -24,16 +24,16 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 /**
  * Groups mutually exclusive options.
  *
- * Use this component when user must select exactly one option from a set.
- * Each `fudis-radio-button` child must have an `[option]` input of type `FudisRadioButtonOption`.
+ * Use this component when user must select exactly one option from a set. Each `fudis-radio-button`
+ * child must have an `[option]` input of type `FudisRadioButtonOption`.
  *
  * @example
- * ```html
- * <fudis-radio-button-group [label]="'Gender'" [control]="genderControl">
- *   <fudis-radio-button [option]="{ value: 'male', label: 'Male' }"></fudis-radio-button>
- *   <fudis-radio-button [option]="{ value: 'female', label: 'Female' }"></fudis-radio-button>
- * </fudis-radio-button-group>
- * ```
+ *   ```html
+ *   <fudis-radio-button-group [label]="'Gender'" [control]="genderControl">
+ *     <fudis-radio-button [option]="{ value: 'male', label: 'Male' }"></fudis-radio-button>
+ *     <fudis-radio-button [option]="{ value: 'female', label: 'Female' }"></fudis-radio-button>
+ *   </fudis-radio-button-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-radio-button-group',

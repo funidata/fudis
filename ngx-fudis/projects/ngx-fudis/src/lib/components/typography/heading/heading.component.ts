@@ -48,7 +48,8 @@ export class HeadingComponent implements OnInit, OnChanges {
   @Input({ required: true }) level: FudisHeadingLevel;
 
   /**
-   * Heading variant: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'. If not set, derived automatically from level.
+   * Heading variant: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'. If not set, derived
+   * automatically from level.
    */
   @Input() variant: FudisHeadingVariant;
 

@@ -18,7 +18,8 @@ export class GridApiDirective {
   @Input() align: FudisGridAlign = 'start';
 
   /**
-   * Horizontal alignment of Grid Items in a row: 'start' | 'center' | 'end' | 'stretch' | 'baseline'
+   * Horizontal alignment of Grid Items in a row: 'start' | 'center' | 'end' | 'stretch' |
+   * 'baseline'
    */
   @Input() alignItemsX: FudisGridAlignItems = 'stretch';
 
@@ -33,7 +34,8 @@ export class GridApiDirective {
   @Input() classes: string;
 
   /**
-   * Gutter gap between columns: 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'responsive'
+   * Gutter gap between columns: 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' |
+   * 'responsive'
    */
   @Input() columnGap: FudisGridGap = 'responsive';
 
@@ -54,8 +56,8 @@ export class GridApiDirective {
   @Input() rowGap: FudisGridGap = 'none';
 
   /**
-   * Maximum width of Grid: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial'.
-   * When viewport gets narrower, grid automatically adjusts to lower sizes.
+   * Maximum width of Grid: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial'. When viewport gets
+   * narrower, grid automatically adjusts to lower sizes.
    */
   @Input() width: FudisGridWidth = 'xxl';
 }

@@ -30,13 +30,13 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
  * Use this component to group secondary or contextual actions.
  *
  * @example
- * ```html
- * <fudis-icon-button ariaLabel="Actions" icon="three-dots" [asMenuButton]="true">
- *   <fudis-dropdown-menu>
- *     <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit()"></fudis-dropdown-menu-item>
- *   </fudis-dropdown-menu>
- * </fudis-icon-button>
- * ```
+ *   ```html
+ *   <fudis-icon-button ariaLabel="Actions" icon="three-dots" [asMenuButton]="true">
+ *     <fudis-dropdown-menu>
+ *       <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit()"></fudis-dropdown-menu-item>
+ *     </fudis-dropdown-menu>
+ *   </fudis-icon-button>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dropdown-menu',

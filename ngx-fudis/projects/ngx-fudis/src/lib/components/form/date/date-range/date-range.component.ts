@@ -6,16 +6,16 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
 /**
  * Allows selection of a start and end date.
  *
- * Use this component when user needs to define a time interval.
- * Wraps two `fudis-datepicker` components — mark them with `fudisDateStart` and `fudisDateEnd` directives.
+ * Use this component when user needs to define a time interval. Wraps two `fudis-datepicker`
+ * components — mark them with `fudisDateStart` and `fudisDateEnd` directives.
  *
  * @example
- * ```html
- * <fudis-date-range>
- *   <fudis-datepicker fudisDateStart [label]="'Start'" [control]="startDate"></fudis-datepicker>
- *   <fudis-datepicker fudisDateEnd [label]="'End'" [control]="endDate"></fudis-datepicker>
- * </fudis-date-range>
- * ```
+ *   ```html
+ *   <fudis-date-range>
+ *     <fudis-datepicker fudisDateStart [label]="'Start'" [control]="startDate"></fudis-datepicker>
+ *     <fudis-datepicker fudisDateEnd [label]="'End'" [control]="endDate"></fudis-datepicker>
+ *   </fudis-date-range>
+ *   ```;
  */
 @Component({
   selector: 'fudis-date-range',
