@@ -25,7 +25,18 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
  * Allows selection of multiple options from a dropdown list.
  *
  * Use this component when there are multiple predefined options and user can choose more than one
- * value.
+ * value. The FormControl value is a `FudisSelectOption[]` array (not primitives). Options are
+ * projected via `<ng-template fudisSelectOptions>` containing `<fudis-multiselect-option>`
+ * elements.
+ *
+ * @example
+ *   ```html
+ *   <fudis-multiselect [label]="'Countries'" [control]="countriesControl">
+ *     <ng-template fudisSelectOptions>
+ *       <fudis-multiselect-option [data]="{ value: 'fi', label: 'Finland' }"></fudis-multiselect-option>
+ *     </ng-template>
+ *   </fudis-multiselect>
+ *   ```;
  */
 @Component({
   selector: 'fudis-multiselect',

@@ -51,7 +51,7 @@ export class TextInputComponent
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
-   * HTML type attribute
+   * HTML type attribute: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url'
    */
   @Input() type: FudisInputType = 'text';
 

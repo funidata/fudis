@@ -24,9 +24,13 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 /**
- * Provides layout and structure for form content.
+ * Provides layout and structure for form content. Extends Grid — all Grid inputs are available.
  *
- * Use this component to consistently arrange form fields, actions, and validation elements.
+ * Use this component to consistently arrange form fields, actions, and validation elements. Place
+ * fields inside `<ng-template fudisFormContent>` and buttons inside `<ng-template
+ * fudisFormActions>`. Use `[fudisFormSubmit]` directive on the submit button to trigger error
+ * summary. Use `FudisValidators` (not Angular's Validators) for error messages to work with Error
+ * Summary.
  */
 @Component({
   selector: 'fudis-form',

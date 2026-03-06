@@ -25,6 +25,17 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
  * Allows selection of a single option from a dropdown list.
  *
  * Use this component when there are multiple predefined options and user can choose only one value.
+ * The FormControl value is a `FudisSelectOption` object (not a primitive). Options are projected
+ * via `<ng-template fudisSelectOptions>` containing `<fudis-select-option>` elements.
+ *
+ * @example
+ *   ```html
+ *   <fudis-select [label]="'Country'" [control]="countryControl">
+ *     <ng-template fudisSelectOptions>
+ *       <fudis-select-option [data]="{ value: 'fi', label: 'Finland' }"></fudis-select-option>
+ *     </ng-template>
+ *   </fudis-select>
+ *   ```;
  */
 @Component({
   selector: 'fudis-select',
