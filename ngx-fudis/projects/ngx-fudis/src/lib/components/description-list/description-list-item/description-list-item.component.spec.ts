@@ -3,7 +3,6 @@ import { By } from '@angular/platform-browser';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../description-list.component';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import { DescriptionListItemComponent } from './description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
@@ -12,13 +11,10 @@ import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.
 import { getElement } from '../../../utilities/tests/utilities';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../../types/miscellaneous';
-import { FudisIdService } from '../../../services/id/id.service';
 import { LanguageBadgeComponent } from '../../language-badge-group/language-badge/language-badge.component';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
-import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
@@ -42,9 +38,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     <fudis-dl>
       <fudis-dl-item #langDlItem>
         <fudis-dt [contentText]="'Single DT'"></fudis-dt>
-        <fudis-dd *ngIf="firstLang" [lang]="'en'" [contentText]="'First English DD'"></fudis-dd>
-        <fudis-dd *ngIf="secondLang" [lang]="'en'" [contentText]="'Another English DD'"></fudis-dd>
-        <fudis-dd *ngIf="thirdLang" [lang]="'fi'" [contentText]="'Finnish DD'"></fudis-dd>
+        @if (firstLang) {
+          <fudis-dd [lang]="'en'" [contentText]="'First English DD'"></fudis-dd>
+        }
+        @if (secondLang) {
+          <fudis-dd [lang]="'en'" [contentText]="'Another English DD'"></fudis-dd>
+        }
+        @if (thirdLang) {
+          <fudis-dd [lang]="'fi'" [contentText]="'Finnish DD'"></fudis-dd>
+        }
       </fudis-dl-item>
     </fudis-dl>
   `,
@@ -75,12 +77,9 @@ describe('DescriptionListItemComponent', () => {
         DescriptionListItemDetailsComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
-        TooltipApiDirective,
-        TooltipDirective,
         MockDlComponent,
       ],
-      imports: [MatTooltipModule],
-      providers: [FudisGridService, FudisIdService, FudisBreakpointService],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 
@@ -91,7 +90,10 @@ describe('DescriptionListItemComponent', () => {
   });
 
   function getDlItemElement(type: string): HTMLElement {
+    mockFixture.detectChanges();
+
     const dlItemElement = getElement(mockFixture, `fudis-dl-item ${type}`);
+
     return dlItemElement;
   }
 
@@ -125,10 +127,9 @@ describe('DescriptionListItemComponent', () => {
     it('should have respective class if grid is disabled from parent DL', () => {
       mockComponent.disableGrid = true;
       mockFixture.detectChanges();
-      mockFixture.whenRenderingDone().then(() => {
-        expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
-        expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
-      });
+
+      expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
+      expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
     });
   });
 
@@ -203,7 +204,7 @@ describe('DescriptionListItemComponent', () => {
 
       mockFixture.detectChanges();
 
-      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toBeNull;
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toBeNull();
     });
   });
 });

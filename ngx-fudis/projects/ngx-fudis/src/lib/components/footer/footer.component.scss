@@ -1,61 +1,46 @@
-@use "../../foundations/typography/mixins.scss" as typography;
-@use "../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../foundations/spacing/tokens.scss" as spacing;
-@use "../../foundations/breakpoints/mixins.scss" as breakpoints;
-@use "../../foundations/utilities/mixins.scss" as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-footer {
-  @include utilities.box-reset;
-  @include colorMixins.bg-color("gray-extra-light");
+  @include core.box-reset;
+  @include core.bg-color('gray-extra-light');
 
+  display: inline-flex;
   position: relative;
+  flex-direction: column;
+  align-items: center;
+  padding: core.$spacing-md core.$spacing-sm core.$spacing-xxl core.$spacing-sm;
+  width: 100%;
   text-align: center;
 
-  fudis-link {
-    @include typography.text-link-m-typography;
-
-    min-height: spacing.$spacing-lg;
-
-    @include breakpoints.breakpoint-max("lg") {
-      &:not(:first-of-type) {
-        margin-top: spacing.$spacing-sm;
-      }
-    }
-  }
-
-  &__content {
-    bottom: 0;
-    padding-top: spacing.$spacing-md;
-    padding-bottom: spacing.$spacing-xl;
-  }
-
   &__item {
-    display: flex;
-    flex-direction: column;
+    &:first-of-type {
+      margin-bottom: core.$spacing-sm;
+    }
 
     &__logo {
-      margin-bottom: spacing.$spacing-sm;
+      display: block;
       /* stylelint-disable-next-line property-disallowed-list, color-no-hex */
       color: #000000;
+
+      &:focus {
+        @include core.focus-generic;
+      }
     }
 
-    @include breakpoints.breakpoint("lg") {
-      flex-direction: row;
-      align-items: center;
-
-      &__logo {
-        margin-right: spacing.$spacing-md;
-      }
-
-      fudis-link {
-        &:not(:last-of-type) {
-          margin-right: spacing.$spacing-md;
-        }
+    @include core.breakpoint('sm') {
+      &:first-of-type {
+        margin-right: core.$spacing-xl;
+        margin-bottom: 0;
       }
     }
   }
 
-  @include breakpoints.breakpoint("sm") {
-    text-align: initial;
+  @include core.breakpoint('sm') {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-right: core.$spacing-xxl;
+    padding-left: core.$spacing-xxl;
+    text-align: start;
   }
 }

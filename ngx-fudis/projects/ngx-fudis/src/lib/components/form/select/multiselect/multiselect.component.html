@@ -1,119 +1,114 @@
-<div class="fudis-select fudis-input-size__{{ size }}" [id]="id + '-main-wrapper'">
+@let dropdownOpen = _dropdownOpen();
+@let sortedSelectedOptions = _sortedSelectedOptions();
+@let autocompleteFilterText = _autocompleteFilterText();
+
+<div
+  role="application"
+  class="fudis-select fudis-input-size__{{ size }}"
+  [id]="id + '-main-wrapper'"
+>
   <fudis-label
     [text]="label"
     [id]="id + '-label'"
-    [required]="_required"
-    [tooltip]="tooltip"
-    [tooltipPosition]="tooltipPosition"
-    [tooltipToggle]="tooltipToggle"
+    [for]="id"
+    [required]="_required | async"
+    [parentSize]="size"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
   >
   </fudis-label>
   <div #selectRef>
     <div class="fudis-select__input-wrapper">
-      <div
-        *ngIf="variant === 'dropdown'"
+      <input
         #inputRef
-        tabindex="0"
-        class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
+        fudisMultiselectControlValueAccessor
+        fudisMultiselectAutocomplete
         [id]="id"
-        role="combobox"
-        [attr.aria-controls]="id + '-dropdown'"
-        aria-haspopup="listbox"
-        (click)="_clickInput()"
-        (focus)="_inputFocus()"
+        [formControl]="control"
+        class="fudis-form-input fudis-select__input"
+        [class.fudis-select__input__dropdown]="variant === 'dropdown'"
+        [class.fudis-select-autocomplete]="variant !== 'dropdown'"
+        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
+        (click)="!control.disabled && !disabled && _clickInput()"
+        (focus)="_selectInputFocus($event)"
         (blur)="_inputBlur($event)"
         (keydown)="_inputKeyDown($event)"
         (keyup)="_inputKeyUp($event)"
-        [attr.aria-autocomplete]="'none'"
-        [attr.aria-expanded]="_dropdownOpen"
-        [attr.aria-disabled]="disabled || control.disabled"
-        [attr.required]="_required ? true : null"
+        [enableAutocomplete]="variant !== 'dropdown'"
+        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
+        [clearButtonClick]="_clearButtonClickTrigger()"
+        (handleSortedSelectedOptions)="_updateSortedSelectedOptions($event)"
+        (handleClearButtonReset)="_clearButtonClickTrigger.set(false)"
+        (handleDropdownOpen)="openDropdown()"
+        (handleDropdownClose)="closeDropdown()"
+        (handleFilterTextUpdate)="setAutocompleteFilterText($event)"
+        type="text"
+        role="combobox"
+        aria-haspopup="listbox"
+        [attr.id]="id"
+        [attr.readonly]="variant === 'dropdown' ? true : null"
+        [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
+        [attr.placeholder]="placeholder"
+        [attr.aria-controls]="_optionsLoadedOnce ? id + '-dropdown' : null"
+        [attr.tabindex]="!control.disabled && !disabled ? null : -1"
+        [attr.aria-expanded]="dropdownOpen"
+        [attr.aria-disabled]="control.disabled || disabled"
+        [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.aria-invalid]="
-          (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
-        "
-      >
-        <span *ngIf="!_dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
-          placeholder
-        }}</span>
-        <span *ngIf="_dropdownSelectionLabelText" class="fudis-select__input__label">{{
-          _dropdownSelectionLabelText
-        }}</span>
-      </div>
-      <fudis-select-autocomplete
-        *ngIf="variant !== 'dropdown'"
-        #autocompleteRef
-        [id]="id"
-        [placeholder]="placeholder"
-        [disabled]="control.disabled || disabled"
-        [dropdownOpen]="_dropdownOpen"
-        [required]="_required"
-        [invalidState]="(control.touched && control.invalid) || (control.touched && invalidState)"
-        [multiselect]="true"
-        [selectedLabel]="_dropdownSelectionLabelText"
-        [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
-        [visibleOptions]="_visibleOptions"
-        [selectionClearButton]="selectionClearButton"
-        (triggerInputClick)="_clickInput()"
-        (triggerFocusToFirstOption)="_focusToFirstOption()"
-        (triggerFilterTextUpdate)="_filterTextUpdate($event)"
-        (triggerSelectOnlyVisibleOption)="_focusToFirstOption(true)"
-        (triggerDropdownOpen)="openDropdown()"
-        (triggerDropdownClose)="closeDropdown()"
-        (triggerDropdownToggle)="_toggleDropdown()"
-        (triggerFocus)="_inputFocus()"
-        (triggerBlur)="_inputBlur($event)"
+        [attr.aria-invalid]="(control.invalid && control.touched) || null"
       />
       <div class="fudis-select__input-wrapper__icons">
-        <fudis-select-icons
-          *ngIf="size !== 'xs'"
-          [filterText]="!!_autocompleteFilterText()"
-          [parentControl]="control"
-          [parentVariant]="variant"
-          [dropdownOpen]="_dropdownOpen"
-          (handleClearButtonClick)="_clearButtonClick()"
-          (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
-          (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
-          [clearButton]="selectionClearButton"
-          [disabled]="control.disabled || disabled"
-        />
+        @if (size !== "xs") {
+          <fudis-select-icons
+            [filterText]="!!autocompleteFilterText"
+            [parentControl]="control"
+            [parentVariant]="variant"
+            [parentId]="id"
+            [dropdownOpen]="dropdownOpen"
+            (handleClearButtonClick)="_clearButtonClick()"
+            (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
+            (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
+            [clearButton]="selectionClearButton"
+            [disabled]="control.disabled || disabled"
+          />
+        }
       </div>
     </div>
-    <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce"
-      #dropdownRef
-      [open]="_dropdownOpen"
-      [selectVariant]="variant"
-      [results]="_visibleOptions.length"
-      [autocompleteHelpText]="autocompleteHelpText"
-      [filterText]="_autocompleteFilterText()"
-      [multiselect]="true"
-      [parentId]="id"
-      [size]="size"
-    >
-      <ng-container *ngIf="_content?.type === 'select-options'">
-        <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
-      </ng-container>
-    </fudis-select-dropdown>
+    @if (_optionsLoadedOnce && !control.disabled && !disabled) {
+      <fudis-select-dropdown
+        #dropdownRef
+        [open]="dropdownOpen"
+        [selectVariant]="variant"
+        [results]="_resultsLength()"
+        [autocompleteNoResultsText]="autocompleteNoResultsText"
+        [autocompleteHelpText]="autocompleteHelpText"
+        [filterText]="autocompleteFilterText"
+        [multiselect]="true"
+        [parentId]="id"
+        [size]="size"
+      >
+        @if (_selectOptionsDirective) {
+          <ng-container *ngTemplateOutlet="_selectOptionsDirective!.templateRef" />
+        }
+      </fudis-select-dropdown>
+    }
   </div>
-  <fudis-guidance
-    *ngIf="!disableGuidance"
-    [formId]="_parentForm?.id || null"
-    [reloadErrorSummary]="_reloadErrorSummary"
-    [inputLabel]="label"
-    [helpText]="helpText"
-    [for]="id"
-    [control]="control"
-  />
-  <ng-container *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0 && control.enabled">
+  @if (!disableGuidance) {
+    <fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [control]="control">
+      <ng-content select="fudis-error-message"
+    /></fudis-guidance>
+  }
+
+  @if (showSelectionChips && sortedSelectedOptions && control.enabled && !disabled) {
     <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
-      _translationRemoveItem | async
+      _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEMS
     }}</span>
     <fudis-multiselect-chip-list
-      [selectedItems]="_sortedSelectedOptions"
+      [selectedItems]="sortedSelectedOptions"
       [parentId]="id"
       (handleClick)="_handleRemoveChip($event)"
     />
-  </ng-container>
+  }
 </div>

@@ -1,42 +1,73 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, signal, WritableSignal } from '@angular/core';
 import {
-  FudisFormErrorSummaryObject,
-  FudisFormErrorSummaryItem,
-  FudisFormErrorSummarySection,
-  FudisFormErrorSummaryRemoveItem,
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryRemoveError,
   FudisFormErrorSummaryUpdateStrategy,
-  FudisFormErrorSummaryFormsAndErrors,
-  FudisFormErrorSummarySectionObject,
-} from '../../../types/forms';
+  FudisErrorSummaryAllErrors,
+  FudisErrorSummaryAllErrorsSignal,
+} from '../../../types/errorSummary';
 import { BehaviorSubject } from 'rxjs';
+import { FudisTranslationService } from '../../translation/translation.service';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
+type FudisFormErrorSummarySection = {
+  id: string;
+  formId: string;
+  title: string;
+};
+
+type FudisFormErrorSummaryFormChild = {
+  [childId: string]: string;
+};
+
+type FudisFormErrorSummaryStructure = {
+  [formId: string]: {
+    sections: FudisFormErrorSummaryFormChild;
+    fieldsets: FudisFormErrorSummaryFormChild;
+  };
+};
 /**
  * Internal Error Summary tools not exposed to public
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FudisInternalErrorSummaryService implements OnDestroy {
-  constructor() {}
+  constructor(private _translationService: FudisTranslationService) {
+    toObservable(_translationService.getLanguageSignal())
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        this.focusToFormOnReload = null;
+      });
+  }
+
+  // --------------------
+  //
+  // CLASS VARIABLES
+  //
+  // --------------------
 
   /**
-   * Current errors
+   * Collection of all registered errors categorised by parent Form id. Used as "temporary" storage
+   * and value will be passed to Observable when ReloadErrors is called.
    */
-  private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = {};
+  private _errorsStore: FudisErrorSummaryAllErrors = {};
 
   /**
-   * Collection of errors categorised by parent Form id.
+   * Collection of all registered errors categorised by parent Form id. This Observable is updated
+   * with new value only when ReloadErrors is called.
    */
+  private _errorsObservable = new BehaviorSubject<FudisErrorSummaryAllErrors>({});
 
-  private _allFormErrorsObservable = new BehaviorSubject<FudisFormErrorSummaryFormsAndErrors>({});
-
-  /**
-   * Current fieldsets
-   */
-  private _fieldsets: FudisFormErrorSummarySectionObject = {};
+  private _errorsSignal: FudisErrorSummaryAllErrorsSignal = {};
 
   /**
-   * Current sections
+   * Current Form ids with their Error Summary Visibility status
    */
-  private _sections: FudisFormErrorSummarySectionObject = {};
+  private _errorSummaryVisibilityStatus: { [formId: string]: WritableSignal<boolean> } = {};
+
+  /**
+   * Collection of child Sections, Expandables and Fieldsets of each Form Component
+   */
+  private _formStructure: FudisFormErrorSummaryStructure = {};
 
   /**
    * Info to Error Summary Component if it should move user focus to updated list or not
@@ -49,280 +80,360 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
-   * To control that only form with spesific ID is reloaded in corresponding ErrorSummaryComponent effect() when signal is updated.
+   * Used prevent unnecessary frequent Signal updates
    */
-  private _formIdToUpdate: string;
+  private _reloadGuard: string[] = [];
 
-  get allFormErrorsObservable(): BehaviorSubject<FudisFormErrorSummaryFormsAndErrors> {
-    return this._allFormErrorsObservable;
+  /**
+   * Signal for counting submit attempts
+   */
+  private _submitAttempt = signal(0);
+
+  // --------------------
+  //
+  // GETTERS & SETTERS FOR CLASS VARIABLES
+  //
+  // --------------------
+
+  /**
+   * Used in Components to listen to Reload updates
+   */
+  get errorsObservable(): BehaviorSubject<FudisErrorSummaryAllErrors> {
+    return this._errorsObservable;
   }
 
   /**
-   * Getter for _formIdToUpdate. Used in ErrorSummaryComponent.
+   * For unit testing purposes
    */
-  get formIdToUpdate(): string {
-    return this._formIdToUpdate;
+  get errors(): FudisErrorSummaryAllErrors {
+    return this._errorsStore;
   }
 
   /**
-   * Getter for _updateStrategy. Used by public Error Summary service.
+   * For unit testing purposes
    */
+  get errorsSignal(): FudisErrorSummaryAllErrorsSignal {
+    return this._errorsSignal;
+  }
+
+  /**
+   * Used for firing focus to error summary when submitting
+   */
+  get submitAttempt() {
+    return this._submitAttempt;
+  }
+
+  /**
+   * Observable to store each Form's Error Summary's visibility status. Form component will listen
+   * to these changes if visiblity changes elsewhere than the Input() prop
+   */
+  get errorSummaryVisibilityStatus(): { [formId: string]: WritableSignal<boolean> } {
+    return this._errorSummaryVisibilityStatus;
+  }
+
   get updateStrategy(): FudisFormErrorSummaryUpdateStrategy {
     return this._updateStrategy;
   }
 
-  /**
-   * Setter for _updateStrategy. Used by public Error Summary service.
-   */
   set updateStrategy(value: FudisFormErrorSummaryUpdateStrategy) {
     this._updateStrategy = value;
   }
 
-  /**
-   * Getter for _focusToFormOnReload
-   */
   get focusToFormOnReload(): string | null {
     return this._focusToFormOnReload;
   }
 
-  /**
-   * Setter for _focusToFormOnReload
-   */
+  get formStructure(): FudisFormErrorSummaryStructure {
+    return this._formStructure;
+  }
+
   set focusToFormOnReload(value: string | null) {
     this._focusToFormOnReload = value;
   }
 
   /**
-   * Returns a list of current fieldsets
+   * Hide or show Error Summary of spesific Form Component
+   *
+   * @param formId Form to target
+   * @param visible Hide or show Error Summary
    */
-  public get fieldsets(): FudisFormErrorSummarySectionObject {
-    return this._fieldsets;
-  }
-
-  /**
-   * Returns a list of current sections
-   */
-  public get sections(): FudisFormErrorSummarySectionObject {
-    return this._sections;
-  }
-
-  public getErrors(): FudisFormErrorSummaryFormsAndErrors {
-    return this._allFormErrors;
-  }
-
-  /**
-   * Returns a readonly list of visible errors
-   */
-  public getFormErrorsById(formId: string): FudisFormErrorSummaryObject {
-    return this._allFormErrors[formId];
-  }
-
-  public addNewFormId(formId: string): void {
-    this._allFormErrors[formId] = {};
-
-    this._sections[formId] = [];
-
-    this._fieldsets[formId] = [];
-  }
-
-  public removeFormId(formId: string): void {
-    if (this._allFormErrors[formId]) {
-      delete this._allFormErrors[formId];
-    }
-
-    if (this._sections[formId]) {
-      delete this._sections[formId];
-    }
-
-    if (this._fieldsets[formId]) {
-      delete this._fieldsets[formId];
+  public setErrorSummaryVisibility(formId: string, visible: boolean) {
+    if (!this._errorSummaryVisibilityStatus[formId]) {
+      this._errorSummaryVisibilityStatus[formId] = signal(visible);
+    } else if (this._errorSummaryVisibilityStatus[formId]() !== visible) {
+      this._errorSummaryVisibilityStatus[formId].set(visible);
     }
   }
 
-  // TODO: Currently all errors are just one big blob and each added error do not have information about the Form it is actually related to. This is currently checked in Form, which loops through all the errors and checks if #error-id exists as a child. It would be better if added errors are categorised by their Form parent.
+  // --------------------
+  //
+  // ADD AND REMOVE ERRORS
+  //
+  // --------------------
 
   /**
-   * Adds a new error to the list of current errors
-   * If new error item has a matching id on the list, new error is tied to that error list object
+   * Adds a new error to the list of current errors If new error item has a matching id on the list,
+   * new error is tied to that error list object
+   *
    * @param newError Form error summary item
    */
-  public addNewError(newError: FudisFormErrorSummaryItem): void {
-    if (!this._allFormErrors[newError.formId]) {
-      this.addNewFormId(newError.formId);
+  public addError(newError: FudisErrorSummaryNewError): void {
+    if (!this._errorsStore[newError.formId]) {
+      this.registerNewForm(newError.formId);
+    }
+    const currentErrors = { ...this._errorsStore?.[newError.formId] };
+
+    if (!currentErrors?.[newError.focusId]) {
+      currentErrors[newError.focusId] = {};
     }
 
-    let currentErrors = this._allFormErrors;
+    const currentMessage = currentErrors[newError.focusId][newError.id];
 
-    const langUpdated =
-      currentErrors?.[newError.formId]?.[newError.id] &&
-      currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
+    const messageChanged = currentMessage && currentMessage !== newError.message;
 
-    currentErrors = {
-      ...currentErrors,
-      [newError.formId]: this.getUpdatedErrorsByFormId(newError, currentErrors[newError.formId]),
-    };
+    const contentChanged = currentErrors?.[newError.focusId] && messageChanged;
 
-    this._allFormErrors = currentErrors;
+    currentErrors[newError.focusId][newError.id] = newError.message;
 
-    if (langUpdated || this._updateStrategy === 'all') {
+    this._errorsStore[newError.formId] = currentErrors;
+
+    const reloadErrors =
+      (contentChanged || this._updateStrategy === 'all') &&
+      !!this._errorSummaryVisibilityStatus?.[newError.formId]();
+
+    if (reloadErrors) {
       this._focusToFormOnReload = null;
-      this.reloadErrorsByFormId(newError.formId);
+
+      this.reloadFormErrors(newError.formId, false);
     }
-  }
-
-  private getUpdatedErrorsByFormId(
-    newError: FudisFormErrorSummaryItem,
-    currentErrors: FudisFormErrorSummaryObject,
-  ): FudisFormErrorSummaryObject {
-    const errorId = this._defineErrorId(newError.id, newError.controlName);
-
-    if (!currentErrors[errorId]) {
-      currentErrors = {
-        ...currentErrors,
-        [errorId]: {
-          id: newError.id,
-          errors: { [newError.type]: newError.error },
-          label: newError.label,
-          language: newError.language,
-        },
-      };
-    } else {
-      currentErrors = {
-        ...currentErrors,
-        [errorId]: {
-          id: newError.id,
-          errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
-          label: newError.label,
-          language: newError.language,
-        },
-      };
-    }
-
-    return currentErrors;
   }
 
   /**
    * Removes error object from the current errors list if it contains matching error id
+   *
    * @param error Error object
    */
-  public removeError(error: FudisFormErrorSummaryRemoveItem, formId: string): void {
-    const currentErrorsOfForm = this._allFormErrors[formId];
+  public removeError(errorToRemove: FudisErrorSummaryRemoveError): void {
+    const currentErrorsOfForm = { ...this._errorsStore[errorToRemove.formId] };
 
-    const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
+    if (currentErrorsOfForm[errorToRemove.focusId]?.[errorToRemove.id]) {
+      delete currentErrorsOfForm[errorToRemove.focusId][errorToRemove.id];
 
-    if (currentErrorsOfForm[errorId]?.errors[error.type]) {
-      delete currentErrorsOfForm[errorId].errors[error.type];
-
-      const otherErrors = Object.keys(currentErrorsOfForm[errorId].errors).length;
+      const otherErrors = Object.keys(currentErrorsOfForm[errorToRemove.focusId]).length;
 
       if (otherErrors === 0) {
-        delete currentErrorsOfForm[errorId];
+        delete currentErrorsOfForm[errorToRemove.focusId];
       }
 
-      this._allFormErrors[formId] = currentErrorsOfForm;
+      this._errorsStore[errorToRemove.formId] = currentErrorsOfForm;
 
-      if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
+      const reloadErrors =
+        (this._updateStrategy === 'onRemove' || this._updateStrategy === 'all') &&
+        !!this._errorSummaryVisibilityStatus?.[errorToRemove.formId]();
+
+      if (reloadErrors) {
         this._focusToFormOnReload = null;
-
-        this.reloadErrorsByFormId(formId);
+        this.reloadFormErrors(errorToRemove.formId);
       }
     }
   }
 
-  /**
-   * Adds new fieldset to the list of current fieldsets
-   * If a fieldset with a matching id exists, replace the old fieldset with the new one
-   * @param fieldset Form error summary fieldset
-   */
-  public addFieldset(fieldset: FudisFormErrorSummarySection): void {
-    this._fieldsets = this.updateSectionsOrFieldsets(this._fieldsets, fieldset);
-  }
-
-  /**
-   * Removes the fieldset from the current fieldsets
-   * @param fieldset Form error summary fieldset
-   */
-  public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
-    const indexToRemove = this._fieldsets[fieldset.formId].indexOf(fieldset);
-
-    this._fieldsets[fieldset.formId].splice(indexToRemove, 1);
-  }
-
-  /**
-   * Adds new section to the list of current sections
-   * If a section with a matching id exists, replace the old section with the new one
-   * @param section Form error summary section
-   */
-  public addSection(section: FudisFormErrorSummarySection): void {
-    this._sections = this.updateSectionsOrFieldsets(this._sections, section);
-  }
-
-  private updateSectionsOrFieldsets(
-    previousValues: FudisFormErrorSummarySectionObject,
-    newValue: FudisFormErrorSummarySection,
-  ): FudisFormErrorSummarySectionObject {
-    const valuesToReturn = previousValues;
-
-    const existingItem = valuesToReturn[newValue.formId]?.find((item) => {
-      return item.id === newValue.id;
-    });
-
-    if (existingItem) {
-      const index = valuesToReturn[newValue.formId].indexOf(existingItem);
-      valuesToReturn[newValue.formId][index] = newValue;
-    } else {
-      valuesToReturn[newValue.formId].push(newValue);
-    }
-
-    return valuesToReturn;
-  }
-
-  /**
-   * Removes the section from the current sections
-   * @param section Form error summary section
-   */
-  public removeSection(section: FudisFormErrorSummarySection): void {
-    const indexToRemove = this._sections[section.formId].indexOf(section);
-
-    this._sections[section.formId].splice(indexToRemove, 1);
-  }
+  // --------------------
+  //
+  // RELOADING LIST OF ERRORS TO HTML DOM
+  //
+  // Functions to actually update Components which listen to Error changes. These will update the
+  // Observables components are listening to.
+  //
+  // --------------------
 
   /**
    * Updates the visible and dynamic lists of all form and errors with the current error list
    */
   public reloadAllErrors(): void {
-    this._formIdToUpdate = 'all';
-
-    Object.keys(this._allFormErrors).forEach((key) => {
-      this.reloadErrorsByFormId(key, false, true);
+    Object.keys(this._errorsStore).forEach((key) => {
+      if (this._errorSummaryVisibilityStatus[key]()) {
+        this.reloadFormErrors(key, false);
+      }
     });
   }
 
-  public reloadErrorsByFormId(formId: string, focus?: boolean, allErrorsReloaded?: boolean): void {
+  /**
+   * @param formId
+   * @param focus
+   */
+  public reloadFormErrors(formId: string, focus?: boolean): void {
     if (focus) {
       this._focusToFormOnReload = formId;
+      this._submitAttempt.update((submitCount) => submitCount + 1);
     } else {
       this._focusToFormOnReload = null;
     }
 
-    if (!allErrorsReloaded) {
-      this._formIdToUpdate = formId;
-    }
+    const reloadConditions =
+      !this._reloadGuard.includes(formId) &&
+      this._errorsStore[formId] &&
+      this._errorsSignal[formId];
 
-    this._allFormErrorsObservable.next({ ...this._allFormErrors });
+    if (reloadConditions) {
+      this._reloadGuard.push(formId);
+      setTimeout(() => {
+        this._errorsSignal[formId]?.set(this._errorsStore[formId]);
+        this._errorsObservable.next({ ...this._errorsStore });
+
+        this._reloadGuard.splice(this._reloadGuard.indexOf(formId), 1);
+      }, 50);
+    }
   }
 
+  // --------------------
+  //
+  // DOM RELATED FUNCTIONS
+  //
+  // Usually called by Components when they are initialized and they register themselves to Error
+  // Summary Service
+  //
+  // --------------------
+
+  /**
+   * @param element HTMLElement to check, if it has Form Component as ancestor
+   * @returns If ancestor found, returns id of that Form and visibility status of Form's Error
+   *   Summary
+   */
+  public getFormAncestorId(element: HTMLElement): Promise<null | string> {
+    let foundId: string | null = null;
+    let tryCounter: number = 0;
+
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        Object.keys(this._errorSummaryVisibilityStatus).find((id) => {
+          if (element.closest(`#${id}`)) {
+            foundId = id;
+          }
+        });
+
+        if (foundId) {
+          clearInterval(interval);
+          resolve(foundId);
+        } else if (tryCounter < 50) {
+          tryCounter = tryCounter + 1;
+        } else {
+          clearInterval(interval);
+          resolve(null);
+        }
+      }, 10);
+    });
+  }
+
+  /**
+   * When new Form Component is initialized, it will register itself for child components and error
+   * messages related to it
+   *
+   * @param formId
+   */
+  public registerNewForm(formId: string, errorSummaryVisible: boolean = false): void {
+    if (!this._formStructure[formId]) {
+      this._formStructure[formId] = {
+        sections: {},
+        fieldsets: {},
+      };
+    }
+
+    if (!this._errorSummaryVisibilityStatus[formId]) {
+      this._errorSummaryVisibilityStatus[formId] = signal(errorSummaryVisible);
+    }
+
+    if (!this._errorsSignal[formId]) {
+      this._errorsSignal[formId] = signal({});
+    }
+
+    if (!this._errorsStore[formId]) {
+      this._errorsStore[formId] = {};
+    }
+  }
+
+  /**
+   * When Form Component is destroyed, it will remove itself from the service
+   *
+   * @param formId
+   */
+  public removeForm(formId: string): void {
+    if (this._errorsStore[formId]) {
+      delete this._errorsStore[formId];
+    }
+
+    if (this._errorsSignal[formId]) {
+      delete this._errorsSignal[formId];
+    }
+
+    if (this._formStructure[formId]) {
+      delete this._formStructure[formId];
+    }
+
+    if (this._errorSummaryVisibilityStatus[formId]) {
+      delete this._errorSummaryVisibilityStatus[formId];
+    }
+  }
+
+  /**
+   * Adds new fieldset to the list of current fieldsets If a fieldset with a matching id exists,
+   * replace the old fieldset with the new one
+   *
+   * @param fieldset Form error summary fieldset
+   */
+  public addFieldset(fieldset: FudisFormErrorSummarySection): void {
+    if (this._formStructure?.[fieldset.formId]) {
+      this._formStructure[fieldset.formId].fieldsets[fieldset.id] = fieldset.title;
+    }
+  }
+
+  /**
+   * Removes the fieldset from the current fieldsets
+   *
+   * @param fieldset Form error summary fieldset
+   */
+  public removeFieldset(formId: string, fieldsetId: string): void {
+    delete this._formStructure?.[formId]?.fieldsets[fieldsetId];
+  }
+
+  /**
+   * Adds new section to the list of current sections If a section with a matching id exists,
+   * replace the old section with the new one
+   *
+   * @param section Form error summary section
+   */
+  public addSection(section: FudisFormErrorSummarySection): void {
+    if (this._formStructure?.[section.formId]) {
+      this._formStructure[section.formId].sections[section.id] = section.title;
+    }
+  }
+
+  /**
+   * Removes the section from the current sections
+   *
+   * @param section Form error summary section
+   */
+  public removeSection(formId: string, sectionId: string): void {
+    delete this._formStructure?.[formId]?.sections[sectionId];
+  }
+
+  // --------------------
+  //
+  // MISC
+  //
+  // --------------------
+
   ngOnDestroy(): void {
-    this._allFormErrorsObservable.complete();
+    this._errorsObservable.complete();
   }
 
   /**
    * Returns an error id including a control name if one is given
+   *
    * @param id Id of the form error summary item
    * @param controlName Control name of the form error summary item
    */
-  // eslint-disable-next-line class-methods-use-this
-  private _defineErrorId(id: string, controlName: string | undefined): string {
+  public defineErrorId(id: string, controlName: string | undefined): string {
     return controlName ? `${id}_${controlName}` : id;
   }
 }

@@ -20,8 +20,8 @@ describe('FudisIdServiceService', () => {
 
   const createBasicComponentIds = () => {
     fudisIdComponents.forEach((componentType) => {
-      for (let index = 1; index <= 4; index += 1) {
-        if (index !== 3) {
+      for (let index = 1; index <= 3; index += 1) {
+        if (index !== 2) {
           const newId = idService.getNewId(componentType);
 
           expect(newId).toEqual(`fudis-${componentType}-${index}`);
@@ -37,8 +37,8 @@ describe('FudisIdServiceService', () => {
     parentIndex: number,
     parentId: string,
   ) => {
-    for (let index = 1; index <= 5; index += 1) {
-      if (index !== 3) {
+    for (let index = 1; index <= 3; index += 1) {
+      if (index !== 2) {
         const childId = idService.getNewChildId(componentType, parentId);
 
         expect(childId).toEqual(`${parentId}-item-${index}`);
@@ -76,6 +76,8 @@ describe('FudisIdServiceService', () => {
     });
   };
 
+  let labelCounter = 1;
+
   const createGrandChildrenIds = (
     parentType: FudisIdGrandParent,
     parentId: string,
@@ -92,10 +94,25 @@ describe('FudisIdServiceService', () => {
         const detailsId = idService.getNewDlGrandChilId('details', parentId, groupId);
 
         expect(detailsId).toEqual(`${groupId}-details-${index}`);
-      } else {
-        const optionId = idService.getNewSelectOptionId(parentType, parentId, groupId);
+      } else if (parentType === 'dropdown-menu') {
+        const optionId = idService.getNewDropdownMenuId(parentId, groupId);
 
         expect(optionId).toEqual(`${groupId}-option-${index}`);
+      } else {
+        const optionId = idService.getNewSelectOptionId(
+          `test-label-${labelCounter}`,
+          parentType,
+          parentId,
+          groupId,
+        );
+
+        const hashLabel = FudisIdService.createSelectOptionId(
+          parentId,
+          `test-label-${labelCounter}`,
+        );
+        expect(optionId).toEqual(hashLabel);
+
+        labelCounter = labelCounter + 1;
       }
     }
   };
@@ -105,8 +122,8 @@ describe('FudisIdServiceService', () => {
     parentIndex: number,
     parentId: string,
   ) => {
-    for (let index = 1; index <= 5; index += 1) {
-      if (index !== 3) {
+    for (let index = 1; index <= 3; index += 1) {
+      if (index !== 2) {
         const groupId = idService.getNewGroupId(parentType, parentId);
 
         if (parentType === 'description-list') {
@@ -125,12 +142,14 @@ describe('FudisIdServiceService', () => {
     }
   };
 
+  let nonGroupedLabelCounter = 1;
+
   const createGrandParentIds = () => {
     fudisIdGrandParents.forEach((grandParentType) => {
-      for (let index = 1; index <= 5; index += 1) {
+      for (let index = 1; index <= 3; index += 1) {
         let newId = '';
 
-        if (index !== 3) {
+        if (index !== 2) {
           newId = idService.getNewGrandParentId(grandParentType);
 
           expect(newId).toEqual(`fudis-${grandParentType}-${index}`);
@@ -144,10 +163,26 @@ describe('FudisIdServiceService', () => {
           createGroupIds(grandParentType, index, newId);
         }
 
-        if (grandParentType !== 'description-list') {
+        if (grandParentType === 'dropdown-menu') {
           for (let index = 1; index <= 3; index += 1) {
-            const nonGroupedOptionId = idService.getNewSelectOptionId(grandParentType, newId);
+            const nonGroupedOptionId = idService.getNewDropdownMenuId(newId);
             expect(nonGroupedOptionId).toEqual(`${newId}-option-${index}`);
+          }
+        } else if (grandParentType === 'select' || grandParentType === 'multiselect') {
+          for (let index = 1; index <= 3; index += 1) {
+            const nonGroupedOptionId = idService.getNewSelectOptionId(
+              `test-label-${nonGroupedLabelCounter}`,
+              grandParentType,
+              newId,
+            );
+
+            const hashLabel = FudisIdService.createSelectOptionId(
+              newId,
+              `test-label-${nonGroupedLabelCounter}`,
+            );
+            expect(nonGroupedOptionId).toEqual(hashLabel);
+
+            nonGroupedLabelCounter = nonGroupedLabelCounter + 1;
           }
         }
       }
@@ -167,7 +202,7 @@ describe('FudisIdServiceService', () => {
     expect(idService.getIdData()).toEqual(testDataBefore);
   });
 
-  it('shoudl create basic component ids', () => {
+  it('should create basic component ids', () => {
     createBasicComponentIds();
 
     expect(idService.getIdData()).toEqual(testComponentDataAfter);
@@ -183,5 +218,22 @@ describe('FudisIdServiceService', () => {
     createGrandParentIds();
 
     expect(idService.getIdData()).toEqual(testGrandParentDataAfter);
+  });
+
+  describe('Option id', () => {
+    it('should generate identical id for the same label', () => {
+      const someLabel = 'I`m a label!';
+      expect(FudisIdService.createSelectOptionId('multiselect', someLabel)).toEqual(
+        'multiselect-option-kkq5na',
+      );
+      expect(FudisIdService.createSelectOptionId('multiselect', someLabel)).toEqual(
+        'multiselect-option-kkq5na',
+      );
+    });
+
+    it('should generate a safe hash with special characters', () => {
+      const id = FudisIdService.createSelectOptionId('select', "</i'm \n a weird _ label !! £$^*-");
+      expect(id).toEqual('select-option-1cnnyrd');
+    });
   });
 });

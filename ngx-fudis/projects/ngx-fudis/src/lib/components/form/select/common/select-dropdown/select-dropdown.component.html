@@ -1,48 +1,50 @@
+<span class="fudis-visually-hidden" role="status">{{ _liveMessage() }}</span>
 <div
   #dropdownElement
+  [class.fudis-select-dropdown--hidden]="selectVariant === 'autocompleteType' && !filterText"
   class="fudis-select-dropdown fudis-input-size__{{ size }}"
   [class.fudis-select-dropdown--open]="open"
   [class.fudis-select-dropdown__multiselect]="multiselect"
   [attr.id]="parentId + '-dropdown'"
   [attr.aria-labelledby]="parentId + '-label'"
-  [attr.aria-multiselectable]="multiselect ? true : null"
+  [attr.aria-multiselectable]="multiselect || null"
   (focus)="_dropdownFocus($event)"
   (blur)="_dropdownBlur($event)"
   role="listbox"
 >
-  <ng-content></ng-content>
-  <ng-container *ngIf="selectVariant !== 'dropdown' && open && filterText">
-    <fudis-body-text
-      *ngIf="autocompleteHelpText !== false"
-      [class.fudis-select-dropdown__help-text--hidden]="!results"
-      class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__first"
-      [variant]="'md-light'"
-      ><ng-container *ngIf="autocompleteHelpText">{{ autocompleteHelpText }}</ng-container
-      ><ng-container *ngIf="!autocompleteHelpText"
-        >{{ _translationShowing | async }} {{ results }}
-        {{ _translationResults | async }}</ng-container
-      ></fudis-body-text
-    >
+  @if (selectVariant !== "dropdown" && open && filterText) {
+    @if (autocompleteHelpText !== false) {
+      <fudis-body-text
+        [class.fudis-select-dropdown__help-text--hidden]="!results"
+        class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__first"
+        [variant]="'md-light'"
+        ><ng-container *ngTemplateOutlet="helpText"
+      /></fudis-body-text>
+    }
     <fudis-body-text
       class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__last"
       [class.fudis-select-dropdown__help-text--hidden]="results"
       [variant]="'md-light'"
-      >{{ _translationNoResultsFound | async }}</fudis-body-text
-    >
-    <span
-      *ngIf="autocompleteHelpText !== false && _displayStatus && results && filterText"
-      class="fudis-visually-hidden"
-      role="alert"
-    >
-      <ng-container *ngIf="autocompleteHelpText">
-        {{ autocompleteHelpText }}
-      </ng-container>
-      <ng-container *ngIf="!autocompleteHelpText">
-        {{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}
-      </ng-container>
-    </span>
-    <span *ngIf="!results && _displayStatus" class="fudis-visually-hidden" role="alert">
-      {{ _translationNoResultsFound | async }}
-    </span>
-  </ng-container>
+      ><ng-container *ngTemplateOutlet="noResults" />
+    </fudis-body-text>
+  }
+  <ng-content></ng-content>
 </div>
+
+<ng-template #helpText>
+  @if (autocompleteHelpText) {
+    {{ autocompleteHelpText }}
+  }
+  @if (!autocompleteHelpText) {
+    {{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}
+  }
+</ng-template>
+
+<ng-template #noResults>
+  @if (autocompleteNoResultsText) {
+    {{ autocompleteNoResultsText }}
+  }
+  @if (!autocompleteNoResultsText) {
+    {{ _translationNoResultsFound | async }}
+  }
+</ng-template>

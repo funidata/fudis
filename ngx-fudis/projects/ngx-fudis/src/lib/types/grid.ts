@@ -1,25 +1,24 @@
-import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
+import { FudisBreakpointKey } from './breakpoint-keys';
+import { FudisBreakpointValueResponsive } from './breakpoints';
 import { FudisSpacing } from './spacing';
 
-/**
- * -------------------------------------------
- * Grid related types
- * -------------------------------------------
- */
+// --------------------
+//
+// Grid related types
+//
+// --------------------
 
 /**
  * Default 'columns' value for Grid component
  */
 export const gridColumnDefault = '1fr';
 
-export const gridInputPropertyDefaults: FudisGridProperties = {
+export const gridInputPropertyDefaults: FudisDefaultGridProperties = {
   align: 'start',
   alignItemsX: 'stretch',
   alignItemsY: 'stretch',
-  classes: [],
+  classes: undefined,
   columnGap: 'responsive',
-  marginTop: 'none',
-  marginBottom: 'none',
   rowGap: 'responsive',
   width: 'xxl',
 };
@@ -35,14 +34,16 @@ export type FudisGridColumns = string | number | FudisGridColumnsResponsive;
 export type FudisGridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial';
 
 /**
- * Alignment of whole Grid inside its container. For items inside the Grid use alignItemsX and alignItemsY.
+ * Alignment of whole Grid inside its container. For items inside the Grid use alignItemsX and
+ * alignItemsY.
  */
 export type FudisGridAlign = 'start' | 'end' | 'center';
 
 /**
  * Alignment of Grid Items inside a Grid
  */
-export type FudisGridAlignItems = 'start' | 'center' | 'end' | 'stretch';
+export const fudisGridAlignItemsArray = ['start', 'center', 'end', 'stretch', 'baseline'] as const;
+export type FudisGridAlignItems = (typeof fudisGridAlignItemsArray)[number];
 
 /**
  * Spacing between columns and rows inside Grid
@@ -57,32 +58,43 @@ export type FudisGridColumnsResponsive = {
 };
 
 /**
- * Attributes for managing Grid
+ * Base attributes for managing Grid
  */
-export interface FudisGridProperties {
+interface FudisGridBase {
   align?: FudisGridAlign;
   alignItemsY?: FudisGridAlignItems;
   alignItemsX?: FudisGridAlignItems;
-  classes?: string[];
-  columns?: FudisBreakpointValueResponsive;
+  classes?: string;
   columnGap?: FudisGridGap;
-  marginBottom?: FudisSpacing;
-  marginTop?: FudisSpacing;
   rowGap?: FudisGridGap;
   width?: FudisGridWidth;
 }
 
-export interface FudisGridPropertyCollection {
-  appValues: FudisGridProperties;
-  defaultValues: FudisGridProperties;
-  serviceValues: FudisGridProperties;
+/**
+ * Attributes for managing Grid properties
+ */
+export interface FudisGridProperties extends FudisGridBase {
+  columns?: FudisBreakpointValueResponsive | string | number;
 }
 
 /**
- * -------------------------------------------
- * Grid Item related types
- * -------------------------------------------
+ * Attributes for managing Grid defaults
  */
+export interface FudisDefaultGridProperties extends FudisGridBase {
+  columns?: FudisBreakpointValueResponsive;
+}
+
+export interface FudisGridPropertyCollection {
+  appValues: FudisGridProperties;
+  defaultValues: FudisDefaultGridProperties;
+  serviceValues: FudisDefaultGridProperties;
+}
+
+// --------------------
+//
+// Grid Item related types
+//
+// --------------------
 
 /**
  * Default value for 'columns' input of Grid Item
@@ -107,7 +119,8 @@ export type FudisGridItemAlignResponsive = {
 export type FudisGridItemWidth = number | string | 'stretch' | 'auto';
 
 /**
- * Input object from application to provide responsive settings for different breakpoints for Grid Item
+ * Input object from application to provide responsive settings for different breakpoints for Grid
+ * Item
  */
 export type FudisGridItemColumnsResponsive = {
   [K in FudisBreakpointKey]?: FudisGridItemWidth;

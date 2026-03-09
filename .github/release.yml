@@ -6,6 +6,9 @@ changelog:
     - title: "Breaking Changes"
       labels:
         - "breaking change"
+    - title: "Deprecated"
+      labels:
+        - "deprecated"
     - title: "Features"
       labels:
         - "feature"
@@ -21,6 +24,9 @@ changelog:
     - title: "Dependencies"
       labels:
         - "dependencies"
+    - title: "Github Actions"
+      labels:
+        - "github actions"
     - title: "Other"
       labels:
         - "*"

@@ -1,16 +1,23 @@
 import { setCompodocJson } from "@storybook/addon-docs/angular";
 import { moduleMetadata } from "@storybook/angular";
-import docJson from "../documentation.json";
 import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
+import { VersionSelectorComponent } from "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.component";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
-import { useTheme } from "./useTheme";
+
+import { TranslocoRootModule } from ".storybook/transloco.module";
+import { HttpClient } from "@angular/common/http";
+import { TranslocoService } from "@jsverse/transloco";
+import docJson from "../documentation.json";
+import { CustomDocsContainer } from "./docs/CustomDocsContainer.tsx";
+import "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts";
+import "zone.js";
 
 setCompodocJson(docJson);
 
 const preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
+      disableSaveFromUI: true,
       exclude: excludeRegex(),
       matchers: {
         color: /(background|color)$/i,
@@ -25,6 +32,7 @@ const preview = {
         exclude: excludeRegex(),
       },
       story: { inline: true },
+      container: CustomDocsContainer,
     },
     options: {
       storySort: {
@@ -32,16 +40,17 @@ const preview = {
           "Documentation",
           [
             "Introduction",
+            ["Welcome", "How to Start Using Fudis"],
             "Development",
             [
               "Getting Started",
+              "How to Contribute",
               "Tooling",
               [
                 "Setup VS Code",
-                "Command Reference",
-                "Testing Local Changes with Symlink",
+                "Testing Local Changes in Application",
                 "Git and GitHub Conventions",
-                "Creating a Release",
+                "Releases",
               ],
               "DS Practises",
               [
@@ -52,20 +61,8 @@ const preview = {
                 "Testing Practises",
                 "Component Checklist",
               ],
+              "Information Security Management",
             ],
-          ],
-          "Foundations",
-          [
-            "Introduction",
-            "Breakpoints",
-            "Borders",
-            "Colors",
-            "Focus",
-            "Grid",
-            "Layers",
-            "Spacing",
-            "Typography",
-            "Utilities",
           ],
           "Components",
           [
@@ -79,16 +76,17 @@ const preview = {
             "Dialog",
             "Dropdown Menu",
             "Expandable",
-
             "Form",
             [
+              "Checkbox",
               "Checkbox Group",
               "Date",
               "Error Message",
               "Error Summary",
-              "Field Set",
+              "Fieldset",
               "Form",
-              "Input With Language Options",
+              "Localized Text Group",
+              "Radio Button Group",
               "Select",
               ["Common Features", "Select", "Multiselect"],
               "Text Area",
@@ -97,14 +95,20 @@ const preview = {
             "Footer",
             "Grid",
             ["Grid", "Grid Item"],
+            "Horizontal Rule",
             "Icon",
+            "IconButton",
+            "Language Badge Group",
             "Link",
+            "Loading Spinner",
             "Notification",
+            "Pagination",
             "Section",
+            "Tab Navigation",
             "Typography",
           ],
           "Directives",
-          ["Introduction", "Form", "Grid", ["Introduction", "Grid", "Grid Item"], "Tooltip"],
+          ["Introduction", "Form", "Grid", ["Introduction", "Grid", "Grid Item"], "Popover"],
           "Services",
           ["Introduction", "Error Summary", "Grid", "Translation"],
           "Utilities",
@@ -113,30 +117,14 @@ const preview = {
       },
     },
   },
-};
 
-export const globalTypes = {
-  theme: {
-    name: "Theme",
-    description: "Project theme for components",
-    defaultValue: "sisu",
-    toolbar: {
-      icon: "mirror",
-      items: [
-        { value: "sisu", title: "Sisu" },
-        { value: "into", title: "Into" },
-      ],
-      title: true,
-      dynamicTitle: true,
-    },
-  },
+  tags: ["autodocs"],
+  decorators: [
+    moduleMetadata({
+      imports: [NgxFudisModule, TranslocoRootModule, VersionSelectorComponent],
+      providers: [HttpClient, TranslocoService],
+    }),
+  ],
 };
-
-export const decorators = [
-  useTheme,
-  moduleMetadata({
-    imports: [NgxFudisModule],
-  }),
-];
 
 export default preview;

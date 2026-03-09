@@ -1,20 +1,16 @@
 <ng-container *transloco="let t">
   <div class="root-style">
       <fudis-grid [columns]="4" [marginTop]="'lg'" [align]="'center'">
-        <fudis-link fudisGridItem [columns]="1" [href]="'/exercise'" [title]="'Workshop exercise'"></fudis-link>
-        <fudis-link fudisGridItem [href]="'/sandbox'" [columns]="2" [title]="'Sandbox'"></fudis-link>
+        <a fudisLink fudisGridItem href="'/exercise'" [external]="true" [title]="'Tietosuojaseloste'" [columns]="1"></a>
+        <a fudisLink fudisGridItem href="'/sandbox'" [external]="true" [title]="'Saavutettavuusseloste'" [columns]="2"></a>
       </fudis-grid>
       <hr class="fudis-hr"/>
       <router-outlet></router-outlet>
-      <fudis-footer>
-        <ng-template fudisFooterContentRight>
-          <fudis-link [href]="'example.com'" [title]="'Tietosuojaseloste'" />
-          <fudis-link [href]="'example.com'" [title]="'Saavutettavuusseloste'" />
-          <fudis-link [href]="'example.com'" [title]="'Järjestelmätiedot'" />
-        </ng-template>
-        <ng-template fudisFooterContentLeft>
-          <fudis-link [href]="'example.com'" [title]="'Promo link'" />
-        </ng-template>
-      </fudis-footer>
+    <fudis-footer>
+      <a fudisLink href="example.com" [external]="true" [title]="'Tietosuojaseloste'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Saavutettavuusseloste'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Järjestelmätiedot'"></a>
+      <a fudisLink href="example.com" [external]="true" [title]="'Promo link'"></a>
+    </fudis-footer>
   </div>
 </ng-container>

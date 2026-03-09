@@ -1,0 +1,119 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { linkTo } from "@storybook/addon-links";
+import { DatepickerComponent } from "./datepicker.component";
+import * as DatepickerStories from "./datepicker.stories.ts";
+import { datepickerExclude } from "../../../../utilities/storybook";
+import * as VersionSelectorStories from "../../../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Form/Date/Datepicker" />
+
+# Datepicker
+
+Datepicker allows user to select a date either from calendar pop-up or by typing it to the text input.
+
+Datepicker is built with the help of [Angular Material's Datepicker](https://material.angular.io/components/datepicker/overview).
+
+## Examples
+
+<Canvas of={DatepickerStories.Datepicker} />
+
+## Usage Guidelines
+
+### Mandatory Properties
+
+Datepicker requires `control` and `label` properties.
+
+```
+<fudis-datepicker
+	[label]="'Select a date'"
+	[control]="control" />
+```
+
+### Optional properties
+
+Popover can be included in the datepicker fieldset with properties from [Popover Directive](/docs/directives-popover--documentation). It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information".
+
+### Validators and Error Handling
+
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation).
+
+**Datepicker validators**
+
+- required
+- datepickerMin
+- datepickerMax
+
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
+
+In addition Datepicker has internal **date format validator** which prompts error message if Fudis is not satisfied with given date's format. This validator can be turned off by setting `dateParse` to `false`.
+
+**Datepicker with Date filter**
+
+DateFilter takes in a function for controlling selectable dates in the calendar.
+DateFilter works the same way as Angular Material's `matDatepickerFilter`.
+
+The function receives a date and must return:
+
+- `true` → the date is allowed and remains enabled in the calendar
+- `false` → the date is not allowed and will be disabled in the calendar
+
+DateFilter allows you to implement custom validation logic such as disabling weekends, holidays, or any dates that don't meet application-specific rules.
+Custom validations always requires the use of a custom error messages. Read [how to add Error message](/docs/components-form-error-message--documentation).
+
+Unlike using simple `datepickerMin` or `datepickerMax` restrictions, using a filter function does _not_ stop users from navigating the calendar past filtered-out dates.
+It only controls which dates can be selected, not which months or years can be viewed.
+
+```
+// In TypeScript file
+
+weekendFilter: (d: Date | null): boolean => {
+	const day = (d || new Date()).getDay();
+	// Prevent Saturday and Sunday from being selected.
+	return day !== 0 && day !== 6;
+	},
+
+// HTML template
+
+<fudis-datepicker
+	[label]="'Select a date'"
+	[control]="control"
+	[dateFilter]="weekendFilter" />
+
+```
+
+## Localization
+
+Currently datepicker parses the display date to Finnish format of <code>DD.MM.YYYY</code> and calendar's first day of the week is Monday by default.
+
+The language of the calendar listens to <code>lang</code> attribute value of <code>html</code> element, e.g. `<html lang="fi">`. This localizes date picker calendar to respective supported language.
+
+Current list of languages supported are:
+
+- English, `lang="en"` which translates to ISO language value of 'en-GB'
+- Finnish, `lang="fi"` which translates to ISO language value of 'fi-FI'
+- Swedish, `lang="sv"` which translates to ISO language value of 'sv-SE'
+
+## Accessibility
+
+- Datepicker has label and id connected to the input
+- Guidance and error messages are connected to the input via id
+- Datepicker has a visible focus state both on input and calendar icon
+- Calendar dialog can be triggered from the calendar icon with keyboard <code>enter</code> and <code>space</code> key
+- User can navigate inside the calendar dialog with keyboard <code>arrow</code> keys
+- User can type the date directly to the input without opening the calendar dialog
+
+## Related components
+
+[Icon](/docs/components-icon--documentation)
+
+[Date Range](/docs/components-form-date-date-range--documentation)
+
+[Angular Material Datepicker](https://material.angular.io/components/datepicker/overview)
+
+## Related directives
+
+[Popover](/docs/directives-popover--documentation)
+
+## Properties
+
+<ArgTypes of={DatepickerComponent} exclude={datepickerExclude} />

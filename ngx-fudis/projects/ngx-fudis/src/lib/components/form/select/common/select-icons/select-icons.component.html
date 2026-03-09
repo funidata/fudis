@@ -1,28 +1,30 @@
 <div class="fudis-select-icons__container">
-  <fudis-icon
-    *ngIf="
-      parentVariant !== 'autocompleteType' &&
-      (!clearButton || ((_controlValue | async) === false && !filterText))
-    "
-    class="fudis-select-icons__icon"
-    [class.fudis-select-icons__icon--disabled]="disabled"
-    [icon]="'chevron'"
-    [rotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
-  />
-  <fudis-icon
-    *ngIf="
-      (parentVariant === 'autocompleteType' && !filterText && (_controlValue | async) === false) ||
-      (parentVariant === 'autocompleteType' && !clearButton)
-    "
-    class="fudis-select-icons__icon"
-    [class.fudis-select-icons__icon--disabled]="disabled"
-    [icon]="'search'"
-  />
+  @if (
+    parentVariant !== "autocompleteType" &&
+    (!clearButton || ((_controlValue | async) === false && !filterText))
+  ) {
+    <fudis-icon
+      class="fudis-select-icons__icon"
+      [class.fudis-select-icons__icon--disabled]="disabled"
+      [icon]="'chevron'"
+      [rotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
+    />
+  }
+  @if (
+    (parentVariant === "autocompleteType" && !filterText && (_controlValue | async) === false) ||
+    (parentVariant === "autocompleteType" && !clearButton)
+  ) {
+    <fudis-icon
+      class="fudis-select-icons__icon"
+      [class.fudis-select-icons__icon--disabled]="disabled"
+      [icon]="'search'"
+    />
+  }
 </div>
 
-<ng-container *ngIf="clearButton">
-  <ng-container *ngIf="_translationClearFilterText | async as clearText">
-    <fudis-button
+@if (clearButton) {
+  @if (_translationClearFilterText | async; as clearText) {
+    <fudis-icon-button
       [class.fudis-select-icons__icon--disabled]="disabled"
       [class.fudis-select-icons__icon--hidden]="
         !(
@@ -35,12 +37,12 @@
       (handleDestroy)="handleClearButtonDestroy.emit()"
       (handleFocus)="_handleClearButtonFocus($event)"
       (handleBlur)="_handleClearButtonBlur($event)"
-      [size]="'icon-only'"
+      [id]="parentId + '-clear-button'"
+      [size]="'extra-small'"
       [variant]="'tertiary'"
       [icon]="'close'"
-      [label]="clearText"
-      [labelHidden]="true"
+      [ariaLabel]="clearText"
       [disabled]="disabled"
     />
-  </ng-container>
-</ng-container>
+  }
+}

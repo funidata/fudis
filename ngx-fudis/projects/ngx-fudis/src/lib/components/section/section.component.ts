@@ -1,38 +1,40 @@
 import {
   Component,
-  ContentChild,
-  Host,
+  ElementRef,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Optional,
   ViewEncapsulation,
+  AfterContentInit,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
-import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
-
-import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
+import { PopoverApiDirective } from '../../directives/popover/popover-api.directive';
 import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
-import { FudisSpacing } from '../../types/spacing';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummarySection } from '../../types/forms';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { FormComponent } from '../form/form/form.component';
 import { BehaviorSubject } from 'rxjs';
+import { getHeadingVariant } from '../../utilities/typography/typography-utils';
 
+/**
+ * Defines a logical content section.
+ *
+ * Use this component to group related content and improve page structure.
+ */
 @Component({
   selector: 'fudis-section',
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
-export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
+export class SectionComponent
+  extends PopoverApiDirective
+  implements OnInit, OnChanges, OnDestroy, AfterContentInit
+{
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent | null,
+    private _element: ElementRef,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
@@ -40,39 +42,24 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   }
 
   /**
-   * Content projection for notifications inside Section
-   */
-  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective | null;
-
-  /**
-   * Content projection for Section content
-   */
-  @ContentChild(ContentDirective) protected _content: ContentDirective | null;
-
-  /**
-   * Content projection for Section heading
-   */
-  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
-
-  /**
    * Section title
    */
   @Input({ required: true }) title: string;
 
   /**
+   * Heading level for the section title
+   */
+  @Input({ required: true }) level: FudisHeadingLevel;
+
+  /**
+   * Heading variant for the section title
+   */
+  @Input() titleVariant: FudisHeadingVariant;
+
+  /**
    * Section id
    */
   @Input() id: string;
-
-  /**
-   * Heading level for the section title
-   */
-  @Input() level: FudisHeadingLevel = 2;
-
-  /**
-   * Heading size for the section title
-   */
-  @Input() titleVariant: FudisHeadingVariant = 'lg';
 
   /**
    * Add badge to the section title
@@ -86,12 +73,13 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-   * xxl = Default value. Viewports of 1600px and larger
-   * xl = Viewports smaller than 1600px
-   * lg = Viewports smaller than 1200px
-   * md = Viewports smaller than 992px
-   * sm = Viewports smaller than 768px
-   * xs = Viewports smaller than 576px
+   *
+   * - Xxl = Default value. Viewports of 1600px and larger
+   * - Xl = Viewports smaller than 1600px
+   * - Lg = Viewports smaller than 1200px
+   * - Md = Viewports smaller than 992px
+   * - Sm = Viewports smaller than 768px
+   * - Xs = Viewports smaller than 576px
    */
   @Input() width: FudisGridWidth = 'initial';
 
@@ -101,19 +89,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   @Input() align: FudisGridAlign = 'start';
 
   /**
-   * Margin top for the Grid
-   */
-  @Input() marginTop: FudisSpacing = 'none';
-
-  /**
-   * Margin bottom for the Grid
-   */
-  @Input() marginBottom: FudisSpacing = 'none';
-
-  /**
    * Custom CSS classes
    */
-  @Input() classes: string[];
+  @Input() classes: string;
 
   /**
    * Is section title shown in error summary breadcrumb
@@ -128,24 +106,36 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Section CSS class list
    */
-  protected _classList = new BehaviorSubject<string[]>([]);
-
-  /**
-   * Object to send to error summary service
-   */
-  private _errorSummaryInfo: FudisFormErrorSummarySection;
+  protected _classList = new BehaviorSubject<string>('');
 
   /**
    * Is info sent to error summary service
    */
   private _errorSummaryInfoSent: boolean = false;
 
+  private _parentFormId: string | null;
+
   ngOnInit(): void {
     this._setSectionId();
+
+    if (!this.titleVariant) {
+      this.titleVariant = getHeadingVariant(this.level);
+    }
 
     this._headingId = `${this.id}-heading`;
     this._classList.next(this._getClasses());
     this._addToErrorSummary();
+  }
+
+  ngAfterContentInit(): void {
+    this._errorSummaryService
+      .getFormAncestorId(this._element.nativeElement)
+      .then((parentFormId) => {
+        if (parentFormId) {
+          this._parentFormId = parentFormId;
+          this._addToErrorSummary();
+        }
+      });
   }
 
   ngOnChanges(changes: FudisComponentChanges<SectionComponent>): void {
@@ -166,13 +156,13 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
    * Send error object to Error Summary Service
    */
   private _addToErrorSummary(): void {
-    if (this.errorSummaryBreadcrumb && this._parentForm) {
-      this._errorSummaryInfo = {
+    if (this.errorSummaryBreadcrumb && this._parentFormId) {
+      const errorSummaryInfo = {
         id: this.id,
-        formId: this._parentForm.id,
+        formId: this._parentFormId,
         title: this.title,
       };
-      this._errorSummaryService.addSection(this._errorSummaryInfo);
+      this._errorSummaryService.addSection(errorSummaryInfo);
       this._errorSummaryInfoSent = true;
     }
   }
@@ -181,20 +171,20 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
    * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
-    if (this._errorSummaryInfoSent) {
-      this._errorSummaryService.removeSection(this._errorSummaryInfo);
+    if (this._errorSummaryInfoSent && this._parentFormId) {
+      this._errorSummaryService.removeSection(this._parentFormId, this.id);
     }
   }
 
   /**
    * Set main CSS class with possible custom classes
    */
-  private _getClasses(): string[] {
-    const cssClasses = this.classes ?? [];
-
-    cssClasses.push('fudis-section');
-
-    return cssClasses;
+  private _getClasses(): string {
+    if (this.classes) {
+      return `fudis-section ${this.classes}`;
+    } else {
+      return 'fudis-section';
+    }
   }
 
   /**

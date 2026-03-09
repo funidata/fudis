@@ -1,28 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SelectComponent } from './select.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { FudisIdService } from '../../../../services/id/id.service';
 import { GuidanceComponent } from '../../guidance/guidance.component';
+import { IconButtonComponent } from '../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../icon/icon.component';
-import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { LabelComponent } from '../../label/label.component';
-import { TestAnimalSound, defaultOptions } from '../common/mock_data';
+import { TestAnimalSound, TestAnimalValue, defaultOptions } from '../common/mock_data';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
-import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
-import { FudisFocusService } from '../../../../services/focus/focus.service';
-import { SelectAutocompleteComponent } from '../common/autocomplete/autocomplete.component';
 import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
 import { BodyTextComponent } from '../../../typography/body-text/body-text.component';
 import { By } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../types/forms';
-import { ButtonComponent } from '../../../button/button.component';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
+import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { SelectOptionComponent } from './select-option/select-option.component';
+import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-container',
   template: `<fudis-select
     #testSelect
@@ -32,56 +32,52 @@ import { SelectIconsComponent } from '../common/select-icons/select-icons.compon
     [control]="control"
     [size]="'md'"
   >
-    <ng-template fudisContent type="select-options">
-      <fudis-select-option *ngFor="let option of testOptions" [data]="option"></fudis-select-option>
+    <ng-template fudisSelectOptions>
+      @for (option of testOptions; track option.value) {
+        <fudis-select-option [data]="option"></fudis-select-option>
+      }
     </ng-template>
   </fudis-select>`,
 })
 class MockAutocompleteComponent {
-  testOptions: TestAnimalSound[] = defaultOptions;
-  control: FormControl<FudisSelectOption<TestAnimalSound> | null> =
-    new FormControl<TestAnimalSound | null>(null);
+  testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
 
-  @ViewChild('testSelect') testSelect: SelectComponent;
+  @ViewChild('testSelect') testSelect: SelectComponent<TestAnimalValue>;
 }
 
 describe('SelectComponent', () => {
-  let component: SelectComponent;
+  let component: SelectComponent<TestAnimalValue>;
   let mockComponent: MockAutocompleteComponent;
-  let fixture: ComponentFixture<SelectComponent>;
+  let fixture: ComponentFixture<SelectComponent<TestAnimalValue>>;
   let mockFixture: ComponentFixture<MockAutocompleteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
+        SelectOptionsDirective,
         SelectComponent,
-        ButtonComponent,
+        SelectAutocompleteDirective,
+        SelectControlValueAccessorDirective,
+        SelectOptionComponent,
         GuidanceComponent,
-        IconComponent,
         LabelComponent,
         MockAutocompleteComponent,
-        SelectAutocompleteComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
-        BodyTextComponent,
       ],
-      providers: [
-        FudisIdService,
-        FudisTranslationService,
-        FudisFocusService,
-        TooltipDirective,
-        SelectBaseDirective,
-        InputBaseDirective,
-      ],
-      imports: [ReactiveFormsModule],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService, SelectBaseDirective],
+      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
     }).compileComponents();
   });
 
   function initWithControlValue() {
-    component.control = new FormControl(defaultOptions[3]);
+    component.control = new FormControl<FudisSelectOption<TestAnimalValue> | null>(
+      defaultOptions[3],
+    );
     component.ngOnChanges({
       control: {
-        currentValue: new FormControl(defaultOptions[3]),
+        currentValue: new FormControl<FudisSelectOption<TestAnimalValue> | null>(defaultOptions[3]),
         previousValue: undefined,
         firstChange: true,
         isFirstChange: () => {
@@ -93,11 +89,11 @@ describe('SelectComponent', () => {
   }
 
   function initWithControlNull() {
-    component.control = new FormControl(null);
+    component.control = new FormControl<FudisSelectOption<TestAnimalValue> | null>(null);
 
     component.ngOnChanges({
       control: {
-        currentValue: new FormControl(null),
+        currentValue: new FormControl<FudisSelectOption<TestAnimalValue> | null>(null),
         previousValue: undefined,
         firstChange: true,
         isFirstChange: () => {
@@ -109,11 +105,80 @@ describe('SelectComponent', () => {
     fixture.detectChanges();
   }
 
-  // TODO: add test for disabled states
+  describe('Control', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(SelectComponent<TestAnimalValue>);
+      component = fixture.componentInstance;
+
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl<FudisSelectOption<TestAnimalValue> | null>(defaultOptions[3]),
+      );
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      jest.spyOn(component as any, '_setParentId');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      jest.spyOn(component as any, '_updateComponentStateFromControlValue');
+    });
+
+    it('should init the component successfully', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { _updateValueAndValidityTrigger } = component as any;
+      jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
+      fixture.detectChanges();
+
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._updateComponentStateFromControlValue).toHaveBeenCalledTimes(1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._setParentId).toHaveBeenCalledTimes(1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._setParentId).toHaveBeenCalledWith('select');
+    });
+
+    it('should not trigger valueChanges', () => {
+      let didEmit = false;
+      component.control.valueChanges.subscribe(() => (didEmit = true));
+      fixture.detectChanges();
+      expect(didEmit).toBeFalsy();
+    });
+
+    it('should trigger valueChanges', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { _updateValueAndValidityTrigger } = component as any;
+      jest.spyOn(_updateValueAndValidityTrigger, 'next');
+
+      let didEmit = false;
+      component.control.valueChanges.subscribe(() => (didEmit = true));
+
+      fixture.detectChanges();
+
+      expect(didEmit).toBeFalsy();
+
+      component.control.setValue(defaultOptions[2]);
+
+      expect(didEmit).toBeTruthy();
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(2);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._updateComponentStateFromControlValue).toHaveBeenCalledTimes(2);
+    });
+
+    it('should close subscription on destroy', () => {
+      fixture.detectChanges();
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeFalsy();
+
+      fixture.destroy();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._subscription.closed).toBeTruthy();
+    });
+  });
 
   describe('Dropdown', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(SelectComponent);
+      fixture = TestBed.createComponent(SelectComponent<TestAnimalValue>);
       component = fixture.componentInstance;
       component.label = 'Test Select Label';
       component.placeholder = 'Test placeholder';
@@ -130,45 +195,40 @@ describe('SelectComponent', () => {
       expect(componentClasses).toEqual(expectedValue.split(' ').sort());
     });
 
-    it('should have default form control option set instead of placeholder on init', () => {
+    it('should have default form control option set on init', () => {
       initWithControlValue();
 
-      const placeholderAnimal = fixture.debugElement.query(By.css('.fudis-select__input__label'));
+      const inputElement = fixture.debugElement.query(By.css('.fudis-select__input'));
 
-      expect(placeholderAnimal.nativeElement.innerHTML).toEqual('Really dangerous cat');
+      expect(inputElement.nativeElement.value).toEqual('Really dangerous cat');
     });
 
-    it('should have placeholder text present when control value is updated to null', () => {
+    it('should have placeholder text present', () => {
       initWithControlValue();
-      component.control.setValue(null);
+
       fixture.detectChanges();
 
-      const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
+      const inputElement = fixture.debugElement.query(By.css('.fudis-select__input'));
 
-      expect(placeholder.nativeElement.outerHTML).toContain('Test placeholder');
-    });
-
-    it('should have placeholder text present when control value is null on init', () => {
-      initWithControlNull();
-      const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
-
-      expect(placeholder.nativeElement.outerHTML).toContain('Test placeholder');
+      expect(inputElement.nativeElement.getAttribute('placeholder')).toBe('Test placeholder');
     });
 
     it('should update component state when handleSelectionChange is called', () => {
       initWithControlNull();
-      component.handleSelectionChange(defaultOptions[5]);
+      component.handleSelectionChange(defaultOptions[7]);
       fixture.detectChanges();
 
-      const value = getElement(fixture, '.fudis-select__input__label').textContent;
+      const value = (getElement(fixture, '.fudis-select__input') as HTMLInputElement).value;
 
       expect(value).toEqual('Southern Titiwangsa Bent-Toed Gecko');
-      expect(component.control.value).toEqual(defaultOptions[5]);
+      expect(component.control.value).toEqual(defaultOptions[7]);
     });
   });
 
   /**
-   * These tests somewhat overlap with SelectAutocomplete component's tests, but as some logic is handled in parent Select component these tests aim to check that those are working and passing them properly to child SelectAutocomplete
+   * These tests somewhat overlap with SelectAutocomplete component's tests, but as some logic is
+   * handled in parent Select component these tests aim to check that those are working and passing
+   * them properly to child SelectAutocomplete
    */
   describe('Autocomplete', () => {
     beforeEach(() => {
@@ -177,7 +237,7 @@ describe('SelectComponent', () => {
     });
 
     it('should have placeholder on init, when control value is null', () => {
-      mockComponent.control = new FormControl<FudisSelectOption<TestAnimalSound> | null>(null);
+      mockComponent.control = new FormControl<TestAnimalSound | null>(null);
       mockFixture.detectChanges();
       const selectElement = getElement(mockFixture, '.fudis-select');
 
@@ -189,7 +249,7 @@ describe('SelectComponent', () => {
     });
 
     it('should have input value, when control has value', () => {
-      mockComponent.control = new FormControl(defaultOptions[2]);
+      mockComponent.control = new FormControl<TestAnimalSound | null>(defaultOptions[2]);
       mockFixture.detectChanges();
 
       const selectElement = getElement(mockFixture, '.fudis-select');
@@ -202,7 +262,7 @@ describe('SelectComponent', () => {
     });
 
     it('should update input value, when control value updates', () => {
-      mockComponent.control = new FormControl(defaultOptions[2]); // Platypus
+      mockComponent.control = new FormControl<TestAnimalSound | null>(defaultOptions[2]); // Platypus
       mockFixture.detectChanges();
       mockComponent.control.patchValue(defaultOptions[1]); // Capybara
       mockFixture.detectChanges();
@@ -217,7 +277,7 @@ describe('SelectComponent', () => {
     });
 
     it('should not have input value, when control value is null', () => {
-      mockComponent.control = new FormControl(null);
+      mockComponent.control = new FormControl<TestAnimalSound | null>(null);
       mockFixture.detectChanges();
 
       const selectElement = getElement(mockFixture, '.fudis-select');
@@ -230,7 +290,7 @@ describe('SelectComponent', () => {
     });
 
     it('should not have input value, when control value is updated to null', () => {
-      mockComponent.control = new FormControl(defaultOptions[2]);
+      mockComponent.control = new FormControl<TestAnimalSound | null>(defaultOptions[2]);
       mockFixture.detectChanges();
       mockComponent.control.patchValue(null);
       mockFixture.detectChanges();

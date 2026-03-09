@@ -1,33 +1,33 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   Output,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import {
-  FudisFormErrorSummaryItem,
-  FudisFormErrorSummaryRemoveItem,
-} from '../../../../types/forms';
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryRemoveError,
+} from '../../../../types/errorSummary';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-validator-error-message',
   templateUrl: './validator-error-message.component.html',
   styleUrls: ['./validator-error-message.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
-export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _idService: FudisIdService,
-    private _translationService: FudisTranslationService,
   ) {
     this._id = _idService.getNewId('validator-error-message');
   }
@@ -48,14 +48,14 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   @Input({ required: true }) type: string;
 
   /**
-   * If error is visible or not.
-   */
-  @Input() visible: boolean = false;
-
-  /**
    * Error message to display
    */
   @Input({ required: true }) message: Observable<string> | string;
+
+  /**
+   * Is error visible or not
+   */
+  @Input() visible: boolean = false;
 
   /**
    * Name of control this error is related to.
@@ -75,17 +75,17 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   /**
    * Output for handling a state when error is sent to Error Summary
    */
-  @Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
+  @Output() handleCreateError = new EventEmitter<FudisErrorSummaryNewError>();
 
   /**
    * Output for handling a state when error is removed from Error Summary
    */
-  @Output() handleRemoveError = new EventEmitter<FudisFormErrorSummaryRemoveItem>();
+  @Output() handleRemoveError = new EventEmitter<FudisErrorSummaryRemoveError>();
 
   /**
    * Error message to include in error summary item
    */
-  protected _currentMessage: string;
+  protected _currentMessage = new BehaviorSubject<string>('');
 
   /**
    * Id generated with FudisIdService
@@ -100,32 +100,15 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   /**
    * Disposable object for preserving message as Observable string
    */
-  private _subscribtion: Subscription;
+  private _messageSubscribtion: Subscription;
 
-  /**
-   * To prevent ngOnChanges running before initial ngOnInit
-   */
-  private _initFinished: boolean = false;
-
-  ngOnInit(): void {
-    /**
-     * Create validator error message if a message is a observable string
-     */
-    if (this.message && typeof this.message !== 'string') {
-      this._subscribtion = this.message.subscribe((value: string) => {
-        this._currentMessage = value;
+  private _subscribeToMessage(message: Observable<string>): void {
+    this._messageSubscribtion = message.subscribe((value: string) => {
+      if (this._currentMessage.value !== value) {
+        this._currentMessage.next(value);
         this._createError();
-      });
-    }
-    /**
-     * Create validator error message if a message is a string
-     */
-    if (typeof this.message === 'string') {
-      this._currentMessage = this.message;
-      this._createError();
-    }
-
-    this._initFinished = true;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -137,22 +120,29 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   }
 
   ngOnChanges(changes: FudisComponentChanges<ValidatorErrorMessageComponent>): void {
-    if (this._initFinished) {
-      if (
-        changes.focusId ||
-        changes.message ||
-        changes.label ||
-        changes.type ||
-        changes.controlName ||
-        changes.formId
-      ) {
-        /**
-         * Update string message and try to create a new error when changes happen
-         */
-        if (typeof this.message === 'string') {
-          this._currentMessage = this.message;
-        }
+    if (
+      changes.message?.currentValue !== changes.message?.previousValue ||
+      changes.label?.currentValue !== changes.label?.previousValue ||
+      changes.formId?.currentValue !== changes.formId?.previousValue
+    ) {
+      const newMessage = changes.message?.currentValue;
+      const newLabel = changes.label?.currentValue;
+      const newFormId = changes.formId?.currentValue;
 
+      if (newMessage) {
+        if (typeof newMessage === 'string') {
+          this._currentMessage.next(newMessage);
+          this._createError();
+        } else {
+          this._subscribeToMessage(newMessage);
+        }
+      }
+
+      if (newLabel) {
+        this._createError();
+      }
+
+      if (newFormId) {
         this._createError();
       }
     }
@@ -161,53 +151,59 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   ngOnDestroy(): void {
     this._removeError();
 
-    if (this._subscribtion) {
-      this._subscribtion.unsubscribe();
+    if (this._messageSubscribtion) {
+      this._messageSubscribtion.unsubscribe();
     }
   }
 
   throwError(): void {
     if (this.controlName) {
-      // eslint-disable-next-line no-console
       console.warn(
         `Fudis component with id of '${this.focusId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`,
       );
     } else {
-      // eslint-disable-next-line no-console
       console.warn(
         `Fudis component with id of '${this.focusId}' is missing error message for error type of: '${this.type}'`,
       );
     }
   }
 
+  /**
+   * Create new error to be sent to Error Summary
+   */
   private _createError(): void {
-    if (this.formId && this.focusId && this._currentMessage && this.label) {
-      const newError: FudisFormErrorSummaryItem = {
-        id: this.focusId,
-        error: this._currentMessage,
+    if (this.formId && this.focusId && this._currentMessage.value) {
+      const newError: FudisErrorSummaryNewError = {
+        focusId: this.focusId,
         formId: this.formId,
-        label: this.label,
-        type: this.type,
-        controlName: this.controlName,
-        language: this._translationService.getLanguage(),
+        message: `${this.label}: ${this._currentMessage.value}`,
+        id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
-      this._errorSummaryService.addNewError(newError);
+      this._errorSummaryService.addError(newError);
       this._errorSent = true;
-      this.handleCreateError.emit(newError);
+
+      // Emit in a microtask only after the current change detection cycle.
+      // This ensures that the OnPush components using Guidance detects the updated state.
+      // Emitting synchronously from ngOnChanges would otherwise break change detection, and in some cases cause NG0100 errors.
+      queueMicrotask(() => {
+        this.handleCreateError.emit(newError);
+      });
     }
   }
 
+  /**
+   * Remove existing error from Error Summary
+   */
   private _removeError(): void {
     if (this._errorSent && this.formId) {
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
-        id: this.focusId,
+      const errorToRemove: FudisErrorSummaryRemoveError = {
+        focusId: this.focusId,
         formId: this.formId,
-        type: this.type,
-        controlName: this.controlName,
+        id: this.controlName ? `${this.type}_${this.controlName}` : this.type,
       };
 
-      this._errorSummaryService.removeError(errorToRemove, this.formId);
+      this._errorSummaryService.removeError(errorToRemove);
       this.handleRemoveError.emit(errorToRemove);
     }
   }

@@ -3,18 +3,22 @@ import {
   Component,
   Host,
   HostBinding,
-  Input,
   ViewEncapsulation,
 } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { BreadcrumbsComponent } from '../breadcrumbs.component';
 
+/**
+ * Represents a single link within BreadcrumbsComponent.
+ *
+ * Use this component with descriptive link text to ensure understandability.
+ */
 @Component({
   selector: 'fudis-breadcrumbs-item',
   templateUrl: './breadcrumbs-item.component.html',
-  styleUrls: ['./breadcrumbs-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class BreadcrumbsItemComponent {
   constructor(
@@ -27,17 +31,7 @@ export class BreadcrumbsItemComponent {
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-breadcrumbs-item-host';
-
-  /**
-   * Visible label text
-   */
-  @Input({ required: true }) label: string;
-
-  /**
-   * Angular Router url
-   */
-  @Input({ required: true }) url: string;
+  @HostBinding('class') protected _classes = 'fudis-breadcrumbs-item-host';
 
   /**
    * Id from Id Service

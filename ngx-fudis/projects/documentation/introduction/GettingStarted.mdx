@@ -1,0 +1,81 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import pkg from "../../../package.json";
+import * as VersionSelectorStories from "../../ngx-fudis/src/storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Documentation/Introduction/How to Start Using Fudis" />
+
+# How to Start Using Fudis in Your Application
+
+Fudis is available as [NPM package](https://www.npmjs.com/package/@funidata/ngx-fudis)
+
+## 1. Compatibility
+
+The library is build and tested against:
+
+- Angular: **{ pkg.dependencies['@angular/core'].replace(/^(\^)?(\d+\.\d+)\.\d+$/, '$2') }**
+- Angular Material: **{ pkg.dependencies['@angular/material'].replace(/^(\^)?(\d+\.\d+)\.\d+$/, '$2') }**
+- Fudis Core: **{ pkg.dependencies['@funidata/fudis-core'].replace(/^(\^)?/, '') }**
+
+> We recommend using these versions in your project. Newer major versions may work, but are not yet tested or guaranteed to be compatible.
+
+## 2. Install Angular Material Peer Dependency:
+
+Run the following command to install Angular Material as a peer dependency to your project. Note that this will also include Angular CDK, which is mandatory for Angular Material to work properly.
+
+```
+ng add @angular/material --theme=custom
+
+```
+
+> This command will set the default Angular Material theme for your project. If you are using the Fudis compatible version of Angular Material, it is safe to remove all external font stylesheets and theming that Angular Material applies to your `index.html ` and root `style.scss` files.
+
+## 3. Install Fudis-Core Peer Dependency:
+
+Fudis has a peer dependency to our style library, that contains global styles, mixins and tokens.
+
+```
+npm install @funidata/fudis-core
+
+```
+
+## 4. Install Fudis:
+
+```
+ng add @funidata/ngx-fudis
+
+```
+
+## 5. Import Fudis in Applications's `app.module.ts`
+
+Check your application's `app.module.ts` file that Fudis is imported correctly.
+
+```
+import { NgxFudisModule } from '@funidata/ngx-fudis';
+
+@NgModule({
+	...
+	imports: [
+		...
+		NgxFudisModule.forRoot()
+	],
+	...
+})
+```
+
+If you need to import `NgxFudisModule` more than once in your application, use the `NgxFudisModule.forRoot()` import only once in your topmost module import and otherwise just import `NgxFudisModule`. The `forRoot`-function call brings in the singleton services along the other providers and declarations.
+
+## 6. Import global styles
+
+### Core styles
+
+After installing the Fudis Core package, to enable the foundational design tokens and utilities of the Fudis Design system in your project, follow the style import instructions provided in the [Fudis Core Style Library](https://fudis.funidata.fi/core) under **Documentation -> Introduction -> How to Start Using Fudis Core in Your Application**.
+
+### Component styles
+
+The Angular specific component styles must be imported to your application's styles for components to work properly. As Fudis uses Angular Material as its dependency, it is already imported as part of Fudis' main CSS file.
+
+The recommended way is to add following lines your project's root SCSS style file, which is often named `styles.scss` or `index.scss` or similar:
+
+```
+@use '@funidata/ngx-fudis';
+```

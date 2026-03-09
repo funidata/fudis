@@ -1,0 +1,100 @@
+import { ArgTypes, Meta, Canvas, Source } from "@storybook/addon-docs/blocks";
+import { SectionComponent } from "./section.component.ts";
+import * as SectionStories from "./section.stories.ts";
+import { sectionExclude } from "../../utilities/storybook.ts";
+import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Section" />
+
+# Section
+
+Section is a semantic wrapper component for grouping elements. Everything within one Section should be related.
+
+## Usage Guidelines
+
+Section has two main areas: header and content. Inside header, addition to heading title, there can be notifications and buttons.
+
+### Header
+
+Each Section should be identified, therefore `title` and its `level` are mandatory properties. Title variant can be modified with `titleVariant` property. As in [Heading Component](/docs/components-typography-heading--documentation), title variant is visual and level is semantic adjustment.
+
+Heading can also include `popover` with all the [Popover](/docs/directives-popover--documentation) Inputs available. It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information".
+
+### Content Directives
+
+**fudis-section-content**: The main content of the Section is added through Fudis Section Content directive.
+
+<Source
+  code={`<fudis-section-content>
+  <fudis-body-text>Main content of the section</fudis-body-text>
+</fudis-section-content>`}
+/>
+
+**fudis-section-actions**: Buttons are added through Fudis Section Actions directive. Buttons have fixed positions and cannot be altered.
+
+<Source
+  code={`
+  <fudis-section-actions>
+  <fudis-button [label]="'Some action'"></fudis-button>
+</fudis-section-actions>`}
+/>
+
+### Nesting Sections Inside Sections
+
+Avoiding too complex page structure is recommended, but if you have a need to nest Sections inside Sections, make sure that heading level order is considered for accessibility. Nested Section's `level` input property should be lower than its parent Section's `level`.
+
+<Source
+  code={`
+<fudis-section
+  [title]="'Parent Section'"
+  [titleVariant]="'lg'"
+  [level]="2"
+  >
+  <fudis-section-content>
+    <fudis-section
+      [title]="'Nested Section'"
+      [titleVariant]="'md'"
+      [level]="3" >
+      <fudis-section-actions>
+        <fudis-button [label]="'Nested Action button'"/>
+      </fudis-section-actions>
+      <fudis-section-content>
+        <fudis-body-text>Main content of the section</fudis-body-text>
+      </fudis-section-content>
+    </fudis-section>
+  </fudis-section-content>
+</fudis-section>
+  `}
+/>
+
+### Using Section With Form and Error Summary
+
+When using Section inside [Form](/docs/components-form-form--documentation) with [Error Summary](/docs/components-form-error-summary--documentation), you can set Section title to be part of the link titles in the Error Summary by setting `errorSummaryBreadcrumb` to `true`.
+
+**Note!** Similar `errorSummaryBreadcrumb` feature is available in [Fieldset](/docs/components-form-field-set--documentation) and [Expandable](/docs/components-expandable--documentation) components as well. If you are nesting these components, e.g. Section > Expandable > Fieldset, consider enabling breadcrumb in only one of these to avoid excessively long link texts. Usually the lowest level element is the safe choise.
+
+## Examples
+
+### Basic Example
+
+<Canvas of={SectionStories.Example} />
+
+### Nested Example
+
+<Canvas of={SectionStories.NestedExample} />
+
+## Accessibility
+
+- Section Component uses native `<section>` element
+- Section and its title is linked to its content by aria-describedby
+- Section title must be provided with `level` property
+
+## Related components
+
+- [Button](/docs/components-button--documentation)
+- [Heading](/docs/components-typography-heading--documentation)
+- [Popover](/docs/directives-popover--documentation)
+
+## Properties
+
+<ArgTypes of={SectionComponent} />

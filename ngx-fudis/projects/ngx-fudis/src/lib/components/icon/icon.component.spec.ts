@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy, SimpleChange } from '@angular/core';
+import { SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { IconComponent } from './icon.component';
 import {
@@ -7,6 +7,7 @@ import {
   FudisIconRotate,
   fudisIconColorArray,
   fudisIconArray,
+  fudisIconRotateArray,
 } from '../../types/icons';
 import { getElement } from '../../utilities/tests/utilities';
 
@@ -46,7 +47,7 @@ const arrayForComparing: string[] = [
   'editor',
   'exclamation-mark-circle',
   'exclamation-mark-circle-fill',
-  'exclamation-mark-small',
+  'exclamation-mark-circle-small',
   'eye',
   'eye-blind',
   'fail',
@@ -55,7 +56,7 @@ const arrayForComparing: string[] = [
   'info',
   'info-circle',
   'info-circle-fill',
-  'info-small',
+  'info-circle-small',
   'junction',
   'link',
   'list-add',
@@ -72,6 +73,7 @@ const arrayForComparing: string[] = [
   'notebook',
   'notification',
   'numbering',
+  'paperclip',
   'pdf',
   'people',
   'person',
@@ -112,12 +114,8 @@ describe('IconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IconComponent],
-    })
-      .overrideComponent(IconComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+      imports: [IconComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -190,6 +188,10 @@ describe('IconComponent', () => {
       ]);
     });
 
+    it('should have CSS host class', () => {
+      expect(component['_classes']).toEqual('fudis-icon-host');
+    });
+
     it('should change color class according to given color Input value', () => {
       fudisIconColorArray.forEach((color) => {
         iconColorCheck(color);
@@ -197,17 +199,38 @@ describe('IconComponent', () => {
     });
 
     it('should change rotate class according to given rotate Input value', () => {
-      iconRotateCheck('flip-180');
-      iconRotateCheck('cw-90');
-      iconRotateCheck('ccw-90');
-      iconRotateCheck('none');
+      fudisIconRotateArray.forEach((rotate) => {
+        iconRotateCheck(rotate);
+      });
+    });
+
+    it('small icons should have className fudis-icon__sm', () => {
+      const fudisSmallIconsArray: string[] = [];
+      const regex = /-small/gm;
+
+      arrayForComparing.forEach((icon) => {
+        if (icon.match(regex)) {
+          fudisSmallIconsArray.push(icon);
+        }
+      });
+
+      fudisSmallIconsArray.forEach((icon) => {
+        fixture.componentRef.setInput('icon', icon);
+        fixture.detectChanges();
+
+        const svg = fixture.debugElement.query(By.css('svg'));
+        const elem = svg.nativeElement as HTMLElement;
+        const iconClasses = elem.getAttribute('class');
+
+        expect(iconClasses).toContain('fudis-icon__sm');
+      });
     });
   });
 
   describe('Icon', () => {
     it('should be displayed according to given icon Input value', () => {
       fudisIconArray.forEach((iconName) => {
-        component.icon = iconName;
+        fixture.componentRef.setInput('icon', iconName);
         fixture.detectChanges();
 
         const svgElement = getElement(fixture, '.fudis-icon');

@@ -1,9 +1,129 @@
-import { FudisTranslationConfig } from '../../types/miscellaneous';
-
 /**
- * This file contains translations for static translation keys used by Fudis components.
- * These are not supposed to be modified by the using application.
+ * This file contains translations for static translation keys used by Fudis components. These are
+ * not supposed to be modified by the using application.
  */
+
+export interface FudisTranslationConfig {
+  BREADCRUMBS: {
+    // Prefix visible to screen reader
+    PREFIX: string;
+  };
+  // Shown with form inputs
+  REQUIRED: string;
+  // Necessary keys for ngMaterial Datepicker
+  DATEPICKER: {
+    CALENDAR: string;
+    CLOSE: string;
+    OPEN: string;
+    PLACEHOLDER: string;
+    PREV_MONTH: string;
+    NEXT_MONTH: string;
+    PREV_YEAR: string;
+    NEXT_YEAR: string;
+    PREV_MULTIYEAR: string;
+    NEXT_MULTIYEAR: string;
+    SWITCH_MONTH_VIEW: string;
+    SWITCH_MULTIYEAR_VIEW: string;
+    // Error message keys for universal Datepicker and Date Range validation
+    VALIDATION: {
+      START_DATE_INVALID: string;
+      END_DATE_INVALID: string;
+      DATE_PARSE: string;
+    };
+  };
+  DIALOG: {
+    // Label for close button
+    CLOSE: string;
+  };
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: string;
+  };
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: string;
+    };
+  };
+  ERROR_SUMMARY: {
+    TITLE: string;
+  };
+  INPUT_WITH_LANGUAGE_OPTIONS: {
+    // Label for language selection dropdown
+    LANGUAGE: string;
+    // Text shown in dropdown options if input for a language is missing
+    MISSING: string;
+    // Assistive text of max character count for screen readers
+    MAX_LENGTH: string;
+  };
+  LINK: {
+    // External link icon aria-label
+    EXTERNAL_LINK: string;
+  };
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: string;
+        ARIA_LABEL: string;
+      };
+      PREVIOUS: {
+        LABEL: string;
+        ARIA_LABEL: string;
+      };
+    };
+    // Prefix visible to screen reader
+    PREFIX: string;
+    // Aria-live announcement
+    OPENED_PAGE: string;
+    CURRENT_PAGE: string;
+    LAST_PAGE: string;
+  };
+  SELECT: {
+    DISABLED: string;
+    MULTISELECT: {
+      REMOVE_ITEM: string;
+      REMOVE_ITEMS: string;
+    };
+    AUTOCOMPLETE: {
+      // Clear filter button label for screen readers
+      CLEAR: string;
+      NO_RESULTS: string;
+      SHOWING: string;
+      RESULTS: string;
+    };
+  };
+  IMAGE: {
+    // Alternative text for screen readers.
+    FUNIDATA_LOGO: string;
+  };
+  ATTENTION: string;
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: string;
+    PAGE_LOADING: string;
+    PAGE_LOAD_FINISHED: string;
+  };
+  LANGUAGE_BADGE: {
+    ARIA_LABEL: FudisTranslationLanguageBadgeAriaLabel;
+  };
+  TEXTAREA: {
+    // Assistive text of max character count for screen readers
+    MAX_LENGTH: string;
+  };
+  TEXTINPUT: {
+    // Assistive text of max character count for screen readers
+    MAX_LENGTH: string;
+  };
+  ALERT: {
+    HEADING_LABEL: string;
+  };
+}
+
+export interface FudisTranslationLanguageBadgeAriaLabel {
+  FI: string;
+  SV: string;
+  EN: string;
+  TRANSLATIONS: string;
+  SELECTED: string;
+  MISSING_TRANSLATION: string;
+}
 
 /**
  * English translations
@@ -15,6 +135,7 @@ export const en: FudisTranslationConfig = {
     CALENDAR: 'Calendar',
     CLOSE: 'Close calendar',
     OPEN: 'Open calendar',
+    PLACEHOLDER: 'dd.mm.yyyy',
     PREV_MONTH: 'Previous month',
     NEXT_MONTH: 'Next month',
     PREV_YEAR: 'Previous year',
@@ -30,10 +151,16 @@ export const en: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Close' },
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: 'Information is not available',
+  },
   DROPDOWNMENU: {
     ITEM: {
       DISABLED: 'Disabled',
     },
+  },
+  ERROR_SUMMARY: {
+    TITLE: 'The information is incomplete or incorrect. Please correct the following items:',
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Language',
@@ -43,12 +170,27 @@ export const en: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(opens in a new tab)',
   },
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Next',
+        ARIA_LABEL: 'Next, page',
+      },
+      PREVIOUS: {
+        LABEL: 'Previous',
+        ARIA_LABEL: 'Previous, page',
+      },
+    },
+    PREFIX: 'Pagination',
+    OPENED_PAGE: 'Opened page',
+    CURRENT_PAGE: 'current page',
+    LAST_PAGE: 'last page',
+  },
   SELECT: {
     DISABLED: 'Disabled',
-    OPEN_DROPDOWN: 'Open dropdown',
-    CLOSE_DROPDOWN: 'Close dropdown',
     MULTISELECT: {
-      REMOVE_ITEM: 'Remove search filters',
+      REMOVE_ITEM: 'Remove selection',
+      REMOVE_ITEMS: 'Remove selections',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Clear selection',
@@ -60,8 +202,11 @@ export const en: FudisTranslationConfig = {
   IMAGE: {
     FUNIDATA_LOGO: 'Funidata homepage',
   },
-  ICON: {
-    ATTENTION: 'Attention',
+  ATTENTION: 'Attention',
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: 'Loading',
+    PAGE_LOADING: 'Page is loading',
+    PAGE_LOAD_FINISHED: 'Page load finished',
   },
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
@@ -94,6 +239,7 @@ export const fi: FudisTranslationConfig = {
     CALENDAR: 'Kalenteri',
     CLOSE: 'Sulje kalenteri',
     OPEN: 'Avaa kalenteri',
+    PLACEHOLDER: 'pp.kk.vvvv',
     PREV_MONTH: 'Edellinen kuukausi',
     NEXT_MONTH: 'Seuraava kuukausi',
     PREV_YEAR: 'Edellinen vuosi',
@@ -109,10 +255,16 @@ export const fi: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Sulje' },
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: 'Tietoa ei ole saatavilla',
+  },
   DROPDOWNMENU: {
     ITEM: {
       DISABLED: 'Ei valittavissa',
     },
+  },
+  ERROR_SUMMARY: {
+    TITLE: 'Tiedoissa on puutteita tai virheitä. Korjaa seuraavat kohdat:',
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Kieli',
@@ -122,12 +274,27 @@ export const fi: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
   },
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Seuraava',
+        ARIA_LABEL: 'Seuraava, sivu',
+      },
+      PREVIOUS: {
+        LABEL: 'Edellinen',
+        ARIA_LABEL: 'Edellinen, sivu',
+      },
+    },
+    PREFIX: 'Sivutus',
+    OPENED_PAGE: 'Avattu sivu',
+    CURRENT_PAGE: 'nykyinen sivu',
+    LAST_PAGE: 'viimeinen sivu',
+  },
   SELECT: {
     DISABLED: 'Ei valittavissa',
-    OPEN_DROPDOWN: 'Avaa pudostuvalikko',
-    CLOSE_DROPDOWN: 'Sulje pudotusvalikko',
     MULTISELECT: {
-      REMOVE_ITEM: 'Poista hakukriteerejä',
+      REMOVE_ITEM: 'Poista valinta',
+      REMOVE_ITEMS: 'Poista valintoja',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Tyhjennä valinta',
@@ -139,8 +306,11 @@ export const fi: FudisTranslationConfig = {
   IMAGE: {
     FUNIDATA_LOGO: 'Funidatan kotisivut',
   },
-  ICON: {
-    ATTENTION: 'Huomio',
+  ATTENTION: 'Huomio',
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: 'Ladataan',
+    PAGE_LOADING: 'Sivua ladataan',
+    PAGE_LOAD_FINISHED: 'Sivu on ladattu',
   },
   LANGUAGE_BADGE: {
     ARIA_LABEL: {
@@ -173,6 +343,7 @@ export const sv: FudisTranslationConfig = {
     CALENDAR: 'Kalender',
     CLOSE: 'Stäng kalender',
     OPEN: 'Öppna kalender',
+    PLACEHOLDER: 'dd.mm.åååå',
     PREV_MONTH: 'Förra månaden',
     NEXT_MONTH: 'Nästa månad',
     PREV_YEAR: 'Förra året',
@@ -188,22 +359,43 @@ export const sv: FudisTranslationConfig = {
     },
   },
   DIALOG: { CLOSE: 'Stäng' },
+  DESCRIPTION_LIST_ITEM_DETAILS: {
+    EMPTY_STATE: 'Ingen information tillgänglig',
+  },
   DROPDOWNMENU: {
     ITEM: {
       DISABLED: 'Inaktiverad',
     },
+  },
+  ERROR_SUMMARY: {
+    TITLE: 'Det finns brister eller fel i uppgifterna. Korrigera följande punkter:',
   },
   INPUT_WITH_LANGUAGE_OPTIONS: {
     LANGUAGE: 'Språk',
     MISSING: 'Saknas',
     MAX_LENGTH: 'tecken använt',
   },
+  PAGINATION: {
+    BUTTON: {
+      NEXT: {
+        LABEL: 'Nästa',
+        ARIA_LABEL: 'Nästa, sida',
+      },
+      PREVIOUS: {
+        LABEL: 'Föregående',
+        ARIA_LABEL: 'Föregående, sida',
+      },
+    },
+    PREFIX: 'Paginering',
+    OPENED_PAGE: 'Öppnad sida',
+    CURRENT_PAGE: 'nuvarande sida',
+    LAST_PAGE: 'sista sida',
+  },
   SELECT: {
     DISABLED: 'Inaktiverad',
-    OPEN_DROPDOWN: 'Öppna menyn',
-    CLOSE_DROPDOWN: 'Stäng menyn',
     MULTISELECT: {
-      REMOVE_ITEM: 'Radera filtrering',
+      REMOVE_ITEM: 'Ta bort val',
+      REMOVE_ITEMS: 'Ta bort valen',
     },
     AUTOCOMPLETE: {
       CLEAR: 'Radera val',
@@ -218,8 +410,11 @@ export const sv: FudisTranslationConfig = {
   LINK: {
     EXTERNAL_LINK: '(öppnas i en ny flik)',
   },
-  ICON: {
-    ATTENTION: 'Observera',
+  ATTENTION: 'Observera',
+  LOADING_SPINNER: {
+    VISIBLE_LABEL: 'Laddar',
+    PAGE_LOADING: 'Sidan laddas',
+    PAGE_LOAD_FINISHED: 'Sidan har laddats klart',
   },
   LANGUAGE_BADGE: {
     ARIA_LABEL: {

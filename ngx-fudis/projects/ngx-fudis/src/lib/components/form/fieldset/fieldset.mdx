@@ -1,0 +1,97 @@
+import { Meta, ArgTypes } from "@storybook/addon-docs/blocks";
+import { FieldSetComponent } from "./fieldset.component";
+import { FieldsetActionsDirective } from "./fieldset-content.directive";
+import { fieldsetExclude } from "../../../utilities/storybook";
+import * as VersionSelectorStories from "../../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Form/Fieldset" />
+
+# Fieldset
+
+Fieldset is a grouping tool for Form Components. There are two directives to project content: header actions and main content.
+
+## Content Directives
+
+**fudis-fieldset-content**: Fieldset Content Directive is the wrapper element for the Fieldset main content where all form components live.
+There are no restrictions on main content but it is advised to use form field components provided by Fudis to use Form's Error Summary features with less effort.
+
+```
+<fudis-fieldset-content>
+  <your-content-here />
+</fudis-fieldset-content>
+```
+
+**fudis-fieldset-actions**: Fieldset Actions Directive is used for positioning buttons next to the Fieldset label.
+There are no restrictions on Fieldset Actions content but it is advised to use Buttons only.
+**Note!** Fieldset Actions has an `align` property that can be used to determine the positions of Fieldset Actions. By default `align` has value `start`.
+
+```
+<fudis-fieldset-actions [align]="'below'">
+  <your-action-buttons-here />
+</fudis-fieldset-actions>
+```
+
+## Fieldset Inputs
+
+Aside from content projection Fieldset will create a legend with optional popover and help text based on given properties.
+
+### Legend
+
+Fieldset is not valid without a **mandatory** `label` property which is semantically legend element for the HTML fieldset.
+
+### Required
+
+If the whole Fieldset is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
+Note that this has no other logic and is not concerned about validation of the components used inside the Fieldset.
+
+### Help Text
+
+Fieldset help text is displayed under legend and can be added through `helpText` property.
+
+### Popover
+
+Popover can be included in legend with properties from [Popover Directive](/docs/directives-popover--documentation). It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information".
+
+### Error Summary Breadcrumb
+
+Boolean property `errorSummaryBreadcrumb` adds Fieldset label to the clickable link in Error Symmary when used inside Form with visible Error Summary. Set `false` by default.
+
+### Grid Properties
+
+Fieldset can use some of the Grid properties, including `width` and `align`.
+
+### Input Size
+
+This can be used to set Checkbox Group and Radio Button Group as wide as other form components by overriding `width` input.
+
+### Initial Focus
+
+Visible focus can be set with `initialFocus` boolean property. It will add focus for the whole fieldset element when the component is initialized and appears for the first time.
+
+### Align (Fieldset Actions)
+
+Fieldset Action's `align` is used for positioning Fieldset's Actions Directive flow to `below`, `end` or `start`. By default has value of `start`.
+
+## Code Example
+
+```
+HTML Template
+
+    <fudis-fieldset
+      [label]="'Fieldset Legend Label'"
+      [helpText]="'Some help text for the Fieldset'"
+    >
+      <fudis-fieldset-actions [align]="'end'">
+        <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
+      </fudis-fieldset-actions>
+      <fudis-fieldset-content>
+          <!-- Your Fieldset content -->
+      </fudis-fieldset-content>
+    </fudis-fieldset>
+```
+
+## Properties
+
+<ArgTypes of={FieldSetComponent} />
+
+<ArgTypes of={FieldsetActionsDirective} exclude={fieldsetExclude} />

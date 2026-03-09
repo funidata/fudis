@@ -1,0 +1,108 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import * as VersionSelectorStories from "../../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Services/Error Summary" />
+
+# Error Summary Service
+
+Error Summary Service provides tools to load and display validation errors for [Form](/docs/components-form-form--documentation) and its [Error Summary Component](/docs/components-form-error-summary--documentation).
+
+**Table of Contents:**
+
+- [Features](#features)
+  - [Reload Form Errors](#reloadformerrors)
+  - [Reload All Errors](#reloadallerrors)
+  - [Add Error](#add-error)
+  - [Remove Error](#remove-error)
+  - [Update Strategy](#update-strategy)
+- [Related Components](#related-components)
+- [Related Directive](#related-directives)
+
+## Features
+
+### reloadFormErrors()
+
+When given parameter of Form's id, function reloads Error Summary list of this Form.
+
+**Recommendation!** Similar feature described here can be achieved with [Button binded with Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button).
+
+If the mentioned Form Submit directive does not fit your needs, you can achieve this manually calling Error Summary Service.
+
+Import `FudisErrorSummaryService` and add the parameter to constructor:
+
+```
+import { FudisErrorSummaryService } from 'ngx-fudis';
+
+...
+
+constructor(
+  private _service: FudisErrorSummaryService
+) {}
+```
+
+Call `reloadFormErrors()` with form id as parameter when user clicks form's submit button, which also sets Error Summary as visible in Fudis Form.
+
+```
+protected _submitButtonClick():void {
+	if(this.form.invalid){
+		// @Input property of Form
+		this._errorSummaryVisible = true;
+		// Reload errors of the spesific Form
+		this._service.reloadFormErrors("id-of-my-form");
+	} else {
+		this._errorSummaryVisible = false;
+		// Other success and profit!
+	}
+}
+
+```
+
+### reloadAllErrors()
+
+If reloading single Form and its Error Summary one at the time is not enough, the Service has function `reloadAllErrors()` which will then reload all Forms and their Error Summaries.
+
+### Add Error
+
+Application can manually send message to be displayed in Form's Error Summary with `addError()` method. It requires four parameters:
+
+- id: Identifier of the message, eg. 'app-custom-error-abc123'
+- formId: Id of Form component and Error Summary this error is linked to
+- focusId: HTML element's id, where user focus should be moved when user clicks the message.
+- message: Visible message to the user. It can either be a static `string`, or an `Observable<string>` for e. g. if message should be different in different application language.
+
+```
+this._service.addError('app-custom-error-abc123', 'app-create-user-form', 'app-username-input', 'This is message!')
+```
+
+_Note!_ Adding errors manually does not affect any FormControl's validity. It is app's responsibility to make sure that Form's Controls and FormGroups are properly set invalid, if these messages are set visible.
+
+### Remove Error
+
+To remove previously added error, three parameters described above, need to be spesified: `id`, `formId` and `focusId`
+
+```
+this._service.removeError('app-custom-error-abc123', 'app-create-user-form', 'app-username-input')
+```
+
+### Update Strategy
+
+By default Error Summary updates only when calling Reload Errors function. All options are:
+
+- `reloadOnly` (default): Error Summary list updates only when calling
+- `onRemove`: Updates Error Summary on reload and removes errors when user corrects one of the visibile errors.
+- `all`: Updates Error Summary dynamically when errors are added, removed or when reload is called
+
+To set Update Strategy, call service's setter function. E. g. to `all` with:
+
+```
+this._service.setUpdateStrategy('all')
+```
+
+## Related Components
+
+- [Error Summary](/docs/components-form-error-summary--documentation)
+- [Form](/docs/components-form-form--documentation)
+
+## Related Directives
+
+- [Form Submit](/docs/directives-form-actions--documentation)

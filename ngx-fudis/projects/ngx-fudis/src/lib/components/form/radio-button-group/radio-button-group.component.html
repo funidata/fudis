@@ -1,30 +1,30 @@
 <fudis-fieldset
+  class="fudis-radio-button-group"
   [id]="id"
   [labelSize]="'sm'"
   [label]="label"
-  [inputSize]="size"
-  [required]="_required ? _required : undefined"
+  [required]="_required | async"
   [errorSummaryBreadcrumb]="false"
+  [inputSize]="size"
+  [popoverText]="popoverText"
+  [popoverPosition]="popoverPosition"
+  [popoverTriggerLabel]="popoverTriggerLabel"
+  [initialFocus]="initialFocus"
+  [syncLegendHeight]="true"
 >
-  <ng-template fudisContent type="fieldset">
-    <fudis-radio-button
-      *ngFor="let option of options; let index = index"
-      [id]="option.id ? option.id : undefined"
-      [groupId]="id"
-      [name]="name"
-      [value]="option.value"
-      [label]="option.label"
-      [required]="_required ? true : false"
-      [checked]="control.value === option.value ? true : false"
-      [control]="control"
-    />
-    <fudis-guidance
-      [inputLabel]="label"
-      [helpText]="helpText"
-      [for]="id + '-legend'"
-      [control]="control"
-    >
-      <ng-content select="fudis-error-message" />
-    </fudis-guidance>
-  </ng-template>
+  <fudis-fieldset-content>
+    <ng-content select="fudis-radio-button" />
+    @if (control && !disableGuidance) {
+      <fudis-guidance
+        #radioButtonGroupGuidance
+        [inputLabel]="label"
+        [helpText]="helpText"
+        [for]="id + '-legend'"
+        [control]="control"
+        [groupHelpTextHidden]="true"
+      >
+        <ng-content select="fudis-error-message" />
+      </fudis-guidance>
+    }
+  </fudis-fieldset-content>
 </fudis-fieldset>

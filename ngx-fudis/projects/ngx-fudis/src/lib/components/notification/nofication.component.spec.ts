@@ -1,31 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { IconComponent } from '../icon/icon.component';
-import { LinkComponent } from '../link/link.component';
 import { NotificationComponent } from './notification.component';
 import { FudisNotification } from '../../types/miscellaneous';
 import { getElement } from '../../utilities/tests/utilities';
 import { RouterModule } from '@angular/router';
 import { LinkDirective } from '../../directives/link/link.directive';
-import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('NotificationComponent', () => {
-  let component: NotificationComponent;
   let fixture: ComponentFixture<NotificationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotificationComponent, IconComponent, LinkComponent, LinkDirective],
-      imports: [RouterModule.forRoot([])],
-    })
-      .overrideComponent(NotificationComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+      declarations: [NotificationComponent, LinkDirective],
+      imports: [BodyTextComponent, IconComponent, RouterModule.forRoot([])],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -37,7 +30,7 @@ describe('NotificationComponent', () => {
   }
 
   function notificationIconCheck(variant: FudisNotification): void {
-    component.variant = variant;
+    fixture.componentRef.setInput('variant', variant);
 
     fixture.detectChanges();
 
@@ -65,7 +58,8 @@ describe('NotificationComponent', () => {
   }
 
   function notificationVariants(variant: FudisNotification): void {
-    component.variant = variant;
+    fixture.componentRef.setInput('variant', variant);
+
     fixture.detectChanges();
 
     assertNotificationHasClasses(`fudis-notification fudis-notification__${variant}`);
@@ -86,6 +80,19 @@ describe('NotificationComponent', () => {
       notificationIconCheck('danger');
       notificationIconCheck('success');
       notificationIconCheck('info');
+    });
+  });
+
+  describe('Optional inputs', () => {
+    it('should have aria-describedby attribute', () => {
+      const notification = fixture.nativeElement.querySelector('.fudis-notification');
+
+      expect(notification.getAttribute('aria-describedby')).toBeFalsy();
+
+      fixture.componentRef.setInput('ariaDescribedby', 'description-id');
+      fixture.detectChanges();
+
+      expect(notification.getAttribute('aria-describedby')).toEqual('description-id');
     });
   });
 });

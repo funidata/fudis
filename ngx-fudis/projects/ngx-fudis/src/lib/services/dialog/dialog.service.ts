@@ -1,76 +1,107 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable, Signal, TemplateRef, signal } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class FudisDialogService {
   constructor(public ngMaterialDialog: MatDialog) {}
 
-  private _dialogOpen = signal<boolean>(false);
+  private _dialogOpen = new BehaviorSubject<boolean>(false);
 
-  private _dialogRef: MatDialogRef<any, any>;
+  private _justClosedDropdownWithEscape = new BehaviorSubject<boolean>(false);
 
   /**
    * Open new dialog.
+   *
    * @param component Component or template to show in the dialog.
-   * @param config Optional configuration object. Use the `data` field to inject data into `component`.
+   * @param config Optional configuration object. Use the `data` field to inject data into
+   *   `component`.
    * @returns Reference to the dialog that was opened.
    */
-  public open<T, R = any>(
+  public open<T, R = any, D = any>(
     component: ComponentType<T> | TemplateRef<T>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    config?: MatDialogConfig<any>,
+    config?: MatDialogConfig<D>,
   ): MatDialogRef<T, R> {
-    this._dialogRef = this.ngMaterialDialog.open(
-      component,
-      FudisDialogService._createConfig(config),
-    );
-
-    this._dialogRef.keydownEvents().subscribe((event) => {
-      if (event.key === 'Escape') {
-        this.close();
-      }
-    });
-
-    return this._dialogRef;
+    return this.ngMaterialDialog.open(component, FudisDialogService._createConfig<D>(config));
   }
 
   /**
    * Close opened Dialog
+   *
    * @param dialogResult Data sent to Component which opened this dialog.
    */
-  public close(dialogResult?: any): void {
-    this._dialogRef.close(dialogResult);
+  public close<R = any>(dialogResult?: R): void {
+    const currentDialogs = this.ngMaterialDialog.openDialogs;
+
+    if (currentDialogs.length > 0) {
+      currentDialogs?.[currentDialogs.length - 1].close(dialogResult);
+    }
   }
 
   /**
    * Close all instances of Dialogs
    */
   public closeAll(): void {
-    this._dialogRef.close();
     this.ngMaterialDialog.closeAll();
   }
 
   /**
    * Get dialog open status
    */
-  public getDialogOpenSignal(): Signal<boolean> {
-    return this._dialogOpen.asReadonly();
+  public getDialogOpenStatus(): BehaviorSubject<boolean> {
+    return this._dialogOpen;
   }
 
   /**
    * Set dialog open
    */
-  public setDialogOpenSignal(value: boolean): void {
-    this._dialogOpen.set(value);
+  public setDialogOpenStatus(value: boolean): void {
+    this._dialogOpen.next(value);
+  }
+
+  /**
+   * Set flag to indicate that a dropdown was just closed with Escape key, so that dialog does not
+   * also close with the same key press.
+   */
+  public dropdownClosedWithEscape(): void {
+    this._justClosedDropdownWithEscape.next(true); // set the flag
+
+    // Reset the flag after a short delay (backup)
+    setTimeout(() => {
+      this._justClosedDropdownWithEscape.next(false);
+    }, 1000);
+  }
+
+  /**
+   * Check if a dropdown was just closed with Escape key. Resets the flag after checking.
+   */
+  public hasJustClosedDropdownWithEscape(): boolean {
+    const hasJustClosed = this._justClosedDropdownWithEscape.value;
+    if (hasJustClosed) {
+      this._justClosedDropdownWithEscape.next(false); // Reset the flag
+    }
+    return hasJustClosed;
+  }
+
+  /**
+   * @returns Currently open Dialogs
+   */
+  public dialogsOpen(): MatDialogRef<any, any>[] {
+    return this.ngMaterialDialog.openDialogs;
   }
 
   /**
    * Merge consumer's config with ours.
    */
-  private static _createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
-    const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
+  private static _createConfig<D = any>(userConfig: MatDialogConfig<D> = {}): MatDialogConfig<D> {
+    const overridableOptions = {
+      hasBackdrop: true,
+      disableClose: true,
+      autoFocus: false,
+      ariaModal: true,
+    };
     const forcedOptions = {
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,

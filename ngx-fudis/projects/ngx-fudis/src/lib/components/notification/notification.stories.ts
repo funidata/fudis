@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { NotificationComponent } from './notification.component';
-import readme from './readme.mdx';
+import docs from './notification.mdx';
 import { notificationExclude } from '../../utilities/storybook';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: NotificationComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: notificationExclude,
@@ -24,32 +24,40 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant"
     ><fudis-body-text>This is notification.</fudis-body-text></fudis-notification
   >`,
 });
 
-const ButtonAndLinkTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+const ButtonAndLinkTemplate: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-grid [align]="'start'">
     <fudis-notification [variant]="variant">
       <fudis-body-text
         >This is Notification with Link.
-        <fudis-link [externalLink]="'https://www.example.com'" [title]="'This is example link.'" />
+        <a
+          fudisLink
+          href="https://www.example.com"
+          [external]="true"
+          [title]="'This is example link.'"
+        ></a>
       </fudis-body-text>
     </fudis-notification>
-    <fudis-notification [variant]="variant">
+    <fudis-notification [variant]="variant" [ariaDescribedby]="'description-id'">
       <fudis-body-text
         >This is Notification with Button.
         <fudis-button [label]="'This is example button.'" />
       </fudis-body-text>
     </fudis-notification>
+    <p id="description-id" aria-hidden="true" class="fudis-visually-hidden"
+      >This is additional description for screen readers, if necessary</p
+    >
   </fudis-grid>`,
 });
 
-const MultiChildTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+const MultiChildTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant">
     <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
@@ -75,7 +83,7 @@ ExampleWithMultipleChildComponents.args = {
   variant: 'warning',
 };
 
-export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   props: {
     ...args,
   },

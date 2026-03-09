@@ -1,99 +1,92 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
-  Host,
   Inject,
   Input,
   OnInit,
-  Optional,
   Output,
+  ViewChild,
   ViewEncapsulation,
+  DOCUMENT,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { FormComponent } from '../../form/form.component';
-import { DOCUMENT } from '@angular/common';
 
+import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
+
+/**
+ * Allows selection of a single option from a dropdown list.
+ *
+ * Use this component when there are multiple predefined options and user can choose only one value.
+ */
 @Component({
   selector: 'fudis-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
-export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class SelectComponent<T = string>
+  extends SelectBaseDirective
+  implements OnInit, AfterViewInit, BaseSelectableComponent
+{
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
+    _dialogService: FudisDialogService,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
+    super(_document, _dialogService, _focusService, _idService);
   }
 
-  /*
+  @ViewChild(SelectControlValueAccessorDirective)
+  public selectCVA: SelectControlValueAccessorDirective<T>;
+
+  /**
    * FormControl for single select
    */
-  @Input({ required: true }) override control: FormControl<FudisSelectOption<object> | null>;
+  @Input({ required: true }) override control: FormControl<FudisSelectOption<T> | null>;
 
   /**
    * Value output event on selection change
    */
-  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
-    new EventEmitter<FudisSelectOption<object> | null>();
+  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<T> | null> =
+    new EventEmitter<FudisSelectOption<T> | null>();
 
   ngOnInit(): void {
     this._setParentId('select');
-
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
-  }
-
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
   }
 
   /**
    * Handler for triggered option selection change
-   * @param value option to be selected
-   * @param disableSignalEmit disable signal update to reduce unneeded state updates
+   *
+   * @param value Option to be selected
+   * @param disableSignalEmit Disable signal update to reduce unneeded state updates
    */
-  public handleSelectionChange(
-    value: FudisSelectOption<object> | null,
-    disableSignalEmit?: boolean,
-  ): void {
+  public handleSelectionChange(value: FudisSelectOption<T> | null): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
     if (!equalValues) {
-      this._controlValueChangedInternally = true;
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
-
-      this._updateInputValueTexts(value?.label || '');
-
-      if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
-        this._filterTextUpdate(value.label);
-      }
     }
   }
 
   /**
    * Checks if currently typed filter text is not same as control label value
-   * @param text filter text value emitted from autocomplete
+   *
+   * @param text Filter text value emitted from autocomplete
    */
-  protected _checkIfAutocompleteValueNull(text: string): void {
+  protected override _checkIfAutocompleteValueNull(text: string): void {
     if (this.control.value && text.toLowerCase() !== this.control.value?.label?.toLowerCase()) {
-      this._controlValueChangedInternally = true;
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
     }
@@ -102,12 +95,14 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   /**
    * If control value is updated from the Application, update component's state accordingly
    */
-  protected override _updateSelectionFromControlValue(): void {
+  protected override _updateComponentStateFromControlValue(): void {
     const currentLabel = this.control.value?.label;
-    this._dropdownSelectionLabelText = currentLabel || '';
-    if (this.variant !== 'dropdown' && this.autocompleteRef) {
-      this.autocompleteRef.updateInputValue(currentLabel || '');
+    if (this.variant !== 'dropdown') {
+      if (currentLabel) {
+        this.setAutocompleteFilterText(currentLabel);
+      } else if (!this._inputFocused) {
+        this.setAutocompleteFilterText('');
+      }
     }
-    this._changeDetectorRef.detectChanges();
   }
 }

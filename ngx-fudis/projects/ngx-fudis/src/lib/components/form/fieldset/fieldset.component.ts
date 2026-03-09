@@ -1,89 +1,78 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
-  ContentChild,
   ElementRef,
-  Host,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Optional,
   ViewChild,
   ViewEncapsulation,
+  AfterContentInit,
 } from '@angular/core';
 
-import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { FudisSpacing } from '../../../types/spacing';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
+import { FudisSelectionGroupInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FormComponent } from '../form/form.component';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
 
+/**
+ * Groups related form controls under a common context.
+ *
+ * Use this component to improve form structure, clarity, and accessibility.
+ */
 @Component({
   selector: 'fudis-fieldset',
   templateUrl: './fieldset.component.html',
   styleUrls: ['./fieldset.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class FieldSetComponent
-  extends FieldSetBaseDirective
-  implements AfterViewInit, OnInit, OnDestroy, OnChanges
+  extends PopoverApiDirective
+  implements AfterViewInit, OnInit, OnDestroy, OnChanges, AfterContentInit
 {
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent | null,
+    protected _translationService: FudisTranslationService,
+    private _element: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
-    _translationService: FudisTranslationService,
-    _idService: FudisIdService,
-    _changeDetectorRef: ChangeDetectorRef,
+    private _idService: FudisIdService,
   ) {
-    super(_idService, _translationService, _changeDetectorRef);
+    super();
   }
-
-  /**
-   * Content directive for Field Set Actions
-   */
-  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
-
-  /**
-   * Content directive for Field Set Notifications
-   */
-  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective;
-
-  /**
-   * Content directive for Field Set Content
-   */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
 
   /**
    * Legend elementRef to trigger initialFocus
    */
-  @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef;
+  @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef<HTMLDivElement>;
+
+  /**
+   * Label for the Fieldset component.
+   */
+  @Input({ required: true }) label: string;
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-   * xxl = Default value. Viewports of 1600px and larger
-   * xl = Viewports smaller than 1600px
-   * lg = Viewports smaller than 1200px
-   * md = Viewports smaller than 992px
-   * sm = Viewports smaller than 768px
-   * xs = Viewports smaller than 576px
+   *
+   * - Xxl = Default value. Viewports of 1600px and larger
+   * - Xl = Viewports smaller than 1600px
+   * - Lg = Viewports smaller than 1200px
+   * - Md = Viewports smaller than 992px
+   * - Sm = Viewports smaller than 768px
+   * - Xs = Viewports smaller than 576px
    */
   @Input() width: FudisGridWidth = 'xxl';
 
   /**
-   * Overrides 'width' input. Used to set Checkbox Group and Radio Button Group as wide as other basic form components.
+   * Overrides 'width' input. Used to set Checkbox Group and Radio Button Group as wide as other
+   * basic form components.
    */
-  @Input() inputSize: FudisInputSize;
+  @Input() inputSize: FudisSelectionGroupInputSize;
 
   /**
    * Alignment of Grid component inside its parent
@@ -91,41 +80,42 @@ export class FieldSetComponent
   @Input() align: FudisGridAlign = 'start';
 
   /**
-   * Margin top for the Grid
-   */
-  @Input() marginTop: FudisSpacing = 'none';
-
-  /**
-   * Margin bottom for the Grid
-   */
-  @Input() marginBottom: FudisSpacing = 'none';
-
-  /**
-   * Set focus to Field Set when it appears first time
+   * Set focus to Fieldset when it appears first time
    */
   @Input() initialFocus: boolean = false;
 
   /**
-   * Send information about current Field Set to Error Summary Service.
-   * Error Summary Breadcrumb is the label of the current Field Set and is visible in the clickable link in Error Summary.
+   * Send information about current Fieldset to Error Summary Service. Error Summary Breadcrumb is
+   * the label of the current Fieldset and is visible in the clickable link in Error Summary.
    */
   @Input() errorSummaryBreadcrumb: boolean = true;
 
   /**
-   * Display "Required" text next to Field Set main label. By default set to 'undefined'.
+   * Display "Required" text next to Fieldset main label.
    */
-  @Input() required: boolean | undefined = undefined;
+  @Input() required: boolean | null;
 
   /**
-   * Visual size of label legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
+   * Visual size of label legend. Default 'md' and 'sm' is similar to standard input label, used in
+   * e. g. RadioButtonGroup.
    */
   @Input() labelSize: 'md' | 'sm' = 'md';
 
   /**
-   * Accessibility attribute for describing the whole Fieldset.
-   * Used internally in CheckboxGroup.
+   * Fieldset id. If not provided when component is initialized, generated by Id Service
    */
-  @Input() describedbyId: string;
+  @Input() id: string;
+
+  /**
+   * Help text, aligned underneath the input.
+   */
+  @Input() helpText: string | undefined;
+
+  /**
+   * Used to vertically align Legend label with similar Label elements with varying heights. By
+   * default `false`, but set `true` in Checkbox Group and Radio Button Group
+   */
+  @Input() syncLegendHeight = false;
 
   /**
    * CSS classes for the native fieldset HTMLelement
@@ -138,38 +128,58 @@ export class FieldSetComponent
   protected _legendFocusVisible: boolean = false;
 
   /**
-   * Has Field Set been added to Error Summary
+   * Has Fieldset been added to Error Summary
    */
   private _fieldsetSent: boolean = false;
 
   /**
-   * Field Set object to send to Error Summary
+   * Private reference to Guidance
    */
-  private _fieldsetInfo: FudisFormErrorSummarySection;
+  private _fieldsetGuidance: HTMLElement | null;
+
+  private _parentFormId: string | null;
 
   ngOnInit(): void {
     this._setFieldsetId();
     this._addToErrorSummary(this.label);
     this._setClasses();
+  }
 
-    this._initFinished = true;
+  ngAfterContentInit(): void {
+    this._errorSummaryService
+      .getFormAncestorId(this._element.nativeElement)
+      .then((parentFormId) => {
+        if (parentFormId) {
+          this._parentFormId = parentFormId;
+          this._addToErrorSummary(this.label);
+        }
+      });
+    this._fieldsetGuidance = this._element.nativeElement.querySelector(
+      'fudis-guidance',
+    ) as HTMLElement | null;
   }
 
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this._fieldsetLegend.nativeElement.focus();
+      this._fieldsetLegend?.nativeElement?.focus();
     }
+
+    const className = this._element.nativeElement.className;
+    const selectionGroups = ['fudis-radio-button-group', 'fudis-checkbox-group'];
+
+    if (selectionGroups.includes(className)) this._hasSelectionGroupParent();
   }
 
   ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
-    if (this._initFinished) {
-      if (changes.label?.currentValue) {
-        this._addToErrorSummary(changes.label?.currentValue);
-      }
+    if (
+      changes.label?.currentValue &&
+      changes.label?.currentValue !== changes.label?.previousValue
+    ) {
+      this._addToErrorSummary(changes.label?.currentValue);
+    }
 
-      if (changes.inputSize) {
-        this._setClasses();
-      }
+    if (changes.inputSize?.currentValue !== changes.inputSize?.previousValue) {
+      this._setClasses();
     }
   }
 
@@ -177,7 +187,11 @@ export class FieldSetComponent
     this._removeFromErrorSummary();
   }
 
-  protected _handleLegendFocus(event: FocusEvent): void {
+  protected _handleLegendBlur(): void {
+    this._legendFocusVisible = false;
+  }
+
+  protected _handleFocus(event: FocusEvent): void {
     if (event.relatedTarget) {
       const elementHasLinkClass = (event.relatedTarget as HTMLElement).classList.contains(
         'fudis-link',
@@ -185,37 +199,59 @@ export class FieldSetComponent
 
       if (elementHasLinkClass) {
         this._legendFocusVisible = true;
+        this._fieldsetLegend.nativeElement.focus();
       }
     }
   }
 
-  protected _handleLegendBlur(): void {
-    this._legendFocusVisible = false;
+  /**
+   * Determines if Fieldset has CheckboxGroup or RadioButtonGroup as a parent. If so, adds Guidance
+   * helptext as part of the Fieldset legend element and makes it accessible for screen readers.
+   */
+  private _hasSelectionGroupParent(): void {
+    const guidanceHelpText = this._fieldsetGuidance
+      ?.querySelector('.fudis-guidance__help-text')
+      ?.textContent?.trim();
+
+    if (!guidanceHelpText) return;
+
+    const groupHelpText = this._element.nativeElement.querySelector(
+      '.fudis-fieldset__legend__main__group-helptext',
+    ) as HTMLElement | null;
+
+    if (!groupHelpText) return;
+
+    groupHelpText.removeAttribute('aria-hidden');
+
+    const helptext = document.createElement('span');
+    helptext.textContent = guidanceHelpText;
+
+    groupHelpText.appendChild(helptext);
   }
 
   /**
-   * Add Field Set label to Error Summary
+   * Add Fieldset label to Error Summary
    */
   private _addToErrorSummary(label: string): void {
-    if (this.errorSummaryBreadcrumb && this._parentForm) {
-      this._fieldsetInfo = {
+    if (this.errorSummaryBreadcrumb && this._parentFormId) {
+      const fieldsetInfo = {
         id: this.id,
-        formId: this._parentForm.id,
+        formId: this._parentFormId,
         title: label,
       };
 
-      this._errorSummaryService.addFieldset(this._fieldsetInfo);
+      this._errorSummaryService.addFieldset(fieldsetInfo);
 
       this._fieldsetSent = true;
     }
   }
 
   /**
-   * Remove Field Set label from Error Summary
+   * Remove Fieldset label from Error Summary
    */
   private _removeFromErrorSummary(): void {
-    if (this.errorSummaryBreadcrumb && this._fieldsetSent) {
-      this._errorSummaryService.removeFieldset(this._fieldsetInfo);
+    if (this._fieldsetSent && this._parentFormId) {
+      this._errorSummaryService.removeFieldset(this._parentFormId, this.id);
     }
   }
 

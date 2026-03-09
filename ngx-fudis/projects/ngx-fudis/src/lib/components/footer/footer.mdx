@@ -1,0 +1,29 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { FooterComponent } from "./footer.component";
+import * as FooterComponentStories from "./footer.stories.ts";
+import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Footer" />
+
+# Footer
+
+Footer is a static component to be used as application's footer in the bottom of the page.
+
+## Usage Guidelines
+
+Footer is designed to be used with [Link Directives](/docs/directives-link--documentation).
+The only fixed element is Funidata logo with a link to Funidata's homepage and translated alternative text for screen readers.
+All footer content is added through content projection and it is displayed on the right side of footer. Please add additional styling to refine your preferred footer layout.
+
+## Example
+
+<Canvas of={FooterComponentStories.Example} />
+
+## Accessibility
+
+- Footer contains native HTML footer element
+- Funidata logo has descriptive alt text
+
+## Related directives
+
+- [Link](/docs/directives-link--documentation)

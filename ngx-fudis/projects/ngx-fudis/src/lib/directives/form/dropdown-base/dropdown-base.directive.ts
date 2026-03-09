@@ -2,6 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostBinding, Output, ViewChild } f
 
 @Directive({
   selector: '[fudisDropdownBase]',
+  standalone: false,
 })
 export class DropdownBaseDirective {
   /**

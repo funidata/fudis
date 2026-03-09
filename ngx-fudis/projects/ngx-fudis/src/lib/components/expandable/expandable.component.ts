@@ -7,63 +7,47 @@ import {
   ViewEncapsulation,
   OnDestroy,
   OnChanges,
-  Optional,
-  Host,
+  ElementRef,
+  inject,
+  Injector,
+  AfterContentInit,
 } from '@angular/core';
-import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
+import {
+  FudisBadgeVariant,
+  FudisComponentChanges,
+  FudisExpandableType,
+} from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummarySection } from '../../types/forms';
-import { FormComponent } from '../form/form/form.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { ExpandableContentDirective } from './expandable-content.directive';
 
+/**
+ * Toggles the visibility of additional content.
+ *
+ * Use this component to progressively disclose information without overwhelming the user.
+ */
 @Component({
   selector: 'fudis-expandable',
   templateUrl: './expandable.component.html',
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
-export class ExpandableComponent implements OnDestroy, OnChanges {
+export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent | null,
+    private _element: ElementRef,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     this._id = this._idService.getNewId('expandable');
     this._headingId = `${this._id}-heading`;
-
-    // TODO: write test
-
-    if (_parentForm) {
-      _errorSummaryService.allFormErrorsObservable
-        .pipe(takeUntilDestroyed())
-        .subscribe((errors) => {
-          const expandableErrors = errors?.[_parentForm.id];
-
-          if (
-            this.closed &&
-            this.openOnErrorSummaryReload &&
-            _parentForm &&
-            expandableErrors &&
-            _parentForm.errorSummaryVisible
-          ) {
-            this._setClosedStatus(false);
-          }
-        });
-    }
   }
 
   /**
    * Content directive for Fudis Expandable Content
    */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
-
-  /**
-   * Content directive for Fudis Expandable Actions
-   */
-  @ContentChild(ActionsDirective) protected _headerButtons: ActionsDirective | null;
+  @ContentChild(ExpandableContentDirective) protected _content: ExpandableContentDirective;
 
   /**
    * Title of the expandable
@@ -71,12 +55,12 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
   @Input({ required: true }) title: string;
 
   /**
-   * Determines header's semantic aria-level for screen readers, default is equivalent for h2
+   * Expandable title's semantic aria-level for screen readers
    */
-  @Input() level: number = 2;
+  @Input({ required: true }) level: number;
 
   /**
-   * Type i.e visual variant of the expandable
+   * Visual variant of the expandable
    */
   @Input() variant: FudisExpandableType = 'regular';
 
@@ -91,13 +75,24 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
   @Input() subTitle: string;
 
   /**
+   * Add badge next to the expandable title
+   */
+  @Input() badge: FudisBadgeVariant | null;
+
+  /**
+   * Badge text
+   */
+  @Input() badgeText: string | null;
+
+  /**
    * Display Expandable title in the breadcrumb of Error Summary
    */
   @Input() errorSummaryBreadcrumb: boolean = false;
 
   // TODO: write test
   /**
-   * If Expandable is used inside Form component, by default it will open itself when ReloadErrors is called in Error Summary Service. To disable this behavior, set this to false.
+   * If Expandable is used inside Form component, by default it will open itself when ReloadErrors
+   * is called in Error Summary Service. To disable this behavior, set this to false.
    */
   @Input() openOnErrorSummaryReload: boolean = true;
 
@@ -129,25 +124,49 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
   protected _headingId: string;
 
   /**
-   *  Lazy loading check for expanding content
+   * Lazy loading check for expanding content
    */
   protected _openedOnce: boolean = false;
-
-  /**
-   * Object to send to Error Summary Service
-   */
-  private _errorSummaryInfo: FudisFormErrorSummarySection;
 
   /**
    * Is info sent to Error Summary Service
    */
   private _errorSummaryInfoSent: boolean = false;
 
+  private _parentFormId: string | null;
+
+  private _getParentForm(): void {
+    this._errorSummaryService
+      .getFormAncestorId(this._element.nativeElement)
+      .then((parentFormId) => {
+        if (parentFormId) {
+          this._parentFormId = parentFormId;
+          if (this.errorSummaryBreadcrumb) {
+            this._addToErrorSummary(this.title);
+          }
+
+          toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
+            injector: this._injector,
+          }).subscribe((value) => {
+            if (this.closed && this.openOnErrorSummaryReload && value) {
+              this._setClosedStatus(false);
+            }
+          });
+        }
+      });
+  }
+
   /**
    * Getter for closed boolean
    */
   get closed(): boolean {
     return this._closed;
+  }
+
+  private _injector = inject(Injector);
+
+  ngAfterContentInit(): void {
+    this._getParentForm();
   }
 
   ngOnChanges(changes: FudisComponentChanges<ExpandableComponent>): void {
@@ -168,13 +187,13 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
    * Send error object to Error Summary Service
    */
   private _addToErrorSummary(title: string): void {
-    if (this.errorSummaryBreadcrumb && this._parentForm) {
-      this._errorSummaryInfo = {
+    if (this.errorSummaryBreadcrumb && this._parentFormId) {
+      const errorSummaryInfo = {
         id: this._id,
-        formId: this._parentForm.id,
+        formId: this._parentFormId,
         title: title,
       };
-      this._errorSummaryService.addSection(this._errorSummaryInfo);
+      this._errorSummaryService.addSection(errorSummaryInfo);
       this._errorSummaryInfoSent = true;
     }
   }
@@ -183,8 +202,8 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
    * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
-    if (this._errorSummaryInfoSent) {
-      this._errorSummaryService.removeSection(this._errorSummaryInfo);
+    if (this._errorSummaryInfoSent && this._parentFormId) {
+      this._errorSummaryService.removeSection(this._parentFormId, this._id);
     }
   }
 

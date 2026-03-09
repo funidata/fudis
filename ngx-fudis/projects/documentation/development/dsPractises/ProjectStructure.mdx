@@ -1,0 +1,115 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import * as VersionSelectorStories from "../../../ngx-fudis/src/storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Documentation/Development/DS Practises/Project Structure" />
+
+# General Directory Structure
+
+<br />
+
+## Dev
+
+Sandbox application, which uses locally built ngx-fudis package as its dependancy. Note that testing new components and features in sandbox application is not same as testing it in totally separate Angular application.
+
+## Documentation
+
+Self-explaining main location of documentation for product developers and Fudis developers.
+
+## Ngx-fudis
+
+<br />
+
+### Assets
+
+Static asset files, like fonts, SVG icons and similar are located here.
+
+### Components
+
+The molecules of Fudis, the components. Each component folder should contain files related to that spesific component, such as Storybook stories, documentation and unit tests.
+
+### Directives
+
+Folder containing base directives for Fudis components to extend on and directive classes to help add additional behaviour to Fudis components, such as content projection, popover and the almighty grid.
+
+### Services
+
+Folder containing all services that Fudis components need. These include e.g. alert, breakpoint, focus and id services. Both internal and exposed services live here.
+
+### Theme
+
+Some of Fudis components use components from Angular Material. Theme folder contains theme definitions, which aim to preset default Angular Material theme as near to Fudis as possible.
+
+If you are using ngMaterial component and the default theme doesn't apply colors as you want, proceed with caution if you consider to customise the default theme. Consider instead, if creating a component spesific theme would fix your issue.
+
+### Types
+
+Folder containing types and interfaces used in various Fudis components.
+
+### Utilities
+
+Folder containing utility functions used throughout the project, e.g. form validator and unit test functions.
+
+## Folder Structure Visualised
+
+Most relevant folders and files for Fudis development
+
+```
+design-system
+│
+└───dev
+│
+└───documentation
+│
+└───ngx-fudis
+│ │
+│ └───lib
+│ │
+│ └───assets
+│ │
+│ └───components
+│ │ │
+│ │ ...
+│ │ │
+│ │ ├──breadcrumbs
+│ │ └─── button
+│ │ │ │
+│ │ │ button.component.html
+│ │ │ button.component.scss
+│ │ │ button.component.spec.ts
+│ │ │ button.component.ts
+│ │ │ button.stories.ts
+│ │ │ button.mdx
+│ │ │
+│ │ ├──description-list
+│ │ ...
+│ │
+│ └───directives
+│ │ │
+│ │ ├──content-projection
+│ │ ├──dialog
+│ │ ├──form
+│ │ │
+│ │ ...
+│ │
+│ └───services
+│ │ │
+│ │ ├──alert
+│ │ ├──breakppoint
+│ │ ├──dialog
+│ │ │
+│ │ ...
+│ │
+│ └───theme
+│ │
+│ └───types
+│ │
+│ └───utilities
+│ │ │
+│ │ ├──breakpoint
+│ │ ├──form
+│ │ └──tests
+│ │ │
+│ │ ...
+│
+...
+```

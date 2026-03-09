@@ -1,0 +1,28 @@
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable no-descending-specificity */
+@use '@funidata/fudis-core' as core;
+
+fudis-heading {
+  .fudis-heading {
+    margin-bottom: core.$spacing-xs;
+
+    &__variant {
+      &__xl,
+      &__xxl {
+        margin-bottom: core.$spacing-sm;
+      }
+    }
+  }
+
+  &[class*='fudis-mb'],
+  &[class*='fudis-xxs-mb'],
+  &[class*='fudis-xs-mb'],
+  &[class*='fudis-md-mb'],
+  &[class*='fudis-lg-mb'],
+  &[class*='fudis-xl-mb'],
+  &[class*='fudis-xxl-mb'] {
+    .fudis-heading {
+      margin-bottom: 0;
+    }
+  }
+}

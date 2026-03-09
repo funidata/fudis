@@ -2,7 +2,7 @@ import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionComponent } from './section.component';
-import docs from './section-docs.mdx';
+import docs from './section.mdx';
 import { excludeAllRegex, sectionExclude } from '../../utilities/storybook';
 import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../types/typography';
 
@@ -42,12 +42,22 @@ export default {
       options: fudisHeadingVariantArray,
       control: { type: 'select' },
     },
+    popoverPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
 const html = String.raw;
 
-const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-section
     [title]="title"
@@ -55,31 +65,27 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
     [level]="level"
     [badge]="badge"
     [badgeText]="badgeText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
     [align]="align"
-    [marginTop]="marginTop"
-    [marginBottom]="marginBottom"
     [width]="width"
   >
-    <ng-template fudisActions [type]="'section'">
+    <fudis-section-actions>
       <fudis-button [label]="'Some action'"></fudis-button>
       <fudis-button [label]="'Another action'"></fudis-button>
-    </ng-template>
-    <ng-template fudisNotifications [type]="'section'">
-      <fudis-notification
-        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
-      >
-    </ng-template>
-    <ng-template fudisContent [type]="'section'">
-      <fudis-expandable [title]="'Expandable inside section'" [closed]="false">
-        <ng-template fudisContent type="expandable">
+    </fudis-section-actions>
+    <fudis-section-content>
+      <fudis-notification>
+        <fudis-body-text>This is notification</fudis-body-text>
+      </fudis-notification>
+      <fudis-expandable [level]="3" [title]="'Expandable inside section'" [closed]="false">
+        <ng-template fudisExpandableContent>
           <fudis-body-text>Some content inside expandable</fudis-body-text>
         </ng-template>
       </fudis-expandable>
       <fudis-body-text>More text content inside section</fudis-body-text>
-    </ng-template>
+    </fudis-section-content>
   </fudis-section> `,
 });
 
@@ -88,14 +94,12 @@ Example.args = {
   title: 'This is title of section',
   titleVariant: 'xl',
   level: 2,
-  tooltip: 'More info about this section',
-  tooltipToggle: false,
-  tooltipPosition: 'below',
+  popoverText: 'More info about this section',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'below',
   badge: 'primary',
   badgeText: 'Example',
   align: 'start',
-  marginTop: 'none',
-  marginBottom: 'none',
   width: 'xl',
 };
 
@@ -105,7 +109,7 @@ Example.parameters = {
   },
 };
 
-const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => ({
+const NestedExampleTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-section
     [title]="'Parent Section'"
@@ -113,29 +117,37 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
     [level]="2"
     [width]="'md'"
   >
-    // Empty Actions template, so that nested Actions will not be rendered to the parent!
-    <ng-template fudisActions [type]="'section'"></ng-template>
-    <ng-template fudisContent [type]="'section'">
-      <fudis-body-text>Parent Section content</fudis-body-text>
-      <fudis-body-text
-        >This Section has an empty fudisActions template tag to make sure that nested Section's
-        Actions is not rendered there.</fudis-body-text
-      >
+    <fudis-section-content>
+      <fudis-body-text>Parent Section content below</fudis-body-text>
 
       <fudis-section
+        class="fudis-mt-sm"
         [title]="'Nested Section'"
-        [marginTop]="'sm'"
         [titleVariant]="'sm'"
         [level]="3"
       >
-        <ng-template fudisActions [type]="'section'">
+        <fudis-section-actions>
           <fudis-button [label]="'Nested Action button'" />
-        </ng-template>
-        <ng-template fudisContent [type]="'section'">
-          <fudis-body-text>Nested Section content</fudis-body-text>
-        </ng-template>
+        </fudis-section-actions>
+        <fudis-section-content>
+          <fudis-body-text>First level nested Section content</fudis-body-text>
+
+          <fudis-section
+            class="fudis-mt-sm"
+            [title]="'Nested Section'"
+            [titleVariant]="'xs'"
+            [level]="4"
+          >
+            <fudis-section-actions>
+              <fudis-button [label]="'Deeper nested Action button'" />
+            </fudis-section-actions>
+            <fudis-section-content>
+              <fudis-body-text>Second level nested Section content</fudis-body-text>
+            </fudis-section-content>
+          </fudis-section>
+        </fudis-section-content>
       </fudis-section>
-    </ng-template>
+    </fudis-section-content>
   </fudis-section>`,
 });
 

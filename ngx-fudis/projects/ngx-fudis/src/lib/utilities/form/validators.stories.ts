@@ -4,7 +4,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisValidators } from './validators';
 import { FudisGroupValidators } from './groupValidators';
-import readme from './readme.mdx';
+import docs from './validators.mdx';
 
 export default {
   title: 'Utilities/Validators',
@@ -15,7 +15,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
 } as Meta;
@@ -27,7 +27,7 @@ const berryFormGroup = new FormGroup(
     cloudberry: new FormControl<boolean | null | undefined>(null),
     raspberry: new FormControl<boolean | null | undefined>(null),
   },
-  [FudisGroupValidators.atLeastOneRequired('Pick at least one berry')],
+  [FudisGroupValidators.oneRequired('Pick at least one berry')],
 );
 
 const fruitMinFormGroup = new FormGroup(
@@ -74,7 +74,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       ),
     },
     minNumberInput: {
-      control: new FormControl('', FudisValidators.min(1, 'Number cannot be under 1')),
+      control: new FormControl('', FudisValidators.min(5, 'Number cannot be under 5')),
     },
     maxNumberInput: {
       control: new FormControl('', FudisValidators.max(99, 'Number cannot be over 99')),
@@ -85,28 +85,25 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         FudisValidators.pattern(/[\d]/, 'Text should include at least one digit'),
       ),
     },
-    // Expose after DateRange is exposed to public API
-    // Deleted from the template:
-    // <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
-    // startDate: {
-    //   label: 'DatepickerMin Validator',
-    //   control: new FormControl<Date | null>(null, [
-    //     FudisValidators.datepickerMin({
-    //       value: new Date(2024, 0, 10),
-    //       message: 'Start date cannot be earlier than 10.1.2024',
-    //     }),
-    //   ]),
-    // },
-    // endDate: {
-    //   label: 'DatepickerMax Validator',
-    //   control: new FormControl<Date | null>(null, [
-    //     FudisValidators.datepickerMax({
-    //       value: new Date(2024, 2, 25),
-    //       message: 'End date cannot be later than 25.3.2024',
-    //     }),
-    //   ]),
-    // },
-    checkboxGroupAtLeastOneRequired: {
+    startDate: {
+      control: new FormControl<Date | null>(
+        null,
+        FudisValidators.datepickerMin({
+          value: new Date(2024, 7, 16),
+          message: 'Start date cannot be earlier than 16.8.2024',
+        }),
+      ),
+    },
+    endDate: {
+      control: new FormControl<Date | null>(
+        null,
+        FudisValidators.datepickerMax({
+          value: new Date(2024, 7, 27),
+          message: 'End date cannot be later than 27.8.2024',
+        }),
+      ),
+    },
+    checkboxGroupOneRequired: {
       formGroup: berryFormGroup,
       options: [
         { controlName: 'strawberry', label: 'Strawberry' },
@@ -136,8 +133,9 @@ const ValidatorsTemplate: StoryFn = (args) => ({
     },
   },
   template: html`
-    <fudis-grid [columns]="2" [marginBottom]="'xl'">
+    <fudis-grid [columns]="2" [classes]="'fudis-mb-xl'">
       <fudis-heading [level]="3">Fudis Validators</fudis-heading>
+      <fudis-heading [level]="4">Text Validators</fudis-heading>
       <fudis-text-input [label]="'Required validator'" [control]="basicTextInput.control" />
       <fudis-text-input
         [label]="'Email validator'"
@@ -146,54 +144,62 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       />
       <fudis-text-input [label]="'MinLength validator'" [control]="minLengthTextInput.control" />
       <fudis-text-input [label]="'MaxLength validator'" [control]="maxLengthTextInput.control" />
+      <fudis-heading [level]="4">Number Validators</fudis-heading>
       <fudis-text-input
         [label]="'Min number validator'"
         [control]="minNumberInput.control"
         [type]="'number'"
-        [size]="'md'"
+        [helpText]="'Try to type smaller than 5'"
       />
       <fudis-text-input
         [label]="'Max number validator'"
         [control]="maxNumberInput.control"
         [type]="'number'"
-        [size]="'md'"
+        [helpText]="'Try to type larger than 99'"
       />
+      <fudis-heading [level]="4">Other Validators</fudis-heading>
       <fudis-text-input [label]="'Pattern validator'" [control]="patternTextInput.control" />
+      <fudis-date-range fudisGridItem [columns]="'stretch'">
+        <fudis-datepicker
+          fudisDateStart
+          [label]="'Datepicker min validator'"
+          [control]="startDate.control"
+        />
+        <fudis-datepicker
+          fudisDateEnd
+          [label]="'Datepicker max validator'"
+          [control]="endDate.control"
+        />
+      </fudis-date-range>
     </fudis-grid>
-    <hr class="fudis-hr" />
-    <fudis-grid [columns]="2" [marginTop]="'xl'">
+    <fudis-hr />
+    <fudis-grid [columns]="2" [classes]="'fudis-mt-xl'">
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">
         <fudis-checkbox-group
-          [label]="'At Least One Required Group Validator'"
-          [formGroup]="checkboxGroupAtLeastOneRequired.formGroup"
+          [label]="'One Required Group Validator'"
+          [formGroup]="checkboxGroupOneRequired.formGroup"
         >
-          <fudis-checkbox
-            *ngFor="let option of checkboxGroupAtLeastOneRequired.options"
-            [controlName]="option.controlName"
-            [label]="option.label"
-          />
+          @for (option of checkboxGroupOneRequired.options; track option.controlName) {
+          <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
+          }
         </fudis-checkbox-group>
       </fudis-grid-item>
       <fudis-checkbox-group
         [label]="'Min Group Validator'"
         [formGroup]="checkboxGroupMin.formGroup"
       >
-        <fudis-checkbox
-          *ngFor="let option of checkboxGroupMin.options"
-          [controlName]="option.controlName"
-          [label]="option.label"
-        />
+        @for (option of checkboxGroupMin.options; track option.controlName) {
+        <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
+        }
       </fudis-checkbox-group>
       <fudis-checkbox-group
         [label]="'Max Group Validator'"
         [formGroup]="checkboxGroupMax.formGroup"
       >
-        <fudis-checkbox
-          *ngFor="let option of checkboxGroupMax.options"
-          [controlName]="option.controlName"
-          [label]="option.label"
-        />
+        @for (option of checkboxGroupMax.options; track option.controlName) {
+        <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
+        }
       </fudis-checkbox-group>
     </fudis-grid>
   `,

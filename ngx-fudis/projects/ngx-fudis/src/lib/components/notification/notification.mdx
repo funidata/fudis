@@ -1,0 +1,56 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { NotificationComponent } from "./notification.component";
+import * as NotificationStories from "./notification.stories.ts";
+import { notificationArgsTableExclude } from "../../utilities/storybook";
+import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Notification" />
+
+# Notification
+
+Notifications are often informative contextual notifications that cannot be clicked away. Input property `variant` can have following values:
+
+- Yellow `warning` notification is used in notes
+- Red `danger` notification describes an error situation
+- Green `success` indicates the possibility or success of some function
+- Blue `info`, on the other hand, is a neutral guideline
+
+## Examples
+
+<Canvas of={NotificationStories.AllVariants} />
+
+### Content Guidelines
+
+For basic text content it is recommended to use [Body Text Components](/docs/components-typography-body-text--documentation),
+however Notification Component can contain any kind of Fudis components, text or html content if needed.
+
+If using [Button Component](/docs/components-button--documentation) or button element they will be transformed to look like
+[Link Component](/docs/components-link--documentation). Otherwise Notification does not interfere with the content styling.
+
+There is also the possibility to add a more detailed description of the Notification for screen readers. When HTML element is described by another element, it must be linked using the other element's id.
+Add `ariaDescribedby` input, using the id of the linked content. See the example implementation in the Notification with Button code.
+
+Please see code examples for recommended usage patterns.
+
+<Canvas of={NotificationStories.ExampleWithMultipleChildComponents} />
+
+<Canvas of={NotificationStories.ExampleWithExternalLinkAndButton} />
+
+### Accessibility
+
+- Notification background and text color contrast ratio meets AA and AAA levels
+- Notification content is accessible by screen readers
+- Notification component is native `article` element
+- External link is communicated to screen reader with assistive aria-label
+- Possibility to add additional aria-describedby attribute if necessary
+
+### Related components
+
+- [Icon](/docs/components-icon--documentation)
+- [Link](/docs/components-link--documentation)
+- [Button](/docs/components-button--documentation)
+- [BodyText](/docs/components-typography-body-text--documentation)
+
+## Properties
+
+<ArgTypes of={NotificationComponent} exclude={notificationArgsTableExclude} />

@@ -1,0 +1,52 @@
+@use '@funidata/fudis-core' as core;
+
+.fudis-tab-navigation-bar {
+  &__button-container {
+    @include core.bg-color('white');
+
+    &--right {
+      display: flex;
+      position: absolute;
+      top: 0;
+      right: 0;
+      align-items: flex-start;
+      justify-content: flex-end;
+      width: core.$spacing-xl;
+      height: core.$tab-navigation-button-height;
+    }
+
+    &--left {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: core.$spacing-xl;
+      height: core.$tab-navigation-button-height;
+    }
+
+    &__button {
+      @include core.bg-color('white');
+
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      border-style: none;
+      cursor: pointer;
+      padding: 0;
+
+      &:focus {
+        @include core.focus-generic;
+      }
+
+      &--right {
+        right: 0;
+      }
+
+      &--left {
+        left: 0;
+      }
+    }
+  }
+}

@@ -8,19 +8,22 @@ import { MultiselectChipListComponent } from '../multiselect-chip-list/multisele
 import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
+import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../../icon/icon.component';
 import { LabelComponent } from '../../../label/label.component';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { FudisIdService } from '../../../../../services/id/id.service';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { getElement } from '../../../../../utilities/tests/utilities';
-import { defaultOptions } from '../../common/mock_data';
+import { defaultOptions, defaultOptionsSecondaryLang } from '../../common/mock_data';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
-import { ButtonComponent } from '../../../../button/button.component';
+import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
+import { MultiselectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { MultiselectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
+import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-multiselect-mock',
   template: `<fudis-multiselect
     #selectEl
@@ -28,18 +31,16 @@ import { ButtonComponent } from '../../../../button/button.component';
     [placeholder]="'Select your favourites'"
     [control]="control"
   >
-    <ng-template fudisContent type="select-options">
-      <fudis-multiselect-option
-        *ngFor="let option of multiOptions"
-        #multiOption
-        [data]="option"
-      ></fudis-multiselect-option>
+    <ng-template fudisSelectOptions>
+      @for (option of multiOptions; track option.value) {
+        <fudis-multiselect-option #multiOption [data]="option"></fudis-multiselect-option>
+      }
     </ng-template>
   </fudis-multiselect>`,
 })
 class MultiselectMockComponent {
-  multiOptions: FudisSelectOption<object>[] = defaultOptions;
-  control = new FormControl<FudisSelectOption<object>[] | null>(null);
+  multiOptions: FudisSelectOption<string | object>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<string | object>[] | null> = new FormControl(null);
 
   @ViewChild('multiOption') multiOption: MultiselectOptionComponent;
   @ViewChild('selectEl') selectEl: MultiselectComponent;
@@ -54,26 +55,24 @@ describe('MultiselectOptionComponent', () => {
       declarations: [
         MultiselectMockComponent,
         MultiselectOptionComponent,
+        MultiselectControlValueAccessorDirective,
+        MultiselectAutocompleteDirective,
         MultiselectComponent,
         MultiselectChipListComponent,
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectIconsComponent,
-        IconComponent,
-        ButtonComponent,
-        ContentDirective,
+        SelectOptionsDirective,
         GuidanceComponent,
-        IconComponent,
         LabelComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
-      imports: [ReactiveFormsModule],
+      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MultiselectMockComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   function setMultiSelectDropdownOpen() {
@@ -82,11 +81,14 @@ describe('MultiselectOptionComponent', () => {
   }
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   describe('Options reflect on parent control value', () => {
     it('should have respective HTML attributes after parent control value changes', () => {
+      fixture.detectChanges();
+
       component.control.patchValue([defaultOptions[2]]);
       fixture.detectChanges();
 
@@ -101,10 +103,24 @@ describe('MultiselectOptionComponent', () => {
       expect(selectedOptionLabel).toEqual('Platypus');
     });
 
+    it('should change visible input value when options are changed', () => {
+      component.control.patchValue([defaultOptions[2]]);
+      fixture.detectChanges();
+
+      const element = getElement(fixture, '.fudis-select__input');
+      expect(element.getAttribute('value')).toEqual('Platypus');
+
+      component.multiOptions = defaultOptionsSecondaryLang;
+      fixture.detectChanges();
+      expect(element.getAttribute('value')).toEqual('Vesinokkaeläin');
+    });
+
     it('should add value to control with already existing values when another option is selected and emit selection', () => {
+      fixture.detectChanges();
+
       jest.spyOn(component.selectEl.selectionUpdate, 'emit');
 
-      component.control.patchValue([defaultOptions[4], defaultOptions[0]]);
+      component.control.patchValue([defaultOptions[5], defaultOptions[0]]);
 
       fixture.detectChanges();
 
@@ -117,23 +133,33 @@ describe('MultiselectOptionComponent', () => {
       const controlValueArray = component.selectEl.control.value;
 
       expect(controlValueArray).toMatchObject([
-        { label: 'Screaming hairy armadillo' },
+        { label: 'Screaming hairy armadillo (partly endangered)' },
         { label: 'Dog' },
         { label: 'Platypus' },
       ]);
 
       expect(component.selectEl.selectionUpdate.emit).toHaveBeenCalledWith([
         {
-          label: 'Screaming hairy armadillo',
+          label: 'Screaming hairy armadillo (partly endangered)',
           sound: "Rollin' rollin' rollin'!",
-          value: 'value-5-armadillo',
+          value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
         },
-        { label: 'Dog', sound: 'Wuf!', value: 'value-1-dog' },
-        { label: 'Platypus', sound: 'Plat plat!', value: 'value-3-platypys' },
+        {
+          label: 'Dog',
+          sound: 'Wuf!',
+          value: { name: 'Max The Great', breed: 'Staffy' },
+        },
+        {
+          label: 'Platypus',
+          sound: 'Plat plat!',
+          value: 'value-3-platypys',
+        },
       ]);
     });
 
     it('should remove value from control when already selected option is clicked and set as null, if no selected options are left', () => {
+      fixture.detectChanges();
+
       setMultiSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('fudis-multiselect-option'));
@@ -141,7 +167,7 @@ describe('MultiselectOptionComponent', () => {
       // Select multiple options
       options[0].nativeElement.querySelector('input').click();
       options[1].nativeElement.querySelector('input').click();
-      options[4].nativeElement.querySelector('input').click();
+      options[5].nativeElement.querySelector('input').click();
       fixture.detectChanges();
 
       const controlValueArray = component.selectEl.control.value;
@@ -149,11 +175,11 @@ describe('MultiselectOptionComponent', () => {
       expect(controlValueArray).toMatchObject([
         { label: 'Dog' },
         { label: 'Capybara' },
-        { label: 'Screaming hairy armadillo' },
+        { label: 'Screaming hairy armadillo (partly endangered)' },
       ]);
 
       // Remove one of the already selected options
-      options[4].nativeElement.querySelector('input').click();
+      options[5].nativeElement.querySelector('input').click();
       fixture.detectChanges();
 
       const updatedControlValueArray = component.selectEl.control.value;
@@ -170,6 +196,10 @@ describe('MultiselectOptionComponent', () => {
   });
 
   describe('Single option HTML attributes', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
     it('should have respective attributes if selected', () => {
       setMultiSelectDropdownOpen();
 

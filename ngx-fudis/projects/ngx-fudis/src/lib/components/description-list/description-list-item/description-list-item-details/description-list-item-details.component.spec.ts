@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
-import { FudisGridService } from '../../../../services/grid/grid.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListItemTermComponent } from '../description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details.component';
@@ -17,12 +15,9 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
-import { FudisIdService } from '../../../../services/id/id.service';
-import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
-import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
-import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
@@ -57,6 +52,21 @@ import { ActionsDirective } from '../../../../directives/content-projection/acti
         <fudis-dd [contentText]="''" [lang]="'sv'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
+
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Empty state 1'"></fudis-dt>
+        <fudis-dd [contentText]="'This should not be visible'" [emptyState]="true"></fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Empty state 2'"></fudis-dt>
+        <fudis-dd
+          [contentText]="'This should not be visible'"
+          [emptyState]="true"
+          [emptyStateContentText]="'This is custom text'"
+        ></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
   `,
 })
 class MockDlComponent {
@@ -71,36 +81,26 @@ describe('DescriptionListItemDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ButtonComponent, IconComponent],
       declarations: [
-        ActionsDirective,
-        ButtonComponent,
         GridDirective,
         GridComponent,
         DescriptionListComponent,
         DescriptionListItemComponent,
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
-        IconComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
-        TooltipDirective,
-        TooltipApiDirective,
         MockDlComponent,
       ],
-      providers: [
-        FudisGridService,
-        FudisIdService,
-        FudisBreakpointService,
-        FudisTranslationService,
-      ],
-      imports: [MatTooltipModule],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 
   beforeEach(() => {
     service = TestBed.inject(FudisTranslationService);
-    service.setLanguage('en');
     service.setSelectableLanguages(['en', 'fi', 'sv']);
+    service.setLanguage('en');
 
     mockFixture = TestBed.createComponent(MockDlComponent);
     mockComponent = mockFixture.componentInstance;
@@ -111,6 +111,8 @@ describe('DescriptionListItemDetailsComponent', () => {
     type: string,
     variant: FudisDescriptionListVariant = 'regular',
   ): HTMLElement {
+    mockFixture.detectChanges();
+
     const dlItemDetailsElement = getElement(
       mockFixture,
       `fudis-dd ${type}.fudis-dl-item-details__${variant}`,
@@ -123,6 +125,13 @@ describe('DescriptionListItemDetailsComponent', () => {
     const itemArray = [...dlItemDetailsElements];
 
     return itemArray[index];
+  }
+
+  function getDlWithLanguages(index: number): DebugElement {
+    const dlWithLanguages = mockFixture.debugElement.queryAll(By.css('fudis-dl'))[index];
+    mockFixture.detectChanges();
+
+    return dlWithLanguages;
   }
 
   it('should create', () => {
@@ -153,17 +162,14 @@ describe('DescriptionListItemDetailsComponent', () => {
       expect(getDlItemDetailsElement('span').className).toEqual('fudis-dl-item-details__regular');
 
       mockComponent.variant = 'compact';
-
       mockFixture.detectChanges();
 
-      mockFixture.whenRenderingDone().then(() => {
-        expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(
-          'fudis-dl-item-details__compact',
-        );
-        expect(getDlItemDetailsElement('span', 'compact').className).toEqual(
-          'fudis-dl-item-details__compact',
-        );
-      });
+      expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(
+        'fudis-dl-item-details__compact',
+      );
+      expect(getDlItemDetailsElement('span', 'compact').className).toEqual(
+        'fudis-dl-item-details__compact',
+      );
     });
   });
 
@@ -229,27 +235,34 @@ describe('DescriptionListItemDetailsComponent', () => {
 
   describe('Language content', () => {
     it('should have selected language visible', () => {
-      let dlWithLanguages: DebugElement;
+      const dlWithLanguages = getDlWithLanguages(2);
+      mockFixture.detectChanges();
 
-      mockFixture.whenRenderingDone().then(() => {
-        dlWithLanguages = mockFixture.debugElement.queryAll(By.css('fudis-dl'))[2];
-        const currentLanguage = dlWithLanguages.nativeElement.querySelector(
-          '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
-        );
+      const currentLanguage = dlWithLanguages.nativeElement.querySelector(
+        '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
+      );
 
-        expect(currentLanguage.textContent).toEqual('This is in English');
-      });
+      expect(currentLanguage.textContent).toEqual('This is in English');
 
       service.setLanguage('fi');
       mockFixture.detectChanges();
 
-      mockFixture.whenRenderingDone().then(() => {
-        const changedLanguage = dlWithLanguages.nativeElement.querySelector(
-          '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
-        );
+      const changedLanguage = dlWithLanguages.nativeElement.querySelector(
+        '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
+      );
 
-        expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
-      });
+      expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
+    });
+
+    it('should have correct language attribute', () => {
+      const dlWithLanguages = getDlWithLanguages(2);
+      mockFixture.detectChanges();
+
+      const changedLanguage = dlWithLanguages.nativeElement.querySelector(
+        '.fudis-dl-item-details__regular',
+      );
+
+      expect(changedLanguage.lang).toEqual('en');
     });
   });
 
@@ -260,6 +273,28 @@ describe('DescriptionListItemDetailsComponent', () => {
       );
 
       expect(buttonComponent).toBeTruthy();
+    });
+  });
+
+  describe('Empty state', () => {
+    it('should show default empty state text', () => {
+      const emptyState = mockFixture.debugElement.query(
+        By.css('.fudis-dl-item-details__regular .fudis-text-emptystate'),
+      );
+
+      const text = emptyState.nativeElement.textContent.trim();
+
+      expect(text).toEqual('Information is not available');
+    });
+
+    it('should show custom text', () => {
+      const emptyStateElements = mockFixture.debugElement.queryAll(
+        By.css('.fudis-dl-item-details__regular .fudis-text-emptystate'),
+      );
+
+      const text = emptyStateElements[1].nativeElement.textContent.trim();
+
+      expect(text).toEqual('This is custom text');
     });
   });
 });

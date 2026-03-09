@@ -6,18 +6,22 @@ import {
   Output,
   effect,
   OnChanges,
+  inject,
+  DestroyRef,
 } from '@angular/core';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisSelectVariant } from '../../../../../types/forms';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-select-icons',
   templateUrl: './select-icons.component.html',
   styleUrls: ['./select-icons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SelectIconsComponent implements OnChanges {
   constructor(protected _translationService: FudisTranslationService) {
@@ -31,7 +35,7 @@ export class SelectIconsComponent implements OnChanges {
   /**
    * If Select's dropdown is open
    */
-  @Input() dropdownOpen: boolean;
+  @Input() dropdownOpen: boolean | null;
 
   /**
    * Parent Select's variant
@@ -44,8 +48,7 @@ export class SelectIconsComponent implements OnChanges {
   @Input() clearButton: boolean;
 
   /**
-   * If parent'c control is disabled
-   * TODO: to be removed when Fudis is refactored only to use FormControl's disabled state
+   * If clear button is disabled
    */
   @Input() disabled: boolean;
 
@@ -58,6 +61,11 @@ export class SelectIconsComponent implements OnChanges {
    * Parent Select's form control
    */
   @Input() parentControl: FormControl;
+
+  /**
+   * Id of parent Select
+   */
+  @Input() parentId: string;
 
   /**
    * Output event for Clear Button click
@@ -90,6 +98,13 @@ export class SelectIconsComponent implements OnChanges {
   protected _translationClearFilterText = new BehaviorSubject<string>('');
 
   /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
+  private _destroyRef = inject(DestroyRef);
+
+  /**
    * Click handler for Clear Button
    */
   protected _clearButtonClick(event: Event): void {
@@ -114,9 +129,12 @@ export class SelectIconsComponent implements OnChanges {
     if (changes.parentControl?.currentValue !== changes.parentControl?.previousValue) {
       this._controlValue.next(!!changes.parentControl?.currentValue?.value);
 
-      this.parentControl.valueChanges.subscribe((value) => {
-        this._controlValue.next(!!value);
-      });
+      this._subscription?.unsubscribe();
+      this._subscription = this.parentControl.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((value) => {
+          this._controlValue.next(!!value);
+        });
     }
   }
 }

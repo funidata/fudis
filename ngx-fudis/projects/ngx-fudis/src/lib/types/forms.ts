@@ -1,144 +1,139 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
-import { FudisLanguageAbbr } from './miscellaneous';
 
 export const fudisInputSizeArray = ['sm', 'md', 'lg'] as const;
 
+export const fudisSelectionGroupInputSizeArray = ['sm', 'md', 'lg', 'full-width'] as const;
+
 export type FudisInputSize = (typeof fudisInputSizeArray)[number];
+
+/**
+ * Input size options used by CheckboxGroup and RadioButtonGroup
+ */
+export type FudisSelectionGroupInputSize = (typeof fudisSelectionGroupInputSizeArray)[number];
 
 export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 'url';
 
 export type FudisCheckboxOption<T extends object> = T & {
-  /** Unique id for single checkbox option */
+  /**
+   * Unique id for single checkbox
+   */
   id?: string;
-  /** Name for the group of checkboxes */
-  groupName?: string;
-  /** If using FormGroup, name of the option */
-  controlName?: string;
-  /** Visible label that is shown in the UI */
-  label: string;
-  /** Is option selected */
+  /**
+   * Visible label that is shown in the UI
+   */
+  label?: string;
+  /**
+   * Is option selected
+   */
   value?: boolean | null | undefined;
-  /** To store additional data */
+  /**
+   * To store additional data
+   */
   [key: string]: unknown;
 };
 
-export interface FudisRadioButtonOption {
-  /** Unique id for single radio button option */
+export type FudisCheckboxGroupOption<T extends object> = T & {
+  /**
+   * Unique id for single checkbox group option
+   */
   id?: string;
-  /** Underlying value of the option */
-  value: string | boolean | null;
-  /** Value that is shown in the UI */
+  /**
+   * Name for the group of checkboxes
+   */
+  groupName?: string;
+  /**
+   * If using FormGroup, name of the option
+   */
+  controlName?: string;
+  /**
+   * Visible label that is shown in the UI
+   */
   label: string;
-  /** Is option selected */
-  checked?: boolean;
-}
+  /**
+   * Is option selected
+   */
+  value?: boolean | null | undefined;
+  /**
+   * To store additional data
+   */
+  [key: string]: unknown;
+};
+
+export type FudisRadioButtonOption<T extends object> = T & {
+  /**
+   * Generated id for single radio option
+   */
+  id?: string;
+  /**
+   * Underlying value of the option
+   */
+  value: string | boolean | null | unknown;
+  /**
+   * Value that is shown in the UI
+   */
+  label: string;
+  /**
+   * To store additional data
+   */
+  [key: string]: unknown;
+};
 
 export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';
 
-export type FudisSelectOption<T extends object> = T & {
-  /** Underlying value of the option */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any;
-  /** Value that is shown in the UI */
+export type FudisSelectOption<T = string> = {
+  /**
+   * Underlying value of the option
+   */
+  value: T;
+  /**
+   * Value that is shown in the UI
+   */
   label: string;
-  /** Secondary, optional label for the option */
+  /**
+   * Secondary, optional label for the option
+   */
   subLabel?: string;
-  /** Is option disabled in the dropdown */
+  /**
+   * Is option disabled in the dropdown
+   */
   disabled?: boolean;
-  /** Fudis generates an id for each SelectOption. This is used in internal logic. */
-  fudisGeneratedHtmlId?: string;
-  /** To store additional data */
-  [key: string]: unknown;
 };
 
-export type FudisFormErrorSummaryItem = {
-  id: string;
-  formId: string;
-  label: string;
-  error: string;
-  type: string;
-  controlName: string | undefined;
-  language: FudisLanguageAbbr;
-};
+export type FudisLocalizedTextGroupFormGroupOptions =
+  | { controlName: 'fi'; label: 'FI' }
+  | { controlName: 'sv'; label: 'SV' }
+  | { controlName: 'en'; label: 'EN' }
+  | { controlName: string; label: string };
 
-export type FudisFormErrorSummaryRemoveItem = {
-  id: string;
-  formId: string | null;
-  controlName: string | undefined;
-  type: string;
-};
-
-export type FudisFormErrorSummaryFormsAndErrors = {
-  [id: string]: FudisFormErrorSummaryObject;
-};
-
-export type FudisFormErrorSummaryError = {
-  id: string;
-  errors: FudisFormErrorSummaryObjectItemErrors;
-  label: string;
-  language: FudisLanguageAbbr;
-};
-
-export type FudisFormErrorSummaryObject = {
-  [id: string]: {
-    id: string;
-    errors: FudisFormErrorSummaryObjectItemErrors;
-    label: string;
-    language: FudisLanguageAbbr;
-  };
-};
-
-export type FudisFormErrorSummarySection = {
-  id: string;
-  formId: string;
-  title: string;
-};
-
-export type FudisFormErrorSummarySectionObject = {
-  [formId: string]: FudisFormErrorSummarySection[];
-};
-
-export type FudisFormErrorSummaryList = {
-  id: string;
-  message: string;
-  element: HTMLElement | null;
-};
-
-export type FudisFormErrorSummaryObjectItemErrors = {
-  [errorType: string]: string;
-};
-
-export type FudisDropdownLanguageOption =
-  | { value: 'finnish'; label: 'FI' }
-  | { value: 'swedish'; label: 'SV' }
-  | { value: 'english'; label: 'EN' }
-  | { value: FudisLanguageAbbr; label: string };
-
-export interface FudisInputWithLanguageOptionsFormGroup {
-  [language: string]: FormControl<string | null>;
+export interface FudisLocalizedTextGroupDefaultFormGroup {
+  fi: FormControl<string | null>;
+  en: FormControl<string | null>;
+  sv: FormControl<string | null>;
 }
 
-export type FudisCheckboxGroupFormGroup<T extends object> = T & {
-  [key: string]: FormControl<boolean | null | undefined>;
+export type FudisLocalizedTextGroupFormGroup<T> = {
+  [K in keyof T]: FormControl<string | null>;
+};
+
+export type FudisCheckboxGroupFormGroup<T> = {
+  [K in keyof T]: FormControl<boolean | null>;
 };
 
 export type FudisCheckboxChangeEvent = {
-  checkbox: FudisCheckboxOption<object>;
-  control: FormControl<boolean | null | undefined>;
+  checkbox: FudisCheckboxGroupOption<object> | FudisCheckboxOption<object>;
+  control: FormControl<boolean | null>;
 };
 
 export type FudisCheckboxGroupChangeEvent = {
   changedControlName: string;
-  formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  formGroup: FormGroup;
 };
 
-export interface FudisDateRangeItem {
-  control: FormControl<Date | null>;
-  label: string;
-  helpText?: string;
-  tooltip?: string;
-}
+export type FudisRadioButtonChangeEvent = {
+  option: FudisRadioButtonOption<object>;
+  control: FormControl<unknown>;
+};
 
 export const FudisDateInputFormat = {
   dateInput: 'DD.MM.YYYY',
@@ -155,5 +150,3 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
     dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
   },
 };
-
-export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';

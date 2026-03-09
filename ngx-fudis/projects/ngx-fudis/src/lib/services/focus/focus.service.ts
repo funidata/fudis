@@ -1,9 +1,6 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, DOCUMENT } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class FudisFocusService {
   constructor(@Inject(DOCUMENT) private _document: Document) {}
 
@@ -34,9 +31,11 @@ export class FudisFocusService {
   }
 
   /**
-   * Focus target element by id. If focusable element is not available when function is called, it will repeatively call itself until try counter is full.
-   * @param id target to focus
-   * @param tryCounter how many times function should try to focus to given id
+   * Focus target element by id. If focusable element is not available when function is called, it
+   * will repeatively call itself until try counter is full.
+   *
+   * @param id Target to focus
+   * @param tryCounter How many times function should try to focus to given id
    */
   public focusToElementById(id: string, numberOfTries: number = 100): void {
     setTimeout(() => {
@@ -51,8 +50,9 @@ export class FudisFocusService {
   }
 
   /**
-   * Add component with given id to ignore list, so that initialFocus is ignored with that.
-   * Used e.g. in a form where same component is added multiple times when user clicks 'New item' or similar and focus is wanted to move there except with 'item-id-x'.
+   * Add component with given id to ignore list, so that initialFocus is ignored with that. Used
+   * e.g. in a form where same component is added multiple times when user clicks 'New item' or
+   * similar and focus is wanted to move there except with 'item-id-x'.
    */
   public addToIgnoreList(id: string): void {
     if (!this._ignoreInitialFocusList.includes(id)) {

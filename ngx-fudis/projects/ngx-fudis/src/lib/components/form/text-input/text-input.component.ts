@@ -1,134 +1,121 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnInit,
-  Optional,
-  Host,
-  ChangeDetectorRef,
-  OnChanges,
-} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { FudisInputSize, FudisInputType } from '../../../types/forms';
+import { FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import {
-  getMaxFromValidator,
-  getMaxLengthFromValidator,
-  getMinFromValidator,
-  getMinLengthFromValidator,
-  hasRequiredValidator,
-} from '../../../utilities/form/getValidators';
-import { FormComponent } from '../form/form.component';
+import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
+/**
+ * Allows entry of single-line text.
+ *
+ * Use this component for short textual input such as names or identifiers.
+ */
 @Component({
   selector: 'fudis-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TextInputComponent
-  extends InputBaseDirective
-  implements OnInit, AfterViewInit, OnChanges
+  extends TextFieldComponentBaseDirective
+  implements OnInit, OnChanges
 {
-  constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _focusService: FudisFocusService,
-    _changeDetectorRef: ChangeDetectorRef,
-    _idService: FudisIdService,
-  ) {
-    super(_idService, _changeDetectorRef);
+  constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
+    super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(FudisValidatorUtilities.required(this.control));
 
         if (this.type === 'number') {
-          this._minNumber = getMinFromValidator(this.control);
-          this._maxNumber = getMaxFromValidator(this.control);
-          this._maxLength = null;
-          this._minLength = null;
+          this._maxLength.next(null);
+          this._minLength.next(null);
+          this._minNumber.next(FudisValidatorUtilities.min(this.control));
+          this._maxNumber.next(FudisValidatorUtilities.max(this.control));
         } else {
-          this._maxLength = getMaxLengthFromValidator(this.control);
-          this._minLength = getMinLengthFromValidator(this.control);
-          this._minNumber = null;
-          this._maxNumber = null;
+          this._maxLength.next(FudisValidatorUtilities.maxLength(this.control));
+          this._minLength.next(FudisValidatorUtilities.minLength(this.control));
+          this._minNumber.next(null);
+          this._maxNumber.next(null);
         }
       }
     });
   }
 
   /**
-   * FormControl for text-input
+   * FormControl binded to the HTML input element
    */
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
-   * Available sizes for the input. Recommended size for number input is 'sm'.
-   */
-  @Input() size: FudisInputSize = 'lg';
-
-  /**
-   * Type of the input - defaults to 'text'
+   * HTML type attribute
    */
   @Input() type: FudisInputType = 'text';
 
   /**
-   * Max length for HTML attribute and for character indicator in guidance
+   * Browser's automated assistance in filling out form field values, describing what input is
+   * expected from the user.
    */
-  protected override _maxLength: number | null = null;
+  @Input() autocomplete: string | string[] = 'off';
 
   /**
-   * Min length for HTML attribute
+   * HTML name attribute (Note: in order to autocomplete to work properly, TextInput should have
+   * specified name attribute as well)
    */
-  protected _minLength: number | null = null;
+  @Input() name: string | null = null;
+
+  /**
+   * Step for number input: controls the minimum increment for number values. Use 'any' to allow any
+   * decimal value.
+   */
+  @Input() step: number | 'any' | null = null;
 
   /**
    * Max number for number input HTML attribute
    */
-  protected _maxNumber: number | null = null;
+  protected _maxNumber = new BehaviorSubject<number | null>(null);
 
   /**
    * Min number for number input HTML attribute
    */
-  protected _minNumber: number | null = null;
+  protected _minNumber = new BehaviorSubject<number | null>(null);
+
+  /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
 
   ngOnInit(): void {
-    this._setInputId('text-input');
+    this._setComponentId('text-input');
     this._updateValueAndValidityTrigger.next();
-
-    /**
-     * TODO: write test
-     */
-    this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-      if (typeof value === 'string' && value.trim() === '') {
-        this.control.setValue(null);
-      }
-    });
-
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    this._setControlValueSubscription();
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
+      if (!changes.control?.firstChange) {
+        this._setControlValueSubscription();
+      }
+
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._updateValueAndValidityTrigger.next());
     }
 
     if (changes.type?.currentValue !== changes.type?.previousValue) {
       this._updateValueAndValidityTrigger.next();
     }
-  }
 
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
-    }
-    /**
-     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
-     */
-    if (this.control.disabled) {
-      this._inputRef.nativeElement.removeAttribute('disabled');
+    if (
+      !changes.nullControlOnEmptyString?.firstChange &&
+      changes.nullControlOnEmptyString?.currentValue !==
+        changes.nullControlOnEmptyString?.previousValue
+    ) {
+      this._setControlValueSubscription();
     }
   }
 }

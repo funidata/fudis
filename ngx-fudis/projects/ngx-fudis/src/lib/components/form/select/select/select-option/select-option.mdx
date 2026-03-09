@@ -1,6 +1,7 @@
-import { Meta, Canvas } from "@storybook/blocks";
-import { Source } from "@storybook/blocks";
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Source } from "@storybook/addon-docs/blocks";
 import * as Stories from "./select-option.stories";
+import * as VersionSelectorStories from "../../../../../../storybook-docs/version-selector/version-selector.stories";
 
 <Meta title="Components/Form/Select/Select and Multiselect Option" />
 
@@ -10,11 +11,11 @@ Select Option and Multiselect Option Components are separate but really similar 
 
 ## Content Directive Properties
 
-To include Select or Multiselect Options, you need to wrap them with **fudisContent** directive and include `type` property with `select-options` value.
+To include Select or Multiselect options, you need to wrap them with directive selector **fudisSelectOptions**. This enables lazy loading of options only after dropdown has been opened for the first time.
 
 ```
 <fudis-select>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     ...
     options here
     ...
@@ -24,23 +25,19 @@ To include Select or Multiselect Options, you need to wrap them with **fudisCont
 
 ## Input Attributes
 
-Select Option and Multiselect Option **require** `data` object property which follows `FudisSelectOption` interface. Mandatory entries for data object are `label` and `value`.
+Select Option and Multiselect Option **require** `data` object property which follows `FudisSelectOption` type. Mandatory entries for data object are `label` and `value`.
 
 ```
-
-interface FudisSelectOption {
+type FudisSelectOption<T = string> = {
   /** Underlying value of the option */
-  value: any;
+  value: T;
   /** Value that is shown in the UI */
   label: string;
   /** Secondary, optional label for the option */
   subLabel?: string;
   /** Is option disabled in the dropdown */
   disabled?: boolean;
-  /** To store additional data */
-  [key: string]: any;
 }
-
 ```
 
 ## Example Usage
@@ -52,12 +49,13 @@ interface FudisSelectOption {
 <Source
   code={`
 <fudis-select>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     <fudis-select-option
-      [data]=
-        "{value: 'unique-option-value',
+      [data]="{
+        value: 'unique-option-value',
         label: 'Visible Label For the Option'
-        subLabel: 'Optional secondary label'}"
+        subLabel: 'Optional secondary label'
+      }"
     />
   </ng-template>
 </fudis-select>`}
@@ -68,12 +66,13 @@ interface FudisSelectOption {
 <Source
   code={`
 <fudis-multiselect>
-  <ng-template fudisContent [type]="'select-options'">
+  <ng-template fudisSelectOptions>
     <fudis-multiselect-option
-      [data]=
-        "{value: 'unique-option-value',
+      [data]="{
+        value: 'unique-option-value',
         label: 'Visible Label For the Option',
-        subLabel: 'Optional secondary label'}"
+        subLabel: 'Optional secondary label'
+      }"
     />
   </ng-template>
 </fudis-multiselect>`}

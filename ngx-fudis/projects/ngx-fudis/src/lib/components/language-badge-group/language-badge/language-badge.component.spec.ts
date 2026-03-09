@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { LanguageBadgeComponent } from './language-badge.component';
-import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { getElement } from '../../../utilities/tests/utilities';
 
 describe('LanguageBadgeComponent', () => {
@@ -14,9 +11,7 @@ describe('LanguageBadgeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LanguageBadgeComponent, TooltipDirective],
-      imports: [MatTooltipModule],
-      providers: [FudisIdService, FudisTranslationService],
+      declarations: [LanguageBadgeComponent],
     }).compileComponents();
   });
 

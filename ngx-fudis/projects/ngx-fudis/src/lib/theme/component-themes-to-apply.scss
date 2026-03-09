@@ -1,26 +1,28 @@
 /*
 * Global style files
 */
-@use "@angular/material" as mat;
-@use "./fudis-theme.scss" as theme;
-@use "../components/form/date/datepicker/ngMaterial-theme.scss" as datePicker;
-@use "../components/dialog/ngMaterial-theme.scss" as dialog;
-@use "../directives/tooltip/ngMaterial-theme.scss" as tooltip;
-@use "../components/grid/grid-item/grid-item.component.scss" as gridItem;
-@use "../components/grid/grid/grid.component.scss" as grid;
-@use "../foundations/spacing/classes.scss" as spacingClasses;
-@use "../components/link/link.component.scss" as link;
-@use "../components/button/button-theme.scss" as button;
-@use "../components/typography/body-text/body-text-theme.scss" as bodyText;
-@use "../components/form/select/common/select-dropdown/select-dropdown-theme.scss" as selectDropdown;
-@use "../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss"
-  as dd;
+@use '@angular/material' as mat;
+@use '../components/form/date/datepicker/ngMaterial-theme.scss' as datePicker;
+@use '../components/dialog/ngMaterial-theme.scss' as dialog;
+@use '../components/grid/grid-item/grid-item.component.scss' as gridItem;
+@use '../components/grid/grid/grid.component.scss' as grid;
+@use '../directives/link/link.directive.scss' as link;
+@use '../components/button/button-theme.scss' as button;
+@use '../components/typography/heading/heading-theme.scss' as heading;
+@use '../components/typography/body-text/body-text-theme.scss' as bodyText;
+@use '../components/form/select/common/select-dropdown/select-dropdown-theme.scss' as selectDropdown;
+@use './display-theme';
+@use './theme-m3.scss' as m3;
 
 // Emit theme-dependent styles for common features used across multiple Material components.
-@include mat.core;
-@include mat.core-theme(theme.$primary-theme);
-@include mat.all-component-typographies(theme.$typography);
-@include mat.button-theme(theme.$button-theme);
-@include mat.datepicker-theme(theme.$datepicker-theme);
-@include mat.dialog-theme(theme.$primary-theme);
-@include mat.tooltip-theme(theme.$primary-theme);
+
+html {
+  // Angular Material documentation is lacking proper information but it seems that their core mixin is deprecated.
+  // It has no effect according to their own code and will be removed in v21 (https://github.com/angular/components/blob/main/src/material/core/_core.scss)
+  // TODO: Check the Material theming system if changes are required
+  @include mat.core;
+  @include mat.core-theme(m3.$fudis-theme);
+  @include mat.button-theme(m3.$fudis-theme);
+  @include mat.datepicker-theme(m3.$fudis-theme);
+  @include mat.tooltip-theme(m3.$fudis-theme);
+}

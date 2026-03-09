@@ -1,4 +1,4 @@
-import { provideTransloco, TranslocoModule } from '@ngneat/transloco';
+import { provideTransloco, TranslocoModule } from '@jsverse/transloco';
 import { isDevMode, NgModule } from '@angular/core';
 import { TranslocoHttpLoader } from './transloco-loader';
 

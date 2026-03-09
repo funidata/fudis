@@ -1,0 +1,62 @@
+# Following Fudis Ngx package ecosystems that are updated by Dependabot. Excluding all major package updates handled by a developer.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directories:
+      - "/"
+      - "/ngx-fudis"
+      - "/ngx-fudis/projects/ngx-fudis"
+      - "/test"
+    schedule:
+      interval: monthly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      angular:
+        patterns:
+          - "@angular/*"
+          - "@angular-devkit/*"
+          - "@angular-eslint/*"
+      storybook:
+        patterns:
+          - "@storybook*"
+      linting:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint*"
+          - "stylelint*"
+          - "prettier"
+      testing:
+        patterns:
+          - "jest*"
+      babel:
+        patterns:
+          - "@babel*"
+          - "babel-loader"
+      typescript:
+        patterns:
+          - "tslib"
+          - "typescript"
+          - "ts-node"
+      others:
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: "/.github"
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: docker
+    directories:
+      - "/ngx-fudis"
+      - "/test"
+    schedule:
+      interval: monthly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-patch"]

@@ -1,12 +1,12 @@
 {
   "name": "fudis",
-  "version": "2.1.0",
+  "version": "8.3.3",
   "description": "Funidata Design System",
   "scripts": {
     "postinstall": "cd ngx-fudis && npm ci",
     "start": "npm run start:storybook && npm run logs -- fudis-storybook",
     "start:all": "npm run start:storybook && npm run start:sandbox && npm run logs",
-    "start:sandbox": "docker compose up --build -d fudis-sandbox",
+    "start:sandbox": "docker compose up --build -d fudis-lib fudis-sandbox",
     "start:storybook": "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) docker compose up --build -d fudis-storybook",
     "stop": "docker compose down",
     "logs": "docker compose logs -f",
@@ -19,21 +19,16 @@
     "lint": "cd ngx-fudis && npm run lint",
     "stylelint": "cd ngx-fudis && npm run stylelint",
     "version": "scripts/version_sub_projects.sh $npm_package_version",
-    "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
-    "fudis-release": "scripts/release.sh",
+    "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\"",
+    "format": "prettier --write .",
     "format:check": "prettier --check ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/funidata/fudis.git"
   },
   "author": "Funidata Ltd",
   "license": "CC-BY-NC-SA-4.0",
-  "bugs": {
-    "url": "https://github.com/funidata/fudis/issues"
-  },
-  "homepage": "https://funidata.github.io/fudis/main/",
   "devDependencies": {
-    "prettier": "^3.2.5"
+    "prettier": "^3.8.1"
+  },
+  "dependencies": {
+    "prettier-plugin-jsdoc": "^1.8.0"
   }
 }

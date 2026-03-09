@@ -1,5 +1,10 @@
 name: Run tests
 
+# Write permission needed for jest-coverage-comment to post comments on PR's.
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   # Enable reusing this workflow.
   workflow_call:
@@ -23,14 +28,14 @@ jobs:
     name: Lint code
     needs:
       - build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
@@ -43,14 +48,14 @@ jobs:
     name: Lint styles
     needs:
       - build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
@@ -63,12 +68,12 @@ jobs:
     name: Check formatting
     needs:
       - build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
       - name: Install dependencies
@@ -80,47 +85,72 @@ jobs:
     name: Component tests
     needs:
       - build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
       - name: Load image
         run: docker load --input /tmp/fudis-test.image.tar
-      - name: Run unit tests
-        run: docker run -te CI=true fudis-test npm test
+      - name: Create directory for coverage
+        run: mkdir coverage
+      - name: Run unit tests with coverage
+        run: |
+          docker run -t \
+            -e CI=true \
+            --mount type=bind,source=./coverage,target=/usr/src/app/projects/ngx-fudis/coverage \
+            fudis-test npm test
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+      - name: Comment Coverage Summary on PR
+        if: github.event_name == 'pull_request'
+        uses: MishaKav/jest-coverage-comment@2a8fe3083255756f3692599238ca251e858e15b2
+        with:
+          coverage-summary-path: coverage/coverage-summary.json
+          coverage-path: coverage/coverage.txt
+          report-only-changed-files: true
+          remove-links-to-files: true
+          remove-links-to-lines: true
 
   visual-regression-tests:
     name: Visual regression tests
     needs:
       - build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: fudis-test
           path: /tmp
       - name: Load image
         run: docker load --input /tmp/fudis-test.image.tar
       - name: Start Storybook
-        run: docker run -d -p 6006:6006 fudis-test npm run storybook
+        run: docker run --name fudis-vr-test -d -p 6006:6006 fudis-test npm run storybook
       - name: Build Playwright image
         run: docker build -t fudis-pw test/
       - name: Wait for Storybook server to be up
-        run: curl --head -X GET --retry 10 --retry-connrefused --retry-delay 5 http://localhost:6006
+        run: curl --head -X GET --retry 10 --retry-all-errors --retry-delay 5 http://localhost:6006
       - name: Create test output directories for mounts
-        run: mkdir test/test-results test/playwright-report
+        run: mkdir test/test-results test/playwright-report test/blob-report
       - name: Run visual regression tests
         run: |
           docker run -t \
@@ -129,14 +159,51 @@ jobs:
             --network=host \
             --mount type=bind,source=./test/test-results,target=/usr/src/app/test-results \
             --mount type=bind,source=./test/playwright-report,target=/usr/src/app/playwright-report \
-            fudis-pw
-      - uses: actions/upload-artifact@v4
-        if: always()
+            --mount type=bind,source=./test/blob-report,target=/usr/src/app/blob-report \
+            fudis-pw \
+            npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+      - name: Upload blob report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
-          name: playwright-report
-          path: test/playwright-report/
-      - uses: actions/upload-artifact@v4
+          name: blob-report-${{ matrix.shardIndex }}
+          path: test/blob-report/
+          retention-days: 1
+      - name: Print debug output
         if: failure()
+        run: |
+          docker ps
+          docker logs fudis-vr-test
+
+  # Combine blob reports from matrix shards into a single Playwright report.
+  playwright-report:
+    name: VR test report
+    runs-on: ubuntu-24.04
+    needs:
+      - visual-regression-tests
+    if: ${{ !cancelled() }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
-          name: test-results
-          path: test/test-results/
+          node-version-file: .nvmrc
+      - name: Install dependencies
+        run: npm ci
+        working-directory: test
+      - name: Download blob reports
+        uses: actions/download-artifact@v5
+        with:
+          path: test/all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+      - name: Merge into HTML Report
+        run: npx playwright merge-reports --reporter html ./all-blob-reports
+        working-directory: test
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-test-report--attempt-${{ github.run_attempt }}
+          path: test/playwright-report
+          retention-days: 7

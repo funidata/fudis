@@ -1,0 +1,8 @@
+@use '@funidata/fudis-core' as core;
+
+.fudis-version-selector {
+  display: block;
+  float: right;
+  margin-right: core.$spacing-sm;
+  padding-bottom: core.$spacing-sm;
+}

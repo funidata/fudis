@@ -1,8 +1,16 @@
-import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, EventEmitter, Inject, Input, Output } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  Output,
+  DOCUMENT,
+} from '@angular/core';
 
 @Directive({
   selector: '[fudisDropdownItemBase]',
+  standalone: false,
 })
 export class DropdownItemBaseDirective {
   constructor(@Inject(DOCUMENT) protected _document: Document) {}
@@ -38,9 +46,10 @@ export class DropdownItemBaseDirective {
   protected _id: string;
 
   /**
-   * Trigger focus based on keyboard interaction. Used to focus on next / previous dropdown item element
+   * Trigger focus based on keyboard interaction. Used to focus on next / previous dropdown item
+   * element
    */
-  // eslint-disable-next-line class-methods-use-this
+
   protected _baseHandleKeyDown(
     event: KeyboardEvent,
     element: ElementRef,

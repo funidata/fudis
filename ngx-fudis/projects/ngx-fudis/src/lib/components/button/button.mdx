@@ -1,0 +1,62 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { ButtonComponent } from "./button.component";
+import * as ButtonStories from "./button.stories.ts";
+import { buttonExclude } from "../../utilities/storybook.ts";
+import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Button" />
+
+# Button
+
+Interactive Button Component can be used whenever there is need for user to perform some clickable action, e. g. to submit a form.
+
+## Commonly used Properties
+
+### Label (mandatory)
+
+Button has a visible label that is the only required input attribute.
+
+### Variant
+
+Buttons are categorized based on their importance and functionality. It is **important** to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user.
+
+Button has three variants: `primary` (default), `secondary` and `tertiary`.
+
+### Type
+
+Type has to two possible values: `button` (default) and `submit`.
+
+For HTML semantics, if Button is a form submit button, `submit` attribute value for `type` should be used.
+
+## Examples
+
+<Canvas of={ButtonStories.AllVariants} />
+
+### Button with Icon
+
+Button has option for displaying Icon component alongside the label. Icon color is automatically set according to which button variant is in use.
+For situations where only visible icon is preferred, use [IconButton](/docs/components-iconbutton--documentation) instead.
+
+Icon is only a visual indicator and is always hidden from screen readers.
+
+Icon can be configured with `icon` and `iconRotate` properties.
+
+<Canvas of={ButtonStories.WithIcon} />
+
+### Accessibility
+
+- Button uses primary-color variable (`--fudis-color-primary`) which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.
+  - Disabled button has static colors `#484848` and `#D4D4D4` with contrast ratio 6.2:1
+- Button has visible focus state
+- Disabled buttons do not receive keyboard focus, but their state is communicated for assistive technology.
+- Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
+- Label is a required property.
+
+### Related components
+
+- [Icon](/docs/components-icon--documentation)
+- [IconButton](/docs/components-iconbutton--documentation)
+
+## Properties
+
+<ArgTypes of={ButtonComponent} exclude={buttonExclude} />

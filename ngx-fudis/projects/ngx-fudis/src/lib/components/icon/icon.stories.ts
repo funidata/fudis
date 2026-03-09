@@ -2,7 +2,7 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 import { fudisIconArray } from '../../types/icons';
 import { excludeEverythingExceptRegex } from '../../utilities/storybook';
-import readme from './readme.mdx';
+import docs from './icon.mdx';
 
 const html = String.raw;
 
@@ -11,7 +11,7 @@ export default {
   component: IconComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {
@@ -36,7 +36,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<IconComponent> = (args: IconComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
 });
 
@@ -47,21 +47,25 @@ Example.args = {
   rotate: 'none',
 };
 
-export const AllIcons: StoryFn<IconComponent> = (args: IconComponent) => ({
+Example.parameters = {
+  controls: {
+    exclude: excludeEverythingExceptRegex(['icon', 'color', 'rotate']),
+  },
+};
+
+export const AllIcons: StoryFn = (args) => ({
   props: {
     fudisIconArray,
     ...args,
   },
   template: html`
     <fudis-grid [columns]="{xs:2, md: 3, lg: 4}" [width]="'sm'">
-      <div
-        class="storybook-flex"
-        style="margin: 0.25rem; justify-content: space-between;"
-        *ngFor="let icon of fudisIconArray;"
-      >
+      @for (icon of fudisIconArray; track icon) {
+      <div class="storybook-flex fudis-my-xxs fudis-mx-xxs" style="justify-content: space-between;">
         <fudis-body-text>{{icon}}</fudis-body-text>
         <fudis-icon [color]="color" [rotate]="rotate" [icon]="icon"></fudis-icon>
       </div>
+      }
     </fudis-grid>
   `,
 });

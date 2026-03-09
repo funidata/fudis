@@ -1,10 +1,9 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
-import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
-import docs from './checkbox-group.docs.mdx';
+import docs from './checkbox-group.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
@@ -13,7 +12,6 @@ export default {
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
       imports: [ReactiveFormsModule, FormsModule],
     }),
   ],
@@ -25,14 +23,17 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'lg', 'full-width'],
       control: { type: 'radio' },
     },
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
@@ -42,44 +43,48 @@ const html = String.raw;
 
 const options = [
   {
-    controlName: 'apple',
-    label: 'Apple',
-    control: new FormControl<boolean | null | undefined>(null),
+    controlName: 'email',
+    label: 'Email',
+    control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'fairTradeBanana',
-    label: 'Fair trade banana',
-    control: new FormControl<boolean | null | undefined>(null),
+    controlName: 'sms',
+    label: 'SMS',
+    control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'pear',
-    label: 'Pear',
-    control: new FormControl<boolean | null | undefined>(null),
+    controlName: 'phoneCall',
+    label: 'Phone call',
+    control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'pineapple',
-    label: 'Pineapple',
-    control: new FormControl<boolean | null | undefined>(null),
+    controlName: 'universityAppNotification',
+    label: 'University app notification',
+    control: new FormControl<boolean | null>(null),
   },
   {
-    controlName: 'orange',
-    label: 'Orange',
-    control: new FormControl<boolean | null | undefined>(null),
+    controlName: 'paperMail',
+    label: 'Paper mail',
+    control: new FormControl<boolean | null>(null),
   },
 ];
 
-const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+const basicFormGroup = new FormGroup(
   {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined>(null),
-    pear: new FormControl<boolean | null | undefined>(null),
-    pineapple: new FormControl<boolean | null | undefined>(null),
-    orange: new FormControl<boolean | null | undefined>(null),
+    email: new FormControl<boolean | null>(null),
+    sms: new FormControl<boolean | null>(null),
+    phoneCall: new FormControl<boolean | null>(null),
+    universityAppNotification: new FormControl<boolean | null>(null),
+    paperMail: new FormControl<boolean | null>(null),
   },
-  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+  [
+    FudisGroupValidators.oneRequired(
+      new BehaviorSubject('You need to choose at least one contact method.'),
+    ),
+  ],
 );
 
-const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formGroup: basicFormGroup,
@@ -92,44 +97,49 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
     [formGroup]="formGroup"
     [label]="label"
     [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
+    [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    <fudis-checkbox
-      *ngFor="let option of options"
+    @for (option of options; track option.controlName) {
+    <fudis-checkbox-group-option
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
-    ></fudis-checkbox>
+    ></fudis-checkbox-group-option>
+    }
   </fudis-checkbox-group>`,
 });
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'Pick at least one fruit.',
+  label: 'Preferred contact method',
+  helpText: 'Pick at least one contact method.',
   size: 'lg',
-  tooltip: 'Fruit sugar is great in small doces!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  initialFocus: false,
+  popoverText: 'We do not recommend paper mail due to its environmental strain.',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };
 
-const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+const withDisabledFormGroupOptions = new FormGroup(
   {
-    apple: new FormControl<boolean | null | undefined>({ value: true, disabled: true }),
-    fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
-    pear: new FormControl<boolean | null | undefined | null>({ value: false, disabled: true }),
-    pineapple: new FormControl<boolean | null | undefined | null>(null),
-    orange: new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
+    email: new FormControl<boolean | null>({ value: true, disabled: true }),
+    sms: new FormControl<boolean | null | null>(null),
+    phoneCall: new FormControl<boolean | null | null>({ value: false, disabled: true }),
+    universityAppNotification: new FormControl<boolean | null | null>(null),
+    paperMail: new FormControl<boolean | null | null>({ value: null, disabled: true }),
   },
-  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Please pick one! :('))],
+  [
+    FudisGroupValidators.oneRequired(
+      new BehaviorSubject('You need to choose at least one contact method.'),
+    ),
+  ],
 );
 
-const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
-  args: CheckboxGroupComponent,
-) => ({
+const ExampleWithDisabledTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formGroup: withDisabledFormGroupOptions,
@@ -142,53 +152,54 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
     [formGroup]="formGroup"
     [label]="label"
     [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
+    [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    <fudis-checkbox
-      *ngFor="let option of options"
+    @for (option of options; track option.controlName) {
+    <fudis-checkbox-group-option
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
-    />
+    ></fudis-checkbox-group-option>
+    }
   </fudis-checkbox-group>`,
 });
 
 export const ExampleWithDisabledOption = ExampleWithDisabledTemplate.bind({});
 ExampleWithDisabledOption.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'Some options are disabled and cannot be toggled.',
+  label: 'Preferred contact method',
+  helpText: 'Obligatory contact method is email.',
   size: 'lg',
-  tooltip: 'Fruit sugar is great in small doces!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  initialFocus: false,
+  popoverText: 'Some options are disabled due to university policies.',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };
 
-const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+const withMinMaxFormGroupOptions = new FormGroup(
   {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
-    pear: new FormControl<boolean | null | undefined | null>(null),
-    pineapple: new FormControl<boolean | null | undefined | null>(null),
-    orange: new FormControl<boolean | null | undefined | null>(null),
+    email: new FormControl<boolean | null>(null),
+    sms: new FormControl<boolean | null | null>(null),
+    phoneCall: new FormControl<boolean | null | null>(null),
+    universityAppNotification: new FormControl<boolean | null | null>(null),
+    paperMail: new FormControl<boolean | null | null>(null),
   },
   [
     FudisGroupValidators.min({
       value: 2,
-      message: new BehaviorSubject('Not enough fruits picked'),
+      message: new BehaviorSubject('Not enough methods chosen.'),
     }),
     FudisGroupValidators.max({
       value: 3,
-      message: new BehaviorSubject('Too many fruits selected!'),
+      message: new BehaviorSubject('Too many methods chosen.'),
     }),
   ],
 );
 
-const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
-  args: CheckboxGroupComponent,
-) => ({
+const ExampleWithMinMaxTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     formGroup: withMinMaxFormGroupOptions,
@@ -201,63 +212,29 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
     [formGroup]="formGroup"
     [label]="label"
     [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverText]="popoverText"
+    [popoverPosition]="popoverPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
+    [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
-    <fudis-checkbox
-      *ngFor="let option of options"
+    @for (option of options; track option.controlName) {
+    <fudis-checkbox-group-option
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
-    />
+    ></fudis-checkbox-group-option>
+    }
   </fudis-checkbox-group>`,
 });
 
 export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
 ExampleWithMinMax.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'Pick two to three fruits.',
+  label: 'Preferred contact method',
+  helpText: 'Pick two to three contact methods.',
   size: 'lg',
-  tooltip: 'Fruit sugar is great in small doces!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
-};
-
-const ExampleWithoutFormGroupTemplate: StoryFn<CheckboxGroupComponent> = (
-  args: CheckboxGroupComponent,
-) => ({
-  props: {
-    ...args,
-    checkboxChange: action('checkboxChange'),
-    groupChange: action('groupChange'),
-    options,
-  },
-  template: html`<fudis-checkbox-group
-    [size]="size"
-    [label]="label"
-    [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
-    (handleChange)="groupChange($event)"
-  >
-    <fudis-checkbox
-      *ngFor="let option of options"
-      (handleChange)="checkboxChange($event)"
-      [control]="option.control"
-      [label]="option.label"
-    />
-  </fudis-checkbox-group>`,
-});
-
-export const ExampleWithoutFormGroup = ExampleWithoutFormGroupTemplate.bind({});
-ExampleWithoutFormGroup.args = {
-  label: 'Choose your preferred fruits',
-  helpText: 'This Checkbox Group has no App provided FormGroup.',
-  size: 'lg',
-  tooltip: 'Fruit sugar is great in small doces!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
+  initialFocus: false,
+  popoverText: 'You should have at least two contact methods in case one fails.',
+  popoverTriggerLabel: 'Additional information',
+  popoverPosition: 'right',
 };

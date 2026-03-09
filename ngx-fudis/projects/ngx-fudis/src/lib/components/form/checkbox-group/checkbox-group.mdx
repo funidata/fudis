@@ -1,0 +1,161 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { CheckboxGroupComponent } from "./checkbox-group.component";
+import { CheckboxGroupOptionComponent } from "./checkbox-group-option/checkbox-group-option.component";
+import * as CheckboxGroupStories from "./checkbox-group.stories";
+import { checkboxGroupExclude } from "../../../utilities/storybook";
+import * as VersionSelectorStories from "../../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Form/Checkbox Group" />
+
+# Checkbox Group
+
+CheckboxGroup is a form fieldset element constructing from `fieldset`, `legend` and `<input type="checkbox">` elements.
+
+It is built by using parent wrapper of CheckboxGroupComponent and adding CheckboxGroupOptionComponents as its children.
+
+## Parent CheckboxGroup
+
+CheckboxGroup's **required properties** are `formGroup` which is an Angular FormGroup typed object and `label` which is set as the fieldset legend.
+
+FormGroup must be built with Angular FormControls, which can have a type of `FormControl<boolean | null>`.
+
+Providing `formGroup` for the parent allows including [validators for the CheckboxGroup](#validators-with-form-group).
+
+## Child Checkbox
+
+Child checkbox's **required properties** are `controlName` and `label`. Checkbox's `controlName` must match with the corresponding control in the main `formGroup`.
+
+### Code Example
+
+```
+// In TypeScript file
+
+interface MyCheckboxGroup {
+  email: FormControl<boolean | null>;
+  sms: FormControl<boolean | null>;
+  phoneCall: FormControl<boolean | null>;
+}
+
+myFormGroup = new FormGroup<MyCheckboxGroup>(
+  {
+    email: new FormControl<boolean | null>(null),
+    sms: new FormControl<boolean | null>(null),
+    phoneCall: new FormControl<boolean | null>(null),
+  }
+);
+
+myOptions = [
+  {label: 'Email', controlName: 'email'},
+  {label: 'SMS', controlName: 'sms'},
+  {label: 'Phone call', controlName: 'phoneCall'},
+]
+
+// HTML template
+
+<fudis-checkbox-group
+  [formGroup]="myFormGroup"
+  [label]="'Select contact method'"
+  (handleChange)="handleChange($event)">
+  @for (option of myOptions; track option.controlName) {
+    <fudis-checkbox-group-option
+      [controlName]="option.controlName"
+      [label]="option.label"
+      (handleChange)="checkboxChange($event)" />
+    }
+</fudis-checkbox-group>
+```
+
+### Example
+
+<Canvas of={CheckboxGroupStories.Example} />
+
+## Validators with Form Group
+
+To use validators with CheckboxGroup, please provide `formGroup` property to it.
+
+When FormGroup has validation errors, the visual and screen reader attributes about invalid state is triggered when user blurs out first time outside of focusable options.
+
+### Required Validator
+
+To mark CheckboxGroup as a required field, include validator `FudisGroupValidators.oneRequired()` or `FudisGroupValidators.min()` in the validators array of `formGroup`.
+
+```
+// In TypeScript file
+
+myFormGroup = new FormGroup(
+  {
+  // controls
+  },
+  [FudisGroupValidators.oneRequired('At least one option must be selected.')]
+);
+
+
+// In HTML template
+
+<fudis-checkbox-group
+  [formGroup]="myFormGroup"
+  [label]="'Choose one option'"
+  >
+  // Checkboxes
+</fudis-checkbox-group>
+
+```
+
+### Minimum and Maximum Selection Validators
+
+If CheckboxGroup has minimum and/or maximum options to be selected, include `FudisGroupValidators.min` and/or `FudisGroupValidators.max` in the group validators.
+
+```
+// In TypeScript file
+
+myFormGroup = new FormGroup(
+  {
+    // controls
+  },
+  [
+    FudisGroupValidators.min({value: 2, message: 'Select at least two.'}),
+    FudisGroupValidators.max({value: 3, message: 'Too many selected. Three is the maximum.'})
+  ]
+);
+```
+
+## Handling Changes
+
+Both CheckboxGroup and Checkbox have `handleChange` output property.
+
+### Output for CheckboxGroup
+
+When clicking any of the child Checkboxes, the parent's property `handleChange` will emit an object with properties:
+
+- changedControlName: Name of the checkbox's control, which was clicked
+- formGroup: Current state of the Form Group
+
+### Output for Checkbox
+
+When clicking Checkbox, property `handleChange` will emit an object with properties:
+
+- checkbox: `FudisCheckboxGroupOption` typed object consisting of various data
+- control: Current Form Control of the Checkbox
+
+## Additional CheckboxGroup Inputs
+
+### Popover
+
+Popover can be included in the checkbox group fieldset with properties from [Popover Directive](/docs/directives-popover--documentation). It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information".
+
+## Accessibility
+
+- Fieldset has a legend as its first child element
+- When selection is mandatory, it is communicated with 'Required' text using validators
+- Checkbox options are grouped by name attribute
+- Guidance help text has been added to the Checkbox Group's legend element and made accessible to screen readers
+  > **Note! Help text should be brief**
+- Possible error messages are displayed after user blurs out from the whole checkbox group
+
+## Properties of CheckboxGroupComponent
+
+<ArgTypes of={CheckboxGroupComponent} exclude={checkboxGroupExclude} />
+
+## Properties of CheckboxGroupOptionComponent
+
+<ArgTypes of={CheckboxGroupOptionComponent} />

@@ -1,21 +1,25 @@
-<label class="fudis-label" [attr.for]="for" [id]="id">
-  <span class="fudis-label__content">
-    <span class="fudis-label__content__text">{{ text }}</span>
-    <span class="fudis-label__content__required" *ngIf="required"
-      >({{ _requiredText | async }})</span
-    >
-  </span>
-  <ng-container *ngIf="tooltip">
-    <fudis-button
+<!-- prettier-ignore -->
+<label #labelElementRef class="fudis-label" [attr.for]="for" [id]="id">
+  <div class="fudis-label__content"
+    ><span class="fudis-label__content__text"
+      >{{ text }}@if (required) {
+        <span class="fudis-label__content__space"></span>
+      }@if (required) {
+        <span class="fudis-label__content__required"
+          >({{ _translationService.getTranslations()().REQUIRED }})</span
+        >
+      }
+    </span>
+  </div>
+  @if (popoverText && popoverTriggerLabel) {
+    <fudis-icon-button
       class="fudis-label__content__button"
-      [size]="'icon-only'"
+      [size]="'extra-small'"
       [variant]="'tertiary'"
       [icon]="'info-circle'"
-      [labelHidden]="true"
-      [label]="tooltip"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
-    ></fudis-button>
-  </ng-container>
+      [ariaLabel]="popoverTriggerLabel"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+    />
+  }
 </label>

@@ -1,0 +1,34 @@
+import { Meta, ArgTypes, Canvas } from "@storybook/addon-docs/blocks";
+import { BodyTextComponent } from "./body-text.component";
+import * as BodyTextStories from "./body-text.stories.ts";
+import * as VersionSelectorStories from "../../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Typography/Body Text" />
+
+# Body Text
+
+Body Text Component is essentially a paragraph element which inherits Fudis font-family.
+
+There are five `variant` options available: `lg-regular`, `lg-light`, `md-regular`, `md-light` and `sm-regular`.
+
+## Usage Guidelines
+
+In addition to paragraph variant, Body Text can be modified through `align` property.
+
+```
+<fudis-body-text [align]="'center'" />
+```
+
+## Examples
+
+<Canvas of={BodyTextStories.AllVariants} />
+
+### Accessibility
+
+- Text color `#484848` passes WCAG AAA requirement against white `#FFFFFF` background
+  - Contrast ratio 9.1:1
+- The `lang` attribute is used for defining language for a different parts of text that differ from the current language of the page. This helps assistive technology such as screen readers to use correct pronunciation.
+
+## Properties
+
+<ArgTypes of={BodyTextComponent} />

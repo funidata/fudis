@@ -1,13 +1,13 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { BadgeComponent } from './badge.component';
-import readme from './readme.mdx';
+import docs from './badge.mdx';
 
 export default {
   title: 'Components/Badge',
   component: BadgeComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {
@@ -18,7 +18,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
 });
 
@@ -30,7 +30,7 @@ Example.args = {
   content: 'Badge text',
 };
 
-export const AllVariants: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
+export const AllVariants: StoryFn = (args) => ({
   ...args,
   template: html`
     <fudis-grid [rowGap]="'sm'">

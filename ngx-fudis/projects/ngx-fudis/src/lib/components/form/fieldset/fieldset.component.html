@@ -1,80 +1,56 @@
+<!-- prettier-ignore -->
 <div
   fudisGrid
   [align]="align"
   [width]="inputSize ? 'initial' : width"
   [serviceDefaults]="false"
   [rowGap]="'none'"
-  [marginBottom]="marginBottom"
-  [marginTop]="marginTop"
 >
-  <fieldset
-    [attr.id]="id"
-    [ngClass]="_classes"
-    [attr.aria-describedby]="describedbyId ? describedbyId : null"
-  >
-    <legend
-      #fieldsetLegend
-      class="fudis-fieldset__legend"
-      [class.fudis-fieldset__legend--focused]="_legendFocusVisible"
-      [attr.id]="id + '-legend'"
-      [tabIndex]="-1"
-      (focus)="_handleLegendFocus($event)"
-      (blur)="_handleLegendBlur()"
-    >
+  <fieldset [attr.id]="id" [tabIndex]="-1" [class]="_classes">
+    <legend class="fudis-fieldset__legend">
       <div
-        class="fudis-fieldset__legend__container"
-        [class.fudis-fieldset__legend__container__row-end]="_headerActions?.align === 'end'"
-        [class.fudis-fieldset__legend__container__column]="_headerActions?.align === 'bottom'"
-        [class.fudis-fieldset__legend__container__row-start]="_headerActions?.align === 'start'"
+        #fieldsetLegend
+        class="fudis-fieldset__legend__main fudis-fieldset__legend__{{ labelSize }}"
+        [class.fudis-fieldset__legend--focused]="_legendFocusVisible"
+        [attr.id]="id + '-legend'"
+        [tabIndex]="-1"
+        (focus)="_handleFocus($event)"
+        (blur)="_handleLegendBlur()"
       >
-        <div
-          class="fudis-fieldset__legend__title"
-          [class.fudis-fieldset__legend__title__with-inputs]="inputSize"
-          [class.fudis-fieldset__legend__title__margin-right]="_headerActions?.type === 'fieldset'"
-        >
+        <div class="fudis-fieldset__legend__main__text-content">
+          <span class="fudis-fieldset__legend__main__text"
+            >{{ label }}@if (required) {
+              <span class="fudis-fieldset__legend__main__space"></span>
+            }@if (required) {
+              <span class="fudis-fieldset__legend__main__required"
+                >({{ _translationService.getTranslations()().REQUIRED }})</span
+              >
+            }
+          </span>
           <div
-            class="fudis-fieldset__legend__title__main fudis-fieldset__legend__title__main__{{
-              labelSize
-            }}"
-          >
-            <span class="fudis-fieldset__legend__title__text"
-              >{{ label
-              }}<span *ngIf="required" class="fudis-fieldset__legend__title__text__required">
-                ({{ _requiredText | async }})</span
-              ></span
-            >
-            <ng-container *ngIf="tooltip">
-              <fudis-button
-                class="fudis-fieldset__legend__tooltip-button"
-                [size]="'icon-only'"
-                [variant]="'tertiary'"
-                [icon]="'info-circle'"
-                [labelHidden]="true"
-                [label]="tooltip"
-                [tooltip]="tooltip"
-                [tooltipPosition]="tooltipPosition"
-                [tooltipToggle]="tooltipToggle"
-              />
-            </ng-container>
-          </div>
-          <ng-container *ngIf="helpText">
-            <span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
-          </ng-container>
+            aria-hidden="true"
+            class="fudis-fieldset__legend__main__group-helptext fudis-visually-hidden"
+          ></div>
         </div>
-        <ng-container *ngIf="_headerActions?.type === 'fieldset'">
-          <div class="fudis-fieldset__legend__actions">
-            <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-          </div>
-        </ng-container>
+        @if (popoverText && popoverTriggerLabel) {
+          <fudis-icon-button
+            class="fudis-fieldset__legend__main__popover-button"
+            [size]="'extra-small'"
+            [variant]="'tertiary'"
+            [icon]="'info-circle'"
+            [popoverText]="popoverText"
+            [popoverPosition]="popoverPosition"
+            [ariaLabel]="popoverTriggerLabel"
+          />
+        }
       </div>
-      <ng-container *ngIf="_notifications?.type === 'fieldset'">
-        <div class="fudis-fieldset__legend__notifications">
-          <ng-container *ngTemplateOutlet="_notifications!.templateRef" />
-        </div>
-      </ng-container>
     </legend>
-    <ng-container *ngIf="_content?.type === 'fieldset'">
-      <ng-container *ngTemplateOutlet="_content!.templateRef" />
-    </ng-container>
+    @if (helpText) {
+      <fudis-body-text class="fudis-fieldset__help-text" [variant]="'sm-regular'">{{
+        helpText
+      }}</fudis-body-text>
+    }
+    <ng-content select="fudis-fieldset-actions"></ng-content>
+    <ng-content select="fudis-fieldset-content"></ng-content>
   </fieldset>
 </div>

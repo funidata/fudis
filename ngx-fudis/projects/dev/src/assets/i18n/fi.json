@@ -1,6 +1,8 @@
 {
+  "alertText": "Jotain kamalaa voipi tapahtua",
   "label": "Tämä on tekstikenttä",
   "change_language": "Vaihda kieli",
+  "popoverAria": "Lisätietoa",
   "helpText": "Kivaa jos näet minut suomeksi!",
   "required": "Pakollinen",
   "form_errors": {
@@ -21,7 +23,7 @@
   "chooseBerryError": "Ei lainkaan marjoja valittuna!",
   "chooseBerryErrorMin": "Ei riittävästi marjoja valittuna!",
   "chooseBerryErrorMax": "Liian monta marjaa valittuna!",
-  "chooseBerryTooltip": "Tällä checkbox-ryhmällä on useampi validaattori: pakollinen, min ja max",
+  "chooseBerryPopover": "Tällä checkbox-ryhmällä on useampi validaattori: pakollinen, min ja max",
   "chooseTruth": "Valitse totuus",
   "chooseTruthHelp": "Me kaikki ymmärrämme totuuden eri tavalla.",
   "chooseTruthError": "Totuus puuttuu!",
@@ -35,5 +37,13 @@
   },
   "closeCalendar": "Sulje kalenteri",
   "fieldsetTitle": "Tärkeän lomakeryhmän otsikko",
-  "breadcrumbsLabel": "Sekalaisen setin haitari"
+  "breadcrumbsLabel": "Sekalaisen setin haitari",
+  "selectOptions": {
+    "dog": "Koira",
+    "cat": "Kissa",
+    "penguin": "Pingviini",
+    "parrot": "Papukaija",
+    "sheep": "Lammas"
+  },
+  "notificationExternalLink": "Lue lisää tapahtuneesta virheestä"
 }

@@ -6,34 +6,29 @@ import {
   Input,
   Optional,
   ViewChild,
-  effect,
+  DOCUMENT,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
 import { SelectGroupComponent } from '../select-group/select-group.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
+import { FudisIdService } from '../../../../../services/id/id.service';
 
 @Directive({
   selector: '[fudisSelectOptionBase]',
+  standalone: false,
 })
-export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
+export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirective {
   constructor(
     @Inject(DOCUMENT) _document: Document,
     @Host() @Optional() protected _parentGroup: SelectGroupComponent,
+    protected _translationService: FudisTranslationService,
+    protected _idService: FudisIdService,
   ) {
     super(_document);
-
-    effect(() => {
-      const filterText = this._parent.getAutocompleteFilterText()();
-
-      if (this._parent.variant !== 'dropdown') {
-        this._isOptionVisible(filterText);
-      } else {
-        this._isOptionVisible('');
-      }
-    });
   }
 
   /**
@@ -46,7 +41,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Select option data
    */
-  @Input({ required: true }) data: FudisSelectOption<object>;
+  @Input({ required: true }) data: FudisSelectOption<T>;
 
   /**
    * State of option visibility
@@ -61,7 +56,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Common parent and its properties for both Select and Multiselect
    */
-  protected _parent: SelectComponent | MultiselectComponent;
+  protected _parent: SelectComponent<T> | MultiselectComponent<T>;
 
   /**
    * Get visibility status of this option
@@ -79,8 +74,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   }
 
   /**
-   * For autocompletes, compare if current filter text is contained in this option's label. If not, hide the option from the dropdown list.
-   * @param filterText autocomplete filter text from parent
+   * For autocompletes, compare if current filter text is contained in this option's label. If not,
+   * hide the option from the dropdown list.
+   *
+   * @param filterText Autocomplete filter text from parent
    */
   protected _isOptionVisible(filterText: string): void {
     if (this.data) {
@@ -113,12 +110,16 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
 
   /**
    * Handler for keydown keyboard events
+   *
    * @param event Keyboard event
    */
   protected _keyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
+    event.preventDefault();
+    if ((event.key === 'Enter' || event.key === ' ') && !this.data.disabled) {
       this._clickOption(event);
+    } else if (event.key === 'Tab') {
+      this._parent.focusToInput();
+      this._parent.closeDropdown();
     } else if (event.key !== ' ') {
       this._baseHandleKeyDown(event, this._optionInputRef, this._parent.focusSelector);
     }
@@ -126,6 +127,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
 
   /**
    * Handler for blurring out from focused option
+   *
    * @param event FocusEvent to emit
    */
   protected _blur(event: FocusEvent): void {
@@ -141,7 +143,15 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   }
 
   /**
-   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own implementations
+   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own
+   * implementations
+   */
+  // eslint-disable-next-line
+  protected _checkVisibilityFromFilterText(filterText: string): void {}
+
+  /**
+   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own
+   * implementations
    */
   // eslint-disable-next-line
   protected _clickOption(event: Event): void {}

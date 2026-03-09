@@ -1,13 +1,10 @@
 import { Injectable, Signal, signal } from '@angular/core';
-import { FudisTranslationConfig, FudisLanguageAbbr } from '../../types/miscellaneous';
-import { fi, sv, en } from './translationKeys';
-import { FudisInternalErrorSummaryService } from '../form/error-summary/internal-error-summary.service';
+import { FudisLanguageAbbr } from '../../types/miscellaneous';
+import { fi, sv, en, FudisTranslationConfig } from './translationKeys';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class FudisTranslationService {
-  constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
+  constructor() {}
 
   /**
    * Signal for Application's translation texts, default language for translations is English
@@ -25,11 +22,12 @@ export class FudisTranslationService {
   private _selectableLanguages = signal<FudisLanguageAbbr[]>(['fi', 'sv', 'en']);
 
   /**
-   * Set language of repeated texts Fudis uses for its components. E. g. 'required' text of form components or help texts for screen readers for various buttons.
-   * Also as Error Summary Component reloads its errors if error's language has changed, here is defined component to NOT focus to the updated list on only language change.
+   * Set language of repeated texts Fudis uses for its components. E. g. 'required' text of form
+   * components or help texts for screen readers for various buttons. Also as Error Summary
+   * Component reloads its errors if error's language has changed, here is defined component to NOT
+   * focus to the updated list on only language change.
    */
   public setLanguage(language: FudisLanguageAbbr): void {
-    this._errorSummaryService.focusToFormOnReload = null;
     this._appLanguage.set(language);
     if (language === 'en') {
       this._appTranslationsSignal.set({ ...en });

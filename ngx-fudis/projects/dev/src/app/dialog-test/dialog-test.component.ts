@@ -6,6 +6,7 @@ import { DialogTestContentComponent } from './dialog-test-content/dialog-test-co
   selector: 'app-dialog-test',
   template: '<button mat-button (click)="openDialog()">Open dialog</button>',
   styles: [],
+  standalone: false,
 })
 export class DialogTestComponent {
   constructor(public dialog: FudisDialogService) {}
@@ -14,7 +15,6 @@ export class DialogTestComponent {
     const ref = this.dialog.open(DialogTestContentComponent);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ref.afterClosed().subscribe((res: any) => {
-      // eslint-disable-next-line no-console
       console.log(res);
     });
   }

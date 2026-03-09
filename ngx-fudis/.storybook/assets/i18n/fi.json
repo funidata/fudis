@@ -1,0 +1,92 @@
+{
+  "formTitle": "Esimerkkilomake Error Summaryn kanssa",
+  "currentStrategy": "Nykyinen Error Summaryn päivitysstrategia on: ",
+  "errorSummaryTitle": "Voit vaihtaa virheiden päivitysstrategiaa alla olevasta painikkeesta",
+  "submit": "Lähetä",
+  "changeStrategy": "Vaihda Error Summaryn päivitysstrategiaa",
+  "changeLanguage": "Vaihda kieltä",
+  "sectionTitle1": "Lomakkeen osion otsikko",
+  "sectionTitle2": "Lisää tai poista Error Summaryn viestejä",
+  "fieldsetLegend": "Lomakeryhmän otsikko",
+  "fieldsetSelectLegend": "Pudotusvalikkokomponentteja",
+  "sectionHelptext1": "Seuraavat painikkeet vaihtavat manuaalisten Error Summaryn virheviestien näkyvyyttä",
+  "sectionHelptext2": "Virheet näytetään, kun Error Summary ladataan uudelleen.",
+  "customError1": "Tämä on ensimmäinen manuaalisesti Error Summaryyn lähetetty virheviesti",
+  "customError2": "Tämä on toinen manuaalinen virheviesti",
+  "customError1Show": "Näytä ensimmäinen virhe",
+  "customError2Show": "Näytä toinen virhe",
+  "customError1Hide": "Piilota ensimmäinen virhe",
+  "customError2Hide": "Piilota toinen virhe",
+  "selectedOption": "Valittu maskotti lomakekentän kontrollerissa",
+  "multiSelectedOption": "Valitut kurssin aiheet lomakekentän kontrollerissa",
+  "selectedNullOption": "Ei valintaa",
+  "selectOption": "Valinta",
+  "value": "Arvo",
+  "label": "Nimike",
+  "form": {
+    "teacherName": {
+      "label": "Vastuuopettaja",
+      "helpText": "Jonkun pitää olla vastuussa",
+      "errors": {
+        "required": "Vastuuopettajan nimi puuttuu"
+      }
+    },
+    "teacherEmail": {
+      "label": "Yhteyssähköposti",
+      "helpText": "Jotta opiskelijat voivat pyytää lisäaikaa kotitehtävilleen",
+      "errors": {
+        "required": "Yhteyssähköposti puuttuu",
+        "email": "Syötteen tulee olla sähköpostimuotoinen"
+      }
+    },
+    "courseType": {
+      "label": "Kurssin tyyppi",
+      "options": {
+        "basic": "Peruskurssi",
+        "advanced": "Jatkokurssi"
+      },
+      "errors": {
+        "required": "Kurssin tyyppi pitää olla valittuna."
+      }
+    },
+    "courseBooks": {
+      "label": "Kurssikirjat",
+      "helpText": "Valite 1-2 kurssikirjaa",
+      "options": {
+        "heir": "Imperiumin perillinen",
+        "dark": "Hämärän laivue",
+        "command": "Keisarin käsky"
+      },
+      "errors": {
+        "min": "Ei kurssikirjaa valittuna",
+        "max": "Liian monta kirjaa valittuna"
+      }
+    },
+    "startDate": {
+      "label": "Aloituspäivämäärä",
+      "helpText": "Jostain täytyy aloittaa",
+
+      "errors": {
+        "required": "Päivämäärä puuttuu"
+      }
+    },
+    "maskot": {
+      "label": "Kurssin maskotti",
+      "options": {
+        "option-1": "Grogu (Lapsi)",
+        "option-2": "R2-D2 (Astromekaanikkodroidi)",
+        "option-3": "Jabba the Hutt (Rikollispomo)"
+      }
+    },
+    "courseTopics": {
+      "label": "Kurssin aiheita",
+      "options": {
+        "option-1": "Korkeampi maankamara",
+        "option-2": "Rajaton voima",
+        "option-3": "Darth Jar Jar -teoria",
+        "option-4": "Kuolemantähden henkilöstöedut",
+        "option-5": "Darth Plagueis viisaan tragedia"
+      }
+    }
+  }
+}

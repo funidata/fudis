@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxFudisModule } from 'ngx-fudis';
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -12,7 +12,6 @@ import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppFormExampleComponent } from './components/formExamples.component';
-import { AppDropdownExamplesComponent } from './components/dropdownExamples.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 import { ExerciseComponent } from './exercise/exercise.component';
@@ -33,15 +32,14 @@ const appRoutes: Routes = [
     DialogTestContentComponent,
     DialogTestFormComponent,
     AppFormExampleComponent,
-    AppDropdownExamplesComponent,
   ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgxFudisModule,
+    NgxFudisModule.forRoot(),
     ScrollingModule,
-    HttpClientModule,
     TranslocoRootModule,
     RouterModule.forRoot(appRoutes),
   ],
@@ -54,7 +52,7 @@ const appRoutes: Routes = [
       provide: MAT_DIALOG_DATA,
       useValue: [],
     },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

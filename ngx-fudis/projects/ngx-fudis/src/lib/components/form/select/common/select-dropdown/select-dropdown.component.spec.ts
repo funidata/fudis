@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectDropdownComponent } from './select-dropdown.component';
-
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { FudisSelectVariant } from '../../../../../types/forms';
@@ -14,7 +13,8 @@ describe('SelectDropdownComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectDropdownComponent, BodyTextComponent],
+      declarations: [SelectDropdownComponent],
+      imports: [BodyTextComponent],
     });
     fixture = TestBed.createComponent(SelectDropdownComponent);
     component = fixture.componentInstance;
@@ -84,7 +84,7 @@ describe('SelectDropdownComponent', () => {
         const noResults = getElement(fixture, '.fudis-select-dropdown__help-text__last');
 
         expect(noResults.classList).toContain('fudis-select-dropdown__help-text--hidden');
-        expect(filterText).toEqual('Showing 42 results');
+        expect(filterText.trim()).toEqual('Showing 42 results');
       });
     });
 
@@ -105,7 +105,7 @@ describe('SelectDropdownComponent', () => {
         const filterText = getElement(fixture, '.fudis-select-dropdown__help-text__first');
 
         expect(filterText.classList).toContain('fudis-select-dropdown__help-text--hidden');
-        expect(noResults).toEqual('No results found');
+        expect(noResults.trim()).toEqual('No results found');
       });
     });
   });
@@ -150,58 +150,61 @@ describe('SelectDropdownComponent', () => {
         const noResults = getElement(fixture, '.fudis-select-dropdown__help-text__last');
 
         expect(noResults.classList).toContain('fudis-select-dropdown__help-text--hidden');
-        expect(helpText).toEqual('Hello from help text');
+        expect(helpText.trim()).toEqual('Hello from help text');
       });
     });
+  });
 
-    it('should have help text status for screen readers if filter text updates', () => {
-      component.results = 42;
-      component.open = true;
-      component.filterText = 'hello';
-      component.autocompleteHelpText = 'Hello from help text';
-      autocompleteVariants.forEach((variant) => {
-        component.selectVariant = variant;
+  describe('Screen reader properties', () => {
+    it('should have results status for screen readers if filter text updates', () => {
+      fixture.componentRef.setInput('results', 42);
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+
+      for (const variant of autocompleteVariants) {
+        fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
 
         const helpText = getElement(fixture, '.fudis-visually-hidden');
 
-        expect(helpText).toBeNull();
-
-        setTimeout(() => {
-          fixture.detectChanges();
-
-          const helpTextAfterDelay = getElement(fixture, '.fudis-visually-hidden');
-
-          expect(helpTextAfterDelay.getAttribute('role')).toEqual('alert');
-
-          expect(helpTextAfterDelay.textContent).toEqual('Hello from help text');
-        }, 500);
-      });
+        expect(helpText).not.toBeNull(); // Aria live region is always in the DOM
+        expect(helpText.getAttribute('role')).toEqual('status');
+        expect(helpText.textContent).toEqual('Showing 42 results');
+      }
     });
 
     it('should have no results status for screen readers if filter text updates', () => {
-      component.results = 0;
-      component.open = true;
-      component.filterText = 'hello';
-      component.autocompleteHelpText = 'Hello from help text';
-      autocompleteVariants.forEach((variant) => {
-        component.selectVariant = variant;
+      fixture.componentRef.setInput('results', 0);
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+
+      for (const variant of autocompleteVariants) {
+        fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
 
         const helpText = getElement(fixture, '.fudis-visually-hidden');
 
-        expect(helpText).toBeNull();
+        expect(helpText).not.toBeNull(); // Aria live region is always in the DOM
+        expect(helpText.getAttribute('role')).toEqual('status');
+        expect(helpText.textContent).toEqual('No results found');
+      }
+    });
 
-        setTimeout(() => {
-          fixture.detectChanges();
+    it('should not announce results to screen reader if dropdown is closed', () => {
+      fixture.componentRef.setInput('results', 42);
+      fixture.componentRef.setInput('open', false);
+      fixture.componentRef.setInput('filterText', 'hello');
 
-          const helpTextAfterDelay = getElement(fixture, '.fudis-visually-hidden');
+      for (const variant of autocompleteVariants) {
+        fixture.componentRef.setInput('selectVariant', variant);
+        fixture.detectChanges();
 
-          expect(helpTextAfterDelay.getAttribute('role')).toEqual('alert');
+        const helpText = getElement(fixture, '.fudis-visually-hidden');
 
-          expect(helpTextAfterDelay.textContent).toEqual('No results found');
-        }, 500);
-      });
+        expect(helpText).not.toBeNull(); // Aria live region is always in the DOM
+        expect(helpText.getAttribute('role')).toEqual('status');
+        expect(helpText.textContent).toEqual(''); // Empty string with no announcement to screen reader
+      }
     });
   });
 });

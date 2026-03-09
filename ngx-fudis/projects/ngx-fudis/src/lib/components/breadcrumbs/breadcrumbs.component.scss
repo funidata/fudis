@@ -1,42 +1,10 @@
-@use "../../foundations/typography/mixins.scss" as typography;
-@use "../../foundations/spacing/tokens.scss" as spacing;
-@use "../../foundations/utilities/mixins.scss" as utilities;
+@use '@funidata/fudis-core' as core;
 
-.fudis-breadcrumbs {
-  @include typography.body-text-md-regular;
-  @include utilities.box-reset;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: spacing.$spacing-md;
-  list-style: none;
-
-  /*
-	* Following CSS rules targets all child Breadcrumbs Item components and
-	* - From all but last one hide the body text element
-	* - From last one display body text element, and hide link and icon
-	*/
-
-  &-item-host {
-    &:not(:last-of-type) {
-      .fudis-breadcrumbs-item {
-        &__current {
-          display: none;
-        }
-      }
-    }
-
-    &:last-of-type {
-      .fudis-breadcrumbs-item {
-        &__current {
-          display: block;
-        }
-
-        &__link,
-        &__icon {
-          display: none;
-        }
+.fudis-breadcrumbs-item-host {
+  &:last-of-type {
+    .fudis-breadcrumbs-item {
+      &__icon {
+        display: none;
       }
     }
   }

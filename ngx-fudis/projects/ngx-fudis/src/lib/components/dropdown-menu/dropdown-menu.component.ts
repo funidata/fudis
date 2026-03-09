@@ -6,39 +6,56 @@ import {
   HostListener,
   Inject,
   Input,
-  OnInit,
+  OnDestroy,
   ViewChild,
   ViewEncapsulation,
+  DOCUMENT,
 } from '@angular/core';
 
 import { FudisIdService } from '../../services/id/id.service';
 import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropdown-base.directive';
-import { ButtonComponent } from '../button/button.component';
-import { DOCUMENT } from '@angular/common';
-import { FudisInputSize } from '../../types/forms';
-import { Subject } from 'rxjs';
-import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 
+import { FudisInputSize } from '../../types/forms';
+import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
+import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
+import { Subscription } from 'rxjs';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { FudisDialogService } from '../../services/dialog/dialog.service';
+
+/**
+ * Displays a list of actions in a collapsible menu.
+ *
+ * Use this component to group secondary or contextual actions.
+ */
 @Component({
   selector: 'fudis-dropdown-menu',
   templateUrl: './dropdown-menu.component.html',
   styleUrls: ['./dropdown-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
-export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit {
+export class DropdownMenuComponent extends DropdownBaseDirective implements OnDestroy {
   constructor(
     private _idService: FudisIdService,
+    private _dropdownEventService: DropdownEventService,
+    private _dialogService: FudisDialogService,
     @Inject(DOCUMENT) private _document: Document,
-    @Host() private _parentButton: ButtonComponent,
+    @Host() private _parentButton: IconButtonComponent,
   ) {
     super();
 
     /**
+     * Generate id in constructor for it to be accessible to child elements, and set it to parent
+     * button's dropdownMenuId property for aria-controls
+     */
+    this.id = this._idService.getNewGrandParentId('dropdown-menu');
+    if (this._parentButton) this._parentButton.dropdownMenuId = this.id;
+
+    /**
      * Fire maxWidth calculation through Observable call from parent Button
      */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    DropdownMenuComponent.fireMaxWidthCalcEvent.subscribe((res) => {
+    this._subscription = this._dropdownEventService.triggerCalculation.subscribe(() => {
       this._getMaxWidth();
     });
   }
@@ -59,11 +76,6 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   @Input() size: FudisInputSize = 'lg';
 
   /**
-   * Dropdown Menu's max width calculation observable
-   */
-  public static fireMaxWidthCalcEvent: Subject<boolean> = new Subject();
-
-  /**
    * Determine dropdown max-width
    */
   protected _maxWidth: string = 'initial';
@@ -72,6 +84,11 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
    * Currently focused option
    */
   private _focusedOption: string | null = null;
+
+  /**
+   * Subscription for dropdown width calculation event
+   */
+  private _subscription: Subscription;
 
   /**
    * Add or remove currently focused option. Called from DropdownMenuItem.
@@ -91,8 +108,9 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
   /**
    * Check if focus is inside the Dropdown Menu component
-   * @param event focus event
-   * @returns boolean
+   *
+   * @param event Focus event
+   * @returns Boolean
    */
   private _componentFocused(event: FocusEvent): Promise<boolean> {
     return new Promise((resolve) => {
@@ -134,17 +152,26 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   /**
    * Host Listener for dropdown's width, it needs to be wider than its Button parent
    */
-  @HostListener('window:click', ['$event'])
-  private _getMaxWidth(): void {
+  @HostListener('window:click')
+  protected _getMaxWidth(): void {
+    const fontSize = Number(
+      window.getComputedStyle(this._document.body).getPropertyValue('font-size').replace('px', ''),
+    );
+
     const elementInViewWidth =
       this._dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.width;
 
+    // Left boundary edge of the element in the viewport
     const elementInViewX = this._dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.x;
 
     if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
-      this._maxWidth = `${elementInViewWidth + elementInViewX}px`;
-    } else if (window?.innerWidth && elementInViewX) {
-      this._maxWidth = `${window.innerWidth - elementInViewX}px`;
+      const viewWidthAndViewXInRem = `${(elementInViewWidth + elementInViewX) / fontSize}rem`;
+      this._maxWidth = 'calc(' + viewWidthAndViewXInRem + '/ var(--fudis-rem-multiplier))';
+    } else if (window?.visualViewport?.width && elementInViewX) {
+      // elementInViewX + 1 is a hack for Firefox. In desktop mode (but in small screen) the dropdown menu's right border did not show.
+      // TODO: This could be improved if better solution comes to mind.
+      const viewportWidthAndViewXInRem = `${(window.visualViewport.width - (elementInViewX + 1)) / fontSize}rem`;
+      this._maxWidth = 'calc(' + viewportWidthAndViewXInRem + '/ var(--fudis-rem-multiplier))';
     } else {
       this._maxWidth = 'initial';
     }
@@ -154,7 +181,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
    * Host Listener for keydown events, especially Arrow Down and Escape from Dropdown Menu
    */
   @HostListener('window:keydown', ['$event'])
-  private _handleDropdownMenuKeyDown(event: KeyboardEvent) {
+  protected _handleDropdownMenuKeyDown(event: KeyboardEvent) {
     if (this._parentButton.dropdownOpen.value) {
       if (event.key === 'ArrowDown') {
         event.preventDefault();
@@ -163,7 +190,7 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
 
         // If focus is on the menu button, only then listen keydown and focus on the first child
         if (
-          firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') ===
+          firstChildElement.closest('fudis-icon-button')?.querySelector('.fudis-button') ===
           document.activeElement
         ) {
           const firstChildButtonElement = firstChildElement.querySelector('button');
@@ -174,12 +201,13 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
       if (event.key === 'Escape') {
         event.preventDefault();
         event.stopPropagation();
+        this._dialogService.dropdownClosedWithEscape();
         this._parentButton.closeMenu();
       }
     }
   }
 
-  ngOnInit(): void {
-    this.id = this._idService.getNewGrandParentId('dropdown-menu');
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
   }
 }

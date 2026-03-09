@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "mdx"],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
@@ -9,8 +9,19 @@
     "../src/test.ts",
     "../src/**/*.spec.ts",
     "../projects/**/*.spec.ts",
-    "../projects/dev/**/*"
+    "../projects/dev/**/*",
+    "../projects/ngx-fudis/schematics/ng-add/index.ts",
+    "../projects/ngx-fudis/setup-jest.ts",
+    "../projects/ngx-fudis/src/lib/services/id/testData.ts",
+    "../projects/ngx-fudis/src/lib/utilities/tests/utilities.ts",
+    "../projects/ngx-fudis/src/public-api.ts"
   ],
-  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"],
-  "files": ["./typings.d.ts"]
+  "include": [
+    "../src/**/*",
+    "../projects/**/*",
+    "../stories/**/*",
+    "transloco.module.ts",
+    "docs/CustomDocsContainer.tsx",
+    "docs/VersionSelectorDocsWrapper.tsx"
+  ]
 }

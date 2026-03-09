@@ -2,9 +2,9 @@ import test, { expect } from "@playwright/test";
 
 test("grid basic with tweaked aligns", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=columns:1fr%201fr;align:end;alignItemsX:center;alignItemsY:center;&id=components-grid-grid--example&viewMode=story",
+    "/iframe.html?globals=&args=&id=components-test-playground--grid-collection&viewMode=story",
   );
-  await expect(page).toHaveScreenshot("grid-basic.png");
+  await expect(page).toHaveScreenshot("grid-basics.png", { fullPage: true });
 });
 
 test("grid min-content", async ({ page }) => {
@@ -36,4 +36,11 @@ test("grid with service", async ({ page }) => {
   await expect(page).toHaveScreenshot("grid-with-service-2.png");
   await page.getByTestId("fudis-button-2").click();
   await expect(page).toHaveScreenshot("grid-with-service-3.png");
+});
+
+test("grid with flexbox", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?globals=&args=&id=components-grid-grid--with-flexbox&viewMode=story",
+  );
+  await expect(page).toHaveScreenshot("grid-with-flexbox.png", { fullPage: true });
 });

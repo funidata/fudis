@@ -1,0 +1,154 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { linkTo } from "@storybook/addon-links";
+import { DescriptionListComponent } from "./description-list.component.ts";
+import * as DescriptionListStories from "./description-list.stories.ts";
+import { Source } from "@storybook/addon-docs/blocks";
+import {
+  descriptionListArgsTypesExclude,
+  descriptionListItemArgTypesExclude,
+} from "../../utilities/storybook.ts";
+import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
+import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
+import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
+
+<Meta title="Components/Description List" />
+
+# Description List Component
+
+Description List displays a list of key value pairs and has two different list variants: `regular` and `compact`.
+
+## Usage Guidelines
+
+### Text Content
+
+Term and Details content is passed through `contentText` Input property.
+
+<Source
+  code={`
+<fudis-dt [contentText]="'This is Term element text'" />
+<fudis-dd [contentText]="'Here is the Details element text'" />`}
+/>
+
+**Note!** Although with Details element it also works, that content is just passed between `<fudis-dd>` tags, it is primarily used for nesting additional content e.g. another list or a button.
+
+### Details Subheading
+
+Details element has also `subHeading` Input for adding optional sub-heading between Term and Details elements. Single Description List Item can have multiple Details elements if necessary.
+
+<Source
+  code={`
+<fudis-dl>
+  <fudis-dl-item>
+  <fudis-dt [contentText]="'I am the main Term text content'" />
+  <fudis-dd [subHeading]="'I am Details Sub heading'" [contentText]="'I am first Details element'" />
+  <fudis-dd [contentText]="'I am second Details element'" />
+</fudis-dl-item>
+</fudis-dl>`}
+/>
+
+### Tag Selection
+
+By default Description List Component, as its name suggests, renders a `<dl>` tag with child `<dt>` and `<dd>` tags. If you have only one item in your list, it is adviced to change `tag` property to `p`. When set, the component will render a paragraph element instead of a list.
+
+<Source
+  code={`
+<fudis-dl [tag]="'p'">
+  <fudis-dl-item>
+    <fudis-dt [contentText]="'Single Item Key'"/>
+    <fudis-dd [contentText]="'And value for that'"/>
+  </fudis-dl-item>
+</fudis-dl>`}
+/>
+
+## Managing Layout
+
+By default Description List uses Grid Directive under the hood and the component accepts multiple inputs from Grid API. For full list see [Properties](#description-list-properties) table. Grid can be disabled in Description List by setting `disableGrid` as true.
+
+Add margins and paddings to the dl element by adding `classes` with desired Core spacing helper classes, e.g.
+
+<Source
+  code={`
+  <fudis-dl [classes]="'fudis-mt-xl fudis-pl-md'">...</fudis-dl>`}
+/>
+
+## Examples
+
+### Regular Variant
+
+<Canvas of={DescriptionListStories.DescriptionList} />
+
+### Compact Variant
+
+<Canvas of={DescriptionListStories.DescriptionListCompact} />
+
+### Empty State
+
+When Details has no relevant data, set `emptyState` to `true` in order to display visually different content with default text. The text can be altered via `emptyStateContentText` if needed.
+
+<Canvas of={DescriptionListStories.EmptyState} />
+
+### Nesting Lists and Sub-Components
+
+When nesting Description List as sublist, the nested one should have `variant` set to `compact`.
+
+<Canvas of={DescriptionListStories.NestedDescriptionLists} />
+
+[Popover](/docs/directives-popover--documentation) can be added to Description List Item Term (`<fudis-dt>`) element by using `popoverText` and `popoverPosition` (optional) properties. It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information". While it works on both Description List variants, it is designed to be used only with **regular** variant.
+
+Also, it is possible to incluce e.g. [Button Component](/docs/components-button--documentation) or other interactive elements inside Description List Item Details (`<fudis-dd>`). The following example displays, how button is used inside the Description List in various ways.
+Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
+
+<Canvas of={DescriptionListStories.NestedSubComponents} />
+
+### With Language Badge Group
+
+Description List with [Language Badge Group](/docs/components-language-badge-group--documentation) displays Term element with clickable language badges. Clicking a badge sets Details content visible, which have corresponding language set. While it works on both Description List variants, Language Badge Group is designed to be used only with **regular** variant.
+
+By default Language Badge Group always displays badges for Finnish, Swedish and English, in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()`.
+Check documentation at [FudisTranslationService](/docs/services-translation--documentation#translation-service).
+
+Set `<fudis-dd>` element's `lang` attribute to tell which translation it represents.
+
+<Source
+  code={`
+<fudis-dl>
+  <fudis-dl-item>
+    <fudis-dt [contentText]="'Example Languages'" />
+    <fudis-dd [lang]="'en'" [contentText]="'This is in English'" />
+    <fudis-dd [lang]="'fi'" [contentText]="'Tämä on suomeksi'" />
+    <fudis-dd [lang]="'sv'" [contentText]="'Den här är på Svenska'" />
+  </fudis-dl-item>
+</fudis-dl>`}
+/>
+
+Description List components communicate with each other and automatically define Language Badge Group visibility. Each button, for each of the languages set in `setSelectableLanguages()`, is themed properly according to provided languages in Details components.
+
+<Canvas of={DescriptionListStories.WithLanguageBadges} />
+
+### Accessibility
+
+- Description List component wraps list content into `dl` element
+- Each description term is contained within a `dt` element
+- Each description details is contained in one or more `dd` element
+- `dd` elements are placed directly after `dt` element
+- Translated `dd` content is marked with a correct language attribute
+
+### Related components / directives / services
+
+- [Grid](/docs/components-grid-grid--example)
+- [Icon](/docs/components-icon--icon)
+- [Button](/docs/components-button--button)
+- [Language Badge Group](/docs/components-language-badge-group--documentation)
+- [FudisTranslationService](/docs/services-translation--documentation#translation-service)
+
+## Description List Properties
+
+<ArgTypes of={DescriptionListComponent} exclude={descriptionListArgsTypesExclude} />
+
+## Description List Item Term Properties
+
+<ArgTypes of={DescriptionListItemTermComponent} />
+
+## Description List Item Details Properties
+
+<ArgTypes of={DescriptionListItemDetailsComponent} exclude={descriptionListItemArgTypesExclude} />

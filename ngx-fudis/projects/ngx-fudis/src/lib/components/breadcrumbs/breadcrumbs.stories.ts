@@ -1,19 +1,13 @@
-import { RouterTestingModule } from '@angular/router/testing';
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
-import readme from './readme.mdx';
+import docs from './breadcrumbs.mdx';
 
 export default {
   title: 'Components/Breadcrumbs',
   component: BreadcrumbsComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [RouterTestingModule],
-    }),
-  ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
 } as Meta;
@@ -27,18 +21,22 @@ const links = [
   { label: 'UCS Imperial Star Destroyer\u{2122}', url: '/my-legos/genre/star-wars/set-75252' },
 ];
 
-const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => ({
+const Template: StoryFn = (args) => ({
   props: {
     ...args,
     links,
   },
   template: html`
     <fudis-breadcrumbs [label]="label">
-      <fudis-breadcrumbs-item
-        *ngFor="let link of links"
-        [label]="link.label"
-        [url]="link.url"
-      ></fudis-breadcrumbs-item>
+      @for (link of links; track link.url; let index = $index) {
+      <fudis-breadcrumbs-item>
+        @if (index + 1 !== links.length) {
+        <a [href]="link.url">{{ link.label }}</a>
+        } @if (index + 1 === links.length) {
+        <fudis-body-text>{{ link.label }}</fudis-body-text>
+        }
+      </fudis-breadcrumbs-item>
+      }
     </fudis-breadcrumbs>
   `,
 });

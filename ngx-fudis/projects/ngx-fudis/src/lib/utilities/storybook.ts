@@ -1,8 +1,8 @@
 /**
  * Targets strings which start with underscore or with 'ng'. E.g. _internalStuff or ngOnInit.
  *
- * This has been set as default value for Storybook stories controls in preview.js
- * If you need to append the list, just provide a string[] with list of props to exclude.
+ * This has been set as default value for Storybook stories controls in preview.js If you need to
+ * append the list, just provide a string[] with list of props to exclude.
  */
 
 export const excludeRegex = (array?: string[]): RegExp => {
@@ -16,7 +16,8 @@ export const excludeRegex = (array?: string[]): RegExp => {
 };
 
 /**
- * Regex for excluding everything except given strings. E. g. to exclude everything but marginTop and variant properties: excludeEverythingExceptRegex(['marginTop', 'variant'])
+ * Regex for excluding everything except given strings. E. g. to exclude everything but variant
+ * property: excludeEverythingExceptRegex(['variant'])
  */
 export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
   const joined: string | null = array ? array.join('|') : null;
@@ -31,80 +32,130 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 export const excludeAllRegex: RegExp = /.*/;
 
 /**
+ * Common Form Component excludes
+ */
+const formCommonControlsExclude: string[] = [
+  'control',
+  'group',
+  'handleFocus',
+  'handleKeyUp',
+  'handleViewInit',
+  'handleChange',
+  'handleBlur',
+  'focusToInput',
+  'onFocus',
+  'id',
+  'formGroup',
+  'ariaLabel',
+  'disableGuidance',
+  'errorSummaryReloadOnInit',
+  'disabled',
+  'nullControlOnEmptyString',
+  'initialFocus',
+];
+
+/**
+ * Common Form Component excludes
+ */
+const formCommonDocsExclude: string[] = ['onFocus', 'focusToInput'];
+
+/**
+ * Alert
+ */
+export const alertGroupExclude: RegExp = excludeRegex(['insideDialog', 'getVisibleStatus']);
+
+/**
  * Button
  */
 const buttonCommonExclude: string[] = [
   'dropdownMenuId',
   'dropdownOpen',
   'buttonEl',
-  'handleBlur',
   'buttonClick',
   'closeMenu',
   'toggleMenu',
+  'popoverTriggerLabel',
+  'popoverPosition',
+  'popoverText',
 ];
 
 export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
 
 export const buttonControlsExclude: RegExp = excludeRegex([
   ...buttonCommonExclude,
+  'ariaLabel',
+  'id',
+  'handleBlur',
   'handleClick',
-  'labelHidden',
+  'asMenuButton',
+  'type',
+  'handleFocus',
+  'handleDestroy',
 ]);
 
-export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclude, 'handleClick']);
+export const buttonIconOnlyExclude: RegExp = excludeRegex([
+  ...buttonCommonExclude,
+  'id',
+  'handleBlur',
+  'handleClick',
+  'asMenuButton',
+  'type',
+  'handleFocus',
+  'handleDestroy',
+]);
 
 /**
- * CheckboxGroup and Checkbox
+ * Checkbox
  */
-export const checkboxGroupExclude: RegExp = excludeRegex([
+export const checkboxExclude: RegExp = excludeRegex([
+  ...formCommonDocsExclude,
   'groupBlurredOut',
   'setGroupBlurredOut',
-  'titleVariant',
+  'triggerEmit',
+  'disableGuidance',
+  'helpText',
+  'popoverPosition',
+  'popoverText',
+  'popoverTriggerLabel',
+  'ariaLabel',
+]);
+
+/**
+ * CheckboxGroup and CheckboxGrouOption
+ */
+export const checkboxGroupExclude: RegExp = excludeRegex([
+  ...formCommonDocsExclude,
+  'groupBlurredOut',
+  'setGroupBlurredOut',
   'triggerEmit',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
-  'groupBlurredOut',
+  ...formCommonControlsExclude,
   'setGroupBlurredOut',
-  'titleVariant',
-  'handleChange',
-  'id',
-  'formGroup',
   'triggerEmit',
-  'errorSummaryReloadOnInit',
 ]);
 
 /**
- * Datepicker and Date-range
+ * Datepicker and Date Range
  */
 const datepickerCommonExcludes: string[] = [
-  'control',
-  'ariaLabel',
-  'disableGuidance',
-  'initialFocus',
-  'invalidState',
-  'id',
-  'errorSummaryReloadOnInit',
-  'handleBlur',
-  'handleKeyUp',
-  'parseDateValidator',
+  ...formCommonControlsExclude,
   'endDateError',
   'startDateError',
+  'dateFilter',
 ];
 
 export const datepickerControlsExclude: RegExp = excludeRegex([
   ...datepickerCommonExcludes,
-  'focusToInput',
-  'onBlur',
+  'dateRangeType',
 ]);
 
-export const datepickerExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
+export const datepickerExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
 
-export const daterangeExclude: RegExp = excludeRegex([
-  'endDate',
-  'startDate',
-  'id',
-  'initialFocus',
+export const dateRangeExclude: RegExp = excludeRegex([
+  'checkDateCrossings',
+  'showDateComparisonErrors',
 ]);
 
 /**
@@ -121,8 +172,6 @@ const descriptionListCommonExclude: string[] = [
   'columns',
   'id',
   'serviceDefaults',
-  'marginBottom',
-  'marginTop',
   'rowGap',
   'tag',
   'width',
@@ -135,9 +184,16 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'serviceDefaults',
 ]);
 
+export const descriptionListItemArgTypesExclude: RegExp = excludeRegex(['hostClass']);
+
 export const nestedDescriptionListExclude: RegExp = excludeRegex([
   ...descriptionListCommonExclude,
   'variant',
+]);
+
+export const descriptionListEmptyState: RegExp = excludeRegex([
+  ...descriptionListCommonExclude,
+  'disableGrid',
 ]);
 
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
@@ -146,6 +202,8 @@ export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCo
  * Dialog
  */
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
+
+export const dialogContentExclude: RegExp = excludeRegex(['hostClass']);
 
 /**
  * Dropdown Menu and Dropdown Menu Item
@@ -172,9 +230,14 @@ export const dropdownMenuItemExclude: RegExp = excludeRegex([
 ]);
 
 /**
- * Error Message and Error Summary
+ * Error Message
  */
 export const errorMessageExclude: RegExp = excludeRegex(['handleAddError', 'handleRemoveError']);
+
+/**
+ * Error Summary
+ */
+export const errorSummaryExclude: RegExp = excludeRegex(['handleErrorClick']);
 
 /**
  * Expandable
@@ -194,7 +257,23 @@ export const expandableControlExclude: RegExp = excludeRegex([
   ...expandableCommonExclude,
   'closedChange',
   'errorSummaryBreadcrumb',
+  'openOnErrorSummaryReload',
 ]);
+
+export const expandableLiteExclude: RegExp = excludeRegex([
+  ...expandableCommonExclude,
+  'closedChange',
+  'errorSummaryBreadcrumb',
+  'openOnErrorSummaryReload',
+  'subTitle',
+  'badge',
+  'badgeText',
+]);
+
+/**
+ * Fieldset
+ */
+export const fieldsetExclude: RegExp = excludeRegex(['hostClass']);
 
 /**
  * Form
@@ -207,9 +286,9 @@ export const formExclude: RegExp = excludeRegex([
   'classes',
   'columnGap',
   'columns',
-  'marginBottom',
-  'marginTop',
+  'handleUpdatedErrorList',
   'rowGap',
+  'serviceDefaults',
   'width',
 ]);
 
@@ -223,7 +302,29 @@ export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefau
 /**
  * Heading
  */
-export const headingControlsExclude: RegExp = excludeRegex(['id']);
+export const headingControlsExclude: RegExp = excludeRegex(['id', 'headingRef']);
+
+/**
+ * Icon
+ */
+export const iconExclude: RegExp = excludeRegex(['elementRef']);
+
+/**
+ * Language Badge Group
+ */
+const languageBadgeGroupCommonExclude: string[] = [
+  'popoverPosition',
+  'popoverText',
+  'popoverTriggerLabel',
+  'invalidOptions',
+];
+
+export const languageBadgeGroupExclude: RegExp = excludeRegex([...languageBadgeGroupCommonExclude]);
+
+export const languageBadgeGroupControlsExclude: RegExp = excludeRegex([
+  ...languageBadgeGroupCommonExclude,
+  'handleClick',
+]);
 
 /**
  * Link
@@ -238,9 +339,90 @@ export const linkExclude: RegExp = excludeRegex([
 ]);
 
 /**
+ * LocalizedTextGroup
+ */
+export const LocalizedTextGroupStoryExclude: RegExp = excludeRegex([
+  ...formCommonControlsExclude,
+  'options',
+]);
+
+export const LocalizedTextGroupDocsExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
+
+/**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex(['link', 'linkTitle', 'externalLink']);
+export const notificationExclude: RegExp = excludeRegex([
+  'articleElement',
+  'focus',
+  'ariaDescribedby',
+]);
+
+export const notificationArgsTableExclude: RegExp = excludeRegex(['articleElement', 'focus']);
+
+/**
+ * Pagination
+ */
+export const paginationCommonExclude: string[] = [
+  'itemList',
+  'hasUserChangedPage',
+  'goToPage',
+  'observer',
+  'prevPageIndex',
+  'range',
+  'userSelectedIndex',
+  'pageHref',
+  'siblingCount',
+  'createPaginationItemList',
+  'activeItemRef',
+];
+export const paginationArgsTableExclude: RegExp = excludeRegex([...paginationCommonExclude]);
+
+export const paginationControlsExclude: RegExp = excludeRegex([
+  ...paginationCommonExclude,
+  'id',
+  'pageChange',
+]);
+
+/**
+ * Popover
+ */
+export const popoverExclude: RegExp = excludeRegex([
+  'id',
+  'popoverTriggerLabel',
+  'handleClick',
+  'handleBlur',
+  'handleDestroy',
+  'handleFocus',
+  'buttonEl',
+  'label',
+  'ariaLabel',
+  'disabled',
+  'icon',
+  'iconRotate',
+  'size',
+  'type',
+  'variant',
+  'buttonClick',
+  'toggleMenu',
+  'closeMenu',
+  'dropdownOpen',
+  'clickSubscription',
+  'keydownSubscription',
+  'scrollSubscription',
+]);
+
+/**
+ * Radio Button Group
+ */
+export const radioButtonGroupControlsExclude: RegExp = excludeRegex([
+  ...formCommonControlsExclude,
+  'triggerEmit',
+]);
+
+export const radioButtonGroupExclude: RegExp = excludeRegex([
+  ...formCommonDocsExclude,
+  'triggerEmit',
+]);
 
 /**
  * Section
@@ -250,10 +432,8 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
 /**
  * Select and Multiselect
  */
-
 export const selectArgsTableExclude: RegExp = excludeRegex([
   'componentFocused',
-  'translationOptionDisabledText',
   'setFocusedOption',
   'autocompleteRef',
   'focusSelector',
@@ -261,84 +441,103 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'getAutocompleteFilterText',
   'closeDropdown',
   'openDropdown',
+  'selectCVA',
   'setOptionVisibility',
   'focusToInput',
-  'onBlur',
   'handleCheckedSort',
   'handleMultiSelectionChange',
 ]);
 
 export const selectStoryControlExclude: RegExp = excludeRegex([
-  'control',
-  'autocomplete',
-  'ariaLabel',
-  'disableGuidance',
-  'id',
-  'initialFocus',
-  'invalidState',
-  'tooltip',
-  'tooltipPosition',
-  'tooltipToggle',
-  'classes',
-  'focusSelector',
+  ...formCommonControlsExclude,
+  'autocompleteFilter',
+  'autocompleteHelpText',
+  'autocompleteNoResultsText',
   'selectionUpdate',
-  'handleBlur',
-  'handleCheckedSort',
-  'handleMultiSelectionChange',
+  'filterTextUpdate',
+  'focusSelector',
+  'visibleOptionsUpdate',
+  'handleSelectionChange',
+  'clearParentOptionVisibility',
   'closeDropdown',
+  'componentFocused',
   'getAutocompleteFilterText',
   'openDropdown',
+  'popoverText',
+  'popoverPosition',
+  'popoverTriggerLabel',
+  'selectCVA',
+  'selectedOptionsFromLangChange',
+  'setAutocompleteFilterText',
+  'setFocusedOption',
   'setOptionVisibility',
-  'focusToInput',
-  'onBlur',
-  'translationOptionDisabledText',
-  'handleSelectionChange',
+  'autocompleteRef',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
   'handleChecked',
   'handleClick',
   'checked',
   'close',
-  'errorSummaryReloadOnInit',
-  'handleKeyUp',
-  'componentFocused',
-  'setFocusedOption',
-  'autocompleteRef',
-  'filterTextUpdate',
-  'visibleOptionsUpdate',
 ]);
 
 /**
- * Text Input
+ * Spacing
  */
-export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
-
-export const textInputControlsExclude: RegExp = excludeRegex([
-  'control',
-  'focusToInput',
-  'handleBlur',
-  'onBlur',
+export const spacingExclude: RegExp = excludeRegex([
   'ariaLabel',
-  'disableGuidance',
-  'id',
-  'initialFocus',
-]);
-
-/**
- * Tooltip
- */
-export const tooltipExclude: RegExp = excludeRegex([
+  'asMenuButton',
+  'buttonClick',
+  'buttonEl',
+  'closeMenu',
+  'disabled',
+  'dropdownOpen',
   'handleClick',
   'handleBlur',
   'handleDestroy',
   'handleFocus',
-  'buttonEl',
-  'label',
-  'labelHidden',
-  'ariaLabel',
-  'disabled',
   'icon',
   'iconRotate',
+  'id',
+  'label',
+  'popoverPosition',
+  'popoverText',
+  'popoverTriggerLabel',
   'size',
+  'toggleMenu',
   'type',
   'variant',
-  'buttonClick',
+]);
+
+/**
+ * Tab Navigation Bar
+ */
+export const tabNavigationBarExclude: RegExp = excludeRegex([
+  'assertScroll',
+  'getAriaControls',
+  'isScrollable',
+  'scrollContainer',
+  'scrollLeft',
+  'scrollRight',
+  'tabNavigation',
+  'updateActiveLink',
+]);
+
+export const tabNavigationBarExampleExclude: RegExp = excludeRegex([
+  'activeLink',
+  'id',
+  'setLink',
+  'tabs',
+]);
+
+export const tabNavigationPanelExclude: RegExp = excludeRegex(['setActiveTabId']);
+
+/**
+ * Text Input
+ */
+export const textInputExclude: RegExp = excludeRegex([...formCommonDocsExclude]);
+
+export const textInputControlsExclude: RegExp = excludeRegex([
+  ...formCommonControlsExclude,
+  'autocomplete',
+  'name',
 ]);

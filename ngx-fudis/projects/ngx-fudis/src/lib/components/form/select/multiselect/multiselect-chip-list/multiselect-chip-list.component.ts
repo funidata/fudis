@@ -1,12 +1,15 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../../types/forms';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-multiselect-chip-list',
   templateUrl: './multiselect-chip-list.component.html',
   styleUrls: ['./multiselect-chip-list.component.scss'],
+  standalone: false,
 })
-export class MultiselectChipListComponent {
+export class MultiselectChipListComponent<T = string> {
+  constructor(protected _translationService: FudisTranslationService) {}
   /**
    * Reference for the chip list ul element
    */
@@ -15,7 +18,7 @@ export class MultiselectChipListComponent {
   /**
    * Array of selected chip items
    */
-  @Input() selectedItems: FudisSelectOption<object>[];
+  @Input() selectedItems: FudisSelectOption<T>[];
 
   /**
    * Parent component id for binding aria attributes
@@ -25,7 +28,7 @@ export class MultiselectChipListComponent {
   /**
    * Output for removed chip index in selectedItems
    */
-  @Output() handleClick = new EventEmitter<FudisSelectOption<object>>();
+  @Output() handleClick = new EventEmitter<FudisSelectOption<T>>();
 
   /**
    * If focus is in some of the chip buttons
@@ -41,16 +44,17 @@ export class MultiselectChipListComponent {
 
   /**
    * Focuses to the sibling and emits clicked index
-   * @param index clicked index
+   *
+   * @param index Clicked index
    */
-  protected _clickChip(clickedOption: FudisSelectOption<object>, index: number) {
+  protected _clickChip(clickedOption: FudisSelectOption<T>, index: number) {
     this.handleClick.emit(clickedOption);
-
     setTimeout(() => {
-      if (index === 0 && this._chipListRef.nativeElement.children[0]) {
-        (this._chipListRef.nativeElement.children[0] as HTMLButtonElement).focus();
-      } else if (this._chipListRef.nativeElement.children[index - 1]) {
-        (this._chipListRef.nativeElement.children[index - 1] as HTMLButtonElement).focus();
+      const buttons = this._chipListRef.nativeElement.querySelectorAll('button');
+      if (index === 0 && buttons[0]) {
+        buttons[0].focus();
+      } else if (buttons[index - 1]) {
+        buttons[index - 1].focus();
       }
     }, 50);
   }

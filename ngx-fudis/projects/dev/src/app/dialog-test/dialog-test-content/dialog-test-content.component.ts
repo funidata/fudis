@@ -8,7 +8,21 @@ import { Component } from '@angular/core';
         >Dialog with fudis-grid and scrollable content</fudis-heading
       >
       <fudis-dialog-content>
-        <fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
+        <fudis-icon-button
+          [id]="'menu-example-button'"
+          [ariaLabel]="'Menu'"
+          [size]="'small'"
+          [variant]="'secondary'"
+          [icon]="'three-dots'"
+          [asMenuButton]="true"
+        >
+          <fudis-dropdown-menu>
+            @for (option of menuOptions; track option) {
+              <fudis-dropdown-menu-item [label]="option" />
+            }
+          </fudis-dropdown-menu>
+        </fudis-icon-button>
+        <fudis-grid [classes]="'fudis-mt-md fudis-mb-md'">
           <fudis-heading [level]="3" [variant]="'sm'">
             I am fudis-heading inside the grid taking the whole width
           </fudis-heading>
@@ -33,7 +47,7 @@ import { Component } from '@angular/core';
             hendrerit ante nisl sed quam. Vestibulum euismod leo ac magna pretium.
           </fudis-body-text>
         </fudis-grid>
-        <!-- <fudis-description-list
+        <!-- <fudis-dl
           [columns]="'1fr 1fr 1fr'"
           [data]="[
             { key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },
@@ -44,9 +58,9 @@ import { Component } from '@angular/core';
               value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987'
             }
           ]"
-        ></fudis-description-list> -->
+      ></fudis-dl> -->
         <hr />
-        <fudis-grid [columns]="3" [marginTop]="'sm'" [marginBottom]="'sm'">
+        <fudis-grid [columns]="3" [classes]="'fudis-mt-sm fudis-mb-sm'">
           <div style="border: 2px solid lightblue">
             <fudis-body-text>Showcase of grid items</fudis-body-text>
           </div>
@@ -91,5 +105,8 @@ import { Component } from '@angular/core';
     </fudis-dialog>
   `,
   styles: [],
+  standalone: false,
 })
-export class DialogTestContentComponent {}
+export class DialogTestContentComponent {
+  menuOptions = ['Menu option 1', 'Menu option 2', 'Menu option 3'];
+}

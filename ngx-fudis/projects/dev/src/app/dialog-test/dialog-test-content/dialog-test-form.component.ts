@@ -1,7 +1,14 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, DOCUMENT } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FudisDialogService, FudisGroupValidators, FudisValidators } from 'ngx-fudis';
+import {
+  FudisDialogService,
+  FudisGroupValidators,
+  FudisTranslationService,
+  FudisValidators,
+} from 'ngx-fudis';
+import { FudisRadioButtonOption, FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 type MyCheckboxType = {
   controlName: string;
@@ -11,7 +18,9 @@ type MyCheckboxType = {
 type MyForm = {
   textInput: FormControl<string | null | number>;
   checkboxFormGroup: FormGroup;
-  // truth: FormControl<boolean | null>;
+  truth: FormControl<boolean | null>;
+  animals: FormControl<FudisSelectOption<string>[] | null>;
+  date: FormControl<Date | null>;
 };
 
 @Component({
@@ -21,37 +30,57 @@ type MyForm = {
       <fudis-dialog-content>
         <fudis-form
           [title]="'Dialog with fudis-form'"
-          [errorSummaryHelpText]="'You did not fill all the required information'"
+          [errorSummaryTitle]="'You did not fill all the required information'"
           [level]="2"
         >
-          <ng-template fudisContent [type]="'form'">
+          <fudis-form-content>
             <fudis-fieldset [label]="'We need some information'" [helpText]="_greetingFromOpener">
-              <ng-template fudisContent [type]="'fieldset'">
+              <fudis-fieldset-content>
                 <fudis-checkbox-group
                   [label]="'Choose berry'"
                   [helpText]="'Berries are yummy'"
                   [formGroup]="testFormGroup.controls['checkboxFormGroup']"
                 >
-                  <fudis-checkbox
-                    *ngFor="let option of checkboxOptions"
-                    [controlName]="option.controlName"
-                    [label]="option.label"
-                  />
+                  @for (option of checkboxOptions; track option.controlName) {
+                    <fudis-checkbox-group-option
+                      [controlName]="option.controlName"
+                      [label]="option.label"
+                    />
+                  }
                 </fudis-checkbox-group>
                 <fudis-text-input
                   [label]="'Is something wrong?'"
                   [helpText]="'I hope everything is OK'"
                   [control]="testFormGroup.controls['textInput']"
                 />
-                <!-- <fudis-radio-button-group
-                [title]="'Choose the truth'"
-                [control]="testFormGroup.controls['truth']"
-                [options]="radioButtonOptions"
-              /> -->
-              </ng-template>
+                <fudis-radio-button-group
+                  [label]="'Choose the truth'"
+                  [control]="testFormGroup.controls['truth']"
+                >
+                  @for (option of radioButtonOptions; track option.value) {
+                    <fudis-radio-button [label]="option.label" [value]="option.value" />
+                  }
+                </fudis-radio-button-group>
+                <fudis-multiselect
+                  [label]="'Choose multiple animals'"
+                  [variant]="'autocompleteDropdown'"
+                  [placeholder]="'Search animals'"
+                  [control]="testFormGroup.controls['animals']"
+                >
+                  <ng-template fudisSelectOptions>
+                    @for (option of multiOptions; track option.value) {
+                      <fudis-multiselect-option [data]="option" />
+                    }
+                  </ng-template>
+                </fudis-multiselect>
+                <fudis-datepicker
+                  [label]="'Choose date'"
+                  [control]="testFormGroup.controls['date']"
+                />
+              </fudis-fieldset-content>
             </fudis-fieldset>
-          </ng-template>
-          <ng-template fudisActions [type]="'form'">
+          </fudis-form-content>
+          <fudis-form-actions>
             <fudis-button
               fudisFormSubmit
               [formValid]="testFormGroup.valid"
@@ -59,17 +88,21 @@ type MyForm = {
               [label]="'Submit'"
             ></fudis-button>
             <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
-          </ng-template>
+          </fudis-form-actions>
         </fudis-form>
       </fudis-dialog-content>
     </fudis-dialog>
   `,
   styles: [],
+  standalone: false,
 })
 export class DialogTestFormComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { greeting: string },
+    @Inject(DOCUMENT) private _document: Document,
     private _dialogService: FudisDialogService,
+    private _translocoService: TranslocoService,
+    private _fudisLanguage: FudisTranslationService,
   ) {
     this._greetingFromOpener = this.data.greeting;
   }
@@ -83,10 +116,17 @@ export class DialogTestFormComponent {
     { controlName: 'strawberry', label: 'strawberry' },
   ];
 
-  // radioButtonOptions: FudisRadioButtonOption[] = [
-  //   { value: true, label: 'True', id: 'boolean-2' },
-  //   { value: false, label: 'False', id: 'boolean-1' },
-  // ];
+  radioButtonOptions: FudisRadioButtonOption<object>[] = [
+    { value: true, label: 'True' },
+    { value: false, label: 'False' },
+  ];
+
+  multiOptions: FudisSelectOption<string>[] = [
+    { value: 'artic-fox', label: 'Artic fox' },
+    { value: 'bear', label: 'Bear' },
+    { value: 'wolverine', label: 'Wolverine' },
+    { value: 'wolf', label: 'Wolf' },
+  ];
 
   testFormGroup = new FormGroup<MyForm>({
     textInput: new FormControl<string | null | number>(null, [
@@ -110,11 +150,14 @@ export class DialogTestFormComponent {
         }),
       ],
     ),
-    //   truth: new FormControl<boolean | null>(
-    //     null,
-    //     FudisValidators.required(
-    //       this._translocoService.selectTranslateObject('form_errors.required'),
-    //    ),
+    truth: new FormControl<boolean | null>(
+      null,
+      FudisValidators.required(
+        this._translocoService.selectTranslateObject('form_errors.required'),
+      ),
+    ),
+    animals: new FormControl<FudisSelectOption<string>[] | null>(null),
+    date: new FormControl<Date | null>(null),
   });
 
   submitDialogForm(): void {

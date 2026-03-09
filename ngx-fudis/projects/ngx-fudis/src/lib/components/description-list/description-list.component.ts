@@ -13,11 +13,17 @@ import { FudisIdService } from '../../services/id/id.service';
 import { FudisGridGap } from '../../types/grid';
 import { BehaviorSubject } from 'rxjs';
 
+/**
+ * Displays a collection of term-details pairs of related information.
+ *
+ * Use this component to present structured information with proper semantic relationships.
+ */
 @Component({
-  selector: 'fudis-dl, fudis-description-list',
+  selector: 'fudis-dl',
   templateUrl: './description-list.component.html',
   styleUrls: ['./description-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {
@@ -53,7 +59,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   /**
    * CSS class list
    */
-  protected _classList = new BehaviorSubject<string[]>([]);
+  protected _classList = new BehaviorSubject<string>('');
 
   /**
    * Signal for variant
@@ -112,6 +118,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
     const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
 
-    this._classList.next(combined);
+    this._classList.next(combined.join(' '));
   }
 }

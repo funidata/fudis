@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { MockComponents } from 'ng-mocks';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import {
-  FudisFormErrorSummaryItem,
-  FudisFormErrorSummaryRemoveItem,
-} from '../../../../types/forms';
+  FudisErrorSummaryNewError,
+  FudisErrorSummaryRemoveError,
+} from '../../../../types/errorSummary';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
 import { IconComponent } from '../../../icon/icon.component';
+import { getElement } from '../../../../utilities/tests/utilities';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
-// TODO: write tests for input visible, controlName and variant
 @Component({
+  standalone: false,
   selector: 'fudis-text-input-with-validator-error-message',
   template: `
     <fudis-text-input
@@ -42,17 +42,17 @@ describe('ValidatorErrorMessageComponent', () => {
     | ComponentFixture<TextInputWithValidatorErrorMessageComponent>
     | ComponentFixture<ValidatorErrorMessageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [
         ValidatorErrorMessageComponent,
         TextInputWithValidatorErrorMessageComponent,
         TextInputComponent,
         GuidanceComponent,
-        MockComponents(IconComponent, LabelComponent),
+        LabelComponent,
       ],
-      imports: [ReactiveFormsModule],
-      providers: [],
+      imports: [IconComponent, ReactiveFormsModule],
+      providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 
@@ -60,14 +60,14 @@ describe('ValidatorErrorMessageComponent', () => {
     textInputComponent.textInputControl.markAllAsTouched();
   }
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TextInputWithValidatorErrorMessageComponent);
-    textInputComponent = fixture.componentInstance;
-    fixture.detectChanges();
-    showErrorMessage();
-  });
-
   describe('Parent component', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TextInputWithValidatorErrorMessageComponent);
+      textInputComponent = fixture.componentInstance;
+      fixture.detectChanges();
+      showErrorMessage();
+    });
+
     it('should display Validator Error Message, when control is touched', () => {
       const message = fixture.nativeElement.querySelector(
         'fudis-validator-error-message',
@@ -76,18 +76,27 @@ describe('ValidatorErrorMessageComponent', () => {
       expect(message).toBeTruthy();
     });
 
-    it('should pass id and label to Validator Error Message', () => {
-      const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
+    it('should find correct id and label related to Validator Error Message', () => {
+      const textInput = fixture.debugElement.query(By.css('fudis-text-input input'));
+      const inputId = textInput.attributes['id'];
 
-      expect(message.attributes['ng-reflect-focus-id']).toEqual('test-id');
-      expect(message.attributes['ng-reflect-label']).toEqual('Test Label');
+      const textInputLabel = fixture.debugElement.query(By.css('fudis-text-input label'));
+      const labelText = textInputLabel.nativeElement.textContent;
+
+      expect(inputId).toEqual('test-id');
+      expect(labelText).toEqual('Test Label(Required)');
     });
 
-    it('should pass Fudis Validator type and message to Validator Error Message', () => {
-      const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
+    it('should pass Fudis Validator message to Validator Error Message', () => {
+      fixture.detectChanges();
 
-      expect(message.attributes['ng-reflect-type']).toEqual('required');
-      expect(message.attributes['ng-reflect-message']).toEqual('This field is required');
+      const validatorComponent = fixture.nativeElement.querySelector(
+        'fudis-validator-error-message',
+      ) as HTMLElement;
+
+      const message = validatorComponent.textContent;
+
+      expect(message).toEqual('This field is required');
     });
   });
 
@@ -95,155 +104,293 @@ describe('ValidatorErrorMessageComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ValidatorErrorMessageComponent);
       component = fixture.componentInstance;
+
       component.formId = 'test-form-id';
       component.focusId = 'test-id';
       component.label = 'Test label';
       component.type = 'required';
+      component.visible = true;
       component.controlName = undefined;
+
       fixture.detectChanges();
     });
 
-    it('should create error with string message when component is initialized', () => {
-      component.message = 'Message for testing';
-
-      fixture.detectChanges();
+    it('should create error with string message when component is initialized', fakeAsync(() => {
       jest.spyOn(component.handleCreateError, 'emit');
 
-      const testError: FudisFormErrorSummaryItem = {
-        id: 'test-id',
-        error: 'Message for testing',
-        formId: 'test-form-id',
-        label: 'Test label',
-        type: 'required',
-        controlName: undefined,
-        language: 'en',
-      };
+      component.message = 'Message for testing';
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
 
-      component.ngOnInit();
       fixture.detectChanges();
 
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
+        message: 'Test label: Message for testing',
+        formId: 'test-form-id',
+        id: 'required',
+      };
+
+      const errorElementText = getElement(fixture, '.fudis-error-message');
+
+      expect(errorElementText.innerHTML).toEqual('Message for testing');
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
-    });
+    }));
 
     it('should remove error with string message when component is destroyed', () => {
       jest.spyOn(component.handleRemoveError, 'emit');
       component.message = 'Error to be removed';
+      component.controlName = 'test-control-name';
 
-      component.ngOnInit();
-      fixture.detectChanges();
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+        controlName: new SimpleChange(null, component.controlName, true),
+      });
 
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
-        id: 'test-id',
+      const errorToRemove: FudisErrorSummaryRemoveError = {
+        focusId: 'test-id',
         formId: 'test-form-id',
-        type: 'required',
-        controlName: undefined,
+        id: 'required_test-control-name',
       };
 
       component.ngOnDestroy();
-      fixture.detectChanges();
-
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
 
-    it('should create error message with observable message when component is initialized and update it when observable updates', () => {
+    it('should create error with observable message when component is initialized and update it when observable updates', fakeAsync(() => {
+      jest.spyOn(component.handleCreateError, 'emit');
+
       const messageAsObservable: Subject<string> = new BehaviorSubject<string>(
         'First message from observable',
       );
-
       component.message = messageAsObservable;
 
-      fixture.detectChanges();
-      jest.spyOn(component.handleCreateError, 'emit');
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
 
-      const testError: FudisFormErrorSummaryItem = {
-        id: 'test-id',
+      fixture.detectChanges();
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
         formId: 'test-form-id',
-        error: 'First message from observable',
-        label: 'Test label',
-        type: 'required',
-        controlName: undefined,
-        language: 'en',
+        message: 'Test label: First message from observable',
+        id: 'required',
       };
 
-      component.ngOnInit();
-      fixture.detectChanges();
+      const errorElementTextFirst = getElement(fixture, '.fudis-error-message');
 
+      expect(errorElementTextFirst.innerHTML).toEqual('First message from observable');
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
 
       messageAsObservable.next('Second message after update');
 
-      const updatedError: FudisFormErrorSummaryItem = {
+      fixture.detectChanges();
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const updatedError: FudisErrorSummaryNewError = {
         ...testError,
-        error: 'Second message after update',
+        message: 'Test label: Second message after update',
       };
 
-      expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
-    });
+      const errorElementTextSecond = getElement(fixture, '.fudis-error-message');
 
-    it('should remove error message with observable message when component is destroyed', () => {
+      expect(errorElementTextSecond.innerHTML).toEqual('Second message after update');
+      expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
+    }));
+
+    it('should remove error with observable message when component is destroyed', () => {
       jest.spyOn(component.handleRemoveError, 'emit');
 
       const removedMessageAsObservable: Subject<string> = new BehaviorSubject<string>(
         'Message to be removed',
       );
+
       component.message = removedMessageAsObservable;
       component.focusId = 'test-observable-message-id';
       component.type = 'required';
       component.controlName = undefined;
 
-      component.ngOnInit();
-      fixture.detectChanges();
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+        focusId: new SimpleChange(null, component.focusId, true),
+        type: new SimpleChange(null, component.type, true),
+        controlName: new SimpleChange(null, component.controlName, true),
+      });
 
-      const errorToRemove: FudisFormErrorSummaryRemoveItem = {
-        id: 'test-observable-message-id',
+      const errorToRemove: FudisErrorSummaryRemoveError = {
+        focusId: 'test-observable-message-id',
         formId: 'test-form-id',
-        type: 'required',
-        controlName: undefined,
+        id: 'required',
       };
 
       component.ngOnDestroy();
-      fixture.detectChanges();
 
       expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
     });
 
-    it('should update error message when label updates', () => {
+    it('should update error message when label updates', fakeAsync(() => {
+      jest.spyOn(component.handleCreateError, 'emit');
+
       const messageAsObservable: Subject<string> = new BehaviorSubject<string>(
         'First message from observable',
       );
-
-      component.message = messageAsObservable;
-
+      fixture.componentRef.setInput('message', messageAsObservable);
       fixture.detectChanges();
-      jest.spyOn(component.handleCreateError, 'emit');
 
-      const testError: FudisFormErrorSummaryItem = {
-        id: 'test-id',
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
         formId: 'test-form-id',
-        error: 'First message from observable',
-        label: 'Test label',
-        type: 'required',
-        controlName: undefined,
-        language: 'en',
+        message: 'Test label: First message from observable',
+        id: 'required',
       };
-
-      component.ngOnInit();
-      fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
 
-      component.label = 'New better label';
-
-      const updatedError: FudisFormErrorSummaryItem = {
-        ...testError,
-        label: 'New better label',
-      };
-      component.ngOnChanges({
-        message: new SimpleChange(null, updatedError.label, false),
-      });
+      fixture.componentRef.setInput('label', 'Better label');
       fixture.detectChanges();
 
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const updatedError: FudisErrorSummaryNewError = {
+        ...testError,
+        message: 'Better label: First message from observable',
+      };
+
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
+    }));
+
+    it('should update error message when formId updates', fakeAsync(() => {
+      jest.spyOn(component.handleCreateError, 'emit');
+
+      component.message = 'Message for testing';
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
+        message: 'Test label: Message for testing',
+        formId: 'test-form-id',
+        id: 'required',
+      };
+
+      expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
+
+      fixture.componentRef.setInput('formId', 'new-form-id');
+      fixture.detectChanges();
+
+      component.ngOnChanges({
+        focusId: new SimpleChange(null, component.focusId, true),
+      });
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const updatedError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
+        message: 'Test label: Message for testing',
+        formId: 'new-form-id',
+        id: 'required',
+      };
+
+      expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
+    }));
+
+    it('should not show error message if visibility conditions are not met', fakeAsync(() => {
+      jest.spyOn(component.handleCreateError, 'emit');
+
+      component.message = 'Message for testing';
+      component.visible = false;
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
+
+      fixture.detectChanges();
+
+      // Flush the microtask so the deferred emit runs
+      flushMicrotasks();
+
+      const testError: FudisErrorSummaryNewError = {
+        focusId: 'test-id',
+        message: 'Test label: Message for testing',
+        formId: 'test-form-id',
+        id: 'required',
+      };
+
+      const errorElementText = getElement(fixture, '.fudis-error-message');
+
+      expect(errorElementText).toBeFalsy();
+      expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
+    }));
+
+    it('should have respective CSS class according to variant', () => {
+      component.message = 'Message for testing';
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
+
+      fixture.detectChanges();
+
+      const errorElement = getElement(fixture, '.fudis-error-message');
+
+      expect(errorElement.className).toContain('fudis-error-message__form-error');
+
+      fixture.componentRef.setInput('variant', 'body-text');
+      fixture.detectChanges();
+
+      expect(errorElement.className).toContain('fudis-error-message__body-text');
+    });
+
+    it('should have generated id', () => {
+      component.message = 'Message for testing';
+      component.ngOnChanges({
+        message: new SimpleChange(null, component.message, true),
+      });
+
+      fixture.detectChanges();
+
+      const errorElement = getElement(fixture, '.fudis-error-message');
+
+      expect(errorElement.getAttribute('id')).toEqual('fudis-validator-error-message-1');
+    });
+
+    it('should throw console warning', () => {
+      const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      jest.useFakeTimers();
+
+      component.ngAfterViewInit();
+      jest.runAllTimers();
+
+      expect(warn).toHaveBeenCalledWith(
+        `Fudis component with id of 'test-id' is missing error message for error type of: 'required'`,
+      );
+
+      fixture.componentRef.setInput('controlName', 'test-control-name');
+      fixture.detectChanges();
+
+      component.ngAfterViewInit();
+      jest.runAllTimers();
+
+      expect(warn).toHaveBeenCalledWith(
+        `Fudis component with id of 'test-id' and control name of 'test-control-name' is missing error message for error type of: 'required'`,
+      );
     });
   });
 });

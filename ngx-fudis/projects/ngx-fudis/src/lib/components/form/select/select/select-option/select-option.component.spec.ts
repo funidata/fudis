@@ -1,27 +1,32 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SelectOptionComponent } from './select-option.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectComponent } from '../select.component';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { FudisIdService } from '../../../../../services/id/id.service';
-import { defaultOptions } from '../../common/mock_data';
+import {
+  defaultOptions,
+  defaultOptionsSecondaryLang,
+  TestAnimalValue,
+} from '../../common/mock_data';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
+import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
 import { IconComponent } from '../../../../icon/icon.component';
 import { LabelComponent } from '../../../label/label.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
+import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { By } from '@angular/platform-browser';
 import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
-import { ButtonComponent } from '../../../../button/button.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
+import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
+import { SelectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
+import { SelectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
+import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-container',
   template: `<fudis-select
     #testSelect
@@ -31,22 +36,19 @@ import { getElement } from '../../../../../utilities/tests/utilities';
     [control]="control"
     [size]="'md'"
   >
-    <ng-template fudisContent type="select-options">
-      <fudis-select-option
-        *ngFor="let option of testOptions"
-        #testOption
-        [data]="option"
-      ></fudis-select-option>
+    <ng-template fudisSelectOptions>
+      @for (option of testOptions; track option.value) {
+        <fudis-select-option [data]="option"></fudis-select-option>
+      }
     </ng-template>
   </fudis-select>`,
 })
 class MockContainerComponent {
-  testOptions: FudisSelectOption<object>[] = defaultOptions;
-  control: FormControl = new FormControl(null);
+  testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
 
   variant = 'dropdown';
 
-  @ViewChild('testOption') testOption: SelectOptionComponent;
   @ViewChild('testSelect') testSelect: SelectComponent;
 }
 
@@ -57,22 +59,20 @@ describe('SelectOptionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ContentDirective,
+        SelectOptionsDirective,
         SelectComponent,
+        SelectControlValueAccessorDirective,
+        SelectAutocompleteDirective,
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
         MockContainerComponent,
-        SelectAutocompleteComponent,
         GuidanceComponent,
         SelectIconsComponent,
-        ButtonComponent,
-        IconComponent,
         LabelComponent,
-        BodyTextComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
-      imports: [ReactiveFormsModule],
+      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockContainerComponent);
@@ -87,7 +87,9 @@ describe('SelectOptionComponent', () => {
   }
 
   function initializeFormControlWithValue() {
-    component.control = new FormControl(defaultOptions[4]);
+    component.control = new FormControl<FudisSelectOption<TestAnimalValue> | null>(
+      defaultOptions[5],
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   }
@@ -112,12 +114,12 @@ describe('SelectOptionComponent', () => {
     it('should not have selected default value if form control has no value on init', () => {
       setSelectDropdownOpen();
 
-      const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+      const iconNotToBeFound = fixture.nativeElement.querySelector('svg#check');
       expect(iconNotToBeFound).toBeFalsy();
 
       updateControlValue();
 
-      const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+      const checkIcon = fixture.nativeElement.querySelector('svg#check');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -128,7 +130,7 @@ describe('SelectOptionComponent', () => {
       updateControlValue();
 
       const checkIcon = fixture.nativeElement.querySelector(
-        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+        '.fudis-select-option--selected fudis-icon svg#check',
       );
 
       const selectedValue = fixture.debugElement.query(
@@ -145,16 +147,31 @@ describe('SelectOptionComponent', () => {
       setSelectDropdownOpen();
 
       const checkIcon = fixture.nativeElement.querySelector(
-        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+        '.fudis-select-option--selected fudis-icon svg#check',
       );
 
       const selectedValue = fixture.debugElement.query(
         By.css('.fudis-select-option--selected'),
       ).nativeElement;
 
-      expect(selectedValue.textContent).toEqual('Screaming hairy armadillo');
+      expect(selectedValue.textContent).toEqual('Screaming hairy armadillo (partly endangered)');
 
       expect(checkIcon).toBeTruthy();
+    });
+
+    it('should change visible input value when options are changed', () => {
+      initializeFormControlWithValue();
+      setSelectDropdownOpen();
+
+      const selectElement = getElement(fixture, '.fudis-select');
+      let value = selectElement.querySelector('.fudis-select input')?.getAttribute('value');
+      expect(value).toEqual('Screaming hairy armadillo (partly endangered)');
+
+      component.testOptions = defaultOptionsSecondaryLang;
+      fixture.detectChanges();
+
+      value = selectElement.querySelector('.fudis-select input')?.getAttribute('value');
+      expect(value).toContain('Kirkuva karvainen armadillo (osittain uhanalainen)');
     });
   });
 
@@ -188,8 +205,8 @@ describe('SelectOptionComponent', () => {
 
       fixture.detectChanges();
 
-      const disabledOption = getElement(fixture, '#fudis-select-1-option-4');
-      const enabledOption = getElement(fixture, '#fudis-select-1-option-5');
+      const disabledOption = getElement(fixture, '#fudis-select-1-option-13slwtn');
+      const enabledOption = getElement(fixture, '#fudis-select-1-option-100zewl');
 
       disabledOption.click();
 
@@ -198,10 +215,9 @@ describe('SelectOptionComponent', () => {
       enabledOption.click();
 
       expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-        fudisGeneratedHtmlId: 'fudis-select-1-option-5',
-        label: 'Screaming hairy armadillo',
+        label: 'Screaming hairy armadillo (partly endangered)',
         sound: "Rollin' rollin' rollin'!",
-        value: 'value-5-armadillo',
+        value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
       });
     });
   });
@@ -215,19 +231,19 @@ describe('SelectOptionComponent', () => {
 
     fixture.detectChanges();
 
-    component.testSelect.autocompleteRef.updateInputValue('Platypus');
+    component.testSelect.setAutocompleteFilterText('Platypus');
 
     fixture.detectChanges();
 
     expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-      fudisGeneratedHtmlId: 'fudis-select-1-option-3',
       label: 'Platypus',
       sound: 'Plat plat!',
       value: 'value-3-platypys',
     });
 
-    component.testSelect.autocompleteRef.updateInputValue('Platypu');
+    component.testSelect.setAutocompleteFilterText('Platy');
 
+    fixture.detectChanges();
     expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith(null);
   });
 });

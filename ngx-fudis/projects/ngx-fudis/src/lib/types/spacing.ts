@@ -1,5 +1,4 @@
-import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
-import { convertToRemValue } from '../utilities/rem-converter';
+import { FudisBreakpointKey } from './breakpoint-keys';
 
 export const fudisSpacingArray = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
 
@@ -17,10 +16,9 @@ export type FudisSpacingResponsive = {
  */
 export const defaultSpacingValue = '0';
 
+// TODO: Would be better to not allow string type since we only want to allow spacing directive to take in predefined spacing token values. This affects in breakpoint-utils.ts when pushing new spacing value to FudisBreakpointStyleResponsive array
 /**
- * Spacing tokens
- * TODO: Would be better to not allow string type since we only want to allow spacing directive to take in predefined spacing token values.
- * This affects in breakpoint-utils.ts when pushing new spacing value to FudisBreakpointStyleResponsive array
+ * Fudis spacing tokens
  */
 type FudisSpacingValues = {
   [key in FudisSpacing | 'default' | string]: string;
@@ -30,23 +28,13 @@ type FudisSpacingValues = {
  * Fudis spacing tokens converted to rem values
  */
 export const fudisSpacingValues: FudisSpacingValues = {
-  xxs: convertToRemValue(0.25),
-  xs: convertToRemValue(0.5),
-  sm: convertToRemValue(1),
-  md: convertToRemValue(1.5),
-  lg: convertToRemValue(2),
-  xl: convertToRemValue(2.5),
-  xxl: convertToRemValue(4),
+  xxs: 'calc(0.25rem / var(--fudis-rem-multiplier))',
+  xs: 'calc(0.5rem / var(--fudis-rem-multiplier))',
+  sm: 'calc(1rem / var(--fudis-rem-multiplier))',
+  md: 'calc(1.5rem / var(--fudis-rem-multiplier))',
+  lg: 'calc(2rem / var(--fudis-rem-multiplier))',
+  xl: 'calc(2.5rem / var(--fudis-rem-multiplier))',
+  xxl: 'calc(4rem / var(--fudis-rem-multiplier))',
   none: '0',
   default: defaultSpacingValue,
 };
-
-/**
- * Attributes for managing spacings
- */
-export interface FudisSpacingAttributes {
-  marginTop?: FudisSpacing | FudisBreakpointValueResponsive;
-  marginBottom?: FudisSpacing | FudisBreakpointValueResponsive;
-  marginRight?: FudisSpacing | FudisBreakpointValueResponsive;
-  marginLeft?: FudisSpacing | FudisBreakpointValueResponsive;
-}

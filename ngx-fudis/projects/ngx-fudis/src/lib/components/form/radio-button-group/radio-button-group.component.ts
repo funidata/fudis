@@ -1,76 +1,126 @@
-import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { FudisRadioButtonOption, FudisInputSize } from '../../../types/forms';
-import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { hasRequiredValidator } from '../../../utilities/form/getValidators';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+  AfterViewInit,
+  DOCUMENT,
+} from '@angular/core';
+import { FudisSelectionGroupInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
+import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
+import { FudisIdService } from '../../../services/id/id.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { Subscription } from 'rxjs';
 
-// TODO: Refactor component to work in similar fashion as Checkbox Group, update docs and tests
+import { GuidanceComponent } from '../guidance/guidance.component';
+
+/**
+ * Groups mutually exclusive options.
+ *
+ * Use this component when user must select exactly one option from a set.
+ */
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
-  styleUrls: ['./radio-button-group.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
-export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
-  /**
-   * Binding host CSS class to component wrapper
-   */
-  @HostBinding('class') private _classes = 'fudis-radio-button-group-host';
+export class RadioButtonGroupComponent
+  extends ControlComponentBaseDirective
+  implements OnInit, OnChanges, AfterViewInit
+{
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    _focusService: FudisFocusService,
+    _idService: FudisIdService,
+  ) {
+    super(_idService, _focusService);
 
-  /*
-   * FormControl for Radio Button group
-   */
-  @Input({ required: true }) control: FormControl<boolean | null>;
+    this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (this.control) {
+        this._required.next(FudisValidatorUtilities.required(this.control));
+      }
+    });
+  }
 
-  /*
-   * Array of options for group of radio buttons
-   */
-  @Input({ required: true }) options: FudisRadioButtonOption[];
-
-  /**
-   * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
-   */
-  @Input() invalidState: boolean = false;
-
-  /**
-   * Width of Radiobutton Group
-   */
-  @Input() size: FudisInputSize = 'lg';
+  @ViewChild('radioButtonGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
-   * Set fieldset as required. By default set to 'undefined'.
+   * Width of Radio Button Group
    */
-  @Input() required: boolean | undefined = undefined;
+  @Input() size: FudisSelectionGroupInputSize = 'lg';
 
   /**
-   * Name of the group. If not provided, use id for the name.
+   * Emit form control and changed option when one option is clicked
    */
-  @Input() name: string;
+  @Output() handleChange = new EventEmitter<FudisRadioButtonChangeEvent>();
 
   /**
-   * Set requiredText based on this boolean value
+   * Subscription for handling the valueChanges observable
    */
-  protected _required: boolean = false;
+  private _subscription: Subscription;
 
   ngOnInit() {
-    this._setParentId('radio-button-group');
+    this._setParentComponentId('radio-button-group');
+    this._updateValueAndValidityTrigger.next();
+  }
 
-    if (this.options.length < 2) {
-      throw new Error(
-        `Fudis-radio-button-group should have minimum of two options for radio buttons, but it only got ${this.options.length} option.`,
-      );
-    }
-
-    if (!this.name) {
-      this.name = this.id;
+  /**
+   * Add value and validity check when control value changes
+   */
+  ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._updateValueAndValidityTrigger.next());
     }
   }
 
-  ngOnChanges(): void {
-    this._required = hasRequiredValidator(this.control);
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
 
-    if (!this.name) {
-      this.name = this.id;
+    /**
+     * For Screen reader users bind guidance text to first radio child input
+     */
+    const firstRadio = this._getFirstEnabledRadio();
+    const guidanceId = this._guidance?.['_id'];
+
+    if (firstRadio && guidanceId) {
+      firstRadio.setAttribute('aria-describedby', guidanceId);
     }
+  }
+
+  /**
+   * Return first radio child input when it is not disabled
+   */
+  private _getFirstEnabledRadio(): HTMLInputElement | null {
+    const radioIds = this._idService.getAllChildrenIds('radio-button-group', this.id);
+    if (!radioIds?.length) return null;
+
+    const radio = this._document.getElementById(radioIds[0]);
+    if (!(radio instanceof HTMLInputElement) || radio.disabled) {
+      return null;
+    }
+
+    return radio;
+  }
+
+  public triggerEmit(id: string, label: string): void {
+    const data: FudisRadioButtonChangeEvent = {
+      option: {
+        id: id,
+        label: label,
+        value: this.control?.value,
+      },
+      control: this.control,
+    };
+    this.handleChange.emit(data);
   }
 }

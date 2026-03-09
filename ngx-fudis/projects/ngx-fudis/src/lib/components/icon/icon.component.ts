@@ -10,16 +10,23 @@ import {
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
+/**
+ * Displays a decorative or semantic icon.
+ *
+ * Use this component to enhance recognition, meaning, or visual hierarchy.
+ */
 @Component({
   selector: 'fudis-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
-  constructor(private _elementRef: ElementRef) {
-    (_elementRef.nativeElement as SVGElement).style.cssText = `
+  constructor(public elementRef: ElementRef) {
+    (elementRef.nativeElement as SVGElement).style.cssText = `
       display: inline-flex;
       vertical-align: middle;
     `;
@@ -28,7 +35,7 @@ export class IconComponent implements OnChanges {
   /**
    * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') private _classes = 'fudis-icon-host';
+  @HostBinding('class') protected _classes = 'fudis-icon-host';
 
   /**
    * Displayed SVG icon
@@ -51,7 +58,8 @@ export class IconComponent implements OnChanges {
   protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
-   * Determines icon size by its name. If icon name has suffix "-small", iconSize is set to sm, otherwise lg.
+   * Determines icon size by its name. If icon name has suffix "-small", iconSize is set to sm,
+   * otherwise lg.
    */
   private _iconSize: string;
 

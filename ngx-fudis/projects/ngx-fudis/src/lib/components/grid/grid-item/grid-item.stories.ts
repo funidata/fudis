@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { GridItemComponent } from './grid-item.component';
-import docs from './grid-item.docs.mdx';
+import docs from './grid-item.mdx';
 
 const html = String.raw;
 
@@ -14,7 +14,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+const Template: StoryFn = (args) => ({
   props: args,
 
   template: html`<fudis-grid [columns]="{ xs: 2, md: 4 }">
@@ -67,7 +67,7 @@ Example.argTypes = {
   },
 };
 
-export const AlignSelfX: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfX: StoryFn = (args) => ({
   props: { ...args, responsiveAlignSelfX: "{ sm: 'start', md: 'end', lg: 'center' }" },
   template: html`<fudis-grid [columns]="2">
     <fudis-grid-item class="storybook__item-highlight">
@@ -101,14 +101,14 @@ export const AlignSelfX: StoryFn<GridItemComponent> = (args: GridItemComponent) 
   </fudis-grid>`,
 });
 
-export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfY: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-grid-item class="storybook__item-highlight">
       <fudis-body-text>alignSelfY = 'stretch' (default)</fudis-body-text>
     </fudis-grid-item>
     <fudis-grid-item class="storybook__item">
-      <fudis-body-text style="margin-bottom: 1rem;"
+      <fudis-body-text class="fudis-mb-sm"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
         better.</fudis-body-text
       >
@@ -124,7 +124,7 @@ export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
       ><fudis-body-text>alignSelfY = 'start'</fudis-body-text></fudis-grid-item
     >
     <fudis-grid-item class="storybook__item">
-      <fudis-body-text style="margin-bottom: 1rem;"
+      <fudis-body-text class="fudis-mb-sm"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
         better.</fudis-body-text
       >
@@ -138,7 +138,7 @@ export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
     <fudis-grid-item class="storybook__item-highlight" [alignSelfY]="'end'"
       ><fudis-body-text>alignSelfY = 'end'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="storybook__item">
-      <fudis-body-text style="margin-bottom: 1rem;"
+      <fudis-body-text class="fudis-mb-sm"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
         better.</fudis-body-text
       >
@@ -152,7 +152,7 @@ export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
     <fudis-grid-item class="storybook__item-highlight" [alignSelfY]="'center'"
       ><fudis-body-text>alignSelfY = 'center'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="storybook__item">
-      <fudis-body-text style="margin-bottom: 1rem;"
+      <fudis-body-text class="fudis-mb-sm"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
         better.</fudis-body-text
       >
@@ -168,7 +168,7 @@ export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
       [alignSelfY]="{xs: 'end', sm: 'stretch', md: 'start', lg: 'center'}"
       ><fudis-body-text>alignSelfY = 'responsive'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="storybook__item">
-      <fudis-body-text style="margin-bottom: 1rem;"
+      <fudis-body-text class="fudis-mb-sm"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
         better.</fudis-body-text
       >
@@ -182,7 +182,7 @@ export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
   </fudis-grid>`,
 });
 
-export const AlignSelfXAndY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfXAndY: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-grid-item class="storybook__item-highlight">
@@ -220,7 +220,7 @@ export const AlignSelfXAndY: StoryFn<GridItemComponent> = (args: GridItemCompone
   </fudis-grid>`,
 });
 
-export const Columns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const Columns: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-grid [columns]="6">
     <fudis-grid-item class="storybook__item-highlight" [columns]="'stretch'">
@@ -258,7 +258,7 @@ export const Columns: StoryFn<GridItemComponent> = (args: GridItemComponent) => 
   </fudis-grid>`,
 });
 
-export const ResponsiveColumns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const ResponsiveColumns: StoryFn = (args) => ({
   props: {
     ...args,
     exampleOne: { xs: 'stretch', md: 3, lg: 1 },

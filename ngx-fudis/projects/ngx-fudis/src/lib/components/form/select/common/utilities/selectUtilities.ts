@@ -2,12 +2,13 @@ import { FudisSelectOption } from '../../../../../types/forms';
 
 /**
  * Function to loop array of options and join their labels to a single string
- * @param values array of selected Options
+ *
+ * @param values Array of selected Options
  * @returns
  */
-export const joinInputValues = (values: FudisSelectOption<object>[]): string => {
+export const joinInputValues = <T>(values: FudisSelectOption<T>[]): string => {
   const label: string[] = [];
-  values.forEach((item: FudisSelectOption<object>) => {
+  values.forEach((item: FudisSelectOption<T>) => {
     const labelToPush = item.label.includes(',') ? `'${item.label}'` : item.label;
 
     label.push(labelToPush);
@@ -20,10 +21,11 @@ export const joinInputValues = (values: FudisSelectOption<object>[]): string => 
 
 /**
  * Add or remove a value from current list and returned updated one
+ *
  * @param currentList
  * @param valueToUpdate
  * @param visible
- * @returns updated List
+ * @returns Updated List
  */
 export const setVisibleOptionsList = (
   currentList: string[],
@@ -41,6 +43,5 @@ export const setVisibleOptionsList = (
 
     listToReturn.splice(index, 1);
   }
-
   return listToReturn;
 };

@@ -1,107 +1,136 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import readme from './readme.mdx';
+import docs from './text-area.mdx';
 import { textInputControlsExclude } from '../../../utilities/storybook';
+import { fudisInputSizeArray } from '../../../types/forms';
 
-@Component({
-  selector: 'example-text-area-with-form-control',
-  template: `
-    <fudis-text-area
-      [control]="firstTextAreaControl"
-      [label]="'Required Text Area'"
-      [helpText]="'Add some text to the textarea'"
-      [tooltip]="'I am here to give you additional guidance'"
-      [tooltipPosition]="'right'"
-    />
-    <fudis-text-area
-      [control]="secondTextareaControl"
-      [helpText]="'Only 20 characters is allowed'"
-      [label]="'Text Area with max and min character length'"
-    />
-  `,
-})
-class TextAreaWithFormControlExampleComponent {
-  minLength = 5;
-  maxLength = 20;
-
-  firstTextAreaControl = new FormControl('', [FudisValidators.required('Missing a value.')]);
-
-  secondTextareaControl = new FormControl('', [
-    FudisValidators.minLength(
-      this.minLength,
-      `Too short input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
-    ),
-    FudisValidators.maxLength(this.maxLength, 'Too long input'),
-  ]);
-}
+const html = String.raw;
 
 export default {
   title: 'Components/Form/Text Area',
   component: TextAreaComponent,
   decorators: [
     moduleMetadata({
-      declarations: [TextAreaWithFormControlExampleComponent],
       imports: [ReactiveFormsModule, FormsModule],
     }),
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: textInputControlsExclude,
     },
   },
   argTypes: {
-    size: { options: ['sm', 'md', 'lg'] },
+    size: { options: fudisInputSizeArray },
     helpText: { control: 'text' },
-
-    tooltipPosition: {
+    popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
 } as Meta;
 
-const Template: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
-  props: { ...args, control: new FormControl(null) },
-});
-
-export const Example = Template.bind({});
-Example.args = {
-  tooltip: '',
-  tooltipToggle: false,
-  size: 'lg',
-  disabled: false,
+const commonArgs: Partial<TextAreaComponent> = {
   label: 'Text Area label example',
   helpText: 'Example help text',
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  tooltip: '',
-  tooltipToggle: false,
   size: 'lg',
-  disabled: true,
-  label: 'Text Area label example',
-  helpText: 'Example help text',
+  initialFocus: false,
+  popoverText: '',
+  popoverPosition: 'left',
+  popoverTriggerLabel: '',
 };
 
-export const WithValidators: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
-  props: args,
-  template: `
-		<example-text-area-with-form-control></example-text-area-with-form-control>
-	`,
-});
-
-WithValidators.parameters = {
-  controls: {
-    exclude: /.*/g,
+const ExampleTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    control: new FormControl(null),
   },
+  template: html`
+    <fudis-text-area
+      [label]="label"
+      [size]="size"
+      [control]="control"
+      [helpText]="helpText"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
+    >
+    </fudis-text-area>
+  `,
+});
+
+export const Example = ExampleTemplate.bind({});
+Example.args = {
+  ...commonArgs,
+};
+
+const DisabledTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    control: new FormControl({ value: null, disabled: true }),
+  },
+  template: html`
+    <fudis-text-area
+      [label]="label"
+      [size]="size"
+      [control]="control"
+      [helpText]="helpText"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
+    >
+    </fudis-text-area>
+  `,
+});
+
+export const Disabled = DisabledTemplate.bind({});
+Disabled.args = {
+  ...commonArgs,
+  label: 'Disabled text area',
+  helpText: 'You should not be able to focus on this input unless you use screen reader',
+};
+
+const WithValidatorsTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    control: new FormControl('', [
+      FudisValidators.minLength(
+        5,
+        `Too short input. Minimum length is 5 and maximum length is 20.`,
+      ),
+      FudisValidators.maxLength(20, 'Too long input'),
+      FudisValidators.required('Missing a value.'),
+    ]),
+  },
+  template: html`
+    <fudis-text-area
+      [label]="label"
+      [size]="size"
+      [control]="control"
+      [helpText]="helpText"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
+    >
+    </fudis-text-area>
+  `,
+});
+export const WithValidators = WithValidatorsTemplate.bind({});
+WithValidators.args = {
+  ...commonArgs,
+  label: 'Text Area with max and min character length',
+  helpText: 'Maximum of 20 characters allowed',
 };

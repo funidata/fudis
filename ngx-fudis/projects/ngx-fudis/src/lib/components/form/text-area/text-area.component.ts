@@ -1,103 +1,73 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  Host,
-  Input,
-  OnChanges,
-  OnInit,
-  Optional,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import {
-  getMaxLengthFromValidator,
-  getMinLengthFromValidator,
-  hasRequiredValidator,
-} from '../../../utilities/form/getValidators';
+import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
-import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
+import { Subscription } from 'rxjs';
 
+/**
+ * Allows entry of multi-line text.
+ *
+ * Use this component for longer or free-form user input.
+ */
 @Component({
   selector: 'fudis-text-area',
   templateUrl: './text-area.component.html',
-  styleUrls: ['./text-area.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TextAreaComponent
-  extends InputBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
+  extends TextFieldComponentBaseDirective
+  implements OnInit, OnChanges
 {
-  constructor(
-    @Host() @Optional() protected _parentForm: FormComponent | null,
-    private _focusService: FudisFocusService,
-    _idService: FudisIdService,
-    _changeDetectorRef: ChangeDetectorRef,
-  ) {
-    super(_idService, _changeDetectorRef);
+  constructor(_focusService: FudisFocusService, _idService: FudisIdService) {
+    super(_idService, _focusService);
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
-        this._maxLength = getMaxLengthFromValidator(this.control);
-        this._minLength = getMinLengthFromValidator(this.control);
+        this._required.next(FudisValidatorUtilities.required(this.control));
+        this._maxLength.next(FudisValidatorUtilities.maxLength(this.control));
+        this._minLength.next(FudisValidatorUtilities.minLength(this.control));
       }
     });
   }
 
   /**
-   * FormControl for text-area
+   * FormControl binded to the HTML textarea element
    */
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
-   * Text Area size
+   * Subscription for handling the valueChanges observable
    */
-  @Input() size: FudisInputSize = 'lg';
-
-  /**
-   * Min length for HTML attribute
-   */
-  protected _minLength: number | null = null;
-
-  /**
-   * Max length for HTML attribute and for character indicator in guidance
-   */
-  protected override _maxLength: number | null = null;
+  private _subscription: Subscription;
 
   ngOnInit(): void {
-    this._setInputId('text-area');
+    this._setComponentId('text-area');
     this._updateValueAndValidityTrigger.next();
-
-    /**
-     * TODO: write test
-     */
-    this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-      if (typeof value === 'string' && value.trim() === '') {
-        this.control.setValue(null);
-      }
-    });
-
-    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+    this._setControlValueSubscription();
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
-    }
-  }
+      if (!changes.control?.firstChange) {
+        this._setControlValueSubscription();
+      }
 
-  ngAfterViewInit(): void {
-    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-      this.focusToInput();
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._updateValueAndValidityTrigger.next());
     }
-    /**
-     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
-     */
-    if (this.control.disabled) {
-      this._inputRef.nativeElement.removeAttribute('disabled');
+
+    if (
+      !changes.nullControlOnEmptyString?.firstChange &&
+      changes.nullControlOnEmptyString?.currentValue !==
+        changes.nullControlOnEmptyString?.previousValue
+    ) {
+      this._setControlValueSubscription();
     }
   }
 }

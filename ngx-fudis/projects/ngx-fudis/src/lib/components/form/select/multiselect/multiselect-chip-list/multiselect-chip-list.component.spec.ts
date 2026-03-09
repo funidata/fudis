@@ -7,6 +7,7 @@ import { IconComponent } from '../../../../icon/icon.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-with-parent',
   template: `<div [id]="id">
     <fudis-multiselect-chip-list
@@ -16,22 +17,23 @@ import { getElement } from '../../../../../utilities/tests/utilities';
   </div>`,
 })
 class MockWithParentComponent {
-  items: FudisSelectOption<object>[] = multiselectChipListMockData;
+  items: FudisSelectOption<string>[] = multiselectChipListMockData;
   id = 'parent-of-chip-list';
 }
 
 describe('MultiselectChipListComponent', () => {
-  let component: MultiselectChipListComponent;
-  let fixture: ComponentFixture<MultiselectChipListComponent>;
+  let component: MultiselectChipListComponent<string>;
+  let fixture: ComponentFixture<MultiselectChipListComponent<string>>;
   let fixtureMock: ComponentFixture<MockWithParentComponent>;
-  let chipList: NodeList;
+  let chipList: NodeListOf<HTMLElement>;
   let buttonElement: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MultiselectChipListComponent, MockWithParentComponent, IconComponent],
+      declarations: [MultiselectChipListComponent, MockWithParentComponent],
+      imports: [IconComponent],
     });
-    fixture = TestBed.createComponent(MultiselectChipListComponent);
+    fixture = TestBed.createComponent(MultiselectChipListComponent<string>);
     component = fixture.componentInstance;
     component.selectedItems = multiselectChipListMockData;
     fixture.detectChanges();
@@ -63,14 +65,9 @@ describe('MultiselectChipListComponent', () => {
 
   describe('Chip element', () => {
     it('should have CSS class', () => {
-      expect(buttonElement.classList).toContain('fudis-multiselect-chip-list__button');
-    });
-
-    it('should have aria-describedby constructed with parent component id', () => {
-      const buttonElement = getElement(fixtureMock, 'button');
-
-      expect(buttonElement.getAttribute('aria-describedby')).toEqual(
-        'parent-of-chip-list-remove-items',
+      expect(buttonElement.classList).toContain('fudis-multiselect-chip-list__item__button');
+      expect(buttonElement.querySelector('span')!.classList).toContain(
+        'fudis-multiselect-chip-list__item__button__label',
       );
     });
 
@@ -96,25 +93,13 @@ describe('MultiselectChipListComponent', () => {
       expect(component.handleClick.emit).toHaveBeenCalledWith(multiselectChipListMockData[2]);
     });
 
-    it('should not emit click event if chip is not first focused', () => {
+    it('should emit click event even if chip is not first focused', () => {
       const itemToRemove = chipList[1];
       jest.spyOn(component.handleClick, 'emit');
 
       itemToRemove.dispatchEvent(new MouseEvent('click'));
       fixture.detectChanges();
 
-      expect(component.handleClick.emit).not.toHaveBeenCalled();
-
-      itemToRemove.dispatchEvent(new FocusEvent('focus'));
-      itemToRemove.dispatchEvent(new FocusEvent('blur'));
-      itemToRemove.dispatchEvent(new MouseEvent('click'));
-      fixture.detectChanges();
-
-      expect(component.handleClick.emit).not.toHaveBeenCalled();
-
-      itemToRemove.dispatchEvent(new FocusEvent('focus'));
-      itemToRemove.dispatchEvent(new MouseEvent('click'));
-      fixture.detectChanges();
       expect(component.handleClick.emit).toHaveBeenCalledWith(multiselectChipListMockData[1]);
     });
   });

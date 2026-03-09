@@ -1,10 +1,10 @@
 import { StoryFn, Meta, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 import { GridComponent } from './grid.component';
 import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utilities/storybook';
-import docs from './grid.docs.mdx';
+import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
-import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
+import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid';
 
 @Component({
   selector: 'example-grid-with-service',
@@ -13,8 +13,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
       [columns]="1"
       [rowGap]="'sm'"
       [align]="'center'"
-      [marginTop]="'md'"
-      [marginBottom]="'md'"
+      [classes]="'fudis-mt-md fudis-mb-md'"
     >
       <fudis-grid [columns]="2" [alignItemsX]="'center'" [rowGap]="'sm'" [alignItemsY]="'center'">
         <fudis-button
@@ -37,7 +36,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
       <fudis-grid
         [alignItemsX]="_gridAlignValue"
         [rowGap]="'sm'"
-        [classes]="['storybook__wrapper-border']"
+        [classes]="'storybook__wrapper-border'"
       >
         <fudis-heading [level]="3" [variant]="'md'"
           >Listen to Service's Columns but not AlignItemsX</fudis-heading
@@ -53,7 +52,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
           screen!</fudis-body-text
         >
       </fudis-grid>
-      <fudis-grid [columns]="2" [classes]="['storybook__wrapper-border']">
+      <fudis-grid [columns]="2" [classes]="'storybook__wrapper-border'">
         <fudis-heading [level]="3" [variant]="'md'"
           >Listen to Service's AlignItemsX but not Columns</fudis-heading
         >
@@ -68,7 +67,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
         >
       </fudis-grid>
 
-      <fudis-grid [serviceDefaults]="false" [classes]="['storybook__wrapper-border']">
+      <fudis-grid [serviceDefaults]="false" [classes]="'storybook__wrapper-border'">
         <fudis-heading [level]="3" [variant]="'md'">Service Defaults are turned off</fudis-heading>
         <fudis-body-text class="storybook__item"
           >This Grid has no set alignItemsX value, and it is ignoring defaults from
@@ -80,10 +79,11 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
       </fudis-grid>
     </fudis-grid>
   `,
+  standalone: false,
 })
 class GridWithServiceExampleComponent {
   constructor(private _gridService: FudisGridService) {
-    const defaultValue: FudisGridProperties = {
+    const defaultValue: FudisDefaultGridProperties = {
       columns: { xs: 1, sm: 2 },
       alignItemsX: 'end',
     };
@@ -160,29 +160,26 @@ const columnsToString = (columns: string | number | object): string => {
   return JSON.stringify(columns);
 };
 
-const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
-  props: { ...args, transformedColumns: columnsToString(args.columns) },
-  template: html`<fudis-body-text
-      style="margin: 1rem 0;"
-      [variant]="'lg-regular'"
-      [align]="'center'"
+const ExampleTemplate: StoryFn = (args) => ({
+  props: { ...args, transformedColumns: columnsToString(args['columns']) },
+  template: html`<fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
       >Current value of <code>columns</code> is:
       <code>{{transformedColumns}}</code></fudis-body-text
     >
     <fudis-grid
-      [classes]="['storybook__wrapper-border']"
+      [classes]="'storybook__wrapper-border'"
       [columns]="columns"
       [align]="align"
       [alignItemsX]="alignItemsX"
       [alignItemsY]="alignItemsY"
-      [marginTop]="marginTop"
-      [marginBottom]="marginBottom"
       [width]="width"
       [columnGap]="columnGap"
       [rowGap]="rowGap"
     >
       <div class="storybook__item">
-        <fudis-body-text>First Grid child's first Body Text inside it</fudis-body-text>
+        <fudis-body-text class="fudis-mb-xs"
+          >First Grid child's first Body Text inside it</fudis-body-text
+        >
         <fudis-body-text>First Grid child's second Body Text inside it</fudis-body-text>
       </div>
       <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
@@ -195,14 +192,88 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
     </fudis-grid>`,
 });
 
+const FlexboxTemplate: StoryFn = (args) => ({
+  props: { ...args },
+  template: html`
+    <fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
+      >This is Grid component styled with flex layout: <code>display:flex;</code></fudis-body-text
+    >
+    <fudis-grid
+      [columns]="3"
+      [columnGap]="'sm'"
+      [align]="'start'"
+      [classes]="'storybook__wrapper-border fudis-mb-md'"
+      style="display: flex;"
+    >
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+    </fudis-grid>
+
+    <fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
+      >This is Grid component styled with flex layout:
+      <code>display:flex; justify-content:flex-end</code></fudis-body-text
+    >
+    <fudis-grid
+      [columns]="3"
+      [columnGap]="'sm'"
+      [align]="'end'"
+      [classes]="'storybook__wrapper-border fudis-mb-md'"
+      style="display: flex; justify-content:flex-end"
+    >
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Element</fudis-body-text>
+    </fudis-grid>
+
+    <fudis-body-text class="fudis-my-sm" [variant]="'lg-regular'" [align]="'center'"
+      >This is Grid component with multiple different child elements with and without
+      flex</fudis-body-text
+    >
+    <fudis-grid
+      [columns]="{sm: 3}"
+      [columnGap]="'sm'"
+      [align]="'center'"
+      [classes]="'storybook__wrapper-border'"
+    >
+      <div style="display:flex; column-gap:.5rem;">
+        <fudis-body-text class="storybook__item">Element inside flex container</fudis-body-text>
+        <fudis-body-text class="storybook__item">Element inside flex container</fudis-body-text>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; row-gap:.5rem;">
+        <fudis-body-text class="storybook__item"
+          >Element inside flex container with wrap property</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item"
+          >Element inside flex container with wrap property</fudis-body-text
+        >
+      </div>
+      <div style="display:flex; column-gap:.5rem;">
+        <fudis-body-text class="storybook__item" style="align-self:center;"
+          >Element with align-self property</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item" style="align-self:stretch;"
+          >Element with align-self property</fudis-body-text
+        >
+      </div>
+      <div fudisGridItem [columns]="{sm: 2}">
+        <fudis-body-text class="storybook__item fudis-mb-xs" style="display:flex;"
+          >Single element with flex property</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item" style="display:flex; justify-content:center;"
+          >Centered single element with flex property</fudis-body-text
+        >
+      </div>
+    </fudis-grid>
+  `,
+});
+
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   columns: 3,
   align: 'center',
   alignItemsX: 'stretch',
   alignItemsY: 'stretch',
-  marginTop: 'none',
-  marginBottom: 'none',
   width: 'xxl',
   rowGap: 'responsive',
   columnGap: 'responsive',
@@ -231,19 +302,11 @@ Example.argTypes = {
     control: { type: 'select' },
   },
   alignItemsY: {
-    options: ['start', 'center', 'end', 'stretch'],
+    options: ['start', 'center', 'end', 'stretch', 'baseline'],
     control: { type: 'select' },
   },
   width: {
     options: ['xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'initial'],
-    control: { type: 'select' },
-  },
-  marginTop: {
-    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
-    control: { type: 'select' },
-  },
-  marginBottom: {
-    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
     control: { type: 'select' },
   },
   rowGap: {
@@ -366,7 +429,7 @@ ResponsiveColumns.parameters = {
   },
 };
 
-const ExampleWithServiceTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
+const ExampleWithServiceTemplate: StoryFn = (args) => ({
   props: { ...args },
   template: html` <example-grid-with-service></example-grid-with-service>`,
 });
@@ -374,6 +437,13 @@ const ExampleWithServiceTemplate: StoryFn<GridComponent> = (args: GridComponent)
 export const ExampleWithService = ExampleWithServiceTemplate.bind({});
 
 ExampleWithService.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
+
+export const WithFlexbox = FlexboxTemplate.bind({});
+WithFlexbox.parameters = {
   controls: {
     exclude: /.*/g,
   },

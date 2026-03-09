@@ -4,10 +4,16 @@ import { SelectComponent } from '../../select/select.component';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 
+/**
+ * Groups select options under a common category.
+ *
+ * Use this component to organize related options to improve readability.
+ */
 @Component({
   selector: 'fudis-select-group, fudis-multiselect-group',
   templateUrl: './select-group.component.html',
   styleUrls: ['./select-group.component.scss'],
+  standalone: false,
 })
 export class SelectGroupComponent {
   constructor(
@@ -39,8 +45,9 @@ export class SelectGroupComponent {
 
   /**
    * Called from SelectOption and MultiselectOption to set if the option is visible or not
-   * @param value value of option
-   * @param visible state of option's visibility
+   *
+   * @param value Value of option
+   * @param visible State of option's visibility
    */
   public setOptionVisibility(value: string, visible: boolean) {
     this._visibleOptions = setVisibleOptionsList(this._visibleOptions, value, visible);

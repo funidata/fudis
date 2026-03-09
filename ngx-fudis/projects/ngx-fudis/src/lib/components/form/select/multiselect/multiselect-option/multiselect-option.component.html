@@ -1,13 +1,14 @@
 <div
   class="fudis-multiselect-option"
   [attr.id]="_id"
+  tabindex="-1"
   [class.fudis-multiselect-option--visible]="_optionVisible"
   [class.fudis-multiselect-option--checked]="checked"
   [class.fudis-multiselect-option--focused]="_focused"
   [class.fudis-multiselect-option--disabled]="data.disabled"
 >
   <label
-    [attr.for]="_id + '-checkbox-input'"
+    [attr.for]="_id + '-checkbox-input-' + componentInstanceId"
     class="fudis-multiselect-option__label"
     [class.fudis-multiselect-option__label--focus]="_focused"
     [class.fudis-multiselect-option__label--checked]="checked"
@@ -22,29 +23,29 @@
         type="checkbox"
         class="fudis-multiselect-option__label__checkbox__input"
         role="option"
-        [attr.id]="_id + '-checkbox-input'"
-        [attr.aria-disabled]="data.disabled ? true : null"
-        (click)="_clickOption($event)"
+        [attr.id]="_id + '-checkbox-input-' + componentInstanceId"
+        [attr.aria-disabled]="data.disabled || null"
+        (click)="!data.disabled && _clickOption($event)"
         [attr.aria-selected]="checked"
         (focus)="_focus()"
         (keydown)="_keyDown($event)"
         (blur)="_blur($event)"
       />
-      <fudis-icon
-        class="fudis-multiselect-option__label__checkbox__icon"
-        *ngIf="checked"
-        [icon]="'check'"
-      />
+      @if (checked) {
+        <fudis-icon class="fudis-multiselect-option__label__checkbox__icon" [icon]="'check'" />
+      }
     </div>
     <div class="fudis-multiselect-option__label__text">
       <span class="fudis-multiselect-option__label__text__main">{{ data.label }}</span>
-      <span *ngIf="data.subLabel" class="fudis-multiselect-option__label__text__sub">{{
-        data.subLabel
-      }}</span>
+      @if (data.subLabel) {
+        <span class="fudis-multiselect-option__label__text__sub">{{ data.subLabel }}</span>
+      }
 
-      <span *ngIf="data.disabled" class="fudis-multiselect-option__label__text__disabled">
-        ({{ _parentMultiselect.translationOptionDisabledText | async }})</span
-      >
+      @if (data.disabled) {
+        <span class="fudis-multiselect-option__label__text__disabled">
+          ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
+        >
+      }
     </div>
   </label>
 </div>

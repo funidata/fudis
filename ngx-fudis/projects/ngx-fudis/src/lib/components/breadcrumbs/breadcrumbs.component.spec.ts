@@ -2,20 +2,27 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
-import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
-import { FudisIdService } from '../../services/id/id.service';
 import { BreadcrumbsItemComponent } from './breadcrumbs-item/breadcrumbs-item.component';
-import { FudisTranslationService } from '../../services/translation/translation.service';
 import { RouterModule } from '@angular/router';
-import { LinkDirective } from '../../directives/link/link.directive';
+import { getElement } from '../../utilities/tests/utilities';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-component',
   template: `<fudis-breadcrumbs [label]="'Test breadcrumbs navigation'">
     <p class="do-not-find-me">This should not be shown</p>
-    <fudis-breadcrumbs-item *ngFor="let link of links" [url]="link.url" [label]="link.label" />
+    @for (link of links; track link.url; let index = $index) {
+      <fudis-breadcrumbs-item>
+        @if (index + 1 !== links.length) {
+          <a [href]="link.url">{{ link.label }}</a>
+        }
+        @if (index + 1 === links.length) {
+          <fudis-body-text>{{ link.label }}</fudis-body-text>
+        }
+      </fudis-breadcrumbs-item>
+    }
   </fudis-breadcrumbs>`,
 })
 class MockComponent {
@@ -27,26 +34,16 @@ class MockComponent {
 }
 
 describe('BreadcrumbsComponent', () => {
-  let fixture: ComponentFixture<BreadcrumbsComponent> | ComponentFixture<MockComponent>;
+  let fixture: ComponentFixture<MockComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        BreadcrumbsComponent,
-        BreadcrumbsItemComponent,
-        LinkComponent,
-        LinkDirective,
-        IconComponent,
-        BodyTextComponent,
-        MockComponent,
-      ],
-      imports: [RouterModule.forRoot([])],
-      providers: [FudisIdService, FudisTranslationService],
+    TestBed.configureTestingModule({
+      declarations: [BreadcrumbsComponent, BreadcrumbsItemComponent, MockComponent],
+      imports: [BodyTextComponent, IconComponent, RouterModule.forRoot([])],
     });
 
     fixture = TestBed.createComponent(MockComponent);
-
-    fixture.autoDetectChanges();
+    fixture.detectChanges();
   });
 
   it('should render the correct number of breadcrumb items', () => {
@@ -76,17 +73,16 @@ describe('BreadcrumbsComponent', () => {
       const linkHrefs: (string | null | undefined)[] = [];
 
       items.forEach((item) => {
-        const linkElement: Element | null = (item as Element)!.querySelector(
-          '.fudis-breadcrumbs-item__link a',
+        const linkElement: HTMLAnchorElement | null = (item as HTMLAnchorElement)!.querySelector(
+          '.fudis-breadcrumbs-item a',
         );
+
         if (linkElement) {
           linkHrefs.push(linkElement.getAttribute('href'));
         }
       });
 
-      expect(linkHrefs.join(' ')).toEqual(
-        '/components /components/breadcrumbs /components/breadcrumbs/documentation',
-      );
+      expect(linkHrefs.join(' ')).toEqual('/components /components/breadcrumbs');
     });
 
     it('should have correct id attributes', () => {
@@ -104,6 +100,12 @@ describe('BreadcrumbsComponent', () => {
       expect(idList.join(' ')).toEqual(
         'fudis-breadcrumbs-1-item-1 fudis-breadcrumbs-1-item-2 fudis-breadcrumbs-1-item-3',
       );
+    });
+
+    it('should have correct aria-current attribute on last item', () => {
+      const bodyText = getElement(fixture, 'fudis-body-text p');
+
+      expect(bodyText.getAttribute('aria-current')).toEqual('page');
     });
   });
 });

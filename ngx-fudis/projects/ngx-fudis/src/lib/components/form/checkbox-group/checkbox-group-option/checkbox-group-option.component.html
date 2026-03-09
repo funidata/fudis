@@ -1,0 +1,58 @@
+@if (_control) {
+  <label
+    class="fudis-checkbox fudis-checkbox__label"
+    [attr.for]="id"
+    [id]="id + '-label'"
+    [class.fudis-checkbox--disabled]="_control.disabled || _checkboxGroup.disabled"
+  >
+    <input
+      (click)="_checkboxClick($event)"
+      type="checkbox"
+      class="fudis-checkbox__input"
+      [id]="id"
+      [formControl]="_control"
+      [value]="_control.value"
+      [name]="_checkboxGroup.id"
+      [attr.tabindex]="_control.disabled || _checkboxGroup.disabled ? -1 : null"
+      [attr.aria-disabled]="_control.disabled || _checkboxGroup.disabled || null"
+      [attr.aria-invalid]="
+        (_checkboxGroup.formGroup &&
+          _checkboxGroup.formGroup.touched &&
+          _checkboxGroup.formGroup.invalid &&
+          _checkboxGroup.groupBlurredOut) ||
+        null
+      "
+      (change)="_onChange()"
+      (blur)="_onBlur($event)"
+      (focus)="_onFocus($event)"
+      (keyup)="_checkboxGroup.handleKeyUp.emit($event)"
+    />
+    <div
+      class="fudis-checkbox__content"
+      [class.fudis-checkbox__content--disabled]="_control.disabled || _checkboxGroup.disabled"
+    >
+      <div class="fudis-checkbox__content-wrapper">
+        <span
+          class="fudis-checkbox__content__box"
+          [class.fudis-checkbox__content__box--focused]="_focused"
+          [class.fudis-checkbox__content__box--invalid]="
+            _checkboxGroup.formGroup &&
+            _checkboxGroup.formGroup.touched &&
+            _checkboxGroup.formGroup.invalid &&
+            _checkboxGroup.groupBlurredOut
+          "
+          [class.fudis-checkbox__content__box--disabled]="
+            _control.disabled || _checkboxGroup.disabled
+          "
+        >
+          @if (_control.value) {
+            <fudis-icon [icon]="'check'" class="fudis-checkbox__content__box__icon" />
+          }
+        </span>
+      </div>
+      <span class="fudis-checkbox__content__label">
+        {{ label }}
+      </span>
+    </div>
+  </label>
+}

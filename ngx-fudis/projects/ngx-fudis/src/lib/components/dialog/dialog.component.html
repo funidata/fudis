@@ -1,17 +1,19 @@
-<!-- <fudis-alert-group [insideDialog]="true" /> -->
-<div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
-  <fudis-button
-    *ngIf="_closeLabel | async as closeLabel"
+<div
+  class="fudis-dialog fudis-dialog__size__{{ size }}"
+  [class.fudis-dialog--scrollable]="_dialogScrollable()"
+  [attr.id]="_id"
+>
+  <fudis-icon-button
     fudisDialogClose
     class="fudis-dialog__close"
-    [class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute"
+    [class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute()"
     [attr.id]="_id + '-close'"
-    [label]="closeLabel"
-    [labelHidden]="true"
-    [size]="'icon-only'"
+    [ariaLabel]="_translateService.getTranslations()().DIALOG.CLOSE"
+    [size]="'extra-small'"
     [icon]="'ring-close-fill'"
     [variant]="'tertiary'"
   >
-  </fudis-button>
+  </fudis-icon-button>
   <ng-content></ng-content>
 </div>
+<fudis-alert-group [insideDialog]="true" />

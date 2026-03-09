@@ -1,7 +1,5 @@
 import {
-  AfterContentInit,
   Component,
-  ContentChild,
   ElementRef,
   Host,
   Input,
@@ -9,27 +7,38 @@ import {
   OnInit,
   Optional,
   ViewEncapsulation,
+  OnChanges,
+  inject,
+  Injector,
+  signal,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
-import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
-import { FudisBadgeVariant } from '../../../types/miscellaneous';
+import { FudisBadgeVariant, FudisComponentChanges } from '../../../types/miscellaneous';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
+/**
+ * Provides layout and structure for form content.
+ *
+ * Use this component to consistently arrange form fields, actions, and validation elements.
+ */
 @Component({
   selector: 'fudis-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
-export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit, OnDestroy {
+export class FormComponent extends GridApiDirective implements OnInit, OnDestroy, OnChanges {
   constructor(
     private _idService: FudisIdService,
-    private _elementRef: ElementRef,
+    protected _elementRef: ElementRef,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
@@ -37,44 +46,25 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   }
 
   /**
-   * Content directive for Form Header Actions
-   */
-  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective;
-
-  /**
-   * Content directive for Form Header Content
-   */
-  @ContentChild(HeaderDirective) protected _headerContent: HeaderDirective;
-
-  /**
-   * Content directive for Form Main Content
-   */
-  @ContentChild(ContentDirective) protected _mainContent: ContentDirective;
-
-  /**
-   * Help text displayed in Error Summary before listing individual errors
-   */
-  @Input({ required: true }) errorSummaryHelpText: string;
-
-  /**
-   * Form id. If not given, id will be generated with IdService. Set only in component initialisation.
-   */
-  @Input() id: string;
-
-  /**
    * Form title
    */
-  @Input() title: string;
+  @Input({ required: true }) title: string;
 
   /**
    * Heading level for the form title
    */
-  @Input() level: FudisHeadingLevel;
+  @Input({ required: true }) level: FudisHeadingLevel;
 
   /**
-   * Heading size for the form title
+   * Form id. If not given, id will be generated with IdService. Set only in component
+   * initialisation.
    */
-  @Input() titleVariant: FudisHeadingVariant = 'xl';
+  @Input() id: string;
+
+  /**
+   * Heading variant for the form title
+   */
+  @Input() titleVariant: FudisHeadingVariant;
 
   /**
    * Help text positioned under form title
@@ -82,7 +72,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() helpText: string;
 
   /**
-   * Add badge to the form title
+   * Additional badge to the form title
    */
   @Input() badge: FudisBadgeVariant | null;
 
@@ -92,31 +82,65 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() badgeText: string | null;
 
   /**
-   * Set Error Summary visibility manually. Usually set true on form submit with Button binded with 'fudisFormSubmit' directive.
+   * Set Error Summary visibility manually. Usually set true on form submit with Button binded with
+   * 'fudisFormSubmit' directive.
    */
   @Input() errorSummaryVisible: boolean = false;
 
   /**
-   * HTML FormElement
+   * Title text displayed in Error Summary before listing individual errors. If not provided, Fudis
+   * will display its default helper title text
    */
-  protected _formElement: HTMLFormElement | undefined;
+  @Input() errorSummaryTitle: string;
+
+  /**
+   * Each time Error Summary List is updated, this emitter will output the list
+   */
+  @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
+
+  /**
+   * Angular Change Detection did not trigger when we tried to update only our internal
+   * errorSummaryVisible input, hence we need this "helper signal"
+   */
+  protected _errorSummaryVisibleSignal = signal<boolean>(false);
+
+  private _injector = inject(Injector);
 
   ngOnInit(): void {
     this._setFormId();
 
-    this._errorSummaryService.addNewFormId(this.id);
+    if (!this.titleVariant) {
+      this.titleVariant = getHeadingVariant(this.level);
+    }
+
+    this._errorSummaryService.registerNewForm(this.id, this.errorSummaryVisible);
 
     if (this._dialogParent) {
-      this._dialogParent.closeButtonPositionAbsolute = true;
+      this._dialogParent.closeButtonPositionAbsolute.set(true);
     }
-  }
 
-  ngAfterContentInit(): void {
-    this._formElement = this._elementRef.nativeElement as HTMLFormElement;
+    toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this.id], {
+      injector: this._injector,
+    }).subscribe((value) => {
+      if (value !== this.errorSummaryVisible) {
+        this.errorSummaryVisible = !this.errorSummaryVisible;
+        this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    this._errorSummaryService.removeFormId(this.id);
+    this._errorSummaryService.removeForm(this.id);
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<FormComponent>): void {
+    if (
+      changes.errorSummaryVisible?.currentValue !== changes.errorSummaryVisible?.previousValue &&
+      this.id
+    ) {
+      this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
+      this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
+    }
   }
 
   /**

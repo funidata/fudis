@@ -1,15 +1,25 @@
-<div class="fudis-notification fudis-notification__{{ variant }}">
-  <ng-container *ngIf="!_content">
-    <fudis-icon *ngIf="variant === 'warning'" [icon]="'exclamation-mark-circle'" />
-    <fudis-icon *ngIf="variant === 'danger'" [icon]="'alert'" />
-    <fudis-icon *ngIf="variant === 'success'" [icon]="'checkmark-circle'" />
-    <fudis-icon *ngIf="variant === 'info'" [icon]="'info-circle'" />
-    <div class="fudis-notification__content">
-      <span class="fudis-visually-hidden">{{ _attentionText | async }}:&nbsp;</span>
-      <ng-content />
-    </div>
-  </ng-container>
-  <ng-container *ngIf="_content?.type === 'notification'">
-    <ng-container *ngTemplateOutlet="_content!.templateRef" />
-  </ng-container>
-</div>
+<article
+  #articleElement
+  tabindex="-1"
+  [attr.aria-describedby]="ariaDescribedby"
+  class="fudis-notification fudis-notification__{{ variant }}"
+>
+  <fudis-body-text class="fudis-visually-hidden">{{
+    _translateService.getTranslations()().ATTENTION
+  }}</fudis-body-text>
+  @if (variant === "warning") {
+    <fudis-icon [icon]="'exclamation-mark-circle'" />
+  }
+  @if (variant === "danger") {
+    <fudis-icon [icon]="'alert'" />
+  }
+  @if (variant === "success") {
+    <fudis-icon [icon]="'checkmark-circle'" />
+  }
+  @if (variant === "info") {
+    <fudis-icon [icon]="'info-circle'" />
+  }
+  <div class="fudis-notification__content">
+    <ng-content />
+  </div>
+</article>

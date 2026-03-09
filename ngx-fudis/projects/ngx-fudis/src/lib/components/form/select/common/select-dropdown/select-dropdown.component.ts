@@ -1,14 +1,23 @@
-import { Component, Input, effect, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  effect,
+  OnChanges,
+  signal,
+  WritableSignal,
+  computed,
+} from '@angular/core';
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
-import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-select-dropdown',
   templateUrl: './select-dropdown.component.html',
   styleUrls: ['./select-dropdown.component.scss'],
+  standalone: false,
 })
 export class SelectDropdownComponent extends DropdownBaseDirective implements OnChanges {
   constructor(private _translationService: FudisTranslationService) {
@@ -38,6 +47,13 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   @Input() autocompleteHelpText: string | false;
 
   /**
+   * By default, Autocomplete variant will display "No results found" text when there are 0 options
+   * matching. When combined with 'autocompleteFilter' false, application can set their own
+   * 'Fetching options...' etc. text while their own filtering is in progress.
+   */
+  @Input() autocompleteNoResultsText: string | null = null;
+
+  /**
    * Current filter text from Autocomplete parents
    */
   @Input() filterText: string;
@@ -60,12 +76,7 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   /**
    * Set dropdown open status
    */
-  @Input() open: boolean = false;
-
-  /**
-   * Boolean which toggles status updates for screen readers about changed option results
-   */
-  protected _displayStatus: boolean = false;
+  @Input() open: boolean | null = false;
 
   /**
    * Internal translated label for situations where no results with current filters were found
@@ -73,31 +84,77 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   protected _translationNoResultsFound = new BehaviorSubject<string>('');
 
   /**
-   * Internal translated label for number of visible results
+   * Internal translated label for visible results
    */
   protected _translationResults = new BehaviorSubject<string>('');
 
   /**
-   * Internal translated label for number of visible results
+   * Internal translated label for visible results
    */
   protected _translationShowing = new BehaviorSubject<string>('');
 
+  /**
+   * Internal signal mirroring results Input
+   */
+  private _resultsSignal: WritableSignal<number> = signal(0);
+
+  /**
+   * Internal signal mirroring filterText Input
+   */
+  private _filterTextSignal: WritableSignal<string> = signal('');
+
+  /**
+   * Computed signal for building and updating screen reader message
+   */
+  protected _liveMessage = computed(() => {
+    const filterText = this._filterTextSignal();
+    const results = this._resultsSignal();
+
+    // Only announce while dropdown is open
+    if (!this.open) {
+      return '';
+    }
+
+    // Reset announcement when input is cleared
+    if (!filterText) {
+      return '';
+    }
+
+    const helpText =
+      typeof this.autocompleteHelpText === 'string' ? this.autocompleteHelpText : null;
+
+    let message: string;
+
+    if (helpText) {
+      message = helpText;
+    } else {
+      // Handle the message based on results
+      const showingText = this._translationShowing.value;
+      const resultsText = this._translationResults.value;
+      const noResultsText = this._translationNoResultsFound.value;
+
+      if (results > 0) {
+        message = `${showingText} ${results} ${resultsText}`;
+      } else {
+        message = `${noResultsText}`;
+      }
+    }
+
+    return message;
+  });
+
   ngOnChanges(changes: FudisComponentChanges<SelectDropdownComponent>): void {
+    const newResults = changes.results?.currentValue;
     const newFilterText = changes.filterText?.currentValue;
 
-    const newResults = changes.results?.currentValue;
-
     if (
-      newFilterText !== changes.filterText?.previousValue ||
-      newResults !== changes.results?.previousValue
+      (changes.filterText &&
+        newFilterText !== undefined &&
+        newFilterText !== changes.filterText?.previousValue) ||
+      (changes.results && newResults !== undefined && newResults !== changes.results?.previousValue)
     ) {
-      this._displayStatus = false;
-
-      setTimeout(() => {
-        if (newFilterText === this.filterText || newResults === 0) {
-          this._displayStatus = true;
-        }
-      }, 500);
+      this._filterTextSignal.set(this.filterText ?? '');
+      this._resultsSignal.set(this.results ?? 0);
     }
   }
 }

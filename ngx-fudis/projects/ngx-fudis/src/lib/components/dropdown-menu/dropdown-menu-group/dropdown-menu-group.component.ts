@@ -2,10 +2,16 @@ import { Component, Host, Input } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 
+/**
+ * Groups related dropdown items.
+ *
+ * Use this component to organize related menu options to improve readability.
+ */
 @Component({
   selector: 'fudis-dropdown-menu-group',
   templateUrl: './dropdown-menu-group.component.html',
   styleUrls: ['./dropdown-menu-group.component.scss'],
+  standalone: false,
 })
 export class DropdownMenuGroupComponent {
   constructor(
@@ -23,7 +29,8 @@ export class DropdownMenuGroupComponent {
   @Input({ required: true }) label: string;
 
   /**
-   * Id for this Dropdown Menu Group. Generated with FudisIdService and used for accessibility attributes.
+   * Id for this Dropdown Menu Group. Generated with FudisIdService and used for accessibility
+   * attributes.
    */
   public id: string;
 }

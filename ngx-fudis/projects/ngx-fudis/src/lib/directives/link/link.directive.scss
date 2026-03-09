@@ -1,0 +1,19 @@
+@use '@funidata/fudis-core' as core;
+
+.fudis-link {
+  &__external {
+    &__icon-wrapper {
+      display: inline-block;
+      position: relative;
+      padding-right: core.$spacing-lg;
+      text-decoration: underline solid;
+    }
+
+    &__icon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+}

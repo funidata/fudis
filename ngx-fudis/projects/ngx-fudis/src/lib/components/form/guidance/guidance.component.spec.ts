@@ -2,14 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GuidanceComponent } from './guidance.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisIdService } from '../../../services/id/id.service';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { IconComponent } from '../../icon/icon.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement, getAllElements } from '../../../utilities/tests/utilities';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
-import { MockComponent } from 'ng-mocks';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
 const testMaxLength = 20;
@@ -34,7 +30,7 @@ const testFormGroupWithGroupValidator: FormGroup = new FormGroup(
     swedish: new FormControl<string | null>(null),
     english: new FormControl<string | null>(null),
   },
-  FudisGroupValidators.atLeastOneRequired('There must be one value!'),
+  FudisGroupValidators.oneRequired('There must be one value!'),
 );
 
 const testControl = new FormControl(null, [
@@ -48,13 +44,9 @@ describe('GuidanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        GuidanceComponent,
-        ContentDirective,
-        ValidatorErrorMessageComponent,
-        MockComponent(IconComponent),
-      ],
-      providers: [FudisInternalErrorSummaryService, FudisIdService, FudisTranslationService],
+      declarations: [GuidanceComponent, ValidatorErrorMessageComponent],
+      imports: [IconComponent],
+      providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 
@@ -63,10 +55,8 @@ describe('GuidanceComponent', () => {
     component = fixture.componentInstance;
     component.inputLabel = 'Test Label';
     component.for = 'related-input-id';
-    component.formId = 'test-form-id';
     component.helpText = 'This is describing guidance text';
     component.maxLength = testMaxLength;
-    component.ariaLive = 'polite';
     fixture.detectChanges();
   });
 
@@ -85,9 +75,9 @@ describe('GuidanceComponent', () => {
       expect(element.innerHTML).toContain('This is describing guidance text');
     });
 
-    it('should have ariaLive assertive', () => {
-      const element = getElement(fixture, '.fudis-guidance__errors__list');
-      expect(element.getAttribute('arialive')).toEqual('polite');
+    it('should have groupHelpTextHidden set to false', () => {
+      const element = getElement(fixture, '.fudis-guidance__help-text');
+      expect(element.getAttribute('aria-hidden')).toEqual('false');
     });
   });
 
@@ -100,9 +90,9 @@ describe('GuidanceComponent', () => {
 
     it('should not have errors when control is untouched', () => {
       const element = getElement(fixture, '.fudis-guidance__errors');
-      const error = getElement(fixture, 'fudis-validator-error-message');
+      const error = getElement(fixture, 'fudis-validator-error-message p');
 
-      expect(error.getAttribute('ng-reflect-visible')).toEqual('false');
+      expect(error).toBeFalsy();
       expect(element).toBeNull();
     });
 
@@ -110,19 +100,10 @@ describe('GuidanceComponent', () => {
       component.control.markAsTouched();
       fixture.detectChanges();
       const element = getElement(fixture, '.fudis-guidance__errors');
-      const error = getElement(fixture, 'fudis-validator-error-message');
+      const error = getElement(fixture, 'fudis-validator-error-message p');
 
-      expect(error.getAttribute('ng-reflect-visible')).toEqual('true');
+      expect(error).toBeTruthy();
       expect(element).toBeTruthy();
-    });
-
-    it('should have related input label text passed to Validator Error Message', () => {
-      component.control.markAsTouched();
-      fixture.detectChanges();
-
-      const element = getElement(fixture, 'fudis-validator-error-message');
-      expect(element.getAttribute('ng-reflect-label')).toEqual('Test Label');
-      expect(element.getAttribute('ng-reflect-visible')).toEqual('true');
     });
 
     it('should show maxLength indicator', () => {
@@ -173,7 +154,6 @@ describe('GuidanceComponent', () => {
 
   describe('with Form Group', () => {
     beforeEach(() => {
-      component.formId = 'some-test-id';
       component.formGroup = testFormGroup;
       component.groupBlurredOut = true;
       component.formGroup.controls['finnish'].markAsUntouched();
@@ -227,20 +207,14 @@ describe('GuidanceComponent', () => {
       });
 
       it('should show errors when single form control is touched', () => {
-        const errorListBefore = getAllElements(
-          fixture,
-          'fudis-validator-error-message[ng-reflect-visible="true"]',
-        );
+        const errorListBefore = getAllElements(fixture, 'fudis-validator-error-message p');
 
         expect(errorListBefore.length).toBe(0);
 
         component.formGroup!.controls['finnish'].markAsTouched();
         fixture.detectChanges();
 
-        const errorList = getAllElements(
-          fixture,
-          'fudis-validator-error-message[ng-reflect-visible="true"]',
-        );
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
         expect(errorList.length).toBe(2);
       });
 
@@ -248,10 +222,7 @@ describe('GuidanceComponent', () => {
         component.groupBlurredOut = false;
         fixture.detectChanges();
 
-        const errorList = getAllElements(
-          fixture,
-          'fudis-validator-error-message[ng-reflect-visible="true"]',
-        );
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
         expect(errorList.length).toBe(0);
       });
 

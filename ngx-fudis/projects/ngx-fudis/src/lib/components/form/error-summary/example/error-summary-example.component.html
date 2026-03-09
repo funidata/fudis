@@ -1,0 +1,226 @@
+<ng-container *transloco="let t">
+  <fudis-form
+    class="fudis-mt-xl"
+    [align]="'center'"
+    [level]="1"
+    [title]="t('formTitle')"
+    [helpText]="t('currentStrategy') + toggleLive"
+    [errorSummaryTitle]="t('errorSummaryTitle')"
+  >
+    <fudis-form-actions>
+      <fudis-button
+        [id]="'change-strategy-button'"
+        [label]="t('changeStrategy')"
+        [variant]="'tertiary'"
+        [icon]="'settings'"
+        (handleClick)="toggleLiveRemove()"
+      />
+      <fudis-button
+        [id]="'change-language-button'"
+        [variant]="'tertiary'"
+        (handleClick)="changeLanguage()"
+        [icon]="'switch'"
+        [label]="t('changeLanguage')"
+      />
+      <fudis-button
+        [id]="'submit-button'"
+        fudisFormSubmit
+        [formValid]="formExample.valid"
+        [label]="t('submit')"
+      />
+    </fudis-form-actions>
+    <fudis-form-content>
+      <fudis-section [title]="t('sectionTitle1')" [errorSummaryBreadcrumb]="true" [level]="2">
+        <fudis-section-content>
+          <fudis-fieldset [label]="t('fieldsetLegend')">
+            <fudis-fieldset-content>
+              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ xs: 1, sm: 2 }">
+                <fudis-text-input
+                  [id]="'unique-input-3'"
+                  [control]="formExample.controls['teacher']"
+                  [label]="t('form.teacherName.label')"
+                  [helpText]="t('form.teacherName.helpText')"
+                />
+                <fudis-text-input
+                  [id]="'unique-input-4'"
+                  [control]="formExample.controls['email']"
+                  [label]="t('form.teacherEmail.label')"
+                  [helpText]="t('form.teacherEmail.helpText')"
+                />
+              </fudis-grid>
+              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ xs: 1, sm: 2 }">
+                <fudis-radio-button-group
+                  [label]="t('form.courseType.label')"
+                  [control]="formExample.controls['courseType']"
+                >
+                  @for (option of courseTypeOptions; track option) {
+                    <fudis-radio-button
+                      [label]="t('form.courseType.options.' + option)"
+                      [value]="option"
+                    />
+                  }
+                </fudis-radio-button-group>
+                <fudis-checkbox-group
+                  [formGroup]="formExample.controls.courseBooks"
+                  [label]="t('form.courseBooks.label')"
+                  [helpText]="t('form.courseBooks.helpText')"
+                >
+                  <fudis-checkbox-group-option
+                    [controlName]="'first'"
+                    [label]="t('form.courseBooks.options.heir')"
+                  />
+                  <fudis-checkbox-group-option
+                    [controlName]="'second'"
+                    [label]="t('form.courseBooks.options.dark')"
+                  />
+                  <fudis-checkbox-group-option
+                    [controlName]="'third'"
+                    [label]="t('form.courseBooks.options.command')"
+                  />
+                </fudis-checkbox-group>
+                <fudis-datepicker
+                  [id]="'date-picker-1'"
+                  [size]="'md'"
+                  [label]="t('form.startDate.label')"
+                  [helpText]="t('form.startDate.helpText')"
+                  [control]="formExample.controls['importantDate']"
+                />
+              </fudis-grid>
+            </fudis-fieldset-content>
+          </fudis-fieldset>
+          <fudis-fieldset class="fudis-mt-xl" [label]="t('fieldsetSelectLegend')">
+            <fudis-fieldset-content>
+              <fudis-grid [alignItemsY]="'baseline'" [columns]="{ xs: 1, sm: 2 }">
+                <fudis-select
+                  [variant]="'dropdown'"
+                  [control]="formExample.controls.courseMainMaskot"
+                  [label]="t('form.maskot.label') + ' (Dropdown)'"
+                >
+                  <ng-template fudisSelectOptions>
+                    @for (option of mainMaskotOptions; track option.value) {
+                      <fudis-select-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
+                  </ng-template>
+                </fudis-select>
+                <fudis-select
+                  [variant]="'autocompleteDropdown'"
+                  [control]="formExample.controls.courseMainMaskot"
+                  [label]="t('form.maskot.label') + ' (Autocomplete)'"
+                >
+                  <ng-template fudisSelectOptions>
+                    @for (option of mainMaskotOptions; track option.value) {
+                      <fudis-select-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
+                  </ng-template>
+                </fudis-select>
+                <fudis-multiselect
+                  [variant]="'dropdown'"
+                  [control]="formExample.controls.courseTopics"
+                  [label]="t('form.courseTopics.label') + ' (Dropdown)'"
+                >
+                  <ng-template fudisSelectOptions>
+                    @for (option of topicOptions; track option.value) {
+                      <fudis-multiselect-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
+                  </ng-template>
+                </fudis-multiselect>
+                <fudis-multiselect
+                  [variant]="'autocompleteDropdown'"
+                  [control]="formExample.controls.courseTopics"
+                  [label]="t('form.courseTopics.label') + ' (Autocomplete)'"
+                >
+                  <ng-template fudisSelectOptions>
+                    @for (option of topicOptions; track option.value) {
+                      <fudis-multiselect-option
+                        [data]="{ value: option.value, label: t(option.label) }"
+                      />
+                    }
+                  </ng-template>
+                </fudis-multiselect>
+                <div>
+                  <fudis-heading [level]="3" [variant]="'sm'">{{
+                    t("selectedOption")
+                  }}</fudis-heading>
+                  @if (formExample.controls.courseMainMaskot.value) {
+                    <fudis-dl [variant]="'compact'">
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="t('value')" />
+                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.value }}</fudis-dd>
+                      </fudis-dl-item>
+                      <fudis-dl-item>
+                        <fudis-dt [contentText]="t('label')" />
+                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.label }}</fudis-dd>
+                      </fudis-dl-item>
+                    </fudis-dl>
+                  } @else {
+                    <fudis-body-text>{{ t("selectedNullOption") }}</fudis-body-text>
+                  }
+                </div>
+                <div>
+                  <fudis-heading [level]="3" [variant]="'sm'">{{
+                    t("multiSelectedOption")
+                  }}</fudis-heading>
+                  @if (formExample.controls.courseTopics.value) {
+                    <fudis-dl>
+                      @for (
+                        option of formExample.controls.courseTopics.value;
+                        track option.value;
+                        let index = $index
+                      ) {
+                        <fudis-dl-item>
+                          <fudis-dt [contentText]="t('selectOption') + ' ' + (index + 1)" />
+                          <fudis-dd>
+                            <fudis-dl [variant]="'compact'">
+                              <fudis-dl-item>
+                                <fudis-dt [contentText]="t('value')" />
+                                <fudis-dd>{{ option.value }}</fudis-dd>
+                              </fudis-dl-item>
+                              <fudis-dl-item>
+                                <fudis-dt [contentText]="t('label')" />
+                                <fudis-dd>{{ option.label }}</fudis-dd>
+                              </fudis-dl-item>
+                            </fudis-dl>
+                          </fudis-dd>
+                        </fudis-dl-item>
+                      }
+                    </fudis-dl>
+                  } @else {
+                    <fudis-body-text>{{ t("selectedNullOption") }}</fudis-body-text>
+                  }
+                </div>
+              </fudis-grid>
+            </fudis-fieldset-content>
+          </fudis-fieldset>
+        </fudis-section-content>
+      </fudis-section>
+      <fudis-section
+        class="fudis-mt-lg"
+        [title]="t('sectionTitle2')"
+        [level]="2"
+        [errorSummaryBreadcrumb]="true"
+      >
+        <fudis-section-content>
+          <fudis-body-text class="fudis-mb-xs">{{ t("sectionHelptext1") }}</fudis-body-text>
+          <fudis-body-text>{{ t("sectionHelptext2") }}</fudis-body-text>
+          <fudis-button
+            class="fudis-mt-sm fudis-mr-md fudis-mb-sm"
+            [id]="'error-button-1'"
+            [label]="firstError ? t('customError1Hide') : t('customError1Show')"
+            (handleClick)="toggleFirstError()"
+          />
+          <fudis-button
+            [id]="'error-button-2'"
+            [label]="secondError ? t('customError2Hide') : t('customError2Show')"
+            (handleClick)="toggleSecondError()"
+          />
+        </fudis-section-content>
+      </fudis-section>
+    </fudis-form-content>
+  </fudis-form>
+</ng-container>

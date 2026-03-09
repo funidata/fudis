@@ -7,9 +7,9 @@ export const fudisIdComponents = [
   'autocomplete',
   'body-text',
   'button',
+  'checkbox',
   'autocomplete-multi-select',
   'datepicker',
-  'daterange',
   'dialog',
   'dropdown',
   'error-message',
@@ -18,12 +18,14 @@ export const fudisIdComponents = [
   'form',
   'guidance',
   'heading',
-  'input-with-language-options',
+  'localized-text-group',
   'link',
   'section',
   'text-area',
   'text-input',
   'validator-error-message',
+  'pagination',
+  'popover',
 ] as const;
 
 export const fudisIdParents = [

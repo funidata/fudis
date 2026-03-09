@@ -1,25 +1,29 @@
-import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular';
+import { action } from 'storybook/actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
-import readme from './multiselect.mdx';
-import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
+import docs from './multiselect.mdx';
+import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
+import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
   component: MultiselectComponent,
   decorators: [
+    moduleMetadata({
+      imports: [StorybookExampleMultiselectBackendSimulationComponent],
+    }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: selectStoryControlExclude,
@@ -33,6 +37,24 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
+    showSelectionChips: {
+      table: {
+        disable: true,
+      },
+    },
+    popoverPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
+      control: { type: 'text' },
+    },
+  },
+  args: {
+    showSelectionChips: true,
   },
 } as Meta;
 
@@ -41,21 +63,25 @@ const html = String.raw;
 const commonProps: Partial<MultiselectComponent> = {
   label: 'Select a pet',
   size: 'lg',
-  disabled: false,
   placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this Dropdown please pick atleast two',
+  helpText:
+    'All pets are equally important, but for sake of this Dropdown please pick at least two',
   showSelectionChips: true,
   selectionClearButton: true,
   autocompleteHelpText: 'Hello from Dropdown Help Text!',
   variant: 'dropdown',
+  initialFocus: false,
+  popoverText: '',
+  popoverTriggerLabel: '',
+  popoverPosition: 'right',
 };
 
-const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound[] | null>(
+    control: new FormControl<string | object[] | null>(
       null,
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),
@@ -66,27 +92,28 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
-      [variant]="'dropdown'"
       [label]="label"
       [helpText]="helpText"
-      [disabled]="disabled"
       [variant]="variant"
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
       [selectionClearButton]="selectionClearButton"
       [autocompleteHelpText]="autocompleteHelpText"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     >
-      <ng-template fudisContent type="select-options">
-        <fudis-multiselect-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-multiselect-option>
-        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-multiselect-option>
+      <ng-template fudisSelectOptions>
+        @for (option of defaultOptions; track option.value) {
+        <fudis-multiselect-option [data]="option"></fudis-multiselect-option>
+        } @for (group of groupedMockData; track group.country) {
+        <fudis-multiselect-group [label]="group.country">
+          @for (groupedOption of group.options; track groupedOption.value) {
+          <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
+          }
         </fudis-multiselect-group>
+        }
       </ng-template>
     </fudis-multiselect>
   `,
@@ -95,4 +122,20 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   ...commonProps,
+};
+
+const ExampleBackendTemplate: StoryFn = (args) => ({
+  props: {
+    ...args,
+    selectionUpdate: action('selectionUpdate'),
+  },
+  template: html`<example-multiselect-backend-simulation></example-multiselect-backend-simulation>`,
+});
+
+export const BackendSimulation = ExampleBackendTemplate.bind({});
+
+BackendSimulation.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
 };

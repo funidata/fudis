@@ -1,10 +1,11 @@
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import { FudisTranslationConfig } from '../../../../types/miscellaneous';
+import { FudisTranslationConfig } from '../../../../services/translation/translationKeys';
 
 /**
  * Update locale for Fudis translations in Datepicker
+ *
  * @param value Language Signal string value
- * @returns locale code
+ * @returns Locale code
  */
 export const updateLocale = (value: string): string => {
   switch (value) {
@@ -46,7 +47,8 @@ export const updateMatDatePickerTranslations = (
 
 /**
  * Parse date input to number array
- * @returns new Date(year, monthIndex, day) or null
+ *
+ * @returns New Date(year, monthIndex, day) or null
  */
 export const parseDate = (value: string | null | undefined): Date | null => {
   // Split input value by non number values, e.g. 25/5/1977 or 25.5.1977 --> [25,5,1977]
@@ -57,8 +59,8 @@ export const parseDate = (value: string | null | undefined): Date | null => {
         .map(Number)
     : null;
 
-  // If day, month and year are provided
-  if (numberArray?.length === 3) {
+  // If day, month and year are provided. Year must have 4 digits.
+  if (numberArray?.length === 3 && numberArray[2].toString().length === 4) {
     const newDate = new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
 
     const dayUnchanged = newDate.getDate() === numberArray[0];

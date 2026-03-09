@@ -1,37 +1,14 @@
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Component, importProvidersFrom } from '@angular/core';
-import { DatepickerComponent } from './datepicker.component';
-import docs from './datepicker-docs.mdx';
+import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
+import { DatepickerComponent } from './datepicker.component';
+import docs from './datepicker.mdx';
 import { datepickerControlsExclude } from '../../../../utilities/storybook';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
-
-@Component({
-  selector: 'example-language-change-component',
-  template: ` <fudis-grid [marginTop]="'sm'" [rowGap]="'xs'">
-    <fudis-button [label]="_label" (handleClick)="changeLanguage()" />
-    <fudis-body-text>Current language: {{ _translationService.getLanguage() }}</fudis-body-text>
-  </fudis-grid>`,
-})
-class LanguageChangeComponent {
-  constructor(private _translationService: FudisTranslationService) {
-    this._translationService.setLanguage('en');
-  }
-
-  protected _label = 'Change calendar language';
-
-  changeLanguage(): void {
-    if (this._translationService.getLanguage() === 'en') {
-      this._translationService.setLanguage('fi');
-    } else if (this._translationService.getLanguage() === 'fi') {
-      this._translationService.setLanguage('sv');
-    } else {
-      this._translationService.setLanguage('en');
-    }
-  }
-}
+import { action } from 'storybook/actions';
+import { LanguageChangeComponent } from '../examples/example-datepicker-language-change';
+import { DateFilterWithErrorMessageComponent } from '../examples/example-datepicker-date-filter';
 
 const html = String.raw;
 
@@ -48,18 +25,18 @@ export default {
   },
   decorators: [
     moduleMetadata({
-      declarations: [LanguageChangeComponent],
-      imports: [ReactiveFormsModule, FormsModule],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        DateFilterWithErrorMessageComponent,
+        LanguageChangeComponent,
+      ],
     }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
   argTypes: {
-    tooltipPosition: {
-      options: ['left', 'right', 'above', 'below'],
-      control: { type: 'radio' },
-    },
     label: {
       control: { type: 'text' },
     },
@@ -70,7 +47,14 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
-    tooltip: {
+    popoverPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    popoverText: {
+      control: { type: 'text' },
+    },
+    popoverTriggerLabel: {
       control: { type: 'text' },
     },
   },
@@ -80,13 +64,14 @@ const commonArgs: Partial<DatepickerComponent> = {
   label: 'Select a date',
   helpText: 'Choose your favourite date.',
   size: 'md',
-  disabled: false,
-  tooltip: 'Is it your birthday?',
-  tooltipPosition: 'left',
-  tooltipToggle: false,
+  dateParse: true,
+  initialFocus: false,
+  popoverText: 'Is it your birthday?',
+  popoverPosition: 'left',
+  popoverTriggerLabel: 'Additional information',
 };
 
-const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl(null, FudisValidators.required('Date is required.')),
@@ -98,14 +83,15 @@ const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
-    ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+      [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
+    />
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
     <example-language-change-component />
   `,
 });
@@ -115,7 +101,7 @@ Datepicker.args = {
   ...commonArgs,
 };
 
-const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const PreselectedTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl(new Date(1977, 11, 16)),
@@ -127,14 +113,15 @@ const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerCompo
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 
@@ -143,7 +130,7 @@ PreselectedDate.args = {
   ...commonArgs,
 };
 
-const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const DisabledTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl({ value: null, disabled: true }),
@@ -155,14 +142,15 @@ const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponen
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 
@@ -171,7 +159,7 @@ Disabled.args = {
   ...commonArgs,
 };
 
-const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const MinMaxTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     control: new FormControl<Date | null>(null, [
@@ -192,14 +180,15 @@ const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent)
       [size]="size"
       [helpText]="helpText"
       [control]="control"
-      [disabled]="disabled"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
+      [dateParse]="dateParse"
+      [initialFocus]="initialFocus"
+      [popoverText]="popoverText"
+      [popoverPosition]="popoverPosition"
+      [popoverTriggerLabel]="popoverTriggerLabel"
     ></fudis-datepicker>
-    <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value }}</fudis-body-text
-    >
+    @if (control.value) {
+    <fudis-body-text>The date output as ISO string is: {{ control.value }}</fudis-body-text>
+    }
   `,
 });
 
@@ -207,4 +196,22 @@ export const WithMinMaxValidator = MinMaxTemplate.bind({});
 WithMinMaxValidator.args = {
   ...commonArgs,
   helpText: 'Choose a date between the allowed range.',
+};
+
+export const WithDateFilter: StoryFn = (args) => ({
+  props: {
+    ...args,
+    addError: action('addError'),
+  },
+  template: html`
+    <example-date-filter-with-error-message
+      (handleAddError)="addError($event)"
+    ></example-date-filter-with-error-message>
+  `,
+});
+
+WithDateFilter.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
 };

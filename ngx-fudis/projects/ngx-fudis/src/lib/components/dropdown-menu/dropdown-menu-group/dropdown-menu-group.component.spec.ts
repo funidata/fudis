@@ -12,7 +12,6 @@ describe('DropdownMenuGroupComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DropdownMenuGroupComponent, DropdownMenuComponent],
-      providers: [FudisIdService],
     })
       .overrideComponent(DropdownMenuGroupComponent, {
         add: {

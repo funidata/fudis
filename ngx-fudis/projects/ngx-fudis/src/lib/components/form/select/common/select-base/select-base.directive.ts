@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   ContentChild,
   Directive,
   ElementRef,
@@ -12,60 +11,65 @@ import {
   Signal,
   ViewChild,
   WritableSignal,
-  effect,
   signal,
+  OnDestroy,
+  DOCUMENT,
 } from '@angular/core';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import { InputBaseDirective } from '../../../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
-import { SelectComponent } from '../../select/select.component';
-import { MultiselectComponent } from '../../multiselect/multiselect.component';
-import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
-import { DOCUMENT } from '@angular/common';
+import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
+import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
+import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
+import { fromEvent, Subscription } from 'rxjs';
+import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
+import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Directive({
   selector: '[fudisSelectBase]',
+  standalone: false,
 })
-export class SelectBaseDirective extends InputBaseDirective implements OnChanges {
+export class SelectBaseDirective
+  extends ControlComponentBaseDirective
+  implements OnChanges, OnDestroy
+{
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
-    protected _focusService: FudisFocusService,
-    private _translationService: FudisTranslationService,
+    protected _dialogService: FudisDialogService,
+    _focusService: FudisFocusService,
     _idService: FudisIdService,
-    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _changeDetectorRef);
+    super(_idService, _focusService);
 
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
-        this._required = hasRequiredValidator(this.control);
+        this._required.next(FudisValidatorUtilities.required(this.control));
       }
     });
-
-    effect(() => {
-      const translations = _translationService.getTranslations()();
-
-      this.translationOptionDisabledText.next(translations.SELECT.DISABLED);
-
-      // TODO: after a11y audit, check if these can be removed
-      this._translationOpenAriaLabel.next(translations.SELECT.OPEN_DROPDOWN);
-      this._translationCloseAriaLabel.next(translations.SELECT.CLOSE_DROPDOWN);
+    /**
+     * This is for detecting the input field size changes so the dropdown width and height can be
+     * adjusted.
+     */
+    this._resizeObserver = new ResizeObserver((): void => {
+      this._calculateDropdownPosition();
     });
+    /**
+     * Observable for viewport height and orientation change, will cause dropdown to close.
+     */
+    fromEvent(window, 'resize')
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        if (window.innerHeight !== this._viewportLastHeight && this._dropdownOpen()) {
+          this._viewportLastHeight = window.innerHeight;
+          this.closeDropdown(false, true);
+        }
+      });
   }
-
-  /**
-   * Reference to autocomplete element, used to focus to it
-   */
-  @ViewChild('autocompleteRef') public autocompleteRef: SelectAutocompleteComponent;
 
   /**
    * Reference to child DropdownComponent listing all options
@@ -80,7 +84,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * To lazy load options on first open
    */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
+  @ContentChild(SelectOptionsDirective) protected _selectOptionsDirective: SelectOptionsDirective;
 
   /**
    * Reference to child DropdownComponent listing all options
@@ -98,23 +102,40 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @Input() placeholder: string;
 
   /**
-   * Determine if Select has autocompletion filter for user typed text
-   * When set to:
-   * "dropdown": default, normal select dropdown
-   * "autocompleteDropdown": dropdown with autocomplete input field
-   * "autocompleteType": autocomplete but user must type 3 letters before any results are displayed
+   * Determine if Select has autocompletion filter for user typed text When set to:
+   *
+   * - Dropdown: default, normal select dropdown
+   * - AutocompleteDropdown": dropdown with autocomplete input field
+   * - AutocompleteType: autocomplete but user must type 3 letters before any results are displayed
    */
   @Input() variant: FudisSelectVariant = 'dropdown';
 
   /**
-   * Enable / disable button, which clears user selectionw when there is a selected value
+   * Enable / disable button, which clears user selection when there is a selected value
    */
   @Input() selectionClearButton: boolean = true;
 
   /**
-   * For Autocomplete variants optional helper text displayed as first item in opened dropdown list. By default uses internal Fudis translation, which can be disabled by setting this property to boolean 'false'
+   * By default Autocomplete filters options loaded to the DOM based on user input. When this is set
+   * to 'false', filtering is disabled and all options available in DOM are displayed regardless of
+   * user's input. Disabling can be useful, if application wants to implement their own filtering
+   * logic. E. g. get user's input, run a backend search and create list of options for the Select.
+   */
+  @Input() autocompleteFilter: boolean = true;
+
+  /**
+   * For Autocomplete variants optional helper text displayed as first item in opened dropdown list.
+   * By default uses internal Fudis translation, which can be disabled by setting this property to
+   * boolean 'false'
    */
   @Input() autocompleteHelpText: string | false;
+
+  /**
+   * By default, Autocomplete variant will display "No results found" text when there are 0 options
+   * matching. When combined with 'autocompleteFilter' false, application can set their own
+   * 'Fetching options...' etc. text while their own filtering is in progress.
+   */
+  @Input() autocompleteNoResultsText: string | null = null;
 
   /**
    * Value output event on selection change
@@ -128,7 +149,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @Output() visibleOptionsUpdate: EventEmitter<number> = new EventEmitter<number>();
 
   /**
-   * Output for number of visible options after filtering results
+   * Output for filter text after filtering results
    */
   @Output() filterTextUpdate: EventEmitter<string | null> = new EventEmitter<string | null>();
 
@@ -138,34 +159,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   public focusSelector: string = '.fudis-select-option__focusable';
 
   /**
-   * Internal translated text for disabled select option, used in Select and Multiselect Option
-   */
-  public translationOptionDisabledText = new BehaviorSubject<string>('string');
-
-  /**
-   * Selected option or options label for non-autocomplete dropdowns
-   */
-  protected _dropdownSelectionLabelText: string | null = null;
-
-  /**
-   * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
-   */
-  protected _controlValueChangedInternally: boolean = false;
-
-  /**
    * For setting dropdown open / closed
    */
-  protected _dropdownOpen: boolean = false;
-
-  /**
-   * Internal translated text for icon-only button aria-label when opening dropdown
-   */
-  protected _translationOpenAriaLabel = new BehaviorSubject<string>('');
-
-  /**
-   * Internal translated text for icon-only button aria-label when closing dropdown
-   */
-  protected _translationCloseAriaLabel = new BehaviorSubject<string>('');
+  protected _dropdownOpen = signal<boolean>(false);
 
   /**
    * Signal to Select & MultiselectOption for listening autocomplete filter text changes
@@ -173,7 +169,15 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
   /**
-   *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically, so that comparing available options match given control value.
+   * Visible results length to be passed on SelectDropdown. This value determines the results shown
+   * in autocomplete variants helptext.
+   */
+  protected _resultsLength = signal<number>(0);
+
+  /**
+   * Lazy loading check for expanding content, unless component control gets values from
+   * application, then set to true automatically, so that comparing available options match given
+   * control value.
    */
   protected _optionsLoadedOnce: boolean = false;
 
@@ -188,7 +192,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _inputFocused: boolean = false;
 
   /**
-   * Used to handle exceptions when mouse click event fires before / after focus event or user has clicked autocomplete clear button
+   * Used to handle exceptions when mouse click event fires before / after focus event or user has
+   * clicked autocomplete clear button
    */
   protected _preventDropdownReopen: boolean | undefined = false;
 
@@ -228,7 +233,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   private _mouseUpOnInput: boolean = false;
 
   /**
-   * Used to not update visible options to HTML template before some delay has passed in case new options are still loading
+   * Used to not update visible options to HTML template before some delay has passed in case new
+   * options are still loading
    */
   private _optionLoadInterval: null | NodeJS.Timeout = null;
 
@@ -242,22 +248,95 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   private _keyDown: string | null = null;
 
-  ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
+  /**
+   * Subscription for handling the valueChanges observable
+   */
+  private _subscription: Subscription;
+
+  /**
+   * Used to pass info, that Clear Button was clicked
+   */
+  protected _clearButtonClickTrigger = signal<boolean>(false);
+
+  /**
+   * Resize observer to observe input field size changes
+   */
+  private _resizeObserver: ResizeObserver;
+
+  /**
+   * Scroll listener for adjusting dropdown position on scroll events
+   */
+  private _scrollListener?: () => void;
+
+  /**
+   * Last recorded height of the viewport. Change will trigger dropdown to close.
+   */
+  private _viewportLastHeight: number;
+
+  private _calculateDropdownPosition() {
+    if (this._dropdownOpen()) {
+      const inputElement = this._inputRef?.nativeElement;
+      const inputRect = inputElement?.getBoundingClientRect();
+
+      const dropDownElement = this._selectRef?.nativeElement?.querySelector(
+        '.fudis-select-dropdown',
+      ) as HTMLElement;
+
+      if (dropDownElement && inputRect) {
+        dropDownElement.style.top = `${inputRect.bottom}px`;
+        dropDownElement.style.left = `${inputRect.left}px`;
+        dropDownElement.style.maxWidth = `${inputRect.width}px`;
+
+        /**
+         * If window has less available space than the default height of the dropdown menu, snap the
+         * dropdown menu to the bottom of the window.
+         */
+        const cssDefaultMaxHeight = 256;
+        const availableSpace = window.innerHeight - inputRect.bottom - 6;
+        const finalMaxHeight = Math.min(cssDefaultMaxHeight, availableSpace);
+
+        dropDownElement.style.maxHeight = `${finalMaxHeight}px`;
+      }
+    }
+  }
+
+  private _setupScrollListener() {
+    this._scrollListener = () => {
+      this._calculateDropdownPosition();
+    };
+    document.addEventListener('scroll', this._scrollListener, true);
+  }
+
+  private _removeScrollListener() {
+    if (this._scrollListener) document.removeEventListener('scroll', this._scrollListener, true);
+  }
+
+  private _unsubscribeDropdownSubscribtions() {
+    this._resizeObserver.disconnect();
+    this._removeScrollListener();
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._applyControlUpdateCheck();
       this._updateValueAndValidityTrigger.next();
 
-      if (changes.control?.currentValue?.value) {
-        this._updateSelectionFromControlValue();
+      this._updateComponentStateFromControlValue();
+
+      if (this.control.value) {
+        this._optionsLoadedOnce = true;
       }
 
-      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-        if (!this._controlValueChangedInternally) {
-          this._updateSelectionFromControlValue();
-        }
+      this._subscription?.unsubscribe();
+      this._subscription = this.control.valueChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((value) => {
+          this._updateValueAndValidityTrigger.next();
+          if (value) {
+            this._optionsLoadedOnce = true;
+          }
 
-        this._controlValueChangedInternally = false;
-      });
+          this._updateComponentStateFromControlValue();
+        });
     }
 
     if (
@@ -265,12 +344,23 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       changes.variant?.currentValue === 'dropdown' &&
       !changes.variant.firstChange
     ) {
-      this._filterTextUpdate('');
+      this.setAutocompleteFilterText('');
+    }
+
+    if (
+      changes.autocompleteFilter?.currentValue !== changes.autocompleteFilter?.previousValue &&
+      !changes.autocompleteFilter?.currentValue
+    ) {
+      this._autocompleteFilterText.set(this._autocompleteFilterText());
     }
   }
 
+  ngOnDestroy() {
+    this._unsubscribeDropdownSubscribtions();
+  }
+
   /**
-   * @returns signal value of autocomplete filter text
+   * @returns Signal value of autocomplete filter text
    */
   public getAutocompleteFilterText(): Signal<string> {
     return this._autocompleteFilterText.asReadonly();
@@ -280,19 +370,27 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Open dropdown
    */
   public openDropdown(): void {
-    if (!this.disabled && !this.control.disabled) {
+    if (!this.control.disabled && !this.disabled) {
       this._optionsLoadedOnce = true;
-      this._dropdownOpen = true;
+      this._dropdownOpen.set(true); // TODO FIXME: When using autocompleteType variant, this should be called only if filter text is applied
+
+      this._unsubscribeDropdownSubscribtions();
+      this._resizeObserver.observe(document?.body);
+      this._setupScrollListener();
     }
   }
 
   /**
    * Close dropdown
-   * @param focusToInput: when dropdown closes, focus or not to the input
-   * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
+   *
+   * @param focusToInput: When dropdown closes, focus or not to the input
+   * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking
+   *   an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to
+   *   the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
-    this._dropdownOpen = false;
+    this._dropdownOpen.set(false);
+    this._unsubscribeDropdownSubscribtions();
 
     this._preventDropdownReopen = preventDropdownReopen;
     if (focusToInput) {
@@ -302,8 +400,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   /**
    * Each option sends information to parent if they are visible or not
-   * @param value option value
-   * @param visible is this option visible or not
+   *
+   * @param value Option value
+   * @param visible Is this option visible or not
    */
   public setOptionVisibility(value: string, visible: boolean) {
     this._latestVisibleOption = value;
@@ -314,6 +413,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this._optionsLoadDelay().then((resolve) => {
         if (resolve) {
           this._visibleOptions = this._visibleOptionsTemp;
+          this._resultsLength.set(this._visibleOptions.length);
           this.visibleOptionsUpdate.emit(this._visibleOptions.length);
         }
       });
@@ -333,6 +433,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   /**
    * Promise which determines, if some of the components used in this Select has focus or not.
+   *
    * @param event FocusEvent
    * @returns
    */
@@ -352,6 +453,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           clearInterval(focusCheckInterval);
           this._mouseDownInsideComponent = false;
           resolve(true);
+
           // If focus target is null
         } else if (!nextTarget) {
           clearInterval(focusCheckInterval);
@@ -373,50 +475,61 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * When Clear button is clicked
    */
   protected _clearButtonClick(): void {
-    if (!this.disabled && !this.control.disabled) {
+    if (!this.control.disabled && !this.disabled) {
+      this._clearButtonClickTrigger.set(true);
       this._setControlNull();
-
       this._focusToSelectInput();
     }
   }
 
   /**
-   * Set control value to null
+   * Set control value to null Control value should reset even when user input does not match any
+   * option value (i.e. control value is null), so that dropdown shows options correctly
    */
   protected _setControlNull(): void {
-    this._controlValueChangedInternally = true;
-    this.control.patchValue(null);
-    this.selectionUpdate.emit(null);
-
-    this._updateInputValueTexts('');
+    if (this.control.value) {
+      this.control.patchValue(null);
+      this.selectionUpdate.emit(null);
+      this.setAutocompleteFilterText('');
+    } else {
+      this.control.patchValue(null);
+      this.setAutocompleteFilterText('');
+    }
   }
 
   /**
    * To handle input focus
    */
-  protected _inputFocus(): void {
+  protected _selectInputFocus(event: FocusEvent): void {
     this._inputFocused = true;
+
+    if (this._preventDropdownReopen) {
+      this._preventDropdownReopen = false;
+      this.onFocus(event);
+      return;
+    }
 
     const openDropdown =
       this.variant === 'dropdown' ||
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (
-      !this._preventDropdownReopen &&
-      openDropdown &&
-      !this._mouseDownInsideComponent &&
-      !this._dropdownOpen
-    ) {
+    if (!this._dropdownOpen() && openDropdown && !this._mouseDownInsideComponent) {
       this.openDropdown();
     } else if (this._clickFromIcon) {
-      this.closeDropdown();
+      if (this._dropdownOpen()) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
     }
-    this._preventDropdownReopen = false;
+
+    this.onFocus(event);
   }
 
   /**
    * To handle input field blur events
+   *
    * @param event FocusEvent
    */
   protected _inputBlur(event: FocusEvent): void {
@@ -435,15 +548,18 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   protected _clickInput(): void {
     this._preventDropdownReopen = true;
-
     if (this._inputFocused || this._mouseUpOnInput) {
-      this._toggleDropdown();
+      if (this.variant === 'dropdown') {
+        this._toggleDropdown();
+      } else {
+        this.openDropdown();
+      }
     }
     this._focusToSelectInput();
   }
-
   /**
-   * Register pressed key inside input field. Used to check that both key down and key up originated from same source.
+   * Register pressed key inside input field. Used to check that both key down and key up originated
+   * from same source.
    */
   protected _inputKeyDown(event: KeyboardEvent): void {
     this._keyDown = event.key;
@@ -452,10 +568,16 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     if (event.key === 'ArrowDown') {
       event.preventDefault();
     }
+
+    // Prevent keydown event if Enter is pressed inside multiselect input
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
   }
 
   /**
    * Handle keypress for dropdown select
+   *
    * @param event KeyboardEvent
    * @param focusSelector CSS selector to focus to on ArrowDown event
    */
@@ -465,13 +587,22 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     if (key === this._keyDown) {
       switch (key) {
         case ' ':
+          if (this.variant === 'dropdown') {
+            event.preventDefault();
+            this._toggleDropdown();
+          }
+          break;
         case 'Enter':
           event.preventDefault();
-          this._toggleDropdown();
+          if (this._visibleOptions.length === 1) {
+            this._focusToFirstOption(true);
+          } else {
+            this._toggleDropdown();
+          }
           break;
         case 'ArrowDown':
           event.preventDefault();
-          if (!this._dropdownOpen) {
+          if (!this._dropdownOpen()) {
             this._toggleDropdown();
           }
           if (this._inputFocused) {
@@ -507,7 +638,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Toggle dropdown
    */
   protected _toggleDropdown(): void {
-    if (this._dropdownOpen) {
+    if (this._dropdownOpen()) {
       this.closeDropdown();
     } else {
       this.openDropdown();
@@ -516,7 +647,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   /**
    * Resolve a promise after delay if there hasn't been new options
-   * @returns boolean
+   *
+   * @returns Boolean
    */
   private _optionsLoadDelay(): Promise<boolean> {
     let tempLatestOptions: string;
@@ -544,7 +676,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * Set focus state of Clear Button and determine if Dropdown should be closed when this function is called
+   * Set focus state of Clear Button and determine if Dropdown should be closed when this function
+   * is called
+   *
    * @param event FocusEvent
    * @param state
    */
@@ -561,30 +695,32 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * Update input filter
+   * Update input filter text
+   *
+   * @param text String to set as filter text
+   * @param nullCheck True by default, check if control should be set as null
    */
-  protected _filterTextUpdate(text: string): void {
+  public setAutocompleteFilterText(text: string, nullCheck = true): void {
     if (this._autocompleteFilterText() !== text) {
       this._autocompleteFilterText.set(text);
       this.filterTextUpdate.emit(text);
     }
-  }
-
-  /**
-   * Manually set typed text in input fields
-   */
-  protected _updateInputValueTexts(value: string): void {
-    if (this.variant !== 'dropdown') {
-      this.autocompleteRef.preventSpaceKeypress = true;
-
-      this.autocompleteRef.updateInputValue(value);
-    } else {
-      this._dropdownSelectionLabelText = value;
+    if (nullCheck) {
+      this._checkIfAutocompleteValueNull(text);
     }
   }
 
   /**
+   * Checks if currently typed filter text is not same as control label value
+   *
+   * @param text Filter text value emitted from autocomplete
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected _checkIfAutocompleteValueNull(text: string): void {}
+
+  /**
    * To focus on first option when dropdown opens
+   *
    * @param cssfocusSelector CSS class to focus to
    */
   protected _focusToFirstOption(clickFirstOption?: boolean): void {
@@ -626,12 +762,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * Browser focus logic differs. E. g. Firefox tries to focus to Dropdown menu wrapper. This function determines that if it should focus to first option or back to input field.
+   * Browser focus logic differs. E. g. Firefox tries to focus to Dropdown menu wrapper. This
+   * function determines that if it should focus to first option or back to input field.
    */
   protected _dropdownFocus(event: FocusEvent): void {
     const focusFromInputOrClearButton =
       event.relatedTarget === this._inputRef?.nativeElement ||
-      event.relatedTarget === this.autocompleteRef?.inputRef.nativeElement ||
       this._selectIconsRef.nativeElement.contains(event.relatedTarget as HTMLElement);
 
     if (focusFromInputOrClearButton) {
@@ -645,62 +781,71 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Focus to input field
    */
   protected _focusToSelectInput() {
-    if (this.variant !== 'dropdown') {
-      this.autocompleteRef.inputRef.nativeElement.focus();
-    } else {
-      this._inputRef.nativeElement.focus();
-    }
+    this._inputRef?.nativeElement.focus();
   }
 
   /**
    * Function declaration overridden and implemented by Select and Multiselect
    */
-  protected _updateSelectionFromControlValue(): void {}
+  protected _updateComponentStateFromControlValue(): void {}
 
   /**
-   * When pressing keyboard Esc, focus to Select input and close dropdown
+   * When pressing keyboard Esc, focus to Select input, set flag that dropdown was closed with
+   * Escape key and close dropdown
+   *
    * @param event
    */
-  @HostListener('window:keydown.escape', ['$event'])
-  private _handleEscapePress(event: KeyboardEvent) {
-    if (this._dropdownOpen) {
+  @HostListener('window:keydown', ['$event'])
+  protected _handleEscapePress(event: KeyboardEvent) {
+    if (event.key === 'Escape' && this._dropdownOpen()) {
       event.preventDefault();
-
+      this._dialogService.dropdownClosedWithEscape();
       this.closeDropdown(true, true);
     }
   }
 
   /**
    * When user clicks, set status whether click is inside or outside the Select element
+   *
    * @param targetElement
    */
-  @HostListener('document:mouseup', ['$event.target'])
-  private _handleWindowClick(targetElement: HTMLElement) {
+  @HostListener('document:mouseup', ['$event'])
+  protected _handleWindowClick(event: MouseEvent) {
     this._mouseDownInsideComponent = false;
-    if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
-      this.closeDropdown(false);
+
+    const targetElement = event.target;
+
+    // Type guard
+    if (targetElement instanceof Element) {
+      if (this._dropdownOpen() && !this._selectRef.nativeElement.contains(targetElement)) {
+        this.closeDropdown(false);
+      }
     }
   }
 
-  @HostListener('mousedown', ['$event.target'])
-  private _handleMouseDown() {
+  @HostListener('mousedown')
+  protected _handleMouseDown() {
     this._mouseDownInsideComponent = true;
   }
 
-  @HostListener('mouseup', ['$event.target'])
-  private _handleMouseUp(targetElement: HTMLElement) {
+  @HostListener('mouseup', ['$event'])
+  protected _handleMouseUp(event: MouseEvent) {
+    const targetElement = event.target;
+    // Type guard
+    if (!(targetElement instanceof Element)) return;
+
     this._clickFromIcon =
       this._selectRef.nativeElement.contains(targetElement) &&
       !!targetElement.closest('.fudis-select-icons__container');
 
     this._mouseUpOnInput =
       targetElement &&
-      (!!this._inputRef?.nativeElement.contains(targetElement) ||
-        !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement) ||
-        this._clickFromIcon);
+      (!!this._inputRef?.nativeElement.contains(targetElement) || this._clickFromIcon);
 
     if (this._clickFromIcon) {
-      this._focusToSelectInput();
+      if (!this.control.disabled) {
+        this._focusToSelectInput();
+      }
     }
   }
 }

@@ -4,11 +4,11 @@ export const testDataBefore: FudisIdData = {
   components: {
     alert: [],
     autocomplete: [],
+    'autocomplete-multi-select': [],
     'body-text': [],
     button: [],
-    'autocomplete-multi-select': [],
+    checkbox: [],
     datepicker: [],
-    daterange: [],
     dialog: [],
     dropdown: [],
     'error-message': [],
@@ -17,12 +17,14 @@ export const testDataBefore: FudisIdData = {
     form: [],
     guidance: [],
     heading: [],
-    'input-with-language-options': [],
+    'localized-text-group': [],
     link: [],
     section: [],
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    pagination: [],
+    popover: [],
   },
   parents: {
     breadcrumbs: {},
@@ -40,97 +42,45 @@ export const testDataBefore: FudisIdData = {
 
 export const testComponentDataAfter: FudisIdData = {
   components: {
-    alert: ['fudis-alert-1', 'fudis-alert-2', 'custom-id-for-alert', 'fudis-alert-4'],
-    autocomplete: [
-      'fudis-autocomplete-1',
-      'fudis-autocomplete-2',
-      'custom-id-for-autocomplete',
-      'fudis-autocomplete-4',
-    ],
-    'body-text': [
-      'fudis-body-text-1',
-      'fudis-body-text-2',
-      'custom-id-for-body-text',
-      'fudis-body-text-4',
-    ],
-    button: ['fudis-button-1', 'fudis-button-2', 'custom-id-for-button', 'fudis-button-4'],
+    alert: ['fudis-alert-1', 'custom-id-for-alert', 'fudis-alert-3'],
+    autocomplete: ['fudis-autocomplete-1', 'custom-id-for-autocomplete', 'fudis-autocomplete-3'],
     'autocomplete-multi-select': [
       'fudis-autocomplete-multi-select-1',
-      'fudis-autocomplete-multi-select-2',
       'custom-id-for-autocomplete-multi-select',
-      'fudis-autocomplete-multi-select-4',
+      'fudis-autocomplete-multi-select-3',
     ],
-    datepicker: [
-      'fudis-datepicker-1',
-      'fudis-datepicker-2',
-      'custom-id-for-datepicker',
-      'fudis-datepicker-4',
-    ],
-    daterange: [
-      'fudis-daterange-1',
-      'fudis-daterange-2',
-      'custom-id-for-daterange',
-      'fudis-daterange-4',
-    ],
-    dialog: ['fudis-dialog-1', 'fudis-dialog-2', 'custom-id-for-dialog', 'fudis-dialog-4'],
-    dropdown: [
-      'fudis-dropdown-1',
-      'fudis-dropdown-2',
-      'custom-id-for-dropdown',
-      'fudis-dropdown-4',
-    ],
+    'body-text': ['fudis-body-text-1', 'custom-id-for-body-text', 'fudis-body-text-3'],
+    button: ['fudis-button-1', 'custom-id-for-button', 'fudis-button-3'],
+    checkbox: ['fudis-checkbox-1', 'custom-id-for-checkbox', 'fudis-checkbox-3'],
+    datepicker: ['fudis-datepicker-1', 'custom-id-for-datepicker', 'fudis-datepicker-3'],
+    dialog: ['fudis-dialog-1', 'custom-id-for-dialog', 'fudis-dialog-3'],
+    dropdown: ['fudis-dropdown-1', 'custom-id-for-dropdown', 'fudis-dropdown-3'],
     'error-message': [
       'fudis-error-message-1',
-      'fudis-error-message-2',
       'custom-id-for-error-message',
-      'fudis-error-message-4',
+      'fudis-error-message-3',
     ],
-    expandable: [
-      'fudis-expandable-1',
-      'fudis-expandable-2',
-      'custom-id-for-expandable',
-      'fudis-expandable-4',
+    expandable: ['fudis-expandable-1', 'custom-id-for-expandable', 'fudis-expandable-3'],
+    fieldset: ['fudis-fieldset-1', 'custom-id-for-fieldset', 'fudis-fieldset-3'],
+    form: ['fudis-form-1', 'custom-id-for-form', 'fudis-form-3'],
+    guidance: ['fudis-guidance-1', 'custom-id-for-guidance', 'fudis-guidance-3'],
+    heading: ['fudis-heading-1', 'custom-id-for-heading', 'fudis-heading-3'],
+    'localized-text-group': [
+      'fudis-localized-text-group-1',
+      'custom-id-for-localized-text-group',
+      'fudis-localized-text-group-3',
     ],
-    fieldset: [
-      'fudis-fieldset-1',
-      'fudis-fieldset-2',
-      'custom-id-for-fieldset',
-      'fudis-fieldset-4',
-    ],
-    form: ['fudis-form-1', 'fudis-form-2', 'custom-id-for-form', 'fudis-form-4'],
-    guidance: [
-      'fudis-guidance-1',
-      'fudis-guidance-2',
-      'custom-id-for-guidance',
-      'fudis-guidance-4',
-    ],
-    heading: ['fudis-heading-1', 'fudis-heading-2', 'custom-id-for-heading', 'fudis-heading-4'],
-    'input-with-language-options': [
-      'fudis-input-with-language-options-1',
-      'fudis-input-with-language-options-2',
-      'custom-id-for-input-with-language-options',
-      'fudis-input-with-language-options-4',
-    ],
-    link: ['fudis-link-1', 'fudis-link-2', 'custom-id-for-link', 'fudis-link-4'],
-    section: ['fudis-section-1', 'fudis-section-2', 'custom-id-for-section', 'fudis-section-4'],
-    'text-area': [
-      'fudis-text-area-1',
-      'fudis-text-area-2',
-      'custom-id-for-text-area',
-      'fudis-text-area-4',
-    ],
-    'text-input': [
-      'fudis-text-input-1',
-      'fudis-text-input-2',
-      'custom-id-for-text-input',
-      'fudis-text-input-4',
-    ],
+    link: ['fudis-link-1', 'custom-id-for-link', 'fudis-link-3'],
+    section: ['fudis-section-1', 'custom-id-for-section', 'fudis-section-3'],
+    'text-area': ['fudis-text-area-1', 'custom-id-for-text-area', 'fudis-text-area-3'],
+    'text-input': ['fudis-text-input-1', 'custom-id-for-text-input', 'fudis-text-input-3'],
     'validator-error-message': [
       'fudis-validator-error-message-1',
-      'fudis-validator-error-message-2',
       'custom-id-for-validator-error-message',
-      'fudis-validator-error-message-4',
+      'fudis-validator-error-message-3',
     ],
+    pagination: ['fudis-pagination-1', 'custom-id-for-pagination', 'fudis-pagination-3'],
+    popover: ['fudis-popover-1', 'custom-id-for-popover', 'fudis-popover-3'],
   },
   parents: {
     breadcrumbs: {},
@@ -150,11 +100,11 @@ export const testParentDataAfter: FudisIdData = {
   components: {
     alert: [],
     autocomplete: [],
+    'autocomplete-multi-select': [],
     'body-text': [],
     button: [],
-    'autocomplete-multi-select': [],
+    checkbox: [],
     datepicker: [],
-    daterange: [],
     dialog: [],
     dropdown: [],
     'error-message': [],
@@ -163,104 +113,82 @@ export const testParentDataAfter: FudisIdData = {
     form: [],
     guidance: [],
     heading: [],
-    'input-with-language-options': [],
+    'localized-text-group': [],
     link: [],
     section: [],
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    pagination: [],
+    popover: [],
   },
   parents: {
     breadcrumbs: {
       'fudis-breadcrumbs-1': [
         'fudis-breadcrumbs-1-item-1',
-        'fudis-breadcrumbs-1-item-2',
         'breadcrumbs-1-custom-child-id',
-        'fudis-breadcrumbs-1-item-4',
-        'fudis-breadcrumbs-1-item-5',
+        'fudis-breadcrumbs-1-item-3',
       ],
       'breadcrumbs-some-custom-id': [
         'breadcrumbs-some-custom-id-item-1',
-        'breadcrumbs-some-custom-id-item-2',
         'breadcrumbs-2-custom-child-id',
-        'breadcrumbs-some-custom-id-item-4',
-        'breadcrumbs-some-custom-id-item-5',
+        'breadcrumbs-some-custom-id-item-3',
       ],
       'fudis-breadcrumbs-3': [
         'fudis-breadcrumbs-3-item-1',
-        'fudis-breadcrumbs-3-item-2',
         'breadcrumbs-3-custom-child-id',
-        'fudis-breadcrumbs-3-item-4',
-        'fudis-breadcrumbs-3-item-5',
+        'fudis-breadcrumbs-3-item-3',
       ],
     },
     'checkbox-group': {
       'fudis-checkbox-group-1': [
         'fudis-checkbox-group-1-item-1',
-        'fudis-checkbox-group-1-item-2',
         'checkbox-group-1-custom-child-id',
-        'fudis-checkbox-group-1-item-4',
-        'fudis-checkbox-group-1-item-5',
+        'fudis-checkbox-group-1-item-3',
       ],
       'checkbox-group-some-custom-id': [
         'checkbox-group-some-custom-id-item-1',
-        'checkbox-group-some-custom-id-item-2',
         'checkbox-group-2-custom-child-id',
-        'checkbox-group-some-custom-id-item-4',
-        'checkbox-group-some-custom-id-item-5',
+        'checkbox-group-some-custom-id-item-3',
       ],
       'fudis-checkbox-group-3': [
         'fudis-checkbox-group-3-item-1',
-        'fudis-checkbox-group-3-item-2',
         'checkbox-group-3-custom-child-id',
-        'fudis-checkbox-group-3-item-4',
-        'fudis-checkbox-group-3-item-5',
+        'fudis-checkbox-group-3-item-3',
       ],
     },
     'language-badge-group': {
       'fudis-language-badge-group-1': [
         'fudis-language-badge-group-1-item-1',
-        'fudis-language-badge-group-1-item-2',
         'language-badge-group-1-custom-child-id',
-        'fudis-language-badge-group-1-item-4',
-        'fudis-language-badge-group-1-item-5',
+        'fudis-language-badge-group-1-item-3',
       ],
       'language-badge-group-some-custom-id': [
         'language-badge-group-some-custom-id-item-1',
-        'language-badge-group-some-custom-id-item-2',
         'language-badge-group-2-custom-child-id',
-        'language-badge-group-some-custom-id-item-4',
-        'language-badge-group-some-custom-id-item-5',
+        'language-badge-group-some-custom-id-item-3',
       ],
       'fudis-language-badge-group-3': [
         'fudis-language-badge-group-3-item-1',
-        'fudis-language-badge-group-3-item-2',
         'language-badge-group-3-custom-child-id',
-        'fudis-language-badge-group-3-item-4',
-        'fudis-language-badge-group-3-item-5',
+        'fudis-language-badge-group-3-item-3',
       ],
     },
     'radio-button-group': {
       'fudis-radio-button-group-1': [
         'fudis-radio-button-group-1-item-1',
-        'fudis-radio-button-group-1-item-2',
         'radio-button-group-1-custom-child-id',
-        'fudis-radio-button-group-1-item-4',
-        'fudis-radio-button-group-1-item-5',
+        'fudis-radio-button-group-1-item-3',
       ],
       'radio-button-group-some-custom-id': [
         'radio-button-group-some-custom-id-item-1',
-        'radio-button-group-some-custom-id-item-2',
         'radio-button-group-2-custom-child-id',
-        'radio-button-group-some-custom-id-item-4',
-        'radio-button-group-some-custom-id-item-5',
+        'radio-button-group-some-custom-id-item-3',
       ],
       'fudis-radio-button-group-3': [
         'fudis-radio-button-group-3-item-1',
-        'fudis-radio-button-group-3-item-2',
         'radio-button-group-3-custom-child-id',
-        'fudis-radio-button-group-3-item-4',
-        'fudis-radio-button-group-3-item-5',
+        'fudis-radio-button-group-3-item-3',
       ],
     },
   },
@@ -276,11 +204,11 @@ export const testGrandParentDataAfter: FudisIdData = {
   components: {
     alert: [],
     autocomplete: [],
+    'autocomplete-multi-select': [],
     'body-text': [],
     button: [],
-    'autocomplete-multi-select': [],
+    checkbox: [],
     datepicker: [],
-    daterange: [],
     dialog: [],
     dropdown: [],
     'error-message': [],
@@ -289,12 +217,14 @@ export const testGrandParentDataAfter: FudisIdData = {
     form: [],
     guidance: [],
     heading: [],
-    'input-with-language-options': [],
+    'localized-text-group': [],
     link: [],
     section: [],
     'text-area': [],
     'text-input': [],
     'validator-error-message': [],
+    pagination: [],
+    popover: [],
   },
   parents: {
     breadcrumbs: {},
@@ -315,14 +245,6 @@ export const testGrandParentDataAfter: FudisIdData = {
               'fudis-description-list-1-item-1-details-3',
             ],
           },
-          'fudis-description-list-1-item-2': {
-            term: ['fudis-description-list-1-item-2-term-1'],
-            details: [
-              'fudis-description-list-1-item-2-details-1',
-              'fudis-description-list-1-item-2-details-2',
-              'fudis-description-list-1-item-2-details-3',
-            ],
-          },
           'fudis-description-list-1-custom-child-id': {
             term: ['fudis-description-list-1-custom-child-id-term-1'],
             details: [
@@ -331,65 +253,12 @@ export const testGrandParentDataAfter: FudisIdData = {
               'fudis-description-list-1-custom-child-id-details-3',
             ],
           },
-          'fudis-description-list-1-item-4': {
-            term: ['fudis-description-list-1-item-4-term-1'],
+          'fudis-description-list-1-item-3': {
+            term: ['fudis-description-list-1-item-3-term-1'],
             details: [
-              'fudis-description-list-1-item-4-details-1',
-              'fudis-description-list-1-item-4-details-2',
-              'fudis-description-list-1-item-4-details-3',
-            ],
-          },
-          'fudis-description-list-1-item-5': {
-            term: ['fudis-description-list-1-item-5-term-1'],
-            details: [
-              'fudis-description-list-1-item-5-details-1',
-              'fudis-description-list-1-item-5-details-2',
-              'fudis-description-list-1-item-5-details-3',
-            ],
-          },
-        },
-      },
-      'fudis-description-list-2': {
-        id: 'fudis-description-list-2',
-        items: {
-          'fudis-description-list-2-item-1': {
-            term: ['fudis-description-list-2-item-1-term-1'],
-            details: [
-              'fudis-description-list-2-item-1-details-1',
-              'fudis-description-list-2-item-1-details-2',
-              'fudis-description-list-2-item-1-details-3',
-            ],
-          },
-          'fudis-description-list-2-item-2': {
-            term: ['fudis-description-list-2-item-2-term-1'],
-            details: [
-              'fudis-description-list-2-item-2-details-1',
-              'fudis-description-list-2-item-2-details-2',
-              'fudis-description-list-2-item-2-details-3',
-            ],
-          },
-          'fudis-description-list-2-custom-child-id': {
-            term: ['fudis-description-list-2-custom-child-id-term-1'],
-            details: [
-              'fudis-description-list-2-custom-child-id-details-1',
-              'fudis-description-list-2-custom-child-id-details-2',
-              'fudis-description-list-2-custom-child-id-details-3',
-            ],
-          },
-          'fudis-description-list-2-item-4': {
-            term: ['fudis-description-list-2-item-4-term-1'],
-            details: [
-              'fudis-description-list-2-item-4-details-1',
-              'fudis-description-list-2-item-4-details-2',
-              'fudis-description-list-2-item-4-details-3',
-            ],
-          },
-          'fudis-description-list-2-item-5': {
-            term: ['fudis-description-list-2-item-5-term-1'],
-            details: [
-              'fudis-description-list-2-item-5-details-1',
-              'fudis-description-list-2-item-5-details-2',
-              'fudis-description-list-2-item-5-details-3',
+              'fudis-description-list-1-item-3-details-1',
+              'fudis-description-list-1-item-3-details-2',
+              'fudis-description-list-1-item-3-details-3',
             ],
           },
         },
@@ -405,12 +274,33 @@ export const testGrandParentDataAfter: FudisIdData = {
               'custom-id-for-description-list-item-1-details-3',
             ],
           },
-          'custom-id-for-description-list-item-2': {
-            term: ['custom-id-for-description-list-item-2-term-1'],
+          'fudis-description-list-2-custom-child-id': {
+            term: ['fudis-description-list-2-custom-child-id-term-1'],
             details: [
-              'custom-id-for-description-list-item-2-details-1',
-              'custom-id-for-description-list-item-2-details-2',
-              'custom-id-for-description-list-item-2-details-3',
+              'fudis-description-list-2-custom-child-id-details-1',
+              'fudis-description-list-2-custom-child-id-details-2',
+              'fudis-description-list-2-custom-child-id-details-3',
+            ],
+          },
+          'custom-id-for-description-list-item-3': {
+            term: ['custom-id-for-description-list-item-3-term-1'],
+            details: [
+              'custom-id-for-description-list-item-3-details-1',
+              'custom-id-for-description-list-item-3-details-2',
+              'custom-id-for-description-list-item-3-details-3',
+            ],
+          },
+        },
+      },
+      'fudis-description-list-3': {
+        id: 'fudis-description-list-3',
+        items: {
+          'fudis-description-list-3-item-1': {
+            term: ['fudis-description-list-3-item-1-term-1'],
+            details: [
+              'fudis-description-list-3-item-1-details-1',
+              'fudis-description-list-3-item-1-details-2',
+              'fudis-description-list-3-item-1-details-3',
             ],
           },
           'fudis-description-list-3-custom-child-id': {
@@ -421,110 +311,12 @@ export const testGrandParentDataAfter: FudisIdData = {
               'fudis-description-list-3-custom-child-id-details-3',
             ],
           },
-          'custom-id-for-description-list-item-4': {
-            term: ['custom-id-for-description-list-item-4-term-1'],
+          'fudis-description-list-3-item-3': {
+            term: ['fudis-description-list-3-item-3-term-1'],
             details: [
-              'custom-id-for-description-list-item-4-details-1',
-              'custom-id-for-description-list-item-4-details-2',
-              'custom-id-for-description-list-item-4-details-3',
-            ],
-          },
-          'custom-id-for-description-list-item-5': {
-            term: ['custom-id-for-description-list-item-5-term-1'],
-            details: [
-              'custom-id-for-description-list-item-5-details-1',
-              'custom-id-for-description-list-item-5-details-2',
-              'custom-id-for-description-list-item-5-details-3',
-            ],
-          },
-        },
-      },
-      'fudis-description-list-4': {
-        id: 'fudis-description-list-4',
-        items: {
-          'fudis-description-list-4-item-1': {
-            term: ['fudis-description-list-4-item-1-term-1'],
-            details: [
-              'fudis-description-list-4-item-1-details-1',
-              'fudis-description-list-4-item-1-details-2',
-              'fudis-description-list-4-item-1-details-3',
-            ],
-          },
-          'fudis-description-list-4-item-2': {
-            term: ['fudis-description-list-4-item-2-term-1'],
-            details: [
-              'fudis-description-list-4-item-2-details-1',
-              'fudis-description-list-4-item-2-details-2',
-              'fudis-description-list-4-item-2-details-3',
-            ],
-          },
-          'fudis-description-list-4-custom-child-id': {
-            term: ['fudis-description-list-4-custom-child-id-term-1'],
-            details: [
-              'fudis-description-list-4-custom-child-id-details-1',
-              'fudis-description-list-4-custom-child-id-details-2',
-              'fudis-description-list-4-custom-child-id-details-3',
-            ],
-          },
-          'fudis-description-list-4-item-4': {
-            term: ['fudis-description-list-4-item-4-term-1'],
-            details: [
-              'fudis-description-list-4-item-4-details-1',
-              'fudis-description-list-4-item-4-details-2',
-              'fudis-description-list-4-item-4-details-3',
-            ],
-          },
-          'fudis-description-list-4-item-5': {
-            term: ['fudis-description-list-4-item-5-term-1'],
-            details: [
-              'fudis-description-list-4-item-5-details-1',
-              'fudis-description-list-4-item-5-details-2',
-              'fudis-description-list-4-item-5-details-3',
-            ],
-          },
-        },
-      },
-      'fudis-description-list-5': {
-        id: 'fudis-description-list-5',
-        items: {
-          'fudis-description-list-5-item-1': {
-            term: ['fudis-description-list-5-item-1-term-1'],
-            details: [
-              'fudis-description-list-5-item-1-details-1',
-              'fudis-description-list-5-item-1-details-2',
-              'fudis-description-list-5-item-1-details-3',
-            ],
-          },
-          'fudis-description-list-5-item-2': {
-            term: ['fudis-description-list-5-item-2-term-1'],
-            details: [
-              'fudis-description-list-5-item-2-details-1',
-              'fudis-description-list-5-item-2-details-2',
-              'fudis-description-list-5-item-2-details-3',
-            ],
-          },
-          'fudis-description-list-5-custom-child-id': {
-            term: ['fudis-description-list-5-custom-child-id-term-1'],
-            details: [
-              'fudis-description-list-5-custom-child-id-details-1',
-              'fudis-description-list-5-custom-child-id-details-2',
-              'fudis-description-list-5-custom-child-id-details-3',
-            ],
-          },
-          'fudis-description-list-5-item-4': {
-            term: ['fudis-description-list-5-item-4-term-1'],
-            details: [
-              'fudis-description-list-5-item-4-details-1',
-              'fudis-description-list-5-item-4-details-2',
-              'fudis-description-list-5-item-4-details-3',
-            ],
-          },
-          'fudis-description-list-5-item-5': {
-            term: ['fudis-description-list-5-item-5-term-1'],
-            details: [
-              'fudis-description-list-5-item-5-details-1',
-              'fudis-description-list-5-item-5-details-2',
-              'fudis-description-list-5-item-5-details-3',
+              'fudis-description-list-3-item-3-details-1',
+              'fudis-description-list-3-item-3-details-2',
+              'fudis-description-list-3-item-3-details-3',
             ],
           },
         },
@@ -539,66 +331,21 @@ export const testGrandParentDataAfter: FudisIdData = {
             'fudis-dropdown-menu-1-group-1-option-2',
             'fudis-dropdown-menu-1-group-1-option-3',
           ],
-          'fudis-dropdown-menu-1-group-2': [
-            'fudis-dropdown-menu-1-group-2-option-1',
-            'fudis-dropdown-menu-1-group-2-option-2',
-            'fudis-dropdown-menu-1-group-2-option-3',
-          ],
           'fudis-dropdown-menu-1-custom-child-id': [
             'fudis-dropdown-menu-1-custom-child-id-option-1',
             'fudis-dropdown-menu-1-custom-child-id-option-2',
             'fudis-dropdown-menu-1-custom-child-id-option-3',
           ],
-          'fudis-dropdown-menu-1-group-4': [
-            'fudis-dropdown-menu-1-group-4-option-1',
-            'fudis-dropdown-menu-1-group-4-option-2',
-            'fudis-dropdown-menu-1-group-4-option-3',
-          ],
-          'fudis-dropdown-menu-1-group-5': [
-            'fudis-dropdown-menu-1-group-5-option-1',
-            'fudis-dropdown-menu-1-group-5-option-2',
-            'fudis-dropdown-menu-1-group-5-option-3',
+          'fudis-dropdown-menu-1-group-3': [
+            'fudis-dropdown-menu-1-group-3-option-1',
+            'fudis-dropdown-menu-1-group-3-option-2',
+            'fudis-dropdown-menu-1-group-3-option-3',
           ],
         },
         nonGroupedOptions: [
           'fudis-dropdown-menu-1-option-1',
           'fudis-dropdown-menu-1-option-2',
           'fudis-dropdown-menu-1-option-3',
-        ],
-      },
-      'fudis-dropdown-menu-2': {
-        id: 'fudis-dropdown-menu-2',
-        groups: {
-          'fudis-dropdown-menu-2-group-1': [
-            'fudis-dropdown-menu-2-group-1-option-1',
-            'fudis-dropdown-menu-2-group-1-option-2',
-            'fudis-dropdown-menu-2-group-1-option-3',
-          ],
-          'fudis-dropdown-menu-2-group-2': [
-            'fudis-dropdown-menu-2-group-2-option-1',
-            'fudis-dropdown-menu-2-group-2-option-2',
-            'fudis-dropdown-menu-2-group-2-option-3',
-          ],
-          'fudis-dropdown-menu-2-custom-child-id': [
-            'fudis-dropdown-menu-2-custom-child-id-option-1',
-            'fudis-dropdown-menu-2-custom-child-id-option-2',
-            'fudis-dropdown-menu-2-custom-child-id-option-3',
-          ],
-          'fudis-dropdown-menu-2-group-4': [
-            'fudis-dropdown-menu-2-group-4-option-1',
-            'fudis-dropdown-menu-2-group-4-option-2',
-            'fudis-dropdown-menu-2-group-4-option-3',
-          ],
-          'fudis-dropdown-menu-2-group-5': [
-            'fudis-dropdown-menu-2-group-5-option-1',
-            'fudis-dropdown-menu-2-group-5-option-2',
-            'fudis-dropdown-menu-2-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-dropdown-menu-2-option-1',
-          'fudis-dropdown-menu-2-option-2',
-          'fudis-dropdown-menu-2-option-3',
         ],
       },
       'custom-id-for-dropdown-menu': {
@@ -609,25 +356,15 @@ export const testGrandParentDataAfter: FudisIdData = {
             'custom-id-for-dropdown-menu-group-1-option-2',
             'custom-id-for-dropdown-menu-group-1-option-3',
           ],
-          'custom-id-for-dropdown-menu-group-2': [
-            'custom-id-for-dropdown-menu-group-2-option-1',
-            'custom-id-for-dropdown-menu-group-2-option-2',
-            'custom-id-for-dropdown-menu-group-2-option-3',
+          'fudis-dropdown-menu-2-custom-child-id': [
+            'fudis-dropdown-menu-2-custom-child-id-option-1',
+            'fudis-dropdown-menu-2-custom-child-id-option-2',
+            'fudis-dropdown-menu-2-custom-child-id-option-3',
           ],
-          'fudis-dropdown-menu-3-custom-child-id': [
-            'fudis-dropdown-menu-3-custom-child-id-option-1',
-            'fudis-dropdown-menu-3-custom-child-id-option-2',
-            'fudis-dropdown-menu-3-custom-child-id-option-3',
-          ],
-          'custom-id-for-dropdown-menu-group-4': [
-            'custom-id-for-dropdown-menu-group-4-option-1',
-            'custom-id-for-dropdown-menu-group-4-option-2',
-            'custom-id-for-dropdown-menu-group-4-option-3',
-          ],
-          'custom-id-for-dropdown-menu-group-5': [
-            'custom-id-for-dropdown-menu-group-5-option-1',
-            'custom-id-for-dropdown-menu-group-5-option-2',
-            'custom-id-for-dropdown-menu-group-5-option-3',
+          'custom-id-for-dropdown-menu-group-3': [
+            'custom-id-for-dropdown-menu-group-3-option-1',
+            'custom-id-for-dropdown-menu-group-3-option-2',
+            'custom-id-for-dropdown-menu-group-3-option-3',
           ],
         },
         nonGroupedOptions: [
@@ -636,252 +373,106 @@ export const testGrandParentDataAfter: FudisIdData = {
           'custom-id-for-dropdown-menu-option-3',
         ],
       },
-      'fudis-dropdown-menu-4': {
-        id: 'fudis-dropdown-menu-4',
+      'fudis-dropdown-menu-3': {
+        id: 'fudis-dropdown-menu-3',
         groups: {
-          'fudis-dropdown-menu-4-group-1': [
-            'fudis-dropdown-menu-4-group-1-option-1',
-            'fudis-dropdown-menu-4-group-1-option-2',
-            'fudis-dropdown-menu-4-group-1-option-3',
+          'fudis-dropdown-menu-3-group-1': [
+            'fudis-dropdown-menu-3-group-1-option-1',
+            'fudis-dropdown-menu-3-group-1-option-2',
+            'fudis-dropdown-menu-3-group-1-option-3',
           ],
-          'fudis-dropdown-menu-4-group-2': [
-            'fudis-dropdown-menu-4-group-2-option-1',
-            'fudis-dropdown-menu-4-group-2-option-2',
-            'fudis-dropdown-menu-4-group-2-option-3',
+          'fudis-dropdown-menu-3-custom-child-id': [
+            'fudis-dropdown-menu-3-custom-child-id-option-1',
+            'fudis-dropdown-menu-3-custom-child-id-option-2',
+            'fudis-dropdown-menu-3-custom-child-id-option-3',
           ],
-          'fudis-dropdown-menu-4-custom-child-id': [
-            'fudis-dropdown-menu-4-custom-child-id-option-1',
-            'fudis-dropdown-menu-4-custom-child-id-option-2',
-            'fudis-dropdown-menu-4-custom-child-id-option-3',
-          ],
-          'fudis-dropdown-menu-4-group-4': [
-            'fudis-dropdown-menu-4-group-4-option-1',
-            'fudis-dropdown-menu-4-group-4-option-2',
-            'fudis-dropdown-menu-4-group-4-option-3',
-          ],
-          'fudis-dropdown-menu-4-group-5': [
-            'fudis-dropdown-menu-4-group-5-option-1',
-            'fudis-dropdown-menu-4-group-5-option-2',
-            'fudis-dropdown-menu-4-group-5-option-3',
+          'fudis-dropdown-menu-3-group-3': [
+            'fudis-dropdown-menu-3-group-3-option-1',
+            'fudis-dropdown-menu-3-group-3-option-2',
+            'fudis-dropdown-menu-3-group-3-option-3',
           ],
         },
         nonGroupedOptions: [
-          'fudis-dropdown-menu-4-option-1',
-          'fudis-dropdown-menu-4-option-2',
-          'fudis-dropdown-menu-4-option-3',
-        ],
-      },
-      'fudis-dropdown-menu-5': {
-        id: 'fudis-dropdown-menu-5',
-        groups: {
-          'fudis-dropdown-menu-5-group-1': [
-            'fudis-dropdown-menu-5-group-1-option-1',
-            'fudis-dropdown-menu-5-group-1-option-2',
-            'fudis-dropdown-menu-5-group-1-option-3',
-          ],
-          'fudis-dropdown-menu-5-group-2': [
-            'fudis-dropdown-menu-5-group-2-option-1',
-            'fudis-dropdown-menu-5-group-2-option-2',
-            'fudis-dropdown-menu-5-group-2-option-3',
-          ],
-          'fudis-dropdown-menu-5-custom-child-id': [
-            'fudis-dropdown-menu-5-custom-child-id-option-1',
-            'fudis-dropdown-menu-5-custom-child-id-option-2',
-            'fudis-dropdown-menu-5-custom-child-id-option-3',
-          ],
-          'fudis-dropdown-menu-5-group-4': [
-            'fudis-dropdown-menu-5-group-4-option-1',
-            'fudis-dropdown-menu-5-group-4-option-2',
-            'fudis-dropdown-menu-5-group-4-option-3',
-          ],
-          'fudis-dropdown-menu-5-group-5': [
-            'fudis-dropdown-menu-5-group-5-option-1',
-            'fudis-dropdown-menu-5-group-5-option-2',
-            'fudis-dropdown-menu-5-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-dropdown-menu-5-option-1',
-          'fudis-dropdown-menu-5-option-2',
-          'fudis-dropdown-menu-5-option-3',
+          'fudis-dropdown-menu-3-option-1',
+          'fudis-dropdown-menu-3-option-2',
+          'fudis-dropdown-menu-3-option-3',
         ],
       },
     },
-
     select: {
       'fudis-select-1': {
         id: 'fudis-select-1',
         groups: {
           'fudis-select-1-group-1': [
-            'fudis-select-1-group-1-option-1',
-            'fudis-select-1-group-1-option-2',
-            'fudis-select-1-group-1-option-3',
-          ],
-          'fudis-select-1-group-2': [
-            'fudis-select-1-group-2-option-1',
-            'fudis-select-1-group-2-option-2',
-            'fudis-select-1-group-2-option-3',
+            'fudis-select-1-option-s68wnx',
+            'fudis-select-1-option-s68wny',
+            'fudis-select-1-option-s68wnz',
           ],
           'fudis-select-1-custom-child-id': [
-            'fudis-select-1-custom-child-id-option-1',
-            'fudis-select-1-custom-child-id-option-2',
-            'fudis-select-1-custom-child-id-option-3',
+            'fudis-select-1-option-s68wo0',
+            'fudis-select-1-option-s68wo1',
+            'fudis-select-1-option-s68wo2',
           ],
-          'fudis-select-1-group-4': [
-            'fudis-select-1-group-4-option-1',
-            'fudis-select-1-group-4-option-2',
-            'fudis-select-1-group-4-option-3',
-          ],
-          'fudis-select-1-group-5': [
-            'fudis-select-1-group-5-option-1',
-            'fudis-select-1-group-5-option-2',
-            'fudis-select-1-group-5-option-3',
+          'fudis-select-1-group-3': [
+            'fudis-select-1-option-s68wo3',
+            'fudis-select-1-option-s68wo4',
+            'fudis-select-1-option-s68wo5',
           ],
         },
         nonGroupedOptions: [
-          'fudis-select-1-option-1',
-          'fudis-select-1-option-2',
-          'fudis-select-1-option-3',
-        ],
-      },
-      'fudis-select-2': {
-        id: 'fudis-select-2',
-        groups: {
-          'fudis-select-2-group-1': [
-            'fudis-select-2-group-1-option-1',
-            'fudis-select-2-group-1-option-2',
-            'fudis-select-2-group-1-option-3',
-          ],
-          'fudis-select-2-group-2': [
-            'fudis-select-2-group-2-option-1',
-            'fudis-select-2-group-2-option-2',
-            'fudis-select-2-group-2-option-3',
-          ],
-          'fudis-select-2-custom-child-id': [
-            'fudis-select-2-custom-child-id-option-1',
-            'fudis-select-2-custom-child-id-option-2',
-            'fudis-select-2-custom-child-id-option-3',
-          ],
-          'fudis-select-2-group-4': [
-            'fudis-select-2-group-4-option-1',
-            'fudis-select-2-group-4-option-2',
-            'fudis-select-2-group-4-option-3',
-          ],
-          'fudis-select-2-group-5': [
-            'fudis-select-2-group-5-option-1',
-            'fudis-select-2-group-5-option-2',
-            'fudis-select-2-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-select-2-option-1',
-          'fudis-select-2-option-2',
-          'fudis-select-2-option-3',
+          'fudis-select-1-option-s68wnx',
+          'fudis-select-1-option-s68wny',
+          'fudis-select-1-option-s68wnz',
         ],
       },
       'custom-id-for-select': {
         id: 'custom-id-for-select',
         groups: {
           'custom-id-for-select-group-1': [
-            'custom-id-for-select-group-1-option-1',
-            'custom-id-for-select-group-1-option-2',
-            'custom-id-for-select-group-1-option-3',
+            'custom-id-for-select-option-l0bgxf',
+            'custom-id-for-select-option-l0bgxg',
+            'custom-id-for-select-option-l0bgxh',
           ],
-          'custom-id-for-select-group-2': [
-            'custom-id-for-select-group-2-option-1',
-            'custom-id-for-select-group-2-option-2',
-            'custom-id-for-select-group-2-option-3',
+          'fudis-select-2-custom-child-id': [
+            'custom-id-for-select-option-l0bgxi',
+            'custom-id-for-select-option-l0bgxj',
+            'custom-id-for-select-option-l0bgxk',
+          ],
+          'custom-id-for-select-group-3': [
+            'custom-id-for-select-option-l0bgxl',
+            'custom-id-for-select-option-l0bgxm',
+            'custom-id-for-select-option-l0bgxn',
+          ],
+        },
+        nonGroupedOptions: [
+          'custom-id-for-select-option-s68wo0',
+          'custom-id-for-select-option-s68wo1',
+          'custom-id-for-select-option-s68wo2',
+        ],
+      },
+      'fudis-select-3': {
+        id: 'fudis-select-3',
+        groups: {
+          'fudis-select-3-group-1': [
+            'fudis-select-3-option-l0bgxo',
+            'fudis-select-3-option-l0bgya',
+            'fudis-select-3-option-l0bgyb',
           ],
           'fudis-select-3-custom-child-id': [
-            'fudis-select-3-custom-child-id-option-1',
-            'fudis-select-3-custom-child-id-option-2',
-            'fudis-select-3-custom-child-id-option-3',
+            'fudis-select-3-option-l0bgyc',
+            'fudis-select-3-option-l0bgyd',
+            'fudis-select-3-option-l0bgye',
           ],
-          'custom-id-for-select-group-4': [
-            'custom-id-for-select-group-4-option-1',
-            'custom-id-for-select-group-4-option-2',
-            'custom-id-for-select-group-4-option-3',
-          ],
-          'custom-id-for-select-group-5': [
-            'custom-id-for-select-group-5-option-1',
-            'custom-id-for-select-group-5-option-2',
-            'custom-id-for-select-group-5-option-3',
+          'fudis-select-3-group-3': [
+            'fudis-select-3-option-l0bgyf',
+            'fudis-select-3-option-l0bgyg',
+            'fudis-select-3-option-l0bgyh',
           ],
         },
         nonGroupedOptions: [
-          'custom-id-for-select-option-1',
-          'custom-id-for-select-option-2',
-          'custom-id-for-select-option-3',
-        ],
-      },
-      'fudis-select-4': {
-        id: 'fudis-select-4',
-        groups: {
-          'fudis-select-4-group-1': [
-            'fudis-select-4-group-1-option-1',
-            'fudis-select-4-group-1-option-2',
-            'fudis-select-4-group-1-option-3',
-          ],
-          'fudis-select-4-group-2': [
-            'fudis-select-4-group-2-option-1',
-            'fudis-select-4-group-2-option-2',
-            'fudis-select-4-group-2-option-3',
-          ],
-          'fudis-select-4-custom-child-id': [
-            'fudis-select-4-custom-child-id-option-1',
-            'fudis-select-4-custom-child-id-option-2',
-            'fudis-select-4-custom-child-id-option-3',
-          ],
-          'fudis-select-4-group-4': [
-            'fudis-select-4-group-4-option-1',
-            'fudis-select-4-group-4-option-2',
-            'fudis-select-4-group-4-option-3',
-          ],
-          'fudis-select-4-group-5': [
-            'fudis-select-4-group-5-option-1',
-            'fudis-select-4-group-5-option-2',
-            'fudis-select-4-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-select-4-option-1',
-          'fudis-select-4-option-2',
-          'fudis-select-4-option-3',
-        ],
-      },
-      'fudis-select-5': {
-        id: 'fudis-select-5',
-        groups: {
-          'fudis-select-5-group-1': [
-            'fudis-select-5-group-1-option-1',
-            'fudis-select-5-group-1-option-2',
-            'fudis-select-5-group-1-option-3',
-          ],
-          'fudis-select-5-group-2': [
-            'fudis-select-5-group-2-option-1',
-            'fudis-select-5-group-2-option-2',
-            'fudis-select-5-group-2-option-3',
-          ],
-          'fudis-select-5-custom-child-id': [
-            'fudis-select-5-custom-child-id-option-1',
-            'fudis-select-5-custom-child-id-option-2',
-            'fudis-select-5-custom-child-id-option-3',
-          ],
-          'fudis-select-5-group-4': [
-            'fudis-select-5-group-4-option-1',
-            'fudis-select-5-group-4-option-2',
-            'fudis-select-5-group-4-option-3',
-          ],
-          'fudis-select-5-group-5': [
-            'fudis-select-5-group-5-option-1',
-            'fudis-select-5-group-5-option-2',
-            'fudis-select-5-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-select-5-option-1',
-          'fudis-select-5-option-2',
-          'fudis-select-5-option-3',
+          'fudis-select-3-option-s68wo3',
+          'fudis-select-3-option-s68wo4',
+          'fudis-select-3-option-s68wo5',
         ],
       },
     },
@@ -890,175 +481,75 @@ export const testGrandParentDataAfter: FudisIdData = {
         id: 'fudis-multiselect-1',
         groups: {
           'fudis-multiselect-1-group-1': [
-            'fudis-multiselect-1-group-1-option-1',
-            'fudis-multiselect-1-group-1-option-2',
-            'fudis-multiselect-1-group-1-option-3',
-          ],
-          'fudis-multiselect-1-group-2': [
-            'fudis-multiselect-1-group-2-option-1',
-            'fudis-multiselect-1-group-2-option-2',
-            'fudis-multiselect-1-group-2-option-3',
+            'fudis-multiselect-1-option-l0bgyi',
+            'fudis-multiselect-1-option-l0bgyj',
+            'fudis-multiselect-1-option-l0bgz5',
           ],
           'fudis-multiselect-1-custom-child-id': [
-            'fudis-multiselect-1-custom-child-id-option-1',
-            'fudis-multiselect-1-custom-child-id-option-2',
-            'fudis-multiselect-1-custom-child-id-option-3',
+            'fudis-multiselect-1-option-l0bgz6',
+            'fudis-multiselect-1-option-l0bgz7',
+            'fudis-multiselect-1-option-l0bgz8',
           ],
-          'fudis-multiselect-1-group-4': [
-            'fudis-multiselect-1-group-4-option-1',
-            'fudis-multiselect-1-group-4-option-2',
-            'fudis-multiselect-1-group-4-option-3',
-          ],
-          'fudis-multiselect-1-group-5': [
-            'fudis-multiselect-1-group-5-option-1',
-            'fudis-multiselect-1-group-5-option-2',
-            'fudis-multiselect-1-group-5-option-3',
+          'fudis-multiselect-1-group-3': [
+            'fudis-multiselect-1-option-l0bgz9',
+            'fudis-multiselect-1-option-l0bgza',
+            'fudis-multiselect-1-option-l0bgzb',
           ],
         },
         nonGroupedOptions: [
-          'fudis-multiselect-1-option-1',
-          'fudis-multiselect-1-option-2',
-          'fudis-multiselect-1-option-3',
-        ],
-      },
-      'fudis-multiselect-2': {
-        id: 'fudis-multiselect-2',
-        groups: {
-          'fudis-multiselect-2-group-1': [
-            'fudis-multiselect-2-group-1-option-1',
-            'fudis-multiselect-2-group-1-option-2',
-            'fudis-multiselect-2-group-1-option-3',
-          ],
-          'fudis-multiselect-2-group-2': [
-            'fudis-multiselect-2-group-2-option-1',
-            'fudis-multiselect-2-group-2-option-2',
-            'fudis-multiselect-2-group-2-option-3',
-          ],
-          'fudis-multiselect-2-custom-child-id': [
-            'fudis-multiselect-2-custom-child-id-option-1',
-            'fudis-multiselect-2-custom-child-id-option-2',
-            'fudis-multiselect-2-custom-child-id-option-3',
-          ],
-          'fudis-multiselect-2-group-4': [
-            'fudis-multiselect-2-group-4-option-1',
-            'fudis-multiselect-2-group-4-option-2',
-            'fudis-multiselect-2-group-4-option-3',
-          ],
-          'fudis-multiselect-2-group-5': [
-            'fudis-multiselect-2-group-5-option-1',
-            'fudis-multiselect-2-group-5-option-2',
-            'fudis-multiselect-2-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-multiselect-2-option-1',
-          'fudis-multiselect-2-option-2',
-          'fudis-multiselect-2-option-3',
+          'fudis-multiselect-1-option-l0bgxf',
+          'fudis-multiselect-1-option-l0bgxg',
+          'fudis-multiselect-1-option-l0bgxh',
         ],
       },
       'custom-id-for-multiselect': {
         id: 'custom-id-for-multiselect',
         groups: {
           'custom-id-for-multiselect-group-1': [
-            'custom-id-for-multiselect-group-1-option-1',
-            'custom-id-for-multiselect-group-1-option-2',
-            'custom-id-for-multiselect-group-1-option-3',
+            'custom-id-for-multiselect-option-l0bgzc',
+            'custom-id-for-multiselect-option-l0bgzd',
+            'custom-id-for-multiselect-option-l0bgze',
           ],
-          'custom-id-for-multiselect-group-2': [
-            'custom-id-for-multiselect-group-2-option-1',
-            'custom-id-for-multiselect-group-2-option-2',
-            'custom-id-for-multiselect-group-2-option-3',
+          'fudis-multiselect-2-custom-child-id': [
+            'custom-id-for-multiselect-option-l0bh00',
+            'custom-id-for-multiselect-option-l0bh01',
+            'custom-id-for-multiselect-option-l0bh02',
+          ],
+          'custom-id-for-multiselect-group-3': [
+            'custom-id-for-multiselect-option-l0bh03',
+            'custom-id-for-multiselect-option-l0bh04',
+            'custom-id-for-multiselect-option-l0bh05',
+          ],
+        },
+        nonGroupedOptions: [
+          'custom-id-for-multiselect-option-l0bgxi',
+          'custom-id-for-multiselect-option-l0bgxj',
+          'custom-id-for-multiselect-option-l0bgxk',
+        ],
+      },
+      'fudis-multiselect-3': {
+        id: 'fudis-multiselect-3',
+        groups: {
+          'fudis-multiselect-3-group-1': [
+            'fudis-multiselect-3-option-l0bh06',
+            'fudis-multiselect-3-option-l0bh07',
+            'fudis-multiselect-3-option-l0bh08',
           ],
           'fudis-multiselect-3-custom-child-id': [
-            'fudis-multiselect-3-custom-child-id-option-1',
-            'fudis-multiselect-3-custom-child-id-option-2',
-            'fudis-multiselect-3-custom-child-id-option-3',
+            'fudis-multiselect-3-option-l0bh09',
+            'fudis-multiselect-3-option-l0bh0v',
+            'fudis-multiselect-3-option-l0bh0w',
           ],
-          'custom-id-for-multiselect-group-4': [
-            'custom-id-for-multiselect-group-4-option-1',
-            'custom-id-for-multiselect-group-4-option-2',
-            'custom-id-for-multiselect-group-4-option-3',
-          ],
-          'custom-id-for-multiselect-group-5': [
-            'custom-id-for-multiselect-group-5-option-1',
-            'custom-id-for-multiselect-group-5-option-2',
-            'custom-id-for-multiselect-group-5-option-3',
+          'fudis-multiselect-3-group-3': [
+            'fudis-multiselect-3-option-l0bh0x',
+            'fudis-multiselect-3-option-l0bh0y',
+            'fudis-multiselect-3-option-l0bh0z',
           ],
         },
         nonGroupedOptions: [
-          'custom-id-for-multiselect-option-1',
-          'custom-id-for-multiselect-option-2',
-          'custom-id-for-multiselect-option-3',
-        ],
-      },
-      'fudis-multiselect-4': {
-        id: 'fudis-multiselect-4',
-        groups: {
-          'fudis-multiselect-4-group-1': [
-            'fudis-multiselect-4-group-1-option-1',
-            'fudis-multiselect-4-group-1-option-2',
-            'fudis-multiselect-4-group-1-option-3',
-          ],
-          'fudis-multiselect-4-group-2': [
-            'fudis-multiselect-4-group-2-option-1',
-            'fudis-multiselect-4-group-2-option-2',
-            'fudis-multiselect-4-group-2-option-3',
-          ],
-          'fudis-multiselect-4-custom-child-id': [
-            'fudis-multiselect-4-custom-child-id-option-1',
-            'fudis-multiselect-4-custom-child-id-option-2',
-            'fudis-multiselect-4-custom-child-id-option-3',
-          ],
-          'fudis-multiselect-4-group-4': [
-            'fudis-multiselect-4-group-4-option-1',
-            'fudis-multiselect-4-group-4-option-2',
-            'fudis-multiselect-4-group-4-option-3',
-          ],
-          'fudis-multiselect-4-group-5': [
-            'fudis-multiselect-4-group-5-option-1',
-            'fudis-multiselect-4-group-5-option-2',
-            'fudis-multiselect-4-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-multiselect-4-option-1',
-          'fudis-multiselect-4-option-2',
-          'fudis-multiselect-4-option-3',
-        ],
-      },
-      'fudis-multiselect-5': {
-        id: 'fudis-multiselect-5',
-        groups: {
-          'fudis-multiselect-5-group-1': [
-            'fudis-multiselect-5-group-1-option-1',
-            'fudis-multiselect-5-group-1-option-2',
-            'fudis-multiselect-5-group-1-option-3',
-          ],
-          'fudis-multiselect-5-group-2': [
-            'fudis-multiselect-5-group-2-option-1',
-            'fudis-multiselect-5-group-2-option-2',
-            'fudis-multiselect-5-group-2-option-3',
-          ],
-          'fudis-multiselect-5-custom-child-id': [
-            'fudis-multiselect-5-custom-child-id-option-1',
-            'fudis-multiselect-5-custom-child-id-option-2',
-            'fudis-multiselect-5-custom-child-id-option-3',
-          ],
-          'fudis-multiselect-5-group-4': [
-            'fudis-multiselect-5-group-4-option-1',
-            'fudis-multiselect-5-group-4-option-2',
-            'fudis-multiselect-5-group-4-option-3',
-          ],
-          'fudis-multiselect-5-group-5': [
-            'fudis-multiselect-5-group-5-option-1',
-            'fudis-multiselect-5-group-5-option-2',
-            'fudis-multiselect-5-group-5-option-3',
-          ],
-        },
-        nonGroupedOptions: [
-          'fudis-multiselect-5-option-1',
-          'fudis-multiselect-5-option-2',
-          'fudis-multiselect-5-option-3',
+          'fudis-multiselect-3-option-l0bgxl',
+          'fudis-multiselect-3-option-l0bgxm',
+          'fudis-multiselect-3-option-l0bgxn',
         ],
       },
     },

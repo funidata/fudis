@@ -3,7 +3,6 @@ import { By } from '@angular/platform-browser';
 import { GridComponent } from '../grid/grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from './description-list.component';
-import { FudisGridService } from '../../services/grid/grid.service';
 import { DescriptionListItemComponent } from './description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
@@ -12,9 +11,9 @@ import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.ser
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { Component, DebugElement, SimpleChange } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../types/miscellaneous';
-import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
@@ -71,7 +70,7 @@ describe('DescriptionListComponent', () => {
         LanguageBadgeGroupComponent,
         MockDlComponent,
       ],
-      providers: [FudisGridService, FudisIdService, FudisBreakpointService],
+      providers: [FudisBreakpointService],
     }).compileComponents();
   });
 
@@ -121,7 +120,7 @@ describe('DescriptionListComponent', () => {
     it('should have grid classes if grid is enabled', () => {
       expect(sortClasses(getDlElement('dl').className)).toEqual(
         sortClasses(
-          'fudis-dl fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__sm',
+          'fudis-dl fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__row-gap__sm',
         ),
       );
     });

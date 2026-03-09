@@ -3,39 +3,35 @@ import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DropdownMenuItemComponent } from './dropdown-menu-item.component';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
-import { ButtonComponent } from '../../button/button.component';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { defaultMenuItems } from '../mock_data';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
 @Component({
+  standalone: false,
   selector: 'fudis-mock-dropdown-menu',
-  template: ` <fudis-button
+  template: ` <fudis-icon-button
     #testButton
-    [label]="'Random items menu'"
-    [labelHidden]="true"
+    [ariaLabel]="'Random items menu'"
     [size]="'small'"
     [variant]="'secondary'"
     [icon]="'three-dots'"
     [asMenuButton]="true"
   >
     <fudis-dropdown-menu>
-      <fudis-dropdown-menu-item
-        *ngFor="let item of testItems"
-        #testMenuItem
-        [label]="item.label"
-        [disabled]="item.disabled"
-      >
-      </fudis-dropdown-menu-item>
+      @for (item of testItems; track item.label) {
+        <fudis-dropdown-menu-item #testMenuItem [label]="item.label" [disabled]="item.disabled">
+        </fudis-dropdown-menu-item>
+      }
     </fudis-dropdown-menu>
-  </fudis-button>`,
+  </fudis-icon-button>`,
 })
 class MockDropdownMenuComponent {
   testItems = defaultMenuItems;
 
-  @ViewChild('testButton') testButton: ButtonComponent;
+  @ViewChild('testButton') testButton: IconButtonComponent;
   @ViewChild('testMenuItem') testMenuItem: DropdownMenuItemComponent;
 }
 
@@ -45,14 +41,9 @@ describe('DropdownMenuItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ButtonComponent,
-        DropdownMenuItemComponent,
-        DropdownMenuComponent,
-        IconComponent,
-        MockDropdownMenuComponent,
-      ],
-      providers: [FudisIdService, FudisTranslationService],
+      declarations: [DropdownMenuItemComponent, DropdownMenuComponent, MockDropdownMenuComponent],
+      imports: [IconButtonComponent, IconComponent],
+      providers: [FudisDialogService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockDropdownMenuComponent);

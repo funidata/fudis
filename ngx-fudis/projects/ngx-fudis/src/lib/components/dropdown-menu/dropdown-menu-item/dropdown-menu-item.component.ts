@@ -8,8 +8,9 @@ import {
   ChangeDetectionStrategy,
   effect,
   Input,
+  DOCUMENT,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -17,11 +18,15 @@ import { BehaviorSubject } from 'rxjs';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { DropdownMenuGroupComponent } from '../dropdown-menu-group/dropdown-menu-group.component';
 
+/**
+ * Single menu item for DropdownMenuComponent.
+ */
 @Component({
   selector: 'fudis-dropdown-menu-item',
   templateUrl: './dropdown-menu-item.component.html',
   styleUrls: ['./dropdown-menu-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
   constructor(
@@ -33,8 +38,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
   ) {
     super(_document);
 
-    this._id = this._idService.getNewSelectOptionId(
-      'dropdown-menu',
+    this._id = this._idService.getNewDropdownMenuId(
       this._parentDropdownMenu.id,
       this._parentGroup?.id,
     );

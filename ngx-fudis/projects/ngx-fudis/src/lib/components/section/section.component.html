@@ -1,60 +1,43 @@
-<section
-  *ngIf="_classList | async as classes"
-  fudisGrid
-  [id]="id"
-  [tabIndex]="-1"
-  [attr.aria-describedby]="_headingId"
-  [align]="align"
-  [width]="width"
-  [classes]="classes"
-  [rowGap]="'none'"
-  [serviceDefaults]="false"
-  [marginBottom]="marginBottom"
-  [marginTop]="marginTop"
->
-  <div class="fudis-section__header" [id]="_headingId">
-    <div class="fudis-section__header__container">
-      <div class="fudis-section__header__heading">
-        <fudis-heading [marginBottom]="'none'" [level]="level" [variant]="titleVariant"
-          >{{ title
-          }}<ng-container *ngIf="badge && badgeText">
-            <fudis-badge
-              class="fudis-section__header__heading__badge"
-              [variant]="badge"
-              [content]="badgeText"
-            >
-            </fudis-badge>
-          </ng-container>
-        </fudis-heading>
-        <ng-container *ngIf="tooltip">
-          <fudis-button
-            class="fudis-section__header__heading__tooltip"
-            [size]="'icon-only'"
-            [variant]="'tertiary'"
-            [icon]="'info-circle'"
-            [labelHidden]="true"
-            [label]="tooltip"
-            [tooltip]="tooltip"
-            [tooltipPosition]="tooltipPosition"
-            [tooltipToggle]="tooltipToggle"
-          ></fudis-button>
-        </ng-container>
-      </div>
-      <ng-container *ngIf="_headerActions?.type === 'section'">
-        <div class="fudis-section__header__actions">
-          <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
+<!-- prettier-ignore -->
+@if (_classList | async; as classes) {
+  <section
+    fudisGrid
+    [id]="id"
+    [tabIndex]="-1"
+    [attr.aria-labelledby]="_headingId"
+    [align]="align"
+    [width]="width"
+    [classes]="classes"
+    [rowGap]="'none'"
+    [serviceDefaults]="false"
+  >
+    <div class="fudis-section__header" [id]="_headingId">
+      <div class="fudis-section__header__container">
+        <div class="fudis-section__header__heading">
+          <fudis-heading class="fudis-mb-none" [level]="level" [variant]="titleVariant"
+            >{{ title }}@if (badge && badgeText) {
+              <fudis-badge
+                class="fudis-section__header__heading__badge"
+                [variant]="badge"
+                [content]="badgeText"
+              />
+            }
+          </fudis-heading>
+          @if (popoverTriggerLabel && popoverText) {
+            <fudis-icon-button
+              class="fudis-section__header__heading__popover"
+              [size]="'extra-small'"
+              [variant]="'tertiary'"
+              [icon]="'info-circle'"
+              [ariaLabel]="popoverTriggerLabel"
+              [popoverPosition]="popoverPosition"
+              [popoverText]="popoverText"
+            />
+          }
         </div>
-      </ng-container>
-    </div>
-    <ng-container *ngIf="_notifications?.type === 'section'">
-      <div class="fudis-section__notifications">
-        <ng-container *ngTemplateOutlet="_notifications!.templateRef" />
+        <ng-content select="fudis-section-actions"></ng-content>
       </div>
-    </ng-container>
-  </div>
-  <div class="fudis-section__content">
-    <ng-container *ngIf="_content?.type === 'section'">
-      <ng-container *ngTemplateOutlet="_content!.templateRef" />
-    </ng-container>
-  </div>
-</section>
+    </div>
+    <ng-content select="fudis-section-content"></ng-content>
+  </section>
+}

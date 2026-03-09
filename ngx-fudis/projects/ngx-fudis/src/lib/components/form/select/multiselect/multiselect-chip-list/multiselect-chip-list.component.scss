@@ -1,31 +1,31 @@
-@use "../../../../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../../../../foundations/typography/mixins.scss" as typography;
-@use "../../../../../foundations/spacing/tokens.scss" as spacing;
-@use "../../../../../foundations/borders/mixins.scss" as border;
-@use "../../../../../foundations/focus/mixins.scss" as focus;
-@use "../../../../../foundations/utilities/mixins.scss" as utilities;
+@use '@funidata/fudis-core' as core;
 
 .fudis-multiselect-chip-list {
-  @include utilities.box-reset;
+  @include core.box-reset;
 
   display: flex;
   flex-wrap: wrap;
-  gap: spacing.$spacing-xxs;
-  padding-top: spacing.$spacing-xxs;
+  gap: core.$spacing-xxs;
+  padding-top: core.$spacing-xxs;
+  list-style: none;
 
-  &__button {
-    @include colorMixins.bg-color("gray-dark");
-    @include colorMixins.text-color("white");
-    @include typography.body-text-md-regular;
-    @include border.border-none;
-    @include utilities.box-reset;
+  &__item__button {
+    @include core.bg-color('gray-dark');
+    @include core.text-color('white');
+    @include core.body-text-md-regular;
+    @include core.border-none;
+    @include core.box-reset;
 
-    display: block;
+    display: flex;
     cursor: pointer;
-    padding: 0 spacing.$spacing-xs 0 0;
+    text-align: start;
 
     &:focus {
-      @include focus.focus-generic;
+      @include core.focus-generic;
+    }
+
+    &__label {
+      padding: core.$spacing-xs core.$spacing-xs core.$spacing-xs 0;
     }
   }
 }

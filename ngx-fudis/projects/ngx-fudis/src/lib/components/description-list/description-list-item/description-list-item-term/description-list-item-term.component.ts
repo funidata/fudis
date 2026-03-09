@@ -1,24 +1,31 @@
-import { ChangeDetectionStrategy, Component, Host, Input, effect } from '@angular/core';
-import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
+import { ChangeDetectionStrategy, Component, Host, Input, signal, effect } from '@angular/core';
+import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
+import { PopoverApiDirective } from '../../../../directives/popover/popover-api.directive';
 
+/**
+ * Displays the term (key) in a DescriptionListItemComponent.
+ */
 @Component({
-  selector: 'fudis-dt, fudis-description-list-term',
+  selector: 'fudis-dt',
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
-export class DescriptionListItemTermComponent {
+export class DescriptionListItemTermComponent extends PopoverApiDirective {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
+    super();
+
     this._id = this._idService.getNewDlGrandChilId(
       'term',
       this._parentDl.id,
@@ -34,12 +41,24 @@ export class DescriptionListItemTermComponent {
     });
 
     effect(() => {
-      this._parentLanguageOptions = _parentDlItem.getDetailsLanguageOptions()();
+      const parentLanguageOptions = _parentDlItem.getDetailsLanguageOptions()();
+
+      if (parentLanguageOptions) {
+        const translated: FudisLanguageAbbr[] = [];
+
+        for (const [key, value] of Object.entries(parentLanguageOptions)) {
+          if (Object.keys(value).some((itemId) => value[itemId] !== null)) {
+            translated.push(<FudisLanguageAbbr>key);
+          }
+        }
+        this._parentLanguageTranslations.set(translated);
+      }
     });
   }
 
   /**
-   * Renders Fudis Language Badge Group Component for displaying Description List Item Detail values in given languages
+   * Renders Fudis Language Badge Group Component for displaying Description List Item Detail values
+   * in given languages
    */
   @Input() languages: boolean = true;
 
@@ -49,9 +68,9 @@ export class DescriptionListItemTermComponent {
   @Input() contentText: string;
 
   /**
-   * Available languages of sibling dt elements fetched from the parent dl-item element
+   * Available translated languages of sibling dt elements fetched from the parent dl-item element
    */
-  protected _parentLanguageOptions: FudisLanguageBadgeContent | null;
+  protected _parentLanguageTranslations = signal<FudisLanguageAbbr[]>([]);
 
   /**
    * Main CSS class
@@ -67,6 +86,7 @@ export class DescriptionListItemTermComponent {
 
   /**
    * When Language Badge is clicked, update clicked language to parent item
+   *
    * @param lang FudisLanguageAbbr
    */
   protected _setSelectedLanguage(lang: FudisLanguageAbbr | null): void {

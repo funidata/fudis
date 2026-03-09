@@ -1,0 +1,41 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { BreadcrumbsComponent } from "./breadcrumbs.component";
+import * as BreadcrumbsStories from "./breadcrumbs.stories.ts";
+import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
+import { BreadcrumbsItemComponent } from "./breadcrumbs-item/breadcrumbs-item.component";
+
+<Meta title="Components/Breadcrumbs" />
+
+# Breadcrumbs
+
+Breadcrumbs is essentially a navigation element.
+
+## Usage Guidelines
+
+Breadcrumbs organism is built using parent wrapper of Breadcrumbs Component and adding Breadcrumbs Item Components as its children.
+
+### Breadcrumbs - Parent Component
+
+Necessary property for Breadcrumbs Component is `label`.
+
+`label` is used as aria-label and it should describe the name of the section breadcrumbs consists from, e.g. _"My profile"_. Aria-label will automatically have a prefix _"Breadcrumbs: "_ which will be followed by the given label.
+
+### Breadcrumbs Item - Child Component
+
+Breadcrumbs Item has content slots for `<a>` and `<fudis-body-text>` elements. Existing array of link objects with `label` and `url` properties should be looped through with index. See the code example in the example below.
+[BodyText](/docs/components-typography-body-text--documentation) is meant to be rendered for the last link, so it is presented as plain text. It will automatically have `aria-current="page"`.
+
+## Example
+
+<Canvas of={BreadcrumbsStories.Example} />
+
+## Accessibility
+
+- Breadcrumbs is a `nav` element containing `ul` list of Breadcrumbs Items
+- Fudis automatically adds an aria-label to parent to provide additional information about the breadcrumbs
+- Each visible Breadcrumbs Item, except the last one, is a link
+- The last visible list item has `aria-current="page"` attribute
+
+## Properties
+
+<ArgTypes of={BreadcrumbsComponent} />

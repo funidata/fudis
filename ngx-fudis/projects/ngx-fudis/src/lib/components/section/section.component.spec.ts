@@ -1,23 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { SectionComponent } from './section.component';
+import { SectionActionsDirective, SectionContentDirective } from './section-content.directive';
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
-import { NotificationComponent } from '../notification/notification.component';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { IconComponent } from '../icon/icon.component';
-import { FudisGridService } from '../../services/grid/grid.service';
-import { FudisIdService } from '../../services/id/id.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
-import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
-import { FudisTooltipPosition } from '../../types/miscellaneous';
 import {
   FudisHeadingLevel,
   FudisHeadingVariant,
@@ -25,29 +18,25 @@ import {
   fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { PopoverDirective } from '../../directives/popover/popover.directive';
 
 @Component({
+  standalone: false,
   selector: 'mock-fudis-section',
   template: `<fudis-section
     [title]="title"
     [titleVariant]="titleVariant"
     [level]="level"
     [classes]="classes"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
+    [popoverTriggerLabel]="popoverTriggerLabel"
+    [popoverText]="popoverText"
   >
-    <ng-template fudisActions type="section">
+    <fudis-section-actions>
       <fudis-button [label]="'Some action'"></fudis-button>
-    </ng-template>
-    <ng-template fudisNotifications type="section">
-      <fudis-notification
-        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
-      >
-    </ng-template>
-    <ng-template fudisContent type="section">
+    </fudis-section-actions>
+    <fudis-section-content>
       <fudis-body-text>Some text content inside section</fudis-body-text>
-    </ng-template>
+    </fudis-section-content>
   </fudis-section>`,
 })
 class MockFudisSectionComponent {
@@ -55,9 +44,8 @@ class MockFudisSectionComponent {
   titleVariant: FudisHeadingVariant = 'lg';
   level: FudisHeadingLevel = 2;
   classes: string[];
-  tooltip: string = 'This is tooltip in section';
-  tooltipToggle: boolean = false;
-  tooltipPosition: FudisTooltipPosition = 'below';
+  popoverText: string = 'This is popover in section';
+  popoverTriggerLabel: string = 'Additional info';
 }
 
 describe('SectionComponent', () => {
@@ -65,28 +53,23 @@ describe('SectionComponent', () => {
   let mockFixture: ComponentFixture<MockFudisSectionComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [
-        ActionsDirective,
-        BodyTextComponent,
-        ButtonComponent,
-        ContentDirective,
         GridDirective,
         HeadingComponent,
-        IconComponent,
         MockFudisSectionComponent,
-        NotificationComponent,
-        NotificationsDirective,
         SectionComponent,
-        TooltipDirective,
+        SectionActionsDirective,
+        SectionContentDirective,
       ],
-      providers: [
-        FudisGridService,
-        FudisIdService,
-        FudisInternalErrorSummaryService,
-        FudisBreakpointService,
+      imports: [
+        BodyTextComponent,
+        ButtonComponent,
+        IconButtonComponent,
+        IconComponent,
+        PopoverDirective,
       ],
-      imports: [MatTooltipModule],
+      providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     });
 
     mockFixture = TestBed.createComponent(MockFudisSectionComponent);
@@ -125,7 +108,7 @@ describe('SectionComponent', () => {
     it('should have Grid related classes', () => {
       expect(sortClasses(getSectionElement().className)).toEqual(
         sortClasses(
-          'fudis-section fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none',
+          'fudis-section fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__row-gap__none',
         ),
       );
     });
@@ -136,7 +119,7 @@ describe('SectionComponent', () => {
 
       expect(sortClasses(getSectionElement().className)).toEqual(
         sortClasses(
-          'fudis-section my-custom-class other-custom-class fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none',
+          'fudis-section my-custom-class other-custom-class fudis-grid fudis-grid__align__start fudis-grid__initial fudis-grid__row-gap__none',
         ),
       );
     });
@@ -144,7 +127,7 @@ describe('SectionComponent', () => {
 
   describe('HTML elements and properties', () => {
     it('should have id related props', () => {
-      expect(getSectionElement().getAttribute('aria-describedby')).toEqual(
+      expect(getSectionElement().getAttribute('aria-labelledby')).toEqual(
         'fudis-section-1-heading',
       );
       expect(getSectionElement().getAttribute('id')).toEqual('fudis-section-1');
@@ -157,7 +140,7 @@ describe('SectionComponent', () => {
 
       expect(headingWrapper).toBeTruthy();
       expect(headingComponent).toBeTruthy();
-      expect(headingElement?.textContent).toEqual('This is section title');
+      expect(headingElement?.textContent.trim()).toEqual('This is section title');
     });
 
     it('should return correct title variant', () => {
@@ -174,20 +157,8 @@ describe('SectionComponent', () => {
   });
 
   describe('Content projection', () => {
-    it('should render notification inside header if given', () => {
-      const notifications = mockFixture.nativeElement.querySelector(
-        '.fudis-section__notifications',
-      );
-      const notificationComponent = mockFixture.debugElement.query(
-        By.directive(NotificationComponent),
-      );
-
-      expect(notifications).toBeTruthy();
-      expect(notificationComponent).toBeTruthy();
-    });
-
     it('should render action button(s) inside header if given', () => {
-      const actions = mockFixture.nativeElement.querySelector('.fudis-section__header__actions');
+      const actions = mockFixture.nativeElement.querySelector('.fudis-section-actions');
       const actionComponent = mockFixture.debugElement.query(By.directive(ButtonComponent));
 
       expect(actions).toBeTruthy();
@@ -195,7 +166,7 @@ describe('SectionComponent', () => {
     });
 
     it('should render content', () => {
-      const content = mockFixture.nativeElement.querySelector('.fudis-section__content');
+      const content = mockFixture.nativeElement.querySelector('.fudis-section-content');
       const contentComponent = mockFixture.debugElement.query(By.directive(BodyTextComponent));
 
       expect(content).toBeTruthy();

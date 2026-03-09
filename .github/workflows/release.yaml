@@ -6,6 +6,11 @@ on:
       - released
       - prereleased
 
+permissions:
+  # Permission to generate OIDC token
+  id-token: write
+  contents: read
+
 jobs:
   test:
     name: Run tests
@@ -13,31 +18,62 @@ jobs:
 
   publish:
     name: Publish library to NPM
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - test
+    outputs:
+      set-as-latest: ${{ steps.check_latest.outputs.is-latest }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       # Recent Node.js is included in `ubuntu-latest` but `setup-node` is still required to setup NPM auth via token.
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
           # Specifying `registry-url` triggers `setup-node` to setup NPM authentication.
           registry-url: https://registry.npmjs.org/
       - name: Copy root README.md to library
         run: cp README.md ngx-fudis/projects/ngx-fudis/README.md
+      - name: Check for latest version
+        id: check_latest
+        run: |
+          LATEST_RELEASE=$(curl -L \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases/latest \
+            | jq -r '.tag_name')
+
+          CURRENT_VERSION=$(echo "${{ github.event.release.tag_name }}" | cut -c2-)
+
+          if [[ "${LATEST_RELEASE}" == "${{ github.event.release.tag_name }}" ]]; then
+            if [[ "$CURRENT_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "is-latest=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "::error::When publishing a latest release, the version has to respect the major.minor.patch-format."
+              exit 1
+            fi
+          else
+            echo "is-latest=false" >> "$GITHUB_OUTPUT"
+            if ${{ github.event.release.prerelease }}; then
+              echo "NPM_TAG=prerelease" >> $GITHUB_ENV
+            else
+              echo "NPM_TAG=patch" >> $GITHUB_ENV
+            fi
+          fi
       - name: Build ngx-fudis
         run: npm run build
-      - run: npm publish --access public
+      - name: Publish latest
+        if: steps.check_latest.outputs.is-latest == 'true'
+        run: npm publish --access public
         working-directory: ngx-fudis/dist/ngx-fudis
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish patch or pre-release
+        if: steps.check_latest.outputs.is-latest == 'false'
+        run: npm publish --access public --tag ${{ env.NPM_TAG }}
+        working-directory: ngx-fudis/dist/ngx-fudis
 
   publish-docs:
     name: Publish docs to AWS
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - test
       - publish
@@ -46,9 +82,9 @@ jobs:
         working-directory: ngx-fudis
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
       - name: Configure AWS credentials
@@ -62,21 +98,67 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build docs
-        run: npm run build -- storybook
+        run: npm run build-storybook
       - name: Copy docs to S3 bucket
-        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/v/$VERSION
-      - name: Check semver
-        id: check-semver
-        run: |
-          if [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-              echo "set-as-latest=true" >> $GITHUB_OUTPUT
-          fi
+        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/$VERSION
+
+      - name: Check for Storybook redirect
+        id: check-storybook-redirect
+        if: needs.publish.outputs.set-as-latest == 'true'
+        run: echo "REDIRECT_STORYBOOK=true" >> $GITHUB_ENV
       - name: Update root redirect to this version
-        if: steps.check-semver.outputs.set-as-latest == 'true'
+        if: env.REDIRECT_STORYBOOK == 'true'
         run: |
           echo "<html>
           <head>
-          <meta http-equiv='refresh' content='0; url=https://fudis.funidata.fi/v/$VERSION/index.html' />
+          <meta http-equiv='refresh' content='0; url=https://fudis.funidata.fi/ngx/v/$VERSION/index.html' />
           </head>
           </html>" > /tmp/index.html
-          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }} --cache-control max-age=5
+          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx --cache-control max-age=5
+          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/index.html --cache-control max-age=5
+          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/index.html --cache-control max-age=5
+
+  update-versions:
+    name: Update version list for version selector
+    runs-on: ubuntu-24.04
+    needs:
+      - publish-docs
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Generate and upload versions.json
+        run: |
+          set -e
+
+          VERSIONS=$(aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/ \
+            | grep 'PRE' \
+            | awk '{print $2}' \
+            | sed 's|/||g' \
+            | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          LATEST=$(echo "$VERSIONS" | jq -r '.[-1]')
+
+          echo "{\"versions\": $VERSIONS, \"latest\": \"$LATEST\"}" > /tmp/versions.json
+
+          echo "VERSIONS=$VERSIONS"
+          echo "LATEST=$LATEST"
+
+           aws   s3 cp /tmp/versions.json \
+              s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
+              --cache-control max-age=60
+
+      - name: Verify uploaded versions.json
+        run: |
+          set -e
+
+          echo "versions from S3 bucket: "
+          aws s3 cp \
+            s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
+            -

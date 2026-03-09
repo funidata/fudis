@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { HeadingComponent } from './heading.component';
 import {
   FudisHeadingVariant,
@@ -7,7 +6,6 @@ import {
   fudisHeadingLevelArray,
   fudisHeadingVariantArray,
 } from '../../../types/typography';
-import { FudisSpacing, fudisSpacingArray } from '../../../types/spacing';
 import { FudisTextAlign, fudisTextAlignArray } from '../../../types/typography';
 
 describe('HeadingComponent', () => {
@@ -17,11 +15,7 @@ describe('HeadingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeadingComponent],
-    })
-      .overrideComponent(HeadingComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
-      })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -44,16 +38,13 @@ describe('HeadingComponent', () => {
   function headingCheck(
     variant: FudisHeadingVariant,
     align: FudisTextAlign,
-    marginBottom: FudisSpacing,
     level: FudisHeadingLevel,
   ): void {
     const variantBefore = component.variant;
-    const marginBefore = component.marginBottom;
     const levelBefore = component.level;
     const alignBefore = component.align;
 
     component.variant = variant;
-    component.marginBottom = marginBottom;
     component.level = level;
     component.align = align;
 
@@ -61,14 +52,6 @@ describe('HeadingComponent', () => {
       variant: {
         previousValue: variantBefore,
         currentValue: variant,
-        firstChange: false,
-        isFirstChange: () => {
-          return false;
-        },
-      },
-      marginBottom: {
-        previousValue: marginBefore,
-        currentValue: marginBottom,
         firstChange: false,
         isFirstChange: () => {
           return false;
@@ -95,7 +78,7 @@ describe('HeadingComponent', () => {
     fixture.detectChanges();
 
     assertHeadingHasClasses(
-      `fudis-heading fudis-heading__align__${align} fudis-heading__variant__${variant} fudis-mb-${marginBottom}`,
+      `fudis-heading fudis-heading__align__${align} fudis-heading__variant__${variant}`,
       level,
     );
   }
@@ -109,9 +92,7 @@ describe('HeadingComponent', () => {
       fudisHeadingLevelArray.forEach((level) => {
         fudisHeadingVariantArray.forEach((variant) => {
           fudisTextAlignArray.forEach((alignment) => {
-            fudisSpacingArray.forEach((spacing) => {
-              headingCheck(variant, alignment, spacing, level);
-            });
+            headingCheck(variant, alignment, level);
           });
         });
       });
@@ -138,8 +119,6 @@ describe('HeadingComponent', () => {
 
         let variantClass = '';
 
-        let marginBottom = '';
-
         if (level == 1) {
           variantClass = 'xxl';
         } else if (level == 2) {
@@ -154,14 +133,8 @@ describe('HeadingComponent', () => {
           variantClass = 'xs';
         }
 
-        if (variantClass === 'xxl' || variantClass === 'xl') {
-          marginBottom = 'sm';
-        } else {
-          marginBottom = 'xs';
-        }
-
         assertHeadingHasClasses(
-          `fudis-heading fudis-heading__align__left fudis-heading__variant__${variantClass} fudis-mb-${marginBottom}`,
+          `fudis-heading fudis-heading__align__left fudis-heading__variant__${variantClass}`,
           level,
         );
       });

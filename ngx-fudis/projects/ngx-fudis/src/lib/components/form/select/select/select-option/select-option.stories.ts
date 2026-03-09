@@ -2,8 +2,8 @@ import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
-import { action } from '@storybook/addon-actions';
-import readme from './select-option.mdx';
+import { action } from 'storybook/actions';
+import docs from './select-option.mdx';
 import { SelectOptionComponent } from './select-option.component';
 import { selectStoryControlExclude } from '../../../../../utilities/storybook';
 
@@ -17,7 +17,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: selectStoryControlExclude,
@@ -27,7 +27,7 @@ export default {
 
 const html = String.raw;
 
-const ExampleTemplate: StoryFn<SelectOptionComponent> = (args: SelectOptionComponent) => ({
+const ExampleTemplate: StoryFn = (args) => ({
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),
@@ -41,7 +41,7 @@ const ExampleTemplate: StoryFn<SelectOptionComponent> = (args: SelectOptionCompo
       [helpText]="'Example help text'"
       [placeholder]="'Example placeholder text'"
     >
-      <ng-template fudisContent type="select-options">
+      <ng-template fudisSelectOptions>
         <fudis-select-option [data]="data"></fudis-select-option>
       </ng-template>
     </fudis-select>

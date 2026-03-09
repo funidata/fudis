@@ -1,20 +1,21 @@
-import {
-  Component,
-  Input,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  effect,
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisIdService } from '../../services/id/id.service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
+/**
+ * Displays the hierarchial navigation path to the current page.
+ *
+ * Use this component to help users understand their location and navigate back through parent
+ * levels.
+ */
 @Component({
   selector: 'fudis-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class BreadcrumbsComponent {
   constructor(
@@ -22,10 +23,7 @@ export class BreadcrumbsComponent {
     private _idService: FudisIdService,
   ) {
     this._id = this._idService.getNewParentId('breadcrumbs');
-
-    effect(() => {
-      this._breadcrumbsPrefix.next(this._translationService.getTranslations()().BREADCRUMBS.PREFIX);
-    });
+    this._breadcrumbsPrefix.next(this._translationService.getTranslations()().BREADCRUMBS.PREFIX);
   }
 
   /**
@@ -36,8 +34,13 @@ export class BreadcrumbsComponent {
   /**
    * Prefix for aria-label from Fudis translation keys
    */
-  protected _breadcrumbsPrefix = new Subject<string>();
+  protected _breadcrumbsPrefix = new BehaviorSubject<string>(
+    this._translationService.getTranslations()().BREADCRUMBS.PREFIX,
+  );
 
+  /**
+   * HTML id
+   */
   protected _id: string;
 
   /**

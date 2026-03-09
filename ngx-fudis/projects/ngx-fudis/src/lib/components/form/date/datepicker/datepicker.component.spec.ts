@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisValidators } from '../../../../utilities/form/validators';
@@ -12,6 +12,8 @@ import { DatepickerComponent } from './datepicker.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../../../types/forms';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 describe('DatepickerComponent', () => {
   let component: DatepickerComponent;
@@ -24,16 +26,17 @@ describe('DatepickerComponent', () => {
       declarations: [
         DatepickerComponent,
         LabelComponent,
-        IconComponent,
         GuidanceComponent,
         ValidatorErrorMessageComponent,
       ],
       imports: [
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
         BrowserAnimationsModule,
+        IconComponent,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
       ],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 
@@ -89,7 +92,7 @@ describe('DatepickerComponent', () => {
         '.fudis-guidance__help-text',
       ) as HTMLParagraphElement;
 
-      expect(guidanceHelpText.textContent).toEqual('Select your favourite date');
+      expect(guidanceHelpText.textContent.trim()).toEqual('Select your favourite date');
     });
   });
 
@@ -122,7 +125,7 @@ describe('DatepickerComponent', () => {
     });
 
     it('should have disabled attributes if input has been disabled', () => {
-      component.disabled = true;
+      component.control.disable();
       fixture.detectChanges();
 
       expect(!!datepickerInput.getAttribute('aria-disabled')).toEqual(true);
@@ -207,6 +210,59 @@ describe('DatepickerComponent', () => {
       fixture.detectChanges();
 
       expect(component.control.valid).toBe(true);
+    });
+  });
+
+  describe('Escape key behavior', () => {
+    let dialogService: FudisDialogService;
+
+    beforeEach(() => {
+      dialogService = TestBed.inject(FudisDialogService);
+      jest.spyOn(dialogService, 'dropdownClosedWithEscape').mockImplementation();
+
+      component['_picker'] = {
+        opened: true,
+        close: jest.fn(),
+      } as unknown as MatDatepicker<Date>;
+    });
+
+    it('should call dropdownClosedWithEscape()when Escape is pressed and calendar is open', () => {
+      // Arrange
+      component['_picker'].opened = true;
+
+      // Act
+      const event = new KeyboardEvent('keydown', { key: 'Escape' });
+      component['_handleEscapePress'](event);
+
+      // Assert
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(1);
+      expect(component['_picker'].close).toHaveBeenCalled();
+    });
+
+    it('should not call dropdownClosedWithEscape() when Escape is pressed and calendar is closed', () => {
+      // Arrange
+      component['_picker'].opened = false;
+
+      // Act
+      const event = new KeyboardEvent('keydown', { key: 'Escape' });
+      component['_handleEscapePress'](event);
+
+      // Assert
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(0);
+      expect(component['_picker'].close).not.toHaveBeenCalled();
+    });
+
+    it('should not call dropdownClosedWithEscape() when A key is pressed and calendar is open', () => {
+      // Arrange
+      component['_picker'].opened = true;
+
+      // Act
+      const event = new KeyboardEvent('keydown', { key: 'a' });
+      component['_handleEscapePress'](event);
+
+      // Assert
+      expect(dialogService.dropdownClosedWithEscape).toHaveBeenCalledTimes(0);
+      expect(component['_picker'].close).not.toHaveBeenCalled();
     });
   });
 });

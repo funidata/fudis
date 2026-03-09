@@ -1,6 +1,6 @@
 {
   "name": "@funidata/ngx-fudis",
-  "version": "2.1.0",
+  "version": "8.3.3",
   "license": "CC-BY-NC-SA-4.0",
   "exports": {
     ".": {
@@ -10,14 +10,30 @@
       "sass": "./src/lib/theme/fudis-theme.scss"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/funidata/fudis.git"
+  },
+  "keywords": [
+    "funidata",
+    "design-system",
+    "component-library",
+    "angular-components"
+  ],
+  "bugs": {
+    "url": "https://github.com/funidata/fudis/issues"
+  },
+  "author": "Funidata Ltd",
+  "homepage": "https://fudis.funidata.fi/",
   "peerDependencies": {
-    "@angular/cdk": "^17.3.10",
-    "@angular/common": "^17.3.10",
-    "@angular/core": "^17.3.10",
-    "@angular/material": "^17.3.10"
+    "@angular/cdk": ">=20.0.0",
+    "@angular/common": ">=20.0.0",
+    "@angular/core": ">=20.0.0",
+    "@angular/material": ">=20.0.0",
+    "@funidata/fudis-core": "^2.2.0"
   },
   "devDependencies": {
-    "tslib": "^2.6.3",
-    "typescript": "~5.4.5"
+    "tslib": "^2.7.0",
+    "typescript": "^5.9.3"
   }
 }

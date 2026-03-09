@@ -2,68 +2,69 @@ import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/ang
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, EventEmitter, Input, Output, importProvidersFrom } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
-import docs from './dropdown-menu-docs.mdx';
+import docs from './dropdown-menu.mdx';
 import { dropdownMenuExclude } from '../../utilities/storybook';
 import { defaultMenuItems, smallDropdownMenuGroupedMockData } from './mock_data';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { FudisInputSize } from '../../types/forms';
+import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
 
 @Component({
   selector: 'example-dropdown-menu',
   template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
     <fudis-grid-item>
       <fudis-heading [level]="4">Random items menu</fudis-heading>
-      <fudis-button
-        [label]="'Random items menu'"
-        [labelHidden]="true"
+      <fudis-icon-button
+        [ariaLabel]="'Random items menu'"
         [size]="'small'"
         [variant]="'secondary'"
         [icon]="'three-dots'"
         [asMenuButton]="true"
       >
         <fudis-dropdown-menu [align]="align" [size]="size">
-          <fudis-dropdown-menu-item
-            *ngFor="let item of defaultMenuItems"
-            [label]="item.label"
-            [disabled]="item.disabled"
-            (handleClick)="_clickOption(item.label, $event)"
-          >
-          </fudis-dropdown-menu-item>
+          @for (item of defaultMenuItems; track item.label) {
+            <fudis-dropdown-menu-item
+              [label]="item.label"
+              [disabled]="item.disabled"
+              (handleClick)="_clickOption(item.label, $event)"
+            >
+            </fudis-dropdown-menu-item>
+          }
         </fudis-dropdown-menu>
-      </fudis-button>
+      </fudis-icon-button>
     </fudis-grid-item>
     <fudis-grid-item>
       <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
-      <fudis-button
-        [label]="'Grouped animals menu'"
-        [labelHidden]="true"
+      <fudis-icon-button
+        [ariaLabel]="'Grouped animals menu'"
         [size]="'small'"
         [variant]="'secondary'"
         [icon]="'three-dots'"
         [asMenuButton]="true"
       >
         <fudis-dropdown-menu [align]="align" [size]="size">
-          <fudis-dropdown-menu-group
-            *ngFor="let group of smallDropdownMenuGroupedMockData"
-            [label]="group.country"
-          >
-            <fudis-dropdown-menu-item
-              *ngFor="let groupedItem of group.items"
-              [label]="groupedItem.label"
-              [disabled]="groupedItem.disabled"
-              (handleClick)="_clickOption(groupedItem.label, $event)"
-            >
-            </fudis-dropdown-menu-item>
-          </fudis-dropdown-menu-group>
+          @for (group of smallDropdownMenuGroupedMockData; track group.country) {
+            <fudis-dropdown-menu-group [label]="group.country">
+              @for (groupedItem of group.items; track groupedItem.label) {
+                <fudis-dropdown-menu-item
+                  [label]="groupedItem.label"
+                  [disabled]="groupedItem.disabled"
+                  (handleClick)="_clickOption(groupedItem.label, $event)"
+                >
+                </fudis-dropdown-menu-item>
+              }
+            </fudis-dropdown-menu-group>
+          }
         </fudis-dropdown-menu>
-      </fudis-button>
+      </fudis-icon-button>
     </fudis-grid-item>
     <fudis-grid-item [columns]="'1/-1'">
-      <fudis-body-text *ngIf="_latestClickItem"
-        >Latest clicked item was: {{ _latestClickItem }}</fudis-body-text
-      >
+      @if (_latestClickItem) {
+        <fudis-body-text>Latest clicked item was: {{ _latestClickItem }}</fudis-body-text>
+      }
     </fudis-grid-item>
   </fudis-grid>`,
+  standalone: false,
 })
 class DropdownMenuExampleComponent {
   protected _latestClickItem: string | null = null;
@@ -108,6 +109,10 @@ export default {
   argTypes: {
     size: {
       options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
+    align: {
+      options: fudisDropdownMenuAlignArray,
       control: { type: 'radio' },
     },
   },
