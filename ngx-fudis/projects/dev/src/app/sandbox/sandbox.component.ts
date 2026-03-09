@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import {
   // FudisAlertService,
   FudisDialogService,
@@ -46,7 +46,7 @@ export class SandboxComponent implements OnInit {
   errorSummaryVisible = false;
   protected _message: string;
 
-  dropdownOptions: FudisSelectOption<object>[] = [
+  dropdownOptions: FudisSelectOption<string>[] = [
     { value: 'value-1-dog', label: 'Dog' },
     { value: 'value-2-capybara', label: 'Capybara' },
     { value: 'value-3-platypys', label: 'Platypus' },

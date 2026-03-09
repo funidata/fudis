@@ -27,15 +27,15 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     AppFormExampleComponent,
+    DialogTestComponent,
+    DialogTestContentComponent,
+    DialogTestFormComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
     ButtonComponent,
     ExerciseComponent,
     SandboxComponent,
-    DialogTestComponent,
-    DialogTestContentComponent,
-    DialogTestFormComponent,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
