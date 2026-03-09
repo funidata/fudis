@@ -9,6 +9,7 @@ import docs from './multiselect.mdx';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component';
+import { fudisInputSizeArray } from '../../../../types/forms';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
@@ -31,8 +32,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     helpText: {
       control: { type: 'text' },

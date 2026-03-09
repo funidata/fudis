@@ -16,7 +16,7 @@ import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
-import { FudisSelectionGroupInputSize } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 
 @Component({
   standalone: false,
@@ -42,7 +42,7 @@ class MockFieldSetComponent {
   required = false;
   initialFocus = false;
   labelSize = 'md';
-  inputSize: FudisSelectionGroupInputSize;
+  inputSize: FudisInputSize;
 }
 
 describe('FieldSetComponent', () => {
@@ -74,7 +74,7 @@ describe('FieldSetComponent', () => {
     fixtureMock.detectChanges();
   });
 
-  function fieldSetInputSizeCheck(size: FudisSelectionGroupInputSize): void {
+  function fieldSetInputSizeCheck(size: FudisInputSize): void {
     componentMock.inputSize = size;
     fixtureMock.detectChanges();
 

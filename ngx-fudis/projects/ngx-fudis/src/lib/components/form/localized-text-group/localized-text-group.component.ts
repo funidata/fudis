@@ -81,7 +81,7 @@ export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGr
   ];
 
   /**
-   * Available sizes for the input - defaults to large.
+   * Total width of the component, including both TextInput and Select.
    */
   @Input() size: FudisInputSize = 'lg';
 
