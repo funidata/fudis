@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxFudisModule } from 'ngx-fudis';
+import { NgxFudisModule, ButtonComponent } from 'ngx-fudis';
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -26,15 +26,16 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    AppFormExampleComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    ButtonComponent,
     ExerciseComponent,
     SandboxComponent,
     DialogTestComponent,
     DialogTestContentComponent,
     DialogTestFormComponent,
-    AppFormExampleComponent,
-  ],
-  bootstrap: [AppComponent],
-  imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
