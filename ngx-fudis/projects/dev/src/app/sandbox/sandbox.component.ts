@@ -7,6 +7,7 @@ import {
   FudisTranslationService,
   FudisBreakpointService,
   FudisErrorSummaryService,
+  NgxFudisModule,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption, FudisCheckboxOption } from 'projects/ngx-fudis/src/lib/types/forms';
@@ -19,6 +20,7 @@ import { DialogTestFormComponent } from '../dialog-test/dialog-test-content/dial
 @Component({
   selector: 'app-sandbox',
   templateUrl: 'sandbox.component.html',
+  imports: [NgxFudisModule],
 })
 export class SandboxComponent implements OnInit {
   constructor(

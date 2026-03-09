@@ -1,19 +1,20 @@
-<ng-container *transloco="let t">
+  <h1>OLLAAAAAAAAA</h1>
+<!-- <ng-container *transloco="let t">
   <div class="root-style">
-    <fudis-grid [columns]="1" [marginTop]="'xl'">
+    <fudis-grid [columns]="1">
       <fudis-heading [level]="1">Welcome to Fudis sandbox </fudis-heading>
 
-      <fudis-expandable [title]="'Random stuff'">
+      <fudis-expandable [title]="'Random stuff'" [level]="2">
         <ng-template fudisContent type="expandable">
-          <fudis-grid [marginTop]="'md'">
+          <fudis-grid>
             <fudis-notification variant="danger" ariaVariantText="Varoitus!"
               >Whoops! Here is danger notification.</fudis-notification
             >
 
             <fudis-heading [level]="3" fudisGridItem [columns]="'auto'">
-              <fudis-link [href]="'#'" [title]="'Link inside a heading'"></fudis-link>
+              <a href="#" title="Link inside a heading"></a>
             </fudis-heading>
-            <!-- <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" /> -->
+            <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" />
             <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
             <fudis-body-text *ngIf="_message"
               >This value comes from the closed dialog input:
@@ -24,7 +25,7 @@
               (handleClick)="openDialogFromComponent()"
             />
             <fudis-button [label]="'Change language'" (handleClick)="changeLanguage()" />
-            <!-- <fudis-button
+            <fudis-button
               [label]="'Menu'"
               [labelHidden]="true"
               [size]="'small'"
@@ -49,7 +50,7 @@
                 <fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
                 <fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
               </fudis-dropdown-menu>
-            </fudis-button> -->
+            </fudis-button>
           </fudis-grid>
         </ng-template>
       </fudis-expandable>
@@ -57,13 +58,13 @@
       <app-dropdown-examples fudisGridItem [columns]="'stretch'" />
       <app-form-examples fudisGridItem [columns]="'stretch'" />
 
-      <fudis-expandable [title]="'Description list'">
+      <fudis-expandable [title]="'Description list'" [level]="2">
         <ng-template fudisContent type="expandable">
-          <!-- <fudis-description-list [data]="testData"></fudis-description-list> -->
+          <fudis-description-list [data]="testData"></fudis-description-list>
         </ng-template>
       </fudis-expandable>
 
-      <fudis-expandable [title]="'Grid stuff'">
+      <fudis-expandable [title]="'Grid stuff'" [level]="2">
         <ng-template fudisContent type="expandable">
           <fudis-grid [columns]="1" [rowGap]="'xxl'">
             <fudis-grid [columns]="2">
@@ -114,11 +115,11 @@
         </ng-template>
       </fudis-expandable>
 
-      <fudis-expandable [title]="'Expandable lite'" [variant]="'lite'" [padding]="'small'">
+      <fudis-expandable [title]="'Expandable lite'" [variant]="'lite'" [padding]="'small'" [level]="2">
         <ng-template fudisContent type="expandable">
           <fudis-body-text>Expandable lite without large content padding.</fudis-body-text>
         </ng-template>
       </fudis-expandable>
     </fudis-grid>
   </div>
-</ng-container>
+</ng-container> -->
