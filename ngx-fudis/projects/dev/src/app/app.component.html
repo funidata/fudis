@@ -1,8 +1,8 @@
 <ng-container *transloco="let t">
   <div class="root-style">
-      <fudis-grid [columns]="4" class="fudis-mt-lg" [align]="'center'">
-        <a fudisLink fudisGridItem [href]="'/exercise'" [external]="true" [title]="'Exercise'" [columns]="1"></a>
-        <a fudisLink fudisGridItem [href]="'/sandbox'" [external]="true" [title]="'Sandbox'" [columns]="2"></a>
+      <fudis-grid [columns]="4" [classes]="'fudis-mt-lg'" [align]="'center'">
+        <a fudisLink fudisGridItem [href]="'/exercise'" [title]="'Exercise'" [columns]="1"></a>
+        <a fudisLink fudisGridItem [href]="'/sandbox'" [title]="'Sandbox'" [columns]="2"></a>
       </fudis-grid>
       <hr class="fudis-hr"/>
       <router-outlet></router-outlet>

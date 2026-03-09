@@ -1,26 +1,25 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, computed, Inject, OnInit, signal, DOCUMENT } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import {
-  // FudisAlertService,
+  FudisAlert,
+  FudisAlertService,
+  FudisCheckboxGroupOption,
   FudisDialogService,
   FudisGridService,
   FudisTranslationService,
   FudisBreakpointService,
   FudisErrorSummaryService,
-  NgxFudisModule,
 } from 'ngx-fudis';
-import { DOCUMENT } from '@angular/common';
-import { FudisSelectOption, FudisCheckboxOption } from 'projects/ngx-fudis/src/lib/types/forms';
-// import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from '../dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTestFormComponent } from '../dialog-test/dialog-test-content/dialog-test-form.component';
+import { dummyData } from '../mock_data';
 
 @Component({
   selector: 'app-sandbox',
   templateUrl: 'sandbox.component.html',
-  imports: [NgxFudisModule],
+  standalone: false,
 })
 export class SandboxComponent implements OnInit {
   constructor(
@@ -30,7 +29,7 @@ export class SandboxComponent implements OnInit {
     private _translocoService: TranslocoService,
     private _gridService: FudisGridService,
     private _fudisLanguage: FudisTranslationService,
-    // private _alertService: FudisAlertService,
+    private _alertService: FudisAlertService,
     private _errorSummaryService: FudisErrorSummaryService,
     private _breakpointService: FudisBreakpointService,
   ) {
@@ -47,36 +46,22 @@ export class SandboxComponent implements OnInit {
   newRemBase: string;
   errorSummaryVisible = false;
   protected _message: string;
+  currentPage = signal(0);
 
-  dropdownOptions: FudisSelectOption<string>[] = [
-    { value: 'value-1-dog', label: 'Dog' },
-    { value: 'value-2-capybara', label: 'Capybara' },
-    { value: 'value-3-platypys', label: 'Platypus' },
-    { value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
-    { value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
-    { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
-  ];
+  allCourses = dummyData;
 
-  multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
-    return {
-      value: i,
-      label: `Item number ${i}`,
-    };
+  // The amount of course items shown per page
+  pageSize = 5;
+  totalPages = Math.ceil(this.allCourses.length / this.pageSize);
+
+  // Returns the amount of items set in pageSize from all courses array
+  visibleCourses = computed(() => {
+    const start = this.currentPage() * this.pageSize;
+    const end = start + this.pageSize;
+    return this.allCourses.slice(start, end);
   });
 
-  testData = [
-    { key: 'First Name', value: 'Rex' },
-    { key: 'Last Name', value: 'Dangerwest' },
-    { key: 'Alias', value: 'Radical Emmet Xtreme' },
-    { key: 'Voice actor', value: 'Chris Pratt' },
-    { key: 'Favorite animal', value: 'Velociraptor', subHeading: 'Dinosaurus' },
-    { key: 'Real name', value: 'Emmet Joseph Brickowski' },
-    { key: 'Species', value: 'Lego' },
-    { key: 'Enemy', value: 'Emmet Brickowski', subHeading: 'Archenemy' },
-    { key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
-  ];
-
-  checkboxOptions: FudisCheckboxOption<object>[] = [
+  checkboxOptions: FudisCheckboxGroupOption<object>[] = [
     { controlName: 'blueberry', label: 'blueberry' },
     { controlName: 'cloudberry', label: 'cloudberry' },
     { controlName: 'raspberry', label: 'raspberry' },
@@ -95,16 +80,14 @@ export class SandboxComponent implements OnInit {
     this.getApplicationFontSize();
   }
 
-  // triggerAlert(): void {
-  //   const newAlert: FudisAlert = {
-  //     message: 'Something dangerous MIGHT happen.',
-  //     type: 'warning',
-  //     id: 'my-own-id-3',
-  //     routerLinkUrl: '/',
-  //     linkTitle: 'More info about this warning.',
-  //   };
-  //   this._alertService.addAlert(newAlert);
-  // }
+  triggerAlert(): void {
+    const newAlert: FudisAlert = {
+      message: this._translocoService.selectTranslate('alertText'),
+      type: 'warning',
+      id: 'my-own-id-3',
+    };
+    this._alertService.addAlert(newAlert);
+  }
 
   getApplicationFontSize(): void {
     this.fontSize = getComputedStyle(
@@ -166,8 +149,8 @@ export class SandboxComponent implements OnInit {
     this._dialogService.open(DialogTestContentComponent);
   }
 
-  doSomething(event: Event) {
-    console.log('event received!', event);
+  onPageChange(index: number): void {
+    this.currentPage.set(index);
   }
 
   updateGridAlignValue(): void {

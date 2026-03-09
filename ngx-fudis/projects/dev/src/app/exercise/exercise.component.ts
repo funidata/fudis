@@ -1,10 +1,9 @@
 import { Component } from "@angular/core";
-import { ButtonComponent } from "ngx-fudis";
 
 @Component({
   selector: 'app-exercise',
   templateUrl: 'exercise.component.html',
-  imports: [ButtonComponent],
   styleUrls: ['exercise.component.scss'],
+  standalone: false,
 })
 export class ExerciseComponent {}
