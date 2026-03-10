@@ -1,11 +1,25 @@
 <ng-container *transloco="let t">
   <div class="root-style">
-      <fudis-grid [columns]="4" [classes]="'fudis-mt-lg'" [align]="'center'">
-        <a fudisLink fudisGridItem [href]="'/exercise'" [title]="'Exercise'" [columns]="1"></a>
-        <a fudisLink fudisGridItem [href]="'/sandbox'" [title]="'Sandbox'" [columns]="2"></a>
-      </fudis-grid>
-      <hr class="fudis-hr"/>
+    <fudis-grid [columns]="1" [classes]="'fudis-mt-xl'">
+    <fudis-tab-navigation-bar
+      [id]="'fudis-tab-navigation-1'"
+      [variant]="'primary'"
+      [panel]="navigationTabPanel">
+      @for (route of routes; track route.id) {
+      <button
+        fudis-tab-navigation-tab
+        [routerLink]="route.path"
+        [routerLinkActive]="'active'"
+        [active]="router.url === route.path"
+        [id]="route.id">
+        {{ route.label }}
+      </button>
+      }
+    </fudis-tab-navigation-bar>
+    </fudis-grid>
+    <fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
       <router-outlet></router-outlet>
+    </fudis-tab-navigation-panel>
     <fudis-footer>
       <a fudisLink href="example.com" [external]="true" [title]="'Tietosuojaseloste'"></a>
       <a fudisLink href="example.com" [external]="true" [title]="'Saavutettavuusseloste'"></a>
