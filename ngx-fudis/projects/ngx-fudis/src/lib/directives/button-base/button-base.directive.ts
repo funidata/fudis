@@ -38,7 +38,7 @@ export class ButtonBaseDirective extends PopoverApiDirective implements OnInit, 
   @Input() icon: FudisIcon | undefined = undefined;
 
   /**
-   * Icon rotation option
+   * Icon rotation option: 'flip-180' | 'cw-90' | 'ccw-90' | 'none'
    */
   @Input() iconRotate: FudisIconRotate = 'none';
 

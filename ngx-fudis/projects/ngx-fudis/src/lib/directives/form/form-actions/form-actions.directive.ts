@@ -6,14 +6,13 @@ import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
 
 // TODO: Write tests
 /**
- * Marks an element as the primary form submission trigger.
- *
- * **Must be applied on a `fudis-button` that is inside a `fudis-form`.** On click, triggers error
- * summary visibility. Pass `[formValid]="myForm.valid"` to control behavior.
+ * Marks an element as the primary form submission trigger. Must be applied on a `fudis-button` that
+ * is inside a `fudis-form`. On click, triggers error summary visibility. Pass
+ * `[formValid]="myForm.valid"` to control behavior.
  *
  * @example
  *   ```html
- *   <fudis-button label="Submit" [fudisFormSubmit] [formValid]="form.valid"></fudis-button>
+ *   <fudis-button fudisFormSubmit [label]="'Submit'" [formValid]="myForm.valid"></fudis-button>
  *   ```;
  */
 @Directive({

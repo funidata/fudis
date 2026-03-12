@@ -23,17 +23,16 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 
 /**
- * Displays a list of actions in a collapsible menu.
- *
- * **Must be a direct child of `fudis-icon-button` with `[asMenuButton]="true"`.**
+ * Displays a list of actions in a collapsible menu. Must be a direct child of `fudis-icon-button`
+ * with `[asMenuButton]="true"`.
  *
  * Use this component to group secondary or contextual actions.
  *
  * @example
  *   ```html
- *   <fudis-icon-button ariaLabel="Actions" icon="three-dots" [asMenuButton]="true">
+ *   <fudis-icon-button [ariaLabel]="'Actions'" [size]="'small'" [variant]="'secondary'" [icon]="'three-dots'" [asMenuButton]="true">
  *     <fudis-dropdown-menu>
- *       <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit()"></fudis-dropdown-menu-item>
+ *       <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit($event)"></fudis-dropdown-menu-item>
  *     </fudis-dropdown-menu>
  *   </fudis-icon-button>
  *   ```;

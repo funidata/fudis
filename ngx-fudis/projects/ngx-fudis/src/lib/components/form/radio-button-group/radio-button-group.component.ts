@@ -29,9 +29,9 @@ import { GuidanceComponent } from '../guidance/guidance.component';
  *
  * @example
  *   ```html
- *   <fudis-radio-button-group [label]="'Gender'" [control]="genderControl">
- *     <fudis-radio-button [option]="{ value: 'male', label: 'Male' }"></fudis-radio-button>
- *     <fudis-radio-button [option]="{ value: 'female', label: 'Female' }"></fudis-radio-button>
+ *   <fudis-radio-button-group [label]="'Color'" [control]="colorControl">
+ *     <fudis-radio-button [label]="'Red'" [value]="'red'"></fudis-radio-button>
+ *     <fudis-radio-button [label]="'Blue'" [value]="'blue'"></fudis-radio-button>
  *   </fudis-radio-button-group>
  *   ```;
  */
@@ -61,7 +61,7 @@ export class RadioButtonGroupComponent
   @ViewChild('radioButtonGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
-   * Width of Radio Button Group
+   * Width of Radio Button Group: 'sm' | 'md' | 'lg' | 'full-width'
    */
   @Input() size: FudisSelectionGroupInputSize = 'lg';
 

@@ -59,7 +59,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   @Input() id: string;
 
   /**
-   * Align heading
+   * Align heading: 'center' | 'left' | 'right'
    */
   @Input() align: FudisTextAlign = 'left';
 

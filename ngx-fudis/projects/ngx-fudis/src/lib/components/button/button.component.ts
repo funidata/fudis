@@ -43,7 +43,7 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   @Input({ required: true }) label: string;
 
   /**
-   * Button size: 'small' | 'medium' (extra-small not available for Button, only IconButton)
+   * Button size: 'small' | 'medium' ('extra-small' not available for Button, only IconButton)
    */
   @Input() override size: Exclude<FudisButtonSize, 'extra-small'> = 'medium';
 

@@ -70,7 +70,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   @Input({ required: true }) override formGroup: FormGroup<T>;
 
   /**
-   * Width size of the group.
+   * Width size of the group: 'sm' | 'md' | 'lg' | 'full-width'
    */
   @Input() size: FudisSelectionGroupInputSize = 'lg';
 

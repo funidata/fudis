@@ -9,9 +9,8 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { BreadcrumbsComponent } from '../breadcrumbs.component';
 
 /**
- * Represents a single link within BreadcrumbsComponent.
- *
- * **Must be a direct child of `fudis-breadcrumbs`.**
+ * Represents a single link within BreadcrumbsComponent. Must be a direct child of
+ * `fudis-breadcrumbs`.
  *
  * Use this component with descriptive link text to ensure understandability.
  */

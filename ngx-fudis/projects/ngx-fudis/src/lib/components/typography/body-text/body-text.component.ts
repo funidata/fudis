@@ -45,7 +45,7 @@ export class BodyTextComponent implements OnChanges {
   @Input() variant: FudisBodyText = 'md-regular';
 
   /**
-   * Text alignment
+   * Text alignment: 'center' | 'left' | 'right'
    */
   @Input() align: FudisTextAlign = 'left';
 

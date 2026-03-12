@@ -33,6 +33,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
  *   <fudis-select [label]="'Country'" [control]="countryControl">
  *     <ng-template fudisSelectOptions>
  *       <fudis-select-option [data]="{ value: 'fi', label: 'Finland' }"></fudis-select-option>
+ *       <fudis-select-option [data]="{ value: 'se', label: 'Sweden' }"></fudis-select-option>
  *     </ng-template>
  *   </fudis-select>
  *   ```;

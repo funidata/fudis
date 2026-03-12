@@ -31,12 +31,13 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
  *
  * @example
  *   ```html
- *   <fudis-multiselect [label]="'Countries'" [control]="countriesControl">
- *     <ng-template fudisSelectOptions>
- *       <fudis-multiselect-option [data]="{ value: 'fi', label: 'Finland' }"></fudis-multiselect-option>
- *     </ng-template>
- *   </fudis-multiselect>
- *   ```;
+ *     <fudis-multiselect [label]="'Countries'" [control]="countriesControl">
+ *       <ng-template fudisSelectOptions>
+ *         <fudis-multiselect-option [data]="{ value: 'fi', label: 'Finland' }"></fudis-multiselect-option>
+ *         <fudis-multiselect-option [data]="{ value: 'se', label: 'Sweden' }"></fudis-multiselect-option>
+ *       </ng-template>
+ *     </fudis-multiselect>
+ *     ```;
  */
 @Component({
   selector: 'fudis-multiselect',

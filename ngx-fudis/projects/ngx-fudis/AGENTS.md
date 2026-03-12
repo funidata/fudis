@@ -65,13 +65,7 @@ import { NgxFudisModule } from "@funidata/ngx-fudis";
 export class AppModule {}
 ```
 
-In `angular.json`, add the Fudis styles:
-
-```json
-"styles": ["node_modules/@funidata/ngx-fudis/src/lib/theme/fudis-theme.scss"]
-```
-
-Or import in your main SCSS:
+Import in your main SCSS:
 
 ```scss
 @use "@funidata/ngx-fudis" as fudis;
@@ -119,19 +113,19 @@ Messages can be `string` or `Observable<string>` for dynamic translations.
 
 These constraints are enforced at runtime and are **not optional**:
 
-| Child                                         | Must be inside                        | Notes                                                                                     |
-| --------------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `fudis-dropdown-menu`                         | `fudis-icon-button`                   | Parent must have `[asMenuButton]="true"`                                                  |
-| `fudis-breadcrumbs-item`                      | `fudis-breadcrumbs`                   | Uses `@Host()` injection                                                                  |
-| `fudis-datepicker` (in range)                 | `fudis-date-range`                    | Uses `@Host() @Optional()` — optional                                                     |
-| `[fudisFormSubmit]`                           | `fudis-button`                        | Directive applied on a `fudis-button`; button must be inside a `fudis-form`               |
-| `fudis-select-option`                         | `fudis-select`                        | Content projected via `fudis-select-options` directive                                    |
-| `fudis-multiselect-option`                    | `fudis-multiselect`                   | Content projected via `fudis-select-options` directive                                    |
-| `fudis-select-group`                          | `fudis-select` or `fudis-multiselect` | Groups options visually                                                                   |
-| `fudis-checkbox-group-option`                 | `fudis-checkbox-group`                | Child provides `[controlName]` matching FormGroup key                                     |
-| `fudis-radio-button`                          | `fudis-radio-button-group`            | Child provides option value+label                                                         |
-| `fudis-tab-navigation-tab`                    | `fudis-tab-navigation-bar`            | Attribute selector: `<a fudis-tab-navigation-tab>` or `<button fudis-tab-navigation-tab>` |
-| Content directives (`fudisFormContent`, etc.) | Their parent component                | See [Directives](#directives)                                                             |
+| Child                                                | Must be inside                        | Notes                                                                                     |
+| ---------------------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `fudis-dropdown-menu`                                | `fudis-icon-button`                   | Parent must have `[asMenuButton]="true"`                                                  |
+| `fudis-breadcrumbs-item`                             | `fudis-breadcrumbs`                   | Uses `@Host()` injection                                                                  |
+| `fudis-datepicker` (in range)                        | `fudis-date-range`                    | Uses `@Host() @Optional()` — optional                                                     |
+| `fudisFormSubmit`                                    | `fudis-button`                        | Directive applied on a `fudis-button`; button must be inside a `fudis-form`               |
+| `fudis-select-option`                                | `fudis-select`                        | Content projected via `fudisSelectOptions` directive                                      |
+| `fudis-multiselect-option`                           | `fudis-multiselect`                   | Content projected via `fudisSelectOptions` directive                                      |
+| `fudis-select-group`                                 | `fudis-select` or `fudis-multiselect` | Groups options visually                                                                   |
+| `fudis-checkbox-group-option`                        | `fudis-checkbox-group`                | Child provides `[controlName]` matching FormGroup key                                     |
+| `fudis-radio-button`                                 | `fudis-radio-button-group`            | Child provides option value+label                                                         |
+| `fudis-tab-navigation-tab`                           | `fudis-tab-navigation-bar`            | Attribute selector: `<a fudis-tab-navigation-tab>` or `<button fudis-tab-navigation-tab>` |
+| Form content directives (`fudis-form-content`, etc.) | `fudis-form`                          | See [Directives](#directives)                                                             |
 
 ### Dialog must be opened via service
 
@@ -148,10 +142,10 @@ Inside the dialog component template, use `fudis-dialog` with content directives
 
 ```html
 <fudis-dialog [size]="'md'">
-  <fudis-dialog-title>Title here</fudis-dialog-title>
+  <fudis-heading fudisDialogTitle>Title here</fudis-heading>
   <fudis-dialog-content>Content here</fudis-dialog-content>
   <fudis-dialog-actions>
-    <fudis-button label="Close" fudisDialogClose></fudis-button>
+    <fudis-button fudisDialogClose [label]="'Close'"></fudis-button>
   </fudis-dialog-actions>
 </fudis-dialog>
 ```
@@ -183,9 +177,9 @@ Inside the dialog component template, use `fudis-dialog` with content directives
 | `handleBlur`  | `EventEmitter<FocusEvent>` | Blur event  |
 
 ```html
-<fudis-button label="Save" variant="primary" (handleClick)="onSave()"></fudis-button>
-<fudis-button label="Cancel" variant="secondary" size="small"></fudis-button>
-<fudis-button label="Search" icon="search" variant="tertiary"></fudis-button>
+<fudis-button [label]="'Save'" [variant]="'primary'" (handleClick)="onSave()"></fudis-button>
+<fudis-button [label]="'Cancel'" [variant]="'secondary'" [size]="'small'"></fudis-button>
+<fudis-button [label]="'Search'" [icon]="'search'" [variant]="'tertiary'"></fudis-button>
 ```
 
 ---
@@ -210,11 +204,16 @@ Inside the dialog component template, use `fudis-dialog` with content directives
 | `handleBlur`  | `EventEmitter<FocusEvent>` | Blur event  |
 
 ```html
-<fudis-icon-button ariaLabel="Edit item" icon="edit" variant="tertiary" (handleClick)="onEdit()">
+<fudis-icon-button
+  [ariaLabel]="'Edit item'"
+  [icon]="'edit'"
+  [variant]="'tertiary'"
+  (handleClick)="onEdit()"
+>
 </fudis-icon-button>
 
 <!-- As dropdown menu trigger -->
-<fudis-icon-button ariaLabel="More actions" icon="three-dots" [asMenuButton]="true">
+<fudis-icon-button [ariaLabel]="'More actions'" [icon]="'three-dots'" [asMenuButton]="true">
   <fudis-dropdown-menu>
     <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit()"></fudis-dropdown-menu-item>
     <fudis-dropdown-menu-item
@@ -231,14 +230,14 @@ Inside the dialog component template, use `fudis-dialog` with content directives
 
 **Selector:** `fudis-icon`
 
-| Input    | Type                                          | Default       | Required |
-| -------- | --------------------------------------------- | ------------- | -------- |
-| `icon`   | `FudisIcon`                                   | —             | **yes**  |
-| `color`  | `FudisIconColor`                              | `'gray-dark'` | no       |
-| `rotate` | `'flip-180' \| 'cw-90' \| 'ccw-90' \| 'none'` | `'none'`      | no       |
+| Input    | Type                                                                                                    | Default       | Required |
+| -------- | ------------------------------------------------------------------------------------------------------- | ------------- | -------- |
+| `icon`   | `FudisIcon`                                                                                             | —             | **yes**  |
+| `color`  | `'yellow' \| 'red' \| 'gray-dark' \| 'gray-light' \| 'primary' \| 'primary-dark' \| 'green' \| 'white'` | `'gray-dark'` | no       |
+| `rotate` | `'flip-180' \| 'cw-90' \| 'ccw-90' \| 'none'`                                                           | `'none'`      | no       |
 
 ```html
-<fudis-icon icon="search" color="primary"></fudis-icon>
+<fudis-icon [icon]="'search'" [color]="'primary'"></fudis-icon>
 ```
 
 ---
@@ -278,21 +277,21 @@ Inside the dialog component template, use `fudis-dialog` with content directives
 
 ### Grid
 
-**Selector:** `fudis-grid` (component) or `[fudisGrid]` (directive on any element)
+**Selector:** `fudis-grid` (component) or `fudisGrid` (directive on any element)
 
-| Input         | Type                                                         | Default        | Description                                    |
-| ------------- | ------------------------------------------------------------ | -------------- | ---------------------------------------------- |
-| `columns`     | `string \| number \| { xs?: ..., md?: ..., lg?: ... }`       | `'1fr'`        | CSS grid-template-columns or responsive object |
-| `align`       | `'start' \| 'end' \| 'center'`                               | `'start'`      | Grid alignment in parent                       |
-| `alignItemsX` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'`    | `'stretch'`    | Horizontal alignment of items                  |
-| `alignItemsY` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'`    | `'stretch'`    | Vertical alignment of items                    |
-| `columnGap`   | `FudisSpacing \| 'responsive'`                               | `'responsive'` | Gap between columns                            |
-| `rowGap`      | `FudisSpacing \| 'responsive'`                               | `'none'`       | Gap between rows                               |
-| `width`       | `'xxl' \| 'xl' \| 'lg' \| 'md' \| 'sm' \| 'xs' \| 'initial'` | `'xxl'`        | Max width                                      |
-| `classes`     | `string`                                                     | —              | Custom CSS classes                             |
+| Input         | Type                                                                            | Default        | Description                                    |
+| ------------- | ------------------------------------------------------------------------------- | -------------- | ---------------------------------------------- |
+| `columns`     | `string \| number \| { xs: ..., md: ..., lg: ... }`                             | `'1fr'`        | CSS grid-template-columns or responsive object |
+| `align`       | `'start' \| 'end' \| 'center'`                                                  | `'start'`      | Grid alignment in parent                       |
+| `alignItemsX` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'`                       | `'stretch'`    | Horizontal alignment of items                  |
+| `alignItemsY` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'`                       | `'stretch'`    | Vertical alignment of items                    |
+| `columnGap`   | `'none' \| 'xxs' \| 'xs' \| 'sm' \| 'md' \| 'lg' 'xl' \| 'xxl' \| 'responsive'` | `'responsive'` | Gap between columns                            |
+| `rowGap`      | `'none' \| 'xxs' \| 'xs' \| 'sm' \| 'md' \| 'lg' 'xl' \| 'xxl' \| 'responsive'` | `'none'`       | Gap between rows                               |
+| `width`       | `'xxl' \| 'xl' \| 'lg' \| 'md' \| 'sm' \| 'xs' \| 'initial'`                    | `'xxl'`        | Max width                                      |
+| `classes`     | `string`                                                                        | —              | Custom CSS classes                             |
 
 ```html
-<fudis-grid [columns]="{ md: '1fr 1fr', lg: '1fr 1fr 1fr' }" [rowGap]="'sm'">
+<fudis-grid [columns]="{ md: '1fr 1fr', lg: '2fr 1fr 1fr' }" [rowGap]="'sm'">
   <fudis-text-input ...></fudis-text-input>
   <fudis-text-input ...></fudis-text-input>
   <fudis-text-input ...></fudis-text-input>
@@ -303,13 +302,13 @@ Inside the dialog component template, use `fudis-dialog` with content directives
 
 ### Grid Item
 
-**Selector:** `fudis-grid-item` (component) or `[fudisGridItem]` (directive)
+**Selector:** `fudis-grid-item` (component) or `fudisGridItem` (directive on any element)
 
-| Input        | Type                                                                | Default     | Description               |
-| ------------ | ------------------------------------------------------------------- | ----------- | ------------------------- |
-| `columns`    | `number \| string \| 'stretch' \| 'auto' \| { xs?: ..., md?: ... }` | `'auto'`    | Column span               |
-| `alignSelfX` | `'start' \| 'end' \| 'center' \| 'stretch'`                         | `'stretch'` | Horizontal self-alignment |
-| `alignSelfY` | `'start' \| 'end' \| 'center' \| 'stretch'`                         | `'stretch'` | Vertical self-alignment   |
+| Input        | Type                                                              | Default     | Description               |
+| ------------ | ----------------------------------------------------------------- | ----------- | ------------------------- |
+| `columns`    | `number \| string \| 'stretch' \| 'auto' \| { xs: ..., md: ... }` | `'auto'`    | Column span               |
+| `alignSelfX` | `'start' \| 'end' \| 'center' \| 'stretch'`                       | `'stretch'` | Horizontal self-alignment |
+| `alignSelfY` | `'start' \| 'end' \| 'center' \| 'stretch'`                       | `'stretch'` | Vertical self-alignment   |
 
 ```html
 <fudis-grid [columns]="3">
@@ -337,16 +336,14 @@ Inside the dialog component template, use `fudis-dialog` with content directives
 | `classes`                | `string`                    | —               | no       |
 | `popoverText`            | `string`                    | —               | no       |
 
-Use content directives for actions:
-
 ```html
-<fudis-section title="Personal Info" [level]="3">
-  <ng-template fudisSectionActions>
-    <fudis-button label="Edit" variant="tertiary"></fudis-button>
-  </ng-template>
-  <ng-template fudisSectionContent>
+<fudis-section [title]="'Personal Info'" [level]="3">
+  <fudis-section-actions>
+    <fudis-button [label]="'Edit'" [variant]="'secondary'"></fudis-button>
+  </fudis-section-actions>
+  <fudis-section-content>
     <p>Section content here</p>
-  </ng-template>
+  </fudis-section-content>
 </fudis-section>
 ```
 
@@ -373,7 +370,10 @@ Use content directives for actions:
 | `closedChange` | `EventEmitter<boolean>` |
 
 ```html
-<fudis-expandable title="Additional Details" [level]="3" [closed]="true">
+<fudis-expandable [title]="'Additional Details'" [level]="3">
+  <fudis-expandable-actions>
+    <fudis-button [label]="'Additional action'"></fudis-button>
+  </fudis-expandable-actions>
   <ng-template fudisExpandableContent>
     <p>Hidden content revealed on expand.</p>
   </ng-template>
@@ -386,19 +386,19 @@ Use content directives for actions:
 
 **Selector:** `fudis-form`
 
-Extends grid — all Grid inputs are available (`columns`, `rowGap`, `width`, etc.).
+Extends Grid — all Grid inputs are available (`columns`, `rowGap`, `width`, etc.).
 
-| Input                 | Type                        | Default            | Required |
-| --------------------- | --------------------------- | ------------------ | -------- |
-| `title`               | `string`                    | —                  | **yes**  |
-| `level`               | `1-6`                       | —                  | **yes**  |
-| `titleVariant`        | `FudisHeadingVariant`       | auto from level    | no       |
-| `helpText`            | `string`                    | —                  | no       |
-| `badge`               | `FudisBadgeVariant \| null` | —                  | no       |
-| `badgeText`           | `string \| null`            | —                  | no       |
-| `errorSummaryVisible` | `boolean`                   | `false`            | no       |
-| `errorSummaryTitle`   | `string`                    | default Fudis text | no       |
-| `id`                  | `string`                    | auto-generated     | no       |
+| Input                 | Type                                                     | Default            | Required |
+| --------------------- | -------------------------------------------------------- | ------------------ | -------- |
+| `title`               | `string`                                                 | —                  | **yes**  |
+| `level`               | `1-6`                                                    | —                  | **yes**  |
+| `titleVariant`        | `'xxs' \| 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'xxl'` | auto from level    | no       |
+| `helpText`            | `string`                                                 | —                  | no       |
+| `badge`               | `FudisBadgeVariant \| null`                              | —                  | no       |
+| `badgeText`           | `string \| null`                                         | —                  | no       |
+| `errorSummaryVisible` | `boolean`                                                | `false`            | no       |
+| `errorSummaryTitle`   | `string`                                                 | default Fudis text | no       |
+| `id`                  | `string`                                                 | auto-generated     | no       |
 
 | Output                   | Type                                                    |
 | ------------------------ | ------------------------------------------------------- |
@@ -406,13 +406,13 @@ Extends grid — all Grid inputs are available (`columns`, `rowGap`, `width`, et
 
 ```html
 <fudis-form [title]="'Registration'" [level]="2" [errorSummaryVisible]="showErrors">
-  <ng-template fudisFormContent>
+  <fudis-form-content>
     <fudis-text-input [label]="'Name'" [control]="nameControl"></fudis-text-input>
     <fudis-text-input [label]="'Email'" [control]="emailControl"></fudis-text-input>
-  </ng-template>
-  <ng-template fudisFormActions>
-    <fudis-button label="Submit" [fudisFormSubmit] [formValid]="form.valid"></fudis-button>
-  </ng-template>
+  </fudis-form-content>
+  <fudis-form-actions>
+    <fudis-button fudisFormSubmit [label]="'Submit'" [formValid]="form.valid"></fudis-button>
+  </fudis-form-actions>
 </fudis-form>
 ```
 
@@ -431,10 +431,10 @@ Groups related form fields with a `<fieldset>` and `<legend>`.
 
 ```html
 <fudis-fieldset [label]="'Address'">
-  <ng-template fudisFieldsetContent>
+  <fudis-fieldset-content>
     <fudis-text-input [label]="'Street'" [control]="streetControl"></fudis-text-input>
     <fudis-text-input [label]="'City'" [control]="cityControl"></fudis-text-input>
-  </ng-template>
+  </fudis-fieldset-content>
 </fudis-fieldset>
 ```
 
@@ -713,20 +713,20 @@ colorsGroup = new FormGroup(
 | `handleChange` | `EventEmitter<FudisRadioButtonChangeEvent>` |
 
 ```typescript
-genderControl = new FormControl<string | null>(null, [
-  FudisValidators.required('Select a gender'),
+colorControl = new FormControl<string | null>(null, [
+  FudisValidators.required('Select a color'),
 ]);
 
-genderOptions: FudisRadioButtonOption<object>[] = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-  { value: 'other', label: 'Other' },
+colorOptions: FudisRadioButtonOption<object>[] = [
+  { value: 'red', label: 'Red' },
+  { value: 'blue', label: 'Blue' },
+  { value: 'green', label: 'Green' },
 ];
 ```
 
 ```html
-<fudis-radio-button-group [label]="'Gender'" [control]="genderControl">
-  @for (option of genderOptions; track option.value) {
+<fudis-radio-button-group [label]="'Color'" [control]="colorControl">
+  @for (option of colorOptions; track option.value) {
   <fudis-radio-button [option]="option"></fudis-radio-button>
   }
 </fudis-radio-button-group>
@@ -775,19 +775,19 @@ localizedName = new FormGroup(
 | ------ | -------------------------------------- | ------- |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'`  |
 
-Open dialogs using `FudisDialogService.open(ComponentClass, options)`.
+Open dialogs using `FudisDialogService.open(ComponentClass, options)` or `FudisDialogService.open(TemplateRef, options)`.
 
 Inside your dialog component:
 
 ```html
 <fudis-dialog [size]="'md'">
-  <fudis-dialog-title>Edit Item</fudis-dialog-title>
+  <fudis-heading fudisDialogTitle>Edit Item</fudis-heading>
   <fudis-dialog-content>
-    <!-- Form or content here -->
+    <!-- Content here -->
   </fudis-dialog-content>
   <fudis-dialog-actions>
-    <fudis-button label="Cancel" variant="secondary" fudisDialogClose></fudis-button>
-    <fudis-button label="Save" (handleClick)="save()"></fudis-button>
+    <fudis-button fudisDialogClose [label]="'Cancel'" [variant]="'secondary'"></fudis-button>
+    <fudis-button [label]="'Save'" (handleClick)="save()"></fudis-button>
   </fudis-dialog-actions>
 </fudis-dialog>
 ```
@@ -796,15 +796,17 @@ Or with a form inside:
 
 ```html
 <fudis-dialog [size]="'lg'">
-  <fudis-form [title]="'Edit'" [level]="2">
-    <ng-template fudisFormContent>
-      <!-- form fields -->
-    </ng-template>
-    <ng-template fudisFormActions>
-      <fudis-button label="Cancel" variant="secondary" fudisDialogClose></fudis-button>
-      <fudis-button label="Save" [fudisFormSubmit] [formValid]="form.valid"></fudis-button>
-    </ng-template>
-  </fudis-form>
+  <fudis-dialog-content>
+    <fudis-form [title]="'Edit'" [level]="2">
+      <fudis-form-content>
+        <!-- form fields -->
+      </fudis-form-content>
+      <fudis-form-actions>
+        <fudis-button fudisDialogClose [label]="'Cancel'" [variant]="'secondary'"></fudis-button>
+        <fudis-button fudisFormSubmit [label]="'Save'" [formValid]="form.valid"></fudis-button>
+      </fudis-form-actions>
+    </fudis-form>
+  </fudis-dialog-content>
 </fudis-dialog>
 ```
 
@@ -822,7 +824,7 @@ Or with a form inside:
 | `size`  | `'sm' \| 'md' \| 'lg'`          | `'lg'`     |
 
 ```html
-<fudis-icon-button ariaLabel="Actions" icon="three-dots" [asMenuButton]="true">
+<fudis-icon-button [ariaLabel]="'Actions'" [icon]="'three-dots'" [asMenuButton]="true">
   <fudis-dropdown-menu [align]="'right'">
     <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit()"></fudis-dropdown-menu-item>
     <fudis-dropdown-menu-item
@@ -839,6 +841,10 @@ Use `fudis-dropdown-menu-group` to group items with a label:
 <fudis-dropdown-menu>
   <fudis-dropdown-menu-group [label]="'Actions'">
     <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit()"></fudis-dropdown-menu-item>
+    <fudis-dropdown-menu-item
+      [label]="'Delete'"
+      (handleClick)="delete()"
+    ></fudis-dropdown-menu-item>
   </fudis-dropdown-menu-group>
 </fudis-dropdown-menu>
 ```
@@ -901,7 +907,7 @@ showAlert() {
 | `content` | `string`                                                        | —           |
 
 ```html
-<fudis-badge variant="success" content="Active"></fudis-badge>
+<fudis-badge [variant]="'success'" [content]="'Active'"></fudis-badge>
 ```
 
 ---
@@ -942,15 +948,16 @@ Extends Grid — all Grid inputs available.
 | `label` | `string` | —       | **yes**  |
 
 ```html
-<fudis-breadcrumbs [label]="'Navigation'">
+<fudis-breadcrumbs [label]="'Breadcrumbs navigation'">
+  @for (link of links; track link.url; let index = $index) {
   <fudis-breadcrumbs-item>
-    <fudis-body-text>
-      <a fudisLink [title]="'Home'" href="/">Home</a>
-    </fudis-body-text>
+    @if (index + 1 !== links.length) {
+    <a [href]="link.url">{{ link.label }}</a>
+    } @if (index + 1 === links.length) {
+    <fudis-body-text>{{ link.label }}</fudis-body-text>
+    }
   </fudis-breadcrumbs-item>
-  <fudis-breadcrumbs-item>
-    <fudis-body-text>Current Page</fudis-body-text>
-  </fudis-breadcrumbs-item>
+  }
 </fudis-breadcrumbs>
 ```
 
@@ -960,7 +967,7 @@ Extends Grid — all Grid inputs available.
 
 Uses three components together:
 
-**`fudis-tab-navigation-bar`** — the tab bar container
+**`fudis-tab-navigation-bar`** — selector for the tab bar container
 
 | Input     | Type                          | Default     |
 | --------- | ----------------------------- | ----------- |
@@ -968,14 +975,14 @@ Uses three components together:
 | `variant` | `'primary' \| 'secondary'`    | `'primary'` |
 | `id`      | `string`                      | —           |
 
-**`[fudis-tab-navigation-tab]`** — attribute selector on `<a>` or `<button>`
+**`fudis-tab-navigation-tab`** — inline attribute selector on `<a>` or `<button>`
 
 | Input    | Type      | Default |
 | -------- | --------- | ------- |
 | `id`     | `string`  | —       |
 | `active` | `boolean` | `false` |
 
-**`fudis-tab-navigation-panel`** — content panel
+**`fudis-tab-navigation-panel`** — content panel selector
 
 | Input | Type     |
 | ----- | -------- |
@@ -1049,6 +1056,7 @@ No inputs. Content projected. Displays Funidata logo automatically.
 
 ```html
 <fudis-footer>
+  <a fudisLink href="#" [external]="true" [title]="'Example link'"></a>
   <p>Custom footer content</p>
 </fudis-footer>
 ```
@@ -1094,30 +1102,35 @@ No inputs. Renders a styled `<hr>`.
 
 | Directive                | Parent Component                      |
 | ------------------------ | ------------------------------------- |
-| `fudisFormContent`       | `fudis-form`                          |
-| `fudisFormActions`       | `fudis-form`                          |
-| `fudisFormHeader`        | `fudis-form`                          |
-| `fudisFieldsetContent`   | `fudis-fieldset`                      |
-| `fudisFieldsetActions`   | `fudis-fieldset`                      |
 | `fudisExpandableContent` | `fudis-expandable`                    |
-| `fudisExpandableActions` | `fudis-expandable`                    |
-| `fudisSectionContent`    | `fudis-section`                       |
-| `fudisSectionActions`    | `fudis-section`                       |
 | `fudisDialogTitle`       | `fudis-dialog`                        |
-| `fudisDialogContent`     | `fudis-dialog`                        |
-| `fudisDialogActions`     | `fudis-dialog`                        |
 | `fudisSelectOptions`     | `fudis-select` or `fudis-multiselect` |
+
+### Content Directives (used with HTML selector)
+
+| Directive                  | Parent Component   |
+| -------------------------- | ------------------ |
+| `fudis-form-content`       | `fudis-form`       |
+| `fudis-form-actions`       | `fudis-form`       |
+| `fudis-form-header`        | `fudis-form`       |
+| `fudis-fieldset-content`   | `fudis-fieldset`   |
+| `fudis-fieldset-actions`   | `fudis-fieldset`   |
+| `fudis-expandable-actions` | `fudis-expandable` |
+| `fudis-section-content`    | `fudis-section`    |
+| `fudis-section-actions`    | `fudis-section`    |
+| `fudis-dialog-content`     | `fudis-dialog`     |
+| `fudis-dialog-actions`     | `fudis-dialog`     |
 
 ### Behavioral Directives
 
 | Directive               | Selector             | Description                                         |
 | ----------------------- | -------------------- | --------------------------------------------------- |
-| `LinkDirective`         | `[fudisLink]`        | Adds link styling + external link handling to `<a>` |
-| `PopoverDirective`      | `[fudisPopover]`     | Adds popover on click to any element                |
-| `FormSubmitDirective`   | `[fudisFormSubmit]`  | On `fudis-button`, triggers error summary on click  |
+| `LinkDirective`         | `fudisLink`          | Adds link styling + external link handling to `<a>` |
+| `PopoverDirective`      | `fudisPopover`       | Adds popover on click to any element                |
+| `FormSubmitDirective`   | `fudisFormSubmit`    | On `fudis-button`, triggers error summary on click  |
 | `DialogCloseDirective`  | `fudisDialogClose`   | On `fudis-button`, closes the dialog                |
-| `GridDirective`         | `[fudisGrid]`        | Adds grid layout to any element                     |
-| `GridItemDirective`     | `[fudisGridItem]`    | Adds grid item behavior to any element              |
+| `GridDirective`         | `fudisGrid`          | Adds grid layout to any element                     |
+| `GridItemDirective`     | `fudisGridItem`      | Adds grid item behavior to any element              |
 | `DateStartDirective`    | `fudisDateStart`     | Marks datepicker as range start                     |
 | `DateEndDirective`      | `fudisDateEnd`       | Marks datepicker as range end                       |
 | `ErrorMessageDirective` | Custom error display | For custom error messages on form controls          |
