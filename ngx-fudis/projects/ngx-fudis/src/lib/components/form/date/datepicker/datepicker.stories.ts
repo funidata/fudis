@@ -9,6 +9,7 @@ import { datepickerControlsExclude } from '../../../../utilities/storybook';
 import { action } from 'storybook/actions';
 import { LanguageChangeComponent } from '../examples/example-datepicker-language-change';
 import { DateFilterWithErrorMessageComponent } from '../examples/example-datepicker-date-filter';
+import { fudisInputSizeArray } from '../../../../types/forms';
 
 const html = String.raw;
 
@@ -44,8 +45,7 @@ export default {
       control: { type: 'text' },
     },
     size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
