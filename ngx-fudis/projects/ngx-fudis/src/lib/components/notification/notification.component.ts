@@ -20,7 +20,7 @@ export class NotificationComponent {
   @ViewChild('articleElement') articleElement: ElementRef;
 
   /**
-   * Notification variant
+   * Notification variant: 'warning' | 'danger' | 'success' | 'info'
    */
   @Input() variant: FudisNotification = 'warning';
 

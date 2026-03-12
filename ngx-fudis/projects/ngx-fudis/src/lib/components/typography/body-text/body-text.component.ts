@@ -40,12 +40,12 @@ export class BodyTextComponent implements OnChanges {
   @HostBinding('class') protected _classes = 'fudis-body-text-host';
 
   /**
-   * Variant for the paragraph
+   * Variant for the paragraph: 'lg-regular' | 'md-regular' | 'sm-regular' | 'lg-light' | 'md-light'
    */
   @Input() variant: FudisBodyText = 'md-regular';
 
   /**
-   * Text alignment
+   * Text alignment: 'center' | 'left' | 'right'
    */
   @Input() align: FudisTextAlign = 'left';
 

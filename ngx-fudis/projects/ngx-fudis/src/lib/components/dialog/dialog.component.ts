@@ -22,6 +22,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 /**
  * Displays content in a modal overlay.
  *
+ * Must be opened via `FudisDialogService.open(Component)` or `FudisDialogService.open(TemplateRef)`
+ * — not used as inline HTML. Use content directive `fudisDialogTitle` as inline attribute for the
+ * dialog heading. Use `<fudis-dialog-content>` and `<fudis-dialog-actions>` directives as HTML
+ * elements inside the dialog template. Add `fudisDialogClose` directive on a button to close it.
+ *
  * Use this component for focused interactions that require user attention or confirmation before
  * continuing.
  */
@@ -61,7 +66,7 @@ export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewI
   }
 
   /**
-   * Dialog size
+   * Dialog size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
    */
   @Input() size: FudisDialogSize = 'md';
 

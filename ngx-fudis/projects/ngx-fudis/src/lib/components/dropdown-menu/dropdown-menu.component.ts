@@ -23,9 +23,19 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 
 /**
- * Displays a list of actions in a collapsible menu.
+ * Displays a list of actions in a collapsible menu. Must be a direct child of `fudis-icon-button`
+ * with `[asMenuButton]="true"`.
  *
  * Use this component to group secondary or contextual actions.
+ *
+ * @example
+ *   ```html
+ *   <fudis-icon-button [ariaLabel]="'Actions'" [size]="'small'" [variant]="'secondary'" [icon]="'three-dots'" [asMenuButton]="true">
+ *     <fudis-dropdown-menu>
+ *       <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit($event)"></fudis-dropdown-menu-item>
+ *     </fudis-dropdown-menu>
+ *   </fudis-icon-button>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -66,12 +76,12 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnDe
   @ViewChild('dropdownMenuElement') private _dropdownMenuElement: ElementRef<HTMLElement>;
 
   /**
-   * Align Dropdown Menu opening position
+   * Align Dropdown Menu opening position: 'left' | 'center' | 'right'
    */
   @Input() align: FudisDropdownMenuAlign = 'center';
 
   /**
-   * Dropdown Menu size
+   * Dropdown Menu size: 'sm' | 'md' | 'lg'
    */
   @Input() size: FudisInputSize = 'lg';
 
