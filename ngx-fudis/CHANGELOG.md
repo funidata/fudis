@@ -17,19 +17,25 @@ For full details and PR links, see [GitHub Releases](https://github.com/funidata
 - [Documentation, VersionSelectorComponent]: Fix the version selector's url redirect and move the selector to iframe
 
 ## [8.3.2] - 2026-01-22
+
 ** Deprecated, broken release - do not use. **
+
 ### Fixes
 
 - [Documentation, VersionSelectorComponent]: Revert version selector to earlier patch
 
 ## [8.3.1] - 2026-01-22
+
 ** Deprecated, broken release - do not use. **
+
 ### Fixes
 
 - [Documentation, VersionSelectorComponent]: Fix version selector redirect and styling
 
 ## [8.3.0] - 2026-01-21
+
 ** Deprecated, broken release - do not use. Listed changes are implemented in working 8.3.3 version. **
+
 ### Features
 
 - [DescriptionListItemDetails]: Empty state display
@@ -75,7 +81,9 @@ For full details and PR links, see [GitHub Releases](https://github.com/funidata
 - [Multiselect]: Click event not working in Safari
 
 ## [8.0.0] - 2025-11-05
+
 ** Deprecated, broken release - do not use. Listed changes are implemented in working 8.0.1 version. **
+
 ### BREAKING CHANGES
 
 - **[Select, MultiSelect]**: Implement hovering menu — dropdown now uses a floating overlay instead of inline expansion. Review any custom positioning or styling.
