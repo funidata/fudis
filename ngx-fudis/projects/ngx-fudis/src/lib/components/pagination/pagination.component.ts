@@ -200,11 +200,11 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
   /**
    * Main CSS classes for buttons
    */
-  protected _mainCssPrevClass: BehaviorSubject<string> = new BehaviorSubject<string>(
-    'fudis-pagination-button__previous',
+  protected _mainCssPrevClass: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
+    ['fudis-pagination-button fudis-pagination-button__previous'],
   );
-  protected _mainCssNextClass: BehaviorSubject<string> = new BehaviorSubject<string>(
-    'fudis-pagination-button__next',
+  protected _mainCssNextClass: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
+    ['fudis-pagination-button fudis-pagination-button__next'],
   );
 
   /**
@@ -271,11 +271,11 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
    */
   private _setClasses(collapsed: boolean): void {
     if (collapsed) {
-      this._mainCssPrevClass.next('fudis-pagination-button__previous--collapsed');
-      this._mainCssNextClass.next('fudis-pagination-button__next--collapsed');
+      this._mainCssPrevClass.next(['fudis-pagination-button fudis-pagination-button__previous--collapsed']);
+      this._mainCssNextClass.next(['fudis-pagination-button fudis-pagination-button__next--collapsed']);
     } else {
-      this._mainCssPrevClass.next('fudis-pagination-button__previous');
-      this._mainCssNextClass.next('fudis-pagination-button__next');
+      this._mainCssPrevClass.next(['fudis-pagination-button fudis-pagination-button__previous']);
+      this._mainCssNextClass.next(['fudis-pagination-button fudis-pagination-button__next']);
     }
   }
 

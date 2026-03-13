@@ -10,6 +10,10 @@ fudis-pagination {
   padding-top: core.$spacing-lg;
 
   &-button {
+    // Override default button styles from Core
+    padding-top: 0;
+    padding-bottom: 0;
+
     &__previous {
       margin-right: core.$spacing-xs;
 
