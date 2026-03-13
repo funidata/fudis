@@ -102,11 +102,11 @@ export class SelectBaseDirective
   @Input() placeholder: string;
 
   /**
-   * Determine if Select has autocompletion filter for user typed text When set to:
+   * Select variant: 'dropdown' | 'autocompleteDropdown' | 'autocompleteType'.
    *
-   * - Dropdown: default, normal select dropdown
-   * - AutocompleteDropdown": dropdown with autocomplete input field
-   * - AutocompleteType: autocomplete but user must type 3 letters before any results are displayed
+   * - 'dropdown': default, normal select dropdown
+   * - 'autocompleteDropdown': dropdown with autocomplete input field
+   * - 'autocompleteType': autocomplete but user must type 3 letters before any results are displayed
    */
   @Input() variant: FudisSelectVariant = 'dropdown';
 

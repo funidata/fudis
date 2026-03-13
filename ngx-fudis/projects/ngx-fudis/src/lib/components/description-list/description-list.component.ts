@@ -37,7 +37,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   @Input() disableGrid: boolean = false;
 
   /**
-   * Variant for Description List structure and layout
+   * Variant for Description List structure and layout: 'regular' | 'compact'
    */
   @Input() variant: FudisDescriptionListVariant = 'regular';
 

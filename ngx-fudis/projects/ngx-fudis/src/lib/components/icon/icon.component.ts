@@ -43,12 +43,13 @@ export class IconComponent implements OnChanges {
   @Input({ required: true }) icon: FudisIcon;
 
   /**
-   * Icon color
+   * Icon color: 'yellow' | 'red' | 'gray-dark' | 'gray-light' | 'primary' | 'primary-dark' |
+   * 'green' | 'white'
    */
   @Input() color: FudisIconColor = 'gray-dark';
 
   /**
-   * Icon rotation
+   * Icon rotation: 'flip-180' | 'cw-90' | 'ccw-90' | 'none'
    */
   @Input() rotate: FudisIconRotate = 'none';
 
