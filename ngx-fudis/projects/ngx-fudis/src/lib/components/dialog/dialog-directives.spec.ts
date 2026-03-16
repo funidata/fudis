@@ -66,7 +66,6 @@ describe('DialogDirectives', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AlertGroupComponent,
-        BodyTextComponent,
         HeadingComponent,
         DialogComponent,
         DialogTitleDirective,
@@ -75,7 +74,13 @@ describe('DialogDirectives', () => {
         DialogCloseDirective,
         HostComponent,
       ],
-      imports: [ButtonComponent, IconButtonComponent, IconComponent, MatDialogModule],
+      imports: [
+        BodyTextComponent,
+        ButtonComponent,
+        IconButtonComponent,
+        IconComponent,
+        MatDialogModule,
+      ],
       providers: [
         FudisDialogService,
         FudisAlertService,
@@ -158,7 +163,7 @@ describe('DialogDirectives', () => {
         'fudis-dialog-actions [fudisDialogClose]',
       )!;
 
-      expect(button.textContent).toEqual('Close this dialog');
+      expect(button.textContent.trim()).toEqual('Close this dialog');
 
       expect(button.ariaDisabled).toEqual(undefined);
       button.click();

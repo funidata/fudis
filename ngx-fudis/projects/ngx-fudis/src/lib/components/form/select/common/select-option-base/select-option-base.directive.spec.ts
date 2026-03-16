@@ -6,7 +6,7 @@ import { SelectOptionComponent } from '../../select/select-option/select-option.
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { defaultOptions } from '../../common/mock_data';
+import { defaultOptions, TestAnimalValue } from '../../common/mock_data';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { IconComponent } from '../../../../icon/icon.component';
 import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
@@ -36,23 +36,24 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
     [size]="'md'"
   >
     <ng-template fudisSelectOptions>
-      <fudis-select-option
-        *ngFor="let option of testOptions"
-        [data]="option"
-        (handleBlur)="handleOptionBlur($event)"
-      />
+      @for (option of testOptions; track option.value) {
+        <fudis-select-option
+          [data]="option"
+          (handleBlur)="handleOptionBlur($event)"
+        ></fudis-select-option>
+      }
       <fudis-select-option #selectOption [data]="optionWithSubLabel" />
     </ng-template>
   </fudis-select>`,
 })
 class MockComponent {
-  testOptions: FudisSelectOption<object>[] = defaultOptions;
-  optionWithSubLabel: FudisSelectOption<object> = {
+  testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
+  optionWithSubLabel: FudisSelectOption<string> = {
     value: 'test-1-abc',
     label: 'Dragon',
     subLabel: 'Roaaar!',
   };
-  control: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
+  control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
 
   @ViewChild('selectElem') selectElem: SelectComponent;
   @ViewChild('selectOption') selectOption: SelectOptionComponent;
@@ -83,10 +84,9 @@ describe('SelectOptionBaseDirective', () => {
         MockComponent,
         GuidanceComponent,
         LabelComponent,
-        BodyTextComponent,
       ],
       providers: [FudisDialogService, SelectBaseDirective, FudisInternalErrorSummaryService],
-      imports: [ButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [BodyTextComponent, ButtonComponent, IconComponent, ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);
@@ -99,7 +99,7 @@ describe('SelectOptionBaseDirective', () => {
     fixture.detectChanges();
   }
 
-  function updateControlValue(option: FudisSelectOption<object>) {
+  function updateControlValue(option: FudisSelectOption<TestAnimalValue>) {
     component.control.patchValue(option);
     fixture.detectChanges();
   }

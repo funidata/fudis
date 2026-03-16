@@ -38,12 +38,12 @@ export class ButtonBaseDirective extends PopoverApiDirective implements OnInit, 
   @Input() icon: FudisIcon | undefined = undefined;
 
   /**
-   * Icon rotation option
+   * Icon rotation option: 'flip-180' | 'cw-90' | 'ccw-90' | 'none'
    */
   @Input() iconRotate: FudisIconRotate = 'none';
 
   /**
-   * Button variant options
+   * Button variant: 'primary' | 'secondary' | 'tertiary'
    */
   @Input() variant: FudisButtonVariant = 'primary';
 
@@ -53,7 +53,7 @@ export class ButtonBaseDirective extends PopoverApiDirective implements OnInit, 
   @Input() disabled = false;
 
   /**
-   * Button size
+   * Button size: 'extra-small' | 'small' | 'medium'
    */
   @Input() size: FudisButtonSize = 'medium';
 

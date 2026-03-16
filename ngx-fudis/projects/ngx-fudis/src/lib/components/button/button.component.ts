@@ -11,7 +11,7 @@ import {
 import { FudisButtonSize, FudisButtonType, FudisComponentChanges } from '../../types/miscellaneous';
 import { ButtonBaseDirective } from '../../directives/button-base/button-base.directive';
 import { FudisIdService } from '../../services/id/id.service';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 import { PopoverDirective } from '../../directives/popover/popover.directive';
 
@@ -24,7 +24,7 @@ import { PopoverDirective } from '../../directives/popover/popover.directive';
 @Component({
   selector: 'fudis-button',
   templateUrl: './button.component.html',
-  imports: [CommonModule, AsyncPipe, PopoverDirective, IconComponent],
+  imports: [CommonModule, PopoverDirective, IconComponent],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -43,12 +43,12 @@ export class ButtonComponent extends ButtonBaseDirective implements OnChanges, O
   @Input({ required: true }) label: string;
 
   /**
-   * Button size options ignoring extra-small
+   * Button size: 'small' | 'medium' ('extra-small' not available for Button, only IconButton)
    */
   @Input() override size: Exclude<FudisButtonSize, 'extra-small'> = 'medium';
 
   /**
-   * Button type options
+   * Button type: 'submit' | 'button'
    */
   @Input() type: FudisButtonType = 'button';
 

@@ -24,9 +24,12 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
 
 /**
- * Provides layout and structure for form content.
+ * Provides layout and structure for form content. Extends Grid — all Grid inputs are available.
  *
- * Use this component to consistently arrange form fields, actions, and validation elements.
+ * Use this component to consistently arrange form fields, actions, and validation elements. Place
+ * fields inside `<fudis-form-content>` and buttons inside `<fudis-form-actions>`. Use
+ * `fudisFormSubmit` directive on the submit button to trigger error summary. Use `FudisValidators`
+ * (not Angular's Validators) for error messages to work with Error Summary.
  */
 @Component({
   selector: 'fudis-form',
@@ -51,7 +54,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Input({ required: true }) title: string;
 
   /**
-   * Heading level for the form title
+   * Heading level for the form title: 1 | 2 | 3 | 4 | 5 | 6
    */
   @Input({ required: true }) level: FudisHeadingLevel;
 
@@ -62,7 +65,8 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Input() id: string;
 
   /**
-   * Heading variant for the form title
+   * Heading variant for the form title: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'. If not
+   * set, derived automatically from level.
    */
   @Input() titleVariant: FudisHeadingVariant;
 
@@ -72,7 +76,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Input() helpText: string;
 
   /**
-   * Additional badge to the form title
+   * Additional badge to the form title: 'accent' | 'danger' | 'primary' | 'secondary' | 'success'
    */
   @Input() badge: FudisBadgeVariant | null;
 

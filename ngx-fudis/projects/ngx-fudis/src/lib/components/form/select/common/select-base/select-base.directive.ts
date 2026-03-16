@@ -13,6 +13,7 @@ import {
   WritableSignal,
   signal,
   OnDestroy,
+  DOCUMENT,
 } from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
@@ -21,7 +22,7 @@ import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
-import { DOCUMENT } from '@angular/common';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
@@ -101,11 +102,11 @@ export class SelectBaseDirective
   @Input() placeholder: string;
 
   /**
-   * Determine if Select has autocompletion filter for user typed text When set to:
+   * Select variant: 'dropdown' | 'autocompleteDropdown' | 'autocompleteType'.
    *
-   * - Dropdown: default, normal select dropdown
-   * - AutocompleteDropdown": dropdown with autocomplete input field
-   * - AutocompleteType: autocomplete but user must type 3 letters before any results are displayed
+   * - 'dropdown': default, normal select dropdown
+   * - 'autocompleteDropdown': dropdown with autocomplete input field
+   * - 'autocompleteType': autocomplete but user must type 3 letters before any results are displayed
    */
   @Input() variant: FudisSelectVariant = 'dropdown';
 

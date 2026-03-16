@@ -33,7 +33,9 @@ import { PopoverDirective } from '../../../../directives/popover/popover.directi
       <fudis-dl-item>
         <fudis-dt [contentText]="'Second DT'" />
         <fudis-dd [contentText]="'This is my DD'" />
-        <fudis-dd *ngIf="langVisible" [contentText]="'Language content'" [lang]="'en'" />
+        @if (langVisible) {
+          <fudis-dd [contentText]="'Language content'" [lang]="'en'" />
+        }
       </fudis-dl-item>
     </fudis-dl>
 

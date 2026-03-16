@@ -5,12 +5,7 @@ export const stories = [
   "../projects/documentation/**/*.mdx",
   "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts",
 ];
-export const addons = [
-  "@storybook/addon-links",
-  "@storybook/addon-essentials",
-  "@storybook/addon-interactions",
-  "@storybook/addon-a11y",
-];
+export const addons = ["@storybook/addon-links", "@storybook/addon-a11y", "@storybook/addon-docs"];
 export const framework = {
   name: "@storybook/angular",
   options: {
@@ -94,19 +89,12 @@ export function previewHead(head) {
           display: flex;
           align-items: center;
       }
-      .welcome-page-link {
-        font-family: 'Fira Sans', sans-serif;
-        font-size: 14px;
-        color: #1d65b8;
-        text-decoration: underline solid;
-        margin-right: 8px;
-      }
 
-      .welcome-page-link:focus {
+      .storybook-example-focus:focus {
           outline: 2px dashed #484848;
           outline-offset: 1px;
           box-shadow: #fff;
-        }
+      }
 
       /* 
       * Remove styling from version selector canvases so that only the selector is shown 

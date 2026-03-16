@@ -56,14 +56,14 @@ describe('AlertComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AlertComponent,
-        AlertGroupComponent,
+      declarations: [AlertComponent, AlertGroupComponent, LinkDirective, MockAlertComponent],
+      imports: [
         BodyTextComponent,
-        LinkDirective,
-        MockAlertComponent,
+        ButtonComponent,
+        IconComponent,
+        MatDialogModule,
+        RouterModule.forRoot([]),
       ],
-      imports: [ButtonComponent, IconComponent, MatDialogModule, RouterModule.forRoot([])],
       providers: [
         FudisDialogService,
         FudisAlertService,

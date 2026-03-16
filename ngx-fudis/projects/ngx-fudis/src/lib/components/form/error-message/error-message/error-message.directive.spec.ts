@@ -37,13 +37,14 @@ const errorToRemove: FudisValidationErrors = {
   selector: 'fudis-mock-test-error',
   template: `
     <fudis-text-input [control]="control" [label]="'Test label'">
-      <fudis-error-message
-        #testError
-        *ngIf="errorVisible"
-        (handleAddError)="handleAddError.emit($event)"
-        (handleRemoveError)="handleRemoveError.emit($event)"
-        [message]="message"
-      />
+      @if (errorVisible) {
+        <fudis-error-message
+          #testError
+          (handleAddError)="handleAddError.emit($event)"
+          (handleRemoveError)="handleRemoveError.emit($event)"
+          [message]="message"
+        />
+      }
     </fudis-text-input>
   `,
 })

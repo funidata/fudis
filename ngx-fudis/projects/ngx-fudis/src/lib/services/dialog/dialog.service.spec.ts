@@ -84,10 +84,8 @@ describe('DialogService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatDialogModule, ButtonComponent, IconButtonComponent, IconComponent],
       declarations: [
         HeadingComponent,
-        BodyTextComponent,
         AlertGroupComponent,
         DialogComponent,
         DialogContentDirective,
@@ -95,6 +93,13 @@ describe('DialogService', () => {
         DialogActionsDirective,
         DialogTestButtonComponent,
         DialogTestContentComponent,
+      ],
+      imports: [
+        MatDialogModule,
+        BodyTextComponent,
+        ButtonComponent,
+        IconButtonComponent,
+        IconComponent,
       ],
       providers: [
         FudisDialogService,

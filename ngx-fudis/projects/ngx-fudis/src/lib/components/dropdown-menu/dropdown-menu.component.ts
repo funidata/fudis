@@ -7,14 +7,14 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit,
   ViewChild,
   ViewEncapsulation,
+  DOCUMENT,
 } from '@angular/core';
 
 import { FudisIdService } from '../../services/id/id.service';
 import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropdown-base.directive';
-import { DOCUMENT } from '@angular/common';
+
 import { FudisInputSize } from '../../types/forms';
 import { FudisDropdownMenuAlign } from '../../types/miscellaneous';
 import { DropdownEventService } from '../../services/dropdown/dropdown-event.service';
@@ -23,9 +23,19 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 
 /**
- * Displays a list of actions in a collapsible menu.
+ * Displays a list of actions in a collapsible menu. Must be a direct child of `fudis-icon-button`
+ * with `[asMenuButton]="true"`.
  *
  * Use this component to group secondary or contextual actions.
+ *
+ * @example
+ *   ```html
+ *   <fudis-icon-button [ariaLabel]="'Actions'" [size]="'small'" [variant]="'secondary'" [icon]="'three-dots'" [asMenuButton]="true">
+ *     <fudis-dropdown-menu>
+ *       <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit($event)"></fudis-dropdown-menu-item>
+ *     </fudis-dropdown-menu>
+ *   </fudis-icon-button>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -35,7 +45,7 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class DropdownMenuComponent extends DropdownBaseDirective implements OnInit, OnDestroy {
+export class DropdownMenuComponent extends DropdownBaseDirective implements OnDestroy {
   constructor(
     private _idService: FudisIdService,
     private _dropdownEventService: DropdownEventService,
@@ -44,6 +54,13 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
     @Host() private _parentButton: IconButtonComponent,
   ) {
     super();
+
+    /**
+     * Generate id in constructor for it to be accessible to child elements, and set it to parent
+     * button's dropdownMenuId property for aria-controls
+     */
+    this.id = this._idService.getNewGrandParentId('dropdown-menu');
+    if (this._parentButton) this._parentButton.dropdownMenuId = this.id;
 
     /**
      * Fire maxWidth calculation through Observable call from parent Button
@@ -59,12 +76,12 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
   @ViewChild('dropdownMenuElement') private _dropdownMenuElement: ElementRef<HTMLElement>;
 
   /**
-   * Align Dropdown Menu opening position
+   * Align Dropdown Menu opening position: 'left' | 'center' | 'right'
    */
   @Input() align: FudisDropdownMenuAlign = 'center';
 
   /**
-   * Dropdown Menu size
+   * Dropdown Menu size: 'sm' | 'md' | 'lg'
    */
   @Input() size: FudisInputSize = 'lg';
 
@@ -198,11 +215,6 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements OnIn
         this._parentButton.closeMenu();
       }
     }
-  }
-
-  ngOnInit(): void {
-    this.id = this._idService.getNewGrandParentId('dropdown-menu');
-    if (this._parentButton) this._parentButton.dropdownMenuId = this.id;
   }
 
   ngOnDestroy() {

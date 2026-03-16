@@ -8,8 +8,9 @@ import {
   Output,
   ViewChild,
   AfterViewInit,
+  DOCUMENT,
 } from '@angular/core';
-import { FudisSelectionGroupInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
+import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -17,13 +18,22 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { Subscription } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 /**
  * Groups mutually exclusive options.
  *
- * Use this component when user must select exactly one option from a set.
+ * Use this component when user must select exactly one option from a set. Each `fudis-radio-button`
+ * child must have an `[option]` input of type `FudisRadioButtonOption`.
+ *
+ * @example
+ *   ```html
+ *   <fudis-radio-button-group [label]="'Color'" [control]="colorControl">
+ *     <fudis-radio-button [label]="'Red'" [value]="'red'"></fudis-radio-button>
+ *     <fudis-radio-button [label]="'Blue'" [value]="'blue'"></fudis-radio-button>
+ *   </fudis-radio-button-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-radio-button-group',
@@ -51,9 +61,9 @@ export class RadioButtonGroupComponent
   @ViewChild('radioButtonGroupGuidance') private _guidance: GuidanceComponent;
 
   /**
-   * Width of Radio Button Group
+   * Width of Radio Button Group: 'sm' | 'md' | 'lg' | 'full-width'
    */
-  @Input() size: FudisSelectionGroupInputSize = 'lg';
+  @Input() size: FudisInputSize = 'lg';
 
   /**
    * Emit form control and changed option when one option is clicked

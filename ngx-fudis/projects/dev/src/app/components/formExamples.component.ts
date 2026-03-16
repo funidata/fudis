@@ -173,7 +173,7 @@ export class AppFormExampleComponent {
 
   selectOptions = defaultOptions;
 
-  translatedSelectOptions: FudisSelectOption<object>[] = [];
+  translatedSelectOptions: FudisSelectOption<string>[] = [];
 
   radioButtonOptions: FudisRadioButtonOption<object>[] = [];
 

@@ -1,14 +1,19 @@
-import { Directive, Host, HostListener, Inject, Input, OnInit } from '@angular/core';
+import { Directive, Host, HostListener, Inject, Input, OnInit, DOCUMENT } from '@angular/core';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { DOCUMENT } from '@angular/common';
+
 import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
 
 // TODO: Write tests
 /**
- * Marks an element as the primary form submission trigger.
+ * Marks an element as the primary form submission trigger. Must be applied on a `fudis-button` that
+ * is inside a `fudis-form`. On click, triggers error summary visibility. Pass
+ * `[formValid]="myForm.valid"` to control behavior.
  *
- * Use this directive on submit button which will trigger error summary on click.
+ * @example
+ *   ```html
+ *   <fudis-button fudisFormSubmit [label]="'Submit'" [formValid]="myForm.valid"></fudis-button>
+ *   ```;
  */
 @Directive({
   selector: '[fudisFormSubmit]',

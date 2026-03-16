@@ -8,7 +8,7 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
   styleUrls: ['./multiselect-chip-list.component.scss'],
   standalone: false,
 })
-export class MultiselectChipListComponent {
+export class MultiselectChipListComponent<T = string> {
   constructor(protected _translationService: FudisTranslationService) {}
   /**
    * Reference for the chip list ul element
@@ -18,7 +18,7 @@ export class MultiselectChipListComponent {
   /**
    * Array of selected chip items
    */
-  @Input() selectedItems: FudisSelectOption<object>[];
+  @Input() selectedItems: FudisSelectOption<T>[];
 
   /**
    * Parent component id for binding aria attributes
@@ -28,7 +28,7 @@ export class MultiselectChipListComponent {
   /**
    * Output for removed chip index in selectedItems
    */
-  @Output() handleClick = new EventEmitter<FudisSelectOption<object>>();
+  @Output() handleClick = new EventEmitter<FudisSelectOption<T>>();
 
   /**
    * If focus is in some of the chip buttons
@@ -47,7 +47,7 @@ export class MultiselectChipListComponent {
    *
    * @param index Clicked index
    */
-  protected _clickChip(clickedOption: FudisSelectOption<object>, index: number) {
+  protected _clickChip(clickedOption: FudisSelectOption<T>, index: number) {
     this.handleClick.emit(clickedOption);
     setTimeout(() => {
       const buttons = this._chipListRef.nativeElement.querySelectorAll('button');

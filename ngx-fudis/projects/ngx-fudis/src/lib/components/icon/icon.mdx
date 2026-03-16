@@ -1,5 +1,6 @@
-import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import { IconComponent } from "./icon.component";
+import { iconExclude } from "../../utilities/storybook";
 import * as IconStories from "./icon.stories.ts";
 import * as VersionSelectorStories from "../../../storybook-docs/version-selector/version-selector.stories";
 
@@ -36,4 +37,4 @@ Flip and rotate the icon with `rotate` property: `flip-180`, `cw-90`, or `ccw-90
 
 ## Properties
 
-<ArgTypes of={IconComponent} />
+<ArgTypes of={IconComponent} exclude={iconExclude} />

@@ -43,15 +43,17 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
     >
       <ng-template fudisSelectOptions>
         @if (searchResults | async; as options) {
-          <fudis-select-option *ngFor="let option of options" [data]="option"></fudis-select-option>
+          @for (option of options; track option.value) {
+            <fudis-select-option [data]="option"></fudis-select-option>
+          }
         }</ng-template
     ></fudis-select>
   `,
 })
 export class StorybookExampleSelectBackendSimulationComponent extends StorybookExampleBackendSimulationBaseDirective {
-  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<object> | null>();
+  @Output() selectionUpdate = new EventEmitter<FudisSelectOption<string> | null>();
 
-  override control: FormControl = new FormControl<FudisSelectOption<object> | null>(null, [
+  override control: FormControl = new FormControl<FudisSelectOption<string> | null>(null, [
     FudisValidators.required('You must choose a movie!'),
   ]);
 }

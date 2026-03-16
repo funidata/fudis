@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisRadioButtonOption } from '../../../../types/forms';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 interface MyCheckboxGroup {
@@ -24,7 +24,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-form-content',
   template: `
     <fudis-section
@@ -51,11 +51,9 @@ type MyForm = {
                 [label]="'Course type'"
                 [control]="formGroup.controls['courseType']"
               >
-                <fudis-radio-button
-                  *ngFor="let option of courseTypeOptions"
-                  [label]="option.label"
-                  [value]="option.value"
-                />
+                @for (option of courseTypeOptions; track option.value) {
+                  <fudis-radio-button [label]="option.label" [value]="option.value" />
+                }
               </fudis-radio-button-group>
               <fudis-checkbox-group
                 [formGroup]="formGroup.controls.courseBooks"
@@ -77,10 +75,9 @@ type MyForm = {
                 [helpText]="'You have to start from somewhere'"
                 [control]="formGroup.controls['importantDate']"
               >
-                <fudis-error-message
-                  *ngIf="formGroup.controls['importantDate'].value?.getTime() !== releaseDate"
-                  [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                />
+                @if (formGroup.controls['importantDate'].value?.getTime() !== releaseDate) {
+                  <fudis-error-message [message]="'Wrong date chosen. 1.5.1991 would be great!'" />
+                }
               </fudis-datepicker>
               <fudis-fieldset
                 [label]="'Tearcher info'"

@@ -1,4 +1,4 @@
-import { ArgTypes, Meta } from "@storybook/blocks";
+import { ArgTypes, Meta } from "@storybook/addon-docs/blocks";
 import { TabNavigationBarComponent } from "./tab-navigation-bar.component";
 import { TabNavigationTabComponent } from "./tab-navigation-tab.component";
 import { TabNavigationPanelComponent } from "./tab-navigation-panel.component";
@@ -79,14 +79,15 @@ This example shows the usage with the `TabNavigationPanel`. Here `ariaControls`-
   [id]="'fudis-tab-navigation-1'"
   [variant]="'primary'"
   [panel]="navigationTabPanel">
+  @for (route of routes; track route.id) {
   <button
     fudis-tab-navigation-tab
-    *ngFor="let route of routes"
     (click)="change(route)"
     [active]="activeLink === route.path"
     [id]="route.id">
     {{ route.label }}
   </button>
+  }
 </fudis-tab-navigation-bar>
 <fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
   <router-outlet />
@@ -104,14 +105,15 @@ First you create a `tab-navigation-bar` with the `aria-controls`-prop and add th
   [id]="'fudis-tab-navigation-1'"
   [aria-controls]="'tab-panel-1'"
   [variant]="'primary'"
+  @for (route of routes; track route.id) {
   <button
     fudis-tab-navigation-tab
-    *ngFor="let route of routes"
     (click)="change(route)"
     [active]="activeLink === route.path"
     [id]="route.id">
     {{ route.label }}
   </button>
+  }
 </fudis-tab-navigation-bar>
 ```
 

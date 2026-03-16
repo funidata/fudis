@@ -41,7 +41,7 @@ export class AlertGroupComponent implements OnChanges {
   }
 
   /**
-   * CSS position of alerts
+   * CSS position of alerts: 'static' | 'absolute' | 'fixed'
    */
   @Input() position: FudisAlertPosition = 'fixed';
 

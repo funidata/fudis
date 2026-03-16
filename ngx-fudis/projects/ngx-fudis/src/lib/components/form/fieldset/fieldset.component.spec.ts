@@ -16,7 +16,7 @@ import { IconButtonComponent } from '../../icon-button/icon-button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
-import { FudisSelectionGroupInputSize } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 
 @Component({
   standalone: false,
@@ -42,7 +42,7 @@ class MockFieldSetComponent {
   required = false;
   initialFocus = false;
   labelSize = 'md';
-  inputSize: FudisSelectionGroupInputSize;
+  inputSize: FudisInputSize;
 }
 
 describe('FieldSetComponent', () => {
@@ -53,7 +53,6 @@ describe('FieldSetComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BodyTextComponent,
         FieldsetActionsDirective,
         FieldsetContentDirective,
         FieldSetComponent,
@@ -66,7 +65,7 @@ describe('FieldSetComponent', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     }).compileComponents();
 
@@ -75,7 +74,7 @@ describe('FieldSetComponent', () => {
     fixtureMock.detectChanges();
   });
 
-  function fieldSetInputSizeCheck(size: FudisSelectionGroupInputSize): void {
+  function fieldSetInputSizeCheck(size: FudisInputSize): void {
     componentMock.inputSize = size;
     fixtureMock.detectChanges();
 
@@ -117,7 +116,7 @@ describe('FieldSetComponent', () => {
     it('should have Fieldset label as given', () => {
       const fieldsetLabel = getElement(fixtureMock, '.fudis-fieldset__legend__main__text');
 
-      expect(fieldsetLabel.textContent).toEqual('Fieldset label');
+      expect(fieldsetLabel.textContent.trim()).toEqual('Fieldset label');
     });
 
     it('should have fieldset helpText as given', () => {

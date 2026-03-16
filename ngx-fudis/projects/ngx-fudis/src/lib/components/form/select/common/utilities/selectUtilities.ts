@@ -6,9 +6,9 @@ import { FudisSelectOption } from '../../../../../types/forms';
  * @param values Array of selected Options
  * @returns
  */
-export const joinInputValues = (values: FudisSelectOption<object>[]): string => {
+export const joinInputValues = <T>(values: FudisSelectOption<T>[]): string => {
   const label: string[] = [];
-  values.forEach((item: FudisSelectOption<object>) => {
+  values.forEach((item: FudisSelectOption<T>) => {
     const labelToPush = item.label.includes(',') ? `'${item.label}'` : item.label;
 
     label.push(labelToPush);

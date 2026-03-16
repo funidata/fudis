@@ -76,18 +76,27 @@ describe('ValidatorErrorMessageComponent', () => {
       expect(message).toBeTruthy();
     });
 
-    it('should pass id and label to Validator Error Message', () => {
-      const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
+    it('should find correct id and label related to Validator Error Message', () => {
+      const textInput = fixture.debugElement.query(By.css('fudis-text-input input'));
+      const inputId = textInput.attributes['id'];
 
-      expect(message.attributes['ng-reflect-focus-id']).toEqual('test-id');
-      expect(message.attributes['ng-reflect-label']).toEqual('Test Label');
+      const textInputLabel = fixture.debugElement.query(By.css('fudis-text-input label'));
+      const labelText = textInputLabel.nativeElement.textContent;
+
+      expect(inputId).toEqual('test-id');
+      expect(labelText).toEqual('Test Label(Required)');
     });
 
-    it('should pass Fudis Validator type and message to Validator Error Message', () => {
-      const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
+    it('should pass Fudis Validator message to Validator Error Message', () => {
+      fixture.detectChanges();
 
-      expect(message.attributes['ng-reflect-type']).toEqual('required');
-      expect(message.attributes['ng-reflect-message']).toEqual('This field is required');
+      const validatorComponent = fixture.nativeElement.querySelector(
+        'fudis-validator-error-message',
+      ) as HTMLElement;
+
+      const message = validatorComponent.textContent;
+
+      expect(message).toEqual('This field is required');
     });
   });
 

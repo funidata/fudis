@@ -1,4 +1,4 @@
-<ng-container *ngIf="_parentGroup?.control">
+@if (_parentGroup?.control) {
   <label
     class="fudis-radio-button"
     [attr.for]="_id"
@@ -34,13 +34,12 @@
             _parentGroup.control.disabled || _parentGroup.disabled
           "
         >
-          <span
-            *ngIf="_parentGroup.control.value === value"
-            class="fudis-radio-button__content__control__indicator"
-          ></span>
+          @if (_parentGroup.control.value === value) {
+            <span class="fudis-radio-button__content__control__indicator"></span>
+          }
         </div>
       </div>
       <span class="fudis-radio-button__label">{{ label }}</span>
     </div>
   </label>
-</ng-container>
+}

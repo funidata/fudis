@@ -14,17 +14,18 @@
 >
   <fudis-fieldset-content>
     <ng-content select="fudis-checkbox-group-option" />
-    <fudis-guidance
-      #checkboxGroupGuidance
-      *ngIf="formGroup && !disableGuidance"
-      [inputLabel]="label"
-      [helpText]="helpText"
-      [for]="id + '-legend'"
-      [groupBlurredOut]="groupBlurredOut"
-      [formGroup]="formGroup"
-      [groupHelpTextHidden]="true"
-    >
-      <ng-content select="fudis-error-message" />
-    </fudis-guidance>
+    @if (formGroup && !disableGuidance) {
+      <fudis-guidance
+        #checkboxGroupGuidance
+        [inputLabel]="label"
+        [helpText]="helpText"
+        [for]="id + '-legend'"
+        [groupBlurredOut]="groupBlurredOut"
+        [formGroup]="formGroup"
+        [groupHelpTextHidden]="true"
+      >
+        <ng-content select="fudis-error-message" />
+      </fudis-guidance>
+    }
   </fudis-fieldset-content>
 </fudis-fieldset>

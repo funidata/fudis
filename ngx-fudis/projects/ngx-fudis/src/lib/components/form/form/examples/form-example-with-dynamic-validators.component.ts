@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
 import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
-
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { NgxFudisModule } from '../../../../ngx-fudis.module';
 
 type SummerCheckbox = {
   summer: FormControl<boolean | null>;
@@ -26,7 +24,7 @@ type MyForm = {
   email: FormControl<string | null>;
   number: FormControl<number | null>;
   date: FormControl<Date | null>;
-  animal: FormControl<FudisSelectOption<object> | null>;
+  animal: FormControl<FudisSelectOption<string> | null>;
   summer: FormGroup<SummerCheckbox>;
   winter: FormGroup<WinterCheckbox>;
   working: FormGroup<WorkingCheckbox>;
@@ -35,7 +33,7 @@ type MyForm = {
 };
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-dynamic-validator',
   template: `
     <fudis-form
@@ -221,12 +219,10 @@ type MyForm = {
                   [label]="'Select your favorite sport'"
                   [control]="formExample.controls.sport"
                 >
-                  <fudis-radio-button
-                    *ngFor="let sport of sportOptions"
-                    [label]="sport.label"
-                    [value]="sport.value"
-                  >
-                  </fudis-radio-button>
+                  @for (sport of sportOptions; track sport.value) {
+                    <fudis-radio-button [label]="sport.label" [value]="sport.value">
+                    </fudis-radio-button>
+                  }
                 </fudis-radio-button-group>
                 <fudis-button
                   [label]="_radioOptionRequired + ' option required validator'"
@@ -282,7 +278,7 @@ export class StorybookExampleDynamicValidatorsComponent {
         this._maxDateValidatorInstance,
         this._minDateValidatorInstance,
       ]),
-      animal: new FormControl<FudisSelectOption<object> | null>(
+      animal: new FormControl<FudisSelectOption<string> | null>(
         null,
         this._requiredValidatorInstance,
       ),

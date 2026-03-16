@@ -141,7 +141,6 @@ describe('ExpandableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        BodyTextComponent,
         ErrorSummaryComponent,
         ExpandableActionsDirective,
         ExpandableComponent,
@@ -169,6 +168,7 @@ describe('ExpandableComponent', () => {
       ],
       imports: [
         BadgeComponent,
+        BodyTextComponent,
         ButtonComponent,
         IconComponent,
         ReactiveFormsModule,

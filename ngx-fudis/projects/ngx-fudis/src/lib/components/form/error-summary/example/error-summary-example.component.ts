@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisFormErrorSummaryUpdateStrategy } from '../../../../types/errorSummary';
@@ -25,7 +24,7 @@ interface CourseBooksFormGroup {
 }
 
 @Component({
-  imports: [NgxFudisModule, CommonModule, TranslocoDirective],
+  imports: [NgxFudisModule, TranslocoDirective],
   selector: 'example-error-summary',
   templateUrl: './error-summary-example.component.html',
 })
@@ -88,13 +87,13 @@ export class ErrorSummaryExampleComponent implements OnInit {
 
   courseTypeOptions = ['basic', 'advanced'];
 
-  mainMaskotOptions: FudisSelectOption<object>[] = [
+  mainMaskotOptions: FudisSelectOption<string>[] = [
     { label: 'form.maskot.options.option-1', value: 'maskot-1' },
     { label: 'form.maskot.options.option-2', value: 'maskot-2' },
     { label: 'form.maskot.options.option-3', value: 'maskot-3' },
   ];
 
-  topicOptions: FudisSelectOption<object>[] = [
+  topicOptions: FudisSelectOption<string>[] = [
     { label: 'form.courseTopics.options.option-1', value: 'topic-1' },
     { label: 'form.courseTopics.options.option-2', value: 'topic-2' },
     { label: 'form.courseTopics.options.option-3', value: 'topic-3' },

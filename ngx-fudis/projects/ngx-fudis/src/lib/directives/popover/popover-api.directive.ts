@@ -12,7 +12,7 @@ export class PopoverApiDirective {
   @Input() popoverText: string;
 
   /**
-   * Position of the popover on the parent element
+   * Position of the popover on the parent element: 'left' | 'right' | 'above' | 'below'
    */
   @Input() popoverPosition: FudisPopoverPosition = 'below';
 

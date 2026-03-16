@@ -2,7 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectOptionComponent } from './select-option.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectComponent } from '../select.component';
-import { defaultOptions, defaultOptionsSecondaryLang } from '../../common/mock_data';
+import {
+  defaultOptions,
+  defaultOptionsSecondaryLang,
+  TestAnimalValue,
+} from '../../common/mock_data';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
@@ -33,13 +37,15 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
     [size]="'md'"
   >
     <ng-template fudisSelectOptions>
-      <fudis-select-option *ngFor="let option of testOptions" [data]="option"></fudis-select-option>
+      @for (option of testOptions; track option.value) {
+        <fudis-select-option [data]="option"></fudis-select-option>
+      }
     </ng-template>
   </fudis-select>`,
 })
 class MockContainerComponent {
-  testOptions: FudisSelectOption<object>[] = defaultOptions;
-  control: FormControl = new FormControl(null);
+  testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
 
   variant = 'dropdown';
 
@@ -64,9 +70,8 @@ describe('SelectOptionComponent', () => {
         GuidanceComponent,
         SelectIconsComponent,
         LabelComponent,
-        BodyTextComponent,
       ],
-      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 
@@ -82,7 +87,9 @@ describe('SelectOptionComponent', () => {
   }
 
   function initializeFormControlWithValue() {
-    component.control = new FormControl(defaultOptions[5]);
+    component.control = new FormControl<FudisSelectOption<TestAnimalValue> | null>(
+      defaultOptions[5],
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   }
@@ -107,12 +114,12 @@ describe('SelectOptionComponent', () => {
     it('should not have selected default value if form control has no value on init', () => {
       setSelectDropdownOpen();
 
-      const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+      const iconNotToBeFound = fixture.nativeElement.querySelector('svg#check');
       expect(iconNotToBeFound).toBeFalsy();
 
       updateControlValue();
 
-      const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+      const checkIcon = fixture.nativeElement.querySelector('svg#check');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -123,7 +130,7 @@ describe('SelectOptionComponent', () => {
       updateControlValue();
 
       const checkIcon = fixture.nativeElement.querySelector(
-        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+        '.fudis-select-option--selected fudis-icon svg#check',
       );
 
       const selectedValue = fixture.debugElement.query(
@@ -140,7 +147,7 @@ describe('SelectOptionComponent', () => {
       setSelectDropdownOpen();
 
       const checkIcon = fixture.nativeElement.querySelector(
-        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+        '.fudis-select-option--selected fudis-icon svg#check',
       );
 
       const selectedValue = fixture.debugElement.query(

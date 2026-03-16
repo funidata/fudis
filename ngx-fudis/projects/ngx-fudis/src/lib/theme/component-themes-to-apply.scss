@@ -24,4 +24,5 @@ html {
   @include mat.core-theme(m3.$fudis-theme);
   @include mat.button-theme(m3.$fudis-theme);
   @include mat.datepicker-theme(m3.$fudis-theme);
+  @include mat.tooltip-theme(m3.$fudis-theme);
 }

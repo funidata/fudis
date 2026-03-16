@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FudisRadioButtonOption } from '../../../types/forms';
+import { fudisInputSizeArray, FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import docs from './radio-button-group.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { radioButtonGroupControlsExclude } from '../../../utilities/storybook';
 
 const html = String.raw;
@@ -42,12 +42,9 @@ const ExampleTestTemplate: StoryFn = (args) => ({
     [popoverTriggerLabel]="popoverTriggerLabel"
     (handleChange)="handleChange($event)"
   >
-    <fudis-radio-button
-      *ngFor="let option of fruitOptions"
-      [label]="option.label"
-      [value]="option.value"
-    >
-    </fudis-radio-button>
+    @for (option of fruitOptions; track option.value) {
+    <fudis-radio-button [label]="option.label" [value]="option.value" />
+    }
   </fudis-radio-button-group>`,
 });
 
@@ -71,11 +68,9 @@ Example.args = {
       [control]="control"
       (handleChange)="handleChange($event)"
     >
-      <fudis-radio-button
-        *ngFor="let option of petOptions"
-        [label]="option.label"
-        [value]="option.value"
-      ></fudis-radio-button>
+      @for (option of petOptions; track option.value) {
+        <fudis-radio-button [label]="option.label" [value]="option.value"></fudis-radio-button>
+      }
     </fudis-radio-button-group>
   `,
   standalone: false,
@@ -120,8 +115,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg', 'full-width'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     popoverPosition: {
       options: ['left', 'right', 'above', 'below'],

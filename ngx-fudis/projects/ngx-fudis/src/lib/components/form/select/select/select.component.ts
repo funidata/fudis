@@ -8,6 +8,7 @@ import {
   Output,
   ViewChild,
   ViewEncapsulation,
+  DOCUMENT,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
@@ -15,7 +16,7 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { DOCUMENT } from '@angular/common';
+
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
@@ -24,6 +25,18 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
  * Allows selection of a single option from a dropdown list.
  *
  * Use this component when there are multiple predefined options and user can choose only one value.
+ * The FormControl value is a `FudisSelectOption` object (not a primitive). Options are projected
+ * via `<ng-template fudisSelectOptions>` containing `<fudis-select-option>` elements.
+ *
+ * @example
+ *   ```html
+ *   <fudis-select [label]="'Country'" [control]="countryControl">
+ *     <ng-template fudisSelectOptions>
+ *       <fudis-select-option [data]="{ value: 'fi', label: 'Finland' }"></fudis-select-option>
+ *       <fudis-select-option [data]="{ value: 'se', label: 'Sweden' }"></fudis-select-option>
+ *     </ng-template>
+ *   </fudis-select>
+ *   ```;
  */
 @Component({
   selector: 'fudis-select',
@@ -32,7 +45,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
   encapsulation: ViewEncapsulation.None,
   standalone: false,
 })
-export class SelectComponent
+export class SelectComponent<T = string>
   extends SelectBaseDirective
   implements OnInit, AfterViewInit, BaseSelectableComponent
 {
@@ -46,18 +59,18 @@ export class SelectComponent
   }
 
   @ViewChild(SelectControlValueAccessorDirective)
-  public selectCVA: SelectControlValueAccessorDirective;
+  public selectCVA: SelectControlValueAccessorDirective<T>;
 
-  /*
+  /**
    * FormControl for single select
    */
-  @Input({ required: true }) override control: FormControl<FudisSelectOption<object> | null>;
+  @Input({ required: true }) override control: FormControl<FudisSelectOption<T> | null>;
 
   /**
    * Value output event on selection change
    */
-  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
-    new EventEmitter<FudisSelectOption<object> | null>();
+  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<T> | null> =
+    new EventEmitter<FudisSelectOption<T> | null>();
 
   ngOnInit(): void {
     this._setParentId('select');
@@ -69,7 +82,7 @@ export class SelectComponent
    * @param value Option to be selected
    * @param disableSignalEmit Disable signal update to reduce unneeded state updates
    */
-  public handleSelectionChange(value: FudisSelectOption<object> | null): void {
+  public handleSelectionChange(value: FudisSelectOption<T> | null): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 

@@ -7,25 +7,36 @@ import {
   OnInit,
   Output,
   ViewChild,
+  DOCUMENT,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FudisCheckboxGroupChangeEvent,
   FudisCheckboxGroupFormGroup,
-  FudisSelectionGroupInputSize,
+  FudisInputSize,
 } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { FudisIdService } from '../../../services/id/id.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { DOCUMENT } from '@angular/common';
+
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 /**
  * Groups multiple related checkbox options.
  *
- * Use this component when user can select value(s) from a set.
+ * Use this component when user can select value(s) from a set. Each `fudis-checkbox-group-option`
+ * child must have a `[controlName]` matching a key in the FormGroup. Use `FudisGroupValidators` for
+ * group-level validation (e.g., `oneRequired`, `min`, `max`).
+ *
+ * @example
+ *   ```html
+ *   <fudis-checkbox-group [label]="'Colors'" [formGroup]="colorsGroup">
+ *     <fudis-checkbox-group-option [controlName]="'red'" [label]="'Red'"></fudis-checkbox-group-option>
+ *     <fudis-checkbox-group-option [controlName]="'blue'" [label]="'Blue'"></fudis-checkbox-group-option>
+ *   </fudis-checkbox-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-checkbox-group',
@@ -59,9 +70,9 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   @Input({ required: true }) override formGroup: FormGroup<T>;
 
   /**
-   * Width size of the group.
+   * Width of Checkbox Group: 'sm' | 'md' | 'lg' | 'full-width'
    */
-  @Input() size: FudisSelectionGroupInputSize = 'lg';
+  @Input() size: FudisInputSize = 'lg';
 
   /**
    * Emit changed control's name and whole FormGroup when one Checkbox is clicked.

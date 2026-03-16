@@ -5,7 +5,7 @@ import { RadioButtonGroupComponent } from './radio-button-group.component';
 import {
   FudisRadioButtonChangeEvent,
   FudisRadioButtonOption,
-  fudisSelectionGroupInputSizeArray,
+  fudisInputSizeArray,
 } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
@@ -31,11 +31,9 @@ import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive
     (handleChange)="handleRadioButtonClick($event)"
   >
     <p class="do-not-find-me">This should not be shown</p>
-    <fudis-radio-button
-      *ngFor="let option of options"
-      [label]="option.label"
-      [value]="option.value"
-    />
+    @for (option of options; track option.value) {
+      <fudis-radio-button [label]="option.label" [value]="option.value" />
+    }
   </fudis-radio-button-group>`,
 })
 class MockContainerComponent {
@@ -132,7 +130,7 @@ describe('Basic inputs of Radio Button Group', () => {
     ) as HTMLElement;
 
     expect(groupHelpText.getAttribute('aria-hidden')).toBeNull();
-    expect(groupHelpText.textContent).toEqual(helpText.textContent);
+    expect(groupHelpText.textContent.trim()).toEqual(helpText.textContent.trim());
   });
 
   it('should display required text', () => {
@@ -144,7 +142,7 @@ describe('Basic inputs of Radio Button Group', () => {
   });
 
   it('should pass correct size values to the Fieldset', () => {
-    fudisSelectionGroupInputSizeArray.forEach((size) => {
+    fudisInputSizeArray.forEach((size) => {
       component.size = size;
       fixture.detectChanges();
 
@@ -194,7 +192,7 @@ describe('Basic inputs of Radio Button Group', () => {
       radioArray.forEach((radio) => {
         const radioName = radio
           .query(By.css('.fudis-radio-button__input'))
-          .nativeElement.getAttribute('ng-reflect-name');
+          .nativeElement.getAttribute('name');
         expect(radioName).toEqual(radioGroupId);
       });
     });

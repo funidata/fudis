@@ -1,18 +1,14 @@
 import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from './select.component';
 import docs from './select.mdx';
-import {
-  groupedMockData,
-  defaultOptions,
-  TestAnimalSound,
-  TestAnimalScience,
-} from '../common/mock_data';
+import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleSelectBackendSimulationComponent } from '../examples/select-backend-simulation.component';
+import { fudisInputSizeArray } from '../../../../types/forms';
 
 export default {
   title: 'Components/Form/Select/Select',
@@ -35,8 +31,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     helpText: {
       control: { type: 'text' },
@@ -74,7 +69,7 @@ const ExampleTemplate: StoryFn = (args) => ({
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(null),
+    control: new FormControl<string | object | null>(null),
     groupedMockData,
   },
   template: html`
@@ -93,16 +88,15 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        <fudis-select-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-select-option>
-        <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-select-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-select-option>
+        @for (option of defaultOptions; track option.value) {
+        <fudis-select-option [data]="option"></fudis-select-option>
+        } @for (group of groupedMockData; track group.country) {
+        <fudis-select-group [label]="group.country">
+          @for (groupedOption of group.options; track groupedOption.value) {
+          <fudis-select-option [data]="groupedOption"></fudis-select-option>
+          }
         </fudis-select-group>
+        }
       </ng-template>
     </fudis-select>
   `,

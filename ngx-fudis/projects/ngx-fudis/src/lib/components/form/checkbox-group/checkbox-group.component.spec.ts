@@ -6,10 +6,7 @@ import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { CheckboxGroupOptionComponent } from './checkbox-group-option/checkbox-group-option.component';
-import {
-  FudisCheckboxGroupChangeEvent,
-  fudisSelectionGroupInputSizeArray,
-} from '../../../types/forms';
+import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridComponent } from '../../grid/grid/grid.component';
@@ -60,11 +57,9 @@ type TestFormGroup = {
     (handleChange)="handleCheckboxClick($event)"
   >
     <p class="do-not-find-me">This should not be shown</p>
-    <fudis-checkbox-group-option
-      *ngFor="let option of options"
-      [controlName]="option.controlName"
-      [label]="option.label"
-    />
+    @for (option of options; track option.controlName) {
+      <fudis-checkbox-group-option [controlName]="option.controlName" [label]="option.label" />
+    }
   </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
@@ -172,7 +167,7 @@ describe('CheckboxGroupComponent', () => {
       ) as HTMLElement;
 
       expect(groupHelpText.getAttribute('aria-hidden')).toBeNull();
-      expect(groupHelpText.textContent).toEqual(helpText.textContent);
+      expect(groupHelpText.textContent.trim()).toEqual(helpText.textContent.trim());
     });
 
     it('should display required text', () => {
@@ -184,7 +179,7 @@ describe('CheckboxGroupComponent', () => {
     });
 
     it('should pass correct size values to the Fieldset', () => {
-      fudisSelectionGroupInputSizeArray.forEach((size) => {
+      fudisInputSizeArray.forEach((size) => {
         component.size = size;
         fixture.detectChanges();
 
@@ -294,15 +289,9 @@ describe('CheckboxGroupComponent', () => {
 
       it('should display error, when too many selected', () => {
         mockComponent.testFromGroup.markAllAsTouched();
-        const appleInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox-group-option[ng-reflect-control-name="apple"] input',
-        );
-        const bananaInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox-group-option[ng-reflect-control-name="fairTradeBanana"] input',
-        );
-        const orangeInput = fixture.nativeElement.querySelector(
-          'fudis-checkbox-group-option[ng-reflect-control-name="orange"] input',
-        );
+        const appleInput = fixture.nativeElement.querySelector('#group-id-item-1');
+        const bananaInput = fixture.nativeElement.querySelector('#group-id-item-2');
+        const orangeInput = fixture.nativeElement.querySelector('#group-id-item-5');
 
         appleInput.click();
         bananaInput.click();

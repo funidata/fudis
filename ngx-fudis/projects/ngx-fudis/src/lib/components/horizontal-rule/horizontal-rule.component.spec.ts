@@ -7,7 +7,7 @@ describe('HorizontalRuleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HorizontalRuleComponent],
+      imports: [HorizontalRuleComponent],
     }).compileComponents();
   });
 

@@ -31,21 +31,21 @@
         (keydown)="_keyDown($event)"
         (blur)="_blur($event)"
       />
-      <fudis-icon
-        class="fudis-multiselect-option__label__checkbox__icon"
-        *ngIf="checked"
-        [icon]="'check'"
-      />
+      @if (checked) {
+        <fudis-icon class="fudis-multiselect-option__label__checkbox__icon" [icon]="'check'" />
+      }
     </div>
     <div class="fudis-multiselect-option__label__text">
       <span class="fudis-multiselect-option__label__text__main">{{ data.label }}</span>
-      <span *ngIf="data.subLabel" class="fudis-multiselect-option__label__text__sub">{{
-        data.subLabel
-      }}</span>
+      @if (data.subLabel) {
+        <span class="fudis-multiselect-option__label__text__sub">{{ data.subLabel }}</span>
+      }
 
-      <span *ngIf="data.disabled" class="fudis-multiselect-option__label__text__disabled">
-        ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
-      >
+      @if (data.disabled) {
+        <span class="fudis-multiselect-option__label__text__disabled">
+          ({{ _translationService.getTranslations()().SELECT.DISABLED }})</span
+        >
+      }
     </div>
   </label>
 </div>

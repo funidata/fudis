@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+
 import { FudisSelectOption } from '../../lib/types/forms';
 import { NgxFudisModule } from '../../lib/ngx-fudis.module';
 
@@ -15,11 +15,11 @@ interface VersionsResponse {
   templateUrl: './version-selector.component.html',
   styleUrls: ['./version-selector.component.scss'],
   standalone: true,
-  imports: [CommonModule, NgxFudisModule],
+  imports: [NgxFudisModule],
 })
 export class VersionSelectorComponent implements OnInit {
   private _versions: string[] = [];
-  private _control = new FormControl<FudisSelectOption<object> | null>(null);
+  private _control = new FormControl<FudisSelectOption<string> | null>(null);
   private _error = false;
 
   get versions(): string[] {
@@ -95,7 +95,7 @@ export class VersionSelectorComponent implements OnInit {
 
     this._control.valueChanges.subscribe((v) => {
       if (!v) return;
-      const selected = v as FudisSelectOption<object> | null;
+      const selected = v as FudisSelectOption<string> | null;
       const val = selected?.value ?? null;
       if (!val) return;
       const cur = new URL(window.top!.location.href);

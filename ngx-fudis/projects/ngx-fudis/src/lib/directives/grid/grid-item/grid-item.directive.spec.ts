@@ -40,14 +40,8 @@ describe('GridItemDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        HostComponent,
-        GridItemDirective,
-        GridComponent,
-        HeadingComponent,
-        BodyTextComponent,
-      ],
-      imports: [ButtonComponent],
+      declarations: [HostComponent, GridItemDirective, GridComponent, HeadingComponent],
+      imports: [BodyTextComponent, ButtonComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

@@ -1,31 +1,33 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NgxFudisModule } from '../../../ngx-fudis.module';
-import { CommonModule } from '@angular/common';
+
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisDialogSize } from '../../../types/miscellaneous';
 import { ExampleDialogFormComponent } from './example-dialog-form.component';
 
 @Component({
-  imports: [NgxFudisModule, CommonModule],
+  imports: [NgxFudisModule],
   selector: 'example-dialog-size',
   template: `
     <fudis-heading [level]="1">Dialog size examples</fudis-heading>
     <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">
       <fudis-heading [level]="2" [variant]="'lg'">Regular Dialogs</fudis-heading>
-      <fudis-button
-        *ngFor="let size of sizes"
-        [label]="'Open regular ' + size + ' dialog'"
-        (handleClick)="openDialog(size)"
-      />
+      @for (size of sizes; track size) {
+        <fudis-button
+          [label]="'Open regular ' + size + ' dialog'"
+          (handleClick)="openDialog(size)"
+        />
+      }
     </fudis-grid>
     <fudis-hr class="fudis-my-xl" />
     <fudis-grid [columns]="'repeat(3,auto)'" [width]="'sm'">
       <fudis-heading [level]="2" [variant]="'lg'">Form Dialogs</fudis-heading>
-      <fudis-button
-        *ngFor="let size of sizes"
-        [label]="'Open form ' + size + ' dialog'"
-        (handleClick)="openDialogWithForm(size)"
-      />
+      @for (size of sizes; track size) {
+        <fudis-button
+          [label]="'Open form ' + size + ' dialog'"
+          (handleClick)="openDialogWithForm(size)"
+        />
+      }
     </fudis-grid>
 
     <ng-template #exampleDialogTemplate>

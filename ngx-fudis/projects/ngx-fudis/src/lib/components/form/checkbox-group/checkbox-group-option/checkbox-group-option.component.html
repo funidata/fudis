@@ -1,4 +1,4 @@
-<ng-container *ngIf="_control">
+@if (_control) {
   <label
     class="fudis-checkbox fudis-checkbox__label"
     [attr.for]="id"
@@ -45,11 +45,9 @@
             _control.disabled || _checkboxGroup.disabled
           "
         >
-          <fudis-icon
-            *ngIf="_control.value"
-            [icon]="'check'"
-            class="fudis-checkbox__content__box__icon"
-          />
+          @if (_control.value) {
+            <fudis-icon [icon]="'check'" class="fudis-checkbox__content__box__icon" />
+          }
         </span>
       </div>
       <span class="fudis-checkbox__content__label">
@@ -57,4 +55,4 @@
       </span>
     </div>
   </label>
-</ng-container>
+}

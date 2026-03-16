@@ -1,7 +1,9 @@
 name: Run tests
 
+# Write permission needed for jest-coverage-comment to post comments on PR's.
 permissions:
   contents: read
+  pull-requests: write
 
 on:
   # Enable reusing this workflow.
@@ -111,7 +113,7 @@ jobs:
           path: coverage
       - name: Comment Coverage Summary on PR
         if: github.event_name == 'pull_request'
-        uses: MishaKav/jest-coverage-comment@d74238813c33e6ea20530ff91b5ea37953d11c91
+        uses: MishaKav/jest-coverage-comment@2a8fe3083255756f3692599238ca251e858e15b2
         with:
           coverage-summary-path: coverage/coverage-summary.json
           coverage-path: coverage/coverage.txt

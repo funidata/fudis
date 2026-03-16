@@ -60,7 +60,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
   @Input({ required: true }) level: number;
 
   /**
-   * Visual variant of the expandable
+   * Visual variant of the expandable: 'regular' | 'lite'
    */
   @Input() variant: FudisExpandableType = 'regular';
 

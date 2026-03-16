@@ -1,14 +1,15 @@
 import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
 import docs from './multiselect.mdx';
-import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
+import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component';
+import { fudisInputSizeArray } from '../../../../types/forms';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
@@ -31,8 +32,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     helpText: {
       control: { type: 'text' },
@@ -81,7 +81,7 @@ const ExampleTemplate: StoryFn = (args) => ({
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound[] | null>(
+    control: new FormControl<string | object[] | null>(
       null,
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),
@@ -105,16 +105,15 @@ const ExampleTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        <fudis-multiselect-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-multiselect-option>
-        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-multiselect-option>
+        @for (option of defaultOptions; track option.value) {
+        <fudis-multiselect-option [data]="option"></fudis-multiselect-option>
+        } @for (group of groupedMockData; track group.country) {
+        <fudis-multiselect-group [label]="group.country">
+          @for (groupedOption of group.options; track groupedOption.value) {
+          <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
+          }
         </fudis-multiselect-group>
+        }
       </ng-template>
     </fudis-multiselect>
   `,

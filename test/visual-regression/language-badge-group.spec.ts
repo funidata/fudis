@@ -46,34 +46,34 @@ test("language badge group interactive", async ({ page }) => {
   await shouldSelectEnglishTranslation(page);
 
   // Select fi
-  await page.getByTestId("fudis-language-badge-group-1-item-10").click();
+  await page.getByTestId("fudis-language-badge-group-1-item-1").click();
   await shouldSelectFinnishTranslation(page);
 
   // Select sv
-  await page.getByTestId("fudis-language-badge-group-1-item-11").click();
+  await page.getByTestId("fudis-language-badge-group-1-item-2").click();
   await shouldSelectSwedishTranslation(page);
 
   // Change selectable languages to fi & sv
   await page.getByTestId("fudis-button-1").click();
   await shouldSelectFinnishTranslation(page);
   // Select sv
-  await page.getByTestId("fudis-language-badge-group-1-item-14").click();
+  await page.getByTestId("fudis-language-badge-group-1-item-2").click();
   await shouldSelectSwedishTranslation(page);
 
   // Change selectable languages to sv & en
   await page.getByTestId("fudis-button-2").click();
   await shouldSelectEnglishTranslation(page);
   // Select sv
-  await page.getByTestId("fudis-language-badge-group-1-item-15").click();
+  await page.getByTestId("fudis-language-badge-group-1-item-2").click();
   await shouldSelectSwedishTranslation(page);
 
   // Change selectable languages to sv, fi & en
   await page.getByTestId("fudis-button-3").click();
   await shouldSelectEnglishTranslation(page);
   // Select sv
-  await page.getByTestId("fudis-language-badge-group-1-item-17").click();
+  await page.getByTestId("fudis-language-badge-group-1-item-2").click();
   await shouldSelectSwedishTranslation(page);
   // Select fi
-  await page.getByTestId("fudis-language-badge-group-1-item-18").click();
+  await page.getByTestId("fudis-language-badge-group-1-item-5").click();
   await shouldSelectFinnishTranslation(page);
 });

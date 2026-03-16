@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, DOCUMENT } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -20,7 +19,7 @@ type MyForm = {
   textInput: FormControl<string | null | number>;
   checkboxFormGroup: FormGroup;
   truth: FormControl<boolean | null>;
-  animals: FormControl<FudisSelectOption<object>[] | null>;
+  animals: FormControl<FudisSelectOption<string>[] | null>;
   date: FormControl<Date | null>;
 };
 
@@ -42,11 +41,12 @@ type MyForm = {
                   [helpText]="'Berries are yummy'"
                   [formGroup]="testFormGroup.controls['checkboxFormGroup']"
                 >
-                  <fudis-checkbox-group-option
-                    *ngFor="let option of checkboxOptions"
-                    [controlName]="option.controlName"
-                    [label]="option.label"
-                  />
+                  @for (option of checkboxOptions; track option.controlName) {
+                    <fudis-checkbox-group-option
+                      [controlName]="option.controlName"
+                      [label]="option.label"
+                    />
+                  }
                 </fudis-checkbox-group>
                 <fudis-text-input
                   [label]="'Is something wrong?'"
@@ -57,11 +57,9 @@ type MyForm = {
                   [label]="'Choose the truth'"
                   [control]="testFormGroup.controls['truth']"
                 >
-                  <fudis-radio-button
-                    *ngFor="let option of radioButtonOptions"
-                    [label]="option.label"
-                    [value]="option.value"
-                  />
+                  @for (option of radioButtonOptions; track option.value) {
+                    <fudis-radio-button [label]="option.label" [value]="option.value" />
+                  }
                 </fudis-radio-button-group>
                 <fudis-multiselect
                   [label]="'Choose multiple animals'"
@@ -70,7 +68,9 @@ type MyForm = {
                   [control]="testFormGroup.controls['animals']"
                 >
                   <ng-template fudisSelectOptions>
-                    <fudis-multiselect-option *ngFor="let option of multiOptions" [data]="option" />
+                    @for (option of multiOptions; track option.value) {
+                      <fudis-multiselect-option [data]="option" />
+                    }
                   </ng-template>
                 </fudis-multiselect>
                 <fudis-datepicker
@@ -121,7 +121,7 @@ export class DialogTestFormComponent {
     { value: false, label: 'False' },
   ];
 
-  multiOptions: FudisSelectOption<object>[] = [
+  multiOptions: FudisSelectOption<string>[] = [
     { value: 'artic-fox', label: 'Artic fox' },
     { value: 'bear', label: 'Bear' },
     { value: 'wolverine', label: 'Wolverine' },
@@ -156,7 +156,7 @@ export class DialogTestFormComponent {
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    animals: new FormControl<FudisSelectOption<object>[] | null>(null),
+    animals: new FormControl<FudisSelectOption<string>[] | null>(null),
     date: new FormControl<Date | null>(null),
   });
 

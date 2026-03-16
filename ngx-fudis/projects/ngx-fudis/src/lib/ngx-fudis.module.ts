@@ -49,6 +49,7 @@ import { HeadingComponent } from './components/typography/heading/heading.compon
 import { HorizontalRuleComponent } from './components/horizontal-rule/horizontal-rule.component';
 import { IconComponent } from './components/icon/icon.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { LocalizedTextGroupComponent } from './components/form/localized-text-group/localized-text-group.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
@@ -57,6 +58,7 @@ import { MultiselectChipListComponent } from './components/form/select/multisele
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SectionComponent } from './components/section/section.component';
@@ -65,6 +67,9 @@ import { SelectOptionComponent } from './components/form/select/select/select-op
 import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
 import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
 import { SelectIconsComponent } from './components/form/select/common/select-icons/select-icons.component';
+import { TabNavigationBarComponent } from './components/tab-navigation/tab-navigation-bar.component';
+import { TabNavigationPanelComponent } from './components/tab-navigation/tab-navigation-panel.component';
+import { TabNavigationTabComponent } from './components/tab-navigation/tab-navigation-tab.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
@@ -105,7 +110,6 @@ import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive'
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GroupComponentBaseDirective } from './directives/form/group-component-base/group-component-base.directive';
-
 import { LinkDirective } from './directives/link/link.directive';
 import {
   SectionActionsDirective,
@@ -141,12 +145,11 @@ import { PopoverDirective } from './directives/popover/popover.directive';
 
 @NgModule({
   /*
-   * Include both internal and external Fudis components in 'declarations' array below.
+   * Include both internal and external non-standalone Fudis components in 'declarations' array below.
    */
   declarations: [
     AlertComponent,
     AlertGroupComponent,
-    BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
     CheckboxComponent,
@@ -194,7 +197,6 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     GroupComponentBaseDirective,
     GuidanceComponent,
     HeadingComponent,
-    HorizontalRuleComponent,
     LocalizedTextGroupComponent,
     LabelComponent,
     LanguageBadgeComponent,
@@ -228,37 +230,44 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     ValidatorErrorMessageComponent,
   ],
   /*
-   * Include imports outside of Fudis components in 'imports' array below.
-   * E.g. components from Angular Material or other Angular tools
+   * Include imports outside of Fudis components in 'imports' array below, e.g. Angular Material components and other Angular tools.
+   * Also import Fudis standalone components here.
    */
   imports: [
     BadgeComponent,
+    BodyTextComponent,
     ButtonComponent,
     CommonModule,
     FormsModule,
+    HorizontalRuleComponent,
     IconButtonComponent,
     IconComponent,
     LayoutModule,
+    LoadingSpinnerComponent,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
+    PaginationComponent,
     ReactiveFormsModule,
     RouterModule,
     ScrollingModule,
+    TabNavigationBarComponent,
+    TabNavigationPanelComponent,
+    TabNavigationTabComponent,
     PopoverDirective,
   ],
 
   /*
-   * Include Fudis component in 'exports' array below
-   * and export in public-api.ts as well,
-   * when you want to expose it outside
+   * Add Fudis components, including all standalone components, in 'exports' array below.
+   * Export them in public-api.ts as well, when you want to expose them outside of the library.
    */
   exports: [
     AlertComponent,
     AlertGroupComponent,
+    BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
     BreadcrumbsItemComponent,
@@ -306,9 +315,11 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     LocalizedTextGroupComponent,
     LanguageBadgeGroupComponent,
     LinkDirective,
+    LoadingSpinnerComponent,
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,
+    PaginationComponent,
     PopoverDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
@@ -319,6 +330,9 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     SelectOptionComponent,
     SelectOptionsDirective,
     SelectGroupComponent,
+    TabNavigationBarComponent,
+    TabNavigationPanelComponent,
+    TabNavigationTabComponent,
     TextAreaComponent,
     TextInputComponent,
   ],

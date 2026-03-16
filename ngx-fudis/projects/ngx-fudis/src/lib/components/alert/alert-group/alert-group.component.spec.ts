@@ -19,8 +19,8 @@ describe('AlertGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IconComponent, MatDialogModule],
-      declarations: [AlertGroupComponent, AlertComponent, BodyTextComponent],
+      imports: [BodyTextComponent, IconComponent, MatDialogModule],
+      declarations: [AlertGroupComponent, AlertComponent],
       providers: [
         FudisDialogService,
         FudisAlertService,

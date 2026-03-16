@@ -13,10 +13,16 @@ import { getElement } from '../../utilities/tests/utilities';
   selector: 'fudis-mock-component',
   template: `<fudis-breadcrumbs [label]="'Test breadcrumbs navigation'">
     <p class="do-not-find-me">This should not be shown</p>
-    <fudis-breadcrumbs-item *ngFor="let link of links; let index = index">
-      <a *ngIf="index + 1 !== links.length" [href]="link.url">{{ link.label }}</a>
-      <fudis-body-text *ngIf="index + 1 === links.length">{{ link.label }}</fudis-body-text>
-    </fudis-breadcrumbs-item>
+    @for (link of links; track link.url; let index = $index) {
+      <fudis-breadcrumbs-item>
+        @if (index + 1 !== links.length) {
+          <a [href]="link.url">{{ link.label }}</a>
+        }
+        @if (index + 1 === links.length) {
+          <fudis-body-text>{{ link.label }}</fudis-body-text>
+        }
+      </fudis-breadcrumbs-item>
+    }
   </fudis-breadcrumbs>`,
 })
 class MockComponent {
@@ -32,13 +38,8 @@ describe('BreadcrumbsComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [
-        BreadcrumbsComponent,
-        BreadcrumbsItemComponent,
-        BodyTextComponent,
-        MockComponent,
-      ],
-      imports: [IconComponent, RouterModule.forRoot([])],
+      declarations: [BreadcrumbsComponent, BreadcrumbsItemComponent, MockComponent],
+      imports: [BodyTextComponent, IconComponent, RouterModule.forRoot([])],
     });
 
     fixture = TestBed.createComponent(MockComponent);

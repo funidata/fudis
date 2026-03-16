@@ -6,11 +6,10 @@ import { NgxFudisModule } from '../../../../ngx-fudis.module';
 import {
   FudisLocalizedTextGroupDefaultFormGroup,
   FudisRadioButtonOption,
-  FudisSelectOption,
 } from '../../../../types/forms';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
-import { defaultOptions } from '../../select/common/mock_data';
+import { defaultOptions, TestAnimalSound } from '../../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
 
 interface MyCheckboxGroup {
@@ -121,11 +120,12 @@ interface MyCheckboxGroup {
                 [label]="'Pick a fruit'"
                 [formGroup]="allForms.controls.formThree"
               >
-                <fudis-checkbox-group-option
-                  *ngFor="let control of allForms.controls.formThree.controls | keyvalue"
-                  [controlName]="control.key"
-                  [label]="control.key"
-                />
+                @for (
+                  control of allForms.controls.formThree.controls | keyvalue;
+                  track control.key
+                ) {
+                  <fudis-checkbox-group-option [controlName]="control.key" [label]="control.key" />
+                }
               </fudis-checkbox-group>
             </ng-template>
           </fudis-expandable>
@@ -156,11 +156,9 @@ interface MyCheckboxGroup {
                 [label]="'Pick a fruit'"
                 [control]="allForms.controls.formFive"
               >
-                <fudis-radio-button
-                  *ngFor="let option of radioOptions"
-                  [label]="option.label"
-                  [value]="option.value"
-                />
+                @for (option of radioOptions; track option.value) {
+                  <fudis-radio-button [label]="option.label" [value]="option.value" />
+                }
               </fudis-radio-button-group>
             </ng-template>
           </fudis-expandable>
@@ -194,7 +192,9 @@ interface MyCheckboxGroup {
                     [control]="allForms.controls.formFour.controls.select"
                   >
                     <ng-template fudisSelectOptions>
-                      <fudis-select-option *ngFor="let option of selectOptions" [data]="option" />
+                      @for (option of selectOptions; track option.value) {
+                        <fudis-select-option [data]="option" />
+                      }
                     </ng-template>
                   </fudis-select>
                   <fudis-multiselect
@@ -202,10 +202,9 @@ interface MyCheckboxGroup {
                     [control]="allForms.controls.formFour.controls.multiselect"
                   >
                     <ng-template fudisSelectOptions>
-                      <fudis-multiselect-option
-                        *ngFor="let option of selectOptions"
-                        [data]="option"
-                      />
+                      @for (option of selectOptions; track option.value) {
+                        <fudis-multiselect-option [data]="option" />
+                      }
                     </ng-template>
                   </fudis-multiselect>
                 </fudis-fieldset-content>
@@ -315,11 +314,11 @@ export class StorybookExampleWithMultipleFormsComponent {
       [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
     ),
     formFour: new FormGroup({
-      select: new FormControl<FudisSelectOption<object> | null>(
+      select: new FormControl<TestAnimalSound | null>(
         null,
         FudisValidators.required('You must pick one'),
       ),
-      multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
+      multiselect: new FormControl<TestAnimalSound[] | null>(null, [
         FudisValidators.required('Selection is missing'),
         FudisValidators.minLength(2, 'Choose at least 2'),
       ]),

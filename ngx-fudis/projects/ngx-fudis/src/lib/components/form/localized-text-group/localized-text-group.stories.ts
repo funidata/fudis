@@ -8,7 +8,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { fudisInputSizeArray, FudisLocalizedTextGroupDefaultFormGroup } from '../../../types/forms';
 import { LocalizedTextGroupStoryExclude } from '../../../utilities/storybook';
 import docs from './localized-text-group.mdx';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/Form/Localized Text Group',
@@ -32,7 +32,6 @@ export default {
   argTypes: {
     size: {
       options: fudisInputSizeArray,
-      control: { type: 'radio' },
     },
     helpText: {
       control: { type: 'text' },
@@ -155,17 +154,17 @@ const ExampleTemplate: StoryFn = (args) => ({
 export const Example = ExampleTemplate.bind({});
 
 Example.args = {
-  ...commonArgs,
   label: 'Your superhero name',
   variant: 'text-input',
   helpText: 'Please provide superhero name in at least one language.',
+  ...commonArgs,
 };
 
 export const ExampleWithAllRequired = ExampleAllRequiredTemplate.bind({});
 
 ExampleWithAllRequired.args = {
-  ...commonArgs,
   label: 'Your superhero origin story',
   variant: 'text-area',
   helpText: 'Please provide an interesting superhero backstory in all languages.',
+  ...commonArgs,
 };

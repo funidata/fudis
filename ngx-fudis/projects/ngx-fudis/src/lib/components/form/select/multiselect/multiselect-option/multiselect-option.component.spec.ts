@@ -32,17 +32,15 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
     [control]="control"
   >
     <ng-template fudisSelectOptions>
-      <fudis-multiselect-option
-        *ngFor="let option of multiOptions"
-        #multiOption
-        [data]="option"
-      ></fudis-multiselect-option>
+      @for (option of multiOptions; track option.value) {
+        <fudis-multiselect-option #multiOption [data]="option"></fudis-multiselect-option>
+      }
     </ng-template>
   </fudis-multiselect>`,
 })
 class MultiselectMockComponent {
-  multiOptions: FudisSelectOption<object>[] = defaultOptions;
-  control = new FormControl<FudisSelectOption<object>[] | null>(null);
+  multiOptions: FudisSelectOption<string | object>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<string | object>[] | null> = new FormControl(null);
 
   @ViewChild('multiOption') multiOption: MultiselectOptionComponent;
   @ViewChild('selectEl') selectEl: MultiselectComponent;

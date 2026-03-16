@@ -51,7 +51,7 @@ export class TextInputComponent
   @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
-   * HTML type attribute
+   * HTML type attribute: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url'
    */
   @Input() type: FudisInputType = 'text';
 
@@ -66,6 +66,12 @@ export class TextInputComponent
    * specified name attribute as well)
    */
   @Input() name: string | null = null;
+
+  /**
+   * Step for number input: controls the minimum increment for number values. Use 'any' to allow any
+   * decimal value.
+   */
+  @Input() step: number | 'any' | null = null;
 
   /**
    * Max number for number input HTML attribute

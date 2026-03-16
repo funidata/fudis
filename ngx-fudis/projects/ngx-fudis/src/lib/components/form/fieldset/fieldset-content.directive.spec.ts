@@ -41,7 +41,6 @@ describe('FieldsetContentDirectives', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BodyTextComponent,
         FieldsetActionsDirective,
         FieldsetContentDirective,
         FieldSetComponent,
@@ -50,6 +49,7 @@ describe('FieldsetContentDirectives', () => {
         GridDirective,
         MockFieldSetComponent,
       ],
+      imports: [BodyTextComponent],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     }).compileComponents();
 

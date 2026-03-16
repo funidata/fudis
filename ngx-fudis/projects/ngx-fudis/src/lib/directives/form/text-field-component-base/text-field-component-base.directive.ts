@@ -16,7 +16,7 @@ export class TextFieldComponentBaseDirective extends ControlComponentBaseDirecti
   }
 
   /**
-   * Width of the input field.
+   * Width of the input field: 'sm' | 'md' | 'lg'
    */
   @Input() size: FudisInputSize = 'lg';
 

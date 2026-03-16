@@ -1,11 +1,12 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import docs from './checkbox-group.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
+import { fudisInputSizeArray } from '../../../types/types';
 
 export default {
   title: 'Components/Form/Checkbox Group',
@@ -23,8 +24,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg', 'full-width'],
-      control: { type: 'radio' },
+      options: fudisInputSizeArray,
     },
     popoverPosition: {
       options: ['left', 'right', 'above', 'below'],
@@ -103,12 +103,13 @@ const ExampleTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
+    @for (option of options; track option.controlName) {
     <fudis-checkbox-group-option
-      *ngFor="let option of options"
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
     ></fudis-checkbox-group-option>
+    }
   </fudis-checkbox-group>`,
 });
 
@@ -157,12 +158,13 @@ const ExampleWithDisabledTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
+    @for (option of options; track option.controlName) {
     <fudis-checkbox-group-option
-      *ngFor="let option of options"
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
-    />
+    ></fudis-checkbox-group-option>
+    }
   </fudis-checkbox-group>`,
 });
 
@@ -216,12 +218,13 @@ const ExampleWithMinMaxTemplate: StoryFn = (args) => ({
     [initialFocus]="initialFocus"
     (handleChange)="groupChange($event)"
   >
+    @for (option of options; track option.controlName) {
     <fudis-checkbox-group-option
-      *ngFor="let option of options"
       (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
-    />
+    ></fudis-checkbox-group-option>
+    }
   </fudis-checkbox-group>`,
 });
 

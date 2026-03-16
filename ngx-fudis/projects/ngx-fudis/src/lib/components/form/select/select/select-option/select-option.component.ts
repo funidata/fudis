@@ -1,6 +1,5 @@
-import { Component, Host, Inject, OnChanges, OnDestroy, Optional } from '@angular/core';
+import { Component, Host, Inject, OnChanges, OnDestroy, Optional, DOCUMENT } from '@angular/core';
 
-import { DOCUMENT } from '@angular/common';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
@@ -19,13 +18,13 @@ import { FudisSelectOption } from '../../../../../types/forms';
   styleUrls: ['./select-option.component.scss'],
   standalone: false,
 })
-export class SelectOptionComponent
-  extends SelectOptionBaseDirective
+export class SelectOptionComponent<T = string>
+  extends SelectOptionBaseDirective<T>
   implements OnChanges, OnDestroy
 {
   constructor(
     @Inject(DOCUMENT) _document: Document,
-    @Host() protected _parentSelect: SelectComponent,
+    @Host() protected _parentSelect: SelectComponent<T>,
     @Host() @Optional() _parentGroup: SelectGroupComponent,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
@@ -44,9 +43,9 @@ export class SelectOptionComponent
   /**
    * Common parent and its properties
    */
-  protected override _parent: SelectComponent;
+  protected override _parent: SelectComponent<T>;
 
-  ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective>): void {
+  ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective<T>>): void {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
       const newOptionId = this._idService.getNewSelectOptionId(
         this.data.label,
@@ -101,7 +100,7 @@ export class SelectOptionComponent
    * When option is changed, it will not change Form Control's value, which is intended, but visible
    * label should be updated
    */
-  protected _checkIfLabelRequiresUpdate(newData: FudisSelectOption<object>): void {
+  protected _checkIfLabelRequiresUpdate(newData: FudisSelectOption<T>): void {
     const controlValue = this._parent?.control.value;
     if (controlValue?.value === newData.value) {
       this._parent.selectCVA?.writeValue(newData);

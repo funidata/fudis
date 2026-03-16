@@ -6,16 +6,12 @@ import docs from './error-summary.mdx';
 import { excludeAllRegex } from '../../../utilities/storybook';
 import { ErrorSummaryExampleComponent } from './example/error-summary-example.component';
 
-import { TranslocoService } from '@jsverse/transloco';
-
 export default {
   title: 'Components/Form/Error Summary',
   component: ErrorSummaryComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
       imports: [ErrorSummaryExampleComponent],
-      providers: [TranslocoService],
     }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],

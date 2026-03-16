@@ -12,34 +12,39 @@
   (blur)="_dropdownBlur($event)"
   role="listbox"
 >
-  <ng-container *ngIf="selectVariant !== 'dropdown' && open && filterText">
-    <fudis-body-text
-      *ngIf="autocompleteHelpText !== false"
-      [class.fudis-select-dropdown__help-text--hidden]="!results"
-      class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__first"
-      [variant]="'md-light'"
-      ><ng-container *ngTemplateOutlet="helpText"
-    /></fudis-body-text>
+  @if (selectVariant !== "dropdown" && open && filterText) {
+    @if (autocompleteHelpText !== false) {
+      <fudis-body-text
+        [class.fudis-select-dropdown__help-text--hidden]="!results"
+        class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__first"
+        [variant]="'md-light'"
+        ><ng-container *ngTemplateOutlet="helpText"
+      /></fudis-body-text>
+    }
     <fudis-body-text
       class="fudis-select-dropdown__help-text fudis-select-dropdown__help-text__last"
       [class.fudis-select-dropdown__help-text--hidden]="results"
       [variant]="'md-light'"
       ><ng-container *ngTemplateOutlet="noResults" />
     </fudis-body-text>
-  </ng-container>
+  }
   <ng-content></ng-content>
 </div>
 
 <ng-template #helpText>
-  <ng-container *ngIf="autocompleteHelpText">{{ autocompleteHelpText }}</ng-container
-  ><ng-container *ngIf="!autocompleteHelpText"
-    >{{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}</ng-container
-  >
+  @if (autocompleteHelpText) {
+    {{ autocompleteHelpText }}
+  }
+  @if (!autocompleteHelpText) {
+    {{ _translationShowing | async }} {{ results }} {{ _translationResults | async }}
+  }
 </ng-template>
 
 <ng-template #noResults>
-  <ng-container *ngIf="autocompleteNoResultsText">{{ autocompleteNoResultsText }}</ng-container>
-  <ng-container *ngIf="!autocompleteNoResultsText">{{
-    _translationNoResultsFound | async
-  }}</ng-container></ng-template
->
+  @if (autocompleteNoResultsText) {
+    {{ autocompleteNoResultsText }}
+  }
+  @if (!autocompleteNoResultsText) {
+    {{ _translationNoResultsFound | async }}
+  }
+</ng-template>

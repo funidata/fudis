@@ -10,7 +10,7 @@ describe('BodyTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BodyTextComponent],
+      imports: [BodyTextComponent],
     }).compileComponents();
   });
 

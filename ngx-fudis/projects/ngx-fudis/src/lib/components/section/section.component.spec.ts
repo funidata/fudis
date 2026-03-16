@@ -55,7 +55,6 @@ describe('SectionComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
-        BodyTextComponent,
         GridDirective,
         HeadingComponent,
         MockFudisSectionComponent,
@@ -63,7 +62,13 @@ describe('SectionComponent', () => {
         SectionActionsDirective,
         SectionContentDirective,
       ],
-      imports: [ButtonComponent, IconButtonComponent, IconComponent, PopoverDirective],
+      imports: [
+        BodyTextComponent,
+        ButtonComponent,
+        IconButtonComponent,
+        IconComponent,
+        PopoverDirective,
+      ],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     });
 
@@ -135,7 +140,7 @@ describe('SectionComponent', () => {
 
       expect(headingWrapper).toBeTruthy();
       expect(headingComponent).toBeTruthy();
-      expect(headingElement?.textContent).toEqual('This is section title');
+      expect(headingElement?.textContent.trim()).toEqual('This is section title');
     });
 
     it('should return correct title variant', () => {
