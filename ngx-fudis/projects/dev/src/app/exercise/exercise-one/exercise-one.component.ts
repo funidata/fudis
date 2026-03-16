@@ -3,11 +3,11 @@ import { FormControl } from "@angular/forms";
 import { FudisSelectOption } from "projects/ngx-fudis/src/lib/types/types";
 
 @Component({
-  selector: 'app-exercise',
-  templateUrl: 'exercise.component.html',
+  selector: 'app-exercise-one',
+  templateUrl: 'exercise-one.component.html',
   standalone: false,
 })
-export class ExerciseComponent {
+export class ExerciseOneComponent {
 
   constructor() {
     this.selectOptions = [

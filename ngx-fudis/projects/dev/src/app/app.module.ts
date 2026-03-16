@@ -15,6 +15,7 @@ import { AppFormExampleComponent } from './components/formExamples.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 import { ExerciseComponent } from './exercise/exercise.component';
+import { ExerciseOneComponent } from './exercise/exercise-one/exercise-one.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
 
 const appRoutes: Routes = [
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
     DialogTestContentComponent,
     DialogTestFormComponent,
     ExerciseComponent,
+    ExerciseOneComponent,
     SandboxComponent,
   ],
   bootstrap: [AppComponent],
