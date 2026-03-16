@@ -17,12 +17,20 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
 import { ExerciseComponent } from './exercise/exercise.component';
 import { ExerciseOneComponent } from './exercise/exercise-one/exercise-one.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
+import { ExerciseTwoComponent } from './exercise/exercise-two/exercise-two.component';
 
 const appRoutes: Routes = [
-  { path: '', component: ExerciseComponent},
-  { path: 'exercise', component: ExerciseComponent},
-  { path: 'sandbox', component: SandboxComponent},
-]
+  { path: '', component: SandboxComponent },
+  { path: 'sandbox', component: SandboxComponent },
+  {
+    path: 'exercise',
+    component: ExerciseComponent,
+    children: [
+      { path: 'exercise-one', component: ExerciseOneComponent },
+      { path: 'exercise-two', component: ExerciseTwoComponent },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
@@ -33,6 +41,7 @@ const appRoutes: Routes = [
     DialogTestFormComponent,
     ExerciseComponent,
     ExerciseOneComponent,
+    ExerciseTwoComponent,
     SandboxComponent,
   ],
   bootstrap: [AppComponent],

@@ -1,34 +1,21 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { FudisSelectOption } from "projects/ngx-fudis/src/lib/types/types";
-import { Router } from '@angular/router';
-import { TabNavigationPanelComponent } from "ngx-fudis";
 
 @Component({
-  selector: 'app-exercise',
-  templateUrl: 'exercise.component.html',
+  selector: 'app-exercise-two',
+  templateUrl: 'exercise-two.component.html',
   standalone: false,
 })
-export class ExerciseComponent {
+export class ExerciseTwoComponent {
 
-  constructor(protected router: Router) {
+  constructor() {
     this.selectOptions = [
       { value: 'option1', label: 'Study plan 23.08.2018', subLabel: 'Fashion, Curriculum period: 2017-2018, modified 2.3.2026' },
       { value: 'option2', label: 'Study plan 13.01.2026', subLabel: 'Fashion, Curriculum period: 2025-2026, modified 13.1.2026' },
       { value: 'option3', label: 'Study plan 12.11.2023', subLabel: 'Fashion, Curriculum period: 2023-2024, modified 12.11.2023' },
     ];
   }
-
-  routes: { id: string; label: string; path: string }[] = [
-    { id: 'exercise-1', label: 'Exercise 1', path: 'exercise-one' },
-    { id: 'exercise-2', label: 'Exercise 2', path: 'exercise-two' },
-  ];
-
-  change(path: string) {
-    this.router.navigate([path]);
-  }
-
-  @ViewChild('navigationTabPanel') navigationTabPanel: TabNavigationPanelComponent;
 
   myControl: FormControl = new FormControl('');
   testControl: FormControl = new FormControl('');

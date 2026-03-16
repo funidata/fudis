@@ -1,6 +1,25 @@
 <ng-container *transloco="let t">
   <fudis-grid [classes]="'fudis-mt-xl'" [align]="'center'">
-      <fudis-heading [level]="1">Fudis Exercise</fudis-heading>
+      <fudis-heading [level]="2">Exercise 1</fudis-heading>
+      <fudis-dl>
+      <fudis-dl-item>
+        <fudis-dt
+          [contentText]="'Creating a layout'"
+        ></fudis-dt>
+        <fudis-dd>
+          <fudis-dl [variant]="'compact'">
+            <fudis-dl-item>
+              <fudis-dt [contentText]="'Goal'"></fudis-dt>
+              <fudis-dd [contentText]="'Getting familiar with Fudis Grid'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [contentText]="'Task'"></fudis-dt>
+              <fudis-dd [contentText]="'Create a layout that matches to the provided image by only using one Grid element. All required dummy components are provided in HTML template.'"></fudis-dd>
+            </fudis-dl-item>
+          </fudis-dl>
+        </fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
   </fudis-grid>
 </ng-container>
 
