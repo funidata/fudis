@@ -1,5 +1,5 @@
 import { Component, computed, Inject, OnInit, signal, DOCUMENT } from '@angular/core';
-import { TranslocoService } from '@jsverse/transloco';
+import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
 import {
   FudisAlert,
   FudisAlertService,
@@ -9,17 +9,57 @@ import {
   FudisTranslationService,
   FudisBreakpointService,
   FudisErrorSummaryService,
+  AlertGroupComponent,
+  GridComponent,
+  GridItemComponent,
+  BodyTextComponent,
+  LoadingSpinnerComponent,
+  ButtonComponent,
+  HeadingComponent,
+  ExpandableComponent,
+  ExpandableContentDirective,
+  NotificationComponent,
+  LinkDirective,
+  GridItemDirective,
+  DescriptionListComponent,
+  DescriptionListItemComponent,
+  DescriptionListItemTermComponent,
+  DescriptionListItemDetailsComponent,
+  PaginationComponent,
+  FooterComponent,
 } from 'ngx-fudis';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 import { dummyData } from './mock_data';
+import { AppFormExampleComponent } from './components/formExamples.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  standalone: false,
+  imports: [
+    TranslocoDirective,
+    AlertGroupComponent,
+    GridComponent,
+    GridItemComponent,
+    BodyTextComponent,
+    LoadingSpinnerComponent,
+    ButtonComponent,
+    HeadingComponent,
+    ExpandableComponent,
+    ExpandableContentDirective,
+    NotificationComponent,
+    LinkDirective,
+    GridItemDirective,
+    AppFormExampleComponent,
+    DescriptionListComponent,
+    DescriptionListItemComponent,
+    DescriptionListItemTermComponent,
+    DescriptionListItemDetailsComponent,
+    PaginationComponent,
+    FooterComponent,
+  ],
 })
 export class AppComponent implements OnInit {
   constructor(
