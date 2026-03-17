@@ -3,6 +3,7 @@ import { FormControl } from "@angular/forms";
 import { FudisSelectOption } from "projects/ngx-fudis/src/lib/types/types";
 import { Router } from '@angular/router';
 import { TabNavigationPanelComponent } from "ngx-fudis";
+import pkg from "../../../../ngx-fudis/package.json";
 
 @Component({
   selector: 'app-exercise',
@@ -29,6 +30,8 @@ export class ExerciseComponent {
   }
 
   @ViewChild('navigationTabPanel') navigationTabPanel: TabNavigationPanelComponent;
+
+  version = pkg.version;
 
   myControl: FormControl = new FormControl('');
   testControl: FormControl = new FormControl('');

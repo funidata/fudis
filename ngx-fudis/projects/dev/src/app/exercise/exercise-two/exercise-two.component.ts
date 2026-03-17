@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { FudisSelectOption } from "projects/ngx-fudis/src/lib/types/types";
+import pkg from "../../../../../ngx-fudis/package.json";
+
 
 @Component({
   selector: 'app-exercise-two',
@@ -16,6 +18,8 @@ export class ExerciseTwoComponent {
       { value: 'option3', label: 'Study plan 12.11.2023', subLabel: 'Fashion, Curriculum period: 2023-2024, modified 12.11.2023' },
     ];
   }
+
+  version = pkg.version;
 
   myControl: FormControl = new FormControl('');
   testControl: FormControl = new FormControl('');
