@@ -11,6 +11,7 @@ import {
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /**
  * Single radio button option for RadioButtonGroupComponent.
@@ -19,7 +20,7 @@ import { RadioButtonGroupComponent } from '../radio-button-group.component';
   selector: 'fudis-radio-button',
   templateUrl: './radio-button.component.html',
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule],
 })
 export class RadioButtonComponent implements OnInit {
   constructor(

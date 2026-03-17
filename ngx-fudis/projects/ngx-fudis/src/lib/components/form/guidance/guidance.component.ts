@@ -19,12 +19,15 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FudisErrorSummaryNewError } from '../../../types/errorSummary';
+import { IconComponent } from '../../icon/icon.component';
+import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
+import { AsyncPipe, KeyValuePipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-guidance',
   templateUrl: './guidance.component.html',
   styleUrls: ['./guidance.component.scss'],
-  standalone: false,
+  imports: [IconComponent, ValidatorErrorMessageComponent, AsyncPipe, KeyValuePipe],
 })
 export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
   constructor(

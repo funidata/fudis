@@ -21,6 +21,9 @@ import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ExpandableContentDirective } from './expandable-content.directive';
+import { IconComponent } from '../icon/icon.component';
+import { BadgeComponent } from '../badge/badge.component';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * Toggles the visibility of additional content.
@@ -32,7 +35,7 @@ import { ExpandableContentDirective } from './expandable-content.directive';
   templateUrl: './expandable.component.html',
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [IconComponent, BadgeComponent, NgTemplateOutlet],
 })
 export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
   constructor(

@@ -18,6 +18,9 @@ import { FudisComponentChanges, FudisDialogSize } from '../../types/miscellaneou
 import { throttle } from '../../utilities/resizeThrottle';
 import { debounceTime, fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { DialogCloseDirective } from './dialog-directives';
+import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 
 /**
  * Displays content in a modal overlay.
@@ -35,7 +38,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IconButtonComponent, DialogCloseDirective, AlertGroupComponent],
 })
 export class DialogComponent implements OnDestroy, OnInit, OnChanges, AfterViewInit {
   constructor(

@@ -13,6 +13,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FudisTextAlign } from '../../../types/typography';
 import { BehaviorSubject } from 'rxjs';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 /**
  * Displays a heading at a specified semantic level (h1-h6).
@@ -24,7 +25,7 @@ import { getHeadingVariant } from '../../../utilities/typography/typography-util
   selector: 'fudis-heading',
   templateUrl: './heading.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [NgTemplateOutlet, AsyncPipe],
 })
 export class HeadingComponent implements OnInit, OnChanges {
   constructor(

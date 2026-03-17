@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FudisNotification } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
+import { IconComponent } from '../icon/icon.component';
 
 /**
  * Displays an information message.
@@ -12,7 +14,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [BodyTextComponent, IconComponent],
 })
 export class NotificationComponent {
   constructor(protected _translateService: FudisTranslationService) {}

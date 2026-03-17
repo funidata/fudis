@@ -11,6 +11,5 @@ import { GridItemDirective } from '../../../directives/grid/grid-item/grid-item.
   templateUrl: './grid-item.component.html',
   styleUrls: ['./grid-item.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
 })
 export class GridItemComponent extends GridItemDirective {}

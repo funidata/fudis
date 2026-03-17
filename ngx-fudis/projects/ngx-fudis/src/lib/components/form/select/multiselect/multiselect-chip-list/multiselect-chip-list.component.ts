@@ -1,12 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
+import { IconComponent } from '../../../../icon/icon.component';
 
 @Component({
   selector: 'fudis-multiselect-chip-list',
   templateUrl: './multiselect-chip-list.component.html',
   styleUrls: ['./multiselect-chip-list.component.scss'],
-  standalone: false,
+  imports: [IconComponent],
 })
 export class MultiselectChipListComponent<T = string> {
   constructor(protected _translationService: FudisTranslationService) {}

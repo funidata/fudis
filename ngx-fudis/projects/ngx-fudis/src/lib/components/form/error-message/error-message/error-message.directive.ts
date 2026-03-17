@@ -42,10 +42,7 @@ import {
  * Use this directive to link custom validation error to an input where existing validators are not
  * possible to use.
  */
-@Directive({
-  selector: 'fudis-error-message',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-error-message' })
 export class ErrorMessageDirective implements OnInit, OnChanges, OnDestroy {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,

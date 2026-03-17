@@ -14,6 +14,9 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
+import { IconComponent } from '../../icon/icon.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Displays a dismissible alert message.
@@ -24,7 +27,7 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
   selector: 'fudis-alert',
   templateUrl: './alert.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [BodyTextComponent, IconComponent, AsyncPipe],
 })
 export class AlertComponent {
   constructor(

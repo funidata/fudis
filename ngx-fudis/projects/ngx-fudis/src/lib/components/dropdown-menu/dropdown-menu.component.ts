@@ -43,7 +43,6 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
   styleUrls: ['./dropdown-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class DropdownMenuComponent extends DropdownBaseDirective implements OnDestroy {
   constructor(

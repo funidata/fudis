@@ -19,6 +19,9 @@ import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
+import { GridDirective } from '../../../directives/grid/grid/grid.directive';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 
 /**
  * Groups related form controls under a common context.
@@ -30,7 +33,7 @@ import { PopoverApiDirective } from '../../../directives/popover/popover-api.dir
   templateUrl: './fieldset.component.html',
   styleUrls: ['./fieldset.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [GridDirective, IconButtonComponent, BodyTextComponent],
 })
 export class FieldSetComponent
   extends PopoverApiDirective

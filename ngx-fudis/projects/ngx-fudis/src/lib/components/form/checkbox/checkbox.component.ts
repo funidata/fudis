@@ -18,7 +18,9 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IconComponent } from '../../icon/icon.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Represents a single boolean form control.
@@ -28,7 +30,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'fudis-checkbox',
   templateUrl: './checkbox.component.html',
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule, IconComponent, AsyncPipe],
 })
 export class CheckboxComponent implements OnInit, OnChanges {
   constructor(

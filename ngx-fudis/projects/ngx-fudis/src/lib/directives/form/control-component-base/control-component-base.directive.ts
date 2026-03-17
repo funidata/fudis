@@ -4,10 +4,7 @@ import { FormCommonApiDirective } from '../form-common-api/form-common-api.direc
 import { FormControl } from '@angular/forms';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
-@Directive({
-  selector: '[fudisControlComponentBase]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisControlComponentBase]' })
 export class ControlComponentBaseDirective extends FormCommonApiDirective {
   constructor(_idService: FudisIdService, _focusService: FudisFocusService) {
     super(_idService, _focusService);

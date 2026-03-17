@@ -8,6 +8,7 @@ import { SelectOptionBaseDirective } from '../../common/select-option-base/selec
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { IconComponent } from '../../../../icon/icon.component';
 
 /**
  * Represents a selectable option within MultiselectComponent.
@@ -16,7 +17,7 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
   selector: 'fudis-multiselect-option',
   templateUrl: './multiselect-option.component.html',
   styleUrls: ['./multiselect-option.component.scss'],
-  standalone: false,
+  imports: [IconComponent],
 })
 export class MultiselectOptionComponent<T = string>
   extends SelectOptionBaseDirective<T>

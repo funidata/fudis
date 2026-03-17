@@ -6,6 +6,9 @@ import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { PopoverApiDirective } from '../../../../directives/popover/popover-api.directive';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { IconButtonComponent } from '../../../icon-button/icon-button.component';
+import { LanguageBadgeGroupComponent } from '../../../language-badge-group/language-badge-group.component';
 
 /**
  * Displays the term (key) in a DescriptionListItemComponent.
@@ -15,7 +18,7 @@ import { PopoverApiDirective } from '../../../../directives/popover/popover-api.
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [NgTemplateOutlet, IconButtonComponent, LanguageBadgeGroupComponent, AsyncPipe],
 })
 export class DescriptionListItemTermComponent extends PopoverApiDirective {
   constructor(

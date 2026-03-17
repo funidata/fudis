@@ -12,6 +12,8 @@ import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisGridGap } from '../../types/grid';
 import { BehaviorSubject } from 'rxjs';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { GridDirective } from '../../directives/grid/grid/grid.directive';
 
 /**
  * Displays a collection of term-details pairs of related information.
@@ -23,7 +25,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './description-list.component.html',
   styleUrls: ['./description-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [NgTemplateOutlet, GridDirective, AsyncPipe],
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {

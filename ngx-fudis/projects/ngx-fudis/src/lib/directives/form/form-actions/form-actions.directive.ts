@@ -15,10 +15,7 @@ import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
  *   <fudis-button fudisFormSubmit [label]="'Submit'" [formValid]="myForm.valid"></fudis-button>
  *   ```;
  */
-@Directive({
-  selector: '[fudisFormSubmit]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisFormSubmit]' })
 export class FormSubmitDirective implements OnInit {
   constructor(
     @Inject(DOCUMENT) private _document: Document,

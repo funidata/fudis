@@ -14,7 +14,8 @@ import {
   FudisCheckboxGroupFormGroup,
   FudisCheckboxGroupOption,
 } from '../../../../types/forms';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IconComponent } from '../../../icon/icon.component';
 
 /**
  * Single checkbox option for CheckboxGroupComponent.
@@ -23,7 +24,7 @@ import { FormControl } from '@angular/forms';
   selector: 'fudis-checkbox-group-option',
   templateUrl: './checkbox-group-option.component.html',
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule, IconComponent],
 })
 export class CheckboxGroupOptionComponent implements OnInit {
   constructor(

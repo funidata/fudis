@@ -16,6 +16,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 /**
  * Represents a single term-detail pair.
@@ -27,7 +28,7 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
   styleUrls: ['./description-list-item.component.scss'],
   templateUrl: './description-list-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [NgTemplateOutlet, AsyncPipe],
 })
 export class DescriptionListItemComponent {
   constructor(

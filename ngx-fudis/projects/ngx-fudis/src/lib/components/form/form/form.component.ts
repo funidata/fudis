@@ -22,6 +22,14 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
+import { FormsModule } from '@angular/forms';
+import { GridDirective } from '../../../directives/grid/grid/grid.directive';
+import { HeadingComponent } from '../../typography/heading/heading.component';
+import { DialogTitleDirective } from '../../dialog/dialog-directives';
+import { BadgeComponent } from '../../badge/badge.component';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
+import { NgTemplateOutlet } from '@angular/common';
+import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
 
 /**
  * Provides layout and structure for form content. Extends Grid — all Grid inputs are available.
@@ -36,7 +44,16 @@ import { getHeadingVariant } from '../../../utilities/typography/typography-util
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [
+    FormsModule,
+    GridDirective,
+    HeadingComponent,
+    DialogTitleDirective,
+    BadgeComponent,
+    BodyTextComponent,
+    NgTemplateOutlet,
+    ErrorSummaryComponent,
+  ],
 })
 export class FormComponent extends GridApiDirective implements OnInit, OnDestroy, OnChanges {
   constructor(

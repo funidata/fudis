@@ -13,13 +13,14 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisTranslationLanguageBadgeAriaLabel } from '../../../services/translation/translationKeys';
 import { FudisIdService } from '../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-language-badge',
   styleUrls: ['./language-badge.component.scss'],
   templateUrl: './language-badge.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [AsyncPipe],
 })
 export class LanguageBadgeComponent implements OnChanges, OnInit {
   constructor(

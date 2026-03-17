@@ -12,12 +12,14 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
+import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-select-dropdown',
   templateUrl: './select-dropdown.component.html',
   styleUrls: ['./select-dropdown.component.scss'],
-  standalone: false,
+  imports: [BodyTextComponent, NgTemplateOutlet, AsyncPipe],
 })
 export class SelectDropdownComponent extends DropdownBaseDirective implements OnChanges {
   constructor(private _translationService: FudisTranslationService) {
