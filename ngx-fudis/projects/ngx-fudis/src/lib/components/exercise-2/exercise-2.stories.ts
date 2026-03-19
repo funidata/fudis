@@ -9,9 +9,7 @@ export default {
   component: Exercise2Component,
   decorators: [
     moduleMetadata({
-      imports: [
-        Exercise2Component,
-      ],
+      imports: [Exercise2Component],
     }),
   ],
   parameters: {
@@ -20,7 +18,7 @@ export default {
     },
   },
   argTypes: {
-        size: {
+    size: {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
       control: { type: 'select' },
     },

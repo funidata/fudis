@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef} from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisDialogSize } from '../../types/miscellaneous';
 import { ComponentType } from '@angular/cdk/portal';
@@ -8,58 +8,69 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
   imports: [NgxFudisModule],
   selector: 'exercise-2',
   template: `
-      <fudis-button
-        [label]="'Dialog trigger button'"
-        (handleClick)="openDialog(dialogToOpen)"
-      ></fudis-button>
-      <ng-template #dialogToOpen>
-        <fudis-dialog>
-          <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
-            >Exercise 2</fudis-heading>
-          <fudis-dialog-content>
-            <table class="fudis-table">
-              <caption class="fudis-table__caption">
-                Course information
-              </caption>
-              <thead>
-                @for (column of columns; track column) {
-                  <th scope="col" class="fudis-table__header fudis-table__header__align__left">
-                    <button
-                      class="fudis-table__header-button fudis-table__header-button__align__left fudis-table__header-button--sortable"
-                      type="button"
-                      (click)="sortBy(column)"
-                    >
-                      {{ column }}
-                      <span [class]="sortDirection[column] === 'asc' ? 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter' : 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter fudis-icon__rotate__flip-180'"></span>
-                    </button>
-                  </th>
-                }
-              </thead>
-              <tbody>
-                @for (course of courses; track course.code) {
+    <fudis-button
+      [label]="'Dialog trigger button'"
+      (handleClick)="openDialog(dialogToOpen)"
+    ></fudis-button>
+    <ng-template #dialogToOpen>
+      <fudis-dialog>
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'">Exercise 2</fudis-heading>
+        <fudis-dialog-content>
+          <table class="fudis-table">
+            <caption class="fudis-table__caption"> Course information </caption>
+            <thead>
+              @for (column of columns; track column) {
+                <th scope="col" class="fudis-table__header fudis-table__header__align__left">
+                  <button
+                    class="fudis-table__header-button fudis-table__header-button__align__left fudis-table__header-button--sortable"
+                    type="button"
+                    (click)="sortBy(column)"
+                  >
+                    {{ column }}
+                    <span
+                      [class]="
+                        sortDirection[column] === 'asc'
+                          ? 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter'
+                          : 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter fudis-icon__rotate__flip-180'
+                      "
+                    ></span>
+                  </button>
+                </th>
+              }
+            </thead>
+            <tbody>
+              @for (course of courses; track course.code) {
                 <tr>
-                  <td class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top">
+                  <td
+                    class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top"
+                  >
                     {{ course.code }}
                   </td>
-                  <td class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top">
+                  <td
+                    class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top"
+                  >
                     {{ course.title }}
                   </td>
-                  <td class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top">
+                  <td
+                    class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top"
+                  >
                     <div class="fudis-badge fudis-badge__success">{{ course.status }}</div>
                   </td>
-                  <td class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top">
+                  <td
+                    class="fudis-table__cell fudis-table__cell__align__left fudis-table__cell__vertical-align__top"
+                  >
                     {{ course.period }}
                   </td>
                 </tr>
               }
-              </tbody>
-            </table>
-          </fudis-dialog-content>
-          <fudis-dialog-actions>
-            <fudis-button fudisDialogClose [label]="'Close'"></fudis-button>
-          </fudis-dialog-actions>
-        </fudis-dialog>
-      </ng-template>
+            </tbody>
+          </table>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Close'"></fudis-button>
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
   `,
 })
 export class Exercise2Component {
@@ -85,31 +96,29 @@ export class Exercise2Component {
     },
     {
       code: 'DES-12.335',
-      title: 'Architectural Design and Integrated Sustainable Systems for Urban Environments and Resilient Infrastructures in the 21st Century',
+      title:
+        'Architectural Design and Integrated Sustainable Systems for Urban Environments and Resilient Infrastructures in the 21st Century',
       status: 'Released 28.9.2023',
       period: '2025-2026',
     },
   ];
 
-      sortDirection: { [key: string]: 'asc' | 'desc' } = {
-      code: 'asc',
-      title: 'asc',
-      status: 'asc',
-      period: 'asc',
-    };
+  sortDirection: { [key: string]: 'asc' | 'desc' } = {
+    code: 'asc',
+    title: 'asc',
+    status: 'asc',
+    period: 'asc',
+  };
 
-    sortBy(field: string) {
-      const direction = this.sortDirection[field];
-      this.courses.sort((a, b) => {
-        const aValue = a[field] ?? '';
-        const bValue = b[field] ?? '';
-        return direction === 'asc'
-          ? aValue.localeCompare(bValue)
-          : bValue.localeCompare(aValue);
-      });
-      this.sortDirection[field] = direction === 'asc' ? 'desc' : 'asc';
-    }
-
+  sortBy(field: string) {
+    const direction = this.sortDirection[field];
+    this.courses.sort((a, b) => {
+      const aValue = a[field] ?? '';
+      const bValue = b[field] ?? '';
+      return direction === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+    });
+    this.sortDirection[field] = direction === 'asc' ? 'desc' : 'asc';
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   openDialog<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
