@@ -56,12 +56,24 @@
       view the placement of completed courses on the timeline. Select the study plan for which you
       want to view and edit the overall picture.
     </fudis-body-text>
+    <fudis-select
+        fudisGridItem
+        [columns]="{'md':2}"
+        [label]="'Study plan'"
+        [control]="selectControl"
+      >
+        <ng-template fudisSelectOptions>
+          @for (option of selectOptions; track option.value) {
+            <fudis-select-option [data]="option" />
+          }
+        </ng-template>
+      </fudis-select>
     <fudis-badge [variant]="'success'" [content]="'Primary study plan'"></fudis-badge>
     <fudis-dl [variant]="'compact'">
       <fudis-dl-item>
         <fudis-dt [contentText]="'Education'"></fudis-dt>
         <fudis-dd
-          [contentText]="'Markun ylempi Education (Study plan 1, Curriculum period: 2018-2019)'"
+          [contentText]="'Bachelor of Science in Business Administration (Study plan 1, curriculum period: 2018-2019)'"
         ></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
@@ -73,7 +85,7 @@
         <fudis-dd [contentText]="'11.3.2026'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
-    <fudis-body-text>Markun ylempi, 0-40 cr</fudis-body-text>
+    <fudis-body-text>Bachelor of Science in Business Administration, 0-40 cr</fudis-body-text>
     <fudis-dl>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Scheduled credits'"></fudis-dt>
