@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 // This component is for practicing styling with Fudis Core Style Library.
+// Your goal is to produce a table that looks like the one in dummy-table-reference.png. You can find the image in the same folder as this component.
 // You don't need to edit the sorting logic for this exercise.
 // Follow the implementation steps from 1 to 2.
 
