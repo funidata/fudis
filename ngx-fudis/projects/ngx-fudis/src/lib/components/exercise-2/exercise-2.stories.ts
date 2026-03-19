@@ -1,7 +1,6 @@
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { Exercise2Component } from './exercise-2.component';
 import docs from './exercise.mdx';
-import { NgxFudisModule } from '../../ngx-fudis.module';
 
 const html = String.raw;
 
@@ -12,7 +11,6 @@ export default {
     moduleMetadata({
       imports: [
         Exercise2Component,
-        NgxFudisModule,
       ],
     }),
   ],

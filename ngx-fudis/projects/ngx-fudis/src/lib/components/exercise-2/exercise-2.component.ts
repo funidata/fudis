@@ -30,7 +30,7 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
                       (click)="sortBy(column)"
                     >
                       {{ column }}
-                      <span [class]="" class="fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter"></span>
+                      <span [class]="sortDirection[column] === 'asc' ? 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter' : 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter fudis-icon__rotate__flip-180'"></span>
                     </button>
                   </th>
                 }
@@ -99,9 +99,6 @@ export class Exercise2Component {
     };
 
     sortBy(field: string) {
-      if (this.sortDirection[field] === undefined) {
-        this.sortDirection[field] = 'asc';
-      }
       const direction = this.sortDirection[field];
       this.courses.sort((a, b) => {
         const aValue = a[field] ?? '';
