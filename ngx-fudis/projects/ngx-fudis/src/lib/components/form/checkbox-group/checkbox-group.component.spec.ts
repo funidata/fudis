@@ -1,20 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
-import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { CheckboxGroupOptionComponent } from './checkbox-group-option/checkbox-group-option.component';
 import { FudisCheckboxGroupChangeEvent, fudisInputSizeArray } from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { GridComponent } from '../../grid/grid/grid.component';
-import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
-import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-import { IconComponent } from '../../icon/icon.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { getElement } from '../../../utilities/tests/utilities';
 
@@ -48,8 +40,8 @@ type TestFormGroup = {
 };
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-component',
+  imports: [CheckboxGroupComponent, CheckboxGroupOptionComponent],
   template: ` <fudis-checkbox-group
     [id]="'group-id'"
     [formGroup]="testFromGroup"
@@ -101,19 +93,7 @@ describe('CheckboxGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MockContainerComponent,
-        CheckboxGroupOptionComponent,
-        CheckboxGroupComponent,
-        FieldSetComponent,
-        FieldsetContentDirective,
-        GridComponent,
-        GridApiDirective,
-        GridDirective,
-        GuidanceComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [MockContainerComponent, CheckboxGroupComponent],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });

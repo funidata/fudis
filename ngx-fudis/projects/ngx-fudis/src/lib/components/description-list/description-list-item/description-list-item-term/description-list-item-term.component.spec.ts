@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
-import { GridComponent } from '../../../grid/grid/grid.component';
-import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item-term.component';
@@ -13,13 +11,15 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
-import { IconButtonComponent } from '../../../icon-button/icon-button.component';
-import { IconComponent } from '../../../icon/icon.component';
-import { PopoverDirective } from '../../../../directives/popover/popover.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-dl',
+  imports: [
+    DescriptionListComponent,
+    DescriptionListItemComponent,
+    DescriptionListItemTermComponent,
+    DescriptionListItemDetailsComponent,
+  ],
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
@@ -70,18 +70,7 @@ describe('DescriptionListItemTermComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        GridDirective,
-        GridComponent,
-        DescriptionListComponent,
-        DescriptionListItemComponent,
-        DescriptionListItemTermComponent,
-        DescriptionListItemDetailsComponent,
-        LanguageBadgeGroupComponent,
-        LanguageBadgeComponent,
-        MockDlComponent,
-      ],
-      imports: [IconButtonComponent, IconComponent, PopoverDirective],
+      imports: [MockDlComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

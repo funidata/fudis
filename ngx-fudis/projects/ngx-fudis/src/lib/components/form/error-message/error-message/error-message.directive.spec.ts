@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
 import { ErrorMessageDirective } from './error-message.directive';
 import { TextInputComponent } from '../../text-input/text-input.component';
-import { LabelComponent } from '../../label/label.component';
-import { GuidanceComponent } from '../../guidance/guidance.component';
-import { ValidatorErrorMessageComponent } from '../validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 const controlErrors = {
@@ -33,8 +30,8 @@ const errorToRemove: FudisValidationErrors = {
 };
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-test-error',
+  imports: [TextInputComponent, ErrorMessageDirective],
   template: `
     <fudis-text-input [control]="control" [label]="'Test label'">
       @if (errorVisible) {
@@ -52,7 +49,6 @@ class MockTestErrorComponent {
   @ViewChild('testError') testError: ErrorMessageDirective;
 
   message = 'Test error message';
-
   errorVisible: boolean;
 
   @Output() handleAddError = new EventEmitter<FudisValidationErrors>();
@@ -67,15 +63,7 @@ describe('ErrorMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ErrorMessageDirective,
-        MockTestErrorComponent,
-        TextInputComponent,
-        ValidatorErrorMessageComponent,
-        LabelComponent,
-        GuidanceComponent,
-      ],
-      imports: [ReactiveFormsModule],
+      imports: [MockTestErrorComponent],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });

@@ -1,5 +1,5 @@
 import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -10,15 +10,12 @@ import {
 } from '../../../../types/errorSummary';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
 import { TextInputComponent } from '../../text-input/text-input.component';
-import { GuidanceComponent } from '../../guidance/guidance.component';
-import { LabelComponent } from '../../label/label.component';
-import { IconComponent } from '../../../icon/icon.component';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
-  standalone: false,
   selector: 'fudis-text-input-with-validator-error-message',
+  imports: [TextInputComponent],
   template: `
     <fudis-text-input
       [control]="textInputControl"
@@ -44,14 +41,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ValidatorErrorMessageComponent,
-        TextInputWithValidatorErrorMessageComponent,
-        TextInputComponent,
-        GuidanceComponent,
-        LabelComponent,
-      ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [ValidatorErrorMessageComponent, TextInputWithValidatorErrorMessageComponent],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });

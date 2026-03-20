@@ -1,26 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 import { RadioButtonComponent } from './radio-button.component';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
 import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
-import { FieldSetComponent } from '../../fieldset/fieldset.component';
-import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
-import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
-import { GridComponent } from '../../../grid/grid/grid.component';
-import { IconComponent } from '../../../icon/icon.component';
-import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
-import { GuidanceComponent } from '../../guidance/guidance.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { By } from '@angular/platform-browser';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { FieldsetContentDirective } from '../../fieldset/fieldset-content.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-component',
+  imports: [RadioButtonGroupComponent, RadioButtonComponent],
   template: `<fudis-radio-button-group
     [id]="'radio-button-test-group'"
     [label]="'Choose a pet'"
@@ -50,28 +42,14 @@ describe('RadioButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MockComponent,
-        RadioButtonComponent,
-        RadioButtonGroupComponent,
-        FieldSetComponent,
-        FieldsetContentDirective,
-        GridComponent,
-        GridApiDirective,
-        GridDirective,
-        GuidanceComponent,
-        ValidatorErrorMessageComponent,
-      ],
+      imports: [MockComponent, RadioButtonComponent],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
-      imports: [IconComponent, ReactiveFormsModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MockComponent);
-
     component = fixture.componentInstance;
-
     fixture.detectChanges();
   });
 

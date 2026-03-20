@@ -1,20 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GridComponent } from '../grid/grid/grid.component';
-import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from './description-list.component';
 import { DescriptionListItemComponent } from './description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
-import { LanguageBadgeGroupComponent } from '../language-badge-group/language-badge-group.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { Component, DebugElement, SimpleChange } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../types/miscellaneous';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-dl',
+  imports: [
+    DescriptionListComponent,
+    DescriptionListItemComponent,
+    DescriptionListItemTermComponent,
+    DescriptionListItemDetailsComponent,
+  ],
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
@@ -60,16 +62,7 @@ describe('DescriptionListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DescriptionListComponent,
-        GridDirective,
-        GridComponent,
-        DescriptionListItemComponent,
-        DescriptionListItemTermComponent,
-        DescriptionListItemDetailsComponent,
-        LanguageBadgeGroupComponent,
-        MockDlComponent,
-      ],
+      imports: [MockDlComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

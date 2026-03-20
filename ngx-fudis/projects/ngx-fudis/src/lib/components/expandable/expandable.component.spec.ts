@@ -1,25 +1,15 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BadgeComponent } from '../badge/badge.component';
-import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { ButtonComponent } from '../button/button.component';
 import { By } from '@angular/platform-browser';
-import { IconComponent } from '../icon/icon.component';
-import { ErrorSummaryComponent } from '../form/error-summary/error-summary.component';
 import {
   ExpandableActionsDirective,
   ExpandableContentDirective,
 } from './expandable-content.directive';
 import { ExpandableComponent } from './expandable.component';
-import { FieldSetComponent } from '../form/fieldset/fieldset.component';
-import { FieldsetContentDirective } from '../form/fieldset/fieldset-content.directive';
 import { FormComponent } from '../form/form/form.component';
-import {
-  FormActionsDirective,
-  FormContentDirective,
-  FormHeaderDirective,
-} from '../form/form/form-content.directive';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormActionsDirective, FormContentDirective } from '../form/form/form-content.directive';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FormSubmitDirective } from '../../directives/form/form-actions/form-actions.directive';
 import {
   FudisBadgeVariant,
@@ -32,21 +22,28 @@ import { fudisHeadingLevelArray } from '../../types/typography';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisValidators } from '../../utilities/form/validators';
 import { getElement } from '../../utilities/tests/utilities';
-import { GridDirective } from '../../directives/grid/grid/grid.directive';
-import { GuidanceComponent } from '../form/guidance/guidance.component';
-import { HeadingComponent } from '../typography/heading/heading.component';
-import { LabelComponent } from '../form/label/label.component';
-import { LinkDirective } from '../../directives/link/link.directive';
-import { NotificationComponent } from '../notification/notification.component';
-import { RouterModule } from '@angular/router';
-import { SectionComponent } from '../section/section.component';
-import { SectionContentDirective } from '../section/section-content.directive';
 import { TextInputComponent } from '../form/text-input/text-input.component';
-import { ValidatorErrorMessageComponent } from '../form/error-message/validator-error-message/validator-error-message.component';
 
 @Component({
-  standalone: false,
+  selector: 'fudis-mock-component',
+  template: 'Mock!',
+})
+class MockContentComponent implements OnInit {
+  @Output() initialized = new EventEmitter<void>();
+
+  ngOnInit(): void {
+    this.initialized.next();
+  }
+}
+@Component({
   selector: 'fudis-mock-container',
+  imports: [
+    ExpandableComponent,
+    ExpandableActionsDirective,
+    ExpandableContentDirective,
+    ButtonComponent,
+    MockContentComponent,
+  ],
   template: `<fudis-expandable
     [closed]="closed"
     [title]="'Test title'"
@@ -77,21 +74,17 @@ class MockContainerComponent {
 }
 
 @Component({
-  standalone: false,
-  selector: 'fudis-mock-component',
-  template: 'Mock!',
-})
-class MockContentComponent implements OnInit {
-  @Output() initialized = new EventEmitter<void>();
-
-  ngOnInit(): void {
-    this.initialized.next();
-  }
-}
-
-@Component({
-  standalone: false,
   selector: 'fudis-mock-form-component',
+  imports: [
+    ButtonComponent,
+    ExpandableComponent,
+    ExpandableContentDirective,
+    FormComponent,
+    FormContentDirective,
+    FormActionsDirective,
+    FormSubmitDirective,
+    TextInputComponent,
+  ],
   template: `<fudis-form
     [id]="'my-own-id'"
     [level]="1"
@@ -140,40 +133,7 @@ describe('ExpandableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ErrorSummaryComponent,
-        ExpandableActionsDirective,
-        ExpandableComponent,
-        ExpandableContentDirective,
-        FieldSetComponent,
-        FieldsetContentDirective,
-        FormActionsDirective,
-        FormComponent,
-        FormContentDirective,
-        FormHeaderDirective,
-        FormSubmitDirective,
-        GridDirective,
-        GuidanceComponent,
-        HeadingComponent,
-        LabelComponent,
-        LinkDirective,
-        MockContainerComponent,
-        MockContentComponent,
-        MockFormComponent,
-        NotificationComponent,
-        SectionComponent,
-        SectionContentDirective,
-        TextInputComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [
-        BadgeComponent,
-        BodyTextComponent,
-        ButtonComponent,
-        IconComponent,
-        ReactiveFormsModule,
-        RouterModule.forRoot([]),
-      ],
+      imports: [ExpandableComponent, MockContainerComponent, MockFormComponent],
       providers: [
         FudisBreakpointService,
         FudisErrorSummaryService,

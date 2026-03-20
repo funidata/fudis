@@ -11,8 +11,8 @@ import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
 import { BodyTextComponent } from '../../../components/typography/body-text/body-text.component';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-grid-item-directive',
+  imports: [GridComponent, GridItemDirective, HeadingComponent, BodyTextComponent, ButtonComponent],
   template: `<fudis-grid [columns]="4">
     <fudis-heading [level]="3">I am test heading</fudis-heading>
     <fudis-body-text fudisGridItem [columns]="columns">
@@ -28,9 +28,7 @@ import { BodyTextComponent } from '../../../components/typography/body-text/body
 })
 class HostComponent {
   columns: string | FudisBreakpointStyleResponsive = '2';
-
   alignSelfX: FudisGridItemAlignment = 'stretch';
-
   alignSelfY: FudisGridItemAlignment = 'stretch';
 }
 
@@ -40,8 +38,7 @@ describe('GridItemDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HostComponent, GridItemDirective, GridComponent, HeadingComponent],
-      imports: [BodyTextComponent, ButtonComponent],
+      imports: [HostComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

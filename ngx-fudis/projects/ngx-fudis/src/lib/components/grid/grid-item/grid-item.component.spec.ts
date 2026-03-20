@@ -10,8 +10,8 @@ import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.
 // Visual Regression tests (grid-item.spec.ts) should be sufficient to cover testing these.
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-grid-item-component',
+  imports: [GridComponent, GridItemComponent, BodyTextComponent],
   template: `<fudis-grid [columns]="6">
     <fudis-grid-item>
       <fudis-body-text> Paragraph text for testing grid item existance. </fudis-body-text>
@@ -29,8 +29,7 @@ describe('GridItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HostComponent, GridItemComponent, GridComponent],
-      imports: [BodyTextComponent],
+      imports: [HostComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

@@ -1,12 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
-import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisAlert, fudisAlertPositionArray } from '../../../types/miscellaneous';
-import { AlertComponent } from '../alert/alert.component';
-import { IconComponent } from '../../icon/icon.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { SimpleChange } from '@angular/core';
@@ -19,20 +15,8 @@ describe('AlertGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BodyTextComponent, IconComponent, MatDialogModule],
-      declarations: [AlertGroupComponent, AlertComponent],
-      providers: [
-        FudisDialogService,
-        FudisAlertService,
-        {
-          provide: MatDialogRef,
-          useValue: {},
-        },
-        {
-          provide: MAT_DIALOG_DATA,
-          useValue: [],
-        },
-      ],
+      imports: [AlertGroupComponent],
+      providers: [FudisDialogService, FudisAlertService],
     }).compileComponents();
 
     alertService = TestBed.inject(FudisAlertService);
