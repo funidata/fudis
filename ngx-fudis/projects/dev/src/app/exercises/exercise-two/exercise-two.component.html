@@ -1,0 +1,129 @@
+<ng-container *transloco="let t">
+  <fudis-grid [classes]="'fudis-mt-xl'" [align]="'center'">
+    <fudis-expandable [title]="'Contributing to Fudis Design System'" [level]="2" [closed]="false">
+      <ng-template fudisExpandableContent>
+        <fudis-heading [level]="3" [class]="'fudis-mb-md'">Description</fudis-heading>
+        <fudis-body-text [class]="'fudis-mb-sm'">
+          Fudis Design System is an open source project and we welcome contributions from everyone.
+          This exercise guides you through the process of contributing to Fudis Design System. The
+          whole process is documented on page
+          <a
+            fudisLink
+            [href]="`https://fudis.funidata.fi/ngx/v/${version}/index.html?path=/docs/documentation-development-how-to-contribute--documentation`"
+            [title]="'How to Contribute'"
+            [external]="true"
+          ></a
+          >. On this exercise we will be closely looking at steps 4/5 "Implementation step-by-step"
+          onwards.
+        </fudis-body-text>
+        <fudis-body-text [class]="'fudis-mb-md'">
+          All the necessary material is provided in a downloaded package in a link below. For this
+          exercise you are not required to write component unit tests or visual regression tests
+          that are otherwise mandatory when exposing a new library component.
+        </fudis-body-text>
+        <fudis-dl>
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Task objectives'"></fudis-dt>
+            <fudis-dd>
+              <fudis-dl [variant]="'compact'">
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Goal'"></fudis-dt>
+                  <fudis-dd [contentText]="'Getting to know the contributions process.'"></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Task'"></fudis-dt>
+                  <fudis-dd [contentText]="'Create a story with provided content.'"></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Bonus'"></fudis-dt>
+                  <fudis-dd
+                    [contentText]="'Style elements with Core Style Library and enhance accessibility improvements.'"
+                  ></fudis-dd>
+                </fudis-dl-item>
+              </fudis-dl>
+            </fudis-dd>
+          </fudis-dl-item>
+        </fudis-dl>
+        <a
+          fudisLink
+          [href]="'../../../assets/downloads/exercise-2.zip'"
+          download
+          [title]="'Download exercise 2 content'"
+          [class]="'fudis-mb-md'"
+        ></a>
+        <fudis-heading [level]="3">Outcome</fudis-heading>
+        <fudis-body-text>
+          With the provided material, you will be implementing a Fudis Dialog to Dummy component.
+          This Dummy component is exposed as a Storybook story. As a dialog content you will be
+          implementing a Dummy Table component that is styled by utilising Core Style Library.
+        </fudis-body-text>
+        <fudis-body-text>
+          After completing the exercise we encourage you to create a pull request that our Fudis
+          team will provide feedback on.
+        </fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
+    <fudis-heading [level]="2">Instructions</fudis-heading>
+    <ol class="fudis-pl-lg fudis-body-text fudis-body-text__md-regular fudis-mb-xxl">
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          Download the provided content, that includes a Dummy folder.
+        </fudis-body-text>
+      </li>
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          Move the downloaded Dummy folder under ngx-fudis project
+          <strong>ngx-fudis/src/lib/components</strong>.
+        </fudis-body-text>
+      </li>
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          Start Storybook by running <strong>npm start</strong> in root directory. Navigate to
+          <a
+            fudisLink
+            [href]="'http://localhost:6006'"
+            [title]="'http://localhost:6006'"
+            [external]="true"
+          ></a
+          >. When Storybook is running, you should have Dummy folder showing on components sidepanel
+          listing. This folder contains Example story (dummy.stories.ts) and documentation page
+          (dummy.mdx). The Example story is currently empty.
+        </fudis-body-text>
+      </li>
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          To get started with your implementation add Dummy component selector ( step 1 ) to the
+          story template in dummy.stories.ts. You should see the dummy component showing up in
+          Storybook.
+        </fudis-body-text>
+      </li>
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          When you have your story showing up, you are free continue with the implementation in
+          order you like. However, we recommend that you complete the steps in each file in order to
+          produce a fully functional story example with documentation.
+        </fudis-body-text>
+      </li>
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          As a bonus task, create a styling for Dummy Table component that matches
+          dummy-table-reference.png by utilising Core Style Library. You can find the documentation
+          for the library here:
+          <a
+            fudisLink
+            [href]="`https://fudis.funidata.fi/core/v/${core}/index.html`"
+            [title]="'Core Style Library Documentation'"
+            [external]="true"
+          ></a
+          >.
+        </fudis-body-text>
+      </li>
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          When you have completed the exercise, make a pull request on Fudis Github repository. Name
+          your pull request as "Exercise 2", so we can easily recognise it as practice material.
+        </fudis-body-text>
+      </li>
+    </ol>
+  </fudis-grid>
+</ng-container>
