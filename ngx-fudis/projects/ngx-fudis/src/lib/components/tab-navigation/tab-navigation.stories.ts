@@ -2,10 +2,19 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
 import docs from './tab-navigation.mdx';
 import { tabNavigationBarExampleExclude } from '../../utilities/storybook';
+import { TabNavigationBarComponent } from './tab-navigation-bar.component';
+import { TabNavigationTabComponent } from './tab-navigation-tab.component';
+import { TabNavigationPanelComponent } from './tab-navigation-panel.component';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 
 @Component({
   selector: 'tab-navigation-example',
-  standalone: false,
+  imports: [
+    TabNavigationBarComponent,
+    TabNavigationTabComponent,
+    TabNavigationPanelComponent,
+    BodyTextComponent,
+  ],
   template: `
     <fudis-tab-navigation-bar
       [id]="'fudis-tab-navigation-bar-1'"
@@ -65,7 +74,7 @@ export default {
   component: TabNavigationExampleComponent,
   decorators: [
     moduleMetadata({
-      declarations: [TabNavigationExampleComponent],
+      imports: [TabNavigationExampleComponent],
     }),
   ],
   parameters: {

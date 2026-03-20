@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { fudisInputSizeArray, FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
@@ -7,6 +7,7 @@ import docs from './radio-button-group.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { action } from 'storybook/actions';
 import { radioButtonGroupControlsExclude } from '../../../utilities/storybook';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
 
 const html = String.raw;
 
@@ -61,6 +62,7 @@ Example.args = {
 
 @Component({
   selector: 'disabled-radio-group-example',
+  imports: [RadioButtonGroupComponent, RadioButtonComponent],
   template: `
     <fudis-radio-button-group
       [label]="'Choose a pet'"
@@ -73,7 +75,6 @@ Example.args = {
       }
     </fudis-radio-button-group>
   `,
-  standalone: false,
 })
 class DisabledRadioGroupExampleComponent {
   petOptions: FudisRadioButtonOption<object>[] = [
@@ -101,8 +102,7 @@ export default {
   component: RadioButtonGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [DisabledRadioGroupExampleComponent],
-      imports: [ReactiveFormsModule, FormsModule],
+      imports: [DisabledRadioGroupExampleComponent],
     }),
   ],
   parameters: {
