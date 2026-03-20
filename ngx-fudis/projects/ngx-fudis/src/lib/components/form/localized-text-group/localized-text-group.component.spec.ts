@@ -1,16 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { LocalizedTextGroupComponent } from './localized-text-group.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { SelectComponent } from '../select/select/select.component';
 import { getAllElements, getElement } from '../../../utilities/tests/utilities';
-import { LabelComponent } from '../label/label.component';
 import { SimpleChange } from '@angular/core';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { SelectIconsComponent } from '../select/common/select-icons/select-icons.component';
-import { IconComponent } from '../../icon/icon.component';
 import {
   fudisInputSizeArray,
   FudisLocalizedTextGroupDefaultFormGroup,
@@ -20,9 +14,6 @@ import {
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { SelectControlValueAccessorDirective } from '../select/common/select-control-value-accessor/select-control-value-accessor.directive';
-import { SelectAutocompleteDirective } from '../select/common/autocomplete/autocomplete.directive';
-import { SelectDropdownComponent } from '../select/common/select-dropdown/select-dropdown.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
 const values = {
@@ -31,11 +22,8 @@ const values = {
 };
 
 const controlRequired = FudisValidators.required('Required in Finnish');
-
 const groupRequired = FudisGroupValidators.oneRequired('One required!');
-
 const minLength = FudisValidators.minLength(5, 'Min length is 5');
-
 const maxlength = FudisValidators.maxLength(25, 'Max length is 25');
 
 describe('LocalizedTextGroupComponent', () => {
@@ -51,18 +39,7 @@ describe('LocalizedTextGroupComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        LocalizedTextGroupComponent,
-        LabelComponent,
-        SelectComponent,
-        SelectControlValueAccessorDirective,
-        SelectAutocompleteDirective,
-        SelectDropdownComponent,
-        GuidanceComponent,
-        ValidatorErrorMessageComponent,
-        SelectIconsComponent,
-      ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [LocalizedTextGroupComponent],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 

@@ -2,8 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GuidanceComponent } from './guidance.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { IconComponent } from '../../icon/icon.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement, getAllElements } from '../../../utilities/tests/utilities';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -44,8 +42,7 @@ describe('GuidanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GuidanceComponent, ValidatorErrorMessageComponent],
-      imports: [IconComponent],
+      imports: [GuidanceComponent],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });

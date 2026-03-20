@@ -1,19 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BodyTextComponent } from '../typography/body-text/body-text.component';
-import { IconComponent } from '../icon/icon.component';
 import { NotificationComponent } from './notification.component';
 import { FudisNotification } from '../../types/miscellaneous';
 import { getElement } from '../../utilities/tests/utilities';
-import { RouterModule } from '@angular/router';
-import { LinkDirective } from '../../directives/link/link.directive';
 
 describe('NotificationComponent', () => {
   let fixture: ComponentFixture<NotificationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotificationComponent, LinkDirective],
-      imports: [BodyTextComponent, IconComponent, RouterModule.forRoot([])],
+      imports: [NotificationComponent],
     }).compileComponents();
   });
 

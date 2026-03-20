@@ -1,15 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
+import { FormControl } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { By } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import { IconComponent } from '../../../icon/icon.component';
-import { GuidanceComponent } from '../../guidance/guidance.component';
-import { LabelComponent } from '../../label/label.component';
 import { DatepickerComponent } from './datepicker.component';
-import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../../../types/forms';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -23,19 +17,7 @@ describe('DatepickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DatepickerComponent,
-        LabelComponent,
-        GuidanceComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [
-        BrowserAnimationsModule,
-        IconComponent,
-        MatNativeDateModule,
-        MatDatepickerModule,
-        ReactiveFormsModule,
-      ],
+      imports: [DatepickerComponent],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });

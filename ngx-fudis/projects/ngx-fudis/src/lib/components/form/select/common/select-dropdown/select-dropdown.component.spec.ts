@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectDropdownComponent } from './select-dropdown.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
-import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { FudisSelectVariant } from '../../../../../types/forms';
 
 const autocompleteVariants: FudisSelectVariant[] = ['autocompleteDropdown', 'autocompleteType'];
@@ -13,8 +12,7 @@ describe('SelectDropdownComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectDropdownComponent],
-      imports: [BodyTextComponent],
+      imports: [SelectDropdownComponent],
     });
     fixture = TestBed.createComponent(SelectDropdownComponent);
     component = fixture.componentInstance;

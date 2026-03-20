@@ -11,7 +11,7 @@ describe('DropdownMenuGroupComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DropdownMenuGroupComponent, DropdownMenuComponent],
+      imports: [DropdownMenuGroupComponent],
     })
       .overrideComponent(DropdownMenuGroupComponent, {
         add: {

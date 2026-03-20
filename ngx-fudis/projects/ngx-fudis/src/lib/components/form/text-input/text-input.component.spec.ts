@@ -1,17 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { TextInputComponent } from './text-input.component';
-import { LabelComponent } from '../label/label.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { IconButtonComponent } from '../../icon-button/icon-button.component';
-import { IconComponent } from '../../icon/icon.component';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { PopoverDirective } from '../../../directives/popover/popover.directive';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -21,13 +15,7 @@ describe('TextInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        GuidanceComponent,
-        LabelComponent,
-        TextInputComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule, PopoverDirective],
+      imports: [TextInputComponent],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });

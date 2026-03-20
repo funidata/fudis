@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DropdownMenuComponent } from './dropdown-menu.component';
-import { DropdownMenuItemComponent } from './dropdown-menu-item/dropdown-menu-item.component';
-import { IconComponent } from '../icon/icon.component';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 import { fudisInputSizeArray } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
@@ -16,8 +14,7 @@ describe('DropdownMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DropdownMenuItemComponent, DropdownMenuComponent],
-      imports: [IconButtonComponent, IconComponent],
+      imports: [DropdownMenuComponent],
       providers: [FudisDialogService],
     })
       .overrideComponent(DropdownMenuComponent, {
