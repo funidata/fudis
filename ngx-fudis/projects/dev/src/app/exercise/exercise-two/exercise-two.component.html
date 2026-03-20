@@ -3,22 +3,23 @@
     <fudis-expandable [title]="'Contributing to Fudis Design System'" [level]="2" [closed]="false">
       <ng-template fudisExpandableContent>
         <fudis-heading [level]="3" [class]="'fudis-mb-md'">Description</fudis-heading>
-        <fudis-body-text>
+        <fudis-body-text [class]="'fudis-mb-sm'">
           Fudis Design System is an open source project and we welcome contributions from everyone.
-          This exercise guides you through the process of contributing to Fudis Design System.
-        </fudis-body-text>
-        <fudis-body-text [class]="'fudis-mb-md'">
-          The contribution process is documented on page
+          This exercise guides you through the process of contributing to Fudis Design System. The
+          whole process is documented on page
           <a
             fudisLink
             [href]="`https://fudis.funidata.fi/ngx/v/${version}/index.html?path=/docs/documentation-development-how-to-contribute--documentation`"
             [title]="'How to Contribute'"
             [external]="true"
           ></a
-          >. On this exercise we will be looking at steps 4/5 "Implementation step-by-step" onwards.
+          >. On this exercise we will be closely looking at steps 4/5 "Implementation step-by-step"
+          onwards.
+        </fudis-body-text>
+        <fudis-body-text [class]="'fudis-mb-md'">
           All the necessary material is provided in a downloaded package in a link below. For this
-          exercise you not required to write component unit tests or visual regression tests that
-          are otherwise mandatory when exposing a new library component.
+          exercise you are not required to write component unit tests or visual regression tests
+          that are otherwise mandatory when exposing a new library component.
         </fudis-body-text>
         <fudis-dl>
           <fudis-dl-item>
@@ -27,7 +28,7 @@
               <fudis-dl [variant]="'compact'">
                 <fudis-dl-item>
                   <fudis-dt [contentText]="'Goal'"></fudis-dt>
-                  <fudis-dd [contentText]="'Getting to know the contributions process'"></fudis-dd>
+                  <fudis-dd [contentText]="'Getting to know the contributions process.'"></fudis-dd>
                 </fudis-dl-item>
                 <fudis-dl-item>
                   <fudis-dt [contentText]="'Task'"></fudis-dt>
@@ -35,7 +36,9 @@
                 </fudis-dl-item>
                 <fudis-dl-item>
                   <fudis-dt [contentText]="'Bonus'"></fudis-dt>
-                  <fudis-dd [contentText]="'Style elements with Core Style Library.'"></fudis-dd>
+                  <fudis-dd
+                    [contentText]="'Style elements with Core Style Library and enhance accessibility improvements.'"
+                  ></fudis-dd>
                 </fudis-dl-item>
               </fudis-dl>
             </fudis-dd>
