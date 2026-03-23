@@ -30,7 +30,7 @@
     "@angular/common": ">=20.0.0",
     "@angular/core": ">=20.0.0",
     "@angular/material": ">=20.0.0",
-    "@funidata/fudis-core": "^2.2.0"
+    "@funidata/fudis-core": "^3.0.0"
   },
   "devDependencies": {
     "tslib": "^2.7.0",
