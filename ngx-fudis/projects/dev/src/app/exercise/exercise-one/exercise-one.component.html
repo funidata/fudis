@@ -132,72 +132,94 @@
 
 <!-- Modified excercise -->
 <!-- <ng-container *transloco="let t">
-  <fudis-grid [columns]="{'md': 4}" [classes]="'fudis-mt-xl'" [align]="'center'">
-      <fudis-heading [level]="1">Timeline</fudis-heading>
-      <fudis-body-text fudisGridItem [columns]="'stretch'">
-        Plan and view the overall picture of your studies on the timeline. Schedule your courses and view the placement of completed courses on the timeline. Select the study plan for which you want to view and edit the overall picture.
-      </fudis-body-text>
-      <fudis-select
-        fudisGridItem
-        [columns]="{'md':2}"
-        [label]="'Study plan'"
-        [control]="selectControl"
-      >
-        <ng-template fudisSelectOptions>
-          @for (option of selectOptions; track option.value) {
-            <fudis-select-option [data]="option" />
-          }
-        </ng-template>
-      </fudis-select>
-      <fudis-grid-item [columns]="{'md':2}">
-        <fudis-badge [variant]="'success'" [content]="'Ensisijainen opintosuunnitelma'"></fudis-badge>
-        <fudis-dl [variant]="'compact'">
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Education'"></fudis-dt>
-            <fudis-dd [contentText]="'Markun ylempi Education (Study plan 1, Curriculum period: 2018-2019)'"></fudis-dd>
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Created'"></fudis-dt>
-            <fudis-dd [contentText]="'15.9.20182'"></fudis-dd>
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Modified'"></fudis-dt>
-            <fudis-dd [contentText]="'11.3.2026'"></fudis-dd>
-          </fudis-dl-item>  
-        </fudis-dl>
-      </fudis-grid-item>
-      <fudis-grid-item>
-        <fudis-body-text>Markun ylempi, 0-40 cr</fudis-body-text>
-        <fudis-dl>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Scheduled credits'"></fudis-dt>
-            <fudis-dd [contentText]="'0'"></fudis-dd>
-          </fudis-dl-item>
-          <fudis-dl-item>
-            <fudis-dt [contentText]="'Completed credits'"></fudis-dt>
-            <fudis-dd [contentText]="'0'"></fudis-dd>
-          </fudis-dl-item>
-        </fudis-dl>
-        </fudis-grid-item>
-      <fudis-heading [level]="2">Study plan timeline</fudis-heading>
-      <fudis-body-text fudisGridItem [columns]="'stretch'">
-          Schedule any unfinished courses in the study plan on the timeline. You can edit and delete timings for periods on the timeline. The timeline also shows the placement of completed credits.
-      </fudis-body-text>
-      <fudis-dl>
+  <fudis-grid [columns]="{ md: 4 }" [classes]="'fudis-mt-xl'" [align]="'center'">
+    <fudis-heading [level]="1">Timeline</fudis-heading>
+    <fudis-body-text fudisGridItem [columns]="'stretch'">
+      Plan and view the overall picture of your studies on the timeline. Schedule your courses and
+      view the placement of completed courses on the timeline. Select the study plan for which you
+      want to view and edit the overall picture.
+    </fudis-body-text>
+    <fudis-select
+      fudisGridItem
+      [columns]="{ md: 2 }"
+      [label]="'Study plan'"
+      [control]="selectControl"
+    >
+      <ng-template fudisSelectOptions>
+        @for (option of selectOptions; track option.value) {
+          <fudis-select-option [data]="option" />
+        }
+      </ng-template>
+    </fudis-select>
+    <fudis-grid-item [columns]="{ md: 2 }">
+      <fudis-badge
+        [variant]="'success'"
+        [content]="'Ensisijainen opintosuunnitelma'"
+        [attr.aria-labelledby]="'education-dl'"
+      ></fudis-badge>
+      <fudis-dl [id]="'education-dl'" [variant]="'compact'">
         <fudis-dl-item>
-          <fudis-dt [contentText]="'Study right'"></fudis-dt>
-          <fudis-dd [contentText]="'Starting from 1.8.2019'"></fudis-dd>
+          <fudis-dt [contentText]="'Education'"></fudis-dt>
+          <fudis-dd
+            [contentText]="'Markun ylempi Education (Study plan 1, Curriculum period: 2018-2019)'"
+          ></fudis-dd>
+        </fudis-dl-item>
+        <fudis-dl-item>
+          <fudis-dt [contentText]="'Created'"></fudis-dt>
+          <fudis-dd [contentText]="'15.9.20182'"></fudis-dd>
+        </fudis-dl-item>
+        <fudis-dl-item>
+          <fudis-dt [contentText]="'Modified'"></fudis-dt>
+          <fudis-dd [contentText]="'11.3.2026'"></fudis-dd>
         </fudis-dl-item>
       </fudis-dl>
-      <fudis-grid-item [columns]="{'md':'2 / 4'}">
-        <div style="display:flex; flex-direction:column; flex-wrap:wrap; row-gap:.5rem;">
-          <fudis-button [label]="'Schedule courses with a timing template'"></fudis-button>
-          <fudis-button [variant]="'secondary'" [label]="'Delete all timings'" [icon]="'delete'"></fudis-button>
-        </div>
-      </fudis-grid-item>
-      <fudis-grid-item>
-        <fudis-checkbox [label]="'Show empty summer periods on the timeline'" [control]="testControl"></fudis-checkbox>
-        <fudis-checkbox [label]="'Show past semesters on the timeline'" [control]="myControl"></fudis-checkbox>
-      </fudis-grid-item>
+    </fudis-grid-item>
+    <fudis-grid-item>
+      <fudis-body-text [attr.aria-labelledby]="'credits-dl'"
+        >Markun ylempi, 0-40 cr</fudis-body-text
+      >
+      <fudis-dl [id]="'credits-dl'" [variant]="'compact'">
+        <fudis-dl-item>
+          <fudis-dt [contentText]="'Scheduled credits'"></fudis-dt>
+          <fudis-dd [contentText]="'0'"></fudis-dd>
+        </fudis-dl-item>
+        <fudis-dl-item>
+          <fudis-dt [contentText]="'Completed credits'"></fudis-dt>
+          <fudis-dd [contentText]="'0'"></fudis-dd>
+        </fudis-dl-item>
+      </fudis-dl>
+    </fudis-grid-item>
+    <fudis-heading [level]="2">Study plan timeline</fudis-heading>
+    <fudis-body-text fudisGridItem [columns]="'stretch'">
+      Schedule any unfinished courses in the study plan on the timeline. You can edit and delete
+      timings for periods on the timeline. The timeline also shows the placement of completed
+      credits.
+    </fudis-body-text>
+    <fudis-dl [tag]="'p'">
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Study right'"></fudis-dt>
+        <fudis-dd [contentText]="'Starting from 1.8.2019'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+    <fudis-grid-item [columns]="{ md: '2 / 4' }">
+      <div style="display: flex; flex-direction: column; flex-wrap: wrap; row-gap: 0.5rem">
+        <fudis-button [label]="'Schedule courses with a timing template'"></fudis-button>
+        <fudis-button
+          [variant]="'secondary'"
+          [label]="'Delete all timings'"
+          [icon]="'delete'"
+        ></fudis-button>
+      </div>
+    </fudis-grid-item>
+    <fudis-grid-item>
+      <fudis-checkbox
+        [label]="'Show empty summer periods on the timeline'"
+        [control]="testControl"
+      ></fudis-checkbox>
+      <fudis-checkbox
+        [label]="'Show past semesters on the timeline'"
+        [control]="myControl"
+      ></fudis-checkbox>
+    </fudis-grid-item>
   </fudis-grid>
 </ng-container> -->
