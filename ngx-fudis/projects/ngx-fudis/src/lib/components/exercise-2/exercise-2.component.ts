@@ -13,7 +13,7 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
       (handleClick)="openDialog(dialogToOpen)"
     ></fudis-button>
     <ng-template #dialogToOpen>
-      <fudis-dialog>
+      <fudis-dialog [size]="size">
         <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'">Exercise 2</fudis-heading>
         <fudis-dialog-content>
           <table class="fudis-table">
@@ -32,6 +32,11 @@ import { NgxFudisModule } from '../../ngx-fudis.module';
                         sortDirection[column] === 'asc'
                           ? 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter'
                           : 'fudis-icon fudis-icon__color__primary fudis-icon__lg fudis-icon__sorter fudis-icon__rotate__flip-180'
+                      "
+                      [attr.aria-label]="
+                        sortedColumn === column
+                          ? _getAriaLabelForSortButton(sortDirection[column])
+                          : null
                       "
                     ></span>
                   </button>
@@ -110,6 +115,8 @@ export class Exercise2Component {
     period: 'asc',
   };
 
+  sortedColumn: string | null = null;
+
   sortBy(field: string) {
     const direction = this.sortDirection[field];
     this.courses.sort((a, b) => {
@@ -118,6 +125,11 @@ export class Exercise2Component {
       return direction === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     });
     this.sortDirection[field] = direction === 'asc' ? 'desc' : 'asc';
+    this.sortedColumn = field;
+  }
+
+  protected _getAriaLabelForSortButton(direction: 'asc' | 'desc'): string {
+    return `Sort by ${direction === 'asc' ? 'ascending' : 'descending'} order`;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

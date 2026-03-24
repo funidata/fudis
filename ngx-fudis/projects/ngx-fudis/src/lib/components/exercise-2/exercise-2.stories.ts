@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 import { Exercise2Component } from './exercise-2.component';
 import docs from './exercise.mdx';
 
@@ -7,14 +7,12 @@ const html = String.raw;
 export default {
   title: 'Components/Exercise2',
   component: Exercise2Component,
-  decorators: [
-    moduleMetadata({
-      imports: [Exercise2Component],
-    }),
-  ],
   parameters: {
     docs: {
       page: docs,
+    },
+    controls: {
+      exclude: ['columns', 'courses', 'sortDirection', 'sortBy', 'openDialog'],
     },
   },
   argTypes: {
@@ -27,15 +25,11 @@ export default {
 
 const Template: StoryFn<Exercise2Component> = (args) => ({
   props: args,
-  template: html`
-    <!-- 1. place your exercise-2 selector here -->
-    <exercise-2 [size]="size"></exercise-2>
-  `,
+  template: html` <exercise-2 [size]="size"></exercise-2> `,
 });
 
 export const Example = Template.bind({});
 
 Example.args = {
   size: 'md',
-  // place your exercise selector args here
 };
