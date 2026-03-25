@@ -121,6 +121,11 @@
                 "glob": "*.json",
                 "input": "projects/dev/src/assets/i18n/",
                 "output": "./assets/i18n/"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/dev/src/assets/downloads",
+                "output": "assets/downloads"
               }
             ],
             "styles": ["projects/dev/src/styles.scss"],

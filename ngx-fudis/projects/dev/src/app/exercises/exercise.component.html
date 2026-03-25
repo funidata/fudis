@@ -1,0 +1,71 @@
+<ng-container *transloco="let t">
+  <fudis-grid [classes]="'fudis-mt-xl'" [align]="'center'">
+    <fudis-heading [level]="1">Fudis Exercise</fudis-heading>
+    <fudis-body-text>
+      On this page, you'll find two hands-on exercises designed to help you get familiar with the
+      Fudis component library. Pick either exercise and follow the step-by-step instructions. In the
+      first exercise, you'll build a layout using the Fudis grid and basic components. In the
+      second, you'll learn how to contribute to the Fudis component library yourself.
+    </fudis-body-text>
+    <fudis-heading [level]="2" [variant]="'sm'">Pre-requirement</fudis-heading>
+    <fudis-heading [level]="3" [variant]="'xxs'" [class]="'fudis-mb-none'"
+      >Before starting the exercises:</fudis-heading
+    >
+    <ol class="fudis-pl-lg fudis-body-text fudis-body-text__md-regular">
+      <li>
+        <fudis-body-text
+          >Make sure that your have both environments, Storybook and Sandbox, running as documented
+          on
+          <a
+            fudisLink
+            [href]="`https://fudis.funidata.fi/ngx/v/${version}/index.html?path=/docs/documentation-development-getting-started--documentation`"
+            [title]="'Getting Started with Development Environment'"
+            [external]="true"
+          ></a
+          >.</fudis-body-text
+        >
+      </li>
+      <li class="fudis-mt-xs">
+        <fudis-body-text>
+          Create a Git branch with a suitable name for the exercise you are doing. For example, if
+          you are doing the first exercise, we advice you to name your branch with identifier
+          "[your-name]-exercise-one". More detailed instructions on how to name your branch and
+          commit messages are documented on page
+          <a
+            fudisLink
+            [href]="`https://fudis.funidata.fi/ngx/v/${version}/index.html?path=/docs/documentation-development-tooling-git-and-github-conventions--documentation`"
+            [title]="'Git and GitHub Conventions'"
+            [external]="true"
+          ></a
+          >. But for the sake of this exercise you don't need to stick to them.
+        </fudis-body-text>
+      </li>
+    </ol>
+    <fudis-tab-navigation-bar
+      [id]="'fudis-tab-navigation-1'"
+      [variant]="'primary'"
+      [panel]="navigationTabPanel"
+    >
+      @for (route of routes; track route.id) {
+        <button
+          fudis-tab-navigation-tab
+          [routerLink]="[route.path]"
+          [active]="
+            router.isActive('exercise/' + route.path, {
+              paths: 'exact',
+              queryParams: 'ignored',
+              fragment: 'ignored',
+              matrixParams: 'ignored',
+            })
+          "
+          [id]="route.id"
+        >
+          {{ route.label }}
+        </button>
+      }
+    </fudis-tab-navigation-bar>
+  </fudis-grid>
+  <fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
+    <router-outlet></router-outlet>
+  </fudis-tab-navigation-panel>
+</ng-container>
