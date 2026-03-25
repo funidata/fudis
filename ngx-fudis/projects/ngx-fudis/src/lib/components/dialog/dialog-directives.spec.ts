@@ -1,9 +1,8 @@
 import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
-import { IconComponent } from '../icon/icon.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
@@ -14,14 +13,20 @@ import {
   DialogCloseDirective,
 } from './dialog-directives';
 import { getElement } from '../../utilities/tests/utilities';
-import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 import { FudisAlertService } from '../../services/alert/alert.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { IconButtonComponent } from '../icon-button/icon-button.component';
-
 @Component({
-  standalone: false,
   selector: 'fudis-mock-dialog',
+  imports: [
+    DialogComponent,
+    DialogTitleDirective,
+    DialogContentDirective,
+    DialogActionsDirective,
+    DialogCloseDirective,
+    HeadingComponent,
+    BodyTextComponent,
+    ButtonComponent,
+  ],
   template: `
     <fudis-dialog [size]="'lg'">
       <fudis-heading fudisDialogTitle [level]="2">Dialog Heading</fudis-heading>
@@ -64,23 +69,7 @@ describe('DialogDirectives', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AlertGroupComponent,
-        HeadingComponent,
-        DialogComponent,
-        DialogTitleDirective,
-        DialogContentDirective,
-        DialogActionsDirective,
-        DialogCloseDirective,
-        HostComponent,
-      ],
-      imports: [
-        BodyTextComponent,
-        ButtonComponent,
-        IconButtonComponent,
-        IconComponent,
-        MatDialogModule,
-      ],
+      imports: [HostComponent],
       providers: [
         FudisDialogService,
         FudisAlertService,

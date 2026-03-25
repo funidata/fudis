@@ -1,23 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormControl } from '@angular/forms';
 import { DateRangeComponent } from './date-range.component';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
-import { LabelComponent } from '../../label/label.component';
-import { IconComponent } from '../../../icon/icon.component';
-import { GuidanceComponent } from '../../guidance/guidance.component';
-import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { getElement, sortClasses } from '../../../../utilities/tests/utilities';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
+import {
+  DateEndDirective,
+  DateStartDirective,
+} from '../../../../directives/form/datepicker/datepicker.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-date-range',
+  imports: [DateRangeComponent, DatepickerComponent, DateStartDirective, DateEndDirective],
   template: `<fudis-date-range [dateComparisonParse]="comparisonParse">
     <p class="do-not-find-me">This should not be shown</p>
     <fudis-datepicker fudisDateStart [label]="'start date'" [control]="startDateControl" />
@@ -52,21 +49,7 @@ describe('DateRangeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        DateRangeComponent,
-        DatepickerComponent,
-        LabelComponent,
-        GuidanceComponent,
-        ValidatorErrorMessageComponent,
-        MockDateRangeComponent,
-      ],
-      imports: [
-        IconComponent,
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        BrowserAnimationsModule,
-      ],
+      imports: [DateRangeComponent, MockDateRangeComponent],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });

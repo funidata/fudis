@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
@@ -7,6 +7,9 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
 import { Subscription } from 'rxjs';
+import { LabelComponent } from '../label/label.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Allows entry of multi-line text.
@@ -17,7 +20,7 @@ import { Subscription } from 'rxjs';
   selector: 'fudis-text-area',
   templateUrl: './text-area.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [LabelComponent, FormsModule, ReactiveFormsModule, GuidanceComponent, AsyncPipe],
 })
 export class TextAreaComponent
   extends TextFieldComponentBaseDirective

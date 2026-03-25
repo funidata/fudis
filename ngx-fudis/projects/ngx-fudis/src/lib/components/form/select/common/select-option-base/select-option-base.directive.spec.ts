@@ -1,31 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SelectOptionBaseDirective } from './select-option-base.directive';
-import { SelectGroupComponent } from '../select-group/select-group.component';
 import { SelectComponent } from '../../select/select.component';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { defaultOptions, TestAnimalValue } from '../../common/mock_data';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
-import { IconComponent } from '../../../../icon/icon.component';
-import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
-import { GuidanceComponent } from '../../../guidance/guidance.component';
-import { LabelComponent } from '../../../label/label.component';
-import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-import { SelectBaseDirective } from '../select-base/select-base.directive';
 import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
-import { SelectIconsComponent } from '../select-icons/select-icons.component';
-import { ButtonComponent } from '../../../../button/button.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
-import { SelectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
-import { SelectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
 import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-select-option-base-directive',
+  imports: [SelectComponent, SelectOptionsDirective, SelectOptionComponent],
   template: `<fudis-select
     #selectElem
     [label]="'Test Label'"
@@ -47,6 +35,9 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
   </fudis-select>`,
 })
 class MockComponent {
+  @ViewChild('selectElem') selectElem: SelectComponent;
+  @ViewChild('selectOption') selectOption: SelectOptionComponent;
+
   testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
   optionWithSubLabel: FudisSelectOption<string> = {
     value: 'test-1-abc',
@@ -54,10 +45,6 @@ class MockComponent {
     subLabel: 'Roaaar!',
   };
   control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
-
-  @ViewChild('selectElem') selectElem: SelectComponent;
-  @ViewChild('selectOption') selectOption: SelectOptionComponent;
-
   eventReceived: FocusEvent;
 
   handleOptionBlur(event: FocusEvent) {
@@ -71,22 +58,8 @@ describe('SelectOptionBaseDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        SelectComponent,
-        SelectAutocompleteDirective,
-        SelectControlValueAccessorDirective,
-        SelectOptionBaseDirective,
-        SelectOptionComponent,
-        SelectGroupComponent,
-        SelectDropdownComponent,
-        SelectIconsComponent,
-        SelectOptionsDirective,
-        MockComponent,
-        GuidanceComponent,
-        LabelComponent,
-      ],
-      providers: [FudisDialogService, SelectBaseDirective, FudisInternalErrorSummaryService],
-      imports: [BodyTextComponent, ButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [MockComponent],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);

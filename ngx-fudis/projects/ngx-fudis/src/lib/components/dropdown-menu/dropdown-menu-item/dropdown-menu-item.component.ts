@@ -17,6 +17,7 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { BehaviorSubject } from 'rxjs';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { DropdownMenuGroupComponent } from '../dropdown-menu-group/dropdown-menu-group.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Single menu item for DropdownMenuComponent.
@@ -26,7 +27,7 @@ import { DropdownMenuGroupComponent } from '../dropdown-menu-group/dropdown-menu
   templateUrl: './dropdown-menu-item.component.html',
   styleUrls: ['./dropdown-menu-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [AsyncPipe],
 })
 export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
   constructor(

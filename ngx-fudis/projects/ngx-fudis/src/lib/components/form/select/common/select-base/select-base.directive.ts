@@ -30,10 +30,7 @@ import { fromEvent, Subscription } from 'rxjs';
 import { BaseSelectableComponent } from '../interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
-@Directive({
-  selector: '[fudisSelectBase]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisSelectBase]' })
 export class SelectBaseDirective
   extends ControlComponentBaseDirective
   implements OnChanges, OnDestroy

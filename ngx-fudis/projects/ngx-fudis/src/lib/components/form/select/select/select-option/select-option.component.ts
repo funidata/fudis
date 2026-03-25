@@ -8,6 +8,7 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisSelectOption } from '../../../../../types/forms';
+import { IconComponent } from '../../../../icon/icon.component';
 
 /**
  * Represents a selectable option within SelectComponent.
@@ -16,7 +17,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
   selector: 'fudis-select-option',
   templateUrl: './select-option.component.html',
   styleUrls: ['./select-option.component.scss'],
-  standalone: false,
+  imports: [IconComponent],
 })
 export class SelectOptionComponent<T = string>
   extends SelectOptionBaseDirective<T>

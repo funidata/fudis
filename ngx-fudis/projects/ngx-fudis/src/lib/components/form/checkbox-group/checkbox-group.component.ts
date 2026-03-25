@@ -9,7 +9,7 @@ import {
   ViewChild,
   DOCUMENT,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   FudisCheckboxGroupChangeEvent,
   FudisCheckboxGroupFormGroup,
@@ -22,6 +22,9 @@ import { GroupComponentBaseDirective } from '../../../directives/form/group-comp
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { FieldSetComponent } from '../fieldset/fieldset.component';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Groups multiple related checkbox options.
@@ -42,7 +45,14 @@ import { GuidanceComponent } from '../guidance/guidance.component';
   selector: 'fudis-checkbox-group',
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
-  standalone: false,
+  imports: [
+    FieldSetComponent,
+    FieldsetContentDirective,
+    GuidanceComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+  ],
 })
 export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   extends GroupComponentBaseDirective

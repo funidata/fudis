@@ -1,16 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { AlertComponent } from './alert.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
-import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-import { IconComponent } from '../../icon/icon.component';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisAlert, fudisNotificationVariantArray } from '../../../types/miscellaneous';
 import { AlertGroupComponent } from '../alert-group/alert-group.component';
 import { ButtonComponent } from '../../button/button.component';
-import { RouterModule } from '@angular/router';
-import { LinkDirective } from '../../../directives/link/link.directive';
 import { BehaviorSubject } from 'rxjs';
 import { Component } from '@angular/core';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -20,8 +15,8 @@ const testHtmlId = 'test-html-id';
 const testButtonId = 'test-button-id';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-component',
+  imports: [ButtonComponent, AlertGroupComponent],
   template: `<div class="mock-container">
     <fudis-alert-group />
     <fudis-button [label]="'Test button'" />
@@ -56,26 +51,8 @@ describe('AlertComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AlertComponent, AlertGroupComponent, LinkDirective, MockAlertComponent],
-      imports: [
-        BodyTextComponent,
-        ButtonComponent,
-        IconComponent,
-        MatDialogModule,
-        RouterModule.forRoot([]),
-      ],
-      providers: [
-        FudisDialogService,
-        FudisAlertService,
-        {
-          provide: MatDialogRef,
-          useValue: {},
-        },
-        {
-          provide: MAT_DIALOG_DATA,
-          useValue: [],
-        },
-      ],
+      imports: [AlertComponent, MockAlertComponent],
+      providers: [FudisDialogService, FudisAlertService],
     });
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,4 @@
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Inject } from '@angular/core';
 import { FudisDialogService } from './dialog.service';
@@ -8,17 +8,20 @@ import { HeadingComponent } from '../../components/typography/heading/heading.co
 import { ButtonComponent } from '../../components/button/button.component';
 import {
   DialogActionsDirective,
-  DialogCloseDirective,
   DialogContentDirective,
 } from '../../components/dialog/dialog-directives';
-import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
-import { IconButtonComponent } from '../../components/icon-button/icon-button.component';
-import { IconComponent } from '../../components/icon/icon.component';
 import { FudisAlertService } from '../alert/alert.service';
 
 @Component({
-  standalone: false,
   selector: 'fudis-dialog-test-content',
+  imports: [
+    DialogComponent,
+    DialogContentDirective,
+    DialogActionsDirective,
+    HeadingComponent,
+    BodyTextComponent,
+    ButtonComponent,
+  ],
   template: `
     <fudis-dialog [size]="'lg'">
       <fudis-heading fudisDialogTitle [level]="2">Dialog Heading</fudis-heading>
@@ -59,8 +62,8 @@ class DialogTestContentComponent {
 }
 
 @Component({
-  standalone: false,
   selector: 'fudis-dialog-test-button',
+  imports: [ButtonComponent],
   template: `<fudis-button
     (handleClick)="openTestDialog()"
     [label]="'Open dialog'"
@@ -84,23 +87,7 @@ describe('DialogService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        HeadingComponent,
-        AlertGroupComponent,
-        DialogComponent,
-        DialogContentDirective,
-        DialogCloseDirective,
-        DialogActionsDirective,
-        DialogTestButtonComponent,
-        DialogTestContentComponent,
-      ],
-      imports: [
-        MatDialogModule,
-        BodyTextComponent,
-        ButtonComponent,
-        IconButtonComponent,
-        IconComponent,
-      ],
+      imports: [DialogTestButtonComponent, DialogTestContentComponent],
       providers: [
         FudisDialogService,
         FudisAlertService,

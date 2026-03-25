@@ -31,7 +31,6 @@ import { isButtonDisabled } from '../../utilities/dialog/dialog-utils';
       useValue: {},
     },
   ],
-  standalone: false,
 })
 export class DialogTitleDirective extends MatDialogTitle implements OnInit {
   constructor(
@@ -57,10 +56,7 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 /**
  * Identifies the main content area of a dialog.
  */
-@Directive({
-  selector: 'fudis-dialog-content',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-dialog-content' })
 export class DialogContentDirective extends MatDialogContent implements OnChanges {
   constructor(
     private _elRef: ElementRef,
@@ -100,10 +96,7 @@ export class DialogContentDirective extends MatDialogContent implements OnChange
  *
  * Use this directive to set action buttons in a fixed position at the bottom of a dialog.
  */
-@Directive({
-  selector: 'fudis-dialog-actions',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-dialog-actions' })
 export class DialogActionsDirective extends MatDialogActions {
   override align: 'start' | 'center' | 'end' = 'end';
 }
@@ -113,10 +106,7 @@ export class DialogActionsDirective extends MatDialogActions {
  *
  * Use this directive to provide a button which solely dismisses a dialog.
  */
-@Directive({
-  selector: '[fudisDialogClose]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisDialogClose]' })
 export class DialogCloseDirective extends MatDialogClose {
   private _hostButtonElement: HTMLElement;
   constructor(

@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { BreadcrumbsComponent } from '../breadcrumbs.component';
+import { IconComponent } from '../../icon/icon.component';
 
 /**
  * Represents a single link within BreadcrumbsComponent. Must be a direct child of
@@ -19,7 +20,7 @@ import { BreadcrumbsComponent } from '../breadcrumbs.component';
   templateUrl: './breadcrumbs-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [IconComponent],
 })
 export class BreadcrumbsItemComponent {
   constructor(

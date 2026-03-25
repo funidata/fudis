@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { TranslocoService } from '@jsverse/transloco';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
 import {
   FudisCheckboxGroupOption,
   FudisSelectOption,
@@ -9,7 +9,12 @@ import {
   FudisInputSize,
 } from 'projects/ngx-fudis/src/lib/types/forms';
 
-import { FudisErrorSummaryService } from 'ngx-fudis';
+import {
+  FudisErrorSummaryService,
+  NgxFudisModule,
+  ButtonComponent,
+  BodyTextComponent,
+} from 'ngx-fudis';
 import { FudisGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/groupValidators';
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 
@@ -47,7 +52,7 @@ type SelectForm = {
 @Component({
   selector: 'app-form-examples',
   templateUrl: 'formExamples.component.html',
-  standalone: false,
+  imports: [TranslocoDirective, NgxFudisModule, ButtonComponent, FormsModule, BodyTextComponent],
 })
 export class AppFormExampleComponent {
   constructor(

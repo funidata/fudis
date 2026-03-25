@@ -7,10 +7,7 @@ import {
   FudisGridColumns,
 } from '../../../types/grid';
 
-@Directive({
-  selector: '[fudisGridApi]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisGridApi]' })
 export class GridApiDirective {
   /**
    * Alignment of Grid component inside its parent: 'start' | 'end' | 'center'

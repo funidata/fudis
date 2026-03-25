@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -8,6 +8,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { TextFieldComponentBaseDirective } from '../../../directives/form/text-field-component-base/text-field-component-base.directive';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { LabelComponent } from '../label/label.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Allows entry of single-line text.
@@ -18,7 +21,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   selector: 'fudis-text-input',
   templateUrl: './text-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [LabelComponent, FormsModule, ReactiveFormsModule, GuidanceComponent, AsyncPipe],
 })
 export class TextInputComponent
   extends TextFieldComponentBaseDirective

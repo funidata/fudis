@@ -16,6 +16,11 @@ import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellane
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { BehaviorSubject } from 'rxjs';
 import { getHeadingVariant } from '../../utilities/typography/typography-utils';
+import { GridDirective } from '../../directives/grid/grid/grid.directive';
+import { HeadingComponent } from '../typography/heading/heading.component';
+import { BadgeComponent } from '../badge/badge.component';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Defines a logical content section.
@@ -27,7 +32,7 @@ import { getHeadingVariant } from '../../utilities/typography/typography-utils';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [GridDirective, HeadingComponent, BadgeComponent, IconButtonComponent, AsyncPipe],
 })
 export class SectionComponent
   extends PopoverApiDirective

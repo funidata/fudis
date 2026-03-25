@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
   DOCUMENT,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -20,6 +20,12 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
+import { LabelComponent } from '../../label/label.component';
+import { SelectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
+import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
+import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { GuidanceComponent } from '../../guidance/guidance.component';
 
 /**
  * Allows selection of a single option from a dropdown list.
@@ -43,7 +49,18 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [
+    LabelComponent,
+    FormsModule,
+    SelectControlValueAccessorDirective,
+    SelectAutocompleteDirective,
+    ReactiveFormsModule,
+    SelectIconsComponent,
+    SelectDropdownComponent,
+    NgTemplateOutlet,
+    GuidanceComponent,
+    AsyncPipe,
+  ],
 })
 export class SelectComponent<T = string>
   extends SelectBaseDirective

@@ -16,13 +16,14 @@ import {
   FudisErrorSummaryRemoveError,
 } from '../../../../types/errorSummary';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-validator-error-message',
   templateUrl: './validator-error-message.component.html',
   styleUrls: ['./validator-error-message.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [AsyncPipe],
 })
 export class ValidatorErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(

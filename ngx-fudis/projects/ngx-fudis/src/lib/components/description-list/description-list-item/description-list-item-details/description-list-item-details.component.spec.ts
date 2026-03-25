@@ -1,24 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
-import { GridComponent } from '../../../grid/grid/grid.component';
-import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListItemTermComponent } from '../description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details.component';
-import { LanguageBadgeGroupComponent } from '../../../language-badge-group/language-badge-group.component';
-import { LanguageBadgeComponent } from '../../../language-badge-group/language-badge/language-badge.component';
 import { ButtonComponent } from '../../../button/button.component';
-import { IconComponent } from '../../../icon/icon.component';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-dl',
+  imports: [
+    ButtonComponent,
+    DescriptionListComponent,
+    DescriptionListItemComponent,
+    DescriptionListItemTermComponent,
+    DescriptionListItemDetailsComponent,
+  ],
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
@@ -81,18 +82,7 @@ describe('DescriptionListItemDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ButtonComponent, IconComponent],
-      declarations: [
-        GridDirective,
-        GridComponent,
-        DescriptionListComponent,
-        DescriptionListItemComponent,
-        DescriptionListItemTermComponent,
-        DescriptionListItemDetailsComponent,
-        LanguageBadgeGroupComponent,
-        LanguageBadgeComponent,
-        MockDlComponent,
-      ],
+      imports: [MockDlComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

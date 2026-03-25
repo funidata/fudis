@@ -1,20 +1,16 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  FormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import docs from './text-input.mdx';
 import { textInputControlsExclude } from '../../../utilities/storybook';
 import { fudisInputSizeArray } from '../../../types/forms';
+import { ErrorMessageDirective } from '../error-message/error-message/error-message.directive';
 
 @Component({
   selector: 'example-text-input-with-validators',
+  imports: [TextInputComponent, ErrorMessageDirective, ReactiveFormsModule],
   template: `
     <form [formGroup]="mainFormGroup">
       <fudis-text-input
@@ -52,17 +48,13 @@ import { fudisInputSizeArray } from '../../../types/forms';
       />
     </form>
   `,
-  standalone: false,
 })
 class TextInputWithFormControlExampleComponent {
   constructor(private _formBuilder: FormBuilder) {}
 
   minLength = 5;
-
   maxLength = 20;
-
   minNumber = 10;
-
   maxNumber = 99;
 
   validatorsForEmail = [
@@ -100,8 +92,7 @@ export default {
   component: TextInputComponent,
   decorators: [
     moduleMetadata({
-      declarations: [TextInputWithFormControlExampleComponent],
-      imports: [ReactiveFormsModule, FormsModule],
+      imports: [TextInputWithFormControlExampleComponent],
     }),
   ],
   parameters: {
@@ -206,9 +197,7 @@ Disabled.args = {
 
 export const WithValidators: StoryFn = (args) => ({
   props: args,
-  template: `
-		<example-text-input-with-validators></example-text-input-with-validators>
-	`,
+  template: html` <example-text-input-with-validators></example-text-input-with-validators> `,
 });
 
 WithValidators.parameters = {

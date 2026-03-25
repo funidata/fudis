@@ -10,9 +10,12 @@ import {
   nestedDescriptionListExclude,
 } from '../../utilities/storybook';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { ButtonComponent } from '../button/button.component';
+import { GridComponent } from '../grid/grid/grid.component';
 
 @Component({
   selector: 'example-language-service-change-component',
+  imports: [ButtonComponent, GridComponent],
   template: `
     <fudis-grid [columns]="3" [width]="'sm'">
       <fudis-button
@@ -32,7 +35,6 @@ import { FudisTranslationService } from '../../services/translation/translation.
       <fudis-button [label]="'Set App Lang to Sv'" (handleClick)="changeAppLang('sv')" />
     </fudis-grid>
   `,
-  standalone: false,
 })
 class LanguageChangeComponent {
   constructor(private _languageService: FudisTranslationService) {
@@ -54,7 +56,7 @@ export default {
   component: DescriptionListComponent,
   decorators: [
     moduleMetadata({
-      declarations: [LanguageChangeComponent],
+      imports: [LanguageChangeComponent],
     }),
   ],
   parameters: {

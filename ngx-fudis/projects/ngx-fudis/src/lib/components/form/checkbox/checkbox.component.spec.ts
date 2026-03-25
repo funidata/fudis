@@ -3,12 +3,11 @@ import { CheckboxComponent } from './checkbox.component';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { IconComponent } from '../../icon/icon.component';
 import { FudisCheckboxChangeEvent } from '../../../types/forms';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-component',
+  imports: [CheckboxComponent, ReactiveFormsModule],
   template: `
     <form [formGroup]="myFormGroup">
       <fudis-checkbox
@@ -48,8 +47,7 @@ describe('CheckboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MockComponent, CheckboxComponent],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [MockComponent],
     }).compileComponents();
   });
 

@@ -5,9 +5,14 @@ import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
 import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid';
+import { ButtonComponent } from '../../button/button.component';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
+import { GridItemDirective } from '../../../directives/grid/grid-item/grid-item.directive';
+import { HeadingComponent } from '../../typography/heading/heading.component';
 
 @Component({
   selector: 'example-grid-with-service',
+  imports: [GridComponent, GridItemDirective, ButtonComponent, BodyTextComponent, HeadingComponent],
   template: `
     <fudis-grid
       [columns]="1"
@@ -79,7 +84,6 @@ import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid'
       </fudis-grid>
     </fudis-grid>
   `,
-  standalone: false,
 })
 class GridWithServiceExampleComponent {
   constructor(private _gridService: FudisGridService) {
@@ -96,7 +100,6 @@ class GridWithServiceExampleComponent {
   }
 
   protected _gridAlignValue: FudisGridAlign = 'end';
-
   protected _currentServiceConfigs: string;
 
   updateGridAlignValue(): void {
@@ -135,7 +138,7 @@ export default {
   component: GridComponent,
   decorators: [
     moduleMetadata({
-      declarations: [GridWithServiceExampleComponent],
+      imports: [GridWithServiceExampleComponent],
     }),
     componentWrapperDecorator(
       (story) => html`<div style="border: 3px solid #b83c2e">${story}</div>`,

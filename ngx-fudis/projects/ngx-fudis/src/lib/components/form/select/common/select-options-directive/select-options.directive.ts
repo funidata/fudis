@@ -7,10 +7,7 @@ import { Directive, TemplateRef } from '@angular/core';
  * Use this directive to tag the template which wraps (multi)select options and enables lazy loading
  * of the options.
  */
-@Directive({
-  selector: '[fudisSelectOptions]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisSelectOptions]' })
 export class SelectOptionsDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }

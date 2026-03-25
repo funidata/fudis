@@ -1,15 +1,26 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { action } from 'storybook/actions';
-import { FormControl, ReactiveFormsModule, FormsModule, FormControlOptions } from '@angular/forms';
+import { FormControl, FormControlOptions } from '@angular/forms';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ErrorMessageDirective } from './error-message.directive';
 import docs from './error-message.mdx';
 import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
 import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/storybook';
+import { ButtonComponent } from '../../../button/button.component';
+import { GridComponent } from '../../../grid/grid/grid.component';
+import { TextInputComponent } from '../../text-input/text-input.component';
+import { GridItemDirective } from '../../../../directives/grid/grid-item/grid-item.directive';
 
 @Component({
   selector: 'example-text-input-with-error-message',
+  imports: [
+    GridComponent,
+    GridItemDirective,
+    TextInputComponent,
+    ErrorMessageDirective,
+    ButtonComponent,
+  ],
   template: `
     <fudis-grid [columns]="2" [width]="'xs'">
       <fudis-text-input
@@ -45,7 +56,6 @@ import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/stor
       />
     </fudis-grid>
   `,
-  standalone: false,
 })
 class TextInputWithErrorMessageComponent {
   constructor() {
@@ -63,9 +73,7 @@ class TextInputWithErrorMessageComponent {
     'This is custom string error message that is placed with content projection';
 
   customErrorExists: FormControlOptions;
-
   originalMessage: boolean = true;
-
   control: FormControl<string | null>;
 
   protected _errorExists: boolean = false;
@@ -99,8 +107,7 @@ export default {
   component: ErrorMessageDirective,
   decorators: [
     moduleMetadata({
-      declarations: [TextInputWithErrorMessageComponent],
-      imports: [ReactiveFormsModule, FormsModule],
+      imports: [TextInputWithErrorMessageComponent],
     }),
   ],
   parameters: {
@@ -155,11 +162,12 @@ export const ExampleWithObservableError: StoryFn = (args) => ({
     handleAddError: action('handleAddError'),
     handleRemoveError: action('handleRemoveError'),
   },
-  template: `
-<example-text-input-with-error-message
-(handleAddError)="handleAddError($event)"
-(handleRemoveError)="handleRemoveError($event)"></example-text-input-with-error-message>
-	`,
+  template: html`
+    <example-text-input-with-error-message
+      (handleAddError)="handleAddError($event)"
+      (handleRemoveError)="handleRemoveError($event)"
+    ></example-text-input-with-error-message>
+  `,
 });
 
 ExampleWithObservableError.parameters = {

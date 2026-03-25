@@ -4,14 +4,13 @@ import { By } from '@angular/platform-browser';
 import { DropdownMenuItemComponent } from './dropdown-menu-item.component';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { IconButtonComponent } from '../../icon-button/icon-button.component';
-import { IconComponent } from '../../icon/icon.component';
 import { defaultMenuItems } from '../mock_data';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-dropdown-menu',
+  imports: [IconButtonComponent, DropdownMenuComponent, DropdownMenuItemComponent],
   template: ` <fudis-icon-button
     #testButton
     [ariaLabel]="'Random items menu'"
@@ -41,8 +40,7 @@ describe('DropdownMenuItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DropdownMenuItemComponent, DropdownMenuComponent, MockDropdownMenuComponent],
-      imports: [IconButtonComponent, IconComponent],
+      imports: [MockDropdownMenuComponent],
       providers: [FudisDialogService],
     }).compileComponents();
 

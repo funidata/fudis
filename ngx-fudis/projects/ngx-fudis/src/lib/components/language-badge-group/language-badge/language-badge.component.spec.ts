@@ -11,7 +11,7 @@ describe('LanguageBadgeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LanguageBadgeComponent],
+      imports: [LanguageBadgeComponent],
     }).compileComponents();
   });
 

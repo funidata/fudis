@@ -17,10 +17,7 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 
-@Directive({
-  selector: '[fudisSelectOptionBase]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisSelectOptionBase]' })
 export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirective {
   constructor(
     @Inject(DOCUMENT) _document: Document,

@@ -81,7 +81,6 @@ class SelectBaseControlValueAccessorDirective implements ControlValueAccessor, V
       multi: true,
     },
   ],
-  standalone: false,
 })
 export class SelectControlValueAccessorDirective<T = string>
   extends SelectBaseControlValueAccessorDirective
@@ -135,7 +134,6 @@ export class SelectControlValueAccessorDirective<T = string>
       multi: true,
     },
   ],
-  standalone: false,
 })
 export class MultiselectControlValueAccessorDirective<T = string>
   extends SelectBaseControlValueAccessorDirective

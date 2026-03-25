@@ -20,6 +20,9 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 import { Subscription } from 'rxjs';
 
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { FieldSetComponent } from '../fieldset/fieldset.component';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Groups mutually exclusive options.
@@ -38,7 +41,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
-  standalone: false,
+  imports: [FieldSetComponent, FieldsetContentDirective, GuidanceComponent, AsyncPipe],
 })
 export class RadioButtonGroupComponent
   extends ControlComponentBaseDirective

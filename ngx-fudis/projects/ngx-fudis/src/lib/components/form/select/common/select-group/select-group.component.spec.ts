@@ -13,7 +13,7 @@ describe('SelectGroupComponent', () => {
   describe('with Select parent', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [SelectGroupComponent, SelectComponent],
+        imports: [SelectGroupComponent],
       })
         .overrideComponent(SelectGroupComponent, {
           add: {
@@ -73,7 +73,7 @@ describe('SelectGroupComponent', () => {
   describe('with Multiselect parent', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [SelectGroupComponent, SelectComponent],
+        imports: [SelectGroupComponent],
       })
         .overrideComponent(SelectGroupComponent, {
           add: {

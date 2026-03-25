@@ -4,12 +4,11 @@ import { getDirective } from '../../../utilities/tests/utilities';
 import { HeadingComponent } from '../../../components/typography/heading/heading.component';
 import { BodyTextComponent } from '../../../components/typography/body-text/body-text.component';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { GridDirective } from './grid.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-grid-directive',
+  imports: [GridDirective, HeadingComponent, BodyTextComponent],
   template: `<div fudisGrid>
       <fudis-heading [level]="3">I am test heading</fudis-heading>
       <fudis-body-text>Paragraph text for testing grid directive.</fudis-body-text>
@@ -27,8 +26,7 @@ describe('GridDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HostComponent, GridApiDirective, GridDirective, HeadingComponent],
-      imports: [BodyTextComponent],
+      imports: [HostComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

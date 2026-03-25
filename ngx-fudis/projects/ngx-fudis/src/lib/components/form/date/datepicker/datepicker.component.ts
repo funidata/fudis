@@ -12,9 +12,15 @@ import {
   ViewEncapsulation,
   effect,
 } from '@angular/core';
-import { FormControl, AbstractControl } from '@angular/forms';
+import { FormControl, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepicker, MatDatepickerIntl } from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerIntl,
+  MatDatepickerInput,
+  MatDatepickerToggle,
+  MatDatepickerToggleIcon,
+} from '@angular/material/datepicker';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -29,6 +35,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateRangeComponent } from '../date-range/date-range.component';
 import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
+import { LabelComponent } from '../../label/label.component';
+import { MatSuffix } from '@angular/material/form-field';
+import { IconComponent } from '../../../icon/icon.component';
+import { GuidanceComponent } from '../../guidance/guidance.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Allows selection of a single date.
@@ -48,7 +59,19 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
     },
     { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
   ],
-  standalone: false,
+  imports: [
+    LabelComponent,
+    MatDatepickerInput,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerToggle,
+    MatSuffix,
+    MatDatepickerToggleIcon,
+    IconComponent,
+    MatDatepicker,
+    GuidanceComponent,
+    AsyncPipe,
+  ],
 })
 export class DatepickerComponent
   extends ControlComponentBaseDirective
