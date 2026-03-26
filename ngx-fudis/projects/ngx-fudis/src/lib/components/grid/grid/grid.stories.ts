@@ -4,7 +4,11 @@ import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utili
 import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
-import { FudisDefaultGridProperties, FudisGridAlign } from '../../../types/grid';
+import {
+  FudisDefaultGridProperties,
+  FudisGridAlign,
+  fudisGridWidthArray,
+} from '../../../types/grid';
 
 @Component({
   selector: 'example-grid-with-service',
@@ -306,7 +310,7 @@ Example.argTypes = {
     control: { type: 'select' },
   },
   width: {
-    options: ['xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'initial'],
+    options: fudisGridWidthArray,
     control: { type: 'select' },
   },
   rowGap: {

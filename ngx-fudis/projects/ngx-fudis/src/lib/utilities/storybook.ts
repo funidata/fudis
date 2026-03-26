@@ -289,7 +289,6 @@ export const formExclude: RegExp = excludeRegex([
   'handleUpdatedErrorList',
   'rowGap',
   'serviceDefaults',
-  'width',
 ]);
 
 export const formArgTypesExclude: RegExp = excludeRegex(['rowGap', 'columns', 'classes']);

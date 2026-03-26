@@ -15,6 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { StorybookExampleFormDynamicComponentsComponent } from './examples/form-dynamic-components.component';
+import { fudisGridWidthArray } from '../../../types/grid';
 
 export default {
   title: 'Components/Form/Form',
@@ -59,6 +60,12 @@ export default {
     },
     level: {
       options: fudisHeadingLevelArray,
+      control: {
+        type: 'select',
+      },
+    },
+    width: {
+      options: fudisGridWidthArray,
       control: {
         type: 'select',
       },
@@ -144,6 +151,7 @@ export const Example: StoryFn = (args) => ({
       [helpText]="helpText"
       [errorSummaryTitle]="errorSummaryTitle"
       [errorSummaryVisible]="errorSummaryVisible"
+      [width]="width"
     >
       <fudis-form-header>
         <fudis-dl [columns]="1" [variant]="'compact'">
@@ -182,6 +190,7 @@ Example.args = {
   errorSummaryTitle:
     'There are errors in this form. Please address these before trying to submit again.',
   errorSummaryVisible: false,
+  width: 'xxl',
 };
 
 Example.parameters = {
@@ -212,6 +221,7 @@ export const ExampleWithDynamicValidators: StoryFn = (args) => ({
     [errorSummaryVisible]="errorSummaryVisible"
     [badge]="badge"
     [badgeText]="badgeText"
+    [width]="width"
   />`,
 });
 
@@ -226,6 +236,7 @@ ExampleWithDynamicValidators.args = {
   errorSummaryVisible: false,
   badge: null,
   badgeText: '',
+  width: 'xxl',
 };
 
 ExampleWithDynamicValidators.parameters = {

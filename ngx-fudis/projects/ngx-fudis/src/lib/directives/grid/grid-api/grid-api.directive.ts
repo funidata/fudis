@@ -56,8 +56,9 @@ export class GridApiDirective {
   @Input() rowGap: FudisGridGap = 'none';
 
   /**
-   * Maximum width of Grid: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial'. When viewport gets
-   * narrower, grid automatically adjusts to lower sizes.
+   * Maximum width of Grid: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial' | 'full-width'.
+   * When viewport gets narrower, grid automatically adjusts to lower sizes, except in full-width
+   * mode.
    */
   @Input() width: FudisGridWidth = 'xxl';
 }
