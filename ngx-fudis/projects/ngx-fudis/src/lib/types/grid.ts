@@ -44,10 +44,10 @@ export const fudisGridWidthArray = [
 export type FudisGridWidth = (typeof fudisGridWidthArray)[number];
 
 /**
- * Alignment of whole Grid inside its container. For items inside the Grid use alignItemsX and
- * alignItemsY.
+ * Alignment of whole Grid inside its container. For items inside the Grid use FudisGridAlignItems.
  */
-export type FudisGridAlign = 'start' | 'end' | 'center';
+export const fudisGridAlignArray = ['start', 'end', 'center'] as const;
+export type FudisGridAlign = (typeof fudisGridAlignArray)[number];
 
 /**
  * Alignment of Grid Items inside a Grid

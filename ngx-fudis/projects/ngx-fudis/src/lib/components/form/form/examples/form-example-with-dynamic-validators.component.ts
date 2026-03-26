@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/forms';
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
-import { FudisGridWidth } from '../../../../types/grid';
+import { FudisGridWidth, FudisGridAlign } from '../../../../types/grid';
 import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -45,6 +45,7 @@ type MyForm = {
       [title]="title"
       [titleVariant]="titleVariant"
       [helpText]="helpText"
+      [align]="align"
       [width]="width"
       [errorSummaryTitle]="errorSummaryTitle"
       [errorSummaryVisible]="errorSummaryVisible"
@@ -324,6 +325,7 @@ export class StorybookExampleDynamicValidatorsComponent {
   @Input() titleVariant: FudisHeadingVariant;
   @Input() level: FudisHeadingLevel;
   @Input() helpText: string;
+  @Input() align: FudisGridAlign;
   @Input() width: FudisGridWidth;
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;

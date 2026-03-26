@@ -280,7 +280,6 @@ export const fieldsetExclude: RegExp = excludeRegex(['hostClass']);
  */
 export const formExclude: RegExp = excludeRegex([
   'id',
-  'align',
   'alignItemsX',
   'alignItemsY',
   'classes',
