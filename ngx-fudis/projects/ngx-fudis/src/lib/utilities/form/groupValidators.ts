@@ -1,11 +1,10 @@
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { FudisValidationErrors, FudisValidatorFn, FudisValidatorMessage } from './validators';
-
-export interface FudisGroupValidatorsMinMaxSettings {
-  value: number;
-  message: Observable<string> | string;
-}
+import {
+  FudisGroupValidatorsMinMaxSettings,
+  FudisValidationErrors,
+  FudisValidatorFn,
+  FudisValidatorMessage,
+} from '../../types/validators';
 
 /**
  * Form Group Validators

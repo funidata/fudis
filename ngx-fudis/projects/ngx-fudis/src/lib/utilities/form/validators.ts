@@ -1,20 +1,9 @@
-import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-
-export type FudisValidatorMessage = Observable<string> | string;
-
-export interface FudisValidationErrors extends ValidationErrors {
-  [key: string]: { message: FudisValidatorMessage; value?: unknown } | null;
-}
-
-export interface FudisValidatorFn extends ValidatorFn {
-  (control: AbstractControl): FudisValidationErrors | null;
-}
-
-export interface FudisValidatorsDatepickerSettings {
-  value: Date;
-  message: FudisValidatorMessage;
-}
+import { AbstractControl, Validators } from '@angular/forms';
+import {
+  FudisValidatorFn,
+  FudisValidatorMessage,
+  FudisValidatorsDatepickerSettings,
+} from '../../types/validators';
 
 /**
  * Form Control Validators

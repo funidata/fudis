@@ -17,7 +17,7 @@ import {
   FudisValidationErrors,
   FudisValidatorFn,
   FudisValidatorMessage,
-} from '../../../../utilities/form/validators';
+} from '../../../../types/validators';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
