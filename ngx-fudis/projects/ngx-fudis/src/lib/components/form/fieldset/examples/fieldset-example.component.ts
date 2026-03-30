@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FudisRadioButtonOption } from '../../../../types/forms';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
-
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { PopoverApiDirective } from '../../../../directives/popover/popover-api.directive';
+import { FudisGridAlign, FudisGridWidth } from '../../../../types/grid';
 
 interface MyRadioButton {
   value: string;
@@ -24,10 +24,10 @@ interface MyFieldsetForm {
   selector: 'example-fieldset',
   template: `
     <fudis-fieldset
-      [width]="'md'"
+      [width]="width"
       [label]="'Example Fieldset Title'"
       [helpText]="'Helptext for the fieldset'"
-      [align]="'center'"
+      [align]="align"
       [popoverText]="'I contain additional information!'"
       [popoverTriggerLabel]="'Additional information'"
       [popoverPosition]="'below'"
@@ -84,6 +84,9 @@ interface MyFieldsetForm {
   `,
 })
 export class FieldsetExampleComponent extends PopoverApiDirective {
+  @Input() width: FudisGridWidth;
+  @Input() align: FudisGridAlign;
+
   alignActions: 'start' | 'end' | 'below' = 'start';
 
   changeAlign(): void {
