@@ -31,13 +31,23 @@ export type FudisGridColumns = string | number | FudisGridColumnsResponsive;
 /**
  * Grid widths
  */
-export type FudisGridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial';
+export const fudisGridWidthArray = [
+  'xxl',
+  'xl',
+  'lg',
+  'md',
+  'sm',
+  'xs',
+  'initial',
+  'full-width',
+] as const;
+export type FudisGridWidth = (typeof fudisGridWidthArray)[number];
 
 /**
- * Alignment of whole Grid inside its container. For items inside the Grid use alignItemsX and
- * alignItemsY.
+ * Alignment of whole Grid inside its container. For items inside the Grid use FudisGridAlignItems.
  */
-export type FudisGridAlign = 'start' | 'end' | 'center';
+export const fudisGridAlignArray = ['start', 'end', 'center'] as const;
+export type FudisGridAlign = (typeof fudisGridAlignArray)[number];
 
 /**
  * Alignment of Grid Items inside a Grid

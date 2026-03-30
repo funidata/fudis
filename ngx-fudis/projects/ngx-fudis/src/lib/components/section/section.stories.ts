@@ -5,6 +5,7 @@ import { SectionComponent } from './section.component';
 import docs from './section.mdx';
 import { excludeAllRegex, sectionExclude } from '../../utilities/storybook';
 import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../types/typography';
+import { fudisGridAlignArray, fudisGridWidthArray } from '../../types/types';
 
 export default {
   title: 'Components/Section',
@@ -51,6 +52,18 @@ export default {
     },
     popoverTriggerLabel: {
       control: { type: 'text' },
+    },
+    align: {
+      options: fudisGridAlignArray,
+      control: {
+        type: 'select',
+      },
+    },
+    width: {
+      options: fudisGridWidthArray,
+      control: {
+        type: 'select',
+      },
     },
   },
 } as Meta;
