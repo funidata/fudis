@@ -1185,7 +1185,7 @@ type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteTyp
 type FudisSelectOption<T = string> = { value: T; label: string; subLabel?: string; disabled?: boolean };
 
 // Layout
-type FudisGridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial';
+type FudisGridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial' | 'full-width';
 type FudisGridAlign = 'start' | 'end' | 'center';
 type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type FudisBreakpointKey = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';

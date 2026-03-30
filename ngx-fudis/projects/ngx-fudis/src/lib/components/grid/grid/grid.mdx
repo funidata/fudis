@@ -17,6 +17,7 @@ This page contains documentation on how to align and set **all** first level chi
 
 - [Basic Usage](#basic-usage)
 - [Defining Columns](#defining-columns)
+- [Default Gutters](#default-gutters)
 - [Usage with Flexbox](#usage-with-flexbox)
 - [Universal Configuration of All Grid Components](#universal-configuration-of-all-grid-components)
 - [Properties Table](#properties)
@@ -206,6 +207,11 @@ With `[columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}"` In following
   <div>Item n</div>
 </fudis-grid-item>
 ```
+
+## Default Gutters
+
+By default, Grid has predefined gutters between columns and rows. These gutters are always customizable through `columnGap` and `rowGap` Input properties.
+Grids with `initial` or `full-width` widths do not have these predefined gutters and should be added manually as needed.
 
 ## Usage with Flexbox
 
