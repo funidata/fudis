@@ -355,6 +355,7 @@ export class PaginationComponent implements AfterViewChecked, OnInit, OnDestroy 
     // Keep focus on clicked button
     if (this._buttonClickState().clicked && this.autoFocusOnPageChange) {
       const buttonType = this._buttonClickState().type;
+      this._buttonClickState.set({ clicked: false, type: null });
       if (buttonType) {
         document.getElementById(`${this.id}-button-${buttonType}`)?.focus();
       }
