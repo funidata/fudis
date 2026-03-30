@@ -5,7 +5,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ErrorMessageDirective } from './error-message.directive';
 import docs from './error-message.mdx';
-import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
+import { FudisValidators } from '../../../../utilities/form/validators';
+import { FudisValidationErrors } from '../../../../types/validators';
 import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/storybook';
 
 @Component({

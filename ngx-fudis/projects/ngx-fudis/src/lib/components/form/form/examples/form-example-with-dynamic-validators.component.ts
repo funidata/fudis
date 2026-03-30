@@ -4,7 +4,8 @@ import { FudisRadioButtonOption, FudisSelectOption } from '../../../../types/for
 import { FudisBadgeVariant } from '../../../../types/miscellaneous';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../../types/typography';
 import { FudisGridWidth, FudisGridAlign } from '../../../../types/grid';
-import { FudisValidatorFn, FudisValidators } from '../../../../utilities/form/validators';
+import { FudisValidators } from '../../../../utilities/form/validators';
+import { FudisValidatorFn } from '../../../../types/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
