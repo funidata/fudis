@@ -116,12 +116,6 @@ export class FieldSetComponent
   @Input() helpText: string | undefined;
 
   /**
-   * Used to vertically align Legend label with similar Label elements with varying heights. By
-   * default `false`, but set `true` in Checkbox Group and Radio Button Group
-   */
-  @Input() syncLegendHeight = false;
-
-  /**
    * CSS classes for the native fieldset HTMLelement
    */
   protected _classes: string[];
