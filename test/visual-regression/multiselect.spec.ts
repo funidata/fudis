@@ -4,6 +4,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.goto(
     "/iframe.html?args=&id=components-form-select--multiselect-showcase&viewMode=story",
   );
+  await page.waitForTimeout(150);
   await expect(page).toHaveScreenshot("A-1-init.png", {
     fullPage: true,
   });

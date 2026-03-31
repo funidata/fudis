@@ -27,7 +27,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { parseDate, updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisValidatorUtilities } from '../../../../utilities/form/validator-utilities';
-import { FudisValidatorFn } from '../../../../utilities/form/validators';
+import { FudisValidatorFn } from '../../../../types/validators';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
 import { BehaviorSubject, Subscription } from 'rxjs';

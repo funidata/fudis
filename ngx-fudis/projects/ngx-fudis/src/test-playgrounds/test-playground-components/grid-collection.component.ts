@@ -67,13 +67,35 @@ import { NgxFudisModule } from '../../lib/ngx-fudis.module';
       fudisGrid
       [classes]="'storybook__wrapper-border'"
       [columns]="{ md: 2, lg: 6 }"
-      [classes]="'storybook__wrapper-border'"
       [align]="'end'"
       [alignItemsX]="'stretch'"
       [alignItemsY]="'stretch'"
       [width]="'xxl'"
       [columnGap]="'xxl'"
       [rowGap]="'xxl'"
+    >
+      <div class="storybook__item">
+        <fudis-body-text class="fudis-mb-xs"
+          >First Grid child's first Body Text inside it</fudis-body-text
+        >
+        <fudis-body-text>First Grid child's second Body Text inside it</fudis-body-text>
+      </div>
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item"
+        >Grid child element which has more content than most of the child elements</fudis-body-text
+      >
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
+    </div>
+    <fudis-hr class="fudis-my-lg" />
+
+    <fudis-heading [level]="2">Grid full-width (no default gutters)</fudis-heading>
+    <div
+      fudisGrid
+      [classes]="'storybook__wrapper-border'"
+      [columns]="{ md: 2, lg: 6 }"
+      [width]="'full-width'"
     >
       <div class="storybook__item">
         <fudis-body-text class="fudis-mb-xs"

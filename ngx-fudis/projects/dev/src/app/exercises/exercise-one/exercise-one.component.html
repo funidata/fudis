@@ -1,0 +1,131 @@
+<ng-container *transloco="let t">
+  <fudis-grid [classes]="'fudis-mt-xl'" [align]="'center'">
+    <fudis-expandable [title]="'Creating a layout with Fudis Grid'" [level]="2" [closed]="false">
+      <ng-template fudisExpandableContent>
+        <fudis-heading [level]="3" [class]="'fudis-mb-md'">Description</fudis-heading>
+        <fudis-body-text [class]="'fudis-mb-md'">
+          In this exercise, use only one Fudis Grid component to recreate the provided example
+          layout. Focus on matching the image as closely as possible, and consider accessibility
+          improvements where needed. Download the example image to guide your implementation.
+        </fudis-body-text>
+        <fudis-dl>
+          <fudis-dl-item>
+            <fudis-dt [contentText]="'Task objectives'"></fudis-dt>
+            <fudis-dd>
+              <fudis-dl [variant]="'compact'">
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Goal'"></fudis-dt>
+                  <fudis-dd [contentText]="'Getting familiar with Fudis Grid.'"></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Task'"></fudis-dt>
+                  <fudis-dd
+                    [contentText]="'Create a layout that matches to the provided image by only using one Grid element.'"
+                  ></fudis-dd>
+                </fudis-dl-item>
+                <fudis-dl-item>
+                  <fudis-dt [contentText]="'Bonus'"></fudis-dt>
+                  <fudis-dd
+                    [contentText]="'The example image layout also has some accessibility issues, can you spot and fix them?'"
+                  ></fudis-dd>
+                </fudis-dl-item>
+              </fudis-dl>
+            </fudis-dd>
+          </fudis-dl-item>
+        </fudis-dl>
+        <a
+          fudisLink
+          [href]="'/assets/downloads/exercise-1.zip'"
+          download
+          [title]="'Download example image'"
+          [class]="'fudis-mb-md'"
+        ></a>
+        <fudis-heading [level]="3">Outcome</fudis-heading>
+        <fudis-body-text>
+          All the components you need are already included in the HTML template below. Complete your
+          solution directly in this exercise-one template. Make sure your layout is fully responsive
+          on mobile devices, all elements should stack vertically.
+        </fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
+  </fudis-grid>
+</ng-container>
+
+<!-- Exercise One -->
+<!-- Use the following components and create a layout that matches to the provided image found in downloads folder. Your goal is to use only one provided Grid element. -->
+<ng-container *transloco="let t">
+  <fudis-grid [classes]="'fudis-mt-xl'" [align]="'center'">
+    <fudis-heading [level]="1">Timeline</fudis-heading>
+    <fudis-body-text>
+      Plan and view the overall picture of your studies on the timeline. Schedule your courses and
+      view the placement of completed courses on the timeline. Select the study plan for which you
+      want to view and edit the overall picture.
+    </fudis-body-text>
+    <fudis-select
+      fudisGridItem
+      [columns]="{ md: 2 }"
+      [label]="'Study plan'"
+      [control]="selectControl"
+    >
+      <ng-template fudisSelectOptions>
+        @for (option of selectOptions; track option.value) {
+          <fudis-select-option [data]="option" />
+        }
+      </ng-template>
+    </fudis-select>
+    <fudis-badge [variant]="'success'" [content]="'Primary study plan'"></fudis-badge>
+    <fudis-dl [variant]="'compact'">
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Education'"></fudis-dt>
+        <fudis-dd
+          [contentText]="'Bachelor of Science in Business Administration (Study plan 1, curriculum period: 2018-2019)'"
+        ></fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Created'"></fudis-dt>
+        <fudis-dd [contentText]="'15.9.20182'"></fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Modified'"></fudis-dt>
+        <fudis-dd [contentText]="'11.3.2026'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+    <fudis-body-text>Bachelor of Science in Business Administration, 0-40 cr</fudis-body-text>
+    <fudis-dl>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Scheduled credits'"></fudis-dt>
+        <fudis-dd [contentText]="'0'"></fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Completed credits'"></fudis-dt>
+        <fudis-dd [contentText]="'0'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+    <fudis-heading [level]="2">Study plan timeline</fudis-heading>
+    <fudis-body-text>
+      Schedule any unfinished courses in the study plan on the timeline. You can edit and delete
+      timings for periods on the timeline. The timeline also shows the placement of completed
+      credits.
+    </fudis-body-text>
+    <fudis-dl>
+      <fudis-dl-item>
+        <fudis-dt [contentText]="'Study right'"></fudis-dt>
+        <fudis-dd [contentText]="'Starting from 1.8.2019'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+    <fudis-button [label]="'Schedule courses with a timing template'"></fudis-button>
+    <fudis-button
+      [variant]="'secondary'"
+      [label]="'Delete all timings'"
+      [icon]="'delete'"
+    ></fudis-button>
+    <fudis-checkbox
+      [label]="'Show empty summer periods on the timeline'"
+      [control]="testControl"
+    ></fudis-checkbox>
+    <fudis-checkbox
+      [label]="'Show past semesters on the timeline'"
+      [control]="myControl"
+    ></fudis-checkbox>
+  </fudis-grid>
+</ng-container>

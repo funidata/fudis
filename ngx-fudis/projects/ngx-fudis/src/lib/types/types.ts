@@ -8,3 +8,4 @@ export * from './id';
 export * from './miscellaneous';
 export * from './spacing';
 export * from './typography';
+export * from './validators';

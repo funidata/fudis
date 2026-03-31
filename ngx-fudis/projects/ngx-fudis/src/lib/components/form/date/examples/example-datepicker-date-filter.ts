@@ -1,6 +1,6 @@
 import { FormControl, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FudisValidationErrors } from '../../../../utilities/form/validators';
+import { FudisValidationErrors } from '../../../../types/validators';
 import { NgxFudisModule } from '../../../../ngx-fudis.module';
 
 import { FudisIdService } from '../../../../services/id/id.service';

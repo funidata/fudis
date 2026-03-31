@@ -3,7 +3,7 @@
   [attr.id]="_id"
   tabindex="-1"
   [class.fudis-multiselect-option--visible]="_optionVisible"
-  [class.fudis-multiselect-option--checked]="checked"
+  [class.fudis-multiselect-option--checked]="_selectedOptionChecked"
   [class.fudis-multiselect-option--focused]="_focused"
   [class.fudis-multiselect-option--disabled]="data.disabled"
 >
@@ -11,7 +11,7 @@
     [attr.for]="_id + '-checkbox-input-' + componentInstanceId"
     class="fudis-multiselect-option__label"
     [class.fudis-multiselect-option__label--focus]="_focused"
-    [class.fudis-multiselect-option__label--checked]="checked"
+    [class.fudis-multiselect-option__label--checked]="_selectedOptionChecked"
   >
     <div
       class="fudis-multiselect-option__label__checkbox"
@@ -26,12 +26,12 @@
         [attr.id]="_id + '-checkbox-input-' + componentInstanceId"
         [attr.aria-disabled]="data.disabled || null"
         (click)="!data.disabled && _clickOption($event)"
-        [attr.aria-selected]="checked"
+        [attr.aria-selected]="_selectedOptionChecked"
         (focus)="_focus()"
         (keydown)="_keyDown($event)"
         (blur)="_blur($event)"
       />
-      @if (checked) {
+      @if (_selectedOptionChecked) {
         <fudis-icon class="fudis-multiselect-option__label__checkbox__icon" [icon]="'check'" />
       }
     </div>

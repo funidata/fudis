@@ -40,9 +40,7 @@ export class MultiselectOptionComponent<T = string>
 
     this._parent = this._parentMultiselect;
 
-    _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
-      this._isOptionChecked(newValue);
-    });
+    _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {});
 
     toObservable(this._parent.getAutocompleteFilterText())
       .pipe(takeUntilDestroyed())
@@ -55,6 +53,15 @@ export class MultiselectOptionComponent<T = string>
    * Common parent and its properties
    */
   protected override _parent: MultiselectComponent<T>;
+
+  /**
+   * Returns true if this option is currently selected in the parent multiselect. Checks if the
+   * option's value exists in the parent FormControl's value array.
+   */
+  protected get _selectedOptionChecked(): boolean {
+    const options = this._parentMultiselect.control.value;
+    return !!options?.find((option) => option.value === this.data.value);
+  }
 
   ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent<T>>) {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
@@ -70,14 +77,6 @@ export class MultiselectOptionComponent<T = string>
       this._id = newOptionId;
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
-
-      const parentControlValue = this._parentMultiselect.control.value;
-
-      if (parentControlValue && parentControlValue.length !== 0) {
-        this._isOptionChecked(parentControlValue);
-      } else {
-        this.checked = false;
-      }
 
       if (changes.data?.currentValue && changes.data.currentValue !== changes.data.previousValue) {
         this._checkIfLabelRequiresUpdate(changes.data?.currentValue);
@@ -101,7 +100,7 @@ export class MultiselectOptionComponent<T = string>
    */
   protected override _clickOption(event: Event): void {
     if (!this.data.disabled) {
-      if (!this.checked) {
+      if (!this._selectedOptionChecked) {
         this._parentMultiselect.handleMultiSelectionChange(this.data, 'add');
       } else {
         this._parentMultiselect.handleMultiSelectionChange(this.data, 'remove');
@@ -117,19 +116,6 @@ export class MultiselectOptionComponent<T = string>
       this._isOptionVisible(filterText);
     } else {
       this._isOptionVisible('');
-    }
-  }
-
-  /**
-   * Checks if this option is checked or not and updates parents state accordingly
-   *
-   * @param options Currently selected options
-   */
-  private _isOptionChecked(options: FudisSelectOption<T>[] | null): void {
-    if (this.data) {
-      const result = options?.find((option) => option.value === this.data.value);
-
-      this.checked = !!result;
     }
   }
 

@@ -85,6 +85,7 @@ export class SectionComponent
    * - Md = Viewports smaller than 992px
    * - Sm = Viewports smaller than 768px
    * - Xs = Viewports smaller than 576px
+   * - Full-width = Grid takes full width of its parent container, no maximum width
    */
   @Input() width: FudisGridWidth = 'initial';
 

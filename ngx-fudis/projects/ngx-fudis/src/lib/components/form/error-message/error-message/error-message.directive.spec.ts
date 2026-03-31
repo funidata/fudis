@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { FudisValidationErrors, FudisValidators } from '../../../../utilities/form/validators';
+import { FudisValidators } from '../../../../utilities/form/validators';
+import { FudisValidationErrors } from '../../../../types/validators';
 import { ErrorMessageDirective } from './error-message.directive';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';

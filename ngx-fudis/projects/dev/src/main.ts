@@ -8,8 +8,25 @@ import { FormsModule } from '@angular/forms';
 import { NgxFudisModule } from 'ngx-fudis';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TranslocoRootModule } from './app/transloco-root.module';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Routes } from '@angular/router';
 import { AppComponent } from './app/app.component';
+import { ExerciseComponent } from './app/exercises/exercise.component';
+import { ExerciseOneComponent } from './app/exercises/exercise-one/exercise-one.component';
+import { ExerciseTwoComponent } from './app/exercises/exercise-two/exercise-two.component';
+import { SandboxComponent } from './app/sandbox/sandbox.component';
+
+const appRoutes: Routes = [
+  { path: '', component: SandboxComponent },
+  { path: 'sandbox', component: SandboxComponent },
+  {
+    path: 'exercise',
+    component: ExerciseComponent,
+    children: [
+      { path: 'exercise-one', component: ExerciseOneComponent },
+      { path: 'exercise-two', component: ExerciseTwoComponent },
+    ],
+  },
+];
 
 if (environment.production) {
   enableProdMode();
@@ -34,6 +51,6 @@ bootstrapApplication(AppComponent, {
     },
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
-    provideRouter([]),
+    provideRouter([...appRoutes]),
   ],
 }).catch((err) => console.error(err));

@@ -10,13 +10,17 @@ import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectStoryControlExclude } from '../../../../utilities/storybook';
 import { StorybookExampleMultiselectBackendSimulationComponent } from '../examples/multiselect-backend-simulation.component';
 import { fudisInputSizeArray } from '../../../../types/forms';
+import { StorybookExampleMultiselectShowcaseNoFormComponent } from '../examples/multiselect-showcase-no-form.component';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
   component: MultiselectComponent,
   decorators: [
     moduleMetadata({
-      imports: [StorybookExampleMultiselectBackendSimulationComponent],
+      imports: [
+        StorybookExampleMultiselectBackendSimulationComponent,
+        StorybookExampleMultiselectShowcaseNoFormComponent,
+      ],
     }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
@@ -139,3 +143,9 @@ BackendSimulation.parameters = {
     exclude: /.*/g,
   },
 };
+
+// Hidden story for testing shared option between two Multiselects, not meant to be exposed in Storybook UI.
+export const pwNoFormExample: StoryFn = (args) => ({
+  props: args,
+  template: html`<example-multiselect-showcase-no-form></example-multiselect-showcase-no-form>`,
+});
