@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FooterComponent, GridComponent, GridItemDirective, HorizontalRuleComponent, LinkDirective } from 'ngx-fudis';
+import {
+  FooterComponent,
+  GridComponent,
+  GridItemDirective,
+  HorizontalRuleComponent,
+  LinkDirective,
+} from 'ngx-fudis';
 import { TranslocoRootModule } from './transloco-root.module';
 import { RouterOutlet } from '@angular/router';
 
