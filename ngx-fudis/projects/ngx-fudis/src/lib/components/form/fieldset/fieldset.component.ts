@@ -9,6 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   AfterContentInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
@@ -33,6 +34,7 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
   templateUrl: './fieldset.component.html',
   styleUrls: ['./fieldset.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [GridDirective, IconButtonComponent, BodyTextComponent],
 })
 export class FieldSetComponent
