@@ -7,6 +7,7 @@ import {
   OnInit,
   ViewEncapsulation,
   AfterContentInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
@@ -32,6 +33,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [GridDirective, HeadingComponent, BadgeComponent, IconButtonComponent, AsyncPipe],
 })
 export class SectionComponent
