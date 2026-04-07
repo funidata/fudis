@@ -4,7 +4,11 @@ import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utili
 import docs from './grid.mdx';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { Component } from '@angular/core';
-import { FudisDefaultGridProperties, FudisGridAlign, fudisGridWidthArray } from '../../../types/grid';
+import {
+  FudisDefaultGridProperties,
+  FudisGridAlign,
+  fudisGridWidthArray,
+} from '../../../types/grid';
 import { ButtonComponent } from '../../button/button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { GridItemDirective } from '../../../directives/grid/grid-item/grid-item.directive';
