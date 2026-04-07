@@ -9,6 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   AfterContentInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
@@ -33,6 +34,7 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
   templateUrl: './fieldset.component.html',
   styleUrls: ['./fieldset.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [GridDirective, IconButtonComponent, BodyTextComponent],
 })
 export class FieldSetComponent
@@ -114,12 +116,6 @@ export class FieldSetComponent
    * Help text, aligned underneath the input.
    */
   @Input() helpText: string | undefined;
-
-  /**
-   * Used to vertically align Legend label with similar Label elements with varying heights. By
-   * default `false`, but set `true` in Checkbox Group and Radio Button Group
-   */
-  @Input() syncLegendHeight = false;
 
   /**
    * CSS classes for the native fieldset HTMLelement
