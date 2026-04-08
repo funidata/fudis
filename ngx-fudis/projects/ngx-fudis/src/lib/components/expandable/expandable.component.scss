@@ -30,9 +30,9 @@
         @include core.expandable-regular-typography;
 
         display: flex;
-        cursor: pointer;
         width: 100%;
         text-align: left;
+        cursor: pointer;
 
         &:focus {
           @include core.focus-generic;
