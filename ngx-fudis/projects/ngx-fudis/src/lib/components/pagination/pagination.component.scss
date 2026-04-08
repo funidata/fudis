@@ -80,8 +80,8 @@ fudis-pagination {
         align-items: center;
         justify-content: center;
         text-decoration: underline solid;
-        font-family: core.$font-family;
         overflow-wrap: anywhere;
+        font-family: core.$font-family;
 
         &:focus {
           @include core.focus-generic;
@@ -97,8 +97,8 @@ fudis-pagination {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        font-family: core.$font-family;
         overflow-wrap: anywhere;
+        font-family: core.$font-family;
 
         &:focus {
           @include core.focus-generic;

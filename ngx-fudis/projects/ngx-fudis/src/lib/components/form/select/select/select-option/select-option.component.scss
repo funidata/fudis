@@ -11,12 +11,12 @@
   position: relative;
   align-items: flex-start;
   justify-content: space-between;
-  cursor: pointer;
   padding-left: core.$spacing-sm;
   width: 100%;
   min-height: core.$spacing-lg;
   overflow: hidden;
   text-align: left;
+  cursor: pointer;
 
   /* stylelint-disable-next-line selector-class-pattern */
   &:not(.fudis-select-option__focusable) {
