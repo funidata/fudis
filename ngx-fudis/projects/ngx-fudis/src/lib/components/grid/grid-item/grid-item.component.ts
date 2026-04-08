@@ -11,6 +11,6 @@ import { GridItemDirective } from '../../../directives/grid/grid-item/grid-item.
   templateUrl: './grid-item.component.html',
   styleUrls: ['./grid-item.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridItemComponent extends GridItemDirective {}
