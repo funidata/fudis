@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { GridItemDirective } from '../../../directives/grid/grid-item/grid-item.directive';
 
 /**
@@ -11,5 +11,6 @@ import { GridItemDirective } from '../../../directives/grid/grid-item/grid-item.
   templateUrl: './grid-item.component.html',
   styleUrls: ['./grid-item.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridItemComponent extends GridItemDirective {}
