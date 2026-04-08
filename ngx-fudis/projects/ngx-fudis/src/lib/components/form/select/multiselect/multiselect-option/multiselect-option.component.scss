@@ -38,9 +38,9 @@
       justify-content: center;
       margin-left: core.$spacing-xs;
       border-radius: 0;
-      cursor: pointer;
       width: core.$spacing-sm;
       height: core.$spacing-sm;
+      cursor: pointer;
 
       &--disabled {
         @include core.border('1px', 'dashed', 'gray-middle');
