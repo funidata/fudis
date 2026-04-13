@@ -10,9 +10,11 @@ fudis-pagination {
   padding-top: core.$spacing-lg;
 
   &-button {
-    // Override default button styles from Core
-    padding-top: 0;
-    padding-bottom: 0;
+    // Override default button styles from Core. These need !important flags in order to work properly in consuming app side.
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-top: 0 !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-bottom: 0 !important;
 
     &__previous {
       margin-right: core.$spacing-xs;
