@@ -75,11 +75,22 @@ Release notes for each release can be found from [Github Fudis Releases](https:/
 
 ### Problems After Releasing
 
-NPM does not allow modifying published packages to protect downstream dependents. If there is something wrong with a published version, you should release a new version incrementing the version as appropriate.
+NPM does not allow modifying published packages in order to protect downstream dependents. If there is something wrong with a published version, you should release a new version and increment the version number accordingly.
 
-For extreme cases, there exists an option to unpublish a package from NPM. This should be a last resort as it will break any downstream projects depending on the unpublished version. Note that even unpublishing will not allow you to use the same version again in a release, i.e., it is not a workaround to overwrite a published package. See [NPM Unpublish documentation](https://docs.npmjs.com/policies/unpublish).
+In extreme cases, a package can be unpublished from NPM. This should be considered a last resort, as it will break downstream projects depending on the unpublished version. Note that even unpublishing will not allow you to use the same version again in a release, i.e., it is not a workaround to overwrite a published package. See [NPM Unpublish documentation](https://docs.npmjs.com/policies/unpublish) for details.
 
-If something goes wrong in the release pipeline before the package has been published to NPM, you should anyhow increment the version and create a new release. This provides clarity and consistency to other Fudis developers as well as users of the library. Please also refrain from removing releases from GitHub and rather edit the release notes to make clear what has wrong and that the package should not be used. The bad code will anyway be forever available in the public repository so it is better to have the problems documented in release notes and thus provide an "audit trail" to users rather than undue surprises.
+**If a release has already been published to NPM:**
+
+Do not delete the corresponding GitHub release.
+Instead, create a new fixed release with an incremented version.
+Optionally, update the GitHub release notes or deprecate the package in NPM to inform users of issues.
+
+**If the release pipeline fails before publishing to NPM:**
+
+There might be cases where a GitHub release is created, but the publishing to NPM fails due to issues in the release pipeline. 
+In such cases, the GitHub release and the corresponding tag can be deleted if it does not represent a valid published version. Note that this should **only** be done for releases that have **not** yet been published to NPM. 
+However, GitHub releases that never resulted in a published NPM package do not need to be preserved, as they are not consumable by users. 
+The final decision on whether to edit or delete a GitHub release should be made based on the specific circumstances, with the goal of maintaining a synchronous and accurate release history.
 
 ### Publishing with OIDC
 
