@@ -17,8 +17,8 @@
     @include core.box-reset;
 
     display: flex;
-    cursor: pointer;
     text-align: start;
+    cursor: pointer;
 
     &:focus {
       @include core.focus-generic;

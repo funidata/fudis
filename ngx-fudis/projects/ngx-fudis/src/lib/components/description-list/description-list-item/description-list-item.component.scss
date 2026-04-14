@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    break-inside: avoid-column;
     margin-bottom: core.$spacing-md;
+    break-inside: avoid-column;
   }
 }
