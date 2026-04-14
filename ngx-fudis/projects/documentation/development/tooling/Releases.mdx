@@ -87,9 +87,9 @@ Optionally, update the GitHub release notes or deprecate the package in NPM to i
 
 **If the release pipeline fails before publishing to NPM:**
 
-There might be cases where a GitHub release is created, but the publishing to NPM fails due to issues in the release pipeline. 
-In such cases, the GitHub release and the corresponding tag can be deleted if it does not represent a valid published version. Note that this should **only** be done for releases that have **not** yet been published to NPM. 
-However, GitHub releases that never resulted in a published NPM package do not need to be preserved, as they are not consumable by users. 
+There might be cases where a GitHub release is created, but the publishing to NPM fails due to issues in the release pipeline.
+In such cases, the GitHub release and the corresponding tag can be deleted if it does not represent a valid published version. Note that this should **only** be done for releases that have **not** yet been published to NPM.
+However, GitHub releases that never resulted in a published NPM package do not need to be preserved, as they are not consumable by users.
 The final decision on whether to edit or delete a GitHub release should be made based on the specific circumstances, with the goal of maintaining a synchronous and accurate release history.
 
 ### Publishing with OIDC
