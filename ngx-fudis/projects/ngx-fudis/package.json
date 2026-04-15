@@ -1,6 +1,6 @@
 {
   "name": "@funidata/ngx-fudis",
-  "version": "9.0.2",
+  "version": "9.1.0",
   "license": "CC-BY-NC-SA-4.0",
   "exports": {
     ".": {
