@@ -47,13 +47,13 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
 
   /**
    * Collection of all registered errors categorised by parent Form id. Used as "temporary" storage
-   * and value will be passed to Observable when ReloadErrors is called.
+   * and value will be passed to Observable when reloadFormErrors is called.
    */
   private _errorsStore: FudisErrorSummaryAllErrors = {};
 
   /**
    * Collection of all registered errors categorised by parent Form id. This Observable is updated
-   * with new value only when ReloadErrors is called.
+   * with new value only when reloadFormErrors is called.
    */
   private _errorsObservable = new BehaviorSubject<FudisErrorSummaryAllErrors>({});
 

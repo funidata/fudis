@@ -10,6 +10,15 @@ import * as VersionSelectorStories from "../../../storybook-docs/version-selecto
 
 Fudis Expandable is an accordion component where its content can be expanded or collapsed to create more compact pages.
 
+**Table of Contents:**
+
+- [Commonly Used Properties](#commonly-used-properties)
+- [Content Projection](#content-projection)
+- [Examples](#examples)
+- [Expandable as Form's Child Component](#expandable-as-forms-child-component)
+- [Accessibility](#accessibility)
+- [Properties](#properties)
+
 ## Commonly Used Properties
 
 ### Variant
@@ -59,7 +68,7 @@ If Expandable has any form field components, e. g. Text Input as its child conte
 
 This can cause syncing issues with Form and Error Summary, because Text Input and other form field components send data to Error Summary only after they are loaded to the DOM.
 
-To ease this issue, property `openOnErrorSummaryReload` is by default `true`: If Expandable is a child component of [Form Component](/docs/components-form-form--documentation), the Expandable will open itself whenever [Error Summary Service's reloadErrors()](/docs/services-error-summary--documentation#reload-errors) is called.
+To ease this issue, property `openOnErrorSummaryReload` is by default `true`: If Expandable is a child component of [Form Component](/docs/components-form-form--documentation), the Expandable will open itself whenever [Error Summary Service's reloadFormErrors()](/docs/services-error-summary--documentation#reloadformerrors) is called.
 
 ### Property `errorSummaryBreadcrumb`
 
