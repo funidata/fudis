@@ -355,7 +355,7 @@ describe('ExpandableComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ExpandableComponent);
       component = fixture.componentInstance;
-      component.title = 'Test title';
+      fixture.componentRef.setInput('title', 'Test title');
       fixture.detectChanges();
     });
 
@@ -367,10 +367,10 @@ describe('ExpandableComponent', () => {
 
     it('should have title level', () => {
       fudisHeadingLevelArray.forEach((level) => {
-        component.level = level;
+        fixture.componentRef.setInput('level', `${level}`);
         fixture.detectChanges();
 
-        const heading = getElement(fixture, '.fudis-expandable .fudis-expandable__header__heading');
+        const heading = getElement(fixture, '.fudis-expandable__header__heading');
 
         expect(heading.getAttribute('aria-level')).toEqual(`${level}`);
       });
