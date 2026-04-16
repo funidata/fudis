@@ -8,6 +8,7 @@ import {
   OnDestroy,
   OnChanges,
   ElementRef,
+  DestroyRef,
   inject,
   Injector,
   AfterContentInit,
@@ -22,7 +23,7 @@ import {
 } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ExpandableContentDirective } from './expandable-content.directive';
 import { IconComponent } from '../icon/icon.component';
 import { BadgeComponent } from '../badge/badge.component';
@@ -142,24 +143,29 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
 
   private _parentFormId: string | null;
 
+  private _destroyRef = inject(DestroyRef);
+
   private _getParentForm(): void {
     this._errorSummaryService
       .getFormAncestorId(this._element.nativeElement)
       .then((parentFormId) => {
-        if (parentFormId) {
-          this._parentFormId = parentFormId;
-          if (this.errorSummaryBreadcrumb) {
-            this._addToErrorSummary(this.title);
-          }
+        if (!parentFormId) return;
 
-          toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
-            injector: this._injector,
-          }).subscribe((value) => {
+        this._parentFormId = parentFormId;
+
+        if (this.errorSummaryBreadcrumb) {
+          this._addToErrorSummary(this.title);
+        }
+
+        toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
+          injector: this._injector,
+        })
+          .pipe(takeUntilDestroyed(this._destroyRef))
+          .subscribe((value) => {
             if (this.closed && this.openOnErrorSummaryReload && value) {
               this._setClosedStatus(false);
             }
           });
-        }
       });
   }
 
