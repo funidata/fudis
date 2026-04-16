@@ -2,7 +2,7 @@
   [id]="_id"
   [attr.aria-labelledby]="_headingId"
   class="fudis-expandable fudis-expandable__{{ variant }}"
-  [class.fudis-expandable--closed]="_closed"
+  [class.fudis-expandable--closed]="_closed()"
 >
   <div class="fudis-expandable__header fudis-expandable__header__{{ variant }}">
     <div
@@ -17,9 +17,9 @@
         class="fudis-expandable__header__heading__button fudis-expandable__header__heading__button__{{
           variant
         }}"
-        [attr.aria-expanded]="!_closed"
+        [attr.aria-expanded]="!_closed()"
         [attr.aria-controls]="!closed ? _id + '__content' : null"
-        (click)="_setClosedStatus(!_closed)"
+        (click)="_setClosedStatus(!_closed())"
       >
         <fudis-icon
           class="fudis-expandable__header__heading__button__icon fudis-expandable__header__heading__button__icon__{{
@@ -27,7 +27,7 @@
           }}"
           [icon]="variant === 'lite' ? 'chevron' : 'chevron-ring-fill'"
           [color]="variant === 'lite' ? 'primary' : 'gray-dark'"
-          [rotate]="_closed ? 'none' : 'cw-90'"
+          [rotate]="_closed() ? 'none' : 'cw-90'"
         ></fudis-icon
         ><span class="fudis-expandable__header__heading__button__title"
           ><span class="fudis-expandable__header__heading__button__title__text">{{ title }}</span>
@@ -48,12 +48,12 @@
     </div>
     <ng-content select="fudis-expandable-actions" />
   </div>
-  @if (_openedOnce) {
+  @if (_openedOnce()) {
     <div
       class="fudis-expandable__content fudis-expandable__content__padding-{{ padding }}"
       [id]="_id + '__content'"
-      [attr.aria-hidden]="_closed"
-      [hidden]="_closed"
+      [attr.aria-hidden]="_closed()"
+      [hidden]="_closed()"
     >
       @if (_content) {
         <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>

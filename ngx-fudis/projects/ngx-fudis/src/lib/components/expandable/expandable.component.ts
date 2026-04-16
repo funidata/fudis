@@ -11,6 +11,9 @@ import {
   inject,
   Injector,
   AfterContentInit,
+  ChangeDetectionStrategy,
+  WritableSignal,
+  signal,
 } from '@angular/core';
 import {
   FudisBadgeVariant,
@@ -35,6 +38,7 @@ import { NgTemplateOutlet } from '@angular/common';
   templateUrl: './expandable.component.html',
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [IconComponent, BadgeComponent, NgTemplateOutlet],
 })
 export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
@@ -114,7 +118,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
   /**
    * Internal boolean of whether the expandable is currently closed
    */
-  protected _closed: boolean = true;
+  protected _closed: WritableSignal<boolean> = signal(true);
 
   /**
    * Internal id to generate unique id
@@ -129,7 +133,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
   /**
    * Lazy loading check for expanding content
    */
-  protected _openedOnce: boolean = false;
+  protected _openedOnce: WritableSignal<boolean> = signal(false);
 
   /**
    * Is info sent to Error Summary Service
@@ -163,7 +167,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
    * Getter for closed boolean
    */
   get closed(): boolean {
-    return this._closed;
+    return this._closed();
   }
 
   private _injector = inject(Injector);
@@ -214,8 +218,8 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
    * Setter for closed boolean
    */
   protected _setClosedStatus(value: boolean): void {
-    this._closed = value ?? this._closed;
-    this._openedOnce = this._openedOnce || !this._closed;
-    this.closedChange.emit(this._closed);
+    this._closed.set(value ?? this._closed());
+    this._openedOnce.set(this._openedOnce() || !this._closed());
+    this.closedChange.emit(this._closed());
   }
 }
