@@ -1,3 +1,4 @@
+@let blurredOut = _checkboxGroup.groupBlurredOut();
 @if (_control) {
   <label
     class="fudis-checkbox fudis-checkbox__label"
@@ -39,7 +40,7 @@
             _checkboxGroup.formGroup &&
             _checkboxGroup.formGroup.touched &&
             _checkboxGroup.formGroup.invalid &&
-            _checkboxGroup.groupBlurredOut()
+            blurredOut
           "
           [class.fudis-checkbox__content__box--disabled]="
             _control.disabled || _checkboxGroup.disabled
