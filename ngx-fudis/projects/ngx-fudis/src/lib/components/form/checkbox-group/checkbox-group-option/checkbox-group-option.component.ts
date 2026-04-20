@@ -92,13 +92,13 @@ export class CheckboxGroupOptionComponent implements OnInit {
     }
 
     /**
-     * Subscribe to formGroup status changes to mark the component for re-check when
-     * formGroup validity changes. Without this, the validity would not update as checkboxes
-     * are checked or unchecked. 
+     * Subscribe to formGroup status changes to mark the component for re-check when formGroup
+     * validity changes. Without this, the validity would not update as checkboxes are checked or
+     * unchecked.
      */
-    this._checkboxGroup.formGroup.statusChanges.pipe(takeUntilDestroyed(this._destroyRef))
+    this._checkboxGroup.formGroup.statusChanges
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(() => this._cdr.markForCheck());
-  
   }
 
   /**
