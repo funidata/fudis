@@ -6,8 +6,8 @@ import {
   ViewEncapsulation,
   OnInit,
   Host,
+  ChangeDetectionStrategy,
 } from '@angular/core';
-
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisRadioButtonChangeEvent, FudisRadioButtonOption } from '../../../../types/forms';
 import { RadioButtonGroupComponent } from '../radio-button-group.component';
@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   selector: 'fudis-radio-button',
   templateUrl: './radio-button.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, ReactiveFormsModule],
 })
 export class RadioButtonComponent implements OnInit {
@@ -55,7 +56,7 @@ export class RadioButtonComponent implements OnInit {
     const optionToEmit: FudisRadioButtonOption<object> = {
       id: this._id,
       label: this.label,
-      value: this._parentGroup?.control.value,
+      value: this._parentGroup?.selectedValue(),
     };
 
     /**
