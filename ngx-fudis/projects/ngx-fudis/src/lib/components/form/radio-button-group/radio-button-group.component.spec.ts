@@ -127,7 +127,7 @@ describe('Basic inputs of Radio Button Group', () => {
 
   it('should pass correct size values to the Fieldset', () => {
     fudisInputSizeArray.forEach((size) => {
-      component.size = size;
+      fixture.componentRef.setInput('size', size);
       fixture.detectChanges();
 
       expect(fieldsetElement.classList).toContain(`fudis-input-size__${size}`);
@@ -135,7 +135,7 @@ describe('Basic inputs of Radio Button Group', () => {
   });
 
   it('should pass correct id', () => {
-    component.id = 'my-custom-radio-button-group';
+    fixture.componentRef.setInput('id', 'my-custom-radio-button-group');
     fixture.detectChanges();
 
     expect(fieldsetElement.getAttribute('id')).toEqual('my-custom-radio-button-group');
