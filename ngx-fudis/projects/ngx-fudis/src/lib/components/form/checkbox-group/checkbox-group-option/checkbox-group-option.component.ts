@@ -92,8 +92,9 @@ export class CheckboxGroupOptionComponent implements OnInit {
     }
 
     /**
-     * With OnPush, the template won't re-check when formGroup validity changes via @Host()
-     * injection. groupBlurredOut is a signal and is tracked automatically.
+     * Subscribe to formGroup status changes to mark the component for re-check when
+     * formGroup validity changes. Without this, the validity would not update as checkboxes
+     * are checked or unchecked. 
      */
     this._checkboxGroup.formGroup.statusChanges.pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(() => this._cdr.markForCheck());

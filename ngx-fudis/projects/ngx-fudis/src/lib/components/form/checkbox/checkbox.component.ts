@@ -151,13 +151,12 @@ export class CheckboxComponent implements OnInit, OnChanges {
   ngOnChanges(changes: FudisComponentChanges<CheckboxComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._subscription?.unsubscribe();
-      this._subscription = this.control.valueChanges
+      this._subscription = this.control.events
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe(() => this._updateValueAndValidityTrigger.next());
-
-      this.control.statusChanges
-        .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe(() => this._cdr.markForCheck());
+        .subscribe(() => {
+          this._updateValueAndValidityTrigger.next();
+          this._cdr.markForCheck();
+        });
     }
   }
 }
