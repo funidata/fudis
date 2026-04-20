@@ -19,7 +19,7 @@
         (_checkboxGroup.formGroup &&
           _checkboxGroup.formGroup.touched &&
           _checkboxGroup.formGroup.invalid &&
-          _checkboxGroup.groupBlurredOut) ||
+          _checkboxGroup.groupBlurredOut()) ||
         null
       "
       (change)="_onChange()"
@@ -39,7 +39,7 @@
             _checkboxGroup.formGroup &&
             _checkboxGroup.formGroup.touched &&
             _checkboxGroup.formGroup.invalid &&
-            _checkboxGroup.groupBlurredOut
+            _checkboxGroup.groupBlurredOut()
           "
           [class.fudis-checkbox__content__box--disabled]="
             _control.disabled || _checkboxGroup.disabled

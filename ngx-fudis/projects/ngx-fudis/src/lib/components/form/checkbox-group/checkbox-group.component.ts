@@ -8,6 +8,8 @@ import {
   Output,
   ViewChild,
   DOCUMENT,
+  ChangeDetectionStrategy,
+  signal,
 } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -53,6 +55,7 @@ import { AsyncPipe } from '@angular/common';
     ReactiveFormsModule,
     AsyncPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   extends GroupComponentBaseDirective
@@ -93,11 +96,12 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will
    * not show before that.
    */
-  private _groupBlurredOut = false;
+  private _groupBlurredOut = signal(false);
+  readonly groupBlurredOut = this._groupBlurredOut.asReadonly();
 
   private _applyGroupMarkAsTouched(): void {
     if (this.formGroup.touched) {
-      this._groupBlurredOut = true;
+      this._groupBlurredOut.set(true);
     } else {
       /**
        * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so
@@ -106,16 +110,9 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
       const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
       this.formGroup.markAllAsTouched = () => {
         originalMarkAllAsTouched.apply(this.formGroup);
-        this._groupBlurredOut = true;
+        this._groupBlurredOut.set(true);
       };
     }
-  }
-
-  /**
-   * Getter for _groupBlurredOut boolean.
-   */
-  get groupBlurredOut(): boolean {
-    return this._groupBlurredOut;
   }
 
   ngOnInit(): void {
@@ -162,11 +159,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * checkboxes.
    */
   public setGroupBlurredOut(value: boolean): void {
-    if (value) {
-      this._groupBlurredOut = true;
-    } else {
-      this._groupBlurredOut = false;
-    }
+    this._groupBlurredOut.set(value);
   }
 
   /**

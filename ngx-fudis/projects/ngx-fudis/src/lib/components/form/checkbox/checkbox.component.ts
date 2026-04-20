@@ -7,6 +7,8 @@ import {
   OnChanges,
   DestroyRef,
   inject,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -31,11 +33,13 @@ import { AsyncPipe } from '@angular/common';
   selector: 'fudis-checkbox',
   templateUrl: './checkbox.component.html',
   imports: [FormsModule, ReactiveFormsModule, IconComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent implements OnInit, OnChanges {
   constructor(
     private _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
+    private _cdr: ChangeDetectorRef,
   ) {
     this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.control) {
@@ -150,6 +154,10 @@ export class CheckboxComponent implements OnInit, OnChanges {
       this._subscription = this.control.valueChanges
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe(() => this._updateValueAndValidityTrigger.next());
+
+      this.control.statusChanges
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._cdr.markForCheck());
     }
   }
 }
