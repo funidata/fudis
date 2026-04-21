@@ -20,7 +20,7 @@
       [attr.aria-invalid]="(_parentGroup.touchedState() && _parentGroup.invalidState()) || null"
       (focus)="_parentGroup.onFocus($event)"
       (keyup)="_parentGroup.handleKeyUp.emit($event)"
-      (blur)="_parentGroup.onRadioBlur($event)"
+      (blur)="_parentGroup.handleBlur.emit($event)"
       (change)="_onChange()"
     />
     <div class="fudis-radio-button__content">

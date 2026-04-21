@@ -113,7 +113,7 @@ export class RadioButtonGroupComponent
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._syncControlState();
       this._subscription?.unsubscribe();
-      this._subscription = this.control.valueChanges
+      this._subscription = this.control.events
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe(() => {
           this._syncControlState();
@@ -161,20 +161,6 @@ export class RadioButtonGroupComponent
     this._touched.set(this.control.touched);
     this._invalid.set(this.control.invalid);
     this._disabled.set(this.control.disabled);
-  }
-
-  /**
-   * Blur can mark the control as touched without changing its value. Sync the local state after
-   * Angular Forms finishes blur handling.
-   */
-  public onRadioBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-
-    // Wait for the current call stack to finish, allowing Angular Forms to update the control's states before syncing.
-    queueMicrotask(() => {
-      this._syncControlState();
-      this._updateValueAndValidityTrigger.next();
-    });
   }
 
   public triggerEmit(id: string, label: string): void {
