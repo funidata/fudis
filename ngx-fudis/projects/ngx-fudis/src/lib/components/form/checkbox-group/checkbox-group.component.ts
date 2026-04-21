@@ -10,6 +10,7 @@ import {
   DOCUMENT,
   ChangeDetectionStrategy,
   signal,
+  WritableSignal,
 } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -96,7 +97,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will
    * not show before that.
    */
-  private _groupBlurredOut = signal(false);
+  private _groupBlurredOut: WritableSignal<boolean> = signal(false);
   readonly groupBlurredOut = this._groupBlurredOut.asReadonly();
 
   private _applyGroupMarkAsTouched(): void {
