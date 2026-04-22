@@ -11,6 +11,7 @@ import {
   DOCUMENT,
   ChangeDetectionStrategy,
   signal,
+  WritableSignal,
   Signal,
 } from '@angular/core';
 import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
@@ -84,10 +85,10 @@ export class RadioButtonGroupComponent
   /**
    * Private signals for managing the state and selected value of the radio button group
    */
-  private _selectedValue = signal<string | boolean | object | null | unknown>(null);
-  private _touched = signal(false);
-  private _invalid = signal(false);
-  private _disabled = signal(false);
+  private _selectedValue: WritableSignal<string | boolean | object | null | unknown> = signal(null);
+  private _touched: WritableSignal<boolean> = signal(false);
+  private _invalid: WritableSignal<boolean> = signal(false);
+  private _disabled: WritableSignal<boolean> = signal(false);
 
   /**
    * Publicly exposed readonly signals for template binding and external use (in single radio
