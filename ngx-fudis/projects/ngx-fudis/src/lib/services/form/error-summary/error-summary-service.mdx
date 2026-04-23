@@ -47,7 +47,7 @@ protected _submitButtonClick():void {
 	if(this.form.invalid){
 		// @Input property of Form
 		this._errorSummaryVisible = true;
-		// Reload errors of the spesific Form
+		// Reload errors of the specific Form
 		this._service.reloadFormErrors("id-of-my-form");
 	} else {
 		this._errorSummaryVisible = false;
@@ -78,7 +78,7 @@ _Note!_ Adding errors manually does not affect any FormControl's validity. It is
 
 ### Remove Error
 
-To remove previously added error, three parameters described above, need to be spesified: `id`, `formId` and `focusId`
+To remove previously added error, three parameters described above, need to be specified: `id`, `formId` and `focusId`
 
 ```
 this._service.removeError('app-custom-error-abc123', 'app-create-user-form', 'app-username-input')

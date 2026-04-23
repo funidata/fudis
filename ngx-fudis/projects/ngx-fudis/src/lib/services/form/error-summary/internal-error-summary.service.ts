@@ -152,7 +152,7 @@ export class FudisInternalErrorSummaryService implements OnDestroy {
   }
 
   /**
-   * Hide or show Error Summary of spesific Form Component
+   * Hide or show Error Summary of specific Form Component
    *
    * @param formId Form to target
    * @param visible Hide or show Error Summary
