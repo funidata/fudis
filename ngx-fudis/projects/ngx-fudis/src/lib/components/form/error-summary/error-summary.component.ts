@@ -210,7 +210,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     /**
-     * Fetch and update current visible errors when reloadErrors() is called
+     * Fetch and update current visible errors when reloadFormErrors() is called
      */
     toObservable(this._errorSummaryService.errorsSignal[this.formId], {
       injector: this._injector,
