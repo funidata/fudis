@@ -83,7 +83,6 @@ export class CheckboxGroupOptionComponent implements OnInit {
        */
       this._control = parentControl;
     }
-
   }
 
   /**

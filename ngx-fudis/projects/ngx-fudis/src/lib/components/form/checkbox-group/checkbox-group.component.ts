@@ -110,8 +110,8 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   private _disabledState = signal(false);
 
   /**
-   * Publicly exposed readonly signals reflecting the current state of the form group. Used by
-   * child checkbox options to track group state reactively without requiring markForCheck().
+   * Publicly exposed readonly signals reflecting the current state of the form group. Used by child
+   * checkbox options to track group state reactively without requiring markForCheck().
    */
   public readonly touchedState: Signal<boolean> = this._touchedState.asReadonly();
   public readonly invalidState: Signal<boolean> = this._invalidState.asReadonly();
@@ -157,12 +157,10 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
     this._syncFormGroupState();
     this._required.next(FudisValidatorUtilities.oneRequiredOrMin(this.formGroup));
 
-    this.formGroup.events
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => {
-        this._syncFormGroupState();
-        this._updateValueAndValidityTrigger.next();
-      });
+    this.formGroup.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      this._syncFormGroupState();
+      this._updateValueAndValidityTrigger.next();
+    });
     this._applyGroupMarkAsTouched();
   }
 
