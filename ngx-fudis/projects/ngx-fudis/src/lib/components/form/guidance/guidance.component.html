@@ -6,12 +6,12 @@
       [id]="_id + '-errors'"
       [class.fudis-guidance__errors]="
         _afterViewInitDone() &&
-        ((control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut))
+        ((control && control.touched) || (formGroup && formGroup.touched && groupErrors))
       "
     >
       @if (
         (control?.invalid && control?.touched) ||
-        (formGroup?.invalid && formGroup?.touched && groupBlurredOut)
+        (formGroup?.invalid && formGroup?.touched && groupErrors)
       ) {
         <fudis-icon [icon]="'alert-fill'" />
       }
@@ -29,7 +29,7 @@
                     [formId]="parentFormId"
                     [focusId]="for"
                     [visible]="
-                      !!((singleControl.value.touched || formGroup.touched) && groupBlurredOut)
+                      !!((singleControl.value.touched || formGroup.touched) && groupErrors)
                     "
                     [type]="error.key"
                     [controlName]="singleControl.key"
@@ -51,7 +51,7 @@
               <fudis-validator-error-message
                 (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
                 [formId]="parentFormId"
-                [visible]="!!(formGroup.touched && groupBlurredOut)"
+                [visible]="!!(formGroup.touched && groupErrors)"
                 [focusId]="for"
                 [type]="error.key"
                 [label]="inputLabel"

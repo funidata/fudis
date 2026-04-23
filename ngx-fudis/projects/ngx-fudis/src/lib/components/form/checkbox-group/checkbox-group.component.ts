@@ -10,6 +10,7 @@ import {
   DOCUMENT,
   ChangeDetectionStrategy,
   Signal,
+  computed,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -115,6 +116,14 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   public readonly touchedState: Signal<boolean> = this._touchedState.asReadonly();
   public readonly invalidState: Signal<boolean> = this._invalidState.asReadonly();
   public readonly disabledState: Signal<boolean> = this._disabledState.asReadonly();
+
+  /**
+   * Computed signal that combines touched, invalid, and blurred-out state to determine if group
+   * errors should be shown.
+   */
+  public readonly groupErrors = computed(
+    () => this._touchedState() && this._invalidState() && this._groupBlurredOut(),
+  );
 
   /**
    * Copy FormGroup states into local signals so child checkbox options can track group state
