@@ -1,4 +1,7 @@
 @let blurredOut = _checkboxGroup.groupBlurredOut();
+@let touchedState = _checkboxGroup.touchedState();
+@let invalidState = _checkboxGroup.invalidState();
+
 @if (_control) {
   <label
     class="fudis-checkbox fudis-checkbox__label"
@@ -16,13 +19,7 @@
       [name]="_checkboxGroup.id"
       [attr.tabindex]="_control.disabled || _checkboxGroup.disabled ? -1 : null"
       [attr.aria-disabled]="_control.disabled || _checkboxGroup.disabled || null"
-      [attr.aria-invalid]="
-        (_checkboxGroup.formGroup &&
-          _checkboxGroup.formGroup.touched &&
-          _checkboxGroup.formGroup.invalid &&
-          _checkboxGroup.groupBlurredOut()) ||
-        null
-      "
+      [attr.aria-invalid]="(touchedState && invalidState && blurredOut) || null"
       (change)="_onChange()"
       (blur)="_onBlur($event)"
       (focus)="_onFocus($event)"
@@ -36,12 +33,7 @@
         <span
           class="fudis-checkbox__content__box"
           [class.fudis-checkbox__content__box--focused]="_focused"
-          [class.fudis-checkbox__content__box--invalid]="
-            _checkboxGroup.formGroup &&
-            _checkboxGroup.formGroup.touched &&
-            _checkboxGroup.formGroup.invalid &&
-            blurredOut
-          "
+          [class.fudis-checkbox__content__box--invalid]="touchedState && invalidState && blurredOut"
           [class.fudis-checkbox__content__box--disabled]="
             _control.disabled || _checkboxGroup.disabled
           "

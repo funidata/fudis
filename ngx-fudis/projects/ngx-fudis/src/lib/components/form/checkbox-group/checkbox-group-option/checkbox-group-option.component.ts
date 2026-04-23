@@ -1,9 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  DestroyRef,
-  inject,
   Input,
   Output,
   EventEmitter,
@@ -11,7 +8,6 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import {
@@ -35,11 +31,8 @@ import { IconComponent } from '../../../icon/icon.component';
 export class CheckboxGroupOptionComponent implements OnInit {
   constructor(
     private _idService: FudisIdService,
-    private _cdr: ChangeDetectorRef,
     @Host() protected _checkboxGroup: CheckboxGroupComponent<object>,
   ) {}
-
-  private _destroyRef = inject(DestroyRef);
 
   /**
    * Control name for this checkbox from FormGroup. Used to link each Checkbox with their Checkbox
@@ -91,14 +84,6 @@ export class CheckboxGroupOptionComponent implements OnInit {
       this._control = parentControl;
     }
 
-    /**
-     * Subscribe to formGroup status changes to mark the component for re-check when formGroup
-     * validity changes. Without this, the validity would not update as checkboxes are checked or
-     * unchecked.
-     */
-    this._checkboxGroup.formGroup.statusChanges
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => this._cdr.markForCheck());
   }
 
   /**

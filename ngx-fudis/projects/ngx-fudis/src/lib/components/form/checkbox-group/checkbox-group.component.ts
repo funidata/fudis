@@ -9,6 +9,7 @@ import {
   ViewChild,
   DOCUMENT,
   ChangeDetectionStrategy,
+  Signal,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -100,6 +101,31 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   private _groupBlurredOut: WritableSignal<boolean> = signal(false);
   readonly groupBlurredOut = this._groupBlurredOut.asReadonly();
 
+  /**
+   * Private signals for managing the touched, invalid, and disabled state of the form group.
+   */
+  private _touchedState = signal(false);
+  private _invalidState = signal(false);
+  private _disabledState = signal(false);
+
+  /**
+   * Publicly exposed readonly signals reflecting the current state of the form group. Used by
+   * child checkbox options to track group state reactively without requiring markForCheck().
+   */
+  public readonly touchedState: Signal<boolean> = this._touchedState.asReadonly();
+  public readonly invalidState: Signal<boolean> = this._invalidState.asReadonly();
+  public readonly disabledState: Signal<boolean> = this._disabledState.asReadonly();
+
+  /**
+   * Copy FormGroup states into local signals so child checkbox options can track group state
+   * reactively without requiring markForCheck().
+   */
+  private _syncFormGroupState(): void {
+    this._touchedState.set(this.formGroup.touched);
+    this._invalidState.set(this.formGroup.invalid);
+    this._disabledState.set(this.formGroup.disabled);
+  }
+
   private _applyGroupMarkAsTouched(): void {
     if (this.formGroup.touched) {
       this._groupBlurredOut.set(true);
@@ -111,6 +137,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
       const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
       this.formGroup.markAllAsTouched = () => {
         originalMarkAllAsTouched.apply(this.formGroup);
+        this._syncFormGroupState();
         this._groupBlurredOut.set(true);
       };
     }
@@ -118,11 +145,15 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
 
   ngOnInit(): void {
     this._setParentComponentId('checkbox-group');
+    this._syncFormGroupState();
     this._required.next(FudisValidatorUtilities.oneRequiredOrMin(this.formGroup));
 
-    this.formGroup.valueChanges
+    this.formGroup.events
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => this._updateValueAndValidityTrigger.next());
+      .subscribe(() => {
+        this._syncFormGroupState();
+        this._updateValueAndValidityTrigger.next();
+      });
     this._applyGroupMarkAsTouched();
   }
 
