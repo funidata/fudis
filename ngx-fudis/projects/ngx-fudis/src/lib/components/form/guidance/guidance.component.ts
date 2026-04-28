@@ -85,7 +85,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
    * Used with together with Checkbox Group component, to display errors only when focus has moved
    * outside of whole Checkbox Group.
    */
-  @Input() groupErrors: boolean = true;
+  @Input() groupBlurredOut: boolean = true;
 
   /**
    * Hide visible helptext from screen readers when group components E.g. Radio Button Group and

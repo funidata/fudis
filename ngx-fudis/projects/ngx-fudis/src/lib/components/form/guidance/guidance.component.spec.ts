@@ -152,7 +152,7 @@ describe('GuidanceComponent', () => {
   describe('with Form Group', () => {
     beforeEach(() => {
       component.formGroup = testFormGroup;
-      component.groupErrors = true;
+      component.groupBlurredOut = true;
       component.formGroup.controls['finnish'].markAsUntouched();
       component.formGroup.controls['swedish'].markAsUntouched();
       component.formGroup.controls['english'].markAsUntouched();
@@ -216,7 +216,7 @@ describe('GuidanceComponent', () => {
       });
 
       it('should not show errors when groupBlurred out is false', () => {
-        component.groupErrors = false;
+        component.groupBlurredOut = false;
         fixture.detectChanges();
 
         const errorList = getAllElements(fixture, 'fudis-validator-error-message p');

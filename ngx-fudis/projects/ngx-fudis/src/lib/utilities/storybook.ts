@@ -109,7 +109,11 @@ export const buttonIconOnlyExclude: RegExp = excludeRegex([
  */
 export const checkboxExclude: RegExp = excludeRegex([
   ...formCommonDocsExclude,
+  'groupBlurredOut',
   'groupErrors',
+  'touchedState',
+  'invalidState',
+  'disabledState',
   'setGroupBlurredOut',
   'triggerEmit',
   'disableGuidance',
@@ -125,7 +129,11 @@ export const checkboxExclude: RegExp = excludeRegex([
  */
 export const checkboxGroupExclude: RegExp = excludeRegex([
   ...formCommonDocsExclude,
+  'groupBlurredOut',
   'groupErrors',
+  'touchedState',
+  'invalidState',
+  'disabledState',
   'setGroupBlurredOut',
   'triggerEmit',
 ]);
