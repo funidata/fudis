@@ -100,14 +100,14 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * not show before that.
    */
   private _groupBlurredOut: WritableSignal<boolean> = signal(false);
-  public readonly groupBlurredOut = this._groupBlurredOut.asReadonly();
+  public readonly groupBlurredOut: Signal<boolean> = this._groupBlurredOut.asReadonly();
 
   /**
    * Private signals for managing the touched, invalid, and disabled state of the form group.
    */
-  private _touchedState = signal(false);
-  private _invalidState = signal(false);
-  private _disabledState = signal(false);
+  private _touchedState: WritableSignal<boolean> = signal(false);
+  private _invalidState: WritableSignal<boolean> = signal(false);
+  private _disabledState: WritableSignal<boolean> = signal(false);
 
   /**
    * Publicly exposed readonly signals reflecting the current state of the form group. Used by child

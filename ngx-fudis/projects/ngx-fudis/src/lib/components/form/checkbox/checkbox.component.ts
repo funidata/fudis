@@ -9,6 +9,7 @@ import {
   inject,
   ChangeDetectionStrategy,
   signal,
+  WritableSignal,
 } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -102,10 +103,10 @@ export class CheckboxComponent implements OnInit, OnChanges {
   /**
    * Signals reflecting the current state of the form control, updated on every control event.
    */
-  protected _touched = signal(false);
-  protected _invalid = signal(false);
-  protected _disabled = signal(false);
-  protected _value = signal<boolean | null>(null);
+  protected _touched: WritableSignal<boolean> = signal(false);
+  protected _invalid: WritableSignal<boolean> = signal(false);
+  protected _disabled: WritableSignal<boolean> = signal(false);
+  protected _value: WritableSignal<boolean | null> = signal(null);
 
   /**
    * Copy FormControl states into local signals so the template tracks them reactively without
