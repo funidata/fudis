@@ -141,7 +141,7 @@ export class CheckboxGroupOptionComponent implements OnInit {
   /**
    * If control is disabled, prevent toggling it.
    */
-  _checkboxClick(event: Event) {
+  protected _checkboxClick(event: Event) {
     if (this._control.disabled) {
       event.preventDefault();
     }
