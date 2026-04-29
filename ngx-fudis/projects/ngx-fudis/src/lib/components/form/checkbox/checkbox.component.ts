@@ -7,6 +7,9 @@ import {
   OnChanges,
   DestroyRef,
   inject,
+  ChangeDetectionStrategy,
+  signal,
+  WritableSignal,
 } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -31,6 +34,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'fudis-checkbox',
   templateUrl: './checkbox.component.html',
   imports: [FormsModule, ReactiveFormsModule, IconComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent implements OnInit, OnChanges {
   constructor(
@@ -97,6 +101,25 @@ export class CheckboxComponent implements OnInit, OnChanges {
   protected _focused = false;
 
   /**
+   * Signals reflecting the current state of the form control, updated on every control event.
+   */
+  protected _touched: WritableSignal<boolean> = signal(false);
+  protected _invalid: WritableSignal<boolean> = signal(false);
+  protected _disabled: WritableSignal<boolean> = signal(false);
+  protected _value: WritableSignal<boolean | null> = signal(null);
+
+  /**
+   * Copy FormControl states into local signals so the template tracks them reactively without
+   * requiring markForCheck().
+   */
+  private _syncControlState(): void {
+    this._touched.set(this.control.touched);
+    this._invalid.set(this.control.invalid);
+    this._disabled.set(this.control.disabled);
+    this._value.set(this.control.value);
+  }
+
+  /**
    * When Checkbox is focused
    */
   protected _onFocus(): void {
@@ -142,14 +165,19 @@ export class CheckboxComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Add value and validity check when control value changes
+   * Sync local signals with FormControl states and add value and validity check when control value
+   * changes.
    */
   ngOnChanges(changes: FudisComponentChanges<CheckboxComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._syncControlState();
       this._subscription?.unsubscribe();
-      this._subscription = this.control.valueChanges
+      this._subscription = this.control.events
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe(() => this._updateValueAndValidityTrigger.next());
+        .subscribe(() => {
+          this._syncControlState();
+          this._updateValueAndValidityTrigger.next();
+        });
     }
   }
 }

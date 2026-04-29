@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
   Output,
@@ -25,6 +26,7 @@ import { IconComponent } from '../../../icon/icon.component';
   templateUrl: './checkbox-group-option.component.html',
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, ReactiveFormsModule, IconComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxGroupOptionComponent implements OnInit {
   constructor(
@@ -139,7 +141,7 @@ export class CheckboxGroupOptionComponent implements OnInit {
   /**
    * If control is disabled, prevent toggling it.
    */
-  _checkboxClick(event: Event) {
+  protected _checkboxClick(event: Event) {
     if (this._control.disabled) {
       event.preventDefault();
     }
