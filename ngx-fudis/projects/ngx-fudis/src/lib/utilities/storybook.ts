@@ -135,6 +135,11 @@ export const checkboxGroupExclude: RegExp = excludeRegex([
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
+  'groupBlurredOut',
+  'groupErrors',
+  'touchedState',
+  'invalidState',
+  'disabledState',
   'setGroupBlurredOut',
   'triggerEmit',
 ]);
