@@ -4,11 +4,11 @@ Singleselect option
 <div
   #optionInputRef
   class="fudis-select-option"
-  [class.fudis-select-option__focusable]="_optionVisible"
+  [class.fudis-select-option__focusable]="_optionVisible()"
   [class.fudis-select-option__xs]="_parent.size === 'xs'"
   [class.fudis-select-option--disabled]="data.disabled"
-  [class.fudis-select-option--selected]="_parentSelect.control.value?.value === data.value"
-  [attr.aria-selected]="_parentSelect.control.value?.value === data.value"
+  [class.fudis-select-option--selected]="_selected()"
+  [attr.aria-selected]="_selected()"
   role="option"
   tabindex="-1"
   [attr.id]="_id"
@@ -24,7 +24,7 @@ Singleselect option
       <span class="fudis-select-option__label__sub">{{ data.subLabel }}</span>
     }
   </div>
-  @if (!data.disabled && _parentSelect.control.value?.value === data.value) {
+  @if (!data.disabled && _selected()) {
     <fudis-icon [icon]="_parent.size === 'xs' ? 'check-small' : 'check'" [color]="'gray-dark'" />
   }
   @if (data.disabled) {
