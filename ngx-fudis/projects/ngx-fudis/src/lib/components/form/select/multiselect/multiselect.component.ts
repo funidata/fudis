@@ -9,6 +9,7 @@ import {
   WritableSignal,
   signal,
   DOCUMENT,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -36,6 +37,12 @@ import { MultiselectChipListComponent } from './multiselect-chip-list/multiselec
  * projected via `<ng-template fudisSelectOptions>` containing `<fudis-multiselect-option>`
  * elements.
  *
+ * Option data should be treated as immutable. If application needs to update option labels
+ * dynamically, for example after a language change, provide a new options array with new
+ * `FudisSelectOption` object references instead of mutating existing option objects in place.
+ * Replacing option objects allows the component to update selected values and option labels
+ * correctly.
+ *
  * @example
  *   ```html
  *     <fudis-multiselect [label]="'Countries'" [control]="countriesControl">
@@ -50,6 +57,7 @@ import { MultiselectChipListComponent } from './multiselect-chip-list/multiselec
   selector: 'fudis-multiselect',
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     LabelComponent,
     FormsModule,

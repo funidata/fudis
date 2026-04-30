@@ -176,7 +176,7 @@ export class SelectBaseDirective
    * application, then set to true automatically, so that comparing available options match given
    * control value.
    */
-  protected _optionsLoadedOnce: boolean = false;
+  protected _optionsLoadedOnce: WritableSignal<boolean> = signal<boolean>(false);
 
   /**
    * Used when filtering autocomplete results to check if 'No results found' text is visible
@@ -193,6 +193,15 @@ export class SelectBaseDirective
    * clicked autocomplete clear button
    */
   protected _preventDropdownReopen: boolean | undefined = false;
+
+  /**
+   * Internal signals for template binding and managing the state of the form control.
+   */
+  protected _touched: WritableSignal<boolean> = signal(false);
+  protected _invalid: WritableSignal<boolean> = signal(false);
+  protected _disabled: WritableSignal<boolean> = signal(false);
+  protected _enabled: WritableSignal<boolean> = signal(true);
+  protected _selectedLabel: WritableSignal<string | null> = signal(null);
 
   /**
    * Focus try counter
@@ -315,21 +324,24 @@ export class SelectBaseDirective
 
   ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._syncControlState();
+
       this._updateValueAndValidityTrigger.next();
 
       this._updateComponentStateFromControlValue();
 
       if (this.control.value) {
-        this._optionsLoadedOnce = true;
+        this._optionsLoadedOnce.set(true);
       }
 
       this._subscription?.unsubscribe();
-      this._subscription = this.control.valueChanges
+      this._subscription = this.control.events
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((value) => {
+        .subscribe(() => {
+          this._syncControlState();
           this._updateValueAndValidityTrigger.next();
-          if (value) {
-            this._optionsLoadedOnce = true;
+          if (this.control.value) {
+            this._optionsLoadedOnce.set(true);
           }
 
           this._updateComponentStateFromControlValue();
@@ -368,7 +380,8 @@ export class SelectBaseDirective
    */
   public openDropdown(): void {
     if (!this.control.disabled && !this.disabled) {
-      this._optionsLoadedOnce = true;
+      this._syncControlState();
+      this._optionsLoadedOnce.set(true);
       this._dropdownOpen.set(true); // TODO FIXME: When using autocompleteType variant, this should be called only if filter text is applied
 
       this._unsubscribeDropdownSubscribtions();
@@ -663,6 +676,19 @@ export class SelectBaseDirective
         }
       }, 50);
     });
+  }
+
+  /**
+   * Copy FormControl states into local signals
+   */
+  private _syncControlState(): void {
+    if (!this.control) return;
+
+    this._touched.set(this.control.touched);
+    this._invalid.set(this.control.invalid);
+    this._disabled.set(this.control.disabled);
+    this._enabled.set(this.control.enabled);
+    this._selectedLabel.set(this.control.value?.label ?? null);
   }
 
   /**
