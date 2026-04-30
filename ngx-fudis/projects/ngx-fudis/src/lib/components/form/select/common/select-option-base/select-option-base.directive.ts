@@ -158,6 +158,11 @@ export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirec
   }
 
   protected _syncSelectedState(): void {
+    if (!this.data) {
+      this._selected.set(false);
+      return;
+    }
+
     this._selected.set(this._isSelected());
   }
 
