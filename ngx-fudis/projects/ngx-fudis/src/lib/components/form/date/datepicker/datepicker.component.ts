@@ -13,6 +13,7 @@ import {
   ViewEncapsulation,
   effect,
   signal,
+  WritableSignal
 } from '@angular/core';
 import { FormControl, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -215,9 +216,9 @@ export class DatepickerComponent
   /**
    * Signals reflecting the current state of the form control, updated on every control event.
    */
-  protected _touched = signal(false);
-  protected _invalid = signal(false);
-  protected _disabled = signal(false);
+  protected _touched: WritableSignal<boolean> = signal(false);
+  protected _invalid: WritableSignal<boolean> = signal(false);
+  protected _disabled: WritableSignal<boolean> = signal(false);
 
   private _syncControlState(): void {
     this._touched.set(this.control.touched);
