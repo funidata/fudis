@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   Host,
   HostListener,
@@ -11,6 +12,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   effect,
+  signal,
 } from '@angular/core';
 import { FormControl, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -50,6 +52,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'fudis-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [
     {
@@ -210,6 +213,19 @@ export class DatepickerComponent
   protected _placeholderString = new BehaviorSubject<string>('');
 
   /**
+   * Signals reflecting the current state of the form control, updated on every control event.
+   */
+  protected _touched = signal(false);
+  protected _invalid = signal(false);
+  protected _disabled = signal(false);
+
+  private _syncControlState(): void {
+    this._touched.set(this.control.touched);
+    this._invalid.set(this.control.invalid);
+    this._disabled.set(this.control.disabled);
+  }
+
+  /**
    * Instance of Datepicker Parse validator
    */
   private _parseValidatorInstance: FudisValidatorFn | null;
@@ -218,6 +234,7 @@ export class DatepickerComponent
    * Subscription for handling the valueChanges observable
    */
   private _subscription: Subscription;
+  private _dateCrossingSubscription: Subscription;
 
   /**
    * Validator reads HTML input field and checks if it can be converted to valid Date object
@@ -293,19 +310,23 @@ export class DatepickerComponent
     // Do checks for the control to define attributes used in e.g. HTML
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._subscription?.unsubscribe();
+      this._syncControlState();
       this._updateValueAndValidityTrigger.next();
-      // Subscribe to control value changes and call parent's date crossing check with current value and Date Range input type
+
+      this._subscription = this.control.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => {
+          this._syncControlState();
+          this._updateValueAndValidityTrigger.next();
+        });
+
       if (this._parentDateRange && this.dateRangeType) {
-        this._subscription = this.control.valueChanges
+        this._dateCrossingSubscription?.unsubscribe();
+        this._dateCrossingSubscription = this.control.valueChanges
           .pipe(takeUntilDestroyed(this._destroyRef))
           .subscribe((value) => {
-            this._updateValueAndValidityTrigger.next();
             this._parentDateRange?.checkDateCrossings(value, this.dateRangeType!);
           });
-      } else {
-        this._subscription = this.control.valueChanges
-          .pipe(takeUntilDestroyed(this._destroyRef))
-          .subscribe(() => this._updateValueAndValidityTrigger.next());
       }
 
       // If control changes and these checks are on, add parseValidator
