@@ -313,6 +313,7 @@ export class DatepickerComponent
       this._syncControlState();
       this._updateValueAndValidityTrigger.next();
 
+      // Subscribe to control events to update the state signals and trigger value and validity updates
       this._subscription = this.control.events
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe(() => {
@@ -320,6 +321,7 @@ export class DatepickerComponent
           this._updateValueAndValidityTrigger.next();
         });
 
+      // Subscribe to control value changes and call parent's date crossing check with current value and Date Range input type
       if (this._parentDateRange && this.dateRangeType) {
         this._dateCrossingSubscription?.unsubscribe();
         this._dateCrossingSubscription = this.control.valueChanges
