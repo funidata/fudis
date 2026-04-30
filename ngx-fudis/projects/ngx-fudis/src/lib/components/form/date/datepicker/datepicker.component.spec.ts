@@ -139,11 +139,16 @@ describe('DatepickerComponent', () => {
     });
 
     it('should update control validity and visible input value according to given min validator and value', () => {
-      
-      fixture.componentRef.setInput('control', new FormControl(null, FudisValidators.datepickerMin({
-          value: new Date('2024-01-12'),
-          message: 'Date is not inside allowed range',
-        })));
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl(
+          null,
+          FudisValidators.datepickerMin({
+            value: new Date('2024-01-12'),
+            message: 'Date is not inside allowed range',
+          }),
+        ),
+      );
       component.control.markAsTouched();
       fixture.detectChanges();
 
