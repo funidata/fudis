@@ -172,12 +172,17 @@ describe('DatepickerComponent', () => {
     });
 
     it('should update control validity according to given max validator and value', () => {
-      
-      fixture.componentRef.setInput('control', new FormControl(null, FudisValidators.datepickerMax({
-          value: new Date('2025-01-01'),
-          message: 'Date is not inside allowed range',
-        })));
-      
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl(
+          null,
+          FudisValidators.datepickerMax({
+            value: new Date('2025-01-01'),
+            message: 'Date is not inside allowed range',
+          }),
+        ),
+      );
+
       fixture.detectChanges();
 
       component.control.patchValue(new Date('2025-01-10'));
