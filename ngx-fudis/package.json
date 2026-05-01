@@ -53,7 +53,7 @@
     "@storybook/angular": "9.1.19",
     "@types/jest": "^29.5.14",
     "@types/node": "^25.5.2",
-    "@typescript-eslint/eslint-plugin": "^8.58.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
     "@typescript-eslint/parser": "^8.58.1",
     "babel-loader": "^9.2.1",
     "eslint": "^9.39.4",
