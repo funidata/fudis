@@ -1,7 +1,6 @@
 @use '@funidata/fudis-core' as core;
 
 .fudis-expandable {
-  margin-bottom: core.$spacing-sm;
   border-top: 0;
 
   &--closed {
