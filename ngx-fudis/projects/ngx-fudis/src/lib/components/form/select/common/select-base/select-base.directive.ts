@@ -562,14 +562,14 @@ export class SelectBaseDirective
    * @param event FocusEvent
    */
   protected _inputBlur(event: FocusEvent): void {
+    this._inputFocused = false;
+
     this.componentFocused(event).then((value) => {
       if (!value) {
         this.closeDropdown(false);
+        this.control.markAsTouched();
       }
     });
-
-    this._inputFocused = false;
-    this.control.markAsTouched();
   }
 
   /**
