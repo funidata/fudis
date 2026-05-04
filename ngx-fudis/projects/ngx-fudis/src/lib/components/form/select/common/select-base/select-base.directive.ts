@@ -15,6 +15,7 @@ import {
   OnDestroy,
   DOCUMENT,
 } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
@@ -22,7 +23,6 @@ import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
-
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
@@ -204,6 +204,14 @@ export class SelectBaseDirective
   protected _selectedLabel: WritableSignal<string | null> = signal(null);
 
   /**
+   * Reactive reference to the current control instance.
+   *
+   * Used by child option components to rebind their subscription if the parent `control` input is
+   * replaced with a new FormControl instance.
+   */
+  protected _controlRef: WritableSignal<AbstractControl | null> = signal(null);
+
+  /**
    * Focus try counter
    */
   private _focusTryCounter: number = 0;
@@ -324,10 +332,10 @@ export class SelectBaseDirective
 
   ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._controlRef.set(this.control);
+
       this._syncControlState();
-
       this._updateValueAndValidityTrigger.next();
-
       this._updateComponentStateFromControlValue();
 
       if (this.control.value) {
@@ -340,6 +348,7 @@ export class SelectBaseDirective
         .subscribe(() => {
           this._syncControlState();
           this._updateValueAndValidityTrigger.next();
+
           if (this.control.value) {
             this._optionsLoadedOnce.set(true);
           }
@@ -373,6 +382,16 @@ export class SelectBaseDirective
    */
   public getAutocompleteFilterText(): Signal<string> {
     return this._autocompleteFilterText.asReadonly();
+  }
+
+  /**
+   * Exposes the current control reference as a readonly signal.
+   *
+   * Option components use this to follow parent control instance changes and resubscribe to the
+   * latest control events.
+   */
+  public getControlRef(): Signal<AbstractControl | null> {
+    return this._controlRef.asReadonly();
   }
 
   /**

@@ -10,7 +10,8 @@ import {
   WritableSignal,
   signal,
 } from '@angular/core';
-
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { EMPTY, startWith, switchMap } from 'rxjs';
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
 import { SelectGroupComponent } from '../select-group/select-group.component';
@@ -18,7 +19,6 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({ selector: '[fudisSelectOptionBase]' })
 export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirective {
@@ -152,9 +152,19 @@ export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirec
    * selected state of options.
    */
   protected _initSelectedStateSync(): void {
-    this._parent.control.events.pipe(takeUntilDestroyed()).subscribe(() => {
-      this._syncSelectedState();
-    });
+    toObservable(this._parent.getControlRef())
+      .pipe(
+        // Necessary for supporting dynamic FormControl assignment to the parent select component.
+        // If the control changes, we want to unsubscribe from the previous one and subscribe to the new one.
+        switchMap((control) => {
+          if (!control) return EMPTY;
+          return control.events.pipe(startWith(null));
+        }),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => {
+        this._syncSelectedState();
+      });
   }
 
   protected _syncSelectedState(): void {
