@@ -141,6 +141,7 @@ describe('SelectComponent', () => {
 
       component.control.setValue(defaultOptions[2]);
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect((component as any)._selectedLabel()).toBe(defaultOptions[2].label);
 
       expect(_updateValueAndValidityTrigger.next).toHaveBeenCalled();
@@ -152,10 +153,13 @@ describe('SelectComponent', () => {
       fixture.detectChanges();
 
       component.control.markAsTouched();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect((component as any)._touched()).toBe(true);
 
       component.control.disable();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect((component as any)._disabled()).toBe(true);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect((component as any)._enabled()).toBe(false);
     });
 
