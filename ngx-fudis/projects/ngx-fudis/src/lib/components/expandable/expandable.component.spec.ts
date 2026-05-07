@@ -229,9 +229,7 @@ describe('ExpandableComponent', () => {
     containerComponent.variant = variant;
     fixture.detectChanges();
 
-    expect(
-      !!fixture.nativeElement.querySelector(`section.fudis-expandable__${variant}`),
-    ).toBeTruthy();
+    expect(!!fixture.nativeElement.querySelector(`div.fudis-expandable__${variant}`)).toBeTruthy();
   }
 
   function assertExpandableIconUpdatesByVariant(variant: FudisExpandableType): void {
