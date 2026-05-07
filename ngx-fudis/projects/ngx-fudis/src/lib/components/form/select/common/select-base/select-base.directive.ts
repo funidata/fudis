@@ -505,6 +505,7 @@ export class SelectBaseDirective
    */
   protected _clearButtonClick(): void {
     if (!this.control.disabled && !this.disabled) {
+      this.control.markAsTouched();
       this._clearButtonClickTrigger.set(true);
       this._setControlNull();
       this._focusToSelectInput();
