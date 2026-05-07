@@ -13,6 +13,7 @@ import {
   signal,
   EventEmitter,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -44,6 +45,7 @@ import { ErrorSummaryComponent } from '../error-summary/error-summary.component'
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FormsModule,
     GridDirective,
