@@ -43,7 +43,9 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
   await page.keyboard.press("ArrowUp");
   await page.waitForTimeout(150);
-  await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeInViewport(); /* Macaw, scarlet */
+  await expect(
+    page.getByTestId("fudis-select-1-option-c46h35"),
+  ).toBeInViewport(); /* Macaw, scarlet */
   await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeFocused();
 
   await page.keyboard.press("ArrowDown");
