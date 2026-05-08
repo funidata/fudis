@@ -7,7 +7,6 @@ fudis-pagination {
 
 .fudis-pagination {
   display: flex;
-  padding-top: core.$spacing-lg;
 
   &-button {
     // Override default button styles from Core. These need !important flags in order to work properly in consuming app side.
