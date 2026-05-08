@@ -56,6 +56,7 @@ interface MyCheckboxGroup {
             [title]="'Expandable with Text Input'"
             [errorSummaryBreadcrumb]="true"
             [level]="3"
+            [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-text-input
@@ -85,6 +86,7 @@ interface MyCheckboxGroup {
             [title]="'Expandable with Text Area'"
             [errorSummaryBreadcrumb]="true"
             [level]="3"
+            [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-text-area
@@ -114,6 +116,7 @@ interface MyCheckboxGroup {
             [title]="'Expandable with Checkbox Group'"
             [level]="3"
             [errorSummaryBreadcrumb]="true"
+            [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-checkbox-group
@@ -150,6 +153,7 @@ interface MyCheckboxGroup {
             [title]="'Expandable with Radio Button Group'"
             [level]="3"
             [errorSummaryBreadcrumb]="true"
+            [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-radio-button-group
@@ -183,6 +187,7 @@ interface MyCheckboxGroup {
             [title]="'Expandable with Select and Multiselect'"
             [level]="3"
             [errorSummaryBreadcrumb]="true"
+            [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">

@@ -44,6 +44,7 @@ type MyForm = {
           [title]="'Expandable section 1'"
           [level]="3"
           [closed]="_closed"
+          [class]="'fudis-mb-sm'"
         >
           <ng-template fudisExpandableContent>
             <fudis-grid>
