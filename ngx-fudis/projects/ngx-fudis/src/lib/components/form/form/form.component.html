@@ -66,7 +66,7 @@
 </form>
 
 <ng-template #errorSummary>
-  @if (_elementRef.nativeElement && _errorSummaryVisibleSignal()) {
+  @if (_elementRef.nativeElement && _errorSummaryVisible()) {
     <fudis-error-summary
       [formId]="id"
       (handleUpdatedErrorList)="handleUpdatedErrorList.emit($event)"
