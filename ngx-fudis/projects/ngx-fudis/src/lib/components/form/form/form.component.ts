@@ -123,7 +123,8 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
 
   /**
-   * The _errorSummaryVisible signal tracks the current visibility of the error summary for template binding
+   * The _errorSummaryVisible signal tracks the current visibility of the error summary for template
+   * binding
    */
   protected _errorSummaryVisible: WritableSignal<boolean> = signal<boolean>(false);
 
