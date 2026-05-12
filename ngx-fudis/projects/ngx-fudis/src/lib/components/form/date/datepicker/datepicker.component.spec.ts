@@ -25,8 +25,8 @@ describe('DatepickerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DatepickerComponent);
     component = fixture.componentInstance;
-    component.control = new FormControl(null);
-    component.label = 'Select a date';
+    fixture.componentRef.setInput('control', new FormControl(null));
+    fixture.componentRef.setInput('label', 'Select a date');
     fixture.detectChanges();
   });
 
@@ -43,7 +43,7 @@ describe('DatepickerComponent', () => {
 
     it('should change CSS classes according to the given datepicker input size', () => {
       fudisInputSizeArray.forEach((size) => {
-        component.size = size;
+        fixture.componentRef.setInput('size', size);
         fixture.detectChanges();
 
         expect(sortClasses(wrapperElement.className)).toEqual(
@@ -67,7 +67,7 @@ describe('DatepickerComponent', () => {
 
       expect(childGuidanceElement).toBeTruthy();
 
-      component.helpText = 'Select your favourite date';
+      fixture.componentRef.setInput('helpText', 'Select your favourite date');
       fixture.detectChanges();
 
       const guidanceHelpText = fixture.debugElement.nativeElement.querySelector(
@@ -88,7 +88,7 @@ describe('DatepickerComponent', () => {
 
     it('should have invalid attribute if datepicker is required, input is touched and no date has been chosen', () => {
       const requiredControl = new FormControl(null, FudisValidators.required('Date is required'));
-      component.control = requiredControl;
+      fixture.componentRef.setInput('control', requiredControl);
       fixture.detectChanges();
 
       datepickerInput.dispatchEvent(new Event('focus'));
@@ -129,7 +129,7 @@ describe('DatepickerComponent', () => {
 
   describe('Control updates', () => {
     it('should have no value selected', () => {
-      component.control = new FormControl(null);
+      fixture.componentRef.setInput('control', new FormControl(null));
       fixture.detectChanges();
 
       const inputEl = getElement(fixture, 'input') as HTMLInputElement;
@@ -139,12 +139,15 @@ describe('DatepickerComponent', () => {
     });
 
     it('should update control validity and visible input value according to given min validator and value', () => {
-      component.control = new FormControl(
-        null,
-        FudisValidators.datepickerMin({
-          value: new Date('2024-01-12'),
-          message: 'Date is not inside allowed range',
-        }),
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl(
+          null,
+          FudisValidators.datepickerMin({
+            value: new Date('2024-01-12'),
+            message: 'Date is not inside allowed range',
+          }),
+        ),
       );
       component.control.markAsTouched();
       fixture.detectChanges();
@@ -174,13 +177,17 @@ describe('DatepickerComponent', () => {
     });
 
     it('should update control validity according to given max validator and value', () => {
-      component.control = new FormControl(
-        null,
-        FudisValidators.datepickerMax({
-          value: new Date('2025-01-01'),
-          message: 'Date is not inside allowed range',
-        }),
+      fixture.componentRef.setInput(
+        'control',
+        new FormControl(
+          null,
+          FudisValidators.datepickerMax({
+            value: new Date('2025-01-01'),
+            message: 'Date is not inside allowed range',
+          }),
+        ),
       );
+
       fixture.detectChanges();
 
       component.control.patchValue(new Date('2025-01-10'));
