@@ -13,6 +13,8 @@ import {
   signal,
   EventEmitter,
   Output,
+  ChangeDetectionStrategy,
+  WritableSignal,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -44,6 +46,7 @@ import { ErrorSummaryComponent } from '../error-summary/error-summary.component'
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FormsModule,
     GridDirective,
@@ -120,10 +123,10 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
 
   /**
-   * Angular Change Detection did not trigger when we tried to update only our internal
-   * errorSummaryVisible input, hence we need this "helper signal"
+   * The _errorSummaryVisible signal tracks the current visibility of the error summary for template
+   * binding
    */
-  protected _errorSummaryVisibleSignal = signal<boolean>(false);
+  protected _errorSummaryVisible: WritableSignal<boolean> = signal<boolean>(false);
 
   private _injector = inject(Injector);
 
@@ -135,6 +138,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
     }
 
     this._errorSummaryService.registerNewForm(this.id, this.errorSummaryVisible);
+    this._errorSummaryVisible.set(this.errorSummaryVisible);
 
     if (this._dialogParent) {
       this._dialogParent.closeButtonPositionAbsolute.set(true);
@@ -143,10 +147,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
     toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this.id], {
       injector: this._injector,
     }).subscribe((value) => {
-      if (value !== this.errorSummaryVisible) {
-        this.errorSummaryVisible = !this.errorSummaryVisible;
-        this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
-      }
+      this._errorSummaryVisible.set(value);
     });
   }
 
@@ -160,7 +161,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
       this.id
     ) {
       this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
-      this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
+      this._errorSummaryVisible.set(this.errorSummaryVisible);
     }
   }
 
