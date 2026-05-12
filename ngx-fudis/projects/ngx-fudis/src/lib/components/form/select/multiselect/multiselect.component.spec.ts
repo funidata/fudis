@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MultiselectComponent } from './multiselect.component';
 import { MultiselectOptionComponent } from './multiselect-option/multiselect-option.component';
@@ -20,6 +20,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
     [size]="'md'"
     [label]="'Multiselect label'"
     [helpText]="'Multiselect help text'"
+    [showSelectionChips]="showSelectionChips"
   >
     <ng-template fudisSelectOptions>
       @for (option of options; track option.value) {
@@ -32,7 +33,11 @@ class MultiselectMockComponent<T = string> {
   @ViewChild('multiselectEl') multiselectEl: MultiselectComponent<T>;
 
   options: TestAnimalSound[] = defaultOptions;
-  control: FormControl<FudisSelectOption<TestAnimalValue>[] | null> = new FormControl(null);
+
+  @Input() showSelectionChips = true;
+  @Input() control: FormControl<FudisSelectOption<TestAnimalValue>[] | null> = new FormControl(
+    null,
+  );
 }
 
 // TODO: add test for disabled states
@@ -57,14 +62,14 @@ describe('MultiselectComponent', () => {
       defaultOptions[2],
     ]);
 
-    component.control = control;
+    fixture.componentRef.setInput('control', control);
 
     fixture.detectChanges();
   }
 
   function initWithControlNull() {
     const control = new FormControl<FudisSelectOption<TestAnimalValue>[] | null>(null);
-    component.control = control;
+    fixture.componentRef.setInput('control', control);
 
     fixture.detectChanges();
   }
@@ -118,33 +123,24 @@ describe('MultiselectComponent', () => {
       expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
     });
 
-    it('should not trigger valueChanges', () => {
-      let didEmit = false;
-      multiselectComponent.control.valueChanges.subscribe(() => (didEmit = true));
-      multiselectComponentFixture.detectChanges();
-      expect(didEmit).toBeFalsy();
-    });
-
-    it('should trigger valueChanges', () => {
+    it('should resync when control emits events', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { _updateValueAndValidityTrigger } = multiselectComponent as any;
       jest.spyOn(_updateValueAndValidityTrigger, 'next');
 
-      let didEmit = false;
-      multiselectComponent.control.valueChanges.subscribe(() => (didEmit = true));
-
       multiselectComponentFixture.detectChanges();
 
-      expect(didEmit).toBeFalsy();
+      _updateValueAndValidityTrigger.next.mockClear();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (multiselectComponent as any)._updateComponentStateFromControlValue.mockClear();
 
       multiselectComponent.control.setValue([defaultOptions[2]]);
 
-      expect(didEmit).toBeTruthy();
-      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(2);
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalled();
       expect(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (multiselectComponent as any)._updateComponentStateFromControlValue,
-      ).toHaveBeenCalledTimes(2);
+      ).toHaveBeenCalled();
     });
 
     it('should close subscription on destroy', () => {
@@ -298,7 +294,7 @@ describe('MultiselectComponent', () => {
 
     it('should not be visible if showSelectionChips is set to false', () => {
       initWithControlValue();
-      component.multiselectEl.showSelectionChips = false;
+      fixture.componentRef.setInput('showSelectionChips', false);
       fixture.detectChanges();
 
       const chipList = getElement(fixture, '.fudis-multiselect-chip-list');

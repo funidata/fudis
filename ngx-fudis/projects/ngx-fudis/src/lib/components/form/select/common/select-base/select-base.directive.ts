@@ -15,6 +15,7 @@ import {
   OnDestroy,
   DOCUMENT,
 } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
@@ -22,7 +23,6 @@ import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisValidatorUtilities } from '../../../../../utilities/form/validator-utilities';
-
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlComponentBaseDirective } from '../../../../../directives/form/control-component-base/control-component-base.directive';
 import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
@@ -176,7 +176,7 @@ export class SelectBaseDirective
    * application, then set to true automatically, so that comparing available options match given
    * control value.
    */
-  protected _optionsLoadedOnce: boolean = false;
+  protected _optionsLoadedOnce: WritableSignal<boolean> = signal<boolean>(false);
 
   /**
    * Used when filtering autocomplete results to check if 'No results found' text is visible
@@ -193,6 +193,23 @@ export class SelectBaseDirective
    * clicked autocomplete clear button
    */
   protected _preventDropdownReopen: boolean | undefined = false;
+
+  /**
+   * Internal signals for template binding and managing the state of the form control.
+   */
+  protected _touched: WritableSignal<boolean> = signal(false);
+  protected _invalid: WritableSignal<boolean> = signal(false);
+  protected _disabled: WritableSignal<boolean> = signal(false);
+  protected _enabled: WritableSignal<boolean> = signal(true);
+  protected _selectedLabel: WritableSignal<string | null> = signal(null);
+
+  /**
+   * Reactive reference to the current control instance.
+   *
+   * Used by child option components to rebind their subscription if the parent `control` input is
+   * replaced with a new FormControl instance.
+   */
+  protected _controlRef: WritableSignal<AbstractControl | null> = signal(null);
 
   /**
    * Focus try counter
@@ -315,21 +332,25 @@ export class SelectBaseDirective
 
   ngOnChanges(changes: FudisComponentChanges<BaseSelectableComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._updateValueAndValidityTrigger.next();
+      this._controlRef.set(this.control);
 
+      this._syncControlState();
+      this._updateValueAndValidityTrigger.next();
       this._updateComponentStateFromControlValue();
 
       if (this.control.value) {
-        this._optionsLoadedOnce = true;
+        this._optionsLoadedOnce.set(true);
       }
 
       this._subscription?.unsubscribe();
-      this._subscription = this.control.valueChanges
+      this._subscription = this.control.events
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((value) => {
+        .subscribe(() => {
+          this._syncControlState();
           this._updateValueAndValidityTrigger.next();
-          if (value) {
-            this._optionsLoadedOnce = true;
+
+          if (this.control.value) {
+            this._optionsLoadedOnce.set(true);
           }
 
           this._updateComponentStateFromControlValue();
@@ -364,11 +385,22 @@ export class SelectBaseDirective
   }
 
   /**
+   * Exposes the current control reference as a readonly signal.
+   *
+   * Option components use this to follow parent control instance changes and resubscribe to the
+   * latest control events.
+   */
+  public getControlRef(): Signal<AbstractControl | null> {
+    return this._controlRef.asReadonly();
+  }
+
+  /**
    * Open dropdown
    */
   public openDropdown(): void {
     if (!this.control.disabled && !this.disabled) {
-      this._optionsLoadedOnce = true;
+      this._syncControlState();
+      this._optionsLoadedOnce.set(true);
       this._dropdownOpen.set(true); // TODO FIXME: When using autocompleteType variant, this should be called only if filter text is applied
 
       this._unsubscribeDropdownSubscribtions();
@@ -473,6 +505,7 @@ export class SelectBaseDirective
    */
   protected _clearButtonClick(): void {
     if (!this.control.disabled && !this.disabled) {
+      this.control.markAsTouched();
       this._clearButtonClickTrigger.set(true);
       this._setControlNull();
       this._focusToSelectInput();
@@ -530,14 +563,14 @@ export class SelectBaseDirective
    * @param event FocusEvent
    */
   protected _inputBlur(event: FocusEvent): void {
+    this._inputFocused = false;
+
     this.componentFocused(event).then((value) => {
       if (!value) {
         this.closeDropdown(false);
+        this.control.markAsTouched();
       }
     });
-
-    this._inputFocused = false;
-    this.control.markAsTouched();
   }
 
   /**
@@ -663,6 +696,19 @@ export class SelectBaseDirective
         }
       }, 50);
     });
+  }
+
+  /**
+   * Copy FormControl states into local signals
+   */
+  private _syncControlState(): void {
+    if (!this.control) return;
+
+    this._touched.set(this.control.touched);
+    this._invalid.set(this.control.invalid);
+    this._disabled.set(this.control.disabled);
+    this._enabled.set(this.control.enabled);
+    this._selectedLabel.set(this.control.value?.label ?? null);
   }
 
   /**

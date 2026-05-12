@@ -24,14 +24,14 @@
         [class.fudis-select__input__dropdown]="variant === 'dropdown'"
         [class.fudis-select-autocomplete]="variant !== 'dropdown'"
         class="fudis-form-input fudis-select__input"
-        [class.fudis-form-input--touched]="_afterViewInitDone() && control.touched"
-        (click)="!control.disabled && !disabled && _clickInput()"
+        [class.fudis-form-input--touched]="_afterViewInitDone() && _touched()"
+        (click)="!_disabled() && !disabled && _clickInput()"
         (focus)="_selectInputFocus($event)"
         (blur)="_inputBlur($event)"
         (keydown)="_inputKeyDown($event)"
         (keyup)="_inputKeyUp($event)"
         [enableAutocomplete]="variant !== 'dropdown'"
-        [selectedLabel]="control.value ? control.value.label : null"
+        [selectedLabel]="_selectedLabel()"
         [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
         [filterText]="autocompleteFilterText"
         [clearButtonClick]="_clearButtonClickTrigger()"
@@ -46,14 +46,14 @@
         [attr.readonly]="variant === 'dropdown' ? true : null"
         [attr.aria-autocomplete]="variant === 'dropdown' ? null : 'list'"
         [attr.placeholder]="placeholder"
-        [attr.aria-controls]="_optionsLoadedOnce ? id + '-dropdown' : null"
-        [attr.tabindex]="!control.disabled && !disabled ? null : -1"
+        [attr.aria-controls]="_optionsLoadedOnce() ? id + '-dropdown' : null"
+        [attr.tabindex]="!_disabled() && !disabled ? null : -1"
         [attr.aria-expanded]="dropdownOpen"
-        [attr.aria-disabled]="control.disabled || disabled || null"
+        [attr.aria-disabled]="_disabled() || disabled || null"
         [attr.required]="(_required | async) || null"
         [attr.aria-labelledby]="id + '-label'"
         [attr.aria-describedby]="id + '_guidance'"
-        [attr.aria-invalid]="(control.invalid && control.touched) || null"
+        [attr.aria-invalid]="(_invalid() && _touched()) || null"
       />
       <div #selectIconsRef class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
@@ -67,11 +67,11 @@
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
           (handleClearButtonDestroy)="_setClearButtonFocusFalse()"
           [clearButton]="selectionClearButton"
-          [disabled]="control.disabled || disabled"
+          [disabled]="_disabled() || disabled"
         />
       </div>
     </div>
-    @if (_optionsLoadedOnce && !control.disabled && !disabled) {
+    @if (_optionsLoadedOnce() && !_disabled() && !disabled) {
       <fudis-select-dropdown
         #dropdownRef
         [open]="dropdownOpen"

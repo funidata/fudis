@@ -6,6 +6,7 @@ import {
   signal,
   WritableSignal,
   computed,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
@@ -19,6 +20,7 @@ import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
   selector: 'fudis-select-dropdown',
   templateUrl: './select-dropdown.component.html',
   styleUrls: ['./select-dropdown.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [BodyTextComponent, NgTemplateOutlet, AsyncPipe],
 })
 export class SelectDropdownComponent extends DropdownBaseDirective implements OnChanges {

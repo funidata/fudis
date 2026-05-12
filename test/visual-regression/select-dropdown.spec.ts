@@ -30,7 +30,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowUp", { delay: 20 });
   await expect(page.getByTestId("fudis-select-1-option-ba3at")).toBeVisible(); /* Golden jackal */
 
-  await page.getByTestId("fudis-select-1-option-qqdcwh").hover();
+  await page.getByTestId("fudis-select-1-option-qqdcwh").hover(); /* Cat, european wild  */
   await page.getByText("Select showcase").hover();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
@@ -43,7 +43,9 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
   await page.keyboard.press("ArrowUp");
   await page.waitForTimeout(150);
-  await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeInViewport();
+  await expect(
+    page.getByTestId("fudis-select-1-option-c46h35"),
+  ).toBeInViewport(); /* Macaw, scarlet */
   await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeFocused();
 
   await page.keyboard.press("ArrowDown");
@@ -84,14 +86,14 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.getByTestId("fudis-select-1-clear-button").focus();
   await page.keyboard.press("Enter");
 
-  await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
+  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
 
   /**
    * Disabled after clearing selection
    */
   await page.getByTestId("fudis-button-1").click();
-  await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(0);
+  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(0);
 
   /**
    * Disabled dropdown options should receive focus
@@ -118,7 +120,7 @@ test("Select dropdown without clear button", async ({ page }) => {
    */
   await page.getByTestId("fudis-select-1-clear-button").click();
   await page.getByTestId("fudis-select-2").focus();
-  await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
+  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
   await expect(
     page.getByTestId("fudis-select-2-option-e05e75").getByText("Golden jackal"),
   ).toBeVisible();
@@ -138,6 +140,6 @@ test("Select dropdown option", async ({ page }) => {
   await ostrichOption.scrollIntoViewIfNeeded();
   await ostrichOption.click();
   await page.waitForTimeout(150);
-  await expect(page.getByText("You must choose a pet!").locator("visible=false")).toHaveCount(0);
+  await expect(page.getByText("You must choose a pet!").filter({ visible: false })).toHaveCount(0);
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
 });

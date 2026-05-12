@@ -9,6 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   DOCUMENT,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
@@ -16,7 +17,6 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-
 import { SelectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
@@ -34,6 +34,12 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
  * The FormControl value is a `FudisSelectOption` object (not a primitive). Options are projected
  * via `<ng-template fudisSelectOptions>` containing `<fudis-select-option>` elements.
  *
+ * Option data should be treated as immutable. If application needs to update option labels
+ * dynamically, for example after a language change, provide a new options array with new
+ * `FudisSelectOption` object references instead of mutating existing option objects in place.
+ * Replacing option objects allows the component to update the selected label and option views
+ * correctly.
+ *
  * @example
  *   ```html
  *   <fudis-select [label]="'Country'" [control]="countryControl">
@@ -48,6 +54,7 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
   selector: 'fudis-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
     LabelComponent,

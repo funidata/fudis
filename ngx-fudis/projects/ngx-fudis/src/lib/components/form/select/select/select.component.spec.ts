@@ -128,31 +128,39 @@ describe('SelectComponent', () => {
       expect((component as any)._setParentId).toHaveBeenCalledWith('select');
     });
 
-    it('should not trigger valueChanges', () => {
-      let didEmit = false;
-      component.control.valueChanges.subscribe(() => (didEmit = true));
-      fixture.detectChanges();
-      expect(didEmit).toBeFalsy();
-    });
-
-    it('should trigger valueChanges', () => {
+    it('should resync when the control emits an event', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { _updateValueAndValidityTrigger } = component as any;
       jest.spyOn(_updateValueAndValidityTrigger, 'next');
 
-      let didEmit = false;
-      component.control.valueChanges.subscribe(() => (didEmit = true));
-
       fixture.detectChanges();
 
-      expect(didEmit).toBeFalsy();
+      _updateValueAndValidityTrigger.next.mockClear();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (component as any)._updateComponentStateFromControlValue.mockClear();
 
       component.control.setValue(defaultOptions[2]);
 
-      expect(didEmit).toBeTruthy();
-      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(2);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      expect((component as any)._updateComponentStateFromControlValue).toHaveBeenCalledTimes(2);
+      expect((component as any)._selectedLabel()).toBe(defaultOptions[2].label);
+
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalled();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._updateComponentStateFromControlValue).toHaveBeenCalled();
+    });
+
+    it('sshould mirror touched and disabled states from control events', () => {
+      fixture.detectChanges();
+
+      component.control.markAsTouched();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._touched()).toBe(true);
+
+      component.control.disable();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._disabled()).toBe(true);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((component as any)._enabled()).toBe(false);
     });
 
     it('should close subscription on destroy', () => {
