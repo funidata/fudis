@@ -6,12 +6,12 @@
       [id]="_id + '-errors'"
       [class.fudis-guidance__errors]="
         _afterViewInitDone() &&
-        ((control && _controlTouched()) || (formGroup && _formGroupTouched() && groupBlurredOut))
+        ((control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut))
       "
     >
       @if (
-        (_controlInvalid() && _controlTouched()) ||
-        (_formGroupInvalid() && _formGroupTouched() && groupBlurredOut)
+        (control?.invalid && control?.touched) ||
+        (formGroup?.invalid && formGroup?.touched && groupBlurredOut)
       ) {
         <fudis-icon [icon]="'alert-fill'" />
       }
@@ -19,7 +19,7 @@
         <!--
         Check errors for each control FormGroup e. g. english, finnish, swedish
         -->
-        @if (formGroup?.controls && !control && !_formGroupErrors()) {
+        @if (formGroup?.controls && !control && !formGroup?.errors) {
           @for (singleControl of formGroup?.controls | keyvalue; track singleControl.key) {
             @if (singleControl.value.errors) {
               @for (error of singleControl.value.errors | keyvalue; track error.key) {
@@ -29,7 +29,7 @@
                     [formId]="parentFormId"
                     [focusId]="for"
                     [visible]="
-                      !!((singleControl.value.touched || _formGroupTouched()) && groupBlurredOut)
+                      !!((singleControl.value.touched || formGroup.touched) && groupBlurredOut)
                     "
                     [type]="error.key"
                     [controlName]="singleControl.key"
@@ -45,13 +45,13 @@
         <!--
         Check parent level errors of FormGroup e. g. oneRequired
         -->
-        @if (_formGroupErrors() && _formGroupInvalid()) {
-          @for (error of _formGroupErrors()! | keyvalue; track error.key) {
+        @if (formGroup?.errors && formGroup?.invalid) {
+          @for (error of formGroup?.errors | keyvalue; track error.key) {
             @if (error.value?.message) {
               <fudis-validator-error-message
                 (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
                 [formId]="parentFormId"
-                [visible]="!!(_formGroupTouched() && groupBlurredOut)"
+                [visible]="!!(formGroup.touched && groupBlurredOut)"
                 [focusId]="for"
                 [type]="error.key"
                 [label]="inputLabel"
@@ -64,13 +64,13 @@
         <!--
         Check errors for single FormControl e. g. single text-input with maxlength error
         -->
-        @if (_controlErrors() && !formGroup) {
-          @for (error of _controlErrors()! | keyvalue; track error.key) {
+        @if (control?.errors && !formGroup) {
+          @for (error of control.errors | keyvalue; track error.key) {
             @if (error.value?.message) {
               <fudis-validator-error-message
                 (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
                 [formId]="parentFormId"
-                [visible]="_controlTouched()"
+                [visible]="control.touched"
                 [focusId]="for"
                 [type]="error.key"
                 [label]="inputLabel"
@@ -98,7 +98,7 @@
       }}"
       [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
     >
-      {{ _controlValueLength() }}/{{ maxLength }}
+      {{ control.value?.length || 0 }}/{{ maxLength }}
       <span class="fudis-visually-hidden">{{ _maxLengthText() }}</span>
     </small>
   }
@@ -133,9 +133,9 @@
 @if (
   control &&
   maxLength &&
-  (_controlValueLength() === _maxLengthAlertThreshold || _controlValueLength() === maxLength)
+  (control.value?.length === _maxLengthAlertThreshold || control.value?.length === maxLength)
 ) {
   <p class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden" role="alert"
-    >{{ _controlValueLength() }}/{{ maxLength }} {{ _maxLengthText() }}</p
+    >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText() }}</p
   >
 }
