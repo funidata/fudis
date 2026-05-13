@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   ElementRef,
@@ -15,7 +14,7 @@ import {
   Injector,
   WritableSignal,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -103,6 +102,15 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
    */
   protected _maxLengthText: WritableSignal<string> = signal<string>('');
 
+  protected _controlTouched: WritableSignal<boolean> = signal<boolean>(false);
+  protected _controlInvalid: WritableSignal<boolean> = signal<boolean>(false);
+  protected _controlErrors: WritableSignal<ValidationErrors | null> = signal<ValidationErrors | null>(null);
+  protected _controlValueLength: WritableSignal<number> = signal<number>(0);
+
+  protected _formGroupTouched: WritableSignal<boolean> = signal<boolean>(false);
+  protected _formGroupInvalid: WritableSignal<boolean> = signal<boolean>(false);
+  protected _formGroupErrors: WritableSignal<ValidationErrors | null> = signal<ValidationErrors | null>(null);
+
   /**
    * Number of characters left when screen reader is alerted about input max length
    */
@@ -136,20 +144,25 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
    */
   private _reloadGuard = false;
 
-  private _cdr = inject(ChangeDetectorRef);
   private _destroyRef = inject(DestroyRef);
   private _injector = inject(Injector);
 
   ngOnInit(): void {
     this._setCharacterLimitIndicatorValues();
 
-    this.control?.events
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => this._cdr.markForCheck());
+    if (this.control) {
+      this._syncControlState();
+      this.control.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._syncControlState());
+    }
 
-    this.formGroup?.events
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => this._cdr.markForCheck());
+    if (this.formGroup) {
+      this._syncFormGroupState();
+      this.formGroup.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._syncFormGroupState());
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<GuidanceComponent>): void {
@@ -207,6 +220,19 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
         }
       }
     });
+  }
+
+  private _syncControlState(): void {
+    this._controlTouched.set(this.control.touched);
+    this._controlInvalid.set(this.control.invalid);
+    this._controlErrors.set(this.control.errors);
+    this._controlValueLength.set((this.control.value as string)?.length ?? 0);
+  }
+
+  private _syncFormGroupState(): void {
+    this._formGroupTouched.set(this.formGroup.touched);
+    this._formGroupInvalid.set(this.formGroup.invalid);
+    this._formGroupErrors.set(this.formGroup.errors);
   }
 
   private _setCharacterLimitIndicatorValues(): void {
