@@ -19,7 +19,7 @@ import * as VersionSelectorStories from "../../../ngx-fudis/src/storybook-docs/v
 
   **Import** each component in their own `.stories.ts` file.
 
-  If component has ngMaterial or Angular dependencies, check that those are imported in `ngx-fudis.module.ts`. If Story has Story spesific imports or declarations, then include them in `moduleMetadata`.
+  If component has ngMaterial or Angular dependencies, check that those are imported in `ngx-fudis.module.ts`. If Story has Story specific imports or declarations, then include them in `moduleMetadata`.
 
 ```
 export default {
@@ -27,7 +27,7 @@ export default {
 	component: InsertNameHereComponent,
 	decorators: [
 		moduleMetadata({
-			declarations: [StorySpesificComponent],
+			declarations: [StorySpecificComponent],
 			imports: ["dependency-1", "dependency-2"],
 		}),
 	],
@@ -56,7 +56,7 @@ Check [Naming Conventions](/docs/documentation-development-ds-practises-naming-c
 - Component variants such as primary, secondary etc. should be documented. These variants should be accessed and controllable through Storybook Controls.
 - If needed, create own story for clearly "other/different version" of the component, e.g. Button vs. Button with Icon
 - Component all variants, can be documented as story by using Storybook template prop.
-  > _Note! This prevents component control through Controls. Template prop should be used mainly for a story spesific .mdx documentation files._
+  > _Note! This prevents component control through Controls. Template prop should be used mainly for a story specific .mdx documentation files._
 - Component has ArgTypes.
 - Component has its @Inputs and @Outputs listed with description and accepted values.
 - Components with event handlers have working actions.

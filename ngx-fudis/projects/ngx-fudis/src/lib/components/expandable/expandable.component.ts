@@ -49,7 +49,6 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     this._id = this._idService.getNewId('expandable');
-    this._headingId = `${this._id}-heading`;
   }
 
   /**
@@ -126,11 +125,6 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
    * Internal id to generate unique id
    */
   protected _id: string;
-
-  /**
-   * Internal, separate unique heading id
-   */
-  protected _headingId: string;
 
   /**
    * Lazy loading check for expanding content

@@ -23,7 +23,12 @@
       (blur)="_parentGroup.handleBlur.emit($event)"
       (change)="_onChange()"
     />
-    <div class="fudis-radio-button__content">
+    <div
+      class="fudis-radio-button__content"
+      [class.fudis-radio-button__content--disabled]="
+        _parentGroup.control.disabled || _parentGroup.disabled
+      "
+    >
       <div class="fudis-radio-button__content-wrapper">
         <div
           class="fudis-radio-button__content__control"

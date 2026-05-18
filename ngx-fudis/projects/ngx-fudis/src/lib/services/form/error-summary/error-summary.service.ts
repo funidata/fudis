@@ -57,7 +57,7 @@ export class FudisErrorSummaryService {
   }
 
   /**
-   * Reload a spesific Form Id
+   * Reload a specific Form Id
    *
    * @param id Form Id
    * @param focus Focus to Error Summary
@@ -76,7 +76,7 @@ export class FudisErrorSummaryService {
   }
 
   /**
-   * To add message to spesific Form's Error Summary.
+   * To add message to specific Form's Error Summary.
    *
    * @param id Identifier of the message, eg. 'app-custom-error-abc123'
    * @param formId Id of Form component

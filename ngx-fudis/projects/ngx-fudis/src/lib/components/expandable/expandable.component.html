@@ -1,16 +1,10 @@
-<section
+<div
   [id]="_id"
-  [attr.aria-labelledby]="_headingId"
   class="fudis-expandable fudis-expandable__{{ variant }}"
   [class.fudis-expandable--closed]="_closed()"
 >
   <div class="fudis-expandable__header fudis-expandable__header__{{ variant }}">
-    <div
-      role="heading"
-      [attr.aria-level]="level"
-      [id]="_headingId"
-      class="fudis-expandable__header__heading"
-    >
+    <div role="heading" [attr.aria-level]="level" class="fudis-expandable__header__heading">
       <button
         type="button"
         [id]="_id + '-header-button'"
@@ -60,4 +54,4 @@
       }
     </div>
   }
-</section>
+</div>
