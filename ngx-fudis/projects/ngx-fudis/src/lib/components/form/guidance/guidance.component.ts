@@ -142,19 +142,23 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
 
   ngOnInit(): void {
     this._setCharacterLimitIndicatorValues();
-
-    this.control?.events
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => this._cdr.markForCheck());
-
-    this.formGroup?.events
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => this._cdr.markForCheck());
   }
 
   ngOnChanges(changes: FudisComponentChanges<GuidanceComponent>): void {
     if (changes.maxLength?.currentValue !== changes.maxLength?.previousValue) {
       this._setCharacterLimitIndicatorValues();
+    }
+
+    if (changes.control) {
+      this.control?.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._cdr.markForCheck());
+    }
+
+    if (changes.formGroup) {
+      this.formGroup?.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._cdr.markForCheck());
     }
   }
 
