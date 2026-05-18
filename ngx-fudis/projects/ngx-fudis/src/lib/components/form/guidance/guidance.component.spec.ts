@@ -50,10 +50,10 @@ describe('GuidanceComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GuidanceComponent);
     component = fixture.componentInstance;
-    component.inputLabel = 'Test Label';
-    component.for = 'related-input-id';
-    component.helpText = 'This is describing guidance text';
-    component.maxLength = testMaxLength;
+    fixture.componentRef.setInput('inputLabel', 'Test Label');
+    fixture.componentRef.setInput('for', 'related-input-id');
+    fixture.componentRef.setInput('helpText', 'This is describing guidance text');
+    fixture.componentRef.setInput('maxLength', testMaxLength);
     fixture.detectChanges();
   });
 
@@ -80,7 +80,7 @@ describe('GuidanceComponent', () => {
 
   describe('with single Form Control', () => {
     beforeEach(() => {
-      component.control = testControl;
+      fixture.componentRef.setInput('control', testControl);
       component.control.markAsUntouched();
       fixture.detectChanges();
     });
@@ -151,8 +151,9 @@ describe('GuidanceComponent', () => {
 
   describe('with Form Group', () => {
     beforeEach(() => {
-      component.formGroup = testFormGroup;
-      component.groupBlurredOut = true;
+      fixture.componentRef.setInput('formGroup', testFormGroup);
+
+      fixture.componentRef.setInput('groupBlurredOut', true);
       component.formGroup.controls['finnish'].markAsUntouched();
       component.formGroup.controls['swedish'].markAsUntouched();
       component.formGroup.controls['english'].markAsUntouched();
@@ -167,7 +168,7 @@ describe('GuidanceComponent', () => {
       });
 
       it('should have correct number in max length indicator when selected option is set', () => {
-        component.selectedOption = 'swedish';
+        fixture.componentRef.setInput('selectedOption', 'swedish');
 
         fixture.detectChanges();
 
@@ -216,7 +217,7 @@ describe('GuidanceComponent', () => {
       });
 
       it('should not show errors when groupBlurred out is false', () => {
-        component.groupBlurredOut = false;
+        fixture.componentRef.setInput('groupBlurredOut', false);
         fixture.detectChanges();
 
         const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
@@ -254,7 +255,7 @@ describe('GuidanceComponent', () => {
 
     describe('group errors', () => {
       beforeEach(() => {
-        component.formGroup = testFormGroupWithGroupValidator;
+        fixture.componentRef.setInput('formGroup', testFormGroupWithGroupValidator);
         fixture.detectChanges();
       });
       it('should display right amount of errors', () => {
