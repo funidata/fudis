@@ -488,8 +488,8 @@ export class SelectBaseDirective
    */
   protected _setControlNull(): void {
     if (this.control.value) {
-      this.control.patchValue(null);
       this.selectionUpdate.emit(null);
+      this.control.patchValue(null);
       this.setAutocompleteFilterText('');
     } else {
       this.control.patchValue(null);
