@@ -15,6 +15,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 /**
  * Displays the details (value) of a term (key) in a DescriptionListItemComponent.
@@ -23,7 +24,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
   selector: 'fudis-dd',
   templateUrl: './description-list-item-details.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [NgTemplateOutlet, AsyncPipe],
 })
 export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy {
   constructor(

@@ -7,8 +7,11 @@ import {
   Optional,
   ViewChild,
   DOCUMENT,
+  WritableSignal,
+  signal,
 } from '@angular/core';
-
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { EMPTY, startWith, switchMap } from 'rxjs';
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
 import { SelectGroupComponent } from '../select-group/select-group.component';
@@ -17,10 +20,7 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 
-@Directive({
-  selector: '[fudisSelectOptionBase]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisSelectOptionBase]' })
 export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirective {
   constructor(
     @Inject(DOCUMENT) _document: Document,
@@ -46,7 +46,7 @@ export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirec
   /**
    * State of option visibility
    */
-  protected _optionVisible: boolean = true;
+  protected _optionVisible: WritableSignal<boolean> = signal<boolean>(true);
 
   /**
    * Focus state
@@ -59,10 +59,15 @@ export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirec
   protected _parent: SelectComponent<T> | MultiselectComponent<T>;
 
   /**
+   * Selected state of an option
+   */
+  protected _selected: WritableSignal<boolean> = signal<boolean>(false);
+
+  /**
    * Get visibility status of this option
    */
   public get visible(): boolean {
-    return this._optionVisible;
+    return this._optionVisible();
   }
 
   /**
@@ -91,9 +96,9 @@ export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirec
           ? true
           : !filterText;
 
-      this._optionVisible = labelMatch || subLabelMatch;
+      this._optionVisible.set(labelMatch || subLabelMatch);
 
-      this._updateVisibilityToParents(this._optionVisible);
+      this._updateVisibilityToParents(this._optionVisible());
     }
   }
 
@@ -140,6 +145,43 @@ export class SelectOptionBaseDirective<T = string> extends DropdownItemBaseDirec
         this._parent.closeDropdown(false);
       }
     });
+  }
+
+  /**
+   * Select and Multiselect shared logic for subscribing to parent FormControl's events and syncing
+   * selected state of options.
+   */
+  protected _initSelectedStateSync(): void {
+    toObservable(this._parent.getControlRef())
+      .pipe(
+        // Necessary for supporting dynamic FormControl assignment to the parent select component.
+        // If the control changes, we want to unsubscribe from the previous one and subscribe to the new one.
+        switchMap((control) => {
+          if (!control) return EMPTY;
+          return control.events.pipe(startWith(null));
+        }),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => {
+        this._syncSelectedState();
+      });
+  }
+
+  protected _syncSelectedState(): void {
+    if (!this.data) {
+      this._selected.set(false);
+      return;
+    }
+
+    this._selected.set(this._isSelected());
+  }
+
+  /**
+   * Every subclass (i.e. SelectOption and MultiselectOption) needs to implement its own logic to
+   * determine if it is selected or not, based on the parent select's control value
+   */
+  protected _isSelected(): boolean {
+    throw new Error('_isSelected must be implemented in a child class');
   }
 
   /**

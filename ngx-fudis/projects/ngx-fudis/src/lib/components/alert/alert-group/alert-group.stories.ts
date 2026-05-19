@@ -7,9 +7,31 @@ import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { alertGroupExclude } from '../../../utilities/storybook';
 import docs from '../alert.mdx';
+import {
+  DialogActionsDirective,
+  DialogCloseDirective,
+  DialogContentDirective,
+  DialogTitleDirective,
+} from '../../dialog/dialog-directives';
+import { ButtonComponent } from '../../button/button.component';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
+import { DialogComponent } from '../../dialog/dialog.component';
+import { GridComponent } from '../../grid/grid/grid.component';
+import { HeadingComponent } from '../../typography/heading/heading.component';
 
 @Component({
   selector: 'example-add-alerts',
+  imports: [
+    ButtonComponent,
+    BodyTextComponent,
+    DialogComponent,
+    DialogTitleDirective,
+    DialogContentDirective,
+    DialogActionsDirective,
+    DialogCloseDirective,
+    GridComponent,
+    HeadingComponent,
+  ],
   template: `<div [style]="'margin-top:' + _marginCounter + 'rem'">
       <fudis-grid [columns]="{ sm: 1, md: '1fr 1fr 1fr 1fr' }">
         <fudis-button [label]="'Add danger'" (handleClick)="addDanger()" />
@@ -32,7 +54,6 @@ import docs from '../alert.mdx';
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>`,
-  standalone: false,
 })
 class AddAlertsComponent implements AfterViewInit {
   constructor(
@@ -48,7 +69,6 @@ class AddAlertsComponent implements AfterViewInit {
   @ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
 
   protected _marginCounter: number = 2;
-
   protected _alerts: FudisAlertElement[] = [];
 
   openDialog(): void {
@@ -127,7 +147,7 @@ export default {
   component: AlertGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [AddAlertsComponent],
+      imports: [AddAlertsComponent],
     }),
   ],
   parameters: {

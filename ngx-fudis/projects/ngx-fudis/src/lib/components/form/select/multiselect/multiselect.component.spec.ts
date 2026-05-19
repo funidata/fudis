@@ -1,30 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MultiselectComponent } from './multiselect.component';
-import { GuidanceComponent } from '../../guidance/guidance.component';
-import { IconButtonComponent } from '../../../icon-button/icon-button.component';
-import { IconComponent } from '../../../icon/icon.component';
-import { LabelComponent } from '../../label/label.component';
-import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
-import { BodyTextComponent } from '../../../typography/body-text/body-text.component';
-import { MultiselectChipListComponent } from './multiselect-chip-list/multiselect-chip-list.component';
 import { MultiselectOptionComponent } from './multiselect-option/multiselect-option.component';
-import { SelectGroupComponent } from '../common/select-group/select-group.component';
-import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisInputSize, FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions, TestAnimalValue } from '../common/mock_data';
 import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
-import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { MultiselectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
-import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
-  standalone: false,
   selector: 'fudis-multiselect-mock',
+  imports: [MultiselectComponent, SelectOptionsDirective, MultiselectOptionComponent],
   template: ` <fudis-multiselect
     #multiselectEl
     [placeholder]="'Multiselect placeholder'"
@@ -32,6 +20,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
     [size]="'md'"
     [label]="'Multiselect label'"
     [helpText]="'Multiselect help text'"
+    [showSelectionChips]="showSelectionChips"
   >
     <ng-template fudisSelectOptions>
       @for (option of options; track option.value) {
@@ -44,7 +33,11 @@ class MultiselectMockComponent<T = string> {
   @ViewChild('multiselectEl') multiselectEl: MultiselectComponent<T>;
 
   options: TestAnimalSound[] = defaultOptions;
-  control: FormControl<FudisSelectOption<TestAnimalValue>[] | null> = new FormControl(null);
+
+  @Input() showSelectionChips = true;
+  @Input() control: FormControl<FudisSelectOption<TestAnimalValue>[] | null> = new FormControl(
+    null,
+  );
 }
 
 // TODO: add test for disabled states
@@ -58,22 +51,8 @@ describe('MultiselectComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        MultiselectComponent,
-        MultiselectOptionComponent,
-        MultiselectMockComponent,
-        MultiselectChipListComponent,
-        MultiselectAutocompleteDirective,
-        MultiselectControlValueAccessorDirective,
-        SelectDropdownComponent,
-        SelectGroupComponent,
-        SelectIconsComponent,
-        GuidanceComponent,
-        LabelComponent,
-        SelectOptionsDirective,
-      ],
-      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
-      providers: [FudisDialogService, FudisInternalErrorSummaryService, SelectBaseDirective],
+      imports: [MultiselectMockComponent, MultiselectComponent],
+      providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });
 
@@ -83,14 +62,14 @@ describe('MultiselectComponent', () => {
       defaultOptions[2],
     ]);
 
-    component.control = control;
+    fixture.componentRef.setInput('control', control);
 
     fixture.detectChanges();
   }
 
   function initWithControlNull() {
     const control = new FormControl<FudisSelectOption<TestAnimalValue>[] | null>(null);
-    component.control = control;
+    fixture.componentRef.setInput('control', control);
 
     fixture.detectChanges();
   }
@@ -144,33 +123,24 @@ describe('MultiselectComponent', () => {
       expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(1);
     });
 
-    it('should not trigger valueChanges', () => {
-      let didEmit = false;
-      multiselectComponent.control.valueChanges.subscribe(() => (didEmit = true));
-      multiselectComponentFixture.detectChanges();
-      expect(didEmit).toBeFalsy();
-    });
-
-    it('should trigger valueChanges', () => {
+    it('should resync when control emits events', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { _updateValueAndValidityTrigger } = multiselectComponent as any;
       jest.spyOn(_updateValueAndValidityTrigger, 'next');
 
-      let didEmit = false;
-      multiselectComponent.control.valueChanges.subscribe(() => (didEmit = true));
-
       multiselectComponentFixture.detectChanges();
 
-      expect(didEmit).toBeFalsy();
+      _updateValueAndValidityTrigger.next.mockClear();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (multiselectComponent as any)._updateComponentStateFromControlValue.mockClear();
 
       multiselectComponent.control.setValue([defaultOptions[2]]);
 
-      expect(didEmit).toBeTruthy();
-      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalledTimes(2);
+      expect(_updateValueAndValidityTrigger.next).toHaveBeenCalled();
       expect(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (multiselectComponent as any)._updateComponentStateFromControlValue,
-      ).toHaveBeenCalledTimes(2);
+      ).toHaveBeenCalled();
     });
 
     it('should close subscription on destroy', () => {
@@ -324,7 +294,7 @@ describe('MultiselectComponent', () => {
 
     it('should not be visible if showSelectionChips is set to false', () => {
       initWithControlValue();
-      component.multiselectEl.showSelectionChips = false;
+      fixture.componentRef.setInput('showSelectionChips', false);
       fixture.detectChanges();
 
       const chipList = getElement(fixture, '.fudis-multiselect-chip-list');

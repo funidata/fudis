@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { LanguageBadgeGroupComponent } from './language-badge-group.component';
-import { LanguageBadgeComponent } from './language-badge/language-badge.component';
 import { getAllElements, getElement } from '../../utilities/tests/utilities';
 
 const providedLanguages: FudisLanguageAbbr[] = ['en', 'fi'];
@@ -13,13 +12,13 @@ describe('LanguageBadgeGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LanguageBadgeGroupComponent, LanguageBadgeComponent],
+      imports: [LanguageBadgeGroupComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LanguageBadgeGroupComponent],
+      imports: [LanguageBadgeGroupComponent],
     });
     fixture = TestBed.createComponent(LanguageBadgeGroupComponent);
     component = fixture.componentInstance;

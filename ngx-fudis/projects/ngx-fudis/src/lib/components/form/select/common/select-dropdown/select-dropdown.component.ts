@@ -6,18 +6,22 @@ import {
   signal,
   WritableSignal,
   computed,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { BehaviorSubject } from 'rxjs';
+import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-select-dropdown',
   templateUrl: './select-dropdown.component.html',
   styleUrls: ['./select-dropdown.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [BodyTextComponent, NgTemplateOutlet, AsyncPipe],
 })
 export class SelectDropdownComponent extends DropdownBaseDirective implements OnChanges {
   constructor(private _translationService: FudisTranslationService) {

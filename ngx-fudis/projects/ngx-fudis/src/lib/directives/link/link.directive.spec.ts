@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, SimpleChange, ViewChild } from '@angular/core';
 import { LinkDirective } from './link.directive';
-import { IconComponent } from '../../components/icon/icon.component';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-link-directive',
+  imports: [LinkDirective],
   template: ` @if (!linkWithInitialFocus) {
       <a
         fudisLink
@@ -33,9 +32,7 @@ class MockComponent {
   @ViewChild(LinkDirective) public dirRef: LinkDirective;
 
   title = 'Test title for the link';
-
   linkWithInitialFocus = false;
-
   focused = false;
 
   handleFocus(): void {
@@ -49,8 +46,7 @@ describe('LinkDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockComponent, LinkDirective],
-      imports: [IconComponent],
+      imports: [MockComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);

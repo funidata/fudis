@@ -2,6 +2,7 @@ import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@a
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Displays the hierarchial navigation path to the current page.
@@ -15,7 +16,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./breadcrumbs.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [AsyncPipe],
 })
 export class BreadcrumbsComponent {
   constructor(

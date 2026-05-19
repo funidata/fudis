@@ -11,8 +11,8 @@ import { By } from '@angular/platform-browser';
 import { joinInputValues } from '../utilities/selectUtilities';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-select-cva-base',
+  imports: [SelectControlValueAccessorDirective, ReactiveFormsModule],
   template: `<input
     fudisSelectControlValueAccessor
     [filterText]="filterText"
@@ -32,8 +32,7 @@ describe('SelectAutocompleteDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockSelectCVAComponent, SelectControlValueAccessorDirective],
-      imports: [ReactiveFormsModule],
+      imports: [MockSelectCVAComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockSelectCVAComponent);
@@ -77,8 +76,8 @@ describe('SelectAutocompleteDirective', () => {
 });
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-multiselect-cva-base',
+  imports: [MultiselectControlValueAccessorDirective, ReactiveFormsModule],
   template: `<input fudisMultiselectControlValueAccessor [formControl]="control" />`,
 })
 class MockMultiselectCVAComponent {
@@ -93,8 +92,7 @@ describe('MultiselectAutocompleteDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockMultiselectCVAComponent, MultiselectControlValueAccessorDirective],
-      imports: [ReactiveFormsModule],
+      imports: [MockMultiselectCVAComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockMultiselectCVAComponent);

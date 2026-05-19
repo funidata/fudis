@@ -11,7 +11,7 @@ describe('GridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GridComponent],
+      imports: [GridComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

@@ -1,42 +1,16 @@
-import { Component, importProvidersFrom } from '@angular/core';
-import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
-import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { importProvidersFrom } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import docs from './date-range.mdx';
 import { dateRangeExclude } from '../../../../utilities/storybook';
 
-@Component({
-  selector: 'example-language-change-component',
-  template: `<fudis-button [label]="_label" (handleClick)="changeLanguage()"></fudis-button>`,
-  standalone: false,
-})
-class LanguageChangeComponent {
-  constructor(private _translationService: FudisTranslationService) {
-    this._translationService.setLanguage('en');
-  }
-
-  protected _label = 'Change calendar language';
-
-  changeLanguage(): void {
-    if (this._translationService.getLanguage() === 'en') {
-      this._translationService.setLanguage('fi');
-    } else {
-      this._translationService.setLanguage('en');
-    }
-  }
-}
-
 export default {
   title: 'Components/Form/Date/Date Range',
   component: DateRangeComponent,
   decorators: [
-    moduleMetadata({
-      declarations: [LanguageChangeComponent],
-      imports: [ReactiveFormsModule, FormsModule],
-    }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),

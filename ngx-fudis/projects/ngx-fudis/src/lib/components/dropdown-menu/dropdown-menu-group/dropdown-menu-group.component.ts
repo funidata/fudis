@@ -1,4 +1,4 @@
-import { Component, Host, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, Input } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 
@@ -11,7 +11,7 @@ import { DropdownMenuComponent } from '../dropdown-menu.component';
   selector: 'fudis-dropdown-menu-group',
   templateUrl: './dropdown-menu-group.component.html',
   styleUrls: ['./dropdown-menu-group.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuGroupComponent {
   constructor(

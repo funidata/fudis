@@ -8,6 +8,7 @@ import {
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisTranslationConfig } from '../../services/translation/translationKeys';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Displays footer content for a page.
@@ -20,7 +21,7 @@ import { FudisTranslationConfig } from '../../services/translation/translationKe
   styleUrls: ['./footer.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [AsyncPipe],
 })
 export class FooterComponent {
   constructor(private _translationService: FudisTranslationService) {

@@ -5,10 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
  *
  * Use this directive to add buttons that affect the section as a whole.
  */
-@Directive({
-  selector: 'fudis-section-actions',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-section-actions' })
 export class SectionActionsDirective {
   @HostBinding('class') readonly _hostClass = 'fudis-section-actions';
 }
@@ -18,10 +15,7 @@ export class SectionActionsDirective {
  *
  * Use this directive to structure section content.
  */
-@Directive({
-  selector: 'fudis-section-content',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-section-content' })
 export class SectionContentDirective {
   @HostBinding('class') readonly _hostClass = 'fudis-section-content';
 }

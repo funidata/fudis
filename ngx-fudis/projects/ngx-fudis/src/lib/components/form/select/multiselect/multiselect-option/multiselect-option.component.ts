@@ -1,4 +1,13 @@
-import { Component, Host, Inject, Optional, OnDestroy, OnChanges, DOCUMENT } from '@angular/core';
+import {
+  Component,
+  Host,
+  Inject,
+  Optional,
+  OnDestroy,
+  OnChanges,
+  DOCUMENT,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
@@ -8,6 +17,7 @@ import { SelectOptionBaseDirective } from '../../common/select-option-base/selec
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { IconComponent } from '../../../../icon/icon.component';
 
 /**
  * Represents a selectable option within MultiselectComponent.
@@ -16,7 +26,8 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
   selector: 'fudis-multiselect-option',
   templateUrl: './multiselect-option.component.html',
   styleUrls: ['./multiselect-option.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [IconComponent],
 })
 export class MultiselectOptionComponent<T = string>
   extends SelectOptionBaseDirective<T>
@@ -39,7 +50,7 @@ export class MultiselectOptionComponent<T = string>
 
     this._parent = this._parentMultiselect;
 
-    _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {});
+    this._initSelectedStateSync();
 
     toObservable(this._parent.getAutocompleteFilterText())
       .pipe(takeUntilDestroyed())
@@ -53,17 +64,10 @@ export class MultiselectOptionComponent<T = string>
    */
   protected override _parent: MultiselectComponent<T>;
 
-  /**
-   * Returns true if this option is currently selected in the parent multiselect. Checks if the
-   * option's value exists in the parent FormControl's value array.
-   */
-  protected get _selectedOptionChecked(): boolean {
-    const options = this._parentMultiselect.control.value;
-    return !!options?.find((option) => option.value === this.data.value);
-  }
-
   ngOnChanges(changes: FudisComponentChanges<MultiselectOptionComponent<T>>) {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
+      this._syncSelectedState();
+
       const newOptionId = this._idService.getNewSelectOptionId(
         this.data.label,
         'multiselect',
@@ -99,7 +103,7 @@ export class MultiselectOptionComponent<T = string>
    */
   protected override _clickOption(event: Event): void {
     if (!this.data.disabled) {
-      if (!this._selectedOptionChecked) {
+      if (!this._selected()) {
         this._parentMultiselect.handleMultiSelectionChange(this.data, 'add');
       } else {
         this._parentMultiselect.handleMultiSelectionChange(this.data, 'remove');
@@ -116,6 +120,14 @@ export class MultiselectOptionComponent<T = string>
     } else {
       this._isOptionVisible('');
     }
+  }
+
+  /**
+   * Checks if this option is currently selected in the parent multiselect and if the option's value
+   * exists in the parent FormControl's value array.
+   */
+  protected override _isSelected(): boolean {
+    return !!this._parent.control.value?.find((option) => option.value === this.data.value);
   }
 
   /**

@@ -9,8 +9,9 @@ import {
   WritableSignal,
   signal,
   DOCUMENT,
+  ChangeDetectionStrategy,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -20,6 +21,13 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { MultiselectControlValueAccessorDirective } from '../common/select-control-value-accessor/select-control-value-accessor.directive';
 import { BaseSelectableComponent } from '../common/interfaces/base-selectable.interface';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
+import { LabelComponent } from '../../label/label.component';
+import { MultiselectAutocompleteDirective } from '../common/autocomplete/autocomplete.directive';
+import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
+import { SelectDropdownComponent } from '../common/select-dropdown/select-dropdown.component';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { GuidanceComponent } from '../../guidance/guidance.component';
+import { MultiselectChipListComponent } from './multiselect-chip-list/multiselect-chip-list.component';
 
 /**
  * Allows selection of multiple options from a dropdown list.
@@ -28,6 +36,12 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
  * value. The FormControl value is a `FudisSelectOption[]` array (not primitives). Options are
  * projected via `<ng-template fudisSelectOptions>` containing `<fudis-multiselect-option>`
  * elements.
+ *
+ * Option data should be treated as immutable. If application needs to update option labels
+ * dynamically, for example after a language change, provide a new options array with new
+ * `FudisSelectOption` object references instead of mutating existing option objects in place.
+ * Replacing option objects allows the component to update selected values and option labels
+ * correctly.
  *
  * @example
  *   ```html
@@ -43,7 +57,20 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
   selector: 'fudis-multiselect',
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    LabelComponent,
+    FormsModule,
+    MultiselectControlValueAccessorDirective,
+    MultiselectAutocompleteDirective,
+    ReactiveFormsModule,
+    SelectIconsComponent,
+    SelectDropdownComponent,
+    NgTemplateOutlet,
+    GuidanceComponent,
+    MultiselectChipListComponent,
+    AsyncPipe,
+  ],
 })
 export class MultiselectComponent<T = string>
   extends SelectBaseDirective

@@ -6,9 +6,20 @@ import docs from './language-badge-group.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';
+import { HeadingComponent } from '../typography/heading/heading.component';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
+import { ButtonComponent } from '../button/button.component';
+import { GridComponent } from '../grid/grid/grid.component';
 
 @Component({
   selector: 'interactive-example-with-language-service-change-component',
+  imports: [
+    HeadingComponent,
+    LanguageBadgeGroupComponent,
+    BodyTextComponent,
+    GridComponent,
+    ButtonComponent,
+  ],
   template: `
     <fudis-heading [level]="3" [variant]="'sm'" style="display: inline-block;"
       >Harry Potter and the Philosopher's Stone
@@ -41,9 +52,13 @@ import { languageBadgeGroupControlsExclude } from '../../utilities/storybook';
       <fudis-button [label]="'Set App Lang to Sv'" (handleClick)="changeAppLang('sv')" />
     </fudis-grid>
   `,
-  standalone: false,
 })
 class LanguageChangeComponent {
+  constructor(private _languageService: FudisTranslationService) {
+    this._languageService.setSelectableLanguages(['fi', 'sv', 'en']);
+    this.selected = this._languageService.getLanguage();
+  }
+
   protected readonly translations = {
     fi: 'Harry Potter on mielestään ihan tavallinen poika. Tosin hän asuu huoltajiensa luona portaiden alla olevassa kaapissa. Harryn elämä muuttuu täysin, kun hän saa 11-vuotispäivänään merkillisen kirjeen. Se on kutsu Tylypahkan velhojen ja noitien kouluun. Harrylle avautuu kokonaan uusi maailma, johon kuuluvat velhot, noidat, yksisarviset ja lohikäärmeet. Harry saa tietää olevansa velhojen sukua!',
     sv: '',
@@ -51,12 +66,6 @@ class LanguageChangeComponent {
   };
   translated: FudisLanguageAbbr[];
   selected: FudisLanguageAbbr | null;
-
-  constructor(private _languageService: FudisTranslationService) {
-    this._languageService.setSelectableLanguages(['fi', 'sv', 'en']);
-    this.selected = this._languageService.getLanguage();
-  }
-
   translatedLanguages: FudisLanguageAbbr[] = ['fi', 'en'];
 
   changeBadgeLanguages(languages: FudisLanguageAbbr[]): void {
@@ -78,7 +87,7 @@ export default {
   component: LanguageBadgeGroupComponent,
   decorators: [
     moduleMetadata({
-      declarations: [LanguageChangeComponent],
+      imports: [LanguageChangeComponent],
     }),
   ],
   parameters: {

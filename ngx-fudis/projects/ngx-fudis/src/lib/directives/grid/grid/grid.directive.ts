@@ -26,10 +26,7 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
  *
  * Use this directive to define responsive columns.
  */
-@Directive({
-  selector: '[fudisGrid]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisGrid]' })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
   constructor(
     private _gridElement: ElementRef,

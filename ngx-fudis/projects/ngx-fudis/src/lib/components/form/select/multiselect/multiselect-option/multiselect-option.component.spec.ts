@@ -1,30 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { MultiselectOptionComponent } from './multiselect-option.component';
 import { MultiselectComponent } from '../multiselect.component';
-import { MultiselectChipListComponent } from '../multiselect-chip-list/multiselect-chip-list.component';
-import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
-import { SelectOptionComponent } from '../../select/select-option/select-option.component';
-import { SelectGroupComponent } from '../../common/select-group/select-group.component';
-import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
-import { IconComponent } from '../../../../icon/icon.component';
-import { LabelComponent } from '../../../label/label.component';
-import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { defaultOptions, defaultOptionsSecondaryLang } from '../../common/mock_data';
-import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
-import { MultiselectControlValueAccessorDirective } from '../../common/select-control-value-accessor/select-control-value-accessor.directive';
-import { MultiselectAutocompleteDirective } from '../../common/autocomplete/autocomplete.directive';
 import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
 
 @Component({
-  standalone: false,
   selector: 'fudis-multiselect-mock',
+  imports: [MultiselectComponent, SelectOptionsDirective, MultiselectOptionComponent],
   template: `<fudis-multiselect
     #selectEl
     [label]="'Select multiple options'"
@@ -39,11 +28,11 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
   </fudis-multiselect>`,
 })
 class MultiselectMockComponent {
-  multiOptions: FudisSelectOption<string | object>[] = defaultOptions;
-  control: FormControl<FudisSelectOption<string | object>[] | null> = new FormControl(null);
-
   @ViewChild('multiOption') multiOption: MultiselectOptionComponent;
   @ViewChild('selectEl') selectEl: MultiselectComponent;
+
+  multiOptions: FudisSelectOption<string | object>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<string | object>[] | null> = new FormControl(null);
 }
 
 describe('MultiselectOptionComponent', () => {
@@ -52,22 +41,7 @@ describe('MultiselectOptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MultiselectMockComponent,
-        MultiselectOptionComponent,
-        MultiselectControlValueAccessorDirective,
-        MultiselectAutocompleteDirective,
-        MultiselectComponent,
-        MultiselectChipListComponent,
-        SelectOptionComponent,
-        SelectGroupComponent,
-        SelectDropdownComponent,
-        SelectIconsComponent,
-        SelectOptionsDirective,
-        GuidanceComponent,
-        LabelComponent,
-      ],
-      imports: [IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [MultiselectMockComponent],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
 

@@ -17,6 +17,7 @@ import { FudisErrorSummaryFormErrors } from '../../../types/errorSummary';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { NotificationComponent } from '../../notification/notification.component';
+import { LinkDirective } from '../../../directives/link/link.directive';
 
 type ErrorSummaryDOMListItem = {
   id: string;
@@ -34,7 +35,7 @@ type ErrorSummaryDOMListItem = {
   templateUrl: './error-summary.component.html',
   styleUrls: ['./error-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [NotificationComponent, LinkDirective],
 })
 export class ErrorSummaryComponent implements AfterViewInit, OnInit {
   constructor(
@@ -209,7 +210,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     /**
-     * Fetch and update current visible errors when reloadErrors() is called
+     * Fetch and update current visible errors when reloadFormErrors() is called
      */
     toObservable(this._errorSummaryService.errorsSignal[this.formId], {
       injector: this._injector,

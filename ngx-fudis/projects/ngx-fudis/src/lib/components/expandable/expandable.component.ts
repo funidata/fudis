@@ -8,9 +8,13 @@ import {
   OnDestroy,
   OnChanges,
   ElementRef,
+  DestroyRef,
   inject,
   Injector,
   AfterContentInit,
+  ChangeDetectionStrategy,
+  WritableSignal,
+  signal,
 } from '@angular/core';
 import {
   FudisBadgeVariant,
@@ -19,8 +23,11 @@ import {
 } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ExpandableContentDirective } from './expandable-content.directive';
+import { IconComponent } from '../icon/icon.component';
+import { BadgeComponent } from '../badge/badge.component';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * Toggles the visibility of additional content.
@@ -32,7 +39,8 @@ import { ExpandableContentDirective } from './expandable-content.directive';
   templateUrl: './expandable.component.html',
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [IconComponent, BadgeComponent, NgTemplateOutlet],
 })
 export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentInit {
   constructor(
@@ -90,8 +98,9 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
 
   // TODO: write test
   /**
-   * If Expandable is used inside Form component, by default it will open itself when ReloadErrors
-   * is called in Error Summary Service. To disable this behavior, set this to false.
+   * If Expandable is used inside Form component, by default it will open itself when
+   * reloadFormErrors is called in Error Summary Service. To disable this behavior, set this to
+   * false.
    */
   @Input() openOnErrorSummaryReload: boolean = true;
 
@@ -110,7 +119,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
   /**
    * Internal boolean of whether the expandable is currently closed
    */
-  protected _closed: boolean = true;
+  protected _closed: WritableSignal<boolean> = signal(true);
 
   /**
    * Internal id to generate unique id
@@ -120,7 +129,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
   /**
    * Lazy loading check for expanding content
    */
-  protected _openedOnce: boolean = false;
+  protected _openedOnce: WritableSignal<boolean> = signal(false);
 
   /**
    * Is info sent to Error Summary Service
@@ -129,24 +138,29 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
 
   private _parentFormId: string | null;
 
+  private _destroyRef = inject(DestroyRef);
+
   private _getParentForm(): void {
     this._errorSummaryService
       .getFormAncestorId(this._element.nativeElement)
       .then((parentFormId) => {
-        if (parentFormId) {
-          this._parentFormId = parentFormId;
-          if (this.errorSummaryBreadcrumb) {
-            this._addToErrorSummary(this.title);
-          }
+        if (!parentFormId) return;
 
-          toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
-            injector: this._injector,
-          }).subscribe((value) => {
+        this._parentFormId = parentFormId;
+
+        if (this.errorSummaryBreadcrumb) {
+          this._addToErrorSummary(this.title);
+        }
+
+        toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this._parentFormId], {
+          injector: this._injector,
+        })
+          .pipe(takeUntilDestroyed(this._destroyRef))
+          .subscribe((value) => {
             if (this.closed && this.openOnErrorSummaryReload && value) {
               this._setClosedStatus(false);
             }
           });
-        }
       });
   }
 
@@ -154,7 +168,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
    * Getter for closed boolean
    */
   get closed(): boolean {
-    return this._closed;
+    return this._closed();
   }
 
   private _injector = inject(Injector);
@@ -205,8 +219,8 @@ export class ExpandableComponent implements OnDestroy, OnChanges, AfterContentIn
    * Setter for closed boolean
    */
   protected _setClosedStatus(value: boolean): void {
-    this._closed = value ?? this._closed;
-    this._openedOnce = this._openedOnce || !this._closed;
-    this.closedChange.emit(this._closed);
+    this._closed.set(value ?? this._closed());
+    this._openedOnce.set(this._openedOnce() || !this._closed());
+    this.closedChange.emit(this._closed());
   }
 }

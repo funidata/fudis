@@ -16,10 +16,7 @@ import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint
  *
  * Use this directive to control placement and span of child elements inside a grid container.
  */
-@Directive({
-  selector: '[fudisGridItem]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisGridItem]' })
 export class GridItemDirective implements OnInit, OnChanges {
   constructor(
     private _gridItemElement: ElementRef,

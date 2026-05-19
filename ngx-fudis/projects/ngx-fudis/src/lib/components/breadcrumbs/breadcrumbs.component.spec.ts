@@ -2,15 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
-import { IconComponent } from '../icon/icon.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { BreadcrumbsItemComponent } from './breadcrumbs-item/breadcrumbs-item.component';
-import { RouterModule } from '@angular/router';
 import { getElement } from '../../utilities/tests/utilities';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-component',
+  imports: [BreadcrumbsComponent, BreadcrumbsItemComponent, BodyTextComponent],
   template: `<fudis-breadcrumbs [label]="'Test breadcrumbs navigation'">
     <p class="do-not-find-me">This should not be shown</p>
     @for (link of links; track link.url; let index = $index) {
@@ -38,8 +36,7 @@ describe('BreadcrumbsComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [BreadcrumbsComponent, BreadcrumbsItemComponent, MockComponent],
-      imports: [BodyTextComponent, IconComponent, RouterModule.forRoot([])],
+      imports: [BreadcrumbsComponent, MockComponent],
     });
 
     fixture = TestBed.createComponent(MockComponent);

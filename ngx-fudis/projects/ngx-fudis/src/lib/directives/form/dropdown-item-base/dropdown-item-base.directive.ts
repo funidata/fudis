@@ -8,10 +8,7 @@ import {
   DOCUMENT,
 } from '@angular/core';
 
-@Directive({
-  selector: '[fudisDropdownItemBase]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisDropdownItemBase]' })
 export class DropdownItemBaseDirective {
   constructor(@Inject(DOCUMENT) protected _document: Document) {}
 

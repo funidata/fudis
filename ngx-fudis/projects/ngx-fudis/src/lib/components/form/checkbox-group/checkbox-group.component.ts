@@ -8,8 +8,13 @@ import {
   Output,
   ViewChild,
   DOCUMENT,
+  ChangeDetectionStrategy,
+  Signal,
+  computed,
+  signal,
+  WritableSignal,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   FudisCheckboxGroupChangeEvent,
   FudisCheckboxGroupFormGroup,
@@ -22,6 +27,9 @@ import { GroupComponentBaseDirective } from '../../../directives/form/group-comp
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { FieldSetComponent } from '../fieldset/fieldset.component';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Groups multiple related checkbox options.
@@ -42,7 +50,15 @@ import { GuidanceComponent } from '../guidance/guidance.component';
   selector: 'fudis-checkbox-group',
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
-  standalone: false,
+  imports: [
+    FieldSetComponent,
+    FieldsetContentDirective,
+    GuidanceComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
   extends GroupComponentBaseDirective
@@ -83,11 +99,45 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will
    * not show before that.
    */
-  private _groupBlurredOut = false;
+  private _groupBlurredOut: WritableSignal<boolean> = signal(false);
+  public readonly groupBlurredOut: Signal<boolean> = this._groupBlurredOut.asReadonly();
+
+  /**
+   * Private signals for managing the touched, invalid, and disabled state of the form group.
+   */
+  private _touchedState: WritableSignal<boolean> = signal(false);
+  private _invalidState: WritableSignal<boolean> = signal(false);
+  private _disabledState: WritableSignal<boolean> = signal(false);
+
+  /**
+   * Publicly exposed readonly signals reflecting the current state of the form group. Used by child
+   * checkbox options to track group state reactively without requiring markForCheck().
+   */
+  public readonly touchedState: Signal<boolean> = this._touchedState.asReadonly();
+  public readonly invalidState: Signal<boolean> = this._invalidState.asReadonly();
+  public readonly disabledState: Signal<boolean> = this._disabledState.asReadonly();
+
+  /**
+   * Computed signal that combines touched, invalid, and blurred-out state to determine if group
+   * errors should be shown.
+   */
+  public readonly groupErrors = computed(
+    () => this._touchedState() && this._invalidState() && this._groupBlurredOut(),
+  );
+
+  /**
+   * Copy FormGroup states into local signals so child checkbox options can track group state
+   * reactively without requiring markForCheck().
+   */
+  private _syncFormGroupState(): void {
+    this._touchedState.set(this.formGroup.touched);
+    this._invalidState.set(this.formGroup.invalid);
+    this._disabledState.set(this.formGroup.disabled);
+  }
 
   private _applyGroupMarkAsTouched(): void {
     if (this.formGroup.touched) {
-      this._groupBlurredOut = true;
+      this._groupBlurredOut.set(true);
     } else {
       /**
        * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so
@@ -96,25 +146,21 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
       const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
       this.formGroup.markAllAsTouched = () => {
         originalMarkAllAsTouched.apply(this.formGroup);
-        this._groupBlurredOut = true;
+        this._syncFormGroupState();
+        this._groupBlurredOut.set(true);
       };
     }
   }
 
-  /**
-   * Getter for _groupBlurredOut boolean.
-   */
-  get groupBlurredOut(): boolean {
-    return this._groupBlurredOut;
-  }
-
   ngOnInit(): void {
     this._setParentComponentId('checkbox-group');
+    this._syncFormGroupState();
     this._required.next(FudisValidatorUtilities.oneRequiredOrMin(this.formGroup));
 
-    this.formGroup.valueChanges
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => this._updateValueAndValidityTrigger.next());
+    this.formGroup.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      this._syncFormGroupState();
+      this._updateValueAndValidityTrigger.next();
+    });
     this._applyGroupMarkAsTouched();
   }
 
@@ -152,11 +198,7 @@ export class CheckboxGroupComponent<T extends FudisCheckboxGroupFormGroup<T>>
    * checkboxes.
    */
   public setGroupBlurredOut(value: boolean): void {
-    if (value) {
-      this._groupBlurredOut = true;
-    } else {
-      this._groupBlurredOut = false;
-    }
+    this._groupBlurredOut.set(value);
   }
 
   /**

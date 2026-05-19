@@ -99,7 +99,7 @@
       [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
     >
       {{ control.value?.length || 0 }}/{{ maxLength }}
-      <span class="fudis-visually-hidden">{{ _maxLengthText | async }}</span>
+      <span class="fudis-visually-hidden">{{ _maxLengthText() }}</span>
     </small>
   }
   @if (formGroup?.controls && !control && maxLength) {
@@ -112,7 +112,7 @@
           [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
         >
           {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
-          <span class="fudis-visually-hidden">{{ _maxLengthText | async }}</span>
+          <span class="fudis-visually-hidden">{{ _maxLengthText() }}</span>
         </small>
       }
       @if (
@@ -123,8 +123,7 @@
           class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden"
           role="alert"
         >
-          {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
-          {{ _maxLengthText | async }}</p
+          {{ singleControl.value.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText() }}</p
         >
       }
     }
@@ -136,6 +135,6 @@
   (control.value?.length === _maxLengthAlertThreshold || control.value?.length === maxLength)
 ) {
   <p class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden" role="alert"
-    >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText | async }}</p
+    >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText() }}</p
   >
 }

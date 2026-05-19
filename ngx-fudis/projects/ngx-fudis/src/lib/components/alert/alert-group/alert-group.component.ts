@@ -9,6 +9,8 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AlertComponent } from '../alert/alert.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Groups and manages multiple alert messages.
@@ -20,7 +22,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './alert-group.component.html',
   styleUrls: ['./alert-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [AlertComponent, AsyncPipe],
 })
 export class AlertGroupComponent implements OnChanges {
   constructor(

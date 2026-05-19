@@ -1,11 +1,50 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import {
+  BadgeComponent,
+  BodyTextComponent,
+  ButtonComponent,
+  CheckboxComponent,
+  DescriptionListComponent,
+  DescriptionListItemComponent,
+  DescriptionListItemDetailsComponent,
+  DescriptionListItemTermComponent,
+  ExpandableComponent,
+  ExpandableContentDirective,
+  GridComponent,
+  GridItemDirective,
+  HeadingComponent,
+  LinkDirective,
+  SelectComponent,
+  SelectOptionComponent,
+  SelectOptionsDirective,
+} from 'ngx-fudis';
 import { FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/types';
+import { TranslocoRootModule } from '../../transloco-root.module';
 
 @Component({
   selector: 'app-exercise-one',
   templateUrl: 'exercise-one.component.html',
-  standalone: false,
+  imports: [
+    GridComponent,
+    GridItemDirective,
+    BadgeComponent,
+    BodyTextComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    HeadingComponent,
+    LinkDirective,
+    ExpandableComponent,
+    ExpandableContentDirective,
+    DescriptionListComponent,
+    DescriptionListItemComponent,
+    DescriptionListItemTermComponent,
+    DescriptionListItemDetailsComponent,
+    SelectComponent,
+    SelectOptionComponent,
+    SelectOptionsDirective,
+    TranslocoRootModule,
+  ],
 })
 export class ExerciseOneComponent {
   constructor() {

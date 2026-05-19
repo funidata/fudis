@@ -1,26 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { GridComponent } from '../../grid/grid/grid.component';
-import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
-import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FieldsetActionsDirective, FieldsetContentDirective } from './fieldset-content.directive';
 import { FieldSetComponent } from './fieldset.component';
-import { TextInputComponent } from '../text-input/text-input.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { LabelComponent } from '../label/label.component';
-import { IconButtonComponent } from '../../icon-button/icon-button.component';
-import { IconComponent } from '../../icon/icon.component';
-import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-fieldset-component',
+  imports: [FieldSetComponent, FieldsetActionsDirective, FieldsetContentDirective],
   template: ` <fudis-fieldset
     [label]="'Fieldset label'"
     [helpText]="'Fieldset help text'"
@@ -52,20 +41,7 @@ describe('FieldSetComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        FieldsetActionsDirective,
-        FieldsetContentDirective,
-        FieldSetComponent,
-        GridComponent,
-        GridApiDirective,
-        GridDirective,
-        GuidanceComponent,
-        LabelComponent,
-        MockFieldSetComponent,
-        TextInputComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [FieldSetComponent, MockFieldSetComponent],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     }).compileComponents();
 

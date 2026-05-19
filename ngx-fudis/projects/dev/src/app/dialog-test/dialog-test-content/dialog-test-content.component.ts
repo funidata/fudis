@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgxFudisModule, IconButtonComponent, BodyTextComponent, ButtonComponent } from 'ngx-fudis';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-dialog-test-content',
@@ -105,7 +107,7 @@ import { Component } from '@angular/core';
     </fudis-dialog>
   `,
   styles: [],
-  standalone: false,
+  imports: [NgxFudisModule, CdkScrollable, IconButtonComponent, BodyTextComponent, ButtonComponent],
 })
 export class DialogTestContentComponent {
   menuOptions = ['Menu option 1', 'Menu option 2', 'Menu option 3'];

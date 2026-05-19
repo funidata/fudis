@@ -13,6 +13,8 @@ import {
   signal,
   EventEmitter,
   Output,
+  ChangeDetectionStrategy,
+  WritableSignal,
 } from '@angular/core';
 import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -22,6 +24,14 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { getHeadingVariant } from '../../../utilities/typography/typography-utils';
+import { FormsModule } from '@angular/forms';
+import { GridDirective } from '../../../directives/grid/grid/grid.directive';
+import { HeadingComponent } from '../../typography/heading/heading.component';
+import { DialogTitleDirective } from '../../dialog/dialog-directives';
+import { BadgeComponent } from '../../badge/badge.component';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
+import { NgTemplateOutlet } from '@angular/common';
+import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
 
 /**
  * Provides layout and structure for form content. Extends Grid — all Grid inputs are available.
@@ -36,7 +46,17 @@ import { getHeadingVariant } from '../../../utilities/typography/typography-util
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    FormsModule,
+    GridDirective,
+    HeadingComponent,
+    DialogTitleDirective,
+    BadgeComponent,
+    BodyTextComponent,
+    NgTemplateOutlet,
+    ErrorSummaryComponent,
+  ],
 })
 export class FormComponent extends GridApiDirective implements OnInit, OnDestroy, OnChanges {
   constructor(
@@ -103,10 +123,10 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
   @Output() handleUpdatedErrorList = new EventEmitter<{ id: string; message: string }[] | null>();
 
   /**
-   * Angular Change Detection did not trigger when we tried to update only our internal
-   * errorSummaryVisible input, hence we need this "helper signal"
+   * The _errorSummaryVisible signal tracks the current visibility of the error summary for template
+   * binding
    */
-  protected _errorSummaryVisibleSignal = signal<boolean>(false);
+  protected _errorSummaryVisible: WritableSignal<boolean> = signal<boolean>(false);
 
   private _injector = inject(Injector);
 
@@ -118,6 +138,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
     }
 
     this._errorSummaryService.registerNewForm(this.id, this.errorSummaryVisible);
+    this._errorSummaryVisible.set(this.errorSummaryVisible);
 
     if (this._dialogParent) {
       this._dialogParent.closeButtonPositionAbsolute.set(true);
@@ -126,10 +147,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
     toObservable(this._errorSummaryService.errorSummaryVisibilityStatus[this.id], {
       injector: this._injector,
     }).subscribe((value) => {
-      if (value !== this.errorSummaryVisible) {
-        this.errorSummaryVisible = !this.errorSummaryVisible;
-        this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
-      }
+      this._errorSummaryVisible.set(value);
     });
   }
 
@@ -143,7 +161,7 @@ export class FormComponent extends GridApiDirective implements OnInit, OnDestroy
       this.id
     ) {
       this._errorSummaryService.setErrorSummaryVisibility(this.id, this.errorSummaryVisible);
-      this._errorSummaryVisibleSignal.set(this.errorSummaryVisible);
+      this._errorSummaryVisible.set(this.errorSummaryVisible);
     }
   }
 

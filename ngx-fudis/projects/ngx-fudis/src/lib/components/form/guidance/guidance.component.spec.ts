@@ -2,8 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GuidanceComponent } from './guidance.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { IconComponent } from '../../icon/icon.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement, getAllElements } from '../../../utilities/tests/utilities';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -44,8 +42,7 @@ describe('GuidanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GuidanceComponent, ValidatorErrorMessageComponent],
-      imports: [IconComponent],
+      imports: [GuidanceComponent],
       providers: [FudisInternalErrorSummaryService],
     }).compileComponents();
   });
@@ -53,10 +50,10 @@ describe('GuidanceComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GuidanceComponent);
     component = fixture.componentInstance;
-    component.inputLabel = 'Test Label';
-    component.for = 'related-input-id';
-    component.helpText = 'This is describing guidance text';
-    component.maxLength = testMaxLength;
+    fixture.componentRef.setInput('inputLabel', 'Test Label');
+    fixture.componentRef.setInput('for', 'related-input-id');
+    fixture.componentRef.setInput('helpText', 'This is describing guidance text');
+    fixture.componentRef.setInput('maxLength', testMaxLength);
     fixture.detectChanges();
   });
 
@@ -83,7 +80,7 @@ describe('GuidanceComponent', () => {
 
   describe('with single Form Control', () => {
     beforeEach(() => {
-      component.control = testControl;
+      fixture.componentRef.setInput('control', testControl);
       component.control.markAsUntouched();
       fixture.detectChanges();
     });
@@ -154,8 +151,9 @@ describe('GuidanceComponent', () => {
 
   describe('with Form Group', () => {
     beforeEach(() => {
-      component.formGroup = testFormGroup;
-      component.groupBlurredOut = true;
+      fixture.componentRef.setInput('formGroup', testFormGroup);
+
+      fixture.componentRef.setInput('groupBlurredOut', true);
       component.formGroup.controls['finnish'].markAsUntouched();
       component.formGroup.controls['swedish'].markAsUntouched();
       component.formGroup.controls['english'].markAsUntouched();
@@ -170,7 +168,7 @@ describe('GuidanceComponent', () => {
       });
 
       it('should have correct number in max length indicator when selected option is set', () => {
-        component.selectedOption = 'swedish';
+        fixture.componentRef.setInput('selectedOption', 'swedish');
 
         fixture.detectChanges();
 
@@ -219,7 +217,7 @@ describe('GuidanceComponent', () => {
       });
 
       it('should not show errors when groupBlurred out is false', () => {
-        component.groupBlurredOut = false;
+        fixture.componentRef.setInput('groupBlurredOut', false);
         fixture.detectChanges();
 
         const errorList = getAllElements(fixture, 'fudis-validator-error-message p');
@@ -257,7 +255,7 @@ describe('GuidanceComponent', () => {
 
     describe('group errors', () => {
       beforeEach(() => {
-        component.formGroup = testFormGroupWithGroupValidator;
+        fixture.componentRef.setInput('formGroup', testFormGroupWithGroupValidator);
         fixture.detectChanges();
       });
       it('should display right amount of errors', () => {

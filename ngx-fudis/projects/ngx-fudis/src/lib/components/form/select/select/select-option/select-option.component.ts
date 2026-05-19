@@ -1,4 +1,13 @@
-import { Component, Host, Inject, OnChanges, OnDestroy, Optional, DOCUMENT } from '@angular/core';
+import {
+  Component,
+  Host,
+  Inject,
+  OnChanges,
+  OnDestroy,
+  Optional,
+  DOCUMENT,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
@@ -8,6 +17,7 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { FudisSelectOption } from '../../../../../types/forms';
+import { IconComponent } from '../../../../icon/icon.component';
 
 /**
  * Represents a selectable option within SelectComponent.
@@ -16,7 +26,8 @@ import { FudisSelectOption } from '../../../../../types/forms';
   selector: 'fudis-select-option',
   templateUrl: './select-option.component.html',
   styleUrls: ['./select-option.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [IconComponent],
 })
 export class SelectOptionComponent<T = string>
   extends SelectOptionBaseDirective<T>
@@ -33,6 +44,8 @@ export class SelectOptionComponent<T = string>
 
     this._parent = _parentSelect;
 
+    this._initSelectedStateSync();
+
     toObservable(this._parent.getAutocompleteFilterText())
       .pipe(takeUntilDestroyed())
       .subscribe((filterText) => {
@@ -47,6 +60,8 @@ export class SelectOptionComponent<T = string>
 
   ngOnChanges(changes: FudisComponentChanges<SelectOptionBaseDirective<T>>): void {
     if (changes.data?.currentValue !== changes.data?.previousValue) {
+      this._syncSelectedState();
+
       const newOptionId = this._idService.getNewSelectOptionId(
         this.data.label,
         'select',
@@ -59,6 +74,7 @@ export class SelectOptionComponent<T = string>
       this._id = newOptionId;
 
       this._checkVisibilityFromFilterText(this._parent.getAutocompleteFilterText()());
+
       if (changes.data?.currentValue && changes.data.currentValue !== changes.data.previousValue) {
         this._checkIfLabelRequiresUpdate(changes.data.currentValue);
       }
@@ -94,6 +110,13 @@ export class SelectOptionComponent<T = string>
     } else {
       this._isOptionVisible('');
     }
+  }
+
+  /**
+   * Checks if this option is currently selected in the parent select.
+   */
+  protected override _isSelected(): boolean {
+    return this._parent.control.value?.value === this.data.value;
   }
 
   /**

@@ -6,10 +6,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { FudisInputSize } from '../../../types/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-@Directive({
-  selector: '[fudisTextFieldComponentBase]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisTextFieldComponentBase]' })
 export class TextFieldComponentBaseDirective extends ControlComponentBaseDirective {
   constructor(_idService: FudisIdService, _focusService: FudisFocusService) {
     super(_idService, _focusService);
