@@ -331,7 +331,6 @@ describe('SelectBaseDirective', () => {
         controlValueWhenEmitted = component.control.value;
       });
 
-      
       getElement(fixture, '#fudis-multiselect-1-main-wrapper fudis-icon-button button').click();
       fixture.detectChanges();
 
