@@ -6,9 +6,6 @@ import { SectionActionsDirective, SectionContentDirective } from './section-cont
 import { HeadingComponent } from '../typography/heading/heading.component';
 import { ButtonComponent } from '../button/button.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
-import { IconButtonComponent } from '../icon-button/icon-button.component';
-import { IconComponent } from '../icon/icon.component';
-import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import {
@@ -18,11 +15,16 @@ import {
   fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
-import { PopoverDirective } from '../../directives/popover/popover.directive';
 
 @Component({
-  standalone: false,
   selector: 'mock-fudis-section',
+  imports: [
+    SectionComponent,
+    SectionActionsDirective,
+    SectionContentDirective,
+    ButtonComponent,
+    BodyTextComponent,
+  ],
   template: `<fudis-section
     [title]="title"
     [titleVariant]="titleVariant"
@@ -54,21 +56,7 @@ describe('SectionComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [
-        GridDirective,
-        HeadingComponent,
-        MockFudisSectionComponent,
-        SectionComponent,
-        SectionActionsDirective,
-        SectionContentDirective,
-      ],
-      imports: [
-        BodyTextComponent,
-        ButtonComponent,
-        IconButtonComponent,
-        IconComponent,
-        PopoverDirective,
-      ],
+      imports: [MockFudisSectionComponent],
       providers: [FudisInternalErrorSummaryService, FudisBreakpointService],
     });
 

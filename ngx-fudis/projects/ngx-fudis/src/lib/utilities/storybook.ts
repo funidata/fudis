@@ -109,7 +109,6 @@ export const buttonIconOnlyExclude: RegExp = excludeRegex([
  */
 export const checkboxExclude: RegExp = excludeRegex([
   ...formCommonDocsExclude,
-  'groupBlurredOut',
   'setGroupBlurredOut',
   'triggerEmit',
   'disableGuidance',
@@ -126,12 +125,21 @@ export const checkboxExclude: RegExp = excludeRegex([
 export const checkboxGroupExclude: RegExp = excludeRegex([
   ...formCommonDocsExclude,
   'groupBlurredOut',
+  'groupErrors',
+  'touchedState',
+  'invalidState',
+  'disabledState',
   'setGroupBlurredOut',
   'triggerEmit',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   ...formCommonControlsExclude,
+  'groupBlurredOut',
+  'groupErrors',
+  'touchedState',
+  'invalidState',
+  'disabledState',
   'setGroupBlurredOut',
   'triggerEmit',
 ]);
@@ -437,6 +445,7 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'focusSelector',
   'handleSelectionChange',
   'getAutocompleteFilterText',
+  'getControlRef',
   'closeDropdown',
   'openDropdown',
   'selectCVA',
@@ -460,6 +469,7 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'closeDropdown',
   'componentFocused',
   'getAutocompleteFilterText',
+  'getControlRef',
   'openDropdown',
   'popoverText',
   'popoverPosition',

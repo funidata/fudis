@@ -1,33 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SelectBaseDirective } from './select-base.directive';
 import { SelectGroupComponent } from '../select-group/select-group.component';
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { SelectComponent } from '../../select/select.component';
-import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
-import { IconComponent } from '../../../../icon/icon.component';
-import { GuidanceComponent } from '../../../guidance/guidance.component';
-import { LabelComponent } from '../../../label/label.component';
-import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
-import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
-import { SelectOptionComponent } from '../../select/select-option/select-option.component';
+import { FormControl } from '@angular/forms';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisInputSize, FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { getAllElements, getElement } from '../../../../../utilities/tests/utilities';
-import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
 import { By } from '@angular/platform-browser';
 import { groupedTestData } from '../mock_data';
-import { SelectIconsComponent } from '../select-icons/select-icons.component';
 import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
-import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
-import { MultiselectControlValueAccessorDirective } from '../select-control-value-accessor/select-control-value-accessor.directive';
-import { MultiselectAutocompleteDirective } from '../autocomplete/autocomplete.directive';
 import { FudisDialogService } from '../../../../../services/dialog/dialog.service';
+import { SelectOptionsDirective } from '../select-options-directive/select-options.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-select',
+  imports: [
+    MultiselectComponent,
+    MultiselectOptionComponent,
+    SelectOptionsDirective,
+    SelectGroupComponent,
+  ],
   template: `<fudis-multiselect
       #multiSelect
       [variant]="variant"
@@ -70,15 +62,15 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
     </fudis-multiselect>`,
 })
 class MockSelectComponent {
+  @ViewChild('multiSelect') multiSelect: MultiselectComponent;
+  @ViewChild('multiSelectAuto') multiSelectAuto: MultiselectComponent;
+
   groupedData = groupedTestData;
   control: FormControl<FudisSelectOption<string>[] | null> = new FormControl(null);
   clearButton: boolean = true;
   size = 'md';
   variant: FudisSelectVariant = 'dropdown';
   autocompleteFilter = true;
-
-  @ViewChild('multiSelect') multiSelect: MultiselectComponent;
-  @ViewChild('multiSelectAuto') multiSelectAuto: MultiselectComponent;
 }
 
 describe('SelectBaseDirective', () => {
@@ -87,24 +79,7 @@ describe('SelectBaseDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        SelectComponent,
-        SelectBaseDirective,
-        MultiselectControlValueAccessorDirective,
-        MultiselectAutocompleteDirective,
-        SelectGroupComponent,
-        SelectDropdownComponent,
-        SelectOptionComponent,
-        SelectIconsComponent,
-        SelectOptionsDirective,
-        GuidanceComponent,
-        LabelComponent,
-        MockSelectComponent,
-        MultiselectComponent,
-        MultiselectOptionComponent,
-        MultiselectChipListComponent,
-      ],
-      imports: [BodyTextComponent, IconButtonComponent, IconComponent, ReactiveFormsModule],
+      imports: [MockSelectComponent],
       providers: [FudisDialogService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });

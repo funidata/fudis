@@ -6,10 +6,7 @@ import { FudisComponentChanges, fudisFieldsetActionsAlign } from '../../../types
  *
  * Use this directive to add buttons that affect the fieldset as a whole.
  */
-@Directive({
-  selector: 'fudis-fieldset-actions',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-fieldset-actions' })
 export class FieldsetActionsDirective implements OnChanges {
   @HostBinding('class') public hostClass =
     'fudis-fieldset-actions fudis-fieldset-actions__align--start';
@@ -31,10 +28,7 @@ export class FieldsetActionsDirective implements OnChanges {
  *
  * Use this directive to group related form controls within a fieldset.
  */
-@Directive({
-  selector: 'fudis-fieldset-content',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-fieldset-content' })
 export class FieldsetContentDirective {
   @HostBinding('class') readonly _hostClass = 'fudis-fieldset-content';
 }

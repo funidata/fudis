@@ -9,6 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   AfterContentInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
@@ -19,6 +20,9 @@ import { FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
+import { GridDirective } from '../../../directives/grid/grid/grid.directive';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 
 /**
  * Groups related form controls under a common context.
@@ -30,7 +34,8 @@ import { PopoverApiDirective } from '../../../directives/popover/popover-api.dir
   templateUrl: './fieldset.component.html',
   styleUrls: ['./fieldset.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [GridDirective, IconButtonComponent, BodyTextComponent],
 })
 export class FieldSetComponent
   extends PopoverApiDirective
@@ -111,12 +116,6 @@ export class FieldSetComponent
    * Help text, aligned underneath the input.
    */
   @Input() helpText: string | undefined;
-
-  /**
-   * Used to vertically align Legend label with similar Label elements with varying heights. By
-   * default `false`, but set `true` in Checkbox Group and Radio Button Group
-   */
-  @Input() syncLegendHeight = false;
 
   /**
    * CSS classes for the native fieldset HTMLelement

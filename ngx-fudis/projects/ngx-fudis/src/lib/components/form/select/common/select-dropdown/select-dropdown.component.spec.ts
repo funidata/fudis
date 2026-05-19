@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectDropdownComponent } from './select-dropdown.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
-import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 import { FudisSelectVariant } from '../../../../../types/forms';
 
 const autocompleteVariants: FudisSelectVariant[] = ['autocompleteDropdown', 'autocompleteType'];
@@ -13,8 +12,7 @@ describe('SelectDropdownComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectDropdownComponent],
-      imports: [BodyTextComponent],
+      imports: [SelectDropdownComponent],
     });
     fixture = TestBed.createComponent(SelectDropdownComponent);
     component = fixture.componentInstance;
@@ -47,9 +45,9 @@ describe('SelectDropdownComponent', () => {
     });
 
     it('should not show help text with dropdown', () => {
-      component.open = true;
-      component.filterText = 'hello';
-      component.results = 42;
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+      fixture.componentRef.setInput('results', 42);
       fixture.detectChanges();
 
       const filterText = getElement(fixture, '.fudis-select-dropdown__help-text__first');
@@ -58,9 +56,9 @@ describe('SelectDropdownComponent', () => {
     });
 
     it('should not show no results with dropdown', () => {
-      component.open = true;
-      component.filterText = 'hello';
-      component.results = 0;
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+      fixture.componentRef.setInput('results', 0);
       fixture.detectChanges();
 
       const filterText = getElement(fixture, '.fudis-select-dropdown__help-text__last');
@@ -69,11 +67,11 @@ describe('SelectDropdownComponent', () => {
     });
 
     it('should display default help text', () => {
-      component.open = true;
-      component.filterText = 'hello';
-      component.results = 42;
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+      fixture.componentRef.setInput('results', 42);
       autocompleteVariants.forEach((variant) => {
-        component.selectVariant = variant;
+        fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
 
         const filterText = getElement(
@@ -89,11 +87,11 @@ describe('SelectDropdownComponent', () => {
     });
 
     it('should show no results help text with autocompletes', () => {
-      component.open = true;
-      component.filterText = 'hello';
-      component.results = 0;
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+      fixture.componentRef.setInput('results', 0);
       autocompleteVariants.forEach((variant) => {
-        component.selectVariant = variant;
+        fixture.componentRef.setInput('selectVariant', variant);
 
         fixture.detectChanges();
 
@@ -116,30 +114,30 @@ describe('SelectDropdownComponent', () => {
     });
 
     it('should have respective size value', () => {
-      component.size = 'md';
+      fixture.componentRef.setInput('size', 'md');
       fixture.detectChanges();
       expect(htmlElement.className).toContain('fudis-input-size__md');
     });
 
     it('should have respective multiselect value', () => {
-      component.multiselect = true;
+      fixture.componentRef.setInput('multiselect', true);
       fixture.detectChanges();
       expect(htmlElement.className).toContain('fudis-select-dropdown__multiselect');
     });
 
     it('should have respective open value', () => {
-      component.open = true;
+      fixture.componentRef.setInput('open', true);
       fixture.detectChanges();
       expect(htmlElement.className).toContain('fudis-select-dropdown--open');
     });
 
     it('should display given help text with autocompletes', () => {
-      component.results = 42;
-      component.open = true;
-      component.filterText = 'hello';
-      component.autocompleteHelpText = 'Hello from help text';
+      fixture.componentRef.setInput('results', 42);
+      fixture.componentRef.setInput('open', true);
+      fixture.componentRef.setInput('filterText', 'hello');
+      fixture.componentRef.setInput('autocompleteHelpText', 'Hello from help text');
       autocompleteVariants.forEach((variant) => {
-        component.selectVariant = variant;
+        fixture.componentRef.setInput('selectVariant', variant);
         fixture.detectChanges();
 
         const helpText = getElement(

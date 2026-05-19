@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PopoverApiDirective } from '../../../directives/popover/popover-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 
 @Component({
   selector: 'fudis-label',
   templateUrl: './label.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IconButtonComponent],
 })
 export class LabelComponent extends PopoverApiDirective {
   constructor(protected _translationService: FudisTranslationService) {

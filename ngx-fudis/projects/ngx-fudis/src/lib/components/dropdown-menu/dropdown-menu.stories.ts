@@ -8,9 +8,26 @@ import { defaultMenuItems, smallDropdownMenuGroupedMockData } from './mock_data'
 import { action } from 'storybook/actions';
 import { FudisInputSize } from '../../types/forms';
 import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
+import { GridComponent } from '../grid/grid/grid.component';
+import { GridItemComponent } from '../grid/grid-item/grid-item.component';
+import { HeadingComponent } from '../typography/heading/heading.component';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { DropdownMenuItemComponent } from './dropdown-menu-item/dropdown-menu-item.component';
+import { DropdownMenuGroupComponent } from './dropdown-menu-group/dropdown-menu-group.component';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 
 @Component({
   selector: 'example-dropdown-menu',
+  imports: [
+    GridComponent,
+    GridItemComponent,
+    HeadingComponent,
+    IconButtonComponent,
+    DropdownMenuComponent,
+    DropdownMenuItemComponent,
+    DropdownMenuGroupComponent,
+    BodyTextComponent,
+  ],
   template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
     <fudis-grid-item>
       <fudis-heading [level]="4">Random items menu</fudis-heading>
@@ -64,7 +81,6 @@ import { fudisDropdownMenuAlignArray } from '../../types/miscellaneous';
       }
     </fudis-grid-item>
   </fudis-grid>`,
-  standalone: false,
 })
 class DropdownMenuExampleComponent {
   protected _latestClickItem: string | null = null;
@@ -92,7 +108,7 @@ export default {
   component: DropdownMenuComponent,
   decorators: [
     moduleMetadata({
-      declarations: [DropdownMenuExampleComponent],
+      imports: [DropdownMenuExampleComponent],
     }),
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],

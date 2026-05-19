@@ -1,11 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FormComponent } from './form.component';
-import { HeadingComponent } from '../../typography/heading/heading.component';
-import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import {
   FormActionsDirective,
   FormContentDirective,
@@ -14,32 +11,28 @@ import {
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { IconButtonComponent } from '../../icon-button/icon-button.component';
-import { IconComponent } from '../../icon/icon.component';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { LabelComponent } from '../label/label.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { getElement } from '../../../utilities/tests/utilities';
-import { BadgeComponent } from '../../badge/badge.component';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { LinkDirective } from '../../../directives/link/link.directive';
-import { NotificationComponent } from '../../notification/notification.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { DialogContentDirective, DialogTitleDirective } from '../../dialog/dialog-directives';
-import { AlertGroupComponent } from '../../alert/alert-group/alert-group.component';
 import { FudisAlertService } from '../../../services/alert/alert.service';
-import { FormSubmitDirective } from '../../../directives/form/form-actions/form-actions.directive';
+import { MatDialogRef } from '@angular/material/dialog';
 
 /**
  * Basic Form example
  */
 @Component({
-  standalone: false,
   selector: 'fudis-mock-form-component',
+  imports: [
+    FormComponent,
+    FormHeaderDirective,
+    FormContentDirective,
+    FormActionsDirective,
+    TextInputComponent,
+  ],
   template: `<fudis-form
     [id]="'my-own-id'"
     [titleVariant]="'md'"
@@ -86,8 +79,15 @@ class MockFormComponent {
  * Form inside Dialog example
  */
 @Component({
-  standalone: false,
   selector: 'mock-dialog-with-form',
+  imports: [
+    DialogComponent,
+    DialogContentDirective,
+    FormComponent,
+    FormContentDirective,
+    FormActionsDirective,
+    TextInputComponent,
+  ],
   template: `
     <fudis-dialog>
       <fudis-dialog-content>
@@ -127,41 +127,17 @@ describe('FormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AlertGroupComponent,
-        DialogComponent,
-        DialogContentDirective,
-        DialogTitleDirective,
-        ErrorSummaryComponent,
-        ExampleDialogWithFormComponent,
-        FormComponent,
-        FormActionsDirective,
-        FormContentDirective,
-        FormHeaderDirective,
-        FormSubmitDirective,
-        GridDirective,
-        GuidanceComponent,
-        HeadingComponent,
-        LabelComponent,
-        LinkDirective,
-        MockFormComponent,
-        NotificationComponent,
-        TextInputComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [
-        BadgeComponent,
-        BodyTextComponent,
-        IconButtonComponent,
-        IconComponent,
-        ReactiveFormsModule,
-      ],
+      imports: [MockFormComponent, ExampleDialogWithFormComponent],
       providers: [
         FudisAlertService,
         FudisBreakpointService,
         FudisDialogService,
         FudisInternalErrorSummaryService,
         FudisErrorSummaryService,
+        {
+          provide: MatDialogRef,
+          useValue: {},
+        },
       ],
     });
     TestBed.runInInjectionContext(() => {

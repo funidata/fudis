@@ -12,6 +12,8 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { PopoverApiDirective } from '../../directives/popover/popover-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
+import { LanguageBadgeComponent } from './language-badge/language-badge.component';
+import { AsyncPipe } from '@angular/common';
 
 type LanguageLabel = { key: FudisLanguageAbbr; variant: 'standard' | 'missing' };
 type LanguageLabelArray = LanguageLabel[];
@@ -26,7 +28,7 @@ type LanguageLabelArray = LanguageLabel[];
   templateUrl: './language-badge-group.component.html',
   styleUrls: ['./language-badge-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [LanguageBadgeComponent, AsyncPipe],
 })
 export class LanguageBadgeGroupComponent extends PopoverApiDirective implements OnChanges {
   constructor(

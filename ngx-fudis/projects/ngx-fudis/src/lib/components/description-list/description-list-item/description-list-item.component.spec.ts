@@ -1,21 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GridComponent } from '../../grid/grid/grid.component';
-import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../description-list.component';
 import { DescriptionListItemComponent } from './description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
-import { LanguageBadgeGroupComponent } from '../../language-badge-group/language-badge-group.component';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { getElement } from '../../../utilities/tests/utilities';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../../types/miscellaneous';
-import { LanguageBadgeComponent } from '../../language-badge-group/language-badge/language-badge.component';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-dl',
+  imports: [
+    DescriptionListComponent,
+    DescriptionListItemComponent,
+    DescriptionListItemTermComponent,
+    DescriptionListItemDetailsComponent,
+  ],
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
@@ -68,17 +69,7 @@ describe('DescriptionListItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        GridDirective,
-        GridComponent,
-        DescriptionListComponent,
-        DescriptionListItemComponent,
-        DescriptionListItemTermComponent,
-        DescriptionListItemDetailsComponent,
-        LanguageBadgeGroupComponent,
-        LanguageBadgeComponent,
-        MockDlComponent,
-      ],
+      imports: [MockDlComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

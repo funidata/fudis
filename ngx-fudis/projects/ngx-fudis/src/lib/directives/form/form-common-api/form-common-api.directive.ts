@@ -16,10 +16,7 @@ import { FudisIdComponent, FudisIdParent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 
-@Directive({
-  selector: '[fudisFormCommonApi]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisFormCommonApi]' })
 export class FormCommonApiDirective extends PopoverApiDirective implements AfterViewInit {
   constructor(
     protected _idService: FudisIdService,

@@ -3,12 +3,11 @@ import { Component } from '@angular/core';
 import { MultiselectChipListComponent } from './multiselect-chip-list.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { multiselectChipListMockData } from '../../common/mock_data';
-import { IconComponent } from '../../../../icon/icon.component';
 import { getElement } from '../../../../../utilities/tests/utilities';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-with-parent',
+  imports: [MultiselectChipListComponent],
   template: `<div [id]="id">
     <fudis-multiselect-chip-list
       [parentId]="id"
@@ -30,8 +29,7 @@ describe('MultiselectChipListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MultiselectChipListComponent, MockWithParentComponent],
-      imports: [IconComponent],
+      imports: [MultiselectChipListComponent, MockWithParentComponent],
     });
     fixture = TestBed.createComponent(MultiselectChipListComponent<string>);
     component = fixture.componentInstance;

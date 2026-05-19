@@ -24,10 +24,7 @@ import { IconComponent } from '../../components/icon/icon.component';
  *
  * Use this directive with anchor element and consider whether link is internal/external.
  */
-@Directive({
-  selector: '[fudisLink]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisLink]' })
 export class LinkDirective implements OnInit, OnChanges, AfterViewInit {
   constructor(
     @Inject(DOCUMENT) private _document: Document,

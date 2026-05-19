@@ -1,6 +1,6 @@
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import {
   FudisRadioButtonChangeEvent,
@@ -8,21 +8,15 @@ import {
   fudisInputSizeArray,
 } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
-import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { Component } from '@angular/core';
-import { IconComponent } from '../../icon/icon.component';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-component',
+  imports: [RadioButtonGroupComponent, RadioButtonComponent],
   template: `<fudis-radio-button-group
     [id]="'radio-button-test-group'"
     [control]="testFormControl"
@@ -64,17 +58,7 @@ describe('Basic inputs of Radio Button Group', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MockContainerComponent,
-        RadioButtonGroupComponent,
-        RadioButtonComponent,
-        FieldSetComponent,
-        FieldsetContentDirective,
-        GridDirective,
-        GuidanceComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [IconComponent, ReactiveFormsModule],
+      imports: [MockContainerComponent, RadioButtonGroupComponent],
       providers: [FudisBreakpointService, FudisInternalErrorSummaryService],
     }).compileComponents();
   });
@@ -143,7 +127,7 @@ describe('Basic inputs of Radio Button Group', () => {
 
   it('should pass correct size values to the Fieldset', () => {
     fudisInputSizeArray.forEach((size) => {
-      component.size = size;
+      fixture.componentRef.setInput('size', size);
       fixture.detectChanges();
 
       expect(fieldsetElement.classList).toContain(`fudis-input-size__${size}`);
@@ -151,7 +135,7 @@ describe('Basic inputs of Radio Button Group', () => {
   });
 
   it('should pass correct id', () => {
-    component.id = 'my-custom-radio-button-group';
+    fixture.componentRef.setInput('id', 'my-custom-radio-button-group');
     fixture.detectChanges();
 
     expect(fieldsetElement.getAttribute('id')).toEqual('my-custom-radio-button-group');

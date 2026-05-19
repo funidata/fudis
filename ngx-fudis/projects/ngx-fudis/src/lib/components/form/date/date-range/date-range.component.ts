@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
@@ -21,7 +21,7 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
   selector: 'fudis-date-range',
   templateUrl: './date-range.component.html',
   styleUrls: ['./date-range.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangeComponent implements OnChanges {
   constructor(private _idService: FudisIdService) {}

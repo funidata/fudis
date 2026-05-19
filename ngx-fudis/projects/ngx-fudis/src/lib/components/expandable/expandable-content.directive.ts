@@ -5,10 +5,7 @@ import { Directive, HostBinding, TemplateRef } from '@angular/core';
  *
  * Use this directive to position action buttons to a fixed place.
  */
-@Directive({
-  selector: 'fudis-expandable-actions',
-  standalone: false,
-})
+@Directive({ selector: 'fudis-expandable-actions' })
 export class ExpandableActionsDirective {
   @HostBinding('class') readonly _hostClass = 'fudis-expandable-actions';
 }
@@ -18,10 +15,7 @@ export class ExpandableActionsDirective {
  *
  * Use this directive for lazy loaded content.
  */
-@Directive({
-  selector: '[fudisExpandableContent]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisExpandableContent]' })
 export class ExpandableContentDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }

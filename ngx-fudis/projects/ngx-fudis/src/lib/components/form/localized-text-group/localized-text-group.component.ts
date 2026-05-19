@@ -7,7 +7,7 @@ import {
   effect,
   AfterViewInit,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   FudisLocalizedTextGroupFormGroup,
   FudisSelectOption,
@@ -23,6 +23,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { GroupComponentBaseDirective } from '../../../directives/form/group-component-base/group-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { LabelComponent } from '../label/label.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
+import { SelectComponent } from '../select/select/select.component';
+import { SelectOptionsDirective } from '../select/common/select-options-directive/select-options.directive';
+import { SelectOptionComponent } from '../select/select/select-option/select-option.component';
+import { AsyncPipe, KeyValuePipe } from '@angular/common';
 
 /**
  * Manages localized text inputs across multiple languages.
@@ -34,7 +40,17 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
   templateUrl: './localized-text-group.component.html',
   styleUrls: ['./localized-text-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    LabelComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    GuidanceComponent,
+    SelectComponent,
+    SelectOptionsDirective,
+    SelectOptionComponent,
+    AsyncPipe,
+    KeyValuePipe,
+  ],
 })
 export class LocalizedTextGroupComponent<T extends FudisLocalizedTextGroupFormGroup<T>>
   extends GroupComponentBaseDirective

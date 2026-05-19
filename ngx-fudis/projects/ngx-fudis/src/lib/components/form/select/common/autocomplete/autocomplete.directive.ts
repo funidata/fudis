@@ -9,10 +9,7 @@ import {
 } from '@angular/core';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 
-@Directive({
-  selector: '[fudisSelectAutocompleteBase]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisSelectAutocompleteBase]' })
 export class SelectAutocompleteBaseDirective {
   constructor(protected _elementRef: ElementRef<HTMLInputElement>) {}
 
@@ -145,10 +142,7 @@ export class SelectAutocompleteBaseDirective {
   }
 }
 
-@Directive({
-  selector: '[fudisSelectAutocomplete]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisSelectAutocomplete]' })
 export class SelectAutocompleteDirective
   extends SelectAutocompleteBaseDirective
   implements OnChanges
@@ -185,10 +179,7 @@ export class SelectAutocompleteDirective
   }
 }
 
-@Directive({
-  selector: '[fudisMultiselectAutocomplete]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisMultiselectAutocomplete]' })
 export class MultiselectAutocompleteDirective
   extends SelectAutocompleteBaseDirective
   implements OnChanges

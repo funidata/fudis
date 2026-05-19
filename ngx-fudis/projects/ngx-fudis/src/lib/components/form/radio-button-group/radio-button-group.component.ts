@@ -9,6 +9,10 @@ import {
   ViewChild,
   AfterViewInit,
   DOCUMENT,
+  ChangeDetectionStrategy,
+  signal,
+  WritableSignal,
+  Signal,
 } from '@angular/core';
 import { FudisInputSize, FudisRadioButtonChangeEvent } from '../../../types/forms';
 import { FudisValidatorUtilities } from '../../../utilities/form/validator-utilities';
@@ -18,8 +22,10 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { ControlComponentBaseDirective } from '../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { Subscription } from 'rxjs';
-
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { FieldSetComponent } from '../fieldset/fieldset.component';
+import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Groups mutually exclusive options.
@@ -38,7 +44,8 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FieldSetComponent, FieldsetContentDirective, GuidanceComponent, AsyncPipe],
 })
 export class RadioButtonGroupComponent
   extends ControlComponentBaseDirective
@@ -75,20 +82,44 @@ export class RadioButtonGroupComponent
    */
   private _subscription: Subscription;
 
+  /**
+   * Private signals for managing the state and selected value of the radio button group
+   */
+  private _selectedValue: WritableSignal<string | boolean | object | null | unknown> = signal(null);
+  private _touched: WritableSignal<boolean> = signal(false);
+  private _invalid: WritableSignal<boolean> = signal(false);
+  private _disabled: WritableSignal<boolean> = signal(false);
+
+  /**
+   * Publicly exposed readonly signals for template binding and external use (in single radio
+   * button). Not meant to be set from outside the component, but reflect the current state of the
+   * form control and selected value.
+   */
+  public readonly selectedValue: Signal<string | boolean | object | null | unknown> =
+    this._selectedValue.asReadonly();
+  public readonly touchedState: Signal<boolean> = this._touched.asReadonly();
+  public readonly invalidState: Signal<boolean> = this._invalid.asReadonly();
+  public readonly disabledState: Signal<boolean> = this._disabled.asReadonly();
+
   ngOnInit() {
     this._setParentComponentId('radio-button-group');
     this._updateValueAndValidityTrigger.next();
   }
 
   /**
-   * Add value and validity check when control value changes
+   * Sync local signals with FormControl states and add value and validity check when control value
+   * changes.
    */
   ngOnChanges(changes: FudisComponentChanges<RadioButtonGroupComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._syncControlState();
       this._subscription?.unsubscribe();
-      this._subscription = this.control.valueChanges
+      this._subscription = this.control.events
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe(() => this._updateValueAndValidityTrigger.next());
+        .subscribe(() => {
+          this._syncControlState();
+          this._updateValueAndValidityTrigger.next();
+        });
     }
   }
 
@@ -121,12 +152,24 @@ export class RadioButtonGroupComponent
     return radio;
   }
 
+  /**
+   * Copy FormControl states into local signals
+   */
+  private _syncControlState(): void {
+    if (!this.control) return;
+
+    this._selectedValue.set(this.control.value);
+    this._touched.set(this.control.touched);
+    this._invalid.set(this.control.invalid);
+    this._disabled.set(this.control.disabled);
+  }
+
   public triggerEmit(id: string, label: string): void {
     const data: FudisRadioButtonChangeEvent = {
       option: {
         id: id,
         label: label,
-        value: this.control?.value,
+        value: this._selectedValue(),
       },
       control: this.control,
     };

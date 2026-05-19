@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 
 /**
@@ -11,7 +11,7 @@ import { GridDirective } from '../../../directives/grid/grid/grid.directive';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 /**

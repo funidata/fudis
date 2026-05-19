@@ -1,5 +1,8 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   Input,
   OnChanges,
@@ -10,21 +13,25 @@ import {
   signal,
   AfterViewInit,
   Injector,
+  WritableSignal,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FudisErrorSummaryNewError } from '../../../types/errorSummary';
+import { IconComponent } from '../../icon/icon.component';
+import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
+import { KeyValuePipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-guidance',
   templateUrl: './guidance.component.html',
   styleUrls: ['./guidance.component.scss'],
-  standalone: false,
+  imports: [IconComponent, ValidatorErrorMessageComponent, KeyValuePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
   constructor(
@@ -36,7 +43,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
     this._id = _idService.getNewId('guidance');
 
     effect(() => {
-      this._maxLengthText.next(_translationService.getTranslations()().TEXTINPUT.MAX_LENGTH);
+      this._maxLengthText.set(_translationService.getTranslations()().TEXTINPUT.MAX_LENGTH);
     });
   }
 
@@ -94,7 +101,7 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where
    * "characters used" is "maxLengthText".
    */
-  protected _maxLengthText = new BehaviorSubject<string>('');
+  protected _maxLengthText: WritableSignal<string> = signal<string>('');
 
   /**
    * Number of characters left when screen reader is alerted about input max length
@@ -117,18 +124,20 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
    */
   protected _lazyLoadedErrors: string[] = [];
 
-  protected _parentFormId = signal<string | null>(null);
+  protected _parentFormId: WritableSignal<string | null> = signal<string | null>(null);
 
   /**
    * Used prevent checks in HTML DOM before content has been loaded
    */
-  protected _afterViewInitDone = signal<boolean>(false);
+  protected _afterViewInitDone: WritableSignal<boolean> = signal<boolean>(false);
 
   /**
    * To prevent Error Summary reloading after lazy load check
    */
   private _reloadGuard = false;
 
+  private _cdr = inject(ChangeDetectorRef);
+  private _destroyRef = inject(DestroyRef);
   private _injector = inject(Injector);
 
   ngOnInit(): void {
@@ -138,6 +147,18 @@ export class GuidanceComponent implements OnChanges, OnInit, AfterContentInit, A
   ngOnChanges(changes: FudisComponentChanges<GuidanceComponent>): void {
     if (changes.maxLength?.currentValue !== changes.maxLength?.previousValue) {
       this._setCharacterLimitIndicatorValues();
+    }
+
+    if (changes.control) {
+      this.control?.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._cdr.markForCheck());
+    }
+
+    if (changes.formGroup) {
+      this.formGroup?.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => this._cdr.markForCheck());
     }
   }
 

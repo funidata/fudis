@@ -2,14 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FooterComponent } from './footer.component';
-import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-footer',
+  imports: [FooterComponent, LinkDirective],
   template: `<fudis-footer>
     <a fudisLink href="example.com" [external]="true" [title]="'Privacy notice'"></a>
     <a fudisLink href="example.com" [external]="true" [title]="'Accessibility statement'"></a>
@@ -27,8 +26,7 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FooterComponent, LinkDirective, MockFooterComponent],
-      imports: [IconComponent],
+      imports: [FooterComponent, MockFooterComponent],
       providers: [FudisBreakpointService],
     }).compileComponents();
   });

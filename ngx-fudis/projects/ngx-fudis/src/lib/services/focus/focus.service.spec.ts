@@ -1,13 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisFocusService } from './focus.service';
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../components/button/button.component';
-import { IconComponent } from '../../components/icon/icon.component';
 import { LinkDirective } from '../../directives/link/link.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-component',
+  imports: [LinkDirective],
   template: `<div class="mock-container">
     <a
       fudisLink
@@ -29,7 +27,6 @@ import { LinkDirective } from '../../directives/link/link.directive';
 })
 class MockFocusComponent {
   secondLinkVisible = false;
-
   focusedId: string;
 
   handleFocus(id: string) {
@@ -44,8 +41,7 @@ describe('FudisFocusService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockFocusComponent, LinkDirective],
-      imports: [ButtonComponent, IconComponent],
+      imports: [MockFocusComponent],
     });
 
     fixture = TestBed.createComponent(MockFocusComponent);

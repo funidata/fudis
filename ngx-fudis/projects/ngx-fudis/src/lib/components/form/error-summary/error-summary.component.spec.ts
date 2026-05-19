@@ -1,27 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ErrorSummaryComponent } from './error-summary.component';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FormComponent } from '../form/form.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { GridComponent } from '../../grid/grid/grid.component';
-import { IconComponent } from '../../icon/icon.component';
-import { NotificationComponent } from '../../notification/notification.component';
-import { HeadingComponent } from '../../typography/heading/heading.component';
-import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { LabelComponent } from '../label/label.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
-import { LinkDirective } from '../../../directives/link/link.directive';
 import { getAllElements, getElement } from '../../../utilities/tests/utilities';
 import { FieldsetContentDirective } from '../fieldset/fieldset-content.directive';
 import { SectionContentDirective } from '../../section/section-content.directive';
@@ -29,8 +17,18 @@ import { FormContentDirective } from '../form/form-content.directive';
 import { ExpandableContentDirective } from '../../expandable/expandable-content.directive';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-form-component',
+  imports: [
+    FormComponent,
+    FormContentDirective,
+    FieldSetComponent,
+    FieldsetContentDirective,
+    TextInputComponent,
+    SectionComponent,
+    SectionContentDirective,
+    ExpandableComponent,
+    ExpandableContentDirective,
+  ],
   template: ` <fudis-form
     #formRef
     [level]="1"
@@ -131,28 +129,7 @@ describe('ErrorSummaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ExpandableComponent,
-        ExpandableContentDirective,
-        ErrorSummaryComponent,
-        FieldSetComponent,
-        FieldsetContentDirective,
-        FormComponent,
-        GridDirective,
-        GridComponent,
-        GuidanceComponent,
-        FormContentDirective,
-        HeadingComponent,
-        LabelComponent,
-        LinkDirective,
-        MockFormComponent,
-        NotificationComponent,
-        SectionComponent,
-        SectionContentDirective,
-        TextInputComponent,
-        ValidatorErrorMessageComponent,
-      ],
-      imports: [BodyTextComponent, IconComponent, ReactiveFormsModule, RouterModule.forRoot([])],
+      imports: [MockFormComponent],
       providers: [
         FudisInternalErrorSummaryService,
         FudisBreakpointService,

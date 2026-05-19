@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   Host,
   HostListener,
@@ -11,10 +12,18 @@ import {
   ViewChild,
   ViewEncapsulation,
   effect,
+  signal,
+  WritableSignal,
 } from '@angular/core';
-import { FormControl, AbstractControl } from '@angular/forms';
+import { FormControl, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepicker, MatDatepickerIntl } from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerIntl,
+  MatDatepickerInput,
+  MatDatepickerToggle,
+  MatDatepickerToggleIcon,
+} from '@angular/material/datepicker';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -29,6 +38,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateRangeComponent } from '../date-range/date-range.component';
 import { ControlComponentBaseDirective } from '../../../../directives/form/control-component-base/control-component-base.directive';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
+import { LabelComponent } from '../../label/label.component';
+import { MatSuffix } from '@angular/material/form-field';
+import { IconComponent } from '../../../icon/icon.component';
+import { GuidanceComponent } from '../../guidance/guidance.component';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Allows selection of a single date.
@@ -39,6 +53,7 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
   selector: 'fudis-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [
     {
@@ -48,7 +63,19 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
     },
     { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
   ],
-  standalone: false,
+  imports: [
+    LabelComponent,
+    MatDatepickerInput,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerToggle,
+    MatSuffix,
+    MatDatepickerToggleIcon,
+    IconComponent,
+    MatDatepicker,
+    GuidanceComponent,
+    AsyncPipe,
+  ],
 })
 export class DatepickerComponent
   extends ControlComponentBaseDirective
@@ -187,6 +214,19 @@ export class DatepickerComponent
   protected _placeholderString = new BehaviorSubject<string>('');
 
   /**
+   * Signals reflecting the current state of the form control, updated on every control event.
+   */
+  protected _touched: WritableSignal<boolean> = signal(false);
+  protected _invalid: WritableSignal<boolean> = signal(false);
+  protected _disabled: WritableSignal<boolean> = signal(false);
+
+  private _syncControlState(): void {
+    this._touched.set(this.control.touched);
+    this._invalid.set(this.control.invalid);
+    this._disabled.set(this.control.disabled);
+  }
+
+  /**
    * Instance of Datepicker Parse validator
    */
   private _parseValidatorInstance: FudisValidatorFn | null;
@@ -195,6 +235,7 @@ export class DatepickerComponent
    * Subscription for handling the valueChanges observable
    */
   private _subscription: Subscription;
+  private _dateCrossingSubscription: Subscription;
 
   /**
    * Validator reads HTML input field and checks if it can be converted to valid Date object
@@ -270,19 +311,25 @@ export class DatepickerComponent
     // Do checks for the control to define attributes used in e.g. HTML
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._subscription?.unsubscribe();
+      this._syncControlState();
       this._updateValueAndValidityTrigger.next();
+
+      // Subscribe to control events to update the state signals and trigger value and validity updates
+      this._subscription = this.control.events
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe(() => {
+          this._syncControlState();
+          this._updateValueAndValidityTrigger.next();
+        });
+
       // Subscribe to control value changes and call parent's date crossing check with current value and Date Range input type
       if (this._parentDateRange && this.dateRangeType) {
-        this._subscription = this.control.valueChanges
+        this._dateCrossingSubscription?.unsubscribe();
+        this._dateCrossingSubscription = this.control.valueChanges
           .pipe(takeUntilDestroyed(this._destroyRef))
           .subscribe((value) => {
-            this._updateValueAndValidityTrigger.next();
             this._parentDateRange?.checkDateCrossings(value, this.dateRangeType!);
           });
-      } else {
-        this._subscription = this.control.valueChanges
-          .pipe(takeUntilDestroyed(this._destroyRef))
-          .subscribe(() => this._updateValueAndValidityTrigger.next());
       }
 
       // If control changes and these checks are on, add parseValidator

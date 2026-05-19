@@ -15,10 +15,7 @@ import { isButtonDisabled } from '../../../utilities/dialog/dialog-utils';
  *   <fudis-button fudisFormSubmit [label]="'Submit'" [formValid]="myForm.valid"></fudis-button>
  *   ```;
  */
-@Directive({
-  selector: '[fudisFormSubmit]',
-  standalone: false,
-})
+@Directive({ selector: '[fudisFormSubmit]' })
 export class FormSubmitDirective implements OnInit {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
@@ -27,9 +24,9 @@ export class FormSubmitDirective implements OnInit {
   ) {}
 
   /**
-   * If false, Button will set parent Form's 'errorSummaryVisible' to true and call reloadErrors()
-   * from Error Summary Service If true, Button will set parent Form's 'errorSummaryVisible' to
-   * false
+   * If false, Button will set parent Form's 'errorSummaryVisible' to true and call
+   * reloadFormErrors() from Error Summary Service If true, Button will set parent Form's
+   * 'errorSummaryVisible' to false
    */
   @Input() formValid: boolean = false;
 

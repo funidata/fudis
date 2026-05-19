@@ -1,14 +1,33 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/types';
-import { Router } from '@angular/router';
-import { TabNavigationPanelComponent } from 'ngx-fudis';
+import { Router, RouterModule } from '@angular/router';
+import {
+  BodyTextComponent,
+  GridComponent,
+  HeadingComponent,
+  LinkDirective,
+  TabNavigationBarComponent,
+  TabNavigationPanelComponent,
+  TabNavigationTabComponent,
+} from 'ngx-fudis';
 import pkg from '../../../../ngx-fudis/package.json';
+import { TranslocoRootModule } from '../transloco-root.module';
 
 @Component({
   selector: 'app-exercise',
   templateUrl: 'exercise.component.html',
-  standalone: false,
+  imports: [
+    GridComponent,
+    BodyTextComponent,
+    HeadingComponent,
+    LinkDirective,
+    RouterModule,
+    TabNavigationBarComponent,
+    TabNavigationPanelComponent,
+    TabNavigationTabComponent,
+    TranslocoRootModule,
+  ],
 })
 export class ExerciseComponent {
   constructor(protected router: Router) {

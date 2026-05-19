@@ -15,13 +15,16 @@ import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IconComponent } from '../../../../icon/icon.component';
+import { IconButtonComponent } from '../../../../icon-button/icon-button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-select-icons',
   templateUrl: './select-icons.component.html',
   styleUrls: ['./select-icons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [IconComponent, IconButtonComponent, AsyncPipe],
 })
 export class SelectIconsComponent implements OnChanges {
   constructor(protected _translationService: FudisTranslationService) {

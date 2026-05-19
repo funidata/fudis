@@ -1,14 +1,17 @@
 import { Component, Inject, DOCUMENT } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   FudisDialogService,
   FudisGroupValidators,
   FudisTranslationService,
   FudisValidators,
+  NgxFudisModule,
+  ButtonComponent,
 } from 'ngx-fudis';
 import { FudisRadioButtonOption, FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/forms';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 type MyCheckboxType = {
   controlName: string;
@@ -94,7 +97,7 @@ type MyForm = {
     </fudis-dialog>
   `,
   styles: [],
-  standalone: false,
+  imports: [NgxFudisModule, CdkScrollable, FormsModule, ButtonComponent],
 })
 export class DialogTestFormComponent {
   constructor(

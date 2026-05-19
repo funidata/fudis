@@ -1,4 +1,12 @@
-import { Component, Host, Input, Optional } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Host,
+  Input,
+  Optional,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../../select/select.component';
 import { setVisibleOptionsList } from '../utilities/selectUtilities';
@@ -13,7 +21,7 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
   selector: 'fudis-select-group, fudis-multiselect-group',
   templateUrl: './select-group.component.html',
   styleUrls: ['./select-group.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectGroupComponent {
   constructor(
@@ -39,9 +47,9 @@ export class SelectGroupComponent {
   public id: string;
 
   /**
-   * Used when filtering autocomplete results to check if 'No results found' text is visible
+   * Checks if the select group has content and if the group label should be visible or not.
    */
-  protected _visibleOptions: string[] = [];
+  protected _visibleOptions: WritableSignal<string[]> = signal<string[]>([]);
 
   /**
    * Called from SelectOption and MultiselectOption to set if the option is visible or not
@@ -50,6 +58,6 @@ export class SelectGroupComponent {
    * @param visible State of option's visibility
    */
   public setOptionVisibility(value: string, visible: boolean) {
-    this._visibleOptions = setVisibleOptionsList(this._visibleOptions, value, visible);
+    this._visibleOptions.set(setVisibleOptionsList(this._visibleOptions(), value, visible));
   }
 }

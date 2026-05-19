@@ -10,7 +10,6 @@
   [popoverText]="popoverText"
   [popoverPosition]="popoverPosition"
   [popoverTriggerLabel]="popoverTriggerLabel"
-  [syncLegendHeight]="true"
 >
   <fudis-fieldset-content>
     <ng-content select="fudis-checkbox-group-option" />
@@ -20,7 +19,7 @@
         [inputLabel]="label"
         [helpText]="helpText"
         [for]="id + '-legend'"
-        [groupBlurredOut]="groupBlurredOut"
+        [groupBlurredOut]="groupBlurredOut()"
         [formGroup]="formGroup"
         [groupHelpTextHidden]="true"
       >

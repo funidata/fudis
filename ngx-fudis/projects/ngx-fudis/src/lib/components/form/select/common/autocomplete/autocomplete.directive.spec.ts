@@ -8,8 +8,8 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
 import { getDirective, getElement } from '../../../../../utilities/tests/utilities';
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-autocomplete-base',
+  imports: [SelectAutocompleteBaseDirective],
   template: `<input
       #inputRef
       fudisSelectAutocompleteBase
@@ -58,8 +58,8 @@ class MockAutocompleteBaseComponent {
 }
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-select-autocomplete',
+  imports: [SelectAutocompleteDirective],
   template: `<input
       #inputRef
       fudisSelectAutocomplete
@@ -84,8 +84,8 @@ class MockSelectAutocompleteComponent {
 }
 
 @Component({
-  standalone: false,
   selector: 'fudis-mock-multiselect-autocomplete',
+  imports: [MultiselectAutocompleteDirective],
   template: `<input
       #inputRef
       fudisMultiselectAutocomplete
@@ -115,7 +115,7 @@ describe('SelectAutocompleteBaseDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectAutocompleteBaseDirective, MockAutocompleteBaseComponent],
+      imports: [MockAutocompleteBaseComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockAutocompleteBaseComponent);
@@ -286,7 +286,7 @@ describe('SelectAutocompleteDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectAutocompleteDirective, MockSelectAutocompleteComponent],
+      imports: [MockSelectAutocompleteComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockSelectAutocompleteComponent);
@@ -358,8 +358,7 @@ describe('MultiselectAutocompleteDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MultiselectAutocompleteDirective, MockMultiselectAutocompleteComponent],
-      providers: [],
+      imports: [MockMultiselectAutocompleteComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockMultiselectAutocompleteComponent);

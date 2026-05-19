@@ -1,12 +1,22 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
+import { IconComponent } from '../../../../icon/icon.component';
 
 @Component({
   selector: 'fudis-multiselect-chip-list',
   templateUrl: './multiselect-chip-list.component.html',
   styleUrls: ['./multiselect-chip-list.component.scss'],
-  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [IconComponent],
 })
 export class MultiselectChipListComponent<T = string> {
   constructor(protected _translationService: FudisTranslationService) {}
@@ -29,18 +39,6 @@ export class MultiselectChipListComponent<T = string> {
    * Output for removed chip index in selectedItems
    */
   @Output() handleClick = new EventEmitter<FudisSelectOption<T>>();
-
-  /**
-   * If focus is in some of the chip buttons
-   */
-  protected _focused: boolean = false;
-
-  /**
-   * Focus setter
-   */
-  protected _setFocus(value: boolean): void {
-    this._focused = value;
-  }
 
   /**
    * Focuses to the sibling and emits clicked index

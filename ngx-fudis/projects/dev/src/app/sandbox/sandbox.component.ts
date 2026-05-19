@@ -9,17 +9,56 @@ import {
   FudisTranslationService,
   FudisBreakpointService,
   FudisErrorSummaryService,
+  AlertGroupComponent,
+  GridComponent,
+  GridItemComponent,
+  HeadingComponent,
+  BodyTextComponent,
+  ButtonComponent,
+  LinkDirective,
+  NotificationComponent,
+  ExpandableComponent,
+  ExpandableContentDirective,
+  DescriptionListComponent,
+  DescriptionListItemComponent,
+  DescriptionListItemTermComponent,
+  DescriptionListItemDetailsComponent,
+  PaginationComponent,
+  LoadingSpinnerComponent,
+  GridItemDirective,
 } from 'ngx-fudis';
 import { DialogTestContentComponent } from '../dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTestFormComponent } from '../dialog-test/dialog-test-content/dialog-test-form.component';
 import { dummyData } from '../mock_data';
+import { TranslocoRootModule } from '../transloco-root.module';
+import { AppFormExampleComponent } from '../components/formExamples.component';
 
 @Component({
   selector: 'app-sandbox',
   templateUrl: 'sandbox.component.html',
-  standalone: false,
+  imports: [
+    AppFormExampleComponent,
+    AlertGroupComponent,
+    GridComponent,
+    GridItemComponent,
+    GridItemDirective,
+    BodyTextComponent,
+    ButtonComponent,
+    HeadingComponent,
+    LinkDirective,
+    LoadingSpinnerComponent,
+    NotificationComponent,
+    ExpandableComponent,
+    ExpandableContentDirective,
+    DescriptionListComponent,
+    DescriptionListItemComponent,
+    DescriptionListItemTermComponent,
+    DescriptionListItemDetailsComponent,
+    PaginationComponent,
+    TranslocoRootModule,
+  ],
 })
 export class SandboxComponent implements OnInit {
   constructor(
