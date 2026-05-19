@@ -30,6 +30,11 @@ export const docs = {
   defaultName: "Documentation",
 };
 
+export async function webpackFinal(config) {
+  config.plugins = config.plugins.filter((p) => p.constructor.name !== "ProgressPlugin");
+  return config;
+}
+
 export function managerHead(head) {
   return `
     ${head}
