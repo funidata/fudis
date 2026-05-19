@@ -26,7 +26,7 @@
     <div
       class="fudis-radio-button__content"
       [class.fudis-radio-button__content--disabled]="
-        _parentGroup.control.disabled || _parentGroup.disabled
+        _parentGroup.disabledState() || _parentGroup.disabled
       "
     >
       <div class="fudis-radio-button__content-wrapper">
