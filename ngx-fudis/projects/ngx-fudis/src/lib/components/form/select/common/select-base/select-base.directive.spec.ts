@@ -321,6 +321,27 @@ describe('SelectBaseDirective', () => {
       expect(component.multiSelect.selectionUpdate.emit).toHaveBeenCalledWith(null);
     });
 
+    it('should emit selectionUpdate before patching control value to null on clear button click', () => {
+      patchControlValue();
+      fixture.detectChanges();
+
+      let controlValueWhenEmitted: FudisSelectOption<string>[] | null | undefined = undefined;
+
+      jest.spyOn(component.multiSelect.selectionUpdate, 'emit').mockImplementation(() => {
+        controlValueWhenEmitted = component.control.value;
+      });
+
+      getElement(fixture, '#fudis-multiselect-1-main-wrapper fudis-icon-button button').click();
+      fixture.detectChanges();
+
+      // selectionUpdate was called
+      expect(controlValueWhenEmitted).not.toBeUndefined();
+      // control had its old value when it fired (patchValue hadn't run yet)
+      expect(controlValueWhenEmitted).not.toBeNull();
+      // control is null now, after patchValue ran
+      expect(component.control.value).toBeNull();
+    });
+
     it('should emit filterTextUpdate', () => {
       jest.spyOn(component.multiSelectAuto.filterTextUpdate, 'emit');
 

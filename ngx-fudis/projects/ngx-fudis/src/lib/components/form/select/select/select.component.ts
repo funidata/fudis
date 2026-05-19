@@ -111,8 +111,8 @@ export class SelectComponent<T = string>
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
     if (!equalValues) {
-      this.control.patchValue(value);
       this.selectionUpdate.emit(value);
+      this.control.patchValue(value);
     }
   }
 
