@@ -13,7 +13,7 @@ export const framework = {
   },
 };
 export const core = {
-  allowedHosts: ["storybook", "localhost"],
+  allowedHosts: ["fudis-storybook", "localhost"],
 };
 
 export const features = {
