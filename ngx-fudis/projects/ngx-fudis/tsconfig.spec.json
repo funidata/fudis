@@ -3,9 +3,13 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
+    "rootDir": ".",
+    "module": "CommonJS",
+    "moduleResolution": "node", // Added for Jest compatibility, since our base config has "bundler" which is not best for Jest CJS tests.
     "types": ["jest", "node"],
     "esModuleInterop": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "ignoreDeprecations": "6.0" // Ignore deprecation warnings from Angular's testing utilities, which are still using some deprecated APIs.
   },
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }
