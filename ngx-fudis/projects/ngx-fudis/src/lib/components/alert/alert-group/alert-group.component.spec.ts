@@ -104,7 +104,7 @@ describe('AlertGroupComponent', () => {
 
       component.insideDialog = true;
       component.ngOnChanges({
-        insideDialog: new SimpleChange('false', component.insideDialog, true),
+        insideDialog: new SimpleChange(false, component.insideDialog, true),
       });
 
       fixture.autoDetectChanges();
