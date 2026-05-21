@@ -12,6 +12,10 @@ export const framework = {
     enableIvy: true,
   },
 };
+export const core = {
+  allowedHosts: ["storybook", "localhost"],
+};
+
 export const features = {
   modernInlineRender: true,
   previewMdx2: true,
