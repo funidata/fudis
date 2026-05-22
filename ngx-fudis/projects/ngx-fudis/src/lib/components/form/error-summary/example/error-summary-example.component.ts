@@ -8,7 +8,7 @@ import { FudisGroupValidators } from '../../../../utilities/form/groupValidators
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
-import { FudisSelectOption } from '../../../../types/types';
+import { FudisSelectOption } from '../../../../types/forms';
 
 type Error = {
   formId: string;
