@@ -28,8 +28,10 @@ test("Select autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-3-dropdown")).not.toBeVisible();
   await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
 
-  // There appeared to be some typing races in Chromium, so had to use evaluate to set the value and dispatch the events
   const select4 = page.getByTestId("fudis-select-4");
+
+  // Work around flaky Chromium typing: set the final value directly, then fire
+  // one keydown/keyup pair so the component's keyboard-driven filter logic runs.
   await select4.evaluate((input: HTMLInputElement, value: string) => {
     input.focus();
     input.value = value;
@@ -82,6 +84,9 @@ test("Select autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
 
   const select5 = page.getByTestId("fudis-select-5");
+
+  // Work around flaky Chromium typing: set the final value directly, then fire
+  // one keydown/keyup pair so the component's keyboard-driven filter logic runs.
   await select5.evaluate((input: HTMLInputElement, value: string) => {
     input.focus();
     input.value = value;
