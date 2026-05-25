@@ -21,7 +21,7 @@ test("Select Autocomplete with filtering false", async ({ page }) => {
       inputEl.focus();
       inputEl.value = "";
       inputEl.dispatchEvent(new Event("input", { bubbles: true }));
-      
+
       inputEl.value = value;
       inputEl.dispatchEvent(new Event("input", { bubbles: true }));
       inputEl.dispatchEvent(
