@@ -110,7 +110,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       component.message = 'Message for testing';
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
+        message: new SimpleChange(undefined, component.message, true),
       });
 
       fixture.detectChanges();
@@ -137,8 +137,8 @@ describe('ValidatorErrorMessageComponent', () => {
       component.controlName = 'test-control-name';
 
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
-        controlName: new SimpleChange(null, component.controlName, true),
+        message: new SimpleChange(undefined, component.message, true),
+        controlName: new SimpleChange(undefined, component.controlName, true),
       });
 
       const errorToRemove: FudisErrorSummaryRemoveError = {
@@ -160,7 +160,7 @@ describe('ValidatorErrorMessageComponent', () => {
       component.message = messageAsObservable;
 
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
+        message: new SimpleChange(undefined, component.message, true),
       });
 
       fixture.detectChanges();
@@ -211,10 +211,10 @@ describe('ValidatorErrorMessageComponent', () => {
       component.controlName = undefined;
 
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
-        focusId: new SimpleChange(null, component.focusId, true),
-        type: new SimpleChange(null, component.type, true),
-        controlName: new SimpleChange(null, component.controlName, true),
+        message: new SimpleChange(undefined, component.message, true),
+        focusId: new SimpleChange(undefined, component.focusId, true),
+        type: new SimpleChange(undefined, component.type, true),
+        controlName: new SimpleChange(undefined, component.controlName, true),
       });
 
       const errorToRemove: FudisErrorSummaryRemoveError = {
@@ -268,7 +268,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       component.message = 'Message for testing';
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
+        message: new SimpleChange(undefined, component.message, true),
       });
 
       // Flush the microtask so the deferred emit runs
@@ -287,7 +287,7 @@ describe('ValidatorErrorMessageComponent', () => {
       fixture.detectChanges();
 
       component.ngOnChanges({
-        focusId: new SimpleChange(null, component.focusId, true),
+        focusId: new SimpleChange(undefined, component.focusId, true),
       });
 
       // Flush the microtask so the deferred emit runs
@@ -309,7 +309,7 @@ describe('ValidatorErrorMessageComponent', () => {
       component.message = 'Message for testing';
       component.visible = false;
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
+        message: new SimpleChange(undefined, component.message, true),
       });
 
       fixture.detectChanges();
@@ -333,7 +333,7 @@ describe('ValidatorErrorMessageComponent', () => {
     it('should have respective CSS class according to variant', () => {
       component.message = 'Message for testing';
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
+        message: new SimpleChange(undefined, component.message, true),
       });
 
       fixture.detectChanges();
@@ -351,7 +351,7 @@ describe('ValidatorErrorMessageComponent', () => {
     it('should have generated id', () => {
       component.message = 'Message for testing';
       component.ngOnChanges({
-        message: new SimpleChange(null, component.message, true),
+        message: new SimpleChange(undefined, component.message, true),
       });
 
       fixture.detectChanges();

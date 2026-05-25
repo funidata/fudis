@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,16 +11,14 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngx-fudis": ["dist/ngx-fudis/ngx-fudis", "dist/ngx-fudis"]
+      "ngx-fudis": ["./dist/ngx-fudis/ngx-fudis", "./dist/ngx-fudis"]
     },
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": ["ES2021", "dom"],
     "strictPropertyInitialization": false,
     "useDefineForClassFields": false,
     "esModuleInterop": true,

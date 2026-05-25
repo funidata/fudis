@@ -87,7 +87,7 @@ describe('LinkDirective', () => {
 
     component.dirRef.ngOnChanges({
       external: new SimpleChange(previousExternal, external, externalFirstChange),
-      title: new SimpleChange(previousTitle, external, titleFirstChange),
+      title: new SimpleChange(previousTitle, title, titleFirstChange),
     });
 
     fixture.detectChanges();
