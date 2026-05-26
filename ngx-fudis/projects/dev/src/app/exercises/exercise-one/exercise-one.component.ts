@@ -18,8 +18,8 @@ import {
   SelectComponent,
   SelectOptionComponent,
   SelectOptionsDirective,
+  FudisSelectOption,
 } from 'ngx-fudis';
-import { FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/types';
 import { TranslocoRootModule } from '../../transloco-root.module';
 
 @Component({

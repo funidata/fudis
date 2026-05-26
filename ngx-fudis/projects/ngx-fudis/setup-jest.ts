@@ -1,10 +1,17 @@
 import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+import { jest } from '@jest/globals';
 
-global.ResizeObserver = jest.fn().mockImplementation(() => ({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
-}));
+class MockResizeObserver implements ResizeObserver {
+  static observe = jest.fn();
+  static unobserve = jest.fn();
+  static disconnect = jest.fn();
+
+  observe = MockResizeObserver.observe;
+  unobserve = MockResizeObserver.unobserve;
+  disconnect = MockResizeObserver.disconnect;
+}
+
+globalThis.ResizeObserver = MockResizeObserver;
 
 /**
  * Workaround for stylesheet error that comes up in tests using angular material overlays. Hopefully

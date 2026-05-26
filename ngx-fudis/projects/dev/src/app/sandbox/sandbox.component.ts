@@ -26,9 +26,9 @@ import {
   PaginationComponent,
   LoadingSpinnerComponent,
   GridItemDirective,
+  FudisGridAlign,
 } from 'ngx-fudis';
 import { DialogTestContentComponent } from '../dialog-test/dialog-test-content/dialog-test-content.component';
-import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTestFormComponent } from '../dialog-test/dialog-test-content/dialog-test-form.component';
 import { dummyData } from '../mock_data';

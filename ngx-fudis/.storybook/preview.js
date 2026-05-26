@@ -3,14 +3,12 @@ import { moduleMetadata } from "@storybook/angular";
 import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
 import { VersionSelectorComponent } from "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.component";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
-
-import { TranslocoRootModule } from ".storybook/transloco.module";
+import { TranslocoRootModule } from "./transloco.module";
 import { HttpClient } from "@angular/common/http";
 import { TranslocoService } from "@jsverse/transloco";
 import docJson from "../documentation.json";
 import { CustomDocsContainer } from "./docs/CustomDocsContainer.tsx";
 import "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts";
-import "zone.js";
 
 setCompodocJson(docJson);
 

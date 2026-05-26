@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/types';
 import { Router, RouterModule } from '@angular/router';
 import {
   BodyTextComponent,
@@ -10,6 +9,7 @@ import {
   TabNavigationBarComponent,
   TabNavigationPanelComponent,
   TabNavigationTabComponent,
+  FudisSelectOption,
 } from 'ngx-fudis';
 import pkg from '../../../../ngx-fudis/package.json';
 import { TranslocoRootModule } from '../transloco-root.module';

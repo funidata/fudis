@@ -124,7 +124,7 @@ describe('IconComponent', () => {
     component.icon = 'clock';
 
     component.ngOnChanges({
-      icon: new SimpleChange(null, component.icon, true),
+      icon: new SimpleChange(undefined, component.icon, true),
     });
 
     fixture.detectChanges();
@@ -141,7 +141,7 @@ describe('IconComponent', () => {
   function iconColorCheck(color: FudisIconColor): void {
     component.color = color;
     component.ngOnChanges({
-      color: new SimpleChange(null, color, false),
+      color: new SimpleChange(undefined, color, false),
     });
 
     fixture.detectChanges();
@@ -157,7 +157,7 @@ describe('IconComponent', () => {
   function iconRotateCheck(rotate: FudisIconRotate): void {
     component.rotate = rotate;
     component.ngOnChanges({
-      rotate: new SimpleChange(null, rotate, false),
+      rotate: new SimpleChange(undefined, rotate, false),
     });
     fixture.detectChanges();
     assertIconHasClasses([
