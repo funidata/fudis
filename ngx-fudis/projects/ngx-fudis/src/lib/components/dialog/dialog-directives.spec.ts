@@ -154,10 +154,10 @@ describe('DialogDirectives', () => {
 
       expect(button.textContent.trim()).toEqual('Close this dialog');
 
-      expect(button.ariaDisabled).toEqual(undefined);
+      expect(button.getAttribute('aria-disabled')).toBeNull();
       button.click();
 
-      button.ariaDisabled = 'false';
+      button.setAttribute('aria-disabled', 'false');
       button.click();
 
       expect(dialogSpy).toHaveBeenCalledTimes(2);
@@ -171,7 +171,7 @@ describe('DialogDirectives', () => {
         'fudis-dialog-actions [fudisDialogClose]',
       )!;
 
-      button.ariaDisabled = 'true';
+      button.setAttribute('aria-disabled', 'true');
 
       button.click();
       expect(dialogSpy).toHaveBeenCalledTimes(0);

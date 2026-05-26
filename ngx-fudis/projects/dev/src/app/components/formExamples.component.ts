@@ -2,24 +2,20 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
 import {
+  FudisErrorSummaryService,
+  NgxFudisModule,
+  ButtonComponent,
+  BodyTextComponent,
+  FudisValidators,
+  FudisGroupValidators,
   FudisCheckboxGroupOption,
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisCheckboxChangeEvent,
   FudisInputSize,
-} from 'projects/ngx-fudis/src/lib/types/forms';
-
-import {
-  FudisErrorSummaryService,
-  NgxFudisModule,
-  ButtonComponent,
-  BodyTextComponent,
 } from 'ngx-fudis';
-import { FudisGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/groupValidators';
-import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
-
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { defaultOptions } from 'projects/ngx-fudis/src/lib/components/form/select/common/mock_data';
+import { defaultOptions } from './mock_data';
 
 interface MyLocalizedTextGroup {
   fi: FormControl<string | null>;

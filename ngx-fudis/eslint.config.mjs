@@ -31,7 +31,6 @@ export default [
   {
     files: ["**/*.ts"],
     rules: { "@angular-eslint/prefer-standalone": "off" },
-
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 5,
@@ -39,6 +38,19 @@ export default [
 
       parserOptions: {
         project: "tsconfig.json",
+      },
+    },
+  },
+  {
+    files: ["**/*.spec.ts"],
+    languageOptions: {
+      parser: tsParser,
+      globals: {
+        ...globals.jest,
+        ...globals.node,
+      },
+      parserOptions: {
+        project: "projects/ngx-fudis/tsconfig.spec.json",
       },
     },
   },
