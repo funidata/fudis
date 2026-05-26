@@ -45,24 +45,24 @@ ng add @funidata/ngx-fudis
 
 ```
 
-## 5. Import Fudis in Applications's `app.module.ts`
+## 5. Import Fudis in Application's `app.config.ts`
 
-Check your application's `app.module.ts` file that Fudis is imported correctly.
+Check your application's `app.config.ts` file that Fudis is imported correctly.
 
 ```
+import { ApplicationConfig, importProvidersFrom } from "@angular/core";
 import { NgxFudisModule } from '@funidata/ngx-fudis';
 
-@NgModule({
-	...
-	imports: [
-		...
-		NgxFudisModule.forRoot()
-	],
-	...
-})
+export const appConfig: ApplicationConfig = {
+  providers: [
+    importProvidersFrom(NgxFudisModule.forRoot()),
+    ...
+  ],
+};
 ```
 
-If you need to import `NgxFudisModule` more than once in your application, use the `NgxFudisModule.forRoot()` import only once in your topmost module import and otherwise just import `NgxFudisModule`. The `forRoot`-function call brings in the singleton services along the other providers and declarations.
+Use `importProvidersFrom(NgxFudisModule.forRoot())` once in `app.config.ts` at application bootstrap. If you still have an NgModule-based app, use `NgxFudisModule.forRoot()` only in the root module and plain `NgxFudisModule` in feature modules.
+The `forRoot`-function call brings in the singleton services along the other providers and declarations.
 
 ## 6. Import global styles
 

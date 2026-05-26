@@ -4,8 +4,13 @@
  */
 
 import type { Config } from 'jest';
+import { createCjsPreset } from 'jest-preset-angular/presets/index.js';
 
 const config: Config = {
+  // Use jest-preset-angular's CommonJS preset here.
+  // It avoids the extra ESM config surface while migrating Jest and Angular.
+  ...createCjsPreset(),
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -104,7 +109,7 @@ const config: Config = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  preset: 'jest-preset-angular',
+  // preset: 'jest-preset-angular', // Legacy preset
 
   // Run tests from one or more projects
   // projects: undefined,

@@ -9,8 +9,9 @@ import {
   FudisValidators,
   NgxFudisModule,
   ButtonComponent,
+  FudisRadioButtonOption,
+  FudisSelectOption,
 } from 'ngx-fudis';
-import { FudisRadioButtonOption, FudisSelectOption } from 'projects/ngx-fudis/src/lib/types/forms';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 
 type MyCheckboxType = {
