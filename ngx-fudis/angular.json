@@ -114,7 +114,7 @@
               "projects/dev/src/favicon.ico",
               {
                 "glob": "*.woff2",
-                "input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
+                "input": "projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
                 "output": "./"
               },
               {
