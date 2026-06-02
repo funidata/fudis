@@ -14,16 +14,17 @@ jobs:
   publish:
     name: Publish docs to AWS
     runs-on: ubuntu-24.04
+    permissions:
+      content: read
+      deployments: write
+    # Native GitHub deployment object + status checks are used to show deployment status and link to docs in PR UI.
+    environment:
+      name: Documentation for branch ${{ github.ref_name }}
+      url: https://fudis.funidata.fi/ngx/branch/${{ github.ref_name }}/index.html
     defaults:
       run:
         working-directory: ngx-fudis
     steps:
-      - name: Start deployment
-        uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8
-        id: deployment
-        with:
-          step: start
-          env: Documentation for branch ${{ github.ref_name }}
       - name: Checkout code
         uses: actions/checkout@v6
       - name: Set up Node.js
@@ -42,12 +43,3 @@ jobs:
         run: npm run build-storybook
       - name: Copy docs to S3 bucket
         run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/branch/${{ github.ref_name }} --delete --cache-control max-age=5
-      - name: Finish deployment
-        uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8
-        if: always()
-        with:
-          step: finish
-          status: ${{ job.status }}
-          env: ${{ steps.deployment.outputs.env }}
-          env_url: https://fudis.funidata.fi/ngx/branch/${{ github.ref_name }}/index.html
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
