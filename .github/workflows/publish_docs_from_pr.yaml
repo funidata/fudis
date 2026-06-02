@@ -15,7 +15,7 @@ jobs:
     name: Publish docs to AWS
     runs-on: ubuntu-24.04
     permissions:
-      content: read
+      contents: read
       deployments: write
     # Native GitHub deployment object + status checks are used to show deployment status and link to docs in PR UI.
     environment:
