@@ -1,0 +1,59 @@
+name: Test deployment deactivation on push
+
+on:
+  push:
+    branches:
+      - DS-662-test-branch-1
+
+jobs:
+  test-deactivate:
+    runs-on: ubuntu-24.04
+    permissions:
+      deployments: write
+    env:
+      TARGET_BRANCH: DS-662-test-branch-1
+      TARGET_ENV: Documentation for branch DS-662-test-branch-1
+      DRY_RUN: "true"
+
+    steps:
+      - name: Show target
+        run: |
+          echo "Branch: $TARGET_BRANCH"
+          echo "Environment: $TARGET_ENV"
+          echo "Dry run: $DRY_RUN"
+
+      - name: Deactivate deployment (test)
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const environment = process.env.TARGET_ENV;
+            const dryRun = process.env.DRY_RUN === "true";
+
+            const { data: deployments } = await github.rest.repos.listDeployments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              environment,
+              per_page: 100
+            });
+
+            core.info(`Found ${deployments.length} deployment(s) for "${environment}"`);
+
+            if (deployments.length === 0) return;
+
+            for (const deployment of deployments) {
+              if (dryRun) {
+                core.info(`DRY RUN: would mark deployment ${deployment.id} inactive`);
+                continue;
+              }
+
+              await github.rest.repos.createDeploymentStatus({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                deployment_id: deployment.id,
+                state: "inactive",
+                environment,
+                description: "Environment was pruned"
+              });
+
+              core.info(`Marked deployment ${deployment.id} inactive`);
+            }
