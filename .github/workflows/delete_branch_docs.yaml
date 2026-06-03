@@ -1,70 +1,21 @@
-# name: Delete branch documentation
-
-# on: delete
-
-# jobs:
-#   delete-docs:
-#     name: Delete documentation
-#     if: github.event.ref_type == 'branch'
-#     runs-on: ubuntu-24.04
-#     permissions:
-#       deployments: write
-#     steps:
-#       - name: Configure AWS credentials
-#         uses: aws-actions/configure-aws-credentials@v4
-#         with:
-#           aws-region: ${{ secrets.AWS_REGION }}
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#       - name: Delete docs from S3 bucket
-#         run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/branch/${{ github.event.ref }} --recursive
-#       - name: Deactivate deployment
-#         uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8
-#         with:
-#           step: deactivate-env
-#           env: Documentation for branch ${{ github.event.ref }}
-#           desc: Environment was pruned
-
 name: Delete branch documentation
 
 on:
   delete:
-  workflow_dispatch:
-    inputs:
-      branch_ref:
-        description: Branch name to clean up (manual testing)
-        required: true
-        type: string
-      dry_run:
-        description: If true, do not deactivate deployment and do not delete from S3
-        required: true
-        default: true
-        type: boolean
-      deactivate_deployment:
-        description: Mark matching GitHub deployments as inactive
-        required: true
-        default: true
-        type: boolean
-      delete_s3:
-        description: Delete docs from S3
-        required: true
-        default: false
-        type: boolean
 
 jobs:
   delete-docs:
     name: Delete documentation
-    if: github.event_name == 'workflow_dispatch' || github.event.ref_type == 'branch'
+    if: github.event.ref_type == 'branch'
     runs-on: ubuntu-24.04
     permissions:
       deployments: write
     env:
-      BRANCH_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.branch_ref || github.event.ref }}
-      ENV_NAME: Documentation for branch ${{ github.event_name == 'workflow_dispatch' && inputs.branch_ref || github.event.ref }}
+      BRANCH_REF: ${{ github.event.ref }}
+      ENV_NAME: Documentation for branch ${{ github.event.ref }}
 
     steps:
       - name: Configure AWS credentials
-        if: github.event_name == 'delete' || (inputs.delete_s3 && !inputs.dry_run)
         uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: ${{ secrets.AWS_REGION }}
@@ -72,11 +23,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Delete docs from S3 bucket
-        if: github.event_name == 'delete' || (inputs.delete_s3 && !inputs.dry_run)
         run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/branch/${{ env.BRANCH_REF }} --recursive
 
       - name: Deactivate deployment
-        if: github.event_name == 'delete' || (inputs.deactivate_deployment && !inputs.dry_run)
+        if: always()
         uses: actions/github-script@v8
         with:
           script: |
