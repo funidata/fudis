@@ -17,14 +17,45 @@ jobs:
     permissions:
       contents: read
       deployments: write
-    # Native GitHub deployment object + status checks are used to show deployment status and link to docs in PR UI.
-    environment:
-      name: Documentation for branch ${{ github.ref_name }}
-      url: https://fudis.funidata.fi/ngx/branch/${{ github.ref_name }}/index.html
     defaults:
       run:
         working-directory: ngx-fudis
     steps:
+      - name: Start deployment
+        id: deployment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const envName = `Documentation for branch ${context.ref.replace('refs/heads/', '')}`;
+
+            const { data } = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              environment: envName,
+              description: `Docs deploy for ${context.ref}`,
+              auto_merge: false,
+              required_contexts: [],
+              transient_environment: true,
+              production_environment: false
+            });
+
+            core.setOutput('deployment_id', String(data.id));
+            core.setOutput('environment', envName);
+      # - name: Mark deployment in progress
+      #   uses: actions/github-script@v8
+      #   with:
+      #     script: |
+      #       await github.rest.repos.createDeploymentStatus({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         deployment_id: Number('${{ steps.deployment.outputs.deployment_id }}'),
+      #         state: 'in_progress',
+      #         environment: '${{ steps.deployment.outputs.environment }}',
+      #         environment_url: 'https://fudis.funidata.fi/ngx/branch/${{ github.ref_name }}/index.html',
+      #         log_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+      #         description: 'Documentation deployment started'
+      #       });
       - name: Checkout code
         uses: actions/checkout@v6
       - name: Set up Node.js
@@ -43,3 +74,27 @@ jobs:
         run: npm run build-storybook
       - name: Copy docs to S3 bucket
         run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/branch/${{ github.ref_name }} --delete --cache-control max-age=5
+      - name: Finish deployment
+        if: always() && steps.deployment.outputs.deployment_id
+        uses: actions/github-script@v8
+        env:
+          JOB_STATUS: ${{ job.status }}
+        with:
+          script: |
+            const map = {
+              success: 'success',
+              failure: 'failure',
+              cancelled: 'error'
+            };
+            const state = map[process.env.JOB_STATUS] ?? 'error';
+
+            await github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: Number('${{ steps.deployment.outputs.deployment_id }}'),
+              state,
+              environment: '${{ steps.deployment.outputs.environment }}',
+              environment_url: 'https://fudis.funidata.fi/ngx/branch/${{ github.ref_name }}/index.html',
+              log_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              description: `Documentation deployment finished with ${process.env.JOB_STATUS}`
+            });
