@@ -42,20 +42,6 @@ jobs:
 
             core.setOutput('deployment_id', String(data.id));
             core.setOutput('environment', envName);
-      # - name: Mark deployment in progress
-      #   uses: actions/github-script@v8
-      #   with:
-      #     script: |
-      #       await github.rest.repos.createDeploymentStatus({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         deployment_id: Number('${{ steps.deployment.outputs.deployment_id }}'),
-      #         state: 'in_progress',
-      #         environment: '${{ steps.deployment.outputs.environment }}',
-      #         environment_url: 'https://fudis.funidata.fi/ngx/branch/${{ github.ref_name }}/index.html',
-      #         log_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-      #         description: 'Documentation deployment started'
-      #       });
       - name: Checkout code
         uses: actions/checkout@v6
       - name: Set up Node.js
