@@ -1,6 +1,7 @@
 name: Delete branch documentation
 
-on: delete
+on:
+  delete:
 
 jobs:
   delete-docs:
@@ -9,6 +10,9 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       deployments: write
+    env:
+      BRANCH_REF: ${{ github.event.ref }}
+      ENV_NAME: Documentation for branch ${{ github.event.ref }}
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
@@ -17,10 +21,33 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Delete docs from S3 bucket
-        run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/branch/${{ github.event.ref }} --recursive
+        run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/branch/${{ env.BRANCH_REF }} --recursive
       - name: Deactivate deployment
-        uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8
+        if: always()
+        uses: actions/github-script@v8
         with:
-          step: deactivate-env
-          env: Documentation for branch ${{ github.event.ref }}
-          desc: Environment was pruned
+          script: |
+            const environment = process.env.ENV_NAME;
+
+            const { data: deployments } = await github.rest.repos.listDeployments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              environment,
+              per_page: 100
+            });
+
+            if (deployments.length === 0) {
+              core.info(`No deployments found for "${environment}"`);
+              return;
+            }
+
+            for (const deployment of deployments) {
+              await github.rest.repos.createDeploymentStatus({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                deployment_id: deployment.id,
+                state: "inactive",
+                environment,
+                description: "Environment was pruned"
+              });
+            }
