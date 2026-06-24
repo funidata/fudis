@@ -24,7 +24,7 @@
     "format:check": "prettier --check ."
   },
   "author": "Funidata Ltd",
-  "license": "CC-BY-NC-SA-4.0",
+  "license": "MIT",
   "devDependencies": {
     "prettier": "^3.8.3"
   },

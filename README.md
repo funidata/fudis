@@ -14,4 +14,4 @@ Contributions from outside collaborators are welcome. When you open a pull reque
 
 ## License
 
-Fudis is licensed under CC-BY-NC-SA. See [LICENSE](./LICENSE).
+Fudis is licensed under MIT. See [LICENSE](./LICENSE).

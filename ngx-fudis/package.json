@@ -18,7 +18,7 @@
     "stylelint": "stylelint '**/*.{css,scss}'"
   },
   "private": true,
-  "license": "CC-BY-NC-SA-4.0",
+  "license": "MIT",
   "dependencies": {
     "@angular/animations": "^21.2.14",
     "@angular/cdk": "^21.2.12",
