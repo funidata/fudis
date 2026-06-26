@@ -1,4 +1,4 @@
-import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, applicationConfig, StoryFn, moduleMetadata, Args } from '@storybook/angular';
 import { action } from 'storybook/actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,7 +51,7 @@ export default {
 
 const html = String.raw;
 
-const commonArgs: Partial<SelectComponent> = {
+const commonArgs: Args = {
   label: 'Select a pet',
   size: 'lg',
   placeholder: 'Choose a pet',
