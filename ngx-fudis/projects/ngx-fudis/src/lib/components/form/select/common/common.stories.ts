@@ -1,10 +1,9 @@
-import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
+import { Meta, applicationConfig, StoryFn, Args } from '@storybook/angular';
 import { action } from 'storybook/actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from '../select/select.component';
-import { MultiselectComponent } from '../multiselect/multiselect.component';
 import docs from './select-common.mdx';
 import { groupedMockData, defaultOptions } from './mock_data';
 import { FudisSelectOption } from '../../../../types/forms';
@@ -39,7 +38,7 @@ export default {
 
 const html = String.raw;
 
-const commonArgs: Partial<SelectComponent> = {
+const commonArgs: Args = {
   label: 'Select a pet',
   size: 'lg',
   placeholder: 'Choose a pet',
@@ -122,7 +121,7 @@ const MultiselectAutocompleteTemplate: StoryFn = (args) => ({
 
 export const MultiselectAutocomplete = MultiselectAutocompleteTemplate.bind({});
 MultiselectAutocomplete.args = {
-  ...(commonArgs as Partial<MultiselectComponent>),
+  ...commonArgs,
 };
 
 const SelectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
@@ -162,7 +161,7 @@ const SelectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
 
 export const SelectDropdownWithGroupedOptions = SelectDropdownWithGroupedOptionsTemplate.bind({});
 SelectDropdownWithGroupedOptions.args = {
-  ...(commonArgs as Partial<SelectComponent>),
+  ...commonArgs,
 };
 
 const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
@@ -203,5 +202,5 @@ const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
 export const MultiselectDropdownWithGroupedOptions =
   MultiselectDropdownWithGroupedOptionsTemplate.bind({});
 MultiselectDropdownWithGroupedOptions.args = {
-  ...(commonArgs as Partial<MultiselectComponent>),
+  ...commonArgs,
 };

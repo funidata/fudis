@@ -1,4 +1,4 @@
-import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig, moduleMetadata, Args } from '@storybook/angular';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
@@ -60,7 +60,7 @@ export default {
   },
 } as Meta;
 
-const commonArgs: Partial<DatepickerComponent> = {
+const commonArgs: Args = {
   label: 'Select a date',
   helpText: 'Choose your favourite date.',
   size: 'md',

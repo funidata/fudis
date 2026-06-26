@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata, applicationConfig, Args } from '@storybook/angular';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,7 +51,7 @@ export default {
 
 const html = String.raw;
 
-const commonArgs: Partial<LocalizedTextGroupComponent<object>> = {
+const commonArgs: Args = {
   size: 'lg',
   initialFocus: false,
   popoverText: 'Your city needs you!',

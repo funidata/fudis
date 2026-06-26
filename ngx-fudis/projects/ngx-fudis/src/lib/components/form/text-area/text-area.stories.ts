@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata, Args } from '@storybook/angular';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TextAreaComponent } from './text-area.component';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -40,7 +40,7 @@ export default {
   },
 } as Meta;
 
-const commonArgs: Partial<TextAreaComponent> = {
+const commonArgs: Args = {
   label: 'Text Area label example',
   helpText: 'Example help text',
   size: 'lg',
