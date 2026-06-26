@@ -26,7 +26,7 @@
   "author": "Funidata Ltd",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^3.8.3"
+    "prettier": "^3.8.4"
   },
   "dependencies": {
     "prettier-plugin-jsdoc": "^1.8.0"
