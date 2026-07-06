@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata, Args } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
@@ -123,7 +123,7 @@ export default {
   },
 } as Meta;
 
-const commonArgs: Partial<TextInputComponent> = {
+const commonArgs: Args = {
   label: 'Text Input label example',
   helpText: 'Example help text',
   size: 'lg',
