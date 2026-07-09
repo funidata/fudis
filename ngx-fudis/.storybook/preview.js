@@ -8,7 +8,6 @@ import { HttpClient } from "@angular/common/http";
 import { TranslocoService } from "@jsverse/transloco";
 import docJson from "../documentation.json";
 import { CustomDocsContainer } from "./docs/CustomDocsContainer.tsx";
-import "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts";
 
 setCompodocJson(docJson);
 
