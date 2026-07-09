@@ -8,7 +8,6 @@ import { HttpClient } from "@angular/common/http";
 import { TranslocoService } from "@jsverse/transloco";
 import docJson from "../documentation.json";
 import { CustomDocsContainer } from "./docs/CustomDocsContainer.tsx";
-import "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts";
 
 setCompodocJson(docJson);
 
@@ -97,7 +96,6 @@ const preview = {
             "Icon",
             "IconButton",
             "Language Badge Group",
-            "Link",
             "Loading Spinner",
             "Notification",
             "Pagination",
@@ -106,11 +104,18 @@ const preview = {
             "Typography",
           ],
           "Directives",
-          ["Introduction", "Form", "Grid", ["Introduction", "Grid", "Grid Item"], "Popover"],
+          [
+            "Introduction",
+            "Form",
+            "Grid",
+            ["Introduction", "Grid", "Grid Item"],
+            "Link",
+            "Popover",
+          ],
           "Services",
-          ["Introduction", "Error Summary", "Grid", "Translation"],
+          ["Introduction", "Breakpoint", "Error Summary", "Grid", "Translation"],
           "Utilities",
-          ["Introduction"],
+          ["Introduction", "Validators"],
         ],
       },
     },

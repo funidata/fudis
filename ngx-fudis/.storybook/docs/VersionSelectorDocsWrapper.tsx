@@ -1,5 +1,3 @@
-import { Canvas } from "@storybook/addon-docs/blocks";
-import * as VersionSelectorStories from "../../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories";
 import React from "react";
 
 // The reason this file and CustomDocsContainer are both react files is that
@@ -15,16 +13,20 @@ export function VersionSelectorDocsWrapper() {
     if (idParam === "documentation-introduction-welcome--documentation") {
       return null;
     }
+
+    const globals = params.get("globals");
+    const globalsPart = globals ? `&globals=${encodeURIComponent(globals)}` : "";
+
+    return (
+      <div className="unstyled-canvas">
+        <iframe
+          title="Version selector"
+          src={`iframe.html?id=docs-version-selector--version-selector-story&viewMode=story${globalsPart}`}
+          style={{ width: "100%", height: "220px", border: 0, overflow: "hidden" }}
+        />
+      </div>
+    );
   }
 
-  return (
-    <Canvas
-      of={VersionSelectorStories.VersionSelectorStory}
-      meta={VersionSelectorStories}
-      story={{ inline: false }}
-      withToolbar={false}
-      sourceState="none"
-      className="unstyled-canvas"
-    />
-  );
+  return null;
 }
