@@ -145,9 +145,10 @@ jobs:
             | grep 'PRE' \
             | awk '{print $2}' \
             | sed 's|/||g' \
+            | sort -V \
             | jq -R -s -c 'split("\n") | map(select(length > 0))')
 
-          LATEST=$(echo "$VERSIONS" | jq -r '.[-1]')
+          LATEST=$(echo "$VERSIONS" | jq -r '[.[] | select(test("rc") | not)] | .[-1]')
 
           echo "{\"versions\": $VERSIONS, \"latest\": \"$LATEST\"}" > /tmp/versions.json
 

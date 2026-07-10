@@ -67,7 +67,7 @@ export class VersionSelectorComponent implements OnInit {
         //  8.0.0, 8.3.0, 8.3.1 and 8.3.2
 
         this._versions = this._versions.filter(
-          (v) => !['8.0.0', '8.3.0', '8.3.1', '8.3.2'].includes(v) && !v.includes('rc'),
+          (v) => !['8.0.0', '8.3.0', '8.3.1', '8.3.2', '10.1.0'].includes(v) && !v.includes('rc'),
         );
 
         // after redirection, if the current selected version can be found in the url, set it as the selected value, else select latest
