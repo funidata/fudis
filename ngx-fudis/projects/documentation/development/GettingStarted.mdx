@@ -47,11 +47,19 @@ To install project dependencies, in the **root** directory run:
 npm ci
 ```
 
-**Note!** This does not install Playwright locally. If your OS is supported by Playwright and want to run Playwright with their UI tool run:
+**Note!** This does not install Playwright locally. If your OS is supported by Playwright and you want to run Playwright with their UI tool run:
 
 ```
 cd test && npm ci && cd ..
 ```
+
+**Linux users:** Before running the above command, install Playwright's system-level browser dependencies once with:
+
+```
+sudo npx playwright install-deps
+```
+
+Without this, you might get cryptic errors about missing browser dependencies. This is a one-time setup step. It is not needed on macOS or Windows.
 
 ## Development
 
