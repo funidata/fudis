@@ -14,6 +14,15 @@ import { IconComponent } from '../../icon/icon.component';
  * `fudis-breadcrumbs`.
  *
  * Use this component with descriptive link text to ensure understandability.
+ *
+ * @example
+ *   ```html
+ *   <fudis-breadcrumbs [label]="'Site navigation'">
+ *     <fudis-breadcrumbs-item>
+ *       <a fudisLink [title]="'Home'" href="/"></a>
+ *     </fudis-breadcrumbs-item>
+ *   </fudis-breadcrumbs>
+ *   ```;
  */
 @Component({
   selector: 'fudis-breadcrumbs-item',

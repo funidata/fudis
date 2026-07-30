@@ -41,6 +41,13 @@ import {
  *
  * Use this directive to link custom validation error to an input where existing validators are not
  * possible to use.
+ *
+ * @example
+ *   ```html
+ *   <fudis-text-input [label]="'Email'" [control]="emailControl">
+ *     <fudis-error-message [message]="'Please enter a valid email address'"></fudis-error-message>
+ *   </fudis-text-input>
+ *   ```;
  */
 @Directive({ selector: 'fudis-error-message' })
 export class ErrorMessageDirective implements OnInit, OnChanges, OnDestroy {

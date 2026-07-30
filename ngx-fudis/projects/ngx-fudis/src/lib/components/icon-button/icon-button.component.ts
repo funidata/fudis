@@ -21,6 +21,11 @@ import { PopoverDirective } from '../../directives/popover/popover.directive';
  *
  * Use this component for compact actions where icon and its aria-label clearly communicate the
  * intent.
+ *
+ * @example
+ *   ```html
+ *   <fudis-icon-button [ariaLabel]="'Delete item'" [icon]="'trash'"></fudis-icon-button>
+ *   ```;
  */
 @Component({
   selector: 'fudis-icon-button',

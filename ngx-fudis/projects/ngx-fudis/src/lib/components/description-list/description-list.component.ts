@@ -19,6 +19,16 @@ import { GridDirective } from '../../directives/grid/grid/grid.directive';
  * Displays a collection of term-details pairs of related information.
  *
  * Use this component to present structured information with proper semantic relationships.
+ *
+ * @example
+ *   ```html
+ *   <fudis-dl>
+ *     <fudis-dl-item>
+ *       <fudis-dt>Name</fudis-dt>
+ *       <fudis-dd>Jane Doe</fudis-dd>
+ *     </fudis-dl-item>
+ *   </fudis-dl>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dl',

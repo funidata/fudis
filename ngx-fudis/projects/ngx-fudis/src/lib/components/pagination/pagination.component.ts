@@ -33,6 +33,16 @@ enum Ellipsis {
  * Controls navigation through paged data sets.
  *
  * Use this component to split large collections into manageable pages.
+ *
+ * @example
+ *   ```html
+ *   <fudis-pagination
+ *     [paginationAriaLabel]="'Search results'"
+ *     [pageCount]="10"
+ *     [pageIndex]="currentPage"
+ *     (pageChange)="onPageChange($event)">
+ *   </fudis-pagination>
+ *   ```;
  */
 @Component({
   selector: 'fudis-pagination',

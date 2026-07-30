@@ -19,6 +19,16 @@ import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 /**
  * Displays the details (value) of a term (key) in a DescriptionListItemComponent.
+ *
+ * @example
+ *   ```html
+ *   <fudis-dl>
+ *     <fudis-dl-item>
+ *       <fudis-dt>Name</fudis-dt>
+ *       <fudis-dd>Jane Doe</fudis-dd>
+ *     </fudis-dl-item>
+ *   </fudis-dl>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dd',

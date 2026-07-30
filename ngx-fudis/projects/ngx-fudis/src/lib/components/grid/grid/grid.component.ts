@@ -5,6 +5,14 @@ import { GridDirective } from '../../../directives/grid/grid/grid.directive';
  * Provides a responsive grid layout.
  *
  * Use this component to structure page or section layouts visually using columns.
+ *
+ * @example
+ *   ```html
+ *   <fudis-grid [columns]="3">
+ *     <fudis-text-input [label]="'First name'" [control]="firstNameControl"></fudis-text-input>
+ *     <fudis-text-input [label]="'Last name'" [control]="lastNameControl"></fudis-text-input>
+ *   </fudis-grid>
+ *   ```;
  */
 @Component({
   selector: 'fudis-grid',

@@ -6,6 +6,18 @@ import { DropdownMenuComponent } from '../dropdown-menu.component';
  * Groups related dropdown items.
  *
  * Use this component to organize related menu options to improve readability.
+ *
+ * @example
+ *   ```html
+ *   <fudis-icon-button [ariaLabel]="'Actions'" [icon]="'three-dots'" [asMenuButton]="true">
+ *     <fudis-dropdown-menu>
+ *       <fudis-dropdown-menu-group [label]="'File'">
+ *         <fudis-dropdown-menu-item [label]="'New'" (handleClick)="newFile()"></fudis-dropdown-menu-item>
+ *         <fudis-dropdown-menu-item [label]="'Open'" (handleClick)="openFile()"></fudis-dropdown-menu-item>
+ *       </fudis-dropdown-menu-group>
+ *     </fudis-dropdown-menu>
+ *   </fudis-icon-button>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dropdown-menu-group',

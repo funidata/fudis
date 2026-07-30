@@ -16,6 +16,11 @@ import { AsyncPipe } from '@angular/common';
  * Groups and manages multiple alert messages.
  *
  * Use this component to display stacked alerts in a single, consistent location.
+ *
+ * @example
+ *   ```html
+ *   <fudis-alert-group [position]="'fixed'"></fudis-alert-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-alert-group',

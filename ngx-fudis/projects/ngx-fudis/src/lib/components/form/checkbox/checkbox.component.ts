@@ -29,6 +29,11 @@ import { AsyncPipe } from '@angular/common';
  * Represents a single boolean form control.
  *
  * Use this component when user need to toggle an option on or off.
+ *
+ * @example
+ *   ```html
+ *   <fudis-checkbox [control]="acceptTermsControl" [label]="'I accept the terms'"></fudis-checkbox>
+ *   ```;
  */
 @Component({
   selector: 'fudis-checkbox',

@@ -20,6 +20,11 @@ import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
  *
  * Use this component to structure content hierarchially and provide semantic information for all
  * users.
+ *
+ * @example
+ *   ```html
+ *   <fudis-heading [level]="2">Section heading</fudis-heading>
+ *   ```;
  */
 @Component({
   selector: 'fudis-heading',
