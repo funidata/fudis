@@ -6,6 +6,11 @@ import { BodyTextComponent } from '../typography/body-text/body-text.component';
  * Indicates a loading or processing state.
  *
  * Use this component to inform users of ongoing activity or process.
+ *
+ * @example
+ *   ```html
+ *   <fudis-loading-spinner [label]="'Fetching data'"></fudis-loading-spinner>
+ *   ```;
  */
 @Component({
   selector: 'fudis-loading-spinner',

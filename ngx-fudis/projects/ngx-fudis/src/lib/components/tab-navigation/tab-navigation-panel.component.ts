@@ -2,6 +2,16 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 
 /**
  * Navigation tab panel associated with the TabNavigationBarComponent.
+ *
+ * @example
+ *   ```html
+ *   <fudis-tab-navigation-bar [id]="'tabs-1'" [panel]="tabPanel">
+ *     <button fudis-tab-navigation-tab [id]="'tab-1'" [active]="true">Overview</button>
+ *   </fudis-tab-navigation-bar>
+ *   <fudis-tab-navigation-panel [id]="'panel-1'" #tabPanel>
+ *     <fudis-body-text>Tab panel content goes here.</fudis-body-text>
+ *   </fudis-tab-navigation-panel>
+ *   ```;
  */
 @Component({
   selector: 'fudis-tab-navigation-panel',

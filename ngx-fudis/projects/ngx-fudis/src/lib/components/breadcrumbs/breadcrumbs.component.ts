@@ -9,6 +9,18 @@ import { AsyncPipe } from '@angular/common';
  *
  * Use this component to help users understand their location and navigate back through parent
  * levels.
+ *
+ * @example
+ *   ```html
+ *   <fudis-breadcrumbs [label]="'Site navigation'">
+ *     <fudis-breadcrumbs-item>
+ *       <a fudisLink [title]="'Home'" href="/"></a>
+ *     </fudis-breadcrumbs-item>
+ *     <fudis-breadcrumbs-item>
+ *       <a fudisLink [title]="'Products'" href="/products"></a>
+ *     </fudis-breadcrumbs-item>
+ *   </fudis-breadcrumbs>
+ *   ```;
  */
 @Component({
   selector: 'fudis-breadcrumbs',

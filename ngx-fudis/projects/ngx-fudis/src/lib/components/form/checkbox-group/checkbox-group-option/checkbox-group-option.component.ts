@@ -20,6 +20,13 @@ import { IconComponent } from '../../../icon/icon.component';
 
 /**
  * Single checkbox option for CheckboxGroupComponent.
+ *
+ * @example
+ *   ```html
+ *   <fudis-checkbox-group [label]="'Colors'" [formGroup]="colorsGroup">
+ *     <fudis-checkbox-group-option [controlName]="'red'" [label]="'Red'"></fudis-checkbox-group-option>
+ *   </fudis-checkbox-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-checkbox-group-option',

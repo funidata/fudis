@@ -20,6 +20,11 @@ import { PopoverDirective } from '../../directives/popover/popover.directive';
  *
  * Use this component for primary user actions such as submitting forms, confirming choices, or
  * navigating workflows.
+ *
+ * @example
+ *   ```html
+ *   <fudis-button [label]="'Save'" (handleClick)="onSave()"></fudis-button>
+ *   ```;
  */
 @Component({
   selector: 'fudis-button',

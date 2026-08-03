@@ -48,6 +48,11 @@ import { AsyncPipe } from '@angular/common';
  * Allows selection of a single date.
  *
  * Use this component for date input with calendar assistance and validation.
+ *
+ * @example
+ *   ```html
+ *   <fudis-datepicker [label]="'Date of birth'" [control]="dateControl"></fudis-datepicker>
+ *   ```;
  */
 @Component({
   selector: 'fudis-datepicker',

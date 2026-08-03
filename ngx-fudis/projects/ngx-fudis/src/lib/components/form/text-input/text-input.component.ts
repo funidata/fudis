@@ -16,6 +16,11 @@ import { AsyncPipe } from '@angular/common';
  * Allows entry of single-line text.
  *
  * Use this component for short textual input such as names or identifiers.
+ *
+ * @example
+ *   ```html
+ *   <fudis-text-input [label]="'First name'" [control]="firstNameControl"></fudis-text-input>
+ *   ```;
  */
 @Component({
   selector: 'fudis-text-input',

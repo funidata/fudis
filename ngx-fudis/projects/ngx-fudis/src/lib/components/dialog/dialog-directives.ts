@@ -22,6 +22,13 @@ import { isButtonDisabled } from '../../utilities/dialog/dialog-utils';
  * Identifies the title of a dialog.
  *
  * Use this directive to provide automatically focused heading when opening a dialog.
+ *
+ * @example
+ *   ```html
+ *   <fudis-dialog>
+ *     <fudis-heading fudisDialogTitle [level]="2">Dialog title</fudis-heading>
+ *   </fudis-dialog>
+ *   ```;
  */
 @Directive({
   selector: '[fudisDialogTitle]',

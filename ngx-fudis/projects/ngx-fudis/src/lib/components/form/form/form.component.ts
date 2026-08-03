@@ -40,6 +40,18 @@ import { ErrorSummaryComponent } from '../error-summary/error-summary.component'
  * fields inside `<fudis-form-content>` and buttons inside `<fudis-form-actions>`. Use
  * `fudisFormSubmit` directive on the submit button to trigger error summary. Use `FudisValidators`
  * (not Angular's Validators) for error messages to work with Error Summary.
+ *
+ * @example
+ *   ```html
+ *   <fudis-form [title]="'Login'" [level]="1">
+ *     <fudis-form-content>
+ *       <fudis-text-input [label]="'Username'" [control]="usernameControl"></fudis-text-input>
+ *     </fudis-form-content>
+ *     <fudis-form-actions>
+ *       <fudis-button fudisFormSubmit [label]="'Submit'" [formValid]="form.valid"></fudis-button>
+ *     </fudis-form-actions>
+ *   </fudis-form>
+ *   ```;
  */
 @Component({
   selector: 'fudis-form',

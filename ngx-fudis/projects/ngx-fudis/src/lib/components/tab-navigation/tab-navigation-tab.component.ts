@@ -11,6 +11,14 @@ import { TabNavigationBarComponent } from './tab-navigation-bar.component';
 
 /**
  * Button or a link inside a `fudis-tab-navigation-bar`.
+ *
+ * @example
+ *   ```html
+ *   <fudis-tab-navigation-bar [id]="'tabs-1'" [panel]="tabPanel">
+ *     <button fudis-tab-navigation-tab [id]="'tab-1'" [active]="true">Overview</button>
+ *     <button fudis-tab-navigation-tab [id]="'tab-2'" [active]="false">Details</button>
+ *   </fudis-tab-navigation-bar>
+ *   ```;
  */
 @Component({
   selector: '[fudis-tab-navigation-tab]',

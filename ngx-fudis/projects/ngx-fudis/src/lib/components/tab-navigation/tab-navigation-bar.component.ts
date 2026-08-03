@@ -18,6 +18,17 @@ import { IconComponent } from '../icon/icon.component';
  * Organizes content into selectable tabs.
  *
  * Use this component to switch between related views within the same context.
+ *
+ * @example
+ *   ```html
+ *   <fudis-tab-navigation-bar [id]="'tabs-1'" [panel]="tabPanel">
+ *     <button fudis-tab-navigation-tab [id]="'tab-1'" [active]="true">Overview</button>
+ *     <button fudis-tab-navigation-tab [id]="'tab-2'" [active]="false">Details</button>
+ *   </fudis-tab-navigation-bar>
+ *   <fudis-tab-navigation-panel [id]="'panel-1'" #tabPanel>
+ *     <fudis-body-text>Tab content goes here.</fudis-body-text>
+ *   </fudis-tab-navigation-panel>
+ *   ```;
  */
 @Component({
   selector: 'fudis-tab-navigation-bar',

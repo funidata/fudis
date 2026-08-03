@@ -25,6 +25,15 @@ type PopoverPosition = {
  *
  * Use this directive to provide contextual information or tips without navigating away from the
  * current view. Keep popover content concise.
+ *
+ * @example
+ *   ```html
+ *   <fudis-button
+ *     fudisPopover
+ *     [popoverText]="'Helpful context about this action'"
+ *     [label]="'Info'">
+ *   </fudis-button>
+ *   ```;
  */
 @Directive({
   selector: '[fudisPopover]',

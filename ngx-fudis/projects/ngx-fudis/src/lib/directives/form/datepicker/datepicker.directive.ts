@@ -6,6 +6,14 @@ import { DatepickerComponent } from '../../../components/form/date/datepicker/da
  *
  * Use this directive to associate the control with a date range and enable correct validation
  * behavior.
+ *
+ * @example
+ *   ```html
+ *   <fudis-date-range>
+ *     <fudis-datepicker fudisDateStart [label]="'Start date'" [control]="startControl"></fudis-datepicker>
+ *     <fudis-datepicker fudisDateEnd [label]="'End date'" [control]="endControl"></fudis-datepicker>
+ *   </fudis-date-range>
+ *   ```;
  */
 @Directive({ selector: '[fudisDateStart]' })
 export class DateStartDirective {
@@ -19,6 +27,14 @@ export class DateStartDirective {
  *
  * Use this directive to associate the control with a date range and enable correct validation
  * behavior.
+ *
+ * @example
+ *   ```html
+ *   <fudis-date-range>
+ *     <fudis-datepicker fudisDateStart [label]="'Start date'" [control]="startControl"></fudis-datepicker>
+ *     <fudis-datepicker fudisDateEnd [label]="'End date'" [control]="endControl"></fudis-datepicker>
+ *   </fudis-date-range>
+ *   ```;
  */
 @Directive({ selector: '[fudisDateEnd]' })
 export class DateEndDirective {
