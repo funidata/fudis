@@ -6,6 +6,11 @@ import { FudisBadgeVariant } from '../../types/miscellaneous';
  *
  * Use this component to convey concise information, like state or classification that supplements
  * surrounding content.
+ *
+ * @example
+ *   ```html
+ *   <fudis-badge [variant]="'success'" [content]="'Badge Text'"></fudis-badge>
+ *   ```;
  */
 @Component({
   selector: 'fudis-badge',

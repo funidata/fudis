@@ -23,6 +23,11 @@ import { IconComponent } from '../../components/icon/icon.component';
  * Adds link behavior to an element.
  *
  * Use this directive with anchor element and consider whether link is internal/external.
+ *
+ * @example
+ *   ```html
+ *   <a fudisLink [title]="'Go to homepage'" href="/"></a>
+ *   ```;
  */
 @Directive({ selector: '[fudisLink]' })
 export class LinkDirective implements OnInit, OnChanges, AfterViewInit {

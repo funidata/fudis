@@ -5,6 +5,18 @@ import { FudisComponentChanges, fudisFieldsetActionsAlign } from '../../../types
  * Identifies the actions associated with a fieldset.
  *
  * Use this directive to add buttons that affect the fieldset as a whole.
+ *
+ * @example
+ *   ```html
+ *   <fudis-fieldset [label]="'Personal details'">
+ *     <fudis-fieldset-actions>
+ *       <fudis-button [label]="'Clear'" (handleClick)="clearForm()"></fudis-button>
+ *     </fudis-fieldset-actions>
+ *     <fudis-fieldset-content>
+ *       <fudis-text-input [label]="'Name'" [control]="nameControl"></fudis-text-input>
+ *     </fudis-fieldset-content>
+ *   </fudis-fieldset>
+ *   ```;
  */
 @Directive({ selector: 'fudis-fieldset-actions' })
 export class FieldsetActionsDirective implements OnChanges {
@@ -27,6 +39,15 @@ export class FieldsetActionsDirective implements OnChanges {
  * Identifies the main content area of a fieldset.
  *
  * Use this directive to group related form controls within a fieldset.
+ *
+ * @example
+ *   ```html
+ *   <fudis-fieldset [label]="'Personal details'">
+ *     <fudis-fieldset-content>
+ *       <fudis-text-input [label]="'Name'" [control]="nameControl"></fudis-text-input>
+ *     </fudis-fieldset-content>
+ *   </fudis-fieldset>
+ *   ```;
  */
 @Directive({ selector: 'fudis-fieldset-content' })
 export class FieldsetContentDirective {

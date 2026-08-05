@@ -21,6 +21,16 @@ import { AsyncPipe } from '@angular/common';
 
 /**
  * Single menu item for DropdownMenuComponent.
+ *
+ * @example
+ *   ```html
+ *   <fudis-icon-button [ariaLabel]="'Actions'" [icon]="'three-dots'" [asMenuButton]="true">
+ *     <fudis-dropdown-menu>
+ *       <fudis-dropdown-menu-item [label]="'Edit'" (handleClick)="edit()"></fudis-dropdown-menu-item>
+ *       <fudis-dropdown-menu-item [label]="'Delete'" (handleClick)="delete()"></fudis-dropdown-menu-item>
+ *     </fudis-dropdown-menu>
+ *   </fudis-icon-button>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dropdown-menu-item',

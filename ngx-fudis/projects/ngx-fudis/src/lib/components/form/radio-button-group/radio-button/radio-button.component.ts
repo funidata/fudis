@@ -15,6 +15,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /**
  * Single radio button option for RadioButtonGroupComponent.
+ *
+ * @example
+ *   ```html
+ *   <fudis-radio-button-group [label]="'Color'" [control]="colorControl">
+ *     <fudis-radio-button [label]="'Red'" [value]="'red'"></fudis-radio-button>
+ *   </fudis-radio-button-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-radio-button',

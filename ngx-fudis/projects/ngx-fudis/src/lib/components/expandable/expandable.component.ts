@@ -33,6 +33,15 @@ import { NgTemplateOutlet } from '@angular/common';
  * Toggles the visibility of additional content.
  *
  * Use this component to progressively disclose information without overwhelming the user.
+ *
+ * @example
+ *   ```html
+ *   <fudis-expandable [title]="'More details'" [level]="3">
+ *     <ng-template fudisExpandableContent>
+ *       <fudis-body-text>Additional content revealed on expand.</fudis-body-text>
+ *     </ng-template>
+ *   </fudis-expandable>
+ *   ```;
  */
 @Component({
   selector: 'fudis-expandable',

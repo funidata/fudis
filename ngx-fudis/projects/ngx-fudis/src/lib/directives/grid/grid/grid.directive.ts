@@ -25,6 +25,14 @@ import { FudisComponentChanges } from '../../../types/miscellaneous';
  * Applies grid layout behavior to a container element.
  *
  * Use this directive to define responsive columns.
+ *
+ * @example
+ *   ```html
+ *   <div fudisGrid [columns]="3">
+ *     <fudis-text-input [label]="'First name'" [control]="firstNameControl"></fudis-text-input>
+ *     <fudis-text-input [label]="'Last name'" [control]="lastNameControl"></fudis-text-input>
+ *   </div>
+ *   ```;
  */
 @Directive({ selector: '[fudisGrid]' })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {

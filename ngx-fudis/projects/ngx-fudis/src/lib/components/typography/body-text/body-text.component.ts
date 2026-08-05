@@ -19,6 +19,11 @@ import { BreadcrumbsItemComponent } from '../../breadcrumbs/breadcrumbs-item/bre
  *
  * Use this component to render paragraphs or informational text with consistent typography and
  * spacing. Use clear, simple, and inclusive language.
+ *
+ * @example
+ *   ```html
+ *   <fudis-body-text> Welcome to the application. </fudis-body-text>
+ *   ```;
  */
 @Component({
   selector: 'fudis-body-text',

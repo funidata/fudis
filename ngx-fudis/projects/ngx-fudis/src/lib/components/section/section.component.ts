@@ -27,6 +27,15 @@ import { AsyncPipe } from '@angular/common';
  * Defines a logical content section.
  *
  * Use this component to group related content and improve page structure.
+ *
+ * @example
+ *   ```html
+ *   <fudis-section [title]="'User information'" [level]="2">
+ *     <fudis-section-content>
+ *       <fudis-body-text>Section content goes here.</fudis-body-text>
+ *     </fudis-section-content>
+ *   </fudis-section>
+ *   ```;
  */
 @Component({
   selector: 'fudis-section',

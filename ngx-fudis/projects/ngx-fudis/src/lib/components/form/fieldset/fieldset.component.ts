@@ -28,6 +28,15 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
  * Groups related form controls under a common context.
  *
  * Use this component to improve form structure, clarity, and accessibility.
+ *
+ * @example
+ *   ```html
+ *   <fudis-fieldset [label]="'Personal details'">
+ *     <fudis-fieldset-content>
+ *       <fudis-text-input [label]="'Name'" [control]="nameControl"></fudis-text-input>
+ *     </fudis-fieldset-content>
+ *   </fudis-fieldset>
+ *   ```;
  */
 @Component({
   selector: 'fudis-fieldset',

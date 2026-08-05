@@ -16,6 +16,11 @@ import { CommonModule } from '@angular/common';
  * Displays a decorative or semantic icon.
  *
  * Use this component to enhance recognition, meaning, or visual hierarchy.
+ *
+ * @example
+ *   ```html
+ *   <fudis-icon [icon]="'alert-circle'"></fudis-icon>
+ *   ```;
  */
 @Component({
   selector: 'fudis-icon',

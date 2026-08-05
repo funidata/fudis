@@ -22,6 +22,11 @@ type LanguageLabelArray = LanguageLabel[];
  * Displays a group of language indicators.
  *
  * Use this component to present available or active languages for content.
+ *
+ * @example
+ *   ```html
+ *   <fudis-language-badge-group [translatedLanguages]="['fi', 'sv', 'en']"></fudis-language-badge-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-language-badge-group',

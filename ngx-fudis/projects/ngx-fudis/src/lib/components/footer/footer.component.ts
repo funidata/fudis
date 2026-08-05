@@ -14,6 +14,11 @@ import { AsyncPipe } from '@angular/common';
  * Displays footer content for a page.
  *
  * Use this component with supplementary information such as links, legal content, or metadata.
+ *
+ * @example
+ *   ```html
+ *   <fudis-footer></fudis-footer>
+ *   ```;
  */
 @Component({
   selector: 'fudis-footer',

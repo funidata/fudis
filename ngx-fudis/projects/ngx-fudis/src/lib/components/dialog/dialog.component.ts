@@ -32,6 +32,20 @@ import { AlertGroupComponent } from '../alert/alert-group/alert-group.component'
  *
  * Use this component for focused interactions that require user attention or confirmation before
  * continuing.
+ *
+ * @example
+ *   ```html
+ *   <fudis-dialog>
+ *     <fudis-heading fudisDialogTitle [level]="2">Confirm action</fudis-heading>
+ *     <fudis-dialog-content>
+ *       <fudis-body-text>Are you sure you want to delete this item?</fudis-body-text>
+ *     </fudis-dialog-content>
+ *     <fudis-dialog-actions>
+ *       <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
+ *       <fudis-button [label]="'Confirm'" (handleClick)="confirm()"></fudis-button>
+ *     </fudis-dialog-actions>
+ *   </fudis-dialog>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dialog',

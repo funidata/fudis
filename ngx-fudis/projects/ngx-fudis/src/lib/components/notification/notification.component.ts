@@ -8,6 +8,13 @@ import { IconComponent } from '../icon/icon.component';
  * Displays an information message.
  *
  * Use this component to inform users about events, updates, or system feedback.
+ *
+ * @example
+ *   ```html
+ *   <fudis-notification [variant]="'info'">
+ *     <fudis-body-text>Your changes have been saved.</fudis-body-text>
+ *   </fudis-notification>
+ *   ```;
  */
 @Component({
   selector: 'fudis-notification',

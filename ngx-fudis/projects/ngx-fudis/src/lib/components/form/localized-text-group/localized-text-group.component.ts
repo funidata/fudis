@@ -34,6 +34,11 @@ import { AsyncPipe, KeyValuePipe } from '@angular/common';
  * Manages localized text inputs across multiple languages.
  *
  * Use this component to edit equivalent content for different language options.
+ *
+ * @example
+ *   ```html
+ *   <fudis-localized-text-group [label]="'Description'" [formGroup]="descriptionGroup"></fudis-localized-text-group>
+ *   ```;
  */
 @Component({
   selector: 'fudis-localized-text-group',

@@ -4,6 +4,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  * Visually separates content sections.
  *
  * Use this component to visually indicate thematic breaks.
+ *
+ * @example
+ *   ```html
+ *   <fudis-hr></fudis-hr>
+ *   ```;
  */
 @Component({
   selector: 'fudis-hr',

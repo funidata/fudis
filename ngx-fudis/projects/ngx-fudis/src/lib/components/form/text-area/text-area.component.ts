@@ -15,6 +15,11 @@ import { AsyncPipe } from '@angular/common';
  * Allows entry of multi-line text.
  *
  * Use this component for longer or free-form user input.
+ *
+ * @example
+ *   ```html
+ *   <fudis-text-area [label]="'Description'" [control]="descriptionControl"></fudis-text-area>
+ *   ```;
  */
 @Component({
   selector: 'fudis-text-area',

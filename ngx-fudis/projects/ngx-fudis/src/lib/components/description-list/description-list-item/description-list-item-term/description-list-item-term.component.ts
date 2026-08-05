@@ -12,6 +12,16 @@ import { LanguageBadgeGroupComponent } from '../../../language-badge-group/langu
 
 /**
  * Displays the term (key) in a DescriptionListItemComponent.
+ *
+ * @example
+ *   ```html
+ *   <fudis-dl>
+ *     <fudis-dl-item>
+ *       <fudis-dt>Name</fudis-dt>
+ *       <fudis-dd>Jane Doe</fudis-dd>
+ *     </fudis-dl-item>
+ *   </fudis-dl>
+ *   ```;
  */
 @Component({
   selector: 'fudis-dt',
