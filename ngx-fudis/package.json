@@ -36,10 +36,10 @@
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^21.2.20",
     "@angular-eslint/eslint-plugin": "^19.8.1",
     "@angular-eslint/eslint-plugin-template": "^19.8.1",
     "@angular-eslint/template-parser": "^19.2.1",
+    "@angular/build": "^21.2.20",
     "@angular/cli": "^21.2.20",
     "@angular/compiler-cli": "^21.2.19",
     "@babel/core": "^7.29.0",

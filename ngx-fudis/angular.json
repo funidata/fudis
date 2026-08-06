@@ -15,7 +15,7 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ngx-fudis/ng-package.json"
           },
@@ -103,12 +103,14 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser-esbuild",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/dev",
+            "outputPath": {
+              "base": "dist/dev",
+              "browser": ""
+            },
             "index": "projects/dev/src/index.html",
-            "main": "projects/dev/src/main.ts",
-            "polyfills": "projects/dev/src/polyfills.ts",
+            "polyfills": ["projects/dev/src/polyfills.ts"],
             "tsConfig": "projects/dev/tsconfig.app.json",
             "assets": [
               "projects/dev/src/favicon.ico",
@@ -129,7 +131,8 @@
               }
             ],
             "styles": ["projects/dev/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/dev/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -154,9 +157,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -165,7 +166,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "dev:build:production"
@@ -180,7 +181,7 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "dev:build"
           }
