@@ -5,7 +5,12 @@ export const stories = [
   "../projects/documentation/**/*.mdx",
   "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts",
 ];
-export const addons = ["@storybook/addon-links", "@storybook/addon-a11y", "@storybook/addon-docs"];
+export const addons = [
+  "@storybook/addon-links",
+  "@storybook/addon-a11y",
+  "@storybook/addon-docs",
+  import.meta.resolve("./local-preset.ts"),
+];
 export const framework = {
   name: "@storybook/angular",
 };
