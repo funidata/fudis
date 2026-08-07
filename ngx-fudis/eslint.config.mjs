@@ -42,6 +42,16 @@ export default [
     },
   },
   {
+    files: [".storybook/**/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: "./.storybook/tsconfig.json",
+        tsconfigRootDir: __dirname,
+      },
+    },
+  },
+  {
     files: ["**/*.spec.ts"],
     languageOptions: {
       parser: tsParser,
