@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata, Args } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata, Args } from '@storybook/angular-vite';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TextAreaComponent } from './text-area.component';
 import { FudisValidators } from '../../../utilities/form/validators';

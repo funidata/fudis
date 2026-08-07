@@ -1,6 +1,6 @@
 import { ButtonComponent } from '../../components/button/button.component';
 import docs from '../popover/popover.mdx';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular-vite';
 import { PopoverDirective } from './popover.directive';
 import { popoverExclude } from '../../utilities/storybook';
 

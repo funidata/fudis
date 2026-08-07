@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular-vite';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

@@ -33,7 +33,7 @@
     "eslint-config-prettier": "^10.1.8",
     "rxjs": "^7.8.2",
     "tslib": "^2.8.1",
-    "zone.js": "^0.15.1"
+    "zone.js": "^0.16.2"
   },
   "devDependencies": {
     "@angular-eslint/eslint-plugin": "^19.8.1",
@@ -50,7 +50,6 @@
     "@storybook/addon-a11y": "10.5.6",
     "@storybook/addon-docs": "10.5.6",
     "@storybook/addon-links": "10.5.6",
-    "@storybook/angular": "10.5.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.4",
     "@typescript-eslint/eslint-plugin": "^8.62.0",
@@ -71,7 +70,9 @@
     "stylelint-config-sass-guidelines": "^12.1.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "@storybook/angular-vite": "10.5.6",
+    "@analogjs/vite-plugin-angular": "^2.6.4"
   },
   "overrides": {
     "@types/react": "^16.14.60"
