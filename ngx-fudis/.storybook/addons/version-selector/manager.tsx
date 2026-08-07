@@ -111,7 +111,7 @@ export const VersionSelector = () => {
       tooltip={<TooltipLinkList links={links} />}
     >
       <Button ariaLabel={"Fudis version " + currentVersion}>
-        {"fudis@" + currentVersion === "next" ? "next" : "v" + currentVersion}
+        {currentVersion === "next" ? "next" : "v" + currentVersion}
       </Button>
     </WithTooltip>
   );
