@@ -8,14 +8,8 @@ export const stories = [
 export const addons = ["@storybook/addon-links", "@storybook/addon-a11y", "@storybook/addon-docs"];
 export const framework = {
   name: "@storybook/angular",
-  options: {
-    enableIvy: true,
-  },
 };
-export const features = {
-  modernInlineRender: true,
-  previewMdx2: true,
-};
+
 export const staticDirs = [
   { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
   { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
