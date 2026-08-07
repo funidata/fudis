@@ -1,15 +1,25 @@
+export const core = {
+  allowedHosts: ["localhost", "fudis-storybook"],
+};
+
 export const stories = [
   "../projects/ngx-fudis/src/test-playgrounds/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.mdx",
   "../projects/documentation/**/*.mdx",
-  "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts",
 ];
-export const addons = ["@storybook/addon-links", "@storybook/addon-a11y", "@storybook/addon-docs"];
+export const addons = [
+  "@storybook/addon-links",
+  "@storybook/addon-a11y",
+  "@storybook/addon-docs",
+  import.meta.resolve("./local-preset.ts"),
+];
 export const framework = {
-  name: "@storybook/angular",
+  name: "@storybook/angular-vite",
   options: {
     enableIvy: true,
+    compodoc: true,
+    compodocArgs: ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "."],
   },
 };
 export const features = {
@@ -30,9 +40,14 @@ export const docs = {
   defaultName: "Documentation",
 };
 
-export async function webpackFinal(config) {
-  config.plugins = config.plugins.filter((p) => p.constructor.name !== "ProgressPlugin");
-  return config;
+export async function viteFinal(config) {
+  const { mergeConfig } = await import("vite");
+
+  return mergeConfig(config, {
+    resolve: {
+      extensions: [".mjs", ".js", ".ts", ".tsx", ".jsx", ".json"],
+    },
+  });
 }
 
 export function managerHead(head) {
@@ -44,11 +59,6 @@ export function managerHead(head) {
       .sidebar-item:has(#components-form-checkbox--all-states)  { display: none;}
       /* Hide test stories from sidebar */
       [data-item-id*="pw"] {
-        display: none !important;
-      }
-      /* Hide Docs/Version Selector story from sidebar */
-      [data-item-id^="docs-version-selector"],
-      .sidebar-item:has([data-item-id^="docs-version-selector"]) {
         display: none !important;
       }
       [data-item-id="docs"],
@@ -116,12 +126,6 @@ export function previewHead(head) {
         display: block;
         border: 0;
         overflow: hidden;
-      }
-      #story--docs-version-selector--version-selector-story {
-        overflow: hidden !important;
-      }
-      #story--docs-version-selector--version-selector-story > div {
-        height: 220px !important;
       }
 
       .unstyled-canvas {

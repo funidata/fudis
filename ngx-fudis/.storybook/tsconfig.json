@@ -4,6 +4,7 @@
     "rootDir": "..",
     "types": ["node", "mdx"],
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "skipLibCheck": true
   },
   "exclude": [
@@ -22,7 +23,10 @@
     "../projects/**/*",
     "../stories/**/*",
     "transloco.module.ts",
-    "docs/CustomDocsContainer.tsx",
-    "docs/VersionSelectorDocsWrapper.tsx"
+    "main.js",
+    "preview.js",
+    "manager.js",
+    "local-preset.ts",
+    "addons/**/*"
   ]
 }
