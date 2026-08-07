@@ -5,8 +5,5 @@ export function previewAnnotations(entry = []) {
 }
 
 export function managerEntries(entry = []) {
-  return [
-    ...entry, 
-    fileURLToPath(import.meta.resolve('./addons/version-selector/manager.tsx')),
-  ]
+  return [...entry, fileURLToPath(import.meta.resolve('./addons/version-selector/manager.tsx'))];
 }

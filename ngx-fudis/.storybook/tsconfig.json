@@ -27,6 +27,6 @@
     "preview.js",
     "manager.js",
     "local-preset.ts",
-    "addons/**/*",
+    "addons/**/*"
   ]
 }
