@@ -1,5 +1,5 @@
 import type { Renderer, ProjectAnnotations } from 'storybook/internal/types';
-import { CustomDocsContainer } from '../../docs/CustomDocsContainer';
+import { CustomDocsContainer } from './CustomDocsContainer';
 
 const preview: ProjectAnnotations<Renderer> = {
   parameters: {

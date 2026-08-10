@@ -25,8 +25,6 @@
     "transloco.module.ts",
     "local-preset.ts",
     "preview.ts",
-    "addons/**/*",
-    "docs/CustomDocsContainer.tsx",
-    "docs/VersionSelectorDocsWrapper.tsx"
+    "addons/**/*"
   ]
 }
