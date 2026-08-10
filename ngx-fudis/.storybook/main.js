@@ -3,7 +3,6 @@ export const stories = [
   "../projects/ngx-fudis/src/lib/**/*.stories.ts",
   "../projects/ngx-fudis/src/lib/**/*.mdx",
   "../projects/documentation/**/*.mdx",
-  "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts",
 ];
 export const addons = [
   "@storybook/addon-links",
@@ -98,44 +97,6 @@ export function previewHead(head) {
           outline: 2px dashed #484848;
           outline-offset: 1px;
           box-shadow: #fff;
-      }
-
-      /* 
-      * Remove styling from version selector canvases so that only the selector is shown 
-        and style the containing iframe correctly to hide scollbars
-        */
-
-      .unstyled-canvas.sbdocs-preview,
-      .unstyled-canvas .docs-story {
-        margin: 0;
-        padding: 0;
-        border: 0;
-      }
-      .unstyled-canvas.sbdocs-preview iframe {
-        display: block;
-        border: 0;
-        overflow: hidden;
-      }
-      #story--docs-version-selector--version-selector-story {
-        overflow: hidden !important;
-      }
-      #story--docs-version-selector--version-selector-story > div {
-        height: 220px !important;
-      }
-
-      .unstyled-canvas {
-        box-shadow: none !important;
-        border: none !important;
-      }
-
-      .unstyled-canvas .docs-story > div {
-        padding: 0;
-        margin: 0;
-        border: 0;
-      }
-
-      .unstyled-canvas .docs-story [class*="css-"] .innerZoomElementWrapper > * {
-        border: none !important;
       }
     </style>
 
