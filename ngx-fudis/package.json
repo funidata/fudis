@@ -63,7 +63,7 @@
     "jest-environment-jsdom": "^30.4.1",
     "jest-preset-angular": "^17.0.0",
     "jsdom": "^29.1.1",
-    "ng-packagr": "^21.2.5",
+    "ng-packagr": "^21.2.7",
     "semver-parser": "^4.2.1",
     "storybook": "10.4.6",
     "stylelint": "^16.26.1",
