@@ -1,14 +1,16 @@
 # Fudis Design System — AI Implementation Guide
 
 This guide is created as reference for AI coding tools implementing [Fudis](https://fudis.funidata.fi) components.
-It combines design intent (from Figma guidelines, in Finnish) with technical API documentation (from Storybook MDX sources, in English). 
+It combines design intent (from Figma guidelines, in Finnish) with technical API documentation (from Storybook MDX sources, in English).
 
 **Important!**
+
 - This document is composed using generative AI (Claude), and should be taken with a grain of salt. The documentation is based on reliable material and has been spot checked, but due to the extensive size of this document, there is no guarantee that it is completely free of errors.
 
 **How to read this guide:**
-- *Design Guidelines* sections explain when and why to use a component (UX rules, variants, use cases). Written in Finnish.
-- *Technical Implementation* sections explain how to use it in code (selectors, inputs, services, validators, accessibility). Written in English.
+
+- _Design Guidelines_ sections explain when and why to use a component (UX rules, variants, use cases). Written in Finnish.
+- _Technical Implementation_ sections explain how to use it in code (selectors, inputs, services, validators, accessibility). Written in English.
 
 ---
 
@@ -128,7 +130,6 @@ Icon can be configured with `icon` and `iconRotate` properties.
 - [IconButton](/docs/components-iconbutton--documentation)
 
 ---
-
 
 descriptionListArgsTypesExclude,
 
@@ -272,7 +273,7 @@ Alert Group Component displays list of toaster-like Alert Components with four v
 
 #### Usage Guidelines
 
-First, add `` HTML tag in the application template, preferably as the bottom element in `app.component.html`.
+First, add ``HTML tag in the application template, preferably as the bottom element in`app.component.html`.
 Note that Alerts will position themselves at the very top of their container, meaning they might overlap the application navigation element, which should be fixed manually by setting custom CSS `top` value as needed in the application side.
 Also, make sure that the custom CSS does not affect Alerts in Dialogs, where they should always be on top because Dialogs have backdrop.
 
@@ -305,7 +306,7 @@ constructor(
 Previously sent alert can be dismissed with `dismissAlert()`. If multiple alerts with the same `id` is sent, all of them will be dismissed.
 
 ```ts
-_alertService.dismissAlert('well-done-identifier');
+_alertService.dismissAlert("well-done-identifier");
 ```
 
 ###### Dismiss All
@@ -454,7 +455,7 @@ Suunnittelun apuna on Figmassa erillinen mobiili-kokovariantti dialogista. Huom.
 
 #### Tietojen muokkaus
 
-- Muokkausta aloittaessa pyritään käyttämään muokkauksen avaavasta painikkeesta tekstiversiota eli "muokkaa"-sanaa. Kynä-ikonia voidaan käyttää vaihtoehtoisesti, jos teksti ei mahdu (huom. ikonin minimikoko 32px*32px ja sen yhteydessä tulee esittää alt-teksti).
+- Muokkausta aloittaessa pyritään käyttämään muokkauksen avaavasta painikkeesta tekstiversiota eli "muokkaa"-sanaa. Kynä-ikonia voidaan käyttää vaihtoehtoisesti, jos teksti ei mahdu (huom. ikonin minimikoko 32px\*32px ja sen yhteydessä tulee esittää alt-teksti).
 - Jos on yksittäinen muokattava kenttä, avataan muokkaus dialogissa.
 - Avataan muokattavia tietoja sisältävät kokonaisuudet suoraan dialogissa, jos mukana on yksikin tietoja sisältävä kenttä. (Voi olla sekaisin read-only ja muokattavia kenttiä, mutta vältetään että aukeaisi tietojen tarkasteluun modaali ja siitä vielä jokin uusi näkymä.)
 - Näytetään vihreä success alert onnistuneista tallennuksista.
@@ -1407,7 +1408,7 @@ Details element has also `subHeading` Input for adding optional sub-heading betw
 
 ##### Tag Selection
 
-By default Description List Component, as its name suggests, renders a `` tag with child `` and `` tags. If you have only one item in your list, it is adviced to change `tag` property to `p`. When set, the component will render a paragraph element instead of a list.
+By default Description List Component, as its name suggests, renders a `tag with child` and ``tags. If you have only one item in your list, it is adviced to change`tag`property to`p`. When set, the component will render a paragraph element instead of a list.
 
 ```ts
 <fudis-dl [tag]="'p'">
@@ -1436,7 +1437,7 @@ When Details has no relevant data, set `emptyState` to `true` in order to displa
 
 When nesting Description List as sublist, the nested one should have `variant` set to `compact`.
 
-[Popover](/docs/directives-popover--documentation) can be added to Description List Item Term (``) element by using `popoverText` and `popoverPosition` (optional) properties. It also requires an additional label `popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information". While it works on both Description List variants, it is designed to be used only with **regular** variant.
+[Popover](/docs/directives-popover--documentation) can be added to Description List Item Term (``) element by using `popoverText`and`popoverPosition`(optional) properties. It also requires an additional label`popoverTriggerLabel` for the button that triggers the popover. This label is only visible for the screen readers. The popover button contains an icon only, so it is required to inform the user what it is for, for example: "Additional information". While it works on both Description List variants, it is designed to be used only with **regular** variant.
 
 Also, it is possible to incluce e.g. [Button Component](/docs/components-button--documentation) or other interactive elements inside Description List Item Details (``). The following example displays, how button is used inside the Description List in various ways.
 Description List Item Details has `ariaLabel` input which is recommended to apply when using classified/hidden content.
@@ -1448,7 +1449,7 @@ Description List with [Language Badge Group](/docs/components-language-badge-gro
 By default Language Badge Group always displays badges for Finnish, Swedish and English, in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()`.
 Check documentation at [FudisTranslationService](/docs/services-translation--documentation#translation-service).
 
-Set `` element's `lang` attribute to tell which translation it represents.
+Set ``element's`lang` attribute to tell which translation it represents.
 
 ```ts
 <fudis-dl>
@@ -1700,19 +1701,20 @@ Popover can be included in the checkbox group fieldset with properties from [Pop
 The `formGroup` property of this example is defined like this:
 
 ```ts
-formGroup = new FormGroup<T>({
-  fi: new FormControl<string | null>(null, [
-    FudisValidators.maxLength(15, 'Too long Finnish name'),
-  ]),
-  sv: new FormControl<string | null>(null, [
-    FudisValidators.maxLength(20, 'Too long Swedish name'),
-  ]),
-  en: new FormControl<string | null>(null, [
-    FudisValidators.maxLength(25, 'Too long English name'),
-  ]),
-},
-  [FudisGroupValidators.oneRequired('Give name in at least in one language')],
-)
+formGroup = new FormGroup<T>(
+  {
+    fi: new FormControl<string | null>(null, [
+      FudisValidators.maxLength(15, "Too long Finnish name"),
+    ]),
+    sv: new FormControl<string | null>(null, [
+      FudisValidators.maxLength(20, "Too long Swedish name"),
+    ]),
+    en: new FormControl<string | null>(null, [
+      FudisValidators.maxLength(25, "Too long English name"),
+    ]),
+  },
+  [FudisGroupValidators.oneRequired("Give name in at least in one language")],
+);
 ```
 
 ##### With All Required
@@ -1722,21 +1724,21 @@ The `formGroup` property of this example is defined like this:
 ```ts
 formGroup = new FormGroup<T>({
   fi: new FormControl<string | null>(null, [
-    FudisValidators.required('Missing superhero name on Finnish.'),
-    FudisValidators.minLength(5, 'Too short Finnish name'),
-    FudisValidators.maxLength(10, 'Too long Finnish name'),
+    FudisValidators.required("Missing superhero name on Finnish."),
+    FudisValidators.minLength(5, "Too short Finnish name"),
+    FudisValidators.maxLength(10, "Too long Finnish name"),
   ]),
   sv: new FormControl<string | null>(null, [
-    FudisValidators.required('Missing superhero name on Swedish.'),
-    FudisValidators.minLength(5, 'Too short Swedish name'),
-    FudisValidators.maxLength(15, 'Too long Swedish name'),
+    FudisValidators.required("Missing superhero name on Swedish."),
+    FudisValidators.minLength(5, "Too short Swedish name"),
+    FudisValidators.maxLength(15, "Too long Swedish name"),
   ]),
   en: new FormControl<string | null>(null, [
-    FudisValidators.required('Missing superhero name on English.'),
-    FudisValidators.minLength(5, 'Too short English name'),
-    FudisValidators.maxLength(20, 'Too long English name'),
-  ])
-})
+    FudisValidators.required("Missing superhero name on English."),
+    FudisValidators.minLength(5, "Too short English name"),
+    FudisValidators.maxLength(20, "Too long English name"),
+  ]),
+});
 ```
 
 #### Accessibility
@@ -2194,7 +2196,7 @@ Fudis Date Range is component combination of two [Datepickers](/docs/components-
 
 #### Usage Guidelines
 
-Wrap two Datepickers inside `` selector with respective directives `fudisDateStart` and `fudisDateEnd`. Please see code example above for usage pattern.
+Wrap two Datepickers inside ``selector with respective directives`fudisDateStart`and`fudisDateEnd`. Please see code example above for usage pattern.
 
 Provide mandatory `label` and `control` properties for both Datepickers.
 
@@ -3157,7 +3159,7 @@ To bind anchor element with Link Directive, include `fudisLink` directive select
 
 **Note!**
 
-Although inserting text content between `` tags can be done, it is highly recommended only to use `title` property for the text content of the link. With `title` property we can be sure, that only `string` type text is used and Angular change detection can be triggered more reliably with the `title` property.
+Although inserting text content between ``tags can be done, it is highly recommended only to use`title`property for the text content of the link. With`title`property we can be sure, that only`string`type text is used and Angular change detection can be triggered more reliably with the`title` property.
 
 #### Accessibility
 
@@ -3298,7 +3300,7 @@ Necessary property for Breadcrumbs Component is `label`.
 
 ##### Breadcrumbs Item - Child Component
 
-Breadcrumbs Item has content slots for `` and `` elements. Existing array of link objects with `label` and `url` properties should be looped through with index. See the code example in the example below.
+Breadcrumbs Item has content slots for `and` elements. Existing array of link objects with `label` and `url` properties should be looped through with index. See the code example in the example below.
 [BodyText](/docs/components-typography-body-text--documentation) is meant to be rendered for the last link, so it is presented as plain text. It will automatically have `aria-current="page"`.
 
 #### Accessibility
