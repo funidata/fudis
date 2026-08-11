@@ -131,10 +131,6 @@ Icon can be configured with `icon` and `iconRotate` properties.
 
 ---
 
-descriptionListArgsTypesExclude,
-
----
-
 ## Notification
 
 ### Design Guidelines
@@ -273,11 +269,11 @@ Alert Group Component displays list of toaster-like Alert Components with four v
 
 #### Usage Guidelines
 
-First, add ``HTML tag in the application template, preferably as the bottom element in`app.component.html`.
+First, add `HTML` tag in the application template, preferably as the bottom element in `app.component.html`.
 Note that Alerts will position themselves at the very top of their container, meaning they might overlap the application navigation element, which should be fixed manually by setting custom CSS `top` value as needed in the application side.
 Also, make sure that the custom CSS does not affect Alerts in Dialogs, where they should always be on top because Dialogs have backdrop.
 
-#### Adding and Dismissing Alerts
+##### Adding and Dismissing Alerts
 
 Alert Group listens to `FudisAlertService` where application or UI sends information about adding or dismissing alerts.
 
@@ -301,7 +297,7 @@ constructor(
     }
 ```
 
-###### Dismiss By Id
+##### Dismiss By Id
 
 Previously sent alert can be dismissed with `dismissAlert()`. If multiple alerts with the same `id` is sent, all of them will be dismissed.
 
@@ -309,7 +305,7 @@ Previously sent alert can be dismissed with `dismissAlert()`. If multiple alerts
 _alertService.dismissAlert("well-done-identifier");
 ```
 
-###### Dismiss All
+##### Dismiss All
 
 All alerts can be dismissed by calling `dismissAll()`.
 
@@ -317,17 +313,17 @@ All alerts can be dismissed by calling `dismissAll()`.
 _alertService.dismissAll();
 ```
 
-###### Dismiss From UI
+##### Dismiss From UI
 
 When user clicks alert's close button, it will dismiss that single alert from the service. But it will not affect the other alerts with the same `id`.
 
-#### Positioning
+##### Positioning
 
 Usually Alert Group is positioned to the top of the screen, right after navigation.
 
 CSS position of Alert Group can be set using `position` attribute with three currently provided options. By default it is `fixed` but can be set to `static` or `absolute` as well.
 
-#### With Fudis Dialog
+##### With Fudis Dialog
 
 Fudis automatically embeddes Alert Group inside [Dialog Component](/docs/components-dialog--documentation), so that new and existing alerts are visible and available for keyboard users when dialog is open.
 Alerts are reloaded to the DOM each time dialog is opened and closed.
@@ -344,7 +340,7 @@ When user closes an alert, focus will move automatically to the last alert in th
 
 [Dialog Component](/docs/components-dialog--documentation) has a focus trap, and navigating outside of the dialog is not possible until the dialog is closed. If there are visible alerts, those are included as focusable elements inside the dialog's focus trap. If user closes all the alerts when dialog is open, focus returns to dialog's close button.
 
-##### Other Mentionable Accessibility Details
+#### Accessibility
 
 - Danger and warning alerts will interrupt the user's current activity
 - Alert Group is wrapped inside a `section` element which has an automatic `aria-label` describing its content, e.g. _'Notifications - Number of notifications: 5'_
@@ -493,7 +489,7 @@ It is not recommended to have multiple dialogs open simultaneously, but sometime
 Dialog can transfer data between nested dialogs. With multiple open dialogs, `dialogService.close()` closes the top dialog.
 `dialogService.closeAll()` closes all the open dialogs, but won't pass any data from any dialog to the launcher component.
 
-###### From Component to Dialog
+##### From Component to Dialog
 
 `dialogService.open()` can be called with optional `config` parameter (in addition to component or template reference) which is extension from `MatDialogConfig`. It can be used to alter some Dialog configs but most importantly config's property `data` can be used to inject properties for the component to be opened.
 
@@ -516,7 +512,7 @@ export class ComponentOpenedAsDialog {
 
 ```
 
-###### From Dialog Back to the Component
+##### From Dialog Back to the Component
 
 First in the component, when opening the Dialog, we need to subscribe to an Observable, which is triggered after Dialog is closed. There is no need to any unsubscribing, as the Observable completes itself when Dialog is closed.
 
@@ -793,6 +789,7 @@ Toiminnot: Edellinen, Jatka
 Kun käyttäjä vahvistaa tiedot, näytetään alert toiminnon onnistumisesta/epäonnistumisesta.
 
 #### fudis-wizard-progress (aka. stepper)
+ADD MISSING TEXT HERE
 
 #### Toiminnon virheistä ilmoittaminen
 
@@ -826,6 +823,8 @@ Jos käyttäjä yrittää poistua, näytetään käyttäjälle vahvistusdialogi 
 - Aria-label on muokattavissa käyttökontekstin mukaan esim. "Hakemuksen tekeminen – toiminnon vaiheet"
 - Komponentin jokaisella vaiheella on aria-label: Vaihe 1/5 Wizard, Vaihe 2/5 Wizard
 - Huomioi sivun title (kts. kohta Saavutettavuus, Sivun title)
+
+PUUTTUU TECHNICAL IMPLEMENTATION OSIO!!
 
 ---
 
@@ -1028,13 +1027,19 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 
 Esimerkki sectionista lukutilaisen (read-only) tiedon esittämiseen, muokkauspainikkeella varustettuna.
 
+ESIMERKKI PUUTTUU!
+
 ##### Section ja fieldset -lomakkeessa
 
 Esimerkki siitä, miten section ja fieldset asettuvat osaksi lomaketta.
 
+ESIMERKKI PUUTTUU!
+
 #### Expandablen section -rakenne
 
 Kun expandable on osa isompaa sectionia, sectionin otsikko on esim. H2-tasoa, ja haitarien (expandablejen) omat otsikot ovat seuraavaa tasoa, esim. H3.
+
+^ EPÄSELVÄ - PUUTTUUKO TÄSTÄ JOTAIN? 
 
 ### Technical Implementation
 
@@ -1102,7 +1107,7 @@ When using Section inside [Form](/docs/components-form-form--documentation) with
 
 #### Accessibility
 
-- Section Component uses native `` element
+- Section Component uses native `` element <-- NATIVE WHAT ELEMENT?
 - Section and its title is linked to its content by aria-describedby
 - Section title must be provided with `level` property
 
@@ -1185,22 +1190,22 @@ Fudis Expandable is an accordion component where its content can be expanded or 
 
 **Table of Contents:**
 
-- [Commonly Used Properties](#commonly-used-properties)
+- [Commonly Used Properties](#commonly-used-properties) <-- DOES NOT WORK; TITLE DOES NOT EXIST>
 - [Content Projection](#content-projection)
-- [Examples](#examples)
-- [Expandable as Form's Child Component](#expandable-as-forms-child-component)
+- [Examples](#examples) <-- DOES NOT EXIST>
+- [Expandable as Form's Child Component](#expandable-as-forms-child-component) <-- DOES NOT EXIST>
 - [Accessibility](#accessibility)
-- [Properties](#properties)
+- [Properties](#properties) <-- DOES NOT EXIST>
 
-##### Variant
+#### Variant
 
 Fudis Expandable has two variant types: `regular` and `lite`.
 
-##### Opening and Closing Programatically
+#### Opening and Closing Programatically
 
 Expandable is by default closed; this can be programatically controlled with the `closed` input property.
 
-##### Heading Level
+#### Heading Level
 
 To define which h-level the Expandable heading is, provide suitable `level` attribute. E.g. number `1` defines the Expandable as `h1` element, number `2` defines it as `h2` etc.
 
@@ -1227,7 +1232,7 @@ The content of the Expandable is not initially rendered to the DOM. Content will
 
 About using lazy initalisation with content projection, see [Angular example of conditional content projection](https://angular.io/guide/content-projection#conditional-content-projection) for more background.
 
-##### Property `openOnErrorSummaryReload`
+#### Property `openOnErrorSummaryReload`
 
 If Expandable has any form field components, e. g. Text Input as its child content, they are not loaded to HTML DOM until Expandable is opened for the first time.
 
@@ -1235,7 +1240,7 @@ This can cause syncing issues with Form and Error Summary, because Text Input an
 
 To ease this issue, property `openOnErrorSummaryReload` is by default `true`: If Expandable is a child component of [Form Component](/docs/components-form-form--documentation), the Expandable will open itself whenever [Error Summary Service's reloadFormErrors()](/docs/services-error-summary--documentation#reloadformerrors) is called.
 
-##### Property `errorSummaryBreadcrumb`
+#### Property `errorSummaryBreadcrumb`
 
 Input `errorSummaryBreadcrumb` is a boolean that determines whether the Expandable title is shown in the breadcrumb of Error Summary. This can be useful if Form structure is nested where there is a validatable forms in the contents of the Expandable.
 
@@ -4405,7 +4410,7 @@ Available color values are: `primary`, `primary-dark`, `gray-dark`, `gray-light`
 
 Flip and rotate the icon with `rotate` property: `flip-180`, `cw-90`, or `ccw-90`.
 
-##### Accessibility
+#### Accessibility
 
 - Icons are always hidden from screen readers
   - Be cautious that no information is communicated only with icons
