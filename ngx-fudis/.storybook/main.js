@@ -5,17 +5,16 @@ export const stories = [
   "../projects/documentation/**/*.mdx",
   "../projects/ngx-fudis/src/storybook-docs/version-selector/version-selector.stories.ts",
 ];
-export const addons = ["@storybook/addon-links", "@storybook/addon-a11y", "@storybook/addon-docs"];
+export const addons = [
+  "@storybook/addon-links",
+  "@storybook/addon-a11y",
+  "@storybook/addon-docs",
+  import.meta.resolve("./local-preset.ts"),
+];
 export const framework = {
   name: "@storybook/angular",
-  options: {
-    enableIvy: true,
-  },
 };
-export const features = {
-  modernInlineRender: true,
-  previewMdx2: true,
-};
+
 export const staticDirs = [
   { from: "./../projects/ngx-fudis/src/lib/assets/fonts", to: "/assets" },
   { from: "./../projects/ngx-fudis/src/lib/assets/images", to: "/images" },
