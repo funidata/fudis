@@ -91,8 +91,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnInit {
     event.preventDefault();
 
     const elementToFocus = this.parentComponent.querySelector(`#${clickedId}`) as
-      | HTMLInputElement
-      | HTMLDivElement;
+      HTMLInputElement | HTMLDivElement;
 
     if (elementToFocus) {
       elementToFocus.focus();

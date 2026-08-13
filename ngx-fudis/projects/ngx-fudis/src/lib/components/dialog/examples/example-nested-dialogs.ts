@@ -96,8 +96,7 @@ export class ExampleNestedDialogComponent {
   @Input() id: Veggie;
   @Input() title: string;
   @Input() nextDialogToOpen:
-    | ComponentType<ExampleNestedDialogComponent>
-    | TemplateRef<ExampleNestedDialogComponent>;
+    ComponentType<ExampleNestedDialogComponent> | TemplateRef<ExampleNestedDialogComponent>;
 
   protected _favoriteVeggies: Veggies = {};
   exampleDialogFormGroup = new FormGroup<TestNestedDialogForm>({
@@ -116,8 +115,7 @@ export class ExampleNestedDialogComponent {
 
   openDialogTemplate(
     dialogToOpen:
-      | ComponentType<ExampleNestedDialogComponent>
-      | TemplateRef<ExampleNestedDialogComponent>,
+      ComponentType<ExampleNestedDialogComponent> | TemplateRef<ExampleNestedDialogComponent>,
   ) {
     this._dialogService.open(dialogToOpen, {
       data: {
@@ -197,8 +195,7 @@ export class ExampleNestedDialogsComponent {
 
   openDialogTemplate(
     dialogToOpen:
-      | ComponentType<ExampleNestedDialogComponent>
-      | TemplateRef<ExampleNestedDialogComponent>,
+      ComponentType<ExampleNestedDialogComponent> | TemplateRef<ExampleNestedDialogComponent>,
   ) {
     this._dialogService
       .open(dialogToOpen)
