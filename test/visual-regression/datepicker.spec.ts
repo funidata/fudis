@@ -72,7 +72,10 @@ test("datepicker min and max", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-date-datepicker--with-min-max-validator&viewMode=story",
   );
-  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
+  await page
+    .getByTestId("fudis-datepicker-1-calendar-icon-toggle")
+    .locator("button")
+    .evaluate((el: HTMLButtonElement) => el.click());
   await expect(page).toHaveScreenshot("min-max-1-init-open.png", { fullPage: true });
   await closeCalendarOverlay(page, 0);
   await expect(page.getByText("Choose a date between the allowed range.")).toBeVisible();
@@ -80,7 +83,10 @@ test("datepicker min and max", async ({ page }) => {
   await page.waitForTimeout(150);
   await page.waitForSelector(".fudis-error-message");
   await expect(page.getByText("Date cannot be before 4.2.2024")).toBeVisible();
-  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
+  await page
+    .getByTestId("fudis-datepicker-1-calendar-icon-toggle")
+    .locator("button")
+    .evaluate((el: HTMLButtonElement) => el.click());
   await expect(page).toHaveScreenshot("min-max-2-min-error-open.png", { fullPage: true });
   await closeCalendarOverlay(page, 1);
   await expect(page.getByText("Choose a date between the allowed range.")).toBeVisible();
@@ -88,7 +94,10 @@ test("datepicker min and max", async ({ page }) => {
   await expect(page.getByText("Date cannot be after 20.2.2024")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1").fill("15.2.2024");
   await expect(page.getByText("Date cannot be")).not.toBeVisible();
-  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
+  await page
+    .getByTestId("fudis-datepicker-1-calendar-icon-toggle")
+    .locator("button")
+    .evaluate((el: HTMLButtonElement) => el.click());
   await expect(page).toHaveScreenshot("min-max-3-valid-open.png", { fullPage: true });
 });
 
