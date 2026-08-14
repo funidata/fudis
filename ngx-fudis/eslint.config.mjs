@@ -1,3 +1,4 @@
+import storybook from "eslint-plugin-storybook";
 import tsParser from "@typescript-eslint/parser";
 import globals from "globals";
 import path from "node:path";
@@ -87,4 +88,5 @@ export default [
       ...config,
       files: ["**/*.html"],
     })),
+  ...storybook.configs["flat/recommended"],
 ];

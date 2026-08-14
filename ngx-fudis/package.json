@@ -47,10 +47,10 @@
     "@eslint/eslintrc": "^3.3.6",
     "@eslint/js": "^9.39.5",
     "@jsverse/transloco": "^7.6.1",
-    "@storybook/addon-a11y": "10.4.6",
-    "@storybook/addon-docs": "10.4.6",
-    "@storybook/addon-links": "10.4.6",
-    "@storybook/angular": "10.4.6",
+    "@storybook/addon-a11y": "10.5.5",
+    "@storybook/addon-docs": "10.5.5",
+    "@storybook/addon-links": "10.5.5",
+    "@storybook/angular": "10.5.5",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.4",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
@@ -65,13 +65,14 @@
     "jsdom": "^29.1.1",
     "ng-packagr": "^21.2.7",
     "semver-parser": "^4.2.1",
-    "storybook": "10.4.6",
+    "storybook": "10.5.5",
     "stylelint": "^16.26.1",
     "stylelint-config-concentric-order": "^5.5.0",
     "stylelint-config-sass-guidelines": "^12.1.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "eslint-plugin-storybook": "10.5.5"
   },
   "overrides": {
     "@types/react": "^16.14.60"
