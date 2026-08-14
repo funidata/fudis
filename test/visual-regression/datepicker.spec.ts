@@ -20,9 +20,13 @@ test("datepicker default init, focus, fill, open, select", async ({ page }) => {
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
   await expect(page.getByTestId("cdk-overlay-0")).toBeVisible();
   await expect(page).toHaveScreenshot("default-1-open-calendar.png", { fullPage: true });
-  await page.keyboard.press("ArrowLeft");
-  await page.keyboard.press("ArrowUp");
+
+  const activeDay = page.locator(".mat-calendar-body-active").first();
+  await expect(activeDay).toBeVisible();
+  await activeDay.press("ArrowLeft");
+  await activeDay.press("ArrowUp");
   await expect(page).toHaveScreenshot("default-2-navigate-to-date.png", { fullPage: true });
+
   await page.locator(".mat-calendar-body-active").click();
   await expect(page).toHaveScreenshot("default-3-selected.png", { fullPage: true });
 });
