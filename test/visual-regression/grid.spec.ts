@@ -14,7 +14,7 @@ test("grid min-content", async ({ page }) => {
 
 test("grid max-content", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=columns:max-content%20auto&id=components-grid-grid--max-content&viewMode=story",
+    "/iframe.html?args=&id=components-grid-grid--max-content&viewMode=story",
   );
   await expect(page).toHaveScreenshot("grid-max-content.png");
 });
