@@ -24,8 +24,13 @@ export const staticDirs = [
     to: "/favicon.svg",
   },
 ];
+
 export const docs = {
   defaultName: "Documentation",
+};
+
+export const core = {
+  allowedHosts: ["fudis-storybook", "localhost"],
 };
 
 export async function webpackFinal(config) {
