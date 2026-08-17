@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import docs from './breadcrumbs.mdx';
 

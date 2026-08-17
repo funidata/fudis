@@ -1,4 +1,4 @@
-import { StoryFn, Meta, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, componentWrapperDecorator, moduleMetadata } from '@storybook/angular-vite';
 import { GridComponent } from './grid.component';
 import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utilities/storybook';
 import docs from './grid.mdx';

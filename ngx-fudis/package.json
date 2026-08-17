@@ -36,6 +36,7 @@
     "zone.js": "^0.16.2"
   },
   "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.7.0",
     "@angular-devkit/build-angular": "^21.2.17",
     "@angular-eslint/eslint-plugin": "^19.8.1",
     "@angular-eslint/eslint-plugin-template": "^19.8.1",
@@ -50,7 +51,7 @@
     "@storybook/addon-a11y": "10.5.7",
     "@storybook/addon-docs": "10.5.7",
     "@storybook/addon-links": "10.5.7",
-    "@storybook/angular": "10.5.7",
+    "@storybook/angular-vite": "10.5.7",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.4",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
@@ -58,6 +59,7 @@
     "babel-loader": "^9.2.1",
     "esbuild": "^0.28.1",
     "eslint": "^9.39.5",
+    "eslint-plugin-storybook": "10.5.7",
     "globals": "^15.15.0",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
@@ -71,8 +73,7 @@
     "stylelint-config-sass-guidelines": "^12.1.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "eslint-plugin-storybook": "10.5.7"
+    "typescript": "^5.9.3"
   },
   "overrides": {
     "@types/react": "^16.14.60"
