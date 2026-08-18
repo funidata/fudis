@@ -84,7 +84,7 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 
 ### Käyttö yleisesti
 
-- Fudis-notification on staattisempi kuin fudis-alert
+- Fudis-notification on staattisempia kuin fudis-alert
 - Notifikaatiot kertovat tietoa, joka on tiedossa ilman käyttäjän aktiivista toimintaakin, eli ovat usein näkyvissä jo käyttäjän saapuessa näkymään
 - Notifikaatio voi myös ilmestyä toiminnan seurauksena mm. tapauksissa, joissa käyttäjä tekee valinnan, joka vaikuttaa formin tietojen antamiseen.
 
@@ -129,7 +129,7 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 
 ### Käyttö yleisesti
 
-- Alerteilla voidaan mm. kertoa toiminnon onnistumisesta/epäonnistumisesta tai antaa ohjeita käyttäjältä edellytetyistä jatkotoimista.
+- Alerteilla voidaan mm. kertoa toiminnon onnistumisesta/epäonnistumisesta tai antaa ohjeita käyttäjältä edellyteistä jatkotoimista.
 - HUOM! Fudis-alert on tällä hetkellä käytössä vain Intossa!
 - Alert ei ole näkymäsidonnainen, vaan se jää käyttäjän selainsivun ylälaitaan näkyviin, vaikka käyttäjä siirtyisi järjestelmässä näkymästä toiseen.
 - Alerttiin ei voi laittaa linkkiä (Ei saavutettava).
@@ -397,6 +397,96 @@ Fudiksen tabeissa käytetään kaikilla tabline-tasoilla (primary&secondary) sam
 
 ---
 
+## Table (fudis-table)
+
+Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?node-id=6223-203
+
+### Käyttö yleisesti
+
+- Taulukkoa käytetään tiedon järjestämiseen ja esittämiseen.
+- Taulukko on kokonaisuus joka koostuu useammasta komponentista (kts. yksittäiset komponentit).
+- Harkitse toista esitystapaa (esim. fudis-dl) kun esitettävää tietoa on vain vähän, ja sarakkeita/rivejä on alle 3 kpl.
+- Vältä yhdistämästä soluja (merge).
+
+### Variaatiot
+
+#### Mobile
+
+- Taulukosta on olemassa mobile-variaatio, jossa fontti ja välistykset ovat pienemmät.
+- Näytetään variaatio kun ruudun leveys on alle 767 px.
+
+### Yksittäiset komponentit
+
+Taulukko on kokonaisuus joka koostuu useasta komponentista.
+
+#### fudis-table-caption
+
+- Taulukolla tulee olla aina sen sisältöä kuvaava otsikko (caption).
+- Näkyvän ja ruudunlukijalle tarkoitetun captionin tulisi olla sama.
+- Font: Heading - s (small)
+
+#### fudis-table-header
+
+- Jokaisella taulukon sarakkeella on table-header (th) joka kuvaa sarakkeen soluissa olevaa sisältöä.
+- Pyri pitämään header lyhyenä ja helposti ymmärrettävä.
+- Komponentista on mobile-variaatio.
+- Komponentti tukee sarakkeen sisällön järjestämistä (sorting).
+
+##### Järjestäminen
+
+- Fudis-table-header tukee sarakkeen sisällön järjestämistä. Käytä sarakkeen järjestämistä vain kun se on välttämätöntä, tai muuten hyödyllistä käyttäjälle.
+- Kun sarake on järjestettävissä (sortable): Table-header labelin yhteydessä näytetään sorter-ikoni (väri: primary). Label ja ikoni toimivat painikkeena.
+- Kun käyttäjä järjestää sarakkeen:
+  - **Laskevasti**: sorter-ikoni osoittaa alaspäin, label alleviivataan, aria-sort: descending, aria-live: "Table header järjestetty laskevasti"
+  - **Nousevasti**: sorter-ikoni osoittaa ylöspäin, label alleviivataan, aria-sort: ascending, aria-live: "Table header järjestetty nousevasti"
+
+#### fudis-table-cell
+
+Komponentista on mobile-variaatio, jonka välistykset ja fonttikoko on pienemmät.
+
+- Default: solun sisäinen täyte (padding) on 16px vasemmalla ja 16px alareunassa (tekstin alla).
+- Mobile: täyte on 8px sekä vasemmalla että alareunassa.
+
+### Tiedon esittäminen
+
+#### Taulukon solu (table cell)
+
+Jos taulukon solussa ei ole esitettävää tietoa, näytetään empty state -teksti, esim.:
+
+- "Tietoa ei saatavilla"
+- "Ei lisätty ..."
+- "Ei määritelty ..."
+
+#### Koko taulukko
+
+Mikäli koko taulukossa ei ole esitettävää tietoa, näytetään käyttäjälle tyhjän taulukon sijaan empty state -teksti, joka kuvaa käyttäjälle syyn miksi näytettävää tietoa ei ole.
+
+#### Koodit
+
+- Pyritään siihen, että koodi näytetään aina (esim. opintojakso, koulutus, tutkinto-ohjelma).
+- Pyritään siihen, että koodi tulee aina ensin.
+- Koodi erotetaan muusta tiedosta pilkulla.
+- HUOM! Opintolaatikossa koodilla oma paikka.
+
+Esimerkki: "HIS1234, Antiikin historian perusteet"
+
+### Sisältöjen asemointi ja linjaus
+
+Pyritään siihen, että sisältö linjataan samalla tavalla soluissa. Esim. kokonaisluvut voidaan linjata vasempaan reunaan, vaikka yleinen tapa laskentataulukoissa ja tilastoissa olisikin tasata ne oikeaan reunaan.
+
+### Asemointi
+
+- Taulukko tasataan lähtökohtaisesti sivun vasempaan ylälaitaan.
+- Taulukon kokonaisleveys määräytyy lähtökohtaisesti sitä ympäröivän osion mukaan (width: 100%). Esimerkiksi luettavuuden helpottamiseksi taulukon leveyttä voidaan säätää, asettamalla se parent-elementin sisään.
+
+### Responsiivisuus
+
+- Ruutukoon pienentyessä: Taulukosta näytetään mobile-variaatio. Breakpoint: <767 px.
+- Mahdollistetaan taulukon vaakavieritys (horizontal scrolling). Huom. Muun näkymän vaakavieritystä on vältettävä.
+- Taulukkoa suunnitellessa, pyri pitämään taulukossa näytettävä tieto tiiviinä ja vältä pitkiä sarakkeen otsikoita (table-header). Harkitse taulukon sijaan myös muista tapoja tiedon esittämiseen.
+
+---
+
 ## Section (fudis-section)
 
 Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?node-id=3278-1049
@@ -417,6 +507,16 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 - Mahdollinen sectionin ohjeteksti.
 - Mahdollinen sectionin notifikaatio (ei virhevalidaatio).
 
+### Käyttötapauksia
+
+#### Lukutilainen näkymä
+
+Esimerkki sectionista lukutilaisen (read-only) tiedon esittämiseen, muokkauspainikkeella varustettuna.
+
+#### Section ja fieldset -lomakkeessa
+
+Esimerkki siitä, miten section ja fieldset asettuvat osaksi lomaketta.
+
 ### Expandablen section -rakenne
 
 Kun expandable on osa isompaa sectionia, sectionin otsikko on esim. H2-tasoa, ja haitarien (expandablejen) omat otsikot ovat seuraavaa tasoa, esim. H3.
@@ -433,14 +533,14 @@ Figma: https://www.figma.com/file/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?typ
 
 Harkitse käyttöä jos:
 
-- Sivulla on paljon näytettävää tietoa.
+- Jos sivulla on paljon näytettävää tietoa.
 - Tiedon voi pilkkoa tai jäsentää useampaan selkeään osaan tai kategoriaan. Nämä kategoriat voivat tarvittaessa olla toisistaan riippumattomia (esim. opiskeluoikeudet).
 - Käyttäjän näkökulmasta voi hyötyä että pystyy piilottamaan osan sivulla esitettävistä tiedoista.
 
 Vältä käyttöä jos:
 
-- Tieto on käyttäjälle tärkeää tai välttämätöntä toiminnon kannalta. Tällöin voi olla parempi että tieto pysyy koko ajan näkyvillä.
-- Sivun tiedot ovat niin vähäiset että ne ovat kerralla silmäiltävissä. Tällöin yksittäisen tiedon piilottaminen ei oikein ole perusteltua.
+- Jos tieto on käyttäjälle tärkeää tai välttämätöntä toiminnon kannalta. Tällöin voi olla parempi että tieto pysyy koko ajan näkyvillä.
+- Jos sivun tiedot ovat niin vähäiset että ne ovat kerralla silmäiltävissä. Tällöin yksittäisen tiedon piilottaminen ei oikein ole perusteltua.
 - Vältä tämän haitari-tyypin sisäkkäistä käyttöä. Käytä kevyempiä haitareita jos tarvitsee sisäkkäisiä haitareita.
 
 - Expandable näytetään lähtökohtaisesti kiinni - tilanteesta riippuen haitarit voidaan näyttää myös oletuksena auki (esim. opintojen rakenne, viestit). Pyritään kirjaamaan suunnitelmille miten kyseisessä tilanteessa haitarit oletuksena toimivat.
@@ -453,7 +553,7 @@ Vältä käyttöä jos:
 
 #### Default (closed)
 
-Suljettu haitari, jossa näkyy vain otsikko.
+Esimerkki suljetusta haitarista, jossa näkyy vain otsikko.
 
 #### Haitarin vaihtoehtoisia tiloja & liitännäisiä
 
@@ -481,6 +581,10 @@ Vältä haitarin käyttöä:
 
 - Default: kaikilla puolilla 24px.
 - Sivu-marginaalit on tapauskohtaisesti mahdollista poistaa.
+
+#### Default (closed)
+
+Esimerkki suljetusta haitarista, jossa näkyy vain otsikko.
 
 ---
 
@@ -1031,6 +1135,10 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 - Mahdollinen fieldsetin notifikaatio (ei virhevalidaatio).
 
 ### Käyttötapaukset
+
+#### Date-range
+
+Esimerkki fieldsetistä date-range-kenttäparin ympärillä.
 
 #### Lisää/poista sisältöä jossa useampi input (case: Into vastuuorganisaatiot)
 
