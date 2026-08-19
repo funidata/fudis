@@ -1,8 +1,9 @@
 <jira-ticket>
 
 <description>
-  
+
 ### Developer's checklist
+
 - [ ] I wrote necessary unit tests
 - [ ] I updated Storybook stories and documentation to reflect the latest changes
 - [ ] I included visual regression tests for new UI design
