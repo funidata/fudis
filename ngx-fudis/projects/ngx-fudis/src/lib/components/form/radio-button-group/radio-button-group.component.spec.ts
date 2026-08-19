@@ -52,7 +52,8 @@ class MockContainerComponent {
 describe('Basic inputs of Radio Button Group', () => {
   let component: RadioButtonGroupComponent;
   let fixture:
-    ComponentFixture<RadioButtonGroupComponent> | ComponentFixture<MockContainerComponent>;
+    | ComponentFixture<RadioButtonGroupComponent>
+    | ComponentFixture<MockContainerComponent>;
   let fieldsetElement: HTMLFieldSetElement;
 
   beforeEach(async () => {

@@ -56,7 +56,8 @@ class MockContainerComponent {
 
 describe('CheckboxGroupOptionComponent', () => {
   let fixture:
-    ComponentFixture<MockContainerComponent> | ComponentFixture<CheckboxGroupOptionComponent>;
+    | ComponentFixture<MockContainerComponent>
+    | ComponentFixture<CheckboxGroupOptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

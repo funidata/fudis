@@ -87,7 +87,8 @@ class MockContainerComponent {
 describe('CheckboxGroupComponent', () => {
   let component: CheckboxGroupComponent<TestForm>;
   let fixture:
-    ComponentFixture<CheckboxGroupComponent<TestForm>> | ComponentFixture<MockContainerComponent>;
+    | ComponentFixture<CheckboxGroupComponent<TestForm>>
+    | ComponentFixture<MockContainerComponent>;
   let fieldsetElement: HTMLFieldSetElement;
 
   beforeEach(async () => {
