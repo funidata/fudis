@@ -75,6 +75,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
+  "optionalDependencies": {
+    "@rolldown/binding-darwin-arm64": "1.2.4",
+    "@rolldown/binding-linux-x64-gnu": "1.2.4"
+  },
   "overrides": {
     "@types/react": "^16.14.60"
   }
