@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata, Args } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata, Args } from '@storybook/angular-vite';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
