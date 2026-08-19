@@ -4,4 +4,4 @@ WORKDIR /usr/src/app
 COPY . .
 RUN npm ci
 
-CMD npx playwright test
+CMD ["npx", "playwright", "test"]
