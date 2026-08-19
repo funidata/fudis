@@ -8,7 +8,7 @@ RUN npm ci
 COPY . .
 RUN npm run build:ngx-fudis
 
-CMD npm run storybook
+CMD ["npm", "run", "storybook"]
 
 # Reduce image size in CI speeding up artifact upload.
 FROM node:24.19.0-alpine
