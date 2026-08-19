@@ -17,6 +17,7 @@ jobs:
         with:
           context: ngx-fudis
           tags: fudis-test
+          platforms: linux/amd64
           outputs: type=docker,dest=/tmp/fudis-test.image.tar
       - name: Save image as artifact
         uses: actions/upload-artifact@v6
