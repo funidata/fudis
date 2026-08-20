@@ -145,7 +145,7 @@ BackendSimulation.parameters = {
 };
 
 // Hidden story for testing shared option between two Multiselects, not meant to be exposed in Storybook UI.
-export const pwNoFormExample: StoryFn = (args) => ({
+export const PwNoFormExample: StoryFn = (args) => ({
   props: args,
   template: html`<example-multiselect-showcase-no-form></example-multiselect-showcase-no-form>`,
 });

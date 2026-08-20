@@ -255,7 +255,7 @@ ExampleWithDynamicValidators.parameters = {
   },
 };
 
-export const pwFormDynamicExample: StoryFn = (args) => ({
+export const PwFormDynamicExample: StoryFn = (args) => ({
   props: args,
   template: html` <example-form-dynamic-components></example-form-dynamic-components>`,
 });
