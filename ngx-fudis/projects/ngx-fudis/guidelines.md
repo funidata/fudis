@@ -66,7 +66,6 @@ Valikkopainikkeen koko määräytyy sitä ympäröivien painikkeiden koon mukaan
 
 ### Muut painikkeet
 
-- **Linkin näköinen painike** (Käytettävissä Sisussa, mutta ei sisälly Fudikseen): Pyritään käyttämään normaalia painiketta, mutta tarpeen tullen voidaan käyttää linkin näköistä painiketta esim. avaamaan modaali/dialogi. Erityisesti toimintoihin jotka eivät vaihda käyttäjän näkymää, pyritään suosimaan normaalia painiketta. Link-button komponenttia ei ole lisätty fudikseen, mutta se on silti käytettävissä Sisussa vanhastaan.
 - **Milloin linkki? Milloin button?**: Lähtökohtaisesti painike on painikkeen näköinen ja ohjelmallisesti button, ja linkki on linkin näköinen ja ohjelmallisesti link, mutta jos on selkeä tarve niin tästä linjauksesti voidaan poiketa. Huomioitava tämä käyttäjille kerrotussa ohjetekstissä. Ei viitata painikkeen ohjelmallisuuteen (button vs. link) vaan sen sisältöön:
   - KÄYTÄ OHJETEKSTISSÄ: esim. "Paina Tallenna"
   - ÄLÄ KÄYTÄ OHJETEKSTISSÄ: esim. "Paina linkkiä"
@@ -130,7 +129,6 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 ### Käyttö yleisesti
 
 - Alerteilla voidaan mm. kertoa toiminnon onnistumisesta/epäonnistumisesta tai antaa ohjeita käyttäjältä edellytetyistä jatkotoimista.
-- HUOM! Fudis-alert on tällä hetkellä käytössä vain Intossa!
 - Alert ei ole näkymäsidonnainen, vaan se jää käyttäjän selainsivun ylälaitaan näkyviin, vaikka käyttäjä siirtyisi järjestelmässä näkymästä toiseen.
 - Alerttiin ei voi laittaa linkkiä (Ei saavutettava).
 - Käyttäjän täytyy sulkea alert, jotta se häviää näkyvistä.
@@ -148,12 +146,6 @@ Alertteja on 4 eri tyyppiä, eri käyttötapauksia varten:
 ### Käyttötapaukset
 
 Listataan yleisiä käyttötapauksia ja niissä käytettyjä alertteja teksteineen.
-
-#### Tallennus onnistui (quick alert)
-
-Tallennus onnistui.
-
-Aria live: "Info, Tallennus onnistui." Ilmoitus poistuu automaattisesti hetken kuluttua.
 
 ### Asemointi
 
@@ -318,7 +310,7 @@ Toiminnot: Edellinen, Jatka
 
 Kun käyttäjä vahvistaa tiedot, näytetään alert toiminnon onnistumisesta/epäonnistumisesta.
 
-### fudis-wizard-progress (aka. stepper)
+### Fudis stepper (to be implemented)
 
 ### Toiminnon virheistä ilmoittaminen
 
@@ -801,7 +793,7 @@ Käyttäjää voidaan ohjata Calendar-popupin valinnoissa.
 
 Esimerkki: Estetään jälkimmäisessä input-kentästä avautuvasta popupista käyttäjää valitsemasta esimerkiksi aikaisempia päivämääriä kuin ensimmäiseen input-kenttään on valittuna, jos lopetuspäivä ei voi olla ennen aloituspäivää.
 
-HUOM! Tämä toimintalogiikka ei tule automaattisesti Fudiksesta. Toiminto täytyy lisätä tai kehittää erikseen Sisun/Inton puolella.
+HUOM! Tämä toimintalogiikka ei tule automaattisesti Fudiksesta. Toiminto täytyy lisätä tai kehittää erikseen sovelluksen puolella.
 
 ---
 
@@ -1030,12 +1022,6 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 - Tarvittaessa fieldsetin alle voidaan lisätä ohjeteksti.
 - Mahdollinen fieldsetin notifikaatio (ei virhevalidaatio).
 
-### Käyttötapaukset
-
-#### Lisää/poista sisältöä jossa useampi input (case: Into vastuuorganisaatiot)
-
-Fieldsetiä voidaan käyttää toistuvan, lisättävän/poistettavan sisällön ryhmittämiseen, jossa jokaisella rivillä on useampi input (esim. Into: vastuuorganisaatiot).
-
 ### Asemointi
 
 - HUOM! Fieldsettiä EI sisennetä.
@@ -1219,7 +1205,7 @@ Tyyli ja koko:
 
 ### Koko sivun lataus - lg (large)
 
-Päätetty poistaa (Dev Des Sync 29.9.2025) koska haasteita saada toimimaan Sisun päässä.
+Ominaisuus on olemassa, mutta sen toteuttamisessa voi olla haasteita sovelluksen tasolla. Arvioidaan käyttö tapauskohtaisesti.
 
 ### Käyttötapaukset
 
@@ -1310,7 +1296,7 @@ Yhä pienemmällä ruutukoolla vähennetään listassa näkyvien sivujen määr�
 
 ### Brändi
 
-Painikkeiden värit yhtenäistetään tuotekohtaisesti (esim. Sisu, Into).
+Painikkeiden värit yhtenäistetään tuotekohtaisesti.
 
 ---
 
@@ -1321,7 +1307,7 @@ Figma: https://www.figma.com/file/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?typ
 ### Käyttö yleisesti
 
 - Käytetään Funidatan kaikkien tuotteiden sivun alalaidassa, kaikissa näkymissä.
-- Fudis määrittelee footerin taustan sekä logon paikan. Oranssilla katkoviivalla merkitty alue on se, jonka sisällöstä kukin sovellus vastaa itse.
+- Fudis määrittelee footerin taustan sekä logon paikan. Muusta sisällöstä, kuten linkeistä sovellus vastaa itse
 - Huomiona, että suuremmalla näytöllä logon oikealle puolelle jää tilaa (margin-right) ja pienemmällä näytöllä vastaava tila jää logon alle (margin-bottom).
 
 ### Linkit
@@ -1468,7 +1454,7 @@ Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?n
 - Komponenttia ei voi käyttää itsenäisesti, irrallaan fudis-form-komponentista.
 - Kohdistus siirretään komponenttiin lomakkeen lähettämisen (submit) jälkeen.
 - Listatuissa virheviesteissä on ankkurilinkit ko. lomakekenttään.
-- Linkin breadcrumb-polkuun voi tarvittaessa lisätä sectionin tai fieldsetin otsikot (esimerkkitoteutus Intossa). Automaattisesti linkkiin tulee lomakekentän label ja virheviesti (sama kuin lomakekentässä).
+- Linkin breadcrumb-polkuun voi tarvittaessa lisätä sectionin tai fieldsetin otsikot. Automaattisesti linkkiin tulee lomakekentän label ja virheviesti (sama kuin lomakekentässä).
 - Error summary tulee, vaikka olisi vain yksi kenttä.
 
 ### Default
