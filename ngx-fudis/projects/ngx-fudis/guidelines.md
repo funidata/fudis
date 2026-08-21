@@ -1485,3 +1485,165 @@ Kahden eri lomakkeen väliset validaatiovirheet (konfliktit) esitetään lähtö
 - Jos päivämäärä yritetään asettaa suoraan, näytetään virheviesti lomakekentän alla + error summary jos lomake yritetään lähettää (submit).
 
 Esimerkki virheviestistä: "Päivämäärä: Päivämäärän tulee olla toteutuksen opetusajan sisällä"
+
+---
+
+## Badge (fudis-badge)
+
+Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?node-id=2573-32696
+
+### Käyttö ja toiminta yleisesti
+
+Voidaan käyttää korostamaan jonkin asian tilaa tai esittämään jotain muuta oleellista tietoa helpommin silmäiltävässä muodossa.
+
+### Variantit
+
+- **Success**: Julkaistu/hyväksytty
+- **Error**: Hylätty/peruttu
+- **Info**: Neutraali tieto joka on syytä erottaa muista helposti silmäiltävällä tavalla
+- **Warning**: Luonnos/välitila/vaatii toimenpiteitä
+- **Inactive**: Päättynyt/passiivinen
+
+---
+
+## Icon (fudis-icon)
+
+Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?node-id=6581-21517
+
+### Käyttö yleisesti
+
+Icon on SVG-kuvaelementti, jota käytetään tukemaan käyttöliittymän silmäiltävyyttä. Huomioi, että Icon Button on erikseen eli ikoni, jossa on toiminnallisuus.
+
+### Saavutettavuus
+
+Varmista, että ikonin ja taustavärin kontrasti täyttää saavutettavuusvaatimukset. Huomioi ikonin tekstivastine ruudunlukijakäyttäjille.
+
+### Variantit
+
+Ikoneissa käytetään seuraavia värejä tukemaan viestiä asioiden tilasta:
+
+- **Dark Gray**: Neutraali viesti, käytetään kun ikonin tehtävä on kuvituksellinen
+- **Green**: Vihreän ikonin tehtävä on tukea viestiä siitä, että jotain onnistui
+- **Red**: Punaisen ikonin tehtävä on tukea viestiä siitä, että tapahtui virhe, tila on virheellinen jne.
+
+---
+
+## Icon Button (fudis-icon-button)
+
+Figma: https://www.figma.com/design/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?node-id=7338-471
+
+### Käyttö yleisesti
+
+- Käytetään aktivoimaan toiminto (esim. avaa dialogi, tallenna lomake tms.)
+- Koko määräytyy sitä ympäröivien painikkeiden koon mukaan, tai toimintojen prioriteetin mukaan näkymäkohtaisesti.
+
+### Saavutettavuus
+
+- Pyritään siihen, että nappeja ei piiloteta.
+- Ensisijaisesti näytetään kaikki painikkeet ja annetaan virhe/info -alert/dialogi -ilmoitus jos käyttäjä klikkaa painiketta, miksi toimintoa ei voitu suorittaa.
+- Lisää painikkeille saavutettava, yhdenmukainen aria-label annotaatioiden yhteydessä.
+
+### Variaatiot
+
+#### Tyypit
+
+Painikkeiden tyypit (Primary, secondary, tertiary) kertovat käyttäjälle painikkeiden oletetusta tärkeydestä. Käytettävät tyyppi on päätettävä tapauskohtaisesti.
+
+- **Primary**: Käytetään ensisijaiseen toimintoon, jonka käyttäjän uskotaan tai toivotaan suorittavan.
+- **Secondary**: Käytetään toissijaiseen toimintoon, jonka käyttäjä voi suorittaa mutta joka ei ole odotettua tai toivottua ensisijaisen toiminnon suorittamisen kannalta.
+- **Tertiary**: Käytetään toimintoon joka on mahdollinen, mutta jota useimpien käyttäjien ei odoteta tai toivota suorittavan. Voidaan käyttää myös vähentämään näkymän hälyä jos toistuvia, toissijaisia toimintoja on paljon.
+- **Disabled**: Disabloitu painike viestii ettei toimintoa voida suorittaa, eikä painikkeeseen voi kohdistaa. HUOM! Painikkeen disablointia tulee välttää saavutettavuussyistä. Mikäli painike kuitenkin disabloidaan, tulee syy kertoa käyttäjälle selkeästi.
+
+#### Koko
+
+- **Medium**: Käytetään tällä hetkellä vain valikkopainikkeena (kolmen pisteen valikko)
+- **Small**: Käytetään tällä hetkellä vain valikkopainikkeena (kolmen pisteen valikko)
+- **Extra small**: Voidaan käyttää kun normaalille painikkeelle ei ole näkymässä tilaa (esim. muokkaa toiminto taulukossa) tai mobiilissa kun tilaa on rajallisesti. Pyritään käyttämään painikkeita, joissa on näkyvä label. Tällöin sekä näkevä että lukuohjelmiakäyttävä saa saman informaation.
+
+### Efektit
+
+- **Hover**: Ei hover -tilan efektiä. Hoveroitaessa interaktiivisen elementin päällä (case: button) kursori vaihtuu => pointer
+- **Active**: Ei active -tilan efektiä
+- **Focus**: Ei active -tilan efektiä
+
+### Asettelu
+
+- Jos painikkeen yhteydessä on otsikko, ne lisätään samalle riville (esim. case: muokkaa-toiminto)
+- Painikkeet sijoitetaan ensisijaisesti sitä ympäröivän elementin (container) oikeaan laitaan
+
+---
+
+## Table (fudis-table)
+
+Figma: https://www.figma.com/design/Av9dkW3LAG6e4Zy78oguGR/FD-design-guidelines?node-id=3391-37511&t=wL3URZhXmG7it4lk-4
+
+### Käyttö yleisesti
+
+- Taulukkoa käytetään tiedon järjestämiseen ja esittämiseen.
+- Taulukko on kokonaisuus joka koostuu useammasta komponentista (kts. Yksittäiset komponentit).
+- Harkitse toista esitystapaa (esim. fudis-dl) kun esitettävää tietoa on vain vähän, ja sarakkeita/rivejä on alle 3 kpl.
+- Vältä yhdistämästä soluja (merge).
+
+### Variaatiot
+
+Taulukosta näytetään pienempi variaatio kun ruudun leveys on alle 767 px. Fontti ja välistykset ovat pienemmät.
+
+### Yksittäiset komponentit
+
+Taulukko on kokonaisuus, joka koostuu useasta komponentista.
+
+#### fudis-table-caption
+
+- Taulukolla tulee olla aina sen sisältöä kuvaava otsikko (caption).
+- Näkyvän ja ruudunlukijalle tarkoitetun captionin tulisi olla sama.
+- Font: Heading - s (small)
+
+#### fudis-table-header
+
+- Jokaisella taulukon sarakkeella on table-header (th) joka kuvaa sarakkeen soluissa olevaa sisältöä.
+- Pyri pitämään header lyhyenä ja helposti ymmärrettävä.
+- Komponentista on mobile-variaatio.
+- Komponentti tukee sarakkeen sisällön järjestämistä (sorting).
+
+##### Järjestäminen
+
+Fudis-table-header tukee sarakkeen sisällön järjestämistä. Käytä sarakkeen järjestämistä vain kun se on välttämätöntä, tai muuten hyödyllistä käyttäjälle.
+
+- Kun sarake on järjestettävissä (sortable): table-header labelin yhteydessä näytetään sorter-ikoni (väri: primary). Label ja ikoni toimivat painikkeena.
+- Kun käyttäjä järjestää sarakkeen:
+  - **Laskevasti**: sorter-ikoni osoittaa alaspäin, label alleviivataan, aria-sort: descending, aria-live: "*Table header* järjestetty laskevasti".
+  - **Nousevasti**: sorter-ikoni osoittaa ylöspäin, label alleviivataan, aria-sort: ascending, aria-live: "*Table header* järjestetty nousevasti".
+
+#### fudis-table-cell
+
+- Komponentista on mobile-variaatio, jonka välistykset ja fonttikoko on pienemmät.
+
+### Tiedon esittäminen
+
+#### Ei näytettävää tietoa
+
+- **Taulukon solu**: Jos taulukon solussa ei ole esitettävää tietoa, näytetään empty state -teksti, esim. "Tietoa ei saatavilla", "Ei lisätty..." tai "Ei määritelty...".
+- **Koko taulukko**: Mikäli koko taulukossa ei ole esitettävää tietoa, näytetään käyttäjälle tyhjän taulukon sijaan empty state -teksti, joka kuvaa käyttäjälle syyn miksi näytettävää tietoa ei ole.
+
+#### Koodit
+
+- Pyritään siihen, että koodi näytetään aina (esim. opintojakso, koulutus, tutkinto-ohjelma).
+- Pyritään siihen, että koodi tulee aina ensin.
+- Koodi erotetaan muusta tiedosta pilkulla (esim. "HIS1234, Antiikin historian perusteet").
+- HUOM! Opintolaatikossa koodilla oma paikka.
+
+#### Sisältöjen asemointi ja linjaus
+
+Pyritään siihen, että sisältö linjataan samalla tavalla soluissa. Esim. kokonaisluvut voidaan linjata vasempaan reunaan, vaikka yleinen tapa laskentataulukoissa ja tilastoissa olisikin tasata ne oikeaan reunaan.
+
+### Asemointi
+
+- Taulukko tasataan lähtökohtaisesti sivun vasempaan ylälaitaan.
+- Taulukon kokonaisleveys määräytyy lähtökohtaisesti sitä ympäröivän osion mukaan (width: 100%). Esimerkiksi luettavuuden helpottamiseksi taulukon leveyttä voidaan säätää, asettamalla se parent-elementin sisään.
+
+### Responsiivisuus
+
+- Ruutukoon pienentyessä:
+  - Taulukosta näytetään mobile-variaatio. Breakpoint: <767 px.
+  - Mahdollistetaan taulukon vaakavieritys (horizontal scrolling). Huom. Muun näkymän vaakavieritystä on vältettävä.
+- Taulukkoa suunnitellessa, pyri pitämään taulukossa näytettävä tieto tiiviinä ja vältä pitkiä sarakkeen otsikoita (table-header). Harkitse taulukon sijaan myös muita tapoja tiedon esittämiseen.
