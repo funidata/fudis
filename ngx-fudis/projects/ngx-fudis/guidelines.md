@@ -1611,8 +1611,8 @@ Fudis-table-header tukee sarakkeen sisällön järjestämistä. Käytä sarakkee
 
 - Kun sarake on järjestettävissä (sortable): table-header labelin yhteydessä näytetään sorter-ikoni (väri: primary). Label ja ikoni toimivat painikkeena.
 - Kun käyttäjä järjestää sarakkeen:
-  - **Laskevasti**: sorter-ikoni osoittaa alaspäin, label alleviivataan, aria-sort: descending, aria-live: "*Table header* järjestetty laskevasti".
-  - **Nousevasti**: sorter-ikoni osoittaa ylöspäin, label alleviivataan, aria-sort: ascending, aria-live: "*Table header* järjestetty nousevasti".
+  - **Laskevasti**: sorter-ikoni osoittaa alaspäin, label alleviivataan, aria-sort: descending, aria-live: "_Table header_ järjestetty laskevasti".
+  - **Nousevasti**: sorter-ikoni osoittaa ylöspäin, label alleviivataan, aria-sort: ascending, aria-live: "_Table header_ järjestetty nousevasti".
 
 #### fudis-table-cell
 
