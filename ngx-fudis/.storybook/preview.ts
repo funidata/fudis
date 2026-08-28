@@ -1,4 +1,3 @@
-import 'zone.js';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import { moduleMetadata, Preview } from '@storybook/angular-vite';
 import { NgxFudisModule } from '../projects/ngx-fudis/src/lib/ngx-fudis.module';
