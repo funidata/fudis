@@ -1,4 +1,4 @@
-import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, applicationConfig, StoryFn, moduleMetadata } from '@storybook/angular-vite';
 import { action } from 'storybook/actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';

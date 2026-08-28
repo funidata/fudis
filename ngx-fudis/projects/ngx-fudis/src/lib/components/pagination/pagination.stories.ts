@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular-vite';
 import { PaginationComponent } from './pagination.component';
 import docs from './pagination.mdx';
 import { paginationControlsExclude } from '../../utilities/storybook';

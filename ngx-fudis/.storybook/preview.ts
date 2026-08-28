@@ -1,5 +1,5 @@
 import { setCompodocJson } from '@storybook/addon-docs/angular';
-import { moduleMetadata, Preview } from '@storybook/angular';
+import { moduleMetadata, Preview } from '@storybook/angular-vite';
 import { NgxFudisModule } from '../projects/ngx-fudis/src/lib/ngx-fudis.module';
 import { excludeRegex } from '../projects/ngx-fudis/src/lib/utilities/storybook';
 import { TranslocoRootModule } from './transloco.module';

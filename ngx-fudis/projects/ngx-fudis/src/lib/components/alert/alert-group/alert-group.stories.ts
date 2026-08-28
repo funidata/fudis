@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AlertGroupComponent } from './alert-group.component';
