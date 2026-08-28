@@ -105,7 +105,6 @@ jobs:
         run: npm run build-storybook
       - name: Copy docs to S3 bucket
         run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/$VERSION
-
       - name: Check for Storybook redirect
         id: check-storybook-redirect
         if: needs.publish.outputs.set-as-latest == 'true'
@@ -129,24 +128,33 @@ jobs:
       - publish-docs
     steps:
       - uses: actions/checkout@v6
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
       - name: Generate and upload versions.json
         run: |
           set -e
+
+          EXCLUDED_VERSIONS='[
+            "8.0.0",
+            "8.3.0",
+            "8.3.1",
+            "8.3.2",
+            "10.1.0"
+          ]'
 
           VERSIONS=$(aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/ \
             | grep 'PRE' \
             | awk '{print $2}' \
             | sed 's|/||g' \
             | sort -V \
-            | jq -R -s -c 'split("\n") | map(select(length > 0))')
+            | jq --argjson excluded "$EXCLUDED_VERSIONS" -R -s -c \
+              'split("\n")
+              | map(select(length > 0))
+              | map(select(. as $version | ($excluded | index($version) | not)))')
 
           LATEST=$(echo "$VERSIONS" | jq -r '[.[] | select(test("rc") | not)] | .[-1]')
 
@@ -155,9 +163,9 @@ jobs:
           echo "VERSIONS=$VERSIONS"
           echo "LATEST=$LATEST"
 
-           aws   s3 cp /tmp/versions.json \
-              s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
-              --cache-control max-age=60
+          aws s3 cp /tmp/versions.json \
+            s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ngx/v/versions.json \
+            --cache-control max-age=60
 
       - name: Verify uploaded versions.json
         run: |
