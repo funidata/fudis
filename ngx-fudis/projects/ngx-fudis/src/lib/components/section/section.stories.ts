@@ -1,4 +1,4 @@
-import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig } from '@storybook/angular-vite';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionComponent } from './section.component';

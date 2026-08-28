@@ -11,7 +11,11 @@ export const addons = [
   import.meta.resolve("./local-preset.ts"),
 ];
 export const framework = {
-  name: "@storybook/angular",
+  name: "@storybook/angular-vite",
+  options: {
+    compodoc: true,
+    compodocArgs: ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "."],
+  },
 };
 
 export const staticDirs = [
@@ -33,9 +37,13 @@ export const core = {
   allowedHosts: ["fudis-storybook", "localhost"],
 };
 
-export async function webpackFinal(config) {
-  config.plugins = config.plugins.filter((p) => p.constructor.name !== "ProgressPlugin");
-  return config;
+export async function viteFinal(config) {
+  const { mergeConfig } = await import("vite");
+  return mergeConfig(config, {
+    resolve: {
+      extensions: [".mjs", ".js", ".ts", ".tsx", ".jsx", ".json"],
+    },
+  });
 }
 
 export function managerHead(head) {

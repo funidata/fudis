@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { GridItemComponent } from './grid-item.component';
 import docs from './grid-item.mdx';
 

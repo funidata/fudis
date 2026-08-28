@@ -1,4 +1,4 @@
-import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular-vite';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, EventEmitter, Input, Output, importProvidersFrom } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
