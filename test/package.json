@@ -11,6 +11,6 @@
   "license": "MIT",
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "@types/node": "^25.0.3"
+    "@types/node": "^25.9.5"
   }
 }
