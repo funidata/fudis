@@ -8,6 +8,53 @@ Language: Finnish (fi)
 
 ---
 
+## Table of Contents
+
+- [Button (fudis-button)](#button-fudis-button)
+- [Notification (fudis-notification)](#notification-fudis-notification)
+- [Alert (fudis-alert)](#alert-fudis-alert)
+- [Dialog (fudis-dialog)](#dialog-fudis-dialog)
+- [Wizard](#wizard)
+- [Tabs (fudis-tab-navigation)](#tabs-fudis-tab-navigation)
+- [Section (fudis-section)](#section-fudis-section)
+- [Expandable (fudis-expandable)](#expandable-fudis-expandable)
+- [Description List (fudis-dl)](#description-list-fudis-dl)
+- [Text Input (fudis-text-input)](#text-input-fudis-text-input)
+- [Text Area (fudis-text-area)](#text-area-fudis-text-area)
+- [Localized Text Group (fudis-localized-text-group)](#localized-text-group-fudis-localized-text-group)
+- [Checkbox (fudis-checkbox)](#checkbox-fudis-checkbox)
+- [Checkbox Group (fudis-checkbox-group)](#checkbox-group-fudis-checkbox-group)
+- [Datepicker (fudis-date-picker)](#datepicker-fudis-date-picker)
+- [Date Range (fudis-date-range)](#date-range-fudis-date-range)
+- [Calendar Popup (fudis-calendar-popup)](#calendar-popup-fudis-calendar-popup)
+- [Radio Button (fudis-radio-button)](#radio-button-fudis-radio-button)
+- [Select (fudis-select)](#select-fudis-select)
+- [Multiselect (fudis-multiselect)](#multiselect-fudis-multiselect)
+- [Fieldset (fudis-fieldset)](#fieldset-fudis-fieldset)
+- [Form (fudis-form)](#form-fudis-form)
+- [Link (fudisLink)](#link-fudislink)
+- [Horizontal Rule (fudis-hr)](#horizontal-rule-fudis-hr)
+- [Popover (fudisPopover)](#popover-fudispopover)
+- [Breadcrumbs (fudis-breadcrumb)](#breadcrumbs-fudis-breadcrumb)
+- [UI Patterns](#ui-patterns)
+- [Loading Spinner (fudis-loading-spinner)](#loading-spinner-fudis-loading-spinner)
+- [Pagination (fudis-pagination)](#pagination-fudis-pagination)
+- [Footer (fudis-footer)](#footer-fudis-footer)
+- [Inputs (general)](#inputs-general-fudis-inputs-general)
+- [Error Message](#error-message)
+- [Error Summary (fudis-error-summary)](#error-summary-fudis-error-summary)
+- [Badge (fudis-badge)](#badge-fudis-badge)
+- [Icon (fudis-icon)](#icon-fudis-icon)
+- [Icon Button (fudis-icon-button)](#icon-button-fudis-icon-button)
+- [Table (fudis-table)](#table-fudis-table)
+
+---
+
+
+
+
+
+
 ## Button (fudis-button)
 
 Figma: https://www.figma.com/file/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?type=design&node-id=19%3A28
