@@ -28,7 +28,7 @@ type MyForm = {
   selector: 'example-form-content',
   template: `
     <fudis-section
-      [title]="'Main section'"
+      [title]="'Course implementation'"
       [level]="2"
       [titleVariant]="'lg'"
       [errorSummaryBreadcrumb]="true"
@@ -36,12 +36,12 @@ type MyForm = {
       <fudis-section-content>
         <fudis-notification
           ><fudis-body-text
-            >This is notification for the section</fudis-body-text
+            >Complete the required course information before submitting.</fudis-body-text
           ></fudis-notification
         >
         <fudis-expandable
           (closedChange)="handleClosedOutput($event)"
-          [title]="'Expandable section 1'"
+          [title]="'Basic course information'"
           [level]="3"
           [closed]="_closed"
           [class]="'fudis-mb-sm'"
@@ -58,31 +58,28 @@ type MyForm = {
               </fudis-radio-button-group>
               <fudis-checkbox-group
                 [formGroup]="formGroup.controls.courseBooks"
-                [label]="'Course books'"
-                [helpText]="'Select 1-2 coursebooks'"
+                [label]="'Teaching methods'"
+                [helpText]="'Select one to two teaching methods.'"
               >
+                <fudis-checkbox-group-option [controlName]="'first'" [label]="'Lectures'" />
+                <fudis-checkbox-group-option [controlName]="'second'" [label]="'Seminars'" />
                 <fudis-checkbox-group-option
-                  [controlName]="'first'"
-                  [label]="'Heir to the Empire'"
+                  [controlName]="'third'"
+                  [label]="'Independent study'"
                 />
-                <fudis-checkbox-group-option
-                  [controlName]="'second'"
-                  [label]="'Dark Force Rising'"
-                />
-                <fudis-checkbox-group-option [controlName]="'third'" [label]="'The Last Command'" />
               </fudis-checkbox-group>
               <fudis-datepicker
-                [label]="'Important date'"
-                [helpText]="'You have to start from somewhere'"
+                [label]="'Course start date'"
+                [helpText]="'Select the first teaching date.'"
                 [control]="formGroup.controls['importantDate']"
               >
                 @if (formGroup.controls['importantDate'].value?.getTime() !== releaseDate) {
-                  <fudis-error-message [message]="'Wrong date chosen. 1.5.1991 would be great!'" />
+                  <fudis-error-message [message]="'Select the published course start date.'" />
                 }
               </fudis-datepicker>
               <fudis-fieldset
-                [label]="'Tearcher info'"
-                [popoverText]="'Quite many fields are required.'"
+                [label]="'Teaching staff contact details'"
+                [popoverText]="'Provide contact details for the responsible teacher.'"
                 [popoverTriggerLabel]="'Additional information'"
               >
                 <fudis-fieldset-content>
@@ -92,14 +89,14 @@ type MyForm = {
                       [id]="'unique-input-3'"
                       [control]="formGroup.controls['teacher']"
                       [label]="'Responsible teacher'"
-                      [helpText]="'Someone has to be responsible for this.'"
+                      [helpText]="'Enter the name of the responsible teacher.'"
                     >
                     </fudis-text-input>
                     <fudis-text-input
                       [id]="'unique-input-4'"
                       [control]="formGroup.controls['email']"
                       [label]="'Contact email'"
-                      [helpText]="'So that students can ask for more time on their homework.'"
+                      [helpText]="'Use the institutional email address.'"
                     />
                   </fudis-grid>
                 </fudis-fieldset-content>
@@ -107,9 +104,9 @@ type MyForm = {
             </fudis-grid>
           </ng-template>
         </fudis-expandable>
-        <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [level]="3">
+        <fudis-expandable [closed]="_closed" [title]="'Schedule and descriptions'" [level]="3">
           <ng-template fudisExpandableContent>
-            <fudis-fieldset [label]="'More important fields'">
+            <fudis-fieldset [label]="'Teaching period and course description'">
               <fudis-fieldset-content>
                 <fudis-date-range>
                   <fudis-datepicker
@@ -125,8 +122,8 @@ type MyForm = {
                 </fudis-date-range>
                 <fudis-localized-text-group
                   [formGroup]="formGroup.controls.description"
-                  [label]="'Description'"
-                  [helpText]="'Description in all languages is required'"
+                  [label]="'Course description'"
+                  [helpText]="'Provide the course description in all languages.'"
                 />
               </fudis-fieldset-content>
             </fudis-fieldset>

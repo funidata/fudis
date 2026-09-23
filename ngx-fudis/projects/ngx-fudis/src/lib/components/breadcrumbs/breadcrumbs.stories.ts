@@ -15,10 +15,10 @@ export default {
 const html = String.raw;
 
 const links = [
-  { label: 'My Legos', url: '/my-legos' },
-  { label: 'Genre', url: '/my-legos/genre' },
-  { label: 'Star Wars\u{2122}', url: '/my-legos/genre/star-wars' },
-  { label: 'UCS Imperial Star Destroyer\u{2122}', url: '/my-legos/genre/star-wars/set-75252' },
+  { label: 'Student services', url: '/student-services' },
+  { label: 'Admissions', url: '/student-services/admissions' },
+  { label: 'Undergraduate admissions', url: '/student-services/admissions/undergraduate' },
+  { label: 'Application status', url: '/student-services/admissions/undergraduate/status' },
 ];
 
 const Template: StoryFn = (args) => ({
@@ -43,5 +43,5 @@ const Template: StoryFn = (args) => ({
 
 export const Example = Template.bind({});
 Example.args = {
-  label: 'My Lego Collection',
+  label: 'Admissions navigation',
 };

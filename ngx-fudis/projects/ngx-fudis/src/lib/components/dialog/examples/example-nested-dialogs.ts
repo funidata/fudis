@@ -8,12 +8,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 
 type TestNestedDialogForm = {
-  favoriteVeggie: FormControl<string | null>;
+  preference: FormControl<string | null>;
 };
 
-type Veggie = 'fruit' | 'berry' | 'vegetable';
+type StudyPreference = 'studyFormat' | 'teachingLanguage' | 'campus';
 
-type Veggies = { [veg in Veggie]?: string | null | undefined };
+type StudyPreferences = { [preference in StudyPreference]?: string | null | undefined };
 
 @Component({
   selector: 'example-nested-dialog',
@@ -29,12 +29,12 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
             [errorSummaryTitle]="'You need to fill up the information.'"
           >
             <fudis-form-content>
-              <ng-container *ngTemplateOutlet="favoriteVeggies" />
+              <ng-container *ngTemplateOutlet="studyPreferences" />
               <fudis-text-input
                 class="fudis-mb-md"
                 [id]="'example-input-' + id"
-                [label]="'What is your favorite ' + id"
-                [control]="exampleDialogFormGroup.controls['favoriteVeggie']"
+                [label]="'Preferred ' + id"
+                [control]="exampleDialogFormGroup.controls['preference']"
               />
             </fudis-form-content>
             <fudis-form-actions>
@@ -58,7 +58,7 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
       @if (!id) {
         <fudis-heading fudisDialogTitle [level]="2" [variant]="'xl'">{{ title }}</fudis-heading>
         <fudis-dialog-content>
-          <ng-container *ngTemplateOutlet="favoriteVeggies" />
+          <ng-container *ngTemplateOutlet="studyPreferences" />
         </fudis-dialog-content>
         <fudis-dialog-actions>
           <fudis-button fudisDialogClose [label]="'Close this dialog'" [variant]="'secondary'" />
@@ -67,15 +67,15 @@ type Veggies = { [veg in Veggie]?: string | null | undefined };
       }
     </fudis-dialog>
 
-    <ng-template #favoriteVeggies>
-      @if ((_favoriteVeggies | keyvalue)?.length === 0) {
+    <ng-template #studyPreferences>
+      @if ((_studyPreferences | keyvalue)?.length === 0) {
         <fudis-body-text class="fudis-mb-sm">
-          You don't have any favorite veggies!
+          No study preferences have been provided.
         </fudis-body-text>
       }
-      @for (veggie of _favoriteVeggies | keyvalue; track veggie.key) {
+      @for (preference of _studyPreferences | keyvalue; track preference.key) {
         <fudis-body-text class="fudis-mb-sm">
-          Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
+          Your preferred {{ preference.key }} is <b>{{ preference.value }}</b
           >.
         </fudis-body-text>
       }
@@ -87,30 +87,30 @@ export class ExampleNestedDialogComponent {
     private _dialogService: FudisDialogService,
     @Optional()
     @Inject(MAT_DIALOG_DATA)
-    private data?: { favoriteVeggies?: Veggies },
+    private data?: { studyPreferences?: StudyPreferences },
   ) {
-    this._favoriteVeggies = this.data?.favoriteVeggies || {};
+    this._studyPreferences = this.data?.studyPreferences || {};
   }
 
   @Input() size: FudisDialogSize = 'md';
-  @Input() id: Veggie;
+  @Input() id: StudyPreference;
   @Input() title: string;
   @Input() nextDialogToOpen:
     ComponentType<ExampleNestedDialogComponent> | TemplateRef<ExampleNestedDialogComponent>;
 
-  protected _favoriteVeggies: Veggies = {};
+  protected _studyPreferences: StudyPreferences = {};
   exampleDialogFormGroup = new FormGroup<TestNestedDialogForm>({
-    favoriteVeggie: new FormControl(null),
+    preference: new FormControl(null),
   });
 
-  updateFavoriteVeggies(): Veggies {
-    const value = this.exampleDialogFormGroup?.controls?.favoriteVeggie?.value;
+  updateStudyPreferences(): StudyPreferences {
+    const value = this.exampleDialogFormGroup?.controls?.preference?.value;
 
     if (value) {
-      this._favoriteVeggies[this.id] = value;
+      this._studyPreferences[this.id] = value;
     }
 
-    return this._favoriteVeggies;
+    return this._studyPreferences;
   }
 
   openDialogTemplate(
@@ -119,13 +119,13 @@ export class ExampleNestedDialogComponent {
   ) {
     this._dialogService.open(dialogToOpen, {
       data: {
-        favoriteVeggies: this.updateFavoriteVeggies(),
+        studyPreferences: this.updateStudyPreferences(),
       },
     });
   }
 
   closeDialog() {
-    this._dialogService.close(this.updateFavoriteVeggies());
+    this._dialogService.close(this.updateStudyPreferences());
   }
 
   closeAll(): void {
@@ -145,10 +145,10 @@ export class ExampleNestedDialogComponent {
       [label]="'Open dialog with nested dialogs'"
     />
 
-    @if (_favourites) {
-      @for (veggie of _favourites | keyvalue; track veggie.key) {
+    @if (_preferences) {
+      @for (preference of _preferences | keyvalue; track preference.key) {
         <fudis-body-text class="fudis-mt-sm">
-          Your favorite {{ veggie.key }} is <b>{{ veggie.value }}</b
+          Your preferred {{ preference.key }} is <b>{{ preference.value }}</b
           >.
         </fudis-body-text>
       }
@@ -156,8 +156,8 @@ export class ExampleNestedDialogComponent {
 
     <ng-template #firstDialog>
       <example-nested-dialog
-        [id]="'fruit'"
-        [title]="'First opened Dialog'"
+        [id]="'studyFormat'"
+        [title]="'Select study format'"
         [size]="size"
         [nextDialogToOpen]="secondDialog"
       />
@@ -165,8 +165,8 @@ export class ExampleNestedDialogComponent {
 
     <ng-template #secondDialog>
       <example-nested-dialog
-        [id]="'berry'"
-        [title]="'Second opened Dialog'"
+        [id]="'teachingLanguage'"
+        [title]="'Select teaching language'"
         [size]="size"
         [nextDialogToOpen]="thirdDialog"
       />
@@ -174,15 +174,15 @@ export class ExampleNestedDialogComponent {
 
     <ng-template #thirdDialog>
       <example-nested-dialog
-        [id]="'vegetable'"
-        [title]="'Third opened Dialog'"
+        [id]="'campus'"
+        [title]="'Select campus'"
         [size]="size"
         [nextDialogToOpen]="fourthDialog"
       />
     </ng-template>
 
     <ng-template #fourthDialog>
-      <example-nested-dialog [title]="'Fourth and last opened Dialog'" [size]="size" />
+      <example-nested-dialog [title]="'Study preferences summary'" [size]="size" />
     </ng-template>
   `,
 })
@@ -191,7 +191,7 @@ export class ExampleNestedDialogsComponent {
 
   @Input() size: FudisDialogSize = 'md';
 
-  protected _favourites: Veggies | null;
+  protected _preferences: StudyPreferences | null;
 
   openDialogTemplate(
     dialogToOpen:
@@ -200,9 +200,9 @@ export class ExampleNestedDialogsComponent {
     this._dialogService
       .open(dialogToOpen)
       .afterClosed()
-      .subscribe((result: Veggies) => {
+      .subscribe((result: StudyPreferences) => {
         if (result) {
-          this._favourites = result;
+          this._preferences = result;
         }
       });
   }

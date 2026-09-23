@@ -19,13 +19,12 @@ import { StorybookExampleBackendSimulationBaseDirective } from './backend-simula
     <fudis-body-text
       >Number of options from 'database' checked: {{ databaseCounter }}</fudis-body-text
     >
-    <fudis-body-text>Filtering status: {{ filterStatus }}</fudis-body-text>
     <fudis-body-text
       >Number of options loaded to DOM: {{ (searchResults | async)?.length }}</fudis-body-text
     >
     <fudis-body-text
-      >Currently selected movie:
-      {{ control.value ? control.value.label : 'No movie selected' }}</fudis-body-text
+      >Currently selected course:
+      {{ control.value ? control.value.label : 'No course selected' }}</fudis-body-text
     >
     <fudis-select
       class="fudis-mt-md"
@@ -54,6 +53,6 @@ export class StorybookExampleSelectBackendSimulationComponent extends StorybookE
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<string> | null>();
 
   override control: FormControl = new FormControl<FudisSelectOption<string> | null>(null, [
-    FudisValidators.required('You must choose a movie!'),
+    FudisValidators.required('Select a course.'),
   ]);
 }

@@ -27,7 +27,7 @@ const html = String.raw;
 const Template: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant"
-    ><fudis-body-text>This is notification.</fudis-body-text></fudis-notification
+    ><fudis-body-text>Your application has been submitted.</fudis-body-text></fudis-notification
   >`,
 });
 
@@ -36,23 +36,23 @@ const ButtonAndLinkTemplate: StoryFn = (args) => ({
   template: html` <fudis-grid [align]="'start'">
     <fudis-notification [variant]="variant">
       <fudis-body-text
-        >This is Notification with Link.
+        >View your application details.
         <a
           fudisLink
           href="https://www.example.com"
           [external]="true"
-          [title]="'This is example link.'"
+          [title]="'Open application details.'"
         ></a>
       </fudis-body-text>
     </fudis-notification>
     <fudis-notification [variant]="variant" [ariaDescribedby]="'description-id'">
       <fudis-body-text
-        >This is Notification with Button.
-        <fudis-button [label]="'This is example button.'" />
+        >Review your course registration.
+        <fudis-button [label]="'Open registration'" />
       </fudis-body-text>
     </fudis-notification>
     <p id="description-id" aria-hidden="true" class="fudis-visually-hidden"
-      >This is additional description for screen readers, if necessary</p
+      >Additional information about the course registration</p
     >
   </fudis-grid>`,
 });
@@ -60,11 +60,11 @@ const ButtonAndLinkTemplate: StoryFn = (args) => ({
 const MultiChildTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant">
-    <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
+    <fudis-body-text>Please review the required fields before submitting.</fudis-body-text>
     <fudis-body-text
-      >If you must do it anyway, please see the documentation for more info.</fudis-body-text
+      >Contact student services if you need help with your application.</fudis-body-text
     >
-    <fudis-body-text>Also remember to breathe. Everything is going to be okay!</fudis-body-text>
+    <fudis-body-text>Changes are saved automatically.</fudis-body-text>
   </fudis-notification>`,
 });
 
@@ -90,16 +90,16 @@ export const AllVariants: StoryFn = (args) => ({
   template: html`
     <fudis-grid [align]="'start'" [width]="'md'">
       <fudis-notification [variant]="'warning'">
-        <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
+        <fudis-body-text>Please review the required fields before submitting.</fudis-body-text>
       </fudis-notification>
       <fudis-notification [variant]="'danger'">
-        <fudis-body-text>Whoops! Some error happened.</fudis-body-text>
+        <fudis-body-text>Your course registration could not be submitted.</fudis-body-text>
       </fudis-notification>
       <fudis-notification [variant]="'success'">
-        <fudis-body-text>You succeeded!</fudis-body-text>
+        <fudis-body-text>Your study plan has been updated.</fudis-body-text>
       </fudis-notification>
       <fudis-notification [variant]="'info'">
-        <fudis-body-text>This is a totally neutral message</fudis-body-text>
+        <fudis-body-text>Course registration opens on 1 August.</fudis-body-text>
       </fudis-notification>
     </fudis-grid>
   `,

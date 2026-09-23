@@ -65,14 +65,13 @@ export default {
 const html = String.raw;
 
 const commonProps: Args = {
-  label: 'Select a pet',
+  label: 'Select study interests',
   size: 'lg',
-  placeholder: 'Choose a pet',
-  helpText:
-    'All pets are equally important, but for sake of this Dropdown please pick at least two',
+  placeholder: 'Choose subject areas',
+  helpText: 'Select at least two areas of interest.',
   showSelectionChips: true,
   selectionClearButton: true,
-  autocompleteHelpText: 'Hello from Dropdown Help Text!',
+  autocompleteHelpText: 'Start typing to filter subject areas.',
   variant: 'dropdown',
   initialFocus: false,
   popoverText: '',
@@ -87,7 +86,7 @@ const ExampleTemplate: StoryFn = (args) => ({
     selectionUpdate: action('selectionUpdate'),
     control: new FormControl<string | object[] | null>(
       null,
-      FudisValidators.minLength(2, 'Pick at least two pets'),
+      FudisValidators.minLength(2, 'Select at least two subject areas.'),
     ),
     groupedMockData,
   },

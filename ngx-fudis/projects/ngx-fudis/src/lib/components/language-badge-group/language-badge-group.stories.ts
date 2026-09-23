@@ -22,7 +22,7 @@ import { GridComponent } from '../grid/grid/grid.component';
   ],
   template: `
     <fudis-heading [level]="3" [variant]="'sm'" style="display: inline-block;"
-      >Harry Potter and the Philosopher's Stone
+      >Bachelor of Computer Science
     </fudis-heading>
 
     <fudis-language-badge-group
@@ -60,9 +60,9 @@ class LanguageChangeComponent {
   }
 
   protected readonly translations = {
-    fi: 'Harry Potter on mielestään ihan tavallinen poika. Tosin hän asuu huoltajiensa luona portaiden alla olevassa kaapissa. Harryn elämä muuttuu täysin, kun hän saa 11-vuotispäivänään merkillisen kirjeen. Se on kutsu Tylypahkan velhojen ja noitien kouluun. Harrylle avautuu kokonaan uusi maailma, johon kuuluvat velhot, noidat, yksisarviset ja lohikäärmeet. Harry saa tietää olevansa velhojen sukua!',
+    fi: 'Tietojenkäsittelytieteen kandidaattiohjelma antaa opiskelijalle valmiudet ohjelmointiin, tietojärjestelmien suunnitteluun ja tieteelliseen työskentelyyn. Opiskelija laatii henkilökohtaisen opintosuunnitelman ja ilmoittautuu kursseille opinto-oikeutensa mukaisesti.',
     sv: '',
-    en: "Harry Potter considers himself just a normal boy. Although he lives with his guardians in the closet under the stairs. Harry's life changes completely when he receives a strange letter on his 11th birthday. It's an invitation to Hogwarts School of Witchcraft and Wizardry. A whole new world opens up for Harry, which includes wizards, witches, Unicorns and dragons. Harry learns that he is of wizarding blood!",
+    en: 'The Bachelor of Computer Science programme gives students a foundation in programming, information systems design, and academic work. Students prepare a personal study plan and register for courses according to their study right.',
   };
   translated: FudisLanguageAbbr[];
   selected: FudisLanguageAbbr | null;

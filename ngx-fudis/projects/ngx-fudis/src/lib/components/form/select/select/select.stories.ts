@@ -52,10 +52,10 @@ export default {
 const html = String.raw;
 
 const commonArgs: Args = {
-  label: 'Select a pet',
+  label: 'Select a course',
   size: 'lg',
-  placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick one.',
+  placeholder: 'Choose a course',
+  helpText: 'Select a course from the catalogue.',
   selectionClearButton: true,
   variant: 'dropdown',
   initialFocus: false,

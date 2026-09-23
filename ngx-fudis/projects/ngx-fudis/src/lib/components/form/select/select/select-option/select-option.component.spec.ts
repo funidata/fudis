@@ -4,7 +4,7 @@ import { SelectComponent } from '../select.component';
 import {
   defaultOptions,
   defaultOptionsSecondaryLang,
-  TestAnimalValue,
+  TestCourseValue,
 } from '../../common/mock_data';
 import { FormControl } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
@@ -36,8 +36,8 @@ import { FudisDialogService } from '../../../../../services/dialog/dialog.servic
 class MockContainerComponent {
   @ViewChild('testSelect') testSelect: SelectComponent;
 
-  testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
-  control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
+  testOptions: FudisSelectOption<TestCourseValue>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<TestCourseValue> | null> = new FormControl(null);
   variant = 'dropdown';
 }
 
@@ -63,7 +63,7 @@ describe('SelectOptionComponent', () => {
   }
 
   function initializeFormControlWithValue() {
-    component.control = new FormControl<FudisSelectOption<TestAnimalValue> | null>(
+    component.control = new FormControl<FudisSelectOption<TestCourseValue> | null>(
       defaultOptions[5],
     );
     component = fixture.componentInstance;
@@ -84,7 +84,7 @@ describe('SelectOptionComponent', () => {
       options[2].nativeElement.click();
       fixture.detectChanges();
 
-      expect(component.testSelect.control.value?.label).toBe('Platypus');
+      expect(component.testSelect.control.value?.label).toBe('Data Analysis');
     });
 
     it('should not have selected default value if form control has no value on init', () => {
@@ -113,7 +113,7 @@ describe('SelectOptionComponent', () => {
         By.css('.fudis-select-option--selected'),
       ).nativeElement;
 
-      expect(selectedValue.textContent).toEqual('Capybara');
+      expect(selectedValue.textContent).toEqual('Academic Writing');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -130,7 +130,7 @@ describe('SelectOptionComponent', () => {
         By.css('.fudis-select-option--selected'),
       ).nativeElement;
 
-      expect(selectedValue.textContent).toEqual('Screaming hairy armadillo (partly endangered)');
+      expect(selectedValue.textContent).toEqual('Project Management');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -141,13 +141,13 @@ describe('SelectOptionComponent', () => {
 
       const selectElement = getElement(fixture, '.fudis-select');
       let value = selectElement.querySelector('.fudis-select input')?.getAttribute('value');
-      expect(value).toEqual('Screaming hairy armadillo (partly endangered)');
+      expect(value).toEqual('Project Management');
 
       component.testOptions = defaultOptionsSecondaryLang;
       fixture.detectChanges();
 
       value = selectElement.querySelector('.fudis-select input')?.getAttribute('value');
-      expect(value).toContain('Kirkuva karvainen armadillo (osittain uhanalainen)');
+      expect(value).toContain('Projektinhallinta');
     });
   });
 
@@ -171,7 +171,7 @@ describe('SelectOptionComponent', () => {
 
       const textContent = options[3].nativeElement.textContent;
 
-      expect(textContent).toEqual('Really dangerous cat (Disabled)');
+      expect(textContent).toEqual('Advanced Research Methods (Disabled)');
     });
 
     it('should trigger emit when clicking', () => {
@@ -181,8 +181,9 @@ describe('SelectOptionComponent', () => {
 
       fixture.detectChanges();
 
-      const disabledOption = getElement(fixture, '#fudis-select-1-option-13slwtn');
-      const enabledOption = getElement(fixture, '#fudis-select-1-option-100zewl');
+      const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+      const disabledOption = options[3].nativeElement;
+      const enabledOption = options[5].nativeElement;
 
       disabledOption.click();
 
@@ -190,11 +191,7 @@ describe('SelectOptionComponent', () => {
 
       enabledOption.click();
 
-      expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-        label: 'Screaming hairy armadillo (partly endangered)',
-        sound: "Rollin' rollin' rollin'!",
-        value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
-      });
+      expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith(defaultOptions[5]);
     });
   });
 
@@ -207,17 +204,13 @@ describe('SelectOptionComponent', () => {
 
     fixture.detectChanges();
 
-    component.testSelect.setAutocompleteFilterText('Platypus');
+    component.testSelect.setAutocompleteFilterText('Data Analysis');
 
     fixture.detectChanges();
 
-    expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith({
-      label: 'Platypus',
-      sound: 'Plat plat!',
-      value: 'value-3-platypys',
-    });
+    expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith(defaultOptions[2]);
 
-    component.testSelect.setAutocompleteFilterText('Platy');
+    component.testSelect.setAutocompleteFilterText('Data');
 
     fixture.detectChanges();
     expect(component.testSelect.selectionUpdate.emit).toHaveBeenCalledWith(null);

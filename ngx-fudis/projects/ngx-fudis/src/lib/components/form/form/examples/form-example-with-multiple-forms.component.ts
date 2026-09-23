@@ -9,7 +9,7 @@ import {
 } from '../../../../types/forms';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
-import { defaultOptions, TestAnimalSound } from '../../select/common/mock_data';
+import { defaultOptions, TestCourseAvailability } from '../../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
 
 interface MyCheckboxGroup {
@@ -22,11 +22,10 @@ interface MyCheckboxGroup {
   template: `
     <fudis-grid [align]="'center'" [columns]="{ sm: 2 }" [width]="'lg'" [classes]="'fudis-mt-xl'">
       <div fudisGridItem [columns]="'stretch'">
-        <fudis-heading [level]="1">Multiple Form Components</fudis-heading>
+        <fudis-heading [level]="1">Course information forms</fudis-heading>
         <fudis-body-text
-          >This page is for testing purposes to demo and test, that form components, their
-          validation errors and forms' Error Summaries load correctly whether the Expandable was
-          opened or not before clicking Submit.</fudis-body-text
+          >Complete the course information sections and submit them together to review validation
+          messages in each section.</fudis-body-text
         >
       </div>
 
@@ -34,13 +33,13 @@ interface MyCheckboxGroup {
         fudisGridItem
         [columns]="'stretch'"
         (handleClick)="submitAllForms()"
-        [label]="'Submit all forms!'"
+        [label]="'Submit all sections'"
       />
 
       <fudis-form
         [level]="2"
         [titleVariant]="'lg'"
-        [title]="'Form 1 with Text Input'"
+        [title]="'Course title'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
@@ -48,19 +47,19 @@ interface MyCheckboxGroup {
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formOne.valid"
-            [label]="'Submit Form 1'"
+            [label]="'Submit course title'"
           />
         </fudis-form-actions>
         <fudis-form-content>
           <fudis-expandable
-            [title]="'Expandable with Text Input'"
+            [title]="'Course title details'"
             [errorSummaryBreadcrumb]="true"
             [level]="3"
             [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-text-input
-                [label]="'Name'"
+                [label]="'Course title'"
                 [control]="allForms.controls.formOne.controls.name"
               />
             </ng-template>
@@ -70,7 +69,7 @@ interface MyCheckboxGroup {
       <fudis-form
         [level]="2"
         [titleVariant]="'lg'"
-        [title]="'Form 2 with Text Area'"
+        [title]="'Course description'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
@@ -78,19 +77,19 @@ interface MyCheckboxGroup {
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formTwo.valid"
-            [label]="'Submit Form 2'"
+            [label]="'Submit course description'"
           />
         </fudis-form-actions>
         <fudis-form-content>
           <fudis-expandable
-            [title]="'Expandable with Text Area'"
+            [title]="'Course description details'"
             [errorSummaryBreadcrumb]="true"
             [level]="3"
             [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-text-area
-                [label]="'Description'"
+                [label]="'Course description'"
                 [control]="allForms.controls.formTwo.controls.description"
               />
             </ng-template>
@@ -100,7 +99,7 @@ interface MyCheckboxGroup {
       <fudis-form
         [level]="2"
         [titleVariant]="'lg'"
-        [title]="'Form 3 with Checkbox Group'"
+        [title]="'Teaching methods'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
@@ -108,19 +107,19 @@ interface MyCheckboxGroup {
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formThree.valid"
-            [label]="'Submit Form 3'"
+            [label]="'Submit teaching methods'"
           />
         </fudis-form-actions>
         <fudis-form-content>
           <fudis-expandable
-            [title]="'Expandable with Checkbox Group'"
+            [title]="'Select teaching methods'"
             [level]="3"
             [errorSummaryBreadcrumb]="true"
             [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-checkbox-group
-                [label]="'Pick a fruit'"
+                [label]="'Select teaching methods'"
                 [formGroup]="allForms.controls.formThree"
               >
                 @for (
@@ -137,7 +136,7 @@ interface MyCheckboxGroup {
       <fudis-form
         [level]="2"
         [titleVariant]="'lg'"
-        [title]="'Form 4 with Radio Button Group'"
+        [title]="'Study format'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
@@ -145,19 +144,19 @@ interface MyCheckboxGroup {
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formFive.valid"
-            [label]="'Submit Form 4'"
+            [label]="'Submit study format'"
           />
         </fudis-form-actions>
         <fudis-form-content>
           <fudis-expandable
-            [title]="'Expandable with Radio Button Group'"
+            [title]="'Select study format'"
             [level]="3"
             [errorSummaryBreadcrumb]="true"
             [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
               <fudis-radio-button-group
-                [label]="'Pick a fruit'"
+                [label]="'Select study format'"
                 [control]="allForms.controls.formFive"
               >
                 @for (option of radioOptions; track option.value) {
@@ -171,7 +170,7 @@ interface MyCheckboxGroup {
       <fudis-form
         [level]="2"
         [titleVariant]="'lg'"
-        [title]="'Form 5 with Select and Multiselect'"
+        [title]="'Course selection'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
@@ -179,21 +178,21 @@ interface MyCheckboxGroup {
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formFour.valid"
-            [label]="'Submit Form 5'"
+            [label]="'Submit course selection'"
           />
         </fudis-form-actions>
         <fudis-form-content>
           <fudis-expandable
-            [title]="'Expandable with Select and Multiselect'"
+            [title]="'Select courses and subject areas'"
             [level]="3"
             [errorSummaryBreadcrumb]="true"
             [class]="'fudis-mb-sm'"
           >
             <ng-template fudisExpandableContent>
-              <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
+              <fudis-fieldset [label]="'Course selection'" [errorSummaryBreadcrumb]="true">
                 <fudis-fieldset-content>
                   <fudis-select
-                    [label]="'Pick a pet'"
+                    [label]="'Select a course'"
                     [control]="allForms.controls.formFour.controls.select"
                   >
                     <ng-template fudisSelectOptions>
@@ -203,7 +202,7 @@ interface MyCheckboxGroup {
                     </ng-template>
                   </fudis-select>
                   <fudis-multiselect
-                    [label]="'Pick multiple pets'"
+                    [label]="'Select subject areas'"
                     [control]="allForms.controls.formFour.controls.multiselect"
                   >
                     <ng-template fudisSelectOptions>
@@ -221,7 +220,7 @@ interface MyCheckboxGroup {
       <fudis-form
         [level]="2"
         [titleVariant]="'lg'"
-        [title]="'Form 6 with Localized Text Group'"
+        [title]="'Multilingual course information'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryTitle]="errorSummaryTitle"
       >
@@ -229,26 +228,26 @@ interface MyCheckboxGroup {
           <fudis-button
             fudisFormSubmit
             [formValid]="allForms.controls.formSix.valid"
-            [label]="'Submit Form 6'"
+            [label]="'Submit course information'"
           />
         </fudis-form-actions>
         <fudis-form-content>
           <fudis-expandable
-            [title]="'Expandable with Localized Text Group'"
+            [title]="'Provide multilingual course information'"
             [level]="3"
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisExpandableContent>
               <fudis-localized-text-group
-                [label]="'At least one required'"
+                [label]="'Course name in at least one language'"
                 [formGroup]="allForms.controls.formSix.controls.oneRequired"
               />
               <fudis-localized-text-group
-                [label]="'All required'"
+                [label]="'Course description in all languages'"
                 [variant]="'text-area'"
                 [formGroup]="allForms.controls.formSix.controls.allRequired"
               />
-              <fudis-button [label]="'Patch value'" (handleClick)="patchValue()"></fudis-button>
+              <fudis-button [label]="'Add Finnish course name'" (handleClick)="patchValue()" />
             </ng-template>
           </fudis-expandable>
         </fudis-form-content>
@@ -261,29 +260,27 @@ export class StorybookExampleWithMultipleFormsComponent {
 
   errorSummaryVisible = false;
 
-  errorSummaryTitle = 'There are incorrect form fields.';
+  errorSummaryTitle = 'Some course information is missing or incorrect.';
 
   selectOptions = defaultOptions;
 
   radioOptions: FudisRadioButtonOption<object>[] = [
     {
-      label: 'Pear',
-      value: 'item-1-pear',
+      label: 'On campus',
+      value: 'on-campus',
     },
     {
-      label: 'Orange',
-      value: 'item-2-orange',
+      label: 'Online',
+      value: 'online',
     },
     {
-      label: 'Peach',
-      value: 'item-3-peach',
+      label: 'Hybrid',
+      value: 'hybrid',
     },
   ];
 
   patchValue(): void {
-    this.allForms.controls.formSix.controls.oneRequired.controls['fi'].patchValue(
-      'Surprise value from outside',
-    );
+    this.allForms.controls.formSix.controls.oneRequired.controls['fi'].patchValue('Kurssin nimi');
   }
 
   submitAllForms(): void {
@@ -299,7 +296,7 @@ export class StorybookExampleWithMultipleFormsComponent {
     formOne: new FormGroup({
       name: new FormControl<string | null>(
         null,
-        FudisValidators.required('You must choose a name'),
+        FudisValidators.required('Course title is required.'),
       ),
     }),
     formTwo: new FormGroup({
@@ -310,25 +307,25 @@ export class StorybookExampleWithMultipleFormsComponent {
     }),
     formThree: new FormGroup<MyCheckboxGroup>(
       {
-        apple: new FormControl<boolean | null>(null),
-        fairTradeBanana: new FormControl<boolean | null>(null),
-        pear: new FormControl<boolean | null>(null),
-        pineapple: new FormControl<boolean | null>(null),
-        orange: new FormControl<boolean | null>(null),
+        lectures: new FormControl<boolean | null>(null),
+        seminars: new FormControl<boolean | null>(null),
+        workshops: new FormControl<boolean | null>(null),
+        independentStudy: new FormControl<boolean | null>(null),
+        projectWork: new FormControl<boolean | null>(null),
       },
-      [FudisGroupValidators.oneRequired(new BehaviorSubject('No fruit picked! :('))],
+      [FudisGroupValidators.oneRequired(new BehaviorSubject('Select a teaching method.'))],
     ),
     formFour: new FormGroup({
-      select: new FormControl<TestAnimalSound | null>(
+      select: new FormControl<TestCourseAvailability | null>(
         null,
-        FudisValidators.required('You must pick one'),
+        FudisValidators.required('Select a course.'),
       ),
-      multiselect: new FormControl<TestAnimalSound[] | null>(null, [
-        FudisValidators.required('Selection is missing'),
-        FudisValidators.minLength(2, 'Choose at least 2'),
+      multiselect: new FormControl<TestCourseAvailability[] | null>(null, [
+        FudisValidators.required('Select subject areas.'),
+        FudisValidators.minLength(2, 'Select at least two subject areas.'),
       ]),
     }),
-    formFive: new FormControl(null, FudisValidators.required('No fruit picked! :(')),
+    formFive: new FormControl(null, FudisValidators.required('Select a study format.')),
     formSix: new FormGroup({
       oneRequired: new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>(
         {
@@ -336,18 +333,18 @@ export class StorybookExampleWithMultipleFormsComponent {
           sv: new FormControl<string | null>(null),
           en: new FormControl<string | null>(null),
         },
-        [FudisGroupValidators.oneRequired('Provide name in atleast one language')],
+        [FudisGroupValidators.oneRequired('Provide a course name in at least one language.')],
       ),
       allRequired: new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>({
-        fi: new FormControl<string | null>('Lorem ipsum', [
-          FudisValidators.required('Missing Finnish description'),
-          FudisValidators.maxLength(10, 'Too long Finnish description'),
+        fi: new FormControl<string | null>('Kurssikuvaus', [
+          FudisValidators.required('Missing Finnish course description.'),
+          FudisValidators.maxLength(15, 'Finnish course description is too long.'),
         ]),
         sv: new FormControl<string | null>(null, [
-          FudisValidators.required('Missing Swedish description'),
+          FudisValidators.required('Missing Swedish course description.'),
         ]),
         en: new FormControl<string | null>(null, [
-          FudisValidators.required('Missing English description'),
+          FudisValidators.required('Missing English course description.'),
         ]),
       }),
     }),

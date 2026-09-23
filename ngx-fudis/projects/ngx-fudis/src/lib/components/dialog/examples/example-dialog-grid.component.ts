@@ -16,12 +16,12 @@ import { NgxFudisModule } from '../../../ngx-fudis.module';
     <ng-template #dialogWithGrid>
       <fudis-dialog [size]="size">
         <fudis-heading fudisDialogTitle [level]="1" [variant]="'xl'"
-          >Dialog with fudis-grid and scrollable content</fudis-heading
+          >Course information and learning outcomes</fudis-heading
         >
         <fudis-dialog-content [contentFocus]="true">
           <fudis-grid [classes]="'fudis-mb-md'">
             <fudis-heading [level]="3" [variant]="'sm'">
-              I am fudis-heading inside the grid taking the whole width
+              Introduction to Data Science
             </fudis-heading>
             <fudis-icon-button
               #menuTrigger
@@ -34,86 +34,100 @@ import { NgxFudisModule } from '../../../ngx-fudis.module';
             >
               <fudis-dropdown-menu [size]="'md'">
                 <fudis-dropdown-menu-item
-                  [label]="'Open new dialog'"
+                  [label]="'View registration details'"
                   (handleClick)="openExtraDialogTemplate(extraDialog)"
                 ></fudis-dropdown-menu-item>
               </fudis-dropdown-menu>
             </fudis-icon-button>
             <fudis-body-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
-              vehicula ut massa non facilisis. Aliquam vehicula risus vitae ex condimentum, sed
-              efficitur neque scelerisque. Mauris facilisis vel orci sit amet tincidunt. Praesent
-              ante leo, tempus eu blandit vel, tempus nec augue. Nam dui est, scelerisque quis
-              mauris sit amet, sagittis pharetra lectus. Donec nec ligula et dolor venenatis
-              bibendum. Vestibulum metus tortor, fermentum eu dignissim id, ultrices vitae metus.
-              Donec eget vulputate risus. Proin eros augue, volutpat mollis varius non, posuere ac
-              turpis. Aliquam et convallis tortor, non semper mi. Praesent nec eleifend mauris, at
-              laoreet urna. Quisque dignissim nibh sollicitudin, finibus justo non, efficitur est.
+              This course introduces data collection, analysis, and visualisation. Students apply
+              statistical methods to practical research questions and learn to communicate results
+              clearly for academic and professional audiences.
             </fudis-body-text>
             <fudis-body-text>
-              Proin pellentesque at felis vel imperdiet. Vivamus eros lorem, condimentum non rutrum
-              quis, aliquam vitae dolor. Morbi dictum leo non porttitor egestas. Sed sed aliquet
-              purus. Sed nec metus dictum, porta justo ut, cursus lorem. Nam libero dolor, pulvinar
-              eu enim et, porttitor sodales ipsum. Nullam tristique ante sed massa porta, in
-              accumsan nibh pretium. Integer vel facilisis neque, a lacinia dui. Donec cursus eget
-              mi a aliquam. Vestibulum commodo, elit a mattis porttitor, eros neque euismod sem, eu
-              hendrerit ante nisl sed quam. Vestibulum euismod leo ac magna pretium.
+              Teaching consists of lectures, workshops, and independent assignments. Assessment is
+              based on a project report and active participation in the workshops. Review the course
+              schedule before registering.
+            </fudis-body-text>
+            <fudis-body-text>
+              During the course, students work with structured datasets from areas such as student
+              wellbeing, learning analytics, and sustainability research. The workshops provide
+              guided practice in preparing data, selecting suitable methods, and interpreting
+              findings responsibly. No previous programming experience is required, but students
+              should be prepared to complete weekly independent exercises.
+            </fudis-body-text>
+            <fudis-body-text>
+              The project report is completed in pairs or small groups. It includes a research
+              question, a description of the data and methods used, visualisations of the results,
+              and a discussion of limitations. Groups receive formative feedback during the course
+              and submit the final report through the learning platform by the published deadline.
+            </fudis-body-text>
+            <fudis-body-text>
+              Course materials, workshop instructions, and assessment criteria are available in the
+              learning platform before the first teaching session. Students who need individual
+              study arrangements should contact the course teacher or accessibility services early
+              in the teaching period. Attendance requirements and timetable changes are announced in
+              the course catalogue.
             </fudis-body-text>
           </fudis-grid>
           <fudis-hr />
           <fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [classes]="'fudis-mt-sm fudis-mb-sm'">
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>5 ECTS credits</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Autumn 2026</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>On-campus teaching</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Lectures</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Workshops</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Project work</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Course catalogue</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Learning platform</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Reading list</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Assessment criteria</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>Registration deadline</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>I am last item of the grid</fudis-body-text>
+              <fudis-body-text>Student support</fudis-body-text>
             </div>
           </fudis-grid>
         </fudis-dialog-content>
         <fudis-dialog-actions>
-          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+          <fudis-button fudisDialogClose [label]="'Close'" />
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>
 
     <ng-template #extraDialog>
       <fudis-dialog [size]="'sm'">
-        <fudis-heading fudisDialogTitle [level]="1" [variant]="'md'">Extra dialog</fudis-heading>
+        <fudis-heading fudisDialogTitle [level]="1" [variant]="'md'"
+          >Registration details</fudis-heading
+        >
         <fudis-dialog-content>
-          <fudis-body-text> I am an extra dialog opened on top of the first one. </fudis-body-text>
+          <fudis-body-text>
+            Registration opens on 1 August and closes one week before teaching begins.
+          </fudis-body-text>
         </fudis-dialog-content>
         <fudis-dialog-actions>
-          <fudis-button fudisDialogClose [label]="'Close'"></fudis-button>
+          <fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>

@@ -39,13 +39,13 @@ export default {
 const html = String.raw;
 
 const commonArgs: Args = {
-  label: 'Select a pet',
+  label: 'Select a study programme',
   size: 'lg',
-  placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick one.',
+  placeholder: 'Choose a programme',
+  helpText: 'Select the programme you are applying for.',
   selectionClearButton: true,
   variant: 'autocompleteDropdown',
-  autocompleteHelpText: 'Hello from autocompleteHelpText!',
+  autocompleteHelpText: 'Start typing to search programmes.',
   popoverText: '',
   popoverTriggerLabel: '',
   popoverPosition: 'right',

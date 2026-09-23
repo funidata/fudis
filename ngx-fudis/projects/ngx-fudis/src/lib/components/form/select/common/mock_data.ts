@@ -10,45 +10,71 @@ interface MockSelectOptionGroupData {
 }
 
 type AnimalId = { mainId: string; secondaryId: string };
-type AnimalObject = { name: string; breed: string };
+type CourseObject = { courseCode: string; studyField: string };
 
-export type TestAnimalValue = string | AnimalObject;
-export type TestAnimalSound = FudisSelectOption<TestAnimalValue> & { sound: string };
+export type TestCourseValue = string | CourseObject;
+export type TestCourseAvailability = FudisSelectOption<TestCourseValue> & { availability: string };
 
-export const defaultOptions: TestAnimalSound[] = [
-  { value: { name: 'Max The Great', breed: 'Staffy' }, label: 'Dog', sound: 'Wuf!' },
-  { value: 'value-2-capybara', label: 'Capybara', sound: 'Squek!' },
-  { value: 'value-3-platypys', label: 'Platypus', sound: 'Plat plat!' },
-  { value: 'value-4-cat', label: 'Really dangerous cat', disabled: true, sound: 'PurrROAR!' },
+export const defaultOptions: TestCourseAvailability[] = [
   {
-    value: { name: 'value-duplicate-1', breed: 'Unwanted' },
-    label: 'Sadly I am an unwanted duplicate',
-    sound: 'Nooooo!',
+    value: { courseCode: 'CS-101', studyField: 'Computer Science' },
+    label: 'Introduction to Programming',
+    availability: 'Available',
+  },
+  { value: 'academic-writing', label: 'Academic Writing', availability: 'Available' },
+  { value: 'data-analysis', label: 'Data Analysis', availability: 'Available' },
+  {
+    value: 'advanced-research-methods',
+    label: 'Advanced Research Methods',
+    disabled: true,
+    availability: 'Unavailable',
   },
   {
-    value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
-    label: 'Screaming hairy armadillo (partly endangered)',
-    sound: "Rollin' rollin' rollin'!",
+    value: { courseCode: 'SUS-220', studyField: 'Sustainability Studies' },
+    label: 'Sustainable Development',
+    availability: 'Available',
   },
   {
-    value: { name: 'value-duplicate-2', breed: 'Unwanted' },
-    label: 'Sadly I am an unwanted duplicate',
-    sound: 'Nooooo!',
+    value: 'project-management',
+    label: 'Project Management',
+    availability: 'Available',
   },
-  { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
+  {
+    value: { courseCode: 'SUS-220', studyField: 'Sustainability Studies' },
+    label: 'Sustainable Development',
+    availability: 'Available',
+  },
+  {
+    value: 'digital-learning-environments',
+    label: 'Digital Learning Environments',
+    availability: 'Available',
+  },
 ];
 
-export const defaultOptionsSecondaryLang: TestAnimalSound[] = [
-  { value: { name: 'Max The Great', breed: 'Staffy' }, label: 'Koira', sound: 'Hau!' },
-  { value: 'value-2-capybara', label: 'Kapybara', sound: 'Sviik!' },
-  { value: 'value-3-platypys', label: 'Vesinokkaeläin', sound: 'Läisk!' },
-  { value: 'value-4-cat', label: 'Erittäin vaarallinen kissa', disabled: true, sound: 'HurrRRuR!' },
+export const defaultOptionsSecondaryLang: TestCourseAvailability[] = [
   {
-    value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
-    label: 'Kirkuva karvainen armadillo (osittain uhanalainen)',
-    sound: "Klinks klanks klonks'!",
+    value: { courseCode: 'CS-101', studyField: 'Computer Science' },
+    label: 'Ohjelmoinnin perusteet',
+    availability: 'Saatavilla',
   },
-  { value: 'value-6-gecko', label: 'Gekko', sound: 'Kukkuu!' },
+  { value: 'academic-writing', label: 'Akateeminen kirjoittaminen', availability: 'Saatavilla' },
+  { value: 'data-analysis', label: 'Data-analyysi', availability: 'Saatavilla' },
+  {
+    value: 'advanced-research-methods',
+    label: 'Edistyneet tutkimusmenetelmat',
+    disabled: true,
+    availability: 'Ei saatavilla',
+  },
+  {
+    value: 'project-management',
+    label: 'Projektinhallinta',
+    availability: 'Saatavilla',
+  },
+  {
+    value: 'digital-learning-environments',
+    label: 'Digitaaliset oppimisymparistot',
+    availability: 'Saatavilla',
+  },
 ];
 
 export const multiselectChipListMockData: FudisSelectOption<string>[] = [
@@ -129,7 +155,7 @@ export const groupedTestData: CountryDataArray = [
   },
 ];
 
-export const selectMovieMockData: FudisSelectOption<string>[] = [
+const selectCourseCatalogueMockDataSource: FudisSelectOption<string>[] = [
   {
     value: '70c15d93-e846-425b-bae0-2313a5c91d90',
     label: "101 Dalmatians II: Patch's London Adventure",
@@ -5137,6 +5163,58 @@ export const selectMovieMockData: FudisSelectOption<string>[] = [
   },
 ];
 
+const courseTopics = [
+  'Data Analysis',
+  'Programming Fundamentals',
+  'Academic Writing',
+  'Research Methods',
+  'Project Management',
+  'Sustainable Development',
+  'Digital Learning Environments',
+  'Information Systems',
+  'Statistical Methods',
+  'Professional Communication',
+];
+
+const subjectAreas = [
+  'Computer Science',
+  'Business Studies',
+  'Humanities',
+  'Natural Sciences',
+  'Social Sciences',
+  'Education',
+  'Health Sciences',
+  'Arts and Design',
+  'Engineering',
+  'Law',
+];
+
+const courseFormats = [
+  'Lecture Series',
+  'Seminar',
+  'Workshop',
+  'Laboratory',
+  'Studio Course',
+  'Field Study',
+  'Independent Study',
+  'Project Course',
+  'Intensive Course',
+  'Capstone',
+];
+
+export const selectCourseCatalogueMockData: FudisSelectOption<string>[] =
+  selectCourseCatalogueMockDataSource.map((option, index) => {
+    const topicIndex = index % courseTopics.length;
+    const subjectAreaIndex = Math.floor(index / courseTopics.length) % subjectAreas.length;
+    const formatIndex = Math.floor(index / (courseTopics.length * subjectAreas.length));
+
+    return {
+      ...option,
+      label: `${courseTopics[topicIndex]}: ${subjectAreas[subjectAreaIndex]} ${courseFormats[formatIndex]}`,
+      subLabel: `${subjectAreas[subjectAreaIndex]} | ${courseFormats[formatIndex]}`,
+    };
+  });
+
 export const selectMockData: FudisSelectOption<string>[] = [
   {
     value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
@@ -5979,7 +6057,7 @@ export const smallGroupedMockData: MockSelectOptionGroupData[] = [
   },
 ];
 
-export const groupedMockData: MockSelectOptionGroupData[] = [
+const groupedMockDataSource: MockSelectOptionGroupData[] = [
   {
     country: 'Netherlands',
     options: [
@@ -6285,3 +6363,15 @@ export const groupedMockData: MockSelectOptionGroupData[] = [
     ],
   },
 ];
+
+export const groupedMockData: MockSelectOptionGroupData[] = groupedMockDataSource.map(
+  (group, groupIndex) => ({
+    ...group,
+    country: subjectAreas[groupIndex % subjectAreas.length],
+    options: group.options.map((option, optionIndex) => ({
+      ...option,
+      label: `${subjectAreas[groupIndex % subjectAreas.length]} course ${optionIndex + 1}`,
+      subLabel: 'Course catalogue',
+    })),
+  }),
+);

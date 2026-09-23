@@ -14,52 +14,52 @@ export type TestMenuItemActions = {
 
 export const defaultMenuItems: TestMenuItemActions[] = [
   {
-    label: 'First item',
+    label: 'View profile',
     disabled: false,
   },
-  { label: 'Second item', disabled: true },
+  { label: 'Update contact details', disabled: true },
   {
-    label: 'Third item with really long label to push it to the limit!',
+    label: 'Request an official transcript of records',
     disabled: false,
   },
-  { label: 'Fourth item', disabled: false },
+  { label: 'Sign out', disabled: false },
 ];
 
 export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
   {
-    country: 'Netherlands',
+    country: 'Course materials',
     items: [
       {
-        label: 'Golden jackal',
+        label: 'Reading list',
         disabled: false,
       },
       {
-        label: 'Mountain lion',
+        label: 'Lecture recordings',
         disabled: false,
       },
     ],
   },
   {
-    country: 'Brazil',
+    country: 'Student services',
     items: [
       {
-        label: 'Small Indian mongoose',
+        label: 'Study guidance',
         disabled: true,
       },
       {
-        label: 'Falcon, prairie',
+        label: 'Accessibility services',
         disabled: false,
       },
     ],
   },
   {
-    country: 'China',
+    country: 'Academic tools',
     items: [
       {
-        label: 'Salmon pink bird eater tarantula',
+        label: 'Course catalogue',
       },
       {
-        label: 'Crane, sandhill',
+        label: 'Examination timetable',
       },
     ],
   },

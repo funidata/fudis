@@ -163,16 +163,16 @@ export const Example: StoryFn = (args) => ({
       <fudis-form-header>
         <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
-            <fudis-dt [contentText]="'Important person'" />
-            <fudis-dd [contentText]="'Admiral Thrawn'" />
+            <fudis-dt [contentText]="'Responsible teacher'" />
+            <fudis-dd [contentText]="'Dr. Aino Laine'" />
           </fudis-dl-item>
           <fudis-dl-item>
-            <fudis-dt [contentText]="'Key'" />
-            <fudis-dd [contentText]="'THX-1138'" />
+            <fudis-dt [contentText]="'Course code'" />
+            <fudis-dd [contentText]="'DATA-101'" />
           </fudis-dl-item>
           <fudis-dl-item>
-            <fudis-dt [contentText]="'Another important person'" />
-            <fudis-dd [contentText]="'Mara Jade'" />
+            <fudis-dt [contentText]="'Study coordinator'" />
+            <fudis-dd [contentText]="'Mika Virtanen'" />
           </fudis-dl-item>
         </fudis-dl>
       </fudis-form-header>
@@ -188,14 +188,14 @@ export const Example: StoryFn = (args) => ({
 });
 
 Example.args = {
-  title: 'Example Form Heading',
+  title: 'Course implementation details',
   titleVariant: 'xl',
   level: 1,
-  helpText: 'This is an additional help text to give user more information about the form',
+  helpText: 'Provide the required information for the course implementation.',
   badge: 'primary',
-  badgeText: 'Example',
+  badgeText: 'Autumn 2026',
   errorSummaryTitle:
-    'There are errors in this form. Please address these before trying to submit again.',
+    'Some course information is missing or incorrect. Review the highlighted fields.',
   errorSummaryVisible: false,
   align: 'start',
   width: 'xxl',
@@ -235,13 +235,13 @@ export const ExampleWithDynamicValidators: StoryFn = (args) => ({
 });
 
 ExampleWithDynamicValidators.args = {
-  title: 'Example With Dynamic Validators',
+  title: 'Course information with dynamic validators',
   helpText:
-    "This example page is used to test, that when validators are added or removed from the FormControls, components' HTML attributes such as 'required' and max/min length are updated correctly.",
+    'Change validation requirements to see how guidance and error messages update for course information fields.',
   titleVariant: 'xl',
   level: 1,
   errorSummaryTitle:
-    'There are errors in this form. Please address these before trying to submit again.',
+    'Some course information is missing or incorrect. Review the highlighted fields.',
   errorSummaryVisible: false,
   badge: null,
   badgeText: '',

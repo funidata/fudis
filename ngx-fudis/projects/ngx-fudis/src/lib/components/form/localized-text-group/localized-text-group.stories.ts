@@ -54,7 +54,7 @@ const html = String.raw;
 const commonArgs: Args = {
   size: 'lg',
   initialFocus: false,
-  popoverText: 'Your city needs you!',
+  popoverText: 'This information is needed for continuing the process.',
   popoverTriggerLabel: 'Important information',
   popoverPosition: 'right',
 };
@@ -62,26 +62,26 @@ const commonArgs: Args = {
 const ExampleAllRequiredTemplate: StoryFn = (args) => ({
   props: {
     ...args,
-    id: 'unique-input-id-superhero-name',
+    id: 'unique-input-id-course-description',
     handleFocus: action('handleFocus'),
     handleBlur: action('handleBlur'),
     handleViewInit: action('handleViewInit'),
     handleKeyUp: action('handleKeyUp'),
     formGroup: new FormGroup<FudisLocalizedTextGroupDefaultFormGroup>({
       fi: new FormControl<string | null>(null, [
-        FudisValidators.required('Missing backstory in Finnish.'),
-        FudisValidators.minLength(10, 'Too short backstory in Finnish'),
-        FudisValidators.maxLength(50, 'Too long backstory in Finnish'),
+        FudisValidators.required('Missing course description in Finnish.'),
+        FudisValidators.minLength(10, 'Course description is too short in Finnish.'),
+        FudisValidators.maxLength(50, 'Course description is too long in Finnish.'),
       ]),
       sv: new FormControl<string | null>(null, [
-        FudisValidators.required('Missing backstory in Swedish.'),
-        FudisValidators.minLength(10, 'Too short backstory in Swedish'),
-        FudisValidators.maxLength(100, 'Too long backstory in Swedish'),
+        FudisValidators.required('Missing course description in Swedish.'),
+        FudisValidators.minLength(10, 'Course description is too short in Swedish.'),
+        FudisValidators.maxLength(100, 'Course description is too long in Swedish.'),
       ]),
       en: new FormControl<string | null>(null, [
-        FudisValidators.required('Missing backstory in English.'),
-        FudisValidators.minLength(10, 'Too short backstory in English'),
-        FudisValidators.maxLength(1000, 'Too long backstory in English'),
+        FudisValidators.required('Missing course description in English.'),
+        FudisValidators.minLength(10, 'Course description is too short in English.'),
+        FudisValidators.maxLength(1000, 'Course description is too long in English.'),
       ]),
     }),
   },
@@ -154,17 +154,17 @@ const ExampleTemplate: StoryFn = (args) => ({
 export const Example = ExampleTemplate.bind({});
 
 Example.args = {
-  label: 'Your superhero name',
+  label: 'Course name',
   variant: 'text-input',
-  helpText: 'Please provide superhero name in at least one language.',
+  helpText: 'Provide the course name in at least one language.',
   ...commonArgs,
 };
 
 export const ExampleWithAllRequired = ExampleAllRequiredTemplate.bind({});
 
 ExampleWithAllRequired.args = {
-  label: 'Your superhero origin story',
+  label: 'Course description',
   variant: 'text-area',
-  helpText: 'Please provide an interesting superhero backstory in all languages.',
+  helpText: 'Provide the course description in all languages.',
   ...commonArgs,
 };
