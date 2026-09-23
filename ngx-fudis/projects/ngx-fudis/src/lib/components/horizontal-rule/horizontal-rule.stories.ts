@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { HorizontalRuleComponent } from './horizontal-rule.component';
 import docs from './horizontal-rule.mdx';
 

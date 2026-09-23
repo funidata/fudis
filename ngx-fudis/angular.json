@@ -36,30 +36,24 @@
           }
         },
         "storybook": {
-          "builder": "@storybook/angular:start-storybook",
+          "builder": "@storybook/angular-vite:start-storybook",
           "options": {
             "configDir": ".storybook",
             "tsConfig": ".storybook/tsconfig.json",
             "styles": [".storybook/style.scss"],
             "port": 6006,
-            "browserTarget": "ngx-fudis:build",
             "host": "0.0.0.0",
-            "open": false,
-            "compodoc": true,
-            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
+            "open": false
           }
         },
         "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
+          "builder": "@storybook/angular-vite:build-storybook",
           "options": {
             "enableProdMode": false,
             "configDir": ".storybook",
             "outputDir": "./static",
             "tsConfig": ".storybook/tsconfig.json",
-            "styles": [".storybook/style.scss"],
-            "browserTarget": "ngx-fudis:build",
-            "compodoc": true,
-            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
+            "styles": [".storybook/style.scss"]
           }
         }
       }

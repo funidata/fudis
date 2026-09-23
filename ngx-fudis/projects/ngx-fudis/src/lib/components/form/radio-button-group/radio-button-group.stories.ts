@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { fudisInputSizeArray, FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import docs from './radio-button-group.mdx';

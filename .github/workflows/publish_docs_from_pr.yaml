@@ -26,7 +26,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const envName = `Documentation for branch ${context.ref.replace('refs/heads/', '')}`;
+            const envName = 'Storybook documentation previews';
 
             const { data } = await github.rest.repos.createDeployment({
               owner: context.repo.owner,

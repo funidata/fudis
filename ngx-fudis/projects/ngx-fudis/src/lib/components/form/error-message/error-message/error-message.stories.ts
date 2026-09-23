@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { action } from 'storybook/actions';
 import { FormControl, FormControlOptions } from '@angular/forms';
 import { Component, EventEmitter, Output } from '@angular/core';

@@ -398,15 +398,26 @@ export class SelectBaseDirective
    * Open dropdown
    */
   public openDropdown(): void {
-    if (!this.control.disabled && !this.disabled) {
-      this._syncControlState();
-      this._optionsLoadedOnce.set(true);
-      this._dropdownOpen.set(true); // TODO FIXME: When using autocompleteType variant, this should be called only if filter text is applied
+    const shouldOpenDropdown =
+      this.variant !== 'autocompleteType' || this._autocompleteFilterText() !== '';
 
-      this._unsubscribeDropdownSubscribtions();
-      this._resizeObserver.observe(document?.body);
-      this._setupScrollListener();
+    if (!shouldOpenDropdown || this.disabled || this.control.disabled) {
+      return;
     }
+
+    this._syncControlState();
+    this._optionsLoadedOnce.set(true);
+    this._dropdownOpen.set(true);
+
+    this._unsubscribeDropdownSubscribtions();
+    this._resizeObserver.observe(document?.body);
+
+    const dialog = this._selectRef.nativeElement.closest('.fudis-dialog');
+    if (dialog) {
+      this._resizeObserver.observe(dialog);
+    }
+
+    this._setupScrollListener();
   }
 
   /**

@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { ButtonComponent } from './button.component';
 import docs from './button.mdx';
 import { buttonControlsExclude } from '../../utilities/storybook';

@@ -136,6 +136,7 @@ describe('SelectBaseDirective', () => {
         expect(dropdownElement).toBeTruthy();
         expect(autocompleteElement).toBeNull();
       });
+
       it('should be autocomplete', () => {
         const variants: FudisSelectVariant[] = ['autocompleteDropdown', 'autocompleteType'];
 
@@ -175,16 +176,13 @@ describe('SelectBaseDirective', () => {
       const customText = 'This is custom no results text';
 
       component.multiSelectAuto.autocompleteNoResultsText = customText;
-
       fixture.detectChanges();
 
       const autocompleteInput = getElement(fixture, '#fudis-multiselect-2') as HTMLInputElement;
       autocompleteInput.focus();
-
       fixture.detectChanges();
 
       component.multiSelectAuto.setAutocompleteFilterText('hello');
-
       fixture.detectChanges();
 
       const noResultsElement = getElement(fixture, '.fudis-select-dropdown__help-text__last');
@@ -198,7 +196,6 @@ describe('SelectBaseDirective', () => {
       fixture.detectChanges();
 
       component.multiSelectAuto.setAutocompleteFilterText('salmon');
-
       fixture.detectChanges();
 
       const allOptionsBefore = getAllElements(
@@ -209,11 +206,9 @@ describe('SelectBaseDirective', () => {
       expect(allOptionsBefore.length).toEqual(1);
 
       component.autocompleteFilter = false;
-
       fixture.detectChanges();
 
       component.multiSelectAuto.setAutocompleteFilterText('salmo');
-
       fixture.detectChanges();
 
       const allOptionsAfter = getAllElements(
@@ -253,7 +248,6 @@ describe('SelectBaseDirective', () => {
     it('should show sorted selected options as form input value for both input sharing the same control', async () => {
       setMultiSelectDropdownOpen();
       patchControlValue();
-
       fixture.detectChanges();
 
       const checkedOption = getAllElements(
@@ -280,14 +274,42 @@ describe('SelectBaseDirective', () => {
         expect(inputText.getAttribute('value')).toEqual("Golden jackal, 'Falcon, prairie'");
       });
     });
+  });
 
-    it('should open and close dropdown', () => {
+  describe('Dropdown', () => {
+    it('should open and close', () => {
       expect(findMultiSelectDropdownElement(0)).toBeFalsy();
+
       setMultiSelectDropdownOpen();
       expect(findMultiSelectDropdownElement(0)).toBeTruthy();
 
       setMultiSelectDropdownClosed();
       expect(findMultiSelectDropdownElement(0)).toBeFalsy();
+    });
+
+    it('should have respective aria-expanded property', () => {
+      component.multiSelect.variant = 'autocompleteType';
+      fixture.detectChanges();
+
+      const input = getElement(
+        fixture,
+        '#fudis-multiselect-1-main-wrapper input',
+      ) as HTMLInputElement;
+
+      input.click();
+      expect(input.getAttribute('aria-expanded')).toBe('false');
+
+      input.value = 'ca';
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+      input.dispatchEvent(new KeyboardEvent('keyup', { key: 'a' }));
+      fixture.detectChanges();
+      expect(input.getAttribute('aria-expanded')).toBe('false');
+
+      input.value = 'cat';
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 't' }));
+      input.dispatchEvent(new KeyboardEvent('keyup', { key: 't' }));
+      fixture.detectChanges();
+      expect(input.getAttribute('aria-expanded')).toBe('true');
     });
   });
 
@@ -375,7 +397,6 @@ describe('SelectBaseDirective', () => {
       );
 
       expect(focusedOption.length).toEqual(1);
-
       expect(options[0]).toEqual(focusedOption[0]);
     });
 
@@ -383,7 +404,6 @@ describe('SelectBaseDirective', () => {
       setMultiSelectDropdownOpen();
 
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-
       fixture.detectChanges();
 
       const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
@@ -396,7 +416,6 @@ describe('SelectBaseDirective', () => {
       setMultiSelectDropdownClosed();
 
       window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-
       fixture.detectChanges();
 
       const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');

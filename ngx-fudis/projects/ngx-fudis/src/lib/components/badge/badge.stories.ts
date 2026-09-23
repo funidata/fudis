@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { BadgeComponent } from './badge.component';
 import docs from './badge.mdx';
 

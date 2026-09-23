@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { HeadingComponent } from './heading.component';
 import docs from './heading.mdx';
 import { headingControlsExclude } from '../../../utilities/storybook';

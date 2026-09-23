@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular-vite';
 import docs from './loading-spinner.mdx';
 import { LoadingSpinnerComponent } from './loading-spinner.component';
 import { StorybookExampleLoadingSpinnerComponent } from './examples/loading-spinner-example.component';

@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { StorybookExampleBasicFormComponentsComponent } from './test-playground-components/basic-form-components.component';
 import { TextInputComponent } from '../lib/components/form/text-input/text-input.component';
 import { StorybookExampleDescriptionListCollectionComponent } from './test-playground-components/description-list-collection.component';

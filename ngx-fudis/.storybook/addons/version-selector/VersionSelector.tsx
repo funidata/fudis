@@ -43,11 +43,7 @@ export default function VersionSelector() {
           return false;
         });
 
-        loadedVersions = loadedVersions.filter(
-          (version) =>
-            !["8.0.0", "8.3.0", "8.3.1", "8.3.2", "10.1.0"].includes(version) &&
-            !version.includes("rc"),
-        );
+        loadedVersions = loadedVersions.filter((version) => !version.includes("rc"));
 
         setVersions(loadedVersions);
 

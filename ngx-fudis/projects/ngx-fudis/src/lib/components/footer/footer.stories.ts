@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular-vite';
 import { FooterComponent } from './footer.component';
 import docs from './footer.mdx';
 

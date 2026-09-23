@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { action } from 'storybook/actions';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
