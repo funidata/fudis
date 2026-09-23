@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { NotificationComponent } from './notification.component';
 import docs from './notification.mdx';
 import { notificationExclude } from '../../utilities/storybook';

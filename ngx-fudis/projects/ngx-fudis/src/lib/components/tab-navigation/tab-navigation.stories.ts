@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular-vite';
 import { Component, Input } from '@angular/core';
 import docs from './tab-navigation.mdx';
 import { tabNavigationBarExampleExclude } from '../../utilities/storybook';

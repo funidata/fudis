@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { BodyTextComponent } from './body-text.component';
 import docs from './body-text.mdx';
 

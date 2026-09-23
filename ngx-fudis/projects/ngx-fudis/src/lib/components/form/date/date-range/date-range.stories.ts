@@ -1,6 +1,6 @@
 import { importProvidersFrom } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig } from '@storybook/angular-vite';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateRangeComponent } from './date-range.component';
 import { FudisValidators } from '../../../../utilities/form/validators';

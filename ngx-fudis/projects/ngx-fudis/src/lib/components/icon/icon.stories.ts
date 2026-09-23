@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { IconComponent } from './icon.component';
 import { fudisIconArray } from '../../types/icons';
 import { excludeEverythingExceptRegex } from '../../utilities/storybook';

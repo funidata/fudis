@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular-vite';
 import { IconButtonComponent } from './icon-button.component';
 import { fudisIconArray } from '../../types/icons';
 import docs from './icon-button.mdx';

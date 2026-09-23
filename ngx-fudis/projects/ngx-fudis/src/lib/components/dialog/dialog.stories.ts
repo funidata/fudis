@@ -1,4 +1,4 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import docs from './dialog.mdx';
 import { dialogExclude } from '../../utilities/storybook';

@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular-vite';
 import { CheckboxComponent } from './checkbox.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 

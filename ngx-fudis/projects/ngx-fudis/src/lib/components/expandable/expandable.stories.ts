@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular-vite';
 import { ExpandableComponent } from './expandable.component';
 import docs from './expandable.mdx';
 import {
