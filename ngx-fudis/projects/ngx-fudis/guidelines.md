@@ -50,11 +50,6 @@ Language: Finnish (fi)
 
 ---
 
-
-
-
-
-
 ## Button (fudis-button)
 
 Figma: https://www.figma.com/file/GMg40yu5t2Y2kQtF9Vw3Cp/Fudis-DS-Components?type=design&node-id=19%3A28
