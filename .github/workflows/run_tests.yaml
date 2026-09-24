@@ -18,6 +18,7 @@ on:
       - opened
       - reopened
       - synchronize
+  merge_group:
 
 jobs:
   build:
