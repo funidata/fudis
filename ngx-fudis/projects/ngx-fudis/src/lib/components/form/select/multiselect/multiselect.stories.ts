@@ -110,8 +110,8 @@ const ExampleTemplate: StoryFn = (args) => ({
       <ng-template fudisSelectOptions>
         @for (option of defaultOptions; track option.value) {
         <fudis-multiselect-option [data]="option"></fudis-multiselect-option>
-        } @for (group of groupedMockData; track group.country) {
-        <fudis-multiselect-group [label]="group.country">
+        } @for (group of groupedMockData; track group.subjectArea) {
+        <fudis-multiselect-group [label]="group.subjectArea">
           @for (groupedOption of group.options; track groupedOption.value) {
           <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
           }

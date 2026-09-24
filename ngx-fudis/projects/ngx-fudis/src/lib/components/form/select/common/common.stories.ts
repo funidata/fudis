@@ -147,8 +147,8 @@ const SelectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedMockData; track group.country) {
-        <fudis-select-group [label]="group.country">
+        @for (group of groupedMockData; track group.subjectArea) {
+        <fudis-select-group [label]="group.subjectArea">
           @for (groupedOption of group.options; track groupedOption.value) {
           <fudis-select-option [data]="groupedOption"></fudis-select-option>
           }
@@ -187,8 +187,8 @@ const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedMockData; track group.country) {
-        <fudis-multiselect-group [label]="group.country">
+        @for (group of groupedMockData; track group.subjectArea) {
+        <fudis-multiselect-group [label]="group.subjectArea">
           @for (groupedOption of group.options; track groupedOption.value) {
           <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
           }
