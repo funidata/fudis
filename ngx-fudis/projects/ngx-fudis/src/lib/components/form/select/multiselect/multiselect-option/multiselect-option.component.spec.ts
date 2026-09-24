@@ -74,7 +74,7 @@ describe('MultiselectOptionComponent', () => {
       )?.textContent;
 
       expect(selectedOption).toBeTruthy();
-      expect(selectedOptionLabel).toEqual('Platypus');
+      expect(selectedOptionLabel).toEqual('Data Analysis');
     });
 
     it('should change visible input value when options are changed', () => {
@@ -82,11 +82,11 @@ describe('MultiselectOptionComponent', () => {
       fixture.detectChanges();
 
       const element = getElement(fixture, '.fudis-select__input');
-      expect(element.getAttribute('value')).toEqual('Platypus');
+      expect(element.getAttribute('value')).toEqual('Data Analysis');
 
       component.multiOptions = defaultOptionsSecondaryLang;
       fixture.detectChanges();
-      expect(element.getAttribute('value')).toEqual('Vesinokkaeläin');
+      expect(element.getAttribute('value')).toEqual('Data-analyysi');
     });
 
     it('should add value to control with already existing values when another option is selected and emit selection', () => {
@@ -107,27 +107,15 @@ describe('MultiselectOptionComponent', () => {
       const controlValueArray = component.selectEl.control.value;
 
       expect(controlValueArray).toMatchObject([
-        { label: 'Screaming hairy armadillo (partly endangered)' },
-        { label: 'Dog' },
-        { label: 'Platypus' },
+        { label: 'Project Management' },
+        { label: 'Introduction to Programming' },
+        { label: 'Data Analysis' },
       ]);
 
       expect(component.selectEl.selectionUpdate.emit).toHaveBeenCalledWith([
-        {
-          label: 'Screaming hairy armadillo (partly endangered)',
-          sound: "Rollin' rollin' rollin'!",
-          value: 'value-5-armadillo_(PARTLY_ENDANGERED)',
-        },
-        {
-          label: 'Dog',
-          sound: 'Wuf!',
-          value: { name: 'Max The Great', breed: 'Staffy' },
-        },
-        {
-          label: 'Platypus',
-          sound: 'Plat plat!',
-          value: 'value-3-platypys',
-        },
+        defaultOptions[5],
+        defaultOptions[0],
+        defaultOptions[2],
       ]);
     });
 
@@ -147,9 +135,9 @@ describe('MultiselectOptionComponent', () => {
       const controlValueArray = component.selectEl.control.value;
 
       expect(controlValueArray).toMatchObject([
-        { label: 'Dog' },
-        { label: 'Capybara' },
-        { label: 'Screaming hairy armadillo (partly endangered)' },
+        { label: 'Introduction to Programming' },
+        { label: 'Academic Writing' },
+        { label: 'Project Management' },
       ]);
 
       // Remove one of the already selected options
@@ -158,7 +146,10 @@ describe('MultiselectOptionComponent', () => {
 
       const updatedControlValueArray = component.selectEl.control.value;
 
-      expect(updatedControlValueArray).toMatchObject([{ label: 'Dog' }, { label: 'Capybara' }]);
+      expect(updatedControlValueArray).toMatchObject([
+        { label: 'Introduction to Programming' },
+        { label: 'Academic Writing' },
+      ]);
 
       options[1].nativeElement.querySelector('input').click();
       fixture.detectChanges();

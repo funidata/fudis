@@ -83,23 +83,23 @@ const DescriptionListTemplate: StoryFn = (args) => ({
     >
       <fudis-dl-item>
         <fudis-dt [contentText]="'First name'"></fudis-dt>
-        <fudis-dd [contentText]="'Rex'"></fudis-dd>
+        <fudis-dd [contentText]="'Aino'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Last name'"></fudis-dt>
-        <fudis-dd [contentText]="'Dangerwest'"></fudis-dd>
+        <fudis-dd [contentText]="'Laine'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Alias'"></fudis-dt>
-        <fudis-dd [contentText]="'Radical Emmet Xtreme'"></fudis-dd>
+        <fudis-dt [contentText]="'Student ID'"></fudis-dt>
+        <fudis-dd [contentText]="'STU-2026-0142'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Voice actor'"></fudis-dt>
-        <fudis-dd [contentText]="'Chris Pratt'"></fudis-dd>
+        <fudis-dt [contentText]="'Programme'"></fudis-dt>
+        <fudis-dd [contentText]="'Bachelor of Science'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Enemy'"></fudis-dt>
-        <fudis-dd [contentText]="'Emmet Brickowski'" [subHeading]="'Archenemy'"></fudis-dd>
+        <fudis-dt [contentText]="'Study status'"></fudis-dt>
+        <fudis-dd [contentText]="'Enrolled'" [subHeading]="'Academic standing'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,
@@ -120,106 +120,104 @@ DescriptionListCompact.args = {
 const NestedDescriptionListsTemplate: StoryFn = (args) => ({
   props: {
     ...args,
-    quoteOne: "It's not the years, honey, it's the mileage.",
-    quoteTwo: "Archimedes didn't know about continental drift!",
+    quoteOne: 'Autumn 2026',
+    quoteTwo: 'Spring 2027',
   },
   template: html`
     <fudis-heading [level]="2" [variant]="'md'"
-      >Nested Description Lists with Indiana Jones Movies</fudis-heading
+      >Nested Description Lists with Course Information</fudis-heading
     >
     <fudis-dl [classes]="'fudis-mt-sm'" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Raiders of the Lost Ark'"></fudis-dt>
+        <fudis-dt [contentText]="'Introduction to Data Science'"></fudis-dt>
         <fudis-dd>
           <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
-              <fudis-dd [contentText]="'1981'"></fudis-dd>
+              <fudis-dt [contentText]="'Course code'"></fudis-dt>
+              <fudis-dd [contentText]="'CS-101'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [contentText]="'8.4 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'Credits'"></fudis-dt>
+              <fudis-dd [contentText]="'5 ECTS'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
+              <fudis-dt [contentText]="'Teaching period'"></fudis-dt>
               <fudis-dd [contentText]="quoteOne"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'The Temple of Doom'"></fudis-dt>
+        <fudis-dt [contentText]="'Academic Writing'"></fudis-dt>
         <fudis-dd>
           <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
-              <fudis-dd [contentText]="'1984'"></fudis-dd>
+              <fudis-dt [contentText]="'Course code'"></fudis-dt>
+              <fudis-dd [contentText]="'LANG-210'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [contentText]="'7.5 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'Credits'"></fudis-dt>
+              <fudis-dd [contentText]="'3 ECTS'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
-              <fudis-dd [contentText]="'Ah, dessert! Chilled monkey brains.'"></fudis-dd>
+              <fudis-dt [contentText]="'Teaching period'"></fudis-dt>
+              <fudis-dd [contentText]="'Autumn 2026'"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'The Last Crusade'"></fudis-dt>
+        <fudis-dt [contentText]="'Research Methods'"></fudis-dt>
         <fudis-dd>
           <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
-              <fudis-dd [contentText]="'1989'"></fudis-dd>
+              <fudis-dt [contentText]="'Course code'"></fudis-dt>
+              <fudis-dd [contentText]="'RES-305'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [contentText]="'8.2 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'Credits'"></fudis-dt>
+              <fudis-dd [contentText]="'5 ECTS'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
-              <fudis-dd
-                [contentText]="'I suddenly remembered my Charlemagne. Let my armies be the rocks and the trees and the birds in the sky...'"
-              ></fudis-dd>
+              <fudis-dt [contentText]="'Assessment method'"></fudis-dt>
+              <fudis-dd [contentText]="'Examination and research proposal'"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'The Kingdom of Crystal Skull'"></fudis-dt>
+        <fudis-dt [contentText]="'Sustainable Development'"></fudis-dt>
         <fudis-dd>
           <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
-              <fudis-dd [contentText]="'2008'"></fudis-dd>
+              <fudis-dt [contentText]="'Course code'"></fudis-dt>
+              <fudis-dd [contentText]="'SUS-220'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [contentText]="'6.2 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'Credits'"></fudis-dt>
+              <fudis-dd [contentText]="'5 ECTS'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
-              <fudis-dd [contentText]="'How much of human life is lost in waiting?'"></fudis-dd>
+              <fudis-dt [contentText]="'Teaching period'"></fudis-dt>
+              <fudis-dd [contentText]="'Spring 2027'"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'The Dial of Destiny'"></fudis-dt>
+        <fudis-dt [contentText]="'Project Management'"></fudis-dt>
         <fudis-dd>
           <fudis-dl [variant]="'compact'">
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Release Year'"></fudis-dt>
-              <fudis-dd [contentText]="'2023'"></fudis-dd>
+              <fudis-dt [contentText]="'Course code'"></fudis-dt>
+              <fudis-dd [contentText]="'BUS-315'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'IMDB Rating'"></fudis-dt>
-              <fudis-dd [contentText]="'6.5 / 10'"></fudis-dd>
+              <fudis-dt [contentText]="'Credits'"></fudis-dt>
+              <fudis-dd [contentText]="'3 ECTS'"></fudis-dd>
             </fudis-dl-item>
             <fudis-dl-item>
-              <fudis-dt [contentText]="'Famous Quote'"></fudis-dt>
+              <fudis-dt [contentText]="'Teaching period'"></fudis-dt>
               <fudis-dd [contentText]="quoteTwo"></fudis-dd>
             </fudis-dl-item>
           </fudis-dl>
@@ -249,11 +247,14 @@ const DescriptionListInsideGridTemplate: StoryFn = (args) => ({
     <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
       <fudis-dl-item>
         <fudis-dt [contentText]="'Teacher email'"></fudis-dt>
-        <fudis-dd [contentText]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
+        <fudis-dd
+          [contentText]="'advisor@university.example'"
+          [subHeading]="'Academic advisor'"
+        ></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Course name'"></fudis-dt>
-        <fudis-dd [contentText]="'Defense Against the Dark Arts'"></fudis-dd>
+        <fudis-dd [contentText]="'Introduction to Data Science'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
     <fudis-body-text
@@ -284,17 +285,17 @@ const NestedSubComponentsTemplate: StoryFn = (args) => ({
       <fudis-dl-item>
         <fudis-dt
           [contentText]="'First name'"
-          [popoverText]="'Second name unknown'"
+          [popoverText]="'Name shown in the student register'"
           [popoverPosition]="'right'"
           [popoverTriggerLabel]="'Additional information'"
         ></fudis-dt>
-        <fudis-dd [contentText]="'Rex'"></fudis-dd>
+        <fudis-dd [contentText]="'Aino'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [contentText]="'Last name'"></fudis-dt>
         <fudis-dd
-          [contentText]="classified ? '&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' : 'Dangerwest'"
-          [ariaLabel]="classified ? 'Hidden classified content' : null"
+          [contentText]="classified ? '&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' : 'Laine'"
+          [ariaLabel]="classified ? 'Hidden personal information' : null"
         >
           <fudis-icon-button
             [variant]="'tertiary'"
@@ -306,14 +307,14 @@ const NestedSubComponentsTemplate: StoryFn = (args) => ({
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Alias'"></fudis-dt>
-        <fudis-dd [contentText]="'Radical Emmet Xtreme'">
+        <fudis-dt [contentText]="'Study programme'"></fudis-dt>
+        <fudis-dd [contentText]="'Bachelor of Science'">
           <fudis-button [label]="'Edit'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Enemy'">Enemy</fudis-dt>
-        <fudis-dd [contentText]="'Emmet Brickowski'" [subHeading]="'Archenemy'">
+        <fudis-dt [contentText]="'Academic advisor'">Academic advisor</fudis-dt>
+        <fudis-dd [contentText]="'Mika Virtanen'" [subHeading]="'Student services'">
           <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
         </fudis-dd>
       </fudis-dl-item>
@@ -340,28 +341,26 @@ const WithLanguageBadgesTemplate: StoryFn = (args) => ({
       [columns]="columns"
     >
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Example paragraph'"></fudis-dt>
-        <fudis-dd [lang]="'sv'" [contentText]="'Och den här är på Svenska'"></fudis-dd>
-        <fudis-dd [lang]="'en'" [contentText]="'This is in English'"></fudis-dd>
-        <fudis-dd [lang]="'fi'" [contentText]="'Tämä on suomeksi'"></fudis-dd>
+        <fudis-dt [contentText]="'Programme description'"></fudis-dt>
+        <fudis-dd [lang]="'sv'" [contentText]="'Programbeskrivning på svenska'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'Programme description in English'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [contentText]="'Koulutusohjelman kuvaus suomeksi'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Example without one language'"></fudis-dt>
-        <fudis-dd [lang]="'fi'" [contentText]="'Tähtien sota'"></fudis-dd>
+        <fudis-dt [contentText]="'Course information without English translation'"></fudis-dt>
+        <fudis-dd [lang]="'fi'" [contentText]="'Kurssin perustiedot'"></fudis-dd>
         <fudis-dd [lang]="'en'" [contentText]="''"></fudis-dd>
-        <fudis-dd [lang]="'sv'" [contentText]="'Stjärnornas krig'"></fudis-dd>
+        <fudis-dd [lang]="'sv'" [contentText]="'Kursens grunduppgifter'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt
-          [contentText]="'Example which has multiple Details in different languages'"
-        ></fudis-dt>
-        <fudis-dd [lang]="'fi'" [contentText]="'Uusi toivo'"></fudis-dd>
-        <fudis-dd [lang]="'fi'" [contentText]="'Imperiumin vastaisku'"></fudis-dd>
-        <fudis-dd [lang]="'fi'" [contentText]="'Jedin paluu'"></fudis-dd>
+        <fudis-dt [contentText]="'Learning outcomes in different languages'"></fudis-dt>
+        <fudis-dd [lang]="'fi'" [contentText]="'Tunnistaa keskeiset käsitteet'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [contentText]="'Soveltaa opittua käytäntöön'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [contentText]="'Arvioi omaa oppimistaan'"></fudis-dd>
 
-        <fudis-dd [lang]="'en'" [contentText]="'New Hope'"></fudis-dd>
-        <fudis-dd [lang]="'en'" [contentText]="'Empire Strikes Back'"></fudis-dd>
-        <fudis-dd [lang]="'en'" [contentText]="'Return of the Jedi'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'Identify key concepts'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'Apply learning in practice'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [contentText]="'Evaluate personal learning'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
     <example-language-service-change-component /> `,
@@ -376,21 +375,21 @@ WithLanguageBadges.args = {
 };
 
 const multipleDDData = [
-  { value: 'Anakin Skywalker' },
-  { value: 'Obi-Wan Kenobi' },
-  { value: 'Shaak Ti' },
-  { value: 'Stass Allie' },
-  { value: 'Agen Kolar' },
-  { value: 'Depa Billaba' },
-  { value: 'Coleman Kcaj' },
-  { value: 'Saesee Tiin' },
-  { value: 'Oppo Rancisis' },
-  { value: 'Kit Fisto' },
-  { value: 'Plo Koon' },
-  { value: 'Luminara Unduli' },
-  { value: 'Ki-Adi-Mundi' },
-  { value: 'Mace Windu' },
-  { subHeading: 'Grand Master', value: 'Yoda' },
+  { value: 'Aino Laine' },
+  { value: 'Mika Virtanen' },
+  { value: 'Sofia Niemi' },
+  { value: 'Elias Korhonen' },
+  { value: 'Emma Maki' },
+  { value: 'Oskari Lehtonen' },
+  { value: 'Lina Salonen' },
+  { value: 'Noah Heikkinen' },
+  { value: 'Iida Koskinen' },
+  { value: 'Joonas Lahti' },
+  { value: 'Ella Aalto' },
+  { value: 'Veera Ranta' },
+  { value: 'Antti Saarinen' },
+  { value: 'Laura Kivi' },
+  { subHeading: 'Programme director', value: 'Kari Hietala' },
 ];
 
 const ItemWithMultipleDdElementsTemplate: StoryFn = (args) => ({
@@ -406,14 +405,14 @@ const ItemWithMultipleDdElementsTemplate: StoryFn = (args) => ({
       [variant]="variant"
     >
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Members of Jedi High Council'"></fudis-dt>
+        <fudis-dt [contentText]="'Members of the programme committee'"></fudis-dt>
         @for (item of data; track item.value) {
         <fudis-dd [contentText]="item.value" [subHeading]="item.subHeading"></fudis-dd>
         }
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [contentText]="'Non-Jedi Master Members'"></fudis-dt>
-        <fudis-dd [contentText]="'Anakin Skywalker'"></fudis-dd>
+        <fudis-dt [contentText]="'Student representatives'"></fudis-dt>
+        <fudis-dd [contentText]="'Aino Laine'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,
@@ -440,7 +439,10 @@ const SingleListItemTemplate: StoryFn = (args) => ({
     >
       <fudis-dl-item>
         <fudis-dt [contentText]="'Address'"></fudis-dt>
-        <fudis-dd [contentText]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
+        <fudis-dd
+          [contentText]="'Faculty of Computing'"
+          [subHeading]="'University campus'"
+        ></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,

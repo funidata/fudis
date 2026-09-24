@@ -4,7 +4,7 @@ import { SelectOptionComponent } from '../../select/select-option/select-option.
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
-import { defaultOptions, TestAnimalValue } from '../../common/mock_data';
+import { defaultOptions, TestCourseValue } from '../../common/mock_data';
 import { SelectOptionsDirective } from '../../common/select-options-directive/select-options.directive';
 import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
@@ -38,13 +38,13 @@ class MockComponent {
   @ViewChild('selectElem') selectElem: SelectComponent;
   @ViewChild('selectOption') selectOption: SelectOptionComponent;
 
-  testOptions: FudisSelectOption<TestAnimalValue>[] = defaultOptions;
+  testOptions: FudisSelectOption<TestCourseValue>[] = defaultOptions;
   optionWithSubLabel: FudisSelectOption<string> = {
     value: 'test-1-abc',
     label: 'Dragon',
     subLabel: 'Roaaar!',
   };
-  control: FormControl<FudisSelectOption<TestAnimalValue> | null> = new FormControl(null);
+  control: FormControl<FudisSelectOption<TestCourseValue> | null> = new FormControl(null);
   eventReceived: FocusEvent;
 
   handleOptionBlur(event: FocusEvent) {
@@ -72,7 +72,7 @@ describe('SelectOptionBaseDirective', () => {
     fixture.detectChanges();
   }
 
-  function updateControlValue(option: FudisSelectOption<TestAnimalValue>) {
+  function updateControlValue(option: FudisSelectOption<TestCourseValue>) {
     component.control.patchValue(option);
     fixture.detectChanges();
   }
@@ -109,7 +109,7 @@ describe('SelectOptionBaseDirective', () => {
       expect(options[2].nativeElement.outerHTML).toContain(
         'fudis-select-option__focusable fudis-select-option--selected',
       );
-      expect(textContent).toEqual('Platypus');
+      expect(textContent).toEqual('Data Analysis');
     });
 
     it('should filter correct options for given letter input', async () => {
@@ -128,11 +128,10 @@ describe('SelectOptionBaseDirective', () => {
       expect(component.selectOption.visible).toEqual(false);
 
       expect(focusableOptions()).toEqual([
-        'Capybara',
-        'Platypus',
-        'Sadly I am an unwanted duplicate',
-        'Screaming hairy armadillo (partly endangered)',
-        'Sadly I am an unwanted duplicate',
+        'Introduction to Programming',
+        'Sustainable Development',
+        'Project Management',
+        'Sustainable Development',
       ]);
 
       component.selectElem.setAutocompleteFilterText('roa');
@@ -151,14 +150,11 @@ describe('SelectOptionBaseDirective', () => {
       jest.spyOn(component, 'handleOptionBlur');
 
       const firstElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-ba3at',
-      ) as HTMLInputElement;
-      const secondElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-option-w2yoqs',
-      ) as HTMLInputElement;
+        'div.fudis-select-option__focusable',
+      ) as HTMLElement;
 
       firstElement.focus();
-      secondElement.focus();
+      firstElement.dispatchEvent(new FocusEvent('blur'));
 
       expect(component.eventReceived.target).toEqual(firstElement);
       expect(component.handleOptionBlur).toHaveBeenCalled();

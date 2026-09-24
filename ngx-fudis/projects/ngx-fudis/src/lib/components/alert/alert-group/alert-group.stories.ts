@@ -77,7 +77,7 @@ class AddAlertsComponent implements AfterViewInit {
 
   addDanger(): void {
     const newAlert: FudisAlert = {
-      message: new BehaviorSubject('Something dangerous happened'),
+      message: new BehaviorSubject('Your course registration could not be submitted.'),
       type: 'danger',
       id: 'my-own-id-1',
     };
@@ -87,7 +87,7 @@ class AddAlertsComponent implements AfterViewInit {
 
   addWarning(): void {
     const newAlert: FudisAlert = {
-      message: new BehaviorSubject('Something dangerous MIGHT happen'),
+      message: new BehaviorSubject('Your study right expires at the end of the academic year.'),
       type: 'warning',
       id: 'my-own-id-2',
     };
@@ -96,16 +96,16 @@ class AddAlertsComponent implements AfterViewInit {
   }
 
   alertWarningDemoLinkClick(): void {
-    alert('yikes!');
+    alert('Review the alert details.');
   }
 
   alertInfoDemoLinkClick(): void {
-    alert('Nothing really interesting here.');
+    alert('Additional information is available in the student portal.');
   }
 
   addSuccess(): void {
     const newAlert: FudisAlert = {
-      message: new BehaviorSubject('Yippee Ki-Yay! You were successful!'),
+      message: new BehaviorSubject('Your personal study plan has been updated.'),
       type: 'success',
       id: 'my-own-id-4',
     };
@@ -115,7 +115,7 @@ class AddAlertsComponent implements AfterViewInit {
 
   addInfo(): void {
     const newAlert: FudisAlert = {
-      message: new BehaviorSubject('Nothing special here.'),
+      message: new BehaviorSubject('Course registration opens on 1 August.'),
       type: 'info',
       id: 'my-own-id-5',
     };

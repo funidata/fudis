@@ -61,12 +61,12 @@ export default {
 } as Meta;
 
 const commonArgs: Args = {
-  label: 'Select a date',
-  helpText: 'Choose your favourite date.',
+  label: 'Select the course start date',
+  helpText: 'Select the date for your appointment.',
   size: 'md',
   dateParse: true,
   initialFocus: false,
-  popoverText: 'Is it your birthday?',
+  popoverText: 'Check the academic calendar before selecting a date.',
   popoverPosition: 'left',
   popoverTriggerLabel: 'Additional information',
 };

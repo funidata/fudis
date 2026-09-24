@@ -37,9 +37,9 @@ const ExampleTemplate: StoryFn = (args) => ({
     <fudis-select
       (selectionUpdate)="selectionUpdate($event)"
       [control]="control"
-      [label]="'Example label'"
-      [helpText]="'Example help text'"
-      [placeholder]="'Example placeholder text'"
+      [label]="'Study programme'"
+      [helpText]="'Select your programme.'"
+      [placeholder]="'Search programmes'"
     >
       <ng-template fudisSelectOptions>
         <fudis-select-option [data]="data"></fudis-select-option>
@@ -51,8 +51,8 @@ const ExampleTemplate: StoryFn = (args) => ({
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   data: {
-    value: 'example-value-id',
-    label: 'Example option label',
-    subLabel: 'Example sub label for this option',
+    value: 'bachelor-information-technology',
+    label: 'Bachelor of Information Technology',
+    subLabel: 'Faculty of Computing',
   },
 };

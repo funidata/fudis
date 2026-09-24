@@ -30,8 +30,8 @@ import { SelectOptionsDirective } from '../select-options-directive/select-optio
       [size]="size"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedData; track group.country) {
-          <fudis-multiselect-group [label]="group.country">
+        @for (group of groupedData; track group.subjectArea) {
+          <fudis-multiselect-group [label]="group.subjectArea">
             @for (groupedOption of group.options; track groupedOption.value) {
               <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
             }
@@ -51,8 +51,8 @@ import { SelectOptionsDirective } from '../select-options-directive/select-optio
       [selectionClearButton]="clearButton"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedData; track group.country) {
-          <fudis-multiselect-group [label]="group.country">
+        @for (group of groupedData; track group.subjectArea) {
+          <fudis-multiselect-group [label]="group.subjectArea">
             @for (groupedOption of group.options; track groupedOption.value) {
               <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
             }
@@ -195,7 +195,9 @@ describe('SelectBaseDirective', () => {
       autocompleteInput.focus();
       fixture.detectChanges();
 
-      component.multiSelectAuto.setAutocompleteFilterText('salmon');
+      component.multiSelectAuto.setAutocompleteFilterText(
+        'Data Analysis: Computer Science Lecture Series',
+      );
       fixture.detectChanges();
 
       const allOptionsBefore = getAllElements(
@@ -208,7 +210,7 @@ describe('SelectBaseDirective', () => {
       component.autocompleteFilter = false;
       fixture.detectChanges();
 
-      component.multiSelectAuto.setAutocompleteFilterText('salmo');
+      component.multiSelectAuto.setAutocompleteFilterText('Data Analysis');
       fixture.detectChanges();
 
       const allOptionsAfter = getAllElements(
@@ -216,7 +218,7 @@ describe('SelectBaseDirective', () => {
         '#fudis-multiselect-2-main-wrapper .fudis-multiselect-option--visible',
       );
 
-      expect(allOptionsAfter.length).toEqual(9);
+      expect(allOptionsAfter.length).toEqual(50);
     });
 
     it('selectionClearButton', () => {
@@ -262,16 +264,18 @@ describe('SelectBaseDirective', () => {
       });
 
       expect(selectedOptionLabelArray).toEqual([
-        'Golden jackal',
-        'Falcon, prairie',
-        'Golden jackal',
-        'Falcon, prairie',
+        'Data Analysis: Computer Science Lecture Series',
+        'Programming Fundamentals: Business Studies Lecture Series',
+        'Data Analysis: Computer Science Lecture Series',
+        'Programming Fundamentals: Business Studies Lecture Series',
       ]);
 
       await fixture.whenStable().then(() => {
         const inputText = getElement(fixture, '.fudis-select__input') as HTMLInputElement;
 
-        expect(inputText.getAttribute('value')).toEqual("Golden jackal, 'Falcon, prairie'");
+        expect(inputText.getAttribute('value')).toEqual(
+          'Data Analysis: Computer Science Lecture Series, Programming Fundamentals: Business Studies Lecture Series',
+        );
       });
     });
   });
@@ -329,9 +333,9 @@ describe('SelectBaseDirective', () => {
 
       expect(component.multiSelect.selectionUpdate.emit).toHaveBeenCalledWith([
         {
-          label: 'Golden jackal',
-          subLabel: 'Canis aureus',
-          value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
+          label: 'Data Analysis: Computer Science Lecture Series',
+          subLabel: 'Computer Science | Lecture Series | Course 1',
+          value: 'course-0001',
         },
       ]);
 

@@ -85,38 +85,38 @@ const ExampleTemplate: StoryFn = (args) => ({
     [width]="width"
   >
     <fudis-section-actions>
-      <fudis-button [label]="'Some action'"></fudis-button>
-      <fudis-button [label]="'Another action'"></fudis-button>
+      <fudis-button [label]="'Edit details'"></fudis-button>
+      <fudis-button [label]="'Save changes'"></fudis-button>
     </fudis-section-actions>
     <fudis-section-content>
       <fudis-notification>
-        <fudis-body-text>This is notification</fudis-body-text>
+        <fudis-body-text>Your profile is up to date.</fudis-body-text>
       </fudis-notification>
       <fudis-expandable
         [level]="3"
-        [title]="'Expandable inside section'"
+        [title]="'Additional programme information'"
         [closed]="false"
         [class]="'fudis-mb-sm'"
       >
         <ng-template fudisExpandableContent>
-          <fudis-body-text>Some content inside expandable</fudis-body-text>
+          <fudis-body-text>View additional programme information.</fudis-body-text>
         </ng-template>
       </fudis-expandable>
-      <fudis-body-text>More text content inside section</fudis-body-text>
+      <fudis-body-text>Programme details are available for registered students.</fudis-body-text>
     </fudis-section-content>
   </fudis-section> `,
 });
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  title: 'This is title of section',
+  title: 'Student information',
   titleVariant: 'xl',
   level: 2,
-  popoverText: 'More info about this section',
+  popoverText: 'Review and update your student information.',
   popoverTriggerLabel: 'Additional information',
   popoverPosition: 'below',
   badge: 'primary',
-  badgeText: 'Example',
+  badgeText: 'Updated',
   align: 'start',
   width: 'xl',
 };
@@ -130,37 +130,37 @@ Example.parameters = {
 const NestedExampleTemplate: StoryFn = (args) => ({
   props: args,
   template: html`<fudis-section
-    [title]="'Parent Section'"
+    [title]="'Study plan'"
     [titleVariant]="'lg'"
     [level]="2"
     [width]="'md'"
   >
     <fudis-section-content>
-      <fudis-body-text>Parent Section content below</fudis-body-text>
+      <fudis-body-text>Review the courses included in your study plan.</fudis-body-text>
 
       <fudis-section
         class="fudis-mt-sm"
-        [title]="'Nested Section'"
+        [title]="'Major studies'"
         [titleVariant]="'sm'"
         [level]="3"
       >
         <fudis-section-actions>
-          <fudis-button [label]="'Nested Action button'" />
+          <fudis-button [label]="'Edit major studies'" />
         </fudis-section-actions>
         <fudis-section-content>
-          <fudis-body-text>First level nested Section content</fudis-body-text>
+          <fudis-body-text>Major studies form the core of your degree.</fudis-body-text>
 
           <fudis-section
             class="fudis-mt-sm"
-            [title]="'Nested Section'"
+            [title]="'Course selection'"
             [titleVariant]="'xs'"
             [level]="4"
           >
             <fudis-section-actions>
-              <fudis-button [label]="'Deeper nested Action button'" />
+              <fudis-button [label]="'Edit course selection'" />
             </fudis-section-actions>
             <fudis-section-content>
-              <fudis-body-text>Second level nested Section content</fudis-body-text>
+              <fudis-body-text>Choose courses for the next teaching period.</fudis-body-text>
             </fudis-section-content>
           </fudis-section>
         </fudis-section-content>

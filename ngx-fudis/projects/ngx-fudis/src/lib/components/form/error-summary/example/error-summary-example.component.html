@@ -61,21 +61,21 @@
                   }
                 </fudis-radio-button-group>
                 <fudis-checkbox-group
-                  [formGroup]="formExample.controls.courseBooks"
-                  [label]="t('form.courseBooks.label')"
-                  [helpText]="t('form.courseBooks.helpText')"
+                  [formGroup]="formExample.controls.teachingMethods"
+                  [label]="t('form.teachingMethods.label')"
+                  [helpText]="t('form.teachingMethods.helpText')"
                 >
                   <fudis-checkbox-group-option
                     [controlName]="'first'"
-                    [label]="t('form.courseBooks.options.heir')"
+                    [label]="t('form.teachingMethods.options.lectures')"
                   />
                   <fudis-checkbox-group-option
                     [controlName]="'second'"
-                    [label]="t('form.courseBooks.options.dark')"
+                    [label]="t('form.teachingMethods.options.seminars')"
                   />
                   <fudis-checkbox-group-option
                     [controlName]="'third'"
-                    [label]="t('form.courseBooks.options.command')"
+                    [label]="t('form.teachingMethods.options.independentStudy')"
                   />
                 </fudis-checkbox-group>
                 <fudis-datepicker
@@ -93,11 +93,11 @@
               <fudis-grid [alignItemsY]="'baseline'" [columns]="{ xs: 1, sm: 2 }">
                 <fudis-select
                   [variant]="'dropdown'"
-                  [control]="formExample.controls.courseMainMaskot"
-                  [label]="t('form.maskot.label') + ' (Dropdown)'"
+                  [control]="formExample.controls.preferredTeachingMethod"
+                  [label]="t('form.teachingMethod.label') + ' (Dropdown)'"
                 >
                   <ng-template fudisSelectOptions>
-                    @for (option of mainMaskotOptions; track option.value) {
+                    @for (option of teachingMethodOptions; track option.value) {
                       <fudis-select-option
                         [data]="{ value: option.value, label: t(option.label) }"
                       />
@@ -106,11 +106,11 @@
                 </fudis-select>
                 <fudis-select
                   [variant]="'autocompleteDropdown'"
-                  [control]="formExample.controls.courseMainMaskot"
-                  [label]="t('form.maskot.label') + ' (Autocomplete)'"
+                  [control]="formExample.controls.preferredTeachingMethod"
+                  [label]="t('form.teachingMethod.label') + ' (Autocomplete)'"
                 >
                   <ng-template fudisSelectOptions>
-                    @for (option of mainMaskotOptions; track option.value) {
+                    @for (option of teachingMethodOptions; track option.value) {
                       <fudis-select-option
                         [data]="{ value: option.value, label: t(option.label) }"
                       />
@@ -147,15 +147,19 @@
                   <fudis-heading [level]="3" [variant]="'sm'">{{
                     t("selectedOption")
                   }}</fudis-heading>
-                  @if (formExample.controls.courseMainMaskot.value) {
+                  @if (formExample.controls.preferredTeachingMethod.value) {
                     <fudis-dl [variant]="'compact'">
                       <fudis-dl-item>
                         <fudis-dt [contentText]="t('value')" />
-                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.value }}</fudis-dd>
+                        <fudis-dd>{{
+                          formExample.controls.preferredTeachingMethod.value.value
+                        }}</fudis-dd>
                       </fudis-dl-item>
                       <fudis-dl-item>
                         <fudis-dt [contentText]="t('label')" />
-                        <fudis-dd>{{ formExample.controls.courseMainMaskot.value.label }}</fudis-dd>
+                        <fudis-dd>{{
+                          formExample.controls.preferredTeachingMethod.value.label
+                        }}</fudis-dd>
                       </fudis-dl-item>
                     </fudis-dl>
                   } @else {

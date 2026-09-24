@@ -30,9 +30,9 @@ import { BodyTextComponent } from '../typography/body-text/body-text.component';
   ],
   template: `<fudis-grid [columns]="{ md: 2 }" [rowGap]="'md'">
     <fudis-grid-item>
-      <fudis-heading [level]="4">Random items menu</fudis-heading>
+      <fudis-heading [level]="4">Account actions menu</fudis-heading>
       <fudis-icon-button
-        [ariaLabel]="'Random items menu'"
+        [ariaLabel]="'Account actions menu'"
         [size]="'small'"
         [variant]="'secondary'"
         [icon]="'three-dots'"
@@ -51,9 +51,9 @@ import { BodyTextComponent } from '../typography/body-text/body-text.component';
       </fudis-icon-button>
     </fudis-grid-item>
     <fudis-grid-item>
-      <fudis-heading [level]="4">Grouped animals menu</fudis-heading>
+      <fudis-heading [level]="4">Grouped study resources menu</fudis-heading>
       <fudis-icon-button
-        [ariaLabel]="'Grouped animals menu'"
+        [ariaLabel]="'Grouped study resources menu'"
         [size]="'small'"
         [variant]="'secondary'"
         [icon]="'three-dots'"
