@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
 
 const formErrorSummaryText =
-  "Course feedback / Your learning experience / Your favourite course topic: You need to add a topic";
+  "Your learning experience / Your favourite course topic: You need to add a topic";
 
 const dialogFormTitle = "Course feedback";
 
