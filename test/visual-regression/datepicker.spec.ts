@@ -14,7 +14,7 @@ test("datepicker default init, focus, fill, open, select", async ({ page }) => {
     "/iframe.html?args=&id=components-form-date-datepicker--datepicker&viewMode=story",
   );
 
-  await expect(page.getByText("Choose your favourite date.")).toBeVisible();
+  await expect(page.getByText("Select the course start date")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1").focus();
   await page.getByTestId("fudis-datepicker-1").fill(date);
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
@@ -46,7 +46,7 @@ test("datepicker default change calendar language", async ({ page }) => {
   await expect(page).toHaveScreenshot("to-finnish.png", { fullPage: true });
   await closeCalendarOverlay(page, 0);
 
-  await expect(page.getByText("Choose your favourite date.")).toBeVisible();
+  await expect(page.getByText("Select the course start date")).toBeVisible();
   await page.waitForSelector(".fudis-guidance__help-text");
   await page.getByTestId("fudis-button-2").click();
   await expect(page.getByPlaceholder("dd.mm.åååå")).toBeVisible();
@@ -58,7 +58,7 @@ test("datepicker default change calendar language", async ({ page }) => {
   await page.keyboard.press("Escape");
   await page.waitForTimeout(150);
 
-  await expect(page.getByText("Choose your favourite date.")).toBeVisible();
+  await expect(page.getByText("Select the course start date")).toBeVisible();
   await page.getByTestId("fudis-button-2").click();
   await expect(page.getByPlaceholder("dd.mm.yyyy")).toBeVisible();
   await expect(page.getByText("Current language: en")).toBeVisible();
