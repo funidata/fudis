@@ -15,6 +15,15 @@ type StudyPreference = 'studyFormat' | 'teachingLanguage' | 'campus';
 
 type StudyPreferences = { [preference in StudyPreference]?: string | null | undefined };
 
+const studyPreferenceLabels: Record<StudyPreference, string> = {
+  studyFormat: 'study format',
+  teachingLanguage: 'teaching language',
+  campus: 'campus',
+};
+
+const getStudyPreferenceLabel = (preference: string): string =>
+  studyPreferenceLabels[preference as StudyPreference] ?? preference;
+
 @Component({
   selector: 'example-nested-dialog',
   imports: [NgxFudisModule, CommonModule],
@@ -33,7 +42,7 @@ type StudyPreferences = { [preference in StudyPreference]?: string | null | unde
               <fudis-text-input
                 class="fudis-mb-md"
                 [id]="'example-input-' + id"
-                [label]="'Preferred ' + id"
+                [label]="'Preferred ' + _getStudyPreferenceLabel(id)"
                 [control]="exampleDialogFormGroup.controls['preference']"
               />
             </fudis-form-content>
@@ -73,9 +82,13 @@ type StudyPreferences = { [preference in StudyPreference]?: string | null | unde
           No study preferences have been provided.
         </fudis-body-text>
       }
-      @for (preference of _studyPreferences | keyvalue; track preference.key) {
+      @for (
+        preference of _studyPreferences | keyvalue: _preservePreferenceOrder;
+        track preference.key
+      ) {
         <fudis-body-text class="fudis-mb-sm">
-          Your preferred {{ preference.key }} is <b>{{ preference.value }}</b
+          Your preferred {{ _getStudyPreferenceLabel(preference.key) }} is
+          <b>{{ preference.value }}</b
           >.
         </fudis-body-text>
       }
@@ -99,6 +112,8 @@ export class ExampleNestedDialogComponent {
     ComponentType<ExampleNestedDialogComponent> | TemplateRef<ExampleNestedDialogComponent>;
 
   protected _studyPreferences: StudyPreferences = {};
+  protected readonly _getStudyPreferenceLabel = getStudyPreferenceLabel;
+  protected readonly _preservePreferenceOrder = (): number => 0;
   exampleDialogFormGroup = new FormGroup<TestNestedDialogForm>({
     preference: new FormControl(null),
   });
@@ -146,9 +161,10 @@ export class ExampleNestedDialogComponent {
     />
 
     @if (_preferences) {
-      @for (preference of _preferences | keyvalue; track preference.key) {
+      @for (preference of _preferences | keyvalue: _preservePreferenceOrder; track preference.key) {
         <fudis-body-text class="fudis-mt-sm">
-          Your preferred {{ preference.key }} is <b>{{ preference.value }}</b
+          Your preferred {{ _getStudyPreferenceLabel(preference.key) }} is
+          <b>{{ preference.value }}</b
           >.
         </fudis-body-text>
       }
@@ -192,6 +208,8 @@ export class ExampleNestedDialogsComponent {
   @Input() size: FudisDialogSize = 'md';
 
   protected _preferences: StudyPreferences | null;
+  protected readonly _getStudyPreferenceLabel = getStudyPreferenceLabel;
+  protected readonly _preservePreferenceOrder = (): number => 0;
 
   openDialogTemplate(
     dialogToOpen:
