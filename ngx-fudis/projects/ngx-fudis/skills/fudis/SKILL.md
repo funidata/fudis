@@ -11,7 +11,7 @@ Read `node_modules/@funidata/ngx-fudis/AGENTS.md`.
 
 This is the primary reference: component selectors, all inputs and outputs, composition rules, required validators, directives, services, and code examples for every component.
 
-If the file does not exist, tell the user to run `npm install` and confirm `@funidata/ngx-fudis` is in their `package.json` dependencies.
+If the file does not exist, tell the user to confirm `@funidata/ngx-fudis` is in their `package.json` dependencies and run `npm install`.
 
 ## Step 2 — Design guidelines (required)
 
