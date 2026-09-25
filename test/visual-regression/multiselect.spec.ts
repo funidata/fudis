@@ -245,6 +245,7 @@ test.describe("Dropdown and autocompletes", () => {
     await dataAnalysisChip.click();
 
     await page.getByTestId("fudis-multiselect-6").focus();
+    await page.keyboard.press("Escape");
     await expect(page.getByTestId("fudis-multiselect-6-dropdown")).not.toBeVisible();
 
     await page.getByTestId("fudis-multiselect-6").clear();
