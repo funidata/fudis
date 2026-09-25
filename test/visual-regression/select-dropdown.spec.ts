@@ -18,8 +18,8 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await expect(
-    page.getByTestId("fudis-select-1-option-100zewl"),
-  ).toBeFocused(); /* Screaming hairy armadillo (partly endangered)*/
+    page.getByTestId("fudis-select-1-option-1oiq67e"),
+  ).toBeFocused(); /* Project Management */
 
   await page.keyboard.press("ArrowDown", { delay: 20 });
   await page.keyboard.press("ArrowDown", { delay: 20 });
@@ -28,9 +28,13 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown", { delay: 20 });
   await page.keyboard.press("ArrowUp", { delay: 20 });
   await page.keyboard.press("ArrowUp", { delay: 20 });
-  await expect(page.getByTestId("fudis-select-1-option-ba3at")).toBeVisible(); /* Golden jackal */
+  await expect(
+    page.getByTestId("fudis-select-1-option-q20y82"),
+  ).toBeVisible(); /* Data Analysis: Computer Science Lecture Series */
 
-  await page.getByTestId("fudis-select-1-option-qqdcwh").hover(); /* Cat, european wild  */
+  await page
+    .getByTestId("fudis-select-1-option-q20y82")
+    .hover(); /* Data Analysis: Computer Science Lecture Series */
   await page.getByText("Select showcase").hover();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
@@ -40,29 +44,29 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await page.keyboard.press("ArrowDown");
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-173f7lm")).toBeFocused();
   await page.keyboard.press("ArrowUp");
   await page.waitForTimeout(150);
   await expect(
-    page.getByTestId("fudis-select-1-option-c46h35"),
-  ).toBeInViewport(); /* Macaw, scarlet */
-  await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeFocused();
+    page.getByTestId("fudis-select-1-option-1tnzcsn"),
+  ).toBeInViewport(); /* Project Management: Law Lecture Series */
+  await expect(page.getByTestId("fudis-select-1-option-1tnzcsn")).toBeFocused();
 
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-173f7lm")).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await page.keyboard.press("ArrowDown", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  await expect(page.getByTestId("fudis-select-1-option-1h5o")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-173f7lm")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-option-c46h35")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-1tnzcsn")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-option-1ap8lze")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-gqr22y")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-option-11u6ihc")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-h8wp28")).toBeFocused();
   await page.keyboard.press("ArrowUp", { delay: 50 });
-  await expect(page.getByTestId("fudis-select-1-option-nr48pp")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-zjlo9e")).toBeFocused();
   await page.keyboard.press("Enter", { delay: 50 });
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
 
@@ -71,10 +75,13 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
 
   await page
     .getByTestId("fudis-select-1-dropdown")
-    .getByText("Striped hyena")
+    .getByText("Project Management: Law Lecture Series")
     .scrollIntoViewIfNeeded()
     .then(() => {
-      page.getByTestId("fudis-select-1-dropdown").getByText("Striped hyena").click();
+      page
+        .getByTestId("fudis-select-1-dropdown")
+        .getByText("Project Management: Law Lecture Series")
+        .click();
     });
   await page.getByText("Select showcase").hover();
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
@@ -86,14 +93,18 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.getByTestId("fudis-select-1-clear-button").focus();
   await page.keyboard.press("Enter");
 
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
 
   /**
    * Disabled after clearing selection
    */
   await page.getByTestId("fudis-button-1").click();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(0);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    0,
+  );
 
   /**
    * Disabled dropdown options should receive focus
@@ -106,7 +117,7 @@ test("Select dropdown with keyboard interactions", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
-  await expect(page.getByTestId("fudis-select-1-option-13slwtn")).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-option-1w3pbnv")).toBeFocused();
 
   await page.keyboard.press("Enter"); /* Doesn't make selection on disabled option */
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
@@ -120,9 +131,11 @@ test("Select dropdown without clear button", async ({ page }) => {
    */
   await page.getByTestId("fudis-select-1-clear-button").click();
   await page.getByTestId("fudis-select-2").focus();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
   await expect(
-    page.getByTestId("fudis-select-2-option-e05e75").getByText("Golden jackal"),
+    page.getByTestId("fudis-select-2-option-173f7lm").getByText("Introduction to Programming"),
   ).toBeVisible();
   await page.getByTestId("fudis-select-2").click();
   await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
@@ -135,11 +148,15 @@ test("Select dropdown option", async ({ page }) => {
 
   await page.getByTestId("fudis-select-1").focus();
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  const ostrichOption = page.getByTestId("fudis-select-1-dropdown").getByText("Ostrich");
+  const lawCourseOption = page
+    .getByTestId("fudis-select-1-dropdown")
+    .getByText("Project Management: Law Lecture Series");
 
-  await ostrichOption.scrollIntoViewIfNeeded();
-  await ostrichOption.click();
+  await lawCourseOption.scrollIntoViewIfNeeded();
+  await lawCourseOption.click();
   await page.waitForTimeout(150);
-  await expect(page.getByText("You must choose a pet!").filter({ visible: false })).toHaveCount(0);
+  await expect(page.getByText("You must choose a course!").filter({ visible: false })).toHaveCount(
+    0,
+  );
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
 });

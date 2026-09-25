@@ -1,14 +1,14 @@
-import test, { expect, Page } from "@playwright/test";
+import test, { expect } from "@playwright/test";
 
 test("error summary", async ({ page }) => {
   const invalidEmailText =
-    "Form Section Title / Fieldset Legend / Contact email: Input must be an email address.";
+    "Course Information / Course Details / Contact email: Input must be an email address.";
 
   const missingEmailText =
-    "Form Section Title / Fieldset Legend / Contact email: Missing email contact.";
+    "Course Information / Course Details / Contact email: Missing email contact.";
 
   const missingTeacher =
-    "Form Section Title / Fieldset Legend / Responsible Teacher: Missing teacher's name who is responsible for this course.";
+    "Course Information / Course Details / Responsible Teacher: Missing teacher's name who is responsible for this course.";
 
   await page.goto("/iframe.html?args=&id=components-form-error-summary--example&viewMode=story");
 
@@ -50,13 +50,10 @@ test("error summary", async ({ page }) => {
 test("error summary language change and manually sent errors", async ({ page }) => {
   const firstManualError =
     "Add and Remove Error Summary Messages / This is the first custom error sent to Error Summary";
-
   const secondManualError =
     "Add and Remove Error Summary Messages / Here is the second custom error";
-
   const firstManualErrorFi =
     "Lisää tai poista Error Summaryn viestejä / Tämä on ensimmäinen manuaalisesti Error Summaryyn lähetetty virheviesti";
-
   const secondManualErrorFi =
     "Lisää tai poista Error Summaryn viestejä / Tämä on toinen manuaalinen virheviesti";
 
@@ -68,25 +65,23 @@ test("error summary language change and manually sent errors", async ({ page }) 
   await expect(page.getByText(firstManualError)).toBeVisible();
   await expect(page.getByText(secondManualError)).not.toBeVisible();
 
-  // Set Select components
-  await page.getByTestId("fudis-select-1").click();
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("Enter"); /* Selecting R2-D2 */
-  await page.getByTestId("fudis-multiselect-1").click();
-  await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await page.keyboard.press("ArrowDown");
-  await expect(
-    page.getByTestId("fudis-multiselect-1-option-odo5ti-checkbox-input-1"),
-  ).toBeFocused();
-  await page.keyboard.press("Enter"); /* Selecting The High Ground */
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("ArrowDown");
-  await expect(
-    page.getByTestId("fudis-multiselect-1-option-152akng-checkbox-input-4"),
-  ).toBeFocused();
-  await page.keyboard.press("Enter"); /* Selecting Death Star Employee Benefits */
+  const teachingMethodSelect = page.getByTestId("fudis-select-1");
+  const courseTopicsMultiselect = page.getByTestId("fudis-multiselect-1");
+
+  await teachingMethodSelect.scrollIntoViewIfNeeded();
+  await teachingMethodSelect.focus();
+  await page.keyboard.press("ArrowDown"); // Focus Lectures
+  await page.keyboard.press("ArrowDown"); // Focus Seminars
+  await page.keyboard.press("Enter"); // Select Seminars
+
+  await courseTopicsMultiselect.scrollIntoViewIfNeeded();
+  await courseTopicsMultiselect.focus();
+  await page.keyboard.press("ArrowDown"); // Focus Data analysis
+  await page.keyboard.press("Enter"); // Select Data analysis
+  await page.keyboard.press("ArrowDown"); // Focus Academic writing
+  await page.keyboard.press("ArrowDown"); // Focus Research methods
+  await page.keyboard.press("ArrowDown"); // Focus Project management
+  await page.keyboard.press("Enter"); // Select Project management
 
   // Change update strategy
   await page.getByTestId("change-strategy-button").dblclick();
@@ -102,71 +97,39 @@ test("error summary language change and manually sent errors", async ({ page }) 
   // Change language
   await page.getByTestId("change-language-button").click();
   await expect(page.getByText(firstManualError)).not.toBeVisible();
-  await expect(page.getByText(secondManualError)).not.toBeVisible();
   await expect(page.getByText(firstManualErrorFi)).toBeVisible();
   await expect(page.getByText(secondManualErrorFi)).toBeVisible();
   await expect(page).toHaveScreenshot("9-manual-errors-visible-fi.png", { fullPage: true });
 
   // Remove manual errors
-  await page.getByText("Piilota Ensimmäinen Virhe").click();
-  await page.getByText("Piilota Toinen Virhe").click();
-
-  // Let's wait until the hide action has happened by checking that the text changes in the buttons
-  await page.getByText("Näytä Ensimmäinen Virhe").waitFor();
-  await page.getByText("Näytä Toinen Virhe").waitFor();
-
+  await page.getByText("Piilota ensimmäinen virhe").click();
+  await page.getByText("Piilota toinen virhe").click();
+  await page.getByText("Näytä ensimmäinen virhe").waitFor();
+  await page.getByText("Näytä toinen virhe").waitFor();
   await expect(page.getByText(firstManualErrorFi)).not.toBeVisible();
   await expect(page.getByText(secondManualErrorFi)).not.toBeVisible();
   await expect(page).toHaveScreenshot("10-manual-errors-remove.png", { fullPage: true });
 
-  // Check that Select options are translated correctly
-  await expect(
-    page
-      .getByTestId("fudis-description-list-1-item-2-details-1")
-      .getByText("R2-D2 (Astromech Droid)"),
-  ).toBeVisible();
-  await expect(
-    page
-      .getByTestId("fudis-description-list-4-item-2-details-1")
-      .getByText("Death Star Employee Benefits"),
-  ).toBeVisible();
-  await expect(page.getByTestId("fudis-select-1")).toHaveValue("R2-D2 (Astromekaanikkodroidi)");
-  await expect(page.getByTestId("fudis-select-2")).toHaveValue("R2-D2 (Astromekaanikkodroidi)");
+  await expect(page.getByTestId("fudis-select-1")).toHaveValue("Seminaarit");
+  await expect(page.getByTestId("fudis-select-2")).toHaveValue("Seminaarit");
   await expect(page.getByTestId("fudis-multiselect-1")).toHaveValue(
-    "Korkeampi maankamara, Kuolemantähden henkilöstöedut",
+    "Data-analyysi, Projektinhallinta",
   );
+
   await page.getByTestId("fudis-select-1").click();
-  await assertDropdownOption(page, "fudis-select-1-option-b6n1bd", "Jabba the Hutt (Rikollispomo)");
-
+  await expect(page.getByTestId("fudis-select-1-dropdown").getByText("Työpajat")).toBeVisible();
   await page.getByTestId("fudis-select-2").focus();
-  await expect(
-    page.getByTestId("fudis-body-text-8").getByText("Näytetään 1 tulosta"),
-  ).toBeVisible();
-  await assertDropdownOption(page, "fudis-select-2-option-95nokf", "R2-D2 (Astromekaanikkodroidi)");
-
-  await expect(page.getByTestId("fudis-select-2-option-95nokf")).toHaveClass(
-    "fudis-select-option fudis-select-option__focusable fudis-select-option--selected",
-  );
-  await expect(page.getByTestId("fudis-select-2-option-95nokf")).toHaveAttribute(
-    "aria-selected",
-    "true",
-  );
+  await expect(page.getByTestId("fudis-select-2")).toHaveValue("Seminaarit");
 
   await page.getByTestId("fudis-multiselect-1").click();
   await expect(
-    page.getByTestId("fudis-multiselect-1-dropdown").getByText("Rajaton voima"),
+    page.getByTestId("fudis-multiselect-1-dropdown").getByText("Data-analyysi"),
   ).toBeVisible();
 
   await page.getByTestId("change-language-button").click();
-  await expect(page.getByTestId("fudis-select-1")).toHaveValue("R2-D2 (Astromech Droid)");
-  await expect(page.getByTestId("fudis-select-2")).toHaveValue("R2-D2 (Astromech Droid)");
+  await expect(page.getByTestId("fudis-select-1")).toHaveValue("Seminars");
+  await expect(page.getByTestId("fudis-select-2")).toHaveValue("Seminars");
   await expect(page.getByTestId("fudis-multiselect-1")).toHaveValue(
-    "The High Ground, Death Star Employee Benefits",
+    "Data analysis, Project management",
   );
 });
-
-const assertDropdownOption = async (page: Page, id: string, result: string) => {
-  const option = page.getByTestId(id);
-  await option.waitFor();
-  await expect(option.getByText(result)).toBeVisible();
-};

@@ -111,7 +111,7 @@ import { NgxFudisModule } from '../../../ngx-fudis.module';
           </fudis-grid>
         </fudis-dialog-content>
         <fudis-dialog-actions>
-          <fudis-button fudisDialogClose [label]="'Close'" />
+          <fudis-button fudisDialogClose [label]="'Ok'" />
         </fudis-dialog-actions>
       </fudis-dialog>
     </ng-template>

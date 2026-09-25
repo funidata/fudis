@@ -1,9 +1,9 @@
 import test, { expect } from "@playwright/test";
 
 const formErrorSummaryText =
-  "Course feedback / Your favourite course topic: You need to add a topic";
+  "Your learning experience / Your favourite course topic: You need to add a topic";
 
-const dialogFormTitle = "Form Dialog";
+const dialogFormTitle = "Course feedback";
 
 const dialogFormResultAfterClose =
   "Thank you for the feedback! Your favourite topic was Automation testing.";
@@ -40,11 +40,11 @@ test("dialog with grid", async ({ page }) => {
   await page.getByTestId("fudis-button-1").click();
   await expect(page.getByTestId("fudis-menu-button-1")).toBeVisible();
   await expect(page.getByTestId("fudis-button-3")).toBeVisible();
-  await expect(page.getByText("Dialog with fudis-grid and scrollable content")).toBeVisible();
+  await expect(page.getByText("Course information and learning outcomes")).toBeVisible();
   await expect(page).toHaveScreenshot("grid-1-init.png");
   await page.keyboard.press("Tab");
   await expect(page).toHaveScreenshot("grid-2-content-focus.png");
-  await page.getByText(" I am last item of the grid ").scrollIntoViewIfNeeded();
+  await page.getByText("Student support").scrollIntoViewIfNeeded();
   await expect(page).toHaveScreenshot("grid-3-content-scrolled.png");
   await page.keyboard.press("Tab"); // Focus to menu button
   await page.keyboard.press("Enter"); // Open dropdown menu
@@ -61,54 +61,58 @@ test("nested dialogs", async ({ page }) => {
   await expect(page).toHaveScreenshot("nested-dialog-1-fruit.png");
 
   let currentDialog = page.getByTestId("fudis-dialog-1");
-  await expect(currentDialog.getByText("First opened dialog")).toBeVisible();
-  await expect(currentDialog.getByText("You don't have any favorite veggies!")).toBeVisible();
-  await currentDialog.getByTestId("example-input-fruit").fill("Orange");
-  await currentDialog.getByText("Save and open next dialog").click();
+  await expect(currentDialog.getByText("Select study format")).toBeVisible();
+  await expect(currentDialog.getByText("No study preferences have been provided.")).toBeVisible();
+  await currentDialog.getByTestId("example-input-studyFormat").fill("Online");
+  await currentDialog.getByText("Save and open next Dialog").click();
 
   await expect(page).toHaveScreenshot("nested-dialog-2-berry.png");
 
   currentDialog = page.getByTestId("fudis-dialog-2");
-  await expect(currentDialog.getByText("Second opened dialog")).toBeVisible();
-  await expect(currentDialog.getByText("You don't have any favorite veggies!")).not.toBeVisible();
-  await expect(currentDialog.getByText("Your favorite fruit is Orange.")).toBeVisible();
-  await currentDialog.getByTestId("example-input-berry").fill("Strawberry");
-  await currentDialog.getByText("Save and open next dialog").click();
+  await expect(currentDialog.getByText("Select teaching language")).toBeVisible();
+  await expect(
+    currentDialog.getByText("No study preferences have been provided."),
+  ).not.toBeVisible();
+  await expect(currentDialog.getByText("Your preferred study format is Online.")).toBeVisible();
+  await currentDialog.getByTestId("example-input-teachingLanguage").fill("English");
+  await currentDialog.getByText("Save and open next Dialog").click();
 
   await expect(page).toHaveScreenshot("nested-dialog-3-vegetable.png");
 
   currentDialog = page.getByTestId("fudis-dialog-3");
-  await expect(currentDialog.getByText("Third opened dialog")).toBeVisible();
-  await expect(currentDialog.getByText("Your favorite berry is Strawberry.")).toBeVisible();
-  await currentDialog.getByTestId("example-input-vegetable").fill("Tomato");
-  await currentDialog.getByText("Save and open next dialog").click();
+  await expect(currentDialog.getByText("Select campus")).toBeVisible();
+  await expect(
+    currentDialog.getByText("Your preferred teaching language is English."),
+  ).toBeVisible();
+  await currentDialog.getByTestId("example-input-campus").fill("City campus");
+  await currentDialog.getByText("Save and open next Dialog").click();
 
   await expect(page).toHaveScreenshot("nested-dialog-4-inputs-filled.png");
 
   currentDialog = page.getByTestId("fudis-dialog-4");
-  await expect(currentDialog.getByText("Fourth and last opened dialog")).toBeVisible();
-  await expect(currentDialog.getByText("Your favorite vegetable is Tomato")).toBeVisible();
+  await expect(currentDialog.getByText("Study preferences summary")).toBeVisible();
+  await expect(currentDialog.getByText("Your preferred campus is City campus.")).toBeVisible();
   await page.waitForTimeout(150); // Chrome seems to need some time at this point
   await page.keyboard.press("Escape");
 
   currentDialog = page.getByTestId("fudis-dialog-3");
-  await expect(currentDialog.getByText("Fourth and last opened dialog")).not.toBeVisible();
-  await expect(currentDialog.getByText("Third opened dialog")).toBeVisible();
+  await expect(currentDialog.getByText("Study preferences summary")).not.toBeVisible();
+  await expect(currentDialog.getByText("Select campus")).toBeVisible();
   await page.waitForTimeout(150); // Chrome seems to need some time at this point
   await page.keyboard.press("Escape");
 
   currentDialog = page.getByTestId("fudis-dialog-2");
-  await expect(currentDialog.getByText("Third opened dialog")).not.toBeVisible();
-  await expect(currentDialog.getByText("Second opened dialog")).toBeVisible();
+  await expect(currentDialog.getByText("Select campus")).not.toBeVisible();
+  await expect(currentDialog.getByText("Select teaching language")).toBeVisible();
   await page.waitForTimeout(150); // Chrome seems to need some time at this point
   await page.keyboard.press("Escape");
 
   currentDialog = page.getByTestId("fudis-dialog-1");
-  await expect(currentDialog.getByText("Second opened dialog")).not.toBeVisible();
-  await expect(currentDialog.getByText("First opened dialog")).toBeVisible();
+  await expect(currentDialog.getByText("Select teaching language")).not.toBeVisible();
+  await expect(currentDialog.getByText("Select study format")).toBeVisible();
   await currentDialog.getByText("Save and close dialog").click(); // If the last closing is done by ESC, the data won't pass to the Story template
 
-  await expect(page.getByText("First opened dialog")).not.toBeVisible();
+  await expect(page.getByText("Select study format")).not.toBeVisible();
   await expect(page.getByText("Open dialog with nested dialogs")).toBeVisible();
   await expect(page).toHaveScreenshot("nested-dialog-5-final-result.png");
 });
