@@ -24,33 +24,33 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await expect(
-    page.getByTestId("fudis-multiselect-1-option-100zewl-checkbox-input-6"),
+    page.getByTestId("fudis-multiselect-1-option-1oiq67e").getByRole("option"),
   ).toBeFocused();
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
-  await page.keyboard.press("ArrowUp"); /* Focus is on disabled option */
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("ArrowUp");
-
+  await page.keyboard.press("ArrowUp");
   await expect(
-    page.getByTestId("fudis-multiselect-1-option-nr48pp-checkbox-input-55"),
+    page.getByTestId("fudis-multiselect-1-option-zjlo9e").getByRole("option"),
   ).toBeFocused();
-  await page.getByTestId("fudis-multiselect-1-option-ibd9lw").hover();
-  await expect(page).toHaveScreenshot("A-4-hover-alligator.png");
+
+  await page.getByTestId("fudis-multiselect-1-option-h8wp28").first().hover();
+  await expect(page).toHaveScreenshot("A-4-hover-academic-writing.png");
   await page.getByTestId("fudis-heading-1").hover();
 
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-5-select-dolphin.png");
+  await expect(page).toHaveScreenshot("A-5-select-programming.png");
   await page.keyboard.press("Space");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-6-deselect-dolphin.png");
-  await page.getByTestId("fudis-multiselect-1-option-1d30z6z").click();
-  await page.getByTestId("fudis-multiselect-1-option-1szhdxn").click();
+  await expect(page).toHaveScreenshot("A-6-deselect-programming.png");
+  await page.getByTestId("fudis-multiselect-1-option-179er9u").first().click();
+  await page.getByTestId("fudis-multiselect-1-option-1388lei").click();
 
   await page.getByTestId("fudis-heading-1").hover();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
@@ -90,9 +90,9 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
-  await expect(page.getByText("Pick at least two pets")).toHaveCount(6);
+  await expect(page.getByText("Select at least two courses")).toHaveCount(6);
   await page.getByTestId("fudis-button-1").click();
-  await expect(page.getByText("Pick at least two pets")).toHaveCount(0);
+  await expect(page.getByText("Select at least two courses")).toHaveCount(0);
 });
 
 test.describe("Dropdown and autocompletes", () => {
@@ -109,7 +109,9 @@ test.describe("Dropdown and autocompletes", () => {
     await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
     await expect(
-      page.getByTestId("fudis-multiselect-2-option-e05e75").getByText("Golden jackal"),
+      page
+        .getByTestId("fudis-multiselect-2-option-173f7lm")
+        .getByText("Introduction to Programming", { exact: true }),
     ).toBeVisible();
     await page.getByTestId("fudis-multiselect-2").click();
     await page.waitForTimeout(150);
@@ -122,7 +124,7 @@ test.describe("Dropdown and autocompletes", () => {
 
     await page.getByTestId("fudis-heading-1").hover();
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
-    await expect(page.getByText("Pick at least two pets")).toHaveCount(6);
+    await expect(page.getByText("Select at least two courses")).toHaveCount(6);
   });
 
   test("Autocomplete dropdown with clear button", async ({ page }) => {
@@ -133,9 +135,9 @@ test.describe("Dropdown and autocompletes", () => {
     await expect(page.getByTestId("fudis-multiselect-2-dropdown")).not.toBeVisible();
 
     await page.keyboard.press("KeyI");
-    await expect(page.locator(".fudis-body-text").getByText("Showing 48 results")).toBeVisible();
+    await expect(page.locator(".fudis-body-text").getByText("Showing 34 results")).toBeVisible();
     await page.keyboard.press("KeyN");
-    await expect(page.locator(".fudis-body-text").getByText("Showing 18 results")).toBeVisible();
+    await expect(page.locator(".fudis-body-text").getByText("Showing 34 results")).toBeVisible();
   });
 
   test("Autocomplete dropdown without clear button", async ({ page }) => {
@@ -146,10 +148,10 @@ test.describe("Dropdown and autocompletes", () => {
     await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-3-dropdown")).not.toBeVisible();
     await page.getByTestId("fudis-multiselect-4").focus();
-    await page.keyboard.type("golden");
+    await page.keyboard.type("academic");
     await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
-    await expect(page.locator(".fudis-body-text").getByText("Showing 3 results")).toBeVisible();
+    await expect(page.locator(".fudis-body-text").getByText("Showing 11 results")).toBeVisible();
     await page.getByTestId("fudis-multiselect-4").focus();
     await page.keyboard.press("Enter");
     await expect(page.getByTestId("fudis-multiselect-4-dropdown")).not.toBeVisible();
@@ -157,7 +159,7 @@ test.describe("Dropdown and autocompletes", () => {
     await page.keyboard.press("KeyE");
     await page.keyboard.press("KeyA");
     await page.waitForTimeout(150);
-    await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
+    await expect(page.locator(".fudis-body-text").getByText("Showing 12 results")).toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
     await page.keyboard.press("Enter");
     await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
@@ -179,32 +181,32 @@ test.describe("Dropdown and autocompletes", () => {
     await page.keyboard.press("Space");
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
 
-    await page.keyboard.press("KeyM");
-    await page.keyboard.press("KeyO");
+    await page.keyboard.press("KeyD");
+    await page.keyboard.press("KeyI");
     await page.waitForTimeout(150);
 
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
-    await page.keyboard.press("KeyU");
+    await page.keyboard.press("KeyG");
     await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
-    await expect(page.locator(".fudis-body-text").getByText("Showing 2 results")).toBeVisible();
+    await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
 
     await page.keyboard.press("Backspace");
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
-    await page.keyboard.press("KeyU");
+    await page.keyboard.press("KeyG");
     await page.waitForTimeout(150);
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
 
-    await page.keyboard.type("ntain lion");
+    await page.keyboard.type("ital learning environments");
     await page.waitForTimeout(150);
     await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
     await page.keyboard.press("Enter");
     await page.getByTestId("fudis-multiselect-5").focus();
     await page.getByTestId("fudis-multiselect-5").clear();
-    await page.keyboard.type("cat");
+    await page.keyboard.type("research");
     await page.waitForTimeout(150);
-    await expect(page.locator(".fudis-body-text").getByText("Showing 5 results")).toBeVisible();
+    await expect(page.locator(".fudis-body-text").getByText("Showing 11 results")).toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
 
     await page.keyboard.press("ArrowDown"); /* Focus is on disabled option */
@@ -218,7 +220,7 @@ test.describe("Dropdown and autocompletes", () => {
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("Space");
-    await expect(page.getByTestId("fudis-multiselect-5-option-1fkgm3k")).toHaveClass(
+    await expect(page.getByTestId("fudis-multiselect-5-option-1juncq5").nth(4)).toHaveClass(
       "fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--focused fudis-multiselect-option--checked",
     );
   });
@@ -230,13 +232,19 @@ test.describe("Dropdown and autocompletes", () => {
     await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
     await expect(page.getByTestId("fudis-multiselect-6-dropdown")).not.toBeVisible();
 
-    await page.keyboard.type("Ringtail cat");
+    await page.keyboard.type("Academic Writing");
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("Space");
     await page.keyboard.press("Escape");
     await page.getByTestId("fudis-multiselect-6").clear();
-    await page.getByTestId("fudis-multiselect-6-selected-items").getByText("Ringtail cat").focus();
-    await page.getByTestId("fudis-multiselect-6-selected-items").getByText("Ringtail cat").click();
+    await page
+      .getByTestId("fudis-multiselect-6-selected-items")
+      .getByText("Academic Writing")
+      .focus();
+    await page
+      .getByTestId("fudis-multiselect-6-selected-items")
+      .getByText("Academic Writing")
+      .click();
 
     await page.getByTestId("fudis-multiselect-6").focus();
     await page.getByTestId("fudis-multiselect-6").click();
@@ -264,37 +272,25 @@ test("Select values that have duplicate labels", async ({ page }) => {
   await page.getByTestId("fudis-multiselect-1").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await expect(
-    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-7"),
+    page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(1).getByRole("option"),
   ).toHaveAttribute("aria-selected", "false");
 
-  await page
-    .getByTestId("fudis-multiselect-1-dropdown")
-    .getByText("Sadly I am an unwanted duplicate")
-    .nth(1)
-    .click();
+  await page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(1).click();
 
   await expect(
-    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-7"),
+    page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(1).getByRole("option"),
   ).toHaveAttribute("aria-selected", "true");
   await expect(
-    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-5"),
+    page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(0).getByRole("option"),
   ).toHaveAttribute("aria-selected", "false");
 
-  await page
-    .getByTestId("fudis-multiselect-1-dropdown")
-    .getByText("Sadly I am an unwanted duplicate")
-    .nth(1)
-    .click();
-  await page
-    .getByTestId("fudis-multiselect-1-dropdown")
-    .getByText("Sadly I am an unwanted duplicate")
-    .nth(0)
-    .click();
+  await page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(1).click();
+  await page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(0).click();
 
   await expect(
-    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-7"),
+    page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(1).getByRole("option"),
   ).toHaveAttribute("aria-selected", "false");
   await expect(
-    page.getByTestId("fudis-multiselect-1-option-hxx4g6-checkbox-input-5"),
+    page.getByTestId("fudis-multiselect-1-option-1tb1v88").nth(0).getByRole("option"),
   ).toHaveAttribute("aria-selected", "true");
 });
