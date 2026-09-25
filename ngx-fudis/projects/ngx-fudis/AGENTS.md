@@ -24,7 +24,7 @@ Replace `<target>` with the path for your tool:
 - **GitHub Copilot**: `.claude/skills/fudis`, `.github/skills/fudis` or `.agents/skills/fudis`
 - **Other compatible tools**: `.agents/skills/fudis`
 
-You might need to restart your AI tool after copying the file. In Claude Code, invoke `/fudis` before implementing a component.
+You might need to restart your AI tool after copying the file. In your AI tool, invoke `/fudis` before implementing a component.
 
 ---
 
