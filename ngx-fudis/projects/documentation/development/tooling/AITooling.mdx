@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/Development/Tooling/AI Tooling" />
+
+# AI Tooling
+
+Fudis ships supporting files to help AI coding assistants implement components correctly. These are included in the npm package:
+
+- **`AGENTS.md`** - Full API reference: component selectors, inputs, outputs, composition rules, validators, and code examples.
+- **`guidelines.md`** - UX and design guidelines for each component (written in Finnish).
+- **`skills/fudis/SKILL.md`** - An agent skill that loads both files automatically when activated.
+
+The skill follows the [Agent Skills open standard](https://github.com/agentskills/agentskills), which is supported by Claude Code, GitHub Copilot, and other compatible AI tools.
+
+## Setup
+
+Ask your AI tool to read `node_modules/@funidata/ngx-fudis/AGENTS.md`, which has the setup instructions. Instruct your AI tool to copy the skill file to the correct location if needed. Restart the tool afterward and `/fudis` will be available.
+
+For full control over placement, copy the skill manually (run in your project root):
+
+```bash
+mkdir -p <target> && cp node_modules/@funidata/ngx-fudis/skills/fudis/SKILL.md <target>/SKILL.md
+```
+
+Replace `<target>` with the path for your tool:
+
+- **Claude Code**: `.claude/skills/fudis`
+- **GitHub Copilot**: `.claude/skills/fudis`, `.github/skills/fudis` or `.agents/skills/fudis`
+- **Other compatible tools**: `.agents/skills/fudis`
+
+**Important:** You might need to restart the AI tool after copying the file. Skills added during an active session might not be picked up until the next session.
+
+After restarting, type `/fudis` before asking the AI tool to implement a Fudis component. The skill will read the API reference and design guidelines before writing any code.
+
+## Personal skills
+
+If you want to be able to use this skill across multiple projects, you can copy it to your home directory instead of the project root. For this, refer to your AI tool's documentation for personal skill locations. For example, Claude Code supports `~/.claude/skills/fudis/SKILL.md` and GitHub Copilot supports `~/.agents/skills/fudis/SKILL.md`.
+Note that you will still need to have `@funidata/ngx-fudis` installed in each project for the skill to work, as it reads the API reference and guidelines from the installed package.
