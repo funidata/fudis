@@ -8,8 +8,29 @@
 
 ---
 
+## AI Tool Setup
+
+The included skill follows the [Agent Skills open standard](https://github.com/agentskills/agentskills) and works with any compatible AI tool, including Claude Code and GitHub Copilot.
+
+Copy it into your project once:
+
+```bash
+mkdir -p <target> && cp node_modules/@funidata/ngx-fudis/skills/fudis/SKILL.md <target>/SKILL.md
+```
+
+Replace `<target>` with the path for your tool:
+
+- **Claude Code**: `.claude/skills/fudis`
+- **GitHub Copilot**: `.claude/skills/fudis`, `.github/skills/fudis` or `.agents/skills/fudis`
+- **Other compatible tools**: `.agents/skills/fudis`
+
+You might need to restart your AI tool after copying the file. In your AI tool, invoke `/fudis` before implementing a component.
+
+---
+
 ## Table of Contents
 
+- [AI Tool Setup](#ai-tool-setup)
 - [Setup](#setup)
 - [Validators](#validators)
 - [Composition Rules](#composition-rules)
