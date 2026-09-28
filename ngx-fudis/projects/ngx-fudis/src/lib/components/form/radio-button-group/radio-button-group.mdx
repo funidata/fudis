@@ -29,25 +29,25 @@ Radio Button component's mandatory properties are `label` and `value`.
 ```
 // In TypeScript file
 
-const control: FormControl = new FormControl(null, FudisValidators.required('You must choose a fruit'));
+const control: FormControl = new FormControl(null, FudisValidators.required('Select a study format'));
 
-const fruitOptions: FudisRadioButtonOption<object>[] = [
-  { value: 'apple', label: 'Apple' },
+const studyOptions: FudisRadioButtonOption<object>[] = [
+  { value: 'on-campus', label: 'On campus' },
   {
-    value: 'fair-trade-banana',
-    label: 'Fair Trade Banana',
+    value: 'online',
+    label: 'Online',
   },
-  { value: 'cherry', label: 'Cherry' },
+  { value: 'hybrid', label: 'Hybrid' },
 ];
 
 // HTML template
 
 <fudis-radio-button-group
     [control]="control"
-    [label]="'Pick a fruit'"
+    [label]="'Choose your study format'"
     (handleChange)="handleChange($event)"
   >
-    @if (option of fruitOptions; track option.value) {
+    @if (option of studyOptions; track option.value) {
       <fudis-radio-button [label]="option.label" [value]="option.value" />
     }
   </fudis-radio-button-group>

@@ -58,9 +58,9 @@ In similar fashion, if `options` array is defined like this:
 
 ```
 options = [
-  { controlName: 'klingon', label: 'KLI' },
-  { controlName: 'elvish', label: 'ELV' },
-  { controlName: 'dothraki', label: 'DOT' },
+  { controlName: 'de', label: 'DE' },
+  { controlName: 'es', label: 'ES' },
+  { controlName: 'fr', label: 'FR' },
 ]
 ```
 
@@ -68,15 +68,15 @@ Then the FormGroup should look like this to match with each selectable option:
 
 ```
 interface MyCustomType {
-  klingon: FormControl<string | null>;
-  elvish: FormControl<string | null>;
-  dothraki: FormControl<string | null>;
+  de: FormControl<string | null>;
+  es: FormControl<string | null>;
+  fr: FormControl<string | null>;
 }
 
 formGroup = new FormGroup<MyCustomType>({
-  klingon: new FormControl<string | null>(null),
-  elvish: new FormControl<string | null>(null),
-  dothraki: new FormControl<string | null>(null),
+  de: new FormControl<string | null>(null),
+  es: new FormControl<string | null>(null),
+  fr: new FormControl<string | null>(null),
 }),
 ```
 
@@ -125,19 +125,19 @@ The `formGroup` property of this example is defined like this:
   code={`
 formGroup = new FormGroup<T>({
   fi: new FormControl<string | null>(null, [
-    FudisValidators.required('Missing superhero name on Finnish.'),
-    FudisValidators.minLength(5, 'Too short Finnish name'),
-    FudisValidators.maxLength(10, 'Too long Finnish name'),
+    FudisValidators.required('Missing course description in Finnish.'),
+    FudisValidators.minLength(5, 'Too short Finnish description'),
+    FudisValidators.maxLength(10, 'Too long Finnish description'),
   ]),
   sv: new FormControl<string | null>(null, [
-    FudisValidators.required('Missing superhero name on Swedish.'),
-    FudisValidators.minLength(5, 'Too short Swedish name'),
-    FudisValidators.maxLength(15, 'Too long Swedish name'),
+    FudisValidators.required('Missing course description in Swedish.'),
+    FudisValidators.minLength(5, 'Too short Swedish description'),
+    FudisValidators.maxLength(15, 'Too long Swedish description'),
   ]),
   en: new FormControl<string | null>(null, [
-    FudisValidators.required('Missing superhero name on English.'),
-    FudisValidators.minLength(5, 'Too short English name'),
-    FudisValidators.maxLength(20, 'Too long English name'),
+    FudisValidators.required('Missing course description in English.'),
+    FudisValidators.minLength(5, 'Too short English description'),
+    FudisValidators.maxLength(20, 'Too long English description'),
   ])
 })`}
 />

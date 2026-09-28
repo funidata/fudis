@@ -126,7 +126,10 @@ interface MyCheckboxGroup {
                   control of allForms.controls.formThree.controls | keyvalue;
                   track control.key
                 ) {
-                  <fudis-checkbox-group-option [controlName]="control.key" [label]="control.key" />
+                  <fudis-checkbox-group-option
+                    [controlName]="control.key"
+                    [label]="teachingMethodLabels[control.key]"
+                  />
                 }
               </fudis-checkbox-group>
             </ng-template>
@@ -261,6 +264,14 @@ export class StorybookExampleWithMultipleFormsComponent {
   errorSummaryVisible = false;
 
   errorSummaryTitle = 'Some course information is missing or incorrect.';
+
+  teachingMethodLabels: Record<string, string> = {
+    lectures: 'Lectures',
+    seminars: 'Seminars',
+    workshops: 'Workshops',
+    independentStudy: 'Independent study',
+    projectWork: 'Project work',
+  };
 
   selectOptions = defaultOptions;
 
