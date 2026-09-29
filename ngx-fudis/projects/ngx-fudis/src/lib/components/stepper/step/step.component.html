@@ -1,0 +1,19 @@
+<li class="fudis-step" [aria-current]="isCurrent ? 'step' : null" [aria-label]="ariaLabel">
+  <div
+    class="fudis-step__arrow fudis-step__arrow--{{ orientation }}"
+    [class.fudis-step__arrow--current]="isCurrent"
+    [class.fudis-step__arrow--completed]="isCompleted"
+  >
+    <div class="fudis-step__arrow__label fudis-step__title">
+      <span [class.fudis-step__arrow__underline]="isCurrent && orientation === 'vertical'">{{
+        index + 1 + "."
+      }}</span>
+      @if (orientation === "horizontal") {
+        <span [class.fudis-step__arrow__underline]="isCurrent">{{ label }}</span>
+      }
+    </div>
+  </div>
+  @if (orientation === "vertical") {
+    <div class="fudis-step__title" [class.fudis-step__title--active]="isCurrent">{{ label }}</div>
+  }
+</li>

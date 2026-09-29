@@ -1,0 +1,14 @@
+<nav>
+  <ol class="fudis-stepper" [class.fudis-stepper--vertical]="orientation === 'vertical'">
+    @for (step of stepList; track idx; let idx = $index) {
+      <fudis-step
+        [index]="idx"
+        [orientation]="orientation"
+        [totalSteps]="stepList.length"
+        [currentStepIndex]="currentStepIndex"
+        [label]="step.label"
+      >
+      </fudis-step>
+    }
+  </ol>
+</nav>

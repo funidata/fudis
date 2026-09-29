@@ -1,0 +1,14 @@
+/* stylelint-disable property-disallowed-list */
+@use '@funidata/fudis-core' as core;
+
+.fudis-stepper {
+  @include core.body-text-sm-regular;
+
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+
+  &--vertical {
+    flex-direction: column;
+  }
+}

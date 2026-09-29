@@ -90,6 +90,13 @@ export interface FudisTranslationConfig {
       RESULTS: string;
     };
   };
+  STEPPER: {
+    ARIA_LABEL: string;
+    STEP: {
+      ARIA_LABEL_PREFIX: string;
+      COMPLETED: string;
+    };
+  };
   IMAGE: {
     // Alternative text for screen readers.
     FUNIDATA_LOGO: string;
@@ -199,6 +206,13 @@ export const en: FudisTranslationConfig = {
       RESULTS: 'results',
     },
   },
+  STEPPER: {
+    ARIA_LABEL: 'Steps',
+    STEP: {
+      ARIA_LABEL_PREFIX: 'Step',
+      COMPLETED: 'Completed',
+    },
+  },
   IMAGE: {
     FUNIDATA_LOGO: 'Funidata homepage',
   },
@@ -303,6 +317,13 @@ export const fi: FudisTranslationConfig = {
       RESULTS: 'tulosta',
     },
   },
+  STEPPER: {
+    ARIA_LABEL: 'Toiminnon vaiheet',
+    STEP: {
+      ARIA_LABEL_PREFIX: 'Vaihe',
+      COMPLETED: 'Suoritettu',
+    },
+  },
   IMAGE: {
     FUNIDATA_LOGO: 'Funidatan kotisivut',
   },
@@ -402,6 +423,13 @@ export const sv: FudisTranslationConfig = {
       NO_RESULTS: 'Inga sökresultat',
       SHOWING: 'Visas',
       RESULTS: 'resultat',
+    },
+  },
+  STEPPER: {
+    ARIA_LABEL: 'Stegs',
+    STEP: {
+      ARIA_LABEL_PREFIX: 'Steg',
+      COMPLETED: 'Slutförd',
     },
   },
   IMAGE: {
