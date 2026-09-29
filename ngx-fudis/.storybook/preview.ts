@@ -97,6 +97,7 @@ const preview: Preview = {
             'Notification',
             'Pagination',
             'Section',
+            'Stepper',
             'Tab Navigation',
             'Typography',
           ],
