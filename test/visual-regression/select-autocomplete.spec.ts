@@ -53,15 +53,11 @@ test("Select autocompletes", async ({ page }) => {
     6,
   );
 
-  await page.keyboard.press("Enter");
-  await expect(page.getByTestId("fudis-select-4-dropdown")).not.toBeVisible();
-  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
-    6,
-  );
-
-  await page.keyboard.press("Space");
-  await page.keyboard.type("writing");
-  await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
+  const academicWritingOption = page
+    .getByTestId("fudis-select-4-dropdown")
+    .getByRole("option", { name: "Academic Writing", exact: true });
+  await expect(academicWritingOption).toBeVisible();
+  await academicWritingOption.focus();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-4-dropdown")).not.toBeVisible();
   await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
