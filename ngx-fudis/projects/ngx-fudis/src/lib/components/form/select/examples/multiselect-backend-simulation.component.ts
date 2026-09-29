@@ -19,7 +19,6 @@ import { FudisValidators } from '../../../../utilities/form/validators';
     <fudis-body-text
       >Number of options from 'database' checked: {{ databaseCounter }}</fudis-body-text
     >
-    <fudis-body-text>Filtering status: {{ filterStatus }}</fudis-body-text>
     <fudis-body-text
       >Number of options loaded to DOM: {{ (searchResults | async)?.length }}</fudis-body-text
     >
@@ -51,6 +50,6 @@ export class StorybookExampleMultiselectBackendSimulationComponent extends Story
   @Output() selectionUpdate = new EventEmitter<FudisSelectOption<string>[] | null>();
 
   override control: FormControl = new FormControl<FudisSelectOption<string>[] | null>(null, [
-    FudisValidators.required('You must choose a movie!'),
+    FudisValidators.required('Select at least one course.'),
   ]);
 }

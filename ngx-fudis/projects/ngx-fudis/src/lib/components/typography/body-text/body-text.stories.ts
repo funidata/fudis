@@ -47,32 +47,31 @@ Example.args = {
   variant: 'md-regular',
   align: 'left',
   lang: 'en',
-  content:
-    'Mutiny Pirate Round execution dock spanker broadside schooner aye reef sails quarter yo-ho-ho.',
+  content: 'Students can view course information, submit assignments, and track academic progress.',
 };
 
 export const AllVariants: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-body-text [variant]="'lg-regular'" class="fudis-mb-xs"
-      >This paragraph has <strong>lg-regular</strong> variant. Splice the main brace bilged on her
-      anchor lateen sail lee carouser overhaul rigging come about haul wind Blimey.
+      >This paragraph has <strong>lg-regular</strong> variant. Course information is presented in a
+      clear, readable format for students.
     </fudis-body-text>
     <fudis-body-text [variant]="'lg-light'" class="fudis-mb-xs"
-      >This paragraph has <strong>lg-light</strong> variant. Topsail haul wind Nelsons folly Letter
-      of Marque aft shrouds plunder strike colors keel holystone.
+      >This paragraph has <strong>lg-light</strong> variant. Students can review their study plan
+      before registering for courses.
     </fudis-body-text>
     <fudis-body-text [variant]="'md-regular'" class="fudis-mb-xs"
-      >This paragraph has <strong>md-regular</strong> variant.Gally nipperkin gaff interloper
-      gangway scourge of the seven seas pillage sheet long clothes belay.</fudis-body-text
+      >This paragraph has <strong>md-regular</strong> variant. Assessment information is available
+      in the course catalogue.</fudis-body-text
     >
     <fudis-body-text [variant]="'md-light'" class="fudis-mb-xs"
-      >This paragraph has <strong>md-light</strong> variant. Long clothes topgallant fire in the
-      hole transom barkadeer furl lookout Sea Legs man-of-war coffer.
+      >This paragraph has <strong>md-light</strong> variant. Academic services provide guidance
+      throughout the academic year.
     </fudis-body-text>
     <fudis-body-text [variant]="'sm-regular'"
-      >This paragraph has <strong>sm-regular</strong> variant. Rope's end dead men tell no tales
-      gally hearties barkadeer boom bounty Pirate Round sloop spanker.
+      >This paragraph has <strong>sm-regular</strong> variant. Check the deadline before submitting
+      your application.
     </fudis-body-text>
   `,
 });

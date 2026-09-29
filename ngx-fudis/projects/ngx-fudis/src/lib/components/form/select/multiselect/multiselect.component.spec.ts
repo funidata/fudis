@@ -5,7 +5,7 @@ import { MultiselectComponent } from './multiselect.component';
 import { MultiselectOptionComponent } from './multiselect-option/multiselect-option.component';
 import { FudisInputSize, FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
-import { TestAnimalSound, defaultOptions, TestAnimalValue } from '../common/mock_data';
+import { TestCourseAvailability, defaultOptions, TestCourseValue } from '../common/mock_data';
 import { SelectOptionsDirective } from '../common/select-options-directive/select-options.directive';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { FudisDialogService } from '../../../../services/dialog/dialog.service';
@@ -32,10 +32,10 @@ import { FudisDialogService } from '../../../../services/dialog/dialog.service';
 class MultiselectMockComponent<T = string> {
   @ViewChild('multiselectEl') multiselectEl: MultiselectComponent<T>;
 
-  options: TestAnimalSound[] = defaultOptions;
+  options: TestCourseAvailability[] = defaultOptions;
 
   @Input() showSelectionChips = true;
-  @Input() control: FormControl<FudisSelectOption<TestAnimalValue>[] | null> = new FormControl(
+  @Input() control: FormControl<FudisSelectOption<TestCourseValue>[] | null> = new FormControl(
     null,
   );
 }
@@ -43,11 +43,11 @@ class MultiselectMockComponent<T = string> {
 // TODO: add test for disabled states
 
 describe('MultiselectComponent', () => {
-  let component: MultiselectMockComponent<TestAnimalValue>;
-  let fixture: ComponentFixture<MultiselectMockComponent<TestAnimalValue>>;
+  let component: MultiselectMockComponent<TestCourseValue>;
+  let fixture: ComponentFixture<MultiselectMockComponent<TestCourseValue>>;
 
-  let multiselectComponent: MultiselectComponent<TestAnimalValue>;
-  let multiselectComponentFixture: ComponentFixture<MultiselectComponent<TestAnimalValue>>;
+  let multiselectComponent: MultiselectComponent<TestCourseValue>;
+  let multiselectComponentFixture: ComponentFixture<MultiselectComponent<TestCourseValue>>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -57,7 +57,7 @@ describe('MultiselectComponent', () => {
   });
 
   function initWithControlValue() {
-    const control = new FormControl<FudisSelectOption<TestAnimalValue>[]>([
+    const control = new FormControl<FudisSelectOption<TestCourseValue>[]>([
       defaultOptions[0],
       defaultOptions[2],
     ]);
@@ -68,7 +68,7 @@ describe('MultiselectComponent', () => {
   }
 
   function initWithControlNull() {
-    const control = new FormControl<FudisSelectOption<TestAnimalValue>[] | null>(null);
+    const control = new FormControl<FudisSelectOption<TestCourseValue>[] | null>(null);
     fixture.componentRef.setInput('control', control);
 
     fixture.detectChanges();
@@ -89,11 +89,11 @@ describe('MultiselectComponent', () => {
 
   describe('Control', () => {
     beforeEach(() => {
-      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent<TestAnimalValue>);
+      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent<TestCourseValue>);
       multiselectComponent = multiselectComponentFixture.componentInstance;
       multiselectComponentFixture.componentRef.setInput(
         'control',
-        new FormControl<FudisSelectOption<TestAnimalValue>[]>([
+        new FormControl<FudisSelectOption<TestCourseValue>[]>([
           defaultOptions[0],
           defaultOptions[2],
         ]),
@@ -156,11 +156,11 @@ describe('MultiselectComponent', () => {
 
   describe('CSS classes', () => {
     beforeEach(() => {
-      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent<TestAnimalValue>);
+      multiselectComponentFixture = TestBed.createComponent(MultiselectComponent<TestCourseValue>);
       multiselectComponent = multiselectComponentFixture.componentInstance;
       multiselectComponentFixture.componentRef.setInput(
         'control',
-        new FormControl<FudisSelectOption<TestAnimalValue>[]>([
+        new FormControl<FudisSelectOption<TestCourseValue>[]>([
           defaultOptions[0],
           defaultOptions[2],
         ]),
@@ -178,7 +178,7 @@ describe('MultiselectComponent', () => {
 
   describe('Input', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(MultiselectMockComponent<TestAnimalValue>);
+      fixture = TestBed.createComponent(MultiselectMockComponent<TestCourseValue>);
       component = fixture.componentInstance;
     });
 
@@ -215,7 +215,7 @@ describe('MultiselectComponent', () => {
     it('should have HTML input value from control value if control value is set on init', () => {
       initWithControlValue();
 
-      const expectedValue = 'Dog, Platypus';
+      const expectedValue = 'Introduction to Programming, Data Analysis';
 
       const inputElement = getElement(fixture, '.fudis-select__input') as HTMLInputElement;
 
@@ -225,7 +225,7 @@ describe('MultiselectComponent', () => {
 
   describe('Multiselection change', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(MultiselectMockComponent<TestAnimalValue>);
+      fixture = TestBed.createComponent(MultiselectMockComponent<TestCourseValue>);
       component = fixture.componentInstance;
     });
 
@@ -241,7 +241,7 @@ describe('MultiselectComponent', () => {
         const element = getElement(fixture, '.fudis-select__input');
 
         expect(component.control.value).toEqual([defaultOptions[7]]);
-        expect(element.getAttribute('value')).toEqual('Southern Titiwangsa Bent-Toed Gecko');
+        expect(element.getAttribute('value')).toEqual('Digital Learning Environments');
       });
     });
 
@@ -253,7 +253,9 @@ describe('MultiselectComponent', () => {
 
       const value = getElement(fixture, '.fudis-select__input').getAttribute('value');
 
-      expect(value).toEqual('Dog, Platypus, Southern Titiwangsa Bent-Toed Gecko');
+      expect(value).toEqual(
+        'Introduction to Programming, Data Analysis, Digital Learning Environments',
+      );
       expect(component.control.value).toEqual([
         defaultOptions[0],
         defaultOptions[2],
@@ -268,14 +270,14 @@ describe('MultiselectComponent', () => {
 
       const value = getElement(fixture, '.fudis-select__input').getAttribute('value');
 
-      expect(value).toEqual('Platypus');
+      expect(value).toEqual('Data Analysis');
       expect(component.control.value).toEqual([defaultOptions[2]]);
     });
   });
 
   describe('Chip list', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(MultiselectMockComponent<TestAnimalValue>);
+      fixture = TestBed.createComponent(MultiselectMockComponent<TestCourseValue>);
       component = fixture.componentInstance;
     });
 

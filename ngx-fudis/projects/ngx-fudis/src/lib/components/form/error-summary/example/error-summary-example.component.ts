@@ -17,7 +17,7 @@ type Error = {
   message: Observable<string>;
 };
 
-interface CourseBooksFormGroup {
+interface TeachingMethodsFormGroup {
   first: FormControl<boolean | null>;
   second: FormControl<boolean | null>;
   third: FormControl<boolean | null>;
@@ -38,7 +38,7 @@ export class ErrorSummaryExampleComponent implements OnInit {
   toggleLive: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   formExample = new FormGroup({
-    courseBooks: new FormGroup<CourseBooksFormGroup>(
+    teachingMethods: new FormGroup<TeachingMethodsFormGroup>(
       {
         first: new FormControl(null),
         second: new FormControl(null),
@@ -47,11 +47,11 @@ export class ErrorSummaryExampleComponent implements OnInit {
       [
         FudisGroupValidators.min({
           value: 1,
-          message: this._transloco.selectTranslateObject('form.courseBooks.errors.min'),
+          message: this._transloco.selectTranslateObject('form.teachingMethods.errors.min'),
         }),
         FudisGroupValidators.max({
           value: 2,
-          message: this._transloco.selectTranslateObject('form.courseBooks.errors.max'),
+          message: this._transloco.selectTranslateObject('form.teachingMethods.errors.max'),
         }),
       ],
     ),
@@ -81,16 +81,16 @@ export class ErrorSummaryExampleComponent implements OnInit {
         this._transloco.selectTranslateObject('form.courseType.errors.required'),
       ),
     ),
-    courseMainMaskot: new FormControl<FudisSelectOption<object> | null>(null),
+    preferredTeachingMethod: new FormControl<FudisSelectOption<object> | null>(null),
     courseTopics: new FormControl<FudisSelectOption<object>[] | null>(null),
   });
 
   courseTypeOptions = ['basic', 'advanced'];
 
-  mainMaskotOptions: FudisSelectOption<string>[] = [
-    { label: 'form.maskot.options.option-1', value: 'maskot-1' },
-    { label: 'form.maskot.options.option-2', value: 'maskot-2' },
-    { label: 'form.maskot.options.option-3', value: 'maskot-3' },
+  teachingMethodOptions: FudisSelectOption<string>[] = [
+    { label: 'form.teachingMethod.options.option-1', value: 'lectures' },
+    { label: 'form.teachingMethod.options.option-2', value: 'seminars' },
+    { label: 'form.teachingMethod.options.option-3', value: 'workshops' },
   ];
 
   topicOptions: FudisSelectOption<string>[] = [

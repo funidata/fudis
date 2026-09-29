@@ -10,15 +10,19 @@ test("Select autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-3-dropdown")).toBeVisible();
   await page.getByTestId("fudis-select-3-clear-button").focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
   await expect(page.getByTestId("fudis-select-3-dropdown")).toBeVisible();
 
   await page.getByTestId("fudis-select-3").focus();
   await page.keyboard.press("KeyI");
-  await expect(page.getByTestId("fudis-body-text-6").getByText("Showing 48 results")).toBeVisible();
+  await expect(page.getByTestId("fudis-body-text-6").getByText("Showing 55 results")).toBeVisible();
   await page.keyboard.press("KeyN");
-  await expect(page.getByTestId("fudis-body-text-6").getByText("Showing 18 results")).toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByTestId("fudis-body-text-6").getByText("Showing 30 results")).toBeVisible();
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
 
   /**
    * Autocomplete dropdown without clear button
@@ -26,7 +30,9 @@ test("Select autocompletes", async ({ page }) => {
   await page.getByTestId("fudis-select-4").focus();
   await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
   await expect(page.getByTestId("fudis-select-3-dropdown")).not.toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
 
   const select4 = page.getByTestId("fudis-select-4");
 
@@ -36,49 +42,57 @@ test("Select autocompletes", async ({ page }) => {
     input.focus();
     input.value = value;
     input.dispatchEvent(new Event("input", { bubbles: true }));
-    input.dispatchEvent(new KeyboardEvent("keydown", { key: "n", bubbles: true }));
-    input.dispatchEvent(new KeyboardEvent("keyup", { key: "n", bubbles: true }));
-  }, "golden");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "c", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keyup", { key: "c", bubbles: true }));
+  }, "academic");
 
-  await expect(select4).toHaveValue("golden");
-  await expect(page.getByTestId("fudis-body-text-8").getByText("Showing 3 results")).toBeVisible();
+  await expect(select4).toHaveValue("academic");
+  await expect(page.getByTestId("fudis-body-text-8").getByText("Showing 11 results")).toBeVisible();
   await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
 
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-4-dropdown")).not.toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
 
   await page.keyboard.press("Space");
-  await expect(page.locator(".fudis-body-text").getByText("Showing 2 results")).toBeVisible();
-  await page.keyboard.press("KeyE");
-  await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
-  await page.keyboard.press("KeyA");
-  await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
+  await page.keyboard.type("writing");
   await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-4-dropdown")).not.toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(0);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    0,
+  );
 
   /**
    * Autocomplete type with clear button
    */
   await page.getByTestId("fudis-select-5").focus();
   await expect(page.getByTestId("fudis-select-5-dropdown")).toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(0);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    0,
+  );
 
   await page.getByTestId("fudis-select-5-clear-button").focus();
   await page.keyboard.press("Space");
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
 
-  await page.keyboard.press("KeyM");
-  await page.keyboard.press("KeyO");
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await page.keyboard.press("KeyD");
+  await page.keyboard.press("KeyI");
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
 
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
-  await page.keyboard.press("KeyU");
-  await expect(page.locator(".fudis-body-text").getByText("Showing 2 results")).toBeVisible();
+  await page.keyboard.press("KeyG");
+  await expect(page.locator(".fudis-body-text").getByText("Showing 1 results")).toBeVisible();
   await expect(page.getByTestId("fudis-select-5-dropdown")).toBeVisible();
   await page.keyboard.press("Backspace");
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
@@ -93,10 +107,12 @@ test("Select autocompletes", async ({ page }) => {
     input.dispatchEvent(new Event("input", { bubbles: true }));
     input.dispatchEvent(new KeyboardEvent("keydown", { key: "n", bubbles: true }));
     input.dispatchEvent(new KeyboardEvent("keyup", { key: "n", bubbles: true }));
-  }, "mouflon");
+  }, "digital learning environments");
 
-  await expect(select5).toHaveValue("Mouflon");
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(0);
+  await expect(select5).toHaveValue("Digital Learning Environments");
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    0,
+  );
   await page.keyboard.press("Backspace");
 
   /**
@@ -121,7 +137,9 @@ test("Select autocompletes", async ({ page }) => {
     page.getByTestId("fudis-select-6-dropdown").getByText("No results found"),
   ).toBeVisible();
   await expect(page.getByTestId("fudis-select-6-dropdown")).toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
   await expect(page.getByTestId("fudis-select-5-clear-button")).toBeVisible();
 
   await page.keyboard.press("Backspace");
@@ -130,5 +148,7 @@ test("Select autocompletes", async ({ page }) => {
     page.getByTestId("fudis-select-6-dropdown").getByText("No results found"),
   ).not.toBeVisible();
   await expect(page.getByTestId("fudis-select-6-dropdown")).not.toBeVisible();
-  await expect(page.getByText("You must choose a pet!").filter({ visible: true })).toHaveCount(6);
+  await expect(page.getByText("You must choose a course!").filter({ visible: true })).toHaveCount(
+    6,
+  );
 });

@@ -40,7 +40,7 @@ export class ExampleDialogLaucherComponent {
     this._dialogService
       .open(ExampleDialogFormComponent, {
         data: {
-          greeting: 'This is greeting sent from the component, which opened up this dialog!',
+          greeting: 'Your feedback helps us improve future course deliveries.',
           size: this.size,
         },
       })

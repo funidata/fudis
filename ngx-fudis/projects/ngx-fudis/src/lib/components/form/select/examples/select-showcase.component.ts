@@ -36,10 +36,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'dropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -47,8 +47,8 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 @for (option of defaultOptions; track option.value) {
                   <fudis-select-option [data]="option"></fudis-select-option>
                 }
-                @for (group of groupedMockData; track group.country) {
-                  <fudis-select-group [label]="group.country">
+                @for (group of groupedMockData; track group.subjectArea) {
+                  <fudis-select-group [label]="group.subjectArea">
                     @for (groupedOption of group.options; track groupedOption.value) {
                       <fudis-select-option [data]="groupedOption"></fudis-select-option>
                     }
@@ -62,10 +62,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'dropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -73,8 +73,8 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 @for (option of defaultOptions; track option.value) {
                   <fudis-select-option [data]="option"></fudis-select-option>
                 }
-                @for (group of groupedMockData; track group.country) {
-                  <fudis-select-group [label]="group.country">
+                @for (group of groupedMockData; track group.subjectArea) {
+                  <fudis-select-group [label]="group.subjectArea">
                     @for (groupedOption of group.options; track groupedOption.value) {
                       <fudis-select-option [data]="groupedOption"></fudis-select-option>
                     }
@@ -88,10 +88,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteDropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -99,8 +99,8 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 @for (option of defaultOptions; track option.value) {
                   <fudis-select-option [data]="option"></fudis-select-option>
                 }
-                @for (group of groupedMockData; track group.country) {
-                  <fudis-select-group [label]="group.country">
+                @for (group of groupedMockData; track group.subjectArea) {
+                  <fudis-select-group [label]="group.subjectArea">
                     @for (groupedOption of group.options; track groupedOption.value) {
                       <fudis-select-option [data]="groupedOption"></fudis-select-option>
                     }
@@ -115,10 +115,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteDropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -126,8 +126,8 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 @for (option of defaultOptions; track option.value) {
                   <fudis-select-option [data]="option"></fudis-select-option>
                 }
-                @for (group of groupedMockData; track group.country) {
-                  <fudis-select-group [label]="group.country">
+                @for (group of groupedMockData; track group.subjectArea) {
+                  <fudis-select-group [label]="group.subjectArea">
                     @for (groupedOption of group.options; track groupedOption.value) {
                       <fudis-select-option [data]="groupedOption"></fudis-select-option>
                     }
@@ -141,10 +141,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteType'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -152,8 +152,8 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 @for (option of defaultOptions; track option.value) {
                   <fudis-select-option [data]="option"></fudis-select-option>
                 }
-                @for (group of groupedMockData; track group.country) {
-                  <fudis-select-group [label]="group.country">
+                @for (group of groupedMockData; track group.subjectArea) {
+                  <fudis-select-group [label]="group.subjectArea">
                     @for (groupedOption of group.options; track groupedOption.value) {
                       <fudis-select-option [data]="groupedOption"></fudis-select-option>
                     }
@@ -168,10 +168,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteType'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -179,8 +179,8 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
                 @for (option of defaultOptions; track option.value) {
                   <fudis-select-option [data]="option"></fudis-select-option>
                 }
-                @for (group of groupedMockData; track group.country) {
-                  <fudis-select-group [label]="group.country">
+                @for (group of groupedMockData; track group.subjectArea) {
+                  <fudis-select-group [label]="group.subjectArea">
                     @for (groupedOption of group.options; track groupedOption.value) {
                       <fudis-select-option [data]="groupedOption"></fudis-select-option>
                     }
@@ -217,7 +217,7 @@ export class StorybookExampleSelectShowcaseComponent {
 
   control: FormControl = new FormControl<FudisSelectOption<string | object> | null>(
     defaultOptions[2],
-    [FudisValidators.required('You must choose a pet!')],
+    [FudisValidators.required('You must choose a course!')],
   );
 
   onClick() {

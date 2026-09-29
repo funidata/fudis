@@ -1,14 +1,14 @@
 {
-  "formTitle": "Esimerkkilomake Error Summaryn kanssa",
+  "formTitle": "Kurssitietolomake Error Summaryn kanssa",
   "currentStrategy": "Nykyinen Error Summaryn päivitysstrategia on: ",
   "errorSummaryTitle": "Voit vaihtaa virheiden päivitysstrategiaa alla olevasta painikkeesta",
   "submit": "Lähetä",
   "changeStrategy": "Vaihda Error Summaryn päivitysstrategiaa",
   "changeLanguage": "Vaihda kieltä",
-  "sectionTitle1": "Lomakkeen osion otsikko",
+  "sectionTitle1": "Kurssin tiedot",
   "sectionTitle2": "Lisää tai poista Error Summaryn viestejä",
-  "fieldsetLegend": "Lomakeryhmän otsikko",
-  "fieldsetSelectLegend": "Pudotusvalikkokomponentteja",
+  "fieldsetLegend": "Kurssin perustiedot",
+  "fieldsetSelectLegend": "Opetusmenetelmät ja aihealueet",
   "sectionHelptext1": "Seuraavat painikkeet vaihtavat manuaalisten Error Summaryn virheviestien näkyvyyttä",
   "sectionHelptext2": "Virheet näytetään, kun Error Summary ladataan uudelleen.",
   "customError1": "Tämä on ensimmäinen manuaalisesti Error Summaryyn lähetetty virheviesti",
@@ -17,7 +17,7 @@
   "customError2Show": "Näytä toinen virhe",
   "customError1Hide": "Piilota ensimmäinen virhe",
   "customError2Hide": "Piilota toinen virhe",
-  "selectedOption": "Valittu maskotti lomakekentän kontrollerissa",
+  "selectedOption": "Valittu opetusmenetelmä lomakekentän kontrollerissa",
   "multiSelectedOption": "Valitut kurssin aiheet lomakekentän kontrollerissa",
   "selectedNullOption": "Ei valintaa",
   "selectOption": "Valinta",
@@ -33,7 +33,7 @@
     },
     "teacherEmail": {
       "label": "Yhteyssähköposti",
-      "helpText": "Jotta opiskelijat voivat pyytää lisäaikaa kotitehtävilleen",
+      "helpText": "Käytä korkeakoulun sähköpostiosoitetta",
       "errors": {
         "required": "Yhteyssähköposti puuttuu",
         "email": "Syötteen tulee olla sähköpostimuotoinen"
@@ -49,17 +49,17 @@
         "required": "Kurssin tyyppi pitää olla valittuna."
       }
     },
-    "courseBooks": {
-      "label": "Kurssikirjat",
-      "helpText": "Valite 1-2 kurssikirjaa",
+    "teachingMethods": {
+      "label": "Opetusmenetelmät",
+      "helpText": "Valitse yksi tai kaksi opetusmenetelmää",
       "options": {
-        "heir": "Imperiumin perillinen",
-        "dark": "Hämärän laivue",
-        "command": "Keisarin käsky"
+        "lectures": "Luennot",
+        "seminars": "Seminaarit",
+        "independentStudy": "Itsenäinen työskentely"
       },
       "errors": {
-        "min": "Ei kurssikirjaa valittuna",
-        "max": "Liian monta kirjaa valittuna"
+        "min": "Valitse vähintään yksi opetusmenetelmä",
+        "max": "Valitse enintään kaksi opetusmenetelmää"
       }
     },
     "startDate": {
@@ -70,22 +70,22 @@
         "required": "Päivämäärä puuttuu"
       }
     },
-    "maskot": {
-      "label": "Kurssin maskotti",
+    "teachingMethod": {
+      "label": "Opetusmenetelmä",
       "options": {
-        "option-1": "Grogu (Lapsi)",
-        "option-2": "R2-D2 (Astromekaanikkodroidi)",
-        "option-3": "Jabba the Hutt (Rikollispomo)"
+        "option-1": "Luennot",
+        "option-2": "Seminaarit",
+        "option-3": "Työpajat"
       }
     },
     "courseTopics": {
       "label": "Kurssin aiheita",
       "options": {
-        "option-1": "Korkeampi maankamara",
-        "option-2": "Rajaton voima",
-        "option-3": "Darth Jar Jar -teoria",
-        "option-4": "Kuolemantähden henkilöstöedut",
-        "option-5": "Darth Plagueis viisaan tragedia"
+        "option-1": "Data-analyysi",
+        "option-2": "Akateeminen kirjoittaminen",
+        "option-3": "Tutkimusmenetelmät",
+        "option-4": "Projektinhallinta",
+        "option-5": "Kestävä kehitys"
       }
     }
   }

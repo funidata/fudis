@@ -27,13 +27,16 @@ export const gradeOptions: FudisSelectOption[] = [
     <fudis-dialog [size]="_size">
       <fudis-dialog-content>
         <fudis-form
-          [title]="'Form Dialog'"
+          [title]="'Course feedback'"
           [level]="1"
           [titleVariant]="'xl'"
           [errorSummaryTitle]="'You need to fill up the information.'"
         >
           <fudis-form-content>
-            <fudis-fieldset [label]="'Course feedback'" [helpText]="_greetingFromOpeningComponent">
+            <fudis-fieldset
+              [label]="'Your learning experience'"
+              [helpText]="_greetingFromOpeningComponent"
+            >
               <fudis-fieldset-content>
                 <fudis-text-input
                   [id]="'example-input-course-topic'"

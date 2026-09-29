@@ -37,12 +37,12 @@ export class RadioButtonComponent implements OnInit {
   ) {}
 
   /**
-   * Selectable value of a single Radio Button, e.g. "fair-trade-banana"
+   * Selectable value of a single Radio Button, e.g. "on-campus"
    */
   @Input({ required: true }) value: string | boolean | object | null | unknown;
 
   /**
-   * Visible label for a single Radio Button, e. g. "Fair trade banana"
+   * Visible label for a single Radio Button, e. g. "On campus"
    */
   @Input({ required: true }) label: string;
 

@@ -38,7 +38,7 @@ import { BodyTextComponent } from '../typography/body-text/body-text.component';
         href="javascript:void(0);"
         [id]="'fudis-tab-5'"
       >
-        Link tab 5
+        Study guidance
       </a>
     </fudis-tab-navigation-bar>
     <fudis-tab-navigation-panel [id]="'fudis-panel-1'" #navigationTabPanel>
@@ -57,10 +57,14 @@ class TabNavigationExampleComponent {
   @Input() variant: 'primary' | 'secondary';
 
   tabs: { id: string; label: string; link: string }[] = [
-    { id: 'fudis-tab-1', label: 'Button tab 1', link: '/link-1' },
-    { id: 'fudis-tab-2', label: 'Button tab 2', link: '/link-2' },
-    { id: 'fudis-tab-3', label: 'Button tab 3', link: '/link-3' },
-    { id: 'fudis-tab-4', label: 'A veeery long button tab 4', link: '/link-4' },
+    { id: 'fudis-tab-1', label: 'Course overview', link: '/link-1' },
+    { id: 'fudis-tab-2', label: 'Learning materials', link: '/link-2' },
+    { id: 'fudis-tab-3', label: 'Assessment', link: '/link-3' },
+    {
+      id: 'fudis-tab-4',
+      label: 'Assessment and recognition of prior learning',
+      link: '/link-4',
+    },
   ];
   activeLink = '/link-1';
 

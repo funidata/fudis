@@ -52,10 +52,10 @@ export default {
 const html = String.raw;
 
 const commonArgs: Args = {
-  label: 'Select a pet',
+  label: 'Select a course',
   size: 'lg',
-  placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick one.',
+  placeholder: 'Choose a course',
+  helpText: 'Select a course from the catalogue.',
   selectionClearButton: true,
   variant: 'dropdown',
   initialFocus: false,
@@ -90,8 +90,8 @@ const ExampleTemplate: StoryFn = (args) => ({
       <ng-template fudisSelectOptions>
         @for (option of defaultOptions; track option.value) {
         <fudis-select-option [data]="option"></fudis-select-option>
-        } @for (group of groupedMockData; track group.country) {
-        <fudis-select-group [label]="group.country">
+        } @for (group of groupedMockData; track group.subjectArea) {
+        <fudis-select-group [label]="group.subjectArea">
           @for (groupedOption of group.options; track groupedOption.value) {
           <fudis-select-option [data]="groupedOption"></fudis-select-option>
           }

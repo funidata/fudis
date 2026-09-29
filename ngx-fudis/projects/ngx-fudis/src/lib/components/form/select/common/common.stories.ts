@@ -39,13 +39,13 @@ export default {
 const html = String.raw;
 
 const commonArgs: Args = {
-  label: 'Select a pet',
+  label: 'Select a study programme',
   size: 'lg',
-  placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick one.',
+  placeholder: 'Choose a programme',
+  helpText: 'Select the programme you are applying for.',
   selectionClearButton: true,
   variant: 'autocompleteDropdown',
-  autocompleteHelpText: 'Hello from autocompleteHelpText!',
+  autocompleteHelpText: 'Start typing to search programmes.',
   popoverText: '',
   popoverTriggerLabel: '',
   popoverPosition: 'right',
@@ -147,8 +147,8 @@ const SelectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedMockData; track group.country) {
-        <fudis-select-group [label]="group.country">
+        @for (group of groupedMockData; track group.subjectArea) {
+        <fudis-select-group [label]="group.subjectArea">
           @for (groupedOption of group.options; track groupedOption.value) {
           <fudis-select-option [data]="groupedOption"></fudis-select-option>
           }
@@ -187,8 +187,8 @@ const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn = (args) => ({
       [popoverTriggerLabel]="popoverTriggerLabel"
     >
       <ng-template fudisSelectOptions>
-        @for (group of groupedMockData; track group.country) {
-        <fudis-multiselect-group [label]="group.country">
+        @for (group of groupedMockData; track group.subjectArea) {
+        <fudis-multiselect-group [label]="group.subjectArea">
           @for (groupedOption of group.options; track groupedOption.value) {
           <fudis-multiselect-option [data]="groupedOption"></fudis-multiselect-option>
           }

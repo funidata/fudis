@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 import { FudisSelectOption } from '../../../../types/forms';
-import { selectMovieMockData } from '../common/mock_data';
+import { selectCourseCatalogueMockData } from '../common/mock_data';
 import { BehaviorSubject, debounceTime, Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
@@ -12,10 +12,8 @@ export class StorybookExampleBackendSimulationBaseDirective<T = string> {
   constructor() {
     this.searchTextUpdateSubject.pipe(takeUntilDestroyed()).subscribe((value) => {
       if (value?.trim()) {
-        this.filterStatus = 'In progress...';
         this.autocompleteNoResultsText = 'Fetching results...';
       }
-      this.searchResults?.next([]);
     });
 
     this.searchTextUpdateSubject
@@ -30,7 +28,7 @@ export class StorybookExampleBackendSimulationBaseDirective<T = string> {
 
             const results: FudisSelectOption<T>[] = [];
 
-            for (const option of selectMovieMockData as FudisSelectOption<T>[]) {
+            for (const option of selectCourseCatalogueMockData as FudisSelectOption<T>[]) {
               if (counter >= counterLimit) {
                 break;
               }
@@ -52,16 +50,13 @@ export class StorybookExampleBackendSimulationBaseDirective<T = string> {
             }
 
             this.searchResults?.next(results);
-            this.filterStatus = 'Finished';
-            setTimeout(() => {
+            if (!results.length) {
               this.autocompleteNoResultsText = null;
-            }, 100);
+            }
           }, 500);
         }
       });
   }
-
-  protected filterStatus: 'Finished' | 'In progress...' = 'Finished';
 
   protected searchTextUpdateSubject = new Subject<string | null>();
 
@@ -71,12 +66,12 @@ export class StorybookExampleBackendSimulationBaseDirective<T = string> {
 
   protected autocompleteNoResultsText: null | string = null;
 
-  protected label = 'Select a movie';
+  protected label = 'Select a course';
 
   protected helpText =
-    'There are 1000 options to choose from. You can also search by genre, e. g. action.';
+    'There are 1000 courses to choose from. You can search by course catalogue information.';
 
-  protected placeholder = 'Select a movie';
+  protected placeholder = 'Select a course';
 
   protected control: FormControl<FudisSelectOption<T> | null>;
 }

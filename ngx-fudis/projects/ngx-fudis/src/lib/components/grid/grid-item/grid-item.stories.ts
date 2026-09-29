@@ -113,10 +113,9 @@ export const AlignSelfY: StoryFn = (args) => ({
         better.</fudis-body-text
       >
       <fudis-body-text
-        >Barkadeer splice the main brace fire in the hole Corsair cackle fruit topgallant six
-        pounders careen avast belay. Sutler Jack Ketch broadside six pounders gally knave landlubber
-        or just lubber handsomely ballast draft. Landlubber or just lubber Sea Legs bucko code of
-        conduct chase wench spike lateen sail bilge boom.</fudis-body-text
+        >This course description contains additional text so the grid alignment can be compared
+        across items. Students can review learning outcomes, teaching methods, and assessment
+        criteria before registering.</fudis-body-text
       ></fudis-grid-item
     >
 
@@ -129,10 +128,9 @@ export const AlignSelfY: StoryFn = (args) => ({
         better.</fudis-body-text
       >
       <fudis-body-text
-        >Barkadeer splice the main brace fire in the hole Corsair cackle fruit topgallant six
-        pounders careen avast belay. Sutler Jack Ketch broadside six pounders gally knave landlubber
-        or just lubber handsomely ballast draft. Landlubber or just lubber Sea Legs bucko code of
-        conduct chase wench spike lateen sail bilge boom.</fudis-body-text
+        >This course description contains additional text so the grid alignment can be compared
+        across items. Students can review learning outcomes, teaching methods, and assessment
+        criteria before registering.</fudis-body-text
       ></fudis-grid-item
     >
     <fudis-grid-item class="storybook__item-highlight" [alignSelfY]="'end'"
@@ -143,10 +141,9 @@ export const AlignSelfY: StoryFn = (args) => ({
         better.</fudis-body-text
       >
       <fudis-body-text
-        >Barkadeer splice the main brace fire in the hole Corsair cackle fruit topgallant six
-        pounders careen avast belay. Sutler Jack Ketch broadside six pounders gally knave landlubber
-        or just lubber handsomely ballast draft. Landlubber or just lubber Sea Legs bucko code of
-        conduct chase wench spike lateen sail bilge boom.</fudis-body-text
+        >This course description contains additional text so the grid alignment can be compared
+        across items. Students can review learning outcomes, teaching methods, and assessment
+        criteria before registering.</fudis-body-text
       ></fudis-grid-item
     >
     <fudis-grid-item class="storybook__item-highlight" [alignSelfY]="'center'"
@@ -157,10 +154,9 @@ export const AlignSelfY: StoryFn = (args) => ({
         better.</fudis-body-text
       >
       <fudis-body-text
-        >Barkadeer splice the main brace fire in the hole Corsair cackle fruit topgallant six
-        pounders careen avast belay. Sutler Jack Ketch broadside six pounders gally knave landlubber
-        or just lubber handsomely ballast draft. Landlubber or just lubber Sea Legs bucko code of
-        conduct chase wench spike lateen sail bilge boom.</fudis-body-text
+        >This course description contains additional text so the grid alignment can be compared
+        across items. Students can review learning outcomes, teaching methods, and assessment
+        criteria before registering.</fudis-body-text
       ></fudis-grid-item
     >
     <fudis-grid-item
@@ -173,10 +169,9 @@ export const AlignSelfY: StoryFn = (args) => ({
         better.</fudis-body-text
       >
       <fudis-body-text
-        >Barkadeer splice the main brace fire in the hole Corsair cackle fruit topgallant six
-        pounders careen avast belay. Sutler Jack Ketch broadside six pounders gally knave landlubber
-        or just lubber handsomely ballast draft. Landlubber or just lubber Sea Legs bucko code of
-        conduct chase wench spike lateen sail bilge boom.</fudis-body-text
+        >This course description contains additional text so the grid alignment can be compared
+        across items. Students can review learning outcomes, teaching methods, and assessment
+        criteria before registering.</fudis-body-text
       ></fudis-grid-item
     >
   </fudis-grid>`,

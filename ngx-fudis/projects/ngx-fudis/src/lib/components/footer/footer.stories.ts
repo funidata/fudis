@@ -18,7 +18,12 @@ const Template: StoryFn = (args) => ({
   props: args,
   template: html`
     <fudis-footer>
-      <a fudisLink href="example.com" [external]="true" [title]="'Example link'"></a>
+      <a
+        fudisLink
+        href="https://www.exampleuniversity.edu"
+        [external]="true"
+        [title]="'University website'"
+      ></a>
     </fudis-footer>
   `,
 });

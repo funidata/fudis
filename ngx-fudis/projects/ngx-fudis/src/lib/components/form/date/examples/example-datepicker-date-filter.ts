@@ -29,14 +29,14 @@ export function disallowedWeekendValidator(): ValidatorFn {
   selector: 'example-date-filter-with-error-message',
   template: `
     <fudis-datepicker
-      [label]="'Select a date'"
+      [label]="'Select an examination date'"
       [id]="id"
       [size]="'md'"
-      [helpText]="'Type in a Saturday or a Sunday'"
+      [helpText]="'Examinations are scheduled on weekdays only.'"
       [control]="control"
       [dateParse]="true"
       [initialFocus]="false"
-      [popoverText]="'Is it your birthday?'"
+      [popoverText]="'Check the examination timetable before selecting a date.'"
       [popoverPosition]="'left'"
       [popoverTriggerLabel]="'Additional information'"
       [dateFilter]="weekendFilter"
@@ -44,7 +44,7 @@ export function disallowedWeekendValidator(): ValidatorFn {
       @if (control.hasError('disallowedDay')) {
         <fudis-error-message
           (handleAddError)="handleAddError.emit($event)"
-          [message]="'This error message is sent from a custom validator'"
+          [message]="'Select a weekday for the examination date.'"
         />
       }
     </fudis-datepicker>

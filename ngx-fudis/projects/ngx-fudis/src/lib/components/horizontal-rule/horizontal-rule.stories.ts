@@ -17,12 +17,10 @@ const html = String.raw;
 export const Example: StoryFn = (args) => ({
   ...args,
   template: html` <fudis-body-text class="fudis-mb-md">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
-      vehicula ut massa non facilisis.
+      Course information is shown above the divider.
     </fudis-body-text>
     <fudis-hr />
     <fudis-body-text class="fudis-mt-md">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
-      vehicula ut massa non facilisis.
+      Assessment details are shown below the divider.
     </fudis-body-text>`,
 });

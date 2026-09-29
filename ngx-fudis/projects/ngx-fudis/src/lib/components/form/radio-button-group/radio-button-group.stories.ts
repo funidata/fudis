@@ -11,18 +11,18 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
 
 const html = String.raw;
 
-const fruitOptions: FudisRadioButtonOption<object>[] = [
-  { value: 'apple', label: 'Apple' },
+const studyFormatOptions: FudisRadioButtonOption<object>[] = [
+  { value: 'on-campus', label: 'On campus' },
   {
-    value: 'fair-trade-banana',
-    label: 'Fair Trade Banana',
+    value: 'online',
+    label: 'Online',
   },
-  { value: 'cherry', label: 'Cherry' },
+  { value: 'hybrid', label: 'Hybrid' },
 ];
 
 const control: FormControl = new FormControl(
   null,
-  FudisValidators.required('You must choose a fruit'),
+  FudisValidators.required('Select a study format.'),
 );
 
 const ExampleTestTemplate: StoryFn = (args) => ({
@@ -30,7 +30,7 @@ const ExampleTestTemplate: StoryFn = (args) => ({
     ...args,
     formControl: control,
     handleChange: action('handleChange'),
-    fruitOptions,
+    studyFormatOptions,
   },
   template: html`<fudis-radio-button-group
     [size]="size"
@@ -43,7 +43,7 @@ const ExampleTestTemplate: StoryFn = (args) => ({
     [popoverTriggerLabel]="popoverTriggerLabel"
     (handleChange)="handleChange($event)"
   >
-    @for (option of fruitOptions; track option.value) {
+    @for (option of studyFormatOptions; track option.value) {
     <fudis-radio-button [label]="option.label" [value]="option.value" />
     }
   </fudis-radio-button-group>`,
@@ -51,11 +51,11 @@ const ExampleTestTemplate: StoryFn = (args) => ({
 
 export const Example = ExampleTestTemplate.bind({});
 Example.args = {
-  label: 'Choose your preferred fruit',
-  helpText: 'Fruits are important for your health.',
+  label: 'Choose your study format',
+  helpText: 'Select the format that suits your study plan.',
   size: 'lg',
   initialFocus: false,
-  popoverText: 'Fair Trade Banana is right choise',
+  popoverText: 'Hybrid courses combine campus sessions with online work.',
   popoverTriggerLabel: 'Additional information',
   popoverPosition: 'right',
 };
@@ -65,30 +65,30 @@ Example.args = {
   imports: [RadioButtonGroupComponent, RadioButtonComponent],
   template: `
     <fudis-radio-button-group
-      [label]="'Choose a pet'"
-      [helpText]="'We all should have a pet.'"
+      [label]="'Preferred contact method'"
+      [helpText]="'Select the contact method we should use for study-related matters.'"
       [control]="control"
       (handleChange)="handleChange($event)"
     >
-      @for (option of petOptions; track option.value) {
+      @for (option of contactMethodOptions; track option.value) {
         <fudis-radio-button [label]="option.label" [value]="option.value"></fudis-radio-button>
       }
     </fudis-radio-button-group>
   `,
 })
 class DisabledRadioGroupExampleComponent {
-  petOptions: FudisRadioButtonOption<object>[] = [
-    { value: 'platypus', label: 'Platypus' },
+  contactMethodOptions: FudisRadioButtonOption<object>[] = [
+    { value: 'email', label: 'Email' },
     {
-      value: 'otter',
-      label: 'Otter with powerful webbed feet and seal-like ability for holding breath underwater',
+      value: 'text-message',
+      label: 'Text message',
     },
-    { value: 'capybara', label: 'Capybara' },
+    { value: 'phone-call', label: 'Phone call' },
   ];
 
   control: FormControl = new FormControl(
     { value: null, disabled: true },
-    FudisValidators.required('You must choose a pet.'),
+    FudisValidators.required('Select a contact method.'),
   );
 }
 
