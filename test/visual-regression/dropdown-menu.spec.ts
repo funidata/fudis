@@ -10,24 +10,22 @@ test("dropdown menu", async ({ page }) => {
   await expect(page).toHaveScreenshot("2-dropdown-menu-option-focused.png", { fullPage: true });
 
   await page.getByTestId("fudis-dropdown-menu-1-option-1").click();
-  await expect(page.getByText("Latest clicked item was: First item")).toBeVisible();
+  await expect(page.getByText("Latest clicked item was: View profile")).toBeVisible();
 
   await page.getByTestId("fudis-button-1").press("Enter");
   await page.getByTestId("fudis-button-1").press("ArrowDown");
   await page.getByTestId("fudis-dropdown-menu-1-option-1").press("ArrowDown");
   await page.getByTestId("fudis-dropdown-menu-1-option-3").press("Space");
   await expect(
-    page.getByText(
-      "Latest clicked item was: Third item with really long label to push it to the limit!",
-    ),
+    page.getByText("Latest clicked item was: Request an official transcript of records"),
   ).toBeVisible();
 
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
-  await expect(page.getByText("Mountain Lion")).toBeVisible();
+  await expect(page.getByText("Reading list")).toBeVisible();
 
   await page.keyboard.press("Escape");
-  await expect(page.getByText("Mountain Lion")).not.toBeVisible();
+  await expect(page.getByText("Reading list")).not.toBeVisible();
 });

@@ -13,8 +13,8 @@ test("alert group default", async ({ page }) => {
   // Close two previous alerts
   await page.getByTestId("fudis-alert-2-button").click();
   await page.getByTestId("fudis-alert-4-button").click();
-  await expect(page.getByText("Nothing special here.")).not.toBeVisible();
-  await expect(page.getByText("Yippee Ki-Yay! You were successful!")).not.toBeVisible();
+  await expect(page.getByText("Course registration opens on 1 August.")).not.toBeVisible();
+  await expect(page.getByText("Your personal study plan has been updated.")).not.toBeVisible();
 
   // Open dialog
   await page.getByTestId("fudis-alert-6-button").click(); // Dismiss one Alert
@@ -33,7 +33,11 @@ test("alert group default", async ({ page }) => {
 
   // Dismiss all alerts
   await page.getByTestId("fudis-button-6").click();
-  await expect(page.getByText("Something dangerous happened")).not.toBeVisible();
-  await expect(page.getByText("Something dangerous MIGHT happen")).not.toBeVisible();
-  await expect(page.getByText("Yippee Ki-Yay! You were successful!")).not.toBeVisible();
+  await expect(
+    page.getByText("Your course registration could not be submitted."),
+  ).not.toBeVisible();
+  await expect(
+    page.getByText("Your study right expires at the end of the academic year."),
+  ).not.toBeVisible();
+  await expect(page.getByText("Your personal study plan has been updated.")).not.toBeVisible();
 });

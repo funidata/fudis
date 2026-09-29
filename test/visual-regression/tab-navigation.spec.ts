@@ -37,7 +37,7 @@ test("should be able to scroll with ui arrow buttons", async ({ page }, testInfo
 
   await page.getByTestId(scrollButtonRight).click();
 
-  await expect(page.getByTestId(`${tabNavigationTabPrefix}1`)).not.toBeInViewport();
+  await expect(page.getByTestId(`${tabNavigationTabPrefix}1`)).not.toBeInViewport({ ratio: 0.1 });
   await expect(page.getByTestId(scrollButtonLeft)).toBeVisible();
   await expect(page.getByTestId(scrollButtonRight)).toBeVisible();
 

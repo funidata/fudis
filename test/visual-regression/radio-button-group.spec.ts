@@ -15,7 +15,7 @@ test("radio button group with required", async ({ page }) => {
   await page.keyboard.press("Shift+Tab");
   await page.keyboard.press("Shift+Tab");
   await page.waitForSelector(".fudis-error-message");
-  await expect(page.getByText("You must choose a fruit")).toBeVisible();
+  await expect(page.getByText("Select a study format.")).toBeVisible();
   await expect(page).toHaveScreenshot("validation-3-errors.png");
 
   await page.getByTestId("fudis-radio-button-group-1-item-2").focus();

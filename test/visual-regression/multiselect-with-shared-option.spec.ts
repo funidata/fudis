@@ -35,7 +35,7 @@ test("Multiselect with shared option", async ({ page }) => {
   // Check that the shared option is still selected in the second Multiselect
   const sharedOption = page
     .getByTestId("fudis-multiselect-2-dropdown")
-    .getByRole("option", { name: "Capybara" });
+    .getByRole("option", { name: "Academic Writing" });
 
   await expect(sharedOption).toHaveAttribute("aria-selected", "true");
 

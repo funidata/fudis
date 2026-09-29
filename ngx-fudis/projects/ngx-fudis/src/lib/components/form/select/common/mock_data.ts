@@ -29,7 +29,7 @@ export const defaultOptions: TestCourseAvailability[] = [
     availability: 'Unavailable',
   },
   {
-    value: { courseCode: 'SUS-220', studyField: 'Sustainability Studies' },
+    value: { courseCode: 'SUS-221', studyField: 'Sustainability Studies' },
     label: 'Sustainable Development',
     availability: 'Available',
   },

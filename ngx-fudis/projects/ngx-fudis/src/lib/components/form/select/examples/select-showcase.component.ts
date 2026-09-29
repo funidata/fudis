@@ -36,10 +36,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'dropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -62,10 +62,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'dropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -88,10 +88,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteDropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -115,10 +115,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteDropdown'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -141,10 +141,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteType'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="true"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -168,10 +168,10 @@ import { defaultOptions, groupedMockData } from '../common/mock_data';
             <fudis-select
               [size]="'lg'"
               [variant]="'autocompleteType'"
-              [placeholder]="'Choose a pet'"
+              [placeholder]="'Choose a course'"
               [control]="control"
-              [label]="'Select a pet'"
-              [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+              [label]="'Select a course'"
+              [helpText]="'Select a course you are interested in.'"
               [selectionClearButton]="false"
               (selectionUpdate)="selectionUpdate.emit($event)"
             >
@@ -217,7 +217,7 @@ export class StorybookExampleSelectShowcaseComponent {
 
   control: FormControl = new FormControl<FudisSelectOption<string | object> | null>(
     defaultOptions[2],
-    [FudisValidators.required('You must choose a pet!')],
+    [FudisValidators.required('You must choose a course!')],
   );
 
   onClick() {

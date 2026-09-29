@@ -1,11 +1,11 @@
 import test, { expect } from "@playwright/test";
 
 test("Select Autocomplete with filtering false", async ({ page }) => {
-  const hotelRoomsId = "fudis-select-1-option-1iaar8y";
+  const programmingFundamentalsId = "fudis-select-1-option-1b6oytb";
 
-  const jurassicParkId = "fudis-select-1-option-1w8a4ie";
+  const finalCourseId = "fudis-select-1-option-1nqcrtg";
 
-  const dalmatiansId = "fudis-select-1-option-gnfvby";
+  const firstCourseId = "fudis-select-1-option-q20y82";
 
   /**
    * @param database How many options from 'database' was checked to match results
@@ -51,25 +51,31 @@ test("Select Autocomplete with filtering false", async ({ page }) => {
 
   await page.getByTestId("fudis-select-1").focus();
 
-  await expectSearchResults(20, 10, "drama");
+  await expectSearchResults(92, 10, "programming");
 
-  await expect(page.getByTestId(hotelRoomsId)).toContainText("28 Hotel Rooms");
+  await expect(page.getByTestId(programmingFundamentalsId)).toContainText(
+    "Programming Fundamentals: Computer Science Lecture Series",
+  );
 
   await expectSearchResults(10, 10, "&&&");
 
-  await expect(page.getByTestId(dalmatiansId)).toContainText(
-    "101 Dalmatians II: Patch's London Adventure",
+  await expect(page.getByTestId(firstCourseId)).toContainText(
+    "Data Analysis: Computer Science Lecture Series",
   );
 
-  await expectSearchResults(1000, 1, "assic pa");
+  await expectSearchResults(1000, 1, "course 1000");
 
-  await expect(page.getByTestId(jurassicParkId)).toContainText("Jurassic Park");
+  await expect(page.getByTestId(finalCourseId)).toContainText(
+    "Professional Communication: Law Capstone",
+  );
 
-  await page.getByTestId(jurassicParkId).click();
+  await page.getByTestId(finalCourseId).click();
 
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
 
   await expect(page.getByText(`Number of options loaded to DOM: 1`)).toBeVisible();
 
-  await expect(page.getByText("Currently selected movie: Jurassic Park")).toBeVisible();
+  await expect(
+    page.getByText("Currently selected course: Professional Communication: Law Capstone"),
+  ).toBeVisible();
 });
