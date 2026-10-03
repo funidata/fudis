@@ -1,0 +1,112 @@
+@use '@funidata/fudis-core' as core;
+
+$step-item-background: core.$color-gray-light;
+$step-item-background-active: core.$color-primary;
+$step-item-background-previous: core.$color-gray-middle;
+
+.fudis-step {
+  @include core.text-color('gray-dark');
+
+  display: flex;
+  flex-direction: row;
+  gap: core.$spacing-xs;
+  align-items: center;
+  text-decoration: none;
+
+  &__arrow {
+    &--horizontal {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &--vertical {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--active {
+      @include core.text-color('white');
+
+      & > div {
+        background-color: $step-item-background-active;
+      }
+    }
+
+    &--previous {
+      @include core.text-color('white');
+
+      text-decoration: none;
+
+      & > div {
+        background-color: $step-item-background-previous;
+      }
+    }
+
+    &__item {
+      background-color: $step-item-background;
+    }
+
+    &__label {
+      display: flex;
+      flex-direction: row;
+      gap: core.$spacing-xxs;
+      align-items: center;
+      justify-content: center;
+      padding: calc(core.$spacing-xs - core.$pixel-2) calc(core.$spacing-sm - core.$spacing-xxs);
+
+      &--active {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__title {
+    &--active {
+      font-weight: 600;
+    }
+  }
+
+  &__divot-start {
+    &--horizontal {
+      /* stylelint-disable-next-line unit-disallowed-list */
+      margin-right: calc(core.$pixel-1 * -1);
+      clip-path: polygon(100% 0, 100% 100%, 0% 100%, calc(100% - core.$pixel-1) 50%, 0% 0%);
+      width: calc(core.$spacing-xs - core.$pixel-1);
+      content: '';
+    }
+
+    &--vertical {
+      /* stylelint-disable-next-line unit-disallowed-list */
+      margin-bottom: calc(core.$pixel-1 * -1);
+      clip-path: polygon(50% calc(100% - core.$pixel-1), 100% 0, 100% 100%, 0 100%, 0 0);
+      height: calc(core.$spacing-xs - core.$pixel-1);
+      content: '';
+    }
+
+    &--first {
+      display: none;
+    }
+  }
+
+  &__divot-end {
+    &--horizontal {
+      margin-left: calc(core.$pixel-1 * -1);
+      /* stylelint-disable-next-line unit-disallowed-list */
+      clip-path: polygon(0 0, core.$pixel-1 0, 100% 50%, core.$pixel-1 100%, 0 100%);
+      width: core.$spacing-xs;
+      content: '';
+    }
+
+    &--vertical {
+      margin-top: calc(core.$pixel-1 * -1);
+      /* stylelint-disable-next-line unit-disallowed-list */
+      clip-path: polygon(100% 0, 100% core.$pixel-1, 50% 100%, 0 core.$pixel-1, 0 0);
+      height: core.$spacing-xs;
+      content: '';
+    }
+
+    &--last {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<li
+  class="fudis-step"
+  [aria-current]="isCurrent ? 'step' : null"
+  [aria-label]="`${stepTranslation} ${index + 1}/${totalSteps}: `"
+>
+  <div
+    class="fudis-step__arrow fudis-step__arrow--{{ orientation }}"
+    [class.fudis-step__arrow--active]="isCurrent"
+    [class.fudis-step__arrow--previous]="isDone"
+  >
+    <div
+      class="fudis-step__arrow__item fudis-step__divot-start--{{ orientation }}"
+      [class.fudis-step__divot-start--first]="index === 0"
+    ></div>
+    <div
+      class="fudis-step__arrow__item fudis-step__arrow__label fudis-step__title"
+      [class.fudis-step__title--active]="isCurrent"
+    >
+      <span [class.fudis-step__arrow__label--active]="isCurrent && orientation === 'vertical'">{{
+        index + 1 + "."
+      }}</span>
+      @if (orientation === "horizontal") {
+        <div [class.fudis-step__arrow__label--active]="isCurrent">{{ label }}</div>
+      }
+    </div>
+    <div
+      class="fudis-step__arrow__item fudis-step__divot-end--{{ orientation }}"
+      [class.fudis-step__divot-end--last]="index === totalSteps - 1"
+    ></div>
+  </div>
+  @if (orientation === "vertical") {
+    <div class="fudis-step__title" [class.fudis-step__title--active]="isCurrent">{{ label }}</div>
+  }
+</li>
