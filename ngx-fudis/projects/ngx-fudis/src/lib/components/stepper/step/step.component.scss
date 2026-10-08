@@ -33,7 +33,7 @@
         margin-left: calc(core.$pixel-1 * -1);
         /* stylelint-disable-next-line unit-disallowed-list */
         clip-path: polygon(0 0, core.$pixel-1 0, 100% 50%, core.$pixel-1 100%, 0 100%);
-        width: core.$spacing-xs;
+        width: calc(core.$spacing-xs - core.$pixel-1);
       }
     }
 
@@ -52,7 +52,7 @@
         margin-top: calc(core.$pixel-1 * -1);
         /* stylelint-disable-next-line unit-disallowed-list */
         clip-path: polygon(100% 0, 100% core.$pixel-1, 50% 100%, 0 core.$pixel-1, 0 0);
-        height: core.$spacing-xs;
+        height: calc(core.$spacing-xs - core.$pixel-1);
       }
     }
 
@@ -119,6 +119,12 @@
       &__arrow::before {
         display: none;
       }
+
+      &__title {
+        &--outside {
+          padding-bottom: calc(core.$spacing-xs - core.$pixel-2);
+        }
+      }
     }
   }
 
@@ -126,6 +132,12 @@
     .fudis-step {
       &__arrow::after {
         display: none;
+      }
+
+      &__title {
+        &--outside {
+          padding-top: calc(core.$spacing-xs - core.$pixel-2);
+        }
       }
     }
   }
