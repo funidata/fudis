@@ -21,7 +21,7 @@ See [Getting Started](/docs/documentation-development-getting-started--documenta
 
 Firstly, it should be noted that generating the screenshots that are committed into version control MUST BE generated with the Docker image provided in `test/Dockerfile`. Failing to do so will result in machine-specific differences in the screenshots when the tests are run in CI/CD and in consequent false positive test failures.
 
-However, the Playwright UI (run directly on host machine) should be leveraged when writing VR tests. It offers better error messages, stack traces, and overall UX. You can launch the UI with `npm run test:ui`. As our team generally uses Apple hardware, PNG files ending in _"-darwin"_ have been ignored in Git as to not be accidentally committed. When using the UI on macOS, such screenshots will be generated but they are safe to ignore. The screenshots that are generated inside the container end with _"-ubuntu"_.
+However, the Playwright UI (run directly on host machine) should be leveraged when writing VR tests. It offers better error messages, stack traces, and overall UX. You can launch the UI with `npm run test:ui`. As our team generally uses Apple hardware, PNG files ending in _"-darwin"_ have been ignored in Git as to not be accidentally committed. When using the UI on macOS, such screenshots will be generated but they are safe to ignore. The screenshots that are generated inside the container end with _"-linux"_.
 
 The actual test code looks something like this:
 
