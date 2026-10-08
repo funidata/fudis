@@ -1,0 +1,150 @@
+/* stylelint-disable property-disallowed-list */
+@use '@funidata/fudis-core' as core;
+
+.fudis-stepper {
+  @include core.body-text-sm-regular;
+
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+
+  &--vertical {
+    flex-direction: column;
+  }
+}
+
+.fudis-step {
+  @include core.text-color('gray-dark');
+
+  display: flex;
+  flex-direction: row;
+  gap: core.$spacing-xs;
+  align-items: center;
+  text-decoration: none;
+
+  &__arrow {
+    &::before,
+    &::after {
+      @include core.bg-color('gray-light');
+
+      content: '';
+    }
+
+    &--horizontal {
+      display: flex;
+      flex-direction: row;
+
+      &::before {
+        /* stylelint-disable-next-line unit-disallowed-list */
+        margin-right: calc(core.$pixel-1 * -1);
+        clip-path: polygon(100% 0, 100% 100%, 0% 100%, calc(100% - core.$pixel-1) 50%, 0% 0%);
+        width: calc(core.$spacing-xs - core.$pixel-1);
+      }
+
+      &::after {
+        margin-left: calc(core.$pixel-1 * -1);
+        /* stylelint-disable-next-line unit-disallowed-list */
+        clip-path: polygon(0 0, core.$pixel-1 0, 100% 50%, core.$pixel-1 100%, 0 100%);
+        width: calc(core.$spacing-xs - core.$pixel-1);
+      }
+    }
+
+    &--vertical {
+      display: flex;
+      flex-direction: column;
+
+      &::before {
+        /* stylelint-disable-next-line unit-disallowed-list */
+        margin-bottom: calc(core.$pixel-1 * -1);
+        clip-path: polygon(50% calc(100% - core.$pixel-1), 100% 0, 100% 100%, 0 100%, 0 0);
+        height: calc(core.$spacing-xs - core.$pixel-1);
+      }
+
+      &::after {
+        margin-top: calc(core.$pixel-1 * -1);
+        /* stylelint-disable-next-line unit-disallowed-list */
+        clip-path: polygon(100% 0, 100% core.$pixel-1, 50% 100%, 0 core.$pixel-1, 0 0);
+        height: calc(core.$spacing-xs - core.$pixel-1);
+      }
+    }
+
+    &__label {
+      @include core.bg-color('gray-light');
+
+      display: flex;
+      flex-direction: row;
+      gap: core.$spacing-xxs;
+      align-items: center;
+      justify-content: center;
+      padding: calc(core.$spacing-xs - core.$pixel-2) calc(core.$spacing-sm - core.$spacing-xxs);
+    }
+
+    &--current {
+      @include core.text-color('white');
+
+      &::before,
+      &::after {
+        @include core.bg-color('primary');
+      }
+
+      .fudis-step {
+        &__arrow__label {
+          @include core.bg-color('primary');
+
+          font-weight: 600;
+        }
+      }
+    }
+
+    &--completed {
+      @include core.text-color('white');
+
+      text-decoration: none;
+
+      &::before,
+      &::after {
+        @include core.bg-color('gray-middle');
+      }
+
+      .fudis-step {
+        &__arrow__label {
+          @include core.bg-color('gray-middle');
+        }
+      }
+    }
+
+    &__underline {
+      text-decoration: underline;
+    }
+  }
+
+  &__title {
+    &--active {
+      font-weight: 600;
+    }
+  }
+
+  &:first-child {
+    .fudis-step {
+      &__arrow::before {
+        display: none;
+      }
+    }
+
+    .fudis-step__title--outside {
+      padding-bottom: calc(core.$spacing-xs - core.$pixel-2);
+    }
+  }
+
+  &:last-child {
+    .fudis-step__arrow::after {
+      display: none;
+    }
+
+    .fudis-step__title--outside {
+      padding-top: calc(core.$spacing-xs - core.$pixel-2);
+    }
+  }
+}

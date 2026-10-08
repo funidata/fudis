@@ -67,6 +67,7 @@ import { SelectOptionComponent } from './components/form/select/select/select-op
 import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
 import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
 import { SelectIconsComponent } from './components/form/select/common/select-icons/select-icons.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 import { TabNavigationBarComponent } from './components/tab-navigation/tab-navigation-bar.component';
 import { TabNavigationPanelComponent } from './components/tab-navigation/tab-navigation-panel.component';
 import { TabNavigationTabComponent } from './components/tab-navigation/tab-navigation-tab.component';
@@ -246,6 +247,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     SelectOptionBaseDirective,
     SelectOptionComponent,
     SelectOptionsDirective,
+    StepperComponent,
     TabNavigationBarComponent,
     TabNavigationPanelComponent,
     TabNavigationTabComponent,
@@ -324,6 +326,7 @@ import { PopoverDirective } from './directives/popover/popover.directive';
     SelectOptionComponent,
     SelectOptionsDirective,
     SelectGroupComponent,
+    StepperComponent,
     TabNavigationBarComponent,
     TabNavigationPanelComponent,
     TabNavigationTabComponent,

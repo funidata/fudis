@@ -1,0 +1,48 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import { StepperComponent } from "./stepper.component";
+import * as StepperStories from "./stepper.stories.ts";
+
+<Meta title="Components/Stepper" />
+
+# Stepper
+
+Stepper guides the user through a multi-step process. It shows each step and indicates
+the current step, helping users understand their progress.
+
+The stepper is not interactive by itself; it only displays the progress and current
+step. Users cannot change the step directly through the stepper component.
+
+## Example
+
+### Horizontal orientation
+
+<Canvas of={StepperStories.HorizontalOrientation} />
+
+### Vertical orientation
+
+<Canvas of={StepperStories.VerticalOrientation} />
+
+## Usage Guidelines
+
+```
+<fudis-stepper
+  [currentStepIndex]="0"
+  [orientation]="'horizontal'"
+  [stepList]="[
+    { label: 'Step 1' },
+    { label: 'Step 2' },
+    { label: 'Step 3' }
+  ]">
+</fudis-stepper>
+```
+
+### Accessibility
+
+- The stepper component is wrapped around `<nav>` element.
+- The steps are listed in an ordered list (`<ol>`).
+- Each step has a descriptive `aria-label` attribute.
+- The current step has `aria-current="step"` attribute.
+
+## Properties
+
+<ArgTypes of={StepperComponent} />
