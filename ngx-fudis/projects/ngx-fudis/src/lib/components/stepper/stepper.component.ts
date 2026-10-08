@@ -1,5 +1,4 @@
 import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
-import { StepComponent } from './step/step.component';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 interface StepItem {
@@ -24,7 +23,6 @@ interface StepItem {
  */
 @Component({
   selector: 'fudis-stepper',
-  imports: [StepComponent],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,4 +44,21 @@ export class StepperComponent {
    * List of steps in the stepper.
    */
   @Input({ required: true }) stepList: StepItem[];
+
+  protected isCompleted(index: number): boolean {
+    return index < this.currentStepIndex;
+  }
+
+  protected isCurrent(index: number): boolean {
+    return index === this.currentStepIndex;
+  }
+
+  protected getStepAriaLabel(index: number, label: string): string {
+    const translations = this._translationService.getTranslations()().STEPPER.STEP;
+
+    return (
+      `${this.isCompleted(index) ? `${translations.COMPLETED} ` : ''}` +
+      `${translations.ARIA_LABEL_PREFIX} ${index + 1}/${this.stepList.length} ${label}`
+    );
+  }
 }
