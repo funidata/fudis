@@ -1,12 +1,13 @@
 import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { StepComponent } from './step/step.component';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 interface StepItem {
   label: string;
 }
 
 /**
- * Show progress of a processthrough a series of steps.
+ * Show progress of a process through a series of steps.
  *
  * @example
  *   ```html
@@ -30,6 +31,7 @@ interface StepItem {
   encapsulation: ViewEncapsulation.None,
 })
 export class StepperComponent {
+  constructor(protected _translationService: FudisTranslationService) {}
   /**
    * Index of the currently active step. Indices start from 0.
    */

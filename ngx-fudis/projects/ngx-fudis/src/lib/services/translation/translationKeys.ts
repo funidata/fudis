@@ -207,7 +207,7 @@ export const en: FudisTranslationConfig = {
     },
   },
   STEPPER: {
-    ARIA_LABEL: 'Steps',
+    ARIA_LABEL: 'Action steps',
     STEP: {
       ARIA_LABEL_PREFIX: 'Step',
       COMPLETED: 'Completed',
@@ -426,7 +426,7 @@ export const sv: FudisTranslationConfig = {
     },
   },
   STEPPER: {
-    ARIA_LABEL: 'Stegs',
+    ARIA_LABEL: 'Åtgärdssteg',
     STEP: {
       ARIA_LABEL_PREFIX: 'Steg',
       COMPLETED: 'Slutförd',

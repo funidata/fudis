@@ -1,5 +1,9 @@
 <nav>
-  <ol class="fudis-stepper" [class.fudis-stepper--vertical]="orientation === 'vertical'">
+  <ol
+    class="fudis-stepper"
+    [class.fudis-stepper--vertical]="orientation === 'vertical'"
+    aria-label="{{ _translationService.getTranslations()().STEPPER.ARIA_LABEL }}"
+  >
     @for (step of stepList; track idx; let idx = $index) {
       <fudis-step
         [index]="idx"

@@ -39,7 +39,9 @@ describe('StepperComponent', () => {
       hostComponent.orientation = orientation;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('nav ol')).toBeTruthy();
+      const stepper = fixture.nativeElement.querySelector('nav ol');
+      expect(stepper).toBeTruthy();
+      expect(stepper.getAttribute('aria-label')).toBe('Action steps');
 
       const steps = fixture.nativeElement.querySelectorAll('li');
       expect(steps).toHaveLength(3);
