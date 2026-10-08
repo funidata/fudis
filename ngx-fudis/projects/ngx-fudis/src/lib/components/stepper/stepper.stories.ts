@@ -31,16 +31,24 @@ const Template: StoryFn = (args) => ({
   props: args,
 });
 
-export const Example = Template.bind({});
+const stepList = [
+  { label: 'Wizard' },
+  { label: 'Wizard' },
+  { label: 'Wizard' },
+  { label: 'Wizard' },
+  { label: 'Wizard' },
+];
 
-Example.args = {
+export const HorizontalOrientation = Template.bind({});
+HorizontalOrientation.args = {
   currentStepIndex: 2,
   orientation: 'horizontal',
-  stepList: [
-    { label: 'Wizard' },
-    { label: 'Wizard' },
-    { label: 'Wizard' },
-    { label: 'Wizard' },
-    { label: 'Wizard' },
-  ],
+  stepList,
+};
+
+export const VerticalOrientation = Template.bind({});
+VerticalOrientation.args = {
+  currentStepIndex: 2,
+  orientation: 'vertical',
+  stepList,
 };
