@@ -13,8 +13,7 @@ export const addons = [
 export const framework = {
   name: "@storybook/angular-vite",
   options: {
-    compodoc: true,
-    compodocArgs: ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "."],
+    compodoc: false,
   },
 };
 
