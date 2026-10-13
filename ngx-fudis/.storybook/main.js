@@ -35,6 +35,7 @@ export const docs = {
 
 export const core = {
   allowedHosts: ["fudis-storybook", "localhost"],
+  disableTelemetry: true,
 };
 
 export async function viteFinal(config) {
