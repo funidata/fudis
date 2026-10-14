@@ -43,6 +43,9 @@ export async function viteFinal(config) {
     resolve: {
       extensions: [".mjs", ".js", ".ts", ".tsx", ".jsx", ".json"],
     },
+    esbuild: {
+      keepNames: true,
+    },
   });
 }
 
