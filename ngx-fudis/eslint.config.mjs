@@ -88,5 +88,9 @@ export default [
       ...config,
       files: ["**/*.html"],
     })),
+  {
+    files: ["projects/ngx-fudis/src/lib/**/*.html"],
+    rules: { "@angular-eslint/template/button-has-type": "error" },
+  },
   ...storybook.configs["flat/recommended"],
 ];
