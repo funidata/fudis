@@ -3,7 +3,7 @@
     fudisPopover
     #buttonElement
     [class]="_classList | async"
-    [type]="type"
+    [type]="type || 'button'"
     (click)="!disabled && buttonClick($event)"
     (blur)="!disabled && _handleButtonBlur($event)"
     (focus)="!disabled && _handleButtonFocus($event)"
@@ -34,7 +34,7 @@
   <button
     #buttonElement
     [class]="_classList | async"
-    [type]="type"
+    [type]="type || 'button'"
     (click)="!disabled && buttonClick($event)"
     (blur)="!disabled && _handleButtonBlur($event)"
     (focus)="!disabled && _handleButtonFocus($event)"

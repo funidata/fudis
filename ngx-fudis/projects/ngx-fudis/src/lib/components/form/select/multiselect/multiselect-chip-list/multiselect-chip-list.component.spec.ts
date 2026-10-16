@@ -20,6 +20,21 @@ class MockWithParentComponent {
   id = 'parent-of-chip-list';
 }
 
+@Component({
+  selector: 'fudis-mock-inside-form',
+  imports: [MultiselectChipListComponent],
+  template: `<form>
+    <fudis-multiselect-chip-list
+      [parentId]="'chip-list-in-form'"
+      [selectedItems]="items"
+    ></fudis-multiselect-chip-list>
+    <button id="form-submit-button" type="submit">Submit</button>
+  </form>`,
+})
+class MockInsideFormComponent {
+  items: FudisSelectOption<string>[] = multiselectChipListMockData;
+}
+
 describe('MultiselectChipListComponent', () => {
   let component: MultiselectChipListComponent<string>;
   let fixture: ComponentFixture<MultiselectChipListComponent<string>>;
@@ -29,7 +44,7 @@ describe('MultiselectChipListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MultiselectChipListComponent, MockWithParentComponent],
+      imports: [MultiselectChipListComponent, MockWithParentComponent, MockInsideFormComponent],
     });
     fixture = TestBed.createComponent(MultiselectChipListComponent<string>);
     component = fixture.componentInstance;
@@ -99,6 +114,22 @@ describe('MultiselectChipListComponent', () => {
       fixture.detectChanges();
 
       expect(component.handleClick.emit).toHaveBeenCalledWith(multiselectChipListMockData[1]);
+    });
+  });
+
+  describe('Inside a form', () => {
+    it('should not become the default button of the form', () => {
+      const fixtureInForm = TestBed.createComponent(MockInsideFormComponent);
+      fixtureInForm.detectChanges();
+
+      expect(getElement(fixtureInForm, '.fudis-multiselect-chip-list__item__button')).toBeTruthy();
+
+      const form = getElement(fixtureInForm, 'form') as HTMLFormElement;
+      const defaultButton = Array.from(form.elements).find(
+        (element) => (element as HTMLButtonElement).type === 'submit',
+      );
+
+      expect(defaultButton?.id).toEqual('form-submit-button');
     });
   });
 });
