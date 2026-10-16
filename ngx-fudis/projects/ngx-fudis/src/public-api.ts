@@ -52,6 +52,7 @@ export { SectionComponent } from './lib/components/section/section.component';
 export { SelectComponent } from './lib/components/form/select/select/select.component';
 export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
 export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
+export { StepperComponent } from './lib/components/stepper/stepper.component';
 export { TabNavigationBarComponent } from './lib/components/tab-navigation/tab-navigation-bar.component';
 export { TabNavigationPanelComponent } from './lib/components/tab-navigation/tab-navigation-panel.component';
 export { TabNavigationTabComponent } from './lib/components/tab-navigation/tab-navigation-tab.component';
