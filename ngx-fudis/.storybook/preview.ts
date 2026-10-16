@@ -13,13 +13,16 @@ interface DocComponent {
 interface DocJson {
   components: Array<DocComponent>;
 }
+/*
+  TODO: Remove this workaround when updating to Angular 22.
 
-// Safely duplicate the compodoc array entries to support Vite's suffixed names
+  Duplicate the compodoc array entries to support Vite's suffixed names.
+  Read more about why this is necessary here: https://github.com/funidata/fudis/pull/1038
+*/
 if ((docJson as DocJson).components) {
   const aliasedComponents = [...(docJson as DocJson).components];
 
   (docJson as DocJson).components.forEach((component) => {
-    // Dynamically add aliases for SectionComponent2, SectionComponent3, etc.
     aliasedComponents.push({
       ...component,
       name: `${component.name}2`,
