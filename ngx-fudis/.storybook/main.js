@@ -13,8 +13,7 @@ export const addons = [
 export const framework = {
   name: "@storybook/angular-vite",
   options: {
-    compodoc: true,
-    compodocArgs: ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "."],
+    compodoc: false,
   },
 };
 
@@ -35,6 +34,7 @@ export const docs = {
 
 export const core = {
   allowedHosts: ["fudis-storybook", "localhost"],
+  disableTelemetry: true,
 };
 
 export async function viteFinal(config) {
@@ -42,6 +42,9 @@ export async function viteFinal(config) {
   return mergeConfig(config, {
     resolve: {
       extensions: [".mjs", ".js", ".ts", ".tsx", ".jsx", ".json"],
+    },
+    esbuild: {
+      keepNames: true,
     },
   });
 }
