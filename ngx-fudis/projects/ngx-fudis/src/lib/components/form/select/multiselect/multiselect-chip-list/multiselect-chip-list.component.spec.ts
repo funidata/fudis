@@ -118,7 +118,7 @@ describe('MultiselectChipListComponent', () => {
   });
 
   describe('Inside a form', () => {
-    it('should not become the default button of the form', () => {
+    it('should not become a submit button', () => {
       const fixtureInForm = TestBed.createComponent(MockInsideFormComponent);
       fixtureInForm.detectChanges();
 

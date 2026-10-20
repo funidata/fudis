@@ -80,7 +80,7 @@ describe('TabNavigationComponent', () => {
     expect(tabNavigationTab3.nativeElement.getAttribute('aria-controls')).toEqual('panel-1');
   });
 
-  it('should set button type only on button tabs', () => {
+  it('should set type attribute only on button tabs', () => {
     fixture.detectChanges();
 
     const buttonTab = getTabNavigationTabElement(fixture, 'tab-1').nativeElement;
@@ -90,7 +90,7 @@ describe('TabNavigationComponent', () => {
     expect(anchorTab.hasAttribute('type')).toEqual(false);
   });
 
-  it('should keep the type set on a button tab', () => {
+  it('should not change an existing type attribute on a button tab', () => {
     const typesFixture = TestBed.createComponent(MockTabNavigationWithTypesComponent);
     typesFixture.detectChanges();
 
@@ -99,7 +99,7 @@ describe('TabNavigationComponent', () => {
     expect(submitTab.getAttribute('type')).toEqual('submit');
   });
 
-  it('should keep a bound type set on a button tab', () => {
+  it('should not override a bound type attribute on a button tab', () => {
     const typesFixture = TestBed.createComponent(MockTabNavigationWithTypesComponent);
     typesFixture.detectChanges();
 

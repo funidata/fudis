@@ -69,7 +69,7 @@ export class TabNavigationTabComponent implements AfterViewInit {
   constructor() {
     const element: HTMLElement = inject(ElementRef).nativeElement;
 
-    // A <button> without type acts as a submit button inside a form
+    // If no type is defined, set type="button" so the button does not unintentionally submit a form
     if (element.tagName.toLowerCase() === 'button' && !element.hasAttribute('type')) {
       inject(Renderer2).setAttribute(element, 'type', 'button');
     }
