@@ -69,6 +69,7 @@ You might need to restart your AI tool after copying the file. In your AI tool, 
   - [Footer](#footer)
   - [Horizontal Rule](#horizontal-rule)
   - [Language Badge Group](#language-badge-group)
+  - [Stepper](#stepper)
 - [Directives](#directives)
 - [Services](#services)
 - [Type Quick Reference](#type-quick-reference)
@@ -1113,6 +1114,31 @@ No inputs. Renders a styled `<hr>`.
   [translatedLanguages]="['fi', 'en']"
   (handleClick)="onLanguageChange($event)"
 ></fudis-language-badge-group>
+```
+
+---
+
+### Stepper
+
+**Selector:** `fudis-stepper`
+
+| Input              | Type                         | Default | Required |
+| ------------------ | ---------------------------- | ------- | -------- |
+| `currentStepIndex` | `number`                     | —       | **yes**  |
+| `orientation`      | `'horizontal' \| 'vertical'` | —       | **yes**  |
+| `steps`            | `{ label: string }[]`        | —       | **yes**  |
+
+```html
+<fudis-stepper
+  [currentStepIndex]="0"
+  [orientation]="'horizontal'"
+  [steps]="[
+    { label: 'Step 1' },
+    { label: 'Step 2' },
+    { label: 'Step 3' }
+  ]"
+>
+</fudis-stepper>
 ```
 
 ---
