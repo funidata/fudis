@@ -61,5 +61,17 @@ describe('ButtonComponent', () => {
         expect(getButton().getAttribute('type')).toEqual(`${type}`);
       });
     });
+
+    it('should fall back to button type if type Input is undefined', () => {
+      fixture.componentRef.setInput('type', undefined);
+      fixture.detectChanges();
+
+      expect((getButton() as HTMLButtonElement).type).toEqual('button');
+
+      fixture.componentRef.setInput('popoverText', 'Popover text');
+      fixture.detectChanges();
+
+      expect((getButton() as HTMLButtonElement).type).toEqual('button');
+    });
   });
 });

@@ -22,12 +22,24 @@ class MockTabNavigationComponent {
   @Input() activeTabId: string;
 }
 
+@Component({
+  imports: [TabNavigationBarComponent, TabNavigationTabComponent],
+  selector: 'mock-tab-navigation-with-types-component',
+  template: `<fudis-tab-navigation-bar [id]="'tab-bar-2'">
+    <button type="submit" fudis-tab-navigation-tab id="tab-submit"></button>
+    <button [type]="boundType" fudis-tab-navigation-tab id="tab-bound"></button>
+  </fudis-tab-navigation-bar>`,
+})
+class MockTabNavigationWithTypesComponent {
+  boundType = 'submit';
+}
+
 describe('TabNavigationComponent', () => {
   let fixture: ComponentFixture<MockTabNavigationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MockTabNavigationComponent],
+      imports: [MockTabNavigationComponent, MockTabNavigationWithTypesComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockTabNavigationComponent);
@@ -66,6 +78,39 @@ describe('TabNavigationComponent', () => {
     expect(tabNavigationTab3.nativeElement.getAttribute('tabIndex')).toEqual('0');
     expect(tabNavigationTab3.nativeElement.getAttribute('aria-selected')).toEqual('true');
     expect(tabNavigationTab3.nativeElement.getAttribute('aria-controls')).toEqual('panel-1');
+  });
+
+  it('should set type attribute only on button tabs', () => {
+    fixture.detectChanges();
+
+    const buttonTab = getTabNavigationTabElement(fixture, 'tab-1').nativeElement;
+    const anchorTab = getTabNavigationTabElement(fixture, 'tab-3').nativeElement;
+
+    expect(buttonTab.type).toEqual('button');
+    expect(anchorTab.hasAttribute('type')).toEqual(false);
+  });
+
+  it('should not change an existing type attribute on a button tab', () => {
+    const typesFixture = TestBed.createComponent(MockTabNavigationWithTypesComponent);
+    typesFixture.detectChanges();
+
+    const submitTab = getTabNavigationTabElement(typesFixture, 'tab-submit').nativeElement;
+
+    expect(submitTab.getAttribute('type')).toEqual('submit');
+  });
+
+  it('should not override a bound type attribute on a button tab', () => {
+    const typesFixture = TestBed.createComponent(MockTabNavigationWithTypesComponent);
+    typesFixture.detectChanges();
+
+    const boundTab = getTabNavigationTabElement(typesFixture, 'tab-bound').nativeElement;
+
+    expect(boundTab.getAttribute('type')).toEqual('submit');
+
+    typesFixture.componentInstance.boundType = 'reset';
+    typesFixture.detectChanges();
+
+    expect(boundTab.getAttribute('type')).toEqual('reset');
   });
 
   it('should update the required aria-attributes', () => {

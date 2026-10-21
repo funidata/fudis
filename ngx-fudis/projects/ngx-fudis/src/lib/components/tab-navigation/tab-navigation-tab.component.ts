@@ -3,8 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   effect,
+  ElementRef,
   inject,
   Input,
+  Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
 import { TabNavigationBarComponent } from './tab-navigation-bar.component';
@@ -65,6 +67,13 @@ export class TabNavigationTabComponent implements AfterViewInit {
   }
 
   constructor() {
+    const element: HTMLElement = inject(ElementRef).nativeElement;
+
+    // If no type is defined, set type="button" so the button does not unintentionally submit a form
+    if (element.tagName.toLowerCase() === 'button' && !element.hasAttribute('type')) {
+      inject(Renderer2).setAttribute(element, 'type', 'button');
+    }
+
     effect(() => {
       this._ariaControls = this._tabNavigation.getAriaControls()();
     });
