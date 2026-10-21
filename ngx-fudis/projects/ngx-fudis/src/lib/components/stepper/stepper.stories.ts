@@ -18,15 +18,12 @@ const meta: Meta<StepperComponent> = {
     orientation: {
       options: ['horizontal', 'vertical'],
       control: { type: 'radio' },
-      description: 'Orientation of the stepper component',
     },
     currentStepIndex: {
       control: { type: 'number' },
-      description: 'Index of the current step',
     },
     steps: {
       control: { type: 'object' },
-      description: 'Steps displayed by the stepper component.',
     },
   },
 };
