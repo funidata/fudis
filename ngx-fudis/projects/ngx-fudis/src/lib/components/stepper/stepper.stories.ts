@@ -1,6 +1,7 @@
 import { StoryObj, Meta } from '@storybook/angular-vite';
 import { StepperComponent } from './stepper.component';
 import docs from './stepper.mdx';
+import { stepperExclude } from '../../utilities/storybook';
 
 const meta: Meta<StepperComponent> = {
   title: 'Components/Stepper',
@@ -8,6 +9,9 @@ const meta: Meta<StepperComponent> = {
   parameters: {
     docs: {
       page: docs,
+    },
+    controls: {
+      exclude: stepperExclude,
     },
   },
   argTypes: {

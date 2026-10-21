@@ -517,6 +517,15 @@ export const spacingExclude: RegExp = excludeRegex([
 ]);
 
 /**
+ * Stepper
+ */
+export const stepperExclude: RegExp = excludeRegex([
+  'getStepAriaLabel',
+  'isCompleted',
+  'isCurrent',
+]);
+
+/**
  * Tab Navigation Bar
  */
 export const tabNavigationBarExclude: RegExp = excludeRegex([
