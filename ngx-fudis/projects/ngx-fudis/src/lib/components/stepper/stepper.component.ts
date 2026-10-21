@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 interface StepItem {
@@ -26,7 +26,6 @@ interface StepItem {
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
 })
 export class StepperComponent {
   constructor(protected _translationService: FudisTranslationService) {}
