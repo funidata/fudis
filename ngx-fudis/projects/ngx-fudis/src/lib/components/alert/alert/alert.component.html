@@ -9,6 +9,7 @@
   </fudis-body-text>
 
   <button
+    type="button"
     [attr.aria-label]="
       (message | async) + ', ' + _translateService.getTranslations()().DIALOG.CLOSE
     "
