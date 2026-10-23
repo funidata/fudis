@@ -331,7 +331,7 @@ Suunnittelun apuna on Figmassa erillinen mobiili-kokovariantti dialogista. Huom.
 - Pyritään siihen, että ei tabeja eikä expandableja wizardien sisälle
 - Mikäli wizardin stepin sisältö on pitkä, mieti voisiko tilanteen jäsentää useampaan eri steppiin
 
-### Wizarding vaiheet
+### Wizardin vaiheet
 
 #### Ensimmäinen vaihe (start)
 
@@ -352,7 +352,11 @@ Toiminnot: Edellinen, Jatka
 
 Kun käyttäjä vahvistaa tiedot, näytetään alert toiminnon onnistumisesta/epäonnistumisesta.
 
-### Fudis stepper (to be implemented)
+### Fudis stepper
+
+Stepper-komponenttia käytetään wizardin vaiheiden näyttämiseen. Stepper ei sisällä navigointilogiikkaa eri vaiheiden välillä, vaan ainoastaan näyttää kaikki wizardin vaiheiden otsikot sekä indikoi mitkä vaiheet on jo tehty, ja missä vaiheessa käyttäjä on tällä hetkellä.
+
+Käytä mahdollisimman lyhyitä tekstejä vaiheiden nimille, ja vältä horisontaalista scrollaamista. Mikäli wizard sisältää monta vaihetta, käytä Stepperin horisontaalisen orientaatiovariantin sijaan vertikaalista orientaatiotavarianttia näyttämään vaiheet allekkain.
 
 ### Toiminnon virheistä ilmoittaminen
 
