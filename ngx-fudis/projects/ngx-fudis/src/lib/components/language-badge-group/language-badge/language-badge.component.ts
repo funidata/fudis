@@ -17,7 +17,6 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'fudis-language-badge',
-  styleUrls: ['./language-badge.component.scss'],
   templateUrl: './language-badge.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AsyncPipe],
