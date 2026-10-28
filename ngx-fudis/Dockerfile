@@ -15,3 +15,7 @@ FROM node:24.22.1-alpine
 
 WORKDIR /usr/src/app
 COPY --from=dev /usr/src/app .
+
+# Reinstall native dependencies for Alpine/musl.
+RUN rm -rf node_modules
+RUN npm ci
