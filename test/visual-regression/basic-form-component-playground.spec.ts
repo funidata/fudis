@@ -29,10 +29,10 @@ test("basic form components playground", async ({ page }) => {
 
       await page.getByTestId("fudis-button-2").click();
 
-      await expect(page.getByText("This is required")).not.toBeVisible();
+      await expect(page.getByText("This is required")).toHaveCount(0);
       await expect(
         page.getByText("This is definitely required as this error has so many words"),
-      ).not.toBeVisible();
+      ).toHaveCount(0);
 
       await expect(page).toHaveScreenshot("3-basic-form-components-disabled.png", {
         fullPage: true,
