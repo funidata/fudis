@@ -30,6 +30,9 @@ test("dialog with form", async ({ page }) => {
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
+  
+  await page.getByRole("button", { name: "Submit" }).focus();
+
   await page.keyboard.press("Enter"); /* Submit */
   await expect(page.getByText(dialogFormTitle)).not.toBeVisible();
   await expect(page.getByText(dialogFormResultAfterClose)).toBeVisible();
