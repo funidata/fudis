@@ -1,8 +1,5 @@
 import test, { expect } from "@playwright/test";
 
-const formErrorSummaryText =
-  "Your learning experience / Your favourite course topic: You need to add a topic";
-
 const dialogFormTitle = "Course feedback";
 
 const dialogFormResultAfterClose =
@@ -10,33 +7,38 @@ const dialogFormResultAfterClose =
 
 test("dialog with form", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-form&viewMode=story");
-  await page.getByTestId("fudis-button-1").click();
-  await expect(page.getByTestId("fudis-button-2")).toBeVisible();
+  await page.getByText("OPEN DIALOG WITH FORM").click();
+  await expect(page.getByText("CANCEL")).toBeVisible();
   await expect(page).toHaveScreenshot("form-1-init.png");
+
+  // Test validation errors showing correctly
   await page.getByText("SUBMIT").click();
-  await expect(page.getByText(formErrorSummaryText)).toBeVisible();
+  await expect(
+    page.getByText(
+      "Your learning experience / Your favourite course topic: You need to add a topic",
+    ),
+  ).toBeVisible();
   await expect(page).toHaveScreenshot("form-2-errors.png");
-  await page.getByTestId("example-input-course-topic").focus();
-  await page.getByTestId("example-input-course-topic").fill("Automation testing");
+  const input = page.locator("input").and(page.getByLabel("Your favourite course topic"));
+  await input.focus();
+  await input.fill("Automation testing");
   await expect(page.getByTestId("fudis-validator-error-message-1")).not.toBeVisible();
 
-  await page.getByTestId("fudis-select-1").focus();
-  await page.waitForTimeout(150);
-  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  await page.getByTestId("fudis-select-1-dropdown").scrollIntoViewIfNeeded();
+  // Test that select options are visible inside the dialog
+  await page.getByLabel("COURSE GRADE 1 - 5").focus();
   await page.keyboard.press("ArrowDown");
-  await expect(
-    page.getByTestId("fudis-select-1-dropdown").getByRole("option").first(),
-  ).toBeFocused();
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+  await expect(page.getByRole("option").first()).toBeFocused();
+  await page.getByTestId("fudis-select-1-dropdown").scrollIntoViewIfNeeded();
   await expect(page).toHaveScreenshot("form-3-dropdown.png");
 
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
 
-  await page.getByRole("button", { name: "Submit" }).focus();
-
+  await page.getByText("SUBMIT").focus();
   await page.keyboard.press("Enter"); /* Submit */
+
   await expect(page.getByText(dialogFormTitle)).not.toBeVisible();
   await expect(page.getByText(dialogFormResultAfterClose)).toBeVisible();
 });
