@@ -25,12 +25,15 @@ test("dialog with form", async ({ page }) => {
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
   await page.getByTestId("fudis-select-1-dropdown").scrollIntoViewIfNeeded();
   await page.keyboard.press("ArrowDown");
+  await expect(
+    page.getByTestId("fudis-select-1-dropdown").getByRole("option").first(),
+  ).toBeFocused();
   await expect(page).toHaveScreenshot("form-3-dropdown.png");
 
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
-  
+
   await page.getByRole("button", { name: "Submit" }).focus();
 
   await page.keyboard.press("Enter"); /* Submit */
