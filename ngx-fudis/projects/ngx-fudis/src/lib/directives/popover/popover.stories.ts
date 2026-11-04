@@ -1,11 +1,11 @@
-import { ButtonComponent } from '../../components/button/button.component';
+import { PopoverDirective } from './popover.directive';
 import docs from '../popover/popover.mdx';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 import { popoverExclude } from '../../utilities/storybook';
 
-const meta: Meta<ButtonComponent> = {
+const meta: Meta<PopoverDirective> = {
   title: 'Directives/Popover',
-  component: ButtonComponent,
+  component: PopoverDirective,
   parameters: {
     docs: {
       page: docs,
@@ -32,7 +32,7 @@ export default meta;
 
 const html = String.raw;
 
-export const ExampleWithNativeButton: StoryObj<ButtonComponent> = {
+export const ExampleWithNativeButton: StoryObj<PopoverDirective> = {
   render: (args) => ({
     props: args,
     template: html`
@@ -45,7 +45,7 @@ export const ExampleWithNativeButton: StoryObj<ButtonComponent> = {
   }),
 };
 
-export const ExampleWithFudisButton: StoryObj<ButtonComponent> = {
+export const ExampleWithFudisButton: StoryObj<PopoverDirective> = {
   render: (args) => ({
     props: args,
     template: html`
