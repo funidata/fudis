@@ -6,8 +6,8 @@ import {
   descriptionListArgsTypesExclude,
   descriptionListItemArgTypesExclude,
 } from "../../utilities/storybook.ts";
-import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
-import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
+import * as DescriptionListItemDetailsStories from "./description-list-item/description-list-item-details/description-list-item-details.component.stories.ts";
+import * as DescriptionListItemTermStories from "./description-list-item/description-list-item-term/description-list-item-term.component.stories.ts";
 
 <Meta title="Components/Description List" />
 
@@ -145,8 +145,8 @@ Description List components communicate with each other and automatically define
 
 ## Description List Item Term Properties
 
-<ArgTypes of={DescriptionListItemTermComponent} />
+<ArgTypes of={DescriptionListItemTermStories} />
 
 ## Description List Item Details Properties
 
-<ArgTypes of={DescriptionListItemDetailsComponent} exclude={descriptionListItemArgTypesExclude} />
+<ArgTypes of={DescriptionListItemDetailsStories} exclude={descriptionListItemArgTypesExclude} />
