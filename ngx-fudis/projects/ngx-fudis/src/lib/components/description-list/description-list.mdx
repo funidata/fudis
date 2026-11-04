@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
 import { linkTo } from "@storybook/addon-links";
-import { DescriptionListComponent } from "./description-list.component.ts";
 import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/addon-docs/blocks";
 import {
@@ -142,7 +141,7 @@ Description List components communicate with each other and automatically define
 
 ## Description List Properties
 
-<ArgTypes of={DescriptionListComponent} exclude={descriptionListArgsTypesExclude} />
+<ArgTypes of={DescriptionListStories} exclude={descriptionListArgsTypesExclude} />
 
 ## Description List Item Term Properties
 

@@ -1,16 +1,21 @@
 import { StoryFn, Meta } from '@storybook/angular-vite';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import docs from './breadcrumbs.mdx';
+import { breadcrumbsExclude } from '../../utilities/storybook';
 
-export default {
+const meta: Meta<BreadcrumbsComponent> = {
   title: 'Components/Breadcrumbs',
   component: BreadcrumbsComponent,
   parameters: {
     docs: {
       page: docs,
     },
+    controls: {
+      exclude: breadcrumbsExclude,
+    },
   },
-} as Meta;
+};
+export default meta;
 
 const html = String.raw;
 
