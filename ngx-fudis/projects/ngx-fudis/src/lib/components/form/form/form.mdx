@@ -1,5 +1,5 @@
 import { Meta, ArgTypes } from "@storybook/addon-docs/blocks";
-import { FormComponent } from "./form.component";
+import * as FormStories from "./form.stories";
 import { formArgTypesExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Form" />
@@ -105,4 +105,4 @@ submitForm(): void {
 
 ## Properties
 
-<ArgTypes of={FormComponent} exclude={formArgTypesExclude} />
+<ArgTypes of={FormStories} exclude={formArgTypesExclude} />

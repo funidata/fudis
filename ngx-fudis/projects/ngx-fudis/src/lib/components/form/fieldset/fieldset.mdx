@@ -1,6 +1,6 @@
 import { Meta, ArgTypes } from "@storybook/addon-docs/blocks";
-import { FieldSetComponent } from "./fieldset.component";
-import { FieldsetActionsDirective } from "./fieldset-content.directive";
+import * as FieldSetStories from "./fieldset.stories";
+import * as FieldsetActionsDirectiveStories from "./fieldset-actions-directive.stories";
 import { fieldsetExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Fieldset" />
@@ -91,6 +91,6 @@ HTML Template
 
 ## Properties
 
-<ArgTypes of={FieldSetComponent} />
+<ArgTypes of={FieldSetStories} />
 
 <ArgTypes of={FieldsetActionsDirective} exclude={fieldsetExclude} />
