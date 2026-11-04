@@ -12,8 +12,8 @@ export const addons = [
 ];
 export const framework = {
   name: "@storybook/angular-vite",
-  options: {
-    compodoc: false,
+  features: {
+    experimentalDocgenServer: true,
   },
 };
 
