@@ -1,7 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
-import { RadioButtonGroupComponent } from "./radio-button-group.component";
 import * as RadioButtonGroupStories from "./radio-button-group.stories";
-import { RadioButtonComponent } from "./radio-button/radio-button.component";
+import * as RadioButtonStories from "./radio-button/radio-button.stories";
 import { radioButtonGroupExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Radio Button Group" />
@@ -84,4 +83,4 @@ When clicking any of the child Radio Buttons, the parent's property `handleChang
 
 ## Properties of Radio Button Component
 
-<ArgTypes of={RadioButtonComponent} />
+<ArgTypes of={RadioButtonStories} />
