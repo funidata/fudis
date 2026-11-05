@@ -1,10 +1,9 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
 import { linkTo } from "@storybook/addon-links";
 import { Source } from "@storybook/addon-docs/blocks";
-import { DropdownMenuComponent } from "./dropdown-menu.component.ts";
-import { DropdownMenuItemComponent } from "./dropdown-menu-item/dropdown-menu-item.component.ts";
-import { DropdownMenuGroupComponent } from "./dropdown-menu-group/dropdown-menu-group.component.ts";
-import * as DropdownMenuStories from "./dropdown-menu.stories.ts";
+import * as DropdownMenuStories from "./dropdown-menu.stories";
+import * as DropdownMenuItemStories from "./dropdown-menu-item/dropdown-menu-item.component.stories";
+import * as DropdownMenuGroupStories from "./dropdown-menu-group/dropdown-menu-group.component.stories";
 import { dropdownMenuExclude, dropdownMenuItemExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Dropdown Menu" />
@@ -96,12 +95,12 @@ To group items, wrap them using `DropdownMenuGroupComponent` with `fudis-dropdow
 
 ## Dropdown Menu Properties
 
-<ArgTypes of={DropdownMenuComponent} exclude={dropdownMenuExclude} />
+<ArgTypes of={DropdownMenuStories} exclude={dropdownMenuExclude} />
 
 ## Dropdown Menu Group Properties
 
-<ArgTypes of={DropdownMenuGroupComponent} exclude={dropdownMenuExclude} />
+<ArgTypes of={DropdownMenuGroupStories} exclude={dropdownMenuExclude} />
 
 ## Dropdown Menu Item Properties
 
-<ArgTypes of={DropdownMenuItemComponent} exclude={dropdownMenuItemExclude} />
+<ArgTypes of={DropdownMenuItemStories} exclude={dropdownMenuItemExclude} />

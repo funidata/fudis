@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
-import { CheckboxGroupComponent } from "./checkbox-group.component";
-import { CheckboxGroupOptionComponent } from "./checkbox-group-option/checkbox-group-option.component";
+import * as CheckboxGroupOptionStories from "./checkbox-group-option/checkbox-group-option.stories";
 import * as CheckboxGroupStories from "./checkbox-group.stories";
 import { checkboxGroupExclude } from "../../../utilities/storybook";
 
@@ -153,8 +152,8 @@ Popover can be included in the checkbox group fieldset with properties from [Pop
 
 ## Properties of CheckboxGroupComponent
 
-<ArgTypes of={CheckboxGroupComponent} exclude={checkboxGroupExclude} />
+<ArgTypes of={CheckboxGroupStories} exclude={checkboxGroupExclude} />
 
 ## Properties of CheckboxGroupOptionComponent
 
-<ArgTypes of={CheckboxGroupOptionComponent} />
+<ArgTypes of={CheckboxGroupOptionStories} />

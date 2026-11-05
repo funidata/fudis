@@ -1,17 +1,11 @@
-import { ButtonComponent } from '../../components/button/button.component';
-import docs from '../popover/popover.mdx';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular-vite';
 import { PopoverDirective } from './popover.directive';
+import docs from '../popover/popover.mdx';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { popoverExclude } from '../../utilities/storybook';
 
-export default {
+const meta: Meta<PopoverDirective> = {
   title: 'Directives/Popover',
-  component: ButtonComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [PopoverDirective],
-    }),
-  ],
+  component: PopoverDirective,
   parameters: {
     docs: {
       page: docs,
@@ -33,30 +27,35 @@ export default {
     popoverPosition: 'below',
     popoverText: 'Greetings from popover, I hope you can see me!',
   },
-} as Meta;
+};
+export default meta;
 
 const html = String.raw;
 
-export const ExampleWithNativeButton: StoryFn = (args) => ({
-  props: args,
-  template: html`
-    <div style="display: flex; min-height: 50vh; align-items: center; justify-content: center"
-      ><button fudisPopover [popoverText]="popoverText" [popoverPosition]="popoverPosition">
-        Popover will display and close on click
-      </button></div
-    >
-  `,
-});
+export const ExampleWithNativeButton: StoryObj<PopoverDirective> = {
+  render: (args) => ({
+    props: args,
+    template: html`
+      <div style="display: flex; min-height: 50vh; align-items: center; justify-content: center"
+        ><button fudisPopover [popoverText]="popoverText" [popoverPosition]="popoverPosition">
+          Popover will display and close on click
+        </button></div
+      >
+    `,
+  }),
+};
 
-export const ExampleWithFudisButton: StoryFn = (args) => ({
-  props: args,
-  template: html`
-    <div style="display: flex; min-height: 50vh; align-items: center; justify-content: center">
-      <fudis-button
-        [label]="'Popover will display and close on click'"
-        [popoverPosition]="popoverPosition"
-        [popoverText]="popoverText"
-      ></fudis-button>
-    </div>
-  `,
-});
+export const ExampleWithFudisButton: StoryObj<PopoverDirective> = {
+  render: (args) => ({
+    props: args,
+    template: html`
+      <div style="display: flex; min-height: 50vh; align-items: center; justify-content: center">
+        <fudis-button
+          [label]="'Popover will display and close on click'"
+          [popoverPosition]="popoverPosition"
+          [popoverText]="popoverText"
+        ></fudis-button>
+      </div>
+    `,
+  }),
+};

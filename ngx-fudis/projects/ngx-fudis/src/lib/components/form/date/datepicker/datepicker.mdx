@@ -1,7 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
 import { linkTo } from "@storybook/addon-links";
-import { DatepickerComponent } from "./datepicker.component";
-import * as DatepickerStories from "./datepicker.stories.ts";
+import * as DatepickerStories from "./datepicker.stories";
 import { datepickerExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Date/Datepicker" />
@@ -115,4 +114,4 @@ Current list of languages supported are:
 
 ## Properties
 
-<ArgTypes of={DatepickerComponent} exclude={datepickerExclude} />
+<ArgTypes of={DatepickerStories} exclude={datepickerExclude} />

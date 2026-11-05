@@ -105,6 +105,11 @@ export const buttonIconOnlyExclude: RegExp = excludeRegex([
 ]);
 
 /**
+ * Breadcrumbs
+ */
+export const breadcrumbsExclude: RegExp = excludeRegex(['id']);
+
+/**
  * Checkbox
  */
 export const checkboxExclude: RegExp = excludeRegex([

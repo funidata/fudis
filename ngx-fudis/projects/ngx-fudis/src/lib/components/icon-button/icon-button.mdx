@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
-import { IconButtonComponent } from "./icon-button.component";
-import * as IconButtonStories from "./icon-button.stories.ts";
+import * as IconButtonStories from "./icon-button.stories";
 import { buttonExclude } from "../../utilities/storybook";
 
 <Meta title="Components/IconButton" />
@@ -50,4 +49,4 @@ Icon Button has three variants: `primary` (default), `secondary` and `tertiary`.
 
 ## Properties
 
-<ArgTypes of={IconButtonComponent} exclude={buttonExclude} />
+<ArgTypes of={IconButtonStories} exclude={buttonExclude} />

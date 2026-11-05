@@ -1,7 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
-import { DialogComponent } from "./dialog.component.ts";
-import { DialogContentDirective } from "./dialog-directives.ts";
-import * as DialogStory from "./dialog.stories.ts";
+import * as DialogContentDirectiveStories from "./dialog-content.directive.stories";
+import * as DialogStory from "./dialog.stories";
 import { dialogExclude, dialogContentExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Dialog" />
@@ -309,8 +308,8 @@ For these cases, add handling with `afterClosed()` observable as advised in the 
 
 ### Dialog Component
 
-<ArgTypes of={DialogComponent} exclude={dialogExclude} />
+<ArgTypes of={DialogStory} exclude={dialogExclude} />
 
 ### Dialog Content Directive
 
-<ArgTypes of={DialogContentDirective} exclude={dialogContentExclude} />
+<ArgTypes of={DialogContentDirectiveStories} exclude={dialogContentExclude} />

@@ -1,38 +1,9 @@
-import { setCompodocJson } from '@storybook/addon-docs/angular';
 import { moduleMetadata, Preview } from '@storybook/angular-vite';
 import { NgxFudisModule } from '../projects/ngx-fudis/src/lib/ngx-fudis.module';
 import { excludeRegex } from '../projects/ngx-fudis/src/lib/utilities/storybook';
 import { TranslocoRootModule } from './transloco.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslocoService } from '@jsverse/transloco';
-import docJson from '../documentation.json';
-interface DocComponent {
-  name: string;
-  [key: string]: unknown;
-}
-interface DocJson {
-  components: Array<DocComponent>;
-}
-/*
-  TODO: Remove this workaround when updating to Angular 22.
-
-  Duplicate the compodoc array entries to support Vite's suffixed names.
-  Read more about why this is necessary here: https://github.com/funidata/fudis/pull/1038
-*/
-if ((docJson as DocJson).components) {
-  const aliasedComponents = [...(docJson as DocJson).components];
-
-  (docJson as DocJson).components.forEach((component) => {
-    aliasedComponents.push({
-      ...component,
-      name: `${component.name}2`,
-    });
-  });
-
-  (docJson as DocJson).components = aliasedComponents;
-}
-
-setCompodocJson(docJson);
 
 const preview: Preview = {
   parameters: {
