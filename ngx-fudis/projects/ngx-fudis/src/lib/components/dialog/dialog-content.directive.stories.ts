@@ -1,5 +1,5 @@
-import { DialogContentDirective } from "./dialog-directives";
-import type { StoryObj, Meta } from "@storybook/angular-vite";
+import { DialogContentDirective } from './dialog-directives';
+import type { StoryObj, Meta } from '@storybook/angular-vite';
 
 const meta: Meta<DialogContentDirective> = {
   title: 'Components/Dialog/Dialog Content Directive',

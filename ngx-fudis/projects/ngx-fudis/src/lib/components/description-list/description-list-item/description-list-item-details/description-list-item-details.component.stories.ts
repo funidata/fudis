@@ -1,16 +1,16 @@
-import { Meta, StoryObj } from "@storybook/angular-vite";
-import { DescriptionListItemDetailsComponent } from "./description-list-item-details.component";
-import { descriptionListItemArgTypesExclude } from "../../../../utilities/storybook";
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { DescriptionListItemDetailsComponent } from './description-list-item-details.component';
+import { descriptionListItemArgTypesExclude } from '../../../../utilities/storybook';
 
 const meta: Meta<DescriptionListItemDetailsComponent> = {
   title: 'Components/Description List/Description List Item Details',
   component: DescriptionListItemDetailsComponent,
   parameters: {
     controls: {
-      exclude: descriptionListItemArgTypesExclude
-    }
+      exclude: descriptionListItemArgTypesExclude,
+    },
   },
-  tags: ['!dev', '!autodocs']
+  tags: ['!dev', '!autodocs'],
 };
 
 export default meta;
