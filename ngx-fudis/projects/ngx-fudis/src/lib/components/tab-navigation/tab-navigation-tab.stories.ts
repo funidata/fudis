@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/angular-vite';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { TabNavigationTabComponent } from './tab-navigation-tab.component';
 
 const meta: Meta<TabNavigationTabComponent> = {
@@ -8,4 +8,4 @@ const meta: Meta<TabNavigationTabComponent> = {
 };
 export default meta;
 
-export const Example = {};
+export const Example: StoryObj<TabNavigationTabComponent> = {};

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/angular-vite';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { RadioButtonComponent } from './radio-button.component';
 
 const meta: Meta<RadioButtonComponent> = {
@@ -8,4 +8,4 @@ const meta: Meta<RadioButtonComponent> = {
 };
 export default meta;
 
-export const Example = {};
+export const Example: StoryObj<RadioButtonComponent> = {};
