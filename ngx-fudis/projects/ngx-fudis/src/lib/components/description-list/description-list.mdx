@@ -1,14 +1,13 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
 import { linkTo } from "@storybook/addon-links";
-import { DescriptionListComponent } from "./description-list.component.ts";
-import * as DescriptionListStories from "./description-list.stories.ts";
+import * as DescriptionListStories from "./description-list.stories";
 import { Source } from "@storybook/addon-docs/blocks";
 import {
   descriptionListArgsTypesExclude,
   descriptionListItemArgTypesExclude,
 } from "../../utilities/storybook.ts";
-import { DescriptionListItemDetailsComponent } from "./description-list-item/description-list-item-details/description-list-item-details.component";
-import { DescriptionListItemTermComponent } from "./description-list-item/description-list-item-term/description-list-item-term.component";
+import * as DescriptionListItemDetailsStories from "./description-list-item/description-list-item-details/description-list-item-details.stories";
+import * as DescriptionListItemTermStories from "./description-list-item/description-list-item-term/description-list-item-term.stories";
 
 <Meta title="Components/Description List" />
 
@@ -142,12 +141,12 @@ Description List components communicate with each other and automatically define
 
 ## Description List Properties
 
-<ArgTypes of={DescriptionListComponent} exclude={descriptionListArgsTypesExclude} />
+<ArgTypes of={DescriptionListStories} exclude={descriptionListArgsTypesExclude} />
 
 ## Description List Item Term Properties
 
-<ArgTypes of={DescriptionListItemTermComponent} />
+<ArgTypes of={DescriptionListItemTermStories} />
 
 ## Description List Item Details Properties
 
-<ArgTypes of={DescriptionListItemDetailsComponent} exclude={descriptionListItemArgTypesExclude} />
+<ArgTypes of={DescriptionListItemDetailsStories} exclude={descriptionListItemArgTypesExclude} />

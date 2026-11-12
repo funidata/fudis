@@ -1,6 +1,5 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
-import * as PopoverStories from "./popover.stories.ts";
-import { PopoverDirective } from "./popover.directive.ts";
+import { ArgTypes, Meta } from "@storybook/addon-docs/blocks";
+import * as PopoverDirectiveStories from "./popover.stories.ts";
 import { popoverExclude } from "../../utilities/storybook.ts";
 
 <Meta title="Directives/Popover" />
@@ -41,4 +40,4 @@ Following components implement Popover Directive to apply popover in semanticall
 
 ## Properties
 
-<ArgTypes of={PopoverDirective} exclude={popoverExclude} />
+<ArgTypes of={PopoverDirectiveStories} exclude={popoverExclude} />

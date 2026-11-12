@@ -1,5 +1,4 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
-import { SelectComponent } from "./select.component";
 import * as Stories from "./select.stories";
 import { selectArgsTableExclude } from "../../../../utilities/storybook";
 
@@ -42,4 +41,4 @@ myControl: new FormControl<FudisSelectOption<string> | null>(defaultOption)
 
 ## Properties
 
-<ArgTypes of={SelectComponent} exclude={selectArgsTableExclude} />
+<ArgTypes of={Stories} exclude={selectArgsTableExclude} />

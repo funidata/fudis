@@ -1,8 +1,10 @@
 import { StoryFn, Meta } from '@storybook/angular-vite';
 import docs from './link-directive.mdx';
+import { LinkDirective } from './link.directive';
 
 export default {
   title: 'Directives/Link',
+  component: LinkDirective,
   parameters: {
     docs: {
       page: docs,

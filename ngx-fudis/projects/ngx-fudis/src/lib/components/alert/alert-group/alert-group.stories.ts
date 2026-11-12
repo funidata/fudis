@@ -142,7 +142,7 @@ class AddAlertsComponent implements AfterViewInit {
   }
 }
 
-export default {
+const meta: Meta<AlertGroupComponent> = {
   title: 'Components/Alert Group',
   component: AlertGroupComponent,
   decorators: [
@@ -164,7 +164,8 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as Meta;
+};
+export default meta;
 
 const html = String.raw;
 

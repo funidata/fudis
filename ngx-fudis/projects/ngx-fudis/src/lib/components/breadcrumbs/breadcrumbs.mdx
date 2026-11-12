@@ -1,7 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/addon-docs/blocks";
-import { BreadcrumbsComponent } from "./breadcrumbs.component";
-import * as BreadcrumbsStories from "./breadcrumbs.stories.ts";
-import { BreadcrumbsItemComponent } from "./breadcrumbs-item/breadcrumbs-item.component";
+import * as BreadcrumbsStories from "./breadcrumbs.stories";
+import { breadcrumbsExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Breadcrumbs" />
 
@@ -37,4 +36,4 @@ Breadcrumbs Item has content slots for `<a>` and `<fudis-body-text>` elements. E
 
 ## Properties
 
-<ArgTypes of={BreadcrumbsComponent} />
+<ArgTypes of={BreadcrumbsStories} exclude={breadcrumbsExclude} />

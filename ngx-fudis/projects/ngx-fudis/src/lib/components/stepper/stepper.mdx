@@ -1,6 +1,5 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
-import { StepperComponent } from "./stepper.component";
-import * as StepperStories from "./stepper.stories.ts";
+import * as StepperStories from "./stepper.stories";
 import { stepperExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Stepper" />
@@ -45,4 +44,4 @@ step. Users cannot change the step directly through the stepper component.
 
 ## Properties
 
-<ArgTypes of={StepperComponent} exclude={stepperExclude} />
+<ArgTypes of={StepperStories} exclude={stepperExclude} />

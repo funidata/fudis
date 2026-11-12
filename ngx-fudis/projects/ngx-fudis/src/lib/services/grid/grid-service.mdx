@@ -1,5 +1,5 @@
 import { Meta, ArgTypes, Source } from "@storybook/addon-docs/blocks";
-import { FudisGridService } from "./grid.service.ts";
+import * as FudisGridServiceStories from "./grid.service.stories";
 
 <Meta title="Services/Grid" />
 
@@ -66,4 +66,4 @@ So individually set breakpoint column values override those set in configuration
 
 ## Properties
 
-<ArgTypes of={FudisGridService} />
+<ArgTypes of={FudisGridServiceStories} />
