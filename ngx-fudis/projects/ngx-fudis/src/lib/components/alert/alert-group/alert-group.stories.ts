@@ -164,7 +164,7 @@ const meta: Meta<AlertGroupComponent> = {
       control: { type: 'radio' },
     },
   },
-} as Meta;
+};
 export default meta;
 
 const html = String.raw;
